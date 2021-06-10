@@ -135,6 +135,14 @@
             <End Role="AuthenticatedPrincipal" EntitySet="Taxa" />
             <End Role="Publisher" EntitySet="Taxa" />
           </AssociationSet>
+          <AssociationSet Name="PublicationArtifact" Association="HorselessNewspaper.Core.Taxa.PublicationArtifact">
+            <End Role="Publication" EntitySet="Taxa" />
+            <End Role="Artifact" EntitySet="Taxa" />
+          </AssociationSet>
+          <AssociationSet Name="MessageVisitor" Association="HorselessNewspaper.Core.Taxa.MessageVisitor">
+            <End Role="Message" EntitySet="Taxa" />
+            <End Role="Visitor" EntitySet="Taxa" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Taxon">
           <Key>
@@ -152,6 +160,7 @@
           <Property Name="PublishAt" Type="DateTime" Nullable="false" />
           <Property Name="UnPublishAt" Type="DateTime" Nullable="false" />
           <Property Name="RSAPubllicKey" Type="String" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="Artifact" BaseType="HorselessNewspaper.Core.Taxa.Taxon" >
           <NavigationProperty Name="Publisher" Relationship="HorselessNewspaper.Core.Taxa.PublishedArtifacts" FromRole="Artifaact" ToRole="Publisher" />
@@ -161,6 +170,7 @@
           <Property Name="PubllishedUri" Type="String" Nullable="true" />
           <NavigationProperty Name="VisualLayoutSections" Relationship="HorselessNewspaper.Core.Taxa.VisualLayoutSectionArtifact" FromRole="Artifact" ToRole="VisualLayoutSection" />
           <NavigationProperty Name="Authors" Relationship="HorselessNewspaper.Core.Taxa.AuthorArtifact" FromRole="Artifact" ToRole="Author" />
+          <NavigationProperty Name="Publications" Relationship="HorselessNewspaper.Core.Taxa.PublicationArtifact" FromRole="Artifact" ToRole="Publication" />
         </EntityType>
         <EntityType Name="Property" BaseType="HorselessNewspaper.Core.Taxa.Taxon" >
           <Property Name="Key" Type="String" Nullable="false" />
@@ -215,6 +225,7 @@
           <NavigationProperty Name="RetrievedArtifacts" Relationship="HorselessNewspaper.Core.Taxa.VisitorArtifact" FromRole="Visitor" ToRole="Artifact" />
           <NavigationProperty Name="RetrievedContent" Relationship="HorselessNewspaper.Core.Taxa.VisitorContent" FromRole="Visitor" ToRole="Content" />
           <NavigationProperty Name="Visits" Relationship="HorselessNewspaper.Core.Taxa.VisitorVisit1" FromRole="Visitor" ToRole="Visit" />
+          <NavigationProperty Name="Messages" Relationship="HorselessNewspaper.Core.Taxa.MessageVisitor" FromRole="Visitor" ToRole="Message" />
         </EntityType>
         <Association Name="VisitorProperty">
           <End Type="HorselessNewspaper.Core.Taxa.Visitor" Role="Visitor" Multiplicity="*" />
@@ -314,7 +325,7 @@
           <NavigationProperty Name="WorkflowActions" Relationship="HorselessNewspaper.Core.Taxa.WorkflowActionWorkflow" FromRole="Workflow" ToRole="WorkflowAction" />
           </EntityType>
         <EntityType Name="Blob" BaseType="HorselessNewspaper.Core.Taxa.Content" >
-          <Property Name="BlobName" Type="String" Nullable="false" />
+          <Property Name="BlobFileName" Type="String" Nullable="false" />
           <Property Name="BlobSize" Type="Int64" Nullable="false" />
         </EntityType>
         <EntityType Name="MimePayload" BaseType="HorselessNewspaper.Core.Taxa.Content" >
@@ -478,6 +489,44 @@
         <Association Name="AuthenticatedPrincipalPublisher">
           <End Type="HorselessNewspaper.Core.Taxa.AuthenticatedPrincipal" Role="AuthenticatedPrincipal" Multiplicity="*" />
           <End Type="HorselessNewspaper.Core.Taxa.Publisher" Role="Publisher" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Publication" BaseType="HorselessNewspaper.Core.Taxa.Taxon" >
+          <Property Name="PublicationName" Type="String" Nullable="false" />
+          <Property Name="UriScheme" Type="String" Nullable="false" />
+          <NavigationProperty Name="Artifacts" Relationship="HorselessNewspaper.Core.Taxa.PublicationArtifact" FromRole="Publication" ToRole="Artifact" />
+          <Property Name="Uri" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="PublicationArtifact">
+          <End Type="HorselessNewspaper.Core.Taxa.Publication" Role="Publication" Multiplicity="*" />
+          <End Type="HorselessNewspaper.Core.Taxa.Artifact" Role="Artifact" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Image" BaseType="HorselessNewspaper.Core.Taxa.Blob" >
+          <Property Name="Width" Type="Int16" Nullable="false" />
+          <Property Name="Height" Type="String" Nullable="false" />
+          <Property Name="ImageCaption" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Video" BaseType="HorselessNewspaper.Core.Taxa.Blob" >
+          <Property Name="VideoTitle" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Audio" BaseType="HorselessNewspaper.Core.Taxa.Blob" >
+          <Property Name="AudioTitle" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Message" BaseType="HorselessNewspaper.Core.Taxa.Content" >
+          <Property Name="Subject" Type="String" Nullable="false" />
+          <NavigationProperty Name="Sender" Relationship="HorselessNewspaper.Core.Taxa.MessageVisitor" FromRole="Message" ToRole="Visitor" />
+          <Property Name="VisitorId" Type="String" Nullable="true" />
+        </EntityType>
+        <Association Name="MessageVisitor">
+          <End Type="HorselessNewspaper.Core.Taxa.Message" Role="Message" Multiplicity="*" />
+          <End Type="HorselessNewspaper.Core.Taxa.Visitor" Role="Visitor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Visitor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="VisitorId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>

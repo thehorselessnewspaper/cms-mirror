@@ -20,6 +20,7 @@ namespace Horseless.Newspaper.Core.Model.Taxa
             this.RetrievedArtifacts = new HashSet<Artifact>();
             this.RetrievedContent = new HashSet<Content>();
             this.Visits = new HashSet<Visit>();
+            this.Messages = new HashSet<Message>();
         }
     
     
@@ -29,5 +30,7 @@ namespace Horseless.Newspaper.Core.Model.Taxa
         public virtual ICollection<Content> RetrievedContent { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Visit> Visits { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }

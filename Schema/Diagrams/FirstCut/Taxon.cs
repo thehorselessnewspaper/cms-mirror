@@ -30,6 +30,7 @@ namespace Horseless.Newspaper.Core.Model.Taxa
         public System.DateTime PublishAt { get; set; }
         public System.DateTime UnPublishAt { get; set; }
         public string RSAPubllicKey { get; set; }
+        public System.DateTime CreateDate { get; set; }
     
         public virtual Tenant HomeTenant { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

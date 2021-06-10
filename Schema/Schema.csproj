@@ -52,6 +52,9 @@
     <Compile Include="Diagrams\FirstCut\ArtifactDeployment.cs">
       <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
     </Compile>
+    <Compile Include="Diagrams\FirstCut\Audio.cs">
+      <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
+    </Compile>
     <Compile Include="Diagrams\FirstCut\AuthenticatedPrincipal.cs">
       <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
     </Compile>
@@ -88,6 +91,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
     </Compile>
+    <Compile Include="Diagrams\FirstCut\Image.cs">
+      <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\FirstCut\Message.cs">
+      <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
+    </Compile>
     <Compile Include="Diagrams\FirstCut\MimePayload.cs">
       <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
     </Compile>
@@ -97,6 +106,9 @@
     <Compile Include="Diagrams\FirstCut\Property.cs">
       <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
     </Compile>
+    <Compile Include="Diagrams\FirstCut\Publication.cs">
+      <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
+    </Compile>
     <Compile Include="Diagrams\FirstCut\Publisher.cs">
       <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
     </Compile>
@@ -104,6 +116,9 @@
       <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\FirstCut\Tenant.cs">
+      <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\FirstCut\Video.cs">
       <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\FirstCut\Visit.cs">

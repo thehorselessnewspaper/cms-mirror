@@ -12,9 +12,10 @@ namespace Horseless.Newspaper.Core.Model.Taxa
     using System;
     using System.Collections.Generic;
     
-    public partial class Blob : Content
+    public partial class Image : Blob
     {
-        public string BlobFileName { get; set; }
-        public long BlobSize { get; set; }
+        public short Width { get; set; }
+        public string Height { get; set; }
+        public string ImageCaption { get; set; }
     }
 }

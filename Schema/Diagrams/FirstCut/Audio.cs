@@ -12,9 +12,8 @@ namespace Horseless.Newspaper.Core.Model.Taxa
     using System;
     using System.Collections.Generic;
     
-    public partial class Blob : Content
+    public partial class Audio : Blob
     {
-        public string BlobFileName { get; set; }
-        public long BlobSize { get; set; }
+        public string AudioTitle { get; set; }
     }
 }

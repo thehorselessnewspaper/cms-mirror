@@ -21,6 +21,7 @@ namespace Horseless.Newspaper.Core.Model.Taxa
             this.Visitors = new HashSet<Visitor>();
             this.VisualLayoutSections = new HashSet<VisualLayoutSection>();
             this.Authors = new HashSet<Creative>();
+            this.Publications = new HashSet<Publication>();
         }
     
         public string PublisherId { get; set; }
@@ -35,5 +36,7 @@ namespace Horseless.Newspaper.Core.Model.Taxa
         public virtual ICollection<VisualLayoutSection> VisualLayoutSections { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Creative> Authors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Publication> Publications { get; set; }
     }
 }
