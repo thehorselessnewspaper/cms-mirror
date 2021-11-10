@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Schema</RootNamespace>
     <AssemblyName>Schema</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -139,6 +140,16 @@
     <Compile Include="Diagrams\FirstCut\WorkflowActionParameter.cs">
       <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
     </Compile>
+    <Compile Include="Diagrams\SecondCut\ConfigurationDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfigurationDb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\SecondCut\ContentDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContentDb.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +162,20 @@
     <None Include="App.Config" />
     <None Include="Diagrams\FirstCut\CoreTaxa.edmx.diagram">
       <DependentUpon>CoreTaxa.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="Diagrams\SecondCut\ConfigurationDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ConfigurationDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Diagrams\SecondCut\ConfigurationDb.edmx.diagram">
+      <DependentUpon>ConfigurationDb.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="Diagrams\SecondCut\ContentDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ContentDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Diagrams\SecondCut\ContentDb.edmx.diagram">
+      <DependentUpon>ContentDb.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

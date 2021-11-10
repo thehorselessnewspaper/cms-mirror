@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="77878aaaf3bc467499179b1da701cf01" Name="Diagram1" >
+        <EntityTypeShape EntityType="Model1.Taxon" Width="3.125" PointX="9.875" PointY="0.75" />
+        <EntityTypeShape EntityType="Model1.Content" Width="3" PointX="5.125" PointY="9.375" />
+        <EntityTypeShape EntityType="Model1.Visitor" Width="3" PointX="4.5" PointY="2.75" />
+        <EntityTypeShape EntityType="Model1.Publication" Width="3.125" PointX="10.125" PointY="9.25" />
+        <EntityTypeShape EntityType="Model1.Artifact" Width="3.125" PointX="9.875" PointY="2.75" />
+        <EntityTypeShape EntityType="Model1.Role" Width="3" PointX="0.625" PointY="2.75" />
+        <EntityTypeShape EntityType="Model1.Property" Width="3.125" PointX="10" PointY="5.375" />
+        <AssociationConnector Association="Model1.ArtifactProperty" />
+        <EntityTypeShape EntityType="Model1.Visit" Width="3" PointX="4.375" PointY="6.75" />
+        <AssociationConnector Association="Model1.PublicationProperty" />
+        <AssociationConnector Association="Model1.ContentPublication" />
+        <AssociationConnector Association="Model1.VisitorVisit" />
+        <AssociationConnector Association="Model1.VisitorArtifact" />
+        <AssociationConnector Association="Model1.TaxonArtifact" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

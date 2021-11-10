@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0fc847aed57c461dbd12426b68d47803" Name="V0.5" ZoomLevel="137" >
+      <Diagram DiagramId="0fc847aed57c461dbd12426b68d47803" Name="V0.5" ZoomLevel="135" >
         <EntityTypeShape EntityType="HorselessNewspaper.Core.Taxa.Taxon" Width="3.75" PointX="37.75" PointY="0.75" />
         <EntityTypeShape EntityType="HorselessNewspaper.Core.Taxa.Artifact" Width="2.125" PointX="41.125" PointY="7.5" />
         <InheritanceConnector EntityType="HorselessNewspaper.Core.Taxa.Artifact" />
