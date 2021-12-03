@@ -1,19 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31402.337
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Core.Locus", "Web.Core.Locus\Web.Core.Locus.csproj", "{98180D55-3E71-47CF-BE08-260A25686754}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Core.Locus", "Web.Core.Locus\Web.Core.Locus.csproj", "{98180D55-3E71-47CF-BE08-260A25686754}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Core.Locus.Views", "Web.Core.Locus.Views\Web.Core.Locus.Views.csproj", "{C175D718-EE09-469F-8660-DD56C592B955}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Core.Locus.Views", "Web.Core.Locus.Views\Web.Core.Locus.Views.csproj", "{C175D718-EE09-469F-8660-DD56C592B955}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Core.Locus.MiddleWare", "Web.Core.Locus.MiddleWare\Web.Core.Locus.MiddleWare.csproj", "{7D3772FB-96F3-48ED-9378-41A447773EF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Core.Locus.MiddleWare", "Web.Core.Locus.MiddleWare\Web.Core.Locus.MiddleWare.csproj", "{7D3772FB-96F3-48ED-9378-41A447773EF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Core.Locus.Services", "Web.Core.Locus.Services\Web.Core.Locus.Services.csproj", "{61C54BA5-B535-42B3-BB96-2B6D2A0B58B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Core.Locus.Services", "Web.Core.Locus.Services\Web.Core.Locus.Services.csproj", "{61C54BA5-B535-42B3-BB96-2B6D2A0B58B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Core.Locus.Integration.KeyCloak", "Web.Core.Locus.Integration.KeyCloak\Web.Core.Locus.Integration.KeyCloak.csproj", "{CAD0D69E-F192-497E-8062-7A49A4DD6258}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Core.Locus.Integration.KeyCloak", "Web.Core.Locus.Integration.KeyCloak\Web.Core.Locus.Integration.KeyCloak.csproj", "{CAD0D69E-F192-497E-8062-7A49A4DD6258}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Core.Locus.Http.Api", "Web.Core.Locus.Http.Api\Web.Core.Locus.Http.Api.csproj", "{999D1087-F65A-422C-922A-4300F24C0D35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Core.Locus.Http.Api", "Web.Core.Locus.Http.Api\Web.Core.Locus.Http.Api.csproj", "{999D1087-F65A-422C-922A-4300F24C0D35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
