@@ -4,14 +4,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-    <AssemblyName>HorselessNewspaper.$(MSBuildProjectName)</AssemblyName>
     <RootNamespace>HorselessNewspaper.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
-    <Version>$(VersionPrefix)</Version>
+    <AssemblyName>HorselessNewspaper.$(MSBuildProjectName)</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGet.Protocol" Version="6.0.0" />
+    <PackageReference Include="HorselessNewspaper.Web.Core" Version="0.1.211203.16" />
   </ItemGroup>
 
 </Project>
