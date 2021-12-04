@@ -5,13 +5,13 @@
     <version>$version$</version>
     <title>$title$</title>
     <authors>$author$</authors>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <license type="expression">MIT</license>
-    <projectUrl>http://github.com/vigouredelaruse/</projectUrl>
-    <iconUrl></iconUrl>
+    <!--<requireLicenseAcceptance>false</requireLicenseAcceptance>-->
+    <!--<license type="expression">MIT</license>-->
+    <!--<projectUrl>http://github.com/vigouredelaruse/</projectUrl>-->
+    <!--<iconUrl></iconUrl>-->
     <description>$description$</description>
-    <releaseNotes>Inception.</releaseNotes>
+    <!--<releaseNotes>Inception.</releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags></tags>
+    <tags></tags>-->
   </metadata>
 </package>
