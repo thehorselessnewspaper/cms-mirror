@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Web.Core
+namespace HorselessNewspaper.Web.Core.Interfaces
 {
     /// <summary>
     /// specifies a razor class library deployment
@@ -14,11 +14,13 @@ namespace Web.Core
     /// </summary>
     public interface IViewTemplateDeployment
     {
-        public string Id { get; set; }
+        public string PackageId { get; set; }
 
-        public string Name { get; set; }
+        public string PackageTitle { get; set; }
 
-        public string Publisher { get; set; }
+        public string PackagePublisher { get; set; }
+
+        public string PackageVersion { get; set; }
 
     }
 }
