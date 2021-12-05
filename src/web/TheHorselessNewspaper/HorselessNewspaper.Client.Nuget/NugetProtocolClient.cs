@@ -34,9 +34,29 @@ namespace HorselessNewspaper.Client.Nuget
             return new List<NuGetVersion>(versions); 
         }
 
+        public Task<List<NuGetVersion>> ListPackageVersions(Uri repositoryUri, string nugetPackageId)
+        {
+            throw new NotImplementedException();
+        }
+         
+        public Task<List<NuGetVersion>> ListPackageVersions(Uri repositoryUri, string nugetPackageId, INugetProtocolCredentials credentials)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<NuGetVersion> PersistNugetTolocalFilesystem(Uri repositoryUri, string nugetPackageId, NuGetVersion nugetVersion, string folderPath, string userName = "", string password = "")
         {
             return await Task.FromResult(new NuGetVersion(""));
+        }
+
+        public Task<NuGetVersion> PersistNugetTolocalFilesystem(Uri repositoryUri, string nugetPackageId, NuGetVersion nugetVersion, string folderPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<NuGetVersion> PersistNugetTolocalFilesystem(Uri repositoryUri, string nugetPackageId, NuGetVersion nugetVersion, string folderPath, INugetProtocolCredentials credentials)
+        {
+            throw new NotImplementedException();
         }
     }
 }

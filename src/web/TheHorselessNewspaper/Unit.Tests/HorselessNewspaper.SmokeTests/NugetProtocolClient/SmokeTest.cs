@@ -42,14 +42,14 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
 
 
             INugetProtocol client = new HorselessNewspaper.Client.Nuget.NugetProtocolClient();
-            var versions = await client.ListPackageVersions(endpoint, testPackage, UserName, Password);
+            //var versions = await client.ListPackageVersions(endpoint, testPackage, UserName, Password);
 
-            Assert.IsTrue(versions.Count > 0);
+            //Assert.IsTrue(versions.Count > 0);
 
-            foreach (NuGetVersion version in versions)
-            {
-                Console.WriteLine($"Found version {version}");
-            }
+            //foreach (NuGetVersion version in versions)
+            //{
+            //    Console.WriteLine($"Found version {version}");
+            //}
 
 
             Assert.Pass();
