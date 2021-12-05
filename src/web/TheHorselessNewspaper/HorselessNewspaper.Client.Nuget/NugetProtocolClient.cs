@@ -1,4 +1,7 @@
 ﻿using HorselessNewspaper.Core.Interfaces.Nuget;
+using NuGet.Common;
+using NuGet.Protocol;
+using NuGet.Protocol.Core.Types;
 using NuGet.Versioning;
 using System;
 using System.Collections.Generic;
@@ -15,7 +18,20 @@ namespace HorselessNewspaper.Client.Nuget
     {
         public async Task<List<NuGetVersion>> ListPackageVersions(Uri repositoryUri, string nugetPackageId, string userName = "", string password = "")
         {
-            return await Task.FromResult(new List<NuGetVersion>());
+            ILogger logger = NullLogger.Instance;
+            CancellationToken cancellationToken = CancellationToken.None;
+
+            SourceCacheContext cache = new SourceCacheContext();
+            SourceRepository repository = Repository.Factory.GetCoreV3(repositoryUri.AbsoluteUri);
+            FindPackageByIdResource resource = await repository.GetResourceAsync<FindPackageByIdResource>();
+
+            IEnumerable<NuGetVersion> versions = await resource.GetAllVersionsAsync(
+                nugetPackageId,
+                cache,
+                logger,
+                cancellationToken);
+
+            return new List<NuGetVersion>(versions); 
         }
 
         public async Task<NuGetVersion> PersistNugetTolocalFilesystem(Uri repositoryUri, string nugetPackageId, NuGetVersion nugetVersion, string folderPath, string userName = "", string password = "")
