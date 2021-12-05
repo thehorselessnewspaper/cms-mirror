@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HorselessNewspaper.Web.Core" Version="0.1.211204.6" />
+    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.1.211204.11" />
   </ItemGroup>
 
 </Project>
