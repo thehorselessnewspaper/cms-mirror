@@ -6,6 +6,8 @@
     <Nullable>enable</Nullable>
     <PackageId>HorselessNewspaper.Core.Interfaces</PackageId>
     <Version>1.0.0</Version>
+    <PackageVersion>1.0.0</PackageVersion>
+    <PackageId>HorselessNewspaper.Core.Interfaces</PackageId>
     <Authors>sechele@ataxlab.com</Authors>
     <Company>ataxlab</Company>
     <Product>HorselessNewspaper.Core.Interfaces</Product>
