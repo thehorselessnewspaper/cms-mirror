@@ -45,7 +45,7 @@ namespace HorselessNewspaper.Client.Nuget
             var packageSource = new PackageSource(repositoryUri.AbsoluteUri)
             {
                 Credentials = new PackageSourceCredential(
-                    source: repositoryUri.AbsolutePath,
+                    source: repositoryUri.AbsoluteUri,
                     username: credentials.UserName,
                     passwordText: credentials.Password,
                     isPasswordClearText: true,
