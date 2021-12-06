@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration.UserSecrets;
 using NuGet.Versioning;
 using Microsoft.Extensions.Configuration;
 using HorselessNewspaper.SmokeTests.Model;
+using HorselessNewspaper.Client.Nuget.Model;
 
 namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
 {
@@ -34,22 +35,26 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
             var testPackage = configuration.GetSection("NugetPackageId").Value;
             var testUri = configuration.GetSection("RepositoryUrl").Value;
 
-            var Password = configuration.GetSection("NugetPackageId").Value;
-            var UserName = configuration.GetSection("RepositoryUrl").Value;
+            var Password = configuration.GetSection("Password").Value;
+            var UserName = configuration.GetSection("UserName").Value;
 
             Console.WriteLine(testPackage);
             var endpoint = new Uri(testUri);
 
 
             INugetProtocol client = new HorselessNewspaper.Client.Nuget.NugetProtocolClient();
-            //var versions = await client.ListPackageVersions(endpoint, testPackage, UserName, Password);
+            var versions = await client.ListPackageVersions(endpoint, testPackage, new NugetProtocolCredentials() 
+                                                            { 
+                                                                UserName = UserName,
+                                                                Password = Password
+                                                            });
 
-            //Assert.IsTrue(versions.Count > 0);
+            Assert.IsTrue(versions.Count > 0);
 
-            //foreach (NuGetVersion version in versions)
-            //{
-            //    Console.WriteLine($"Found version {version}");
-            //}
+            foreach (NuGetVersion version in versions)
+            {
+                Console.WriteLine($"Found version {version}");
+            }
 
 
             Assert.Pass();

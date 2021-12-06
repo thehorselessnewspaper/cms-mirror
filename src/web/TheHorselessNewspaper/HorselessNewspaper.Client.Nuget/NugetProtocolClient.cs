@@ -42,7 +42,7 @@ namespace HorselessNewspaper.Client.Nuget
             CancellationToken cancellationToken = CancellationToken.None;
             SourceCacheContext cache = new SourceCacheContext();
 
-            var packageSource = new PackageSource(repositoryUri.AbsolutePath)
+            var packageSource = new PackageSource(repositoryUri.AbsoluteUri)
             {
                 Credentials = new PackageSourceCredential(
                     source: repositoryUri.AbsolutePath,
