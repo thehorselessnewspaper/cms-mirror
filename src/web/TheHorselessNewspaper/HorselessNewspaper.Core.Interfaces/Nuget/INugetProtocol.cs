@@ -1,4 +1,5 @@
-﻿using NuGet.Versioning;
+﻿using NuGet.Configuration;
+using NuGet.Versioning;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,10 +25,12 @@ namespace HorselessNewspaper.Core.Interfaces.Nuget
     /// </summary>
     public interface INugetProtocol
     {
-        Task<List<NuGetVersion>> ListPackageVersions(Uri repositoryUri, string nugetPackageId);
-        Task<List<NuGetVersion>> ListPackageVersions(Uri repositoryUri, string nugetPackageId, INugetProtocolCredentials credentials);
+        public PackageSource GetNugetCredentials(Uri repositoryUri, INugetProtocolCredentials credentials);
 
-        Task<NuGetVersion> PersistNugetTolocalFilesystem(Uri repositoryUri, string nugetPackageId, NuGetVersion nugetVersion, string folderPath);
-        Task<NuGetVersion> PersistNugetTolocalFilesystem(Uri repositoryUri, string nugetPackageId, NuGetVersion nugetVersion, string folderPath, INugetProtocolCredentials credentials);
+        public Task<List<NuGetVersion>> ListPackageVersions(Uri repositoryUri, string nugetPackageId);
+        public Task<List<NuGetVersion>> ListPackageVersions(Uri repositoryUri, string nugetPackageId, INugetProtocolCredentials credentials);
+
+        public Task<NuGetVersion> PersistNugetTolocalFilesystem(Uri repositoryUri, string nugetPackageId, NuGetVersion nugetVersion, string folderPath);
+        public Task<NuGetVersion> PersistNugetTolocalFilesystem(Uri repositoryUri, string nugetPackageId, NuGetVersion nugetVersion, string folderPath, INugetProtocolCredentials credentials);
     }
 }

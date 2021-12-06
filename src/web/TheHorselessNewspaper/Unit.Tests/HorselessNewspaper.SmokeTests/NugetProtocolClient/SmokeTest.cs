@@ -11,12 +11,13 @@ using NuGet.Versioning;
 using Microsoft.Extensions.Configuration;
 using HorselessNewspaper.SmokeTests.Model;
 using HorselessNewspaper.Client.Nuget.Model;
+using System.Net;
 
 namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
 {
     internal class SmokeTest
     {
- 
+
         [SetUp]
         public void Setup()
         {
@@ -24,13 +25,40 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
         }
 
         [Test]
+        public async Task CanDownloadPackageFromPrivateRepo()
+        {
+            IConfiguration configuration = GetConfiguration();
+
+            var testPackage = configuration.GetSection("NugetPackageId").Value;
+            var testUri = configuration.GetSection("RepositoryUrl").Value;
+
+            var Password = configuration.GetSection("Password").Value;
+            var UserName = configuration.GetSection("UserName").Value;
+            var PackageCacheLocationr = configuration.GetSection("PackageCacheLocation").Value;
+
+            INugetProtocol client = new HorselessNewspaper.Client.Nuget.NugetProtocolClient();
+
+            var packageVersions = await client.ListPackageVersions(new Uri(testUri), testPackage, new NugetProtocolCredentials()
+                {
+                    UserName = UserName,
+                    Password = Password
+                });
+
+            var versions = await client.PersistNugetTolocalFilesystem(new Uri(testUri), testPackage, packageVersions.LastOrDefault<NuGetVersion>(),
+                PackageCacheLocationr, new NugetProtocolCredentials()
+                {
+                    UserName = UserName,
+                    Password = Password
+                }
+                );
+
+
+        }
+
+        [Test]
         public async Task CanGetPackageVersionsFromPrivateRepo()
         {
-            IConfiguration configuration;
-            configuration = new ConfigurationBuilder()
-                .AddUserSecrets<NugetProtocolClientTestConfig>()
-                .Build();
-
+            IConfiguration configuration = GetConfiguration();
 
             var testPackage = configuration.GetSection("NugetPackageId").Value;
             var testUri = configuration.GetSection("RepositoryUrl").Value;
@@ -43,11 +71,11 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
 
 
             INugetProtocol client = new HorselessNewspaper.Client.Nuget.NugetProtocolClient();
-            var versions = await client.ListPackageVersions(endpoint, testPackage, new NugetProtocolCredentials() 
-                                                            { 
-                                                                UserName = UserName,
-                                                                Password = Password
-                                                            });
+            var versions = await client.ListPackageVersions(endpoint, testPackage, new NugetProtocolCredentials()
+            {
+                UserName = UserName,
+                Password = Password
+            });
 
             Assert.IsTrue(versions.Count > 0);
 
@@ -60,21 +88,28 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
             Assert.Pass();
         }
 
+        private static IConfiguration GetConfiguration()
+        {
+            return new ConfigurationBuilder()
+                .AddUserSecrets<NugetProtocolClientTestConfig>()
+                .Build();
+        }
+
         [Test]
         public async Task CanGetPackageVersionsFromPublicRepo()
         {
             IConfiguration configuration;
             configuration = new ConfigurationBuilder()
-                .AddUserSecrets< NugetProtocolClientTestConfig>()
+                .AddUserSecrets<NugetProtocolClientTestConfig>()
                 .Build();
 
 
             var testPackage = "NewtonSoft.Json";
             var endpoint = new Uri("https://api.nuget.org/v3/index.json");
 
-            
+
             INugetProtocol client = new HorselessNewspaper.Client.Nuget.NugetProtocolClient();
-            var versions = await client.ListPackageVersions(endpoint,testPackage);
+            var versions = await client.ListPackageVersions(endpoint, testPackage);
 
             Assert.IsTrue(versions.Count > 0);
 

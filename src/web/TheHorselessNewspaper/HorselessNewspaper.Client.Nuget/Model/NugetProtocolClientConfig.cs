@@ -37,6 +37,8 @@ namespace HorselessNewspaper.Client.Nuget.Model
 
         public string RepositoryUrl { get; set; } = string.Empty;
 
+        public string CacheLocation { get; set; } = String.Empty;
+
         INugetProtocolCredentials Credentials { get; set; } = new NugetProtocolCredentials();
     }
 }

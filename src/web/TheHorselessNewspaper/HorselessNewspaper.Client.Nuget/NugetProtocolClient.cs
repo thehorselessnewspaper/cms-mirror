@@ -1,6 +1,7 @@
 ﻿using HorselessNewspaper.Core.Interfaces.Nuget;
 using NuGet.Common;
 using NuGet.Configuration;
+using NuGet.Packaging;
 using NuGet.Protocol;
 using NuGet.Protocol.Core.Types;
 using NuGet.Versioning;
@@ -42,15 +43,7 @@ namespace HorselessNewspaper.Client.Nuget
             CancellationToken cancellationToken = CancellationToken.None;
             SourceCacheContext cache = new SourceCacheContext();
 
-            var packageSource = new PackageSource(repositoryUri.AbsoluteUri)
-            {
-                Credentials = new PackageSourceCredential(
-                    source: repositoryUri.AbsoluteUri,
-                    username: credentials.UserName,
-                    passwordText: credentials.Password,
-                    isPasswordClearText: true,
-                    validAuthenticationTypesText: null)
-            };
+            PackageSource packageSource = GetNugetCredentials(repositoryUri, credentials);
 
             // If the `SourceRepository` is created with a `PackageSource`, the rest of APIs will consume the credentials attached to `PackageSource.Credentials`.
             SourceRepository repository = Repository.Factory.GetCoreV3(packageSource);
@@ -67,15 +60,83 @@ namespace HorselessNewspaper.Client.Nuget
             return new List<NuGetVersion>(versions);
         }
 
-
-        public Task<NuGetVersion> PersistNugetTolocalFilesystem(Uri repositoryUri, string nugetPackageId, NuGetVersion nugetVersion, string folderPath)
+        public PackageSource GetNugetCredentials(Uri repositoryUri, INugetProtocolCredentials credentials)
         {
-            throw new NotImplementedException();
+            return new PackageSource(repositoryUri.AbsoluteUri)
+            {
+                Credentials = new PackageSourceCredential(
+                    source: repositoryUri.AbsoluteUri,
+                    username: credentials.UserName,
+                    passwordText: credentials.Password,
+                    isPasswordClearText: true,
+                    validAuthenticationTypesText: null)
+            };
         }
 
-        public Task<NuGetVersion> PersistNugetTolocalFilesystem(Uri repositoryUri, string nugetPackageId, NuGetVersion nugetVersion, string folderPath, INugetProtocolCredentials credentials)
+        public async Task<NuGetVersion> PersistNugetTolocalFilesystem(Uri repositoryUri, string nugetPackageId, NuGetVersion nugetVersion, string folderPath)
         {
-            throw new NotImplementedException();
+            ILogger logger = NullLogger.Instance;
+            CancellationToken cancellationToken = CancellationToken.None;
+
+            SourceCacheContext cache = new SourceCacheContext();
+            SourceRepository repository = Repository.Factory.GetCoreV3(repositoryUri.AbsoluteUri);
+            FindPackageByIdResource resource = await repository.GetResourceAsync<FindPackageByIdResource>();
+
+            string packageId = nugetPackageId;
+            NuGetVersion packageVersion = nugetVersion;
+
+            using FileStream packageStream = File.Open(folderPath, FileMode.OpenOrCreate);
+            await resource.CopyNupkgToStreamAsync(
+                packageId,
+                packageVersion,
+                packageStream,
+                cache,
+                logger,
+                cancellationToken);
+
+            Console.WriteLine($"Downloaded package {packageId} {packageVersion}");
+
+            using PackageArchiveReader packageReader = new PackageArchiveReader(packageStream);
+            NuspecReader nuspecReader = await packageReader.GetNuspecReaderAsync(cancellationToken);
+
+            Console.WriteLine($"Tags: {nuspecReader.GetTags()}");
+            Console.WriteLine($"Description: {nuspecReader.GetDescription()}");
+
+            return await Task.FromResult<NuGetVersion>(nugetVersion);
+        }
+
+        public async Task<NuGetVersion> PersistNugetTolocalFilesystem(Uri repositoryUri, string nugetPackageId, NuGetVersion nugetVersion, string folderPath, INugetProtocolCredentials credentials)
+        {
+            ILogger logger = NullLogger.Instance;
+            CancellationToken cancellationToken = CancellationToken.None;
+
+            SourceCacheContext cache = new SourceCacheContext();
+            PackageSource packageSource = GetNugetCredentials(repositoryUri, credentials);
+
+            SourceRepository repository = Repository.Factory.GetCoreV3(packageSource);
+            FindPackageByIdResource resource = await repository.GetResourceAsync<FindPackageByIdResource>();
+
+            string packageId = nugetPackageId;
+            NuGetVersion packageVersion = nugetVersion;
+
+            using FileStream packageStream = File.Open(folderPath + packageId + ".dll", FileMode.OpenOrCreate);
+            await resource.CopyNupkgToStreamAsync(
+                packageId,
+                packageVersion,
+                packageStream,
+                cache,
+                logger,
+                cancellationToken);
+
+            Console.WriteLine($"Downloaded package {packageId} {packageVersion}");
+
+            using PackageArchiveReader packageReader = new PackageArchiveReader(packageStream);
+            NuspecReader nuspecReader = await packageReader.GetNuspecReaderAsync(cancellationToken);
+
+            Console.WriteLine($"Tags: {nuspecReader.GetTags()}");
+            Console.WriteLine($"Description: {nuspecReader.GetDescription()}");
+
+            return await Task.FromResult<NuGetVersion>(nugetVersion);
         }
     }
 }
