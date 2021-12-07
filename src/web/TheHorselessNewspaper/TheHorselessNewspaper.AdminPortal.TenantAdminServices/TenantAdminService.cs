@@ -21,7 +21,7 @@ namespace TheHorselessNewspaper.AdminPortal.TenantAdminServices
             this.DbContext = dbContext;
         }
 
-        public async Task<List<Tenant>> GetTenants(Expression<Func<Tenant, bool>> filterExpression)
+        public async Task<List<Tenant>> FilterTenants(Expression<Func<Tenant, bool>> filterExpression)
         {
             var result = await DbContext.Tenants.Where(filterExpression).ToListAsync<Tenant>();
             return result;

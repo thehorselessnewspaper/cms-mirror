@@ -25,4 +25,8 @@
     <ProjectReference Include="..\TheHorselessNewspaper.AdminPortal.TenantAdminServices\TheHorselessNewspaper.AdminPortal.TenantAdminServices.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\TenantAdmin\" />
+  </ItemGroup>
+
 </Project>

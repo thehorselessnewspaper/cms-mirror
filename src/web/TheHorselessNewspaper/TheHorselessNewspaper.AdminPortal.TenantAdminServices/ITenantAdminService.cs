@@ -12,7 +12,7 @@ namespace TheHorselessNewspaper.AdminPortal.TenantAdminServices
     {
         THNLPHostingContext DbContext { get; set; }
 
-        public Task<List<Tenant>> GetTenants(Expression<Func<Tenant, bool>> filterExpression);
+        public Task<List<Tenant>> FilterTenants(Expression<Func<Tenant, bool>> filterExpression);
 
         public Task<Tenant> SetTenant(Tenant tenant);
 
