@@ -6,6 +6,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Design;
 using Microsoft.EntityFrameworkCore;
 using TheHorselessNewspaper.AdminPortal.TenantAdminServices;
+using AutoMapper;
+using TheHorselessNewspaper.AdminPortal.TenantAdminServices.Automapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<THNLPHostingContext>(
        options => options.UseNpgsql("")
     );
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles)); // expect this profile in an external nuget
 
 builder.Services.AddTransient<ITenantAdminService>();
 
