@@ -13,7 +13,7 @@ builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
         .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
             .AddMicrosoftGraph(builder.Configuration.GetSection("MicrosoftGraph"))
-            .AddDownstreamWebApi("DownstreamApi",builder.Configuration.GetSection("DownstreamApi"))
+            .AddDownstreamWebApi("DownstreamApi", builder.Configuration.GetSection("DownstreamApi"))
             .AddInMemoryTokenCaches();
 
 builder.Services.AddAuthorization(options =>
@@ -48,9 +48,26 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapDefaultControllerRoute();
+
+app.UseEndpoints(endpoints =>
+{
+
+    endpoints.MapAreaControllerRoute(
+    name: "areas",
+    areaName: "Installation",
+    pattern: "Installation/{controller=Home}/{action=Index}",
+    defaults: new { Area = "Installation" }, constraints: new { area = "Installation" }
+    );
+
+
+    endpoints.MapDefaultControllerRoute();
+
+
+    endpoints.MapRazorPages();
+    endpoints.MapControllers();
+});
+
 app.MapRazorPages();
 app.MapControllers();
 app.Run();

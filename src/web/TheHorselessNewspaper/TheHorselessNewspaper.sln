@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheHorselessNewspaper.AdminPortal", "TheHorselessNewspaper.AdminPortal\TheHorselessNewspaper.AdminPortal.csproj", "{968ACB8E-E7C7-4E69-B897-0ABE7AE9D8D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheHorselessNewspaper.AdminPortal.Web", "TheHorselessNewspaper.AdminPortal.Web\TheHorselessNewspaper.AdminPortal.Web.csproj", "{96A8F911-FAA6-42CA-A6A0-68B33FD8CEBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{968ACB8E-E7C7-4E69-B897-0ABE7AE9D8D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{968ACB8E-E7C7-4E69-B897-0ABE7AE9D8D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{968ACB8E-E7C7-4E69-B897-0ABE7AE9D8D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96A8F911-FAA6-42CA-A6A0-68B33FD8CEBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96A8F911-FAA6-42CA-A6A0-68B33FD8CEBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96A8F911-FAA6-42CA-A6A0-68B33FD8CEBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96A8F911-FAA6-42CA-A6A0-68B33FD8CEBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
