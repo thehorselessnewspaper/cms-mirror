@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TheHorselessNewspaper.AdminPortal.WebApi.Services.TenantAdmin;
 using System.Linq;
 using System.Linq.Expressions;
+using TheHorselessNewspaper.AdminPortal.TenantAdminServices;
 using TheHorselessNewspaper.Schemas.HostingModel.Entities;
 
 namespace TheHorselessNewspaper.AdminPortal.WebApi.Controllers.TenantAdmin
@@ -19,10 +19,17 @@ namespace TheHorselessNewspaper.AdminPortal.WebApi.Controllers.TenantAdmin
             this.TenantAdminService = tenantAdminService;
         }
 
-        public async Task<List<Tenant>> GetTenants(List<string> tenantIds)
+        public async Task<List<Tenant>> FilerTenantsByTenantId(List<string> tenantIds)
         {
 
             var result = await this.TenantAdminService.GetTenants(t => tenantIds.Contains(t.TenantId));
+            return result;
+        }
+
+        public async Task<List<Tenant>> FilerTenantsByTenantDisplayName(List<string> tenantNames)
+        {
+
+            var result = await this.TenantAdminService.GetTenants(t => tenantNames.Contains(t.TenantDisplayName));
             return result;
         }
     }

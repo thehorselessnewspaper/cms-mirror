@@ -1,8 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
 using TheHorselessNewspaper.Schemas.HostingModel.Entities;
 
-namespace TheHorselessNewspaper.AdminPortal.WebApi.Services.TenantAdmin
+namespace TheHorselessNewspaper.AdminPortal.TenantAdminServices
 {
     /// <summary>
     /// entity operations service for Tenant Admin

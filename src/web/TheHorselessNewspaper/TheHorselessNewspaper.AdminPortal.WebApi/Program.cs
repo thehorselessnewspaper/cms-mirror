@@ -5,7 +5,7 @@ using TheHorselessNewspaper.Schemas.HostingModel.Entities;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Design;
 using Microsoft.EntityFrameworkCore;
-using TheHorselessNewspaper.AdminPortal.WebApi.Services.TenantAdmin;
+using TheHorselessNewspaper.AdminPortal.TenantAdminServices;
 
 var builder = WebApplication.CreateBuilder(args);
 

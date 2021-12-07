@@ -21,4 +21,8 @@
     <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.1.20211207.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TheHorselessNewspaper.AdminPortal.TenantAdminServices\TheHorselessNewspaper.AdminPortal.TenantAdminServices.csproj" />
+  </ItemGroup>
+
 </Project>
