@@ -1,0 +1,49 @@
+﻿{
+   "CodeGenerationMode": 2,
+   "ContextClassName": "THNLPHostingContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Entities",
+   "ProjectRootNamespace": "TheHorselessNewspaper.Schemas.HostingModel",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[HostingModel].[Hosts]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[HostingModel].[RoutingDiscriminators]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[HostingModel].[Tenants]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[HostingModel].[UriPaths]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "wipers.THLNP_Hosting.dbo",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}

@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HostingModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="HostingModelStoreContainer">
+    <EntitySet Name="Tenants" EntityType="HostingModel.Store.Tenants" store:Type="Tables" Schema="HostingModel" />
+    <EntitySet Name="RoutingDiscriminators" EntityType="HostingModel.Store.RoutingDiscriminators" store:Type="Tables" Schema="HostingModel" />
+    <EntitySet Name="Hosts" EntityType="HostingModel.Store.Hosts" store:Type="Tables" Schema="HostingModel" />
+    <EntitySet Name="UriPaths" EntityType="HostingModel.Store.UriPaths" store:Type="Tables" Schema="HostingModel" />
+    <AssociationSet Name="TenantRoutingDiscriminator" Association="HostingModel.Store.TenantRoutingDiscriminator">
+      <End Role="Tenant" EntitySet="Tenants" />
+      <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
+    </AssociationSet>
+    <AssociationSet Name="RoutingDiscriminatorHost" Association="HostingModel.Store.RoutingDiscriminatorHost">
+      <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
+      <End Role="Host" EntitySet="Hosts" />
+    </AssociationSet>
+    <AssociationSet Name="RoutingDiscriminatorUriPath" Association="HostingModel.Store.RoutingDiscriminatorUriPath">
+      <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
+      <End Role="UriPath" EntitySet="UriPaths" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Tenants">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenantId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TenantDisplayName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RoutingDiscriminators">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="TenantId" Type="uniqueidentifier" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Hosts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DNSSafeHost" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsTenanantDiscriminator" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RoutingDiscriminatorId" Type="uniqueidentifier" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UriPaths">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AbsolutePath" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsTenantDiscriminator" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RoutingDiscriminatorId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <Association Name="TenantRoutingDiscriminator">
+    <End Role="Tenant" Type="HostingModel.Store.Tenants" Multiplicity="0..1" />
+    <End Role="RoutingDiscriminator" Type="HostingModel.Store.RoutingDiscriminators" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tenant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RoutingDiscriminator">
+        <PropertyRef Name="TenantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RoutingDiscriminatorHost">
+    <End Role="RoutingDiscriminator" Type="HostingModel.Store.RoutingDiscriminators" Multiplicity="0..1" />
+    <End Role="Host" Type="HostingModel.Store.Hosts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoutingDiscriminator">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Host">
+        <PropertyRef Name="RoutingDiscriminatorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RoutingDiscriminatorUriPath">
+    <End Role="RoutingDiscriminator" Type="HostingModel.Store.RoutingDiscriminators" Multiplicity="1" />
+    <End Role="UriPath" Type="HostingModel.Store.UriPaths" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoutingDiscriminator">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UriPath">
+        <PropertyRef Name="RoutingDiscriminatorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="HostingModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="HostingModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tenants" EntityType="HostingModel.Tenant" />
+          <EntitySet Name="RoutingDiscriminators" EntityType="HostingModel.RoutingDiscriminator" />
+          <EntitySet Name="Hosts" EntityType="HostingModel.Host" />
+          <EntitySet Name="UriPaths" EntityType="HostingModel.UriPath" />
+          <AssociationSet Name="TenantRoutingDiscriminator" Association="HostingModel.TenantRoutingDiscriminator">
+            <End Role="Tenant" EntitySet="Tenants" />
+            <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
+          </AssociationSet>
+          <AssociationSet Name="RoutingDiscriminatorHost" Association="HostingModel.RoutingDiscriminatorHost">
+            <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
+            <End Role="Host" EntitySet="Hosts" />
+          </AssociationSet>
+          <AssociationSet Name="RoutingDiscriminatorUriPath" Association="HostingModel.RoutingDiscriminatorUriPath">
+            <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
+            <End Role="UriPath" EntitySet="UriPaths" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Tenant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenantId" Type="String" Nullable="false" />
+          <Property Name="TenantDisplayName" Type="String" Nullable="false" />
+          <NavigationProperty Name="RoutingDiscriminators" Relationship="HostingModel.TenantRoutingDiscriminator" FromRole="Tenant" ToRole="RoutingDiscriminator" />
+        </EntityType>
+        <EntityType Name="RoutingDiscriminator">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tenant" Relationship="HostingModel.TenantRoutingDiscriminator" FromRole="RoutingDiscriminator" ToRole="Tenant" />
+          <Property Name="TenantId" Type="Guid" Nullable="true" />
+          <NavigationProperty Name="Hosts" Relationship="HostingModel.RoutingDiscriminatorHost" FromRole="RoutingDiscriminator" ToRole="Host" />
+          <NavigationProperty Name="UriPaths" Relationship="HostingModel.RoutingDiscriminatorUriPath" FromRole="RoutingDiscriminator" ToRole="UriPath" />
+        </EntityType>
+        <EntityType Name="Host">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="DNSSafeHost" Type="String" Nullable="false" />
+          <Property Name="IsTenanantDiscriminator" Type="String" Nullable="false" />
+          <NavigationProperty Name="RoutingDiscriminator" Relationship="HostingModel.RoutingDiscriminatorHost" FromRole="Host" ToRole="RoutingDiscriminator" />
+          <Property Name="RoutingDiscriminatorId" Type="Guid" Nullable="true" />
+        </EntityType>
+        <EntityType Name="UriPath">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="AbsolutePath" Type="String" Nullable="false" />
+          <Property Name="IsTenantDiscriminator" Type="String" Nullable="false" />
+          <NavigationProperty Name="RoutingDiscriminator" Relationship="HostingModel.RoutingDiscriminatorUriPath" FromRole="UriPath" ToRole="RoutingDiscriminator" />
+          <Property Name="RoutingDiscriminatorId" Type="Guid" Nullable="false" />
+        </EntityType>
+        <Association Name="TenantRoutingDiscriminator">
+          <End Type="HostingModel.Tenant" Role="Tenant" Multiplicity="0..1" />
+          <End Type="HostingModel.RoutingDiscriminator" Role="RoutingDiscriminator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tenant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoutingDiscriminator">
+              <PropertyRef Name="TenantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RoutingDiscriminatorHost">
+          <End Type="HostingModel.RoutingDiscriminator" Role="RoutingDiscriminator" Multiplicity="0..1" />
+          <End Type="HostingModel.Host" Role="Host" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoutingDiscriminator">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Host">
+              <PropertyRef Name="RoutingDiscriminatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RoutingDiscriminatorUriPath">
+          <End Type="HostingModel.RoutingDiscriminator" Role="RoutingDiscriminator" Multiplicity="1" />
+          <End Type="HostingModel.UriPath" Role="UriPath" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoutingDiscriminator">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UriPath">
+              <PropertyRef Name="RoutingDiscriminatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HostingModelStoreContainer" CdmEntityContainer="HostingModelContainer">
+    <EntitySetMapping Name="Tenants">
+      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.Tenant)">
+        <MappingFragment StoreEntitySet="Tenants">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TenantId" ColumnName="TenantId" />
+          <ScalarProperty Name="TenantDisplayName" ColumnName="TenantDisplayName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoutingDiscriminators">
+      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.RoutingDiscriminator)">
+        <MappingFragment StoreEntitySet="RoutingDiscriminators">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="TenantId" ColumnName="TenantId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hosts">
+      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.Host)">
+        <MappingFragment StoreEntitySet="Hosts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DNSSafeHost" ColumnName="DNSSafeHost" />
+          <ScalarProperty Name="IsTenanantDiscriminator" ColumnName="IsTenanantDiscriminator" />
+          <ScalarProperty Name="RoutingDiscriminatorId" ColumnName="RoutingDiscriminatorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UriPaths">
+      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.UriPath)">
+        <MappingFragment StoreEntitySet="UriPaths">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AbsolutePath" ColumnName="AbsolutePath" />
+          <ScalarProperty Name="IsTenantDiscriminator" ColumnName="IsTenantDiscriminator" />
+          <ScalarProperty Name="RoutingDiscriminatorId" ColumnName="RoutingDiscriminatorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="DefaultDatabaseSchema" Value="HostingModel" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
