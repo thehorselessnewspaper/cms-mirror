@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/06/2021 23:57:36
--- Generated from EDMX file: C:\src\horselessprototype\prototype\Model.Core.Taxa\Schema\Diagrams\Hosting\HostingModel.edmx
+-- Date Created: 12/07/2021 21:27:06
+-- Generated from EDMX file: C:\src\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Hosting\HostingModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -51,8 +51,9 @@ GO
 -- Creating table 'Tenants'
 CREATE TABLE [HostingModel].[Tenants] (
     [Id] uniqueidentifier  NOT NULL,
-    [TenantId] nvarchar(max)  NOT NULL,
-    [TenantDisplayName] nvarchar(max)  NOT NULL
+    [TenantDisplayName] nvarchar(max)  NOT NULL,
+    [ObjectId] nvarchar(max)  NOT NULL,
+    [IsSoftDeleted] bit  NOT NULL
 );
 GO
 
@@ -60,7 +61,9 @@ GO
 CREATE TABLE [HostingModel].[RoutingDiscriminators] (
     [Id] uniqueidentifier  NOT NULL,
     [IsActive] bit  NOT NULL,
-    [TenantId] uniqueidentifier  NULL
+    [TenantId] uniqueidentifier  NULL,
+    [ObjectId] nvarchar(max)  NOT NULL,
+    [RuleDisplayName] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -69,7 +72,9 @@ CREATE TABLE [HostingModel].[Hosts] (
     [Id] uniqueidentifier  NOT NULL,
     [DNSSafeHost] nvarchar(max)  NOT NULL,
     [IsTenanantDiscriminator] nvarchar(max)  NOT NULL,
-    [RoutingDiscriminatorId] uniqueidentifier  NULL
+    [RoutingDiscriminatorId] uniqueidentifier  NULL,
+    [ObjectId] nvarchar(max)  NOT NULL,
+    [HostDisplayName] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -78,7 +83,9 @@ CREATE TABLE [HostingModel].[UriPaths] (
     [Id] uniqueidentifier  NOT NULL,
     [AbsolutePath] nvarchar(max)  NOT NULL,
     [IsTenantDiscriminator] nvarchar(max)  NOT NULL,
-    [RoutingDiscriminatorId] uniqueidentifier  NOT NULL
+    [RoutingDiscriminatorId] uniqueidentifier  NOT NULL,
+    [ObjectId] nvarchar(max)  NOT NULL,
+    [HostDisplayName] nvarchar(max)  NOT NULL
 );
 GO
 

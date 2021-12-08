@@ -10,6 +10,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
         public string AbsolutePath { get; set; }
         public string IsTenantDiscriminator { get; set; }
         public Guid RoutingDiscriminatorId { get; set; }
+        public string ObjectId { get; set; }
+        public string HostDisplayName { get; set; }
 
         public virtual RoutingDiscriminator RoutingDiscriminator { get; set; }
     }

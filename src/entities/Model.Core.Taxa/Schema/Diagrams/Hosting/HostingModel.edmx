@@ -28,8 +28,9 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TenantId" Type="nvarchar(max)" Nullable="false" />
     <Property Name="TenantDisplayName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="RoutingDiscriminators">
     <Key>
@@ -38,6 +39,8 @@
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="TenantId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RuleDisplayName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Hosts">
     <Key>
@@ -47,6 +50,8 @@
     <Property Name="DNSSafeHost" Type="nvarchar(max)" Nullable="false" />
     <Property Name="IsTenanantDiscriminator" Type="nvarchar(max)" Nullable="false" />
     <Property Name="RoutingDiscriminatorId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="HostDisplayName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="UriPaths">
     <Key>
@@ -56,6 +61,8 @@
     <Property Name="AbsolutePath" Type="nvarchar(max)" Nullable="false" />
     <Property Name="IsTenantDiscriminator" Type="nvarchar(max)" Nullable="false" />
     <Property Name="RoutingDiscriminatorId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="HostDisplayName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="TenantRoutingDiscriminator">
     <End Role="Tenant" Type="HostingModel.Store.Tenants" Multiplicity="0..1" />
@@ -209,6 +216,8 @@
         <MappingFragment StoreEntitySet="Tenants">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="TenantDisplayName" ColumnName="TenantDisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -218,6 +227,8 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="TenantId" ColumnName="TenantId" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="RuleDisplayName" ColumnName="RuleDisplayName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -228,6 +239,8 @@
           <ScalarProperty Name="DNSSafeHost" ColumnName="DNSSafeHost" />
           <ScalarProperty Name="IsTenanantDiscriminator" ColumnName="IsTenanantDiscriminator" />
           <ScalarProperty Name="RoutingDiscriminatorId" ColumnName="RoutingDiscriminatorId" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="HostDisplayName" ColumnName="HostDisplayName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -238,6 +251,8 @@
           <ScalarProperty Name="AbsolutePath" ColumnName="AbsolutePath" />
           <ScalarProperty Name="IsTenantDiscriminator" ColumnName="IsTenantDiscriminator" />
           <ScalarProperty Name="RoutingDiscriminatorId" ColumnName="RoutingDiscriminatorId" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="HostDisplayName" ColumnName="HostDisplayName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

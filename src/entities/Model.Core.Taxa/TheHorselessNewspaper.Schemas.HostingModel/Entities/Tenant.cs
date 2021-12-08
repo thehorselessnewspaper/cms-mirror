@@ -12,8 +12,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
         }
 
         public Guid Id { get; set; }
-        public string TenantId { get; set; }
         public string TenantDisplayName { get; set; }
+        public string ObjectId { get; set; }
+        public bool IsSoftDeleted { get; set; }
 
         public virtual ICollection<RoutingDiscriminator> RoutingDiscriminators { get; set; }
     }

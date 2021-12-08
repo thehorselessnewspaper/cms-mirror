@@ -10,6 +10,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
         public string DNSSafeHost { get; set; }
         public string IsTenanantDiscriminator { get; set; }
         public Guid? RoutingDiscriminatorId { get; set; }
+        public string ObjectId { get; set; }
+        public string HostDisplayName { get; set; }
 
         public virtual RoutingDiscriminator RoutingDiscriminator { get; set; }
     }
