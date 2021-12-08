@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using TheHorselessNewspaper.AdminPortal.TenantAdminServices.Models.Tenant;
 using TheHorselessNewspaper.Schemas.HostingModel.Entities;
 
 namespace TheHorselessNewspaper.AdminPortal.TenantAdminServices
@@ -12,10 +13,12 @@ namespace TheHorselessNewspaper.AdminPortal.TenantAdminServices
     {
         THNLPHostingContext DbContext { get; set; }
 
-        public Task<List<Tenant>> FilterTenants(Expression<Func<Tenant, bool>> filterExpression);
+        public Task<List<TenantDTO>> GetTenants(Expression<Func<Tenant, bool>> filterExpression);
 
-        public Task<Tenant> SetTenant(Tenant tenant);
+        public Task<TenantDTO> SetTenant(TenantDTO tenant);
 
-        public Task<Tenant> GetTenantByTenantId(string tenantId);
+        public Task<TenantDTO> GetTenantByTenantId(string tenantId);
+
+        public Task<TenantDTO> GetTenantByObjectId(string tenantId);
     }
 }

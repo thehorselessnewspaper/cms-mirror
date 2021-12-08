@@ -120,9 +120,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TenantId" Type="String" Nullable="false" />
           <Property Name="TenantDisplayName" Type="String" Nullable="false" />
           <NavigationProperty Name="RoutingDiscriminators" Relationship="HostingModel.TenantRoutingDiscriminator" FromRole="Tenant" ToRole="RoutingDiscriminator" />
+          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="RoutingDiscriminator">
           <Key>
@@ -134,6 +135,8 @@
           <Property Name="TenantId" Type="Guid" Nullable="true" />
           <NavigationProperty Name="Hosts" Relationship="HostingModel.RoutingDiscriminatorHost" FromRole="RoutingDiscriminator" ToRole="Host" />
           <NavigationProperty Name="UriPaths" Relationship="HostingModel.RoutingDiscriminatorUriPath" FromRole="RoutingDiscriminator" ToRole="UriPath" />
+          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="RuleDisplayName" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Host">
           <Key>
@@ -144,6 +147,8 @@
           <Property Name="IsTenanantDiscriminator" Type="String" Nullable="false" />
           <NavigationProperty Name="RoutingDiscriminator" Relationship="HostingModel.RoutingDiscriminatorHost" FromRole="Host" ToRole="RoutingDiscriminator" />
           <Property Name="RoutingDiscriminatorId" Type="Guid" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="HostDisplayName" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="UriPath">
           <Key>
@@ -154,6 +159,8 @@
           <Property Name="IsTenantDiscriminator" Type="String" Nullable="false" />
           <NavigationProperty Name="RoutingDiscriminator" Relationship="HostingModel.RoutingDiscriminatorUriPath" FromRole="UriPath" ToRole="RoutingDiscriminator" />
           <Property Name="RoutingDiscriminatorId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="HostDisplayName" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="TenantRoutingDiscriminator">
           <End Type="HostingModel.Tenant" Role="Tenant" Multiplicity="0..1" />
@@ -201,7 +208,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(HostingModel.Tenant)">
         <MappingFragment StoreEntitySet="Tenants">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="TenantId" ColumnName="TenantId" />
           <ScalarProperty Name="TenantDisplayName" ColumnName="TenantDisplayName" />
         </MappingFragment>
       </EntityTypeMapping>

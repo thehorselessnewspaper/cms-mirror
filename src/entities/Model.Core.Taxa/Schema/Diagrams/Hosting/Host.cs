@@ -18,6 +18,8 @@ namespace Schema.Diagrams.Hosting
         public string DNSSafeHost { get; set; }
         public string IsTenanantDiscriminator { get; set; }
         public Nullable<System.Guid> RoutingDiscriminatorId { get; set; }
+        public string ObjectId { get; set; }
+        public string HostDisplayName { get; set; }
     
         public virtual RoutingDiscriminator RoutingDiscriminator { get; set; }
     }

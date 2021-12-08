@@ -18,6 +18,8 @@ namespace Schema.Diagrams.Hosting
         public string AbsolutePath { get; set; }
         public string IsTenantDiscriminator { get; set; }
         public System.Guid RoutingDiscriminatorId { get; set; }
+        public string ObjectId { get; set; }
+        public string HostDisplayName { get; set; }
     
         public virtual RoutingDiscriminator RoutingDiscriminator { get; set; }
     }

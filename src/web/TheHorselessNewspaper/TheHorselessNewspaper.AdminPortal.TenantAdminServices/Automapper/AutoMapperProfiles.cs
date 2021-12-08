@@ -16,9 +16,16 @@ namespace TheHorselessNewspaper.AdminPortal.TenantAdminServices.Automapper
         public AutoMapperProfiles()
         {
             CreateMap<Tenant, TenantDTO>();
+            CreateMap<Tenant, TenantDTO>().ReverseMap();
+
             CreateMap<Host, HostDTO>();
+            CreateMap<Host, HostDTO>().ReverseMap();
+
             CreateMap<RoutingDiscriminator, RoutingDiscriminatorDTO>();
+            CreateMap<RoutingDiscriminator, RoutingDiscriminatorDTO>().ReverseMap();
+
             CreateMap<UriPath, UriPathDTO>();
+            CreateMap<UriPath, UriPathDTO>().ReverseMap();
         }
     }
 }
