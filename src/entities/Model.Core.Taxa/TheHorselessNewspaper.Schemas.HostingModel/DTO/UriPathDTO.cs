@@ -16,6 +16,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.DTO
         public string ObjectId { get; set; }
         public string HostDisplayName { get; set; }
 
-        public virtual RoutingDiscriminatorDTO RoutingDiscriminator { get; set; }
+        public RoutingDiscriminatorDTO RoutingDiscriminator { get; set; }
     }
 }
