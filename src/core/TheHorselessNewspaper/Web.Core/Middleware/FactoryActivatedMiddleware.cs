@@ -19,6 +19,12 @@ namespace HorselessNewspaper.Web.Core.Middleware
  
         }
 
+        /// <summary>
+        /// incredibly you can inject services here
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="next"></param>
+        /// <returns></returns>
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
             var keyValue = context.Request.Query["key"];
