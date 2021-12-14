@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\HorselessNewspaper.Client.Nuget\HorselessNewspaper.Client.Nuget.csproj" />
+    <ProjectReference Include="..\..\Web.Core\HorselessNewspaper.Web.Core.csproj" />
   </ItemGroup>
 
 </Project>
