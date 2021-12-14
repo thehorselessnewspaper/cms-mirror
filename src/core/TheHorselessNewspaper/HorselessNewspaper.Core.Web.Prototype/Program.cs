@@ -1,4 +1,15 @@
+using HorselessNewspaper.Web.Core.Extensions;
+using HorselessNewspaper.Web.Core.Interfaces.Cache;
+using HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant;
+using TheHorselessNewspaper.Schemas.HostingModel.DTO;
+using HorselessNewspaper.Web.Core.Extensions.Hosting;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddHorselessNewspaper(opts =>
+{
+
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -17,6 +28,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseHorselessNewspaper(options =>
+{
+    
+});
 
 app.UseAuthorization();
 

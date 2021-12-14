@@ -16,9 +16,11 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
     /// </summary>
     public class HorselessRouteTransformer : DynamicRouteValueTransformer
     {
-        public override ValueTask<RouteValueDictionary> TransformAsync(HttpContext httpContext, RouteValueDictionary values)
+        public override async ValueTask<RouteValueDictionary> TransformAsync(HttpContext httpContext, RouteValueDictionary values)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            i++;
+            return await ValueTask.FromResult(values);
         }
     }
 }
