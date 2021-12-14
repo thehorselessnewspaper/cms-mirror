@@ -9,6 +9,6 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.TenantServices
 {
     public interface ITenantService
     {
-        public Task<Tenant> GetCurrentTenant();
+        // public Task<TenantDTO> GetCurrentTenant();
     }
 }
