@@ -18,7 +18,8 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
                 .UseRouting()
                 .UseEndpoints(endpoints =>
                 {
-                    endpoints.MapDynamicControllerRoute<HorselessRouteTransformer>("{controller}/{action}");
+                    // test of library controlled routing scenario
+                    endpoints.MapDynamicControllerRoute<HorselessRouteTransformer>("");
                 });
                 //.UseAuthentication()
                 //.UseAuthorization();

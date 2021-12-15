@@ -3,6 +3,7 @@ using HorselessNewspaper.Web.Core.Interfaces.Cache;
 using HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant;
 using TheHorselessNewspaper.Schemas.HostingModel.DTO;
 using HorselessNewspaper.Web.Core.Extensions.Hosting;
+using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +31,11 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseHorselessNewspaper(options =>
 {
-    
+    options.Builder.UseEndpoints(options =>
+    {
+        // test of user defined routing scenario
+        options.MapDynamicControllerRoute<HorselessRouteTransformer>("/pages");
+    });
 });
 
 app.UseAuthorization();

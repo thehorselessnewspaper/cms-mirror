@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HorselessNewspaper.Web.Core.Interfaces.Cache;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
+using TheHorselessNewspaper.Schemas.HostingModel.DTO;
 
 namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
 {
@@ -16,6 +18,19 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
     /// </summary>
     public class HorselessRouteTransformer : DynamicRouteValueTransformer
     {
+        public HorselessRouteTransformer(IHorselessCacheProvider<Guid, TenantDTO> tenantCache)
+        {
+            TenantCache = tenantCache;
+        }
+
+        public IHorselessCacheProvider<Guid, TenantDTO> TenantCache { get; set; }
+
+        /// <summary>
+        /// provides cms routing semantics
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
         public override async ValueTask<RouteValueDictionary> TransformAsync(HttpContext httpContext, RouteValueDictionary values)
         {
             int i = 0;
