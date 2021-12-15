@@ -14,7 +14,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
     public static class HorselessAspNetCoreStartupExtensions
     {
         public static IServiceCollection AddHorselessNewspaper(this IServiceCollection services,
-        Action<HorselessServiceBuilder> options = null, ServiceLifetime scope = ServiceLifetime.Scoped)
+        Action<HorselessServiceBuilder> options, ServiceLifetime scope = ServiceLifetime.Scoped)
         {
             var serviceBuilder = new HorselessServiceBuilder(services);
             serviceBuilder.AddRazorRuntimeCompilation = true;

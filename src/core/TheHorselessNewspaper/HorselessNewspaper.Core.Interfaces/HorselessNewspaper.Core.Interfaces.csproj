@@ -10,7 +10,7 @@
     <PackageId>HorselessNewspaper.Core.Interfaces</PackageId>
     <Authors>sechele@ataxlab.com</Authors>
     <Company>ataxlab</Company>
-    <Product>HorselessNewspaper.Core.Interfaces</Product>
+    <Product>The Horseless Newspaper</Product>
     <Description>core interfaces for the horseless newspaper</Description>
   </PropertyGroup>
 
