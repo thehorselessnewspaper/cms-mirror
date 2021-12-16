@@ -4,10 +4,21 @@ using HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant;
 using TheHorselessNewspaper.Schemas.HostingModel.DTO;
 using HorselessNewspaper.Web.Core.Extensions.Hosting;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
+using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHorselessNewspaper();
+
+// as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/docs/keycloak.md
+builder.Services.AddHorselessKeycloakAuth(keycloakOpts =>
+{
+    keycloakOpts.ClientId = "my-client-id";
+    keycloakOpts.ClientSecret = "my-client-secret";
+    keycloakOpts.Domain = "mydomain.local";
+    keycloakOpts.Realm = "myrealm";
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -26,6 +37,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthorization();
+
 app.UseHorselessNewspaper(options =>
 {
     options.Builder.UseEndpoints(options =>
@@ -34,8 +48,6 @@ app.UseHorselessNewspaper(options =>
         options.MapDynamicControllerRoute<HorselessRouteTransformer>("/pages");
     });
 });
-
-app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
