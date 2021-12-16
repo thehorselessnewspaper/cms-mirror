@@ -16,13 +16,14 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.DTO
         }
 
         public Guid Id { get; set; }
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
         public Guid? TenantId { get; set; }
         public string ObjectId { get; set; }
-        public string RuleDisplayName { get; set; }
+        public string DisplayName { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
-        public TenantDTO Tenant { get; set; }
-        public ICollection<HostDTO> Hosts { get; set; }
-        public ICollection<UriPathDTO> UriPaths { get; set; }
+        public virtual Tenant Tenant { get; set; }
+        public virtual ICollection<HostDTO> Hosts { get; set; }
+        public virtual ICollection<UriPathDTO> UriPaths { get; set; }
     }
 }

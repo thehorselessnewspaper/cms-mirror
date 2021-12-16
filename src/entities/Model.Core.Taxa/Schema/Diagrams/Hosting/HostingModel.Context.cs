@@ -29,5 +29,8 @@ namespace Schema.Diagrams.Hosting
         public virtual DbSet<RoutingDiscriminator> RoutingDiscriminators { get; set; }
         public virtual DbSet<Host> Hosts { get; set; }
         public virtual DbSet<UriPath> UriPaths { get; set; }
+        public virtual DbSet<NugetPackage> NugetPackages { get; set; }
+        public virtual DbSet<FilesystemAssetLocation> FilesystemAssetLocations { get; set; }
+        public virtual DbSet<KeyCloakConfiguration> KeyCloakConfigurations { get; set; }
     }
 }

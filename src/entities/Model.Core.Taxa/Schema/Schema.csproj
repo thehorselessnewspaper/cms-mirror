@@ -140,6 +140,9 @@
     <Compile Include="Diagrams\FirstCut\WorkflowActionParameter.cs">
       <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
     </Compile>
+    <Compile Include="Diagrams\Hosting\FilesystemAssetLocation.cs">
+      <DependentUpon>HostingModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Diagrams\Hosting\Host.cs">
       <DependentUpon>HostingModel.tt</DependentUpon>
     </Compile>
@@ -157,6 +160,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HostingModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Hosting\KeyCloakConfiguration.cs">
+      <DependentUpon>HostingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Hosting\NugetPackage.cs">
+      <DependentUpon>HostingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Hosting\RoutingDiscriminator.cs">
       <DependentUpon>HostingModel.tt</DependentUpon>

@@ -6,16 +6,23 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
 {
     public partial class Host
     {
+        public Host()
+        {
+            WWWRootAssetLocations = new HashSet<FilesystemAssetLocation>();
+        }
+
         public Guid Id { get; set; }
         public string TCPHost { get; set; }
         public string IsTenanantDiscriminator { get; set; }
         public Guid? RoutingDiscriminatorId { get; set; }
         public string ObjectId { get; set; }
-        public string RouteDisplayName { get; set; }
+        public string DisplayName { get; set; }
         public string HtmlLayoutFilename { get; set; }
         public DateTime? CreatedAt { get; set; }
         public string HTTPPort { get; set; }
 
         public virtual RoutingDiscriminator RoutingDiscriminator { get; set; }
+
+        public virtual ICollection<FilesystemAssetLocation> WWWRootAssetLocations { get; set; }
     }
 }

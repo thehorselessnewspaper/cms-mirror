@@ -6,12 +6,17 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
 {
     public partial class UriPath
     {
+        public UriPath()
+        {
+            WWWRootAssetLocations = new HashSet<FilesystemAssetLocation>();
+        }
+
         public Guid Id { get; set; }
         public string AbsoluteURL { get; set; }
         public string IsTenantDiscriminator { get; set; }
         public Guid RoutingDiscriminatorId { get; set; }
         public string ObjectId { get; set; }
-        public string RouteDisplayName { get; set; }
+        public string DisplayName { get; set; }
         public string HtmlLayoutFilename { get; set; }
         public DateTime? CreatedAt { get; set; }
         public string HTTPPort { get; set; }
@@ -19,5 +24,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
         public string TCPHost { get; set; }
 
         public virtual RoutingDiscriminator RoutingDiscriminator { get; set; }
+
+        public virtual ICollection<FilesystemAssetLocation> WWWRootAssetLocations { get; set; }
     }
 }

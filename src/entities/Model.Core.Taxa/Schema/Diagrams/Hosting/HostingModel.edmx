@@ -10,6 +10,12 @@
     <EntitySet Name="RoutingDiscriminators" EntityType="HostingModel.Store.RoutingDiscriminators" store:Type="Tables" Schema="HostingModel" />
     <EntitySet Name="Hosts" EntityType="HostingModel.Store.Hosts" store:Type="Tables" Schema="HostingModel" />
     <EntitySet Name="UriPaths" EntityType="HostingModel.Store.UriPaths" store:Type="Tables" Schema="HostingModel" />
+    <EntitySet Name="NugetPackages" EntityType="HostingModel.Store.NugetPackages" store:Type="Tables" Schema="HostingModel" />
+    <EntitySet Name="FilesystemAssetLocations" EntityType="HostingModel.Store.FilesystemAssetLocations" store:Type="Tables" Schema="HostingModel" />
+    <EntitySet Name="KeyCloakConfigurations" EntityType="HostingModel.Store.KeyCloakConfigurations" store:Type="Tables" Schema="HostingModel" />
+    <EntitySet Name="TenantNugetPackage" EntityType="HostingModel.Store.TenantNugetPackage" store:Type="Tables" Schema="HostingModel" />
+    <EntitySet Name="HostFilesystemAssetLocation" EntityType="HostingModel.Store.HostFilesystemAssetLocation" store:Type="Tables" Schema="HostingModel" />
+    <EntitySet Name="UriPathFilesystemAssetLocation" EntityType="HostingModel.Store.UriPathFilesystemAssetLocation" store:Type="Tables" Schema="HostingModel" />
     <AssociationSet Name="TenantRoutingDiscriminator" Association="HostingModel.Store.TenantRoutingDiscriminator">
       <End Role="Tenant" EntitySet="Tenants" />
       <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
@@ -22,16 +28,49 @@
       <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
       <End Role="UriPath" EntitySet="UriPaths" />
     </AssociationSet>
+    <AssociationSet Name="FK_TenantNugetPackage_Tenant" Association="HostingModel.Store.FK_TenantNugetPackage_Tenant">
+      <End Role="Tenant" EntitySet="Tenants" />
+      <End Role="TenantNugetPackage" EntitySet="TenantNugetPackage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TenantNugetPackage_NugetPackage" Association="HostingModel.Store.FK_TenantNugetPackage_NugetPackage">
+      <End Role="NugetPackage" EntitySet="NugetPackages" />
+      <End Role="TenantNugetPackage" EntitySet="TenantNugetPackage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HostFilesystemAssetLocation_Host" Association="HostingModel.Store.FK_HostFilesystemAssetLocation_Host">
+      <End Role="Host" EntitySet="Hosts" />
+      <End Role="HostFilesystemAssetLocation" EntitySet="HostFilesystemAssetLocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HostFilesystemAssetLocation_FilesystemAssetLocation" Association="HostingModel.Store.FK_HostFilesystemAssetLocation_FilesystemAssetLocation">
+      <End Role="FilesystemAssetLocation" EntitySet="FilesystemAssetLocations" />
+      <End Role="HostFilesystemAssetLocation" EntitySet="HostFilesystemAssetLocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UriPathFilesystemAssetLocation_UriPath" Association="HostingModel.Store.FK_UriPathFilesystemAssetLocation_UriPath">
+      <End Role="UriPath" EntitySet="UriPaths" />
+      <End Role="UriPathFilesystemAssetLocation" EntitySet="UriPathFilesystemAssetLocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UriPathFilesystemAssetLocation_FilesystemAssetLocation" Association="HostingModel.Store.FK_UriPathFilesystemAssetLocation_FilesystemAssetLocation">
+      <End Role="FilesystemAssetLocation" EntitySet="FilesystemAssetLocations" />
+      <End Role="UriPathFilesystemAssetLocation" EntitySet="UriPathFilesystemAssetLocation" />
+    </AssociationSet>
+    <AssociationSet Name="NugetPackageFilesystemAssetLocation" Association="HostingModel.Store.NugetPackageFilesystemAssetLocation">
+      <End Role="NugetPackage" EntitySet="NugetPackages" />
+      <End Role="FilesystemAssetLocation" EntitySet="FilesystemAssetLocations" />
+    </AssociationSet>
+    <AssociationSet Name="KeyCloakConfigurationTenant" Association="HostingModel.Store.KeyCloakConfigurationTenant">
+      <End Role="KeyCloakConfiguration" EntitySet="KeyCloakConfigurations" />
+      <End Role="Tenant" EntitySet="Tenants" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Tenants">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TenantDisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="KeyCloakConfigurationId" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <EntityType Name="RoutingDiscriminators">
     <Key>
@@ -41,7 +80,7 @@
     <Property Name="IsActive" Type="bit" Nullable="true" />
     <Property Name="TenantId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="RuleDisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="Hosts">
@@ -49,11 +88,11 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="TCPHost" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TCPHost" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsTenanantDiscriminator" Type="nvarchar(max)" Nullable="true" />
     <Property Name="RoutingDiscriminatorId" Type="uniqueidentifier" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="RouteDisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="HtmlLayoutFilename" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="HTTPPort" Type="nvarchar(max)" Nullable="true" />
@@ -66,13 +105,71 @@
     <Property Name="AbsoluteURL" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsTenantDiscriminator" Type="nvarchar(max)" Nullable="true" />
     <Property Name="RoutingDiscriminatorId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="RouteDisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="HtmlLayoutFilename" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="HTTPPort" Type="nvarchar(max)" Nullable="true" />
     <Property Name="HTTPScheme" Type="nvarchar(max)" Nullable="true" />
     <Property Name="TCPHost" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="NugetPackages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PackageName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PackageId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Publisher" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Version" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="FilesystemAssetLocation_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FilesystemAssetLocations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="AssetURI" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="KeyCloakConfigurations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Authority" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Realm" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TenantNugetPackage">
+    <Key>
+      <PropertyRef Name="TenantDeployments_Id" />
+      <PropertyRef Name="AvailableNugetPackages_Id" />
+    </Key>
+    <Property Name="TenantDeployments_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AvailableNugetPackages_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HostFilesystemAssetLocation">
+    <Key>
+      <PropertyRef Name="HostWWWRootAssetLocations_Id" />
+      <PropertyRef Name="WWWRootAssetLocations_Id" />
+    </Key>
+    <Property Name="HostWWWRootAssetLocations_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="WWWRootAssetLocations_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UriPathFilesystemAssetLocation">
+    <Key>
+      <PropertyRef Name="UriPathWWWRootAssetLocations_Id" />
+      <PropertyRef Name="WWWRootAssetLocations_Id" />
+    </Key>
+    <Property Name="UriPathWWWRootAssetLocations_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="WWWRootAssetLocations_Id" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <Association Name="TenantRoutingDiscriminator">
     <End Role="Tenant" Type="HostingModel.Store.Tenants" Multiplicity="0..1" />
@@ -110,6 +207,102 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="NugetPackageFilesystemAssetLocation">
+    <End Role="NugetPackage" Type="HostingModel.Store.NugetPackages" Multiplicity="*" />
+    <End Role="FilesystemAssetLocation" Type="HostingModel.Store.FilesystemAssetLocations" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="FilesystemAssetLocation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NugetPackage">
+        <PropertyRef Name="FilesystemAssetLocation_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="KeyCloakConfigurationTenant">
+    <End Role="KeyCloakConfiguration" Type="HostingModel.Store.KeyCloakConfigurations" Multiplicity="0..1" />
+    <End Role="Tenant" Type="HostingModel.Store.Tenants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyCloakConfiguration">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tenant">
+        <PropertyRef Name="KeyCloakConfigurationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TenantNugetPackage_Tenant">
+    <End Role="Tenant" Type="HostingModel.Store.Tenants" Multiplicity="1" />
+    <End Role="TenantNugetPackage" Type="HostingModel.Store.TenantNugetPackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tenant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TenantNugetPackage">
+        <PropertyRef Name="TenantDeployments_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TenantNugetPackage_NugetPackage">
+    <End Role="TenantNugetPackage" Type="HostingModel.Store.TenantNugetPackage" Multiplicity="*" />
+    <End Role="NugetPackage" Type="HostingModel.Store.NugetPackages" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="NugetPackage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TenantNugetPackage">
+        <PropertyRef Name="AvailableNugetPackages_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HostFilesystemAssetLocation_Host">
+    <End Role="Host" Type="HostingModel.Store.Hosts" Multiplicity="1" />
+    <End Role="HostFilesystemAssetLocation" Type="HostingModel.Store.HostFilesystemAssetLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Host">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HostFilesystemAssetLocation">
+        <PropertyRef Name="HostWWWRootAssetLocations_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HostFilesystemAssetLocation_FilesystemAssetLocation">
+    <End Role="HostFilesystemAssetLocation" Type="HostingModel.Store.HostFilesystemAssetLocation" Multiplicity="*" />
+    <End Role="FilesystemAssetLocation" Type="HostingModel.Store.FilesystemAssetLocations" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="FilesystemAssetLocation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HostFilesystemAssetLocation">
+        <PropertyRef Name="WWWRootAssetLocations_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UriPathFilesystemAssetLocation_UriPath">
+    <End Role="UriPath" Type="HostingModel.Store.UriPaths" Multiplicity="1" />
+    <End Role="UriPathFilesystemAssetLocation" Type="HostingModel.Store.UriPathFilesystemAssetLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UriPath">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UriPathFilesystemAssetLocation">
+        <PropertyRef Name="UriPathWWWRootAssetLocations_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UriPathFilesystemAssetLocation_FilesystemAssetLocation">
+    <End Role="UriPathFilesystemAssetLocation" Type="HostingModel.Store.UriPathFilesystemAssetLocation" Multiplicity="*" />
+    <End Role="FilesystemAssetLocation" Type="HostingModel.Store.FilesystemAssetLocations" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="FilesystemAssetLocation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UriPathFilesystemAssetLocation">
+        <PropertyRef Name="WWWRootAssetLocations_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -131,17 +324,43 @@
             <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
             <End Role="UriPath" EntitySet="UriPaths" />
           </AssociationSet>
+          <EntitySet Name="NugetPackages" EntityType="HostingModel.NugetPackage" />
+          <AssociationSet Name="TenantNugetPackage" Association="HostingModel.TenantNugetPackage">
+            <End Role="Tenant" EntitySet="Tenants" />
+            <End Role="NugetPackage" EntitySet="NugetPackages" />
+          </AssociationSet>
+          <EntitySet Name="FilesystemAssetLocations" EntityType="HostingModel.FilesystemAssetLocation" />
+          <AssociationSet Name="HostFilesystemAssetLocation" Association="HostingModel.HostFilesystemAssetLocation">
+            <End Role="Host" EntitySet="Hosts" />
+            <End Role="FilesystemAssetLocation" EntitySet="FilesystemAssetLocations" />
+          </AssociationSet>
+          <AssociationSet Name="UriPathFilesystemAssetLocation" Association="HostingModel.UriPathFilesystemAssetLocation">
+            <End Role="UriPath" EntitySet="UriPaths" />
+            <End Role="FilesystemAssetLocation" EntitySet="FilesystemAssetLocations" />
+          </AssociationSet>
+          <AssociationSet Name="NugetPackageFilesystemAssetLocation" Association="HostingModel.NugetPackageFilesystemAssetLocation">
+            <End Role="NugetPackage" EntitySet="NugetPackages" />
+            <End Role="FilesystemAssetLocation" EntitySet="FilesystemAssetLocations" />
+          </AssociationSet>
+          <EntitySet Name="KeyCloakConfigurations" EntityType="HostingModel.KeyCloakConfiguration" />
+          <AssociationSet Name="KeyCloakConfigurationTenant" Association="HostingModel.KeyCloakConfigurationTenant">
+            <End Role="KeyCloakConfiguration" EntitySet="KeyCloakConfigurations" />
+            <End Role="Tenant" EntitySet="Tenants" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Tenant">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TenantDisplayName" Type="String" Nullable="true" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
           <NavigationProperty Name="RoutingDiscriminators" Relationship="HostingModel.TenantRoutingDiscriminator" FromRole="Tenant" ToRole="RoutingDiscriminator" />
           <Property Name="ObjectId" Type="String" Nullable="false" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="AvailableNugetPackages" Relationship="HostingModel.TenantNugetPackage" FromRole="Tenant" ToRole="NugetPackage" />
+          <NavigationProperty Name="KeyCloakConfiguration" Relationship="HostingModel.KeyCloakConfigurationTenant" FromRole="Tenant" ToRole="KeyCloakConfiguration" />
+          <Property Name="KeyCloakConfigurationId" Type="Guid" Nullable="true" />
         </EntityType>
         <EntityType Name="RoutingDiscriminator">
           <Key>
@@ -154,7 +373,7 @@
           <NavigationProperty Name="Hosts" Relationship="HostingModel.RoutingDiscriminatorHost" FromRole="RoutingDiscriminator" ToRole="Host" />
           <NavigationProperty Name="UriPaths" Relationship="HostingModel.RoutingDiscriminatorUriPath" FromRole="RoutingDiscriminator" ToRole="UriPath" />
           <Property Name="ObjectId" Type="String" Nullable="false" />
-          <Property Name="RuleDisplayName" Type="String" Nullable="true" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
         </EntityType>
         <EntityType Name="Host">
@@ -162,15 +381,16 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="TCPHost" Type="String" Nullable="false" />
+          <Property Name="TCPHost" Type="String" Nullable="true" />
           <Property Name="IsTenanantDiscriminator" Type="String" Nullable="true" />
           <NavigationProperty Name="RoutingDiscriminator" Relationship="HostingModel.RoutingDiscriminatorHost" FromRole="Host" ToRole="RoutingDiscriminator" />
           <Property Name="RoutingDiscriminatorId" Type="Guid" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
-          <Property Name="RouteDisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
           <Property Name="HtmlLayoutFilename" Type="String" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="HTTPPort" Type="String" Nullable="true" />
+          <NavigationProperty Name="WWWRootAssetLocations" Relationship="HostingModel.HostFilesystemAssetLocation" FromRole="Host" ToRole="FilesystemAssetLocation" />
         </EntityType>
         <EntityType Name="UriPath">
           <Key>
@@ -181,13 +401,14 @@
           <Property Name="IsTenantDiscriminator" Type="String" Nullable="true" />
           <NavigationProperty Name="RoutingDiscriminator" Relationship="HostingModel.RoutingDiscriminatorUriPath" FromRole="UriPath" ToRole="RoutingDiscriminator" />
           <Property Name="RoutingDiscriminatorId" Type="Guid" Nullable="false" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
-          <Property Name="RouteDisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
           <Property Name="HtmlLayoutFilename" Type="String" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="HTTPPort" Type="String" Nullable="true" />
           <Property Name="HTTPScheme" Type="String" Nullable="true" />
           <Property Name="TCPHost" Type="String" Nullable="true" />
+          <NavigationProperty Name="WWWRootAssetLocations" Relationship="HostingModel.UriPathFilesystemAssetLocation" FromRole="UriPath" ToRole="FilesystemAssetLocation" />
         </EntityType>
         <Association Name="TenantRoutingDiscriminator">
           <End Type="HostingModel.Tenant" Role="Tenant" Multiplicity="0..1" />
@@ -225,6 +446,76 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="NugetPackage">
+          <Documentation>
+            <LongDescription>imagine all the available nuget packages are in one table</LongDescription>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
+          <Property Name="PackageName" Type="String" Nullable="true" />
+          <Property Name="PackageId" Type="String" Nullable="true" />
+          <Property Name="Publisher" Type="String" Nullable="true" />
+          <Property Name="Version" Type="String" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="TenantDeployments" Relationship="HostingModel.TenantNugetPackage" FromRole="NugetPackage" ToRole="Tenant" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <NavigationProperty Name="FilesystemAssetLocation" Relationship="HostingModel.NugetPackageFilesystemAssetLocation" FromRole="NugetPackage" ToRole="FilesystemAssetLocation" />
+        </EntityType>
+        <Association Name="TenantNugetPackage">
+          <End Type="HostingModel.Tenant" Role="Tenant" Multiplicity="*" />
+          <End Type="HostingModel.NugetPackage" Role="NugetPackage" Multiplicity="*" />
+        </Association>
+        <EntityType Name="FilesystemAssetLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <Property Name="AssetURI" Type="String" Nullable="true" />
+          <NavigationProperty Name="HostWWWRootAssetLocations" Relationship="HostingModel.HostFilesystemAssetLocation" FromRole="FilesystemAssetLocation" ToRole="Host" />
+          <NavigationProperty Name="UriPathWWWRootAssetLocations" Relationship="HostingModel.UriPathFilesystemAssetLocation" FromRole="FilesystemAssetLocation" ToRole="UriPath" />
+          <NavigationProperty Name="NugetPackage" Relationship="HostingModel.NugetPackageFilesystemAssetLocation" FromRole="FilesystemAssetLocation" ToRole="NugetPackage" />
+        </EntityType>
+        <Association Name="HostFilesystemAssetLocation">
+          <End Type="HostingModel.Host" Role="Host" Multiplicity="*" />
+          <End Type="HostingModel.FilesystemAssetLocation" Role="FilesystemAssetLocation" Multiplicity="*" />
+        </Association>
+        <Association Name="UriPathFilesystemAssetLocation">
+          <End Type="HostingModel.UriPath" Role="UriPath" Multiplicity="*" />
+          <End Type="HostingModel.FilesystemAssetLocation" Role="FilesystemAssetLocation" Multiplicity="*" />
+        </Association>
+        <Association Name="NugetPackageFilesystemAssetLocation">
+          <End Type="HostingModel.NugetPackage" Role="NugetPackage" Multiplicity="0..1" />
+          <End Type="HostingModel.FilesystemAssetLocation" Role="FilesystemAssetLocation" Multiplicity="1" />
+        </Association>
+        <EntityType Name="KeyCloakConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="false" />
+          <Property Name="Authority" Type="String" Nullable="true" />
+          <Property Name="Realm" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="Tenants" Relationship="HostingModel.KeyCloakConfigurationTenant" FromRole="KeyCloakConfiguration" ToRole="Tenant" />
+        </EntityType>
+        <Association Name="KeyCloakConfigurationTenant">
+          <End Type="HostingModel.KeyCloakConfiguration" Role="KeyCloakConfiguration" Multiplicity="0..1" />
+          <End Type="HostingModel.Tenant" Role="Tenant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KeyCloakConfiguration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tenant">
+              <PropertyRef Name="KeyCloakConfigurationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -235,10 +526,11 @@
       <EntityTypeMapping TypeName="IsTypeOf(HostingModel.Tenant)">
         <MappingFragment StoreEntitySet="Tenants">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="TenantDisplayName" ColumnName="TenantDisplayName" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
           <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
           <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="KeyCloakConfigurationId" ColumnName="KeyCloakConfigurationId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -249,7 +541,7 @@
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="TenantId" ColumnName="TenantId" />
           <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
-          <ScalarProperty Name="RuleDisplayName" ColumnName="RuleDisplayName" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -262,7 +554,7 @@
           <ScalarProperty Name="IsTenanantDiscriminator" ColumnName="IsTenanantDiscriminator" />
           <ScalarProperty Name="RoutingDiscriminatorId" ColumnName="RoutingDiscriminatorId" />
           <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
-          <ScalarProperty Name="RouteDisplayName" ColumnName="RouteDisplayName" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
           <ScalarProperty Name="HtmlLayoutFilename" ColumnName="HtmlLayoutFilename" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="HTTPPort" ColumnName="HTTPPort" />
@@ -277,7 +569,7 @@
           <ScalarProperty Name="IsTenantDiscriminator" ColumnName="IsTenantDiscriminator" />
           <ScalarProperty Name="RoutingDiscriminatorId" ColumnName="RoutingDiscriminatorId" />
           <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
-          <ScalarProperty Name="RouteDisplayName" ColumnName="RouteDisplayName" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
           <ScalarProperty Name="HtmlLayoutFilename" ColumnName="HtmlLayoutFilename" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="HTTPPort" ColumnName="HTTPPort" />
@@ -286,6 +578,74 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="NugetPackages">
+      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.NugetPackage)">
+        <MappingFragment StoreEntitySet="NugetPackages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+          <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+          <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilesystemAssetLocations">
+      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.FilesystemAssetLocation)">
+        <MappingFragment StoreEntitySet="FilesystemAssetLocations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="AssetURI" ColumnName="AssetURI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KeyCloakConfigurations">
+      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.KeyCloakConfiguration)">
+        <MappingFragment StoreEntitySet="KeyCloakConfigurations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="Authority" ColumnName="Authority" />
+          <ScalarProperty Name="Realm" ColumnName="Realm" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="TenantNugetPackage" TypeName="HostingModel.TenantNugetPackage" StoreEntitySet="TenantNugetPackage">
+      <EndProperty Name="Tenant">
+        <ScalarProperty Name="Id" ColumnName="TenantDeployments_Id" />
+      </EndProperty>
+      <EndProperty Name="NugetPackage">
+        <ScalarProperty Name="Id" ColumnName="AvailableNugetPackages_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="HostFilesystemAssetLocation" TypeName="HostingModel.HostFilesystemAssetLocation" StoreEntitySet="HostFilesystemAssetLocation">
+      <EndProperty Name="Host">
+        <ScalarProperty Name="Id" ColumnName="HostWWWRootAssetLocations_Id" />
+      </EndProperty>
+      <EndProperty Name="FilesystemAssetLocation">
+        <ScalarProperty Name="Id" ColumnName="WWWRootAssetLocations_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UriPathFilesystemAssetLocation" TypeName="HostingModel.UriPathFilesystemAssetLocation" StoreEntitySet="UriPathFilesystemAssetLocation">
+      <EndProperty Name="UriPath">
+        <ScalarProperty Name="Id" ColumnName="UriPathWWWRootAssetLocations_Id" />
+      </EndProperty>
+      <EndProperty Name="FilesystemAssetLocation">
+        <ScalarProperty Name="Id" ColumnName="WWWRootAssetLocations_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="NugetPackageFilesystemAssetLocation" TypeName="HostingModel.NugetPackageFilesystemAssetLocation" StoreEntitySet="NugetPackages">
+      <EndProperty Name="FilesystemAssetLocation">
+        <ScalarProperty Name="Id" ColumnName="FilesystemAssetLocation_Id" />
+      </EndProperty>
+      <EndProperty Name="NugetPackage">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

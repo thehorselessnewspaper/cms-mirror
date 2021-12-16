@@ -25,7 +25,7 @@ namespace Schema.Diagrams.Hosting
         public Nullable<bool> IsActive { get; set; }
         public Nullable<System.Guid> TenantId { get; set; }
         public string ObjectId { get; set; }
-        public string RuleDisplayName { get; set; }
+        public string DisplayName { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
     
         public virtual Tenant Tenant { get; set; }

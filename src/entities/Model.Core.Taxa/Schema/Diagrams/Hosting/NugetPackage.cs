@@ -12,26 +12,25 @@ namespace Schema.Diagrams.Hosting
     using System;
     using System.Collections.Generic;
     
-    public partial class Tenant
+    public partial class NugetPackage
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tenant()
+        public NugetPackage()
         {
-            this.RoutingDiscriminators = new HashSet<RoutingDiscriminator>();
-            this.AvailableNugetPackages = new HashSet<NugetPackage>();
+            this.TenantDeployments = new HashSet<Tenant>();
         }
     
         public System.Guid Id { get; set; }
-        public string DisplayName { get; set; }
         public string ObjectId { get; set; }
-        public Nullable<bool> IsSoftDeleted { get; set; }
+        public string PackageName { get; set; }
+        public string PackageId { get; set; }
+        public string Publisher { get; set; }
+        public string Version { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
-        public Nullable<System.Guid> KeyCloakConfigurationId { get; set; }
+        public string DisplayName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RoutingDiscriminator> RoutingDiscriminators { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NugetPackage> AvailableNugetPackages { get; set; }
-        public virtual KeyCloakConfiguration KeyCloakConfiguration { get; set; }
+        public virtual ICollection<Tenant> TenantDeployments { get; set; }
+        public virtual FilesystemAssetLocation FilesystemAssetLocation { get; set; }
     }
 }

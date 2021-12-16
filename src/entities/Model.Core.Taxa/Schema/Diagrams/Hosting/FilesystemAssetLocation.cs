@@ -12,26 +12,24 @@ namespace Schema.Diagrams.Hosting
     using System;
     using System.Collections.Generic;
     
-    public partial class Tenant
+    public partial class FilesystemAssetLocation
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tenant()
+        public FilesystemAssetLocation()
         {
-            this.RoutingDiscriminators = new HashSet<RoutingDiscriminator>();
-            this.AvailableNugetPackages = new HashSet<NugetPackage>();
+            this.HostWWWRootAssetLocations = new HashSet<Host>();
+            this.UriPathWWWRootAssetLocations = new HashSet<UriPath>();
         }
     
         public System.Guid Id { get; set; }
         public string DisplayName { get; set; }
-        public string ObjectId { get; set; }
-        public Nullable<bool> IsSoftDeleted { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
-        public Nullable<System.Guid> KeyCloakConfigurationId { get; set; }
+        public string AssetURI { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RoutingDiscriminator> RoutingDiscriminators { get; set; }
+        public virtual ICollection<Host> HostWWWRootAssetLocations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NugetPackage> AvailableNugetPackages { get; set; }
-        public virtual KeyCloakConfiguration KeyCloakConfiguration { get; set; }
+        public virtual ICollection<UriPath> UriPathWWWRootAssetLocations { get; set; }
+        public virtual NugetPackage NugetPackage { get; set; }
     }
 }

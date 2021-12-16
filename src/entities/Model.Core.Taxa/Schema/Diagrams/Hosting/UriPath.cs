@@ -14,12 +14,18 @@ namespace Schema.Diagrams.Hosting
     
     public partial class UriPath
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public UriPath()
+        {
+            this.WWWRootAssetLocations = new HashSet<FilesystemAssetLocation>();
+        }
+    
         public System.Guid Id { get; set; }
         public string AbsoluteURL { get; set; }
         public string IsTenantDiscriminator { get; set; }
         public System.Guid RoutingDiscriminatorId { get; set; }
         public string ObjectId { get; set; }
-        public string RouteDisplayName { get; set; }
+        public string DisplayName { get; set; }
         public string HtmlLayoutFilename { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public string HTTPPort { get; set; }
@@ -27,5 +33,7 @@ namespace Schema.Diagrams.Hosting
         public string TCPHost { get; set; }
     
         public virtual RoutingDiscriminator RoutingDiscriminator { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FilesystemAssetLocation> WWWRootAssetLocations { get; set; }
     }
 }

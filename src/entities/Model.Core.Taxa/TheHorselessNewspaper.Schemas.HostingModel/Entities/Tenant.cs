@@ -9,14 +9,19 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
         public Tenant()
         {
             RoutingDiscriminators = new HashSet<RoutingDiscriminator>();
+            AvailableNugetPackages = new HashSet<NugetPackage>();
         }
 
         public Guid Id { get; set; }
-        public string TenantDisplayName { get; set; }
+        public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
         public DateTime? CreatedAt { get; set; }
+        public Guid? KeyCloakConfigurationId { get; set; }
 
+        public virtual KeyCloakConfiguration KeyCloakConfiguration { get; set; }
         public virtual ICollection<RoutingDiscriminator> RoutingDiscriminators { get; set; }
+
+        public virtual ICollection<NugetPackage> AvailableNugetPackages { get; set; }
     }
 }

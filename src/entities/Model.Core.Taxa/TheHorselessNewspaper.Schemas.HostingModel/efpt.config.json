@@ -14,7 +14,23 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
+         "Name": "[HostingModel].[FilesystemAssetLocations]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[HostingModel].[HostFilesystemAssetLocation]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[HostingModel].[Hosts]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[HostingModel].[KeyCloakConfigurations]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[HostingModel].[NugetPackages]",
          "ObjectType": 0
       },
       {
@@ -22,7 +38,15 @@
          "ObjectType": 0
       },
       {
+         "Name": "[HostingModel].[TenantNugetPackage]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[HostingModel].[Tenants]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[HostingModel].[UriPathFilesystemAssetLocation]",
          "ObjectType": 0
       },
       {

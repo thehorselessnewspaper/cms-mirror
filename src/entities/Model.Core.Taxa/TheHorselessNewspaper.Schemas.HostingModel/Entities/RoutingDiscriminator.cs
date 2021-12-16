@@ -16,7 +16,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
         public bool? IsActive { get; set; }
         public Guid? TenantId { get; set; }
         public string ObjectId { get; set; }
-        public string RuleDisplayName { get; set; }
+        public string DisplayName { get; set; }
         public DateTime? CreatedAt { get; set; }
 
         public virtual Tenant Tenant { get; set; }
