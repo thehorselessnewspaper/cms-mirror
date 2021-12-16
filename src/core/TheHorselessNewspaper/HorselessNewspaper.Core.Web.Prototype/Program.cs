@@ -7,10 +7,7 @@ using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddHorselessNewspaper(opts =>
-{
-
-});
+builder.Services.AddHorselessNewspaper();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
