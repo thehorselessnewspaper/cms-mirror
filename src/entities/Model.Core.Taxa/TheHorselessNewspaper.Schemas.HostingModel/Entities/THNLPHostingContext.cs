@@ -32,13 +32,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.DNSSafeHost).IsRequired();
-
-                entity.Property(e => e.HostDisplayName).IsRequired();
-
-                entity.Property(e => e.IsTenanantDiscriminator).IsRequired();
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
                 entity.Property(e => e.ObjectId).IsRequired();
+
+                entity.Property(e => e.TCPHost).IsRequired();
 
                 entity.HasOne(d => d.RoutingDiscriminator)
                     .WithMany(p => p.Hosts)
@@ -54,9 +52,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.ObjectId).IsRequired();
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
-                entity.Property(e => e.RuleDisplayName).IsRequired();
+                entity.Property(e => e.ObjectId).IsRequired();
 
                 entity.HasOne(d => d.Tenant)
                     .WithMany(p => p.RoutingDiscriminators)
@@ -70,9 +68,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.ObjectId).IsRequired();
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
-                entity.Property(e => e.TenantDisplayName).IsRequired();
+                entity.Property(e => e.ObjectId).IsRequired();
             });
 
             modelBuilder.Entity<UriPath>(entity =>
@@ -83,11 +81,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.AbsolutePath).IsRequired();
-
-                entity.Property(e => e.HostDisplayName).IsRequired();
-
-                entity.Property(e => e.IsTenantDiscriminator).IsRequired();
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
                 entity.Property(e => e.ObjectId).IsRequired();
 

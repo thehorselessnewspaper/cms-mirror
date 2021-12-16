@@ -28,41 +28,51 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TenantDisplayName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TenantDisplayName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="IsSoftDeleted" Type="bit" Nullable="false" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="RoutingDiscriminators">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="true" />
     <Property Name="TenantId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="RuleDisplayName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RuleDisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="Hosts">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="DNSSafeHost" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="IsTenanantDiscriminator" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TCPHost" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsTenanantDiscriminator" Type="nvarchar(max)" Nullable="true" />
     <Property Name="RoutingDiscriminatorId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="HostDisplayName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RouteDisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="HtmlLayoutFilename" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="HTTPPort" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="UriPaths">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="AbsolutePath" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="IsTenantDiscriminator" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AbsoluteURL" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="IsTenantDiscriminator" Type="nvarchar(max)" Nullable="true" />
     <Property Name="RoutingDiscriminatorId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="HostDisplayName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RouteDisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="HtmlLayoutFilename" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="HTTPPort" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="HTTPScheme" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="TCPHost" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <Association Name="TenantRoutingDiscriminator">
     <End Role="Tenant" Type="HostingModel.Store.Tenants" Multiplicity="0..1" />
@@ -127,47 +137,57 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TenantDisplayName" Type="String" Nullable="false" />
+          <Property Name="TenantDisplayName" Type="String" Nullable="true" />
           <NavigationProperty Name="RoutingDiscriminators" Relationship="HostingModel.TenantRoutingDiscriminator" FromRole="Tenant" ToRole="RoutingDiscriminator" />
           <Property Name="ObjectId" Type="String" Nullable="false" />
-          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
         </EntityType>
         <EntityType Name="RoutingDiscriminator">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="true" />
           <NavigationProperty Name="Tenant" Relationship="HostingModel.TenantRoutingDiscriminator" FromRole="RoutingDiscriminator" ToRole="Tenant" />
           <Property Name="TenantId" Type="Guid" Nullable="true" />
           <NavigationProperty Name="Hosts" Relationship="HostingModel.RoutingDiscriminatorHost" FromRole="RoutingDiscriminator" ToRole="Host" />
           <NavigationProperty Name="UriPaths" Relationship="HostingModel.RoutingDiscriminatorUriPath" FromRole="RoutingDiscriminator" ToRole="UriPath" />
           <Property Name="ObjectId" Type="String" Nullable="false" />
-          <Property Name="RuleDisplayName" Type="String" Nullable="false" />
+          <Property Name="RuleDisplayName" Type="String" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
         </EntityType>
         <EntityType Name="Host">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="DNSSafeHost" Type="String" Nullable="false" />
-          <Property Name="IsTenanantDiscriminator" Type="String" Nullable="false" />
+          <Property Name="TCPHost" Type="String" Nullable="false" />
+          <Property Name="IsTenanantDiscriminator" Type="String" Nullable="true" />
           <NavigationProperty Name="RoutingDiscriminator" Relationship="HostingModel.RoutingDiscriminatorHost" FromRole="Host" ToRole="RoutingDiscriminator" />
           <Property Name="RoutingDiscriminatorId" Type="Guid" Nullable="true" />
           <Property Name="ObjectId" Type="String" Nullable="false" />
-          <Property Name="HostDisplayName" Type="String" Nullable="false" />
+          <Property Name="RouteDisplayName" Type="String" Nullable="true" />
+          <Property Name="HtmlLayoutFilename" Type="String" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <Property Name="HTTPPort" Type="String" Nullable="true" />
         </EntityType>
         <EntityType Name="UriPath">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="AbsolutePath" Type="String" Nullable="false" />
-          <Property Name="IsTenantDiscriminator" Type="String" Nullable="false" />
+          <Property Name="AbsoluteURL" Type="String" Nullable="true" />
+          <Property Name="IsTenantDiscriminator" Type="String" Nullable="true" />
           <NavigationProperty Name="RoutingDiscriminator" Relationship="HostingModel.RoutingDiscriminatorUriPath" FromRole="UriPath" ToRole="RoutingDiscriminator" />
           <Property Name="RoutingDiscriminatorId" Type="Guid" Nullable="false" />
           <Property Name="ObjectId" Type="String" Nullable="false" />
-          <Property Name="HostDisplayName" Type="String" Nullable="false" />
+          <Property Name="RouteDisplayName" Type="String" Nullable="true" />
+          <Property Name="HtmlLayoutFilename" Type="String" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <Property Name="HTTPPort" Type="String" Nullable="true" />
+          <Property Name="HTTPScheme" Type="String" Nullable="true" />
+          <Property Name="TCPHost" Type="String" Nullable="true" />
         </EntityType>
         <Association Name="TenantRoutingDiscriminator">
           <End Type="HostingModel.Tenant" Role="Tenant" Multiplicity="0..1" />
@@ -218,6 +238,7 @@
           <ScalarProperty Name="TenantDisplayName" ColumnName="TenantDisplayName" />
           <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
           <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -229,6 +250,7 @@
           <ScalarProperty Name="TenantId" ColumnName="TenantId" />
           <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
           <ScalarProperty Name="RuleDisplayName" ColumnName="RuleDisplayName" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -236,11 +258,14 @@
       <EntityTypeMapping TypeName="IsTypeOf(HostingModel.Host)">
         <MappingFragment StoreEntitySet="Hosts">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="DNSSafeHost" ColumnName="DNSSafeHost" />
+          <ScalarProperty Name="TCPHost" ColumnName="TCPHost" />
           <ScalarProperty Name="IsTenanantDiscriminator" ColumnName="IsTenanantDiscriminator" />
           <ScalarProperty Name="RoutingDiscriminatorId" ColumnName="RoutingDiscriminatorId" />
           <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
-          <ScalarProperty Name="HostDisplayName" ColumnName="HostDisplayName" />
+          <ScalarProperty Name="RouteDisplayName" ColumnName="RouteDisplayName" />
+          <ScalarProperty Name="HtmlLayoutFilename" ColumnName="HtmlLayoutFilename" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="HTTPPort" ColumnName="HTTPPort" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -248,11 +273,16 @@
       <EntityTypeMapping TypeName="IsTypeOf(HostingModel.UriPath)">
         <MappingFragment StoreEntitySet="UriPaths">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="AbsolutePath" ColumnName="AbsolutePath" />
+          <ScalarProperty Name="AbsoluteURL" ColumnName="AbsoluteURL" />
           <ScalarProperty Name="IsTenantDiscriminator" ColumnName="IsTenantDiscriminator" />
           <ScalarProperty Name="RoutingDiscriminatorId" ColumnName="RoutingDiscriminatorId" />
           <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
-          <ScalarProperty Name="HostDisplayName" ColumnName="HostDisplayName" />
+          <ScalarProperty Name="RouteDisplayName" ColumnName="RouteDisplayName" />
+          <ScalarProperty Name="HtmlLayoutFilename" ColumnName="HtmlLayoutFilename" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="HTTPPort" ColumnName="HTTPPort" />
+          <ScalarProperty Name="HTTPScheme" ColumnName="HTTPScheme" />
+          <ScalarProperty Name="TCPHost" ColumnName="TCPHost" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

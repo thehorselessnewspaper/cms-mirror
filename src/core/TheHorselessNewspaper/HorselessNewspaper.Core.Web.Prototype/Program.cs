@@ -46,6 +46,10 @@ app.UseHorselessNewspaper(options =>
     {
         // test of user defined routing scenario
         options.MapDynamicControllerRoute<HorselessRouteTransformer>("/pages");
+
+        app.MapControllerRoute(
+        name: "HorselessCMS",
+        pattern: "{controller=HorselessCmsController}/{action=Index}/{id?}");
     });
 });
 

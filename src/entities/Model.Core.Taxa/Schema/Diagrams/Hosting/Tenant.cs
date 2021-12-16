@@ -23,7 +23,8 @@ namespace Schema.Diagrams.Hosting
         public System.Guid Id { get; set; }
         public string TenantDisplayName { get; set; }
         public string ObjectId { get; set; }
-        public bool IsSoftDeleted { get; set; }
+        public Nullable<bool> IsSoftDeleted { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RoutingDiscriminator> RoutingDiscriminators { get; set; }

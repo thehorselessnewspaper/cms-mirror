@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/07/2021 21:27:06
+-- Date Created: 12/16/2021 15:45:43
 -- Generated from EDMX file: C:\src\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Hosting\HostingModel.edmx
 -- --------------------------------------------------
 
@@ -51,41 +51,51 @@ GO
 -- Creating table 'Tenants'
 CREATE TABLE [HostingModel].[Tenants] (
     [Id] uniqueidentifier  NOT NULL,
-    [TenantDisplayName] nvarchar(max)  NOT NULL,
+    [TenantDisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NOT NULL,
-    [IsSoftDeleted] bit  NOT NULL
+    [IsSoftDeleted] bit  NULL,
+    [CreatedAt] datetime  NULL
 );
 GO
 
 -- Creating table 'RoutingDiscriminators'
 CREATE TABLE [HostingModel].[RoutingDiscriminators] (
     [Id] uniqueidentifier  NOT NULL,
-    [IsActive] bit  NOT NULL,
+    [IsActive] bit  NULL,
     [TenantId] uniqueidentifier  NULL,
     [ObjectId] nvarchar(max)  NOT NULL,
-    [RuleDisplayName] nvarchar(max)  NOT NULL
+    [RuleDisplayName] nvarchar(max)  NULL,
+    [CreatedAt] datetime  NULL
 );
 GO
 
 -- Creating table 'Hosts'
 CREATE TABLE [HostingModel].[Hosts] (
     [Id] uniqueidentifier  NOT NULL,
-    [DNSSafeHost] nvarchar(max)  NOT NULL,
-    [IsTenanantDiscriminator] nvarchar(max)  NOT NULL,
+    [TCPHost] nvarchar(max)  NOT NULL,
+    [IsTenanantDiscriminator] nvarchar(max)  NULL,
     [RoutingDiscriminatorId] uniqueidentifier  NULL,
     [ObjectId] nvarchar(max)  NOT NULL,
-    [HostDisplayName] nvarchar(max)  NOT NULL
+    [RouteDisplayName] nvarchar(max)  NULL,
+    [HtmlLayoutFilename] nvarchar(max)  NULL,
+    [CreatedAt] datetime  NULL,
+    [HTTPPort] nvarchar(max)  NULL
 );
 GO
 
 -- Creating table 'UriPaths'
 CREATE TABLE [HostingModel].[UriPaths] (
     [Id] uniqueidentifier  NOT NULL,
-    [AbsolutePath] nvarchar(max)  NOT NULL,
-    [IsTenantDiscriminator] nvarchar(max)  NOT NULL,
+    [AbsoluteURL] nvarchar(max)  NULL,
+    [IsTenantDiscriminator] nvarchar(max)  NULL,
     [RoutingDiscriminatorId] uniqueidentifier  NOT NULL,
     [ObjectId] nvarchar(max)  NOT NULL,
-    [HostDisplayName] nvarchar(max)  NOT NULL
+    [RouteDisplayName] nvarchar(max)  NULL,
+    [HtmlLayoutFilename] nvarchar(max)  NULL,
+    [CreatedAt] datetime  NULL,
+    [HTTPPort] nvarchar(max)  NULL,
+    [HTTPScheme] nvarchar(max)  NULL,
+    [TCPHost] nvarchar(max)  NULL
 );
 GO
 
