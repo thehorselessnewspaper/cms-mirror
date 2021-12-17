@@ -13,7 +13,7 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Cache
     /// specifies a general cache interface
     /// for use in web applications 
     /// </summary>
-    internal interface IHorselessCacheProvider<TCacheKey, TCacheValue> where TCacheValue : new()
+    public interface IHorselessCacheProvider<TCacheKey, TCacheValue> where TCacheValue : new()
     {
 
         internal Task<ICacheOperationResult<TCacheValue>> Get(TCacheKey key);
@@ -33,9 +33,9 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Cache
     /// </summary>
     /// <typeparam name="TCacheKey"></typeparam>
     /// <typeparam name="TCacheValue"></typeparam>
-    internal interface IMockHorselessCacheProvider<TCacheKey, TCacheValue> : IHorselessCacheProvider<TCacheKey, TCacheValue> where TCacheValue : new()
+    public interface IMockHorselessCacheProvider<TCacheKey, TCacheValue> : IHorselessCacheProvider<TCacheKey, TCacheValue> where TCacheValue : new()
     {
-        internal Task<TCacheKey> HasMockedKey { get; }
-        internal Task<TCacheValue> HasMockedValue { get; }
+        public Task<TCacheKey> HasMockedKey { get; }
+        public Task<TCacheValue> HasMockedValue { get; }
     }
 }
