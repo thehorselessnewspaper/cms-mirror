@@ -18,12 +18,17 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
     /// </summary>
     public class HorselessRouteTransformer : DynamicRouteValueTransformer
     {
-        public HorselessRouteTransformer(IHorselessCacheProvider<Guid, TenantDTO> tenantCache)
+        public HorselessRouteTransformer()
+        {
+
+        }
+
+        internal HorselessRouteTransformer(IHorselessCacheProvider<Guid, TenantDTO> tenantCache)
         {
             TenantCache = tenantCache;
         }
 
-        public IHorselessCacheProvider<Guid, TenantDTO> TenantCache { get; set; }
+        internal IHorselessCacheProvider<Guid, TenantDTO> TenantCache { get; set; }
 
         /// <summary>
         /// provides cms routing semantics

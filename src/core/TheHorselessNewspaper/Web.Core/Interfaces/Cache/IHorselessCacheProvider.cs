@@ -13,18 +13,29 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Cache
     /// specifies a general cache interface
     /// for use in web applications 
     /// </summary>
-    public interface IHorselessCacheProvider<TCacheKey, TCacheValue> where TCacheValue : new()
+    internal interface IHorselessCacheProvider<TCacheKey, TCacheValue> where TCacheValue : new()
     {
 
-        public Task<ICacheOperationResult<TCacheValue>> Get(TCacheKey key);
+        internal Task<ICacheOperationResult<TCacheValue>> Get(TCacheKey key);
 
-        public Task<TCacheValue> Set(TCacheKey key, TCacheValue value);
+        internal Task<TCacheValue> Set(TCacheKey key, TCacheValue value);
 
-        public Task<TCacheKey> Evict(TCacheKey key);
+        internal Task<TCacheKey> Evict(TCacheKey key);
 
-        public Task<ICacheOperationResult<List<KeyValuePair<TCacheKey, TCacheValue>>>> Get(Expression<Func<KeyValuePair<TCacheKey, TCacheValue>, bool>> predicate);
+        internal Task<ICacheOperationResult<List<KeyValuePair<TCacheKey, TCacheValue>>>> Get(Expression<Func<KeyValuePair<TCacheKey, TCacheValue>, bool>> predicate);
 
-        public Task<List<TCacheKey>> Evict(Expression<Func<KeyValuePair<TCacheKey, TCacheValue>, bool>> predicate);
+        internal Task<List<TCacheKey>> Evict(Expression<Func<KeyValuePair<TCacheKey, TCacheValue>, bool>> predicate);
 
+    }
+
+    /// <summary>
+    /// convenience mechanism that should have conditional compilation 
+    /// </summary>
+    /// <typeparam name="TCacheKey"></typeparam>
+    /// <typeparam name="TCacheValue"></typeparam>
+    internal interface IMockHorselessCacheProvider<TCacheKey, TCacheValue> : IHorselessCacheProvider<TCacheKey, TCacheValue> where TCacheValue : new()
+    {
+        internal Task<TCacheKey> HasMockedKey { get; }
+        internal Task<TCacheValue> HasMockedValue { get; }
     }
 }
