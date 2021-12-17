@@ -5,6 +5,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <PackageId>HorselessNewspaper.RazorClassLibrary.CMS.Default</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>sechele delaruse</Authors>
+    <Company>Ataxlab</Company>
+    <Product>The Horseless Newspaper</Product>
+    <Description>this razor class library implements the default skin of the horseless newspaper</Description>
   </PropertyGroup>
 
   <ItemGroup>
