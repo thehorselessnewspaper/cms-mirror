@@ -32,7 +32,7 @@ namespace HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant.Mock
             {
                 Id = key,
                 ObjectId = key.ToString(),
-                TenantDisplayName = "",
+                // TenantDisplayName = "",
                 IsSoftDeleted = false,
                 RoutingDiscriminators = new List<RoutingDiscriminatorDTO>()
                 { }
