@@ -9,5 +9,10 @@ using System.Xml.Linq;
 
 namespace HorselessNewspaper.Web.Core.Model.Query
 {
-   
+    //internal class DefaultQuery<TCollection, TData> : IHorselessQuery<TCollection, TData>
+    //    where TCollection : ICollection<TData>
+    //    where TData : new()
+    //{
+      
+    //}
 }

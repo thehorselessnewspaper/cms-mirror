@@ -16,10 +16,10 @@ namespace HorselessNewspaper.Core.Interfaces.Query
         where TCollection : ICollection<TData>
         where TData : new()
     {
-        public Task<TCollection> FilterByExpression(Expression<Func<TCollection, bool>> predicate, IHorselessQueryResultProvider<TCollection, TData> queryProvider);
+        public Task<TCollection> FilterByExpression(Expression<Func<TCollection, Task<bool>>> predicate, IHorselessQueryResultProvider<TCollection, TData> queryProvider);
 
-        public Task<bool> Insert(Expression<Func<TCollection, bool>> predicate, TData data, IHorselessQueryResultProvider<TCollection, TData>  queryProvider);
+        public Task<bool> Insert(Expression<Func<TCollection, Task<bool>>> predicate, TData data, IHorselessQueryResultProvider<TCollection, TData>  queryProvider);
 
-        public Task<bool> Insert(Expression<Func<TCollection, bool>> predicate, TCollection data, IHorselessQueryResultProvider<TCollection, TData> queryProvider);
+        public Task<bool> Insert(Expression<Func<TCollection, Task<bool>>> predicate, TCollection data, IHorselessQueryResultProvider<TCollection, TData> queryProvider);
     }
 }

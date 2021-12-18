@@ -18,6 +18,6 @@ namespace HorselessNewspaper.Core.Interfaces.Query
     {
         Task<TCollection> Execute(Expression<Func<TCollection, Task<bool>>> predicate);
         Task<TCollection> Execute(Expression<Func<TCollection, Task<bool>>> predicate, TData data);
-        Task<TCollection> Execute(Expression<Func<TCollection, bool>> predicate, TCollection data);
+        Task<TCollection> Execute(Expression<Func<TCollection, Task<bool>>> predicate, TCollection data);
     }
 }
