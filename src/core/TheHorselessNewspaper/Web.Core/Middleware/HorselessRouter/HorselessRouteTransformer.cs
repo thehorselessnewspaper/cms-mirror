@@ -38,6 +38,7 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
         /// <returns></returns>
         public override async ValueTask<RouteValueDictionary> TransformAsync(HttpContext httpContext, RouteValueDictionary values)
         {
+            // this code runs each time a cms controlled route is http requested
             int i = 0;
             i++;
             return await ValueTask.FromResult(values);
