@@ -6,18 +6,32 @@ using HorselessNewspaper.Web.Core.Extensions.Hosting;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
 using Microsoft.Extensions.Options;
+using HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers;
+using System.Configuration;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllersWithViews()
+    // this hardcodes a static reference to the default horseless razor class library
+    // i am sorry - the hoped for benefit is that this will always have a default implementation
+    .AddApplicationPart(typeof(HorselessCMSController).Assembly);
+
+builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
+{
+    options.FileProviders.Add(
+            new EmbeddedFileProvider(typeof(HorselessCMSController).Assembly)); });
 
 builder.Services.AddHorselessNewspaper();
 
 // as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/docs/keycloak.md
 builder.Services.AddHorselessKeycloakAuth(keycloakOpts =>
 {
-    keycloakOpts.ClientId = "my-client-id";
-    keycloakOpts.ClientSecret = "my-client-secret";
-    keycloakOpts.Domain = "mydomain.local";
-    keycloakOpts.Realm = "myrealm";
+    keycloakOpts.ClientId = builder.Configuration["Keycloak:ClientId"];
+    keycloakOpts.ClientSecret = builder.Configuration["Keycloak:ClientSecret"];
+    keycloakOpts.Domain = builder.Configuration["Keycloak:Domain"];
+    keycloakOpts.Realm = builder.Configuration["Keycloak:Realm"]; 
 });
 
 // Add services to the container.
@@ -45,11 +59,11 @@ app.UseHorselessNewspaper(options =>
     options.Builder.UseEndpoints(options =>
     {
         // test of user defined routing scenario
-        options.MapDynamicControllerRoute<HorselessRouteTransformer>("/pages");
+        options.MapDynamicControllerRoute<HorselessRouteTransformer>("");
 
         app.MapControllerRoute(
         name: "HorselessCMS",
-        pattern: "{controller=HorselessCmsController}/{action=Index}/{id?}");
+        pattern: "{controller=HorselessCMS}/{action=ViewTemplate}/{id?}");
     });
 });
 

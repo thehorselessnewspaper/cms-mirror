@@ -14,13 +14,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{25BF4201-5602-4A85-B3F3-B7E328B125B9}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		HorselessNewspaper.Core.Web.Prototype\NuGet.Config = HorselessNewspaper.Core.Web.Prototype\NuGet.Config
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Core.Web.Prototype", "HorselessNewspaper.Core.Web.Prototype\HorselessNewspaper.Core.Web.Prototype.csproj", "{E16E3AD0-784F-44D5-8AE5-C8E86547FAF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorselessNewspaper.Web.Core.Auth.Keycloak", "HorselessNewspaper.Web.Core.Auth.Keycloak\HorselessNewspaper.Web.Core.Auth.Keycloak.csproj", "{E26646D7-38E1-4F56-9EEC-039205E1CE3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Web.Core.Auth.Keycloak", "HorselessNewspaper.Web.Core.Auth.Keycloak\HorselessNewspaper.Web.Core.Auth.Keycloak.csproj", "{E26646D7-38E1-4F56-9EEC-039205E1CE3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorselessNewspaper.RazorClassLibrary.CMS.Default", "HorselessNewspaper.RazorClassLibrary.CMS.Default\HorselessNewspaper.RazorClassLibrary.CMS.Default.csproj", "{56BDE1B4-838E-491E-A9C0-9648FB3CF788}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.RazorClassLibrary.CMS.Default", "HorselessNewspaper.RazorClassLibrary.CMS.Default\HorselessNewspaper.RazorClassLibrary.CMS.Default.csproj", "{56BDE1B4-838E-491E-A9C0-9648FB3CF788}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
