@@ -28,4 +28,8 @@
     <ProjectCapability Include="AspNetCore" />
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="HostedServices\RazorClassLibrary\" />
+  </ItemGroup>
 </Project>

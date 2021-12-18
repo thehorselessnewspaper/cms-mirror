@@ -41,7 +41,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
             return Task.CompletedTask;
         }
 
-        private void DoWork(object? state)
+        internal void DoWork(object? state)
         {
 
             // Get the names of all the application parts. This is the short assembly name for AssemblyParts

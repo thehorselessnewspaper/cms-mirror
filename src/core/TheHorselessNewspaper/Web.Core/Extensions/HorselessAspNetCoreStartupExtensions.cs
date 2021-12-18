@@ -22,6 +22,9 @@ namespace HorselessNewspaper.Web.Core.Extensions
         {
             var serviceBuilder = new HorselessServiceBuilder(services);
             serviceBuilder.AddRazorRuntimeCompilation = true;
+
+            // as per https://docs.microsoft.com/en-us/archive/msdn-magazine/2016/september/asp-net-core-feature-slices-for-asp-net-core-mvc
+            // as per https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/areas?view=aspnetcore-6.0
             services.Configure<RazorViewEngineOptions>(o =>
             {
                 // o.ViewLocationFormats.Clear();
