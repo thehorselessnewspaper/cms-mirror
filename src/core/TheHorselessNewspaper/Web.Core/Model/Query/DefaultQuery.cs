@@ -13,6 +13,20 @@ namespace HorselessNewspaper.Web.Core.Model.Query
     //    where TCollection : ICollection<TData>
     //    where TData : new()
     //{
-      
+    //    public async Task<TCollection> FilterByExpression(Expression<Func<TCollection, Task<bool>>> predicate, IHorselessQueryResultProvider<TCollection, TData> queryProvider)
+    //    {
+    //        return await queryProvider.Execute(predicate);
+    //    }
+
+    //    public async Task<bool> Insert(Expression<Func<TCollection, Task<bool>>> predicate, TData data, IHorselessQueryResultProvider<TCollection, TData> queryProvider)
+    //    {
+    //        var result = await queryProvider.Execute(predicate, data);
+    //        return await Task.FromResult(true);
+    //    }
+
+    //    public Task<bool> Insert(Expression<Func<TCollection, Task<bool>>> predicate, TCollection data, IHorselessQueryResultProvider<TCollection, TData> queryProvider)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
     //}
 }

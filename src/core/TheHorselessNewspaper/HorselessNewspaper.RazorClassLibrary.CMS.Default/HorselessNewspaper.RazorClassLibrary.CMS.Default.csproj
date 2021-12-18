@@ -22,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.1.211218.6" />
-    <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.1.20211218.6" />
+    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.1.211218.7" />
+    <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.1.20211218.7" />
   </ItemGroup>
 
 
