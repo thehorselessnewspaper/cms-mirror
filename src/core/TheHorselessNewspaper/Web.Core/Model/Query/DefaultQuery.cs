@@ -13,6 +13,7 @@ namespace HorselessNewspaper.Web.Core.Model.Query
     /// generic query specification attempt
     /// open problem - serializable linq
     /// test https://github.com/esskar/Serialize.Linq
+    /// test https://dynamic-linq.net/overview
     /// </summary>
     /// <typeparam name="TCollection"></typeparam>
     /// <typeparam name="TData"></typeparam>

@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.1.211218.11" />
+    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.1.211218.12" />
   </ItemGroup>
 
 </Project>

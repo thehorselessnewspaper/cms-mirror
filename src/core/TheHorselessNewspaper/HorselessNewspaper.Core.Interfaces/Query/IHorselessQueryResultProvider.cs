@@ -13,7 +13,7 @@ namespace HorselessNewspaper.Core.Interfaces.Query
     /// <typeparam name="TCollection"></typeparam>
     /// <typeparam name="TData"></typeparam>
     public interface IHorselessQueryResultProvider<TCollection, TData> 
-        where TCollection : ICollection<TData>
+        where TCollection : IQueryable<TData>
         where TData : new()
     {
         public Task<TCollection> Execute(Expression<Func<TCollection, Task<bool>>> predicate);
