@@ -16,10 +16,10 @@ namespace HorselessNewspaper.Core.Interfaces.Query
         where TCollection : IQueryable<TData>
         where TData : new()
     {
-        internal Task<TCollection> FilterByExpression(Expression<Func<TCollection, Task<bool>>> predicate, IHorselessQueryResultProvider<TCollection, TData> queryProvider);
+        internal Task<TCollection> FilterByExpression(Expression<Func<TCollection>> predicate, IHorselessQueryResultProvider<TCollection, TData> queryProvider);
 
-        internal Task<bool> Insert(Expression<Func<TData, Task<bool>>> predicate, TData data, IHorselessQueryResultProvider<TCollection, TData>  queryProvider);
+        internal Task<bool> Insert(Expression<Func<TCollection>> predicate, TData parameter, IHorselessQueryResultProvider<TCollection, TData>  queryProvider);
 
-        internal Task<bool> Insert(Expression<Func<TCollection, Task<bool>>> predicate, TCollection data, IHorselessQueryResultProvider<TCollection, TData> queryProvider);
+        internal Task<bool> Insert(Expression<Func<TCollection>> predicate, TCollection parameter, IHorselessQueryResultProvider<TCollection, TData> queryProvider);
     }
 }

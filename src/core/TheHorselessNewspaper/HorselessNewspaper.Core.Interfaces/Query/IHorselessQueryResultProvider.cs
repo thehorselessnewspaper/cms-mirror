@@ -16,8 +16,9 @@ namespace HorselessNewspaper.Core.Interfaces.Query
         where TCollection : IQueryable<TData>
         where TData : new()
     {
-        public Task<TCollection> Execute(Expression<Func<TCollection, Task<bool>>> predicate);
-        public Task<TData> Execute(Expression<Func<TData, Task<bool>>> predicate, TData data);
-        public Task<TCollection> Execute(Expression<Func<TCollection, Task<bool>>> predicate, TCollection data);
+        public Task<TCollection> Filter(Expression<Func<TCollection>> predicate);
+        public Task<bool> Insert(Expression<Func<TCollection>> predicate, TData parameter);
+
+        public Task<bool> Insert(Expression<Func<TCollection>> predicate, TCollection parameter);
     }
 }
