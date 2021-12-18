@@ -38,7 +38,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
             #region cms routing pattern services
             serviceBuilder.Services.AddScoped<IHorselessRoutingStrategy, UrlSegmentRoutingStrategy>();
-            services.AddHostedService<ApplicationPartsLogger>();
+            serviceBuilder.Services.AddHostedService<ApplicationPartsLogger>();
             // validate that this needs to be a singleton
             // as it's gating every request
             serviceBuilder.Services.AddSingleton<HorselessRouteTransformer>();

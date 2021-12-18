@@ -21,7 +21,8 @@ builder.Services.AddControllersWithViews()
 builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
 {
     options.FileProviders.Add(
-            new EmbeddedFileProvider(typeof(HorselessCMSController).Assembly)); });
+            new EmbeddedFileProvider(typeof(HorselessCMSController).Assembly));
+});
 
 builder.Services.AddHorselessNewspaper();
 
@@ -31,7 +32,7 @@ builder.Services.AddHorselessKeycloakAuth(keycloakOpts =>
     keycloakOpts.ClientId = builder.Configuration["Keycloak:ClientId"];
     keycloakOpts.ClientSecret = builder.Configuration["Keycloak:ClientSecret"];
     keycloakOpts.Domain = builder.Configuration["Keycloak:Domain"];
-    keycloakOpts.Realm = builder.Configuration["Keycloak:Realm"]; 
+    keycloakOpts.Realm = builder.Configuration["Keycloak:Realm"];
 });
 
 // Add services to the container.
