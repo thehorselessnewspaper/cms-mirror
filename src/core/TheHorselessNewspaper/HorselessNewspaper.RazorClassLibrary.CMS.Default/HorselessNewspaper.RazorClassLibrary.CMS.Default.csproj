@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -19,6 +19,11 @@
 
   <ItemGroup>
     <Folder Include="Areas\HorselessContent\Views\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.1.211218.4" />
+    <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.1.20211218.4" />
   </ItemGroup>
 
 
