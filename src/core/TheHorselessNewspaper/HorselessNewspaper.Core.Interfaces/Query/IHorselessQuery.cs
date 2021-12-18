@@ -18,7 +18,7 @@ namespace HorselessNewspaper.Core.Interfaces.Query
     {
         public Task<TCollection> FilterByExpression(Expression<Func<TCollection, Task<bool>>> predicate, IHorselessQueryResultProvider<TCollection, TData> queryProvider);
 
-        public Task<bool> Insert(Expression<Func<TCollection, Task<bool>>> predicate, TData data, IHorselessQueryResultProvider<TCollection, TData>  queryProvider);
+        public Task<bool> Insert(Expression<Func<TData, Task<bool>>> predicate, TData data, IHorselessQueryResultProvider<TCollection, TData>  queryProvider);
 
         public Task<bool> Insert(Expression<Func<TCollection, Task<bool>>> predicate, TCollection data, IHorselessQueryResultProvider<TCollection, TData> queryProvider);
     }

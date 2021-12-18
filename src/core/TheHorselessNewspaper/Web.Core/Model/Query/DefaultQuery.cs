@@ -20,8 +20,7 @@ namespace HorselessNewspaper.Web.Core.Model.Query
 
     //    public async Task<bool> Insert(Expression<Func<TCollection, Task<bool>>> predicate, TData data, IHorselessQueryResultProvider<TCollection, TData> queryProvider)
     //    {
-    //        var result = await queryProvider.Execute(predicate, data);
-    //        return await Task.FromResult(true);
+    //        return await queryProvider.Execute(predicate, data);
     //    }
 
     //    public Task<bool> Insert(Expression<Func<TCollection, Task<bool>>> predicate, TCollection data, IHorselessQueryResultProvider<TCollection, TData> queryProvider)
