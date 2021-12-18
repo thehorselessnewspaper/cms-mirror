@@ -1,4 +1,5 @@
-﻿using HorselessNewspaper.Web.Core.Interfaces.Cache;
+﻿using HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.ApplicationPartsLogger;
+using HorselessNewspaper.Web.Core.Interfaces.Cache;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter.Strategy;
 using HorselessNewspaper.Web.Core.ScopedServices.RoutingStrategy;
@@ -34,9 +35,10 @@ namespace HorselessNewspaper.Web.Core.Extensions
             
             serviceBuilder.Services.AddSingleton<IHorselessCacheProvider<Guid, TenantDTO>, DefaultTenantCache>();
 
+
             #region cms routing pattern services
             serviceBuilder.Services.AddScoped<IHorselessRoutingStrategy, UrlSegmentRoutingStrategy>();
-
+            services.AddHostedService<ApplicationPartsLogger>();
             // validate that this needs to be a singleton
             // as it's gating every request
             serviceBuilder.Services.AddSingleton<HorselessRouteTransformer>();
