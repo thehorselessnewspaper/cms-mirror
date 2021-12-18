@@ -6,6 +6,10 @@ using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.HorselessContent.Controllers.REST
 {
+    /// <summary>
+    /// open problem - serializable linq
+    /// test https://github.com/esskar/Serialize.Linq
+    /// </summary>
     [ApiController]
     [Route("/content/[controller]")]
     [Produces(MediaTypeNames.Application.Json)]
