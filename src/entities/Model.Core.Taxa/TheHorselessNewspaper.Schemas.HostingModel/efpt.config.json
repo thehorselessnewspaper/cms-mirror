@@ -1,63 +1,55 @@
 ﻿{
    "CodeGenerationMode": 2,
-   "ContextClassName": "THNLPHostingContext",
+   "ContextClassName": "THNLPContentContext",
    "ContextNamespace": null,
    "DefaultDacpacSchema": null,
    "FilterSchemas": false,
    "IncludeConnectionString": false,
    "ModelNamespace": null,
    "OutputContextPath": null,
-   "OutputPath": "Entities",
-   "ProjectRootNamespace": "TheHorselessNewspaper.Schemas.HostingModel",
+   "OutputPath": "ContentEntities",
+   "ProjectRootNamespace": "TheHorselessNewspaper.Schemas.ContentModel",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 0,
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
-         "Name": "[HostingModel].[FilesystemAssetLocations]",
+         "Name": "[dbo].[ContentCollectionMimeContent]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[HostFilesystemAssetLocation]",
+         "Name": "[dbo].[ContentCollections]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[Hosts]",
+         "Name": "[dbo].[FilesystemAssets]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[KeyCloakConfigurations]",
+         "Name": "[dbo].[JSONAssets]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[NugetPackages]",
+         "Name": "[dbo].[MimeContents]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[RoutingDiscriminators]",
+         "Name": "[dbo].[MIMETypes]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[TenantNugetPackage]",
+         "Name": "[dbo].[TenantContentCollection]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[Tenants]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[HostingModel].[UriPathFilesystemAssetLocation]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[HostingModel].[UriPaths]",
+         "Name": "[dbo].[Tenants]",
          "ObjectType": 0
       }
    ],
-   "UiHint": "wipers.THLNP_Hosting.dbo",
+   "UiHint": "WIPERS.THNLP_Content",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
-   "UseDbContextSplitting": false,
+   "UseDbContextSplitting": true,
    "UseFluentApiOnly": true,
    "UseHandleBars": false,
    "UseInflector": true,

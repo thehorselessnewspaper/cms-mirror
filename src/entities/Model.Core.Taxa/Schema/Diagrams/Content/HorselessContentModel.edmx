@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HorselessContentModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="HorselessContentModelStoreContainer">
+    <EntitySet Name="MimeContents" EntityType="HorselessContentModel.Store.MimeContents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tenants" EntityType="HorselessContentModel.Store.Tenants" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MIMETypes" EntityType="HorselessContentModel.Store.MIMETypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FilesystemAssets" EntityType="HorselessContentModel.Store.FilesystemAssets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="JSONAssets" EntityType="HorselessContentModel.Store.JSONAssets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContentCollections" EntityType="HorselessContentModel.Store.ContentCollections" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TenantContentCollection" EntityType="HorselessContentModel.Store.TenantContentCollection" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContentCollectionMimeContent" EntityType="HorselessContentModel.Store.ContentCollectionMimeContent" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_TenantContentCollection_Tenant" Association="HorselessContentModel.Store.FK_TenantContentCollection_Tenant">
+      <End Role="Tenant" EntitySet="Tenants" />
+      <End Role="TenantContentCollection" EntitySet="TenantContentCollection" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TenantContentCollection_ContentCollection" Association="HorselessContentModel.Store.FK_TenantContentCollection_ContentCollection">
+      <End Role="ContentCollection" EntitySet="ContentCollections" />
+      <End Role="TenantContentCollection" EntitySet="TenantContentCollection" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContentCollectionMimeContent_ContentCollection" Association="HorselessContentModel.Store.FK_ContentCollectionMimeContent_ContentCollection">
+      <End Role="ContentCollection" EntitySet="ContentCollections" />
+      <End Role="ContentCollectionMimeContent" EntitySet="ContentCollectionMimeContent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContentCollectionMimeContent_MimeContent" Association="HorselessContentModel.Store.FK_ContentCollectionMimeContent_MimeContent">
+      <End Role="MimeContent" EntitySet="MimeContents" />
+      <End Role="ContentCollectionMimeContent" EntitySet="ContentCollectionMimeContent" />
+    </AssociationSet>
+    <AssociationSet Name="FilesystemAssetMimeContent" Association="HorselessContentModel.Store.FilesystemAssetMimeContent">
+      <End Role="MimeContent" EntitySet="MimeContents" />
+      <End Role="FilesystemAsset" EntitySet="FilesystemAssets" />
+    </AssociationSet>
+    <AssociationSet Name="MimeContentJSONAsset" Association="HorselessContentModel.Store.MimeContentJSONAsset">
+      <End Role="MimeContent" EntitySet="MimeContents" />
+      <End Role="JSONAsset" EntitySet="JSONAssets" />
+    </AssociationSet>
+    <AssociationSet Name="MimeContentMIMEType" Association="HorselessContentModel.Store.MimeContentMIMEType">
+      <End Role="MimeContent" EntitySet="MimeContents" />
+      <End Role="MIMEType" EntitySet="MIMETypes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="MimeContents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="FilesystemAssetId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="JSONAssetId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="MIMETypeId" Type="uniqueidentifier" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Tenants">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="MIMETypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="MIMETypeName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FilesystemAssets">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="Filename" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JSONAssets">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="JsonValue" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContentCollections">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="AllowAnonymousRead" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TenantContentCollection">
+    <Key>
+      <PropertyRef Name="Tenants_Id" />
+      <PropertyRef Name="ContentCollections_Id" />
+    </Key>
+    <Property Name="Tenants_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ContentCollections_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContentCollectionMimeContent">
+    <Key>
+      <PropertyRef Name="ContentCollections_Id" />
+      <PropertyRef Name="MimeContents_Id" />
+    </Key>
+    <Property Name="ContentCollections_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MimeContents_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <Association Name="FilesystemAssetMimeContent">
+    <End Role="MimeContent" Type="HorselessContentModel.Store.MimeContents" Multiplicity="*" />
+    <End Role="FilesystemAsset" Type="HorselessContentModel.Store.FilesystemAssets" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="FilesystemAsset">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MimeContent">
+        <PropertyRef Name="FilesystemAssetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MimeContentJSONAsset">
+    <End Role="MimeContent" Type="HorselessContentModel.Store.MimeContents" Multiplicity="*" />
+    <End Role="JSONAsset" Type="HorselessContentModel.Store.JSONAssets" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="JSONAsset">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MimeContent">
+        <PropertyRef Name="JSONAssetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MimeContentMIMEType">
+    <End Role="MimeContent" Type="HorselessContentModel.Store.MimeContents" Multiplicity="*" />
+    <End Role="MIMEType" Type="HorselessContentModel.Store.MIMETypes" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="MIMEType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MimeContent">
+        <PropertyRef Name="MIMETypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TenantContentCollection_Tenant">
+    <End Role="Tenant" Type="HorselessContentModel.Store.Tenants" Multiplicity="1" />
+    <End Role="TenantContentCollection" Type="HorselessContentModel.Store.TenantContentCollection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tenant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TenantContentCollection">
+        <PropertyRef Name="Tenants_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TenantContentCollection_ContentCollection">
+    <End Role="TenantContentCollection" Type="HorselessContentModel.Store.TenantContentCollection" Multiplicity="*" />
+    <End Role="ContentCollection" Type="HorselessContentModel.Store.ContentCollections" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ContentCollection">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TenantContentCollection">
+        <PropertyRef Name="ContentCollections_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContentCollectionMimeContent_ContentCollection">
+    <End Role="ContentCollection" Type="HorselessContentModel.Store.ContentCollections" Multiplicity="1" />
+    <End Role="ContentCollectionMimeContent" Type="HorselessContentModel.Store.ContentCollectionMimeContent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContentCollection">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContentCollectionMimeContent">
+        <PropertyRef Name="ContentCollections_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContentCollectionMimeContent_MimeContent">
+    <End Role="ContentCollectionMimeContent" Type="HorselessContentModel.Store.ContentCollectionMimeContent" Multiplicity="*" />
+    <End Role="MimeContent" Type="HorselessContentModel.Store.MimeContents" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="MimeContent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContentCollectionMimeContent">
+        <PropertyRef Name="MimeContents_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="HorselessContentModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="HorselessContentModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MimeContents" EntityType="HorselessContentModel.MimeContent" />
+          <EntitySet Name="Tenants" EntityType="HorselessContentModel.Tenant" />
+          <EntitySet Name="MIMETypes" EntityType="HorselessContentModel.MIMEType" />
+          <EntitySet Name="FilesystemAssets" EntityType="HorselessContentModel.FilesystemAsset" />
+          <EntitySet Name="JSONAssets" EntityType="HorselessContentModel.JSONAsset" />
+          <EntitySet Name="ContentCollections" EntityType="HorselessContentModel.ContentCollection" />
+          <AssociationSet Name="TenantContentCollection" Association="HorselessContentModel.TenantContentCollection">
+            <End Role="Tenant" EntitySet="Tenants" />
+            <End Role="ContentCollection" EntitySet="ContentCollections" />
+          </AssociationSet>
+          <AssociationSet Name="ContentCollectionMimeContent" Association="HorselessContentModel.ContentCollectionMimeContent">
+            <End Role="ContentCollection" EntitySet="ContentCollections" />
+            <End Role="MimeContent" EntitySet="MimeContents" />
+          </AssociationSet>
+          <AssociationSet Name="FilesystemAssetMimeContent" Association="HorselessContentModel.FilesystemAssetMimeContent">
+            <End Role="MimeContent" EntitySet="MimeContents" />
+            <End Role="FilesystemAsset" EntitySet="FilesystemAssets" />
+          </AssociationSet>
+          <AssociationSet Name="MimeContentJSONAsset" Association="HorselessContentModel.MimeContentJSONAsset">
+            <End Role="MimeContent" EntitySet="MimeContents" />
+            <End Role="JSONAsset" EntitySet="JSONAssets" />
+          </AssociationSet>
+          <AssociationSet Name="MimeContentMIMEType" Association="HorselessContentModel.MimeContentMIMEType">
+            <End Role="MimeContent" EntitySet="MimeContents" />
+            <End Role="MIMEType" EntitySet="MIMETypes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="MimeContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="ContentCollections" Relationship="HorselessContentModel.ContentCollectionMimeContent" FromRole="MimeContent" ToRole="ContentCollection" />
+          <NavigationProperty Name="FilesystemAsset" Relationship="HorselessContentModel.FilesystemAssetMimeContent" FromRole="MimeContent" ToRole="FilesystemAsset" />
+          <Property Name="FilesystemAssetId" Type="Guid" Nullable="true" />
+          <NavigationProperty Name="JSONAsset" Relationship="HorselessContentModel.MimeContentJSONAsset" FromRole="MimeContent" ToRole="JSONAsset" />
+          <Property Name="JSONAssetId" Type="Guid" Nullable="true" />
+          <NavigationProperty Name="MIMEType" Relationship="HorselessContentModel.MimeContentMIMEType" FromRole="MimeContent" ToRole="MIMEType" />
+          <Property Name="MIMETypeId" Type="Guid" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Tenant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="ContentCollections" Relationship="HorselessContentModel.TenantContentCollection" FromRole="Tenant" ToRole="ContentCollection" />
+        </EntityType>
+        <EntityType Name="MIMEType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <Property Name="MIMETypeName" Type="String" Nullable="false" />
+          <NavigationProperty Name="MimeContents" Relationship="HorselessContentModel.MimeContentMIMEType" FromRole="MIMEType" ToRole="MimeContent" />
+        </EntityType>
+        <EntityType Name="FilesystemAsset">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <Property Name="Filename" Type="String" Nullable="false" />
+          <NavigationProperty Name="MimeContents" Relationship="HorselessContentModel.FilesystemAssetMimeContent" FromRole="FilesystemAsset" ToRole="MimeContent" />
+        </EntityType>
+        <EntityType Name="JSONAsset">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <Property Name="JsonValue" Type="String" Nullable="false" />
+          <NavigationProperty Name="MimeContents" Relationship="HorselessContentModel.MimeContentJSONAsset" FromRole="JSONAsset" ToRole="MimeContent" />
+        </EntityType>
+        <EntityType Name="ContentCollection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="Tenants" Relationship="HorselessContentModel.TenantContentCollection" FromRole="ContentCollection" ToRole="Tenant" />
+          <NavigationProperty Name="MimeContents" Relationship="HorselessContentModel.ContentCollectionMimeContent" FromRole="ContentCollection" ToRole="MimeContent" />
+          <Property Name="AllowAnonymousRead" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="TenantContentCollection">
+          <End Type="HorselessContentModel.Tenant" Role="Tenant" Multiplicity="*" />
+          <End Type="HorselessContentModel.ContentCollection" Role="ContentCollection" Multiplicity="*" />
+        </Association>
+        <Association Name="ContentCollectionMimeContent">
+          <End Type="HorselessContentModel.ContentCollection" Role="ContentCollection" Multiplicity="*" />
+          <End Type="HorselessContentModel.MimeContent" Role="MimeContent" Multiplicity="*" />
+        </Association>
+        <Association Name="FilesystemAssetMimeContent">
+          <End Type="HorselessContentModel.MimeContent" Role="MimeContent" Multiplicity="*" />
+          <End Type="HorselessContentModel.FilesystemAsset" Role="FilesystemAsset" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FilesystemAsset">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MimeContent">
+              <PropertyRef Name="FilesystemAssetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MimeContentJSONAsset">
+          <End Type="HorselessContentModel.MimeContent" Role="MimeContent" Multiplicity="*" />
+          <End Type="HorselessContentModel.JSONAsset" Role="JSONAsset" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="JSONAsset">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MimeContent">
+              <PropertyRef Name="JSONAssetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MimeContentMIMEType">
+          <End Type="HorselessContentModel.MimeContent" Role="MimeContent" Multiplicity="*" />
+          <End Type="HorselessContentModel.MIMEType" Role="MIMEType" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MIMEType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MimeContent">
+              <PropertyRef Name="MIMETypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HorselessContentModelStoreContainer" CdmEntityContainer="HorselessContentModelContainer">
+    <EntitySetMapping Name="MimeContents">
+      <EntityTypeMapping TypeName="IsTypeOf(HorselessContentModel.MimeContent)">
+        <MappingFragment StoreEntitySet="MimeContents">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="FilesystemAssetId" ColumnName="FilesystemAssetId" />
+          <ScalarProperty Name="JSONAssetId" ColumnName="JSONAssetId" />
+          <ScalarProperty Name="MIMETypeId" ColumnName="MIMETypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tenants">
+      <EntityTypeMapping TypeName="IsTypeOf(HorselessContentModel.Tenant)">
+        <MappingFragment StoreEntitySet="Tenants">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MIMETypes">
+      <EntityTypeMapping TypeName="IsTypeOf(HorselessContentModel.MIMEType)">
+        <MappingFragment StoreEntitySet="MIMETypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="MIMETypeName" ColumnName="MIMETypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilesystemAssets">
+      <EntityTypeMapping TypeName="IsTypeOf(HorselessContentModel.FilesystemAsset)">
+        <MappingFragment StoreEntitySet="FilesystemAssets">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="Filename" ColumnName="Filename" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JSONAssets">
+      <EntityTypeMapping TypeName="IsTypeOf(HorselessContentModel.JSONAsset)">
+        <MappingFragment StoreEntitySet="JSONAssets">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="JsonValue" ColumnName="JsonValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContentCollections">
+      <EntityTypeMapping TypeName="IsTypeOf(HorselessContentModel.ContentCollection)">
+        <MappingFragment StoreEntitySet="ContentCollections">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="AllowAnonymousRead" ColumnName="AllowAnonymousRead" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="TenantContentCollection" TypeName="HorselessContentModel.TenantContentCollection" StoreEntitySet="TenantContentCollection">
+      <EndProperty Name="Tenant">
+        <ScalarProperty Name="Id" ColumnName="Tenants_Id" />
+      </EndProperty>
+      <EndProperty Name="ContentCollection">
+        <ScalarProperty Name="Id" ColumnName="ContentCollections_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ContentCollectionMimeContent" TypeName="HorselessContentModel.ContentCollectionMimeContent" StoreEntitySet="ContentCollectionMimeContent">
+      <EndProperty Name="ContentCollection">
+        <ScalarProperty Name="Id" ColumnName="ContentCollections_Id" />
+      </EndProperty>
+      <EndProperty Name="MimeContent">
+        <ScalarProperty Name="Id" ColumnName="MimeContents_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

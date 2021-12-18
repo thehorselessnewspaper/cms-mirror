@@ -44,6 +44,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Diagrams\Content\ContentCollection.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\FilesystemAsset.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\HorselessContentModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HorselessContentModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\HorselessContentModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\HorselessContentModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HorselessContentModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\JSONAsset.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\MimeContent.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\MIMEType.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\Tenant.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Diagrams\FirstCut\AccessMode.cs">
       <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
     </Compile>
@@ -196,6 +229,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
+    <EntityDeploy Include="Diagrams\Content\HorselessContentModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HorselessContentModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Diagrams\Content\HorselessContentModel.edmx.diagram">
+      <DependentUpon>HorselessContentModel.edmx</DependentUpon>
+    </None>
     <None Include="Diagrams\FirstCut\CoreTaxa.edmx.diagram">
       <DependentUpon>CoreTaxa.edmx</DependentUpon>
     </None>
@@ -222,6 +262,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Diagrams\Content\HorselessContentModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HorselessContentModel.Context.cs</LastGenOutput>
+      <DependentUpon>HorselessContentModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Diagrams\Content\HorselessContentModel.edmx.sql" />
+    <Content Include="Diagrams\Content\HorselessContentModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HorselessContentModel.cs</LastGenOutput>
+      <DependentUpon>HorselessContentModel.edmx</DependentUpon>
+    </Content>
     <Content Include="Diagrams\FirstCut\HorselessCarriageCoreTaxa.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>HorselessCarriageCoreTaxa.Context.cs</LastGenOutput>
