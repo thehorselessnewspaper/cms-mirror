@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HorselessNewspaper.RazorClassLibrary.CMS.Default" Version="0.1.211217.9" />
+    <PackageReference Include="HorselessNewspaper.RazorClassLibrary.CMS.Default" Version="0.1.211217.15" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
   </ItemGroup>
@@ -17,6 +17,10 @@
   <ItemGroup>
     <ProjectReference Include="..\HorselessNewspaper.Web.Core.Auth.Keycloak\HorselessNewspaper.Web.Core.Auth.Keycloak.csproj" />
     <ProjectReference Include="..\Web.Core\HorselessNewspaper.Web.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="assetroot\RazorClassLibrary\" />
   </ItemGroup>
 
 </Project>
