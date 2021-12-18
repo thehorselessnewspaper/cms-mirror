@@ -16,30 +16,13 @@ namespace HorselessNewspaper.Web.Core.Model.Query
     /// </summary>
     /// <typeparam name="TCollection"></typeparam>
     /// <typeparam name="TData"></typeparam>
-    public class DefaultQuery<TCollection, TData> : IHorselessQuery<TCollection, TData>
-        where TCollection : ICollection<TData>
-        where TData : new()
-    {
-        public async Task<TCollection> FilterByExpression(Expression<Func<TCollection, Task<bool>>> predicate, IHorselessQueryResultProvider<TCollection, TData> queryProvider)
-        {
-            var results = await queryProvider.Execute(predicate);
-            return results;
-        }
+    //internal class DefaultQuery<TCollection, TData> : IHorselessQuery<TCollection, TData>
+    //    where TCollection : ICollection<TData> where TData : new()
+    //{
+    //    internal Task<TCollection> FilterByExpression(Expression<Func<TCollection, Task<bool>>> predicate, IHorselessQueryResultProvider<TCollection, TData> queryProvider);
 
-        public async Task<bool> Insert(Expression<Func<TData, Task<bool>>> predicate, TData data, IHorselessQueryResultProvider<TCollection, TData> queryProvider)
-        {
-            var result = await queryProvider.Execute(predicate, data);
+    //    internal Task<bool> Insert(Expression<Func<TData, Task<bool>>> predicate, TData data, IHorselessQueryResultProvider<TCollection, TData> queryProvider);
 
-            var retVal = await Task.FromResult(true);
-            return retVal;
-        }
-
-        public async Task<bool> Insert(Expression<Func<TCollection, Task<bool>>> predicate, TCollection data, IHorselessQueryResultProvider<TCollection, TData> queryProvider)
-        {
-            var result = await queryProvider.Execute(predicate, data);
-
-            var retVal = await Task.FromResult(true);
-            return retVal;
-        }
-    }
+    //    internal Task<bool> Insert(Expression<Func<TCollection, Task<bool>>> predicate, TCollection data, IHorselessQueryResultProvider<TCollection, TData> queryProvider);
+    //}
 }
