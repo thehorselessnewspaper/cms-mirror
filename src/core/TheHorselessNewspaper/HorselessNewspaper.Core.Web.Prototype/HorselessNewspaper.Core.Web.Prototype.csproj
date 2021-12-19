@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HorselessNewspaper.RazorClassLibrary.CMS.Default" Version="0.1.211218.21" />
+    <PackageReference Include="HorselessNewspaper.RazorClassLibrary.CMS.Default" Version="0.1.211218.22" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
   </ItemGroup>

@@ -14,13 +14,19 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.Content
     /// <summary>
     /// we will spare no effort to defeat direct access to sql layers
     /// </summary>
-    internal class HorselessEntityFrameworkQueryProvider<TData> : IHorselessQueryResultProvider<TData>
+    public class HorselessEntityFrameworkQueryProvider<TData> : IHorselessQueryResultProvider<TData>
 
         where TData : new()
     {
 
         private THNLPContentContext Context { get; set; }
-        internal HorselessEntityFrameworkQueryProvider(THNLPContentContext contentCtx)
+
+        public HorselessEntityFrameworkQueryProvider()
+        {
+            int i = 0;
+        }
+
+        public HorselessEntityFrameworkQueryProvider(THNLPContentContext contentCtx)
         {
             this.Context = contentCtx;
         }

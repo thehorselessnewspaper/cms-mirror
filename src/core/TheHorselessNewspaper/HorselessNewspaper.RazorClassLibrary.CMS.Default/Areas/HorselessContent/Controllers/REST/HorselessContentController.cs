@@ -15,6 +15,18 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.HorselessConten
     [Produces(MediaTypeNames.Application.Json)]
     public class HorselessContentController : ControllerBase
     {
+        private IHorselessQueryResultProvider<ContentCollection> ContentCollections { get; set; }
+
+        public HorselessContentController()
+        {
+            int i = 0;
+        }
+
+        public HorselessContentController(IHorselessQueryResultProvider<ContentCollection> contentCollections)
+        {
+            this.ContentCollections = contentCollections;
+        }
+
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -48,7 +48,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
             serviceBuilder.Services.AddHostedService<ApplicationPartsLogger>();
 
             serviceBuilder.Services.AddScoped<THNLPContentContext>();
-            serviceBuilder.Services.AddScoped<IHorselessQueryResultProvider<ContentCollection>>();
+            serviceBuilder.Services.AddScoped<IHorselessQueryResultProvider<ContentCollection>, HorselessEntityFrameworkQueryProvider<ContentCollection>>();
             // validate that this needs to be a singleton
             // as it's gating every request
             serviceBuilder.Services.AddSingleton<HorselessRouteTransformer>();
