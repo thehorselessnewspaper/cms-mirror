@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews()
+    .AddRazorRuntimeCompilation()
     // this hardcodes a static reference to the default horseless razor class library
     // i am sorry - the hoped for benefit is that this will always have a default implementation
     .AddApplicationPart(typeof(HorselessCMSController).Assembly);
@@ -36,7 +37,8 @@ builder.Services.AddHorselessKeycloakAuth(keycloakOpts =>
 });
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+//builder.Services.AddControllersWithViews()
+//    .AddRazorRuntimeCompilation();
 
 var app = builder.Build();
 
