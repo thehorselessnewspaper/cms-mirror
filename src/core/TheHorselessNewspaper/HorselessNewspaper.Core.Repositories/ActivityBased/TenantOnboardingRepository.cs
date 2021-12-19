@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
@@ -10,7 +11,7 @@ namespace HorselessNewspaper.Core.Repositories.ActivityBased
     /// <summary>
     /// a repository to support workflow rather than unit of work
     /// </summary>
-    public class TenantOnboardingRepository
+    public class TenantOnboardingRepository : ITenantOnboardingRepository
     {
         private THNLPContentContext ContentContext { get; set; }
         public TenantOnboardingRepository(THNLPContentContext ctx)
@@ -30,6 +31,16 @@ namespace HorselessNewspaper.Core.Repositories.ActivityBased
                     };
 
             return result;
+        }
+
+        public async Task<RepositoryResult<Tenant>> GetTenant(Guid tenantId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<RepositoryResult<IEnumerable<Tenant>>> FindTenants(Expression<Func<Tenant, bool>> expression, int offset, int pageSize, int pageCount)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<RepositoryResult<ContentCollection>> NewContentCollection(Guid Tenantid, ContentCollection collection)
@@ -56,5 +67,78 @@ namespace HorselessNewspaper.Core.Repositories.ActivityBased
 
             return result;
         }
+        public async Task<RepositoryResult<ContentCollection>> GetContentCollection(Guid tenantId, Guid tenantCollectionId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<RepositoryResult<IEnumerable<ContentCollection>>> FindContentCollections(Expression<Func<ContentCollection, bool>> expression, int offset, int pageSize, int pageCount)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public async Task<RepositoryResult<MimeContent>> NewMimeContent(Guid tenantId, MimeContent content, Guid? parentContentCollectionId = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<RepositoryResult<MimeContent>> GetMimeContent(Guid tenantId, Guid mimeContentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<RepositoryResult<IEnumerable<MimeContent>>> FindMimeContent(Expression<Func<MimeContent, bool>> expression, int offset, int pageSize, int pageCount)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public async Task<RepositoryResult<MIMEType>> NewMIMEType(Guid tenantId, MIMEType content, Guid? parentMimeContentId = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<RepositoryResult<MIMEType>> GetMIMEType(Guid tenantId, Guid mimeTypeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<RepositoryResult<IEnumerable<MIMEType>>> FindMIMEType(Expression<Func<MIMEType, bool>> expression, int offset, int pageSize, int pageCount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<RepositoryResult<FilesystemAsset>> NewFilesystemAsset(Guid tenantId, FilesystemAsset content, Guid? parentMimeContentId = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<RepositoryResult<FilesystemAsset>> GetFilesystemAsset(Guid tenantId, Guid filesystemAssetId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<RepositoryResult<IEnumerable<FilesystemAsset>>> FindFilesystemAsset(Expression<Func<FilesystemAsset, bool>> expression, int offset, int pageSize, int pageCount)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public async Task<RepositoryResult<JSONAsset>> NewJSONAsset(Guid tenantId, JSONAsset content, Guid? parentMimeContentId = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<RepositoryResult<JSONAsset>> GetJSONAsset(Guid tenantId, Guid jsonAssetId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<RepositoryResult<IEnumerable<JSONAsset>>> FindJSONAsset(Expression<Func<JSONAsset, bool>> expression, int offset, int pageSize, int pageCount)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
