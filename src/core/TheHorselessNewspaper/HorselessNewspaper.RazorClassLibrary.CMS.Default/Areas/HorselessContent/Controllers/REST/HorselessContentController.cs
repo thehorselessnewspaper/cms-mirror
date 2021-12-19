@@ -1,4 +1,5 @@
 ﻿using HorselessNewspaper.Core.Interfaces.Query;
+using HorselessNewspaper.Web.Core.ScopedServices.Content;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
@@ -22,7 +23,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.HorselessConten
             int i = 0;
         }
 
-        public HorselessContentController(IHorselessQueryResultProvider<ContentCollection> contentCollections)
+        public HorselessContentController(HorselessEntityFrameworkQueryProvider<ContentCollection> contentCollections)
         {
             this.ContentCollections = contentCollections;
         }
