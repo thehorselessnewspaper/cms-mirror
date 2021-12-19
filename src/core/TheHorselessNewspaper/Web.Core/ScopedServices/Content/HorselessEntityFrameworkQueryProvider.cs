@@ -14,16 +14,23 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.Content
     /// <summary>
     /// we will spare no effort to defeat direct access to sql layers
     /// </summary>
-    //internal class HorselessEntityFrameworkQueryProvider<TCollection, TData>:  IHorselessQueryResultProvider<TCollection, TData>
-    //       where TCollection : IQueryable<TData>
-    //    where TData : new()
-    //{
+    internal class HorselessEntityFrameworkQueryProvider<TData>
+       
+        where TData : new()
+    {
 
-    //    private THNLPContentContext Context { get; set; }
-    //    internal HorselessEntityFrameworkQueryProvider(THNLPContentContext contentCtx)
-    //    {
-    //        this.Context = contentCtx;
-    //    }
+        private THNLPContentContext Context { get; set; }
+        internal HorselessEntityFrameworkQueryProvider(THNLPContentContext contentCtx)
+        {
+            this.Context = contentCtx;
+        }
 
-    //}
+        public async Task<IEnumerable<TData>> Filter(Expression<Func<IQueryable<TData>>> predicate)
+        {
+            var result = this.Context.FromExpression<TData>(predicate);
+
+            return await Task.FromResult(result.ToList<TData>());
+        }
+
+    }
 }

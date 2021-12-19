@@ -12,14 +12,14 @@ namespace HorselessNewspaper.Core.Interfaces.Query
     /// </summary>
     /// <typeparam name="TCollection"></typeparam>
     /// <typeparam name="TData"></typeparam>
-    public interface IHorselessQuery<TCollection, TData> 
-        where TCollection : IQueryable<TData>
+    public interface IHorselessQuery<TData> 
+
         where TData : new()
     {
-        internal Task<TCollection> FilterByExpression(Expression<Func<TCollection>> predicate, IHorselessQueryResultProvider<TCollection, TData> queryProvider);
+        internal Task<IEnumerable<TData>> FilterByExpression(Expression<Func<IQueryable<TData>>> predicate, IHorselessQueryResultProvider<TData> queryProvider);
 
-        internal Task<bool> Insert(Expression<Func<TCollection>> predicate, TData parameter, IHorselessQueryResultProvider<TCollection, TData>  queryProvider);
+        //internal Task<bool> Insert(Expression<Func<TCollection>> predicate, TData parameter, IHorselessQueryResultProvider<TData>  queryProvider);
 
-        internal Task<bool> Insert(Expression<Func<TCollection>> predicate, TCollection parameter, IHorselessQueryResultProvider<TCollection, TData> queryProvider);
+        //internal Task<bool> Insert(Expression<Func<TCollection>> predicate, TCollection parameter, IHorselessQueryResultProvider<TData> queryProvider);
     }
 }
