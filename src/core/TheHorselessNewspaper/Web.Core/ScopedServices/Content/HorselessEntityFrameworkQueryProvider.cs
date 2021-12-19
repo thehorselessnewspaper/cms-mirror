@@ -27,9 +27,9 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.Content
 
         public async Task<IEnumerable<TData>> Filter(Expression<Func<IQueryable<TData>>> predicate)
         {
-            var result = this.Context.FromExpression<TData>(predicate);
-
-            return await Task.FromResult(result.ToList<TData>());
+            var queryResult = this.Context.FromExpression<TData>(predicate).ToList<TData>();
+            var result = await Task.FromResult(queryResult);
+            return result;
         }
 
     }

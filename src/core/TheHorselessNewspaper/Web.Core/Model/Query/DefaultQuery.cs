@@ -17,13 +17,14 @@ namespace HorselessNewspaper.Web.Core.Model.Query
     /// </summary>
     /// <typeparam name="TCollection"></typeparam>
     /// <typeparam name="TData"></typeparam>
-    //internal class DefaultQuery<TCollection, TData> : IHorselessQuery<TCollection, TData>
-    //    where TCollection : ICollection<TData> where TData : new()
-    //{
-    //    internal Task<TCollection> FilterByExpression(Expression<Func<TCollection, Task<bool>>> predicate, IHorselessQueryResultProvider<TCollection, TData> queryProvider);
+    public class DefaultQuery<TData> : IHorselessQuery<TData>
+         where TData : new()
+    {
+        public async Task<IEnumerable<TData>> FilterByExpression(Expression<Func<IQueryable<TData>>> predicate, IHorselessQueryResultProvider<TData> queryProvider)
+        {
+            var result = await queryProvider.Filter(predicate);
+            return result;
+        }
 
-    //    internal Task<bool> Insert(Expression<Func<TData, Task<bool>>> predicate, TData data, IHorselessQueryResultProvider<TCollection, TData> queryProvider);
-
-    //    internal Task<bool> Insert(Expression<Func<TCollection, Task<bool>>> predicate, TCollection data, IHorselessQueryResultProvider<TCollection, TData> queryProvider);
-    //}
+    }
 }
