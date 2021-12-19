@@ -19,6 +19,11 @@ namespace HorselessNewspaper.Core.Interfaces.Query
         public Task<IEnumerable<TData>> FilterByExpression(Expression<Func<IQueryable<TData>>> predicate, IHorselessQueryResultProvider<TData> queryProvider,
             int offset, int pageSize, int pageCount);
 
+        public Task<TData> Insert(TData data, IHorselessQueryResultProvider<TData> queryProvider);
+
+        public Task<IEnumerable<TData>> Delete(Expression<Func<IQueryable<TData>>> predicate, IHorselessQueryResultProvider<TData> queryProvider,
+            int offset, int pageSize, int pageCount);
+
         //internal Task<bool> Insert(Expression<Func<TCollection>> predicate, TData parameter, IHorselessQueryResultProvider<TData>  queryProvider);
 
         //internal Task<bool> Insert(Expression<Func<TCollection>> predicate, TCollection parameter, IHorselessQueryResultProvider<TData> queryProvider);
