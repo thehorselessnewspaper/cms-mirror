@@ -21,7 +21,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.Content
 
         private THNLPContentContext Context { get; set; }
 
-        private HorselessEntityFrameworkQueryProvider()
+        public HorselessEntityFrameworkQueryProvider()
         {
             int i = 0;
         }
