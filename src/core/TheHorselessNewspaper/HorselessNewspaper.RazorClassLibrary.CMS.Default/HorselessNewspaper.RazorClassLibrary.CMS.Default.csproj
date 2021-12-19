@@ -22,9 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.1.211218.24" />
-    <PackageReference Include="HorselessNewspaper.Web.Core" Version="0.1.211218.24" />
-    <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.1.20211218.24" />
+    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.1.211218.25" />
+    <PackageReference Include="HorselessNewspaper.Web.Core" Version="0.1.211218.25" />
+    <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.1.20211218.25" />
   </ItemGroup>
 
 
