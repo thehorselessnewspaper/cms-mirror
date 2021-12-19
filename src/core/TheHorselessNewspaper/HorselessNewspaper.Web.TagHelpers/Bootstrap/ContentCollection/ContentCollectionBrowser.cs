@@ -16,7 +16,7 @@ namespace HorselessNewspaper.Web.TagHelpers.Bootstrap.ContentCollection
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            output.TagName = "ContentCollections";
+            output.TagName = "div";
             output.Content.SetHtmlContent(
    $@"<ul><li><strong>id:</strong> {Payload.Id}</li>
 <li><strong>DisplayName</strong> {Payload.DisplayName}</li>
