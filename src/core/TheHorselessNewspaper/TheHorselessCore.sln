@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.RazorCla
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorselessNewspaper.Core.Repositories", "HorselessNewspaper.Core.Repositories\HorselessNewspaper.Core.Repositories.csproj", "{BB3F1432-BD07-4B1C-996F-2A8740CE1DAC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorselessNewspaper.Web.TagHelpers", "HorselessNewspaper.Web.TagHelpers\HorselessNewspaper.Web.TagHelpers.csproj", "{7B1B7FB3-5A13-46C1-9D89-3F93CBC3AE42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{BB3F1432-BD07-4B1C-996F-2A8740CE1DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB3F1432-BD07-4B1C-996F-2A8740CE1DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB3F1432-BD07-4B1C-996F-2A8740CE1DAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B1B7FB3-5A13-46C1-9D89-3F93CBC3AE42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B1B7FB3-5A13-46C1-9D89-3F93CBC3AE42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B1B7FB3-5A13-46C1-9D89-3F93CBC3AE42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B1B7FB3-5A13-46C1-9D89-3F93CBC3AE42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

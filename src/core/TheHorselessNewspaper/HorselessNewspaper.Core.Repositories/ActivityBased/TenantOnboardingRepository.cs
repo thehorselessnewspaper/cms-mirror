@@ -1,4 +1,6 @@
-﻿using System;
+﻿// ouch - we've taken a dependencyhere on entity framework core ina  repository
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -35,12 +37,30 @@ namespace HorselessNewspaper.Core.Repositories.ActivityBased
 
         public async Task<RepositoryResult<Tenant>> GetTenant(Guid tenantId)
         {
-            throw new NotImplementedException();
+            var queryResult = await ContentContext.Set<Tenant>().FindAsync(tenantId);
+            var result = new
+               RepositoryResult<Tenant>()
+            {
+                OperationSuccessful = queryResult != null,
+                Payload = queryResult,
+                UTCTimestamp = DateTime.UtcNow
+            };
+
+            return result;
         }
 
         public async Task<RepositoryResult<IEnumerable<Tenant>>> FindTenants(Expression<Func<Tenant, bool>> expression, int offset, int pageSize, int pageCount)
         {
-            throw new NotImplementedException();
+            var queryResult = await ContentContext.Set<Tenant>().Where(expression).ToListAsync();
+            var result = new
+                RepositoryResult<IEnumerable<Tenant>>()
+            {
+                OperationSuccessful = queryResult != null && queryResult.Any(),
+                Payload = queryResult,
+                UTCTimestamp = DateTime.UtcNow
+            }
+            ;
+            return result;
         }
 
         public async Task<RepositoryResult<ContentCollection>> NewContentCollection(Guid Tenantid, ContentCollection collection)

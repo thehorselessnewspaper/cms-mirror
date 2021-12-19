@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HorselessNewspaper.Web.Core.Auth.Keycloak\HorselessNewspaper.Web.Core.Auth.Keycloak.csproj" />
+    <ProjectReference Include="..\HorselessNewspaper.Web.TagHelpers\HorselessNewspaper.Web.TagHelpers.csproj" />
     <ProjectReference Include="..\Web.Core\HorselessNewspaper.Web.Core.csproj" />
   </ItemGroup>
 

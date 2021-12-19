@@ -10,17 +10,12 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
     public class HorselessCMSController : Controller
     {
 
-        private HorselessCMSController()
+
+        public HorselessCMSController()
         {
-            int i = 0;
+
         }
 
-        public HorselessCMSController(HorselessEntityFrameworkQueryProvider<ContentCollection> contentCollections)
-        {
-            this.ContentCollections = contentCollections;
-        }
-
-        public IHorselessQueryResultProvider<ContentCollection> ContentCollections { get; }
 
         public IActionResult ViewTemplate()
         {
