@@ -14,7 +14,9 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.Content
     /// <summary>
     /// we will spare no effort to defeat direct access to sql layers
     /// </summary>
-    //internal class HorselessEntityFrameworkQueryProvider:  IHorselessQueryResultProvider<IQueryable<MimeContent>, MimeContent>
+    //internal class HorselessEntityFrameworkQueryProvider<TCollection, TData>:  IHorselessQueryResultProvider<TCollection, TData>
+    //       where TCollection : IQueryable<TData>
+    //    where TData : new()
     //{
 
     //    private THNLPContentContext Context { get; set; }
