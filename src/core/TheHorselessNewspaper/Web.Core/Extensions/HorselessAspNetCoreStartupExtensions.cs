@@ -1,13 +1,17 @@
-﻿using HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.ApplicationPartsLogger;
+﻿using HorselessNewspaper.Core.Interfaces.Query;
+using HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.ApplicationPartsLogger;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter.Strategy;
+using HorselessNewspaper.Web.Core.ScopedServices.Content;
 using HorselessNewspaper.Web.Core.ScopedServices.RoutingStrategy;
 using HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.Schemas.HostingModel.DTO;
 
 namespace HorselessNewspaper.Web.Core.Extensions
@@ -42,6 +46,9 @@ namespace HorselessNewspaper.Web.Core.Extensions
             #region cms routing pattern services
             serviceBuilder.Services.AddScoped<IHorselessRoutingStrategy, UrlSegmentRoutingStrategy>();
             serviceBuilder.Services.AddHostedService<ApplicationPartsLogger>();
+
+            serviceBuilder.Services.AddScoped<THNLPContentContext>();
+            serviceBuilder.Services.AddScoped<IHorselessQueryResultProvider<ContentCollection>>();
             // validate that this needs to be a singleton
             // as it's gating every request
             serviceBuilder.Services.AddSingleton<HorselessRouteTransformer>();

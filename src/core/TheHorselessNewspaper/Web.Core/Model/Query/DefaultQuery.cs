@@ -17,9 +17,25 @@ namespace HorselessNewspaper.Web.Core.Model.Query
     /// </summary>
     /// <typeparam name="TCollection"></typeparam>
     /// <typeparam name="TData"></typeparam>
-    //public class DefaultQuery<TData> : IHorselessQuery<TData>
-    //     where TData : new()
-    //{
-   
-    //}
+    public class DefaultQuery<TData> : IHorselessQuery<TData>
+         where TData : new()
+    {
+        public async Task<IEnumerable<TData>> Delete(Expression<Func<IQueryable<TData>>> predicate, IHorselessQueryResultProvider<TData> queryProvider, int offset, int pageSize, int pageCount)
+        {
+            var operationResult = await queryProvider.Delete(predicate, offset, pageSize, pageCount);
+            return operationResult.ToList<TData>();
+        }
+
+        public async Task<IEnumerable<TData>> FilterByExpression(Expression<Func<IQueryable<TData>>> predicate, IHorselessQueryResultProvider<TData> queryProvider, int offset, int pageSize, int pageCount)
+        {
+            var operationResult = await queryProvider.Filter(predicate, offset, pageSize, pageCount);
+            return operationResult.ToList<TData>();
+        }
+
+        public async Task<TData> Insert(TData data, IHorselessQueryResultProvider<TData> queryProvider)
+        {
+            var operationResult = await queryProvider.Insert(data);
+            return data;
+        }
+    }
 }

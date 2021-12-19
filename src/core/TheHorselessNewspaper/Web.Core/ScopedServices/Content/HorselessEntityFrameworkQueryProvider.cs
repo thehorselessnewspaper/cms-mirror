@@ -14,8 +14,8 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.Content
     /// <summary>
     /// we will spare no effort to defeat direct access to sql layers
     /// </summary>
-    internal class HorselessEntityFrameworkQueryProvider<TData>
-       
+    internal class HorselessEntityFrameworkQueryProvider<TData> : IHorselessQueryResultProvider<TData>
+
         where TData : new()
     {
 
@@ -33,5 +33,21 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.Content
             return result;
         }
 
+        public async Task<TData> Insert(TData data)
+        {
+            var entity = this.Context.Entry(data);
+            entity.State = Microsoft.EntityFrameworkCore.EntityState.Added;
+            var operationResult = this.Context.SaveChanges();
+
+            var result = await Task.FromResult(data);
+            return result;
+        }
+
+        public async Task<IEnumerable<TData>> Delete(Expression<Func<IQueryable<TData>>> predicate, int offset, int pageSize, int pageCount)
+        {
+            var queryResult = this.Context.FromExpression<TData>(predicate).ToList<TData>();
+            var result = await Task.FromResult(queryResult);
+            return result;
+        }
     }
 }
