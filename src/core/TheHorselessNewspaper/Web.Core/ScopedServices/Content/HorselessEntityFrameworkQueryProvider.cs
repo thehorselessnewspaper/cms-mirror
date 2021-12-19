@@ -25,7 +25,8 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.Content
             this.Context = contentCtx;
         }
 
-        public async Task<IEnumerable<TData>> Filter(Expression<Func<IQueryable<TData>>> predicate)
+        public async Task<IEnumerable<TData>> Filter(Expression<Func<IQueryable<TData>>> predicate,
+             int offset, int pageSize, int pageCount)
         {
             var queryResult = this.Context.FromExpression<TData>(predicate).ToList<TData>();
             var result = await Task.FromResult(queryResult);
