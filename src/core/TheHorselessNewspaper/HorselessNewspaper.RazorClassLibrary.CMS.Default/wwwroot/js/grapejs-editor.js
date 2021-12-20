@@ -1,10 +1,5 @@
-﻿// as per grapejs getting started https://grapesjs.com/docs/getting-started.html#panels-buttons
-const editor = grapesjs.init({
-    // Indicate where to init the editor. You can also pass an HTMLElement
+﻿var editor = grapesjs.init({
     container: '#gjs',
-    layerManager: {
-        appendTo: '.layers-container'
-    },
     // Get the content for the canvas directly from the element
     // As an alternative we could use: `components: '<h1>Hello World Component!</h1>'`,
     fromElement: true,
@@ -12,42 +7,9 @@ const editor = grapesjs.init({
     height: '300px',
     width: 'auto',
     // Disable the storage manager for the moment
-    storageManager: false,
+    storageManager: true,
     // Avoid any default panel
-    panels: {
-        defaults: [{
-            id: 'layers',
-            el: '.panel__right',
-            // Make the panel resizable
-            resizable: {
-                maxDim: 350,
-                minDim: 200,
-                tc: 0, // Top handler
-                cl: 1, // Left handler
-                cr: 0, // Right handler
-                bc: 0, // Bottom handler
-                // Being a flex child we need to change `flex-basis` property
-                // instead of the `width` (default)
-                keyWidth: 'flex-basis',
-            },
-        }, {
-                id: 'panel-switcher',
-                el: '.panel__switcher',
-                buttons: [{
-                    id: 'show-layers',
-                    active: true,
-                    label: 'Layers',
-                    command: 'show-layers',
-                    // Once activated disable the possibility to turn it off
-                    togglable: false,
-                }, {
-                    id: 'show-style',
-                    active: true,
-                    label: 'Styles',
-                    command: 'show-styles',
-                    togglable: false,
-                }],
-            }] },
+    panels: { defaults: [] },
     blockManager: {
         appendTo: '#blocks',
         blocks: [
@@ -77,29 +39,22 @@ const editor = grapesjs.init({
             }
         ]
     },
+    plugins: ['gjs-preset-webpage'],
+    pluginsOpts: {
+        'gjs-preset-webpage': {
+            // options
+            blocks: ['link-block', 'quote', 'text-basic'],
+            navbarOpts: true,
+            blocksBasicOpts: true,
+            formsOpts: true,
+            exportOpts: true,
+            aviaryOpts: true,
+            filestackOpts : true
+        }
+    }
 });
 
-editor.BlockManager.add('my-block-id', {
-    // ...
-    content: {
-        tagName: 'div',
-        draggable: false,
-        attributes: { 'some-attribute': 'some-value' },
-        components: [
-            {
-                tagName: 'span',
-                content: '<b>Some static content</b>',
-            }, {
-                tagName: 'div',
-                // use `content` for static strings, `components` string will be parsed
-                // and transformed in Components
-                components: '<span>HTML at some point</span>',
-            }
-        ]
-    }
-})
-
-ditor.Panels.addPanel({
+editor.Panels.addPanel({
     id: 'panel-top',
     el: '.panel__top',
 });
@@ -134,12 +89,3 @@ editor.Panels.addPanel({
         }
     ],
 });
-
-editor.on('run:export-template:before', opts => {
-    console.log('Before the command run');
-    if (0 /* some condition */) {
-        opts.abort = 1;
-    }
-});
-editor.on('run:export-template', () => console.log('After the command run'));
-editor.on('abort:export-template', () => console.log('Command aborted'));

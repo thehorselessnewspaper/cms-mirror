@@ -1,5 +1,4 @@
-﻿
-/* Let's highlight canvas boundaries */
+﻿/* Let's highlight canvas boundaries */
 #gjs {
     border: 3px solid #444;
 }
@@ -27,27 +26,5 @@
 }
 
 .panel__basic-actions {
-    position: initial;
-}
-
-.editor-row {
-    display: flex;
-    justify-content: flex-start;
-    align-items: stretch;
-    flex-wrap: nowrap;
-    height: 300px;
-}
-
-.editor-canvas {
-    flex-grow: 1;
-}
-
-.panel__right {
-    flex-basis: 230px;
-    position: relative;
-    overflow-y: auto;
-}
-
-.panel__switcher {
     position: initial;
 }

@@ -6,9 +6,11 @@
     <title>@ViewData["Title"] - Default Horseless CMS Grape Skin</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://unpkg.com/grapesjs/dist/css/grapes.min.css">
     <link rel="stylesheet" href="~/Horseless.Template.MVC.CMS.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/css/grapejs-editor.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://unpkg.com/grapesjs/dist/css/grapes.min.css">
+    <link rel="stylesheet" href="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/css/grapesjs-preset-webpage.min.css" asp-append-version="true" />
+
 </head>
 <body>
     <header>
@@ -51,8 +53,9 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/grapesjs/0.12.17/grapes.min.js" asp-append-version="true"></script>
-    <script src="https://unpkg.com/grapesjs"></script>
+    <script src="https://unpkg.com/grapesjs@0.17.29/dist/grapes.min.js"></script>
     <script src="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/grapejs-editor.js"></script>
+    <script src="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/grapesjs-preset-webpage.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
