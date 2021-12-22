@@ -35,6 +35,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
             //        // endpoints.MapDynamicControllerRoute<HorselessRouteTransformer>(""); // enabling this here prevents the implementer from configuring it in program.cs
             //    });
 
+
             options?.Invoke(applicationBuilder);
 
             return applicationBuilder.Builder;

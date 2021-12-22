@@ -48,6 +48,11 @@ namespace HorselessNewspaper.RazorClassLibrary.Keycloak.Default.Controllers
         {
             // similar to https://docs.identityserver.io/en/release/quickstarts/3_interactive_login.html
             // similar to https://github.com/tuxiem/AspNetCore-keycloak/blob/master/KeycloakAuth/Controllers/HomeController.cs
+            // similar to https://issues.redhat.com/browse/KEYCLOAK-3399?page=com.atlassian.jira.plugin.system.issuetabpanels%3Achangehistory-tabpanel
+            string accessToken = await this.HttpContext.GetTokenAsync("access_token");
+            string idToken = await this.HttpContext.GetTokenAsync("id_token");
+
+
             await HttpContext.SignOutAsync("Cookies");
             await HttpContext.SignOutAsync("OpenIdConnect");
             // Instruct the cookies middleware to delete the local cookie created

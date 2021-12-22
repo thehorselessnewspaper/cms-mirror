@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using AspNet.Security.OpenId;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
+using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
 
 namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
 {
@@ -17,12 +19,22 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
     /// </summary>
     public static class HorselessKeycloakExtensions
     {
-        public static IServiceCollection AddHorselessKeycloakAuth(this IServiceCollection services, Action<OpenIdAuthenticationOptions> keyCloakOptions,
+
+
+        public static IServiceCollection AddHorselessKeycloakAuth(this IServiceCollection services, IConfiguration configuration, Action<OpenIdAuthenticationOptions> keyCloakOptions,
             Action<HorselessServiceBuilder> options = null, ServiceLifetime scope = ServiceLifetime.Scoped)
         {
-            var serviceBuilder = new HorselessServiceBuilder(services);
+            var serviceBuilder = new HorselessServiceBuilder(configuration, services);
+
+            #region surface the keycloak logout url configuration 
+            IKeycloakAuthOptions keycloakAuthOptions = new KeycloakAuthOptions()
+            {
+                OIDCLogoutUri = new Uri(configuration[KeycloakAuthOptions.OIDCLogoutUriConfigKey])
+            };
 
 
+            serviceBuilder.Services.AddSingleton<IKeycloakAuthOptions>(keycloakAuthOptions);
+            #endregion surface the keycloak logout url configuration 
 
             #region as per https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/social-without-identity?view=aspnetcore-6.0
             serviceBuilder.Services.AddAuthentication(options =>

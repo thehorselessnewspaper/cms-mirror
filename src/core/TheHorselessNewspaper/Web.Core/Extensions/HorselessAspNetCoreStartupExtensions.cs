@@ -9,6 +9,7 @@ using HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
@@ -21,10 +22,10 @@ namespace HorselessNewspaper.Web.Core.Extensions
     /// </summary>
     public static class HorselessAspNetCoreStartupExtensions
     {
-        public static IServiceCollection AddHorselessNewspaper(this IServiceCollection services,
+        public static IServiceCollection AddHorselessNewspaper(this IServiceCollection services, IConfiguration configuration,
         Action<HorselessServiceBuilder> options = null, ServiceLifetime scope = ServiceLifetime.Scoped)
         {
-            var serviceBuilder = new HorselessServiceBuilder(services);
+            var serviceBuilder = new HorselessServiceBuilder(configuration, services);
 
             // todo - why is this here
             serviceBuilder.AddRazorRuntimeCompilation = true;
@@ -42,6 +43,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
             }
             
             );
+
             
             serviceBuilder.Services.AddSingleton<IHorselessCacheProvider<Guid, TenantDTO>, DefaultTenantCache>();
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HorselessNewspaper.Web.Core.Extensions
@@ -14,6 +15,8 @@ namespace HorselessNewspaper.Web.Core.Extensions
         /// </summary>
         public readonly IServiceCollection Services;
 
+        public readonly IConfiguration Configuration;
+
         /// <summary>
         /// Gets/sets if runtime compilation should be enabled.
         /// </summary>
@@ -23,9 +26,10 @@ namespace HorselessNewspaper.Web.Core.Extensions
         /// Default constructor.
         /// </summary>
         /// <param name="services">The current service collection</param>
-        public HorselessServiceBuilder(IServiceCollection services)
+        public HorselessServiceBuilder(IConfiguration configuration, IServiceCollection services)
         {
             Services = services;
+            Configuration = configuration;
         }
     }
 }

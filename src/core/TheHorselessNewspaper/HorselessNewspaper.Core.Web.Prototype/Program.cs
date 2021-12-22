@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.CodeAnalysis;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,7 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
         builder =>
         {
+            // TODO put something rational and devops engineer production environment configurable here
             builder.WithOrigins("https://localhost").AllowAnyOrigin();
         });
 });
@@ -41,7 +43,7 @@ builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
             new EmbeddedFileProvider(typeof(HorselessCMSController).Assembly));
 });
 
-builder.Services.AddHorselessNewspaper();
+builder.Services.AddHorselessNewspaper(builder.Configuration);
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -61,12 +63,12 @@ builder.Services.AddAuthentication(options =>
   
     opts.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     opts.SignedOutCallbackPath = "/signout-oidc";
-    opts.SignedOutRedirectUri = builder.Configuration["Keycloak:SignoutRedirectUrl"];
-    opts.Authority = builder.Configuration["Keycloak:Realm"];
+    opts.SignedOutRedirectUri = builder.Configuration[KeycloakAuthOptions.SignoutRedirectUrlConfigKey];
+    opts.Authority = builder.Configuration[KeycloakAuthOptions.RealmConfigKey];
     opts.RequireHttpsMetadata = false;
-    opts.ClientId = builder.Configuration["Keycloak:ClientId"];
-    opts.ClientSecret = builder.Configuration["Keycloak:ClientSecret"];
-    opts.MetadataAddress = builder.Configuration["Keycloak:MetaData"];
+    opts.ClientId = builder.Configuration[KeycloakAuthOptions.ClientIdConfigKey];
+    opts.ClientSecret = builder.Configuration[KeycloakAuthOptions.ClientSecretConfigKey];
+    opts.MetadataAddress = builder.Configuration[KeycloakAuthOptions.MetaDataConfigKey];
     opts.ResponseType = OpenIdConnectResponseType.Code;
     opts.GetClaimsFromUserInfoEndpoint = true;
     opts.SaveTokens = true;
@@ -77,12 +79,12 @@ builder.Services.AddAuthentication(options =>
 .AddJwtBearer(o =>
     {
         // my API name as defined in Config.cs - new ApiResource... or in DB ApiResources table
-        o.Audience = builder.Configuration["Keycloak:Audience"];
+        o.Audience = builder.Configuration[KeycloakAuthOptions.AudienceConfigKey];
         // URL of Auth server(API and Auth are separate projects/applications),
         // so for local testing this is http://localhost:5000 if you followed ID4 tutorials
-        o.Authority = builder.Configuration["Keycloak:Authority"];
+        o.Authority = builder.Configuration[KeycloakAuthOptions.AuthorityConfigKey];
 
-        o.ClaimsIssuer = builder.Configuration["Keycloak:Issuer"];
+        o.ClaimsIssuer = builder.Configuration[KeycloakAuthOptions.IssuerConfigKey];
         o.RequireHttpsMetadata = !builder.Environment.IsDevelopment();
         o.TokenValidationParameters = new TokenValidationParameters
         {
@@ -98,7 +100,7 @@ builder.Services.AddAuthentication(options =>
 ;
 
 // as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/docs/keycloak.md
-builder.Services.AddHorselessKeycloakAuth(keycloakOpts =>
+builder.Services.AddHorselessKeycloakAuth(builder.Configuration, keycloakOpts =>
 {
 
     //// keycloakOpts.Realm = builder.Configuration["Keycloak:Realm"];
