@@ -27,25 +27,12 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
             var user = User.Identities.First();
             if (user != null && user.Claims != null && user.Claims.Count() > 0)
             {
-                ClaimsPrincipal currentUser = this.User;
-                //Get username, for keycloak you need to regex this to get the clean username
-                var userNameClaim = currentUser.FindFirst(ClaimTypes.NameIdentifier);
-                if(userNameClaim != null)
-                {
-                    var userName = userNameClaim.Value;
-                    int i = 0;
-                }
-
-                //logs an error so it's easier to find - thanks debug.
-
-
-                //Debug this line of code if you want to validate the content jwt.io
-                string accessToken = await HttpContext.GetTokenAsync("access_token");
-                string idToken = await HttpContext.GetTokenAsync("id_token");
+                // TODO constrain against required claims
                 return View();
             }
             else
             {
+                // TODO convert this reference into a devops productoin environment configurable feture toggle
                 return RedirectToAction(actionName: "signin", controllerName: "KeyCloakAuthentication"); 
 
             }

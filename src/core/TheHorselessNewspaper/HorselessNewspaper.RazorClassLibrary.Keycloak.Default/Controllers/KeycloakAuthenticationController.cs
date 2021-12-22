@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using HorselessNewspaper.RazorClassLibrary.Keycloak.Default.Extensions;
+
 using System.Security.Claims;
 
 namespace HorselessNewspaper.RazorClassLibrary.Keycloak.Default.Controllers
@@ -13,6 +14,7 @@ namespace HorselessNewspaper.RazorClassLibrary.Keycloak.Default.Controllers
     /// </summary>
     public class KeycloakAuthenticationController : Controller
     {
+
         [HttpGet("~/signin")]
         public async Task<IActionResult> SignIn()
         {
