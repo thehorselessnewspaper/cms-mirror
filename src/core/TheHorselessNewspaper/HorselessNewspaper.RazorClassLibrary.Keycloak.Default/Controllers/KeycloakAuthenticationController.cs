@@ -3,17 +3,24 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using HorselessNewspaper.RazorClassLibrary.Keycloak.Default.Extensions;
+using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
 
 using System.Security.Claims;
 
 namespace HorselessNewspaper.RazorClassLibrary.Keycloak.Default.Controllers
 {
+     
     /// <summary>
     /// keycloak integration authentication controller
     /// as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/samples/Mvc.Client/Controllers/AuthenticationController.cs
     /// </summary>
     public class KeycloakAuthenticationController : Controller
     {
+        private IKeycloakAuthOptions AuthOptions { get; set; }
+        public KeycloakAuthenticationController(IKeycloakAuthOptions keycloakAuthOptions)
+        {
+            this.AuthOptions = keycloakAuthOptions;
+        }
 
         [HttpGet("~/signin")]
         public async Task<IActionResult> SignIn()
@@ -57,12 +64,14 @@ namespace HorselessNewspaper.RazorClassLibrary.Keycloak.Default.Controllers
 
             await HttpContext.SignOutAsync("Cookies");
             await HttpContext.SignOutAsync("OpenIdConnect");
+
+            // var redirectUri = $"{AuthOptions.OIDCLogoutUri.AbsolutePath}?id_token_hint={idToken}&&post_logout_redirect_uri={}"
             // Instruct the cookies middleware to delete the local cookie created
             // when the user agent is redirected from the external identity provider
             // after a successful authentication flow (e.g Google or Facebook).
             //return SignOut(new AuthenticationProperties { RedirectUri = "/" },
             //    CookieAuthenticationDefaults.AuthenticationScheme);
-            return Redirect("/");
+           return Redirect("/");
         }
     }
 }

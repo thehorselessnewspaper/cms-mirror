@@ -10,6 +10,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Model
     public interface IKeycloakAuthOptions
     {
         public Uri OIDCLogoutUri { get; set; }
+        public Uri PostLogoutRedirectUri { get; set; }
     }
 
     /// <summary>
@@ -37,5 +38,6 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Model
         /// as per https://issues.redhat.com/browse/KEYCLOAK-3399?page=com.atlassian.jira.plugin.system.issuetabpanels%3Achangehistory-tabpanel
         /// </summary>
         public Uri OIDCLogoutUri { get; set; }
+        public Uri PostLogoutRedirectUri { get; set; }
     }
 }
