@@ -27,12 +27,13 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Model
         public const string OIDCLogoutUriConfigKey = "Keycloak:OIDCLogoutUri";
         public const string AudienceConfigKey = "Keycloak:Audience";
         public const string AuthorityConfigKey = "Keycloak:Authority";
-        public const string IssuerConfigKey = "Keycloak:SignoutRedirectUrl";
+        public const string IssuerConfigKey = "Keycloak:Issuer";
         public const string SignoutRedirectUrlConfigKey = "Keycloak:SignoutRedirectUrl";
         public const string RealmConfigKey = "Keycloak:Realm";
         public const string ClientIdConfigKey = "Keycloak:ClientId";
         public const string ClientSecretConfigKey = "Keycloak:ClientSecret";
-        public const string MetaDataConfigKey = "Keycloak:ClientSecret";
+        public const string MetaDataConfigKey = "Keycloak:MetaData";
+        public const string PostLogoutRedirectUriConfigKey = "Keycloak:PostLogoutRedirectUri";
         #endregion Configuration["Keys"]
         /// <summary>
         /// as per https://issues.redhat.com/browse/KEYCLOAK-3399?page=com.atlassian.jira.plugin.system.issuetabpanels%3Achangehistory-tabpanel

@@ -6,6 +6,7 @@ using HorselessNewspaper.RazorClassLibrary.Keycloak.Default.Extensions;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
 
 using System.Security.Claims;
+using System.Web;
 
 namespace HorselessNewspaper.RazorClassLibrary.Keycloak.Default.Controllers
 {
@@ -48,7 +49,11 @@ namespace HorselessNewspaper.RazorClassLibrary.Keycloak.Default.Controllers
             // Instruct the middleware corresponding to the requested external identity
             // provider to redirect the user agent to its own authorization endpoint.
             // Note: the authenticationScheme parameter must match the value configured in Startup.cs
-            return Challenge(new AuthenticationProperties { RedirectUri = "/" }, provider);
+
+            // TODO defend against unavailable IDP  here - probe the challenge endpoint
+            // IOException: IDX20804: Unable to retrieve document from: 'System.String'.
+            var challengeResult = Challenge(new AuthenticationProperties { RedirectUri = "/" }, provider);
+            return challengeResult;
         }
 
         [HttpGet("~/signout")]
@@ -58,20 +63,45 @@ namespace HorselessNewspaper.RazorClassLibrary.Keycloak.Default.Controllers
             // similar to https://docs.identityserver.io/en/release/quickstarts/3_interactive_login.html
             // similar to https://github.com/tuxiem/AspNetCore-keycloak/blob/master/KeycloakAuth/Controllers/HomeController.cs
             // similar to https://issues.redhat.com/browse/KEYCLOAK-3399?page=com.atlassian.jira.plugin.system.issuetabpanels%3Achangehistory-tabpanel
-            string accessToken = await this.HttpContext.GetTokenAsync("access_token");
-            string idToken = await this.HttpContext.GetTokenAsync("id_token");
+            var redirectUri = await SignoutGetRedirectUrl();
+
+            return Redirect(redirectUri.AbsolutePath);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private async Task<Uri> SignoutGetRedirectUrl()
+        {
+
+            var redirectUri = AuthOptions.PostLogoutRedirectUri.AbsolutePath;
+            try
+            {
+                string accessToken = await this.HttpContext.GetTokenAsync("access_token");
+                string idToken = await this.HttpContext.GetTokenAsync("id_token");
 
 
-            await HttpContext.SignOutAsync("Cookies");
-            await HttpContext.SignOutAsync("OpenIdConnect");
+                await HttpContext.SignOutAsync("Cookies");
+                await HttpContext.SignOutAsync("OpenIdConnect");
+                var urlEncodedRedirect = HttpUtility.UrlEncode(AuthOptions.PostLogoutRedirectUri.AbsoluteUri);
+                redirectUri = GetRedirectFormatString(idToken, urlEncodedRedirect);
+            }
+            catch (Exception ex)
+            {
+                // do not redirect to keycloak integration logout uri 
+                // because required token hints are not present
+            }
 
-            // var redirectUri = $"{AuthOptions.OIDCLogoutUri.AbsolutePath}?id_token_hint={idToken}&&post_logout_redirect_uri={}"
-            // Instruct the cookies middleware to delete the local cookie created
-            // when the user agent is redirected from the external identity provider
-            // after a successful authentication flow (e.g Google or Facebook).
-            //return SignOut(new AuthenticationProperties { RedirectUri = "/" },
-            //    CookieAuthenticationDefaults.AuthenticationScheme);
-           return Redirect("/");
+            return new Uri(redirectUri);
+        }
+
+        private string GetRedirectFormatString(string idToken, string urlEncodedRedirect)
+        {
+            // todo SORT OUT if necessary to call keycloak logout url or just invalidate on asp.net core side
+            // return $"{AuthOptions.OIDCLogoutUri.AbsoluteUri}?id_token_hint={idToken}&&redirect_uri={urlEncodedRedirect}";
+            return $"{AuthOptions.PostLogoutRedirectUri}";
+
         }
     }
 }

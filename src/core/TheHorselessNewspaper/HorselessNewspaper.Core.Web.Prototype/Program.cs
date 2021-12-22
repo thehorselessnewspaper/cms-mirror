@@ -62,8 +62,8 @@ builder.Services.AddAuthentication(options =>
 {
   
     opts.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    opts.SignedOutCallbackPath = "/signout-oidc";
-    opts.SignedOutRedirectUri = builder.Configuration[KeycloakAuthOptions.SignoutRedirectUrlConfigKey];
+    //opts.SignedOutCallbackPath = "/";
+    //opts.SignedOutRedirectUri = builder.Configuration[KeycloakAuthOptions.SignoutRedirectUrlConfigKey];
     opts.Authority = builder.Configuration[KeycloakAuthOptions.RealmConfigKey];
     opts.RequireHttpsMetadata = false;
     opts.ClientId = builder.Configuration[KeycloakAuthOptions.ClientIdConfigKey];

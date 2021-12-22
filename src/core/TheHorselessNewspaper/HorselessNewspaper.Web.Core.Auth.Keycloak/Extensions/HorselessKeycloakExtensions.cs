@@ -29,7 +29,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
             #region surface the keycloak logout url configuration 
             IKeycloakAuthOptions keycloakAuthOptions = new KeycloakAuthOptions()
             {
-                OIDCLogoutUri = new Uri(configuration[KeycloakAuthOptions.OIDCLogoutUriConfigKey])
+                OIDCLogoutUri = new Uri(configuration[KeycloakAuthOptions.OIDCLogoutUriConfigKey]),
+                PostLogoutRedirectUri = new Uri(configuration[KeycloakAuthOptions.PostLogoutRedirectUriConfigKey])
+
             };
 
 
