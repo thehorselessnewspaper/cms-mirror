@@ -30,18 +30,31 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
+
                 </div>
+
+                @{
+                    @* // support our default signin keycloak *@
+                    @* // expect to find _SignIn.cshtml in the associated *@
+                    @* // canonical keycloak horseless razorclass library *@
+
+                    @* // as per https://docs.microsoft.com/en-us/aspnet/core/mvc/views/partial?view=aspnetcore-6.0 *@
+                    await Html.RenderPartialAsync("_SignIn");
+                }
             </div>
         </nav>
     </header>
     <div class="container">
- 
+
         <main role="main" class="pb-3">
-            <div>
-                @Html.Partial("_GrapeJS")
-            </div>
             @RenderBody()
         </main>
+        @if (User.Claims != null && User.Claims.Count() > 0)
+        {
+            <div class="container">
+                @Html.Partial("_GrapeJS")
+            </div>
+        }
     </div>
 
     <footer class="border-top footer text-muted">
@@ -55,7 +68,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/grapesjs/0.12.17/grapes.min.js" asp-append-version="true"></script>
     <script src="https://unpkg.com/grapesjs@0.17.29/dist/grapes.min.js"></script>
     <script src="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/grapesjs-preset-webpage.min.js"></script>
-        <script src="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/grapejs-editor.js"></script>
+    <script src="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/grapejs-editor.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

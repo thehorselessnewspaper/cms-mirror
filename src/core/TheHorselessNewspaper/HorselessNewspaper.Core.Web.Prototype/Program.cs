@@ -10,8 +10,24 @@ using HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers;
 using System.Configuration;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.CodeAnalysis;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    
+    options.AddDefaultPolicy(
+        builder =>
+        {
+            builder.WithOrigins("https://localhost").AllowAnyOrigin();
+        });
+});
 
 builder.Services.AddControllersWithViews()
     .AddRazorRuntimeCompilation()
@@ -26,19 +42,82 @@ builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
 });
 
 builder.Services.AddHorselessNewspaper();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+
+})
+.AddCookie(cookie =>
+{
+    cookie.Cookie.Name = "keycloak.cookie";
+    cookie.Cookie.MaxAge = TimeSpan.FromMinutes(60);
+    cookie.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+    cookie.SlidingExpiration = true;
+})
+.AddOpenIdConnect(opts =>
+{
+  
+    opts.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    opts.SignedOutCallbackPath = "/signout-oidc";
+    opts.SignedOutRedirectUri = builder.Configuration["Keycloak:SignoutRedirectUrl"];
+    opts.Authority = builder.Configuration["Keycloak:Realm"];
+    opts.RequireHttpsMetadata = false;
+    opts.ClientId = builder.Configuration["Keycloak:ClientId"];
+    opts.ClientSecret = builder.Configuration["Keycloak:ClientSecret"];
+    opts.MetadataAddress = builder.Configuration["Keycloak:MetaData"];
+    opts.ResponseType = OpenIdConnectResponseType.Code;
+    opts.GetClaimsFromUserInfoEndpoint = true;
+    opts.SaveTokens = true;
+    opts.Scope.Add("openid email profile roles web-origins");
+    opts.NonceCookie.SameSite = SameSiteMode.Unspecified;
+    opts.CorrelationCookie.SameSite = SameSiteMode.Unspecified;
+})
+.AddJwtBearer(o =>
+    {
+        // my API name as defined in Config.cs - new ApiResource... or in DB ApiResources table
+        o.Audience = builder.Configuration["Keycloak:Audience"];
+        // URL of Auth server(API and Auth are separate projects/applications),
+        // so for local testing this is http://localhost:5000 if you followed ID4 tutorials
+        o.Authority = builder.Configuration["Keycloak:Authority"];
+
+        o.ClaimsIssuer = builder.Configuration["Keycloak:Issuer"];
+        o.RequireHttpsMetadata = !builder.Environment.IsDevelopment();
+        o.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateAudience = true,
+            // Scopes supported by API as defined in Config.cs - new ApiResource... or in DB ApiScopes table
+            ValidAudiences = new List<string>() {
+                        "api.read",
+                        "api.write"
+                    },
+            ValidateIssuer = true
+        };
+    })
+;
 
 // as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/docs/keycloak.md
 builder.Services.AddHorselessKeycloakAuth(keycloakOpts =>
 {
-    keycloakOpts.ClientId = builder.Configuration["Keycloak:ClientId"];
-    keycloakOpts.ClientSecret = builder.Configuration["Keycloak:ClientSecret"];
-    keycloakOpts.Domain = builder.Configuration["Keycloak:Domain"];
-    keycloakOpts.Realm = builder.Configuration["Keycloak:Realm"];
+
+    //// keycloakOpts.Realm = builder.Configuration["Keycloak:Realm"];
+    //keycloakOpts.Authority = new Uri(builder.Configuration["Keycloak:Authority"]);
+    //keycloakOpts.Realm = builder.Configuration["Keycloak:Realm"];
+    //keycloakOpts.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    //keycloakOpts.ClaimsIssuer = builder.Configuration["KeycloakOpts:Issuer"];
+
+    //keycloakOpts.SaveTokens = true;
+    //keycloakOpts.CallbackPath = "/";
+    //keycloakOpts.RequireHttpsMetadata = false;
+    //keycloakOpts.RequireHttpsMetadata = false;
 });
 
 // Add services to the container.
 //builder.Services.AddControllersWithViews()
 //    .AddRazorRuntimeCompilation();
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -55,6 +134,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseCors();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseHorselessNewspaper(options =>
