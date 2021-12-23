@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Api.IdentityProvidersApi
+# Horseless.Keycloak.Admin.Rest.Api.IdentityProvidersApi
 
 All URIs are relative to *http://localhost*
 
@@ -32,9 +32,9 @@ Import identity provider from uploaded JSON file
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -104,9 +104,9 @@ Delete the identity provider
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -177,9 +177,9 @@ Export public broker configuration for identity provider
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -252,9 +252,9 @@ Get the identity provider
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -326,9 +326,9 @@ Return object stating whether client Authorization permissions have been initial
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -400,9 +400,9 @@ Return object stating whether client Authorization permissions have been initial
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -476,9 +476,9 @@ Get mapper types for identity provider
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -549,9 +549,9 @@ Get mappers for identity provider
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -623,9 +623,9 @@ Delete a mapper for the identity provider
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -698,9 +698,9 @@ Get mapper by id for the identity provider
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -774,9 +774,9 @@ Update a mapper for the identity provider
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -851,9 +851,9 @@ Add a mapper to identity provider
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -926,9 +926,9 @@ Update the identity provider
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -1001,9 +1001,9 @@ Get identity providers
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -1073,9 +1073,9 @@ Create a new identity provider
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -1146,9 +1146,9 @@ Get identity providers
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {

@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.ManagementPermissionReference
+# Horseless.Keycloak.Admin.Rest.Model.ManagementPermissionReference
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.GroupRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.GroupRepresentation
 
 ## Properties
 

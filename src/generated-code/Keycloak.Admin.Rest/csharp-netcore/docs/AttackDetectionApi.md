@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Api.AttackDetectionApi
+# Horseless.Keycloak.Admin.Rest.Api.AttackDetectionApi
 
 All URIs are relative to *http://localhost*
 
@@ -19,9 +19,9 @@ Clear any user login failures for all users   This can release temporary disable
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -90,9 +90,9 @@ Clear any user login failures for the user   This can release temporary disabled
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -163,9 +163,9 @@ Get status of a username in brute force detection
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {

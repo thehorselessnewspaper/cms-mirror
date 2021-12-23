@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.ClientMappingsRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.ClientMappingsRepresentation
 
 ## Properties
 

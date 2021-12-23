@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Api.RealmsAdminApi
+# Horseless.Keycloak.Admin.Rest.Api.RealmsAdminApi
 
 All URIs are relative to *http://localhost*
 
@@ -63,9 +63,9 @@ Delete all admin events
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -134,9 +134,9 @@ Get admin events   Returns all admin events, or filters events based on URL quer
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -228,9 +228,9 @@ Clear cache of external public keys (Public keys of clients or Identity provider
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -299,9 +299,9 @@ Clear realm cache
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -370,9 +370,9 @@ Clear user cache
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -441,9 +441,9 @@ Base path for importing clients under this realm.
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -515,9 +515,9 @@ Name | Type | Description  | Notes
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -586,9 +586,9 @@ Name | Type | Description  | Notes
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -658,9 +658,9 @@ void (empty response body)
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -731,9 +731,9 @@ Name | Type | Description  | Notes
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -803,9 +803,9 @@ Get client session stats   Returns a JSON map.
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -875,9 +875,9 @@ Name | Type | Description  | Notes
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -946,9 +946,9 @@ Name | Type | Description  | Notes
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -1018,9 +1018,9 @@ void (empty response body)
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -1090,9 +1090,9 @@ Get realm default client scopes.
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -1162,9 +1162,9 @@ Get group hierarchy.
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -1234,9 +1234,9 @@ Name | Type | Description  | Notes
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -1306,9 +1306,9 @@ void (empty response body)
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -1378,9 +1378,9 @@ void (empty response body)
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -1450,9 +1450,9 @@ void (empty response body)
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -1522,9 +1522,9 @@ Get realm optional client scopes.
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -1594,9 +1594,9 @@ Delete the realm
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -1665,9 +1665,9 @@ Get the events provider configuration   Returns JSON object with events provider
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -1737,9 +1737,9 @@ Update the events provider   Change the events provider and/or its configuration
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -1810,9 +1810,9 @@ Delete all events
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -1881,9 +1881,9 @@ Get events   Returns all events, or filters them based on URL query parameters l
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -1969,9 +1969,9 @@ Get the top-level representation of the realm   It will not include nested infor
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -2041,9 +2041,9 @@ Name | Type | Description  | Notes
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -2114,9 +2114,9 @@ Get LDAP supported extensions.
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -2187,9 +2187,9 @@ void (empty response body)
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -2258,9 +2258,9 @@ Name | Type | Description  | Notes
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -2330,9 +2330,9 @@ void (empty response body)
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -2403,9 +2403,9 @@ Name | Type | Description  | Notes
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -2477,9 +2477,9 @@ void (empty response body)
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -2552,9 +2552,9 @@ Name | Type | Description  | Notes
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -2628,9 +2628,9 @@ void (empty response body)
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -2702,9 +2702,9 @@ Removes all user sessions.
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -2774,9 +2774,9 @@ Partial export of existing realm into a JSON file.
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -2850,9 +2850,9 @@ Partial import from a JSON file to an existing realm.
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -2923,9 +2923,9 @@ Push the realm’s revocation policy to any client that has an admin url associa
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -2994,9 +2994,9 @@ Update the top-level information of the realm   Any user, roles or client inform
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -3067,9 +3067,9 @@ Remove a specific user session.
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -3140,9 +3140,9 @@ Test LDAP connection
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -3213,9 +3213,9 @@ void (empty response body)
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -3285,9 +3285,9 @@ void (empty response body)
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -3356,9 +3356,9 @@ Name | Type | Description  | Notes
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {
@@ -3429,9 +3429,9 @@ Import a realm   Imports a realm from a full representation of that realm.
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {

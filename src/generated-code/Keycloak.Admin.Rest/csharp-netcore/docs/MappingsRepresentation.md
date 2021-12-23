@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.MappingsRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.MappingsRepresentation
 
 ## Properties
 

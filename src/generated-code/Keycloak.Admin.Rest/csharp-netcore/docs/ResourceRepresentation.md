@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.ResourceRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.ResourceRepresentation
 
 ## Properties
 

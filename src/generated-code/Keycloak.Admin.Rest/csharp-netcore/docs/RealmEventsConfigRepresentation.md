@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.RealmEventsConfigRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.RealmEventsConfigRepresentation
 
 ## Properties
 

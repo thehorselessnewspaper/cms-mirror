@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.RoleRepresentationComposites
+# Horseless.Keycloak.Admin.Rest.Model.RoleRepresentationComposites
 
 ## Properties
 

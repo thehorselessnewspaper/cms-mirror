@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Api.RootApi
+# Horseless.Keycloak.Admin.Rest.Api.RootApi
 
 All URIs are relative to *http://localhost*
 
@@ -17,9 +17,9 @@ Get themes, social providers, auth providers, and event listeners available on t
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {

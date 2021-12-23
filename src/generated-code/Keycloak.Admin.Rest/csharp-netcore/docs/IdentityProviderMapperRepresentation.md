@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.IdentityProviderMapperRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.IdentityProviderMapperRepresentation
 
 ## Properties
 

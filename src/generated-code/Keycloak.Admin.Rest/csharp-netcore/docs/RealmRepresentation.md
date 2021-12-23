@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.RealmRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.RealmRepresentation
 
 ## Properties
 

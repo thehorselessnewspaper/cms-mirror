@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.KeysMetadataRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.KeysMetadataRepresentation
 
 ## Properties
 

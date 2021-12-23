@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.SpiInfoRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.SpiInfoRepresentation
 
 ## Properties
 

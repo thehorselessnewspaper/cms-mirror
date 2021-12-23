@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.ClientScopeRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.ClientScopeRepresentation
 
 ## Properties
 

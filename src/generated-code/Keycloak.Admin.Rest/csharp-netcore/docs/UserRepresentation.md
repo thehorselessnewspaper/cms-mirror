@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.UserRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.UserRepresentation
 
 ## Properties
 

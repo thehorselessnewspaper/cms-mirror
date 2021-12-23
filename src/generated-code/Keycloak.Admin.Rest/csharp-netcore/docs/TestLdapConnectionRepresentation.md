@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.TestLdapConnectionRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.TestLdapConnectionRepresentation
 
 ## Properties
 

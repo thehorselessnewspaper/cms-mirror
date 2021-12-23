@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.ComponentExportRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.ComponentExportRepresentation
 
 ## Properties
 

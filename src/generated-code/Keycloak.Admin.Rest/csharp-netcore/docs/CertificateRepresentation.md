@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.CertificateRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.CertificateRepresentation
 
 ## Properties
 

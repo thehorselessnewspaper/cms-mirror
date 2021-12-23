@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.CredentialRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.CredentialRepresentation
 
 ## Properties
 

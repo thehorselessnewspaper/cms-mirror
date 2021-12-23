@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.AddressClaimSet
+# Horseless.Keycloak.Admin.Rest.Model.AddressClaimSet
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.JsonNode
+# Horseless.Keycloak.Admin.Rest.Model.JsonNode
 
 ## Properties
 

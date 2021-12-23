@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.ClientPolicyConditionRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.ClientPolicyConditionRepresentation
 
 ## Properties
 

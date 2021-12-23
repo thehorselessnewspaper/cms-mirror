@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.RequiredActionProviderRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.RequiredActionProviderRepresentation
 
 ## Properties
 

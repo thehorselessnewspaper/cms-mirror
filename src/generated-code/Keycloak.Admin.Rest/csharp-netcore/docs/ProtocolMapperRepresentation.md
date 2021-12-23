@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.ProtocolMapperRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.ProtocolMapperRepresentation
 
 ## Properties
 

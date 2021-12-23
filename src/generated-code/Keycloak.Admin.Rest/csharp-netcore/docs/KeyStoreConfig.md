@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.KeyStoreConfig
+# Horseless.Keycloak.Admin.Rest.Model.KeyStoreConfig
 
 ## Properties
 

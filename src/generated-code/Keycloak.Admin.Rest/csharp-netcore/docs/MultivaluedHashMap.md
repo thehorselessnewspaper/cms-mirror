@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.MultivaluedHashMap
+# Horseless.Keycloak.Admin.Rest.Model.MultivaluedHashMap
 
 ## Properties
 

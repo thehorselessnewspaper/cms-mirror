@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.SystemInfoRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.SystemInfoRepresentation
 
 ## Properties
 

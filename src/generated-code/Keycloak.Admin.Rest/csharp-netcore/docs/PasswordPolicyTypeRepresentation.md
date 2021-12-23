@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.PasswordPolicyTypeRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.PasswordPolicyTypeRepresentation
 
 ## Properties
 

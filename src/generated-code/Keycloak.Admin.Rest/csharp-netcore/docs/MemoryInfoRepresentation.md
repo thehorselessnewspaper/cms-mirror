@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.MemoryInfoRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.MemoryInfoRepresentation
 
 ## Properties
 

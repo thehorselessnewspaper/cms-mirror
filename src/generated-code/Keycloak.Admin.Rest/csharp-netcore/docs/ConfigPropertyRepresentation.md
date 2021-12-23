@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.ConfigPropertyRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.ConfigPropertyRepresentation
 
 ## Properties
 

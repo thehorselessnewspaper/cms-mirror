@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.ProfileInfoRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.ProfileInfoRepresentation
 
 ## Properties
 

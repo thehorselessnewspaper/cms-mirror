@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Api.ClientRegistrationPolicyApi
+# Horseless.Keycloak.Admin.Rest.Api.ClientRegistrationPolicyApi
 
 All URIs are relative to *http://localhost*
 
@@ -17,9 +17,9 @@ Base path for retrieve providers with the configProperties properly filled
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using Horseless.Keycloak.Admin.Rest.Api;
+using Horseless.Keycloak.Admin.Rest.Client;
+using Horseless.Keycloak.Admin.Rest.Model;
 
 namespace Example
 {

@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.AccessToken
+# Horseless.Keycloak.Admin.Rest.Model.AccessToken
 
 ## Properties
 

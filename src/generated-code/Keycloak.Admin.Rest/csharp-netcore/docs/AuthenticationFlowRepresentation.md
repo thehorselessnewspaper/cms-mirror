@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.AuthenticationFlowRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.AuthenticationFlowRepresentation
 
 ## Properties
 

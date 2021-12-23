@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.UserConsentRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.UserConsentRepresentation
 
 ## Properties
 

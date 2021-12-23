@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.FederatedIdentityRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.FederatedIdentityRepresentation
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.ClientRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.ClientRepresentation
 
 ## Properties
 

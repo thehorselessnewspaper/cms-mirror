@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.GlobalRequestResult
+# Horseless.Keycloak.Admin.Rest.Model.GlobalRequestResult
 
 ## Properties
 

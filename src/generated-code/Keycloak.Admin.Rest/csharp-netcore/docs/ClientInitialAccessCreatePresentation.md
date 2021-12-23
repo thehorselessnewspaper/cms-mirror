@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.ClientInitialAccessCreatePresentation
+# Horseless.Keycloak.Admin.Rest.Model.ClientInitialAccessCreatePresentation
 
 ## Properties
 

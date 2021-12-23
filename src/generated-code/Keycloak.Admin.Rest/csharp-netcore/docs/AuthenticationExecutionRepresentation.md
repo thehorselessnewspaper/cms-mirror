@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.AuthenticationExecutionRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.AuthenticationExecutionRepresentation
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.SynchronizationResult
+# Horseless.Keycloak.Admin.Rest.Model.SynchronizationResult
 
 ## Properties
 

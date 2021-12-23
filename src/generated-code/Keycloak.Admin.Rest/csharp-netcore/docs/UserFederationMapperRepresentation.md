@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.UserFederationMapperRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.UserFederationMapperRepresentation
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.ClientScopeEvaluateResourceProtocolMapperEvaluationRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.ClientScopeEvaluateResourceProtocolMapperEvaluationRepresentation
 
 ## Properties
 

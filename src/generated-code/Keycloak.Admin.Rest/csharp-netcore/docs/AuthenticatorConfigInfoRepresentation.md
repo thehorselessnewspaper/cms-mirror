@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.AuthenticatorConfigInfoRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.AuthenticatorConfigInfoRepresentation
 
 ## Properties
 

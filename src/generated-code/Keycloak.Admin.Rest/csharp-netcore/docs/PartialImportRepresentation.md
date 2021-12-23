@@ -1,4 +1,4 @@
-# Org.OpenAPITools.Model.PartialImportRepresentation
+# Horseless.Keycloak.Admin.Rest.Model.PartialImportRepresentation
 
 ## Properties
 
