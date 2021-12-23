@@ -1,0 +1,1 @@
+docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate -i https://raw.githubusercontent.com/ccouzens/keycloak-openapi/main/keycloak/16.0.yml -g csharp-netcore -o /local/out/csharp-netcore
