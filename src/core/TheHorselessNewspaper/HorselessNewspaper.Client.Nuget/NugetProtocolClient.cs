@@ -138,5 +138,53 @@ namespace HorselessNewspaper.Client.Nuget
 
             return await Task.FromResult<NuGetVersion>(nugetVersion);
         }
+
+        /// <summary>
+        /// wholly based on 
+        ///     https://github.com/autostep/AutoStep.Extensions
+        ///     https://gist.githubusercontent.com/alistairjevans/4de1dccfb7288e0460b7b04f9a700a04/raw/68b3750f8bb438ff458586a42f43f8c153f83bd0/nugetpackageload.cs
+        /// </summary>
+        public async Task LoadExtensions(IEnumerable<PackageSource> packageSources, IEnumerable<NuGetVersion> extensions, string nugetFrameworkParseFolder, string packageDirectory)
+        {
+
+
+            INugetLoader nugetLoader = new NugetLoader();
+            // Define a source provider, with nuget, plus my own feed.
+            // as per list of new PackageSource("https://api.nuget.org/v3/index.json"),
+            var sourceProvider = new PackageSourceProvider(NullSettings.Instance, packageSources);
+
+            // Establish the source repository provider; the available providers come from our custom settings.
+            var sourceRepositoryProvider = new SourceRepositoryProvider(sourceProvider, Repository.Provider.GetCoreV3());
+
+            // Get the list of repositories.
+            var repositories = sourceRepositoryProvider.GetRepositories();
+
+
+
+            // My extension configuration:
+            //var extensions = new[]
+            //{
+            //    new ExtensionConfiguration
+            //    {
+            //        Package = "AutoStep.Web",
+            //        PreRelease = true // Allow pre-release versions.
+            //    }
+            //};
+
+            // Replace this with a proper cancellation token.
+            var cancellationToken = CancellationToken.None;
+
+            var extensionConfigurations = new List<ExtensionConfiguration>();
+            foreach(var extension in extensions)
+            {
+                extensionConfigurations.Add(new ExtensionConfiguration()
+                {
+                    // Package = extension.Version.
+                });
+            }
+
+            nugetLoader.LoadExtensions(packageSources, extensionConfigurations, nugetFrameworkParseFolder, packageDirectory);    
+
+        }
     }
 }

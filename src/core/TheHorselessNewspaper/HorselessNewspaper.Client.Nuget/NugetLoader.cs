@@ -17,6 +17,11 @@ using System.Threading.Tasks;
 
 namespace HorselessNewspaper.Client.Nuget
 {
+    public interface INugetLoader
+    {
+        public Task LoadExtensions(IEnumerable<PackageSource> packageSources, IEnumerable<ExtensionConfiguration> extensions, string nugetFrameworkParseFolder, string packageDirectory);
+    }
+
     public class ExtensionConfiguration
     {
         public string Package { get; set; }
@@ -29,7 +34,7 @@ namespace HorselessNewspaper.Client.Nuget
     ///     https://github.com/autostep/AutoStep.Extensions
     ///     https://gist.githubusercontent.com/alistairjevans/4de1dccfb7288e0460b7b04f9a700a04/raw/68b3750f8bb438ff458586a42f43f8c153f83bd0/nugetpackageload.cs
     /// </summary>
-    public class NugetLoader
+    public class NugetLoader : INugetLoader
     {
         public NugetLoader()
         {
@@ -69,7 +74,7 @@ namespace HorselessNewspaper.Client.Nuget
             await LoadExtensions(extensions, nugetFrameworkParseFolder, packageDirectory, sourceRepositoryProvider, repositories, cancellationToken);
         }
 
-        private async Task LoadExtensions(IEnumerable<ExtensionConfiguration> extensions, string nugetFrameworkParseFolder, string packageDirectory, SourceRepositoryProvider sourceRepositoryProvider, IEnumerable<SourceRepository> repositories, CancellationToken cancellationToken)
+        public async Task LoadExtensions(IEnumerable<ExtensionConfiguration> extensions, string nugetFrameworkParseFolder, string packageDirectory, SourceRepositoryProvider sourceRepositoryProvider, IEnumerable<SourceRepository> repositories, CancellationToken cancellationToken)
         {
             // Disposable source cache.
             using var sourceCacheContext = new SourceCacheContext();

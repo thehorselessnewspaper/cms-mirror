@@ -1,4 +1,5 @@
-﻿using NuGet.Configuration;
+﻿using HorselessNewspaper.Core.Interfaces.Model;
+using NuGet.Configuration;
 using NuGet.Versioning;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace HorselessNewspaper.Core.Interfaces.Nuget
 
         public Task<NuGetVersion> PersistNugetTolocalFilesystem(Uri repositoryUri, string nugetPackageId, NuGetVersion nugetVersion, string folderPath);
         public Task<NuGetVersion> PersistNugetTolocalFilesystem(Uri repositoryUri, string nugetPackageId, NuGetVersion nugetVersion, string folderPath, INugetProtocolCredentials credentials);
-        public Task LoadExtensions(IEnumerable<PackageSource> packageSources, IEnumerable<NuGetVersion> extensions, string nugetFrameworkParseFolder, string packageDirectory);
+        public Task LoadExtensions(IEnumerable<PackageSource> packageSources, IEnumerable<IExtensionConfiguration> extensions, string nugetFrameworkParseFolder, string packageDirectory);
 
 
     }
