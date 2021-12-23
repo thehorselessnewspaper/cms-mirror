@@ -12,16 +12,68 @@ using Microsoft.Extensions.Configuration;
 using HorselessNewspaper.SmokeTests.Model;
 using HorselessNewspaper.Client.Nuget.Model;
 using System.Net;
+using NuGet.Configuration;
+using HorselessNewspaper.Core.Interfaces.Model;
 
 namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
 {
     internal class SmokeTest
     {
+        private const string NewtonsoftJsonPackageId = "NewtonSoft.Json";
+        private const string NugetOrgEndpoint = "https://api.nuget.org/v3/index.json";
 
         [SetUp]
         public void Setup()
         {
 
+        }
+
+        [Test]
+        public async Task CanDownloadPackageAndDependenciesFromPublicRepo()
+        {
+            IConfiguration configuration;
+            configuration = new ConfigurationBuilder()
+                .AddUserSecrets<NugetProtocolClientTestConfig>()
+                .Build();
+
+
+            var testPackage = "Microsoft.Extensions.Configuration"; // NewtonsoftJsonPackageId;
+            var endpoint = new Uri(NugetOrgEndpoint);
+
+
+            INugetProtocol client = new HorselessNewspaper.Client.Nuget.NugetProtocolClient();
+            var versions = await client.ListPackageVersions(endpoint, testPackage);
+
+            Assert.IsTrue(versions.Count > 0);
+
+            foreach (NuGetVersion version in versions)
+            {
+                Console.WriteLine($"Found version {version}");
+            }
+
+            Assert.IsTrue(versions != null && versions.Count > 0, "inconcievable - the test package was not found");
+
+            // get dependencies
+
+            PackageSource packageSource = new PackageSource(endpoint.AbsoluteUri,"Nuget.Org",true);
+            var packageSources = new List<PackageSource>() { packageSource };
+
+            var extensionConfiguration = new ExtensionConfiguration() { Package = testPackage, Version = versions.Last().Version.ToString(), PreRelease = false };
+            var extensionConfigurations = new List<IExtensionConfiguration>() { extensionConfiguration };
+
+            TargetedFramework parseFolder = new TargetedFramework(TargetedFramework.NET60);
+            var packageCacheLocationr = configuration.GetSection("PackageCacheLocation").Value;
+
+            try
+            {
+                await client.LoadExtensions(packageSources, extensionConfigurations.AsEnumerable<IExtensionConfiguration>(), parseFolder, packageCacheLocationr);
+            }
+            catch(Exception e)
+            {
+                int i = 0;
+            }
+
+            Assert.Pass();
         }
 
         [Test]

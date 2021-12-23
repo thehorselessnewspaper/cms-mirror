@@ -1,4 +1,5 @@
 ﻿using HorselessNewspaper.Client.Nuget.Model;
+using HorselessNewspaper.Core.Interfaces.Model;
 using Microsoft.Extensions.DependencyModel;
 using NuGet.Common;
 using NuGet.Configuration;
@@ -22,7 +23,7 @@ namespace HorselessNewspaper.Client.Nuget
         public Task LoadExtensions(IEnumerable<PackageSource> packageSources, IEnumerable<ExtensionConfiguration> extensions, string nugetFrameworkParseFolder, string packageDirectory);
     }
 
-    public class ExtensionConfiguration
+    public class ExtensionConfiguration : IExtensionConfiguration
     {
         public string Package { get; set; }
         public string Version { get; set; }
@@ -166,12 +167,22 @@ namespace HorselessNewspaper.Client.Nuget
             {
                 // Get the dependency info for the package.
                 var dependencyInfoResource = await sourceRepository.GetResourceAsync<DependencyInfoResource>();
-                var dependencyInfo = await dependencyInfoResource.ResolvePackage(
-                    package,
-                    framework,
-                    cacheContext,
-                    nugetLogger,
-                    cancelToken);
+                SourcePackageDependencyInfo dependencyInfo;
+
+                try
+                {
+                     dependencyInfo = await dependencyInfoResource.ResolvePackage(
+                        package,
+                        NuGetFramework.AnyFramework, //framework,
+                        cacheContext,
+                        nugetLogger,
+                        cancelToken);
+
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
 
                 // No info for the package in this repository.
                 if (dependencyInfo == null)
@@ -255,22 +266,37 @@ namespace HorselessNewspaper.Client.Nuget
             foreach (var package in packagesToInstall)
             {
                 var downloadResource = await package.Source.GetResourceAsync<DownloadResource>(cancellationToken);
+                DownloadResourceResult downloadResult;
 
-                // Download the package (might come from the shared package cache).
-                var downloadResult = await downloadResource.GetDownloadResourceResultAsync(
-                    package,
-                    new PackageDownloadContext(sourceCacheContext),
-                    SettingsUtility.GetGlobalPackagesFolder(nugetSettings),
-                    nugetLogger,
-                    cancellationToken);
+                try
+                {
+                    // Download the package (might come from the shared package cache).
+                        downloadResult = await downloadResource.GetDownloadResourceResultAsync(
+                        package,
+                        new PackageDownloadContext(sourceCacheContext),
+                        SettingsUtility.GetGlobalPackagesFolder(nugetSettings),
+                        nugetLogger,
+                        cancellationToken);
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
 
-                // Extract the package into the target directory.
-                await PackageExtractor.ExtractPackageAsync(
-                    downloadResult.PackageSource,
-                    downloadResult.PackageStream,
-                    packagePathResolver,
-                    packageExtractionContext,
-                    cancellationToken);
+                try
+                {
+                    // Extract the package into the target directory.
+                    await PackageExtractor.ExtractPackageAsync(
+                        downloadResult.PackageSource,
+                        downloadResult.PackageStream,
+                        packagePathResolver,
+                        packageExtractionContext,
+                        cancellationToken);
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
             }
         }
 
