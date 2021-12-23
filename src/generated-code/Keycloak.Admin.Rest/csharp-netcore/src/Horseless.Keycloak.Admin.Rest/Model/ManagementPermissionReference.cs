@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// ManagementPermissionReference
     /// </summary>
     [DataContract(Name = "ManagementPermissionReference")]
-    internal partial class ManagementPermissionReference : IEquatable<ManagementPermissionReference>, IValidatableObject
+    public partial class ManagementPermissionReference : IEquatable<ManagementPermissionReference>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ManagementPermissionReference" /> class.

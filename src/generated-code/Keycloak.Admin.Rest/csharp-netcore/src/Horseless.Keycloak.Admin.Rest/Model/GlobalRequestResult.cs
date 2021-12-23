@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// GlobalRequestResult
     /// </summary>
     [DataContract(Name = "GlobalRequestResult")]
-    internal partial class GlobalRequestResult : IEquatable<GlobalRequestResult>, IValidatableObject
+    public partial class GlobalRequestResult : IEquatable<GlobalRequestResult>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GlobalRequestResult" /> class.

@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// GroupRepresentation
     /// </summary>
     [DataContract(Name = "GroupRepresentation")]
-    internal partial class GroupRepresentation : IEquatable<GroupRepresentation>, IValidatableObject
+    public partial class GroupRepresentation : IEquatable<GroupRepresentation>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GroupRepresentation" /> class.

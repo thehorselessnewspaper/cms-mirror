@@ -15,7 +15,7 @@ namespace Horseless.Keycloak.Admin.Rest.Client
     /// <summary>
     /// Represents configuration aspects required to interact with the API endpoints.
     /// </summary>
-    internal interface IApiAccessor
+    public interface IApiAccessor
     {
         /// <summary>
         /// Gets or sets the configuration object

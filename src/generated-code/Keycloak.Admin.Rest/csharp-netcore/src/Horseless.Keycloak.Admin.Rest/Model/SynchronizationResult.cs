@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// SynchronizationResult
     /// </summary>
     [DataContract(Name = "SynchronizationResult")]
-    internal partial class SynchronizationResult : IEquatable<SynchronizationResult>, IValidatableObject
+    public partial class SynchronizationResult : IEquatable<SynchronizationResult>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SynchronizationResult" /> class.

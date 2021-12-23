@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// SpiInfoRepresentation
     /// </summary>
     [DataContract(Name = "SpiInfoRepresentation")]
-    internal partial class SpiInfoRepresentation : IEquatable<SpiInfoRepresentation>, IValidatableObject
+    public partial class SpiInfoRepresentation : IEquatable<SpiInfoRepresentation>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SpiInfoRepresentation" /> class.

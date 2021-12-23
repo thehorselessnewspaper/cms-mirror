@@ -29,13 +29,13 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// KeysMetadataRepresentationKeyMetadataRepresentation
     /// </summary>
     [DataContract(Name = "KeysMetadataRepresentation-KeyMetadataRepresentation")]
-    internal partial class KeysMetadataRepresentationKeyMetadataRepresentation : IEquatable<KeysMetadataRepresentationKeyMetadataRepresentation>, IValidatableObject
+    public partial class KeysMetadataRepresentationKeyMetadataRepresentation : IEquatable<KeysMetadataRepresentationKeyMetadataRepresentation>, IValidatableObject
     {
         /// <summary>
         /// Defines Use
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        internal enum UseEnum
+        public enum UseEnum
         {
             /// <summary>
             /// Enum SIG for value: SIG

@@ -161,7 +161,7 @@ namespace Horseless.Keycloak.Admin.Rest.Client
     /// Provides a default implementation of an Api client (both synchronous and asynchronous implementations),
     /// encapsulating general REST accessor use cases.
     /// </summary>
-    internal partial class ApiClient : ISynchronousClient, IAsynchronousClient
+    public partial class ApiClient : ISynchronousClient, IAsynchronousClient
     {
         private readonly string _baseUrl;
 

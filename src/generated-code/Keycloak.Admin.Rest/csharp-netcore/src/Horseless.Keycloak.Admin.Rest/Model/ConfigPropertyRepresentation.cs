@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// ConfigPropertyRepresentation
     /// </summary>
     [DataContract(Name = "ConfigPropertyRepresentation")]
-    internal partial class ConfigPropertyRepresentation : IEquatable<ConfigPropertyRepresentation>, IValidatableObject
+    public partial class ConfigPropertyRepresentation : IEquatable<ConfigPropertyRepresentation>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfigPropertyRepresentation" /> class.

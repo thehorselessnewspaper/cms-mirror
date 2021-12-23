@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// AccessTokenAuthorization
     /// </summary>
     [DataContract(Name = "AccessToken-Authorization")]
-    internal partial class AccessTokenAuthorization : IEquatable<AccessTokenAuthorization>, IValidatableObject
+    public partial class AccessTokenAuthorization : IEquatable<AccessTokenAuthorization>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AccessTokenAuthorization" /> class.

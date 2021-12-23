@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// AccessTokenCertConf
     /// </summary>
     [DataContract(Name = "AccessToken-CertConf")]
-    internal partial class AccessTokenCertConf : IEquatable<AccessTokenCertConf>, IValidatableObject
+    public partial class AccessTokenCertConf : IEquatable<AccessTokenCertConf>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AccessTokenCertConf" /> class.

@@ -29,13 +29,13 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// JsonNode
     /// </summary>
     [DataContract(Name = "JsonNode")]
-    internal partial class JsonNode : IEquatable<JsonNode>, IValidatableObject
+    public partial class JsonNode : IEquatable<JsonNode>, IValidatableObject
     {
         /// <summary>
         /// Defines NodeType
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        internal enum NodeTypeEnum
+        public enum NodeTypeEnum
         {
             /// <summary>
             /// Enum ARRAY for value: ARRAY

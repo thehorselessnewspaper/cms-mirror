@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// IdentityProviderRepresentation
     /// </summary>
     [DataContract(Name = "IdentityProviderRepresentation")]
-    internal partial class IdentityProviderRepresentation : IEquatable<IdentityProviderRepresentation>, IValidatableObject
+    public partial class IdentityProviderRepresentation : IEquatable<IdentityProviderRepresentation>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IdentityProviderRepresentation" /> class.

@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// PasswordPolicyTypeRepresentation
     /// </summary>
     [DataContract(Name = "PasswordPolicyTypeRepresentation")]
-    internal partial class PasswordPolicyTypeRepresentation : IEquatable<PasswordPolicyTypeRepresentation>, IValidatableObject
+    public partial class PasswordPolicyTypeRepresentation : IEquatable<PasswordPolicyTypeRepresentation>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PasswordPolicyTypeRepresentation" /> class.

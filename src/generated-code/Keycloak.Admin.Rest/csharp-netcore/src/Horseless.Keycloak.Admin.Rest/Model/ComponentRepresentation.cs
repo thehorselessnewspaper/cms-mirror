@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// ComponentRepresentation
     /// </summary>
     [DataContract(Name = "ComponentRepresentation")]
-    internal partial class ComponentRepresentation : IEquatable<ComponentRepresentation>, IValidatableObject
+    public partial class ComponentRepresentation : IEquatable<ComponentRepresentation>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ComponentRepresentation" /> class.

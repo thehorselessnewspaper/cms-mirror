@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// TestLdapConnectionRepresentation
     /// </summary>
     [DataContract(Name = "TestLdapConnectionRepresentation")]
-    internal partial class TestLdapConnectionRepresentation : IEquatable<TestLdapConnectionRepresentation>, IValidatableObject
+    public partial class TestLdapConnectionRepresentation : IEquatable<TestLdapConnectionRepresentation>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TestLdapConnectionRepresentation" /> class.

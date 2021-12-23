@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// ClientScopeEvaluateResourceProtocolMapperEvaluationRepresentation
     /// </summary>
     [DataContract(Name = "ClientScopeEvaluateResource-ProtocolMapperEvaluationRepresentation")]
-    internal partial class ClientScopeEvaluateResourceProtocolMapperEvaluationRepresentation : IEquatable<ClientScopeEvaluateResourceProtocolMapperEvaluationRepresentation>, IValidatableObject
+    public partial class ClientScopeEvaluateResourceProtocolMapperEvaluationRepresentation : IEquatable<ClientScopeEvaluateResourceProtocolMapperEvaluationRepresentation>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ClientScopeEvaluateResourceProtocolMapperEvaluationRepresentation" /> class.

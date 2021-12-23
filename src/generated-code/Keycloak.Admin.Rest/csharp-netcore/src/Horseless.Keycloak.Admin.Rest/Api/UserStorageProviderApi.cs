@@ -23,7 +23,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal interface IUserStorageProviderApiSync : IApiAccessor
+    public interface IUserStorageProviderApiSync : IApiAccessor
     {
         #region Synchronous Operations
         /// <summary>
@@ -156,7 +156,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal interface IUserStorageProviderApiAsync : IApiAccessor
+    public interface IUserStorageProviderApiAsync : IApiAccessor
     {
         #region Asynchronous Operations
         /// <summary>
@@ -319,7 +319,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal interface IUserStorageProviderApi : IUserStorageProviderApiSync, IUserStorageProviderApiAsync
+    public interface IUserStorageProviderApi : IUserStorageProviderApiSync, IUserStorageProviderApiAsync
     {
 
     }
@@ -327,7 +327,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal partial class UserStorageProviderApi : IUserStorageProviderApi
+    public partial class UserStorageProviderApi : IUserStorageProviderApi
     {
         private Horseless.Keycloak.Admin.Rest.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 

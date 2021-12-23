@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// UserConsentRepresentation
     /// </summary>
     [DataContract(Name = "UserConsentRepresentation")]
-    internal partial class UserConsentRepresentation : IEquatable<UserConsentRepresentation>, IValidatableObject
+    public partial class UserConsentRepresentation : IEquatable<UserConsentRepresentation>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UserConsentRepresentation" /> class.

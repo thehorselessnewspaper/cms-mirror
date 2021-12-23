@@ -29,13 +29,13 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// IDToken
     /// </summary>
     [DataContract(Name = "IDToken")]
-    internal partial class IDToken : IEquatable<IDToken>, IValidatableObject
+    public partial class IDToken : IEquatable<IDToken>, IValidatableObject
     {
         /// <summary>
         /// Defines Category
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        internal enum CategoryEnum
+        public enum CategoryEnum
         {
             /// <summary>
             /// Enum INTERNAL for value: INTERNAL

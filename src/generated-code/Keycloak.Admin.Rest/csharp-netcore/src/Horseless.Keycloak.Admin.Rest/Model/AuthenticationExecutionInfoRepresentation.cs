@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// AuthenticationExecutionInfoRepresentation
     /// </summary>
     [DataContract(Name = "AuthenticationExecutionInfoRepresentation")]
-    internal partial class AuthenticationExecutionInfoRepresentation : IEquatable<AuthenticationExecutionInfoRepresentation>, IValidatableObject
+    public partial class AuthenticationExecutionInfoRepresentation : IEquatable<AuthenticationExecutionInfoRepresentation>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthenticationExecutionInfoRepresentation" /> class.

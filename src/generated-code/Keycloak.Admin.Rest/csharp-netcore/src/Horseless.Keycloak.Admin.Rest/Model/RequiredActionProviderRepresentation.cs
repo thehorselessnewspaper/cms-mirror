@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// RequiredActionProviderRepresentation
     /// </summary>
     [DataContract(Name = "RequiredActionProviderRepresentation")]
-    internal partial class RequiredActionProviderRepresentation : IEquatable<RequiredActionProviderRepresentation>, IValidatableObject
+    public partial class RequiredActionProviderRepresentation : IEquatable<RequiredActionProviderRepresentation>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RequiredActionProviderRepresentation" /> class.

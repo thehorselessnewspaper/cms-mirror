@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// ClientInitialAccessCreatePresentation
     /// </summary>
     [DataContract(Name = "ClientInitialAccessCreatePresentation")]
-    internal partial class ClientInitialAccessCreatePresentation : IEquatable<ClientInitialAccessCreatePresentation>, IValidatableObject
+    public partial class ClientInitialAccessCreatePresentation : IEquatable<ClientInitialAccessCreatePresentation>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ClientInitialAccessCreatePresentation" /> class.

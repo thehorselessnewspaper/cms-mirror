@@ -15,7 +15,7 @@ namespace Horseless.Keycloak.Admin.Rest.Client
     /// <summary>
     /// API Exception
     /// </summary>
-    internal class ApiException : Exception
+    public class ApiException : Exception
     {
         /// <summary>
         /// Gets or sets the error code (HTTP status code)

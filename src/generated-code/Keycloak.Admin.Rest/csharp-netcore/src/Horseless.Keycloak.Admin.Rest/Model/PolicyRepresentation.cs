@@ -29,13 +29,13 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// PolicyRepresentation
     /// </summary>
     [DataContract(Name = "PolicyRepresentation")]
-    internal partial class PolicyRepresentation : IEquatable<PolicyRepresentation>, IValidatableObject
+    public partial class PolicyRepresentation : IEquatable<PolicyRepresentation>, IValidatableObject
     {
         /// <summary>
         /// Defines DecisionStrategy
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        internal enum DecisionStrategyEnum
+        public enum DecisionStrategyEnum
         {
             /// <summary>
             /// Enum AFFIRMATIVE for value: AFFIRMATIVE
@@ -67,7 +67,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
         /// Defines Logic
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        internal enum LogicEnum
+        public enum LogicEnum
         {
             /// <summary>
             /// Enum POSITIVE for value: POSITIVE

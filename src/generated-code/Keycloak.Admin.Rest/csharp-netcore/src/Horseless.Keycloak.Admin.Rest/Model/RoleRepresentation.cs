@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// RoleRepresentation
     /// </summary>
     [DataContract(Name = "RoleRepresentation")]
-    internal partial class RoleRepresentation : IEquatable<RoleRepresentation>, IValidatableObject
+    public partial class RoleRepresentation : IEquatable<RoleRepresentation>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RoleRepresentation" /> class.

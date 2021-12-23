@@ -23,7 +23,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal interface IScopeMappingsApiSync : IApiAccessor
+    public interface IScopeMappingsApiSync : IApiAccessor
     {
         #region Synchronous Operations
         /// <summary>
@@ -476,7 +476,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal interface IScopeMappingsApiAsync : IApiAccessor
+    public interface IScopeMappingsApiAsync : IApiAccessor
     {
         #region Asynchronous Operations
         /// <summary>
@@ -1029,7 +1029,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal interface IScopeMappingsApi : IScopeMappingsApiSync, IScopeMappingsApiAsync
+    public interface IScopeMappingsApi : IScopeMappingsApiSync, IScopeMappingsApiAsync
     {
 
     }
@@ -1037,7 +1037,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal partial class ScopeMappingsApi : IScopeMappingsApi
+    public partial class ScopeMappingsApi : IScopeMappingsApi
     {
         private Horseless.Keycloak.Admin.Rest.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 

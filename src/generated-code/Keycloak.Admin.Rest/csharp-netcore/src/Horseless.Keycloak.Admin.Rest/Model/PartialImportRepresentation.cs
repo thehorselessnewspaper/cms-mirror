@@ -29,13 +29,13 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// PartialImportRepresentation
     /// </summary>
     [DataContract(Name = "PartialImportRepresentation")]
-    internal partial class PartialImportRepresentation : IEquatable<PartialImportRepresentation>, IValidatableObject
+    public partial class PartialImportRepresentation : IEquatable<PartialImportRepresentation>, IValidatableObject
     {
         /// <summary>
         /// Defines Policy
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        internal enum PolicyEnum
+        public enum PolicyEnum
         {
             /// <summary>
             /// Enum SKIP for value: SKIP

@@ -23,7 +23,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal interface IAuthenticationManagementApiSync : IApiAccessor
+    public interface IAuthenticationManagementApiSync : IApiAccessor
     {
         #region Synchronous Operations
         /// <summary>
@@ -692,7 +692,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal interface IAuthenticationManagementApiAsync : IApiAccessor
+    public interface IAuthenticationManagementApiAsync : IApiAccessor
     {
         #region Asynchronous Operations
         /// <summary>
@@ -1526,7 +1526,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal interface IAuthenticationManagementApi : IAuthenticationManagementApiSync, IAuthenticationManagementApiAsync
+    public interface IAuthenticationManagementApi : IAuthenticationManagementApiSync, IAuthenticationManagementApiAsync
     {
 
     }
@@ -1534,7 +1534,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal partial class AuthenticationManagementApi : IAuthenticationManagementApi
+    public partial class AuthenticationManagementApi : IAuthenticationManagementApi
     {
         private Horseless.Keycloak.Admin.Rest.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 

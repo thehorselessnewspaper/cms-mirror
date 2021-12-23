@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// KeyStoreConfig
     /// </summary>
     [DataContract(Name = "KeyStoreConfig")]
-    internal partial class KeyStoreConfig : IEquatable<KeyStoreConfig>, IValidatableObject
+    public partial class KeyStoreConfig : IEquatable<KeyStoreConfig>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="KeyStoreConfig" /> class.

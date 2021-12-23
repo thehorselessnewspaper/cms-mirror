@@ -18,5 +18,5 @@ namespace Horseless.Keycloak.Admin.Rest.Client
     /// <param name="methodName">Method name</param>
     /// <param name="response">Response</param>
     /// <returns>Exceptions</returns>
-    internal delegate Exception ExceptionFactory(string methodName, IApiResponse response);
+    public delegate Exception ExceptionFactory(string methodName, IApiResponse response);
 }

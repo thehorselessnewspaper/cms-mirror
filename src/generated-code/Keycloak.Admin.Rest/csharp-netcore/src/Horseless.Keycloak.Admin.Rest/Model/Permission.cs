@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// Permission
     /// </summary>
     [DataContract(Name = "Permission")]
-    internal partial class Permission : IEquatable<Permission>, IValidatableObject
+    public partial class Permission : IEquatable<Permission>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Permission" /> class.

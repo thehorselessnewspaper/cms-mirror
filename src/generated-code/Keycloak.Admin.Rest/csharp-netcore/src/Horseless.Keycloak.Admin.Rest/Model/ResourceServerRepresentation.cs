@@ -29,13 +29,13 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// ResourceServerRepresentation
     /// </summary>
     [DataContract(Name = "ResourceServerRepresentation")]
-    internal partial class ResourceServerRepresentation : IEquatable<ResourceServerRepresentation>, IValidatableObject
+    public partial class ResourceServerRepresentation : IEquatable<ResourceServerRepresentation>, IValidatableObject
     {
         /// <summary>
         /// Defines DecisionStrategy
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        internal enum DecisionStrategyEnum
+        public enum DecisionStrategyEnum
         {
             /// <summary>
             /// Enum AFFIRMATIVE for value: AFFIRMATIVE
@@ -67,7 +67,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
         /// Defines PolicyEnforcementMode
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        internal enum PolicyEnforcementModeEnum
+        public enum PolicyEnforcementModeEnum
         {
             /// <summary>
             /// Enum ENFORCING for value: ENFORCING

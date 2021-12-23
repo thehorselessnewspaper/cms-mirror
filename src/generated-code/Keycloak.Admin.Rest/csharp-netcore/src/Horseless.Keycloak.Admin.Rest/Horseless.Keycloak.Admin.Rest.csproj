@@ -14,7 +14,7 @@
     <RootNamespace>Horseless.Keycloak.Admin.Rest</RootNamespace>
     <Version>1.0.0</Version>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Horseless.Keycloak.Admin.Rest.xml</DocumentationFile>
-
+    <RepositoryUrl>https://github.com/GIT_USER_ID/GIT_REPO_ID.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>Minor update</PackageReleaseNotes>
   </PropertyGroup>

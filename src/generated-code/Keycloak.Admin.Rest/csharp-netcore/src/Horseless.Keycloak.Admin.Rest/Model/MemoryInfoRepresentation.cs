@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// MemoryInfoRepresentation
     /// </summary>
     [DataContract(Name = "MemoryInfoRepresentation")]
-    internal partial class MemoryInfoRepresentation : IEquatable<MemoryInfoRepresentation>, IValidatableObject
+    public partial class MemoryInfoRepresentation : IEquatable<MemoryInfoRepresentation>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MemoryInfoRepresentation" /> class.

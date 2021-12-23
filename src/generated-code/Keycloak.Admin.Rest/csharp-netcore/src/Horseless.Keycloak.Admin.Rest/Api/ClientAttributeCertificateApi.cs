@@ -23,7 +23,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal interface IClientAttributeCertificateApiSync : IApiAccessor
+    public interface IClientAttributeCertificateApiSync : IApiAccessor
     {
         #region Synchronous Operations
         /// <summary>
@@ -168,7 +168,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal interface IClientAttributeCertificateApiAsync : IApiAccessor
+    public interface IClientAttributeCertificateApiAsync : IApiAccessor
     {
         #region Asynchronous Operations
         /// <summary>
@@ -343,7 +343,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal interface IClientAttributeCertificateApi : IClientAttributeCertificateApiSync, IClientAttributeCertificateApiAsync
+    public interface IClientAttributeCertificateApi : IClientAttributeCertificateApiSync, IClientAttributeCertificateApiAsync
     {
 
     }
@@ -351,7 +351,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal partial class ClientAttributeCertificateApi : IClientAttributeCertificateApi
+    public partial class ClientAttributeCertificateApi : IClientAttributeCertificateApi
     {
         private Horseless.Keycloak.Admin.Rest.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 

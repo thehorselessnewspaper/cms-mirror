@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// MultivaluedHashMap
     /// </summary>
     [DataContract(Name = "MultivaluedHashMap")]
-    internal partial class MultivaluedHashMap : IEquatable<MultivaluedHashMap>, IValidatableObject
+    public partial class MultivaluedHashMap : IEquatable<MultivaluedHashMap>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MultivaluedHashMap" /> class.

@@ -23,7 +23,7 @@ namespace Horseless.Keycloak.Admin.Rest.Client
     /// <summary>
     /// Represents a set of configuration settings
     /// </summary>
-    internal class Configuration : IReadableConfiguration
+    public class Configuration : IReadableConfiguration
     {
         #region Constants
 

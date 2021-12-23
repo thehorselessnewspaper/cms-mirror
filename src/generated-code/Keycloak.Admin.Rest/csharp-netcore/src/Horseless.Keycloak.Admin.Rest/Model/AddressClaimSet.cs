@@ -29,7 +29,7 @@ namespace Horseless.Keycloak.Admin.Rest.Model
     /// AddressClaimSet
     /// </summary>
     [DataContract(Name = "AddressClaimSet")]
-    internal partial class AddressClaimSet : IEquatable<AddressClaimSet>, IValidatableObject
+    public partial class AddressClaimSet : IEquatable<AddressClaimSet>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AddressClaimSet" /> class.

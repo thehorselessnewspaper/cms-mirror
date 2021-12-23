@@ -23,7 +23,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal interface IGroupsApiSync : IApiAccessor
+    public interface IGroupsApiSync : IApiAccessor
     {
         #region Synchronous Operations
         /// <summary>
@@ -252,7 +252,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal interface IGroupsApiAsync : IApiAccessor
+    public interface IGroupsApiAsync : IApiAccessor
     {
         #region Asynchronous Operations
         /// <summary>
@@ -531,7 +531,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal interface IGroupsApi : IGroupsApiSync, IGroupsApiAsync
+    public interface IGroupsApi : IGroupsApiSync, IGroupsApiAsync
     {
 
     }
@@ -539,7 +539,7 @@ namespace Horseless.Keycloak.Admin.Rest.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    internal partial class GroupsApi : IGroupsApi
+    public partial class GroupsApi : IGroupsApi
     {
         private Horseless.Keycloak.Admin.Rest.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
