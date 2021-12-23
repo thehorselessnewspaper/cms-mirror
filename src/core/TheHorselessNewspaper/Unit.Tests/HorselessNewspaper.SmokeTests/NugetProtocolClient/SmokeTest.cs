@@ -37,7 +37,7 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
                 .Build();
 
 
-            var testPackage = "Microsoft.Extensions.Configuration"; // NewtonsoftJsonPackageId;
+            var testPackage = NewtonsoftJsonPackageId;
             var endpoint = new Uri(NugetOrgEndpoint);
 
 
