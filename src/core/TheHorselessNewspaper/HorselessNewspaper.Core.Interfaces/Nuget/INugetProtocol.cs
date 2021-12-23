@@ -33,6 +33,16 @@ namespace HorselessNewspaper.Core.Interfaces.Nuget
 
         public Task<NuGetVersion> PersistNugetTolocalFilesystem(Uri repositoryUri, string nugetPackageId, NuGetVersion nugetVersion, string folderPath);
         public Task<NuGetVersion> PersistNugetTolocalFilesystem(Uri repositoryUri, string nugetPackageId, NuGetVersion nugetVersion, string folderPath, INugetProtocolCredentials credentials);
+
+        /// <summary>
+        /// nugetFrameworkParseFolder supports
+        ///  https://docs.microsoft.com/en-us/dotnet/standard/frameworks
+        /// </summary>
+        /// <param name="packageSources"></param>
+        /// <param name="extensions"></param>
+        /// <param name="nugetFrameworkParseFolder"></param>
+        /// <param name="packageDirectory"></param>
+        /// <returns></returns>
         public Task LoadExtensions(IEnumerable<PackageSource> packageSources, IEnumerable<IExtensionConfiguration> extensions, TargetedFramework nugetFrameworkParseFolder, string packageDirectory);
 
 

@@ -1,4 +1,5 @@
-﻿using HorselessNewspaper.Core.Interfaces.Nuget;
+﻿using HorselessNewspaper.Core.Interfaces.Model;
+using HorselessNewspaper.Core.Interfaces.Nuget;
 using NuGet.Common;
 using NuGet.Configuration;
 using NuGet.Packaging;
@@ -139,12 +140,23 @@ namespace HorselessNewspaper.Client.Nuget
             return await Task.FromResult<NuGetVersion>(nugetVersion);
         }
 
+
         /// <summary>
+        /// load a nuget package and its dependencies
+        ///  for a specific supported .net (core) target framework
+        ///  from a set of nuget sdk package sources
+        ///    preauthenticated if necessary
+        ///  materialize in the specified folder
         /// wholly based on 
         ///     https://github.com/autostep/AutoStep.Extensions
         ///     https://gist.githubusercontent.com/alistairjevans/4de1dccfb7288e0460b7b04f9a700a04/raw/68b3750f8bb438ff458586a42f43f8c153f83bd0/nugetpackageload.cs
         /// </summary>
-        public async Task LoadExtensions(IEnumerable<PackageSource> packageSources, IEnumerable<NuGetVersion> extensions, string nugetFrameworkParseFolder, string packageDirectory)
+        /// <param name="packageSources"></param>
+        /// <param name="extensions"></param>
+        /// <param name="nugetFrameworkParseFolder"></param>
+        /// <param name="packageDirectory"></param>
+        /// <returns></returns>
+        public async Task LoadExtensions(IEnumerable<PackageSource> packageSources, IEnumerable<IExtensionConfiguration> extensions, TargetedFramework nugetFrameworkParseFolder, string packageDirectory)
         {
 
 
@@ -179,11 +191,13 @@ namespace HorselessNewspaper.Client.Nuget
             {
                 extensionConfigurations.Add(new ExtensionConfiguration()
                 {
-                    // Package = extension.Version.
+                    Package = extension.Package,
+                    PreRelease = extension.PreRelease,
+                    Version = extension.Version
                 });
             }
 
-            nugetLoader.LoadExtensions(packageSources, extensionConfigurations, nugetFrameworkParseFolder, packageDirectory);    
+            nugetLoader.LoadExtensions(packageSources, extensionConfigurations, nugetFrameworkParseFolder.Value, packageDirectory);    
 
         }
     }
