@@ -5,5 +5,5 @@ docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate `
 -g csharp-netcore -o /local/csharp-netcore `
 --artifact-id "Horseless.Keycloak.Admin.Rest" `
 --package-name "Horseless.Keycloak.Admin.Rest" `
---additional-properties="netCoreProjectFile=true,nonPublicApi=true,optionalAssemblyInfo=true,packageName=Horseless.Keycloak.Admin.Rest,targetFramework=net6.0"
+--additional-properties="netCoreProjectFile=true,nonPublicApi=false,optionalAssemblyInfo=true,packageName=Horseless.Keycloak.Admin.Rest,targetFramework=net6.0"
 
