@@ -12,6 +12,9 @@
     <Company>ataxlab</Company>
     <Product>The Horseless Newspaper</Product>
     <Description>foundational modules of the horseless newspaper web components</Description>
+    <!-- support embedding dependencies for redistributable packages -->
+    <!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
