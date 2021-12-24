@@ -188,18 +188,18 @@ namespace HorselessNewspaper.Client.Nuget
                     this.nugetLogger.LogInformation($"resolving dependencies: cache context {cacheContext.GeneratedTempFolder}");
                     dependencyInfo = await dependencyInfoResource.ResolvePackage(
                         package,
-                        framework, // NuGetFramework.AnyFramework, 
+                        NuGetFramework.AnyFramework, // framework, 
                         cacheContext,
                         nugetLogger,
                         cancelToken);
 
                     this.nugetLogger.LogInformation($"resolving dependencies: complete {package.Id}");
                 }
-                catch(Exception ex)
+                catch
                 {
 
-                    this.nugetLogger.LogError($"resolving dependencies: exception for dependency {package.Id}: Message {ex.Message}");
-                    throw ex;
+                    this.nugetLogger.LogError($"resolving dependencies: exception for dependency {package.Id}: Message ");
+                    continue;
                 }
 
                 // No info for the package in this repository.

@@ -15,7 +15,10 @@
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
-      <PackageReference Include="NuGet.Build.Tasks.Pack" />
+      <PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.0.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -26,7 +29,7 @@
     <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.2.211223.8" />
     <PackageReference Include="HorselessNewspaper.Web.Core" Version="0.2.211223.8" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.1" />
-    <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.1.20211223.6" />
+    <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.1.20211223.8" />
   </ItemGroup>
 
 
