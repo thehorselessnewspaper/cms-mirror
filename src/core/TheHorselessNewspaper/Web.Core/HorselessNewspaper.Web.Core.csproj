@@ -15,12 +15,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.2.211223.8" />
+    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.2.211224.15" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="NuGet.Protocol" Version="6.0.0" />
-    <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.1.20211223.8" />
+    <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.1.20211224.2" />
   </ItemGroup>
 
   <ItemGroup>

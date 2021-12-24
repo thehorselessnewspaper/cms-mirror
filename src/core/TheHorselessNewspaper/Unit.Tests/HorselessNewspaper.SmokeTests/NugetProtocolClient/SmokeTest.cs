@@ -116,7 +116,7 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
             var PackageCacheLocationr = configuration.GetSection("PackageCacheLocation").Value;
 
 
-            var endpoint = new Uri(testUri);
+            var privateEndpoint = new Uri(testUri);
 
             var a = services.GetServices(typeof(LoggerNS.ILogger));
             Assert.IsTrue(a != null, "service registration issue");
@@ -142,9 +142,11 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
             Assert.IsTrue(packageVersions != null && packageVersions.Count > 0, "inconcievable - the test package was not found");
 
             // get dependencies
+            var nugetEndpointUri = new Uri(NugetOrgEndpoint);
+            PackageSource packageSource = new PackageSource(privateEndpoint.AbsoluteUri, privateEndpoint.Host, true);
+            PackageSource nugetSource = new PackageSource(nugetEndpointUri.AbsoluteUri, nugetEndpointUri.Host, true);
 
-            PackageSource packageSource = new PackageSource(endpoint.AbsoluteUri, endpoint.Host, true);
-            var packageSources = new List<PackageSource>() { packageSource };
+            var packageSources = new List<PackageSource>() { packageSource, nugetSource };
 
             var extensionConfiguration = new ExtensionConfiguration() { Package = testPackage, Version = packageVersions.Last().Version.ToString(), PreRelease = false };
             var extensionConfigurations = new List<IExtensionConfiguration>() { extensionConfiguration };
@@ -252,7 +254,9 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
 
             var testPackage = "NewtonSoft.Json";
             var endpoint = new Uri("https://api.nuget.org/v3/index.json");
-
+            var Password = configuration.GetSection("Password").Value;
+            var UserName = configuration.GetSection("UserName").Value;
+            var packageLocation = configuration.GetSection("PackageCacheLocation").Value;
 
             INugetProtocol client = services.GetService<INugetProtocol>(); // new HorselessNewspaper.Client.Nuget.NugetProtocolClient(logger);
             var versions = await client.ListPackageVersions(endpoint, testPackage);
@@ -264,6 +268,8 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
                 Console.WriteLine($"Found version {version}");
             }
 
+            var savedVersion = await client.PersistNugetTolocalFilesystem(endpoint, testPackage, versions.LastOrDefault<NuGetVersion>(),
+                    packageLocation);
 
             Assert.Pass();
         }

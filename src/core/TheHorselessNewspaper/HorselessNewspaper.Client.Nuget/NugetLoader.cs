@@ -178,7 +178,7 @@ namespace HorselessNewspaper.Client.Nuget
             {
                 // Get the dependency info for the package.
                 var dependencyInfoResource = await sourceRepository.GetResourceAsync<DependencyInfoResource>();
-                SourcePackageDependencyInfo dependencyInfo;
+                SourcePackageDependencyInfo dependencyInfo = null;
 
                 try
                 {
@@ -188,7 +188,7 @@ namespace HorselessNewspaper.Client.Nuget
                     this.nugetLogger.LogInformation($"resolving dependencies: cache context {cacheContext.GeneratedTempFolder}");
                     dependencyInfo = await dependencyInfoResource.ResolvePackage(
                         package,
-                        NuGetFramework.AnyFramework, // framework, 
+                        framework, 
                         cacheContext,
                         nugetLogger,
                         cancelToken);
@@ -199,7 +199,7 @@ namespace HorselessNewspaper.Client.Nuget
                 {
 
                     this.nugetLogger.LogError($"resolving dependencies: exception for dependency {package.Id}: Message ");
-                    continue;
+                    // continue;
                 }
 
                 // No info for the package in this repository.
