@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace HorselessNewspaper.SmokeTests.Repository
-{
+{ 
     internal class TenantOnboardingSmokeTest
     {
         DbContextOptions<THNLPContentContext> contextOptions;
