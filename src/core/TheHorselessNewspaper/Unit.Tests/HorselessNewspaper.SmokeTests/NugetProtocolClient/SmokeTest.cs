@@ -73,7 +73,7 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
 
             Assert.IsTrue(versions.Count > 0);
 
-            foreach (NuGetVersion version in versions)
+            foreach (NuGetVersion version in versions.TakeLast(5))
             {
                 this.testLogger.LogInformation($"Found version {version}");
             }
@@ -134,7 +134,7 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
 
             Assert.IsTrue(packageVersions.Count > 0);
 
-            foreach (NuGetVersion version in packageVersions)
+            foreach (NuGetVersion version in packageVersions.TakeLast(5))
             {
                 this.testLogger.LogInformation($"Found version {version}");
             }
@@ -153,13 +153,13 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
 
             TargetedFramework parseFolder = new TargetedFramework(TargetedFramework.NET60);
             var packageCacheLocationr = configuration.GetSection("PackageCacheLocation").Value;
-            var versions = await client.PersistNugetTolocalFilesystem(new Uri(testUri), testPackage, packageVersions.LastOrDefault<NuGetVersion>(),
-                packageCacheLocationr, new NugetProtocolCredentials()
-                {
-                    UserName = UserName,
-                    Password = Password
-                }
-                );
+            //var versions = await client.PersistNugetTolocalFilesystem(new Uri(testUri), testPackage, packageVersions.LastOrDefault<NuGetVersion>(),
+            //    packageCacheLocationr, new NugetProtocolCredentials()
+            //    {
+            //        UserName = UserName,
+            //        Password = Password
+            //    }
+            //    );
             try
             {
                 await client.LoadExtensions(packageSources, extensionConfigurations.AsEnumerable<IExtensionConfiguration>(), parseFolder, packageCacheLocationr);
@@ -227,7 +227,7 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
 
             Assert.IsTrue(versions.Count > 0);
 
-            foreach (NuGetVersion version in versions)
+            foreach (NuGetVersion version in versions.TakeLast(5))
             {
                 Console.WriteLine($"Found version {version}");
             }
@@ -263,7 +263,7 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
 
             Assert.IsTrue(versions.Count > 0);
 
-            foreach (NuGetVersion version in versions)
+            foreach (NuGetVersion version in versions.TakeLast(5))
             {
                 Console.WriteLine($"Found version {version}");
             }

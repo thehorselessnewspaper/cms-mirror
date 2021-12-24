@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NuGet.Protocol;
 
 namespace HorselessNewspaper.Client.Nuget
 {
@@ -163,6 +164,24 @@ namespace HorselessNewspaper.Client.Nuget
         }
 
 
+        private async Task<List<NuGetVersion>> ListPackageVersions(Uri repositoryUri, string nugetPackageId)
+        {
+            LoggerNS.ILogger logger = this.nugetLogger; // NullLogger.Instance;
+            CancellationToken cancellationToken = CancellationToken.None;
+
+            SourceCacheContext cache = new SourceCacheContext();
+            SourceRepository repository = Repository.Factory.GetCoreV3(repositoryUri.AbsoluteUri);
+            FindPackageByIdResource resource = await repository.GetResourceAsync<FindPackageByIdResource>();
+
+            IEnumerable<NuGetVersion> versions = await resource.GetAllVersionsAsync(
+                nugetPackageId,
+                cache,
+                logger,
+                cancellationToken);
+
+            return new List<NuGetVersion>(versions);
+        }
+
         private async Task GetPackageDependencies(PackageIdentity package, SourceCacheContext cacheContext, NuGetFramework framework, IEnumerable<SourceRepository> repositories, DependencyContext hostDependencies,
                                               ISet<SourcePackageDependencyInfo> availablePackages, CancellationToken cancelToken)
         {
@@ -186,6 +205,22 @@ namespace HorselessNewspaper.Client.Nuget
                     this.nugetLogger.LogInformation($"resolving dependencies: not ignoring dependency {package.Id}");
 
                     this.nugetLogger.LogInformation($"resolving dependencies: cache context {cacheContext.GeneratedTempFolder}");
+
+                    // probe the repository for this package before trying to resolve 
+                    var repoHasVersions = await this.ListPackageVersions(sourceRepository.PackageSource.SourceUri, package.Id);
+                    this.nugetLogger.LogInformation($"resolving dependencies: probing for {package.Id} at {sourceRepository.PackageSource.SourceUri}");
+
+                    if (repoHasVersions == null || repoHasVersions.Count == 0)
+                    {
+                        this.nugetLogger.LogInformation($"resolving dependencies: no version found for {package.Id} at {sourceRepository.PackageSource.SourceUri}");
+                        continue;
+                    }
+                    else
+                    {
+                        this.nugetLogger.LogInformation($"resolving dependencies: found version found for {package.Id} at {sourceRepository.PackageSource.SourceUri}");
+
+                    }
+
                     dependencyInfo = await dependencyInfoResource.ResolvePackage(
                         package,
                         framework, 
@@ -199,7 +234,7 @@ namespace HorselessNewspaper.Client.Nuget
                 {
 
                     this.nugetLogger.LogError($"resolving dependencies: exception for dependency {package.Id}: Message ");
-                    // continue;
+                    continue;
                 }
 
                 // No info for the package in this repository.
@@ -261,12 +296,12 @@ namespace HorselessNewspaper.Client.Nuget
                 // What version of the library is the host using?
                 var parsedLibVersion = NuGetVersion.Parse(runtimeLib.Version);
 
-                this.nugetLogger.LogInformation($"resolving dependencies: runtime resolved dependency version {parsedLibVersion.ToFullString()}");
+                this.nugetLogger.LogInformation($"resolving dependencies: runtime resolved {runtimeLib.Name} dependency version {parsedLibVersion.ToFullString()} at path {runtimeLib.Path}");
                 if (parsedLibVersion.IsPrerelease)
                 {
                     // Always use pre-release versions from the host, otherwise it becomes
                     // a nightmare to develop across multiple active versions.
-                    this.nugetLogger.LogInformation($"resolving dependencies: runtime resolved dependency version is prelease: {parsedLibVersion.ToFullString()}");
+                    this.nugetLogger.LogInformation($"resolving dependencies: runtime resolved {runtimeLib.Name} dependency version is prelease: {parsedLibVersion.ToFullString()}");
 
                     return true;
                 }
@@ -274,7 +309,7 @@ namespace HorselessNewspaper.Client.Nuget
                 {
                     // Does the host version satisfy the version range of the requested package?
                     // If so, we can provide it; otherwise, we cannot.
-                    this.nugetLogger.LogInformation($"resolving dependencies: runtime resolved dependency satisfies required version {parsedLibVersion.ToFullString()}");
+                    this.nugetLogger.LogInformation($"resolving dependencies: runtime resolved {runtimeLib.Name} dependency satisfies required version {parsedLibVersion.ToFullString()}");
 
                     return dep.VersionRange.Satisfies(parsedLibVersion);
                 }
