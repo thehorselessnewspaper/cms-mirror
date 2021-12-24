@@ -26,12 +26,7 @@ namespace HorselessNewspaper.Client.Nuget
         public Task LoadExtensions(IEnumerable<PackageSource> packageSources, IEnumerable<ExtensionConfiguration> extensions, string nugetFrameworkParseFolder, string packageDirectory);
     }
 
-    public class ExtensionConfiguration : IExtensionConfiguration
-    {
-        public string Package { get; set; }
-        public string Version { get; set; }
-        public bool PreRelease { get; set; }
-    }
+
 
     /// <summary>
     /// wholly based on 
@@ -49,7 +44,6 @@ namespace HorselessNewspaper.Client.Nuget
             this.nugetLogger = nugetLoggerAdapter; 
         }
 
-        // TODO currently a null logger
         LoggerNS.ILogger nugetLogger;
 
         public async Task LoadExtensions(IEnumerable<PackageSource> packageSources, IEnumerable<ExtensionConfiguration> extensions, string nugetFrameworkParseFolder, string packageDirectory)

@@ -1,6 +1,7 @@
 ﻿using HorselessNewspaper.Core.Interfaces.Model;
 using NuGet.Configuration;
 using NuGet.Versioning;
+using NuGet.Packaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +46,11 @@ namespace HorselessNewspaper.Core.Interfaces.Nuget
         /// <returns></returns>
         public Task LoadExtensions(IEnumerable<PackageSource> packageSources, IEnumerable<IExtensionConfiguration> extensions, TargetedFramework nugetFrameworkParseFolder, string packageDirectory);
 
-
+        /// <summary>
+        /// introspoect a package and enumerate its dependencies
+        /// </summary>
+        /// <param name="filePathAndName"></param>
+        /// <returns></returns>
+        public Task<IEnumerable<PackageDependencyGroup>> GetPackageDependencies(string filePathAndName);
     }
 }
