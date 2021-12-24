@@ -2,6 +2,7 @@
 using HorselessNewspaper.Core.Interfaces.Nuget;
 // using Microsoft.Extensions.Logging;
 using NuGet.Common;
+using LoggerNS = NuGet.Common;
 using NuGet.Configuration;
 using NuGet.Packaging;
 using NuGet.Protocol;
@@ -20,22 +21,29 @@ namespace HorselessNewspaper.Client.Nuget
     /// </summary>
     public class NugetProtocolClient : INugetProtocol
     {
+        // because nuget processing is xml tree parsing
+        // and injecting a logger is weird apparently
         Microsoft.Extensions.Logging.ILogger<NugetProtocolClient> _logger;
+        LoggerNS.ILogger _nugetLogger;
 
         INugetLoader nugetLoader;
 
         private NugetProtocolClient()
         { }
 
-        public NugetProtocolClient(Microsoft.Extensions.Logging.ILogger<NugetProtocolClient> logger, INugetLoader loader)
+        public NugetProtocolClient
+            (Microsoft.Extensions.Logging.ILogger<NugetProtocolClient> logger,
+            LoggerNS.ILogger nugetLogger,
+            INugetLoader loader)
         {
             this._logger = logger;
             nugetLoader = loader;
+            this._nugetLogger = nugetLogger;
         }
 
         public async Task<List<NuGetVersion>> ListPackageVersions(Uri repositoryUri, string nugetPackageId)
         {
-            ILogger logger = NullLogger.Instance;
+            ILogger logger = _nugetLogger; // NullLogger.Instance;
             CancellationToken cancellationToken = CancellationToken.None;
 
             SourceCacheContext cache = new SourceCacheContext();
@@ -53,7 +61,7 @@ namespace HorselessNewspaper.Client.Nuget
 
         public async Task<List<NuGetVersion>> ListPackageVersions(Uri repositoryUri, string nugetPackageId, INugetProtocolCredentials credentials)
         {
-            ILogger logger = NullLogger.Instance;
+            ILogger logger = _nugetLogger; // NullLogger.Instance;
             CancellationToken cancellationToken = CancellationToken.None;
             SourceCacheContext cache = new SourceCacheContext();
 
@@ -89,7 +97,7 @@ namespace HorselessNewspaper.Client.Nuget
 
         public async Task<NuGetVersion> PersistNugetTolocalFilesystem(Uri repositoryUri, string nugetPackageId, NuGetVersion nugetVersion, string folderPath)
         {
-            ILogger logger = NullLogger.Instance;
+            ILogger logger = _nugetLogger; // NullLogger.Instance;
             CancellationToken cancellationToken = CancellationToken.None;
 
             SourceCacheContext cache = new SourceCacheContext();
@@ -108,20 +116,20 @@ namespace HorselessNewspaper.Client.Nuget
                 logger,
                 cancellationToken);
 
-            Console.WriteLine($"Downloaded package {packageId} {packageVersion}");
+            logger.LogInformation($"Downloaded package {packageId} {packageVersion}");
 
             using PackageArchiveReader packageReader = new PackageArchiveReader(packageStream);
             NuspecReader nuspecReader = await packageReader.GetNuspecReaderAsync(cancellationToken);
 
-            Console.WriteLine($"Tags: {nuspecReader.GetTags()}");
-            Console.WriteLine($"Description: {nuspecReader.GetDescription()}");
+            logger.LogInformation($"Tags: {nuspecReader.GetTags()}");
+            logger.LogInformation($"Description: {nuspecReader.GetDescription()}");
 
             return await Task.FromResult<NuGetVersion>(nugetVersion);
         }
 
         public async Task<NuGetVersion> PersistNugetTolocalFilesystem(Uri repositoryUri, string nugetPackageId, NuGetVersion nugetVersion, string folderPath, INugetProtocolCredentials credentials)
         {
-            ILogger logger = NullLogger.Instance;
+            ILogger logger = _nugetLogger; // NullLogger.Instance;
             CancellationToken cancellationToken = CancellationToken.None;
 
             SourceCacheContext cache = new SourceCacheContext();
@@ -142,13 +150,13 @@ namespace HorselessNewspaper.Client.Nuget
                 logger,
                 cancellationToken);
 
-            Console.WriteLine($"Downloaded package {packageId} {packageVersion}");
+            logger.LogInformation($"Downloaded package {packageId} {packageVersion}");
 
             using PackageArchiveReader packageReader = new PackageArchiveReader(packageStream);
             NuspecReader nuspecReader = await packageReader.GetNuspecReaderAsync(cancellationToken);
 
-            Console.WriteLine($"Tags: {nuspecReader.GetTags()}");
-            Console.WriteLine($"Description: {nuspecReader.GetDescription()}");
+            logger.LogInformation($"Tags: {nuspecReader.GetTags()}");
+            logger.LogInformation($"Description: {nuspecReader.GetDescription()}");
 
             return await Task.FromResult<NuGetVersion>(nugetVersion);
         }
@@ -172,6 +180,10 @@ namespace HorselessNewspaper.Client.Nuget
         public async Task LoadExtensions(IEnumerable<PackageSource> packageSources, IEnumerable<IExtensionConfiguration> extensions, TargetedFramework nugetFrameworkParseFolder, string packageDirectory)
         {
 
+            foreach(var source in packageSources)
+            {
+                this._nugetLogger.LogInformation($"loading from package source {source.SourceUri.AbsoluteUri}");
+            }
 
             // Define a source provider, with nuget, plus my own feed.
             // as per list of new PackageSource("https://api.nuget.org/v3/index.json"),
@@ -183,24 +195,13 @@ namespace HorselessNewspaper.Client.Nuget
             // Get the list of repositories.
             var repositories = sourceRepositoryProvider.GetRepositories();
 
-
-
-            // My extension configuration:
-            //var extensions = new[]
-            //{
-            //    new ExtensionConfiguration
-            //    {
-            //        Package = "AutoStep.Web",
-            //        PreRelease = true // Allow pre-release versions.
-            //    }
-            //};
-
             // Replace this with a proper cancellation token.
             var cancellationToken = CancellationToken.None;
 
             var extensionConfigurations = new List<ExtensionConfiguration>();
             foreach(var extension in extensions)
             {
+                this._nugetLogger.LogInformation($"loading {extension.Package}, {extension.Version} for target framework {nugetFrameworkParseFolder.Value}");
                 extensionConfigurations.Add(new ExtensionConfiguration()
                 {
                     Package = extension.Package,
@@ -212,5 +213,47 @@ namespace HorselessNewspaper.Client.Nuget
             nugetLoader.LoadExtensions(packageSources, extensionConfigurations, nugetFrameworkParseFolder.Value, packageDirectory);    
 
         }
+
+        public async Task LoadExtensions(IEnumerable<PackageSource> packageSources, 
+                IEnumerable<IExtensionConfiguration> extensions, 
+                TargetedFramework nugetFrameworkParseFolder, 
+                string packageDirectory, INugetProtocolCredentials credentials)
+        {
+
+            foreach(var source in packageSources)
+            {
+                this._nugetLogger.LogInformation($"loading from package source {source.SourceUri.AbsoluteUri}");
+            }
+
+            // Define a source provider, with nuget, plus my own feed.
+            // as per list of new PackageSource("https://api.nuget.org/v3/index.json"),
+            var sourceProvider = new PackageSourceProvider(NullSettings.Instance, packageSources);
+
+            // Establish the source repository provider; the available providers come from our custom settings.
+            var sourceRepositoryProvider = new SourceRepositoryProvider(sourceProvider, Repository.Provider.GetCoreV3());
+
+            // Get the list of repositories.
+            var repositories = sourceRepositoryProvider.GetRepositories();
+
+            // Replace this with a proper cancellation token.
+            var cancellationToken = CancellationToken.None;
+
+            var extensionConfigurations = new List<ExtensionConfiguration>();
+            foreach(var extension in extensions)
+            {
+                this._nugetLogger.LogInformation($"loading {extension.Package}, {extension.Version} for target framework {nugetFrameworkParseFolder.Value}");
+                extensionConfigurations.Add(new ExtensionConfiguration()
+                {
+                    Package = extension.Package,
+                    PreRelease = extension.PreRelease,
+                    Version = extension.Version
+                });
+            }
+
+            nugetLoader.LoadExtensions(packageSources, extensionConfigurations, nugetFrameworkParseFolder.Value, packageDirectory);    
+
+        }
+
+       
     }
 }

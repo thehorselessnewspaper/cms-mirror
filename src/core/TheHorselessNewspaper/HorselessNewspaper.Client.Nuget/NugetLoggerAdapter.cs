@@ -15,7 +15,9 @@ namespace HorselessNewspaper.Client.Nuget
     /// </summary>
     public class NugetLoggerAdapter : LoggerNS.ILogger
     {
-        private readonly Microsoft.Extensions.Logging.ILogger<NugetLoader> _logger;
+        // TODO ouch the adapter is hardcoded for specific ILogger<T>
+        public Microsoft.Extensions.Logging.ILogger<NugetLoader> NugetLoaderlogger { get; set; }
+
 
         private  NugetLoggerAdapter()
         {
@@ -23,19 +25,19 @@ namespace HorselessNewspaper.Client.Nuget
         }
 
 
-        public NugetLoggerAdapter(Microsoft.Extensions.Logging.ILogger<NugetLoader> logger)
+        public NugetLoggerAdapter(
+            Microsoft.Extensions.Logging.ILogger<NugetLoader> nugetLoaderLogger)
         {
 
-            _logger = logger;
-
+            NugetLoaderlogger = nugetLoaderLogger;
         }
 
         public void Log(LoggerNS.LogLevel level, string data)
         {
             var newLevel = GetLevel(level);
-            if (_logger != null)
+            if (NugetLoaderlogger != null)
             {
-                _logger.Log(newLevel, data);
+                NugetLoaderlogger.Log(newLevel, data);
             }
 
         }
@@ -44,9 +46,9 @@ namespace HorselessNewspaper.Client.Nuget
         public void Log(LoggerNS.ILogMessage message)
         {
             var newLevel = GetLevel(message.Level);
-            if (_logger != null)
+            if (NugetLoaderlogger != null)
             {
-                _logger.Log(newLevel, message.Message); ;
+                NugetLoaderlogger.Log(newLevel, message.Message); ;
             }
         }
 
@@ -55,9 +57,9 @@ namespace HorselessNewspaper.Client.Nuget
             var newLevel = GetLevel(level);
             var nullAsync = await Task.FromResult<string>("");
 
-            if (_logger != null)
+            if (NugetLoaderlogger != null)
             {
-                _logger.Log(newLevel, data);
+                NugetLoaderlogger.Log(newLevel, data);
                 return;
             }
             else
@@ -71,9 +73,9 @@ namespace HorselessNewspaper.Client.Nuget
             var newLevel = GetLevel(message.Level);
             var nullAsync = await Task.FromResult<string>("");
 
-            if (_logger != null)
+            if (NugetLoaderlogger != null)
             {
-                _logger.Log(newLevel, message.Message);
+                NugetLoaderlogger.Log(newLevel, message.Message);
                 return;
             }
             else
@@ -85,63 +87,63 @@ namespace HorselessNewspaper.Client.Nuget
         public void LogDebug(string data)
         {
 
-            if (_logger != null)
+            if (NugetLoaderlogger != null)
             {
-                _logger.LogDebug(data); ;
+                NugetLoaderlogger.LogDebug(data); ;
             }
         }
 
         public void LogError(string data)
         {
 
-            if (_logger != null)
+            if (NugetLoaderlogger != null)
             {
-                _logger.LogError(data); ;
+                NugetLoaderlogger.LogError(data); ;
             }
         }
 
         public void LogInformation(string data)
         {
 
-            if (_logger != null)
+            if (NugetLoaderlogger != null)
             {
-                _logger.LogInformation(data); ;
+                NugetLoaderlogger.LogInformation(data); ;
             }
         }
 
         public void LogInformationSummary(string data)
         {
 
-            if (_logger != null)
+            if (NugetLoaderlogger != null)
             {
-                _logger.LogInformation(data); ;
+                NugetLoaderlogger.LogInformation(data); ;
             }
         }
 
         public void LogMinimal(string data)
         {
 
-            if (_logger != null)
+            if (NugetLoaderlogger != null)
             {
-                _logger.LogInformation(data); ;
+                NugetLoaderlogger.LogInformation(data); ;
             }
         }
 
         public void LogVerbose(string data)
         {
 
-            if (_logger != null)
+            if (NugetLoaderlogger != null)
             {
-                _logger.LogInformation(data); ;
+                NugetLoaderlogger.LogInformation(data); ;
             }
         }
 
         public void LogWarning(string data)
         {
 
-            if (_logger != null)
+            if (NugetLoaderlogger != null)
             {
-                _logger.LogWarning(data); ;
+                NugetLoaderlogger.LogWarning(data); ;
             }
         }
 

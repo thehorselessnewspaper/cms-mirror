@@ -76,7 +76,8 @@ namespace HorselessNewspaper.Client.Nuget
             //};
 
             // Replace this with a proper cancellation token.
-            var cancellationToken = CancellationToken.None;
+            var tokenSource2 = new CancellationTokenSource();
+            var cancellationToken = tokenSource2.Token;
             await LoadExtensions(extensions, nugetFrameworkParseFolder, packageDirectory, sourceRepositoryProvider, repositories, cancellationToken);
         }
 
@@ -183,9 +184,11 @@ namespace HorselessNewspaper.Client.Nuget
                 {
 
                     this.nugetLogger.LogInformation($"resolving dependencies: not ignoring dependency {package.Id}");
+
+                    this.nugetLogger.LogInformation($"resolving dependencies: cache context {cacheContext.GeneratedTempFolder}");
                     dependencyInfo = await dependencyInfoResource.ResolvePackage(
                         package,
-                        NuGetFramework.AnyFramework, //framework,
+                        framework, // NuGetFramework.AnyFramework, 
                         cacheContext,
                         nugetLogger,
                         cancelToken);
@@ -208,6 +211,7 @@ namespace HorselessNewspaper.Client.Nuget
                 }
 
 
+                this.nugetLogger.LogInformation($"filtering dependency info {package.Id}");
                 // Filter the dependency info.
                 // Don't bring in any dependencies that are provided by the host.
                 var actualSourceDep = new SourcePackageDependencyInfo(
@@ -245,7 +249,7 @@ namespace HorselessNewspaper.Client.Nuget
             if (RuntimeProvidedPackages.IsPackageProvidedByRuntime(dep.Id))
             {
 
-                this.nugetLogger.LogInformation($"resolving dependencies: ignoring dependency provided by7 runtime {dep.Id}");
+                this.nugetLogger.LogInformation($"resolving dependencies: ignoring dependency provided by runtime {dep.Id}");
                 return true;
             }
 
@@ -285,7 +289,7 @@ namespace HorselessNewspaper.Client.Nuget
                                            ISettings nugetSettings, CancellationToken cancellationToken)
         {
             this.nugetLogger.LogInformation($"installing packages");
-            this.nugetLogger.LogInformation($"installing packages from directory {rootPackagesDirectory}");
+            this.nugetLogger.LogInformation($"installing packages to directory {rootPackagesDirectory}");
             var packagePathResolver = new PackagePathResolver(rootPackagesDirectory, true);
             var packageExtractionContext = new PackageExtractionContext(
                 PackageSaveMode.Defaultv3,

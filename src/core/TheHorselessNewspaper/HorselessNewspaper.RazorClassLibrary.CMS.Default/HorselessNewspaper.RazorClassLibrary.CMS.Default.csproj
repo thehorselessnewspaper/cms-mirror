@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+      <PackageReference Include="NuGet.Build.Tasks.Pack" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,10 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.2.211223.5" />
-    <PackageReference Include="HorselessNewspaper.Web.Core" Version="0.2.211223.5" />
+    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.2.211223.8" />
+    <PackageReference Include="HorselessNewspaper.Web.Core" Version="0.2.211223.8" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.1" />
-    <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.1.20211223.3" />
+    <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.1.20211223.6" />
   </ItemGroup>
 
 
