@@ -6,7 +6,9 @@ using HorselessNewspaper.Web.Core.Middleware.HorselessRouter.Strategy;
 using HorselessNewspaper.Web.Core.ScopedServices.Content;
 using HorselessNewspaper.Web.Core.ScopedServices.RoutingStrategy;
 using HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant;
+using HorselessNewspaper.Web.Core.SingletonServices.ViewCompiler;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -47,6 +49,11 @@ namespace HorselessNewspaper.Web.Core.Extensions
             
             serviceBuilder.Services.AddSingleton<IHorselessCacheProvider<Guid, TenantDTO>, DefaultTenantCache>();
 
+            // support dynamic view loading and unloading
+            // wholly based on https://stackoverflow.com/questions/48206993/how-to-load-asp-net-core-razor-view-dynamically-at-runtime
+            ServiceDescriptor descriptor = services.FirstOrDefault(s => s.ServiceType == typeof(IViewCompilerProvider));
+            serviceBuilder.Services.Remove(descriptor);
+            services.AddSingleton<IViewCompilerProvider, HorselessViewCompilerProvider>();
 
             #region cms routing pattern services
             serviceBuilder.Services.AddScoped<IHorselessRoutingStrategy, UrlSegmentRoutingStrategy>();

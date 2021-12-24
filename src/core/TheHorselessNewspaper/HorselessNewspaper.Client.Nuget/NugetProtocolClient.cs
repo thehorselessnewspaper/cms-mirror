@@ -1,5 +1,6 @@
 ﻿using HorselessNewspaper.Core.Interfaces.Model;
 using HorselessNewspaper.Core.Interfaces.Nuget;
+// using Microsoft.Extensions.Logging;
 using NuGet.Common;
 using NuGet.Configuration;
 using NuGet.Packaging;
@@ -19,6 +20,18 @@ namespace HorselessNewspaper.Client.Nuget
     /// </summary>
     public class NugetProtocolClient : INugetProtocol
     {
+        Microsoft.Extensions.Logging.ILogger<NugetProtocolClient> _logger;
+
+        INugetLoader nugetLoader;
+
+        private NugetProtocolClient()
+        { }
+
+        public NugetProtocolClient(Microsoft.Extensions.Logging.ILogger<NugetProtocolClient> logger, INugetLoader loader)
+        {
+            this._logger = logger;
+            nugetLoader = loader;
+        }
 
         public async Task<List<NuGetVersion>> ListPackageVersions(Uri repositoryUri, string nugetPackageId)
         {
@@ -160,7 +173,6 @@ namespace HorselessNewspaper.Client.Nuget
         {
 
 
-            INugetLoader nugetLoader = new NugetLoader();
             // Define a source provider, with nuget, plus my own feed.
             // as per list of new PackageSource("https://api.nuget.org/v3/index.json"),
             var sourceProvider = new PackageSourceProvider(NullSettings.Instance, packageSources);

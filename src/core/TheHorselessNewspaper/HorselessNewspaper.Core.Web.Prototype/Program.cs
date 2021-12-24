@@ -53,6 +53,7 @@ builder.Services.AddAuthentication(options =>
 })
 .AddCookie(cookie =>
 {
+    // TODO examine this cookie magic string naming business
     cookie.Cookie.Name = "keycloak.cookie";
     cookie.Cookie.MaxAge = TimeSpan.FromMinutes(60);
     cookie.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;

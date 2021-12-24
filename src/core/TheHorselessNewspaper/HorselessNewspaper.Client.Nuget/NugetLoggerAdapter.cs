@@ -1,93 +1,150 @@
-﻿using NuGet.Common;
+﻿using LoggerNS = NuGet.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using System.Reflection.Emit;
+using NuGet.Protocol.Plugins;
+
 namespace HorselessNewspaper.Client.Nuget
 {
     /// <summary>
     /// a null loging adapter to satisfy Nuget SDK
     /// </summary>
-    public class NugetLoggerAdapter : ILogger
+    public class NugetLoggerAdapter : LoggerNS.ILogger
     {
-        private readonly Microsoft.Extensions.Logging.ILogger<NugetLoggerAdapter> _logger;
+        private readonly Microsoft.Extensions.Logging.ILogger<NugetLoader> _logger;
 
-        public NugetLoggerAdapter()
+        private  NugetLoggerAdapter()
         {
 
         }
 
-        public NugetLoggerAdapter(Microsoft.Extensions.Logging.ILogger<NugetLoggerAdapter> logger)
+
+        public NugetLoggerAdapter(Microsoft.Extensions.Logging.ILogger<NugetLoader> logger)
         {
+
             _logger = logger;
-           
+
         }
 
-        public void Log(LogLevel level, string data)
+        public void Log(LoggerNS.LogLevel level, string data)
         {
             var newLevel = GetLevel(level);
-           
+            if (_logger != null)
+            {
+                _logger.Log(newLevel, data);
+            }
+
         }
 
 
-        public void Log(ILogMessage message)
+        public void Log(LoggerNS.ILogMessage message)
         {
- 
+            var newLevel = GetLevel(message.Level);
+            if (_logger != null)
+            {
+                _logger.Log(newLevel, message.Message); ;
+            }
         }
 
-        public async Task<string> NullAsync()
+        public async Task LogAsync(LoggerNS.LogLevel level, string data)
         {
-            return await Task.FromResult("");
+            var newLevel = GetLevel(level);
+            var nullAsync = await Task.FromResult<string>("");
+
+            if (_logger != null)
+            {
+                _logger.Log(newLevel, data);
+                return;
+            }
+            else
+            {
+                return;
+            }
         }
 
-        public async Task LogAsync(LogLevel level, string data)
+        public async Task LogAsync(LoggerNS.ILogMessage message)
         {
-            await NullAsync();
-            return;
-        }
+            var newLevel = GetLevel(message.Level);
+            var nullAsync = await Task.FromResult<string>("");
 
-        public async Task LogAsync(ILogMessage message)
-        {
-            await NullAsync();
-            return;
+            if (_logger != null)
+            {
+                _logger.Log(newLevel, message.Message);
+                return;
+            }
+            else
+            {
+                return;
+            }
         }
 
         public void LogDebug(string data)
         {
 
+            if (_logger != null)
+            {
+                _logger.LogDebug(data); ;
+            }
         }
 
         public void LogError(string data)
         {
 
+            if (_logger != null)
+            {
+                _logger.LogError(data); ;
+            }
         }
 
         public void LogInformation(string data)
         {
- 
+
+            if (_logger != null)
+            {
+                _logger.LogInformation(data); ;
+            }
         }
 
         public void LogInformationSummary(string data)
         {
- 
+
+            if (_logger != null)
+            {
+                _logger.LogInformation(data); ;
+            }
         }
 
         public void LogMinimal(string data)
         {
- 
+
+            if (_logger != null)
+            {
+                _logger.LogInformation(data); ;
+            }
         }
 
         public void LogVerbose(string data)
         {
 
+            if (_logger != null)
+            {
+                _logger.LogInformation(data); ;
+            }
         }
 
         public void LogWarning(string data)
         {
 
+            if (_logger != null)
+            {
+                _logger.LogWarning(data); ;
+            }
         }
-        
+
         /// <summary>
         /// here we do some actual loglevel adptation
         /// warning - pii leakage risk upon incorrect interpretation
@@ -96,7 +153,7 @@ namespace HorselessNewspaper.Client.Nuget
         /// <param name="level"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        private Microsoft.Extensions.Logging.LogLevel GetLevel(LogLevel level)
+        private Microsoft.Extensions.Logging.LogLevel GetLevel(LoggerNS.LogLevel level)
         {
             Microsoft.Extensions.Logging.LogLevel ret = Microsoft.Extensions.Logging.LogLevel.Debug;
 

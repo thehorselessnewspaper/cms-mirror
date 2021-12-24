@@ -1,7 +1,9 @@
 ﻿using HorselessNewspaper.Client.Nuget.Model;
 using HorselessNewspaper.Core.Interfaces.Model;
 using Microsoft.Extensions.DependencyModel;
+using Microsoft.Extensions.Logging;
 using NuGet.Common;
+using LoggerNS = NuGet.Common;
 using NuGet.Configuration;
 using NuGet.Frameworks;
 using NuGet.Packaging;
@@ -37,18 +39,21 @@ namespace HorselessNewspaper.Client.Nuget
     /// </summary>
     public class NugetLoader : INugetLoader
     {
-        public NugetLoader()
-        {
+        private NugetLoader()
+{
+}
 
-            nugetLogger = new NugetLoggerAdapter();
+        public NugetLoader(LoggerNS.ILogger nugetLoggerAdapter)
+        {
+            this.nugetLogger = nugetLoggerAdapter; 
         }
 
         // TODO currently a null logger
-        NugetLoggerAdapter nugetLogger;
+        LoggerNS.ILogger nugetLogger;
 
         public async Task LoadExtensions(IEnumerable<PackageSource> packageSources, IEnumerable<ExtensionConfiguration> extensions, string nugetFrameworkParseFolder, string packageDirectory)
         {
-            // Define a source provider, with nuget, plus my own feed.
+            // Define a source provider, with nuget, plus my own feed.P
             // as per list of new PackageSource("https://api.nuget.org/v3/index.json"),
             var sourceProvider = new PackageSourceProvider(NullSettings.Instance, packageSources);
 
@@ -82,6 +87,9 @@ namespace HorselessNewspaper.Client.Nuget
 
             // The framework we're using.
             var targetFramework = NuGetFramework.ParseFolder(nugetFrameworkParseFolder);
+
+            this.nugetLogger.LogInformation($"targetting framework {targetFramework}");
+
             var allPackages = new HashSet<SourcePackageDependencyInfo>();
 
             var dependencyContext = DependencyContext.Default;
@@ -160,6 +168,8 @@ namespace HorselessNewspaper.Client.Nuget
             // Don't recurse over a package we've already seen.
             if (availablePackages.Contains(package))
             {
+
+                this.nugetLogger.LogInformation($"resolving dependencies: ignoring dependency {package.Id}");
                 return;
             }
 
@@ -171,22 +181,29 @@ namespace HorselessNewspaper.Client.Nuget
 
                 try
                 {
-                     dependencyInfo = await dependencyInfoResource.ResolvePackage(
+
+                    this.nugetLogger.LogInformation($"resolving dependencies: not ignoring dependency {package.Id}");
+                    dependencyInfo = await dependencyInfoResource.ResolvePackage(
                         package,
                         NuGetFramework.AnyFramework, //framework,
                         cacheContext,
                         nugetLogger,
                         cancelToken);
 
+                    this.nugetLogger.LogInformation($"resolving dependencies: complete {package.Id}");
                 }
                 catch(Exception ex)
                 {
+
+                    this.nugetLogger.LogError($"resolving dependencies: exception for dependency {package.Id}: Message {ex.Message}");
                     throw ex;
                 }
 
                 // No info for the package in this repository.
                 if (dependencyInfo == null)
                 {
+
+                    this.nugetLogger.LogInformation($"resolving dependencies: null dependency {package.Id}");
                     continue;
                 }
 
@@ -200,11 +217,15 @@ namespace HorselessNewspaper.Client.Nuget
                     dependencyInfo.Listed,
                     dependencyInfo.Source);
 
+
+                this.nugetLogger.LogInformation($"resolving dependencies: filtered dependencies {package.Id}");
                 availablePackages.Add(actualSourceDep);
 
                 // Recurse through each package.
                 foreach (var dependency in actualSourceDep.Dependencies)
                 {
+
+                    this.nugetLogger.LogInformation($"resolving dependencies of dependencies: package = {package.Id}, dependency = {dependency.Id}");
                     await GetPackageDependencies(
                         new PackageIdentity(dependency.Id, dependency.VersionRange.MinVersion),
                         cacheContext,
@@ -223,6 +244,8 @@ namespace HorselessNewspaper.Client.Nuget
         {
             if (RuntimeProvidedPackages.IsPackageProvidedByRuntime(dep.Id))
             {
+
+                this.nugetLogger.LogInformation($"resolving dependencies: ignoring dependency provided by7 runtime {dep.Id}");
                 return true;
             }
 
@@ -234,16 +257,21 @@ namespace HorselessNewspaper.Client.Nuget
                 // What version of the library is the host using?
                 var parsedLibVersion = NuGetVersion.Parse(runtimeLib.Version);
 
+                this.nugetLogger.LogInformation($"resolving dependencies: runtime resolved dependency version {parsedLibVersion.ToFullString()}");
                 if (parsedLibVersion.IsPrerelease)
                 {
                     // Always use pre-release versions from the host, otherwise it becomes
                     // a nightmare to develop across multiple active versions.
+                    this.nugetLogger.LogInformation($"resolving dependencies: runtime resolved dependency version is prelease: {parsedLibVersion.ToFullString()}");
+
                     return true;
                 }
                 else
                 {
                     // Does the host version satisfy the version range of the requested package?
                     // If so, we can provide it; otherwise, we cannot.
+                    this.nugetLogger.LogInformation($"resolving dependencies: runtime resolved dependency satisfies required version {parsedLibVersion.ToFullString()}");
+
                     return dep.VersionRange.Satisfies(parsedLibVersion);
                 }
             }
@@ -256,12 +284,16 @@ namespace HorselessNewspaper.Client.Nuget
                                            IEnumerable<SourcePackageDependencyInfo> packagesToInstall, string rootPackagesDirectory,
                                            ISettings nugetSettings, CancellationToken cancellationToken)
         {
+            this.nugetLogger.LogInformation($"installing packages");
+            this.nugetLogger.LogInformation($"installing packages from directory {rootPackagesDirectory}");
             var packagePathResolver = new PackagePathResolver(rootPackagesDirectory, true);
             var packageExtractionContext = new PackageExtractionContext(
                 PackageSaveMode.Defaultv3,
                 XmlDocFileSaveMode.Skip,
                 ClientPolicyContext.GetClientPolicy(nugetSettings, nugetLogger),
                 nugetLogger);
+
+
 
             foreach (var package in packagesToInstall)
             {
