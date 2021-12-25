@@ -255,6 +255,9 @@ namespace HorselessNewspaper.Client.Nuget
 
         }
 
-       
+        public Task<IEnumerable<PackageDependencyGroup>> GetPackageDependencies(string filePathAndName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -88,7 +88,7 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
             var extensionConfiguration = new ExtensionConfiguration() { Package = testPackage, Version = versions.Last().Version.ToString(), PreRelease = false };
             var extensionConfigurations = new List<IExtensionConfiguration>() { extensionConfiguration };
 
-            TargetedFramework parseFolder = new TargetedFramework(TargetedFramework.NET60);
+            TargetedFramework parseFolder = new TargetedFramework(TargetedFramework.NETCoreApp31);
             var packageCacheLocationr = configuration.GetSection("PackageCacheLocation").Value;
 
             try

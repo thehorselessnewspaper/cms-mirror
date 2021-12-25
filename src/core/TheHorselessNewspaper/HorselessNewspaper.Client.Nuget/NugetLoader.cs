@@ -80,7 +80,7 @@ namespace HorselessNewspaper.Client.Nuget
         {
             // Disposable source cache.
             using var sourceCacheContext = new SourceCacheContext();
-
+            sourceCacheContext.GeneratedTempFolder = packageDirectory; // + "\\cache";
             // The framework we're using.
             var targetFramework = NuGetFramework.ParseFolder(nugetFrameworkParseFolder);
 
@@ -200,7 +200,7 @@ namespace HorselessNewspaper.Client.Nuget
 
                     this.nugetLogger.LogInformation($"resolving dependencies: cache context {cacheContext.GeneratedTempFolder}");
 
-                    // probe the repository for this package before trying to resolve 
+                    //// probe the repository for this package before trying to resolve 
                     var repoHasVersions = await this.ListPackageVersions(sourceRepository.PackageSource.SourceUri, package.Id);
                     this.nugetLogger.LogInformation($"resolving dependencies: probing for {package.Id} at {sourceRepository.PackageSource.SourceUri}");
 
@@ -219,7 +219,7 @@ namespace HorselessNewspaper.Client.Nuget
                         package,
                         framework, 
                         cacheContext,
-                        nugetLogger,
+                        NullLogger.Instance,
                         cancelToken);
 
                     this.nugetLogger.LogInformation($"resolving dependencies: complete {package.Id}");
@@ -246,7 +246,7 @@ namespace HorselessNewspaper.Client.Nuget
                 var actualSourceDep = new SourcePackageDependencyInfo(
                     dependencyInfo.Id,
                     dependencyInfo.Version,
-                    dependencyInfo.Dependencies.Where(dep => !DependencySuppliedByHost(hostDependencies, dep)),
+                    dependencyInfo.Dependencies.Where(dep => !DependencySuppliedByHost(hostDependencies, dep)), // beware a behaviour flag on DependencySuppliedByHost with a default false here 
                     dependencyInfo.Listed,
                     dependencyInfo.Source);
 
