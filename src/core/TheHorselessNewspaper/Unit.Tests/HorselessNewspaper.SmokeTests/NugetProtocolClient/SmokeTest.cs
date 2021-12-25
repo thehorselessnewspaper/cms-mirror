@@ -143,10 +143,13 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
 
             // get dependencies
             var nugetEndpointUri = new Uri(NugetOrgEndpoint);
-            PackageSource packageSource = new PackageSource(privateEndpoint.AbsoluteUri, privateEndpoint.Host, true);
-            PackageSource nugetSource = new PackageSource(nugetEndpointUri.AbsoluteUri, nugetEndpointUri.Host, true);
+            PackageSource privatePackageSource = new PackageSource(privateEndpoint.AbsoluteUri, privateEndpoint.Host, true);
+            privatePackageSource.Credentials = new PackageSourceCredential(privateEndpoint.AbsoluteUri, UserName, Password, true, null);
 
-            var packageSources = new List<PackageSource>() { packageSource, nugetSource };
+            PackageSource officialNugetSource = new PackageSource(nugetEndpointUri.AbsoluteUri, nugetEndpointUri.Host, true);
+
+
+            var packageSources = new List<PackageSource>() { privatePackageSource, officialNugetSource };
 
             var extensionConfiguration = new ExtensionConfiguration() { Package = testPackage, Version = packageVersions.Last().Version.ToString(), PreRelease = false };
             var extensionConfigurations = new List<IExtensionConfiguration>() { extensionConfiguration };

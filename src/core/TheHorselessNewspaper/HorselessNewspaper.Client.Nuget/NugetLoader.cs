@@ -219,7 +219,7 @@ namespace HorselessNewspaper.Client.Nuget
                         package,
                         framework, 
                         cacheContext,
-                        NullLogger.Instance,
+                        this.nugetLogger,
                         cancelToken);
 
                     this.nugetLogger.LogInformation($"resolving dependencies: complete {package.Id}");
