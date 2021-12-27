@@ -18,6 +18,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[ContentCollectionPublication]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[ContentCollections]",
          "ObjectType": 0
       },
@@ -26,7 +30,19 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[HolonymMeronym]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Holonyms]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[JSONAssets]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Meronyms]",
          "ObjectType": 0
       },
       {
@@ -38,6 +54,58 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[NugetPackages]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PlaceholderHolonym]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PlaceholderMeronym]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PlaceholderMimeContent]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Placeholders]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Principals]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PrincipalTenant]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PublicationNugetPackage]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Publications]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TaxonContentCollection]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TaxonHolonym]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TaxonPlaceholder]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Taxons]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[TenantContentCollection]",
          "ObjectType": 0
       },
@@ -46,7 +114,7 @@
          "ObjectType": 0
       }
    ],
-   "UiHint": "WIPERS.THNLP_Content",
+   "UiHint": "wipers.THNLP_Content.dbo",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": true,
@@ -54,6 +122,7 @@
    "UseHandleBars": false,
    "UseInflector": true,
    "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
    "UseNoConstructor": false,
    "UseNoDefaultConstructor": false,
    "UseNoNavigations": false,

@@ -20,7 +20,7 @@ namespace Schema.Diagrams.Content
             this.Tenants = new HashSet<Tenant>();
         }
     
-        public int Id { get; set; }
+        public System.Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public Nullable<bool> IsSoftDeleted { get; set; }

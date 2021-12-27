@@ -5,21 +5,25 @@ using System.Collections.Generic;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    public partial class Tenant
+    public partial class Publication
     {
-        public Tenant()
+        public Publication()
         {
             ContentCollections = new HashSet<ContentCollection>();
-            Principals = new HashSet<Principal>();
+            NugetPackages = new HashSet<NugetPackage>();
         }
 
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
-        public DateTime? CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public string RouteTemplateRegEx { get; set; }
+        public DateTime? PublishAt { get; set; }
+        public DateTime? UnPublishAt { get; set; }
+        public bool? IsPublished { get; set; }
 
         public virtual ICollection<ContentCollection> ContentCollections { get; set; }
-        public virtual ICollection<Principal> Principals { get; set; }
+        public virtual ICollection<NugetPackage> NugetPackages { get; set; }
     }
 }

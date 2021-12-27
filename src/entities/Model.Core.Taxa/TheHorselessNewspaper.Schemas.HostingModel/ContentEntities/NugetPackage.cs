@@ -5,27 +5,26 @@ using System.Collections.Generic;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    public partial class ContentCollection
+    public partial class NugetPackage
     {
-        public ContentCollection()
+        public NugetPackage()
         {
-            MimeContents = new HashSet<MimeContent>();
             Publications = new HashSet<Publication>();
-            Taxons = new HashSet<Taxon>();
-            Tenants = new HashSet<Tenant>();
         }
 
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public bool AllowAnonymousRead { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? PublishAt { get; set; }
+        public DateTime? UnPublishAt { get; set; }
         public bool? IsPublished { get; set; }
+        public string PackageId { get; set; }
+        public string PackageVersion { get; set; }
+        public string PackageAuthor { get; set; }
+        public string PackageSource { get; set; }
 
-        public virtual ICollection<MimeContent> MimeContents { get; set; }
         public virtual ICollection<Publication> Publications { get; set; }
-        public virtual ICollection<Taxon> Taxons { get; set; }
-        public virtual ICollection<Tenant> Tenants { get; set; }
     }
 }

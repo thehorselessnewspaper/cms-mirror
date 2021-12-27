@@ -5,21 +5,25 @@ using System.Collections.Generic;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    public partial class Tenant
+    public partial class Taxon
     {
-        public Tenant()
+        public Taxon()
         {
             ContentCollections = new HashSet<ContentCollection>();
-            Principals = new HashSet<Principal>();
+            Holonyms = new HashSet<Holonym>();
+            Placeholders = new HashSet<Placeholder>();
         }
 
         public Guid Id { get; set; }
-        public string DisplayName { get; set; }
+        public Guid? DisplayName { get; set; }
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
-        public DateTime? CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public string JsonContent { get; set; }
+        public string JsonSchema { get; set; }
 
         public virtual ICollection<ContentCollection> ContentCollections { get; set; }
-        public virtual ICollection<Principal> Principals { get; set; }
+        public virtual ICollection<Holonym> Holonyms { get; set; }
+        public virtual ICollection<Placeholder> Placeholders { get; set; }
     }
 }

@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    public partial class MIMEType
+    public partial class Principal
     {
-        public MIMEType()
+        public Principal()
         {
-            MimeContents = new HashSet<MimeContent>();
+            Tenants = new HashSet<Tenant>();
         }
 
         public Guid Id { get; set; }
@@ -17,8 +17,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
         public DateTime? CreatedAt { get; set; }
-        public string MIMETypeName { get; set; }
+        public string Iss { get; set; }
+        public string Aud { get; set; }
+        public string Sub { get; set; }
 
-        public virtual ICollection<MimeContent> MimeContents { get; set; }
+        public virtual ICollection<Tenant> Tenants { get; set; }
     }
 }

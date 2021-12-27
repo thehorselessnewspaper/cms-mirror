@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/26/2021 23:48:32
+-- Date Created: 12/27/2021 02:32:00
 -- Generated from EDMX file: C:\src\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
@@ -38,6 +38,66 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_MimeContentMIMEType]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MimeContents] DROP CONSTRAINT [FK_MimeContentMIMEType];
 GO
+IF OBJECT_ID(N'[dbo].[FK_ContentCollectionPublication_ContentCollection]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ContentCollectionPublication] DROP CONSTRAINT [FK_ContentCollectionPublication_ContentCollection];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContentCollectionPublication_Publication]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ContentCollectionPublication] DROP CONSTRAINT [FK_ContentCollectionPublication_Publication];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlaceholderMimeContent_Placeholder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlaceholderMimeContent] DROP CONSTRAINT [FK_PlaceholderMimeContent_Placeholder];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlaceholderMimeContent_MimeContent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlaceholderMimeContent] DROP CONSTRAINT [FK_PlaceholderMimeContent_MimeContent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TaxonHolonym_Taxon]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TaxonHolonym] DROP CONSTRAINT [FK_TaxonHolonym_Taxon];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TaxonHolonym_Holonym]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TaxonHolonym] DROP CONSTRAINT [FK_TaxonHolonym_Holonym];
+GO
+IF OBJECT_ID(N'[dbo].[FK_HolonymMeronym_Holonym]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HolonymMeronym] DROP CONSTRAINT [FK_HolonymMeronym_Holonym];
+GO
+IF OBJECT_ID(N'[dbo].[FK_HolonymMeronym_Meronym]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HolonymMeronym] DROP CONSTRAINT [FK_HolonymMeronym_Meronym];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PrincipalTenant_Principal]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PrincipalTenant] DROP CONSTRAINT [FK_PrincipalTenant_Principal];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PrincipalTenant_Tenant]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PrincipalTenant] DROP CONSTRAINT [FK_PrincipalTenant_Tenant];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TaxonContentCollection_Taxon]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TaxonContentCollection] DROP CONSTRAINT [FK_TaxonContentCollection_Taxon];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TaxonContentCollection_ContentCollection]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TaxonContentCollection] DROP CONSTRAINT [FK_TaxonContentCollection_ContentCollection];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TaxonPlaceholder_Taxon]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TaxonPlaceholder] DROP CONSTRAINT [FK_TaxonPlaceholder_Taxon];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TaxonPlaceholder_Placeholder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TaxonPlaceholder] DROP CONSTRAINT [FK_TaxonPlaceholder_Placeholder];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlaceholderHolonym_Placeholder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlaceholderHolonym] DROP CONSTRAINT [FK_PlaceholderHolonym_Placeholder];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlaceholderHolonym_Holonym]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlaceholderHolonym] DROP CONSTRAINT [FK_PlaceholderHolonym_Holonym];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlaceholderMeronym_Placeholder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlaceholderMeronym] DROP CONSTRAINT [FK_PlaceholderMeronym_Placeholder];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlaceholderMeronym_Meronym]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlaceholderMeronym] DROP CONSTRAINT [FK_PlaceholderMeronym_Meronym];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PublicationNugetPackage_Publication]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PublicationNugetPackage] DROP CONSTRAINT [FK_PublicationNugetPackage_Publication];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PublicationNugetPackage_NugetPackage]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PublicationNugetPackage] DROP CONSTRAINT [FK_PublicationNugetPackage_NugetPackage];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -61,11 +121,62 @@ GO
 IF OBJECT_ID(N'[dbo].[ContentCollections]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ContentCollections];
 GO
+IF OBJECT_ID(N'[dbo].[Publications]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Publications];
+GO
+IF OBJECT_ID(N'[dbo].[Placeholders]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Placeholders];
+GO
+IF OBJECT_ID(N'[dbo].[Taxons]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Taxons];
+GO
+IF OBJECT_ID(N'[dbo].[Holonyms]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Holonyms];
+GO
+IF OBJECT_ID(N'[dbo].[Meronyms]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Meronyms];
+GO
+IF OBJECT_ID(N'[dbo].[Principals]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Principals];
+GO
+IF OBJECT_ID(N'[dbo].[NugetPackages]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[NugetPackages];
+GO
 IF OBJECT_ID(N'[dbo].[TenantContentCollection]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TenantContentCollection];
 GO
 IF OBJECT_ID(N'[dbo].[ContentCollectionMimeContent]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ContentCollectionMimeContent];
+GO
+IF OBJECT_ID(N'[dbo].[ContentCollectionPublication]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ContentCollectionPublication];
+GO
+IF OBJECT_ID(N'[dbo].[PlaceholderMimeContent]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PlaceholderMimeContent];
+GO
+IF OBJECT_ID(N'[dbo].[TaxonHolonym]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TaxonHolonym];
+GO
+IF OBJECT_ID(N'[dbo].[HolonymMeronym]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[HolonymMeronym];
+GO
+IF OBJECT_ID(N'[dbo].[PrincipalTenant]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PrincipalTenant];
+GO
+IF OBJECT_ID(N'[dbo].[TaxonContentCollection]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TaxonContentCollection];
+GO
+IF OBJECT_ID(N'[dbo].[TaxonPlaceholder]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TaxonPlaceholder];
+GO
+IF OBJECT_ID(N'[dbo].[PlaceholderHolonym]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PlaceholderHolonym];
+GO
+IF OBJECT_ID(N'[dbo].[PlaceholderMeronym]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PlaceholderMeronym];
+GO
+IF OBJECT_ID(N'[dbo].[PublicationNugetPackage]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PublicationNugetPackage];
 GO
 
 -- --------------------------------------------------
@@ -143,7 +254,7 @@ GO
 
 -- Creating table 'Publications'
 CREATE TABLE [dbo].[Publications] (
-    [Id] nvarchar(max)  NOT NULL,
+    [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
@@ -157,7 +268,7 @@ GO
 
 -- Creating table 'Placeholders'
 CREATE TABLE [dbo].[Placeholders] (
-    [Id] nvarchar(max)  NOT NULL,
+    [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NOT NULL,
     [IsSoftDeleted] bit  NULL,
@@ -168,8 +279,8 @@ GO
 
 -- Creating table 'Taxons'
 CREATE TABLE [dbo].[Taxons] (
-    [Id] nvarchar(max)  NOT NULL,
-    [DisplayName] nvarchar(max)  NULL,
+    [Id] uniqueidentifier  NOT NULL,
+    [DisplayName] uniqueidentifier  NULL,
     [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
     [CreatedAt] datetime  NOT NULL,
@@ -180,7 +291,7 @@ GO
 
 -- Creating table 'Holonyms'
 CREATE TABLE [dbo].[Holonyms] (
-    [Id] nvarchar(max)  NOT NULL,
+    [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
@@ -192,7 +303,7 @@ GO
 
 -- Creating table 'Meronyms'
 CREATE TABLE [dbo].[Meronyms] (
-    [Id] nvarchar(max)  NOT NULL,
+    [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
@@ -204,7 +315,7 @@ GO
 
 -- Creating table 'Principals'
 CREATE TABLE [dbo].[Principals] (
-    [Id] int IDENTITY(1,1) NOT NULL,
+    [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NOT NULL,
     [IsSoftDeleted] bit  NULL,
@@ -217,7 +328,7 @@ GO
 
 -- Creating table 'NugetPackages'
 CREATE TABLE [dbo].[NugetPackages] (
-    [Id] nvarchar(max)  NOT NULL,
+    [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
@@ -249,70 +360,70 @@ GO
 -- Creating table 'ContentCollectionPublication'
 CREATE TABLE [dbo].[ContentCollectionPublication] (
     [ContentCollections_Id] uniqueidentifier  NOT NULL,
-    [Publications_Id] nvarchar(max)  NOT NULL
+    [Publications_Id] uniqueidentifier  NOT NULL
 );
 GO
 
 -- Creating table 'PlaceholderMimeContent'
 CREATE TABLE [dbo].[PlaceholderMimeContent] (
-    [Placeholders_Id] nvarchar(max)  NOT NULL,
+    [Placeholders_Id] uniqueidentifier  NOT NULL,
     [MimeContents_Id] uniqueidentifier  NOT NULL
 );
 GO
 
 -- Creating table 'TaxonHolonym'
 CREATE TABLE [dbo].[TaxonHolonym] (
-    [Taxons_Id] nvarchar(max)  NOT NULL,
-    [Holonyms_Id] nvarchar(max)  NOT NULL
+    [Taxons_Id] uniqueidentifier  NOT NULL,
+    [Holonyms_Id] uniqueidentifier  NOT NULL
 );
 GO
 
 -- Creating table 'HolonymMeronym'
 CREATE TABLE [dbo].[HolonymMeronym] (
-    [Holonyms_Id] nvarchar(max)  NOT NULL,
-    [Meronyms_Id] nvarchar(max)  NOT NULL
+    [Holonyms_Id] uniqueidentifier  NOT NULL,
+    [Meronyms_Id] uniqueidentifier  NOT NULL
 );
 GO
 
 -- Creating table 'PrincipalTenant'
 CREATE TABLE [dbo].[PrincipalTenant] (
-    [Principals_Id] int  NOT NULL,
+    [Principals_Id] uniqueidentifier  NOT NULL,
     [Tenants_Id] uniqueidentifier  NOT NULL
 );
 GO
 
 -- Creating table 'TaxonContentCollection'
 CREATE TABLE [dbo].[TaxonContentCollection] (
-    [Taxons_Id] nvarchar(max)  NOT NULL,
+    [Taxons_Id] uniqueidentifier  NOT NULL,
     [ContentCollections_Id] uniqueidentifier  NOT NULL
 );
 GO
 
 -- Creating table 'TaxonPlaceholder'
 CREATE TABLE [dbo].[TaxonPlaceholder] (
-    [Taxons_Id] nvarchar(max)  NOT NULL,
-    [Placeholders_Id] nvarchar(max)  NOT NULL
+    [Taxons_Id] uniqueidentifier  NOT NULL,
+    [Placeholders_Id] uniqueidentifier  NOT NULL
 );
 GO
 
 -- Creating table 'PlaceholderHolonym'
 CREATE TABLE [dbo].[PlaceholderHolonym] (
-    [Placeholders_Id] nvarchar(max)  NOT NULL,
-    [Holonyms_Id] nvarchar(max)  NOT NULL
+    [Placeholders_Id] uniqueidentifier  NOT NULL,
+    [Holonyms_Id] uniqueidentifier  NOT NULL
 );
 GO
 
 -- Creating table 'PlaceholderMeronym'
 CREATE TABLE [dbo].[PlaceholderMeronym] (
-    [Placeholders_Id] nvarchar(max)  NOT NULL,
-    [Meronyms_Id] nvarchar(max)  NOT NULL
+    [Placeholders_Id] uniqueidentifier  NOT NULL,
+    [Meronyms_Id] uniqueidentifier  NOT NULL
 );
 GO
 
 -- Creating table 'PublicationNugetPackage'
 CREATE TABLE [dbo].[PublicationNugetPackage] (
-    [Publications_Id] nvarchar(max)  NOT NULL,
-    [NugetPackages_Id] nvarchar(max)  NOT NULL
+    [Publications_Id] uniqueidentifier  NOT NULL,
+    [NugetPackages_Id] uniqueidentifier  NOT NULL
 );
 GO
 

@@ -5,20 +5,23 @@ using System.Collections.Generic;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    public partial class MIMEType
+    public partial class Meronym
     {
-        public MIMEType()
+        public Meronym()
         {
-            MimeContents = new HashSet<MimeContent>();
+            Holonyms = new HashSet<Holonym>();
+            Placeholders = new HashSet<Placeholder>();
         }
 
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public string MIMETypeName { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public string JsonContent { get; set; }
+        public string JsonSchema { get; set; }
 
-        public virtual ICollection<MimeContent> MimeContents { get; set; }
+        public virtual ICollection<Holonym> Holonyms { get; set; }
+        public virtual ICollection<Placeholder> Placeholders { get; set; }
     }
 }
