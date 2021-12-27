@@ -1,0 +1,37 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@using Microsoft.AspNetCore.Authentication
+@model AuthenticationScheme[]
+
+@if (User.Claims == null || User.Claims.Count() == 0)
+{
+    <div class="container">
+
+        <p class="lead text-left">Available Authorities</p>
+        <div style="overflow:auto; height:auto;">
+            @foreach (var scheme in Model!.OrderBy(p => p.DisplayName))
+            {
+                <form action="/signin" method="post">
+                    <input type="hidden" name="Provider" value="@scheme.Name" />
+                    <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl" />
+
+                    <button class="btn btn-success m-1" type="submit">Connect using @scheme.DisplayName</button>
+                </form>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="container">
+        <h1>Welcome, @User.Identity.Name</h1>
+
+        <form action="/signout" method="post">
+            <button class="btn btn-success m-1" type="submit">Sign Out</button>
+        </form>
+     </div>
+}

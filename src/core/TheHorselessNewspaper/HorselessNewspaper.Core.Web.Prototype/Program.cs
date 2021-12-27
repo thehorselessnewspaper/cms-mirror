@@ -18,11 +18,12 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
 {
-    
+
     options.AddDefaultPolicy(
         builder =>
         {
@@ -61,7 +62,7 @@ builder.Services.AddAuthentication(options =>
 })
 .AddOpenIdConnect(opts =>
 {
-  
+
     opts.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     //opts.SignedOutCallbackPath = "/";
     //opts.SignedOutRedirectUri = builder.Configuration[KeycloakAuthOptions.SignoutRedirectUrlConfigKey];
@@ -148,6 +149,10 @@ app.UseHorselessNewspaper(options =>
     {
         // test of user defined routing scenario
         options.MapDynamicControllerRoute<HorselessRouteTransformer>("");
+        app.MapControllerRoute(
+        name: "Authentication",
+        pattern: "{area:exists}/{controller=KeycloakController}/{action=Signin}/{id?}");
+
 
         app.MapControllerRoute(
         name: "HorselessCMS",

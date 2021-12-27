@@ -23,15 +23,15 @@ namespace HorselessNewspaper.RazorClassLibrary.Keycloak.Default.Controllers
             this.AuthOptions = keycloakAuthOptions;
         }
 
-        [HttpGet("~/signin")]
+        [HttpGet("SignIn")]
         public async Task<IActionResult> SignIn()
         {
 
-            return View("SignIn", await HttpContext.GetExternalProvidersAsync());
+            return View("Index", await HttpContext.GetExternalProvidersAsync());
 
         }
 
-        [HttpPost("~/signin")]
+        [HttpPost("SignIn")]
         public async Task<IActionResult> SignIn([FromForm] string provider)
         {
             // Note: the "provider" parameter corresponds to the external

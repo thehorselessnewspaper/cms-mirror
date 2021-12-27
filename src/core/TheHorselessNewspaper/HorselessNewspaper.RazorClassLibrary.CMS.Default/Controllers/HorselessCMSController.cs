@@ -32,9 +32,10 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
             }
             else
             {
+                return View();
                 // TODO convert this reference into a devops productoin environment configurable feture toggle
-                return RedirectToAction(actionName: "signin", controllerName: "KeyCloakAuthentication"); 
-
+                // return RedirectToAction( actionName: "signin", controllerName: "KeycloakAuthentication"); 
+                // return RedirectToRoute(new { action = "signin", controller = "KeyCloakAuthentication", area = "Authentication" });
             }
         }
     }

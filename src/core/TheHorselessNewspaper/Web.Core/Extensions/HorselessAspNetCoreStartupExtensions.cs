@@ -9,11 +9,8 @@ using HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant;
 using HorselessNewspaper.Web.Core.SingletonServices.ViewCompiler;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
-using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.Schemas.HostingModel.DTO;
 
@@ -36,24 +33,29 @@ namespace HorselessNewspaper.Web.Core.Extensions
             // as per https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/areas?view=aspnetcore-6.0
             services.Configure<RazorViewEngineOptions>(o =>
             {
-             
+
                 // o.ViewLocationFormats.Clear();
-                //o.ViewLocationFormats.Add
-                //("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
-                //        o.ViewLocationFormats.Add
-                //("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add
+                    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add
+                    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
+
+                o.ViewLocationFormats.Add
+                    ("~/../HorselessNewspaper.Web.Core.Auth.Keycloak/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add
+                    ("~/../HorselessNewspaper.Web.Core.Auth.Keycloak/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
             }
-            
+
             );
 
-            
+
             serviceBuilder.Services.AddSingleton<IHorselessCacheProvider<Guid, TenantDTO>, DefaultTenantCache>();
 
             // support dynamic view loading and unloading
             // wholly based on https://stackoverflow.com/questions/48206993/how-to-load-asp-net-core-razor-view-dynamically-at-runtime
-            ServiceDescriptor descriptor = services.FirstOrDefault(s => s.ServiceType == typeof(IViewCompilerProvider));
-            serviceBuilder.Services.Remove(descriptor);
-            services.AddSingleton<IViewCompilerProvider, HorselessViewCompilerProvider>();
+            //ServiceDescriptor descriptor = services.FirstOrDefault(s => s.ServiceType == typeof(IViewCompilerProvider));
+            //serviceBuilder.Services.Remove(descriptor);
+            //services.AddSingleton<IViewCompilerProvider, HorselessViewCompilerProvider>();
 
             #region cms routing pattern services
             serviceBuilder.Services.AddScoped<IHorselessRoutingStrategy, UrlSegmentRoutingStrategy>();
