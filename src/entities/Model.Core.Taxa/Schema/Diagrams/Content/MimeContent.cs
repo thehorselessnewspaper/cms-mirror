@@ -18,6 +18,7 @@ namespace Schema.Diagrams.Content
         public MimeContent()
         {
             this.ContentCollections = new HashSet<ContentCollection>();
+            this.Placeholders = new HashSet<Placeholder>();
         }
     
         public System.Guid Id { get; set; }
@@ -28,11 +29,14 @@ namespace Schema.Diagrams.Content
         public Nullable<System.Guid> FilesystemAssetId { get; set; }
         public Nullable<System.Guid> JSONAssetId { get; set; }
         public Nullable<System.Guid> MIMETypeId { get; set; }
+        public Nullable<bool> IsPublished { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ContentCollection> ContentCollections { get; set; }
         public virtual FilesystemAsset FilesystemAsset { get; set; }
         public virtual JSONAsset JSONAsset { get; set; }
         public virtual MIMEType MIMEType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Placeholder> Placeholders { get; set; }
     }
 }

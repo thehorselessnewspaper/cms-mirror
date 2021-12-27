@@ -12,32 +12,28 @@ namespace Schema.Diagrams.Content
     using System;
     using System.Collections.Generic;
     
-    public partial class ContentCollection
+    public partial class NugetPackage
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ContentCollection()
+        public NugetPackage()
         {
-            this.Tenants = new HashSet<Tenant>();
-            this.MimeContents = new HashSet<MimeContent>();
             this.Publications = new HashSet<Publication>();
-            this.Taxons = new HashSet<Taxon>();
         }
     
-        public System.Guid Id { get; set; }
+        public string Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public Nullable<bool> IsSoftDeleted { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public bool AllowAnonymousRead { get; set; }
+        public System.DateTime CreatedAt { get; set; }
+        public Nullable<System.DateTime> PublishAt { get; set; }
+        public Nullable<System.DateTime> UnPublishAt { get; set; }
         public Nullable<bool> IsPublished { get; set; }
+        public string PackageId { get; set; }
+        public string PackageVersion { get; set; }
+        public string PackageAuthor { get; set; }
+        public string PackageSource { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tenant> Tenants { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MimeContent> MimeContents { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Publication> Publications { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Taxon> Taxons { get; set; }
     }
 }

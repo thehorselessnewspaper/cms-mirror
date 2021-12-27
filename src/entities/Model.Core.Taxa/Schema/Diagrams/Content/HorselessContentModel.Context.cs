@@ -31,5 +31,12 @@ namespace Schema.Diagrams.Content
         public virtual DbSet<FilesystemAsset> FilesystemAssets { get; set; }
         public virtual DbSet<JSONAsset> JSONAssets { get; set; }
         public virtual DbSet<ContentCollection> ContentCollections { get; set; }
+        public virtual DbSet<Publication> Publications { get; set; }
+        public virtual DbSet<Placeholder> Placeholders { get; set; }
+        public virtual DbSet<Taxon> Taxons { get; set; }
+        public virtual DbSet<Holonym> Holonyms { get; set; }
+        public virtual DbSet<Meronym> Meronyms { get; set; }
+        public virtual DbSet<Principal> Principals { get; set; }
+        public virtual DbSet<NugetPackage> NugetPackages { get; set; }
     }
 }

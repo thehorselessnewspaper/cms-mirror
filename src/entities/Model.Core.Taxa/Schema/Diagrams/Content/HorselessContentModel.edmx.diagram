@@ -4,18 +4,35 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0c7f99035d7540a9858afd51f8273784" Name="Diagram1" ZoomLevel="83" >
-        <EntityTypeShape EntityType="HorselessContentModel.MimeContent" Width="2.375" PointX="7.875" PointY="1.5" />
-        <EntityTypeShape EntityType="HorselessContentModel.Tenant" Width="2.5" PointX="0.5" PointY="1.5" />
-        <EntityTypeShape EntityType="HorselessContentModel.MIMEType" Width="2.25" PointX="7.875" PointY="5.625" />
-        <EntityTypeShape EntityType="HorselessContentModel.FilesystemAsset" Width="2.875" PointX="12.75" PointY="1.5" />
-        <EntityTypeShape EntityType="HorselessContentModel.JSONAsset" Width="2.875" PointX="12.75" PointY="4.375" />
-        <EntityTypeShape EntityType="HorselessContentModel.ContentCollection" Width="2.875" PointX="4.375" PointY="1.5" />
+      <Diagram DiagramId="0c7f99035d7540a9858afd51f8273784" Name="Diagram1" ZoomLevel="96" >
+        <EntityTypeShape EntityType="HorselessContentModel.MimeContent" Width="2.375" PointX="12" PointY="6.375" />
+        <EntityTypeShape EntityType="HorselessContentModel.Tenant" Width="2.5" PointX="3.25" PointY="6.375" />
+        <EntityTypeShape EntityType="HorselessContentModel.MIMEType" Width="2.25" PointX="16.125" PointY="2.375" />
+        <EntityTypeShape EntityType="HorselessContentModel.FilesystemAsset" Width="2.875" PointX="15.5" PointY="6.375" />
+        <EntityTypeShape EntityType="HorselessContentModel.JSONAsset" Width="2.875" PointX="15.5" PointY="9.25" />
+        <EntityTypeShape EntityType="HorselessContentModel.ContentCollection" Width="2.875" PointX="7.125" PointY="6.375" />
         <AssociationConnector Association="HorselessContentModel.TenantContentCollection" />
         <AssociationConnector Association="HorselessContentModel.ContentCollectionMimeContent" />
         <AssociationConnector Association="HorselessContentModel.FilesystemAssetMimeContent" />
         <AssociationConnector Association="HorselessContentModel.MimeContentJSONAsset" />
         <AssociationConnector Association="HorselessContentModel.MimeContentMIMEType" />
+        <EntityTypeShape EntityType="HorselessContentModel.Publication" Width="2.875" PointX="8.75" PointY="10.5" />
+        <AssociationConnector Association="HorselessContentModel.ContentCollectionPublication" />
+        <EntityTypeShape EntityType="HorselessContentModel.Placeholder" Width="2.25" PointX="12.375" PointY="15.875" />
+        <AssociationConnector Association="HorselessContentModel.PlaceholderMimeContent" />
+        <EntityTypeShape EntityType="HorselessContentModel.Taxon" Width="2.125" PointX="5.375" PointY="15.75" />
+        <EntityTypeShape EntityType="HorselessContentModel.Holonym" Width="2.125" PointX="5.875" PointY="19.875" />
+        <EntityTypeShape EntityType="HorselessContentModel.Meronym" Width="2.125" PointX="9.25" PointY="18.625" />
+        <AssociationConnector Association="HorselessContentModel.TaxonHolonym" />
+        <AssociationConnector Association="HorselessContentModel.HolonymMeronym" />
+        <EntityTypeShape EntityType="HorselessContentModel.Principal" Width="2.5" PointX="3.25" PointY="9.375" />
+        <AssociationConnector Association="HorselessContentModel.PrincipalTenant" />
+        <AssociationConnector Association="HorselessContentModel.TaxonContentCollection" />
+        <AssociationConnector Association="HorselessContentModel.TaxonPlaceholder" />
+        <AssociationConnector Association="HorselessContentModel.PlaceholderHolonym" />
+        <AssociationConnector Association="HorselessContentModel.PlaceholderMeronym" />
+        <EntityTypeShape EntityType="HorselessContentModel.NugetPackage" Width="2.625" PointX="8.875" PointY="14.375" />
+        <AssociationConnector Association="HorselessContentModel.PublicationNugetPackage" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

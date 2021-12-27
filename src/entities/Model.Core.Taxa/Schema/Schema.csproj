@@ -50,6 +50,9 @@
     <Compile Include="Diagrams\Content\FilesystemAsset.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Diagrams\Content\Holonym.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Diagrams\Content\HorselessContentModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -68,10 +71,28 @@
     <Compile Include="Diagrams\Content\JSONAsset.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Diagrams\Content\Meronym.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Diagrams\Content\MimeContent.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Content\MIMEType.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\NugetPackage.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\Placeholder.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\Principal.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\Publication.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\Taxon.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Content\Tenant.cs">

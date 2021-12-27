@@ -12,32 +12,24 @@ namespace Schema.Diagrams.Content
     using System;
     using System.Collections.Generic;
     
-    public partial class ContentCollection
+    public partial class Principal
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ContentCollection()
+        public Principal()
         {
             this.Tenants = new HashSet<Tenant>();
-            this.MimeContents = new HashSet<MimeContent>();
-            this.Publications = new HashSet<Publication>();
-            this.Taxons = new HashSet<Taxon>();
         }
     
-        public System.Guid Id { get; set; }
+        public int Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public Nullable<bool> IsSoftDeleted { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
-        public bool AllowAnonymousRead { get; set; }
-        public Nullable<bool> IsPublished { get; set; }
+        public string Iss { get; set; }
+        public string Aud { get; set; }
+        public string Sub { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tenant> Tenants { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MimeContent> MimeContents { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Publication> Publications { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Taxon> Taxons { get; set; }
     }
 }

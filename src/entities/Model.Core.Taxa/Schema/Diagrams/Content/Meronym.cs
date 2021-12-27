@@ -12,32 +12,26 @@ namespace Schema.Diagrams.Content
     using System;
     using System.Collections.Generic;
     
-    public partial class ContentCollection
+    public partial class Meronym
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ContentCollection()
+        public Meronym()
         {
-            this.Tenants = new HashSet<Tenant>();
-            this.MimeContents = new HashSet<MimeContent>();
-            this.Publications = new HashSet<Publication>();
-            this.Taxons = new HashSet<Taxon>();
+            this.Holonyms = new HashSet<Holonym>();
+            this.Placeholders = new HashSet<Placeholder>();
         }
     
-        public System.Guid Id { get; set; }
+        public string Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public Nullable<bool> IsSoftDeleted { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public bool AllowAnonymousRead { get; set; }
-        public Nullable<bool> IsPublished { get; set; }
+        public System.DateTime CreatedAt { get; set; }
+        public string JsonContent { get; set; }
+        public string JsonSchema { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tenant> Tenants { get; set; }
+        public virtual ICollection<Holonym> Holonyms { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MimeContent> MimeContents { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Publication> Publications { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Taxon> Taxons { get; set; }
+        public virtual ICollection<Placeholder> Placeholders { get; set; }
     }
 }

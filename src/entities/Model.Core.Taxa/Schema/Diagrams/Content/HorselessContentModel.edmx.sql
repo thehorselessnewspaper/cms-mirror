@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/18/2021 14:04:32
+-- Date Created: 12/26/2021 23:48:32
 -- Generated from EDMX file: C:\src\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
@@ -17,11 +17,56 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_TenantContentCollection_Tenant]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TenantContentCollection] DROP CONSTRAINT [FK_TenantContentCollection_Tenant];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TenantContentCollection_ContentCollection]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TenantContentCollection] DROP CONSTRAINT [FK_TenantContentCollection_ContentCollection];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContentCollectionMimeContent_ContentCollection]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ContentCollectionMimeContent] DROP CONSTRAINT [FK_ContentCollectionMimeContent_ContentCollection];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContentCollectionMimeContent_MimeContent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ContentCollectionMimeContent] DROP CONSTRAINT [FK_ContentCollectionMimeContent_MimeContent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_FilesystemAssetMimeContent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MimeContents] DROP CONSTRAINT [FK_FilesystemAssetMimeContent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MimeContentJSONAsset]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MimeContents] DROP CONSTRAINT [FK_MimeContentJSONAsset];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MimeContentMIMEType]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MimeContents] DROP CONSTRAINT [FK_MimeContentMIMEType];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[MimeContents]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MimeContents];
+GO
+IF OBJECT_ID(N'[dbo].[Tenants]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Tenants];
+GO
+IF OBJECT_ID(N'[dbo].[MIMETypes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MIMETypes];
+GO
+IF OBJECT_ID(N'[dbo].[FilesystemAssets]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[FilesystemAssets];
+GO
+IF OBJECT_ID(N'[dbo].[JSONAssets]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[JSONAssets];
+GO
+IF OBJECT_ID(N'[dbo].[ContentCollections]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ContentCollections];
+GO
+IF OBJECT_ID(N'[dbo].[TenantContentCollection]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TenantContentCollection];
+GO
+IF OBJECT_ID(N'[dbo].[ContentCollectionMimeContent]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ContentCollectionMimeContent];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -36,7 +81,8 @@ CREATE TABLE [dbo].[MimeContents] (
     [CreatedAt] datetime  NULL,
     [FilesystemAssetId] uniqueidentifier  NULL,
     [JSONAssetId] uniqueidentifier  NULL,
-    [MIMETypeId] uniqueidentifier  NULL
+    [MIMETypeId] uniqueidentifier  NULL,
+    [IsPublished] bit  NULL
 );
 GO
 
@@ -90,7 +136,99 @@ CREATE TABLE [dbo].[ContentCollections] (
     [ObjectId] nvarchar(max)  NOT NULL,
     [IsSoftDeleted] bit  NULL,
     [CreatedAt] datetime  NULL,
-    [AllowAnonymousRead] bit  NOT NULL
+    [AllowAnonymousRead] bit  NOT NULL,
+    [IsPublished] bit  NULL
+);
+GO
+
+-- Creating table 'Publications'
+CREATE TABLE [dbo].[Publications] (
+    [Id] nvarchar(max)  NOT NULL,
+    [DisplayName] nvarchar(max)  NULL,
+    [ObjectId] nvarchar(max)  NULL,
+    [IsSoftDeleted] bit  NULL,
+    [CreatedAt] datetime  NOT NULL,
+    [RouteTemplateRegEx] nvarchar(max)  NULL,
+    [PublishAt] datetime  NULL,
+    [UnPublishAt] datetime  NULL,
+    [IsPublished] bit  NULL
+);
+GO
+
+-- Creating table 'Placeholders'
+CREATE TABLE [dbo].[Placeholders] (
+    [Id] nvarchar(max)  NOT NULL,
+    [DisplayName] nvarchar(max)  NULL,
+    [ObjectId] nvarchar(max)  NOT NULL,
+    [IsSoftDeleted] bit  NULL,
+    [CreatedAt] datetime  NULL,
+    [IsPublished] bit  NULL
+);
+GO
+
+-- Creating table 'Taxons'
+CREATE TABLE [dbo].[Taxons] (
+    [Id] nvarchar(max)  NOT NULL,
+    [DisplayName] nvarchar(max)  NULL,
+    [ObjectId] nvarchar(max)  NULL,
+    [IsSoftDeleted] bit  NULL,
+    [CreatedAt] datetime  NOT NULL,
+    [JsonContent] nvarchar(max)  NOT NULL,
+    [JsonSchema] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Holonyms'
+CREATE TABLE [dbo].[Holonyms] (
+    [Id] nvarchar(max)  NOT NULL,
+    [DisplayName] nvarchar(max)  NULL,
+    [ObjectId] nvarchar(max)  NULL,
+    [IsSoftDeleted] bit  NULL,
+    [CreatedAt] datetime  NOT NULL,
+    [JsonContent] nvarchar(max)  NOT NULL,
+    [JsonSchema] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Meronyms'
+CREATE TABLE [dbo].[Meronyms] (
+    [Id] nvarchar(max)  NOT NULL,
+    [DisplayName] nvarchar(max)  NULL,
+    [ObjectId] nvarchar(max)  NULL,
+    [IsSoftDeleted] bit  NULL,
+    [CreatedAt] datetime  NOT NULL,
+    [JsonContent] nvarchar(max)  NOT NULL,
+    [JsonSchema] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Principals'
+CREATE TABLE [dbo].[Principals] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [DisplayName] nvarchar(max)  NULL,
+    [ObjectId] nvarchar(max)  NOT NULL,
+    [IsSoftDeleted] bit  NULL,
+    [CreatedAt] datetime  NULL,
+    [Iss] nvarchar(max)  NULL,
+    [Aud] nvarchar(max)  NULL,
+    [Sub] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'NugetPackages'
+CREATE TABLE [dbo].[NugetPackages] (
+    [Id] nvarchar(max)  NOT NULL,
+    [DisplayName] nvarchar(max)  NULL,
+    [ObjectId] nvarchar(max)  NULL,
+    [IsSoftDeleted] bit  NULL,
+    [CreatedAt] datetime  NOT NULL,
+    [PublishAt] datetime  NULL,
+    [UnPublishAt] datetime  NULL,
+    [IsPublished] bit  NULL,
+    [PackageId] nvarchar(max)  NULL,
+    [PackageVersion] nvarchar(max)  NULL,
+    [PackageAuthor] nvarchar(max)  NULL,
+    [PackageSource] nvarchar(max)  NULL
 );
 GO
 
@@ -105,6 +243,76 @@ GO
 CREATE TABLE [dbo].[ContentCollectionMimeContent] (
     [ContentCollections_Id] uniqueidentifier  NOT NULL,
     [MimeContents_Id] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'ContentCollectionPublication'
+CREATE TABLE [dbo].[ContentCollectionPublication] (
+    [ContentCollections_Id] uniqueidentifier  NOT NULL,
+    [Publications_Id] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'PlaceholderMimeContent'
+CREATE TABLE [dbo].[PlaceholderMimeContent] (
+    [Placeholders_Id] nvarchar(max)  NOT NULL,
+    [MimeContents_Id] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'TaxonHolonym'
+CREATE TABLE [dbo].[TaxonHolonym] (
+    [Taxons_Id] nvarchar(max)  NOT NULL,
+    [Holonyms_Id] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'HolonymMeronym'
+CREATE TABLE [dbo].[HolonymMeronym] (
+    [Holonyms_Id] nvarchar(max)  NOT NULL,
+    [Meronyms_Id] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'PrincipalTenant'
+CREATE TABLE [dbo].[PrincipalTenant] (
+    [Principals_Id] int  NOT NULL,
+    [Tenants_Id] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'TaxonContentCollection'
+CREATE TABLE [dbo].[TaxonContentCollection] (
+    [Taxons_Id] nvarchar(max)  NOT NULL,
+    [ContentCollections_Id] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'TaxonPlaceholder'
+CREATE TABLE [dbo].[TaxonPlaceholder] (
+    [Taxons_Id] nvarchar(max)  NOT NULL,
+    [Placeholders_Id] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'PlaceholderHolonym'
+CREATE TABLE [dbo].[PlaceholderHolonym] (
+    [Placeholders_Id] nvarchar(max)  NOT NULL,
+    [Holonyms_Id] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'PlaceholderMeronym'
+CREATE TABLE [dbo].[PlaceholderMeronym] (
+    [Placeholders_Id] nvarchar(max)  NOT NULL,
+    [Meronyms_Id] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'PublicationNugetPackage'
+CREATE TABLE [dbo].[PublicationNugetPackage] (
+    [Publications_Id] nvarchar(max)  NOT NULL,
+    [NugetPackages_Id] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -148,6 +356,48 @@ ADD CONSTRAINT [PK_ContentCollections]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
+-- Creating primary key on [Id] in table 'Publications'
+ALTER TABLE [dbo].[Publications]
+ADD CONSTRAINT [PK_Publications]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Placeholders'
+ALTER TABLE [dbo].[Placeholders]
+ADD CONSTRAINT [PK_Placeholders]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Taxons'
+ALTER TABLE [dbo].[Taxons]
+ADD CONSTRAINT [PK_Taxons]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Holonyms'
+ALTER TABLE [dbo].[Holonyms]
+ADD CONSTRAINT [PK_Holonyms]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Meronyms'
+ALTER TABLE [dbo].[Meronyms]
+ADD CONSTRAINT [PK_Meronyms]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Principals'
+ALTER TABLE [dbo].[Principals]
+ADD CONSTRAINT [PK_Principals]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'NugetPackages'
+ALTER TABLE [dbo].[NugetPackages]
+ADD CONSTRAINT [PK_NugetPackages]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
 -- Creating primary key on [Tenants_Id], [ContentCollections_Id] in table 'TenantContentCollection'
 ALTER TABLE [dbo].[TenantContentCollection]
 ADD CONSTRAINT [PK_TenantContentCollection]
@@ -158,6 +408,66 @@ GO
 ALTER TABLE [dbo].[ContentCollectionMimeContent]
 ADD CONSTRAINT [PK_ContentCollectionMimeContent]
     PRIMARY KEY CLUSTERED ([ContentCollections_Id], [MimeContents_Id] ASC);
+GO
+
+-- Creating primary key on [ContentCollections_Id], [Publications_Id] in table 'ContentCollectionPublication'
+ALTER TABLE [dbo].[ContentCollectionPublication]
+ADD CONSTRAINT [PK_ContentCollectionPublication]
+    PRIMARY KEY CLUSTERED ([ContentCollections_Id], [Publications_Id] ASC);
+GO
+
+-- Creating primary key on [Placeholders_Id], [MimeContents_Id] in table 'PlaceholderMimeContent'
+ALTER TABLE [dbo].[PlaceholderMimeContent]
+ADD CONSTRAINT [PK_PlaceholderMimeContent]
+    PRIMARY KEY CLUSTERED ([Placeholders_Id], [MimeContents_Id] ASC);
+GO
+
+-- Creating primary key on [Taxons_Id], [Holonyms_Id] in table 'TaxonHolonym'
+ALTER TABLE [dbo].[TaxonHolonym]
+ADD CONSTRAINT [PK_TaxonHolonym]
+    PRIMARY KEY CLUSTERED ([Taxons_Id], [Holonyms_Id] ASC);
+GO
+
+-- Creating primary key on [Holonyms_Id], [Meronyms_Id] in table 'HolonymMeronym'
+ALTER TABLE [dbo].[HolonymMeronym]
+ADD CONSTRAINT [PK_HolonymMeronym]
+    PRIMARY KEY CLUSTERED ([Holonyms_Id], [Meronyms_Id] ASC);
+GO
+
+-- Creating primary key on [Principals_Id], [Tenants_Id] in table 'PrincipalTenant'
+ALTER TABLE [dbo].[PrincipalTenant]
+ADD CONSTRAINT [PK_PrincipalTenant]
+    PRIMARY KEY CLUSTERED ([Principals_Id], [Tenants_Id] ASC);
+GO
+
+-- Creating primary key on [Taxons_Id], [ContentCollections_Id] in table 'TaxonContentCollection'
+ALTER TABLE [dbo].[TaxonContentCollection]
+ADD CONSTRAINT [PK_TaxonContentCollection]
+    PRIMARY KEY CLUSTERED ([Taxons_Id], [ContentCollections_Id] ASC);
+GO
+
+-- Creating primary key on [Taxons_Id], [Placeholders_Id] in table 'TaxonPlaceholder'
+ALTER TABLE [dbo].[TaxonPlaceholder]
+ADD CONSTRAINT [PK_TaxonPlaceholder]
+    PRIMARY KEY CLUSTERED ([Taxons_Id], [Placeholders_Id] ASC);
+GO
+
+-- Creating primary key on [Placeholders_Id], [Holonyms_Id] in table 'PlaceholderHolonym'
+ALTER TABLE [dbo].[PlaceholderHolonym]
+ADD CONSTRAINT [PK_PlaceholderHolonym]
+    PRIMARY KEY CLUSTERED ([Placeholders_Id], [Holonyms_Id] ASC);
+GO
+
+-- Creating primary key on [Placeholders_Id], [Meronyms_Id] in table 'PlaceholderMeronym'
+ALTER TABLE [dbo].[PlaceholderMeronym]
+ADD CONSTRAINT [PK_PlaceholderMeronym]
+    PRIMARY KEY CLUSTERED ([Placeholders_Id], [Meronyms_Id] ASC);
+GO
+
+-- Creating primary key on [Publications_Id], [NugetPackages_Id] in table 'PublicationNugetPackage'
+ALTER TABLE [dbo].[PublicationNugetPackage]
+ADD CONSTRAINT [PK_PublicationNugetPackage]
+    PRIMARY KEY CLUSTERED ([Publications_Id], [NugetPackages_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -255,6 +565,246 @@ GO
 CREATE INDEX [IX_FK_MimeContentMIMEType]
 ON [dbo].[MimeContents]
     ([MIMETypeId]);
+GO
+
+-- Creating foreign key on [ContentCollections_Id] in table 'ContentCollectionPublication'
+ALTER TABLE [dbo].[ContentCollectionPublication]
+ADD CONSTRAINT [FK_ContentCollectionPublication_ContentCollection]
+    FOREIGN KEY ([ContentCollections_Id])
+    REFERENCES [dbo].[ContentCollections]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Publications_Id] in table 'ContentCollectionPublication'
+ALTER TABLE [dbo].[ContentCollectionPublication]
+ADD CONSTRAINT [FK_ContentCollectionPublication_Publication]
+    FOREIGN KEY ([Publications_Id])
+    REFERENCES [dbo].[Publications]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ContentCollectionPublication_Publication'
+CREATE INDEX [IX_FK_ContentCollectionPublication_Publication]
+ON [dbo].[ContentCollectionPublication]
+    ([Publications_Id]);
+GO
+
+-- Creating foreign key on [Placeholders_Id] in table 'PlaceholderMimeContent'
+ALTER TABLE [dbo].[PlaceholderMimeContent]
+ADD CONSTRAINT [FK_PlaceholderMimeContent_Placeholder]
+    FOREIGN KEY ([Placeholders_Id])
+    REFERENCES [dbo].[Placeholders]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [MimeContents_Id] in table 'PlaceholderMimeContent'
+ALTER TABLE [dbo].[PlaceholderMimeContent]
+ADD CONSTRAINT [FK_PlaceholderMimeContent_MimeContent]
+    FOREIGN KEY ([MimeContents_Id])
+    REFERENCES [dbo].[MimeContents]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PlaceholderMimeContent_MimeContent'
+CREATE INDEX [IX_FK_PlaceholderMimeContent_MimeContent]
+ON [dbo].[PlaceholderMimeContent]
+    ([MimeContents_Id]);
+GO
+
+-- Creating foreign key on [Taxons_Id] in table 'TaxonHolonym'
+ALTER TABLE [dbo].[TaxonHolonym]
+ADD CONSTRAINT [FK_TaxonHolonym_Taxon]
+    FOREIGN KEY ([Taxons_Id])
+    REFERENCES [dbo].[Taxons]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Holonyms_Id] in table 'TaxonHolonym'
+ALTER TABLE [dbo].[TaxonHolonym]
+ADD CONSTRAINT [FK_TaxonHolonym_Holonym]
+    FOREIGN KEY ([Holonyms_Id])
+    REFERENCES [dbo].[Holonyms]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TaxonHolonym_Holonym'
+CREATE INDEX [IX_FK_TaxonHolonym_Holonym]
+ON [dbo].[TaxonHolonym]
+    ([Holonyms_Id]);
+GO
+
+-- Creating foreign key on [Holonyms_Id] in table 'HolonymMeronym'
+ALTER TABLE [dbo].[HolonymMeronym]
+ADD CONSTRAINT [FK_HolonymMeronym_Holonym]
+    FOREIGN KEY ([Holonyms_Id])
+    REFERENCES [dbo].[Holonyms]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Meronyms_Id] in table 'HolonymMeronym'
+ALTER TABLE [dbo].[HolonymMeronym]
+ADD CONSTRAINT [FK_HolonymMeronym_Meronym]
+    FOREIGN KEY ([Meronyms_Id])
+    REFERENCES [dbo].[Meronyms]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_HolonymMeronym_Meronym'
+CREATE INDEX [IX_FK_HolonymMeronym_Meronym]
+ON [dbo].[HolonymMeronym]
+    ([Meronyms_Id]);
+GO
+
+-- Creating foreign key on [Principals_Id] in table 'PrincipalTenant'
+ALTER TABLE [dbo].[PrincipalTenant]
+ADD CONSTRAINT [FK_PrincipalTenant_Principal]
+    FOREIGN KEY ([Principals_Id])
+    REFERENCES [dbo].[Principals]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Tenants_Id] in table 'PrincipalTenant'
+ALTER TABLE [dbo].[PrincipalTenant]
+ADD CONSTRAINT [FK_PrincipalTenant_Tenant]
+    FOREIGN KEY ([Tenants_Id])
+    REFERENCES [dbo].[Tenants]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PrincipalTenant_Tenant'
+CREATE INDEX [IX_FK_PrincipalTenant_Tenant]
+ON [dbo].[PrincipalTenant]
+    ([Tenants_Id]);
+GO
+
+-- Creating foreign key on [Taxons_Id] in table 'TaxonContentCollection'
+ALTER TABLE [dbo].[TaxonContentCollection]
+ADD CONSTRAINT [FK_TaxonContentCollection_Taxon]
+    FOREIGN KEY ([Taxons_Id])
+    REFERENCES [dbo].[Taxons]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ContentCollections_Id] in table 'TaxonContentCollection'
+ALTER TABLE [dbo].[TaxonContentCollection]
+ADD CONSTRAINT [FK_TaxonContentCollection_ContentCollection]
+    FOREIGN KEY ([ContentCollections_Id])
+    REFERENCES [dbo].[ContentCollections]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TaxonContentCollection_ContentCollection'
+CREATE INDEX [IX_FK_TaxonContentCollection_ContentCollection]
+ON [dbo].[TaxonContentCollection]
+    ([ContentCollections_Id]);
+GO
+
+-- Creating foreign key on [Taxons_Id] in table 'TaxonPlaceholder'
+ALTER TABLE [dbo].[TaxonPlaceholder]
+ADD CONSTRAINT [FK_TaxonPlaceholder_Taxon]
+    FOREIGN KEY ([Taxons_Id])
+    REFERENCES [dbo].[Taxons]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Placeholders_Id] in table 'TaxonPlaceholder'
+ALTER TABLE [dbo].[TaxonPlaceholder]
+ADD CONSTRAINT [FK_TaxonPlaceholder_Placeholder]
+    FOREIGN KEY ([Placeholders_Id])
+    REFERENCES [dbo].[Placeholders]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TaxonPlaceholder_Placeholder'
+CREATE INDEX [IX_FK_TaxonPlaceholder_Placeholder]
+ON [dbo].[TaxonPlaceholder]
+    ([Placeholders_Id]);
+GO
+
+-- Creating foreign key on [Placeholders_Id] in table 'PlaceholderHolonym'
+ALTER TABLE [dbo].[PlaceholderHolonym]
+ADD CONSTRAINT [FK_PlaceholderHolonym_Placeholder]
+    FOREIGN KEY ([Placeholders_Id])
+    REFERENCES [dbo].[Placeholders]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Holonyms_Id] in table 'PlaceholderHolonym'
+ALTER TABLE [dbo].[PlaceholderHolonym]
+ADD CONSTRAINT [FK_PlaceholderHolonym_Holonym]
+    FOREIGN KEY ([Holonyms_Id])
+    REFERENCES [dbo].[Holonyms]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PlaceholderHolonym_Holonym'
+CREATE INDEX [IX_FK_PlaceholderHolonym_Holonym]
+ON [dbo].[PlaceholderHolonym]
+    ([Holonyms_Id]);
+GO
+
+-- Creating foreign key on [Placeholders_Id] in table 'PlaceholderMeronym'
+ALTER TABLE [dbo].[PlaceholderMeronym]
+ADD CONSTRAINT [FK_PlaceholderMeronym_Placeholder]
+    FOREIGN KEY ([Placeholders_Id])
+    REFERENCES [dbo].[Placeholders]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Meronyms_Id] in table 'PlaceholderMeronym'
+ALTER TABLE [dbo].[PlaceholderMeronym]
+ADD CONSTRAINT [FK_PlaceholderMeronym_Meronym]
+    FOREIGN KEY ([Meronyms_Id])
+    REFERENCES [dbo].[Meronyms]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PlaceholderMeronym_Meronym'
+CREATE INDEX [IX_FK_PlaceholderMeronym_Meronym]
+ON [dbo].[PlaceholderMeronym]
+    ([Meronyms_Id]);
+GO
+
+-- Creating foreign key on [Publications_Id] in table 'PublicationNugetPackage'
+ALTER TABLE [dbo].[PublicationNugetPackage]
+ADD CONSTRAINT [FK_PublicationNugetPackage_Publication]
+    FOREIGN KEY ([Publications_Id])
+    REFERENCES [dbo].[Publications]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [NugetPackages_Id] in table 'PublicationNugetPackage'
+ALTER TABLE [dbo].[PublicationNugetPackage]
+ADD CONSTRAINT [FK_PublicationNugetPackage_NugetPackage]
+    FOREIGN KEY ([NugetPackages_Id])
+    REFERENCES [dbo].[NugetPackages]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PublicationNugetPackage_NugetPackage'
+CREATE INDEX [IX_FK_PublicationNugetPackage_NugetPackage]
+ON [dbo].[PublicationNugetPackage]
+    ([NugetPackages_Id]);
 GO
 
 -- --------------------------------------------------

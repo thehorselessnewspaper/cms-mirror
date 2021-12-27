@@ -12,8 +12,25 @@
     <EntitySet Name="FilesystemAssets" EntityType="HorselessContentModel.Store.FilesystemAssets" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="JSONAssets" EntityType="HorselessContentModel.Store.JSONAssets" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ContentCollections" EntityType="HorselessContentModel.Store.ContentCollections" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Publications" EntityType="HorselessContentModel.Store.Publications" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Placeholders" EntityType="HorselessContentModel.Store.Placeholders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Taxons" EntityType="HorselessContentModel.Store.Taxons" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Holonyms" EntityType="HorselessContentModel.Store.Holonyms" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Meronyms" EntityType="HorselessContentModel.Store.Meronyms" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Principals" EntityType="HorselessContentModel.Store.Principals" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NugetPackages" EntityType="HorselessContentModel.Store.NugetPackages" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TenantContentCollection" EntityType="HorselessContentModel.Store.TenantContentCollection" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ContentCollectionMimeContent" EntityType="HorselessContentModel.Store.ContentCollectionMimeContent" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContentCollectionPublication" EntityType="HorselessContentModel.Store.ContentCollectionPublication" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PlaceholderMimeContent" EntityType="HorselessContentModel.Store.PlaceholderMimeContent" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TaxonHolonym" EntityType="HorselessContentModel.Store.TaxonHolonym" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HolonymMeronym" EntityType="HorselessContentModel.Store.HolonymMeronym" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PrincipalTenant" EntityType="HorselessContentModel.Store.PrincipalTenant" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TaxonContentCollection" EntityType="HorselessContentModel.Store.TaxonContentCollection" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TaxonPlaceholder" EntityType="HorselessContentModel.Store.TaxonPlaceholder" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PlaceholderHolonym" EntityType="HorselessContentModel.Store.PlaceholderHolonym" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PlaceholderMeronym" EntityType="HorselessContentModel.Store.PlaceholderMeronym" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PublicationNugetPackage" EntityType="HorselessContentModel.Store.PublicationNugetPackage" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_TenantContentCollection_Tenant" Association="HorselessContentModel.Store.FK_TenantContentCollection_Tenant">
       <End Role="Tenant" EntitySet="Tenants" />
       <End Role="TenantContentCollection" EntitySet="TenantContentCollection" />
@@ -42,6 +59,86 @@
       <End Role="MimeContent" EntitySet="MimeContents" />
       <End Role="MIMEType" EntitySet="MIMETypes" />
     </AssociationSet>
+    <AssociationSet Name="FK_ContentCollectionPublication_ContentCollection" Association="HorselessContentModel.Store.FK_ContentCollectionPublication_ContentCollection">
+      <End Role="ContentCollection" EntitySet="ContentCollections" />
+      <End Role="ContentCollectionPublication" EntitySet="ContentCollectionPublication" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContentCollectionPublication_Publication" Association="HorselessContentModel.Store.FK_ContentCollectionPublication_Publication">
+      <End Role="Publication" EntitySet="Publications" />
+      <End Role="ContentCollectionPublication" EntitySet="ContentCollectionPublication" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlaceholderMimeContent_Placeholder" Association="HorselessContentModel.Store.FK_PlaceholderMimeContent_Placeholder">
+      <End Role="Placeholder" EntitySet="Placeholders" />
+      <End Role="PlaceholderMimeContent" EntitySet="PlaceholderMimeContent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlaceholderMimeContent_MimeContent" Association="HorselessContentModel.Store.FK_PlaceholderMimeContent_MimeContent">
+      <End Role="MimeContent" EntitySet="MimeContents" />
+      <End Role="PlaceholderMimeContent" EntitySet="PlaceholderMimeContent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaxonHolonym_Taxon" Association="HorselessContentModel.Store.FK_TaxonHolonym_Taxon">
+      <End Role="Taxon" EntitySet="Taxons" />
+      <End Role="TaxonHolonym" EntitySet="TaxonHolonym" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaxonHolonym_Holonym" Association="HorselessContentModel.Store.FK_TaxonHolonym_Holonym">
+      <End Role="Holonym" EntitySet="Holonyms" />
+      <End Role="TaxonHolonym" EntitySet="TaxonHolonym" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HolonymMeronym_Holonym" Association="HorselessContentModel.Store.FK_HolonymMeronym_Holonym">
+      <End Role="Holonym" EntitySet="Holonyms" />
+      <End Role="HolonymMeronym" EntitySet="HolonymMeronym" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HolonymMeronym_Meronym" Association="HorselessContentModel.Store.FK_HolonymMeronym_Meronym">
+      <End Role="Meronym" EntitySet="Meronyms" />
+      <End Role="HolonymMeronym" EntitySet="HolonymMeronym" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrincipalTenant_Principal" Association="HorselessContentModel.Store.FK_PrincipalTenant_Principal">
+      <End Role="Principal" EntitySet="Principals" />
+      <End Role="PrincipalTenant" EntitySet="PrincipalTenant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrincipalTenant_Tenant" Association="HorselessContentModel.Store.FK_PrincipalTenant_Tenant">
+      <End Role="Tenant" EntitySet="Tenants" />
+      <End Role="PrincipalTenant" EntitySet="PrincipalTenant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaxonContentCollection_Taxon" Association="HorselessContentModel.Store.FK_TaxonContentCollection_Taxon">
+      <End Role="Taxon" EntitySet="Taxons" />
+      <End Role="TaxonContentCollection" EntitySet="TaxonContentCollection" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaxonContentCollection_ContentCollection" Association="HorselessContentModel.Store.FK_TaxonContentCollection_ContentCollection">
+      <End Role="ContentCollection" EntitySet="ContentCollections" />
+      <End Role="TaxonContentCollection" EntitySet="TaxonContentCollection" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaxonPlaceholder_Taxon" Association="HorselessContentModel.Store.FK_TaxonPlaceholder_Taxon">
+      <End Role="Taxon" EntitySet="Taxons" />
+      <End Role="TaxonPlaceholder" EntitySet="TaxonPlaceholder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaxonPlaceholder_Placeholder" Association="HorselessContentModel.Store.FK_TaxonPlaceholder_Placeholder">
+      <End Role="Placeholder" EntitySet="Placeholders" />
+      <End Role="TaxonPlaceholder" EntitySet="TaxonPlaceholder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlaceholderHolonym_Placeholder" Association="HorselessContentModel.Store.FK_PlaceholderHolonym_Placeholder">
+      <End Role="Placeholder" EntitySet="Placeholders" />
+      <End Role="PlaceholderHolonym" EntitySet="PlaceholderHolonym" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlaceholderHolonym_Holonym" Association="HorselessContentModel.Store.FK_PlaceholderHolonym_Holonym">
+      <End Role="Holonym" EntitySet="Holonyms" />
+      <End Role="PlaceholderHolonym" EntitySet="PlaceholderHolonym" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlaceholderMeronym_Placeholder" Association="HorselessContentModel.Store.FK_PlaceholderMeronym_Placeholder">
+      <End Role="Placeholder" EntitySet="Placeholders" />
+      <End Role="PlaceholderMeronym" EntitySet="PlaceholderMeronym" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlaceholderMeronym_Meronym" Association="HorselessContentModel.Store.FK_PlaceholderMeronym_Meronym">
+      <End Role="Meronym" EntitySet="Meronyms" />
+      <End Role="PlaceholderMeronym" EntitySet="PlaceholderMeronym" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PublicationNugetPackage_Publication" Association="HorselessContentModel.Store.FK_PublicationNugetPackage_Publication">
+      <End Role="Publication" EntitySet="Publications" />
+      <End Role="PublicationNugetPackage" EntitySet="PublicationNugetPackage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PublicationNugetPackage_NugetPackage" Association="HorselessContentModel.Store.FK_PublicationNugetPackage_NugetPackage">
+      <End Role="NugetPackage" EntitySet="NugetPackages" />
+      <End Role="PublicationNugetPackage" EntitySet="PublicationNugetPackage" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="MimeContents">
     <Key>
@@ -55,6 +152,7 @@
     <Property Name="FilesystemAssetId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="JSONAssetId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="MIMETypeId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="IsPublished" Type="bit" Nullable="true" />
   </EntityType>
   <EntityType Name="Tenants">
     <Key>
@@ -109,6 +207,98 @@
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="AllowAnonymousRead" Type="bit" Nullable="false" />
+    <Property Name="IsPublished" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Publications">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar(max)" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="RouteTemplateRegEx" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PublishAt" Type="datetime" Nullable="true" />
+    <Property Name="UnPublishAt" Type="datetime" Nullable="true" />
+    <Property Name="IsPublished" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Placeholders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="IsPublished" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Taxons">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar(max)" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="JsonContent" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="JsonSchema" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Holonyms">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar(max)" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="JsonContent" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="JsonSchema" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Meronyms">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar(max)" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="JsonContent" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="JsonSchema" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Principals">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="Iss" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Aud" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Sub" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="NugetPackages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="PublishAt" Type="datetime" Nullable="true" />
+    <Property Name="UnPublishAt" Type="datetime" Nullable="true" />
+    <Property Name="IsPublished" Type="bit" Nullable="true" />
+    <Property Name="PackageId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PackageVersion" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PackageAuthor" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PackageSource" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="TenantContentCollection">
     <Key>
@@ -125,6 +315,86 @@
     </Key>
     <Property Name="ContentCollections_Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="MimeContents_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContentCollectionPublication">
+    <Key>
+      <PropertyRef Name="ContentCollections_Id" />
+      <PropertyRef Name="Publications_Id" />
+    </Key>
+    <Property Name="ContentCollections_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Publications_Id" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PlaceholderMimeContent">
+    <Key>
+      <PropertyRef Name="Placeholders_Id" />
+      <PropertyRef Name="MimeContents_Id" />
+    </Key>
+    <Property Name="Placeholders_Id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MimeContents_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaxonHolonym">
+    <Key>
+      <PropertyRef Name="Taxons_Id" />
+      <PropertyRef Name="Holonyms_Id" />
+    </Key>
+    <Property Name="Taxons_Id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Holonyms_Id" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HolonymMeronym">
+    <Key>
+      <PropertyRef Name="Holonyms_Id" />
+      <PropertyRef Name="Meronyms_Id" />
+    </Key>
+    <Property Name="Holonyms_Id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Meronyms_Id" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PrincipalTenant">
+    <Key>
+      <PropertyRef Name="Principals_Id" />
+      <PropertyRef Name="Tenants_Id" />
+    </Key>
+    <Property Name="Principals_Id" Type="int" Nullable="false" />
+    <Property Name="Tenants_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaxonContentCollection">
+    <Key>
+      <PropertyRef Name="Taxons_Id" />
+      <PropertyRef Name="ContentCollections_Id" />
+    </Key>
+    <Property Name="Taxons_Id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContentCollections_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaxonPlaceholder">
+    <Key>
+      <PropertyRef Name="Taxons_Id" />
+      <PropertyRef Name="Placeholders_Id" />
+    </Key>
+    <Property Name="Taxons_Id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Placeholders_Id" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PlaceholderHolonym">
+    <Key>
+      <PropertyRef Name="Placeholders_Id" />
+      <PropertyRef Name="Holonyms_Id" />
+    </Key>
+    <Property Name="Placeholders_Id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Holonyms_Id" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PlaceholderMeronym">
+    <Key>
+      <PropertyRef Name="Placeholders_Id" />
+      <PropertyRef Name="Meronyms_Id" />
+    </Key>
+    <Property Name="Placeholders_Id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Meronyms_Id" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PublicationNugetPackage">
+    <Key>
+      <PropertyRef Name="Publications_Id" />
+      <PropertyRef Name="NugetPackages_Id" />
+    </Key>
+    <Property Name="Publications_Id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NugetPackages_Id" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="FilesystemAssetMimeContent">
     <End Role="MimeContent" Type="HorselessContentModel.Store.MimeContents" Multiplicity="*" />
@@ -210,6 +480,246 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ContentCollectionPublication_ContentCollection">
+    <End Role="ContentCollection" Type="HorselessContentModel.Store.ContentCollections" Multiplicity="1" />
+    <End Role="ContentCollectionPublication" Type="HorselessContentModel.Store.ContentCollectionPublication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContentCollection">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContentCollectionPublication">
+        <PropertyRef Name="ContentCollections_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContentCollectionPublication_Publication">
+    <End Role="ContentCollectionPublication" Type="HorselessContentModel.Store.ContentCollectionPublication" Multiplicity="*" />
+    <End Role="Publication" Type="HorselessContentModel.Store.Publications" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Publication">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContentCollectionPublication">
+        <PropertyRef Name="Publications_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlaceholderMimeContent_Placeholder">
+    <End Role="Placeholder" Type="HorselessContentModel.Store.Placeholders" Multiplicity="1" />
+    <End Role="PlaceholderMimeContent" Type="HorselessContentModel.Store.PlaceholderMimeContent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Placeholder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlaceholderMimeContent">
+        <PropertyRef Name="Placeholders_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlaceholderMimeContent_MimeContent">
+    <End Role="PlaceholderMimeContent" Type="HorselessContentModel.Store.PlaceholderMimeContent" Multiplicity="*" />
+    <End Role="MimeContent" Type="HorselessContentModel.Store.MimeContents" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="MimeContent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlaceholderMimeContent">
+        <PropertyRef Name="MimeContents_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaxonHolonym_Taxon">
+    <End Role="Taxon" Type="HorselessContentModel.Store.Taxons" Multiplicity="1" />
+    <End Role="TaxonHolonym" Type="HorselessContentModel.Store.TaxonHolonym" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Taxon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaxonHolonym">
+        <PropertyRef Name="Taxons_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaxonHolonym_Holonym">
+    <End Role="TaxonHolonym" Type="HorselessContentModel.Store.TaxonHolonym" Multiplicity="*" />
+    <End Role="Holonym" Type="HorselessContentModel.Store.Holonyms" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Holonym">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaxonHolonym">
+        <PropertyRef Name="Holonyms_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HolonymMeronym_Holonym">
+    <End Role="Holonym" Type="HorselessContentModel.Store.Holonyms" Multiplicity="1" />
+    <End Role="HolonymMeronym" Type="HorselessContentModel.Store.HolonymMeronym" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Holonym">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HolonymMeronym">
+        <PropertyRef Name="Holonyms_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HolonymMeronym_Meronym">
+    <End Role="HolonymMeronym" Type="HorselessContentModel.Store.HolonymMeronym" Multiplicity="*" />
+    <End Role="Meronym" Type="HorselessContentModel.Store.Meronyms" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Meronym">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HolonymMeronym">
+        <PropertyRef Name="Meronyms_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PrincipalTenant_Principal">
+    <End Role="Principal" Type="HorselessContentModel.Store.Principals" Multiplicity="1" />
+    <End Role="PrincipalTenant" Type="HorselessContentModel.Store.PrincipalTenant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Principal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PrincipalTenant">
+        <PropertyRef Name="Principals_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PrincipalTenant_Tenant">
+    <End Role="PrincipalTenant" Type="HorselessContentModel.Store.PrincipalTenant" Multiplicity="*" />
+    <End Role="Tenant" Type="HorselessContentModel.Store.Tenants" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Tenant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PrincipalTenant">
+        <PropertyRef Name="Tenants_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaxonContentCollection_Taxon">
+    <End Role="Taxon" Type="HorselessContentModel.Store.Taxons" Multiplicity="1" />
+    <End Role="TaxonContentCollection" Type="HorselessContentModel.Store.TaxonContentCollection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Taxon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaxonContentCollection">
+        <PropertyRef Name="Taxons_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaxonContentCollection_ContentCollection">
+    <End Role="TaxonContentCollection" Type="HorselessContentModel.Store.TaxonContentCollection" Multiplicity="*" />
+    <End Role="ContentCollection" Type="HorselessContentModel.Store.ContentCollections" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ContentCollection">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaxonContentCollection">
+        <PropertyRef Name="ContentCollections_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaxonPlaceholder_Taxon">
+    <End Role="Taxon" Type="HorselessContentModel.Store.Taxons" Multiplicity="1" />
+    <End Role="TaxonPlaceholder" Type="HorselessContentModel.Store.TaxonPlaceholder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Taxon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaxonPlaceholder">
+        <PropertyRef Name="Taxons_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaxonPlaceholder_Placeholder">
+    <End Role="TaxonPlaceholder" Type="HorselessContentModel.Store.TaxonPlaceholder" Multiplicity="*" />
+    <End Role="Placeholder" Type="HorselessContentModel.Store.Placeholders" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Placeholder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaxonPlaceholder">
+        <PropertyRef Name="Placeholders_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlaceholderHolonym_Placeholder">
+    <End Role="Placeholder" Type="HorselessContentModel.Store.Placeholders" Multiplicity="1" />
+    <End Role="PlaceholderHolonym" Type="HorselessContentModel.Store.PlaceholderHolonym" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Placeholder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlaceholderHolonym">
+        <PropertyRef Name="Placeholders_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlaceholderHolonym_Holonym">
+    <End Role="PlaceholderHolonym" Type="HorselessContentModel.Store.PlaceholderHolonym" Multiplicity="*" />
+    <End Role="Holonym" Type="HorselessContentModel.Store.Holonyms" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Holonym">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlaceholderHolonym">
+        <PropertyRef Name="Holonyms_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlaceholderMeronym_Placeholder">
+    <End Role="Placeholder" Type="HorselessContentModel.Store.Placeholders" Multiplicity="1" />
+    <End Role="PlaceholderMeronym" Type="HorselessContentModel.Store.PlaceholderMeronym" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Placeholder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlaceholderMeronym">
+        <PropertyRef Name="Placeholders_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlaceholderMeronym_Meronym">
+    <End Role="PlaceholderMeronym" Type="HorselessContentModel.Store.PlaceholderMeronym" Multiplicity="*" />
+    <End Role="Meronym" Type="HorselessContentModel.Store.Meronyms" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Meronym">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlaceholderMeronym">
+        <PropertyRef Name="Meronyms_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PublicationNugetPackage_Publication">
+    <End Role="Publication" Type="HorselessContentModel.Store.Publications" Multiplicity="1" />
+    <End Role="PublicationNugetPackage" Type="HorselessContentModel.Store.PublicationNugetPackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Publication">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PublicationNugetPackage">
+        <PropertyRef Name="Publications_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PublicationNugetPackage_NugetPackage">
+    <End Role="PublicationNugetPackage" Type="HorselessContentModel.Store.PublicationNugetPackage" Multiplicity="*" />
+    <End Role="NugetPackage" Type="HorselessContentModel.Store.NugetPackages" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="NugetPackage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PublicationNugetPackage">
+        <PropertyRef Name="NugetPackages_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -241,6 +751,53 @@
             <End Role="MimeContent" EntitySet="MimeContents" />
             <End Role="MIMEType" EntitySet="MIMETypes" />
           </AssociationSet>
+          <EntitySet Name="Publications" EntityType="HorselessContentModel.Publication" />
+          <AssociationSet Name="ContentCollectionPublication" Association="HorselessContentModel.ContentCollectionPublication">
+            <End Role="ContentCollection" EntitySet="ContentCollections" />
+            <End Role="Publication" EntitySet="Publications" />
+          </AssociationSet>
+          <EntitySet Name="Placeholders" EntityType="HorselessContentModel.Placeholder" />
+          <AssociationSet Name="PlaceholderMimeContent" Association="HorselessContentModel.PlaceholderMimeContent">
+            <End Role="Placeholder" EntitySet="Placeholders" />
+            <End Role="MimeContent" EntitySet="MimeContents" />
+          </AssociationSet>
+          <EntitySet Name="Taxons" EntityType="HorselessContentModel.Taxon" />
+          <EntitySet Name="Holonyms" EntityType="HorselessContentModel.Holonym" />
+          <EntitySet Name="Meronyms" EntityType="HorselessContentModel.Meronym" />
+          <AssociationSet Name="TaxonHolonym" Association="HorselessContentModel.TaxonHolonym">
+            <End Role="Taxon" EntitySet="Taxons" />
+            <End Role="Holonym" EntitySet="Holonyms" />
+          </AssociationSet>
+          <AssociationSet Name="HolonymMeronym" Association="HorselessContentModel.HolonymMeronym">
+            <End Role="Holonym" EntitySet="Holonyms" />
+            <End Role="Meronym" EntitySet="Meronyms" />
+          </AssociationSet>
+          <EntitySet Name="Principals" EntityType="HorselessContentModel.Principal" />
+          <AssociationSet Name="PrincipalTenant" Association="HorselessContentModel.PrincipalTenant">
+            <End Role="Principal" EntitySet="Principals" />
+            <End Role="Tenant" EntitySet="Tenants" />
+          </AssociationSet>
+          <AssociationSet Name="TaxonContentCollection" Association="HorselessContentModel.TaxonContentCollection">
+            <End Role="Taxon" EntitySet="Taxons" />
+            <End Role="ContentCollection" EntitySet="ContentCollections" />
+          </AssociationSet>
+          <AssociationSet Name="TaxonPlaceholder" Association="HorselessContentModel.TaxonPlaceholder">
+            <End Role="Taxon" EntitySet="Taxons" />
+            <End Role="Placeholder" EntitySet="Placeholders" />
+          </AssociationSet>
+          <AssociationSet Name="PlaceholderHolonym" Association="HorselessContentModel.PlaceholderHolonym">
+            <End Role="Placeholder" EntitySet="Placeholders" />
+            <End Role="Holonym" EntitySet="Holonyms" />
+          </AssociationSet>
+          <AssociationSet Name="PlaceholderMeronym" Association="HorselessContentModel.PlaceholderMeronym">
+            <End Role="Placeholder" EntitySet="Placeholders" />
+            <End Role="Meronym" EntitySet="Meronyms" />
+          </AssociationSet>
+          <EntitySet Name="NugetPackages" EntityType="HorselessContentModel.NugetPackage" />
+          <AssociationSet Name="PublicationNugetPackage" Association="HorselessContentModel.PublicationNugetPackage">
+            <End Role="Publication" EntitySet="Publications" />
+            <End Role="NugetPackage" EntitySet="NugetPackages" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="MimeContent">
           <Key>
@@ -258,6 +815,8 @@
           <Property Name="JSONAssetId" Type="Guid" Nullable="true" />
           <NavigationProperty Name="MIMEType" Relationship="HorselessContentModel.MimeContentMIMEType" FromRole="MimeContent" ToRole="MIMEType" />
           <Property Name="MIMETypeId" Type="Guid" Nullable="true" />
+          <NavigationProperty Name="Placeholders" Relationship="HorselessContentModel.PlaceholderMimeContent" FromRole="MimeContent" ToRole="Placeholder" />
+          <Property Name="IsPublished" Type="Boolean" Nullable="true" />
         </EntityType>
         <EntityType Name="Tenant">
           <Key>
@@ -269,6 +828,7 @@
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="ContentCollections" Relationship="HorselessContentModel.TenantContentCollection" FromRole="Tenant" ToRole="ContentCollection" />
+          <NavigationProperty Name="Principals" Relationship="HorselessContentModel.PrincipalTenant" FromRole="Tenant" ToRole="Principal" />
         </EntityType>
         <EntityType Name="MIMEType">
           <Key>
@@ -318,6 +878,9 @@
           <NavigationProperty Name="Tenants" Relationship="HorselessContentModel.TenantContentCollection" FromRole="ContentCollection" ToRole="Tenant" />
           <NavigationProperty Name="MimeContents" Relationship="HorselessContentModel.ContentCollectionMimeContent" FromRole="ContentCollection" ToRole="MimeContent" />
           <Property Name="AllowAnonymousRead" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Publications" Relationship="HorselessContentModel.ContentCollectionPublication" FromRole="ContentCollection" ToRole="Publication" />
+          <Property Name="IsPublished" Type="Boolean" Nullable="true" />
+          <NavigationProperty Name="Taxons" Relationship="HorselessContentModel.TaxonContentCollection" FromRole="ContentCollection" ToRole="Taxon" />
         </EntityType>
         <Association Name="TenantContentCollection">
           <End Type="HorselessContentModel.Tenant" Role="Tenant" Multiplicity="*" />
@@ -363,6 +926,153 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Publication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <Property Name="RouteTemplateRegEx" Type="String" Nullable="true" />
+          <Property Name="PublishAt" Type="DateTime" Nullable="true" />
+          <Property Name="UnPublishAt" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="ContentCollections" Relationship="HorselessContentModel.ContentCollectionPublication" FromRole="Publication" ToRole="ContentCollection" />
+          <Property Name="IsPublished" Type="Boolean" Nullable="true" />
+          <NavigationProperty Name="NugetPackages" Relationship="HorselessContentModel.PublicationNugetPackage" FromRole="Publication" ToRole="NugetPackage" />
+        </EntityType>
+        <Association Name="ContentCollectionPublication">
+          <End Type="HorselessContentModel.ContentCollection" Role="ContentCollection" Multiplicity="*" />
+          <End Type="HorselessContentModel.Publication" Role="Publication" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Placeholder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="MimeContents" Relationship="HorselessContentModel.PlaceholderMimeContent" FromRole="Placeholder" ToRole="MimeContent" />
+          <Property Name="IsPublished" Type="Boolean" Nullable="true" />
+          <NavigationProperty Name="Taxons" Relationship="HorselessContentModel.TaxonPlaceholder" FromRole="Placeholder" ToRole="Taxon" />
+          <NavigationProperty Name="Holonyms" Relationship="HorselessContentModel.PlaceholderHolonym" FromRole="Placeholder" ToRole="Holonym" />
+          <NavigationProperty Name="Meronyms" Relationship="HorselessContentModel.PlaceholderMeronym" FromRole="Placeholder" ToRole="Meronym" />
+        </EntityType>
+        <Association Name="PlaceholderMimeContent">
+          <End Type="HorselessContentModel.Placeholder" Role="Placeholder" Multiplicity="*" />
+          <End Type="HorselessContentModel.MimeContent" Role="MimeContent" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Taxon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <Property Name="JsonContent" Type="String" Nullable="false" />
+          <Property Name="JsonSchema" Type="String" Nullable="false" />
+          <NavigationProperty Name="Holonyms" Relationship="HorselessContentModel.TaxonHolonym" FromRole="Taxon" ToRole="Holonym" />
+          <NavigationProperty Name="ContentCollections" Relationship="HorselessContentModel.TaxonContentCollection" FromRole="Taxon" ToRole="ContentCollection" />
+          <NavigationProperty Name="Placeholders" Relationship="HorselessContentModel.TaxonPlaceholder" FromRole="Taxon" ToRole="Placeholder" />
+        </EntityType>
+        <EntityType Name="Holonym">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <Property Name="JsonContent" Type="String" Nullable="false" />
+          <Property Name="JsonSchema" Type="String" Nullable="false" />
+          <NavigationProperty Name="Taxons" Relationship="HorselessContentModel.TaxonHolonym" FromRole="Holonym" ToRole="Taxon" />
+          <NavigationProperty Name="Meronyms" Relationship="HorselessContentModel.HolonymMeronym" FromRole="Holonym" ToRole="Meronym" />
+          <NavigationProperty Name="Placeholders" Relationship="HorselessContentModel.PlaceholderHolonym" FromRole="Holonym" ToRole="Placeholder" />
+        </EntityType>
+        <EntityType Name="Meronym">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <Property Name="JsonContent" Type="String" Nullable="false" />
+          <Property Name="JsonSchema" Type="String" Nullable="false" />
+          <NavigationProperty Name="Holonyms" Relationship="HorselessContentModel.HolonymMeronym" FromRole="Meronym" ToRole="Holonym" />
+          <NavigationProperty Name="Placeholders" Relationship="HorselessContentModel.PlaceholderMeronym" FromRole="Meronym" ToRole="Placeholder" />
+        </EntityType>
+        <Association Name="TaxonHolonym">
+          <End Type="HorselessContentModel.Taxon" Role="Taxon" Multiplicity="*" />
+          <End Type="HorselessContentModel.Holonym" Role="Holonym" Multiplicity="*" />
+        </Association>
+        <Association Name="HolonymMeronym">
+          <End Type="HorselessContentModel.Holonym" Role="Holonym" Multiplicity="*" />
+          <End Type="HorselessContentModel.Meronym" Role="Meronym" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Principal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <Property Name="Iss" Type="String" Nullable="true" />
+          <Property Name="Aud" Type="String" Nullable="true" />
+          <Property Name="Sub" Type="String" Nullable="true" />
+          <NavigationProperty Name="Tenants" Relationship="HorselessContentModel.PrincipalTenant" FromRole="Principal" ToRole="Tenant" />
+        </EntityType>
+        <Association Name="PrincipalTenant">
+          <End Type="HorselessContentModel.Principal" Role="Principal" Multiplicity="*" />
+          <End Type="HorselessContentModel.Tenant" Role="Tenant" Multiplicity="*" />
+        </Association>
+        <Association Name="TaxonContentCollection">
+          <End Type="HorselessContentModel.Taxon" Role="Taxon" Multiplicity="*" />
+          <End Type="HorselessContentModel.ContentCollection" Role="ContentCollection" Multiplicity="*" />
+        </Association>
+        <Association Name="TaxonPlaceholder">
+          <End Type="HorselessContentModel.Taxon" Role="Taxon" Multiplicity="*" />
+          <End Type="HorselessContentModel.Placeholder" Role="Placeholder" Multiplicity="*" />
+        </Association>
+        <Association Name="PlaceholderHolonym">
+          <End Type="HorselessContentModel.Placeholder" Role="Placeholder" Multiplicity="*" />
+          <End Type="HorselessContentModel.Holonym" Role="Holonym" Multiplicity="*" />
+        </Association>
+        <Association Name="PlaceholderMeronym">
+          <End Type="HorselessContentModel.Placeholder" Role="Placeholder" Multiplicity="*" />
+          <End Type="HorselessContentModel.Meronym" Role="Meronym" Multiplicity="*" />
+        </Association>
+        <EntityType Name="NugetPackage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <Property Name="PublishAt" Type="DateTime" Nullable="true" />
+          <Property Name="UnPublishAt" Type="DateTime" Nullable="true" />
+          <Property Name="IsPublished" Type="Boolean" Nullable="true" />
+          <Property Name="PackageId" Type="String" Nullable="true" />
+          <Property Name="PackageVersion" Type="String" Nullable="true" />
+          <Property Name="PackageAuthor" Type="String" Nullable="true" />
+          <Property Name="PackageSource" Type="String" Nullable="true" />
+          <NavigationProperty Name="Publications" Relationship="HorselessContentModel.PublicationNugetPackage" FromRole="NugetPackage" ToRole="Publication" />
+        </EntityType>
+        <Association Name="PublicationNugetPackage">
+          <End Type="HorselessContentModel.Publication" Role="Publication" Multiplicity="*" />
+          <End Type="HorselessContentModel.NugetPackage" Role="NugetPackage" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -380,6 +1090,7 @@
           <ScalarProperty Name="FilesystemAssetId" ColumnName="FilesystemAssetId" />
           <ScalarProperty Name="JSONAssetId" ColumnName="JSONAssetId" />
           <ScalarProperty Name="MIMETypeId" ColumnName="MIMETypeId" />
+          <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -439,6 +1150,105 @@
           <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="AllowAnonymousRead" ColumnName="AllowAnonymousRead" />
+          <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Publications">
+      <EntityTypeMapping TypeName="IsTypeOf(HorselessContentModel.Publication)">
+        <MappingFragment StoreEntitySet="Publications">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="RouteTemplateRegEx" ColumnName="RouteTemplateRegEx" />
+          <ScalarProperty Name="PublishAt" ColumnName="PublishAt" />
+          <ScalarProperty Name="UnPublishAt" ColumnName="UnPublishAt" />
+          <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Placeholders">
+      <EntityTypeMapping TypeName="IsTypeOf(HorselessContentModel.Placeholder)">
+        <MappingFragment StoreEntitySet="Placeholders">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Taxons">
+      <EntityTypeMapping TypeName="IsTypeOf(HorselessContentModel.Taxon)">
+        <MappingFragment StoreEntitySet="Taxons">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="JsonContent" ColumnName="JsonContent" />
+          <ScalarProperty Name="JsonSchema" ColumnName="JsonSchema" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Holonyms">
+      <EntityTypeMapping TypeName="IsTypeOf(HorselessContentModel.Holonym)">
+        <MappingFragment StoreEntitySet="Holonyms">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="JsonContent" ColumnName="JsonContent" />
+          <ScalarProperty Name="JsonSchema" ColumnName="JsonSchema" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Meronyms">
+      <EntityTypeMapping TypeName="IsTypeOf(HorselessContentModel.Meronym)">
+        <MappingFragment StoreEntitySet="Meronyms">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="JsonContent" ColumnName="JsonContent" />
+          <ScalarProperty Name="JsonSchema" ColumnName="JsonSchema" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Principals">
+      <EntityTypeMapping TypeName="IsTypeOf(HorselessContentModel.Principal)">
+        <MappingFragment StoreEntitySet="Principals">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="Iss" ColumnName="Iss" />
+          <ScalarProperty Name="Aud" ColumnName="Aud" />
+          <ScalarProperty Name="Sub" ColumnName="Sub" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NugetPackages">
+      <EntityTypeMapping TypeName="IsTypeOf(HorselessContentModel.NugetPackage)">
+        <MappingFragment StoreEntitySet="NugetPackages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="PublishAt" ColumnName="PublishAt" />
+          <ScalarProperty Name="UnPublishAt" ColumnName="UnPublishAt" />
+          <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+          <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+          <ScalarProperty Name="PackageVersion" ColumnName="PackageVersion" />
+          <ScalarProperty Name="PackageAuthor" ColumnName="PackageAuthor" />
+          <ScalarProperty Name="PackageSource" ColumnName="PackageSource" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -456,6 +1266,86 @@
       </EndProperty>
       <EndProperty Name="MimeContent">
         <ScalarProperty Name="Id" ColumnName="MimeContents_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ContentCollectionPublication" TypeName="HorselessContentModel.ContentCollectionPublication" StoreEntitySet="ContentCollectionPublication">
+      <EndProperty Name="ContentCollection">
+        <ScalarProperty Name="Id" ColumnName="ContentCollections_Id" />
+      </EndProperty>
+      <EndProperty Name="Publication">
+        <ScalarProperty Name="Id" ColumnName="Publications_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PlaceholderMimeContent" TypeName="HorselessContentModel.PlaceholderMimeContent" StoreEntitySet="PlaceholderMimeContent">
+      <EndProperty Name="Placeholder">
+        <ScalarProperty Name="Id" ColumnName="Placeholders_Id" />
+      </EndProperty>
+      <EndProperty Name="MimeContent">
+        <ScalarProperty Name="Id" ColumnName="MimeContents_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TaxonHolonym" TypeName="HorselessContentModel.TaxonHolonym" StoreEntitySet="TaxonHolonym">
+      <EndProperty Name="Taxon">
+        <ScalarProperty Name="Id" ColumnName="Taxons_Id" />
+      </EndProperty>
+      <EndProperty Name="Holonym">
+        <ScalarProperty Name="Id" ColumnName="Holonyms_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="HolonymMeronym" TypeName="HorselessContentModel.HolonymMeronym" StoreEntitySet="HolonymMeronym">
+      <EndProperty Name="Holonym">
+        <ScalarProperty Name="Id" ColumnName="Holonyms_Id" />
+      </EndProperty>
+      <EndProperty Name="Meronym">
+        <ScalarProperty Name="Id" ColumnName="Meronyms_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PrincipalTenant" TypeName="HorselessContentModel.PrincipalTenant" StoreEntitySet="PrincipalTenant">
+      <EndProperty Name="Principal">
+        <ScalarProperty Name="Id" ColumnName="Principals_Id" />
+      </EndProperty>
+      <EndProperty Name="Tenant">
+        <ScalarProperty Name="Id" ColumnName="Tenants_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TaxonContentCollection" TypeName="HorselessContentModel.TaxonContentCollection" StoreEntitySet="TaxonContentCollection">
+      <EndProperty Name="Taxon">
+        <ScalarProperty Name="Id" ColumnName="Taxons_Id" />
+      </EndProperty>
+      <EndProperty Name="ContentCollection">
+        <ScalarProperty Name="Id" ColumnName="ContentCollections_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TaxonPlaceholder" TypeName="HorselessContentModel.TaxonPlaceholder" StoreEntitySet="TaxonPlaceholder">
+      <EndProperty Name="Taxon">
+        <ScalarProperty Name="Id" ColumnName="Taxons_Id" />
+      </EndProperty>
+      <EndProperty Name="Placeholder">
+        <ScalarProperty Name="Id" ColumnName="Placeholders_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PlaceholderHolonym" TypeName="HorselessContentModel.PlaceholderHolonym" StoreEntitySet="PlaceholderHolonym">
+      <EndProperty Name="Placeholder">
+        <ScalarProperty Name="Id" ColumnName="Placeholders_Id" />
+      </EndProperty>
+      <EndProperty Name="Holonym">
+        <ScalarProperty Name="Id" ColumnName="Holonyms_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PlaceholderMeronym" TypeName="HorselessContentModel.PlaceholderMeronym" StoreEntitySet="PlaceholderMeronym">
+      <EndProperty Name="Placeholder">
+        <ScalarProperty Name="Id" ColumnName="Placeholders_Id" />
+      </EndProperty>
+      <EndProperty Name="Meronym">
+        <ScalarProperty Name="Id" ColumnName="Meronyms_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PublicationNugetPackage" TypeName="HorselessContentModel.PublicationNugetPackage" StoreEntitySet="PublicationNugetPackage">
+      <EndProperty Name="Publication">
+        <ScalarProperty Name="Id" ColumnName="Publications_Id" />
+      </EndProperty>
+      <EndProperty Name="NugetPackage">
+        <ScalarProperty Name="Id" ColumnName="NugetPackages_Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
