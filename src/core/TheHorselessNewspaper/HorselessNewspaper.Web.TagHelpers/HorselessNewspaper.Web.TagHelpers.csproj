@@ -7,7 +7,7 @@
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <!-- support embedding dependencies for redistributable packages -->
     <!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
   </PropertyGroup>
 
   <ItemGroup>

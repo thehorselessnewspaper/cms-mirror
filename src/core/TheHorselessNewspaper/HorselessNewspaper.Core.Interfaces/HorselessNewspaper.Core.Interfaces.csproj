@@ -14,7 +14,7 @@
     <Description>core interfaces for the horseless newspaper</Description>
     <!-- support embedding dependencies for redistributable packages -->
     <!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
-    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <!--<CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>-->
   </PropertyGroup>
 
   <ItemGroup>

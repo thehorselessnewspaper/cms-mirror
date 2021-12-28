@@ -23,15 +23,15 @@ namespace HorselessNewspaper.RazorClassLibrary.Keycloak.Default.Controllers
             this.AuthOptions = keycloakAuthOptions;
         }
 
-        [HttpGet("SignIn")]
+        [HttpGet("~/SignIn")]
         public async Task<IActionResult> SignIn()
         {
 
-            return View("Index", await HttpContext.GetExternalProvidersAsync());
+            return View("Signin", await HttpContext.GetExternalProvidersAsync());
 
         }
 
-        [HttpPost("SignIn")]
+        [HttpPost("~/SignIn")]
         public async Task<IActionResult> SignIn([FromForm] string provider)
         {
             // Note: the "provider" parameter corresponds to the external
@@ -56,8 +56,8 @@ namespace HorselessNewspaper.RazorClassLibrary.Keycloak.Default.Controllers
             return challengeResult;
         }
 
-        [HttpGet("~/signout")]
-        [HttpPost("~/signout")]
+        [HttpGet("Signout")]
+        [HttpPost("Signout")]
         public  async  Task<IActionResult> SignOutCurrentUser()
         {
             // similar to https://docs.identityserver.io/en/release/quickstarts/3_interactive_login.html
