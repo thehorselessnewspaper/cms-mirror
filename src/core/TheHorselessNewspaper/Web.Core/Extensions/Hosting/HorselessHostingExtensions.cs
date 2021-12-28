@@ -1,8 +1,11 @@
 ﻿using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Loader;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,7 +25,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
         /// <param name="builder"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseHorselessNewspaper(this IApplicationBuilder builder,
+        public static IApplicationBuilder UseHorselessNewspaper(this IApplicationBuilder builder, IWebHostEnvironment env, IConfiguration configuration,
             Action<HorselessApplicationBuilder> options)
         {
             var applicationBuilder = new HorselessApplicationBuilder(builder);
@@ -35,6 +38,34 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
             //        // endpoints.MapDynamicControllerRoute<HorselessRouteTransformer>(""); // enabling this here prevents the implementer from configuring it in program.cs
             //    });
 
+            // as per https://stackoverflow.com/questions/40908568/assembly-loading-in-net-core
+            // todo - come up with a central way of storing configuration string keys
+            var directoryInfo = new DirectoryInfo(env.WebRootPath);
+            var pluginPath = Path.Combine(directoryInfo.Parent.FullName, configuration[HorselessApplicationBuilder.TenantFilesystemPathConfigurationKey]);
+            
+            AssemblyLoadContext.Default.Resolving += (context, name) => {
+                var resolver = new AssemblyDependencyResolver(pluginPath);
+                string assemblyPath = resolver.ResolveAssemblyToPath(name);
+                if (assemblyPath != null)
+                    return context.LoadFromAssemblyPath(assemblyPath);
+                return null;
+            };
+
+
+            builder.UseEndpoints(options =>
+            {
+
+                // test of user defined routing scenario
+                options.MapDynamicControllerRoute<HorselessRouteTransformer>("");
+                options.MapControllerRoute(
+                name: "Authentication",
+                pattern: "{area:exists}/{controller=KeycloakController}/{action=Signin}/{id?}");
+
+
+                options.MapControllerRoute(
+                name: "HorselessCMS",
+                pattern: "{controller=HorselessCMS}/{action=ViewTemplate}/{id?}");
+            });
 
             options?.Invoke(applicationBuilder);
 

@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <Folder Include="assetroot\RazorClassLibrary\" />
+    <Folder Include="tenant-filesystem\nuget\" />
   </ItemGroup>
 
 </Project>

@@ -18,6 +18,8 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
+using System.Runtime.Loader;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,10 +35,10 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddControllersWithViews()
-    .AddRazorRuntimeCompilation()
+    .AddRazorRuntimeCompilation();
     // this hardcodes a static reference to the default horseless razor class library
     // i am sorry - the hoped for benefit is that this will always have a default implementation
-    .AddApplicationPart(typeof(HorselessCMSController).Assembly);
+    // .AddApplicationPart(typeof(HorselessCMSController).Assembly);
 
 builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
 {
@@ -77,49 +79,42 @@ builder.Services.AddAuthentication(options =>
     opts.Scope.Add("openid email profile roles web-origins");
     opts.NonceCookie.SameSite = SameSiteMode.Unspecified;
     opts.CorrelationCookie.SameSite = SameSiteMode.Unspecified;
-})
-.AddJwtBearer(o =>
-    {
-        // my API name as defined in Config.cs - new ApiResource... or in DB ApiResources table
-        o.Audience = builder.Configuration[KeycloakAuthOptions.AudienceConfigKey];
-        // URL of Auth server(API and Auth are separate projects/applications),
-        // so for local testing this is http://localhost:5000 if you followed ID4 tutorials
-        o.Authority = builder.Configuration[KeycloakAuthOptions.AuthorityConfigKey];
 
-        o.ClaimsIssuer = builder.Configuration[KeycloakAuthOptions.IssuerConfigKey];
-        o.RequireHttpsMetadata = !builder.Environment.IsDevelopment();
-        o.TokenValidationParameters = new TokenValidationParameters
+    opts.Events = new OpenIdConnectEvents
+    {
+        OnRedirectToIdentityProvider = async ctx =>
         {
-            ValidateAudience = true,
-            // Scopes supported by API as defined in Config.cs - new ApiResource... or in DB ApiScopes table
-            ValidAudiences = new List<string>() {
-                        "api.read",
-                        "api.write"
-                    },
-            ValidateIssuer = true
-        };
-    })
-;
+            await Task.Yield();
+        },
+        OnMessageReceived = async ctxt =>
+        {
+            // Invoked when a protocol message is first received.
+            await Task.Yield();
+        },
+        OnTicketReceived = async ctxt =>
+        {
+            // Invoked after the remote ticket has been received.
+            // Can be used to modify the Principal before it is passed to the Cookie scheme for sign-in.
+            // This example removes all 'groups' claims from the Principal (assuming the AAD app has been configured
+            // with "groupMembershipClaims": "SecurityGroup"). Group memberships can be checked here and turned into
+            // roles, to be persisted in the cookie.
+            if (ctxt.Principal.Identity is ClaimsIdentity identity)
+            {
+                var groupClaims = ctxt.Principal.FindAll(x => x.Type == "roles")
+                    .ToList(); 
+                    // .ForEach(identity.RemoveClaim);
+            }
+            await Task.Yield();
+        }
+    };
+});
 
 // as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/docs/keycloak.md
 builder.Services.AddHorselessKeycloakAuth(builder.Configuration, keycloakOpts =>
 {
 
-    //// keycloakOpts.Realm = builder.Configuration["Keycloak:Realm"];
-    //keycloakOpts.Authority = new Uri(builder.Configuration["Keycloak:Authority"]);
-    //keycloakOpts.Realm = builder.Configuration["Keycloak:Realm"];
-    //keycloakOpts.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    //keycloakOpts.ClaimsIssuer = builder.Configuration["KeycloakOpts:Issuer"];
-
-    //keycloakOpts.SaveTokens = true;
-    //keycloakOpts.CallbackPath = "/";
-    //keycloakOpts.RequireHttpsMetadata = false;
-    //keycloakOpts.RequireHttpsMetadata = false;
 });
 
-// Add services to the container.
-//builder.Services.AddControllersWithViews()
-//    .AddRazorRuntimeCompilation();
 
 builder.Services.AddAuthorization();
 
@@ -143,21 +138,10 @@ app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseHorselessNewspaper(options =>
+app.UseHorselessNewspaper(app.Environment, app.Configuration, options =>
 {
-    options.Builder.UseEndpoints(options =>
-    {
-        // test of user defined routing scenario
-        options.MapDynamicControllerRoute<HorselessRouteTransformer>("");
-        app.MapControllerRoute(
-        name: "Authentication",
-        pattern: "{area:exists}/{controller=KeycloakController}/{action=Signin}/{id?}");
 
-
-        app.MapControllerRoute(
-        name: "HorselessCMS",
-        pattern: "{controller=HorselessCMS}/{action=ViewTemplate}/{id?}");
-    });
+  
 });
 
 app.MapControllerRoute(

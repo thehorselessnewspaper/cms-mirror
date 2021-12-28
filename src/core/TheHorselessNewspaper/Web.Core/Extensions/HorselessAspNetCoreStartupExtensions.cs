@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Runtime.Loader;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.Schemas.HostingModel.DTO;
 
@@ -28,6 +29,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
             // todo - why is this here
             serviceBuilder.AddRazorRuntimeCompilation = true;
+          
 
             // as per https://docs.microsoft.com/en-us/archive/msdn-magazine/2016/september/asp-net-core-feature-slices-for-asp-net-core-mvc
             // as per https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/areas?view=aspnetcore-6.0
@@ -47,6 +49,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
             }
 
             );
+
 
 
             serviceBuilder.Services.AddSingleton<IHorselessCacheProvider<Guid, TenantDTO>, DefaultTenantCache>();

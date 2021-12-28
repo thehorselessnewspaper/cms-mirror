@@ -11,6 +11,8 @@ namespace HorselessNewspaper.Web.Core.Extensions
     {
         public readonly IApplicationBuilder Builder;
 
+        // ouch mnagic string for retrieving configuration
+        public static string TenantFilesystemPathConfigurationKey = "TenantFilesystemPath";
         public HorselessApplicationBuilder(IApplicationBuilder builder)
         {
             Builder = builder;
