@@ -4,7 +4,7 @@ using HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant;
 using TheHorselessNewspaper.Schemas.HostingModel.DTO;
 using HorselessNewspaper.Web.Core.Extensions.Hosting;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
-using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
+
 using Microsoft.Extensions.Options;
 using HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers;
 using System.Configuration;
@@ -17,7 +17,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
-
+using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

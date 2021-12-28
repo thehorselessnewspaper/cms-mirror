@@ -35,6 +35,11 @@
     <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.1.20211227.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HorselessNewspaper.Web.Core.Auth.Keycloak\HorselessNewspaper.Web.Core.Auth.Keycloak.csproj" />
+    <ProjectReference Include="..\Web.Core\HorselessNewspaper.Web.Core.csproj" />
+  </ItemGroup>
+
 
 
 </Project>

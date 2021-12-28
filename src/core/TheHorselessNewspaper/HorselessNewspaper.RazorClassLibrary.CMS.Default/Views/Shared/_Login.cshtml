@@ -9,10 +9,10 @@
 
 @if (User.Claims == null || User.Claims.Count() == 0)
 {
-    <div class="container">
+    <div>
 
-        <p class="lead text-left">Available Authorities</p>
-        <div style="overflow:auto; height:auto;">
+        <p class="lead text-right">available authorities</p>
+        <div >
             @foreach (var scheme in Model!.OrderBy(p => p.DisplayName))
             {
                 <form action="/signin" method="post">
@@ -27,8 +27,8 @@
 }
 else
 {
-    <div class="container">
-        <h1>Welcome, @User.Identity.Name</h1>
+    <div>
+        <div>Welcome, @User.Identity.Name</div>
 
         <form action="/signout" method="post">
             <button class="btn btn-success m-1" type="submit">Sign Out</button>

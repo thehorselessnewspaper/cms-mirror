@@ -30,10 +30,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
-
-                </div>
-
-                @{
+                                    @{
                     @* // support our default signin keycloak *@
                     @* // expect to find _SignIn.cshtml in the associated *@
                     @* // canonical keycloak horseless razorclass library *@
@@ -41,6 +38,9 @@
                     @* // as per https://docs.microsoft.com/en-us/aspnet/core/mvc/views/partial?view=aspnetcore-6.0 *@
                     await Html.RenderPartialAsync("_Login");
                 }
+                </div>
+
+
             </div>
         </nav>
     </header>
