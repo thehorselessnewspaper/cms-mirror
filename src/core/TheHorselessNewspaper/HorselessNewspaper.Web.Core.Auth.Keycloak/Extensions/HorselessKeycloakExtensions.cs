@@ -16,6 +16,10 @@ using System.Text.Json;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Claims;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
 {
@@ -27,9 +31,10 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
     {
 
 
-        public static IServiceCollection AddHorselessKeycloakAuth(this IServiceCollection services, IConfiguration configuration, Action<OpenIdAuthenticationOptions> keyCloakOptions,
+        public static IServiceCollection AddHorselessKeycloakAuth(this IServiceCollection services, WebApplicationBuilder builder, Action<OpenIdAuthenticationOptions> keyCloakOptions,
             Action<HorselessServiceBuilder> options = null, ServiceLifetime scope = ServiceLifetime.Scoped)
         {
+            IConfiguration configuration = builder.Configuration;
             var serviceBuilder = new HorselessServiceBuilder(configuration, services);
 
 
@@ -49,16 +54,23 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
             #region as per https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/social-without-identity?view=aspnetcore-6.0
             serviceBuilder.Services.AddAuthentication(options =>
             {
-                //options.DefaultAuthenticateScheme = AspNet.Security.OpenId.OpenIdAuthenticationDefaults.AuthenticationScheme; // CookieAuthenticationDefaults.AuthenticationScheme;
-                //options.DefaultSignInScheme = AspNet.Security.OpenId.OpenIdAuthenticationDefaults.AuthenticationScheme;//  CookieAuthenticationDefaults.AuthenticationScheme;
-                //options.DefaultChallengeScheme = AspNet.Security.OpenId.OpenIdAuthenticationDefaults.AuthenticationScheme;  //CookieAuthenticationDefaults.AuthenticationScheme;
+                //options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                //options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                //options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
 
             })
-
+            .AddCookie(cookie =>
+            {
+                // TODO examine this cookie magic string naming business
+                cookie.Cookie.Name = "keycloak.cookie";
+                cookie.Cookie.MaxAge = TimeSpan.FromMinutes(60);
+                cookie.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                cookie.SlidingExpiration = true;
+            })
             .AddJwtBearer(o =>
             {
                 // my API name as defined in Config.cs - new ApiResource... or in DB ApiResources table
@@ -79,6 +91,52 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                     ValidateIssuer = true
                 };
 
+            })
+            .AddOpenIdConnect(opts =>
+            {
+
+                opts.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                //opts.SignedOutCallbackPath = "/";
+                //opts.SignedOutRedirectUri = builder.Configuration[KeycloakAuthOptions.SignoutRedirectUrlConfigKey];
+                opts.Authority = builder.Configuration[KeycloakAuthOptions.RealmConfigKey];
+                opts.RequireHttpsMetadata = false;
+                opts.ClientId = builder.Configuration[KeycloakAuthOptions.ClientIdConfigKey];
+                opts.ClientSecret = builder.Configuration[KeycloakAuthOptions.ClientSecretConfigKey];
+                opts.MetadataAddress = builder.Configuration[KeycloakAuthOptions.MetaDataConfigKey];
+                opts.ResponseType = OpenIdConnectResponseType.Code;
+                opts.GetClaimsFromUserInfoEndpoint = true;
+                opts.SaveTokens = true;
+                opts.Scope.Add("openid email profile roles web-origins");
+                opts.NonceCookie.SameSite = SameSiteMode.Unspecified;
+                opts.CorrelationCookie.SameSite = SameSiteMode.Unspecified;
+
+                opts.Events = new OpenIdConnectEvents
+                {
+                    OnRedirectToIdentityProvider = async ctx =>
+                    {
+                        await Task.Yield();
+                    },
+                    OnMessageReceived = async ctxt =>
+                    {
+                        // Invoked when a protocol message is first received.
+                        await Task.Yield();
+                    },
+                    OnTicketReceived = async ctxt =>
+                    {
+                        // Invoked after the remote ticket has been received.
+                        // Can be used to modify the Principal before it is passed to the Cookie scheme for sign-in.
+                        // This example removes all 'groups' claims from the Principal (assuming the AAD app has been configured
+                        // with "groupMembershipClaims": "SecurityGroup"). Group memberships can be checked here and turned into
+                        // roles, to be persisted in the cookie.
+                        if (ctxt.Principal.Identity is ClaimsIdentity identity)
+                        {
+                            var groupClaims = ctxt.Principal.FindAll(x => x.Type == "roles")
+                                .ToList();
+                            // .ForEach(identity.RemoveClaim);
+                        }
+                        await Task.Yield();
+                    }
+                };
             });
 
             // as per https://stackoverflow.com/questions/53702555/cant-access-roles-in-jwt-token-net-core/53817194#53817194
