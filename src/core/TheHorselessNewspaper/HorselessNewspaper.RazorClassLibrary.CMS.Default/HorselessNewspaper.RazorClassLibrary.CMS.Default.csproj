@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\HorselessContent\Views\" />
+    <Folder Include="HorselessControllers\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -23,6 +23,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="2.4.0" />
     <PackageReference Include="NuGet.Protocol" Version="6.0.0" />
     <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.1.20211227.4" />
   </ItemGroup>
