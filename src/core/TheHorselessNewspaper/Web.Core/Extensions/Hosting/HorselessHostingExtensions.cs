@@ -51,6 +51,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
                 return null;
             };
 
+            builder.UseMultiTenant();
 
             builder.UseEndpoints(options =>
             {

@@ -1,4 +1,5 @@
-﻿using HorselessNewspaper.Core.Interfaces.Query;
+﻿using Finbuckle.MultiTenant;
+using HorselessNewspaper.Core.Interfaces.Query;
 using HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.ApplicationPartsLogger;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
@@ -50,7 +51,14 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
             );
 
+            #region multitenancy as per https://www.finbuckle.com/MultiTenant/
+            serviceBuilder.Services.AddMultiTenant<TenantInfo>()
+                .WithInMemoryStore()
+                .WithHostStrategy()
+                .WithBasePathStrategy()
+                .WithRouteStrategy();
 
+            #endregion multitenancy as per https://www.finbuckle.com/MultiTenant/
 
             serviceBuilder.Services.AddSingleton<IHorselessCacheProvider<Guid, TenantDTO>, DefaultTenantCache>();
 
