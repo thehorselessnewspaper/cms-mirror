@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.1.20211229.7" />
+    <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.2.20211231.1" />
   </ItemGroup>
 
 </Project>

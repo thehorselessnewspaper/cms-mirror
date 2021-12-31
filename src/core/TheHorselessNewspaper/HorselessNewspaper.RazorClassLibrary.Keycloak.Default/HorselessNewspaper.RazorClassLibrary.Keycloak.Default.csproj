@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HorselessNewspaper.Web.Core.Auth.Keycloak" Version="0.2.211229.7" />
+    <PackageReference Include="HorselessNewspaper.Web.Core.Auth.Keycloak" Version="0.3.211231.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
   </ItemGroup>
