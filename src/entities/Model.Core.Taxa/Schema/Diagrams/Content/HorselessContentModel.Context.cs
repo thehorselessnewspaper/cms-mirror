@@ -38,5 +38,6 @@ namespace Schema.Diagrams.Content
         public virtual DbSet<Meronym> Meronyms { get; set; }
         public virtual DbSet<Principal> Principals { get; set; }
         public virtual DbSet<NugetPackage> NugetPackages { get; set; }
+        public virtual DbSet<AccessControlEntry> AccessControlEntries { get; set; }
     }
 }

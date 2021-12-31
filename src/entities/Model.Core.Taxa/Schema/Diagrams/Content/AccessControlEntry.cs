@@ -12,26 +12,13 @@ namespace Schema.Diagrams.Content
     using System;
     using System.Collections.Generic;
     
-    public partial class Principal
+    public partial class AccessControlEntry
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Principal()
-        {
-            this.Tenants = new HashSet<Tenant>();
-        }
-    
         public System.Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public Nullable<bool> IsSoftDeleted { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
-        public string Iss { get; set; }
-        public string Aud { get; set; }
-        public string Sub { get; set; }
-        public Nullable<bool> IsAnonymous { get; set; }
-        public string HorselessCookieId { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tenant> Tenants { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     }
 }

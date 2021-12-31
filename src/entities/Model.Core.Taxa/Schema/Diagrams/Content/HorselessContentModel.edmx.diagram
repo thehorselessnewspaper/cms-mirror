@@ -33,6 +33,7 @@
         <AssociationConnector Association="HorselessContentModel.PlaceholderMeronym" />
         <EntityTypeShape EntityType="HorselessContentModel.NugetPackage" Width="2.625" PointX="8.875" PointY="14.375" />
         <AssociationConnector Association="HorselessContentModel.PublicationNugetPackage" />
+        <EntityTypeShape EntityType="HorselessContentModel.AccessControlEntry" Width="2.375" PointX="0.5" PointY="9.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -44,6 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Diagrams\Content\AccessControlEntry.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\ACEScope.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\ACEType.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Diagrams\Content\ContentCollection.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
@@ -67,6 +76,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HorselessContentModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\HorselessPermission.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Content\JSONAsset.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>

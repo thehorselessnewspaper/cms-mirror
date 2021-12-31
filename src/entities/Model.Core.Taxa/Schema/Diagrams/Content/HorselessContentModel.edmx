@@ -19,6 +19,7 @@
     <EntitySet Name="Meronyms" EntityType="HorselessContentModel.Store.Meronyms" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Principals" EntityType="HorselessContentModel.Store.Principals" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NugetPackages" EntityType="HorselessContentModel.Store.NugetPackages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AccessControlEntries" EntityType="HorselessContentModel.Store.AccessControlEntries" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TenantContentCollection" EntityType="HorselessContentModel.Store.TenantContentCollection" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ContentCollectionMimeContent" EntityType="HorselessContentModel.Store.ContentCollectionMimeContent" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ContentCollectionPublication" EntityType="HorselessContentModel.Store.ContentCollectionPublication" store:Type="Tables" Schema="dbo" />
@@ -282,6 +283,8 @@
     <Property Name="Iss" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Aud" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Sub" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="IsAnonymous" Type="bit" Nullable="true" />
+    <Property Name="HorselessCookieId" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="NugetPackages">
     <Key>
@@ -299,6 +302,17 @@
     <Property Name="PackageVersion" Type="nvarchar(max)" Nullable="true" />
     <Property Name="PackageAuthor" Type="nvarchar(max)" Nullable="true" />
     <Property Name="PackageSource" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="AccessControlEntries">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="IsActive" Type="bit" Nullable="true" />
   </EntityType>
   <EntityType Name="TenantContentCollection">
     <Key>
@@ -798,6 +812,7 @@
             <End Role="Publication" EntitySet="Publications" />
             <End Role="NugetPackage" EntitySet="NugetPackages" />
           </AssociationSet>
+          <EntitySet Name="AccessControlEntries" EntityType="HorselessContentModel.AccessControlEntry" />
         </EntityContainer>
         <EntityType Name="MimeContent">
           <Key>
@@ -1030,6 +1045,8 @@
           <Property Name="Aud" Type="String" Nullable="true" />
           <Property Name="Sub" Type="String" Nullable="true" />
           <NavigationProperty Name="Tenants" Relationship="HorselessContentModel.PrincipalTenant" FromRole="Principal" ToRole="Tenant" />
+          <Property Name="IsAnonymous" Type="Boolean" Nullable="true" />
+          <Property Name="HorselessCookieId" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="PrincipalTenant">
           <End Type="HorselessContentModel.Principal" Role="Principal" Multiplicity="*" />
@@ -1073,6 +1090,37 @@
           <End Type="HorselessContentModel.Publication" Role="Publication" Multiplicity="*" />
           <End Type="HorselessContentModel.NugetPackage" Role="NugetPackage" Multiplicity="*" />
         </Association>
+        <EntityType Name="AccessControlEntry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="true" />
+        </EntityType>
+        <EnumType Name="ACEType">
+          <Member Name="ACCESS_DENIED" />
+          <Member Name="ACCESS_ALLOWED" />
+        </EnumType>
+        <EnumType Name="ACEScope">
+          <Member Name="Role" />
+          <Member Name="Group" />
+          <Member Name="Anonymous" />
+          <Member Name="Everyone" />
+          <Member Name="Owner" />
+          <Member Name="Workflow" />
+        </EnumType>
+        <EnumType Name="HorselessPermission">
+          <Member Name="READ" />
+          <Member Name="WRITE" />
+          <Member Name="UPDATE" />
+          <Member Name="DELETE" />
+          <Member Name="SHARE" />
+          <Member Name="EXECUTE" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1231,6 +1279,8 @@
           <ScalarProperty Name="Iss" ColumnName="Iss" />
           <ScalarProperty Name="Aud" ColumnName="Aud" />
           <ScalarProperty Name="Sub" ColumnName="Sub" />
+          <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+          <ScalarProperty Name="HorselessCookieId" ColumnName="HorselessCookieId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1249,6 +1299,18 @@
           <ScalarProperty Name="PackageVersion" ColumnName="PackageVersion" />
           <ScalarProperty Name="PackageAuthor" ColumnName="PackageAuthor" />
           <ScalarProperty Name="PackageSource" ColumnName="PackageSource" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AccessControlEntries">
+      <EntityTypeMapping TypeName="IsTypeOf(HorselessContentModel.AccessControlEntry)">
+        <MappingFragment StoreEntitySet="AccessControlEntries">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

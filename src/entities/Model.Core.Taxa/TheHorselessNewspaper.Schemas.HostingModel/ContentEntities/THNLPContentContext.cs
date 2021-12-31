@@ -18,6 +18,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         {
         }
 
+        public virtual DbSet<AccessControlEntry> AccessControlEntries { get; set; }
         public virtual DbSet<ContentCollection> ContentCollections { get; set; }
         public virtual DbSet<FilesystemAsset> FilesystemAssets { get; set; }
         public virtual DbSet<Holonym> Holonyms { get; set; }
@@ -34,6 +35,15 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AccessControlEntry>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.ObjectId).IsRequired();
+            });
+
             modelBuilder.Entity<ContentCollection>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
@@ -243,6 +253,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.HorselessCookieId).IsRequired();
 
                 entity.Property(e => e.ObjectId).IsRequired();
 

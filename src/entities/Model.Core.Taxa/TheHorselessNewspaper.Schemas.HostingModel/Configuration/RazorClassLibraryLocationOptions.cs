@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.Configuration
 {
-
+    /// <summary>
+    /// todo why is this here
+    /// </summary>
     internal class RazorClassLibraryLocationOption
     {
 

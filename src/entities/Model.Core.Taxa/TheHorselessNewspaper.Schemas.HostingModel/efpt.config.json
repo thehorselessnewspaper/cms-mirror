@@ -1,68 +1,124 @@
 ﻿{
    "CodeGenerationMode": 2,
-   "ContextClassName": "THNLPHostingContext",
+   "ContextClassName": "THNLPContentContext",
    "ContextNamespace": null,
    "DefaultDacpacSchema": null,
    "FilterSchemas": false,
    "IncludeConnectionString": false,
    "ModelNamespace": null,
    "OutputContextPath": null,
-   "OutputPath": "Entities",
-   "ProjectRootNamespace": "TheHorselessNewspaper.Schemas.HostingModel",
+   "OutputPath": "ContentEntities",
+   "ProjectRootNamespace": "TheHorselessNewspaper.Schemas.ContentModel",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 0,
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
-         "Name": "[HostingModel].[FilesystemAssetLocations]",
+         "Name": "[dbo].[AccessControlEntries]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[HostFilesystemAssetLocation]",
+         "Name": "[dbo].[ContentCollectionMimeContent]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[Hosts]",
+         "Name": "[dbo].[ContentCollectionPublication]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[KeyCloakConfigurations]",
+         "Name": "[dbo].[ContentCollections]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[NugetPackages]",
+         "Name": "[dbo].[FilesystemAssets]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[RoutingDiscriminators]",
+         "Name": "[dbo].[HolonymMeronym]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[TenantInfos]",
+         "Name": "[dbo].[Holonyms]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[TenantNugetPackage]",
+         "Name": "[dbo].[JSONAssets]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[Tenants]",
+         "Name": "[dbo].[Meronyms]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[UriPathFilesystemAssetLocation]",
+         "Name": "[dbo].[MimeContents]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[UriPaths]",
+         "Name": "[dbo].[MIMETypes]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[WebAPITenantInfos]",
+         "Name": "[dbo].[NugetPackages]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PlaceholderHolonym]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PlaceholderMeronym]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PlaceholderMimeContent]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Placeholders]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Principals]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PrincipalTenant]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PublicationNugetPackage]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Publications]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TaxonContentCollection]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TaxonHolonym]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TaxonPlaceholder]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Taxons]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TenantContentCollection]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Tenants]",
          "ObjectType": 0
       }
    ],
-   "UiHint": "wipers.THLNP_Hosting.dbo",
+   "UiHint": "wipers.THNLP_Content.dbo",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": true,

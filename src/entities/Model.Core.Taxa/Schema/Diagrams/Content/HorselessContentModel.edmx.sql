@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/27/2021 02:32:00
+-- Date Created: 12/31/2021 15:13:32
 -- Generated from EDMX file: C:\src\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
@@ -141,6 +141,9 @@ IF OBJECT_ID(N'[dbo].[Principals]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[NugetPackages]', 'U') IS NOT NULL
     DROP TABLE [dbo].[NugetPackages];
+GO
+IF OBJECT_ID(N'[dbo].[AccessControlEntries]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AccessControlEntries];
 GO
 IF OBJECT_ID(N'[dbo].[TenantContentCollection]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TenantContentCollection];
@@ -322,7 +325,9 @@ CREATE TABLE [dbo].[Principals] (
     [CreatedAt] datetime  NULL,
     [Iss] nvarchar(max)  NULL,
     [Aud] nvarchar(max)  NULL,
-    [Sub] nvarchar(max)  NULL
+    [Sub] nvarchar(max)  NULL,
+    [IsAnonymous] bit  NULL,
+    [HorselessCookieId] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -340,6 +345,17 @@ CREATE TABLE [dbo].[NugetPackages] (
     [PackageVersion] nvarchar(max)  NULL,
     [PackageAuthor] nvarchar(max)  NULL,
     [PackageSource] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'AccessControlEntries'
+CREATE TABLE [dbo].[AccessControlEntries] (
+    [Id] uniqueidentifier  NOT NULL,
+    [DisplayName] nvarchar(max)  NULL,
+    [ObjectId] nvarchar(max)  NOT NULL,
+    [IsSoftDeleted] bit  NULL,
+    [CreatedAt] datetime  NULL,
+    [IsActive] bit  NULL
 );
 GO
 
@@ -506,6 +522,12 @@ GO
 -- Creating primary key on [Id] in table 'NugetPackages'
 ALTER TABLE [dbo].[NugetPackages]
 ADD CONSTRAINT [PK_NugetPackages]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'AccessControlEntries'
+ALTER TABLE [dbo].[AccessControlEntries]
+ADD CONSTRAINT [PK_AccessControlEntries]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 

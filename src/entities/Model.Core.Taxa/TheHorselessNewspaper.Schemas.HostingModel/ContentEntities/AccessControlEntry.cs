@@ -5,24 +5,13 @@ using System.Collections.Generic;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    public partial class Principal
+    public partial class AccessControlEntry
     {
-        public Principal()
-        {
-            Tenants = new HashSet<Tenant>();
-        }
-
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
         public DateTime? CreatedAt { get; set; }
-        public string Iss { get; set; }
-        public string Aud { get; set; }
-        public string Sub { get; set; }
-        public bool? IsAnonymous { get; set; }
-        public string HorselessCookieId { get; set; }
-
-        public virtual ICollection<Tenant> Tenants { get; set; }
+        public bool? IsActive { get; set; }
     }
 }
