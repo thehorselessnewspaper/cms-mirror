@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/16/2021 17:09:07
+-- Date Created: 12/30/2021 19:34:45
 -- Generated from EDMX file: C:\src\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Hosting\HostingModel.edmx
 -- --------------------------------------------------
 
@@ -26,6 +26,36 @@ GO
 IF OBJECT_ID(N'[HostingModel].[FK_RoutingDiscriminatorUriPath]', 'F') IS NOT NULL
     ALTER TABLE [HostingModel].[UriPaths] DROP CONSTRAINT [FK_RoutingDiscriminatorUriPath];
 GO
+IF OBJECT_ID(N'[HostingModel].[FK_TenantNugetPackage_Tenant]', 'F') IS NOT NULL
+    ALTER TABLE [HostingModel].[TenantNugetPackage] DROP CONSTRAINT [FK_TenantNugetPackage_Tenant];
+GO
+IF OBJECT_ID(N'[HostingModel].[FK_TenantNugetPackage_NugetPackage]', 'F') IS NOT NULL
+    ALTER TABLE [HostingModel].[TenantNugetPackage] DROP CONSTRAINT [FK_TenantNugetPackage_NugetPackage];
+GO
+IF OBJECT_ID(N'[HostingModel].[FK_HostFilesystemAssetLocation_Host]', 'F') IS NOT NULL
+    ALTER TABLE [HostingModel].[HostFilesystemAssetLocation] DROP CONSTRAINT [FK_HostFilesystemAssetLocation_Host];
+GO
+IF OBJECT_ID(N'[HostingModel].[FK_HostFilesystemAssetLocation_FilesystemAssetLocation]', 'F') IS NOT NULL
+    ALTER TABLE [HostingModel].[HostFilesystemAssetLocation] DROP CONSTRAINT [FK_HostFilesystemAssetLocation_FilesystemAssetLocation];
+GO
+IF OBJECT_ID(N'[HostingModel].[FK_UriPathFilesystemAssetLocation_UriPath]', 'F') IS NOT NULL
+    ALTER TABLE [HostingModel].[UriPathFilesystemAssetLocation] DROP CONSTRAINT [FK_UriPathFilesystemAssetLocation_UriPath];
+GO
+IF OBJECT_ID(N'[HostingModel].[FK_UriPathFilesystemAssetLocation_FilesystemAssetLocation]', 'F') IS NOT NULL
+    ALTER TABLE [HostingModel].[UriPathFilesystemAssetLocation] DROP CONSTRAINT [FK_UriPathFilesystemAssetLocation_FilesystemAssetLocation];
+GO
+IF OBJECT_ID(N'[HostingModel].[FK_NugetPackageFilesystemAssetLocation]', 'F') IS NOT NULL
+    ALTER TABLE [HostingModel].[NugetPackages] DROP CONSTRAINT [FK_NugetPackageFilesystemAssetLocation];
+GO
+IF OBJECT_ID(N'[HostingModel].[FK_KeyCloakConfigurationTenant]', 'F') IS NOT NULL
+    ALTER TABLE [HostingModel].[Tenants] DROP CONSTRAINT [FK_KeyCloakConfigurationTenant];
+GO
+IF OBJECT_ID(N'[HostingModel].[FK_TenantInfoFilesystemAssetLocation]', 'F') IS NOT NULL
+    ALTER TABLE [HostingModel].[FilesystemAssetLocations] DROP CONSTRAINT [FK_TenantInfoFilesystemAssetLocation];
+GO
+IF OBJECT_ID(N'[HostingModel].[FK_TenantInfoWebAPITenantInfo]', 'F') IS NOT NULL
+    ALTER TABLE [HostingModel].[WebAPITenantInfos] DROP CONSTRAINT [FK_TenantInfoWebAPITenantInfo];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -42,6 +72,30 @@ IF OBJECT_ID(N'[HostingModel].[Hosts]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[HostingModel].[UriPaths]', 'U') IS NOT NULL
     DROP TABLE [HostingModel].[UriPaths];
+GO
+IF OBJECT_ID(N'[HostingModel].[NugetPackages]', 'U') IS NOT NULL
+    DROP TABLE [HostingModel].[NugetPackages];
+GO
+IF OBJECT_ID(N'[HostingModel].[FilesystemAssetLocations]', 'U') IS NOT NULL
+    DROP TABLE [HostingModel].[FilesystemAssetLocations];
+GO
+IF OBJECT_ID(N'[HostingModel].[KeyCloakConfigurations]', 'U') IS NOT NULL
+    DROP TABLE [HostingModel].[KeyCloakConfigurations];
+GO
+IF OBJECT_ID(N'[HostingModel].[TenantInfos]', 'U') IS NOT NULL
+    DROP TABLE [HostingModel].[TenantInfos];
+GO
+IF OBJECT_ID(N'[HostingModel].[WebAPITenantInfos]', 'U') IS NOT NULL
+    DROP TABLE [HostingModel].[WebAPITenantInfos];
+GO
+IF OBJECT_ID(N'[HostingModel].[TenantNugetPackage]', 'U') IS NOT NULL
+    DROP TABLE [HostingModel].[TenantNugetPackage];
+GO
+IF OBJECT_ID(N'[HostingModel].[HostFilesystemAssetLocation]', 'U') IS NOT NULL
+    DROP TABLE [HostingModel].[HostFilesystemAssetLocation];
+GO
+IF OBJECT_ID(N'[HostingModel].[UriPathFilesystemAssetLocation]', 'U') IS NOT NULL
+    DROP TABLE [HostingModel].[UriPathFilesystemAssetLocation];
 GO
 
 -- --------------------------------------------------
@@ -119,7 +173,8 @@ CREATE TABLE [HostingModel].[FilesystemAssetLocations] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [CreatedAt] datetime  NULL,
-    [AssetURI] nvarchar(max)  NULL
+    [AssetURI] nvarchar(max)  NULL,
+    [TenantInfoId] uniqueidentifier  NULL
 );
 GO
 
@@ -131,6 +186,33 @@ CREATE TABLE [HostingModel].[KeyCloakConfigurations] (
     [Realm] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NULL,
     [CreatedAt] datetime  NULL
+);
+GO
+
+-- Creating table 'TenantInfos'
+CREATE TABLE [HostingModel].[TenantInfos] (
+    [Id] uniqueidentifier  NOT NULL,
+    [DisplayName] nvarchar(max)  NULL,
+    [ObjectId] nvarchar(max)  NOT NULL,
+    [IsSoftDeleted] bit  NULL,
+    [CreatedAt] datetime  NULL,
+    [Identifier] nvarchar(max)  NULL,
+    [Name] nvarchar(max)  NULL,
+    [ConnectionString] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'WebAPITenantInfos'
+CREATE TABLE [HostingModel].[WebAPITenantInfos] (
+    [Id] uniqueidentifier  NOT NULL,
+    [DisplayName] nvarchar(max)  NULL,
+    [ObjectId] nvarchar(max)  NOT NULL,
+    [IsSoftDeleted] bit  NULL,
+    [CreatedAt] datetime  NULL,
+    [Identifier] nvarchar(max)  NULL,
+    [Name] nvarchar(max)  NULL,
+    [ConnectionString] nvarchar(max)  NULL,
+    [TenantInfo_Id] uniqueidentifier  NULL
 );
 GO
 
@@ -198,6 +280,18 @@ GO
 -- Creating primary key on [Id] in table 'KeyCloakConfigurations'
 ALTER TABLE [HostingModel].[KeyCloakConfigurations]
 ADD CONSTRAINT [PK_KeyCloakConfigurations]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'TenantInfos'
+ALTER TABLE [HostingModel].[TenantInfos]
+ADD CONSTRAINT [PK_TenantInfos]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'WebAPITenantInfos'
+ALTER TABLE [HostingModel].[WebAPITenantInfos]
+ADD CONSTRAINT [PK_WebAPITenantInfos]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -368,6 +462,36 @@ GO
 CREATE INDEX [IX_FK_KeyCloakConfigurationTenant]
 ON [HostingModel].[Tenants]
     ([KeyCloakConfigurationId]);
+GO
+
+-- Creating foreign key on [TenantInfoId] in table 'FilesystemAssetLocations'
+ALTER TABLE [HostingModel].[FilesystemAssetLocations]
+ADD CONSTRAINT [FK_TenantInfoFilesystemAssetLocation]
+    FOREIGN KEY ([TenantInfoId])
+    REFERENCES [HostingModel].[TenantInfos]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TenantInfoFilesystemAssetLocation'
+CREATE INDEX [IX_FK_TenantInfoFilesystemAssetLocation]
+ON [HostingModel].[FilesystemAssetLocations]
+    ([TenantInfoId]);
+GO
+
+-- Creating foreign key on [TenantInfo_Id] in table 'WebAPITenantInfos'
+ALTER TABLE [HostingModel].[WebAPITenantInfos]
+ADD CONSTRAINT [FK_TenantInfoWebAPITenantInfo]
+    FOREIGN KEY ([TenantInfo_Id])
+    REFERENCES [HostingModel].[TenantInfos]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TenantInfoWebAPITenantInfo'
+CREATE INDEX [IX_FK_TenantInfoWebAPITenantInfo]
+ON [HostingModel].[WebAPITenantInfos]
+    ([TenantInfo_Id]);
 GO
 
 -- --------------------------------------------------

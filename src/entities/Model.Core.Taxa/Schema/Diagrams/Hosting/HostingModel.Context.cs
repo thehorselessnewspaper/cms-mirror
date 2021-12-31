@@ -32,5 +32,7 @@ namespace Schema.Diagrams.Hosting
         public virtual DbSet<NugetPackage> NugetPackages { get; set; }
         public virtual DbSet<FilesystemAssetLocation> FilesystemAssetLocations { get; set; }
         public virtual DbSet<KeyCloakConfiguration> KeyCloakConfigurations { get; set; }
+        public virtual DbSet<TenantInfo> TenantInfos { get; set; }
+        public virtual DbSet<WebAPITenantInfo> WebAPITenantInfos { get; set; }
     }
 }

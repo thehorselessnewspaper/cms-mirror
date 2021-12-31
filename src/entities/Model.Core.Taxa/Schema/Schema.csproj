@@ -227,7 +227,13 @@
     <Compile Include="Diagrams\Hosting\Tenant.cs">
       <DependentUpon>HostingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Diagrams\Hosting\TenantInfo.cs">
+      <DependentUpon>HostingModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Diagrams\Hosting\UriPath.cs">
+      <DependentUpon>HostingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Hosting\WebAPITenantInfo.cs">
       <DependentUpon>HostingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\SecondCut\ConfigurationDb.Designer.cs">

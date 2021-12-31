@@ -102,8 +102,6 @@ namespace HorselessNewspaper.Web.Core.Extensions
             serviceBuilder.Services.AddScoped<IHorselessRoutingStrategy, UrlSegmentRoutingStrategy>();
             serviceBuilder.Services.AddHostedService<ApplicationPartsLogger>();
 
-            serviceBuilder.Services.AddScoped<THNLPContentContext>();
-
             // as per https://stackoverflow.com/questions/33566075/generic-repository-in-asp-net-core-without-having-a-separate-addscoped-line-per
             // support injecting a provider for a generic entity type determined by consumers of the injected service
             serviceBuilder.Services.AddScoped(typeof(IHorselessQueryResultProvider<>), typeof(HorselessEntityFrameworkQueryProvider<>));

@@ -13,6 +13,8 @@
     <EntitySet Name="NugetPackages" EntityType="HostingModel.Store.NugetPackages" store:Type="Tables" Schema="HostingModel" />
     <EntitySet Name="FilesystemAssetLocations" EntityType="HostingModel.Store.FilesystemAssetLocations" store:Type="Tables" Schema="HostingModel" />
     <EntitySet Name="KeyCloakConfigurations" EntityType="HostingModel.Store.KeyCloakConfigurations" store:Type="Tables" Schema="HostingModel" />
+    <EntitySet Name="TenantInfos" EntityType="HostingModel.Store.TenantInfos" store:Type="Tables" Schema="HostingModel" />
+    <EntitySet Name="WebAPITenantInfos" EntityType="HostingModel.Store.WebAPITenantInfos" store:Type="Tables" Schema="HostingModel" />
     <EntitySet Name="TenantNugetPackage" EntityType="HostingModel.Store.TenantNugetPackage" store:Type="Tables" Schema="HostingModel" />
     <EntitySet Name="HostFilesystemAssetLocation" EntityType="HostingModel.Store.HostFilesystemAssetLocation" store:Type="Tables" Schema="HostingModel" />
     <EntitySet Name="UriPathFilesystemAssetLocation" EntityType="HostingModel.Store.UriPathFilesystemAssetLocation" store:Type="Tables" Schema="HostingModel" />
@@ -59,6 +61,14 @@
     <AssociationSet Name="KeyCloakConfigurationTenant" Association="HostingModel.Store.KeyCloakConfigurationTenant">
       <End Role="KeyCloakConfiguration" EntitySet="KeyCloakConfigurations" />
       <End Role="Tenant" EntitySet="Tenants" />
+    </AssociationSet>
+    <AssociationSet Name="TenantInfoFilesystemAssetLocation" Association="HostingModel.Store.TenantInfoFilesystemAssetLocation">
+      <End Role="TenantInfo" EntitySet="TenantInfos" />
+      <End Role="FilesystemAssetLocation" EntitySet="FilesystemAssetLocations" />
+    </AssociationSet>
+    <AssociationSet Name="TenantInfoWebAPITenantInfo" Association="HostingModel.Store.TenantInfoWebAPITenantInfo">
+      <End Role="TenantInfo" EntitySet="TenantInfos" />
+      <End Role="WebAPITenantInfo" EntitySet="WebAPITenantInfos" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Tenants">
@@ -135,6 +145,7 @@
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="AssetURI" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="TenantInfoId" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <EntityType Name="KeyCloakConfigurations">
     <Key>
@@ -146,6 +157,33 @@
     <Property Name="Realm" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TenantInfos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="Identifier" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ConnectionString" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="WebAPITenantInfos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="Identifier" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ConnectionString" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="TenantInfo_Id" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <EntityType Name="TenantNugetPackage">
     <Key>
@@ -228,6 +266,30 @@
       </Principal>
       <Dependent Role="Tenant">
         <PropertyRef Name="KeyCloakConfigurationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TenantInfoFilesystemAssetLocation">
+    <End Role="TenantInfo" Type="HostingModel.Store.TenantInfos" Multiplicity="0..1" />
+    <End Role="FilesystemAssetLocation" Type="HostingModel.Store.FilesystemAssetLocations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TenantInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FilesystemAssetLocation">
+        <PropertyRef Name="TenantInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TenantInfoWebAPITenantInfo">
+    <End Role="TenantInfo" Type="HostingModel.Store.TenantInfos" Multiplicity="0..1" />
+    <End Role="WebAPITenantInfo" Type="HostingModel.Store.WebAPITenantInfos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TenantInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WebAPITenantInfo">
+        <PropertyRef Name="TenantInfo_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -346,6 +408,16 @@
           <AssociationSet Name="KeyCloakConfigurationTenant" Association="HostingModel.KeyCloakConfigurationTenant">
             <End Role="KeyCloakConfiguration" EntitySet="KeyCloakConfigurations" />
             <End Role="Tenant" EntitySet="Tenants" />
+          </AssociationSet>
+          <EntitySet Name="TenantInfos" EntityType="HostingModel.TenantInfo" />
+          <EntitySet Name="WebAPITenantInfos" EntityType="HostingModel.WebAPITenantInfo" />
+          <AssociationSet Name="TenantInfoFilesystemAssetLocation" Association="HostingModel.TenantInfoFilesystemAssetLocation">
+            <End Role="TenantInfo" EntitySet="TenantInfos" />
+            <End Role="FilesystemAssetLocation" EntitySet="FilesystemAssetLocations" />
+          </AssociationSet>
+          <AssociationSet Name="TenantInfoWebAPITenantInfo" Association="HostingModel.TenantInfoWebAPITenantInfo">
+            <End Role="TenantInfo" EntitySet="TenantInfos" />
+            <End Role="WebAPITenantInfo" EntitySet="WebAPITenantInfos" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Tenant">
@@ -479,6 +551,8 @@
           <NavigationProperty Name="HostWWWRootAssetLocations" Relationship="HostingModel.HostFilesystemAssetLocation" FromRole="FilesystemAssetLocation" ToRole="Host" />
           <NavigationProperty Name="UriPathWWWRootAssetLocations" Relationship="HostingModel.UriPathFilesystemAssetLocation" FromRole="FilesystemAssetLocation" ToRole="UriPath" />
           <NavigationProperty Name="NugetPackage" Relationship="HostingModel.NugetPackageFilesystemAssetLocation" FromRole="FilesystemAssetLocation" ToRole="NugetPackage" />
+          <NavigationProperty Name="TenantInfo" Relationship="HostingModel.TenantInfoFilesystemAssetLocation" FromRole="FilesystemAssetLocation" ToRole="TenantInfo" />
+          <Property Name="TenantInfoId" Type="Guid" Nullable="true" />
         </EntityType>
         <Association Name="HostFilesystemAssetLocation">
           <End Type="HostingModel.Host" Role="Host" Multiplicity="*" />
@@ -515,6 +589,51 @@
               <PropertyRef Name="KeyCloakConfigurationId" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TenantInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <Property Name="Identifier" Type="String" Nullable="true" />
+          <Property Name="Name" Type="String" Nullable="true" />
+          <Property Name="ConnectionString" Type="String" Nullable="true" />
+          <NavigationProperty Name="FilesystemAssetLocations" Relationship="HostingModel.TenantInfoFilesystemAssetLocation" FromRole="TenantInfo" ToRole="FilesystemAssetLocation" />
+          <NavigationProperty Name="WebAPITenantInfo" Relationship="HostingModel.TenantInfoWebAPITenantInfo" FromRole="TenantInfo" ToRole="WebAPITenantInfo" />
+        </EntityType>
+        <EntityType Name="WebAPITenantInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <Property Name="Identifier" Type="String" Nullable="true" />
+          <Property Name="Name" Type="String" Nullable="true" />
+          <Property Name="ConnectionString" Type="String" Nullable="true" />
+          <NavigationProperty Name="TenantInfo" Relationship="HostingModel.TenantInfoWebAPITenantInfo" FromRole="WebAPITenantInfo" ToRole="TenantInfo" />
+        </EntityType>
+        <Association Name="TenantInfoFilesystemAssetLocation">
+          <End Type="HostingModel.TenantInfo" Role="TenantInfo" Multiplicity="0..1" />
+          <End Type="HostingModel.FilesystemAssetLocation" Role="FilesystemAssetLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TenantInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilesystemAssetLocation">
+              <PropertyRef Name="TenantInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TenantInfoWebAPITenantInfo">
+          <End Type="HostingModel.TenantInfo" Role="TenantInfo" Multiplicity="0..1" />
+          <End Type="HostingModel.WebAPITenantInfo" Role="WebAPITenantInfo" Multiplicity="0..1" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -599,6 +718,7 @@
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="AssetURI" ColumnName="AssetURI" />
+          <ScalarProperty Name="TenantInfoId" ColumnName="TenantInfoId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -611,6 +731,34 @@
           <ScalarProperty Name="Realm" ColumnName="Realm" />
           <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TenantInfos">
+      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.TenantInfo)">
+        <MappingFragment StoreEntitySet="TenantInfos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ConnectionString" ColumnName="ConnectionString" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WebAPITenantInfos">
+      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.WebAPITenantInfo)">
+        <MappingFragment StoreEntitySet="WebAPITenantInfos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ConnectionString" ColumnName="ConnectionString" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -645,6 +793,15 @@
       <EndProperty Name="NugetPackage">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TenantInfoWebAPITenantInfo" TypeName="HostingModel.TenantInfoWebAPITenantInfo" StoreEntitySet="WebAPITenantInfos">
+      <EndProperty Name="TenantInfo">
+        <ScalarProperty Name="Id" ColumnName="TenantInfo_Id" />
+      </EndProperty>
+      <EndProperty Name="WebAPITenantInfo">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="TenantInfo_Id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>

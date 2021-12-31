@@ -12,26 +12,25 @@ namespace Schema.Diagrams.Hosting
     using System;
     using System.Collections.Generic;
     
-    public partial class FilesystemAssetLocation
+    public partial class TenantInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public FilesystemAssetLocation()
+        public TenantInfo()
         {
-            this.HostWWWRootAssetLocations = new HashSet<Host>();
-            this.UriPathWWWRootAssetLocations = new HashSet<UriPath>();
+            this.FilesystemAssetLocations = new HashSet<FilesystemAssetLocation>();
         }
     
         public System.Guid Id { get; set; }
         public string DisplayName { get; set; }
+        public string ObjectId { get; set; }
+        public Nullable<bool> IsSoftDeleted { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
-        public string AssetURI { get; set; }
-        public Nullable<System.Guid> TenantInfoId { get; set; }
+        public string Identifier { get; set; }
+        public string Name { get; set; }
+        public string ConnectionString { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Host> HostWWWRootAssetLocations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UriPath> UriPathWWWRootAssetLocations { get; set; }
-        public virtual NugetPackage NugetPackage { get; set; }
-        public virtual TenantInfo TenantInfo { get; set; }
+        public virtual ICollection<FilesystemAssetLocation> FilesystemAssetLocations { get; set; }
+        public virtual WebAPITenantInfo WebAPITenantInfo { get; set; }
     }
 }

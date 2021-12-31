@@ -5,20 +5,18 @@ using System.Collections.Generic;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
 {
-    public partial class KeyCloakConfiguration
+    public partial class WebAPITenantInfo
     {
-        public KeyCloakConfiguration()
-        {
-            Tenants = new HashSet<Tenant>();
-        }
-
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
-        public string Authority { get; set; }
-        public string Realm { get; set; }
         public string ObjectId { get; set; }
+        public bool? IsSoftDeleted { get; set; }
         public DateTime? CreatedAt { get; set; }
+        public string Identifier { get; set; }
+        public string Name { get; set; }
+        public string ConnectionString { get; set; }
+        public Guid? TenantInfo_Id { get; set; }
 
-        public virtual ICollection<Tenant> Tenants { get; set; }
+        public virtual TenantInfo TenantInfo { get; set; }
     }
 }

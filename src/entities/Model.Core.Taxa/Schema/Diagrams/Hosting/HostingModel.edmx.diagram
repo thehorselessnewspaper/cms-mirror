@@ -4,22 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="004a630ba438496abab63777020bbddd" Name="Diagram1" ZoomLevel="121" >
+      <Diagram DiagramId="004a630ba438496abab63777020bbddd" Name="Diagram1" ZoomLevel="98" >
         <EntityTypeShape EntityType="HostingModel.Tenant" Width="2.875" PointX="7.75" PointY="2.125" />
         <EntityTypeShape EntityType="HostingModel.RoutingDiscriminator" Width="2.25" PointX="12.25" PointY="2.125" />
         <EntityTypeShape EntityType="HostingModel.Host" Width="2.875" PointX="12" PointY="5.875" />
-        <EntityTypeShape EntityType="HostingModel.UriPath" Width="2.5" PointX="16" PointY="5.875" />
+        <EntityTypeShape EntityType="HostingModel.UriPath" Width="2.5" PointX="18" PointY="9.5" />
         <AssociationConnector Association="HostingModel.TenantRoutingDiscriminator" />
         <AssociationConnector Association="HostingModel.RoutingDiscriminatorHost" />
         <AssociationConnector Association="HostingModel.RoutingDiscriminatorUriPath" />
-        <EntityTypeShape EntityType="HostingModel.NugetPackage" Width="2.875" PointX="7.875" PointY="9.375" />
+        <EntityTypeShape EntityType="HostingModel.NugetPackage" Width="2.875" PointX="7.875" PointY="6.125" />
         <AssociationConnector Association="HostingModel.TenantNugetPackage" />
         <EntityTypeShape EntityType="HostingModel.FilesystemAssetLocation" Width="2.875" PointX="12.125" PointY="9.75" />
         <AssociationConnector Association="HostingModel.HostFilesystemAssetLocation" />
         <AssociationConnector Association="HostingModel.UriPathFilesystemAssetLocation" />
         <AssociationConnector Association="HostingModel.NugetPackageFilesystemAssetLocation" />
-        <EntityTypeShape EntityType="HostingModel.KeyCloakConfiguration" Width="3" PointX="2.625" PointY="2.125" />
+        <EntityTypeShape EntityType="HostingModel.KeyCloakConfiguration" Width="3" PointX="2.625" PointY="0.5" />
         <AssociationConnector Association="HostingModel.KeyCloakConfigurationTenant" />
+        <EntityTypeShape EntityType="HostingModel.TenantInfo" Width="2.375" PointX="10.5" PointY="13.75" />
+        <EntityTypeShape EntityType="HostingModel.WebAPITenantInfo" Width="2.625" PointX="15.125" PointY="13.75" />
+        <AssociationConnector Association="HostingModel.TenantInfoFilesystemAssetLocation" />
+        <AssociationConnector Association="HostingModel.TenantInfoWebAPITenantInfo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
