@@ -32,7 +32,7 @@
     <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.3.211231.4" />
     <PackageReference Include="HorselessNewspaper.Web.Core" Version="0.2.211227.4" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.1" />
-    <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.2.20211231.3" />
+    <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.2.20211231.4" />
   </ItemGroup>
 
   <ItemGroup>
