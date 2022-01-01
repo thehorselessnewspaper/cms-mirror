@@ -26,14 +26,13 @@
 
   <ItemGroup>
     <Folder Include="Areas\HorselessContent\Views\" />
-    <Folder Include="HorselessControllers\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.3.211231.3" />
+    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.3.211231.4" />
     <PackageReference Include="HorselessNewspaper.Web.Core" Version="0.2.211227.4" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.1" />
-    <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.2.20211231.2" />
+    <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.2.20211231.3" />
   </ItemGroup>
 
   <ItemGroup>

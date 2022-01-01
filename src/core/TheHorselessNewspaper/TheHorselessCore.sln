@@ -29,9 +29,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Web.TagH
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.RazorClassLibrary.Keycloak.Default", "HorselessNewspaper.RazorClassLibrary.Keycloak.Default\HorselessNewspaper.RazorClassLibrary.Keycloak.Default.csproj", "{FC6BB660-0BD4-4A02-AB79-B8A6C1FBBC1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorselessNewspaper.Web.Core.Extensions.MSSQLServer", "HorselessNewspaper.Web.Core.Extensions.MSSQLServer\HorselessNewspaper.Web.Core.Extensions.MSSQLServer.csproj", "{68C78FFB-7BA0-463B-A9C3-FD8E069054F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Web.Core.Extensions.MSSQLServer", "HorselessNewspaper.Web.Core.Extensions.MSSQLServer\HorselessNewspaper.Web.Core.Extensions.MSSQLServer.csproj", "{68C78FFB-7BA0-463B-A9C3-FD8E069054F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorselessNewspaper.Web.Core.Extensions.MySQL", "HorselessNewspaper.Web.Core.Extensions.MySQL\HorselessNewspaper.Web.Core.Extensions.MySQL.csproj", "{FEC81F63-4E51-4D9C-AB51-8781557F725F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Web.Core.Extensions.MySQL", "HorselessNewspaper.Web.Core.Extensions.MySQL\HorselessNewspaper.Web.Core.Extensions.MySQL.csproj", "{FEC81F63-4E51-4D9C-AB51-8781557F725F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorselessNewspaper.Web.Core.Services.Query", "HorselessNewspaper.Web.Core.Services.Query\HorselessNewspaper.Web.Core.Services.Query.csproj", "{63E6F9DB-F681-431B-B5F8-0EBC9C3C1C8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{FEC81F63-4E51-4D9C-AB51-8781557F725F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEC81F63-4E51-4D9C-AB51-8781557F725F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEC81F63-4E51-4D9C-AB51-8781557F725F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63E6F9DB-F681-431B-B5F8-0EBC9C3C1C8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63E6F9DB-F681-431B-B5F8-0EBC9C3C1C8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63E6F9DB-F681-431B-B5F8-0EBC9C3C1C8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63E6F9DB-F681-431B-B5F8-0EBC9C3C1C8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -21,6 +21,8 @@ using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
 using System.Runtime.Loader;
 using System.Security.Claims;
 using Microsoft.AspNetCore.OData;
+using Microsoft.AspNetCore.OData.Extensions;
+
 using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,6 +41,10 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllersWithViews()
     .AddRazorRuntimeCompilation();
 
+builder.Services.AddODataQueryFilter();
+var model = new HorselessOdataModel();
+var edm = await model.GetEdmModel();
+// odata concerns
 builder.Services.AddControllers()
     .AddOData(options =>
     {
@@ -50,9 +56,13 @@ builder.Services.AddControllers()
         .OrderBy()
         .SetMaxTop(100)
         .Count();
+
+        options.TimeZone = TimeZoneInfo.Utc;
+
+        /// todo make this an environment configurable item
+        options.AddRouteComponents("horselessdata", edm);
     });
 
-// var model = HorselessOdataModel.GetEdmModel();
 
     // this hardcodes a static reference to the default horseless razor class library
     // i am sorry - the hoped for benefit is that this will always have a default implementation
@@ -134,6 +144,7 @@ builder.Services.AddHorselessKeycloakAuth(builder,keycloakOpts =>
 });
 
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -159,6 +170,7 @@ app.UseHorselessNewspaper(app, app.Environment, app.Configuration, options =>
 
   
 });
+
 
 app.MapControllerRoute(
     name: "default",
