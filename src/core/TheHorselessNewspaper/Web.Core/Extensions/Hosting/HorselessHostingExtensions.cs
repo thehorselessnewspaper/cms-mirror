@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.Loader;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.OData.Extensions;
 
 namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 {
@@ -25,10 +26,10 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
         /// <param name="builder"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseHorselessNewspaper(this IApplicationBuilder builder, IWebHostEnvironment env, IConfiguration configuration,
+        public static IApplicationBuilder UseHorselessNewspaper(this IApplicationBuilder builder, WebApplication app, IWebHostEnvironment env, IConfiguration configuration,
             Action<HorselessApplicationBuilder> options)
         {
-            var applicationBuilder = new HorselessApplicationBuilder(builder);
+            var applicationBuilder = new HorselessApplicationBuilder(app, builder);
 
             // avoid doing this such that the implementer has full flexibility
             //applicationBuilder.Builder
@@ -55,7 +56,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 
             builder.UseEndpoints(options =>
             {
-
+                   
                 // test of user defined routing scenario
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("");
                 options.MapControllerRoute(

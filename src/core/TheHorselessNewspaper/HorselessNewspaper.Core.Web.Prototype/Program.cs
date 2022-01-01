@@ -20,6 +20,8 @@ using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
 using System.Runtime.Loader;
 using System.Security.Claims;
+using Microsoft.AspNetCore.OData;
+using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +38,22 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddControllersWithViews()
     .AddRazorRuntimeCompilation();
+
+builder.Services.AddControllers()
+    .AddOData(options =>
+    {
+        /// TODO - surface these as configurable parameters 
+        options
+        .Select()
+        .Expand()
+        .Filter()
+        .OrderBy()
+        .SetMaxTop(100)
+        .Count();
+    });
+
+// var model = HorselessOdataModel.GetEdmModel();
+
     // this hardcodes a static reference to the default horseless razor class library
     // i am sorry - the hoped for benefit is that this will always have a default implementation
     // .AddApplicationPart(typeof(HorselessCMSController).Assembly);
@@ -136,7 +154,7 @@ app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseHorselessNewspaper(app.Environment, app.Configuration, options =>
+app.UseHorselessNewspaper(app, app.Environment, app.Configuration, options =>
 {
 
   

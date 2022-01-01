@@ -10,6 +10,8 @@ using HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant;
 using HorselessNewspaper.Web.Core.SingletonServices.ViewCompiler;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
+using Microsoft.AspNetCore.OData.Edm;
+using Microsoft.AspNetCore.OData.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Runtime.Loader;
@@ -19,6 +21,7 @@ using Microsoft.FeatureManagement;
 using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using System.Text.RegularExpressions;
+
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -89,6 +92,8 @@ namespace HorselessNewspaper.Web.Core.Extensions
                 .WithRouteStrategy();
 
             #endregion multitenancy as per https://www.finbuckle.com/MultiTenant/
+
+           
 
             serviceBuilder.Services.AddSingleton<IHorselessCacheProvider<Guid, TenantDTO>, DefaultTenantCache>();
 
