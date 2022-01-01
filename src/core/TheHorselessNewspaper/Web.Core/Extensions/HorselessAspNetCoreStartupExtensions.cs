@@ -109,7 +109,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
             // as per https://stackoverflow.com/questions/33566075/generic-repository-in-asp-net-core-without-having-a-separate-addscoped-line-per
             // support injecting a provider for a generic entity type determined by consumers of the injected service
-            serviceBuilder.Services.AddScoped(typeof(IHorselessQueryResultProvider<>), typeof(HorselessEntityFrameworkQueryProvider<>));
+            //serviceBuilder.Services.AddScoped(typeof(IHorselessQueryResultProvider<>), typeof(HorselessEntityFrameworkQueryProvider<>));
             // don't do this unless you mean to be specific about the Entity collection
             // serviceBuilder.Services.AddScoped<HorselessEntityFrameworkQueryProvider<ContentCollection>>();
 

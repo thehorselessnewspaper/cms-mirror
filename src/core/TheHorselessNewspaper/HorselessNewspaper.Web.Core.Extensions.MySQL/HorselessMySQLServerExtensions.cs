@@ -32,11 +32,11 @@ namespace HorselessNewspaper.Web.Core.Extensions.MySQL
                 options.EnableDetailedErrors();
             });
 
-            services.AddDbContext<THNLPContentContext>(options =>
-            {
-                options.UseMySql(contentModelConnectionString, contentModelServerVersion);
-                options.EnableDetailedErrors();
-            });
+            //services.AddDbContext<THNLPContentContext>(options =>
+            //{
+            //    options.UseMySql(contentModelConnectionString, contentModelServerVersion);
+            //    options.EnableDetailedErrors();
+            //});
 
             return services;
         }

@@ -8,8 +8,8 @@ using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace HorselessNewspaper.Core.Repositories.MimeType
 {
-    public interface IMimeTypeRepository : IBaseRepository<MIMEType> 
-    {
+    //public interface IMimeTypeRepository : IBaseRepository<MIMEType> 
+    //{
  
-    }
+    //}
 }
