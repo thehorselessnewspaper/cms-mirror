@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <PackageId>TheHorselessNewspaper.Schemas.HostingModel</PackageId>
+    <PackageId>TheHorselessNewspaper.HostingModel</PackageId>
     <Version>1.0.0</Version>
     <Authors>sechele</Authors>
     <Company>Ataxlab</Company>
@@ -30,6 +30,7 @@
     <Folder Include="Context\MySQL\" />
     <Folder Include="Context\PostGIS\" />
     <Folder Include="EntityPartials\Hosting\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

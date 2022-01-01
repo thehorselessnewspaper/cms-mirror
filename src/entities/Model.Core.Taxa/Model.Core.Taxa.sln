@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schema", "Schema\Schema.csproj", "{1D08054D-887D-4A65-9DA5-624091494390}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheHorselessNewspaper.Schemas.HostingModel", "TheHorselessNewspaper.Schemas.HostingModel\TheHorselessNewspaper.Schemas.HostingModel.csproj", "{FF2D659A-F1E4-43B1-88B7-3F6A5995275B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheHorselessNewspaper.HostingModel", "TheHorselessNewspaper.Schemas.HostingModel\TheHorselessNewspaper.HostingModel.csproj", "{FF2D659A-F1E4-43B1-88B7-3F6A5995275B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
