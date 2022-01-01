@@ -19,7 +19,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
     ///  - support database per tenant
     ///     - as per Finbuckle MultiTenant https://www.finbuckle.com/MultiTenant/Docs/v6.5.1/EFCore#introduction
     /// </summary>
-    public partial class THNLPHostingContext : DbContext
+    internal partial class THNLPHostingContext : DbContext
     {
         public THNLPHostingContext(DbContextOptions<THNLPHostingContext> options, TenantInfoDTO tenant)
         : base(options)

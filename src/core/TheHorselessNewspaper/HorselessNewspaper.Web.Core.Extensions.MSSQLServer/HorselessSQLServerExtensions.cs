@@ -6,7 +6,12 @@ using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace HorselessNewspaper.Web.Core.Extensions.MSSQLServer
 {
-    public static class HorselessSQLServerExtensions
+    /// <summary>
+    /// don't do this due to use of dbcontext marked internal in a different assembly
+    /// to prevent injection into controllers
+    /// </summary>
+    [Obsolete]
+    public static class HorselessSQLServerExtensionsObsolete
     {
         public static IServiceCollection UseHorselessMSSqlServer(this IServiceCollection services, IConfiguration configuration)
         {

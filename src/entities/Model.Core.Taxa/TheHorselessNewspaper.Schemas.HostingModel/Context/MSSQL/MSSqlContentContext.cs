@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
     /// </summary>
     internal partial class MSSqlContentContext : THNLPContentContext, IContentModelContext
     {
-        public MSSqlContentContext(DbContextOptions<THNLPContentContext> options, TenantInfoDTO tenant) : base(options, tenant)
+        internal MSSqlContentContext(DbContextOptions<THNLPContentContext> options, TenantInfoDTO tenant) : base(options, tenant)
         {
             
         }
@@ -49,4 +51,5 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
         }
     }
+
 }

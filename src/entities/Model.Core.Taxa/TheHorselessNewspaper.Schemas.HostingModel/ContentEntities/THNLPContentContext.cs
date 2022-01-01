@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    public partial class THNLPContentContext : DbContext
+    internal partial class THNLPContentContext : DbContext
     {
         public THNLPContentContext()
         {

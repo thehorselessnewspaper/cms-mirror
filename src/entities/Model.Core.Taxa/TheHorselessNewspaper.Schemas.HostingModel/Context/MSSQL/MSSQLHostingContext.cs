@@ -8,7 +8,7 @@ using TheHorselessNewspaper.Schemas.HostingModel.Entities;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 {
-    public class MSSQLHostingContext : THNLPHostingContext
+    internal class MSSQLHostingContext : THNLPHostingContext
     {
     }
 }

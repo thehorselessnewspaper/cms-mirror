@@ -6,7 +6,12 @@ using TheHorselessNewspaper.Schemas.HostingModel.Entities;
 
 namespace HorselessNewspaper.Web.Core.Extensions.MySQL
 {
-    public static class HorselessMySQLServerExtensions
+    /// <summary>
+    /// don't do this due to use of dbcontext marked internal in a different assembly
+    /// to prevent injection into controllers
+    /// </summary>
+    [Obsolete]
+    public static class HorselessMySQLServerExtensionsObsolete
     {
         public static IServiceCollection UseHorselessMSSqlServer<TDbContext>(this IServiceCollection services, IConfiguration configuration, TDbContext dbContext) where TDbContext : DbContext 
         {

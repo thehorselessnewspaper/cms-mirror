@@ -8,7 +8,7 @@ using TheHorselessNewspaper.Schemas.HostingModel.Entities.Configurations;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
 {
-    public partial class THNLPHostingContext : DbContext
+    internal partial class THNLPHostingContext : DbContext
     {
         public THNLPHostingContext()
         {
