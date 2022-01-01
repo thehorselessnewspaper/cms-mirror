@@ -13,7 +13,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
     /// support polymorphic database interaction
     /// through a common dbcontext archetype
     /// </summary>
-    public partial class MSSqlContentContext : THNLPContentContext, IContentModelContext
+    internal partial class MSSqlContentContext : THNLPContentContext, IContentModelContext
     {
         public MSSqlContentContext(DbContextOptions<THNLPContentContext> options, TenantInfoDTO tenant) : base(options, tenant)
         {
