@@ -11,7 +11,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context
     /// <summary>
     /// support Implementation specific context
     /// </summary>
-    public partial interface IContentModelContext
+    internal partial interface IContentModelContext
     {
         public DbSet<AccessControlEntry> AccessControlEntries { get; set; }
         public DbSet<ContentCollection> ContentCollections { get; set; }
