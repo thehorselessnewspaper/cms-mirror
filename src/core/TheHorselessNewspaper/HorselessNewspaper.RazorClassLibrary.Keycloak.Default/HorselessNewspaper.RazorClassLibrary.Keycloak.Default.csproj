@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="HorselessNewspaper.Web.Core.Auth.Keycloak" Version="0.3.220102.3" />
       <PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.0.0">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -22,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HorselessNewspaper.Web.Core.Auth.Keycloak" Version="0.3.220102.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
   </ItemGroup>
