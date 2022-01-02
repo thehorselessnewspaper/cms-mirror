@@ -5,12 +5,11 @@ using System.Collections.Generic;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    public partial class MimeContent
+    public partial class HorselessContent
     {
-        public MimeContent()
+        public HorselessContent()
         {
             ContentCollections = new HashSet<ContentCollection>();
-            Placeholders = new HashSet<Placeholder>();
         }
 
         public Guid Id { get; set; }
@@ -28,6 +27,5 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public virtual MIMEType MIMEType { get; set; }
 
         public virtual ICollection<ContentCollection> ContentCollections { get; set; }
-        public virtual ICollection<Placeholder> Placeholders { get; set; }
     }
 }

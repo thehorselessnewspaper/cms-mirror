@@ -9,7 +9,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     {
         public MIMEType()
         {
-            MimeContents = new HashSet<MimeContent>();
+            HorselessContents = new HashSet<HorselessContent>();
         }
 
         public Guid Id { get; set; }
@@ -19,6 +19,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public DateTime? CreatedAt { get; set; }
         public string MIMETypeName { get; set; }
 
-        public virtual ICollection<MimeContent> MimeContents { get; set; }
+        public virtual ICollection<HorselessContent> HorselessContents { get; set; }
     }
 }

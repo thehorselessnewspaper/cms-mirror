@@ -7,24 +7,12 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     public partial class Placeholder
     {
-        public Placeholder()
-        {
-            Holonyms = new HashSet<Holonym>();
-            Meronyms = new HashSet<Meronym>();
-            MimeContents = new HashSet<MimeContent>();
-            Taxons = new HashSet<Taxon>();
-        }
-
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
         public DateTime? CreatedAt { get; set; }
         public bool? IsPublished { get; set; }
-
-        public virtual ICollection<Holonym> Holonyms { get; set; }
-        public virtual ICollection<Meronym> Meronyms { get; set; }
-        public virtual ICollection<MimeContent> MimeContents { get; set; }
-        public virtual ICollection<Taxon> Taxons { get; set; }
+        public string Description { get; set; }
     }
 }

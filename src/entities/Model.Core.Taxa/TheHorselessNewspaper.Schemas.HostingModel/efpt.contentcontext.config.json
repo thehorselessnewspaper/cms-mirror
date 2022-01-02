@@ -1,6 +1,6 @@
 ﻿{
    "CodeGenerationMode": 2,
-   "ContextClassName": "THNLPContentContext",
+   "ContextClassName": "THLNPContentContext",
    "ContextNamespace": null,
    "DefaultDacpacSchema": null,
    "FilterSchemas": false,
@@ -18,11 +18,11 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[ContentCollectionMimeContent]",
+         "Name": "[dbo].[ContentCollectionContentCollection]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[ContentCollectionPublication]",
+         "Name": "[dbo].[ContentCollectionMimeContent]",
          "ObjectType": 0
       },
       {
@@ -34,11 +34,15 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[HolonymMeronym]",
+         "Name": "[dbo].[Holonyms]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Holonyms]",
+         "Name": "[dbo].[HorselessContents]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HorselessSessions]",
          "ObjectType": 0
       },
       {
@@ -50,27 +54,31 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[MimeContents]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[dbo].[MIMETypes]",
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[NavigationMenuItemNavigationMenu]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NavigationMenuItemNavigationMenuItem]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NavigationMenuItems]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NavigationMenuNavigationMenu]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NavigationMenus]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[NugetPackages]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[PlaceholderHolonym]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[PlaceholderMeronym]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[PlaceholderMimeContent]",
          "ObjectType": 0
       },
       {
@@ -86,23 +94,15 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[PublicationNugetPackage]",
+         "Name": "[dbo].[PublicationContentCollection]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PublicationPublication]",
          "ObjectType": 0
       },
       {
          "Name": "[dbo].[Publications]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[TaxonContentCollection]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[TaxonHolonym]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[TaxonPlaceholder]",
          "ObjectType": 0
       },
       {
@@ -121,7 +121,7 @@
    "UiHint": "wipers.THNLP_Content.dbo",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
-   "UseDbContextSplitting": true,
+   "UseDbContextSplitting": false,
    "UseFluentApiOnly": true,
    "UseHandleBars": false,
    "UseInflector": true,

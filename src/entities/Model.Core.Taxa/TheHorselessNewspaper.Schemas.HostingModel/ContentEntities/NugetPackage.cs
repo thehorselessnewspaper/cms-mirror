@@ -7,11 +7,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     public partial class NugetPackage
     {
-        public NugetPackage()
-        {
-            Publications = new HashSet<Publication>();
-        }
-
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
@@ -24,7 +19,5 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string PackageVersion { get; set; }
         public string PackageAuthor { get; set; }
         public string PackageSource { get; set; }
-
-        public virtual ICollection<Publication> Publications { get; set; }
     }
 }

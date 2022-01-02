@@ -21,15 +21,15 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     ///  - support database per tenant
     ///     - as per Finbuckle MultiTenant https://www.finbuckle.com/MultiTenant/Docs/v6.5.1/EFCore#introduction
     /// </summary>
-    internal partial class THNLPContentContext : DbContext
+    internal partial class THLNPContentContext : DbContext
     {
 
-        public THNLPContentContext(DbContextOptions<THNLPContentContext> options, TenantInfoDTO tenant)
+        public THLNPContentContext(DbContextOptions<THLNPContentContext> options, TenantInfo tenant)
         : base(options)
         {
         }
 
-        protected THNLPContentContext(DbContextOptions options, TenantInfoDTO tenant)
+        protected THLNPContentContext(DbContextOptions options, TenantInfo tenant)
         : base(options)
         {
               

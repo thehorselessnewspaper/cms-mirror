@@ -27,8 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ContentEntities\" />
     <Folder Include="Context\MySQL\" />
     <Folder Include="Context\PostGIS\" />
+    <Folder Include="Entities\" />
     <Folder Include="EntityPartials\Hosting\" />
     <Folder Include="Services\" />
   </ItemGroup>

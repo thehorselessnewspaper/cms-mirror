@@ -10,7 +10,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
         public Tenant()
         {
             RoutingDiscriminators = new HashSet<RoutingDiscriminator>();
-            AvailableNugetPackages = new HashSet<NugetPackage>();
+            TenantInfos = new HashSet<TenantInfo>();
         }
 
         public Guid Id { get; set; }
@@ -18,11 +18,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
         public DateTime? CreatedAt { get; set; }
-        public Guid? KeyCloakConfigurationId { get; set; }
 
-        public virtual KeyCloakConfiguration KeyCloakConfiguration { get; set; }
         public virtual ICollection<RoutingDiscriminator> RoutingDiscriminators { get; set; }
-
-        public virtual ICollection<NugetPackage> AvailableNugetPackages { get; set; }
+        public virtual ICollection<TenantInfo> TenantInfos { get; set; }
     }
 }

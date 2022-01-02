@@ -21,7 +21,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         {
             services.AddDbContext<MSSqlContentContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("HostingModelConnection"));
+                options.UseSqlServer(configuration.GetConnectionString("ContentModelConnection"));
+
                 options.EnableDetailedErrors();
             });
 
@@ -33,7 +34,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         {
             services.AddDbContext<MSSQLHostingContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("ContentModelConnection"));
+                options.UseSqlServer(configuration.GetConnectionString("HostingModelConnection"));
                 options.EnableDetailedErrors();
             });
 

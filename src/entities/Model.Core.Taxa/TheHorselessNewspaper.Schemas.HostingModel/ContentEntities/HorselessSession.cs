@@ -3,21 +3,19 @@
 using System;
 using System.Collections.Generic;
 
-namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
+namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    public partial class WebAPITenantInfo
+    public partial class HorselessSession
     {
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
         public DateTime? CreatedAt { get; set; }
-        public string Identifier { get; set; }
-        public string Name { get; set; }
-        public string ConnectionString { get; set; }
-        public string WebAPIBaseUrl { get; set; }
-        public Guid? TenantInfoId { get; set; }
-
-        public virtual TenantInfo TenantInfo { get; set; }
+        public string SessionId { get; set; }
+        public string Iss { get; set; }
+        public string Aud { get; set; }
+        public string Sub { get; set; }
+        public bool? IsAnonymous { get; set; }
     }
 }

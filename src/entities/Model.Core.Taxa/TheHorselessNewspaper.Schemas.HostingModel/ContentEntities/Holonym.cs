@@ -7,13 +7,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     public partial class Holonym
     {
-        public Holonym()
-        {
-            Meronyms = new HashSet<Meronym>();
-            Placeholders = new HashSet<Placeholder>();
-            Taxons = new HashSet<Taxon>();
-        }
-
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
@@ -21,9 +14,5 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public DateTime CreatedAt { get; set; }
         public string JsonContent { get; set; }
         public string JsonSchema { get; set; }
-
-        public virtual ICollection<Meronym> Meronyms { get; set; }
-        public virtual ICollection<Placeholder> Placeholders { get; set; }
-        public virtual ICollection<Taxon> Taxons { get; set; }
     }
 }

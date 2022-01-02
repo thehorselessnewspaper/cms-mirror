@@ -20,8 +20,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string Iss { get; set; }
         public string Aud { get; set; }
         public string Sub { get; set; }
-        public bool? IsAnonymous { get; set; }
-        public string HorselessCookieId { get; set; }
 
         public virtual ICollection<Tenant> Tenants { get; set; }
     }

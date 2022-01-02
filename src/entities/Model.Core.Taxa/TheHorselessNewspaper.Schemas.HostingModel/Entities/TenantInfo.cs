@@ -9,7 +9,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
     {
         public TenantInfo()
         {
-            FilesystemAssetLocations = new HashSet<FilesystemAssetLocation>();
+            KeyCloakConfigurations = new HashSet<KeyCloakConfiguration>();
             WebAPITenantInfos = new HashSet<WebAPITenantInfo>();
         }
 
@@ -21,8 +21,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
         public string Identifier { get; set; }
         public string Name { get; set; }
         public string ConnectionString { get; set; }
+        public string TenantBaseUrl { get; set; }
+        public Guid? Tenant_Id { get; set; }
 
-        public virtual ICollection<FilesystemAssetLocation> FilesystemAssetLocations { get; set; }
+        public virtual Tenant Tenant { get; set; }
+        public virtual ICollection<KeyCloakConfiguration> KeyCloakConfigurations { get; set; }
         public virtual ICollection<WebAPITenantInfo> WebAPITenantInfos { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     {
         public JSONAsset()
         {
-            MimeContents = new HashSet<MimeContent>();
+            HorselessContents = new HashSet<HorselessContent>();
         }
 
         public Guid Id { get; set; }
@@ -18,7 +18,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public bool? IsSoftDeleted { get; set; }
         public DateTime? CreatedAt { get; set; }
         public string JsonValue { get; set; }
+        public string JsonSchema { get; set; }
 
-        public virtual ICollection<MimeContent> MimeContents { get; set; }
+        public virtual ICollection<HorselessContent> HorselessContents { get; set; }
     }
 }

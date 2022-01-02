@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.Schemas.HostingModel.DTO;
+using TheHorselessNewspaper.Schemas.HostingModel.Entities;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 {
@@ -15,32 +16,14 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
     /// support polymorphic database interaction
     /// through a common dbcontext archetype
     /// </summary>
-    internal partial class MSSqlContentContext : THNLPContentContext, IContentModelContext
+    internal partial class MSSqlContentContext : THLNPContentContext, IContentModelContext
     {
-        internal MSSqlContentContext(DbContextOptions<THNLPContentContext> options, TenantInfoDTO tenant) : base(options, tenant)
+        internal MSSqlContentContext(DbContextOptions<THLNPContentContext> options, TenantInfo tenant) : base(options, tenant)
         {
             
         }
 
-        public new virtual DbSet<AccessControlEntry> AccessControlEntries { get; set; }
-        public new virtual DbSet<ContentCollection> ContentCollections { get; set; }
-        public new virtual  DbSet<FilesystemAsset> FilesystemAssets { get; set; }
-        public new virtual  DbSet<Holonym> Holonyms { get; set; }
-        public new virtual  DbSet<JSONAsset> JSONAssets { get; set; }
-        public new virtual  DbSet<MIMEType> MIMETypes { get; set; }
-        public new virtual  DbSet<Meronym> Meronyms { get; set; }
-        public new virtual  DbSet<MimeContent> MimeContents { get; set; }
-        public new virtual  DbSet<NugetPackage> NugetPackages { get; set; }
-        public new virtual  DbSet<Placeholder> Placeholders { get; set; }
-        public new virtual  DbSet<Principal> Principals { get; set; }
-        public new virtual  DbSet<Publication> Publications { get; set; }
-        public new virtual  DbSet<Taxon> Taxons { get; set; }
-        public new virtual  DbSet<Tenant> Tenants { get; set; }
-
-        public void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-        }
+ 
 
         /// <summary>
         /// extensoin point for localized model building

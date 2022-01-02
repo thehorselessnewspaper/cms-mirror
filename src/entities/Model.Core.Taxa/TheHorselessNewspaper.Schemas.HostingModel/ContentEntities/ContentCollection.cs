@@ -9,9 +9,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     {
         public ContentCollection()
         {
-            MimeContents = new HashSet<MimeContent>();
+            ChildContentCollections = new HashSet<ContentCollection>();
+            MimeContents = new HashSet<HorselessContent>();
+            ParentContentCollections = new HashSet<ContentCollection>();
             Publications = new HashSet<Publication>();
-            Taxons = new HashSet<Taxon>();
             Tenants = new HashSet<Tenant>();
         }
 
@@ -22,10 +23,12 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public DateTime? CreatedAt { get; set; }
         public bool AllowAnonymousRead { get; set; }
         public bool? IsPublished { get; set; }
+        public string URL { get; set; }
 
-        public virtual ICollection<MimeContent> MimeContents { get; set; }
+        public virtual ICollection<ContentCollection> ChildContentCollections { get; set; }
+        public virtual ICollection<HorselessContent> MimeContents { get; set; }
+        public virtual ICollection<ContentCollection> ParentContentCollections { get; set; }
         public virtual ICollection<Publication> Publications { get; set; }
-        public virtual ICollection<Taxon> Taxons { get; set; }
         public virtual ICollection<Tenant> Tenants { get; set; }
     }
 }

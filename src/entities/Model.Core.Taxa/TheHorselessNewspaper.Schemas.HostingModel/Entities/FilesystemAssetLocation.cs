@@ -18,9 +18,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
         public string DisplayName { get; set; }
         public DateTime? CreatedAt { get; set; }
         public string AssetURI { get; set; }
-        public Guid? TenantInfoId { get; set; }
 
-        public virtual TenantInfo TenantInfo { get; set; }
         public virtual ICollection<NugetPackage> NugetPackages { get; set; }
 
         public virtual ICollection<Host> HostWWWRootAssetLocations { get; set; }

@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    public partial class Publication
+    public partial class NavigationMenu
     {
-        public Publication()
+        public NavigationMenu()
         {
-            ContentCollections = new HashSet<ContentCollection>();
-            PublicationParents = new HashSet<Publication>();
-            PublicationsChildren = new HashSet<Publication>();
+            ChildNavigationMenuItems = new HashSet<NavigationMenuItem>();
+            Children = new HashSet<NavigationMenu>();
+            Parents = new HashSet<NavigationMenu>();
         }
 
         public Guid Id { get; set; }
@@ -22,9 +22,12 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public DateTime? PublishAt { get; set; }
         public DateTime? UnPublishAt { get; set; }
         public bool? IsPublished { get; set; }
+        public string MenuLabel { get; set; }
+        public string MenuDescription { get; set; }
+        public string MenuAltText { get; set; }
 
-        public virtual ICollection<ContentCollection> ContentCollections { get; set; }
-        public virtual ICollection<Publication> PublicationParents { get; set; }
-        public virtual ICollection<Publication> PublicationsChildren { get; set; }
+        public virtual ICollection<NavigationMenuItem> ChildNavigationMenuItems { get; set; }
+        public virtual ICollection<NavigationMenu> Children { get; set; }
+        public virtual ICollection<NavigationMenu> Parents { get; set; }
     }
 }

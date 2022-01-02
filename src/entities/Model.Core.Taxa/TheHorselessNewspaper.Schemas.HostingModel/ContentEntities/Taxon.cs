@@ -7,13 +7,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     public partial class Taxon
     {
-        public Taxon()
-        {
-            ContentCollections = new HashSet<ContentCollection>();
-            Holonyms = new HashSet<Holonym>();
-            Placeholders = new HashSet<Placeholder>();
-        }
-
         public Guid Id { get; set; }
         public Guid? DisplayName { get; set; }
         public string ObjectId { get; set; }
@@ -21,9 +14,5 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public DateTime CreatedAt { get; set; }
         public string JsonContent { get; set; }
         public string JsonSchema { get; set; }
-
-        public virtual ICollection<ContentCollection> ContentCollections { get; set; }
-        public virtual ICollection<Holonym> Holonyms { get; set; }
-        public virtual ICollection<Placeholder> Placeholders { get; set; }
     }
 }

@@ -7,11 +7,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
 {
     public partial class NugetPackage
     {
-        public NugetPackage()
-        {
-            TenantDeployments = new HashSet<Tenant>();
-        }
-
         public Guid Id { get; set; }
         public string ObjectId { get; set; }
         public string PackageName { get; set; }
@@ -23,7 +18,5 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
         public Guid FilesystemAssetLocation_Id { get; set; }
 
         public virtual FilesystemAssetLocation FilesystemAssetLocation { get; set; }
-
-        public virtual ICollection<Tenant> TenantDeployments { get; set; }
     }
 }
