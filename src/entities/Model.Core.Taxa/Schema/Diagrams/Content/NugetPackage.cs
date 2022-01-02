@@ -14,12 +14,6 @@ namespace Schema.Diagrams.Content
     
     public partial class NugetPackage
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public NugetPackage()
-        {
-            this.Publications = new HashSet<Publication>();
-        }
-    
         public System.Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
@@ -32,8 +26,5 @@ namespace Schema.Diagrams.Content
         public string PackageVersion { get; set; }
         public string PackageAuthor { get; set; }
         public string PackageSource { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Publication> Publications { get; set; }
     }
 }

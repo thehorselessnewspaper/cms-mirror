@@ -25,7 +25,7 @@ namespace Schema.Diagrams.Content
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<MimeContent> MimeContents { get; set; }
+        public virtual DbSet<HorselessContent> HorselessContents { get; set; }
         public virtual DbSet<Tenant> Tenants { get; set; }
         public virtual DbSet<MIMEType> MIMETypes { get; set; }
         public virtual DbSet<FilesystemAsset> FilesystemAssets { get; set; }
@@ -39,5 +39,8 @@ namespace Schema.Diagrams.Content
         public virtual DbSet<Principal> Principals { get; set; }
         public virtual DbSet<NugetPackage> NugetPackages { get; set; }
         public virtual DbSet<AccessControlEntry> AccessControlEntries { get; set; }
+        public virtual DbSet<HorselessSession> HorselessSessions { get; set; }
+        public virtual DbSet<NavigationMenu> NavigationMenus { get; set; }
+        public virtual DbSet<NavigationMenuItem> NavigationMenuItems { get; set; }
     }
 }

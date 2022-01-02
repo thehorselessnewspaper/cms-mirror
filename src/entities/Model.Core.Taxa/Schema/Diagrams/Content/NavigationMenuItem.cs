@@ -12,31 +12,33 @@ namespace Schema.Diagrams.Content
     using System;
     using System.Collections.Generic;
     
-    public partial class MimeContent
+    public partial class NavigationMenuItem
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MimeContent()
+        public NavigationMenuItem()
         {
-            this.ContentCollections = new HashSet<ContentCollection>();
-            this.Placeholders = new HashSet<Placeholder>();
+            this.ParentNavigationItems = new HashSet<NavigationMenuItem>();
+            this.ChildNavigationItems = new HashSet<NavigationMenuItem>();
+            this.ParentNavigationMenus = new HashSet<NavigationMenu>();
         }
     
         public System.Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public Nullable<bool> IsSoftDeleted { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public Nullable<System.Guid> FilesystemAssetId { get; set; }
-        public Nullable<System.Guid> JSONAssetId { get; set; }
-        public Nullable<System.Guid> MIMETypeId { get; set; }
+        public System.DateTime CreatedAt { get; set; }
+        public Nullable<System.DateTime> PublishAt { get; set; }
+        public Nullable<System.DateTime> UnPublishAt { get; set; }
         public Nullable<bool> IsPublished { get; set; }
+        public string MenuItemLabel { get; set; }
+        public string MenuItemDescription { get; set; }
+        public string MenuItemAltText { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ContentCollection> ContentCollections { get; set; }
-        public virtual FilesystemAsset FilesystemAsset { get; set; }
-        public virtual JSONAsset JSONAsset { get; set; }
-        public virtual MIMEType MIMEType { get; set; }
+        public virtual ICollection<NavigationMenuItem> ParentNavigationItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Placeholder> Placeholders { get; set; }
+        public virtual ICollection<NavigationMenuItem> ChildNavigationItems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NavigationMenu> ParentNavigationMenus { get; set; }
     }
 }

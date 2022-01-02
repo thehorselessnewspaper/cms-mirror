@@ -28,8 +28,6 @@ namespace Schema.Diagrams.Content
         public string Iss { get; set; }
         public string Aud { get; set; }
         public string Sub { get; set; }
-        public Nullable<bool> IsAnonymous { get; set; }
-        public string HorselessCookieId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tenant> Tenants { get; set; }

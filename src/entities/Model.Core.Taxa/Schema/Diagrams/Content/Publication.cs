@@ -17,8 +17,9 @@ namespace Schema.Diagrams.Content
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Publication()
         {
+            this.PublicationParents = new HashSet<Publication>();
+            this.PublicationsChildren = new HashSet<Publication>();
             this.ContentCollections = new HashSet<ContentCollection>();
-            this.NugetPackages = new HashSet<NugetPackage>();
         }
     
         public System.Guid Id { get; set; }
@@ -26,14 +27,15 @@ namespace Schema.Diagrams.Content
         public string ObjectId { get; set; }
         public Nullable<bool> IsSoftDeleted { get; set; }
         public System.DateTime CreatedAt { get; set; }
-        public string RouteTemplateRegEx { get; set; }
         public Nullable<System.DateTime> PublishAt { get; set; }
         public Nullable<System.DateTime> UnPublishAt { get; set; }
         public Nullable<bool> IsPublished { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ContentCollection> ContentCollections { get; set; }
+        public virtual ICollection<Publication> PublicationParents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NugetPackage> NugetPackages { get; set; }
+        public virtual ICollection<Publication> PublicationsChildren { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ContentCollection> ContentCollections { get; set; }
     }
 }

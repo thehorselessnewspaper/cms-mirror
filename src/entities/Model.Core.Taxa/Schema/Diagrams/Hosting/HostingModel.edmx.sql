@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/30/2021 19:34:45
+-- Date Created: 01/01/2022 17:04:53
 -- Generated from EDMX file: C:\src\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Hosting\HostingModel.edmx
 -- --------------------------------------------------
 
@@ -25,12 +25,6 @@ IF OBJECT_ID(N'[HostingModel].[FK_RoutingDiscriminatorHost]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[HostingModel].[FK_RoutingDiscriminatorUriPath]', 'F') IS NOT NULL
     ALTER TABLE [HostingModel].[UriPaths] DROP CONSTRAINT [FK_RoutingDiscriminatorUriPath];
-GO
-IF OBJECT_ID(N'[HostingModel].[FK_TenantNugetPackage_Tenant]', 'F') IS NOT NULL
-    ALTER TABLE [HostingModel].[TenantNugetPackage] DROP CONSTRAINT [FK_TenantNugetPackage_Tenant];
-GO
-IF OBJECT_ID(N'[HostingModel].[FK_TenantNugetPackage_NugetPackage]', 'F') IS NOT NULL
-    ALTER TABLE [HostingModel].[TenantNugetPackage] DROP CONSTRAINT [FK_TenantNugetPackage_NugetPackage];
 GO
 IF OBJECT_ID(N'[HostingModel].[FK_HostFilesystemAssetLocation_Host]', 'F') IS NOT NULL
     ALTER TABLE [HostingModel].[HostFilesystemAssetLocation] DROP CONSTRAINT [FK_HostFilesystemAssetLocation_Host];
@@ -88,9 +82,6 @@ GO
 IF OBJECT_ID(N'[HostingModel].[WebAPITenantInfos]', 'U') IS NOT NULL
     DROP TABLE [HostingModel].[WebAPITenantInfos];
 GO
-IF OBJECT_ID(N'[HostingModel].[TenantNugetPackage]', 'U') IS NOT NULL
-    DROP TABLE [HostingModel].[TenantNugetPackage];
-GO
 IF OBJECT_ID(N'[HostingModel].[HostFilesystemAssetLocation]', 'U') IS NOT NULL
     DROP TABLE [HostingModel].[HostFilesystemAssetLocation];
 GO
@@ -108,8 +99,7 @@ CREATE TABLE [HostingModel].[Tenants] (
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NOT NULL,
     [IsSoftDeleted] bit  NULL,
-    [CreatedAt] datetime  NULL,
-    [KeyCloakConfigurationId] uniqueidentifier  NULL
+    [CreatedAt] datetime  NULL
 );
 GO
 
@@ -173,8 +163,7 @@ CREATE TABLE [HostingModel].[FilesystemAssetLocations] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [CreatedAt] datetime  NULL,
-    [AssetURI] nvarchar(max)  NULL,
-    [TenantInfoId] uniqueidentifier  NULL
+    [AssetURI] nvarchar(max)  NULL
 );
 GO
 
@@ -185,7 +174,10 @@ CREATE TABLE [HostingModel].[KeyCloakConfigurations] (
     [Authority] nvarchar(max)  NULL,
     [Realm] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NULL,
-    [CreatedAt] datetime  NULL
+    [CreatedAt] datetime  NULL,
+    [Iss] nvarchar(max)  NULL,
+    [Aud] nvarchar(max)  NULL,
+    [TenantInfoId] uniqueidentifier  NULL
 );
 GO
 
@@ -198,7 +190,9 @@ CREATE TABLE [HostingModel].[TenantInfos] (
     [CreatedAt] datetime  NULL,
     [Identifier] nvarchar(max)  NULL,
     [Name] nvarchar(max)  NULL,
-    [ConnectionString] nvarchar(max)  NULL
+    [ConnectionString] nvarchar(max)  NULL,
+    [TenantBaseUrl] nvarchar(max)  NULL,
+    [Tenant_Id] uniqueidentifier  NULL
 );
 GO
 
@@ -212,14 +206,8 @@ CREATE TABLE [HostingModel].[WebAPITenantInfos] (
     [Identifier] nvarchar(max)  NULL,
     [Name] nvarchar(max)  NULL,
     [ConnectionString] nvarchar(max)  NULL,
-    [TenantInfo_Id] uniqueidentifier  NULL
-);
-GO
-
--- Creating table 'TenantNugetPackage'
-CREATE TABLE [HostingModel].[TenantNugetPackage] (
-    [TenantDeployments_Id] uniqueidentifier  NOT NULL,
-    [AvailableNugetPackages_Id] uniqueidentifier  NOT NULL
+    [WebAPIBaseUrl] nvarchar(max)  NULL,
+    [TenantInfoId] uniqueidentifier  NULL
 );
 GO
 
@@ -295,12 +283,6 @@ ADD CONSTRAINT [PK_WebAPITenantInfos]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [TenantDeployments_Id], [AvailableNugetPackages_Id] in table 'TenantNugetPackage'
-ALTER TABLE [HostingModel].[TenantNugetPackage]
-ADD CONSTRAINT [PK_TenantNugetPackage]
-    PRIMARY KEY CLUSTERED ([TenantDeployments_Id], [AvailableNugetPackages_Id] ASC);
-GO
-
 -- Creating primary key on [HostWWWRootAssetLocations_Id], [WWWRootAssetLocations_Id] in table 'HostFilesystemAssetLocation'
 ALTER TABLE [HostingModel].[HostFilesystemAssetLocation]
 ADD CONSTRAINT [PK_HostFilesystemAssetLocation]
@@ -360,30 +342,6 @@ GO
 CREATE INDEX [IX_FK_RoutingDiscriminatorUriPath]
 ON [HostingModel].[UriPaths]
     ([RoutingDiscriminatorId]);
-GO
-
--- Creating foreign key on [TenantDeployments_Id] in table 'TenantNugetPackage'
-ALTER TABLE [HostingModel].[TenantNugetPackage]
-ADD CONSTRAINT [FK_TenantNugetPackage_Tenant]
-    FOREIGN KEY ([TenantDeployments_Id])
-    REFERENCES [HostingModel].[Tenants]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [AvailableNugetPackages_Id] in table 'TenantNugetPackage'
-ALTER TABLE [HostingModel].[TenantNugetPackage]
-ADD CONSTRAINT [FK_TenantNugetPackage_NugetPackage]
-    FOREIGN KEY ([AvailableNugetPackages_Id])
-    REFERENCES [HostingModel].[NugetPackages]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TenantNugetPackage_NugetPackage'
-CREATE INDEX [IX_FK_TenantNugetPackage_NugetPackage]
-ON [HostingModel].[TenantNugetPackage]
-    ([AvailableNugetPackages_Id]);
 GO
 
 -- Creating foreign key on [HostWWWRootAssetLocations_Id] in table 'HostFilesystemAssetLocation'
@@ -449,40 +407,10 @@ ON [HostingModel].[NugetPackages]
     ([FilesystemAssetLocation_Id]);
 GO
 
--- Creating foreign key on [KeyCloakConfigurationId] in table 'Tenants'
-ALTER TABLE [HostingModel].[Tenants]
-ADD CONSTRAINT [FK_KeyCloakConfigurationTenant]
-    FOREIGN KEY ([KeyCloakConfigurationId])
-    REFERENCES [HostingModel].[KeyCloakConfigurations]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_KeyCloakConfigurationTenant'
-CREATE INDEX [IX_FK_KeyCloakConfigurationTenant]
-ON [HostingModel].[Tenants]
-    ([KeyCloakConfigurationId]);
-GO
-
--- Creating foreign key on [TenantInfoId] in table 'FilesystemAssetLocations'
-ALTER TABLE [HostingModel].[FilesystemAssetLocations]
-ADD CONSTRAINT [FK_TenantInfoFilesystemAssetLocation]
-    FOREIGN KEY ([TenantInfoId])
-    REFERENCES [HostingModel].[TenantInfos]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TenantInfoFilesystemAssetLocation'
-CREATE INDEX [IX_FK_TenantInfoFilesystemAssetLocation]
-ON [HostingModel].[FilesystemAssetLocations]
-    ([TenantInfoId]);
-GO
-
--- Creating foreign key on [TenantInfo_Id] in table 'WebAPITenantInfos'
+-- Creating foreign key on [TenantInfoId] in table 'WebAPITenantInfos'
 ALTER TABLE [HostingModel].[WebAPITenantInfos]
 ADD CONSTRAINT [FK_TenantInfoWebAPITenantInfo]
-    FOREIGN KEY ([TenantInfo_Id])
+    FOREIGN KEY ([TenantInfoId])
     REFERENCES [HostingModel].[TenantInfos]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -491,7 +419,37 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_TenantInfoWebAPITenantInfo'
 CREATE INDEX [IX_FK_TenantInfoWebAPITenantInfo]
 ON [HostingModel].[WebAPITenantInfos]
-    ([TenantInfo_Id]);
+    ([TenantInfoId]);
+GO
+
+-- Creating foreign key on [TenantInfoId] in table 'KeyCloakConfigurations'
+ALTER TABLE [HostingModel].[KeyCloakConfigurations]
+ADD CONSTRAINT [FK_TenantInfoKeyCloakConfiguration]
+    FOREIGN KEY ([TenantInfoId])
+    REFERENCES [HostingModel].[TenantInfos]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TenantInfoKeyCloakConfiguration'
+CREATE INDEX [IX_FK_TenantInfoKeyCloakConfiguration]
+ON [HostingModel].[KeyCloakConfigurations]
+    ([TenantInfoId]);
+GO
+
+-- Creating foreign key on [Tenant_Id] in table 'TenantInfos'
+ALTER TABLE [HostingModel].[TenantInfos]
+ADD CONSTRAINT [FK_TenantTenantInfo]
+    FOREIGN KEY ([Tenant_Id])
+    REFERENCES [HostingModel].[Tenants]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TenantTenantInfo'
+CREATE INDEX [IX_FK_TenantTenantInfo]
+ON [HostingModel].[TenantInfos]
+    ([Tenant_Id]);
 GO
 
 -- --------------------------------------------------

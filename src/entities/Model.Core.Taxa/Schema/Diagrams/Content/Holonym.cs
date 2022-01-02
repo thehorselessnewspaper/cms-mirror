@@ -14,14 +14,6 @@ namespace Schema.Diagrams.Content
     
     public partial class Holonym
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Holonym()
-        {
-            this.Taxons = new HashSet<Taxon>();
-            this.Meronyms = new HashSet<Meronym>();
-            this.Placeholders = new HashSet<Placeholder>();
-        }
-    
         public System.Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
@@ -29,12 +21,5 @@ namespace Schema.Diagrams.Content
         public System.DateTime CreatedAt { get; set; }
         public string JsonContent { get; set; }
         public string JsonSchema { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Taxon> Taxons { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Meronym> Meronyms { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Placeholder> Placeholders { get; set; }
     }
 }

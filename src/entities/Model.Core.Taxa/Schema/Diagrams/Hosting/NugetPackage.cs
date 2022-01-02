@@ -14,12 +14,6 @@ namespace Schema.Diagrams.Hosting
     
     public partial class NugetPackage
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public NugetPackage()
-        {
-            this.TenantDeployments = new HashSet<Tenant>();
-        }
-    
         public System.Guid Id { get; set; }
         public string ObjectId { get; set; }
         public string PackageName { get; set; }
@@ -29,8 +23,6 @@ namespace Schema.Diagrams.Hosting
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public string DisplayName { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tenant> TenantDeployments { get; set; }
         public virtual FilesystemAssetLocation FilesystemAssetLocation { get; set; }
     }
 }

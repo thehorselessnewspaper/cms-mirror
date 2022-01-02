@@ -7,6 +7,30 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schema", "Schema\Schema.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheHorselessNewspaper.HostingModel", "TheHorselessNewspaper.Schemas.HostingModel\TheHorselessNewspaper.HostingModel.csproj", "{FF2D659A-F1E4-43B1-88B7-3F6A5995275B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TheHorselessNewspaper.Content.Tool", "TheHorselessNewspaper.Content.Tool", "{4D097A03-A77C-4253-9D6C-A7FE00EFE830}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Horseless.ContentModeller", "horseless.content.modeller\Horseless.ContentModeller\", "{9D1B9BD4-BF8D-41C7-BEAF-1A198CCC70DE}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv3.5"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_1052"
+		Debug.AspNetCompiler.PhysicalPath = "horseless.content.modeller\Horseless.ContentModeller\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_1052\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_1052"
+		Release.AspNetCompiler.PhysicalPath = "horseless.content.modeller\Horseless.ContentModeller\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_1052\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "1052"
+		SlnRelativePath = "horseless.content.modeller\Horseless.ContentModeller\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +45,16 @@ Global
 		{FF2D659A-F1E4-43B1-88B7-3F6A5995275B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF2D659A-F1E4-43B1-88B7-3F6A5995275B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF2D659A-F1E4-43B1-88B7-3F6A5995275B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D1B9BD4-BF8D-41C7-BEAF-1A198CCC70DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D1B9BD4-BF8D-41C7-BEAF-1A198CCC70DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D1B9BD4-BF8D-41C7-BEAF-1A198CCC70DE}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D1B9BD4-BF8D-41C7-BEAF-1A198CCC70DE}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9D1B9BD4-BF8D-41C7-BEAF-1A198CCC70DE} = {4D097A03-A77C-4253-9D6C-A7FE00EFE830}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D9E312B6-6A7A-4962-86C8-E6931883B4CA}

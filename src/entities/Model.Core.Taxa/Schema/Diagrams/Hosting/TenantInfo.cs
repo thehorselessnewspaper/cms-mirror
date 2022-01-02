@@ -17,7 +17,8 @@ namespace Schema.Diagrams.Hosting
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TenantInfo()
         {
-            this.FilesystemAssetLocations = new HashSet<FilesystemAssetLocation>();
+            this.WebAPITenantInfos = new HashSet<WebAPITenantInfo>();
+            this.KeyCloakConfigurations = new HashSet<KeyCloakConfiguration>();
         }
     
         public System.Guid Id { get; set; }
@@ -28,9 +29,12 @@ namespace Schema.Diagrams.Hosting
         public string Identifier { get; set; }
         public string Name { get; set; }
         public string ConnectionString { get; set; }
+        public string TenantBaseUrl { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FilesystemAssetLocation> FilesystemAssetLocations { get; set; }
-        public virtual WebAPITenantInfo WebAPITenantInfo { get; set; }
+        public virtual ICollection<WebAPITenantInfo> WebAPITenantInfos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KeyCloakConfiguration> KeyCloakConfigurations { get; set; }
+        public virtual Tenant Tenant { get; set; }
     }
 }

@@ -18,7 +18,6 @@ namespace Schema.Diagrams.Hosting
         public Tenant()
         {
             this.RoutingDiscriminators = new HashSet<RoutingDiscriminator>();
-            this.AvailableNugetPackages = new HashSet<NugetPackage>();
         }
     
         public System.Guid Id { get; set; }
@@ -26,12 +25,9 @@ namespace Schema.Diagrams.Hosting
         public string ObjectId { get; set; }
         public Nullable<bool> IsSoftDeleted { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
-        public Nullable<System.Guid> KeyCloakConfigurationId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RoutingDiscriminator> RoutingDiscriminators { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NugetPackage> AvailableNugetPackages { get; set; }
-        public virtual KeyCloakConfiguration KeyCloakConfiguration { get; set; }
+        public virtual TenantInfo TenantInfo { get; set; }
     }
 }

@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="THNLP_Content" Class="HorselessContentDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=WIPERS;Initial Catalog=THNLP_Content;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="THNLP_ContentConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.AccessControlEntries" Member="AccessControlEntries">
+    <Type Name="AccessControlEntry">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ObjectId" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="IsSoftDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ContentCollectionContentCollection" Member="ContentCollectionContentCollections">
+    <Type Name="ContentCollectionContentCollection">
+      <Column Name="ChildContentCollections_Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ParentContentCollections_Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="ContentCollection_ContentCollectionContentCollection" Member="ContentCollection" ThisKey="ChildContentCollections_Id" OtherKey="Id" Type="ContentCollection" IsForeignKey="true" />
+      <Association Name="ContentCollection_ContentCollectionContentCollection1" Member="ContentCollection1" ThisKey="ParentContentCollections_Id" OtherKey="Id" Type="ContentCollection" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ContentCollectionMimeContent" Member="ContentCollectionMimeContents">
+    <Type Name="ContentCollectionMimeContent">
+      <Column Name="ContentCollections_Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MimeContents_Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="ContentCollection_ContentCollectionMimeContent" Member="ContentCollection" ThisKey="ContentCollections_Id" OtherKey="Id" Type="ContentCollection" IsForeignKey="true" />
+      <Association Name="HorselessContent_ContentCollectionMimeContent" Member="HorselessContent" ThisKey="MimeContents_Id" OtherKey="Id" Type="HorselessContent" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ContentCollections" Member="ContentCollections">
+    <Type Name="ContentCollection">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ObjectId" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="IsSoftDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AllowAnonymousRead" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsPublished" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="URL" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="ContentCollection_ContentCollectionContentCollection" Member="ContentCollectionContentCollections" ThisKey="Id" OtherKey="ChildContentCollections_Id" Type="ContentCollectionContentCollection" />
+      <Association Name="ContentCollection_ContentCollectionContentCollection1" Member="ContentCollectionContentCollections1" ThisKey="Id" OtherKey="ParentContentCollections_Id" Type="ContentCollectionContentCollection" />
+      <Association Name="ContentCollection_ContentCollectionMimeContent" Member="ContentCollectionMimeContents" ThisKey="Id" OtherKey="ContentCollections_Id" Type="ContentCollectionMimeContent" />
+      <Association Name="ContentCollection_PublicationContentCollection" Member="PublicationContentCollections" ThisKey="Id" OtherKey="ContentCollections_Id" Type="PublicationContentCollection" />
+      <Association Name="ContentCollection_TenantContentCollection" Member="TenantContentCollections" ThisKey="Id" OtherKey="ContentCollections_Id" Type="TenantContentCollection" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FilesystemAssets" Member="FilesystemAssets">
+    <Type Name="FilesystemAsset">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ObjectId" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="IsSoftDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Filename" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="FilesystemAsset_HorselessContent" Member="HorselessContents" ThisKey="Id" OtherKey="FilesystemAssetId" Type="HorselessContent" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Holonyms" Member="Holonyms">
+    <Type Name="Holonym">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ObjectId" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="IsSoftDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="JsonContent" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="JsonSchema" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HorselessContents" Member="HorselessContents">
+    <Type Name="HorselessContent">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ObjectId" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="IsSoftDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FilesystemAssetId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="JSONAssetId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="MIMETypeId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="IsPublished" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="HorselessContent_ContentCollectionMimeContent" Member="ContentCollectionMimeContents" ThisKey="Id" OtherKey="MimeContents_Id" Type="ContentCollectionMimeContent" />
+      <Association Name="FilesystemAsset_HorselessContent" Member="FilesystemAsset" ThisKey="FilesystemAssetId" OtherKey="Id" Type="FilesystemAsset" IsForeignKey="true" />
+      <Association Name="JSONAsset_HorselessContent" Member="JSONAsset" ThisKey="JSONAssetId" OtherKey="Id" Type="JSONAsset" IsForeignKey="true" />
+      <Association Name="MIMEType_HorselessContent" Member="MIMEType" ThisKey="MIMETypeId" OtherKey="Id" Type="MIMEType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HorselessSessions" Member="HorselessSessions">
+    <Type Name="HorselessSession">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ObjectId" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="IsSoftDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SessionId" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Iss" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Aud" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Sub" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="IsAnonymous" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.JSONAssets" Member="JSONAssets">
+    <Type Name="JSONAsset">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ObjectId" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="IsSoftDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="JsonValue" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="JsonSchema" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="JSONAsset_HorselessContent" Member="HorselessContents" ThisKey="Id" OtherKey="JSONAssetId" Type="HorselessContent" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Meronyms" Member="Meronyms">
+    <Type Name="Meronym">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ObjectId" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="IsSoftDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="JsonContent" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="JsonSchema" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MIMETypes" Member="MIMETypes">
+    <Type Name="MIMEType">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ObjectId" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="IsSoftDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="MIMETypeName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="MIMEType_HorselessContent" Member="HorselessContents" ThisKey="Id" OtherKey="MIMETypeId" Type="HorselessContent" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NavigationMenuItemNavigationMenu" Member="NavigationMenuItemNavigationMenus">
+    <Type Name="NavigationMenuItemNavigationMenu">
+      <Column Name="ChildNavigationMenuItems_Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ParentNavigationMenus_Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="NavigationMenuItem_NavigationMenuItemNavigationMenu" Member="NavigationMenuItem" ThisKey="ChildNavigationMenuItems_Id" OtherKey="Id" Type="NavigationMenuItem" IsForeignKey="true" />
+      <Association Name="NavigationMenus_NavigationMenuItemNavigationMenu" Member="NavigationMenus" ThisKey="ParentNavigationMenus_Id" OtherKey="Id" Type="NavigationMenus" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NavigationMenuItemNavigationMenuItem" Member="NavigationMenuItemNavigationMenuItems">
+    <Type Name="NavigationMenuItemNavigationMenuItem">
+      <Column Name="ChildNavigationItems_Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ParentNavigationItems_Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="NavigationMenuItem_NavigationMenuItemNavigationMenuItem" Member="NavigationMenuItem" ThisKey="ChildNavigationItems_Id" OtherKey="Id" Type="NavigationMenuItem" IsForeignKey="true" />
+      <Association Name="NavigationMenuItem_NavigationMenuItemNavigationMenuItem1" Member="NavigationMenuItem1" ThisKey="ParentNavigationItems_Id" OtherKey="Id" Type="NavigationMenuItem" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NavigationMenuItems" Member="NavigationMenuItems">
+    <Type Name="NavigationMenuItem">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ObjectId" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="IsSoftDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PublishAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UnPublishAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsPublished" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MenuItemLabel" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="MenuItemDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="MenuItemAltText" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="NavigationMenuItem_NavigationMenuItemNavigationMenu" Member="NavigationMenuItemNavigationMenus" ThisKey="Id" OtherKey="ChildNavigationMenuItems_Id" Type="NavigationMenuItemNavigationMenu" />
+      <Association Name="NavigationMenuItem_NavigationMenuItemNavigationMenuItem" Member="NavigationMenuItemNavigationMenuItems" ThisKey="Id" OtherKey="ChildNavigationItems_Id" Type="NavigationMenuItemNavigationMenuItem" />
+      <Association Name="NavigationMenuItem_NavigationMenuItemNavigationMenuItem1" Member="NavigationMenuItemNavigationMenuItems1" ThisKey="Id" OtherKey="ParentNavigationItems_Id" Type="NavigationMenuItemNavigationMenuItem" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NavigationMenuNavigationMenu" Member="NavigationMenuNavigationMenus">
+    <Type Name="NavigationMenuNavigationMenu">
+      <Column Name="Children_Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Parents_Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="NavigationMenus_NavigationMenuNavigationMenu" Member="NavigationMenus" ThisKey="Children_Id" OtherKey="Id" Type="NavigationMenus" IsForeignKey="true" />
+      <Association Name="NavigationMenus_NavigationMenuNavigationMenu1" Member="NavigationMenus1" ThisKey="Parents_Id" OtherKey="Id" Type="NavigationMenus" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NavigationMenus" Member="NavigationMenus">
+    <Type Name="NavigationMenus">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ObjectId" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="IsSoftDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PublishAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UnPublishAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsPublished" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MenuLabel" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="MenuDescription" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="MenuAltText" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="NavigationMenus_NavigationMenuItemNavigationMenu" Member="NavigationMenuItemNavigationMenus" ThisKey="Id" OtherKey="ParentNavigationMenus_Id" Type="NavigationMenuItemNavigationMenu" />
+      <Association Name="NavigationMenus_NavigationMenuNavigationMenu" Member="NavigationMenuNavigationMenus" ThisKey="Id" OtherKey="Children_Id" Type="NavigationMenuNavigationMenu" />
+      <Association Name="NavigationMenus_NavigationMenuNavigationMenu1" Member="NavigationMenuNavigationMenus1" ThisKey="Id" OtherKey="Parents_Id" Type="NavigationMenuNavigationMenu" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NugetPackages" Member="NugetPackages">
+    <Type Name="NugetPackage">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ObjectId" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="IsSoftDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PublishAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UnPublishAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsPublished" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PackageId" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PackageVersion" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PackageAuthor" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PackageSource" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Placeholders" Member="Placeholders">
+    <Type Name="Placeholder">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ObjectId" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="IsSoftDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsPublished" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Principals" Member="Principals">
+    <Type Name="Principal">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ObjectId" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="IsSoftDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Iss" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Aud" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Sub" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Principal_PrincipalTenant" Member="PrincipalTenants" ThisKey="Id" OtherKey="Principals_Id" Type="PrincipalTenant" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PrincipalTenant" Member="PrincipalTenants">
+    <Type Name="PrincipalTenant">
+      <Column Name="Principals_Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Tenants_Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Principal_PrincipalTenant" Member="Principal" ThisKey="Principals_Id" OtherKey="Id" Type="Principal" IsForeignKey="true" />
+      <Association Name="Tenant_PrincipalTenant" Member="Tenant" ThisKey="Tenants_Id" OtherKey="Id" Type="Tenant" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PublicationContentCollection" Member="PublicationContentCollections">
+    <Type Name="PublicationContentCollection">
+      <Column Name="Publications_Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ContentCollections_Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="ContentCollection_PublicationContentCollection" Member="ContentCollection" ThisKey="ContentCollections_Id" OtherKey="Id" Type="ContentCollection" IsForeignKey="true" />
+      <Association Name="Publication_PublicationContentCollection" Member="Publication" ThisKey="Publications_Id" OtherKey="Id" Type="Publication" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PublicationPublication" Member="PublicationPublications">
+    <Type Name="PublicationPublication">
+      <Column Name="PublicationsChildren_Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PublicationParents_Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Publication_PublicationPublication" Member="Publication" ThisKey="PublicationsChildren_Id" OtherKey="Id" Type="Publication" IsForeignKey="true" />
+      <Association Name="Publication_PublicationPublication1" Member="Publication1" ThisKey="PublicationParents_Id" OtherKey="Id" Type="Publication" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Publications" Member="Publications">
+    <Type Name="Publication">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ObjectId" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="IsSoftDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PublishAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UnPublishAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsPublished" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Publication_PublicationContentCollection" Member="PublicationContentCollections" ThisKey="Id" OtherKey="Publications_Id" Type="PublicationContentCollection" />
+      <Association Name="Publication_PublicationPublication" Member="PublicationPublications" ThisKey="Id" OtherKey="PublicationsChildren_Id" Type="PublicationPublication" />
+      <Association Name="Publication_PublicationPublication1" Member="PublicationPublications1" ThisKey="Id" OtherKey="PublicationParents_Id" Type="PublicationPublication" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Taxons" Member="Taxons">
+    <Type Name="Taxon">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="ObjectId" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="IsSoftDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="JsonContent" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="JsonSchema" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TenantContentCollection" Member="TenantContentCollections">
+    <Type Name="TenantContentCollection">
+      <Column Name="Tenants_Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ContentCollections_Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="ContentCollection_TenantContentCollection" Member="ContentCollection" ThisKey="ContentCollections_Id" OtherKey="Id" Type="ContentCollection" IsForeignKey="true" />
+      <Association Name="Tenant_TenantContentCollection" Member="Tenant" ThisKey="Tenants_Id" OtherKey="Id" Type="Tenant" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tenants" Member="Tenants">
+    <Type Name="Tenant">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ObjectId" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="IsSoftDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Tenant_PrincipalTenant" Member="PrincipalTenants" ThisKey="Id" OtherKey="Tenants_Id" Type="PrincipalTenant" />
+      <Association Name="Tenant_TenantContentCollection" Member="TenantContentCollections" ThisKey="Id" OtherKey="Tenants_Id" Type="TenantContentCollection" />
+    </Type>
+  </Table>
+</Database>

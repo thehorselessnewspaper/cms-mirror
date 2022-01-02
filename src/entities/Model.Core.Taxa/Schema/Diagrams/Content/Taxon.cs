@@ -14,14 +14,6 @@ namespace Schema.Diagrams.Content
     
     public partial class Taxon
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Taxon()
-        {
-            this.Holonyms = new HashSet<Holonym>();
-            this.ContentCollections = new HashSet<ContentCollection>();
-            this.Placeholders = new HashSet<Placeholder>();
-        }
-    
         public System.Guid Id { get; set; }
         public Nullable<System.Guid> DisplayName { get; set; }
         public string ObjectId { get; set; }
@@ -29,12 +21,5 @@ namespace Schema.Diagrams.Content
         public System.DateTime CreatedAt { get; set; }
         public string JsonContent { get; set; }
         public string JsonSchema { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Holonym> Holonyms { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ContentCollection> ContentCollections { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Placeholder> Placeholders { get; set; }
     }
 }

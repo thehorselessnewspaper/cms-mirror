@@ -18,9 +18,10 @@ namespace Schema.Diagrams.Content
         public ContentCollection()
         {
             this.Tenants = new HashSet<Tenant>();
-            this.MimeContents = new HashSet<MimeContent>();
+            this.MimeContents = new HashSet<HorselessContent>();
+            this.ParentContentCollections = new HashSet<ContentCollection>();
+            this.ChildContentCollections = new HashSet<ContentCollection>();
             this.Publications = new HashSet<Publication>();
-            this.Taxons = new HashSet<Taxon>();
         }
     
         public System.Guid Id { get; set; }
@@ -30,14 +31,17 @@ namespace Schema.Diagrams.Content
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public bool AllowAnonymousRead { get; set; }
         public Nullable<bool> IsPublished { get; set; }
+        public string URL { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tenant> Tenants { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MimeContent> MimeContents { get; set; }
+        public virtual ICollection<HorselessContent> MimeContents { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ContentCollection> ParentContentCollections { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ContentCollection> ChildContentCollections { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Publication> Publications { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Taxon> Taxons { get; set; }
     }
 }

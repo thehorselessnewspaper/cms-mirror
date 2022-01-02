@@ -25,13 +25,11 @@ namespace Schema.Diagrams.Hosting
         public string DisplayName { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public string AssetURI { get; set; }
-        public Nullable<System.Guid> TenantInfoId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Host> HostWWWRootAssetLocations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UriPath> UriPathWWWRootAssetLocations { get; set; }
         public virtual NugetPackage NugetPackage { get; set; }
-        public virtual TenantInfo TenantInfo { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.HostingModel.Entities;
 using TheHorselessNewspaper.Schemas.HostingModel.Entities.Configurations;
+
 namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 {
     internal partial class MSSQLHostingContext : THNLPHostingContext, IHostingModelContext

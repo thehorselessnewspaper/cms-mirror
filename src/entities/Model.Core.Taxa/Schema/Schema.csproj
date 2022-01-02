@@ -62,6 +62,9 @@
     <Compile Include="Diagrams\Content\Holonym.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Diagrams\Content\HorselessContent.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Diagrams\Content\HorselessContentModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -80,16 +83,22 @@
     <Compile Include="Diagrams\Content\HorselessPermission.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Diagrams\Content\HorselessSession.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Diagrams\Content\JSONAsset.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Content\Meronym.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Diagrams\Content\MimeContent.cs">
+    <Compile Include="Diagrams\Content\MIMEType.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Diagrams\Content\MIMEType.cs">
+    <Compile Include="Diagrams\Content\NavigationMenu.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\NavigationMenuItem.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Content\NugetPackage.cs">

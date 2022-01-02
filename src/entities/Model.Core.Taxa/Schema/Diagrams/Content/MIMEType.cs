@@ -17,7 +17,7 @@ namespace Schema.Diagrams.Content
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MIMEType()
         {
-            this.MimeContents = new HashSet<MimeContent>();
+            this.MimeContents = new HashSet<HorselessContent>();
         }
     
         public System.Guid Id { get; set; }
@@ -28,6 +28,6 @@ namespace Schema.Diagrams.Content
         public string MIMETypeName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MimeContent> MimeContents { get; set; }
+        public virtual ICollection<HorselessContent> MimeContents { get; set; }
     }
 }
