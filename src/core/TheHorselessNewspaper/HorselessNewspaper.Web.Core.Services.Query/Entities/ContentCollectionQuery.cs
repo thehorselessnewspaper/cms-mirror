@@ -13,11 +13,11 @@ namespace HorselessNewspaper.Web.Core.Services.Query.Entities
 {
     public class ContentCollectionQuery
     {
-        private IContentModelContext dbContext;
+        // private IContentModelContext dbContext;
         private IAuthorizationService authorizationService;
-        public ContentCollectionQuery(IContentModelContext dbContext, IAuthorizationService authorizationService)
+        public ContentCollectionQuery(IAuthorizationService authorizationService)
         {
-            this.dbContext = dbContext;
+            // this.dbContext = dbContext;
             this.authorizationService = authorizationService;
         }
 
