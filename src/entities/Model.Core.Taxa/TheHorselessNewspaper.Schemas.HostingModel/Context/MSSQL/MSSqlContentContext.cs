@@ -16,10 +16,10 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
         }
 
-        public MSSqlContentContext(DbContextOptions<THLNPContentContext> options, Finbuckle.MultiTenant.TenantInfo tenant) : base(options, tenant)
-        {
+        //public MSSqlContentContext(DbContextOptions<THLNPContentContext> options, Finbuckle.MultiTenant.TenantInfo tenant) : base(options, tenant)
+        //{
 
-        }
+        //}
 
         public MSSqlContentContext(DbContextOptions options, Finbuckle.MultiTenant.TenantInfo tenant): base(options, tenant)
         {
