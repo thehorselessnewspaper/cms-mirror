@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>eee1f82a-f32f-40b8-82ee-ce6129e87969</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HorselessNewspaper.RazorClassLibrary.CMS.Default" Version="0.3.220103.14" />
+    <PackageReference Include="HorselessNewspaper.Web.Core.Auth.Keycloak" Version="0.3.220103.14" />
+    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.2.20220103.14" />
+  </ItemGroup>
+
+</Project>

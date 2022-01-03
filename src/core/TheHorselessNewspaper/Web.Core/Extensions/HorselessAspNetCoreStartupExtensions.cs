@@ -21,7 +21,8 @@ using Microsoft.FeatureManagement;
 using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using System.Text.RegularExpressions;
-
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollections;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -117,6 +118,8 @@ namespace HorselessNewspaper.Web.Core.Extensions
             // validate that this needs to be a singleton
             // as it's gating every request
             serviceBuilder.Services.AddSingleton<HorselessRouteTransformer>();
+
+            serviceBuilder.Services.AddScoped<IQueryableContentModelOperator<ContentCollection>, ContentCollectionQueries>();
 
             #endregion  cms routing pattern services
             options?.Invoke(serviceBuilder);
