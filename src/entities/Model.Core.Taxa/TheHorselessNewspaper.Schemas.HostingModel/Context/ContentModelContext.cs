@@ -21,7 +21,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         {
         }
 
-        protected THLNPContentContext(DbContextOptions options, TenantInfo tenant)
+        protected THLNPContentContext(DbContextOptions options, Finbuckle.MultiTenant.TenantInfo tenant)
         : base(options)
         {
               

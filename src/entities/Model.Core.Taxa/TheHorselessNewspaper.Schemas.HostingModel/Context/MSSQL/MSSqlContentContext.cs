@@ -11,7 +11,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
     internal partial class MSSqlContentContext : THLNPContentContext, IContentModelContext
     {
 
-        public MSSqlContentContext(DbContextOptions<MSSqlContentContext> options, Finbuckle.MultiTenant.TenantInfo tenant) : base(options, tenant)
+        public MSSqlContentContext(DbContextOptions<THLNPContentContext> options, Finbuckle.MultiTenant.TenantInfo tenant) : base(options, tenant)
         {
 
         }
