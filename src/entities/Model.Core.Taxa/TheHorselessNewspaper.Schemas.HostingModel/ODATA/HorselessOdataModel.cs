@@ -23,13 +23,17 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.ODATA
 
             builder.EntitySet<Holonym>("Holonyms");
 
+            builder.EntitySet<HorselessContent>("HorselessContents");
+            builder.EntitySet<HorselessSession>("HorselessSessions");
+
             builder.EntitySet<JSONAsset>("JSONAssets");
 
             builder.EntitySet<MIMEType>("MIMETypes");
 
             builder.EntitySet<Meronym>("Meronyms");
 
-            builder.EntitySet<MimeContent>("MimeContents");
+            builder.EntitySet<NavigationMenu>("NavigationMenus");
+            builder.EntitySet<NavigationMenuItem>("NavigationMenuItems");
 
             builder.EntitySet<NugetPackage>("NugetPackages");
 

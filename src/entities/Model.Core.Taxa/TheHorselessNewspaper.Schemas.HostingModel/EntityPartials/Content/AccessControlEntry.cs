@@ -21,7 +21,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     [Flags]
     public enum ACEPermission
     {
-        READ, WRITE, UPDATE, DELETE, SHARE, EXECUTE
+        READ, WRITE, UPDATE, DELETE, SHARE, EXECUTE, SEARCH, PUBLISH, UNPUBLISH
     }
 
     public enum ACEPermissionType
@@ -36,11 +36,14 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     [Owned]
     public partial class AccessControlEntry
     {
+
         public ACEPermissionScope Scope { get; set; }
 
         public ACEPermission Permission { get; set; }
 
-        public ACEPermissionType Type { get; set; }
+        public ACEPermissionType PermissionType { get; set; }
+
+        public ICollection<Principal> SubjectPrincipals { get; set; }  = new  HashSet<Principal>();
 
     }
 
