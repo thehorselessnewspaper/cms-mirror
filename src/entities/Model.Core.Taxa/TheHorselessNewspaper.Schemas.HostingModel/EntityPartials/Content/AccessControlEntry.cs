@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Claims;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
+using System.Security.Claims;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
@@ -26,7 +26,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
     public enum ACEPermissionType
     {
-        PERMIT, DENY
+        PERMIT, DENY, SUBMIT_REQUEST, APPROVE_REQUEST, DENY_REQUEST
     }
 
     /// <summary>
@@ -60,7 +60,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         /// <param name="principal"></param>
         /// <param name="authorizationService"></param>
         /// <returns></returns>
-        public static async Task<bool> IsPermitted<T>(this T entity, ACEPermission permission, IClaimsPrincipal principal, IAuthorizationService service) 
+        public static async Task<bool> IsPermitted<T>(this T entity, ACEPermission permission, ClaimsPrincipal principal, IAuthorizationService service) 
             where T : IRowLevelSecured
         {
             var isPermittedRead = entity.AccessControlList.First().Permission.HasFlag(ACEPermission.READ) && permission.HasFlag(ACEPermission.READ);
