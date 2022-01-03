@@ -85,7 +85,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
             );
 
             #region multitenancy as per https://www.finbuckle.com/MultiTenant/
-            serviceBuilder.Services.AddMultiTenant<TenantInfo>()
+            serviceBuilder.Services.AddMultiTenant<TheHorselessNewspaper.Schemas.HostingModel.Entities.TenantInfo>()
                 .WithInMemoryStore()
                 .WithHostStrategy()
                 .WithBasePathStrategy()

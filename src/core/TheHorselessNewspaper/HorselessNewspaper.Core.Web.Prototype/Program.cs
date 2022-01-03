@@ -9,6 +9,16 @@ using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
 using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
 
 var builder = WebApplication.CreateBuilder(args);
+using var loggerFactory = LoggerFactory.Create(builder =>
+{
+    builder
+        .AddFilter("Microsoft", LogLevel.Warning)
+        .AddFilter("System", LogLevel.Warning)
+        .AddFilter("LoggingConsoleApp.Program", LogLevel.Debug)
+        .AddConsole();
+});
+
+ILogger logger = loggerFactory.CreateLogger<Program>();
 
 builder.Services.AddCors(options =>
 {
@@ -51,9 +61,9 @@ builder.Services.AddControllers()
     });
 
 
-    // this hardcodes a static reference to the default horseless razor class library
-    // i am sorry - the hoped for benefit is that this will always have a default implementation
-    // .AddApplicationPart(typeof(HorselessCMSController).Assembly);
+// this hardcodes a static reference to the default horseless razor class library
+// i am sorry - the hoped for benefit is that this will always have a default implementation
+// .AddApplicationPart(typeof(HorselessCMSController).Assembly);
 
 builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
 {
@@ -74,7 +84,10 @@ builder.Services.AddHorselessKeycloakAuth(builder, keycloakOpts =>
  });
 
 
-
+foreach (var service in builder.Services)
+{
+    logger.LogDebug($"Service: {service.ServiceType.FullName} Lifetime: { service.Lifetime} Instance: { service.ImplementationType?.FullName}");
+}
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -98,7 +111,7 @@ app.UseAuthorization();
 app.UseHorselessNewspaper(app, app.Environment, app.Configuration, options =>
 {
 
-  
+
 });
 
 
