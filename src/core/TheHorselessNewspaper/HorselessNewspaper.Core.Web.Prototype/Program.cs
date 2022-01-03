@@ -1,25 +1,10 @@
 using HorselessNewspaper.Web.Core.Extensions;
-using HorselessNewspaper.Web.Core.Interfaces.Cache;
-using HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant;
-using TheHorselessNewspaper.Schemas.HostingModel.DTO;
 using HorselessNewspaper.Web.Core.Extensions.Hosting;
-using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
-
-using Microsoft.Extensions.Options;
 using HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers;
-using System.Configuration;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.CodeAnalysis;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
-using System.Runtime.Loader;
-using System.Security.Claims;
 using Microsoft.AspNetCore.OData;
-using Microsoft.AspNetCore.OData.Extensions;
 using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
 using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
 
@@ -81,10 +66,10 @@ builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
 builder.Services.AddHorselessNewspaper(builder.Configuration);
 
 // as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/docs/keycloak.md
-//builder.Services.AddHorselessKeycloakAuth(builder,keycloakOpts =>
-//{
+builder.Services.AddHorselessKeycloakAuth(builder, keycloakOpts =>
+ {
 
-//});
+ });
 
 
 

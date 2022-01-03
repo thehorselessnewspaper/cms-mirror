@@ -1,13 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using TheHorselessNewspaper.Schemas.HostingModel.DTO;
 using TheHorselessNewspaper.Schemas.HostingModel.Entities;
-using Microsoft.EntityFrameworkCore;
 
 /// <summary>
 /// note this namespace corresponds with the partial class it implements, not this folder
