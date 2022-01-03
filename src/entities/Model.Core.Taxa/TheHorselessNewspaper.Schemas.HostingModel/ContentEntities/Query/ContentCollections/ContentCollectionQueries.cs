@@ -14,7 +14,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
     {
         private readonly ILogger<ContentCollectionQueries> _logger;
         private readonly IContentModelContext _context;
-        internal ContentCollectionQueries(IContentModelContext ctx, ILogger<ContentCollectionQueries> logger)
+        public  ContentCollectionQueries(IContentModelContext ctx, ILogger<ContentCollectionQueries> logger)
         {
             this._context = ctx;    
             this._logger = logger;

@@ -1,30 +1,34 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Finbuckle.MultiTenant.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.Context
 {
     /// <summary>
     /// support Implementation specific context
+    /// 
+    /// as per 
+    ///     - https://www.finbuckle.com/MultiTenant/Docs/v6.5.1/EFCore#adding-multitenant-functionality-to-an-existing-dbcontext
     /// </summary>
-    internal partial interface IContentModelContext
+    public partial interface IContentModelContext : IMultiTenantDbContext 
     {
-        public DbSet<AccessControlEntry> AccessControlEntries { get; set; }
-        public DbSet<ContentCollection> ContentCollections { get; set; }
-        public DbSet<FilesystemAsset> FilesystemAssets { get; set; }
-        public DbSet<Holonym> Holonyms { get; set; }
-        public DbSet<HorselessContent> HorselessContents { get; set; }
-        public DbSet<HorselessSession> HorselessSessions { get; set; }
-        public DbSet<JSONAsset> JSONAssets { get; set; }
-        public DbSet<MIMEType> MIMETypes { get; set; }
-        public DbSet<Meronym> Meronyms { get; set; }
-        public DbSet<NavigationMenu> NavigationMenus { get; set; }
-        public DbSet<NavigationMenuItem> NavigationMenuItems { get; set; }
-        public DbSet<NugetPackage> NugetPackages { get; set; }
-        public DbSet<Placeholder> Placeholders { get; set; }
-        public DbSet<Principal> Principals { get; set; }
-        public DbSet<Publication> Publications { get; set; }
-        public DbSet<Taxon> Taxons { get; set; }
-        public DbSet<Tenant> Tenants { get; set; }
+        internal DbSet<AccessControlEntry> AccessControlEntries { get; set; }
+        internal DbSet<ContentCollection> ContentCollections { get; set; }
+        internal DbSet<FilesystemAsset> FilesystemAssets { get; set; }
+        internal DbSet<Holonym> Holonyms { get; set; }
+        internal DbSet<HorselessContent> HorselessContents { get; set; }
+        internal DbSet<HorselessSession> HorselessSessions { get; set; }
+        internal DbSet<JSONAsset> JSONAssets { get; set; }
+        internal DbSet<MIMEType> MIMETypes { get; set; }
+        internal DbSet<Meronym> Meronyms { get; set; }
+        internal DbSet<NavigationMenu> NavigationMenus { get; set; }
+        internal DbSet<NavigationMenuItem> NavigationMenuItems { get; set; }
+        internal DbSet<NugetPackage> NugetPackages { get; set; }
+        internal DbSet<Placeholder> Placeholders { get; set; }
+        internal DbSet<Principal> Principals { get; set; }
+        internal DbSet<Publication> Publications { get; set; }
+        internal DbSet<Taxon> Taxons { get; set; }
+        internal DbSet<Tenant> Tenants { get; set; }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }

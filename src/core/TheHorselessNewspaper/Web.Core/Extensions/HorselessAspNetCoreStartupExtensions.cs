@@ -119,8 +119,6 @@ namespace HorselessNewspaper.Web.Core.Extensions
             // as it's gating every request
             serviceBuilder.Services.AddSingleton<HorselessRouteTransformer>();
 
-            serviceBuilder.Services.AddScoped<IQueryableContentModelOperator<ContentCollection>, ContentCollectionQueries>();
-
             #endregion  cms routing pattern services
             options?.Invoke(serviceBuilder);
 

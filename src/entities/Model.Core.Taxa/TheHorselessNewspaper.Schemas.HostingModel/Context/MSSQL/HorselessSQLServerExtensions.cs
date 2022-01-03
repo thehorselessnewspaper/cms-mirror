@@ -9,6 +9,9 @@ using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.Schemas.HostingModel.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollections;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+
 namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 {
     /// <summary>
@@ -19,12 +22,14 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
     {
         public static IServiceCollection UseHorselessContentModelMSSqlServer(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<MSSqlContentContext>(options =>
-            {
-                options.UseSqlServer(configuration.GetConnectionString("ContentModelConnection"));
+            services.AddScoped<IContentModelContext, MSSqlContentContext>();
+            services.AddScoped<IQueryableContentModelOperator<ContentCollection>, ContentCollectionQueries>();
+            //services.AddDbContext<MSSqlContentContext>(options =>
+            //{
+            //    options.UseSqlServer(configuration.GetConnectionString("ContentModelConnection"));
 
-                options.EnableDetailedErrors();
-            });
+            //    options.EnableDetailedErrors();
+            //});
 
             return services;
 
