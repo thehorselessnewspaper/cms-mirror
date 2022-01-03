@@ -211,7 +211,7 @@ namespace HorselessNewspaper.Client.Nuget
                 });
             }
 
-            nugetLoader.LoadExtensions(packageSources, extensionConfigurations, nugetFrameworkParseFolder.Value, packageDirectory);    
+            await nugetLoader.LoadExtensions(packageSources, extensionConfigurations, nugetFrameworkParseFolder.Value, packageDirectory);    
 
         }
 
@@ -251,7 +251,7 @@ namespace HorselessNewspaper.Client.Nuget
                 });
             }
 
-            nugetLoader.LoadExtensions(packageSources, extensionConfigurations, nugetFrameworkParseFolder.Value, packageDirectory);    
+            await nugetLoader.LoadExtensions(packageSources, extensionConfigurations, nugetFrameworkParseFolder.Value, packageDirectory);    
 
         }
 
