@@ -19,6 +19,12 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         {
 
         }
+
+        internal MSSQLHostingContext(DbContextOptions options, TenantInfo tenant) : base(options, tenant)
+        {
+
+        }
+
         void OnModelCreatingPartial(ModelBuilder modelBuilder)
         {
             // do mssql specific things here
