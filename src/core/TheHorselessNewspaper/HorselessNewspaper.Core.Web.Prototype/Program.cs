@@ -21,9 +21,7 @@ builder.Services.AddCors(options =>
         });
 });
 
-// globally enables mssql server
-builder.Services.UseHorselessContentModelMSSqlServer(builder.Configuration);
-builder.Services.UseHorselessHostingModelMSSqlServer(builder.Configuration);
+
 
 builder.Services.AddControllersWithViews()
     .AddRazorRuntimeCompilation();
@@ -64,6 +62,10 @@ builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
 });
 
 builder.Services.AddHorselessNewspaper(builder.Configuration);
+
+// globally enables mssql server
+builder.Services.UseHorselessContentModelMSSqlServer(builder.Configuration);
+builder.Services.UseHorselessHostingModelMSSqlServer(builder.Configuration);
 
 // as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/docs/keycloak.md
 builder.Services.AddHorselessKeycloakAuth(builder, keycloakOpts =>

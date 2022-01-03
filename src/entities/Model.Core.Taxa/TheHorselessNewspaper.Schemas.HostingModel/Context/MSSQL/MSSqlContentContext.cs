@@ -18,10 +18,14 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
         public MSSqlContentContext(DbContextOptions<THLNPContentContext> options, TenantInfo tenant) : base(options, tenant)
         {
-            
+
         }
 
- 
+        public MSSqlContentContext(DbContextOptions options, TenantInfo tenant): base(options, tenant)
+        {
+        }
+
+
 
         /// <summary>
         /// extensoin point for localized model building
