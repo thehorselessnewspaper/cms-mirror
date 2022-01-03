@@ -16,10 +16,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     internal partial class THLNPContentContext : DbContext
     {
 
-        public THLNPContentContext(DbContextOptions<THLNPContentContext> options, Finbuckle.MultiTenant.TenantInfo tenant)
-        : base(options)
-        {
-        }
 
         protected THLNPContentContext(DbContextOptions options, Finbuckle.MultiTenant.TenantInfo tenant)
         : base(options)

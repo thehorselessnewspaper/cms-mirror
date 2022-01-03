@@ -1,6 +1,8 @@
 ﻿using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.Reflection.Emit;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.Schemas.HostingModel.Entities;
 
@@ -12,21 +14,24 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
     /// </summary>
     internal partial class MSSqlContentContext : THLNPContentContext, IContentModelContext
     {
+        private readonly IConfiguration _configuration;
+        //public MSSqlContentContext(DbContextOptions<THLNPContentContext> options, IConfiguration config, Finbuckle.MultiTenant.TenantInfo tenant) : base(options, tenant)
+        //{
+        //    this.TenantInfo = tenant;
+        //    this._configuration =  config;
+        //}
 
-        public MSSqlContentContext(DbContextOptions<THLNPContentContext> options, Finbuckle.MultiTenant.TenantInfo tenant) : base(options, tenant)
+        public MSSqlContentContext(DbContextOptions<MSSqlContentContext> options, IConfiguration config, Finbuckle.MultiTenant.TenantInfo tenant) : base(options, tenant)
         {
             this.TenantInfo = tenant;
+            this._configuration = config;
         }
 
-        public MSSqlContentContext(DbContextOptions<MSSqlContentContext> options, Finbuckle.MultiTenant.TenantInfo tenant) : base(options, tenant)
-        {
-            this.TenantInfo = tenant;
-        }
-
-        public MSSqlContentContext(DbContextOptions options, Finbuckle.MultiTenant.TenantInfo tenant): base(options, tenant)
-        {
-            this.TenantInfo = tenant;
-        }
+        //public MSSqlContentContext(DbContextOptions options, IConfiguration config, Finbuckle.MultiTenant.TenantInfo tenant) : base(options, tenant)
+        //{
+        //    this.TenantInfo = tenant;
+        //    this._configuration = config;
+        //}
 
         #region finbuckle IMultiTenantDbContext concerns 
         /// <summary>
@@ -68,12 +73,15 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
             // Configure an entity type to be multitenant.
             builder.Entity<Finbuckle.MultiTenant.TenantInfo>().IsMultiTenant();
+
+            base.OnModelCreating(builder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Use the connection string to connect to the per-tenant database.
-            optionsBuilder.UseSqlServer(TenantInfo.ConnectionString);
+            optionsBuilder.UseSqlServer(TenantInfo.ConnectionString == String.Empty ? this._configuration["ContentModelConnection"] : TenantInfo.ConnectionString);
+
         }
     }
 

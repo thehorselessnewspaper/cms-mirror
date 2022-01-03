@@ -10,7 +10,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context
     /// as per 
     ///     - https://www.finbuckle.com/MultiTenant/Docs/v6.5.1/EFCore#adding-multitenant-functionality-to-an-existing-dbcontext
     /// </summary>
-    public partial interface IContentModelContext : IMultiTenantDbContext 
+    internal partial interface IContentModelContext : IMultiTenantDbContext 
     {
         internal DbSet<AccessControlEntry> AccessControlEntries { get; set; }
         internal DbSet<ContentCollection> ContentCollections { get; set; }

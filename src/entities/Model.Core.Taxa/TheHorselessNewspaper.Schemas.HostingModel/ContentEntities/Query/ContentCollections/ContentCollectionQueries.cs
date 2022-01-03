@@ -10,7 +10,7 @@ using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollections
 {
-    public class ContentCollectionQueries : IQueryableContentModelOperator<ContentCollection>
+    internal class ContentCollectionQueries : IQueryableContentModelOperator<ContentCollection>
     {
         private readonly ILogger<ContentCollectionQueries> _logger;
         private readonly IContentModelContext _context;

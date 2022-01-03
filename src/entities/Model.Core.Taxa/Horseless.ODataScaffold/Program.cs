@@ -1,3 +1,4 @@
+using Finbuckle.MultiTenant;
 using HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
 using HorselessNewspaper.Web.Core.Extensions;
@@ -25,6 +26,20 @@ builder.Services.AddCors(options =>
         });
 });
 
+// setup a default tenant store
+
+builder.Services.AddMultiTenant<TenantInfo>()
+    .WithInMemoryStore(options =>
+    {
+        options.Tenants.Add(new TenantInfo()
+        {
+            ConnectionString = builder.Configuration.GetConnectionString("ContentModelConnection"),
+            Id = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
+            Identifier = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
+            Name = "the horseless phantom tenant"
+        });
+    })
+    .WithStaticStrategy("6da806b8-f7ab-4e3a-8833-7e834a40e9d0");
 
 builder.Services.AddControllersWithViews()
     .AddRazorRuntimeCompilation();

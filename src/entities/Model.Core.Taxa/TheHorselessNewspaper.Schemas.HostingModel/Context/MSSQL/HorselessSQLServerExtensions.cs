@@ -22,6 +22,10 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
     {
         public static IServiceCollection UseHorselessContentModelMSSqlServer(this IServiceCollection services, IConfiguration configuration)
         {
+
+            var builder = new DbContextOptionsBuilder<MSSqlContentContext>();
+            builder.UseSqlServer(configuration.GetConnectionString("ContentModelConnection"));
+            services.AddSingleton<DbContextOptions<MSSqlContentContext>>(builder.Options);
             services.AddScoped<IContentModelContext, MSSqlContentContext>();
             services.AddScoped<IQueryableContentModelOperator<ContentCollection>, ContentCollectionQueries>();
             //services.AddDbContext<MSSqlContentContext>(options =>
@@ -37,9 +41,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
         public static IServiceCollection UseHorselessHostingModelMSSqlServer(this IServiceCollection services, IConfiguration configuration)
         {
+
             services.AddDbContext<MSSQLHostingContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("HostingModelConnection"));
+                string connectionString = configuration.GetConnectionString("HostingModelConnection");
+                options.UseSqlServer(connectionString);
                 options.EnableDetailedErrors();
             });
 

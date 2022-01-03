@@ -6,7 +6,32 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.ODATA
 {
     public class HorselessOdataModel
     {
+        private Type[] GetTypesInNamespace(System.Reflection.Assembly assembly, string nameSpace)
+        {
+            return assembly.GetTypes()
+                .Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal))
+                .ToArray();
+        }
+
         public async Task<IEdmModel> GetEdmModel()
+        {
+            var builder = new ODataConventionModelBuilder();
+            foreach (Type item in GetTypesInNamespace(System.Reflection.Assembly.Load("TheHorselessNewspaper.HostingModel"), "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities"))
+            {
+
+                //My models have a key named "Id"
+                if (item.GetProperty("Id") == null)
+                    continue;
+
+                EntityTypeConfiguration entityType = builder.AddEntityType(item);
+                entityType.HasKey(item.GetProperty("Id"));
+                builder.AddEntitySet(item.Name, entityType);
+            }
+
+            return await Task.FromResult(builder.GetEdmModel());
+        }
+
+        public async Task<IEdmModel> GetEdmModelObsolete()
         {
             var builder = new ODataConventionModelBuilder();
             builder.EntitySet<AccessControlEntry>("AccessControlEntries");
