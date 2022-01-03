@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.IdentityModel.Claims;
 
 namespace HorselessNewspaper.Web.Core.Services.Query.Entities
 {
@@ -21,7 +20,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.Entities
             this.authorizationService = authorizationService;
         }
 
-        public async Task<IEnumerable<ContentCollectionQuery>> Get(IClaimsPrincipal principal)
+        public async Task<IEnumerable<ContentCollectionQuery>> Get(ClaimsPrincipal principal)
         {
             //var results = await dbContext.ContentCollections
             //    .Where(async w => w.AccessControlList

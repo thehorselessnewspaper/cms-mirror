@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TheHorselessNewspaper.Schemas.HostingModel" Version="0.2.20220101.5" />
+    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.2.20220102.8" />
   </ItemGroup>
 
 </Project>

@@ -11,11 +11,9 @@ using System.Configuration;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.CodeAnalysis;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
 using System.Runtime.Loader;
@@ -83,10 +81,10 @@ builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
 builder.Services.AddHorselessNewspaper(builder.Configuration);
 
 // as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/docs/keycloak.md
-builder.Services.AddHorselessKeycloakAuth(builder,keycloakOpts =>
-{
+//builder.Services.AddHorselessKeycloakAuth(builder,keycloakOpts =>
+//{
 
-});
+//});
 
 
 
