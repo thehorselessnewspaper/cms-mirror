@@ -10,6 +10,12 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
     /// </summary>
     internal partial class MSSqlContentContext : THLNPContentContext, IContentModelContext
     {
+
+        public MSSqlContentContext(DbContextOptions<MSSqlContentContext> options, TenantInfo tenant) : base(options, tenant)
+        {
+
+        }
+
         public MSSqlContentContext(DbContextOptions<THLNPContentContext> options, TenantInfo tenant) : base(options, tenant)
         {
             
