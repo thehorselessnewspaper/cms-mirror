@@ -15,8 +15,5 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
         public string Version { get; set; }
         public DateTime? CreatedAt { get; set; }
         public string DisplayName { get; set; }
-        public Guid FilesystemAssetLocation_Id { get; set; }
-
-        public virtual FilesystemAssetLocation FilesystemAssetLocation { get; set; }
     }
 }

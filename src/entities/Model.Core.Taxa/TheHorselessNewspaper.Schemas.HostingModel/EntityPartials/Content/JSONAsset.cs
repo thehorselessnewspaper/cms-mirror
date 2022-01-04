@@ -2,7 +2,7 @@
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    public partial class JSONAsset : IRowLevelSecured
+    public partial class JSONAsset : IContentRowLevelSecured
     {
         public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/01/2022 17:04:53
+-- Date Created: 01/04/2022 14:50:02
 -- Generated from EDMX file: C:\src\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Hosting\HostingModel.edmx
 -- --------------------------------------------------
 
@@ -26,29 +26,20 @@ GO
 IF OBJECT_ID(N'[HostingModel].[FK_RoutingDiscriminatorUriPath]', 'F') IS NOT NULL
     ALTER TABLE [HostingModel].[UriPaths] DROP CONSTRAINT [FK_RoutingDiscriminatorUriPath];
 GO
-IF OBJECT_ID(N'[HostingModel].[FK_HostFilesystemAssetLocation_Host]', 'F') IS NOT NULL
-    ALTER TABLE [HostingModel].[HostFilesystemAssetLocation] DROP CONSTRAINT [FK_HostFilesystemAssetLocation_Host];
-GO
-IF OBJECT_ID(N'[HostingModel].[FK_HostFilesystemAssetLocation_FilesystemAssetLocation]', 'F') IS NOT NULL
-    ALTER TABLE [HostingModel].[HostFilesystemAssetLocation] DROP CONSTRAINT [FK_HostFilesystemAssetLocation_FilesystemAssetLocation];
-GO
-IF OBJECT_ID(N'[HostingModel].[FK_UriPathFilesystemAssetLocation_UriPath]', 'F') IS NOT NULL
-    ALTER TABLE [HostingModel].[UriPathFilesystemAssetLocation] DROP CONSTRAINT [FK_UriPathFilesystemAssetLocation_UriPath];
-GO
-IF OBJECT_ID(N'[HostingModel].[FK_UriPathFilesystemAssetLocation_FilesystemAssetLocation]', 'F') IS NOT NULL
-    ALTER TABLE [HostingModel].[UriPathFilesystemAssetLocation] DROP CONSTRAINT [FK_UriPathFilesystemAssetLocation_FilesystemAssetLocation];
-GO
-IF OBJECT_ID(N'[HostingModel].[FK_NugetPackageFilesystemAssetLocation]', 'F') IS NOT NULL
-    ALTER TABLE [HostingModel].[NugetPackages] DROP CONSTRAINT [FK_NugetPackageFilesystemAssetLocation];
-GO
-IF OBJECT_ID(N'[HostingModel].[FK_KeyCloakConfigurationTenant]', 'F') IS NOT NULL
-    ALTER TABLE [HostingModel].[Tenants] DROP CONSTRAINT [FK_KeyCloakConfigurationTenant];
-GO
-IF OBJECT_ID(N'[HostingModel].[FK_TenantInfoFilesystemAssetLocation]', 'F') IS NOT NULL
-    ALTER TABLE [HostingModel].[FilesystemAssetLocations] DROP CONSTRAINT [FK_TenantInfoFilesystemAssetLocation];
-GO
 IF OBJECT_ID(N'[HostingModel].[FK_TenantInfoWebAPITenantInfo]', 'F') IS NOT NULL
     ALTER TABLE [HostingModel].[WebAPITenantInfos] DROP CONSTRAINT [FK_TenantInfoWebAPITenantInfo];
+GO
+IF OBJECT_ID(N'[HostingModel].[FK_TenantInfoKeyCloakConfiguration]', 'F') IS NOT NULL
+    ALTER TABLE [HostingModel].[KeyCloakConfigurations] DROP CONSTRAINT [FK_TenantInfoKeyCloakConfiguration];
+GO
+IF OBJECT_ID(N'[HostingModel].[FK_TenantTenantInfo]', 'F') IS NOT NULL
+    ALTER TABLE [HostingModel].[TenantInfos] DROP CONSTRAINT [FK_TenantTenantInfo];
+GO
+IF OBJECT_ID(N'[HostingModel].[FK_PrincipalTenant_Principal]', 'F') IS NOT NULL
+    ALTER TABLE [HostingModel].[PrincipalTenant] DROP CONSTRAINT [FK_PrincipalTenant_Principal];
+GO
+IF OBJECT_ID(N'[HostingModel].[FK_PrincipalTenant_Tenant]', 'F') IS NOT NULL
+    ALTER TABLE [HostingModel].[PrincipalTenant] DROP CONSTRAINT [FK_PrincipalTenant_Tenant];
 GO
 
 -- --------------------------------------------------
@@ -82,11 +73,17 @@ GO
 IF OBJECT_ID(N'[HostingModel].[WebAPITenantInfos]', 'U') IS NOT NULL
     DROP TABLE [HostingModel].[WebAPITenantInfos];
 GO
-IF OBJECT_ID(N'[HostingModel].[HostFilesystemAssetLocation]', 'U') IS NOT NULL
-    DROP TABLE [HostingModel].[HostFilesystemAssetLocation];
+IF OBJECT_ID(N'[HostingModel].[AccessControlEntries]', 'U') IS NOT NULL
+    DROP TABLE [HostingModel].[AccessControlEntries];
 GO
-IF OBJECT_ID(N'[HostingModel].[UriPathFilesystemAssetLocation]', 'U') IS NOT NULL
-    DROP TABLE [HostingModel].[UriPathFilesystemAssetLocation];
+IF OBJECT_ID(N'[HostingModel].[Principals]', 'U') IS NOT NULL
+    DROP TABLE [HostingModel].[Principals];
+GO
+IF OBJECT_ID(N'[HostingModel].[HorselessSessions]', 'U') IS NOT NULL
+    DROP TABLE [HostingModel].[HorselessSessions];
+GO
+IF OBJECT_ID(N'[HostingModel].[PrincipalTenant]', 'U') IS NOT NULL
+    DROP TABLE [HostingModel].[PrincipalTenant];
 GO
 
 -- --------------------------------------------------
@@ -107,7 +104,6 @@ GO
 CREATE TABLE [HostingModel].[RoutingDiscriminators] (
     [Id] uniqueidentifier  NOT NULL,
     [IsActive] bit  NULL,
-    [TenantId] uniqueidentifier  NULL,
     [ObjectId] nvarchar(max)  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [CreatedAt] datetime  NULL
@@ -136,7 +132,6 @@ CREATE TABLE [HostingModel].[UriPaths] (
     [RoutingDiscriminatorId] uniqueidentifier  NOT NULL,
     [ObjectId] nvarchar(max)  NULL,
     [DisplayName] nvarchar(max)  NULL,
-    [HtmlLayoutFilename] nvarchar(max)  NULL,
     [CreatedAt] datetime  NULL,
     [HTTPPort] nvarchar(max)  NULL,
     [HTTPScheme] nvarchar(max)  NULL,
@@ -153,8 +148,7 @@ CREATE TABLE [HostingModel].[NugetPackages] (
     [Publisher] nvarchar(max)  NULL,
     [Version] nvarchar(max)  NULL,
     [CreatedAt] datetime  NULL,
-    [DisplayName] nvarchar(max)  NULL,
-    [FilesystemAssetLocation_Id] uniqueidentifier  NOT NULL
+    [DisplayName] nvarchar(max)  NULL
 );
 GO
 
@@ -211,17 +205,49 @@ CREATE TABLE [HostingModel].[WebAPITenantInfos] (
 );
 GO
 
--- Creating table 'HostFilesystemAssetLocation'
-CREATE TABLE [HostingModel].[HostFilesystemAssetLocation] (
-    [HostWWWRootAssetLocations_Id] uniqueidentifier  NOT NULL,
-    [WWWRootAssetLocations_Id] uniqueidentifier  NOT NULL
+-- Creating table 'AccessControlEntries'
+CREATE TABLE [HostingModel].[AccessControlEntries] (
+    [Id] uniqueidentifier  NOT NULL,
+    [DisplayName] nvarchar(max)  NULL,
+    [ObjectId] nvarchar(max)  NOT NULL,
+    [IsSoftDeleted] bit  NULL,
+    [CreatedAt] datetime  NULL,
+    [IsActive] bit  NULL
 );
 GO
 
--- Creating table 'UriPathFilesystemAssetLocation'
-CREATE TABLE [HostingModel].[UriPathFilesystemAssetLocation] (
-    [UriPathWWWRootAssetLocations_Id] uniqueidentifier  NOT NULL,
-    [WWWRootAssetLocations_Id] uniqueidentifier  NOT NULL
+-- Creating table 'Principals'
+CREATE TABLE [HostingModel].[Principals] (
+    [Id] uniqueidentifier  NOT NULL,
+    [DisplayName] nvarchar(max)  NULL,
+    [ObjectId] nvarchar(max)  NOT NULL,
+    [IsSoftDeleted] bit  NULL,
+    [CreatedAt] datetime  NULL,
+    [Iss] nvarchar(max)  NULL,
+    [Aud] nvarchar(max)  NULL,
+    [Sub] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'HorselessSessions'
+CREATE TABLE [HostingModel].[HorselessSessions] (
+    [Id] uniqueidentifier  NOT NULL,
+    [DisplayName] nvarchar(max)  NULL,
+    [ObjectId] nvarchar(max)  NOT NULL,
+    [IsSoftDeleted] bit  NULL,
+    [CreatedAt] datetime  NULL,
+    [SessionId] nvarchar(max)  NULL,
+    [Iss] nvarchar(max)  NULL,
+    [Aud] nvarchar(max)  NULL,
+    [Sub] nvarchar(max)  NULL,
+    [IsAnonymous] bit  NULL
+);
+GO
+
+-- Creating table 'PrincipalTenant'
+CREATE TABLE [HostingModel].[PrincipalTenant] (
+    [Principals_Id] uniqueidentifier  NOT NULL,
+    [Tenants_Id] uniqueidentifier  NOT NULL
 );
 GO
 
@@ -283,36 +309,33 @@ ADD CONSTRAINT [PK_WebAPITenantInfos]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [HostWWWRootAssetLocations_Id], [WWWRootAssetLocations_Id] in table 'HostFilesystemAssetLocation'
-ALTER TABLE [HostingModel].[HostFilesystemAssetLocation]
-ADD CONSTRAINT [PK_HostFilesystemAssetLocation]
-    PRIMARY KEY CLUSTERED ([HostWWWRootAssetLocations_Id], [WWWRootAssetLocations_Id] ASC);
+-- Creating primary key on [Id] in table 'AccessControlEntries'
+ALTER TABLE [HostingModel].[AccessControlEntries]
+ADD CONSTRAINT [PK_AccessControlEntries]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [UriPathWWWRootAssetLocations_Id], [WWWRootAssetLocations_Id] in table 'UriPathFilesystemAssetLocation'
-ALTER TABLE [HostingModel].[UriPathFilesystemAssetLocation]
-ADD CONSTRAINT [PK_UriPathFilesystemAssetLocation]
-    PRIMARY KEY CLUSTERED ([UriPathWWWRootAssetLocations_Id], [WWWRootAssetLocations_Id] ASC);
+-- Creating primary key on [Id] in table 'Principals'
+ALTER TABLE [HostingModel].[Principals]
+ADD CONSTRAINT [PK_Principals]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'HorselessSessions'
+ALTER TABLE [HostingModel].[HorselessSessions]
+ADD CONSTRAINT [PK_HorselessSessions]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Principals_Id], [Tenants_Id] in table 'PrincipalTenant'
+ALTER TABLE [HostingModel].[PrincipalTenant]
+ADD CONSTRAINT [PK_PrincipalTenant]
+    PRIMARY KEY CLUSTERED ([Principals_Id], [Tenants_Id] ASC);
 GO
 
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
-
--- Creating foreign key on [TenantId] in table 'RoutingDiscriminators'
-ALTER TABLE [HostingModel].[RoutingDiscriminators]
-ADD CONSTRAINT [FK_TenantRoutingDiscriminator]
-    FOREIGN KEY ([TenantId])
-    REFERENCES [HostingModel].[Tenants]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TenantRoutingDiscriminator'
-CREATE INDEX [IX_FK_TenantRoutingDiscriminator]
-ON [HostingModel].[RoutingDiscriminators]
-    ([TenantId]);
-GO
 
 -- Creating foreign key on [RoutingDiscriminatorId] in table 'Hosts'
 ALTER TABLE [HostingModel].[Hosts]
@@ -342,69 +365,6 @@ GO
 CREATE INDEX [IX_FK_RoutingDiscriminatorUriPath]
 ON [HostingModel].[UriPaths]
     ([RoutingDiscriminatorId]);
-GO
-
--- Creating foreign key on [HostWWWRootAssetLocations_Id] in table 'HostFilesystemAssetLocation'
-ALTER TABLE [HostingModel].[HostFilesystemAssetLocation]
-ADD CONSTRAINT [FK_HostFilesystemAssetLocation_Host]
-    FOREIGN KEY ([HostWWWRootAssetLocations_Id])
-    REFERENCES [HostingModel].[Hosts]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [WWWRootAssetLocations_Id] in table 'HostFilesystemAssetLocation'
-ALTER TABLE [HostingModel].[HostFilesystemAssetLocation]
-ADD CONSTRAINT [FK_HostFilesystemAssetLocation_FilesystemAssetLocation]
-    FOREIGN KEY ([WWWRootAssetLocations_Id])
-    REFERENCES [HostingModel].[FilesystemAssetLocations]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_HostFilesystemAssetLocation_FilesystemAssetLocation'
-CREATE INDEX [IX_FK_HostFilesystemAssetLocation_FilesystemAssetLocation]
-ON [HostingModel].[HostFilesystemAssetLocation]
-    ([WWWRootAssetLocations_Id]);
-GO
-
--- Creating foreign key on [UriPathWWWRootAssetLocations_Id] in table 'UriPathFilesystemAssetLocation'
-ALTER TABLE [HostingModel].[UriPathFilesystemAssetLocation]
-ADD CONSTRAINT [FK_UriPathFilesystemAssetLocation_UriPath]
-    FOREIGN KEY ([UriPathWWWRootAssetLocations_Id])
-    REFERENCES [HostingModel].[UriPaths]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [WWWRootAssetLocations_Id] in table 'UriPathFilesystemAssetLocation'
-ALTER TABLE [HostingModel].[UriPathFilesystemAssetLocation]
-ADD CONSTRAINT [FK_UriPathFilesystemAssetLocation_FilesystemAssetLocation]
-    FOREIGN KEY ([WWWRootAssetLocations_Id])
-    REFERENCES [HostingModel].[FilesystemAssetLocations]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_UriPathFilesystemAssetLocation_FilesystemAssetLocation'
-CREATE INDEX [IX_FK_UriPathFilesystemAssetLocation_FilesystemAssetLocation]
-ON [HostingModel].[UriPathFilesystemAssetLocation]
-    ([WWWRootAssetLocations_Id]);
-GO
-
--- Creating foreign key on [FilesystemAssetLocation_Id] in table 'NugetPackages'
-ALTER TABLE [HostingModel].[NugetPackages]
-ADD CONSTRAINT [FK_NugetPackageFilesystemAssetLocation]
-    FOREIGN KEY ([FilesystemAssetLocation_Id])
-    REFERENCES [HostingModel].[FilesystemAssetLocations]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_NugetPackageFilesystemAssetLocation'
-CREATE INDEX [IX_FK_NugetPackageFilesystemAssetLocation]
-ON [HostingModel].[NugetPackages]
-    ([FilesystemAssetLocation_Id]);
 GO
 
 -- Creating foreign key on [TenantInfoId] in table 'WebAPITenantInfos'
@@ -450,6 +410,30 @@ GO
 CREATE INDEX [IX_FK_TenantTenantInfo]
 ON [HostingModel].[TenantInfos]
     ([Tenant_Id]);
+GO
+
+-- Creating foreign key on [Principals_Id] in table 'PrincipalTenant'
+ALTER TABLE [HostingModel].[PrincipalTenant]
+ADD CONSTRAINT [FK_PrincipalTenant_Principal]
+    FOREIGN KEY ([Principals_Id])
+    REFERENCES [HostingModel].[Principals]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Tenants_Id] in table 'PrincipalTenant'
+ALTER TABLE [HostingModel].[PrincipalTenant]
+ADD CONSTRAINT [FK_PrincipalTenant_Tenant]
+    FOREIGN KEY ([Tenants_Id])
+    REFERENCES [HostingModel].[Tenants]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PrincipalTenant_Tenant'
+CREATE INDEX [IX_FK_PrincipalTenant_Tenant]
+ON [HostingModel].[PrincipalTenant]
+    ([Tenants_Id]);
 GO
 
 -- --------------------------------------------------

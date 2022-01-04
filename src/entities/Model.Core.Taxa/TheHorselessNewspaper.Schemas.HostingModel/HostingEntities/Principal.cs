@@ -5,12 +5,11 @@ using System.Collections.Generic;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
 {
-    public partial class Tenant
+    public partial class Principal
     {
-        public Tenant()
+        public Principal()
         {
-            RoutingDiscriminators = new HashSet<RoutingDiscriminator>();
-            TenantInfos = new HashSet<TenantInfo>();
+            Tenants = new HashSet<Tenant>();
         }
 
         public Guid Id { get; set; }
@@ -18,8 +17,10 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
         public DateTime? CreatedAt { get; set; }
+        public string Iss { get; set; }
+        public string Aud { get; set; }
+        public string Sub { get; set; }
 
-        public virtual ICollection<RoutingDiscriminator> RoutingDiscriminators { get; set; }
-        public virtual ICollection<TenantInfo> TenantInfos { get; set; }
+        public virtual ICollection<Tenant> Tenants { get; set; }
     }
 }

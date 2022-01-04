@@ -6,7 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollections;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
-using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using hostingModel = TheHorselessNewspaper.Schemas.HostingModel.Entities;
+using TheHorselessNewspaper.HostingModel.Entities.Query;
+using TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollection;
 
 namespace TheHorselessNewspaper.HostingModel.Context
 {
@@ -15,29 +18,44 @@ namespace TheHorselessNewspaper.HostingModel.Context
     /// </summary>
     internal static class ModelOperatorExtensions
     {
+        internal static void RegisterHostingModelOperator(IServiceCollection services)
+        {
+            services.AddScoped<IQueryableHostingModelOperator<hostingModel.FilesystemAssetLocation>, HostingModelQueries<hostingModel.FilesystemAssetLocation>>();
+            services.AddScoped<IQueryableHostingModelOperator<hostingModel.HorselessSession>, HostingModelQueries<hostingModel.HorselessSession>>();
+            services.AddScoped<IQueryableHostingModelOperator<hostingModel.Host>, HostingModelQueries<hostingModel.Host>>();
+            services.AddScoped<IQueryableHostingModelOperator<hostingModel.KeyCloakConfiguration>, HostingModelQueries<hostingModel.KeyCloakConfiguration>>();
+            services.AddScoped<IQueryableHostingModelOperator<hostingModel.NugetPackage>, HostingModelQueries<hostingModel.NugetPackage>>();
+            services.AddScoped<IQueryableHostingModelOperator<hostingModel.Principal>, HostingModelQueries<hostingModel.Principal>>();
+            services.AddScoped<IQueryableHostingModelOperator<hostingModel.RoutingDiscriminator>, HostingModelQueries<hostingModel.RoutingDiscriminator>>();
+            services.AddScoped<IQueryableHostingModelOperator<hostingModel.Tenant>, HostingModelQueries<hostingModel.Tenant>>();
+            services.AddScoped<IQueryableHostingModelOperator<hostingModel.TenantInfo>, HostingModelQueries<hostingModel.TenantInfo>>();
+            services.AddScoped<IQueryableHostingModelOperator<hostingModel.UriPath>, HostingModelQueries<hostingModel.UriPath>>();
+            services.AddScoped<IQueryableHostingModelOperator<hostingModel.WebAPITenantInfo>, HostingModelQueries<hostingModel.WebAPITenantInfo>>();
+        }
+
         internal static void RegisterContentModelOperators(IServiceCollection services)
         {
             // add services friendly for odata for each 
             // odata exposed entity
-            services.AddScoped<IQueryableContentModelOperator<ContentCollection>, ContentModelQueries<ContentCollection>>();
-            services.AddScoped<IQueryableContentModelOperator<FilesystemAsset>, ContentModelQueries<FilesystemAsset>>();
-            services.AddScoped<IQueryableContentModelOperator<Holonym>, ContentModelQueries<Holonym>>();
-            services.AddScoped<IQueryableContentModelOperator<HorselessContent>, ContentModelQueries<HorselessContent>>();
-            services.AddScoped<IQueryableContentModelOperator<HorselessSession>, ContentModelQueries<HorselessSession>>();
-            services.AddScoped<IQueryableContentModelOperator<JSONAsset>, ContentModelQueries<JSONAsset>>();
-            services.AddScoped<IQueryableContentModelOperator<Meronym>, ContentModelQueries<Meronym>>();
-            services.AddScoped<IQueryableContentModelOperator<MIMEType>, ContentModelQueries<MIMEType>>();
-            services.AddScoped<IQueryableContentModelOperator<NavigationMenu>, ContentModelQueries<NavigationMenu>>();
-            services.AddScoped<IQueryableContentModelOperator<NavigationMenuItem>, ContentModelQueries<NavigationMenuItem>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModelQueries<ContentModel.ContentCollection>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.FilesystemAsset>, ContentModelQueries<ContentModel.FilesystemAsset>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.Holonym>, ContentModelQueries<ContentModel.Holonym>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.HorselessContent>, ContentModelQueries<ContentModel.HorselessContent>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.HorselessSession>, ContentModelQueries<ContentModel.HorselessSession>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.JSONAsset>, ContentModelQueries<ContentModel.JSONAsset>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.Meronym>, ContentModelQueries<ContentModel.Meronym>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.MIMEType>, ContentModelQueries<ContentModel.MIMEType>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.NavigationMenu>, ContentModelQueries<ContentModel.NavigationMenu>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.NavigationMenuItem>, ContentModelQueries<ContentModel.NavigationMenuItem>>();
 
-            services.AddScoped<IQueryableContentModelOperator<TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NugetPackage>,
-                ContentModelQueries<TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NugetPackage>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.NugetPackage>,
+                ContentModelQueries<ContentModel.NugetPackage>>();
 
-            services.AddScoped<IQueryableContentModelOperator<Placeholder>, ContentModelQueries<Placeholder>>();
-            services.AddScoped<IQueryableContentModelOperator<Principal>, ContentModelQueries<Principal>>();
-            services.AddScoped<IQueryableContentModelOperator<Publication>, ContentModelQueries<Publication>>();
-            services.AddScoped<IQueryableContentModelOperator<Taxon>, ContentModelQueries<Taxon>>();
-            services.AddScoped<IQueryableContentModelOperator<Tenant>, ContentModelQueries<Tenant>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.Placeholder>, ContentModelQueries<ContentModel.Placeholder>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.Principal>, ContentModelQueries<ContentModel.Principal>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.Publication>, ContentModelQueries<ContentModel.Publication>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.Taxon>, ContentModelQueries<ContentModel.Taxon>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModelQueries<ContentModel.Tenant>>();
         }
     }
 }

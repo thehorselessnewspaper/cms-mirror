@@ -11,7 +11,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context
     /// <summary>
     /// marks a db entity as evaluable via access control entry collectoin
     /// </summary>
-    public interface IRowLevelSecured
+    public interface IContentRowLevelSecured
     {
         public ICollection<AccessControlEntry> AccessControlList { get; set; }
         public ICollection<Principal> Owners { get; set; }

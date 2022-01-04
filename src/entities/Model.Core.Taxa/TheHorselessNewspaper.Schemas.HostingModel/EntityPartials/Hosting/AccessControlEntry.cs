@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
-namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
+namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
 {
 
     [Flags]

@@ -7,7 +7,7 @@ using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    public partial class ContentCollection : IRowLevelSecured
+    public partial class ContentCollection : IContentRowLevelSecured
     {
 
         public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();

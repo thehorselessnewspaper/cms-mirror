@@ -23,12 +23,10 @@ namespace Schema.Diagrams.Hosting
     
         public System.Guid Id { get; set; }
         public Nullable<bool> IsActive { get; set; }
-        public Nullable<System.Guid> TenantId { get; set; }
         public string ObjectId { get; set; }
         public string DisplayName { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
     
-        public virtual Tenant Tenant { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Host> Hosts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

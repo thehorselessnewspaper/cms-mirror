@@ -12,19 +12,13 @@ namespace Schema.Diagrams.Hosting
     using System;
     using System.Collections.Generic;
     
-    public partial class UriPath
+    public partial class AccessControlEntry
     {
         public System.Guid Id { get; set; }
-        public string AbsoluteURL { get; set; }
-        public string IsTenantDiscriminator { get; set; }
-        public System.Guid RoutingDiscriminatorId { get; set; }
-        public string ObjectId { get; set; }
         public string DisplayName { get; set; }
+        public string ObjectId { get; set; }
+        public Nullable<bool> IsSoftDeleted { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
-        public string HTTPPort { get; set; }
-        public string HTTPScheme { get; set; }
-        public string TCPHost { get; set; }
-    
-        public virtual RoutingDiscriminator RoutingDiscriminator { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     }
 }

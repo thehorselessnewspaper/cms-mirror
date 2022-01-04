@@ -36,6 +36,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             // register repository-like services that depend on dbcontext
             ModelOperatorExtensions.RegisterContentModelOperators(services);
 
+
             return services;
 
         }
@@ -44,14 +45,23 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
         public static IServiceCollection UseHorselessHostingModelMSSqlServer(this IServiceCollection services, IConfiguration configuration)
         {
+            var builder = new DbContextOptionsBuilder<MSSQLHostingContext>();
+            builder.EnableDetailedErrors();
+            builder.EnableSensitiveDataLogging();
+            builder.UseSqlServer(configuration.GetConnectionString("HostingModelConnection"));
+            services.AddSingleton<DbContextOptions<MSSQLHostingContext>>(builder.Options);
 
-            services.AddDbContext<MSSQLHostingContext>(options =>
-            {
-                string connectionString = configuration.GetConnectionString("HostingModelConnection");
-                options.UseSqlServer(connectionString);
-                options.EnableDetailedErrors();
-            });
+            // add dbcontext for dependency injectoin
+            services.AddScoped<IHostingModelContext, MSSQLHostingContext>();
 
+            //services.AddDbContext<MSSQLHostingContext>(options =>
+            //{
+            //    string connectionString = configuration.GetConnectionString("HostingModelConnection");
+            //    options.UseSqlServer(connectionString);
+            //    options.EnableDetailedErrors();
+            //});
+
+            ModelOperatorExtensions.RegisterHostingModelOperator(services);
             return services;
         }
     }

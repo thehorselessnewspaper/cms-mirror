@@ -5,30 +5,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollections;
+using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
-namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollections
+namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollection
 {
-    /// <summary>
-    /// could it be that all content collection entities of interest
-    /// are reachable by a generic specification of T
-    /// that won't blow the whole leg away?
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    internal class ContentModelQueries<T> : IQueryableContentModelOperator<T> where T : class, IContentRowLevelSecured
+    internal class HostingModelQueries<T> : IQueryableHostingModelOperator<T> where T : class, IHostingRowLevelSecured
     {
-        private readonly ILogger<ContentModelQueries<T>> _logger;
+
+        private readonly ILogger<HostingModelQueries<T>> _logger;
         private readonly IContentModelContext _context;
-        public  ContentModelQueries(IContentModelContext ctx, ILogger<ContentModelQueries<T>> logger)
+
+        public HostingModelQueries(IContentModelContext ctx, ILogger<HostingModelQueries<T>> logger)
         {
-            this._context = ctx;    
+            this._context = ctx;
             this._logger = logger;
 
             try
             {
                 var providerName = ((DbContext)ctx).Database.ProviderName;
-                _logger.LogDebug($"content collections context using provider named {providerName}");
+                _logger.LogDebug($"hosting collections context using provider named {providerName}");
             }
             catch (Exception e) { }
         }
@@ -39,7 +36,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             var dbSet = ((DbContext)_context).Set<T>();
 
             var addResult = await dbSet.AddAsync(entity);
-            var saveResult = await((DbContext)_context).SaveChangesAsync();
+            var saveResult = await ((DbContext)_context).SaveChangesAsync();
 
             return await Task.FromResult<T>(entity);
         }
@@ -50,7 +47,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             var dbSet = ((DbContext)_context).Set<T>();
 
             await dbSet.AddRangeAsync(entities);
-            var saveResult = await((DbContext)_context).SaveChangesAsync();
+            var saveResult = await ((DbContext)_context).SaveChangesAsync();
 
             return entities;
         }
@@ -61,7 +58,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             var dbSet = ((DbContext)_context).Set<T>();
 
             var removeState = dbSet.Remove(entity);
-            var updateResult = await((DbContext)_context).SaveChangesAsync();
+            var updateResult = await ((DbContext)_context).SaveChangesAsync();
 
             return await Task.FromResult<T>(entity);
         }
@@ -91,10 +88,9 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             var dbSet = ((DbContext)_context).Set<T>();
 
             dbSet.UpdateRange(entities);
-            var saveResult = await((DbContext)_context).SaveChangesAsync();
+            var saveResult = await ((DbContext)_context).SaveChangesAsync();
 
             return entities;
         }
-
     }
 }

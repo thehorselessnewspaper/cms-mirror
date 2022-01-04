@@ -10,10 +10,14 @@ namespace TheHorselessNewspaper.HostingModel.Context
 {
     internal partial interface IHostingModelContext
     {
+
+        public DbSet<AccessControlEntry> AccessControlEntries { get; set; }
         public DbSet<FilesystemAssetLocation> FilesystemAssetLocations { get; set; }
+        public DbSet<HorselessSession> HorselessSessions { get; set; }
         public DbSet<Host> Hosts { get; set; }
         public DbSet<KeyCloakConfiguration> KeyCloakConfigurations { get; set; }
         public DbSet<NugetPackage> NugetPackages { get; set; }
+        public DbSet<Principal> Principals { get; set; }
         public DbSet<RoutingDiscriminator> RoutingDiscriminators { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<TenantInfo> TenantInfos { get; set; }

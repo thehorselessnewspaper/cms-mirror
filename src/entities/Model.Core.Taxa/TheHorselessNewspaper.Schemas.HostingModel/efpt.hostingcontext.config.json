@@ -14,11 +14,15 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
+         "Name": "[HostingModel].[AccessControlEntries]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[HostingModel].[FilesystemAssetLocations]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[HostFilesystemAssetLocation]",
+         "Name": "[HostingModel].[HorselessSessions]",
          "ObjectType": 0
       },
       {
@@ -34,6 +38,14 @@
          "ObjectType": 0
       },
       {
+         "Name": "[HostingModel].[Principals]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[HostingModel].[PrincipalTenant]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[HostingModel].[RoutingDiscriminators]",
          "ObjectType": 0
       },
@@ -43,10 +55,6 @@
       },
       {
          "Name": "[HostingModel].[Tenants]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[HostingModel].[UriPathFilesystemAssetLocation]",
          "ObjectType": 0
       },
       {

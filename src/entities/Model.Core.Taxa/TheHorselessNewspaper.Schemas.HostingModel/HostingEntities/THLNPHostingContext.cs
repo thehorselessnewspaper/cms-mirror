@@ -18,10 +18,13 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
         {
         }
 
+        public virtual DbSet<AccessControlEntry> AccessControlEntries { get; set; }
         public virtual DbSet<FilesystemAssetLocation> FilesystemAssetLocations { get; set; }
+        public virtual DbSet<HorselessSession> HorselessSessions { get; set; }
         public virtual DbSet<Host> Hosts { get; set; }
         public virtual DbSet<KeyCloakConfiguration> KeyCloakConfigurations { get; set; }
         public virtual DbSet<NugetPackage> NugetPackages { get; set; }
+        public virtual DbSet<Principal> Principals { get; set; }
         public virtual DbSet<RoutingDiscriminator> RoutingDiscriminators { get; set; }
         public virtual DbSet<Tenant> Tenants { get; set; }
         public virtual DbSet<TenantInfo> TenantInfos { get; set; }
@@ -30,6 +33,17 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AccessControlEntry>(entity =>
+            {
+                entity.ToTable("AccessControlEntries", "HostingModel");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.ObjectId).IsRequired();
+            });
+
             modelBuilder.Entity<FilesystemAssetLocation>(entity =>
             {
                 entity.ToTable("FilesystemAssetLocations", "HostingModel");
@@ -37,6 +51,17 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<HorselessSession>(entity =>
+            {
+                entity.ToTable("HorselessSessions", "HostingModel");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.ObjectId).IsRequired();
             });
 
             modelBuilder.Entity<Host>(entity =>
@@ -53,21 +78,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
                     .WithMany(p => p.Hosts)
                     .HasForeignKey(d => d.RoutingDiscriminatorId)
                     .HasConstraintName("FK_RoutingDiscriminatorHost");
-
-                entity.HasMany(d => d.WWWRootAssetLocations)
-                    .WithMany(p => p.HostWWWRootAssetLocations)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "HostFilesystemAssetLocation",
-                        l => l.HasOne<FilesystemAssetLocation>().WithMany().HasForeignKey("WWWRootAssetLocations_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_HostFilesystemAssetLocation_FilesystemAssetLocation"),
-                        r => r.HasOne<Host>().WithMany().HasForeignKey("HostWWWRootAssetLocations_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_HostFilesystemAssetLocation_Host"),
-                        j =>
-                        {
-                            j.HasKey("HostWWWRootAssetLocations_Id", "WWWRootAssetLocations_Id");
-
-                            j.ToTable("HostFilesystemAssetLocation", "HostingModel");
-
-                            j.HasIndex(new[] { "WWWRootAssetLocations_Id" }, "IX_FK_HostFilesystemAssetLocation_FilesystemAssetLocation");
-                        });
             });
 
             modelBuilder.Entity<KeyCloakConfiguration>(entity =>
@@ -92,24 +102,14 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
             {
                 entity.ToTable("NugetPackages", "HostingModel");
 
-                entity.HasIndex(e => e.FilesystemAssetLocation_Id, "IX_FK_NugetPackageFilesystemAssetLocation");
-
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.HasOne(d => d.FilesystemAssetLocation)
-                    .WithMany(p => p.NugetPackages)
-                    .HasForeignKey(d => d.FilesystemAssetLocation_Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_NugetPackageFilesystemAssetLocation");
             });
 
-            modelBuilder.Entity<RoutingDiscriminator>(entity =>
+            modelBuilder.Entity<Principal>(entity =>
             {
-                entity.ToTable("RoutingDiscriminators", "HostingModel");
-
-                entity.HasIndex(e => e.TenantId, "IX_FK_TenantRoutingDiscriminator");
+                entity.ToTable("Principals", "HostingModel");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -117,10 +117,31 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
 
                 entity.Property(e => e.ObjectId).IsRequired();
 
-                entity.HasOne(d => d.Tenant)
-                    .WithMany(p => p.RoutingDiscriminators)
-                    .HasForeignKey(d => d.TenantId)
-                    .HasConstraintName("FK_TenantRoutingDiscriminator");
+                entity.HasMany(d => d.Tenants)
+                    .WithMany(p => p.Principals)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "PrincipalTenant",
+                        l => l.HasOne<Tenant>().WithMany().HasForeignKey("Tenants_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalTenant_Tenant"),
+                        r => r.HasOne<Principal>().WithMany().HasForeignKey("Principals_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalTenant_Principal"),
+                        j =>
+                        {
+                            j.HasKey("Principals_Id", "Tenants_Id");
+
+                            j.ToTable("PrincipalTenant", "HostingModel");
+
+                            j.HasIndex(new[] { "Tenants_Id" }, "IX_FK_PrincipalTenant_Tenant");
+                        });
+            });
+
+            modelBuilder.Entity<RoutingDiscriminator>(entity =>
+            {
+                entity.ToTable("RoutingDiscriminators", "HostingModel");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.ObjectId).IsRequired();
             });
 
             modelBuilder.Entity<Tenant>(entity =>
@@ -167,21 +188,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
                     .HasForeignKey(d => d.RoutingDiscriminatorId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_RoutingDiscriminatorUriPath");
-
-                entity.HasMany(d => d.WWWRootAssetLocations)
-                    .WithMany(p => p.UriPathWWWRootAssetLocations)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "UriPathFilesystemAssetLocation",
-                        l => l.HasOne<FilesystemAssetLocation>().WithMany().HasForeignKey("WWWRootAssetLocations_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_UriPathFilesystemAssetLocation_FilesystemAssetLocation"),
-                        r => r.HasOne<UriPath>().WithMany().HasForeignKey("UriPathWWWRootAssetLocations_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_UriPathFilesystemAssetLocation_UriPath"),
-                        j =>
-                        {
-                            j.HasKey("UriPathWWWRootAssetLocations_Id", "WWWRootAssetLocations_Id");
-
-                            j.ToTable("UriPathFilesystemAssetLocation", "HostingModel");
-
-                            j.HasIndex(new[] { "WWWRootAssetLocations_Id" }, "IX_FK_UriPathFilesystemAssetLocation_FilesystemAssetLocation");
-                        });
             });
 
             modelBuilder.Entity<WebAPITenantInfo>(entity =>

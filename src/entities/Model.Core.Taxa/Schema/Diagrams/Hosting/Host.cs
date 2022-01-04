@@ -14,12 +14,6 @@ namespace Schema.Diagrams.Hosting
     
     public partial class Host
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Host()
-        {
-            this.WWWRootAssetLocations = new HashSet<FilesystemAssetLocation>();
-        }
-    
         public System.Guid Id { get; set; }
         public string TCPHost { get; set; }
         public string IsTenanantDiscriminator { get; set; }
@@ -31,7 +25,5 @@ namespace Schema.Diagrams.Hosting
         public string HTTPPort { get; set; }
     
         public virtual RoutingDiscriminator RoutingDiscriminator { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FilesystemAssetLocation> WWWRootAssetLocations { get; set; }
     }
 }
