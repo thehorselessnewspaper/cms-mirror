@@ -38,9 +38,9 @@ namespace HorselessNewspaper.Web.Core.SingletonServices.HorselessAuthorization.C
     /// as per
     ///     - https://docs.microsoft.com/en-us/aspnet/core/security/authorization/resourcebased?view=aspnetcore-6.0
     /// </summary>
-    public class DeleteOperationAuthorizationHandler : AuthorizationHandler<CanDeleteRequirement, IRowLevelSecured>
+    public class DeleteOperationAuthorizationHandler : AuthorizationHandler<CanDeleteRequirement, IContentRowLevelSecured>
     {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, CanDeleteRequirement requirement, IRowLevelSecured resource)
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, CanDeleteRequirement requirement, IContentRowLevelSecured resource)
         {
 
             // apply delete permission evaluation strategies

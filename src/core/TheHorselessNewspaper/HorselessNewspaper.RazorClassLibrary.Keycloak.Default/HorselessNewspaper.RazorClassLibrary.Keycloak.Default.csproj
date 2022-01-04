@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Authentication\Controllers\" />
+    <Folder Include="Views\Shared\" />
   </ItemGroup>
 
   <ItemGroup>
