@@ -19,7 +19,7 @@ namespace Horseless.ODataScaffold.Controllers.OData
         [HttpGet("horselessdata/ContentCollection/$count")]
         public async Task<IActionResult> Get()
         {            
-            return await Task.FromResult(Ok(this.context.Get()));
+            return await Task.FromResult(Ok(this.context.Read()));
         }
     }
 }

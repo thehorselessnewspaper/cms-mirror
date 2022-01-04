@@ -31,6 +31,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.EntityPartials.Content.Stra
             new OperationAuthorizationRequirement { Name = nameof(ACEPermission.UPDATE) };
 
         public static OperationAuthorizationRequirement WRITE =
-            new OperationAuthorizationRequirement { Name = nameof(ACEPermission.WRITE) };
+            new OperationAuthorizationRequirement { Name = nameof(ACEPermission.CREATE) };
     }
 }

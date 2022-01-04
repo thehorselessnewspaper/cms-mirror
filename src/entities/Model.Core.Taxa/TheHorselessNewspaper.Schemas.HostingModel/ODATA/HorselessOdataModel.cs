@@ -13,9 +13,15 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.ODATA
                 .ToArray();
         }
 
+        /// <summary>
+        /// wholly based on 
+        ///     - https://stackoverflow.com/questions/28200511/how-to-build-edm-model-for-odata-web-api-in-runtime
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEdmModel> GetEdmModel()
         {
             var builder = new ODataConventionModelBuilder();
+            /// TODO load fro ma configurable location
             foreach (Type item in GetTypesInNamespace(System.Reflection.Assembly.Load("TheHorselessNewspaper.HostingModel"), "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities"))
             {
 

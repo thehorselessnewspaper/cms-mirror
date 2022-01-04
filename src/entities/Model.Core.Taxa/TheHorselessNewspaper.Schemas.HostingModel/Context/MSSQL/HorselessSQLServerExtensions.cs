@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using TheHorselessNewspaper.Schemas.HostingModel.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollections;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using TheHorselessNewspaper.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 {
@@ -23,21 +23,24 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         public static IServiceCollection UseHorselessContentModelMSSqlServer(this IServiceCollection services, IConfiguration configuration)
         {
 
+            // add dbcontext options for dependency injection
             var builder = new DbContextOptionsBuilder<MSSqlContentContext>();
+            builder.EnableDetailedErrors();
+            builder.EnableSensitiveDataLogging();
             builder.UseSqlServer(configuration.GetConnectionString("ContentModelConnection"));
             services.AddSingleton<DbContextOptions<MSSqlContentContext>>(builder.Options);
-            services.AddScoped<IContentModelContext, MSSqlContentContext>();
-            services.AddScoped<IQueryableContentModelOperator<ContentCollection>, ContentCollectionQueries>();
-            //services.AddDbContext<MSSqlContentContext>(options =>
-            //{
-            //    options.UseSqlServer(configuration.GetConnectionString("ContentModelConnection"));
 
-            //    options.EnableDetailedErrors();
-            //});
+            // add dbcontext for dependency injectoin
+            services.AddScoped<IContentModelContext, MSSqlContentContext>();
+
+            // register repository-like services that depend on dbcontext
+            ModelOperatorExtensions.RegisterContentModelOperators(services);
 
             return services;
 
         }
+
+      
 
         public static IServiceCollection UseHorselessHostingModelMSSqlServer(this IServiceCollection services, IConfiguration configuration)
         {

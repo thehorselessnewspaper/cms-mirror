@@ -16,7 +16,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     [Flags]
     public enum ACEPermission
     {
-        READ, WRITE, UPDATE, DELETE, SHARE, EXECUTE, SEARCH, PUBLISH, UNPUBLISH
+        READ, CREATE, UPDATE, DELETE, SHARE, EXECUTE, SEARCH, PUBLISH, UNPUBLISH
     }
 
     public enum ACEPermissionType
@@ -59,7 +59,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             where T : IRowLevelSecured
         {
             var isPermittedRead = entity.AccessControlList.First().Permission.HasFlag(ACEPermission.READ) && permission.HasFlag(ACEPermission.READ);
-            var isPermittedWrite = entity.AccessControlList.First().Permission.HasFlag(ACEPermission.WRITE) && permission.HasFlag(ACEPermission.WRITE);
+            var isPermittedWrite = entity.AccessControlList.First().Permission.HasFlag(ACEPermission.CREATE) && permission.HasFlag(ACEPermission.CREATE);
 
 
             var isPermittedUpdate = entity.AccessControlList.First().Permission.HasFlag(ACEPermission.UPDATE) && permission.HasFlag(ACEPermission.UPDATE);
