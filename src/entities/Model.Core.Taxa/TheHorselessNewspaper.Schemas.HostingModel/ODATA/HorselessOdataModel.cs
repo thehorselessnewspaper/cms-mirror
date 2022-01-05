@@ -18,7 +18,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.ODATA
         ///     - https://stackoverflow.com/questions/28200511/how-to-build-edm-model-for-odata-web-api-in-runtime
         /// </summary>
         /// <returns></returns>
-        public async Task<IEdmModel> GetEdmModel()
+        public async Task<IEdmModel> GetContentEDMModel()
         {
             var builder = new ODataConventionModelBuilder();
             /// TODO load fro ma configurable location
@@ -37,44 +37,24 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.ODATA
             return await Task.FromResult(builder.GetEdmModel());
         }
 
-        public async Task<IEdmModel> GetEdmModelObsolete()
+        public async Task<IEdmModel> GetHostingEDMModel()
         {
             var builder = new ODataConventionModelBuilder();
-            builder.EntitySet<AccessControlEntry>("AccessControlEntries");
+            /// TODO load fro ma configurable location
+            foreach (Type item in GetTypesInNamespace(System.Reflection.Assembly.Load("TheHorselessNewspaper.HostingModel"), "TheHorselessNewspaper.Schemas.HostingModel.Entities"))
+            {
 
-            builder.EntitySet<ContentCollection>("ContentCollections");
+                //My models have a key named "Id"
+                if (item.GetProperty("Id") == null)
+                    continue;
 
-            builder.EntitySet<FilesystemAsset>("FilesystemAssets");
-
-            builder.EntitySet<Holonym>("Holonyms");
-
-            builder.EntitySet<HorselessContent>("HorselessContents");
-            builder.EntitySet<HorselessSession>("HorselessSessions");
-
-            builder.EntitySet<JSONAsset>("JSONAssets");
-
-            builder.EntitySet<MIMEType>("MIMETypes");
-
-            builder.EntitySet<Meronym>("Meronyms");
-
-            builder.EntitySet<NavigationMenu>("NavigationMenus");
-            builder.EntitySet<NavigationMenuItem>("NavigationMenuItems");
-
-            builder.EntitySet<NugetPackage>("NugetPackages");
-
-            builder.EntitySet<Placeholder>("Placeholders");
-
-            builder.EntitySet<Principal>("Principals");
-
-            builder.EntitySet<Publication>("Publications");
-
-            builder.EntitySet<Taxon>("Taxons");
-
-            builder.EntitySet<Tenant>("Tenants");
+                EntityTypeConfiguration entityType = builder.AddEntityType(item);
+                entityType.HasKey(item.GetProperty("Id"));
+                builder.AddEntitySet(item.Name, entityType);
+            }
 
             return await Task.FromResult(builder.GetEdmModel());
         }
-
     }
 }
 

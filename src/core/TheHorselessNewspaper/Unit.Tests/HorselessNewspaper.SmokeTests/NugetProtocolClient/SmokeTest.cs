@@ -1,22 +1,18 @@
-﻿using HorselessNewspaper.Core.Interfaces.Nuget;
-using HorselessNewspaper.Client.Nuget;
+﻿using HorselessNewspaper.Client.Nuget;
+using HorselessNewspaper.Client.Nuget.Model;
+using HorselessNewspaper.Core.Interfaces.Model;
+using HorselessNewspaper.Core.Interfaces.Nuget;
+using HorselessNewspaper.SmokeTests.Model;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using NuGet.Configuration;
+using NuGet.Versioning;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using NuGet.Versioning;
-using Microsoft.Extensions.Configuration;
-using HorselessNewspaper.SmokeTests.Model;
-using HorselessNewspaper.Client.Nuget.Model;
-using System.Net;
-using NuGet.Configuration;
-using HorselessNewspaper.Core.Interfaces.Model;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
-using Microsoft.Extensions.DependencyInjection;
 using LoggerNS = NuGet.Common;
 
 namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
