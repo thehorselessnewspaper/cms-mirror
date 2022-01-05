@@ -10,6 +10,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     public partial class Meronym
     {
+        public Meronym()
+        {
+            Holonyms = new HashSet<Holonym>();
+        }
+
         [Key]
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
@@ -18,8 +23,12 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Column(TypeName = "datetime")]
         public DateTime CreatedAt { get; set; }
         [Required]
-        public string JsonContent { get; set; }
+        public string JsonValue { get; set; }
         [Required]
         public string JsonSchema { get; set; }
+
+        [ForeignKey("Meronyms_Id")]
+        [InverseProperty(nameof(Holonym.Meronyms))]
+        public virtual ICollection<Holonym> Holonyms { get; set; }
     }
 }

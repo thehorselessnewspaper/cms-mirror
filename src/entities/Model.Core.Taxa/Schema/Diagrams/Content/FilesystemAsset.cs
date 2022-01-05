@@ -26,6 +26,8 @@ namespace Schema.Diagrams.Content
         public Nullable<bool> IsSoftDeleted { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public string Filename { get; set; }
+        public string PublishedURL { get; set; }
+        public string PreviewURL { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HorselessContent> MimeContents { get; set; }

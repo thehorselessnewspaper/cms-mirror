@@ -12,15 +12,13 @@ namespace Schema.Diagrams.Content
     using System;
     using System.Collections.Generic;
     
-    public partial class Taxon
+    public partial class Taxonomy
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Taxon()
+        public Taxonomy()
         {
-            this.Taxonomies = new HashSet<Taxonomy>();
-            this.DerivativeTaxons = new HashSet<Taxon>();
-            this.AntecedentTaxons = new HashSet<Taxon>();
-            this.Holonyms = new HashSet<Holonym>();
+            this.Taxons = new HashSet<Taxon>();
+            this.ContentCollections = new HashSet<ContentCollection>();
         }
     
         public System.Guid Id { get; set; }
@@ -32,12 +30,8 @@ namespace Schema.Diagrams.Content
         public string JsonSchema { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Taxonomy> Taxonomies { get; set; }
+        public virtual ICollection<Taxon> Taxons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Taxon> DerivativeTaxons { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Taxon> AntecedentTaxons { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Holonym> Holonyms { get; set; }
+        public virtual ICollection<ContentCollection> ContentCollections { get; set; }
     }
 }

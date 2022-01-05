@@ -12,7 +12,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context
     /// </summary>
     internal partial interface IContentModelContext : IMultiTenantDbContext 
     {
-        internal DbSet<AccessControlEntry> AccessControlEntries { get; set; }
+        /// an owned type without a dbset
+        /// internal DbSet<AccessControlEntry> AccessControlEntries { get; set; }
         internal DbSet<ContentCollection> ContentCollections { get; set; }
         internal DbSet<FilesystemAsset> FilesystemAssets { get; set; }
         internal DbSet<Holonym> Holonyms { get; set; }
@@ -24,8 +25,10 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context
         internal DbSet<NavigationMenu> NavigationMenus { get; set; }
         internal DbSet<NavigationMenuItem> NavigationMenuItems { get; set; }
         internal DbSet<NugetPackage> NugetPackages { get; set; }
-        internal DbSet<Placeholder> Placeholders { get; set; }
-        internal DbSet<Principal> Principals { get; set; }
+        /// an owned type without a dbset
+        /// internal DbSet<Placeholder> Placeholders { get; set; }
+        /// an owned type without a dbset
+        ///internal DbSet<Principal> Principals { get; set; }
         internal DbSet<Publication> Publications { get; set; }
         internal DbSet<Taxon> Taxons { get; set; }
         internal DbSet<Tenant> Tenants { get; set; }

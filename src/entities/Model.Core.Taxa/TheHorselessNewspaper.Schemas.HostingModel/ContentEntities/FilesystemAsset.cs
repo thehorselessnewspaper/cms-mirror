@@ -25,6 +25,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public DateTime? CreatedAt { get; set; }
         [Required]
         public string Filename { get; set; }
+        public string PublishedURL { get; set; }
+        public string PreviewURL { get; set; }
 
         [InverseProperty(nameof(HorselessContent.FilesystemAsset))]
         public virtual ICollection<HorselessContent> HorselessContents { get; set; }

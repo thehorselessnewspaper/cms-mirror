@@ -14,10 +14,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         {
         }
 
-        public virtual DbSet<AccessControlEntry> AccessControlEntries { get; set; }
         public virtual DbSet<ContentCollection> ContentCollections { get; set; }
         public virtual DbSet<FilesystemAsset> FilesystemAssets { get; set; }
         public virtual DbSet<Holonym> Holonyms { get; set; }
+        public virtual DbSet<HorselessClaimsPrincipal> HorselessClaimsPrincipals { get; set; }
         public virtual DbSet<HorselessContent> HorselessContents { get; set; }
         public virtual DbSet<HorselessSession> HorselessSessions { get; set; }
         public virtual DbSet<JSONAsset> JSONAssets { get; set; }
@@ -26,19 +26,13 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public virtual DbSet<NavigationMenu> NavigationMenus { get; set; }
         public virtual DbSet<NavigationMenuItem> NavigationMenuItems { get; set; }
         public virtual DbSet<NugetPackage> NugetPackages { get; set; }
-        public virtual DbSet<Placeholder> Placeholders { get; set; }
-        public virtual DbSet<Principal> Principals { get; set; }
         public virtual DbSet<Publication> Publications { get; set; }
         public virtual DbSet<Taxon> Taxons { get; set; }
+        public virtual DbSet<Taxonomy> Taxonomies { get; set; }
         public virtual DbSet<Tenant> Tenants { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<AccessControlEntry>(entity =>
-            //{
-            //    entity.Property(e => e.Id).ValueGeneratedNever();
-            //});
-
             modelBuilder.Entity<ContentCollection>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
@@ -97,6 +91,31 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             modelBuilder.Entity<Holonym>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasMany(d => d.Meronyms)
+                    .WithMany(p => p.Holonyms)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "HolonymMeronym",
+                        l => l.HasOne<Meronym>().WithMany().HasForeignKey("Meronyms_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_HolonymMeronym_Meronym"),
+                        r => r.HasOne<Holonym>().WithMany().HasForeignKey("Holonyms_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_HolonymMeronym_Holonym"),
+                        j =>
+                        {
+                            j.HasKey("Holonyms_Id", "Meronyms_Id");
+
+                            j.ToTable("HolonymMeronym");
+
+                            j.HasIndex(new[] { "Meronyms_Id" }, "IX_FK_HolonymMeronym_Meronym");
+                        });
+            });
+
+            modelBuilder.Entity<HorselessClaimsPrincipal>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasOne(d => d.Tenant)
+                    .WithMany(p => p.HorselessClaimsPrincipals)
+                    .HasForeignKey(d => d.TenantId)
+                    .HasConstraintName("FK_TenantHorselessClaimsPrincipal");
             });
 
             modelBuilder.Entity<HorselessContent>(entity =>
@@ -229,16 +248,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
                 entity.Property(e => e.Id).ValueGeneratedNever();
             });
 
-            modelBuilder.Entity<Placeholder>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            //modelBuilder.Entity<Principal>(entity =>
-            //{
-            //    entity.Property(e => e.Id).ValueGeneratedNever();
-            //});
-
             modelBuilder.Entity<Publication>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
@@ -292,6 +301,86 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             modelBuilder.Entity<Taxon>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasMany(d => d.AntecedentTaxons)
+                    .WithMany(p => p.DerivativeTaxons)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "TaxonTaxon",
+                        l => l.HasOne<Taxon>().WithMany().HasForeignKey("AntecedentTaxons_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TaxonTaxon_Taxon"),
+                        r => r.HasOne<Taxon>().WithMany().HasForeignKey("DerivativeTaxons_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TaxonTaxon_Taxon1"),
+                        j =>
+                        {
+                            j.HasKey("AntecedentTaxons_Id", "DerivativeTaxons_Id");
+
+                            j.ToTable("TaxonTaxon");
+
+                            j.HasIndex(new[] { "DerivativeTaxons_Id" }, "IX_FK_TaxonTaxon_Taxon1");
+                        });
+
+                entity.HasMany(d => d.DerivativeTaxons)
+                    .WithMany(p => p.AntecedentTaxons)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "TaxonTaxon",
+                        l => l.HasOne<Taxon>().WithMany().HasForeignKey("DerivativeTaxons_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TaxonTaxon_Taxon1"),
+                        r => r.HasOne<Taxon>().WithMany().HasForeignKey("AntecedentTaxons_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TaxonTaxon_Taxon"),
+                        j =>
+                        {
+                            j.HasKey("AntecedentTaxons_Id", "DerivativeTaxons_Id");
+
+                            j.ToTable("TaxonTaxon");
+
+                            j.HasIndex(new[] { "DerivativeTaxons_Id" }, "IX_FK_TaxonTaxon_Taxon1");
+                        });
+
+                entity.HasMany(d => d.Holonyms)
+                    .WithMany(p => p.Taxons)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "TaxonHolonym",
+                        l => l.HasOne<Holonym>().WithMany().HasForeignKey("Holonyms_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TaxonHolonym_Holonym"),
+                        r => r.HasOne<Taxon>().WithMany().HasForeignKey("Taxons_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TaxonHolonym_Taxon"),
+                        j =>
+                        {
+                            j.HasKey("Taxons_Id", "Holonyms_Id");
+
+                            j.ToTable("TaxonHolonym");
+
+                            j.HasIndex(new[] { "Holonyms_Id" }, "IX_FK_TaxonHolonym_Holonym");
+                        });
+
+                entity.HasMany(d => d.Taxonomies)
+                    .WithMany(p => p.Taxons)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "TaxonTaxonomy",
+                        l => l.HasOne<Taxonomy>().WithMany().HasForeignKey("Taxonomies_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TaxonTaxonomy_Taxonomy"),
+                        r => r.HasOne<Taxon>().WithMany().HasForeignKey("Taxons_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TaxonTaxonomy_Taxon"),
+                        j =>
+                        {
+                            j.HasKey("Taxons_Id", "Taxonomies_Id");
+
+                            j.ToTable("TaxonTaxonomy");
+
+                            j.HasIndex(new[] { "Taxonomies_Id" }, "IX_FK_TaxonTaxonomy_Taxonomy");
+                        });
+            });
+
+            modelBuilder.Entity<Taxonomy>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasMany(d => d.ContentCollections)
+                    .WithMany(p => p.Taxonomies)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "TaxonomyContentCollection",
+                        l => l.HasOne<ContentCollection>().WithMany().HasForeignKey("ContentCollections_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TaxonomyContentCollection_ContentCollection"),
+                        r => r.HasOne<Taxonomy>().WithMany().HasForeignKey("Taxonomies_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TaxonomyContentCollection_Taxonomy"),
+                        j =>
+                        {
+                            j.HasKey("Taxonomies_Id", "ContentCollections_Id");
+
+                            j.ToTable("TaxonomyContentCollection");
+
+                            j.HasIndex(new[] { "ContentCollections_Id" }, "IX_FK_TaxonomyContentCollection_ContentCollection");
+                        });
             });
 
             modelBuilder.Entity<Tenant>(entity =>

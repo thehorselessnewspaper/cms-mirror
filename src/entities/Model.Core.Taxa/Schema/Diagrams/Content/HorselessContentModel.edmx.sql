@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/05/2022 01:10:27
+-- Date Created: 01/05/2022 16:48:01
 -- Generated from EDMX file: C:\src\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
@@ -169,7 +169,9 @@ CREATE TABLE [dbo].[HorselessContents] (
     [FilesystemAssetId] uniqueidentifier  NULL,
     [JSONAssetId] uniqueidentifier  NULL,
     [MIMETypeId] uniqueidentifier  NULL,
-    [IsPublished] bit  NULL
+    [IsPublished] bit  NULL,
+    [PublishedURL] nvarchar(max)  NULL,
+    [PreviewURL] nvarchar(max)  NULL
 );
 GO
 
@@ -201,7 +203,9 @@ CREATE TABLE [dbo].[FilesystemAssets] (
     [ObjectId] nvarchar(max)  NOT NULL,
     [IsSoftDeleted] bit  NULL,
     [CreatedAt] datetime  NULL,
-    [Filename] nvarchar(max)  NOT NULL
+    [Filename] nvarchar(max)  NOT NULL,
+    [PublishedURL] nvarchar(max)  NULL,
+    [PreviewURL] nvarchar(max)  NULL
 );
 GO
 
@@ -226,7 +230,8 @@ CREATE TABLE [dbo].[ContentCollections] (
     [CreatedAt] datetime  NULL,
     [AllowAnonymousRead] bit  NOT NULL,
     [IsPublished] bit  NULL,
-    [URL] nvarchar(max)  NOT NULL
+    [PublishedURL] nvarchar(max)  NULL,
+    [PreviewURL] nvarchar(max)  NULL
 );
 GO
 
@@ -239,7 +244,9 @@ CREATE TABLE [dbo].[Publications] (
     [CreatedAt] datetime  NOT NULL,
     [PublishAt] datetime  NULL,
     [UnPublishAt] datetime  NULL,
-    [IsPublished] bit  NULL
+    [IsPublished] bit  NULL,
+    [PublishedURL] nvarchar(max)  NULL,
+    [PreviewURL] nvarchar(max)  NULL
 );
 GO
 
@@ -262,7 +269,7 @@ CREATE TABLE [dbo].[Taxons] (
     [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
     [CreatedAt] datetime  NOT NULL,
-    [JsonContent] nvarchar(max)  NOT NULL,
+    [JsonValue] nvarchar(max)  NOT NULL,
     [JsonSchema] nvarchar(max)  NOT NULL
 );
 GO
@@ -274,7 +281,7 @@ CREATE TABLE [dbo].[Holonyms] (
     [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
     [CreatedAt] datetime  NOT NULL,
-    [JsonContent] nvarchar(max)  NOT NULL,
+    [JsonValue] nvarchar(max)  NOT NULL,
     [JsonSchema] nvarchar(max)  NOT NULL
 );
 GO
@@ -286,13 +293,13 @@ CREATE TABLE [dbo].[Meronyms] (
     [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
     [CreatedAt] datetime  NOT NULL,
-    [JsonContent] nvarchar(max)  NOT NULL,
+    [JsonValue] nvarchar(max)  NOT NULL,
     [JsonSchema] nvarchar(max)  NOT NULL
 );
 GO
 
--- Creating table 'Principals'
-CREATE TABLE [dbo].[Principals] (
+-- Creating table 'HorselessClaimsPrincipals'
+CREATE TABLE [dbo].[HorselessClaimsPrincipals] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NOT NULL,
@@ -300,7 +307,9 @@ CREATE TABLE [dbo].[Principals] (
     [CreatedAt] datetime  NULL,
     [Iss] nvarchar(max)  NULL,
     [Aud] nvarchar(max)  NULL,
-    [Sub] nvarchar(max)  NULL
+    [Sub] nvarchar(max)  NULL,
+    [TenantId] uniqueidentifier  NULL,
+    [Principal_Id] uniqueidentifier  NULL
 );
 GO
 
@@ -379,6 +388,31 @@ CREATE TABLE [dbo].[NavigationMenuItems] (
 );
 GO
 
+-- Creating table 'Taxonomies'
+CREATE TABLE [dbo].[Taxonomies] (
+    [Id] uniqueidentifier  NOT NULL,
+    [DisplayName] uniqueidentifier  NULL,
+    [ObjectId] nvarchar(max)  NULL,
+    [IsSoftDeleted] bit  NULL,
+    [CreatedAt] datetime  NOT NULL,
+    [JsonValue] nvarchar(max)  NOT NULL,
+    [JsonSchema] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Principals'
+CREATE TABLE [dbo].[Principals] (
+    [Id] uniqueidentifier  NOT NULL,
+    [DisplayName] nvarchar(max)  NULL,
+    [ObjectId] nvarchar(max)  NOT NULL,
+    [IsSoftDeleted] bit  NULL,
+    [CreatedAt] datetime  NULL,
+    [Iss] nvarchar(max)  NULL,
+    [Aud] nvarchar(max)  NULL,
+    [Sub] nvarchar(max)  NULL
+);
+GO
+
 -- Creating table 'TenantContentCollection'
 CREATE TABLE [dbo].[TenantContentCollection] (
     [Tenants_Id] uniqueidentifier  NOT NULL,
@@ -431,6 +465,41 @@ GO
 -- Creating table 'PublicationContentCollection'
 CREATE TABLE [dbo].[PublicationContentCollection] (
     [Publications_Id] uniqueidentifier  NOT NULL,
+    [ContentCollections_Id] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'TaxonTaxonomy'
+CREATE TABLE [dbo].[TaxonTaxonomy] (
+    [Taxons_Id] uniqueidentifier  NOT NULL,
+    [Taxonomies_Id] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'TaxonTaxon'
+CREATE TABLE [dbo].[TaxonTaxon] (
+    [AntecedentTaxons_Id] uniqueidentifier  NOT NULL,
+    [DerivativeTaxons_Id] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'TaxonHolonym'
+CREATE TABLE [dbo].[TaxonHolonym] (
+    [Taxons_Id] uniqueidentifier  NOT NULL,
+    [Holonyms_Id] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'HolonymMeronym'
+CREATE TABLE [dbo].[HolonymMeronym] (
+    [Holonyms_Id] uniqueidentifier  NOT NULL,
+    [Meronyms_Id] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'TaxonomyContentCollection'
+CREATE TABLE [dbo].[TaxonomyContentCollection] (
+    [Taxonomies_Id] uniqueidentifier  NOT NULL,
     [ContentCollections_Id] uniqueidentifier  NOT NULL
 );
 GO
@@ -505,9 +574,9 @@ ADD CONSTRAINT [PK_Meronyms]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Principals'
-ALTER TABLE [dbo].[Principals]
-ADD CONSTRAINT [PK_Principals]
+-- Creating primary key on [Id] in table 'HorselessClaimsPrincipals'
+ALTER TABLE [dbo].[HorselessClaimsPrincipals]
+ADD CONSTRAINT [PK_HorselessClaimsPrincipals]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -538,6 +607,18 @@ GO
 -- Creating primary key on [Id] in table 'NavigationMenuItems'
 ALTER TABLE [dbo].[NavigationMenuItems]
 ADD CONSTRAINT [PK_NavigationMenuItems]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Taxonomies'
+ALTER TABLE [dbo].[Taxonomies]
+ADD CONSTRAINT [PK_Taxonomies]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Principals'
+ALTER TABLE [dbo].[Principals]
+ADD CONSTRAINT [PK_Principals]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -587,6 +668,36 @@ GO
 ALTER TABLE [dbo].[PublicationContentCollection]
 ADD CONSTRAINT [PK_PublicationContentCollection]
     PRIMARY KEY CLUSTERED ([Publications_Id], [ContentCollections_Id] ASC);
+GO
+
+-- Creating primary key on [Taxons_Id], [Taxonomies_Id] in table 'TaxonTaxonomy'
+ALTER TABLE [dbo].[TaxonTaxonomy]
+ADD CONSTRAINT [PK_TaxonTaxonomy]
+    PRIMARY KEY CLUSTERED ([Taxons_Id], [Taxonomies_Id] ASC);
+GO
+
+-- Creating primary key on [AntecedentTaxons_Id], [DerivativeTaxons_Id] in table 'TaxonTaxon'
+ALTER TABLE [dbo].[TaxonTaxon]
+ADD CONSTRAINT [PK_TaxonTaxon]
+    PRIMARY KEY CLUSTERED ([AntecedentTaxons_Id], [DerivativeTaxons_Id] ASC);
+GO
+
+-- Creating primary key on [Taxons_Id], [Holonyms_Id] in table 'TaxonHolonym'
+ALTER TABLE [dbo].[TaxonHolonym]
+ADD CONSTRAINT [PK_TaxonHolonym]
+    PRIMARY KEY CLUSTERED ([Taxons_Id], [Holonyms_Id] ASC);
+GO
+
+-- Creating primary key on [Holonyms_Id], [Meronyms_Id] in table 'HolonymMeronym'
+ALTER TABLE [dbo].[HolonymMeronym]
+ADD CONSTRAINT [PK_HolonymMeronym]
+    PRIMARY KEY CLUSTERED ([Holonyms_Id], [Meronyms_Id] ASC);
+GO
+
+-- Creating primary key on [Taxonomies_Id], [ContentCollections_Id] in table 'TaxonomyContentCollection'
+ALTER TABLE [dbo].[TaxonomyContentCollection]
+ADD CONSTRAINT [PK_TaxonomyContentCollection]
+    PRIMARY KEY CLUSTERED ([Taxonomies_Id], [ContentCollections_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -827,6 +938,156 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_PublicationContentCollection_ContentCollection'
 CREATE INDEX [IX_FK_PublicationContentCollection_ContentCollection]
 ON [dbo].[PublicationContentCollection]
+    ([ContentCollections_Id]);
+GO
+
+-- Creating foreign key on [Taxons_Id] in table 'TaxonTaxonomy'
+ALTER TABLE [dbo].[TaxonTaxonomy]
+ADD CONSTRAINT [FK_TaxonTaxonomy_Taxon]
+    FOREIGN KEY ([Taxons_Id])
+    REFERENCES [dbo].[Taxons]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Taxonomies_Id] in table 'TaxonTaxonomy'
+ALTER TABLE [dbo].[TaxonTaxonomy]
+ADD CONSTRAINT [FK_TaxonTaxonomy_Taxonomy]
+    FOREIGN KEY ([Taxonomies_Id])
+    REFERENCES [dbo].[Taxonomies]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TaxonTaxonomy_Taxonomy'
+CREATE INDEX [IX_FK_TaxonTaxonomy_Taxonomy]
+ON [dbo].[TaxonTaxonomy]
+    ([Taxonomies_Id]);
+GO
+
+-- Creating foreign key on [AntecedentTaxons_Id] in table 'TaxonTaxon'
+ALTER TABLE [dbo].[TaxonTaxon]
+ADD CONSTRAINT [FK_TaxonTaxon_Taxon]
+    FOREIGN KEY ([AntecedentTaxons_Id])
+    REFERENCES [dbo].[Taxons]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [DerivativeTaxons_Id] in table 'TaxonTaxon'
+ALTER TABLE [dbo].[TaxonTaxon]
+ADD CONSTRAINT [FK_TaxonTaxon_Taxon1]
+    FOREIGN KEY ([DerivativeTaxons_Id])
+    REFERENCES [dbo].[Taxons]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TaxonTaxon_Taxon1'
+CREATE INDEX [IX_FK_TaxonTaxon_Taxon1]
+ON [dbo].[TaxonTaxon]
+    ([DerivativeTaxons_Id]);
+GO
+
+-- Creating foreign key on [Taxons_Id] in table 'TaxonHolonym'
+ALTER TABLE [dbo].[TaxonHolonym]
+ADD CONSTRAINT [FK_TaxonHolonym_Taxon]
+    FOREIGN KEY ([Taxons_Id])
+    REFERENCES [dbo].[Taxons]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Holonyms_Id] in table 'TaxonHolonym'
+ALTER TABLE [dbo].[TaxonHolonym]
+ADD CONSTRAINT [FK_TaxonHolonym_Holonym]
+    FOREIGN KEY ([Holonyms_Id])
+    REFERENCES [dbo].[Holonyms]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TaxonHolonym_Holonym'
+CREATE INDEX [IX_FK_TaxonHolonym_Holonym]
+ON [dbo].[TaxonHolonym]
+    ([Holonyms_Id]);
+GO
+
+-- Creating foreign key on [Holonyms_Id] in table 'HolonymMeronym'
+ALTER TABLE [dbo].[HolonymMeronym]
+ADD CONSTRAINT [FK_HolonymMeronym_Holonym]
+    FOREIGN KEY ([Holonyms_Id])
+    REFERENCES [dbo].[Holonyms]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Meronyms_Id] in table 'HolonymMeronym'
+ALTER TABLE [dbo].[HolonymMeronym]
+ADD CONSTRAINT [FK_HolonymMeronym_Meronym]
+    FOREIGN KEY ([Meronyms_Id])
+    REFERENCES [dbo].[Meronyms]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_HolonymMeronym_Meronym'
+CREATE INDEX [IX_FK_HolonymMeronym_Meronym]
+ON [dbo].[HolonymMeronym]
+    ([Meronyms_Id]);
+GO
+
+-- Creating foreign key on [TenantId] in table 'HorselessClaimsPrincipals'
+ALTER TABLE [dbo].[HorselessClaimsPrincipals]
+ADD CONSTRAINT [FK_TenantHorselessClaimsPrincipal]
+    FOREIGN KEY ([TenantId])
+    REFERENCES [dbo].[Tenants]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TenantHorselessClaimsPrincipal'
+CREATE INDEX [IX_FK_TenantHorselessClaimsPrincipal]
+ON [dbo].[HorselessClaimsPrincipals]
+    ([TenantId]);
+GO
+
+-- Creating foreign key on [Principal_Id] in table 'HorselessClaimsPrincipals'
+ALTER TABLE [dbo].[HorselessClaimsPrincipals]
+ADD CONSTRAINT [FK_PrincipalHorselessClaimsPrincipal]
+    FOREIGN KEY ([Principal_Id])
+    REFERENCES [dbo].[Principals]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PrincipalHorselessClaimsPrincipal'
+CREATE INDEX [IX_FK_PrincipalHorselessClaimsPrincipal]
+ON [dbo].[HorselessClaimsPrincipals]
+    ([Principal_Id]);
+GO
+
+-- Creating foreign key on [Taxonomies_Id] in table 'TaxonomyContentCollection'
+ALTER TABLE [dbo].[TaxonomyContentCollection]
+ADD CONSTRAINT [FK_TaxonomyContentCollection_Taxonomy]
+    FOREIGN KEY ([Taxonomies_Id])
+    REFERENCES [dbo].[Taxonomies]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ContentCollections_Id] in table 'TaxonomyContentCollection'
+ALTER TABLE [dbo].[TaxonomyContentCollection]
+ADD CONSTRAINT [FK_TaxonomyContentCollection_ContentCollection]
+    FOREIGN KEY ([ContentCollections_Id])
+    REFERENCES [dbo].[ContentCollections]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TaxonomyContentCollection_ContentCollection'
+CREATE INDEX [IX_FK_TaxonomyContentCollection_ContentCollection]
+ON [dbo].[TaxonomyContentCollection]
     ([ContentCollections_Id]);
 GO
 

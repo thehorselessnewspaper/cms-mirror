@@ -10,6 +10,14 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     public partial class Taxon
     {
+        public Taxon()
+        {
+            AntecedentTaxons = new HashSet<Taxon>();
+            DerivativeTaxons = new HashSet<Taxon>();
+            Holonyms = new HashSet<Holonym>();
+            Taxonomies = new HashSet<Taxonomy>();
+        }
+
         [Key]
         public Guid Id { get; set; }
         public Guid? DisplayName { get; set; }
@@ -18,8 +26,21 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Column(TypeName = "datetime")]
         public DateTime CreatedAt { get; set; }
         [Required]
-        public string JsonContent { get; set; }
+        public string JsonValue { get; set; }
         [Required]
         public string JsonSchema { get; set; }
+
+        [ForeignKey("DerivativeTaxons_Id")]
+        [InverseProperty(nameof(Taxon.DerivativeTaxons))]
+        public virtual ICollection<Taxon> AntecedentTaxons { get; set; }
+        [ForeignKey("AntecedentTaxons_Id")]
+        [InverseProperty(nameof(Taxon.AntecedentTaxons))]
+        public virtual ICollection<Taxon> DerivativeTaxons { get; set; }
+        [ForeignKey("Taxons_Id")]
+        [InverseProperty(nameof(Holonym.Taxons))]
+        public virtual ICollection<Holonym> Holonyms { get; set; }
+        [ForeignKey("Taxons_Id")]
+        [InverseProperty(nameof(Taxonomy.Taxons))]
+        public virtual ICollection<Taxonomy> Taxonomies { get; set; }
     }
 }

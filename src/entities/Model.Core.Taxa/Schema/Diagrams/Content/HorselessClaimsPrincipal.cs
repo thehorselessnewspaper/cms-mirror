@@ -12,23 +12,19 @@ namespace Schema.Diagrams.Content
     using System;
     using System.Collections.Generic;
     
-    public partial class Meronym
+    public partial class HorselessClaimsPrincipal
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Meronym()
-        {
-            this.Holonyms = new HashSet<Holonym>();
-        }
-    
         public System.Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public Nullable<bool> IsSoftDeleted { get; set; }
-        public System.DateTime CreatedAt { get; set; }
-        public string JsonValue { get; set; }
-        public string JsonSchema { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public string Iss { get; set; }
+        public string Aud { get; set; }
+        public string Sub { get; set; }
+        public Nullable<System.Guid> TenantId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Holonym> Holonyms { get; set; }
+        public virtual Tenant Tenant { get; set; }
+        public virtual Principal Principal { get; set; }
     }
 }

@@ -8,17 +8,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    public partial class Holonym
+    public partial class Taxonomy
     {
-        public Holonym()
+        public Taxonomy()
         {
-            Meronyms = new HashSet<Meronym>();
+            ContentCollections = new HashSet<ContentCollection>();
             Taxons = new HashSet<Taxon>();
         }
 
         [Key]
         public Guid Id { get; set; }
-        public string DisplayName { get; set; }
+        public Guid? DisplayName { get; set; }
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
         [Column(TypeName = "datetime")]
@@ -28,11 +28,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Required]
         public string JsonSchema { get; set; }
 
-        [ForeignKey("Holonyms_Id")]
-        [InverseProperty(nameof(Meronym.Holonyms))]
-        public virtual ICollection<Meronym> Meronyms { get; set; }
-        [ForeignKey("Holonyms_Id")]
-        [InverseProperty(nameof(Taxon.Holonyms))]
+        [ForeignKey("Taxonomies_Id")]
+        [InverseProperty(nameof(ContentCollection.Taxonomies))]
+        public virtual ICollection<ContentCollection> ContentCollections { get; set; }
+        [ForeignKey("Taxonomies_Id")]
+        [InverseProperty(nameof(Taxon.Taxonomies))]
         public virtual ICollection<Taxon> Taxons { get; set; }
     }
 }

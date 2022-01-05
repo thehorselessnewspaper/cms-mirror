@@ -6,23 +6,23 @@
     <edmx:Diagrams>
       <Diagram DiagramId="0c7f99035d7540a9858afd51f8273784" Name="Diagram1" ZoomLevel="95" >
         <EntityTypeShape EntityType="HorselessContentModel.HorselessContent" Width="2.375" PointX="12" PointY="6.375" />
-        <EntityTypeShape EntityType="HorselessContentModel.Tenant" Width="2.5" PointX="3.25" PointY="6.375" />
+        <EntityTypeShape EntityType="HorselessContentModel.Tenant" Width="2.5" PointX="3.75" PointY="6.5" />
         <EntityTypeShape EntityType="HorselessContentModel.MIMEType" Width="2.25" PointX="16.125" PointY="2.375" />
         <EntityTypeShape EntityType="HorselessContentModel.FilesystemAsset" Width="2.875" PointX="15.5" PointY="6.375" />
-        <EntityTypeShape EntityType="HorselessContentModel.JSONAsset" Width="2.875" PointX="15.5" PointY="9.25" />
-        <EntityTypeShape EntityType="HorselessContentModel.ContentCollection" Width="2.875" PointX="7.125" PointY="6.375" />
+        <EntityTypeShape EntityType="HorselessContentModel.JSONAsset" Width="2.875" PointX="15.5" PointY="9.625" />
+        <EntityTypeShape EntityType="HorselessContentModel.ContentCollection" Width="2.875" PointX="7.875" PointY="6.375" />
         <AssociationConnector Association="HorselessContentModel.TenantContentCollection" />
         <AssociationConnector Association="HorselessContentModel.ContentCollectionMimeContent" />
         <AssociationConnector Association="HorselessContentModel.FilesystemAssetMimeContent" />
         <AssociationConnector Association="HorselessContentModel.MimeContentJSONAsset" />
         <AssociationConnector Association="HorselessContentModel.MimeContentMIMEType" />
-        <EntityTypeShape EntityType="HorselessContentModel.Publication" Width="2.875" PointX="5" PointY="12.625" />
-        <EntityTypeShape EntityType="HorselessContentModel.Placeholder" Width="2.25" PointX="9.375" PointY="10.875" />
-        <EntityTypeShape EntityType="HorselessContentModel.Taxon" Width="2.125" PointX="5.375" PointY="16.25" />
-        <EntityTypeShape EntityType="HorselessContentModel.Holonym" Width="2.125" PointX="5.875" PointY="19.875" />
-        <EntityTypeShape EntityType="HorselessContentModel.Meronym" Width="2.125" PointX="9.25" PointY="18.625" />
-        <EntityTypeShape EntityType="HorselessContentModel.Principal" Width="2.5" PointX="3.25" PointY="9.375" />
-        <EntityTypeShape EntityType="HorselessContentModel.NugetPackage" Width="2.625" PointX="8.875" PointY="14.375" />
+        <EntityTypeShape EntityType="HorselessContentModel.Publication" Width="2.875" PointX="3.625" PointY="9.125" />
+        <EntityTypeShape EntityType="HorselessContentModel.Placeholder" Width="2.25" PointX="16.125" PointY="12.875" />
+        <EntityTypeShape EntityType="HorselessContentModel.Taxon" Width="2.125" PointX="7.125" PointY="11.5" />
+        <EntityTypeShape EntityType="HorselessContentModel.Holonym" Width="2.125" PointX="4.5" PointY="14.375" />
+        <EntityTypeShape EntityType="HorselessContentModel.Meronym" Width="2.125" PointX="7.375" PointY="15.625" />
+        <EntityTypeShape EntityType="HorselessContentModel.HorselessClaimsPrincipal" Width="2.5" PointX="3.625" PointY="2.75" />
+        <EntityTypeShape EntityType="HorselessContentModel.NugetPackage" Width="2.625" PointX="9.875" PointY="15.5" />
         <EntityTypeShape EntityType="HorselessContentModel.AccessControlEntry" Width="2.375" PointX="0.5" PointY="6.375" />
         <EntityTypeShape EntityType="HorselessContentModel.HorselessSession" Width="2.25" PointX="0.5" PointY="9.375" />
         <EntityTypeShape EntityType="HorselessContentModel.NavigationMenu" Width="2.125" PointX="13" PointY="12.25" />
@@ -33,6 +33,15 @@
         <AssociationConnector Association="HorselessContentModel.ContentCollectionContentCollection" />
         <AssociationConnector Association="HorselessContentModel.PublicationPublication" />
         <AssociationConnector Association="HorselessContentModel.PublicationContentCollection" />
+        <EntityTypeShape EntityType="HorselessContentModel.Taxonomy" Width="2.25" PointX="10.125" PointY="11.875" />
+        <AssociationConnector Association="HorselessContentModel.TaxonTaxonomy" />
+        <AssociationConnector Association="HorselessContentModel.TaxonTaxon" />
+        <AssociationConnector Association="HorselessContentModel.TaxonHolonym" />
+        <AssociationConnector Association="HorselessContentModel.HolonymMeronym" />
+        <AssociationConnector Association="HorselessContentModel.TenantHorselessClaimsPrincipal" />
+        <EntityTypeShape EntityType="HorselessContentModel.Principal" Width="2.5" PointX="7.625" PointY="2.875" />
+        <AssociationConnector Association="HorselessContentModel.PrincipalHorselessClaimsPrincipal" />
+        <AssociationConnector Association="HorselessContentModel.TaxonomyContentCollection" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

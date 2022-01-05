@@ -22,5 +22,7 @@ namespace Schema.Diagrams.Content
         public string Iss { get; set; }
         public string Aud { get; set; }
         public string Sub { get; set; }
+    
+        public virtual HorselessClaimsPrincipal HorselessClaimsPrincipal { get; set; }
     }
 }

@@ -30,6 +30,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public Guid? JSONAssetId { get; set; }
         public Guid? MIMETypeId { get; set; }
         public bool? IsPublished { get; set; }
+        public string PublishedURL { get; set; }
+        public string PreviewURL { get; set; }
 
         [ForeignKey(nameof(FilesystemAssetId))]
         [InverseProperty("HorselessContents")]

@@ -16,6 +16,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             MimeContents = new HashSet<HorselessContent>();
             ParentContentCollections = new HashSet<ContentCollection>();
             Publications = new HashSet<Publication>();
+            Taxonomies = new HashSet<Taxonomy>();
             Tenants = new HashSet<Tenant>();
         }
 
@@ -29,8 +30,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public DateTime? CreatedAt { get; set; }
         public bool AllowAnonymousRead { get; set; }
         public bool? IsPublished { get; set; }
-        [Required]
-        public string URL { get; set; }
+        public string PublishedURL { get; set; }
+        public string PreviewURL { get; set; }
 
         [ForeignKey("ParentContentCollections_Id")]
         [InverseProperty(nameof(ContentCollection.ParentContentCollections))]
@@ -44,6 +45,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [ForeignKey("ContentCollections_Id")]
         [InverseProperty(nameof(Publication.ContentCollections))]
         public virtual ICollection<Publication> Publications { get; set; }
+        [ForeignKey("ContentCollections_Id")]
+        [InverseProperty(nameof(Taxonomy.ContentCollections))]
+        public virtual ICollection<Taxonomy> Taxonomies { get; set; }
         [ForeignKey("ContentCollections_Id")]
         [InverseProperty(nameof(Tenant.ContentCollections))]
         public virtual ICollection<Tenant> Tenants { get; set; }

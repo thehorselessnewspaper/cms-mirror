@@ -29,6 +29,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Column(TypeName = "datetime")]
         public DateTime? UnPublishAt { get; set; }
         public bool? IsPublished { get; set; }
+        public string PublishedURL { get; set; }
+        public string PreviewURL { get; set; }
 
         [ForeignKey("Publications_Id")]
         [InverseProperty(nameof(ContentCollection.Publications))]

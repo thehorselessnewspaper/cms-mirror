@@ -6,8 +6,12 @@ using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-
-    [Flags]
+    /// <summary>
+    /// resist the urge to use [Flags]
+    /// due to ACE 1->1 SCOPE
+    ///            1->1 Collection<Principal>
+    /// </summary>
+    /// [Flags]
     public enum ACEPermissionScope
     {
         OWNER, ROLE, GROUP, WORKFLOW, ANONYMOUS, EVERYONE
@@ -22,7 +26,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
     public enum ACEPermissionType
     {
-        PERMIT, DENY, SUBMIT_REQUEST, APPROVE_REQUEST, DENY_REQUEST
+        PERMIT, DENY
     }
 
     /// <summary>
@@ -39,7 +43,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public ACEPermissionType PermissionType { get; set; }
 
-        public ICollection<Principal> SubjectPrincipals { get; set; }  = new  HashSet<Principal>();
+        /// <summary>
+        /// empty for EVERYONE is a valid non-intuitive state
+        /// </summary>
+        public ICollection<Principal> CommonScopeSubjectPrincipals { get; set; }  = new  HashSet<Principal>();
 
     }
 
