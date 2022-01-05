@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
+
+    <UserSecretsId>8435cb1e-7333-468d-a35d-a16488c196b5</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
@@ -12,7 +14,7 @@
   <ItemGroup>
     <PackageReference Include="Finbuckle.MultiTenant" Version="6.5.1" />
     <PackageReference Include="Finbuckle.MultiTenant.EntityFrameworkCore" Version="6.5.1" />
-    <PackageReference Include="HorselessNewspaper.Web.Core" Version="0.3.220104.5" />
+    <PackageReference Include="HorselessNewspaper.Web.Core" Version="0.3.220104.6" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />

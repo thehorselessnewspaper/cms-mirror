@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TheHorselessNewspaper.Schemas.HostingModel.DTO;
-using TheHorselessNewspaper.Schemas.HostingModel.Entities;
+
 
 /// <summary>
 /// note this namespace corresponds with the partial class it implements, not this folder

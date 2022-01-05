@@ -8,7 +8,7 @@
     <Version>1.0.0</Version>
     <Authors>sechele</Authors>
     <Company>Ataxlab</Company>
-    <Product>TheHorselessNewspaper.Schemas.HostingModel</Product>
+    <Product>TheHorselessNewspaper.HostingModel</Product>
     <Description>entity framework core model classes</Description>
   </PropertyGroup>
 

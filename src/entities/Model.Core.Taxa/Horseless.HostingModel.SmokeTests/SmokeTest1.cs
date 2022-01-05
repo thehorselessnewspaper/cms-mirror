@@ -1,18 +1,12 @@
-using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
-using NUnit.Framework.Internal;
-using System;
+using Finbuckle.MultiTenant;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Finbuckle.MultiTenant;
-using Finbuckle.MultiTenant.EntityFrameworkCore;
-using Microsoft.AspNetCore.Builder;
-using Finbuckle.MultiTenant;
-using HorselessNewspaper.Web.Core.Extensions;
-using HorselessNewspaper.Web.Core.Extensions.Hosting;
-using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
+using NUnit.Framework;
+using NUnit.Framework.Internal;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace Horseless.HostingModel.SmokeTests
