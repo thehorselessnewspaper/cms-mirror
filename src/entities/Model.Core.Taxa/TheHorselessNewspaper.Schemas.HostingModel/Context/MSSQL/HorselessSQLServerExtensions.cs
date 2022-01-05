@@ -20,35 +20,55 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
     /// </summary>
     public static class HorselessSQLServerExtensions
     {
-        public static IServiceCollection UseHorselessContentModelMSSqlServer(this IServiceCollection services, IConfiguration configuration)
+        /// <summary>
+        /// globally enables mssql server, pass global connection string
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <param name="connectionString"></param>
+        /// <returns></returns>
+        public static IServiceCollection UseHorselessContentModelMSSqlServer(this IServiceCollection services, IConfiguration configuration, string connectionString)
         {
 
             // add dbcontext options for dependency injection
             var builder = new DbContextOptionsBuilder<MSSqlContentContext>();
             builder.EnableDetailedErrors();
             builder.EnableSensitiveDataLogging();
-            builder.UseSqlServer(configuration.GetConnectionString("ContentModelConnection"));
-            services.AddSingleton<DbContextOptions<MSSqlContentContext>>(builder.Options);
 
-            // add dbcontext for dependency injectoin
-            services.AddScoped<IContentModelContext, MSSqlContentContext>();
+            try
+            {
+                builder.UseSqlServer(connectionString);
+                services.AddSingleton<DbContextOptions<MSSqlContentContext>>(builder.Options);
 
-            // register repository-like services that depend on dbcontext
-            ModelOperatorExtensions.RegisterContentModelOperators(services);
+                // add dbcontext for dependency injectoin
+                services.AddScoped<IContentModelContext, MSSqlContentContext>();
 
-
+                // register repository-like services that depend on dbcontext
+                ModelOperatorExtensions.RegisterContentModelOperators(services);
+            }
+            catch(Exception e)
+            {
+                int i = 0;
+            }
+              
             return services;
 
         }
 
-      
 
-        public static IServiceCollection UseHorselessHostingModelMSSqlServer(this IServiceCollection services, IConfiguration configuration)
+        /// <summary>
+        /// globally enables mssql server, pass global connection string
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <param name="connectionString"></param>
+        /// <returns></returns>
+        public static IServiceCollection UseHorselessHostingModelMSSqlServer(this IServiceCollection services, IConfiguration configuration, string connectionString)
         {
             var builder = new DbContextOptionsBuilder<MSSQLHostingContext>();
             builder.EnableDetailedErrors();
             builder.EnableSensitiveDataLogging();
-            builder.UseSqlServer(configuration.GetConnectionString("HostingModelConnection"));
+            builder.UseSqlServer(connectionString);
             services.AddSingleton<DbContextOptions<MSSQLHostingContext>>(builder.Options);
 
             // add dbcontext for dependency injectoin

@@ -2,9 +2,15 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
+    [Index(nameof(FilesystemAssetId), Name = "IX_FK_FilesystemAssetMimeContent")]
+    [Index(nameof(JSONAssetId), Name = "IX_FK_MimeContentJSONAsset")]
+    [Index(nameof(MIMETypeId), Name = "IX_FK_MimeContentMIMEType")]
     public partial class HorselessContent
     {
         public HorselessContent()
@@ -12,20 +18,31 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             ContentCollections = new HashSet<ContentCollection>();
         }
 
+        [Key]
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
+        [Required]
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
+        [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
         public Guid? FilesystemAssetId { get; set; }
         public Guid? JSONAssetId { get; set; }
         public Guid? MIMETypeId { get; set; }
         public bool? IsPublished { get; set; }
 
+        [ForeignKey(nameof(FilesystemAssetId))]
+        [InverseProperty("HorselessContents")]
         public virtual FilesystemAsset FilesystemAsset { get; set; }
+        [ForeignKey(nameof(JSONAssetId))]
+        [InverseProperty("HorselessContents")]
         public virtual JSONAsset JSONAsset { get; set; }
+        [ForeignKey(nameof(MIMETypeId))]
+        [InverseProperty("HorselessContents")]
         public virtual MIMEType MIMEType { get; set; }
 
+        [ForeignKey("MimeContents_Id")]
+        [InverseProperty(nameof(ContentCollection.MimeContents))]
         public virtual ICollection<ContentCollection> ContentCollections { get; set; }
     }
 }

@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/01/2022 19:49:32
+-- Date Created: 01/05/2022 01:10:27
 -- Generated from EDMX file: C:\src\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [THNLP_Content];
+USE [THLNP_Content];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -17,11 +17,143 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_TenantContentCollection_Tenant]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TenantContentCollection] DROP CONSTRAINT [FK_TenantContentCollection_Tenant];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TenantContentCollection_ContentCollection]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TenantContentCollection] DROP CONSTRAINT [FK_TenantContentCollection_ContentCollection];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContentCollectionMimeContent_ContentCollection]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ContentCollectionMimeContent] DROP CONSTRAINT [FK_ContentCollectionMimeContent_ContentCollection];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContentCollectionMimeContent_MimeContent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ContentCollectionMimeContent] DROP CONSTRAINT [FK_ContentCollectionMimeContent_MimeContent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_FilesystemAssetMimeContent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HorselessContents] DROP CONSTRAINT [FK_FilesystemAssetMimeContent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MimeContentJSONAsset]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HorselessContents] DROP CONSTRAINT [FK_MimeContentJSONAsset];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MimeContentMIMEType]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HorselessContents] DROP CONSTRAINT [FK_MimeContentMIMEType];
+GO
+IF OBJECT_ID(N'[dbo].[FK_NavigationMenuNavigationMenu_NavigationMenu]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[NavigationMenuNavigationMenu] DROP CONSTRAINT [FK_NavigationMenuNavigationMenu_NavigationMenu];
+GO
+IF OBJECT_ID(N'[dbo].[FK_NavigationMenuNavigationMenu_NavigationMenu1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[NavigationMenuNavigationMenu] DROP CONSTRAINT [FK_NavigationMenuNavigationMenu_NavigationMenu1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_NavigationMenuItemNavigationMenuItem_NavigationMenuItem]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[NavigationMenuItemNavigationMenuItem] DROP CONSTRAINT [FK_NavigationMenuItemNavigationMenuItem_NavigationMenuItem];
+GO
+IF OBJECT_ID(N'[dbo].[FK_NavigationMenuItemNavigationMenuItem_NavigationMenuItem1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[NavigationMenuItemNavigationMenuItem] DROP CONSTRAINT [FK_NavigationMenuItemNavigationMenuItem_NavigationMenuItem1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_NavigationMenuItemNavigationMenu_NavigationMenuItem]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[NavigationMenuItemNavigationMenu] DROP CONSTRAINT [FK_NavigationMenuItemNavigationMenu_NavigationMenuItem];
+GO
+IF OBJECT_ID(N'[dbo].[FK_NavigationMenuItemNavigationMenu_NavigationMenu]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[NavigationMenuItemNavigationMenu] DROP CONSTRAINT [FK_NavigationMenuItemNavigationMenu_NavigationMenu];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContentCollectionContentCollection_ContentCollection]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ContentCollectionContentCollection] DROP CONSTRAINT [FK_ContentCollectionContentCollection_ContentCollection];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContentCollectionContentCollection_ContentCollection1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ContentCollectionContentCollection] DROP CONSTRAINT [FK_ContentCollectionContentCollection_ContentCollection1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PublicationPublication_Publication]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PublicationPublication] DROP CONSTRAINT [FK_PublicationPublication_Publication];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PublicationPublication_Publication1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PublicationPublication] DROP CONSTRAINT [FK_PublicationPublication_Publication1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PublicationContentCollection_Publication]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PublicationContentCollection] DROP CONSTRAINT [FK_PublicationContentCollection_Publication];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PublicationContentCollection_ContentCollection]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PublicationContentCollection] DROP CONSTRAINT [FK_PublicationContentCollection_ContentCollection];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[HorselessContents]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[HorselessContents];
+GO
+IF OBJECT_ID(N'[dbo].[Tenants]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Tenants];
+GO
+IF OBJECT_ID(N'[dbo].[MIMETypes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MIMETypes];
+GO
+IF OBJECT_ID(N'[dbo].[FilesystemAssets]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[FilesystemAssets];
+GO
+IF OBJECT_ID(N'[dbo].[JSONAssets]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[JSONAssets];
+GO
+IF OBJECT_ID(N'[dbo].[ContentCollections]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ContentCollections];
+GO
+IF OBJECT_ID(N'[dbo].[Publications]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Publications];
+GO
+IF OBJECT_ID(N'[dbo].[Placeholders]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Placeholders];
+GO
+IF OBJECT_ID(N'[dbo].[Taxons]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Taxons];
+GO
+IF OBJECT_ID(N'[dbo].[Holonyms]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Holonyms];
+GO
+IF OBJECT_ID(N'[dbo].[Meronyms]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Meronyms];
+GO
+IF OBJECT_ID(N'[dbo].[Principals]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Principals];
+GO
+IF OBJECT_ID(N'[dbo].[NugetPackages]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[NugetPackages];
+GO
+IF OBJECT_ID(N'[dbo].[AccessControlEntries]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AccessControlEntries];
+GO
+IF OBJECT_ID(N'[dbo].[HorselessSessions]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[HorselessSessions];
+GO
+IF OBJECT_ID(N'[dbo].[NavigationMenus]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[NavigationMenus];
+GO
+IF OBJECT_ID(N'[dbo].[NavigationMenuItems]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[NavigationMenuItems];
+GO
+IF OBJECT_ID(N'[dbo].[TenantContentCollection]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TenantContentCollection];
+GO
+IF OBJECT_ID(N'[dbo].[ContentCollectionMimeContent]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ContentCollectionMimeContent];
+GO
+IF OBJECT_ID(N'[dbo].[NavigationMenuNavigationMenu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[NavigationMenuNavigationMenu];
+GO
+IF OBJECT_ID(N'[dbo].[NavigationMenuItemNavigationMenuItem]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[NavigationMenuItemNavigationMenuItem];
+GO
+IF OBJECT_ID(N'[dbo].[NavigationMenuItemNavigationMenu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[NavigationMenuItemNavigationMenu];
+GO
+IF OBJECT_ID(N'[dbo].[ContentCollectionContentCollection]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ContentCollectionContentCollection];
+GO
+IF OBJECT_ID(N'[dbo].[PublicationPublication]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PublicationPublication];
+GO
+IF OBJECT_ID(N'[dbo].[PublicationContentCollection]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PublicationContentCollection];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -261,13 +393,6 @@ CREATE TABLE [dbo].[ContentCollectionMimeContent] (
 );
 GO
 
--- Creating table 'PrincipalTenant'
-CREATE TABLE [dbo].[PrincipalTenant] (
-    [Principals_Id] uniqueidentifier  NOT NULL,
-    [Tenants_Id] uniqueidentifier  NOT NULL
-);
-GO
-
 -- Creating table 'NavigationMenuNavigationMenu'
 CREATE TABLE [dbo].[NavigationMenuNavigationMenu] (
     [Children_Id] uniqueidentifier  NOT NULL,
@@ -428,12 +553,6 @@ ADD CONSTRAINT [PK_ContentCollectionMimeContent]
     PRIMARY KEY CLUSTERED ([ContentCollections_Id], [MimeContents_Id] ASC);
 GO
 
--- Creating primary key on [Principals_Id], [Tenants_Id] in table 'PrincipalTenant'
-ALTER TABLE [dbo].[PrincipalTenant]
-ADD CONSTRAINT [PK_PrincipalTenant]
-    PRIMARY KEY CLUSTERED ([Principals_Id], [Tenants_Id] ASC);
-GO
-
 -- Creating primary key on [Children_Id], [Parents_Id] in table 'NavigationMenuNavigationMenu'
 ALTER TABLE [dbo].[NavigationMenuNavigationMenu]
 ADD CONSTRAINT [PK_NavigationMenuNavigationMenu]
@@ -565,30 +684,6 @@ GO
 CREATE INDEX [IX_FK_MimeContentMIMEType]
 ON [dbo].[HorselessContents]
     ([MIMETypeId]);
-GO
-
--- Creating foreign key on [Principals_Id] in table 'PrincipalTenant'
-ALTER TABLE [dbo].[PrincipalTenant]
-ADD CONSTRAINT [FK_PrincipalTenant_Principal]
-    FOREIGN KEY ([Principals_Id])
-    REFERENCES [dbo].[Principals]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Tenants_Id] in table 'PrincipalTenant'
-ALTER TABLE [dbo].[PrincipalTenant]
-ADD CONSTRAINT [FK_PrincipalTenant_Tenant]
-    FOREIGN KEY ([Tenants_Id])
-    REFERENCES [dbo].[Tenants]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PrincipalTenant_Tenant'
-CREATE INDEX [IX_FK_PrincipalTenant_Tenant]
-ON [dbo].[PrincipalTenant]
-    ([Tenants_Id]);
 GO
 
 -- Creating foreign key on [Children_Id] in table 'NavigationMenuNavigationMenu'

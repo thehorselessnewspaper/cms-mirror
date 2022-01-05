@@ -52,7 +52,7 @@ namespace TheHorselessNewspaper.HostingModel.Context
                 ContentModelQueries<ContentModel.NugetPackage>>();
 
             services.AddScoped<IQueryableContentModelOperator<ContentModel.Placeholder>, ContentModelQueries<ContentModel.Placeholder>>();
-            services.AddScoped<IQueryableContentModelOperator<ContentModel.Principal>, ContentModelQueries<ContentModel.Principal>>();
+            // services.AddScoped<IQueryableContentModelOperator<ContentModel.Principal>, ContentModelQueries<ContentModel.Principal>>();
             services.AddScoped<IQueryableContentModelOperator<ContentModel.Publication>, ContentModelQueries<ContentModel.Publication>>();
             services.AddScoped<IQueryableContentModelOperator<ContentModel.Taxon>, ContentModelQueries<ContentModel.Taxon>>();
             services.AddScoped<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModelQueries<ContentModel.Tenant>>();

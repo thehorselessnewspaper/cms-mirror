@@ -2,6 +2,9 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
@@ -10,16 +13,19 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public Tenant()
         {
             ContentCollections = new HashSet<ContentCollection>();
-            Principals = new HashSet<Principal>();
         }
 
+        [Key]
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
+        [Required]
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
+        [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
 
+        [ForeignKey("Tenants_Id")]
+        [InverseProperty(nameof(ContentCollection.Tenants))]
         public virtual ICollection<ContentCollection> ContentCollections { get; set; }
-        public virtual ICollection<Principal> Principals { get; set; }
     }
 }

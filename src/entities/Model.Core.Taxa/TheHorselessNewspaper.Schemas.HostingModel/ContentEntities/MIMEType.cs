@@ -2,6 +2,9 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
@@ -12,13 +15,17 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             HorselessContents = new HashSet<HorselessContent>();
         }
 
+        [Key]
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
+        [Required]
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
+        [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
         public string MIMETypeName { get; set; }
 
+        [InverseProperty(nameof(HorselessContent.MIMEType))]
         public virtual ICollection<HorselessContent> HorselessContents { get; set; }
     }
 }

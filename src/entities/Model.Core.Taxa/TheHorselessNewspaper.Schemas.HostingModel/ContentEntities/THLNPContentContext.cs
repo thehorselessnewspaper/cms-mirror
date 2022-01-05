@@ -9,10 +9,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     internal partial class THLNPContentContext : DbContext
     {
-        public THLNPContentContext()
-        {
-        }
-
         public THLNPContentContext(DbContextOptions<THLNPContentContext> options)
             : base(options)
         {
@@ -38,24 +34,14 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AccessControlEntry>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.ObjectId).IsRequired();
-            });
+            //modelBuilder.Entity<AccessControlEntry>(entity =>
+            //{
+            //    entity.Property(e => e.Id).ValueGeneratedNever();
+            //});
 
             modelBuilder.Entity<ContentCollection>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.ObjectId).IsRequired();
-
-                entity.Property(e => e.URL).IsRequired();
 
                 entity.HasMany(d => d.ChildContentCollections)
                     .WithMany(p => p.ParentContentCollections)
@@ -106,38 +92,16 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             modelBuilder.Entity<FilesystemAsset>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.Filename).IsRequired();
-
-                entity.Property(e => e.ObjectId).IsRequired();
             });
 
             modelBuilder.Entity<Holonym>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.JsonContent).IsRequired();
-
-                entity.Property(e => e.JsonSchema).IsRequired();
             });
 
             modelBuilder.Entity<HorselessContent>(entity =>
             {
-                entity.HasIndex(e => e.FilesystemAssetId, "IX_FK_FilesystemAssetMimeContent");
-
-                entity.HasIndex(e => e.JSONAssetId, "IX_FK_MimeContentJSONAsset");
-
-                entity.HasIndex(e => e.MIMETypeId, "IX_FK_MimeContentMIMEType");
-
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.ObjectId).IsRequired();
 
                 entity.HasOne(d => d.FilesystemAsset)
                     .WithMany(p => p.HorselessContents)
@@ -158,50 +122,26 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             modelBuilder.Entity<HorselessSession>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.ObjectId).IsRequired();
             });
 
             modelBuilder.Entity<JSONAsset>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.ObjectId).IsRequired();
             });
 
             modelBuilder.Entity<MIMEType>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.ObjectId).IsRequired();
             });
 
             modelBuilder.Entity<Meronym>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.JsonContent).IsRequired();
-
-                entity.Property(e => e.JsonSchema).IsRequired();
             });
 
             modelBuilder.Entity<NavigationMenu>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.PublishAt).HasColumnType("datetime");
-
-                entity.Property(e => e.UnPublishAt).HasColumnType("datetime");
 
                 entity.HasMany(d => d.Children)
                     .WithMany(p => p.Parents)
@@ -237,12 +177,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             modelBuilder.Entity<NavigationMenuItem>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.PublishAt).HasColumnType("datetime");
-
-                entity.Property(e => e.UnPublishAt).HasColumnType("datetime");
 
                 entity.HasMany(d => d.ChildNavigationItems)
                     .WithMany(p => p.ParentNavigationItems)
@@ -293,56 +227,21 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             modelBuilder.Entity<NugetPackage>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.PublishAt).HasColumnType("datetime");
-
-                entity.Property(e => e.UnPublishAt).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<Placeholder>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.ObjectId).IsRequired();
             });
 
-            modelBuilder.Entity<Principal>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.ObjectId).IsRequired();
-
-                entity.HasMany(d => d.Tenants)
-                    .WithMany(p => p.Principals)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "PrincipalTenant",
-                        l => l.HasOne<Tenant>().WithMany().HasForeignKey("Tenants_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalTenant_Tenant"),
-                        r => r.HasOne<Principal>().WithMany().HasForeignKey("Principals_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalTenant_Principal"),
-                        j =>
-                        {
-                            j.HasKey("Principals_Id", "Tenants_Id");
-
-                            j.ToTable("PrincipalTenant");
-
-                            j.HasIndex(new[] { "Tenants_Id" }, "IX_FK_PrincipalTenant_Tenant");
-                        });
-            });
+            //modelBuilder.Entity<Principal>(entity =>
+            //{
+            //    entity.Property(e => e.Id).ValueGeneratedNever();
+            //});
 
             modelBuilder.Entity<Publication>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.PublishAt).HasColumnType("datetime");
-
-                entity.Property(e => e.UnPublishAt).HasColumnType("datetime");
 
                 entity.HasMany(d => d.ContentCollections)
                     .WithMany(p => p.Publications)
@@ -393,21 +292,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             modelBuilder.Entity<Taxon>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.JsonContent).IsRequired();
-
-                entity.Property(e => e.JsonSchema).IsRequired();
             });
 
             modelBuilder.Entity<Tenant>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.ObjectId).IsRequired();
 
                 entity.HasMany(d => d.ContentCollections)
                     .WithMany(p => p.Tenants)

@@ -2,6 +2,9 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
@@ -14,17 +17,27 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             PublicationsChildren = new HashSet<Publication>();
         }
 
+        [Key]
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
+        [Column(TypeName = "datetime")]
         public DateTime CreatedAt { get; set; }
+        [Column(TypeName = "datetime")]
         public DateTime? PublishAt { get; set; }
+        [Column(TypeName = "datetime")]
         public DateTime? UnPublishAt { get; set; }
         public bool? IsPublished { get; set; }
 
+        [ForeignKey("Publications_Id")]
+        [InverseProperty(nameof(ContentCollection.Publications))]
         public virtual ICollection<ContentCollection> ContentCollections { get; set; }
+        [ForeignKey("PublicationsChildren_Id")]
+        [InverseProperty(nameof(Publication.PublicationsChildren))]
         public virtual ICollection<Publication> PublicationParents { get; set; }
+        [ForeignKey("PublicationParents_Id")]
+        [InverseProperty(nameof(Publication.PublicationParents))]
         public virtual ICollection<Publication> PublicationsChildren { get; set; }
     }
 }

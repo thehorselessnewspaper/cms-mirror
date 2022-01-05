@@ -2,25 +2,24 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     public partial class Principal
     {
-        public Principal()
-        {
-            Tenants = new HashSet<Tenant>();
-        }
-
+        [Key]
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
+        [Required]
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
+        [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
         public string Iss { get; set; }
         public string Aud { get; set; }
         public string Sub { get; set; }
-
-        public virtual ICollection<Tenant> Tenants { get; set; }
     }
 }

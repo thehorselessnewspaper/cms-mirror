@@ -90,10 +90,6 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[PrincipalTenant]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[dbo].[PublicationContentCollection]",
          "ObjectType": 0
       },
@@ -118,17 +114,17 @@
          "ObjectType": 0
       }
    ],
-   "UiHint": "wipers.THNLP_Content.dbo",
+   "UiHint": "WIPERS.THLNP_Content",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,
-   "UseFluentApiOnly": true,
+   "UseFluentApiOnly": false,
    "UseHandleBars": false,
    "UseInflector": true,
    "UseLegacyPluralizer": false,
    "UseManyToManyEntity": false,
    "UseNoConstructor": false,
-   "UseNoDefaultConstructor": false,
+   "UseNoDefaultConstructor": true,
    "UseNoNavigations": false,
    "UseNoObjectFilter": false,
    "UseNodaTime": false,

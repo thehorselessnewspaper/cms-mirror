@@ -25,7 +25,6 @@
     <EntitySet Name="NavigationMenuItems" EntityType="HorselessContentModel.Store.NavigationMenuItems" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TenantContentCollection" EntityType="HorselessContentModel.Store.TenantContentCollection" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ContentCollectionMimeContent" EntityType="HorselessContentModel.Store.ContentCollectionMimeContent" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PrincipalTenant" EntityType="HorselessContentModel.Store.PrincipalTenant" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NavigationMenuNavigationMenu" EntityType="HorselessContentModel.Store.NavigationMenuNavigationMenu" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NavigationMenuItemNavigationMenuItem" EntityType="HorselessContentModel.Store.NavigationMenuItemNavigationMenuItem" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NavigationMenuItemNavigationMenu" EntityType="HorselessContentModel.Store.NavigationMenuItemNavigationMenu" store:Type="Tables" Schema="dbo" />
@@ -59,14 +58,6 @@
     <AssociationSet Name="MimeContentMIMEType" Association="HorselessContentModel.Store.MimeContentMIMEType">
       <End Role="MimeContent" EntitySet="HorselessContents" />
       <End Role="MIMEType" EntitySet="MIMETypes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PrincipalTenant_Principal" Association="HorselessContentModel.Store.FK_PrincipalTenant_Principal">
-      <End Role="Principal" EntitySet="Principals" />
-      <End Role="PrincipalTenant" EntitySet="PrincipalTenant" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PrincipalTenant_Tenant" Association="HorselessContentModel.Store.FK_PrincipalTenant_Tenant">
-      <End Role="Tenant" EntitySet="Tenants" />
-      <End Role="PrincipalTenant" EntitySet="PrincipalTenant" />
     </AssociationSet>
     <AssociationSet Name="FK_NavigationMenuNavigationMenu_NavigationMenu" Association="HorselessContentModel.Store.FK_NavigationMenuNavigationMenu_NavigationMenu">
       <End Role="NavigationMenu" EntitySet="NavigationMenus" />
@@ -353,14 +344,6 @@
     <Property Name="ContentCollections_Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="MimeContents_Id" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
-  <EntityType Name="PrincipalTenant">
-    <Key>
-      <PropertyRef Name="Principals_Id" />
-      <PropertyRef Name="Tenants_Id" />
-    </Key>
-    <Property Name="Principals_Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Tenants_Id" Type="uniqueidentifier" Nullable="false" />
-  </EntityType>
   <EntityType Name="NavigationMenuNavigationMenu">
     <Key>
       <PropertyRef Name="Children_Id" />
@@ -490,30 +473,6 @@
       </Principal>
       <Dependent Role="ContentCollectionMimeContent">
         <PropertyRef Name="MimeContents_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PrincipalTenant_Principal">
-    <End Role="Principal" Type="HorselessContentModel.Store.Principals" Multiplicity="1" />
-    <End Role="PrincipalTenant" Type="HorselessContentModel.Store.PrincipalTenant" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Principal">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PrincipalTenant">
-        <PropertyRef Name="Principals_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PrincipalTenant_Tenant">
-    <End Role="PrincipalTenant" Type="HorselessContentModel.Store.PrincipalTenant" Multiplicity="*" />
-    <End Role="Tenant" Type="HorselessContentModel.Store.Tenants" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Tenant">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PrincipalTenant">
-        <PropertyRef Name="Tenants_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -698,10 +657,6 @@
           <EntitySet Name="Holonyms" EntityType="HorselessContentModel.Holonym" />
           <EntitySet Name="Meronyms" EntityType="HorselessContentModel.Meronym" />
           <EntitySet Name="Principals" EntityType="HorselessContentModel.Principal" />
-          <AssociationSet Name="PrincipalTenant" Association="HorselessContentModel.PrincipalTenant">
-            <End Role="Principal" EntitySet="Principals" />
-            <End Role="Tenant" EntitySet="Tenants" />
-          </AssociationSet>
           <EntitySet Name="NugetPackages" EntityType="HorselessContentModel.NugetPackage" />
           <EntitySet Name="AccessControlEntries" EntityType="HorselessContentModel.AccessControlEntry" />
           <EntitySet Name="HorselessSessions" EntityType="HorselessContentModel.HorselessSession" />
@@ -760,7 +715,6 @@
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="ContentCollections" Relationship="HorselessContentModel.TenantContentCollection" FromRole="Tenant" ToRole="ContentCollection" />
-          <NavigationProperty Name="Principals" Relationship="HorselessContentModel.PrincipalTenant" FromRole="Tenant" ToRole="Principal" />
         </EntityType>
         <EntityType Name="MIMEType">
           <Key>
@@ -937,12 +891,7 @@
           <Property Name="Iss" Type="String" Nullable="true" />
           <Property Name="Aud" Type="String" Nullable="true" />
           <Property Name="Sub" Type="String" Nullable="true" />
-          <NavigationProperty Name="Tenants" Relationship="HorselessContentModel.PrincipalTenant" FromRole="Principal" ToRole="Tenant" />
         </EntityType>
-        <Association Name="PrincipalTenant">
-          <End Type="HorselessContentModel.Principal" Role="Principal" Multiplicity="*" />
-          <End Type="HorselessContentModel.Tenant" Role="Tenant" Multiplicity="*" />
-        </Association>
         <EntityType Name="NugetPackage">
           <Key>
             <PropertyRef Name="Id" />
@@ -1325,14 +1274,6 @@
       </EndProperty>
       <EndProperty Name="MimeContent">
         <ScalarProperty Name="Id" ColumnName="MimeContents_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="PrincipalTenant" TypeName="HorselessContentModel.PrincipalTenant" StoreEntitySet="PrincipalTenant">
-      <EndProperty Name="Principal">
-        <ScalarProperty Name="Id" ColumnName="Principals_Id" />
-      </EndProperty>
-      <EndProperty Name="Tenant">
-        <ScalarProperty Name="Id" ColumnName="Tenants_Id" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="NavigationMenuNavigationMenu" TypeName="HorselessContentModel.NavigationMenuNavigationMenu" StoreEntitySet="NavigationMenuNavigationMenu">

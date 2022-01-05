@@ -1,10 +1,12 @@
 ﻿using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Extensions.Configuration;
 using System.Reflection.Emit;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using TheHorselessNewspaper.Schemas.HostingModel.Entities;
+
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 {
@@ -71,16 +73,13 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             // Configure all entity types marked with the [MultiTenant] data attribute
             builder.ConfigureMultiTenant();
 
-            // Configure an entity type to be multitenant.
-            builder.Entity<Finbuckle.MultiTenant.TenantInfo>().IsMultiTenant();
-
-            base.OnModelCreating(builder);
+   
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // Use the connection string to connect to the per-tenant database.
-            optionsBuilder.UseSqlServer(TenantInfo.ConnectionString == String.Empty ? this._configuration["ContentModelConnection"] : TenantInfo.ConnectionString);
+
+
 
         }
     }

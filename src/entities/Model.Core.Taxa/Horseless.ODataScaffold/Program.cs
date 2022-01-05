@@ -75,9 +75,9 @@ builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
 
 builder.Services.AddHorselessNewspaper(builder.Configuration);
 
-// globally enables mssql server
-builder.Services.UseHorselessContentModelMSSqlServer(builder.Configuration);
-builder.Services.UseHorselessHostingModelMSSqlServer(builder.Configuration);
+
+builder.Services.UseHorselessContentModelMSSqlServer(builder.Configuration, builder.Configuration.GetConnectionString("ContentModelConnection"));
+builder.Services.UseHorselessHostingModelMSSqlServer(builder.Configuration, builder.Configuration.GetConnectionString("HostingModelConnection"));
 
 // as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/docs/keycloak.md
 builder.Services.AddHorselessKeycloakAuth(builder, keycloakOpts =>

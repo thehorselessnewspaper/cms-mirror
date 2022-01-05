@@ -2,6 +2,9 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
@@ -14,20 +17,30 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             ParentNavigationMenus = new HashSet<NavigationMenu>();
         }
 
+        [Key]
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
+        [Column(TypeName = "datetime")]
         public DateTime CreatedAt { get; set; }
+        [Column(TypeName = "datetime")]
         public DateTime? PublishAt { get; set; }
+        [Column(TypeName = "datetime")]
         public DateTime? UnPublishAt { get; set; }
         public bool? IsPublished { get; set; }
         public string MenuItemLabel { get; set; }
         public string MenuItemDescription { get; set; }
         public string MenuItemAltText { get; set; }
 
+        [ForeignKey("ParentNavigationItems_Id")]
+        [InverseProperty(nameof(NavigationMenuItem.ParentNavigationItems))]
         public virtual ICollection<NavigationMenuItem> ChildNavigationItems { get; set; }
+        [ForeignKey("ChildNavigationItems_Id")]
+        [InverseProperty(nameof(NavigationMenuItem.ChildNavigationItems))]
         public virtual ICollection<NavigationMenuItem> ParentNavigationItems { get; set; }
+        [ForeignKey("ChildNavigationMenuItems_Id")]
+        [InverseProperty(nameof(NavigationMenu.ChildNavigationMenuItems))]
         public virtual ICollection<NavigationMenu> ParentNavigationMenus { get; set; }
     }
 }

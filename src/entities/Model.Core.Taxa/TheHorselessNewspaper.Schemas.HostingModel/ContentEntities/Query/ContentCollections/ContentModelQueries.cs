@@ -30,7 +30,9 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 var providerName = ((DbContext)ctx).Database.ProviderName;
                 _logger.LogDebug($"content collections context using provider named {providerName}");
             }
-            catch (Exception e) { }
+            catch (Exception e) {
+                _logger.LogError($"problem initializing ContentModelQueries {e.Message}");
+            }
         }
 
         public async Task<T> Create(T entity)
@@ -38,8 +40,15 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             _logger.LogDebug($"handling Create request");
             var dbSet = ((DbContext)_context).Set<T>();
 
-            var addResult = await dbSet.AddAsync(entity);
-            var saveResult = await((DbContext)_context).SaveChangesAsync();
+            try
+            {
+                var addResult = await dbSet.AddAsync(entity);
+                var saveResult = await ((DbContext)_context).SaveChangesAsync();
+            }
+            catch(Exception e)
+            {
+                return await Task.FromException<T>(e);
+            }
 
             return await Task.FromResult<T>(entity);
         }
