@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    [Index(nameof(Principal_Id), Name = "IX_FK_PrincipalHorselessClaimsPrincipal")]
     [Index(nameof(TenantId), Name = "IX_FK_TenantHorselessClaimsPrincipal")]
     public partial class HorselessClaimsPrincipal
     {
@@ -24,7 +23,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string Aud { get; set; }
         public string Sub { get; set; }
         public Guid? TenantId { get; set; }
-        public Guid? Principal_Id { get; set; }
 
         [ForeignKey(nameof(TenantId))]
         [InverseProperty("HorselessClaimsPrincipals")]

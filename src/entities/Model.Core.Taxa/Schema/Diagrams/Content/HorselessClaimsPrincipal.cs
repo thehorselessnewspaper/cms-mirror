@@ -25,6 +25,5 @@ namespace Schema.Diagrams.Content
         public Nullable<System.Guid> TenantId { get; set; }
     
         public virtual Tenant Tenant { get; set; }
-        public virtual Principal Principal { get; set; }
     }
 }

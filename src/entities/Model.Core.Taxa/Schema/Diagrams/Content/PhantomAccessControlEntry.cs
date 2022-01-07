@@ -12,7 +12,7 @@ namespace Schema.Diagrams.Content
     using System;
     using System.Collections.Generic;
     
-    public partial class AccessControlEntry
+    public partial class PhantomAccessControlEntry
     {
         public System.Guid Id { get; set; }
         public string DisplayName { get; set; }

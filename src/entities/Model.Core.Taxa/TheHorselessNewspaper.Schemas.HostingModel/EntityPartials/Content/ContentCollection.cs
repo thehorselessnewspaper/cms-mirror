@@ -10,7 +10,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     public partial class ContentCollection : IContentRowLevelSecured
     {
 
-        public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
-        public ICollection<Principal> Owners { get; set; } =  new HashSet<Principal>();
+        public virtual ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
+        public virtual ICollection<Principal> Owners { get; set; } =  new HashSet<Principal>();
     }
 }

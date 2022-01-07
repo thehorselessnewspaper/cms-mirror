@@ -24,7 +24,12 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             // Configure an entity type to be multitenant.
             builder.Entity<Finbuckle.MultiTenant.TenantInfo>().IsMultiTenant();
 
-          
+            builder.Entity<ContentCollection>()
+                .OwnsMany<Principal>(m => m.Owners);
+            builder.Entity<ContentCollection>()
+                .OwnsMany<AccessControlEntry>(m => m.AccessControlList);
+
+
 
         }
 

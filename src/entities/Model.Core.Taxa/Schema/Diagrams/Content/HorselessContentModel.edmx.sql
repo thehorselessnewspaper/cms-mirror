@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/05/2022 16:48:01
+-- Date Created: 01/06/2022 19:25:30
 -- Generated from EDMX file: C:\src\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
@@ -74,6 +74,39 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PublicationContentCollection_ContentCollection]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PublicationContentCollection] DROP CONSTRAINT [FK_PublicationContentCollection_ContentCollection];
 GO
+IF OBJECT_ID(N'[dbo].[FK_TaxonTaxonomy_Taxon]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TaxonTaxonomy] DROP CONSTRAINT [FK_TaxonTaxonomy_Taxon];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TaxonTaxonomy_Taxonomy]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TaxonTaxonomy] DROP CONSTRAINT [FK_TaxonTaxonomy_Taxonomy];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TaxonTaxon_Taxon]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TaxonTaxon] DROP CONSTRAINT [FK_TaxonTaxon_Taxon];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TaxonTaxon_Taxon1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TaxonTaxon] DROP CONSTRAINT [FK_TaxonTaxon_Taxon1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TaxonHolonym_Taxon]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TaxonHolonym] DROP CONSTRAINT [FK_TaxonHolonym_Taxon];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TaxonHolonym_Holonym]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TaxonHolonym] DROP CONSTRAINT [FK_TaxonHolonym_Holonym];
+GO
+IF OBJECT_ID(N'[dbo].[FK_HolonymMeronym_Holonym]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HolonymMeronym] DROP CONSTRAINT [FK_HolonymMeronym_Holonym];
+GO
+IF OBJECT_ID(N'[dbo].[FK_HolonymMeronym_Meronym]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HolonymMeronym] DROP CONSTRAINT [FK_HolonymMeronym_Meronym];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TenantHorselessClaimsPrincipal]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HorselessClaimsPrincipals] DROP CONSTRAINT [FK_TenantHorselessClaimsPrincipal];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TaxonomyContentCollection_Taxonomy]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TaxonomyContentCollection] DROP CONSTRAINT [FK_TaxonomyContentCollection_Taxonomy];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TaxonomyContentCollection_ContentCollection]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TaxonomyContentCollection] DROP CONSTRAINT [FK_TaxonomyContentCollection_ContentCollection];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -112,14 +145,14 @@ GO
 IF OBJECT_ID(N'[dbo].[Meronyms]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Meronyms];
 GO
-IF OBJECT_ID(N'[dbo].[Principals]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Principals];
+IF OBJECT_ID(N'[dbo].[HorselessClaimsPrincipals]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[HorselessClaimsPrincipals];
 GO
 IF OBJECT_ID(N'[dbo].[NugetPackages]', 'U') IS NOT NULL
     DROP TABLE [dbo].[NugetPackages];
 GO
-IF OBJECT_ID(N'[dbo].[AccessControlEntries]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AccessControlEntries];
+IF OBJECT_ID(N'[dbo].[PhantomAccessControlEntries]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PhantomAccessControlEntries];
 GO
 IF OBJECT_ID(N'[dbo].[HorselessSessions]', 'U') IS NOT NULL
     DROP TABLE [dbo].[HorselessSessions];
@@ -129,6 +162,12 @@ IF OBJECT_ID(N'[dbo].[NavigationMenus]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[NavigationMenuItems]', 'U') IS NOT NULL
     DROP TABLE [dbo].[NavigationMenuItems];
+GO
+IF OBJECT_ID(N'[dbo].[Taxonomies]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Taxonomies];
+GO
+IF OBJECT_ID(N'[dbo].[PhantomPrincipals]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PhantomPrincipals];
 GO
 IF OBJECT_ID(N'[dbo].[TenantContentCollection]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TenantContentCollection];
@@ -153,6 +192,21 @@ IF OBJECT_ID(N'[dbo].[PublicationPublication]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[PublicationContentCollection]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PublicationContentCollection];
+GO
+IF OBJECT_ID(N'[dbo].[TaxonTaxonomy]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TaxonTaxonomy];
+GO
+IF OBJECT_ID(N'[dbo].[TaxonTaxon]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TaxonTaxon];
+GO
+IF OBJECT_ID(N'[dbo].[TaxonHolonym]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TaxonHolonym];
+GO
+IF OBJECT_ID(N'[dbo].[HolonymMeronym]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[HolonymMeronym];
+GO
+IF OBJECT_ID(N'[dbo].[TaxonomyContentCollection]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TaxonomyContentCollection];
 GO
 
 -- --------------------------------------------------
@@ -308,8 +362,7 @@ CREATE TABLE [dbo].[HorselessClaimsPrincipals] (
     [Iss] nvarchar(max)  NULL,
     [Aud] nvarchar(max)  NULL,
     [Sub] nvarchar(max)  NULL,
-    [TenantId] uniqueidentifier  NULL,
-    [Principal_Id] uniqueidentifier  NULL
+    [TenantId] uniqueidentifier  NULL
 );
 GO
 
@@ -330,8 +383,8 @@ CREATE TABLE [dbo].[NugetPackages] (
 );
 GO
 
--- Creating table 'AccessControlEntries'
-CREATE TABLE [dbo].[AccessControlEntries] (
+-- Creating table 'PhantomAccessControlEntries'
+CREATE TABLE [dbo].[PhantomAccessControlEntries] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NOT NULL,
@@ -400,8 +453,8 @@ CREATE TABLE [dbo].[Taxonomies] (
 );
 GO
 
--- Creating table 'Principals'
-CREATE TABLE [dbo].[Principals] (
+-- Creating table 'PhantomPrincipals'
+CREATE TABLE [dbo].[PhantomPrincipals] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NOT NULL,
@@ -586,9 +639,9 @@ ADD CONSTRAINT [PK_NugetPackages]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'AccessControlEntries'
-ALTER TABLE [dbo].[AccessControlEntries]
-ADD CONSTRAINT [PK_AccessControlEntries]
+-- Creating primary key on [Id] in table 'PhantomAccessControlEntries'
+ALTER TABLE [dbo].[PhantomAccessControlEntries]
+ADD CONSTRAINT [PK_PhantomAccessControlEntries]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -616,9 +669,9 @@ ADD CONSTRAINT [PK_Taxonomies]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Principals'
-ALTER TABLE [dbo].[Principals]
-ADD CONSTRAINT [PK_Principals]
+-- Creating primary key on [Id] in table 'PhantomPrincipals'
+ALTER TABLE [dbo].[PhantomPrincipals]
+ADD CONSTRAINT [PK_PhantomPrincipals]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -1050,21 +1103,6 @@ GO
 CREATE INDEX [IX_FK_TenantHorselessClaimsPrincipal]
 ON [dbo].[HorselessClaimsPrincipals]
     ([TenantId]);
-GO
-
--- Creating foreign key on [Principal_Id] in table 'HorselessClaimsPrincipals'
-ALTER TABLE [dbo].[HorselessClaimsPrincipals]
-ADD CONSTRAINT [FK_PrincipalHorselessClaimsPrincipal]
-    FOREIGN KEY ([Principal_Id])
-    REFERENCES [dbo].[Principals]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PrincipalHorselessClaimsPrincipal'
-CREATE INDEX [IX_FK_PrincipalHorselessClaimsPrincipal]
-ON [dbo].[HorselessClaimsPrincipals]
-    ([Principal_Id]);
 GO
 
 -- Creating foreign key on [Taxonomies_Id] in table 'TaxonomyContentCollection'

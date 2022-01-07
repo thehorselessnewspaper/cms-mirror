@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollections;
@@ -29,6 +30,13 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             }
             catch (Exception e) { }
         }
+
+        public async Task ResetDb()
+        {
+            var dbreset = await ((DbContext)_context).Database.EnsureDeletedAsync();
+            var dbSet = await ((DbContext)_context).Database.EnsureCreatedAsync();
+        }
+
 
         public async Task<T> Create(T entity)
         {
@@ -69,6 +77,11 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             var dbSet = ((DbContext)_context).Set<T>();
 
             return await Task.FromResult<IQueryable<T>>(dbSet.AsQueryable<T>());
+        }
+
+        public Task<IEnumerable<T>> Read(Expression<Func<T, bool>> query)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<T> Update(T entity)

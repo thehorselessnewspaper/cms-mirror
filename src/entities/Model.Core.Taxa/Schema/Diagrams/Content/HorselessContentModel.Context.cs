@@ -38,11 +38,11 @@ namespace Schema.Diagrams.Content
         public virtual DbSet<Meronym> Meronyms { get; set; }
         public virtual DbSet<HorselessClaimsPrincipal> HorselessClaimsPrincipals { get; set; }
         public virtual DbSet<NugetPackage> NugetPackages { get; set; }
-        public virtual DbSet<AccessControlEntry> AccessControlEntries { get; set; }
+        public virtual DbSet<PhantomAccessControlEntry> PhantomAccessControlEntries { get; set; }
         public virtual DbSet<HorselessSession> HorselessSessions { get; set; }
         public virtual DbSet<NavigationMenu> NavigationMenus { get; set; }
         public virtual DbSet<NavigationMenuItem> NavigationMenuItems { get; set; }
         public virtual DbSet<Taxonomy> Taxonomies { get; set; }
-        public virtual DbSet<Principal> Principals { get; set; }
+        public virtual DbSet<PhantomPrincipal> PhantomPrincipals { get; set; }
     }
 }

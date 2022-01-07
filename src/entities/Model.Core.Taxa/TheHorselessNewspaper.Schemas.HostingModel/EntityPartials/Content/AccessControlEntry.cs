@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
@@ -34,6 +35,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     /// to permit deny principals operations
     /// </summary>
     [Owned]
+   // [Table("PhantomAccessControlEntries")]
     public partial class AccessControlEntry
     {
 
@@ -46,8 +48,21 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         /// <summary>
         /// empty for EVERYONE is a valid non-intuitive state
         /// </summary>
-        public ICollection<Principal> CommonScopeSubjectPrincipals { get; set; }  = new  HashSet<Principal>();
+        // public ICollection<Principal> CommonScopeSubjectPrincipals { get; set; }  = new  HashSet<Principal>();
 
+    }
+
+    public partial class AccessControlEntry
+    {
+        [Key]
+        public Guid Id { get; set; }
+        public string DisplayName { get; set; }
+        [Required]
+        public string ObjectId { get; set; }
+        public bool? IsSoftDeleted { get; set; }
+        [Column(TypeName = "datetime")]
+        public DateTime? CreatedAt { get; set; }
+        public bool? IsActive { get; set; }
     }
 
 

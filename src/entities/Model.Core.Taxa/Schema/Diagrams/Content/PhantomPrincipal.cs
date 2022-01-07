@@ -12,7 +12,7 @@ namespace Schema.Diagrams.Content
     using System;
     using System.Collections.Generic;
     
-    public partial class Principal
+    public partial class PhantomPrincipal
     {
         public System.Guid Id { get; set; }
         public string DisplayName { get; set; }
@@ -22,7 +22,5 @@ namespace Schema.Diagrams.Content
         public string Iss { get; set; }
         public string Aud { get; set; }
         public string Sub { get; set; }
-    
-        public virtual HorselessClaimsPrincipal HorselessClaimsPrincipal { get; set; }
     }
 }

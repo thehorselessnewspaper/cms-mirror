@@ -44,9 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Diagrams\Content\AccessControlEntry.cs">
-      <DependentUpon>HorselessContentModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Diagrams\Content\ACEScope.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
@@ -107,10 +104,13 @@
     <Compile Include="Diagrams\Content\NugetPackage.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Diagrams\Content\Placeholder.cs">
+    <Compile Include="Diagrams\Content\PhantomAccessControlEntry.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Diagrams\Content\Principal.cs">
+    <Compile Include="Diagrams\Content\PhantomPrincipal.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\Placeholder.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Content\Publication.cs">
