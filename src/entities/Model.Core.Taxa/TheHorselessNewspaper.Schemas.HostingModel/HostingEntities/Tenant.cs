@@ -3,14 +3,15 @@
 using System;
 using System.Collections.Generic;
 
-namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
+namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
     public partial class Tenant
     {
         public Tenant()
         {
+            HorselessClaimsPrincipals = new HashSet<HorselessClaimsPrincipal>();
+            RoutingDiscriminators = new HashSet<RoutingDiscriminator>();
             TenantInfos = new HashSet<TenantInfo>();
-            Principals = new HashSet<Principal>();
         }
 
         public Guid Id { get; set; }
@@ -19,8 +20,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
         public bool? IsSoftDeleted { get; set; }
         public DateTime? CreatedAt { get; set; }
 
+        public virtual ICollection<HorselessClaimsPrincipal> HorselessClaimsPrincipals { get; set; }
+        public virtual ICollection<RoutingDiscriminator> RoutingDiscriminators { get; set; }
         public virtual ICollection<TenantInfo> TenantInfos { get; set; }
-
-        public virtual ICollection<Principal> Principals { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="004a630ba438496abab63777020bbddd" Name="Diagram1" ZoomLevel="98" >
+      <Diagram DiagramId="004a630ba438496abab63777020bbddd" Name="Diagram1" ZoomLevel="105" >
         <EntityTypeShape EntityType="HostingModel.Tenant" Width="2.875" PointX="8.25" PointY="1" />
         <EntityTypeShape EntityType="HostingModel.RoutingDiscriminator" Width="2.25" PointX="12.25" PointY="2.125" />
         <EntityTypeShape EntityType="HostingModel.Host" Width="2.875" PointX="12" PointY="5.875" />
@@ -19,10 +19,10 @@
         <AssociationConnector Association="HostingModel.TenantInfoWebAPITenantInfo" />
         <AssociationConnector Association="HostingModel.TenantInfoKeyCloakConfiguration" />
         <AssociationConnector Association="HostingModel.TenantTenantInfo" />
-        <EntityTypeShape EntityType="HostingModel.AccessControlEntry" Width="2.375" PointX="4.375" PointY="0.75" />
-        <EntityTypeShape EntityType="HostingModel.Principal" Width="2.625" PointX="8" PointY="5.5" />
-        <AssociationConnector Association="HostingModel.PrincipalTenant" />
         <EntityTypeShape EntityType="HostingModel.HorselessSession" Width="2.25" PointX="4.375" PointY="8.75" />
+        <AssociationConnector Association="HostingModel.TenantRoutingDiscriminator" />
+        <EntityTypeShape EntityType="HostingModel.HorselessClaimsPrincipal" Width="2.5" PointX="18" PointY="0.5" />
+        <AssociationConnector Association="HostingModel.HorselessClaimsPrincipalTenant" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

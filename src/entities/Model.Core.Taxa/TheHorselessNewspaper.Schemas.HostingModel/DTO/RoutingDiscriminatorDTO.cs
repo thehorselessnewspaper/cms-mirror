@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheHorselessNewspaper.Schemas.HostingModel.Entities;
-
-namespace TheHorselessNewspaper.Schemas.HostingModel.DTO
+﻿namespace TheHorselessNewspaper.Schemas.HostingModel.DTO
 {
     public partial class RoutingDiscriminatorDTO
     {
@@ -22,7 +15,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.DTO
         public string DisplayName { get; set; }
         public DateTime? CreatedAt { get; set; }
 
-        public virtual Tenant Tenant { get; set; }
+        public virtual TenantDTO Tenant { get; set; }
         public virtual ICollection<HostDTO> Hosts { get; set; }
         public virtual ICollection<UriPathDTO> UriPaths { get; set; }
     }

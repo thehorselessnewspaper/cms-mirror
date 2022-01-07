@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
+namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
     internal partial class THLNPHostingContext : DbContext
     {
@@ -18,13 +18,12 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
         {
         }
 
-        public virtual DbSet<AccessControlEntry> AccessControlEntries { get; set; }
         public virtual DbSet<FilesystemAssetLocation> FilesystemAssetLocations { get; set; }
+        public virtual DbSet<HorselessClaimsPrincipal> HorselessClaimsPrincipals { get; set; }
         public virtual DbSet<HorselessSession> HorselessSessions { get; set; }
         public virtual DbSet<Host> Hosts { get; set; }
         public virtual DbSet<KeyCloakConfiguration> KeyCloakConfigurations { get; set; }
         public virtual DbSet<NugetPackage> NugetPackages { get; set; }
-        public virtual DbSet<Principal> Principals { get; set; }
         public virtual DbSet<RoutingDiscriminator> RoutingDiscriminators { get; set; }
         public virtual DbSet<Tenant> Tenants { get; set; }
         public virtual DbSet<TenantInfo> TenantInfos { get; set; }
@@ -33,17 +32,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AccessControlEntry>(entity =>
-            {
-                entity.ToTable("AccessControlEntries", "HostingModel");
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.ObjectId).IsRequired();
-            });
-
             modelBuilder.Entity<FilesystemAssetLocation>(entity =>
             {
                 entity.ToTable("FilesystemAssetLocations", "HostingModel");
@@ -51,6 +39,24 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<HorselessClaimsPrincipal>(entity =>
+            {
+                entity.ToTable("HorselessClaimsPrincipals", "HostingModel");
+
+                entity.HasIndex(e => e.TenantId, "IX_FK_HorselessClaimsPrincipalTenant");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.ObjectId).IsRequired();
+
+                entity.HasOne(d => d.Tenant)
+                    .WithMany(p => p.HorselessClaimsPrincipals)
+                    .HasForeignKey(d => d.TenantId)
+                    .HasConstraintName("FK_HorselessClaimsPrincipalTenant");
             });
 
             modelBuilder.Entity<HorselessSession>(entity =>
@@ -107,41 +113,22 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<Principal>(entity =>
-            {
-                entity.ToTable("Principals", "HostingModel");
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.ObjectId).IsRequired();
-
-                entity.HasMany(d => d.Tenants)
-                    .WithMany(p => p.Principals)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "PrincipalTenant",
-                        l => l.HasOne<Tenant>().WithMany().HasForeignKey("Tenants_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalTenant_Tenant"),
-                        r => r.HasOne<Principal>().WithMany().HasForeignKey("Principals_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalTenant_Principal"),
-                        j =>
-                        {
-                            j.HasKey("Principals_Id", "Tenants_Id");
-
-                            j.ToTable("PrincipalTenant", "HostingModel");
-
-                            j.HasIndex(new[] { "Tenants_Id" }, "IX_FK_PrincipalTenant_Tenant");
-                        });
-            });
-
             modelBuilder.Entity<RoutingDiscriminator>(entity =>
             {
                 entity.ToTable("RoutingDiscriminators", "HostingModel");
 
+                entity.HasIndex(e => e.TenantId, "IX_FK_TenantRoutingDiscriminator");
+
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
                 entity.Property(e => e.ObjectId).IsRequired();
+
+                entity.HasOne(d => d.Tenant)
+                    .WithMany(p => p.RoutingDiscriminators)
+                    .HasForeignKey(d => d.TenantId)
+                    .HasConstraintName("FK_TenantRoutingDiscriminator");
             });
 
             modelBuilder.Entity<Tenant>(entity =>

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TheHorselessNewspaper.Schemas.HostingModel.Entities;
 
 /// <summary>
 /// note this namespace corresponds with the partial class it implements, not this folder

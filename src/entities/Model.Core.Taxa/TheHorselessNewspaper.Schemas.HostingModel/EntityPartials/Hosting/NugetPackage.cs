@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
-namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
+namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
     public partial class NugetPackage : IHostingRowLevelSecured
     {

@@ -3,15 +3,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
+namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
-    public partial class Principal
+    public partial class HorselessClaimsPrincipal
     {
-        public Principal()
-        {
-            Tenants = new HashSet<Tenant>();
-        }
-
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
@@ -20,7 +15,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
         public string Iss { get; set; }
         public string Aud { get; set; }
         public string Sub { get; set; }
+        public Guid? TenantId { get; set; }
 
-        public virtual ICollection<Tenant> Tenants { get; set; }
+        public virtual Tenant Tenant { get; set; }
     }
 }

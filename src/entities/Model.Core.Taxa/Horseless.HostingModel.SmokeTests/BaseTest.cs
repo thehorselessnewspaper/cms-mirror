@@ -9,9 +9,12 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using TheHorselessNewspaper.HostingModel.Context;
+using TheHorselessNewspaper.HostingModel.Entities.Query;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
 namespace Horseless.HostingModel.SmokeTests
 {
@@ -60,8 +63,11 @@ namespace Horseless.HostingModel.SmokeTests
             builder.Services.UseHorselessHostingModelMSSqlServer(builder.Configuration, builder.Configuration.GetConnectionString("HostingModelConnection"));
 
             app = builder.Build();
-            var theOperator = GetIQueryableContentModelOperator<IQueryableContentModelOperator<ContentModel.ContentCollection>>();
-            await theOperator.ResetDb();
+            var theContentOperator = GetIQueryableContentModelOperator<IQueryableContentModelOperator<ContentModel.ContentCollection>>();
+            await theContentOperator.ResetDb();
+
+            var theHostingOperator = GetIQueryableContentModelOperator<IQueryableHostingModelOperator< HostingEntities.Host>>();
+            await theHostingOperator.ResetDb();
             int i = 0;
         }
 
@@ -79,6 +85,12 @@ namespace Horseless.HostingModel.SmokeTests
             return queryProvider;
         }
 
+        protected T GetIQueryableHostingModelOperator<T>() where T : notnull
+        {
+            var queryProvider = app.Services.GetRequiredService<T>();
+            return queryProvider;
+        }
+
         [Test]
         protected async Task PasseslsObjectIdConstraint()
         {
@@ -91,6 +103,13 @@ namespace Horseless.HostingModel.SmokeTests
         protected async Task<T> CreateEntity<T>(T entity) where T : class, IContentRowLevelSecured
         {
             var queryProvider = this.GetIQueryableContentModelOperator<IQueryableContentModelOperator<T>>();
+            var result = await queryProvider.Create(entity);
+            return result;
+        }
+
+        protected async Task<T> CreateHostingEntity<T>(T entity) where T : class, IHostingRowLevelSecured
+        {
+            var queryProvider = this.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<T>>();
             var result = await queryProvider.Create(entity);
             return result;
         }

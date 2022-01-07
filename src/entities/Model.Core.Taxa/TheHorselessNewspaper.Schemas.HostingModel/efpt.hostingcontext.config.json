@@ -7,18 +7,18 @@
    "IncludeConnectionString": false,
    "ModelNamespace": null,
    "OutputContextPath": null,
-   "OutputPath": "Entities",
+   "OutputPath": "HostingEntities",
    "ProjectRootNamespace": "TheHorselessNewspaper.Schemas.HostingModel",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 0,
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
-         "Name": "[HostingModel].[AccessControlEntries]",
+         "Name": "[HostingModel].[FilesystemAssetLocations]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[FilesystemAssetLocations]",
+         "Name": "[HostingModel].[HorselessClaimsPrincipals]",
          "ObjectType": 0
       },
       {
@@ -35,14 +35,6 @@
       },
       {
          "Name": "[HostingModel].[NugetPackages]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[HostingModel].[Principals]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[HostingModel].[PrincipalTenant]",
          "ObjectType": 0
       },
       {

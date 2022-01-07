@@ -17,7 +17,8 @@ namespace Schema.Diagrams.Hosting
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tenant()
         {
-            this.Principals = new HashSet<Principal>();
+            this.RoutingDiscriminators = new HashSet<RoutingDiscriminator>();
+            this.HorselessClaimsPrincipals = new HashSet<HorselessClaimsPrincipal>();
         }
     
         public System.Guid Id { get; set; }
@@ -28,6 +29,8 @@ namespace Schema.Diagrams.Hosting
     
         public virtual TenantInfo TenantInfo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Principal> Principals { get; set; }
+        public virtual ICollection<RoutingDiscriminator> RoutingDiscriminators { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HorselessClaimsPrincipal> HorselessClaimsPrincipals { get; set; }
     }
 }

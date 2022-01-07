@@ -221,10 +221,10 @@
     <Compile Include="Diagrams\FirstCut\WorkflowActionParameter.cs">
       <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
     </Compile>
-    <Compile Include="Diagrams\Hosting\AccessControlEntry.cs">
+    <Compile Include="Diagrams\Hosting\FilesystemAssetLocation.cs">
       <DependentUpon>HostingModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Diagrams\Hosting\FilesystemAssetLocation.cs">
+    <Compile Include="Diagrams\Hosting\HorselessClaimsPrincipal.cs">
       <DependentUpon>HostingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Hosting\HorselessSession.cs">
@@ -252,9 +252,6 @@
       <DependentUpon>HostingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Hosting\NugetPackage.cs">
-      <DependentUpon>HostingModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Diagrams\Hosting\Principal.cs">
       <DependentUpon>HostingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Hosting\RoutingDiscriminator.cs">

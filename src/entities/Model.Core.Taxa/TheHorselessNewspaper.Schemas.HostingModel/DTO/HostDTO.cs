@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheHorselessNewspaper.Schemas.HostingModel.Entities;
-
-namespace TheHorselessNewspaper.Schemas.HostingModel.DTO
+﻿namespace TheHorselessNewspaper.Schemas.HostingModel.DTO
 {
     public partial class HostDTO
     {

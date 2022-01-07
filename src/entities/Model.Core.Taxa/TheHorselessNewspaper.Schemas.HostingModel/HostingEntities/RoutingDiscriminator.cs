@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
+namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
     public partial class RoutingDiscriminator
     {
@@ -18,7 +18,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
         public string ObjectId { get; set; }
         public string DisplayName { get; set; }
         public DateTime? CreatedAt { get; set; }
+        public Guid? TenantId { get; set; }
 
+        public virtual Tenant Tenant { get; set; }
         public virtual ICollection<Host> Hosts { get; set; }
         public virtual ICollection<UriPath> UriPaths { get; set; }
     }

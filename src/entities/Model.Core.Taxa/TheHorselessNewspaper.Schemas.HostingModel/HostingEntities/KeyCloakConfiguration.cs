@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
+namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
     public partial class KeyCloakConfiguration
     {

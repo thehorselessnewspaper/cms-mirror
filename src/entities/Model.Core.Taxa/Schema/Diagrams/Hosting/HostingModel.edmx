@@ -15,10 +15,8 @@
     <EntitySet Name="KeyCloakConfigurations" EntityType="HostingModel.Store.KeyCloakConfigurations" store:Type="Tables" Schema="HostingModel" />
     <EntitySet Name="TenantInfos" EntityType="HostingModel.Store.TenantInfos" store:Type="Tables" Schema="HostingModel" />
     <EntitySet Name="WebAPITenantInfos" EntityType="HostingModel.Store.WebAPITenantInfos" store:Type="Tables" Schema="HostingModel" />
-    <EntitySet Name="AccessControlEntries" EntityType="HostingModel.Store.AccessControlEntries" store:Type="Tables" Schema="HostingModel" />
-    <EntitySet Name="Principals" EntityType="HostingModel.Store.Principals" store:Type="Tables" Schema="HostingModel" />
     <EntitySet Name="HorselessSessions" EntityType="HostingModel.Store.HorselessSessions" store:Type="Tables" Schema="HostingModel" />
-    <EntitySet Name="PrincipalTenant" EntityType="HostingModel.Store.PrincipalTenant" store:Type="Tables" Schema="HostingModel" />
+    <EntitySet Name="HorselessClaimsPrincipals" EntityType="HostingModel.Store.HorselessClaimsPrincipals" store:Type="Tables" Schema="HostingModel" />
     <AssociationSet Name="RoutingDiscriminatorHost" Association="HostingModel.Store.RoutingDiscriminatorHost">
       <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
       <End Role="Host" EntitySet="Hosts" />
@@ -39,13 +37,13 @@
       <End Role="Tenant" EntitySet="Tenants" />
       <End Role="TenantInfo" EntitySet="TenantInfos" />
     </AssociationSet>
-    <AssociationSet Name="FK_PrincipalTenant_Principal" Association="HostingModel.Store.FK_PrincipalTenant_Principal">
-      <End Role="Principal" EntitySet="Principals" />
-      <End Role="PrincipalTenant" EntitySet="PrincipalTenant" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PrincipalTenant_Tenant" Association="HostingModel.Store.FK_PrincipalTenant_Tenant">
+    <AssociationSet Name="TenantRoutingDiscriminator" Association="HostingModel.Store.TenantRoutingDiscriminator">
       <End Role="Tenant" EntitySet="Tenants" />
-      <End Role="PrincipalTenant" EntitySet="PrincipalTenant" />
+      <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
+    </AssociationSet>
+    <AssociationSet Name="HorselessClaimsPrincipalTenant" Association="HostingModel.Store.HorselessClaimsPrincipalTenant">
+      <End Role="HorselessClaimsPrincipal" EntitySet="HorselessClaimsPrincipals" />
+      <End Role="Tenant" EntitySet="Tenants" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Tenants">
@@ -67,6 +65,7 @@
     <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="TenantId" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <EntityType Name="Hosts">
     <Key>
@@ -163,30 +162,6 @@
     <Property Name="WebAPIBaseUrl" Type="nvarchar(max)" Nullable="true" />
     <Property Name="TenantInfoId" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
-  <EntityType Name="AccessControlEntries">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
-    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
-    <Property Name="IsActive" Type="bit" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Principals">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
-    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
-    <Property Name="Iss" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Aud" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Sub" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
   <EntityType Name="HorselessSessions">
     <Key>
       <PropertyRef Name="Id" />
@@ -202,13 +177,19 @@
     <Property Name="Sub" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsAnonymous" Type="bit" Nullable="true" />
   </EntityType>
-  <EntityType Name="PrincipalTenant">
+  <EntityType Name="HorselessClaimsPrincipals">
     <Key>
-      <PropertyRef Name="Principals_Id" />
-      <PropertyRef Name="Tenants_Id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Principals_Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Tenants_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="Iss" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Aud" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Sub" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="TenantId" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <Association Name="RoutingDiscriminatorHost">
     <End Role="RoutingDiscriminator" Type="HostingModel.Store.RoutingDiscriminators" Multiplicity="0..1" />
@@ -270,27 +251,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PrincipalTenant_Principal">
-    <End Role="Principal" Type="HostingModel.Store.Principals" Multiplicity="1" />
-    <End Role="PrincipalTenant" Type="HostingModel.Store.PrincipalTenant" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Principal">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PrincipalTenant">
-        <PropertyRef Name="Principals_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PrincipalTenant_Tenant">
-    <End Role="PrincipalTenant" Type="HostingModel.Store.PrincipalTenant" Multiplicity="*" />
-    <End Role="Tenant" Type="HostingModel.Store.Tenants" Multiplicity="1" />
+  <Association Name="TenantRoutingDiscriminator">
+    <End Role="Tenant" Type="HostingModel.Store.Tenants" Multiplicity="0..1" />
+    <End Role="RoutingDiscriminator" Type="HostingModel.Store.RoutingDiscriminators" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Tenant">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="PrincipalTenant">
-        <PropertyRef Name="Tenants_Id" />
+      <Dependent Role="RoutingDiscriminator">
+        <PropertyRef Name="TenantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HorselessClaimsPrincipalTenant">
+    <End Role="HorselessClaimsPrincipal" Type="HostingModel.Store.HorselessClaimsPrincipals" Multiplicity="*" />
+    <End Role="Tenant" Type="HostingModel.Store.Tenants" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Tenant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HorselessClaimsPrincipal">
+        <PropertyRef Name="TenantId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -328,13 +309,16 @@
             <End Role="Tenant" EntitySet="Tenants" />
             <End Role="TenantInfo" EntitySet="TenantInfos" />
           </AssociationSet>
-          <EntitySet Name="AccessControlEntries" EntityType="HostingModel.AccessControlEntry" />
-          <EntitySet Name="Principals" EntityType="HostingModel.Principal" />
-          <AssociationSet Name="PrincipalTenant" Association="HostingModel.PrincipalTenant">
-            <End Role="Principal" EntitySet="Principals" />
+          <EntitySet Name="HorselessSessions" EntityType="HostingModel.HorselessSession" />
+          <AssociationSet Name="TenantRoutingDiscriminator" Association="HostingModel.TenantRoutingDiscriminator">
+            <End Role="Tenant" EntitySet="Tenants" />
+            <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
+          </AssociationSet>
+          <EntitySet Name="HorselessClaimsPrincipals" EntityType="HostingModel.HorselessClaimsPrincipal" />
+          <AssociationSet Name="HorselessClaimsPrincipalTenant" Association="HostingModel.HorselessClaimsPrincipalTenant">
+            <End Role="HorselessClaimsPrincipal" EntitySet="HorselessClaimsPrincipals" />
             <End Role="Tenant" EntitySet="Tenants" />
           </AssociationSet>
-          <EntitySet Name="HorselessSessions" EntityType="HostingModel.HorselessSession" />
         </EntityContainer>
         <EntityType Name="Tenant">
           <Key>
@@ -346,7 +330,8 @@
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="TenantInfo" Relationship="HostingModel.TenantTenantInfo" FromRole="Tenant" ToRole="TenantInfo" />
-          <NavigationProperty Name="Principals" Relationship="HostingModel.PrincipalTenant" FromRole="Tenant" ToRole="Principal" />
+          <NavigationProperty Name="RoutingDiscriminators" Relationship="HostingModel.TenantRoutingDiscriminator" FromRole="Tenant" ToRole="RoutingDiscriminator" />
+          <NavigationProperty Name="HorselessClaimsPrincipals" Relationship="HostingModel.HorselessClaimsPrincipalTenant" FromRole="Tenant" ToRole="HorselessClaimsPrincipal" />
         </EntityType>
         <EntityType Name="RoutingDiscriminator">
           <Key>
@@ -359,6 +344,8 @@
           <Property Name="ObjectId" Type="String" Nullable="false" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="Tenant" Relationship="HostingModel.TenantRoutingDiscriminator" FromRole="RoutingDiscriminator" ToRole="Tenant" />
+          <Property Name="TenantId" Type="Guid" Nullable="true" />
         </EntityType>
         <EntityType Name="Host">
           <Key>
@@ -516,35 +503,6 @@
           <End Type="HostingModel.Tenant" Role="Tenant" Multiplicity="0..1" />
           <End Type="HostingModel.TenantInfo" Role="TenantInfo" Multiplicity="0..1" />
         </Association>
-        <EntityType Name="AccessControlEntry">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
-          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
-          <Property Name="IsActive" Type="Boolean" Nullable="true" />
-        </EntityType>
-        <EntityType Name="Principal">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
-          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
-          <Property Name="Iss" Type="String" Nullable="true" />
-          <Property Name="Aud" Type="String" Nullable="true" />
-          <Property Name="Sub" Type="String" Nullable="true" />
-          <NavigationProperty Name="Tenants" Relationship="HostingModel.PrincipalTenant" FromRole="Principal" ToRole="Tenant" />
-        </EntityType>
-        <Association Name="PrincipalTenant">
-          <End Type="HostingModel.Principal" Role="Principal" Multiplicity="*" />
-          <End Type="HostingModel.Tenant" Role="Tenant" Multiplicity="*" />
-        </Association>
         <EntityType Name="HorselessSession">
           <Key>
             <PropertyRef Name="Id" />
@@ -560,6 +518,45 @@
           <Property Name="Sub" Type="String" Nullable="true" />
           <Property Name="IsAnonymous" Type="Boolean" Nullable="true" />
         </EntityType>
+        <Association Name="TenantRoutingDiscriminator">
+          <End Type="HostingModel.Tenant" Role="Tenant" Multiplicity="0..1" />
+          <End Type="HostingModel.RoutingDiscriminator" Role="RoutingDiscriminator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tenant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoutingDiscriminator">
+              <PropertyRef Name="TenantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HorselessClaimsPrincipal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <Property Name="Iss" Type="String" Nullable="true" />
+          <Property Name="Aud" Type="String" Nullable="true" />
+          <Property Name="Sub" Type="String" Nullable="true" />
+          <NavigationProperty Name="Tenant" Relationship="HostingModel.HorselessClaimsPrincipalTenant" FromRole="HorselessClaimsPrincipal" ToRole="Tenant" />
+          <Property Name="TenantId" Type="Guid" Nullable="true" />
+        </EntityType>
+        <Association Name="HorselessClaimsPrincipalTenant">
+          <End Type="HostingModel.HorselessClaimsPrincipal" Role="HorselessClaimsPrincipal" Multiplicity="*" />
+          <End Type="HostingModel.Tenant" Role="Tenant" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Tenant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HorselessClaimsPrincipal">
+              <PropertyRef Name="TenantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -585,6 +582,7 @@
           <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="TenantId" ColumnName="TenantId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -689,32 +687,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="AccessControlEntries">
-      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.AccessControlEntry)">
-        <MappingFragment StoreEntitySet="AccessControlEntries">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
-          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
-          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Principals">
-      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.Principal)">
-        <MappingFragment StoreEntitySet="Principals">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
-          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
-          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-          <ScalarProperty Name="Iss" ColumnName="Iss" />
-          <ScalarProperty Name="Aud" ColumnName="Aud" />
-          <ScalarProperty Name="Sub" ColumnName="Sub" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="HorselessSessions">
       <EntityTypeMapping TypeName="IsTypeOf(HostingModel.HorselessSession)">
         <MappingFragment StoreEntitySet="HorselessSessions">
@@ -731,6 +703,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="HorselessClaimsPrincipals">
+      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.HorselessClaimsPrincipal)">
+        <MappingFragment StoreEntitySet="HorselessClaimsPrincipals">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="Iss" ColumnName="Iss" />
+          <ScalarProperty Name="Aud" ColumnName="Aud" />
+          <ScalarProperty Name="Sub" ColumnName="Sub" />
+          <ScalarProperty Name="TenantId" ColumnName="TenantId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="TenantTenantInfo" TypeName="HostingModel.TenantTenantInfo" StoreEntitySet="TenantInfos">
       <EndProperty Name="Tenant">
         <ScalarProperty Name="Id" ColumnName="Tenant_Id" />
@@ -739,14 +726,6 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
       <Condition ColumnName="Tenant_Id" IsNull="false" />
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="PrincipalTenant" TypeName="HostingModel.PrincipalTenant" StoreEntitySet="PrincipalTenant">
-      <EndProperty Name="Principal">
-        <ScalarProperty Name="Id" ColumnName="Principals_Id" />
-      </EndProperty>
-      <EndProperty Name="Tenant">
-        <ScalarProperty Name="Id" ColumnName="Tenants_Id" />
-      </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>

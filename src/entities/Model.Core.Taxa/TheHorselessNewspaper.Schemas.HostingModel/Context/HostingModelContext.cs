@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 /// <summary>
 /// note this namespace corresponds with the partial class it implements, not this folder
 /// </summary>
-namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
+namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
     /// <summary>
     /// as per 
@@ -21,10 +21,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Entities
     internal partial class THLNPHostingContext : DbContext
     {
 
-
-        protected THLNPHostingContext(DbContextOptions options)
-            : base(options)
+        protected THLNPHostingContext(DbContextOptions options, Finbuckle.MultiTenant.TenantInfo tenant)
+        : base(options)
         {
+
         }
+
     }
 }

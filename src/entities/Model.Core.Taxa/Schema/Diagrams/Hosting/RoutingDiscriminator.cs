@@ -26,10 +26,12 @@ namespace Schema.Diagrams.Hosting
         public string ObjectId { get; set; }
         public string DisplayName { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.Guid> TenantId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Host> Hosts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UriPath> UriPaths { get; set; }
+        public virtual Tenant Tenant { get; set; }
     }
 }
