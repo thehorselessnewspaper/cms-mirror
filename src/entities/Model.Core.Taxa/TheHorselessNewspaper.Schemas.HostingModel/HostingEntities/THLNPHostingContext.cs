@@ -16,7 +16,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public THLNPHostingContext(DbContextOptions<THLNPHostingContext> options)
             : base(options)
         {
-
         }
 
         public virtual DbSet<FilesystemAssetLocation> FilesystemAssetLocations { get; set; }
@@ -35,8 +34,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         {
             modelBuilder.Entity<FilesystemAssetLocation>(entity =>
             {
-                entity.ToTable("FilesystemAssetLocations", "HostingModel");
-
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
@@ -44,8 +41,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
             modelBuilder.Entity<HorselessClaimsPrincipal>(entity =>
             {
-                entity.ToTable("HorselessClaimsPrincipals", "HostingModel");
-
                 entity.HasIndex(e => e.TenantId, "IX_FK_HorselessClaimsPrincipalTenant");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
@@ -62,8 +57,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
             modelBuilder.Entity<HorselessSession>(entity =>
             {
-                entity.ToTable("HorselessSessions", "HostingModel");
-
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
@@ -73,8 +66,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
             modelBuilder.Entity<Host>(entity =>
             {
-                entity.ToTable("Hosts", "HostingModel");
-
                 entity.HasIndex(e => e.RoutingDiscriminatorId, "IX_FK_RoutingDiscriminatorHost");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
@@ -89,8 +80,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
             modelBuilder.Entity<KeyCloakConfiguration>(entity =>
             {
-                entity.ToTable("KeyCloakConfigurations", "HostingModel");
-
                 entity.HasIndex(e => e.TenantInfoId, "IX_FK_TenantInfoKeyCloakConfiguration");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
@@ -107,8 +96,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
             modelBuilder.Entity<NugetPackage>(entity =>
             {
-                entity.ToTable("NugetPackages", "HostingModel");
-
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
@@ -116,8 +103,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
             modelBuilder.Entity<RoutingDiscriminator>(entity =>
             {
-                entity.ToTable("RoutingDiscriminators", "HostingModel");
-
                 entity.HasIndex(e => e.TenantId, "IX_FK_TenantRoutingDiscriminator");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
@@ -134,8 +119,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
             modelBuilder.Entity<Tenant>(entity =>
             {
-                entity.ToTable("Tenants", "HostingModel");
-
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
@@ -145,8 +128,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
             modelBuilder.Entity<TenantInfo>(entity =>
             {
-                entity.ToTable("TenantInfos", "HostingModel");
-
                 entity.HasIndex(e => e.Tenant_Id, "IX_FK_TenantTenantInfo");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
@@ -163,8 +144,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
             modelBuilder.Entity<UriPath>(entity =>
             {
-                entity.ToTable("UriPaths", "HostingModel");
-
                 entity.HasIndex(e => e.RoutingDiscriminatorId, "IX_FK_RoutingDiscriminatorUriPath");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
@@ -180,8 +159,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
             modelBuilder.Entity<WebAPITenantInfo>(entity =>
             {
-                entity.ToTable("WebAPITenantInfos", "HostingModel");
-
                 entity.HasIndex(e => e.TenantInfoId, "IX_FK_TenantInfoWebAPITenantInfo");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();

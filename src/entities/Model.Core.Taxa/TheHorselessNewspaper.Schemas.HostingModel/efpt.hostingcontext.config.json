@@ -14,47 +14,47 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
-         "Name": "[HostingModel].[FilesystemAssetLocations]",
+         "Name": "[dbo].[FilesystemAssetLocations]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[HorselessClaimsPrincipals]",
+         "Name": "[dbo].[HorselessClaimsPrincipals]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[HorselessSessions]",
+         "Name": "[dbo].[HorselessSessions]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[Hosts]",
+         "Name": "[dbo].[Hosts]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[KeyCloakConfigurations]",
+         "Name": "[dbo].[KeyCloakConfigurations]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[NugetPackages]",
+         "Name": "[dbo].[NugetPackages]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[RoutingDiscriminators]",
+         "Name": "[dbo].[RoutingDiscriminators]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[TenantInfos]",
+         "Name": "[dbo].[TenantInfos]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[Tenants]",
+         "Name": "[dbo].[Tenants]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[UriPaths]",
+         "Name": "[dbo].[UriPaths]",
          "ObjectType": 0
       },
       {
-         "Name": "[HostingModel].[WebAPITenantInfos]",
+         "Name": "[dbo].[WebAPITenantInfos]",
          "ObjectType": 0
       }
    ],
