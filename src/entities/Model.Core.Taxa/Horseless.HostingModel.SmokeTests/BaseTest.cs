@@ -49,7 +49,7 @@ namespace Horseless.HostingModel.SmokeTests
 
             .WithInMemoryStore(options =>
                 {
-                    options.Tenants.Add(new TenantInfo()
+                    options.Tenants.Add(new Finbuckle.MultiTenant.TenantInfo()
                     {
                         ConnectionString = builder.Configuration.GetConnectionString("ContentModelConnection"),
                         Id = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",

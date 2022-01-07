@@ -55,7 +55,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-
+            base.OnConfiguring(optionsBuilder);
 
         }
     }

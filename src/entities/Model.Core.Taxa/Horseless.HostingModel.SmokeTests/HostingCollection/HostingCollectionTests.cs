@@ -19,6 +19,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
 
         private async Task CrudHostingCollection()
         {
+
             var tenant = new HostingEntities.Tenant()
             {
                 Id = Guid.NewGuid(),
@@ -68,7 +69,14 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                 }
             };
 
-            var newTenant = await CreateHostingEntity<HostingEntities.Tenant>(tenant);
+            try
+            {
+                var newTenant = await CreateHostingEntity<HostingEntities.Tenant>(tenant);
+            }
+            catch(Exception ex)
+            {
+                Assert.Fail($"exception under text {ex.Message}");
+            }
 
             await Task.FromResult(new List<HostingEntities.Host>());
         }

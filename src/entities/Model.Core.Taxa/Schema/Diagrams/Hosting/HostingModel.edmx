@@ -6,17 +6,17 @@
     <edmx:StorageModels>
     <Schema Namespace="HostingModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="HostingModelStoreContainer">
-    <EntitySet Name="Tenants" EntityType="HostingModel.Store.Tenants" store:Type="Tables" Schema="HostingModel" />
-    <EntitySet Name="RoutingDiscriminators" EntityType="HostingModel.Store.RoutingDiscriminators" store:Type="Tables" Schema="HostingModel" />
-    <EntitySet Name="Hosts" EntityType="HostingModel.Store.Hosts" store:Type="Tables" Schema="HostingModel" />
-    <EntitySet Name="UriPaths" EntityType="HostingModel.Store.UriPaths" store:Type="Tables" Schema="HostingModel" />
-    <EntitySet Name="NugetPackages" EntityType="HostingModel.Store.NugetPackages" store:Type="Tables" Schema="HostingModel" />
-    <EntitySet Name="FilesystemAssetLocations" EntityType="HostingModel.Store.FilesystemAssetLocations" store:Type="Tables" Schema="HostingModel" />
-    <EntitySet Name="KeyCloakConfigurations" EntityType="HostingModel.Store.KeyCloakConfigurations" store:Type="Tables" Schema="HostingModel" />
-    <EntitySet Name="TenantInfos" EntityType="HostingModel.Store.TenantInfos" store:Type="Tables" Schema="HostingModel" />
-    <EntitySet Name="WebAPITenantInfos" EntityType="HostingModel.Store.WebAPITenantInfos" store:Type="Tables" Schema="HostingModel" />
-    <EntitySet Name="HorselessSessions" EntityType="HostingModel.Store.HorselessSessions" store:Type="Tables" Schema="HostingModel" />
-    <EntitySet Name="HorselessClaimsPrincipals" EntityType="HostingModel.Store.HorselessClaimsPrincipals" store:Type="Tables" Schema="HostingModel" />
+    <EntitySet Name="Tenants" EntityType="HostingModel.Store.Tenants" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RoutingDiscriminators" EntityType="HostingModel.Store.RoutingDiscriminators" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Hosts" EntityType="HostingModel.Store.Hosts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UriPaths" EntityType="HostingModel.Store.UriPaths" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NugetPackages" EntityType="HostingModel.Store.NugetPackages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FilesystemAssetLocations" EntityType="HostingModel.Store.FilesystemAssetLocations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="KeyCloakConfigurations" EntityType="HostingModel.Store.KeyCloakConfigurations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TenantInfos" EntityType="HostingModel.Store.TenantInfos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WebAPITenantInfos" EntityType="HostingModel.Store.WebAPITenantInfos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HorselessSessions" EntityType="HostingModel.Store.HorselessSessions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HorselessClaimsPrincipals" EntityType="HostingModel.Store.HorselessClaimsPrincipals" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="RoutingDiscriminatorHost" Association="HostingModel.Store.RoutingDiscriminatorHost">
       <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
       <End Role="Host" EntitySet="Hosts" />
@@ -742,7 +742,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
-        <DesignerProperty Name="DefaultDatabaseSchema" Value="HostingModel" />
+        <DesignerProperty Name="DefaultDatabaseSchema" Value="dbo" />
         <DesignerProperty Name="UseLegacyProvider" Value="False" />
       </DesignerInfoPropertySet>
     </edmx:Options>

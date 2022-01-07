@@ -24,7 +24,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         protected THLNPHostingContext(DbContextOptions options, Finbuckle.MultiTenant.TenantInfo tenant)
         : base(options)
         {
-
+            int i = 0;
         }
 
     }

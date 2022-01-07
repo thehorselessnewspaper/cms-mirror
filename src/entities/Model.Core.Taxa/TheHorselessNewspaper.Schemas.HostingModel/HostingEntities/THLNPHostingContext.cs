@@ -16,6 +16,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public THLNPHostingContext(DbContextOptions<THLNPHostingContext> options)
             : base(options)
         {
+
         }
 
         public virtual DbSet<FilesystemAssetLocation> FilesystemAssetLocations { get; set; }

@@ -35,8 +35,15 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         public async Task ResetDb()
         {
-            var dbreset = await ((DbContext)_context).Database.EnsureDeletedAsync();
-            var dbSet = await ((DbContext)_context).Database.EnsureCreatedAsync();
+            try
+            {
+                var dbreset = await ((DbContext)_context).Database.EnsureDeletedAsync();
+                var dbSet = await ((DbContext)_context).Database.EnsureCreatedAsync();
+            }
+            catch(Exception ex)
+            {
+                _logger.LogDebug($"content collections reset exception: {ex.Message}");
+            }
         }
 
         public async Task<T> Create(T entity)

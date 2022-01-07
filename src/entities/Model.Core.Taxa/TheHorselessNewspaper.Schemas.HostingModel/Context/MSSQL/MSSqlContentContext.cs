@@ -14,11 +14,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
     internal partial class MSSqlContentContext : THLNPContentContext, IContentModelContext
     {
         private readonly IConfiguration _configuration;
-        //public MSSqlContentContext(DbContextOptions<THLNPContentContext> options, IConfiguration config, Finbuckle.MultiTenant.TenantInfo tenant) : base(options, tenant)
-        //{
-        //    this.TenantInfo = tenant;
-        //    this._configuration =  config;
-        //}
+
 
         public MSSqlContentContext(DbContextOptions<MSSqlContentContext> options, IConfiguration config, Finbuckle.MultiTenant.TenantInfo tenant) : base(options, tenant)
         {
@@ -26,11 +22,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             this._configuration = config;
         }
 
-        //public MSSqlContentContext(DbContextOptions options, IConfiguration config, Finbuckle.MultiTenant.TenantInfo tenant) : base(options, tenant)
-        //{
-        //    this.TenantInfo = tenant;
-        //    this._configuration = config;
-        //}
+  
 
         #region finbuckle IMultiTenantDbContext concerns 
         /// <summary>

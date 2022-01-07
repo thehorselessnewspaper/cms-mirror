@@ -24,6 +24,6 @@ namespace TheHorselessNewspaper.HostingModel.Context
         public DbSet<TenantInfo> TenantInfos { get; set; }
         public DbSet<UriPath> UriPaths { get; set; }
         public DbSet<WebAPITenantInfo> WebAPITenantInfos { get; set; }
-
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

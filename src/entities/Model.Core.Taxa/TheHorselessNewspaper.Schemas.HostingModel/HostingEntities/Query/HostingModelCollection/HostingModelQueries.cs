@@ -16,9 +16,9 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
     {
 
         private readonly ILogger<HostingModelQueries<T>> _logger;
-        private readonly IContentModelContext _context;
+        private readonly IHostingModelContext _context;
 
-        public HostingModelQueries(IContentModelContext ctx, ILogger<HostingModelQueries<T>> logger)
+        public HostingModelQueries(IHostingModelContext ctx, ILogger<HostingModelQueries<T>> logger)
         {
             this._context = ctx;
             this._logger = logger;
@@ -33,8 +33,15 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 
         public async Task ResetDb()
         {
-            var dbreset = await ((DbContext)_context).Database.EnsureDeletedAsync();
-            var dbSet = await ((DbContext)_context).Database.EnsureCreatedAsync();
+            try
+            {
+                var dbreset = await ((DbContext)_context).Database.EnsureDeletedAsync();
+                var dbSet = await ((DbContext)_context).Database.EnsureCreatedAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"content collections reset exception: {ex.Message}");
+            }
         }
 
 

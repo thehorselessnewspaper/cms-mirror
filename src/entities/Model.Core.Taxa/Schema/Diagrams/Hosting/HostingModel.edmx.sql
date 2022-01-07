@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/07/2022 14:10:52
+-- Date Created: 01/07/2022 18:37:34
 -- Generated from EDMX file: C:\src\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Hosting\HostingModel.edmx
 -- --------------------------------------------------
 
@@ -10,7 +10,7 @@ SET QUOTED_IDENTIFIER OFF;
 GO
 USE [THLNP_Hosting];
 GO
-IF SCHEMA_ID(N'HostingModel') IS NULL EXECUTE(N'CREATE SCHEMA [HostingModel]');
+IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
 
 -- --------------------------------------------------
@@ -82,7 +82,7 @@ GO
 -- --------------------------------------------------
 
 -- Creating table 'Tenants'
-CREATE TABLE [HostingModel].[Tenants] (
+CREATE TABLE [dbo].[Tenants] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NOT NULL,
@@ -92,7 +92,7 @@ CREATE TABLE [HostingModel].[Tenants] (
 GO
 
 -- Creating table 'RoutingDiscriminators'
-CREATE TABLE [HostingModel].[RoutingDiscriminators] (
+CREATE TABLE [dbo].[RoutingDiscriminators] (
     [Id] uniqueidentifier  NOT NULL,
     [IsActive] bit  NULL,
     [ObjectId] nvarchar(max)  NOT NULL,
@@ -103,7 +103,7 @@ CREATE TABLE [HostingModel].[RoutingDiscriminators] (
 GO
 
 -- Creating table 'Hosts'
-CREATE TABLE [HostingModel].[Hosts] (
+CREATE TABLE [dbo].[Hosts] (
     [Id] uniqueidentifier  NOT NULL,
     [TCPHost] nvarchar(max)  NULL,
     [IsTenanantDiscriminator] nvarchar(max)  NULL,
@@ -117,7 +117,7 @@ CREATE TABLE [HostingModel].[Hosts] (
 GO
 
 -- Creating table 'UriPaths'
-CREATE TABLE [HostingModel].[UriPaths] (
+CREATE TABLE [dbo].[UriPaths] (
     [Id] uniqueidentifier  NOT NULL,
     [AbsoluteURL] nvarchar(max)  NULL,
     [IsTenantDiscriminator] nvarchar(max)  NULL,
@@ -132,7 +132,7 @@ CREATE TABLE [HostingModel].[UriPaths] (
 GO
 
 -- Creating table 'NugetPackages'
-CREATE TABLE [HostingModel].[NugetPackages] (
+CREATE TABLE [dbo].[NugetPackages] (
     [Id] uniqueidentifier  NOT NULL,
     [ObjectId] nvarchar(max)  NULL,
     [PackageName] nvarchar(max)  NULL,
@@ -145,7 +145,7 @@ CREATE TABLE [HostingModel].[NugetPackages] (
 GO
 
 -- Creating table 'FilesystemAssetLocations'
-CREATE TABLE [HostingModel].[FilesystemAssetLocations] (
+CREATE TABLE [dbo].[FilesystemAssetLocations] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [CreatedAt] datetime  NULL,
@@ -154,7 +154,7 @@ CREATE TABLE [HostingModel].[FilesystemAssetLocations] (
 GO
 
 -- Creating table 'KeyCloakConfigurations'
-CREATE TABLE [HostingModel].[KeyCloakConfigurations] (
+CREATE TABLE [dbo].[KeyCloakConfigurations] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NOT NULL,
     [Authority] nvarchar(max)  NULL,
@@ -168,7 +168,7 @@ CREATE TABLE [HostingModel].[KeyCloakConfigurations] (
 GO
 
 -- Creating table 'TenantInfos'
-CREATE TABLE [HostingModel].[TenantInfos] (
+CREATE TABLE [dbo].[TenantInfos] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NOT NULL,
@@ -183,7 +183,7 @@ CREATE TABLE [HostingModel].[TenantInfos] (
 GO
 
 -- Creating table 'WebAPITenantInfos'
-CREATE TABLE [HostingModel].[WebAPITenantInfos] (
+CREATE TABLE [dbo].[WebAPITenantInfos] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NOT NULL,
@@ -198,7 +198,7 @@ CREATE TABLE [HostingModel].[WebAPITenantInfos] (
 GO
 
 -- Creating table 'HorselessSessions'
-CREATE TABLE [HostingModel].[HorselessSessions] (
+CREATE TABLE [dbo].[HorselessSessions] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NOT NULL,
@@ -213,7 +213,7 @@ CREATE TABLE [HostingModel].[HorselessSessions] (
 GO
 
 -- Creating table 'HorselessClaimsPrincipals'
-CREATE TABLE [HostingModel].[HorselessClaimsPrincipals] (
+CREATE TABLE [dbo].[HorselessClaimsPrincipals] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NOT NULL,
@@ -231,67 +231,67 @@ GO
 -- --------------------------------------------------
 
 -- Creating primary key on [Id] in table 'Tenants'
-ALTER TABLE [HostingModel].[Tenants]
+ALTER TABLE [dbo].[Tenants]
 ADD CONSTRAINT [PK_Tenants]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'RoutingDiscriminators'
-ALTER TABLE [HostingModel].[RoutingDiscriminators]
+ALTER TABLE [dbo].[RoutingDiscriminators]
 ADD CONSTRAINT [PK_RoutingDiscriminators]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'Hosts'
-ALTER TABLE [HostingModel].[Hosts]
+ALTER TABLE [dbo].[Hosts]
 ADD CONSTRAINT [PK_Hosts]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'UriPaths'
-ALTER TABLE [HostingModel].[UriPaths]
+ALTER TABLE [dbo].[UriPaths]
 ADD CONSTRAINT [PK_UriPaths]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'NugetPackages'
-ALTER TABLE [HostingModel].[NugetPackages]
+ALTER TABLE [dbo].[NugetPackages]
 ADD CONSTRAINT [PK_NugetPackages]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'FilesystemAssetLocations'
-ALTER TABLE [HostingModel].[FilesystemAssetLocations]
+ALTER TABLE [dbo].[FilesystemAssetLocations]
 ADD CONSTRAINT [PK_FilesystemAssetLocations]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'KeyCloakConfigurations'
-ALTER TABLE [HostingModel].[KeyCloakConfigurations]
+ALTER TABLE [dbo].[KeyCloakConfigurations]
 ADD CONSTRAINT [PK_KeyCloakConfigurations]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'TenantInfos'
-ALTER TABLE [HostingModel].[TenantInfos]
+ALTER TABLE [dbo].[TenantInfos]
 ADD CONSTRAINT [PK_TenantInfos]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'WebAPITenantInfos'
-ALTER TABLE [HostingModel].[WebAPITenantInfos]
+ALTER TABLE [dbo].[WebAPITenantInfos]
 ADD CONSTRAINT [PK_WebAPITenantInfos]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'HorselessSessions'
-ALTER TABLE [HostingModel].[HorselessSessions]
+ALTER TABLE [dbo].[HorselessSessions]
 ADD CONSTRAINT [PK_HorselessSessions]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'HorselessClaimsPrincipals'
-ALTER TABLE [HostingModel].[HorselessClaimsPrincipals]
+ALTER TABLE [dbo].[HorselessClaimsPrincipals]
 ADD CONSTRAINT [PK_HorselessClaimsPrincipals]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
@@ -301,107 +301,107 @@ GO
 -- --------------------------------------------------
 
 -- Creating foreign key on [RoutingDiscriminatorId] in table 'Hosts'
-ALTER TABLE [HostingModel].[Hosts]
+ALTER TABLE [dbo].[Hosts]
 ADD CONSTRAINT [FK_RoutingDiscriminatorHost]
     FOREIGN KEY ([RoutingDiscriminatorId])
-    REFERENCES [HostingModel].[RoutingDiscriminators]
+    REFERENCES [dbo].[RoutingDiscriminators]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_RoutingDiscriminatorHost'
 CREATE INDEX [IX_FK_RoutingDiscriminatorHost]
-ON [HostingModel].[Hosts]
+ON [dbo].[Hosts]
     ([RoutingDiscriminatorId]);
 GO
 
 -- Creating foreign key on [RoutingDiscriminatorId] in table 'UriPaths'
-ALTER TABLE [HostingModel].[UriPaths]
+ALTER TABLE [dbo].[UriPaths]
 ADD CONSTRAINT [FK_RoutingDiscriminatorUriPath]
     FOREIGN KEY ([RoutingDiscriminatorId])
-    REFERENCES [HostingModel].[RoutingDiscriminators]
+    REFERENCES [dbo].[RoutingDiscriminators]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_RoutingDiscriminatorUriPath'
 CREATE INDEX [IX_FK_RoutingDiscriminatorUriPath]
-ON [HostingModel].[UriPaths]
+ON [dbo].[UriPaths]
     ([RoutingDiscriminatorId]);
 GO
 
 -- Creating foreign key on [TenantInfoId] in table 'WebAPITenantInfos'
-ALTER TABLE [HostingModel].[WebAPITenantInfos]
+ALTER TABLE [dbo].[WebAPITenantInfos]
 ADD CONSTRAINT [FK_TenantInfoWebAPITenantInfo]
     FOREIGN KEY ([TenantInfoId])
-    REFERENCES [HostingModel].[TenantInfos]
+    REFERENCES [dbo].[TenantInfos]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TenantInfoWebAPITenantInfo'
 CREATE INDEX [IX_FK_TenantInfoWebAPITenantInfo]
-ON [HostingModel].[WebAPITenantInfos]
+ON [dbo].[WebAPITenantInfos]
     ([TenantInfoId]);
 GO
 
 -- Creating foreign key on [TenantInfoId] in table 'KeyCloakConfigurations'
-ALTER TABLE [HostingModel].[KeyCloakConfigurations]
+ALTER TABLE [dbo].[KeyCloakConfigurations]
 ADD CONSTRAINT [FK_TenantInfoKeyCloakConfiguration]
     FOREIGN KEY ([TenantInfoId])
-    REFERENCES [HostingModel].[TenantInfos]
+    REFERENCES [dbo].[TenantInfos]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TenantInfoKeyCloakConfiguration'
 CREATE INDEX [IX_FK_TenantInfoKeyCloakConfiguration]
-ON [HostingModel].[KeyCloakConfigurations]
+ON [dbo].[KeyCloakConfigurations]
     ([TenantInfoId]);
 GO
 
 -- Creating foreign key on [Tenant_Id] in table 'TenantInfos'
-ALTER TABLE [HostingModel].[TenantInfos]
+ALTER TABLE [dbo].[TenantInfos]
 ADD CONSTRAINT [FK_TenantTenantInfo]
     FOREIGN KEY ([Tenant_Id])
-    REFERENCES [HostingModel].[Tenants]
+    REFERENCES [dbo].[Tenants]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TenantTenantInfo'
 CREATE INDEX [IX_FK_TenantTenantInfo]
-ON [HostingModel].[TenantInfos]
+ON [dbo].[TenantInfos]
     ([Tenant_Id]);
 GO
 
 -- Creating foreign key on [TenantId] in table 'RoutingDiscriminators'
-ALTER TABLE [HostingModel].[RoutingDiscriminators]
+ALTER TABLE [dbo].[RoutingDiscriminators]
 ADD CONSTRAINT [FK_TenantRoutingDiscriminator]
     FOREIGN KEY ([TenantId])
-    REFERENCES [HostingModel].[Tenants]
+    REFERENCES [dbo].[Tenants]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TenantRoutingDiscriminator'
 CREATE INDEX [IX_FK_TenantRoutingDiscriminator]
-ON [HostingModel].[RoutingDiscriminators]
+ON [dbo].[RoutingDiscriminators]
     ([TenantId]);
 GO
 
 -- Creating foreign key on [TenantId] in table 'HorselessClaimsPrincipals'
-ALTER TABLE [HostingModel].[HorselessClaimsPrincipals]
+ALTER TABLE [dbo].[HorselessClaimsPrincipals]
 ADD CONSTRAINT [FK_HorselessClaimsPrincipalTenant]
     FOREIGN KEY ([TenantId])
-    REFERENCES [HostingModel].[Tenants]
+    REFERENCES [dbo].[Tenants]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_HorselessClaimsPrincipalTenant'
 CREATE INDEX [IX_FK_HorselessClaimsPrincipalTenant]
-ON [HostingModel].[HorselessClaimsPrincipals]
+ON [dbo].[HorselessClaimsPrincipals]
     ([TenantId]);
 GO
 
