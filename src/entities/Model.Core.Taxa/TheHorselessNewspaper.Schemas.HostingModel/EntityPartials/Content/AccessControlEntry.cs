@@ -48,7 +48,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         /// <summary>
         /// empty for EVERYONE is a valid non-intuitive state
         /// </summary>
-        // public ICollection<Principal> CommonScopeSubjectPrincipals { get; set; }  = new  HashSet<Principal>();
+        public ICollection<Principal> CommonScopeSubjectPrincipals { get; set; }  = new  HashSet<Principal>();
 
     }
 

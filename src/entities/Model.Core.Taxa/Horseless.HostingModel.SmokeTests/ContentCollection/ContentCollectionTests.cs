@@ -14,7 +14,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
     internal class ContentCollectionTests : Tests
     {
         [Test]
-        public async Task CRUDTest()
+        public  void CRUDTest()
         {
             Assert.DoesNotThrowAsync(CrudContentCollection, "test failed due to entity not inserted with null objectid");
             Assert.Pass();

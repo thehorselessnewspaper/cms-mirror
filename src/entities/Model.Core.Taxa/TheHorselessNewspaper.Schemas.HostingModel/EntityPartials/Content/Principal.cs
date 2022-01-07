@@ -27,5 +27,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string Iss { get; set; }
         public string Aud { get; set; }
         public string Sub { get; set; }
+
+        public HorselessClaimsPrincipal? HorselessClaimsPrincipal { get; set; }
     }
 }
