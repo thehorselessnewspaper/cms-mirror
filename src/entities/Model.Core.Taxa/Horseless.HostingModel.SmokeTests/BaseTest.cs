@@ -72,27 +72,27 @@ namespace Horseless.HostingModel.SmokeTests
         }
 
         [Test]
-        protected async Task FailsObjectIdConstraint()
+        public async Task FailsObjectIdConstraint()
         {
 
             Assert.ThrowsAsync(typeof(Exception), TestFailsObjectIdConstraint, "test failed due to entity inserted with null objectid");
             Assert.Pass();
         }
 
-        protected T GetIQueryableContentModelOperator<T>() where T : notnull
+        public T GetIQueryableContentModelOperator<T>() where T : notnull
         {
             var queryProvider = app.Services.GetRequiredService<T>();
             return queryProvider;
         }
 
-        protected T GetIQueryableHostingModelOperator<T>() where T : notnull
+        public T GetIQueryableHostingModelOperator<T>() where T : notnull
         {
             var queryProvider = app.Services.GetRequiredService<T>();
             return queryProvider;
         }
 
         [Test]
-        protected async Task PasseslsObjectIdConstraint()
+        public async Task PasseslsObjectIdConstraint()
         {
             var queryProvider = app.Services.GetRequiredService<IQueryableContentModelOperator<ContentModel.ContentCollection>>();
             Assert.DoesNotThrowAsync(TestPassessObjectIdConstraint, "test failed due to entity not inserted with null objectid");
