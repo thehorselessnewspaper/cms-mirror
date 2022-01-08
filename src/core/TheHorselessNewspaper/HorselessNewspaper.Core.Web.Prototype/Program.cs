@@ -7,6 +7,7 @@ using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
 using Microsoft.AspNetCore.OData;
 using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
 using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
+using Microsoft.AspNetCore.OData.Routing.Conventions;
 
 var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(builder =>
@@ -57,6 +58,7 @@ builder.Services.AddControllers()
         .Count();
 
         options.TimeZone = TimeZoneInfo.Utc;
+        options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
 
         /// todo make this an environment configurable item
         options.AddRouteComponents("HorselessContent", edmContent);
@@ -65,7 +67,10 @@ builder.Services.AddControllers()
 
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.CustomSchemaIds(type => type.ToString());
+});
 
 // this hardcodes a static reference to the default horseless razor class library
 // i am sorry - the hoped for benefit is that this will always have a default implementation

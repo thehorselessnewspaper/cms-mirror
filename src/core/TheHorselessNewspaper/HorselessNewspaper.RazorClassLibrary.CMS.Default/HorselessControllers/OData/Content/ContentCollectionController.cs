@@ -10,7 +10,7 @@ using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    // [Route("HorselessContent")]
+    [Route("HorselessContent")]
     public class ContentCollectionController : ODataController
     {
         private readonly IQueryableContentModelOperator<ContentModel.ContentCollection> _contentCollectionService;
@@ -21,11 +21,18 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-        // [HttpGet("HorselessContent/ContentCollection")]
+        [HttpGet("Get")]
+
         // breaks openapi [HttpGet("HorselessContent/ContentCollection/$count")]
         public async Task<IActionResult> Get()
         {
             return  Ok(await _contentCollectionService.Read());
+        }
+
+        [HttpPost("Post")]
+        public async Task<IActionResult> Post([FromBody]ContentModel.ContentCollection contentCollection)
+        {
+            return Ok(await _contentCollectionService.Create(contentCollection));
         }
     }
 }
