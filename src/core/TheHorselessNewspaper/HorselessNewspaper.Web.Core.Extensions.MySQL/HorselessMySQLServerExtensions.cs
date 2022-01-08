@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using TheHorselessNewspaper.Schemas.HostingModel.Entities;
+using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
 namespace HorselessNewspaper.Web.Core.Extensions.MySQL
 {
