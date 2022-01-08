@@ -64,6 +64,9 @@ builder.Services.AddControllers()
     });
 
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 // this hardcodes a static reference to the default horseless razor class library
 // i am sorry - the hoped for benefit is that this will always have a default implementation
 // .AddApplicationPart(typeof(HorselessCMSController).Assembly);
@@ -99,8 +102,12 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+
+    
 }
 
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

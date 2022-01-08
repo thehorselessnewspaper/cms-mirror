@@ -49,6 +49,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
 
 
     [Route("/")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class HorselessCMSController : Controller
     {
 

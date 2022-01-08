@@ -5,18 +5,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
+    // [Route("HorselessContent")]
     public class ContentCollectionController : ODataController
     {
+        private readonly IQueryableContentModelOperator<ContentModel.ContentCollection> _contentCollectionService;
+
+        public ContentCollectionController(IQueryableContentModelOperator<ContentModel.ContentCollection> contentCollectionService)
+        {
+            this._contentCollectionService = contentCollectionService;
+        }
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-        [HttpGet("horselessdata/ContentCollection")]
-        [HttpGet("horselessdata/ContentCollection/$count")]
+        // [HttpGet("HorselessContent/ContentCollection")]
+        // breaks openapi [HttpGet("HorselessContent/ContentCollection/$count")]
         public async Task<IActionResult> Get()
         {
-            return await Task.FromResult(Ok());
+            return  Ok(await _contentCollectionService.Read());
         }
     }
 }
