@@ -37,6 +37,5 @@
 
   <ItemGroup>
     <Folder Include="HostedServices\RazorClassLibrary\" />
-    <Folder Include="Interfaces\Content\" />
   </ItemGroup>
 </Project>

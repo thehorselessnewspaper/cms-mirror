@@ -59,12 +59,12 @@ namespace HorselessNewspaper.Web.Core.Extensions
                 {
                     var split = result.Split('\\', 255);
                     var path = string.Empty;
-                    foreach(var trimmed in split.Take(split.Count() - 1))
+                    foreach (var trimmed in split.Take(split.Count() - 1))
                     {
                         path = path + trimmed + "\\";
                     }
                     o.ViewLocationFormats.Add($"{path}{1}\\{0}" + RazorViewEngine.ViewExtension);
-                    o.ViewLocationFormats.Add ($"{path}Shared\\{0}" + RazorViewEngine.ViewExtension);
+                    o.ViewLocationFormats.Add($"{path}Shared\\{0}" + RazorViewEngine.ViewExtension);
                 }
 
                 o.ViewLocationFormats.Add
@@ -87,14 +87,21 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
             #region multitenancy as per https://www.finbuckle.com/MultiTenant/
             serviceBuilder.Services.AddMultiTenant<Finbuckle.MultiTenant.TenantInfo>()
-                .WithInMemoryStore()
-                .WithHostStrategy()
-                .WithBasePathStrategy()
-                .WithRouteStrategy();
+                .WithInMemoryStore(options =>
+                {
+                    options.Tenants.Add(new TenantInfo()
+                    {
+                        ConnectionString = configuration.GetConnectionString("ContentModelConnection"),
+                        Id = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
+                        Identifier = "localhost",
+                        Name = "the horseless phantom tenant"
+                    });
+                })
+                .WithStaticStrategy("localhost");
 
             #endregion multitenancy as per https://www.finbuckle.com/MultiTenant/
 
-           
+
 
             serviceBuilder.Services.AddSingleton<IHorselessCacheProvider<Guid, TenantDTO>, DefaultTenantCache>();
 
