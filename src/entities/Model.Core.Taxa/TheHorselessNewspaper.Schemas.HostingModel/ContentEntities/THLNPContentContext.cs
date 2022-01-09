@@ -9,10 +9,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     internal partial class THLNPContentContext : DbContext
     {
-        public THLNPContentContext(DbContextOptions<THLNPContentContext> options, Finbuckle.MultiTenant.TenantInfo tenant)
+        public THLNPContentContext(DbContextOptions<THLNPContentContext> options)
             : base(options)
         {
-            int i = 0;
         }
 
         public virtual DbSet<ContentCollection> ContentCollections { get; set; }

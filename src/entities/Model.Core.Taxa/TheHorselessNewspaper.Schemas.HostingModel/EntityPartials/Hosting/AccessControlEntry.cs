@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
+using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
@@ -30,7 +31,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     /// to permit deny principals operations
     /// </summary>
     [Owned]
-    public partial class AccessControlEntry
+    public partial class AccessControlEntry : IQueryableModelEntity
     {
 
         public ACEPermissionScope Scope { get; set; }
@@ -40,7 +41,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public ACEPermissionType PermissionType { get; set; }
 
         public ICollection<Principal> SubjectPrincipals { get; set; }  = new  HashSet<Principal>();
-
+        public Guid Id { get; set; }
+        public string? ObjectId { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public string? DisplayName { get; set; }
+        public bool? IsSoftDeleted { get; set; }
     }
 
 

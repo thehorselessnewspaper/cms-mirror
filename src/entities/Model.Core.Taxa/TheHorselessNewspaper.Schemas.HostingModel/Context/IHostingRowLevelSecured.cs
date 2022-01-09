@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace TheHorselessNewspaper.HostingModel.Context
 {
-    public interface IHostingRowLevelSecured
+    public interface IHostingRowLevelSecured : IQueryableModelEntity
     {
         public ICollection<AccessControlEntry> AccessControlList { get; set; }
         public ICollection<Principal> Owners { get; set; }

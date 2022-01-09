@@ -30,7 +30,7 @@ namespace Schema.Diagrams.Content
         public string ObjectId { get; set; }
         public Nullable<bool> IsSoftDeleted { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
-        public bool AllowAnonymousRead { get; set; }
+        public Nullable<bool> AllowAnonymousRead { get; set; }
         public Nullable<bool> IsPublished { get; set; }
         public string PublishedURL { get; set; }
         public string PreviewURL { get; set; }

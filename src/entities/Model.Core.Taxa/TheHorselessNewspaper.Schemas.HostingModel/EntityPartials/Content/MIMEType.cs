@@ -1,4 +1,5 @@
-﻿using TheHorselessNewspaper.Schemas.HostingModel.Context;
+﻿using TheHorselessNewspaper.HostingModel.Context;
+using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {

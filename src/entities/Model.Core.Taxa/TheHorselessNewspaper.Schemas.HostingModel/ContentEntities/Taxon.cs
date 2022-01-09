@@ -20,14 +20,12 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         [Key]
         public Guid Id { get; set; }
-        public Guid? DisplayName { get; set; }
+        public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime CreatedAt { get; set; }
-        [Required]
+        public DateTime? CreatedAt { get; set; }
         public string JsonValue { get; set; }
-        [Required]
         public string JsonSchema { get; set; }
 
         [ForeignKey("DerivativeTaxons_Id")]

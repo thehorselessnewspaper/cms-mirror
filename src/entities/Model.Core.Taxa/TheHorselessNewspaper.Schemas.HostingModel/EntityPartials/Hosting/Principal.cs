@@ -3,6 +3,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TheHorselessNewspaper.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
@@ -14,7 +15,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
     [Owned]
     // [Table("Principals")]
-    public partial class Principal
+    public partial class Principal: IQueryableModelEntity
     {
         [Key]
         public Guid Id { get; set; }

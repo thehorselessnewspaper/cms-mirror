@@ -55,8 +55,11 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             {
                 throw new Exception("failed to read existing entity", e);
             }
-            
 
+
+            var deleteResult = await this.Delete<ContentModel.ContentCollection>(newcontentCollection.ObjectId);
+
+            var deleteQuery = await this.Delete<ContentModel.ContentCollection>(w => w.DisplayName.Length > 0);
         }
 
     }

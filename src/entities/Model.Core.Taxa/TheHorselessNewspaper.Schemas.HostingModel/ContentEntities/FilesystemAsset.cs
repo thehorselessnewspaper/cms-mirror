@@ -18,12 +18,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Key]
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
-        [Required]
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
-        [Required]
         public string Filename { get; set; }
         public string PublishedURL { get; set; }
         public string PreviewURL { get; set; }

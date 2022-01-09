@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
+using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
@@ -52,13 +53,13 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
     }
 
-    public partial class AccessControlEntry
+    public partial class AccessControlEntry: IQueryableModelEntity
     {
         [Key]
         public Guid Id { get; set; }
-        public string DisplayName { get; set; }
+        public string? DisplayName { get; set; }
         [Required]
-        public string ObjectId { get; set; }
+        public string? ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }

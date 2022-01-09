@@ -165,7 +165,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="FilesystemAssetId" Type="uniqueidentifier" Nullable="true" />
@@ -181,7 +181,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
   </EntityType>
@@ -191,7 +191,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="MIMETypeName" Type="nvarchar(max)" Nullable="true" />
@@ -202,10 +202,10 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
-    <Property Name="Filename" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Filename" Type="nvarchar(max)" Nullable="true" />
     <Property Name="PublishedURL" Type="nvarchar(max)" Nullable="true" />
     <Property Name="PreviewURL" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
@@ -215,7 +215,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="JsonValue" Type="nvarchar(max)" Nullable="true" />
@@ -227,10 +227,10 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
-    <Property Name="AllowAnonymousRead" Type="bit" Nullable="false" />
+    <Property Name="AllowAnonymousRead" Type="bit" Nullable="true" />
     <Property Name="IsPublished" Type="bit" Nullable="true" />
     <Property Name="PublishedURL" Type="nvarchar(max)" Nullable="true" />
     <Property Name="PreviewURL" Type="nvarchar(max)" Nullable="true" />
@@ -243,7 +243,7 @@
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
-    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="PublishAt" Type="datetime" Nullable="true" />
     <Property Name="UnPublishAt" Type="datetime" Nullable="true" />
     <Property Name="IsPublished" Type="bit" Nullable="true" />
@@ -256,7 +256,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="IsPublished" Type="bit" Nullable="true" />
@@ -267,12 +267,12 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DisplayName" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="true" />
+    <Property Name="DisplayName" Type="nvarchar(max)" StoreGeneratedPattern="Identity" Nullable="true" />
     <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
-    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
-    <Property Name="JsonValue" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="JsonSchema" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="JsonValue" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="JsonSchema" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Holonyms">
     <Key>
@@ -282,9 +282,9 @@
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
-    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
-    <Property Name="JsonValue" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="JsonSchema" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="JsonValue" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="JsonSchema" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Meronyms">
     <Key>
@@ -294,9 +294,9 @@
     <Property Name="DisplayName" Type="nvarchar(max)" StoreGeneratedPattern="Identity" Nullable="true" />
     <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
-    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
-    <Property Name="JsonValue" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="JsonSchema" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="JsonValue" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="JsonSchema" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="HorselessClaimsPrincipals">
     <Key>
@@ -304,7 +304,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="Iss" Type="nvarchar(max)" Nullable="true" />
@@ -320,7 +320,7 @@
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
-    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="PublishAt" Type="datetime" Nullable="true" />
     <Property Name="UnPublishAt" Type="datetime" Nullable="true" />
     <Property Name="IsPublished" Type="bit" Nullable="true" />
@@ -335,7 +335,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="IsActive" Type="bit" Nullable="true" />
@@ -346,7 +346,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="SessionId" Type="nvarchar(max)" Nullable="true" />
@@ -363,7 +363,7 @@
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
-    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="PublishAt" Type="datetime" Nullable="true" />
     <Property Name="UnPublishAt" Type="datetime" Nullable="true" />
     <Property Name="IsPublished" Type="bit" Nullable="true" />
@@ -379,7 +379,7 @@
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
-    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="PublishAt" Type="datetime" Nullable="true" />
     <Property Name="UnPublishAt" Type="datetime" Nullable="true" />
     <Property Name="IsPublished" Type="bit" Nullable="true" />
@@ -392,12 +392,12 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="DisplayName" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="true" />
+    <Property Name="DisplayName" Type="nvarchar(max)" StoreGeneratedPattern="Identity" Nullable="true" />
     <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
-    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
-    <Property Name="JsonValue" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="JsonSchema" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="JsonValue" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="JsonSchema" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="PhantomPrincipals">
     <Key>
@@ -405,7 +405,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="Iss" Type="nvarchar(max)" Nullable="true" />
@@ -975,7 +975,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="ContentCollections" Relationship="HorselessContentModel.ContentCollectionMimeContent" FromRole="MimeContent" ToRole="ContentCollection" />
@@ -995,7 +995,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="ContentCollections" Relationship="HorselessContentModel.TenantContentCollection" FromRole="Tenant" ToRole="ContentCollection" />
@@ -1007,7 +1007,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="MIMETypeName" Type="String" Nullable="true" />
@@ -1019,10 +1019,10 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
-          <Property Name="Filename" Type="String" Nullable="false" />
+          <Property Name="Filename" Type="String" Nullable="true" />
           <NavigationProperty Name="MimeContents" Relationship="HorselessContentModel.FilesystemAssetMimeContent" FromRole="FilesystemAsset" ToRole="MimeContent" />
           <Property Name="PublishedURL" Type="String" Nullable="true" />
           <Property Name="PreviewURL" Type="String" Nullable="true" />
@@ -1033,7 +1033,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="JsonValue" Type="String" Nullable="true" />
@@ -1046,12 +1046,12 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="Tenants" Relationship="HorselessContentModel.TenantContentCollection" FromRole="ContentCollection" ToRole="Tenant" />
           <NavigationProperty Name="MimeContents" Relationship="HorselessContentModel.ContentCollectionMimeContent" FromRole="ContentCollection" ToRole="MimeContent" />
-          <Property Name="AllowAnonymousRead" Type="Boolean" Nullable="false" />
+          <Property Name="AllowAnonymousRead" Type="Boolean" Nullable="true" />
           <Property Name="IsPublished" Type="Boolean" Nullable="true" />
           <NavigationProperty Name="ParentContentCollections" Relationship="HorselessContentModel.ContentCollectionContentCollection" FromRole="ContentCollection" ToRole="ContentCollection1" />
           <NavigationProperty Name="ChildContentCollections" Relationship="HorselessContentModel.ContentCollectionContentCollection" FromRole="ContentCollection1" ToRole="ContentCollection" />
@@ -1112,7 +1112,7 @@
           <Property Name="DisplayName" Type="String" Nullable="true" />
           <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="PublishAt" Type="DateTime" Nullable="true" />
           <Property Name="UnPublishAt" Type="DateTime" Nullable="true" />
           <Property Name="IsPublished" Type="Boolean" Nullable="true" />
@@ -1128,7 +1128,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="IsPublished" Type="Boolean" Nullable="true" />
@@ -1139,12 +1139,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DisplayName" Type="Guid" Nullable="true" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="true" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
-          <Property Name="JsonValue" Type="String" Nullable="false" />
-          <Property Name="JsonSchema" Type="String" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <Property Name="JsonValue" Type="String" Nullable="true" />
+          <Property Name="JsonSchema" Type="String" Nullable="true" />
           <NavigationProperty Name="Taxonomies" Relationship="HorselessContentModel.TaxonTaxonomy" FromRole="Taxon" ToRole="Taxonomy" />
           <NavigationProperty Name="DerivativeTaxons" Relationship="HorselessContentModel.TaxonTaxon" FromRole="Taxon" ToRole="Taxon1" />
           <NavigationProperty Name="AntecedentTaxons" Relationship="HorselessContentModel.TaxonTaxon" FromRole="Taxon1" ToRole="Taxon" />
@@ -1158,9 +1158,9 @@
           <Property Name="DisplayName" Type="String" Nullable="true" />
           <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
-          <Property Name="JsonValue" Type="String" Nullable="false" />
-          <Property Name="JsonSchema" Type="String" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <Property Name="JsonValue" Type="String" Nullable="true" />
+          <Property Name="JsonSchema" Type="String" Nullable="true" />
           <NavigationProperty Name="Taxons" Relationship="HorselessContentModel.TaxonHolonym" FromRole="Holonym" ToRole="Taxon" />
           <NavigationProperty Name="Meronyms" Relationship="HorselessContentModel.HolonymMeronym" FromRole="Holonym" ToRole="Meronym" />
         </EntityType>
@@ -1172,9 +1172,9 @@
           <Property Name="DisplayName" Type="String" Nullable="true" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
-          <Property Name="JsonValue" Type="String" Nullable="false" />
-          <Property Name="JsonSchema" Type="String" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <Property Name="JsonValue" Type="String" Nullable="true" />
+          <Property Name="JsonSchema" Type="String" Nullable="true" />
           <NavigationProperty Name="Holonyms" Relationship="HorselessContentModel.HolonymMeronym" FromRole="Meronym" ToRole="Holonym" />
         </EntityType>
         <EntityType Name="HorselessClaimsPrincipal">
@@ -1183,7 +1183,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="Iss" Type="String" Nullable="true" />
@@ -1200,7 +1200,7 @@
           <Property Name="DisplayName" Type="String" Nullable="true" />
           <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="PublishAt" Type="DateTime" Nullable="true" />
           <Property Name="UnPublishAt" Type="DateTime" Nullable="true" />
           <Property Name="IsPublished" Type="Boolean" Nullable="true" />
@@ -1215,7 +1215,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="true" />
@@ -1246,7 +1246,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="SessionId" Type="String" Nullable="true" />
@@ -1263,7 +1263,7 @@
           <Property Name="DisplayName" Type="String" Nullable="true" />
           <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="PublishAt" Type="DateTime" Nullable="true" />
           <Property Name="UnPublishAt" Type="DateTime" Nullable="true" />
           <Property Name="IsPublished" Type="Boolean" Nullable="true" />
@@ -1282,7 +1282,7 @@
           <Property Name="DisplayName" Type="String" Nullable="true" />
           <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="PublishAt" Type="DateTime" Nullable="true" />
           <Property Name="UnPublishAt" Type="DateTime" Nullable="true" />
           <Property Name="IsPublished" Type="Boolean" Nullable="true" />
@@ -1322,12 +1322,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="DisplayName" Type="Guid" Nullable="true" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="true" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
-          <Property Name="JsonValue" Type="String" Nullable="false" />
-          <Property Name="JsonSchema" Type="String" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <Property Name="JsonValue" Type="String" Nullable="true" />
+          <Property Name="JsonSchema" Type="String" Nullable="true" />
           <NavigationProperty Name="Taxons" Relationship="HorselessContentModel.TaxonTaxonomy" FromRole="Taxonomy" ToRole="Taxon" />
           <NavigationProperty Name="ContentCollections" Relationship="HorselessContentModel.TaxonomyContentCollection" FromRole="Taxonomy" ToRole="ContentCollection" />
         </EntityType>
@@ -1365,7 +1365,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="Iss" Type="String" Nullable="true" />

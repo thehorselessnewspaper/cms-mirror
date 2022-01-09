@@ -6,7 +6,9 @@ using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.Context;
@@ -74,8 +76,8 @@ namespace Horseless.HostingModel.SmokeTests
         [Test]
         public async Task FailsObjectIdConstraint()
         {
-
-            Assert.ThrowsAsync(typeof(Exception), TestFailsObjectIdConstraint, "test failed due to entity inserted with null objectid");
+            /// TODO should objectId be not null???
+            Assert.DoesNotThrowAsync(TestPassWithNullObjectId, "test failed due to entity inserted with null objectid");
             Assert.Pass();
         }
 
@@ -128,13 +130,19 @@ namespace Horseless.HostingModel.SmokeTests
             return result;
         }
 
-        protected async Task<T> Delete<T>(T entity) where T : class, IContentRowLevelSecured
+        protected async Task<T> Delete<T>(string entityId) where T : class, IContentRowLevelSecured
         {
             var queryProvider = this.GetIQueryableContentModelOperator<IQueryableContentModelOperator<T>>();
-            var result = await queryProvider.Delete(entity);
-            return entity;
+            var result = await queryProvider.Delete(entityId);
+            return result;
         }
 
+        protected async Task<IEnumerable<T>> Delete<T>(Expression<Func<T, bool>> query, bool softDelete = true, bool whatIf = true) where T : class, IContentRowLevelSecured
+        {
+            var queryProvider = this.GetIQueryableContentModelOperator<IQueryableContentModelOperator<T>>();
+            var result = await queryProvider.Delete(query, false, false); ;
+            return result;
+        }
 
         protected ContentModel.ContentCollection GetNewContentCollection()
         {
@@ -170,7 +178,7 @@ namespace Horseless.HostingModel.SmokeTests
 
         }
 
-        protected async Task TestFailsObjectIdConstraint()
+        protected async Task TestPassWithNullObjectId()
         {
             var queryProvider = app.Services.GetRequiredService<IQueryableContentModelOperator<ContentModel.ContentCollection>>();
 

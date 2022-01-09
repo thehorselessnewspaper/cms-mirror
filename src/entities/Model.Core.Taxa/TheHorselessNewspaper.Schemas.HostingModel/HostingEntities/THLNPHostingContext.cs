@@ -47,8 +47,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
-                entity.Property(e => e.ObjectId).IsRequired();
-
                 entity.HasOne(d => d.Tenant)
                     .WithMany(p => p.HorselessClaimsPrincipals)
                     .HasForeignKey(d => d.TenantId)
@@ -60,8 +58,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.ObjectId).IsRequired();
             });
 
             modelBuilder.Entity<Host>(entity =>
@@ -86,8 +82,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
-                entity.Property(e => e.DisplayName).IsRequired();
-
                 entity.HasOne(d => d.TenantInfo)
                     .WithMany(p => p.KeyCloakConfigurations)
                     .HasForeignKey(d => d.TenantInfoId)
@@ -109,8 +103,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
-                entity.Property(e => e.ObjectId).IsRequired();
-
                 entity.HasOne(d => d.Tenant)
                     .WithMany(p => p.RoutingDiscriminators)
                     .HasForeignKey(d => d.TenantId)
@@ -122,8 +114,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.ObjectId).IsRequired();
             });
 
             modelBuilder.Entity<TenantInfo>(entity =>
@@ -133,8 +123,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.ObjectId).IsRequired();
 
                 entity.HasOne(d => d.Tenant)
                     .WithMany(p => p.TenantInfos)
@@ -164,8 +152,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.ObjectId).IsRequired();
 
                 entity.HasOne(d => d.TenantInfo)
                     .WithMany(p => p.WebAPITenantInfos)

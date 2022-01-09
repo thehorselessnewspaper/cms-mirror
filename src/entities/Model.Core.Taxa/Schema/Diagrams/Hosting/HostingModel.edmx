@@ -52,7 +52,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
   </EntityType>
@@ -62,7 +62,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IsActive" Type="bit" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="TenantId" Type="uniqueidentifier" Nullable="true" />
@@ -123,7 +123,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Authority" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Realm" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
@@ -138,7 +138,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="Identifier" Type="nvarchar(max)" Nullable="true" />
@@ -153,7 +153,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="Identifier" Type="nvarchar(max)" Nullable="true" />
@@ -168,7 +168,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="SessionId" Type="nvarchar(max)" Nullable="true" />
@@ -183,7 +183,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="Iss" Type="nvarchar(max)" Nullable="true" />
@@ -326,7 +326,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="TenantInfo" Relationship="HostingModel.TenantTenantInfo" FromRole="Tenant" ToRole="TenantInfo" />
@@ -341,7 +341,7 @@
           <Property Name="IsActive" Type="Boolean" Nullable="true" />
           <NavigationProperty Name="Hosts" Relationship="HostingModel.RoutingDiscriminatorHost" FromRole="RoutingDiscriminator" ToRole="Host" />
           <NavigationProperty Name="UriPaths" Relationship="HostingModel.RoutingDiscriminatorUriPath" FromRole="RoutingDiscriminator" ToRole="UriPath" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="Tenant" Relationship="HostingModel.TenantRoutingDiscriminator" FromRole="RoutingDiscriminator" ToRole="Tenant" />
@@ -432,7 +432,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DisplayName" Type="String" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
           <Property Name="Authority" Type="String" Nullable="true" />
           <Property Name="Realm" Type="String" Nullable="true" />
           <Property Name="ObjectId" Type="String" Nullable="true" />
@@ -448,7 +448,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="Identifier" Type="String" Nullable="true" />
@@ -465,7 +465,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="Identifier" Type="String" Nullable="true" />
@@ -509,7 +509,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="SessionId" Type="String" Nullable="true" />
@@ -536,7 +536,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="false" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="Iss" Type="String" Nullable="true" />

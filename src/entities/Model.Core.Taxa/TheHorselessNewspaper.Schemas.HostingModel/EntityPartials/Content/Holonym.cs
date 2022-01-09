@@ -1,9 +1,10 @@
-﻿using TheHorselessNewspaper.Schemas.HostingModel.Context;
+﻿using TheHorselessNewspaper.HostingModel.Context;
+using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     public partial class Holonym : IContentRowLevelSecured
-    {
+    { 
         public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
     }

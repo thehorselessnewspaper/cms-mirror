@@ -21,10 +21,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime CreatedAt { get; set; }
-        [Required]
+        public DateTime? CreatedAt { get; set; }
         public string JsonValue { get; set; }
-        [Required]
         public string JsonSchema { get; set; }
 
         [ForeignKey("Meronyms_Id")]

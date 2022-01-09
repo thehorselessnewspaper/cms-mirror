@@ -24,10 +24,10 @@ namespace Schema.Diagrams.Content
         }
     
         public System.Guid Id { get; set; }
-        public Nullable<System.Guid> DisplayName { get; set; }
+        public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public Nullable<bool> IsSoftDeleted { get; set; }
-        public System.DateTime CreatedAt { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
         public string JsonValue { get; set; }
         public string JsonSchema { get; set; }
     

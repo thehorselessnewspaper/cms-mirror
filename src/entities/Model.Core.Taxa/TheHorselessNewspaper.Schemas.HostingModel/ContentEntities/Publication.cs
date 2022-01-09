@@ -23,7 +23,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? PublishAt { get; set; }
         [Column(TypeName = "datetime")]

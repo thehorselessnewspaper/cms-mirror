@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/06/2022 19:25:30
+-- Date Created: 01/09/2022 13:38:47
 -- Generated from EDMX file: C:\src\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [THLNP_Content];
+
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -217,7 +217,7 @@ GO
 CREATE TABLE [dbo].[HorselessContents] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
-    [ObjectId] nvarchar(max)  NOT NULL,
+    [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
     [CreatedAt] datetime  NULL,
     [FilesystemAssetId] uniqueidentifier  NULL,
@@ -233,7 +233,7 @@ GO
 CREATE TABLE [dbo].[Tenants] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
-    [ObjectId] nvarchar(max)  NOT NULL,
+    [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
     [CreatedAt] datetime  NULL
 );
@@ -243,7 +243,7 @@ GO
 CREATE TABLE [dbo].[MIMETypes] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
-    [ObjectId] nvarchar(max)  NOT NULL,
+    [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
     [CreatedAt] datetime  NULL,
     [MIMETypeName] nvarchar(max)  NULL
@@ -254,10 +254,10 @@ GO
 CREATE TABLE [dbo].[FilesystemAssets] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
-    [ObjectId] nvarchar(max)  NOT NULL,
+    [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
     [CreatedAt] datetime  NULL,
-    [Filename] nvarchar(max)  NOT NULL,
+    [Filename] nvarchar(max)  NULL,
     [PublishedURL] nvarchar(max)  NULL,
     [PreviewURL] nvarchar(max)  NULL
 );
@@ -267,7 +267,7 @@ GO
 CREATE TABLE [dbo].[JSONAssets] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
-    [ObjectId] nvarchar(max)  NOT NULL,
+    [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
     [CreatedAt] datetime  NULL,
     [JsonValue] nvarchar(max)  NULL,
@@ -279,10 +279,10 @@ GO
 CREATE TABLE [dbo].[ContentCollections] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
-    [ObjectId] nvarchar(max)  NOT NULL,
+    [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
     [CreatedAt] datetime  NULL,
-    [AllowAnonymousRead] bit  NOT NULL,
+    [AllowAnonymousRead] bit  NULL,
     [IsPublished] bit  NULL,
     [PublishedURL] nvarchar(max)  NULL,
     [PreviewURL] nvarchar(max)  NULL
@@ -295,7 +295,7 @@ CREATE TABLE [dbo].[Publications] (
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
-    [CreatedAt] datetime  NOT NULL,
+    [CreatedAt] datetime  NULL,
     [PublishAt] datetime  NULL,
     [UnPublishAt] datetime  NULL,
     [IsPublished] bit  NULL,
@@ -308,7 +308,7 @@ GO
 CREATE TABLE [dbo].[Placeholders] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
-    [ObjectId] nvarchar(max)  NOT NULL,
+    [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
     [CreatedAt] datetime  NULL,
     [IsPublished] bit  NULL,
@@ -319,12 +319,12 @@ GO
 -- Creating table 'Taxons'
 CREATE TABLE [dbo].[Taxons] (
     [Id] uniqueidentifier  NOT NULL,
-    [DisplayName] uniqueidentifier  NULL,
+    [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
-    [CreatedAt] datetime  NOT NULL,
-    [JsonValue] nvarchar(max)  NOT NULL,
-    [JsonSchema] nvarchar(max)  NOT NULL
+    [CreatedAt] datetime  NULL,
+    [JsonValue] nvarchar(max)  NULL,
+    [JsonSchema] nvarchar(max)  NULL
 );
 GO
 
@@ -334,9 +334,9 @@ CREATE TABLE [dbo].[Holonyms] (
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
-    [CreatedAt] datetime  NOT NULL,
-    [JsonValue] nvarchar(max)  NOT NULL,
-    [JsonSchema] nvarchar(max)  NOT NULL
+    [CreatedAt] datetime  NULL,
+    [JsonValue] nvarchar(max)  NULL,
+    [JsonSchema] nvarchar(max)  NULL
 );
 GO
 
@@ -346,9 +346,9 @@ CREATE TABLE [dbo].[Meronyms] (
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
-    [CreatedAt] datetime  NOT NULL,
-    [JsonValue] nvarchar(max)  NOT NULL,
-    [JsonSchema] nvarchar(max)  NOT NULL
+    [CreatedAt] datetime  NULL,
+    [JsonValue] nvarchar(max)  NULL,
+    [JsonSchema] nvarchar(max)  NULL
 );
 GO
 
@@ -356,7 +356,7 @@ GO
 CREATE TABLE [dbo].[HorselessClaimsPrincipals] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
-    [ObjectId] nvarchar(max)  NOT NULL,
+    [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
     [CreatedAt] datetime  NULL,
     [Iss] nvarchar(max)  NULL,
@@ -372,7 +372,7 @@ CREATE TABLE [dbo].[NugetPackages] (
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
-    [CreatedAt] datetime  NOT NULL,
+    [CreatedAt] datetime  NULL,
     [PublishAt] datetime  NULL,
     [UnPublishAt] datetime  NULL,
     [IsPublished] bit  NULL,
@@ -387,7 +387,7 @@ GO
 CREATE TABLE [dbo].[PhantomAccessControlEntries] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
-    [ObjectId] nvarchar(max)  NOT NULL,
+    [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
     [CreatedAt] datetime  NULL,
     [IsActive] bit  NULL
@@ -398,7 +398,7 @@ GO
 CREATE TABLE [dbo].[HorselessSessions] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
-    [ObjectId] nvarchar(max)  NOT NULL,
+    [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
     [CreatedAt] datetime  NULL,
     [SessionId] nvarchar(max)  NULL,
@@ -415,7 +415,7 @@ CREATE TABLE [dbo].[NavigationMenus] (
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
-    [CreatedAt] datetime  NOT NULL,
+    [CreatedAt] datetime  NULL,
     [PublishAt] datetime  NULL,
     [UnPublishAt] datetime  NULL,
     [IsPublished] bit  NULL,
@@ -431,7 +431,7 @@ CREATE TABLE [dbo].[NavigationMenuItems] (
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
-    [CreatedAt] datetime  NOT NULL,
+    [CreatedAt] datetime  NULL,
     [PublishAt] datetime  NULL,
     [UnPublishAt] datetime  NULL,
     [IsPublished] bit  NULL,
@@ -444,12 +444,12 @@ GO
 -- Creating table 'Taxonomies'
 CREATE TABLE [dbo].[Taxonomies] (
     [Id] uniqueidentifier  NOT NULL,
-    [DisplayName] uniqueidentifier  NULL,
+    [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
-    [CreatedAt] datetime  NOT NULL,
-    [JsonValue] nvarchar(max)  NOT NULL,
-    [JsonSchema] nvarchar(max)  NOT NULL
+    [CreatedAt] datetime  NULL,
+    [JsonValue] nvarchar(max)  NULL,
+    [JsonSchema] nvarchar(max)  NULL
 );
 GO
 
@@ -457,7 +457,7 @@ GO
 CREATE TABLE [dbo].[PhantomPrincipals] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
-    [ObjectId] nvarchar(max)  NOT NULL,
+    [ObjectId] nvarchar(max)  NULL,
     [IsSoftDeleted] bit  NULL,
     [CreatedAt] datetime  NULL,
     [Iss] nvarchar(max)  NULL,

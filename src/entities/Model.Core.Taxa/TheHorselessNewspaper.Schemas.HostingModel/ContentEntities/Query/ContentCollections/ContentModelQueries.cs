@@ -88,13 +88,14 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             return entities;
         }
 
-        public async Task<T> Delete(T entity)
+        public async Task<T> Delete(string entityId)
         {
+            T? entity;
             _logger.LogDebug($"handling Delete request");
             try
             {
                 var dbSet = ((DbContext)_context).Set<T>();
-
+                entity = dbSet.Where(w => w.ObjectId == entityId).FirstOrDefault<T>();
                 var removeState = dbSet.Remove(entity);
                 var updateResult = await ((DbContext)_context).SaveChangesAsync();
             }
@@ -107,7 +108,6 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
             return await Task.FromResult<T>(entity);
         }
-
         public async Task<IEnumerable<T>> Delete(Expression<Func<T, bool>> query, bool softDelete = true, bool whatIf = true)
         {
             var ret = new List<T>();
@@ -226,6 +226,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
             return entities;
         }
+
 
     }
 }
