@@ -2,6 +2,7 @@
 using Finbuckle.MultiTenant.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 
@@ -14,12 +15,14 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
     internal partial class MSSqlContentContext : THLNPContentContext, IContentModelContext
     {
         private readonly IConfiguration _configuration;
+        public DatabaseServerFamily SqlDialect { get; set; }
 
 
         public MSSqlContentContext(DbContextOptions<MSSqlContentContext> options, IConfiguration config, Finbuckle.MultiTenant.TenantInfo tenant) : base(options, tenant)
         {
             this.TenantInfo = tenant;
             this._configuration = config;
+            this.SqlDialect = DatabaseServerFamily.IsSQLServer;
         }
 
   

@@ -1,5 +1,6 @@
 ﻿using Finbuckle.MultiTenant.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.Context
@@ -12,6 +13,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context
     /// </summary>
     internal partial interface IContentModelContext : IMultiTenantDbContext 
     {
+        // db provider discriminator
+        internal DatabaseServerFamily SqlDialect { get; set; }
+
         /// an owned type without a dbset
         /// internal DbSet<AccessControlEntry> AccessControlEntries { get; set; }
         internal DbSet<ContentCollection> ContentCollections { get; set; }

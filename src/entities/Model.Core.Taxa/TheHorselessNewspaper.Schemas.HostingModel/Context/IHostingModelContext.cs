@@ -12,7 +12,7 @@ namespace TheHorselessNewspaper.HostingModel.Context
     internal partial interface IHostingModelContext : IMultiTenantDbContext
     {
 
-
+        internal DatabaseServerFamily SqlDialect { get; set; }
         public DbSet<FilesystemAssetLocation> FilesystemAssetLocations { get; set; }
         public DbSet<HorselessClaimsPrincipal> HorselessClaimsPrincipals { get; set; }
         public DbSet<HorselessSession> HorselessSessions { get; set; }

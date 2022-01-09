@@ -9,7 +9,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 {
     internal partial class MSSQLHostingContext : THLNPHostingContext, IHostingModelContext
     {
-
+        public DatabaseServerFamily SqlDialect { get; set; }
         #region finbuckle IMultiTenantDbContext concerns 
         /// <summary>
         /// as per https://www.finbuckle.com/MultiTenant/Docs/v6.5.1/EFCore#adding-multitenant-functionality-to-an-existing-dbcontext
@@ -39,6 +39,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         {
             this.TenantInfo = tenant;
             this._configuration = config;
+            this.SqlDialect = DatabaseServerFamily.IsSQLServer;
         }
 
         void OnModelCreatingPartial(ModelBuilder builder)
