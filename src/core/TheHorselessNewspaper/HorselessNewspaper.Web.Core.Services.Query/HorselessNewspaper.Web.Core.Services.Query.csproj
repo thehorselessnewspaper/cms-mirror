@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.2.20220107.3" />
+    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.2.20220109.2" />
   </ItemGroup>
 
 
