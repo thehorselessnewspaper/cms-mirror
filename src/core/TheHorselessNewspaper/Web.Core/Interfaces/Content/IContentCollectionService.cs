@@ -14,7 +14,7 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Content
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="Entity"></typeparam>
-    internal interface IContentCollectionService<T, Entity>
+    public interface IContentCollectionService<T, Entity>
         where T : class, IQueryableContentModelOperator<Entity>, IQueryableModelOperator<Entity>
         where Entity : class, IContentRowLevelSecured
     {
