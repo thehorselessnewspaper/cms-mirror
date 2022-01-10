@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HorselessNewspaper.Web.Core.Interfaces.Content;
+using HorselessNewspaper.Web.Core.Interfaces.Controller;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
     [Route("HorselessContent")]
     internal class ContentCollectionController : 
-        ODataController
-        
+        ODataController, IContentController<ContentModel.ContentCollection>
+
     {
         private readonly IQueryableContentModelOperator<ContentModel.ContentCollection> _contentCollectionService;
         private readonly ITenantInfo _tenantInfo;
@@ -25,7 +26,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [HttpGet("Query")]
 
         // breaks openapi [HttpGet("HorselessContent/ContentCollection/$count")]
-        public async Task<ActionResult<ContentModel.ContentCollection>> Query()
+        public async Task<ActionResult<IQueryable<ContentModel.ContentCollection>>> Query()
         {
             return  Ok(await _contentCollectionService.Read());
         }
@@ -34,7 +35,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [HttpGet("GetByObjectId")]
 
         // breaks openapi [HttpGet("HorselessContent/ContentCollection/$count")]
-        public async Task<IActionResult> GetByObjectId(string objectId)
+        public async Task<ActionResult<ContentModel.ContentCollection>> GetByObjectId(string objectId)
         {
             if(!ModelState.IsValid)
             {
@@ -67,7 +68,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create([FromBody]ContentModel.ContentCollection contentCollection)
+        public async Task<ActionResult<ContentModel.ContentCollection>> Create([FromBody]ContentModel.ContentCollection contentCollection)
         {
             ContentModel.ContentCollection result;
             if (!ModelState.IsValid)
@@ -88,7 +89,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [HttpPost("Update")]
-        public async Task<IActionResult> Update([FromBody] ContentModel.ContentCollection contentCollection)
+        public async Task<ActionResult<ContentModel.ContentCollection>> Update([FromBody] ContentModel.ContentCollection contentCollection)
         {
             ContentModel.ContentCollection result;
             if (!ModelState.IsValid)
