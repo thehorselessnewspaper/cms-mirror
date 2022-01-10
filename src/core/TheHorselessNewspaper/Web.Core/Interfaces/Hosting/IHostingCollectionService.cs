@@ -15,7 +15,7 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Hosting
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="Entity"></typeparam>
-    internal class IHostingCollectionService<T, Entity>
+    internal interface IHostingCollectionService<T, Entity>
         where T : class, IQueryableHostingModelOperator<Entity>, IQueryableModelOperator<Entity>
         where Entity : class, IHostingRowLevelSecured
     {
