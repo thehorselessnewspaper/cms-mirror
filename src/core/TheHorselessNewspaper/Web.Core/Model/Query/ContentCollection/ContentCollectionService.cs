@@ -32,7 +32,7 @@ namespace HorselessNewspaper.Web.Core.Model.Query.ContentCollection
             this._logger = logger;
         }
 
-        public async Task<ActionResult<Entity>> Create([FromBody] Entity entity)
+        public async Task<Entity> Create([FromBody] Entity entity)
         {
             Entity result;
 
@@ -42,50 +42,49 @@ namespace HorselessNewspaper.Web.Core.Model.Query.ContentCollection
             }
             catch (Exception ex)
             {
-                return new BadRequestResult();
+                return await Task.FromException<Entity>(ex);
             }
 
-            var okResult = new ActionResult<Entity>(result);
-            return okResult;
+            return result;
            
         }
 
-        public async Task<ActionResult<Entity>> GetByObjectId(string objectId)
+        public async Task<Entity> GetByObjectId(string objectId)
         {
+            Entity result;
             try
             {
-                var testFind = await _contentModelService.Read(w => w.ObjectId == objectId);
+                var queryResult = await _contentModelService.Read(w => w.ObjectId == objectId);
 
-                if (testFind == null)
+                if (queryResult == null)
                 {
-                    return new NotFoundResult();
+                    throw new Exception("not found");
                 }
-                else if (testFind.First() == null)
+                else if (queryResult.First() == null)
                 {
-                    return new NotFoundResult();
+                    throw new Exception("not found");
+                }
+                else
+                {
+                    result =  queryResult.First();
                 }
             }
             catch (Exception ex)
             {
-                return new BadRequestResult();
+                throw new Exception("not found", ex);
             }
 
-            var found = await _contentModelService.Read(w => w.ObjectId == objectId);
-
-            var first = found.FirstOrDefault();
-
-            return new ActionResult<Entity>(first);
+            return result;
         }
 
-        public async Task<ActionResult<IQueryable<Entity>>> Query()
+        public async Task<IQueryable<Entity>> Query()
         {
             var result = await _contentModelService.Read();
 
-            var okResult = new ActionResult<IQueryable<Entity>>(result);
-            return okResult;
+            return result;
         }
 
-        public async Task<ActionResult<Entity>> Update([FromBody] Entity contentCollection)
+        public async Task<Entity> Update([FromBody] Entity contentCollection)
         {
             Entity result;
 
@@ -95,11 +94,10 @@ namespace HorselessNewspaper.Web.Core.Model.Query.ContentCollection
             }
             catch (Exception ex)
             {
-                return new BadRequestResult();
+                throw new Exception($"failed update {ex.Message}");
             }
 
-            var okResult = new ActionResult<Entity>(result);
-            return okResult;
+            return result;
         }
     }
 }

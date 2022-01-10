@@ -13,20 +13,13 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         ODataController , IContentController<ContentModel.ContentCollection>
 
     {
-        // private readonly IQueryableContentModelOperator<ContentModel.ContentCollection> _queryableContentCollectionService;
-        private readonly IQueryableContentModelOperator<ContentModel.ContentCollection> _contentCollectionService;
-        // private readonly IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModel.ContentCollection> _contentCollectionService;
+        private readonly IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModel.ContentCollection> _contentCollectionService;
         private readonly ITenantInfo _tenantInfo;
 
-        public ContentCollectionController(IQueryableContentModelOperator<ContentModel.ContentCollection> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
-        {
-            this._contentCollectionService = contentCollectionService;
-            this._tenantInfo = tenantInfo;
-        }
 
         public ContentCollectionController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModel.ContentCollection> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
         {
-            // this._contentCollectionService = contentCollectionService;
+            this._contentCollectionService = contentCollectionService;
             this._tenantInfo = tenantInfo;
         }
 
@@ -36,50 +29,16 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         // breaks openapi [HttpGet("HorselessContent/ContentCollection/$count")]
         public async Task<IActionResult> Query()
         {
-            var result = await _contentCollectionService.Read();
-            return  Ok();
+            var result = await _contentCollectionService.Query();
+            return  Ok(result);
         }
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
         [HttpGet("GetByObjectId")]
-
-        // breaks openapi [HttpGet("HorselessContent/ContentCollection/$count")]
         public async Task<IActionResult> GetByObjectId(string objectId)
         {
-            if(!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
 
-            try
-            {
-                var testFind = await _contentCollectionService.Read(w => w.ObjectId == objectId);
-
-                if (testFind == null)
-                {
-                    return NotFound();
-                }
-                else if (testFind.First() == null)
-                {
-                    return NotFound();
-                }
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-            var found = await _contentCollectionService.Read(w => w.ObjectId == objectId);
-
-            var first = found.FirstOrDefault();
-
-            return Ok(first);
-        }
-
-        [HttpPost("Create")]
-        public async Task<IActionResult> Create([FromBody]ContentModel.ContentCollection contentCollection)
-        {
-            ContentModel.ContentCollection result;
+            IActionResult result;
             if (!ModelState.IsValid)
             {
                 return BadRequest();
@@ -87,7 +46,20 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
             try
             {
-                result = await _contentCollectionService.Create(contentCollection);
+                var testFind = await _contentCollectionService.GetByObjectId(objectId);
+
+                if (testFind == null)
+                {
+                    return NotFound();
+                }
+                else if (testFind == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    result = Ok(testFind);
+                }
             }
             catch(Exception ex)
             {
@@ -97,10 +69,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             return Ok(result);
         }
 
-        [HttpPost("Update")]
-        public async Task<IActionResult> Update([FromBody] ContentModel.ContentCollection contentCollection)
+        [HttpPost("Create")]
+        public async Task<IActionResult> Create([FromBody]ContentModel.ContentCollection contentCollection)
         {
-            ContentModel.ContentCollection result;
             if (!ModelState.IsValid)
             {
                 return BadRequest();
@@ -108,14 +79,34 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
             try
             {
-                result = await _contentCollectionService.Update(contentCollection);
+                var createResult  = await _contentCollectionService.Create(contentCollection);
+                return Ok(createResult);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update([FromBody] ContentModel.ContentCollection contentCollection)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var updateResult = await _contentCollectionService.Update(contentCollection);
+                return Ok(updateResult);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
 
-            return Ok(result);
         }
     }
 }

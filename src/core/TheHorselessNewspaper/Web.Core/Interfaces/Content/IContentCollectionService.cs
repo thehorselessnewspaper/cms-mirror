@@ -21,12 +21,12 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Content
         where Entity : class, IContentRowLevelSecured
     {
 
-        public Task<ActionResult<Entity>> Create([FromBody] Entity entity);
+        public Task<Entity> Create([FromBody] Entity entity);
 
-        public Task<ActionResult<Entity>> GetByObjectId(string objectId);
+        public Task<Entity> GetByObjectId(string objectId);
 
-        public Task<ActionResult<IQueryable<Entity>>> Query();
+        public Task<IQueryable<Entity>> Query();
 
-        public Task<ActionResult<Entity>> Update([FromBody] Entity contentCollection);
+        public Task<Entity> Update([FromBody] Entity contentCollection);
     }
 }

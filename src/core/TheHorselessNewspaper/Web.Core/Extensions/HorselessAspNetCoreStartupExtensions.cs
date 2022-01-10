@@ -23,6 +23,8 @@ using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using System.Text.RegularExpressions;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollections;
+using HorselessNewspaper.Web.Core.Interfaces.Content;
+using HorselessNewspaper.Web.Core.Model.Query.ContentCollection;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -101,7 +103,11 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
             #endregion multitenancy as per https://www.finbuckle.com/MultiTenant/
 
+            #region content collection query services
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<ContentCollection>, ContentCollection>,
+                ContentCollectionService<IQueryableContentModelOperator<ContentCollection>, ContentCollection>>();
 
+            #endregion
 
             serviceBuilder.Services.AddSingleton<IHorselessCacheProvider<Guid, TenantDTO>, DefaultTenantCache>();
 
