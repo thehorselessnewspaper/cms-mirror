@@ -9,11 +9,13 @@ using HorselessNewspaper.Web.Core.Interfaces.Controller;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
     [Route("HorselessContent")]
-    internal class ContentCollectionController : 
-        ODataController, IContentController<ContentModel.ContentCollection>
+    public class ContentCollectionController : 
+        ODataController , IContentController<ContentModel.ContentCollection>
 
     {
+        // private readonly IQueryableContentModelOperator<ContentModel.ContentCollection> _queryableContentCollectionService;
         private readonly IQueryableContentModelOperator<ContentModel.ContentCollection> _contentCollectionService;
+        // private readonly IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModel.ContentCollection> _contentCollectionService;
         private readonly ITenantInfo _tenantInfo;
 
         public ContentCollectionController(IQueryableContentModelOperator<ContentModel.ContentCollection> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
@@ -22,20 +24,27 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             this._tenantInfo = tenantInfo;
         }
 
+        public ContentCollectionController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModel.ContentCollection> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
+        {
+            // this._contentCollectionService = contentCollectionService;
+            this._tenantInfo = tenantInfo;
+        }
+
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
         [HttpGet("Query")]
 
         // breaks openapi [HttpGet("HorselessContent/ContentCollection/$count")]
-        public async Task<ActionResult<IQueryable<ContentModel.ContentCollection>>> Query()
+        public async Task<IActionResult> Query()
         {
-            return  Ok(await _contentCollectionService.Read());
+            var result = await _contentCollectionService.Read();
+            return  Ok();
         }
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
         [HttpGet("GetByObjectId")]
 
         // breaks openapi [HttpGet("HorselessContent/ContentCollection/$count")]
-        public async Task<ActionResult<ContentModel.ContentCollection>> GetByObjectId(string objectId)
+        public async Task<IActionResult> GetByObjectId(string objectId)
         {
             if(!ModelState.IsValid)
             {
@@ -68,7 +77,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [HttpPost("Create")]
-        public async Task<ActionResult<ContentModel.ContentCollection>> Create([FromBody]ContentModel.ContentCollection contentCollection)
+        public async Task<IActionResult> Create([FromBody]ContentModel.ContentCollection contentCollection)
         {
             ContentModel.ContentCollection result;
             if (!ModelState.IsValid)
@@ -89,7 +98,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [HttpPost("Update")]
-        public async Task<ActionResult<ContentModel.ContentCollection>> Update([FromBody] ContentModel.ContentCollection contentCollection)
+        public async Task<IActionResult> Update([FromBody] ContentModel.ContentCollection contentCollection)
         {
             ContentModel.ContentCollection result;
             if (!ModelState.IsValid)

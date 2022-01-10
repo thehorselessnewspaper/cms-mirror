@@ -1,23 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace HorselessNewspaper.Web.Core.Interfaces.Controller
 {
     public interface IContentController<Entity>
     {
         [HttpPost("Create")]
-        Task<ActionResult<Entity>> Create([FromBody] Entity contentCollection);
+        Task<IActionResult> Create([FromBody] Entity contentCollection);
         [EnableQuery, HttpGet("GetByObjectId")]
-        Task<ActionResult<Entity>> GetByObjectId(string objectId);
+        Task<IActionResult> GetByObjectId(string objectId);
         [EnableQuery, HttpGet("Query")]
-        Task<ActionResult<IQueryable<Entity>>> Query();
+        Task<IActionResult> Query();
         [HttpPost("Update")]
-        Task<ActionResult<Entity>> Update([FromBody] Entity contentCollection);
+        Task<IActionResult> Update([FromBody] Entity contentCollection);
     }
 }
