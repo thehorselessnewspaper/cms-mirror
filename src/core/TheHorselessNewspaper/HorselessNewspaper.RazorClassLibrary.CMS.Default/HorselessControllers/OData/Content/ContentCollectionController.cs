@@ -1,20 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Finbuckle.MultiTenant;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
-using Finbuckle.MultiTenant;
+using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using HorselessNewspaper.Web.Core.Interfaces.Content;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
     [Route("HorselessContent")]
     internal class ContentCollectionController : 
-        ODataController, 
-        IContentCollectionController<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModel.ContentCollection>
+        ODataController
+        
     {
         private readonly IQueryableContentModelOperator<ContentModel.ContentCollection> _contentCollectionService;
         private readonly ITenantInfo _tenantInfo;
@@ -29,7 +25,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [HttpGet("Query")]
 
         // breaks openapi [HttpGet("HorselessContent/ContentCollection/$count")]
-        public async Task<IActionResult> Query()
+        public async Task<ActionResult<ContentModel.ContentCollection>> Query()
         {
             return  Ok(await _contentCollectionService.Read());
         }

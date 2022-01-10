@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,5 +20,13 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Content
         where T : class, IQueryableContentModelOperator<Entity>, IQueryableModelOperator<Entity>
         where Entity : class, IContentRowLevelSecured
     {
+
+        Task<ActionResult<Entity>> Create([FromBody] Entity entity);
+
+        Task<ActionResult<Entity>> GetByObjectId(string objectId);
+
+        Task<ActionResult<IQueryable<Entity>>> Query();
+
+        Task<ActionResult<Entity>> Update([FromBody] Entity contentCollection);
     }
 }

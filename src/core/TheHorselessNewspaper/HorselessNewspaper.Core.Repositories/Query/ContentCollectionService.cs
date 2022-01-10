@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HorselessNewspaper.Web.Core.Interfaces.Content;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +10,9 @@ using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace HorselessNewspaper.Core.Repositories.Query
 {
-    //internal class ContentCollectionServiceContentCollectionService<T, Entity> : IContentCollectionService<T, Entity>
-    //    where T : class, IQueryableContentModelOperator<Entity>, IQueryableModelOperator<Entity>
-    //    where Entity : class, IContentRowLevelSecured
-    //{
-    //}
+    internal class ContentCollectionService<T, Entity> : IContentCollectionService<T, Entity>
+        where T : class, IQueryableContentModelOperator<Entity>, IQueryableModelOperator<Entity>
+        where Entity : class, IContentRowLevelSecured
+    {
+    }
 }
