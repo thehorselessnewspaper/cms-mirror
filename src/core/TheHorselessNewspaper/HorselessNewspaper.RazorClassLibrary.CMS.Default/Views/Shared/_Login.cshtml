@@ -5,15 +5,17 @@
 }
 
 @using Microsoft.AspNetCore.Authentication
+@using HorselessNewspaper.Web.Core.Extensions;
+// @inject IAuthenticationSchemesCache authenticationSchemes;
 @model AuthenticationScheme[]
 
-@if (User.Claims == null || User.Claims.Count() == 0)
+@if (Model != null && (User.Claims == null || User.Claims.Count() == 0))
 {
     <div>
 
         <p class="lead text-right">available authorities</p>
         <div >
-            @foreach (var scheme in Model!.OrderBy(p => p.DisplayName))
+            @foreach (var scheme in Model.OrderBy(p => p.DisplayName))
             {
                 <form action="/signin" method="post">
                     <input type="hidden" name="Provider" value="@scheme.Name" />
@@ -25,7 +27,7 @@
         </div>
     </div>
 }
-else
+else if(Model != null)
 {
     <div>
         <div>Welcome, @User.Identity.Name</div>

@@ -1,30 +1,23 @@
 ﻿using Finbuckle.MultiTenant;
-using HorselessNewspaper.Core.Interfaces.Query;
 using HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.ApplicationPartsLogger;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
+using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter.Strategy;
-using HorselessNewspaper.Web.Core.ScopedServices.Content;
+using HorselessNewspaper.Web.Core.Model.Query.ContentCollection;
+using HorselessNewspaper.Web.Core.ScopedServices.AuthenticationSchemes;
 using HorselessNewspaper.Web.Core.ScopedServices.RoutingStrategy;
 using HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant;
 using HorselessNewspaper.Web.Core.SingletonServices.ViewCompiler;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
-using Microsoft.AspNetCore.OData.Edm;
-using Microsoft.AspNetCore.OData.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Runtime.Loader;
+using Microsoft.Extensions.FileSystemGlobbing;
+using Microsoft.FeatureManagement;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.Schemas.HostingModel.DTO;
-using Microsoft.FeatureManagement;
-using Microsoft.Extensions.FileSystemGlobbing;
-using Microsoft.Extensions.FileSystemGlobbing.Internal;
-using System.Text.RegularExpressions;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollections;
-using HorselessNewspaper.Web.Core.Interfaces.Content;
-using HorselessNewspaper.Web.Core.Model.Query.ContentCollection;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -124,8 +117,10 @@ namespace HorselessNewspaper.Web.Core.Extensions
                 ContentCollectionService<IQueryableContentModelOperator<MIMEType>, MIMEType>>();
             serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<NavigationMenuItem>, NavigationMenuItem>,
                  ContentCollectionService<IQueryableContentModelOperator<NavigationMenuItem>, NavigationMenuItem>>();
-            #endregion
-
+        #endregion
+         
+            serviceBuilder.Services.AddScoped<IAuthenticationSchemesCache, AuthenticationSchemesCache>();
+                        
             serviceBuilder.Services.AddSingleton<IHorselessCacheProvider<Guid, TenantDTO>, DefaultTenantCache>();
 
             // support dynamic view loading and unloading
