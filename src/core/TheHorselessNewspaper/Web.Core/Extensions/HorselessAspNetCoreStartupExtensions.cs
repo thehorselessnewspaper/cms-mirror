@@ -106,7 +106,24 @@ namespace HorselessNewspaper.Web.Core.Extensions
             #region content collection query services
             serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<ContentCollection>, ContentCollection>,
                 ContentCollectionService<IQueryableContentModelOperator<ContentCollection>, ContentCollection>>();
-
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<Tenant>, Tenant>,
+                ContentCollectionService<IQueryableContentModelOperator<Tenant>, Tenant>>();
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<FilesystemAsset>, FilesystemAsset>,
+                ContentCollectionService<IQueryableContentModelOperator<FilesystemAsset>, FilesystemAsset>>();
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<Holonym>, Holonym>,
+                ContentCollectionService<IQueryableContentModelOperator<Holonym>, Holonym>>();
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<HorselessContent>, HorselessContent>,
+                ContentCollectionService<IQueryableContentModelOperator<HorselessContent>, HorselessContent>>();
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<JSONAsset>, JSONAsset>,
+                ContentCollectionService<IQueryableContentModelOperator<JSONAsset>, JSONAsset>>();
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<Meronym>, Meronym>,
+                ContentCollectionService<IQueryableContentModelOperator<Meronym>, Meronym>>();
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<MIMEType>, MIMEType>,
+                ContentCollectionService<IQueryableContentModelOperator<MIMEType>, MIMEType>>();
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<MIMEType>, MIMEType>,
+                ContentCollectionService<IQueryableContentModelOperator<MIMEType>, MIMEType>>();
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<NavigationMenuItem>, NavigationMenuItem>,
+                 ContentCollectionService<IQueryableContentModelOperator<NavigationMenuItem>, NavigationMenuItem>>();
             #endregion
 
             serviceBuilder.Services.AddSingleton<IHorselessCacheProvider<Guid, TenantDTO>, DefaultTenantCache>();

@@ -1,24 +1,23 @@
 ﻿using Finbuckle.MultiTenant;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.OData.Routing.Controllers;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
-using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
-using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using Microsoft.AspNetCore.OData.Routing;
+using Microsoft.AspNet.OData.Routing;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Formatter;
-
+using Microsoft.AspNetCore.OData.Routing.Controllers;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    [Route("HorselessContent/ContentCollection")]
-    public class ContentCollectionController :
-        ODataController, IContentController<ContentModel.ContentCollection>
+    [Route("HorselessContent/FilesystemAsset")]
+    public class FilesystemAssetController :
+        ODataController, IContentController<ContentModel.FilesystemAsset>
     {
-        private IContentCollectionService<IQueryableContentModelOperator<ContentCollection>, ContentCollection> _contentCollectionService;
+        private IContentCollectionService<IQueryableContentModelOperator<FilesystemAsset>, FilesystemAsset> _contentCollectionService;
         private ITenantInfo _tenantInfo;
 
-        public ContentCollectionController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModel.ContentCollection> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
+        public FilesystemAssetController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.FilesystemAsset>, ContentModel.FilesystemAsset> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
         {
             this._contentCollectionService = contentCollectionService;
             this._tenantInfo = tenantInfo;
@@ -27,7 +26,6 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
         [HttpGet("Query")]
-        // breaks openapi [HttpGet("HorselessContent/ContentCollection/$count")]
         public async Task<IActionResult> Query()
         {
             var result = await _contentCollectionService.Query();
@@ -71,7 +69,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create([FromBody] ContentModel.ContentCollection contentCollection)
+        public async Task<IActionResult> Create([FromBody] ContentModel.FilesystemAsset contentCollection)
         {
             if (!ModelState.IsValid)
             {
@@ -91,7 +89,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [HttpPost("Update")]
-        public async Task<IActionResult> Update([FromBody] ContentModel.ContentCollection contentCollection)
+        public async Task<IActionResult> Update([FromBody] ContentModel.FilesystemAsset contentCollection)
         {
             if (!ModelState.IsValid)
             {

@@ -9,40 +9,111 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using Finbuckle.MultiTenant;
 using Microsoft.AspNetCore.Mvc;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using HorselessNewspaper.Web.Core.Interfaces.Content;
+using HorselessNewspaper.Web.Core.Interfaces.Controller;
+using Microsoft.AspNet.OData.Routing;
+using Microsoft.AspNetCore.OData.Formatter;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    internal class TenantController :
-        ODataController,
-        IContentCollectionController<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModel.Tenant>
+    [ODataRoutePrefix("HorselessContent/Tenant")]
+    public class TenantController :
+        ODataController, IContentController<ContentModel.Tenant>
+
     {
-        private readonly IQueryableContentModelOperator<Tenant> _tenantService;
+        private readonly IContentCollectionService<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModel.Tenant> _contentCollectionService;
         private readonly ITenantInfo _tenantInfo;
 
-        public TenantController(IQueryableContentModelOperator<ContentModel.Tenant> tenantService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
+
+        public TenantController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModel.Tenant> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
         {
-            this._tenantService = tenantService;
+            this._contentCollectionService = contentCollectionService;
             this._tenantInfo = tenantInfo;
         }
 
-        public Task<IActionResult> Create([FromBody] Tenant entity)
+
+        [Microsoft.AspNetCore.OData.Query.EnableQuery]
+        [HttpGet("Query")]
+        public async Task<IActionResult> Query()
         {
-            throw new NotImplementedException();
+            var result = await _contentCollectionService.Query();
+            return Ok(result);
         }
 
-        public Task<IActionResult> GetByObjectId(string objectId)
+        [Microsoft.AspNetCore.OData.Query.EnableQuery]
+        [HttpGet("GetByObjectId")]
+        public async Task<IActionResult> GetByObjectId([FromODataUri] string objectId)
         {
-            throw new NotImplementedException();
+
+            IActionResult result;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var testFind = await _contentCollectionService.GetByObjectId(objectId);
+
+                if (testFind == null)
+                {
+                    return NotFound();
+                }
+                else if (testFind == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    result = Ok(testFind);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(result);
         }
 
-        public Task<IActionResult> Query()
+        [HttpPost("Create")]
+        public async Task<IActionResult> Create([FromBody] ContentModel.Tenant contentCollection)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var createResult = await _contentCollectionService.Create(contentCollection);
+                return Ok(createResult);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
-        public Task<IActionResult> Update([FromBody] Tenant contentCollection)
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update([FromBody] ContentModel.Tenant contentCollection)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var updateResult = await _contentCollectionService.Update(contentCollection);
+                return Ok(updateResult);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 }

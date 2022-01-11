@@ -1,33 +1,30 @@
 ﻿using Finbuckle.MultiTenant;
+using HorselessNewspaper.Web.Core.Interfaces.Content;
+using HorselessNewspaper.Web.Core.Interfaces.Controller;
+using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Formatter;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using HorselessNewspaper.Web.Core.Interfaces.Content;
-using HorselessNewspaper.Web.Core.Interfaces.Controller;
-using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using Microsoft.AspNetCore.OData.Routing;
-using Microsoft.AspNetCore.OData.Formatter;
-
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    [Route("HorselessContent/ContentCollection")]
-    public class ContentCollectionController :
-        ODataController, IContentController<ContentModel.ContentCollection>
+    [Route("HorselessContent/HorselessSession")]
+    public class HorselessSessionController :
+        ODataController, IContentController<ContentModel.HorselessSession>
     {
-        private IContentCollectionService<IQueryableContentModelOperator<ContentCollection>, ContentCollection> _contentCollectionService;
-        private ITenantInfo _tenantInfo;
+        private readonly IContentCollectionService<IQueryableContentModelOperator<ContentModel.HorselessSession>, ContentModel.HorselessSession> _contentCollectionService;
+        private readonly ITenantInfo _tenantInfo;
 
-        public ContentCollectionController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModel.ContentCollection> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
+
+        public HorselessSessionController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.HorselessSession>, ContentModel.HorselessSession> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
         {
             this._contentCollectionService = contentCollectionService;
             this._tenantInfo = tenantInfo;
         }
 
-
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
         [HttpGet("Query")]
-        // breaks openapi [HttpGet("HorselessContent/ContentCollection/$count")]
         public async Task<IActionResult> Query()
         {
             var result = await _contentCollectionService.Query();
@@ -71,7 +68,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create([FromBody] ContentModel.ContentCollection contentCollection)
+        public async Task<IActionResult> Create([FromBody] ContentModel.HorselessSession contentCollection)
         {
             if (!ModelState.IsValid)
             {
@@ -91,7 +88,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [HttpPost("Update")]
-        public async Task<IActionResult> Update([FromBody] ContentModel.ContentCollection contentCollection)
+        public async Task<IActionResult> Update([FromBody] ContentModel.HorselessSession contentCollection)
         {
             if (!ModelState.IsValid)
             {

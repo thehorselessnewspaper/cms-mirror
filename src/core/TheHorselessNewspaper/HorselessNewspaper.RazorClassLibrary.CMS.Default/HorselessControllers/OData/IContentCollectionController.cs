@@ -21,13 +21,13 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         where T : class, IQueryableContentModelOperator<Entity>, IQueryableModelOperator<Entity>
         where Entity : class, IContentRowLevelSecured
     {
-        [HttpPost("Create")]
+        //[HttpPost("Create")]
         Task<IActionResult> Create([FromBody] Entity entity);
         [EnableQuery, HttpGet("GetByObjectId")]
         Task<IActionResult> GetByObjectId(string objectId);
         [EnableQuery, HttpGet("Query")]
         Task<IActionResult> Query();
-        [HttpPost("Update")]
+        //[HttpPost("Update")]
         Task<IActionResult> Update([FromBody] Entity contentCollection);
     }
 }

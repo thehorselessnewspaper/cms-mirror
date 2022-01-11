@@ -1,24 +1,23 @@
 ﻿using Finbuckle.MultiTenant;
+using HorselessNewspaper.Web.Core.Interfaces.Content;
+using HorselessNewspaper.Web.Core.Interfaces.Controller;
+using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Formatter;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using HorselessNewspaper.Web.Core.Interfaces.Content;
-using HorselessNewspaper.Web.Core.Interfaces.Controller;
-using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using Microsoft.AspNetCore.OData.Routing;
-using Microsoft.AspNetCore.OData.Formatter;
-
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    [Route("HorselessContent/ContentCollection")]
-    public class ContentCollectionController :
-        ODataController, IContentController<ContentModel.ContentCollection>
+    [Route("HorselessContent/Holonym")]
+    public class HolonymController :
+        ODataController, IContentController<ContentModel.Holonym>
     {
-        private IContentCollectionService<IQueryableContentModelOperator<ContentCollection>, ContentCollection> _contentCollectionService;
-        private ITenantInfo _tenantInfo;
+        private readonly IContentCollectionService<IQueryableContentModelOperator<ContentModel.Holonym>, ContentModel.Holonym> _contentCollectionService;
+        private readonly ITenantInfo _tenantInfo;
 
-        public ContentCollectionController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModel.ContentCollection> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
+
+        public HolonymController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.Holonym>, ContentModel.Holonym> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
         {
             this._contentCollectionService = contentCollectionService;
             this._tenantInfo = tenantInfo;
@@ -27,7 +26,6 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
         [HttpGet("Query")]
-        // breaks openapi [HttpGet("HorselessContent/ContentCollection/$count")]
         public async Task<IActionResult> Query()
         {
             var result = await _contentCollectionService.Query();
@@ -71,7 +69,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create([FromBody] ContentModel.ContentCollection contentCollection)
+        public async Task<IActionResult> Create([FromBody] ContentModel.Holonym contentCollection)
         {
             if (!ModelState.IsValid)
             {
@@ -91,7 +89,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [HttpPost("Update")]
-        public async Task<IActionResult> Update([FromBody] ContentModel.ContentCollection contentCollection)
+        public async Task<IActionResult> Update([FromBody] ContentModel.Holonym contentCollection)
         {
             if (!ModelState.IsValid)
             {
