@@ -1,21 +1,20 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
+﻿
 @using Microsoft.AspNetCore.Authentication
 @using HorselessNewspaper.Web.Core.Extensions;
-@*@inject IAuthenticationSchemesCache authenticationSchemes;*@
+@using HorselessNewspaper.Web.Core.ScopedServices.AuthenticationSchemes;
+@inject IAuthenticationSchemesCache authenticationSchemes;
 @model AuthenticationScheme[]
 
-@if (Model != null && (User.Claims == null || User.Claims.Count() == 0))
+@{
+    AuthenticationScheme[] registeredSchemes = await authenticationSchemes.GetExternalProvidersAsync();
+}
+@if (registeredSchemes != null && (User.Claims == null || User.Claims.Count() == 0))
 {
     <div>
 
         <p class="lead text-right">available authorities</p>
         <div >
-            @foreach (var scheme in Model.OrderBy(p => p.DisplayName))
+            @foreach (var scheme in registeredSchemes.OrderBy(p => p.DisplayName))
             {
                 <form action="/signin" method="post">
                     <input type="hidden" name="Provider" value="@scheme.Name" />
@@ -27,7 +26,7 @@
         </div>
     </div>
 }
-else if(Model != null)
+else if(registeredSchemes != null)
 {
     <div>
         <div>Welcome, @User.Identity.Name</div>

@@ -9,6 +9,7 @@ using HorselessNewspaper.Web.Core.ScopedServices.AuthenticationSchemes;
 using HorselessNewspaper.Web.Core.ScopedServices.RoutingStrategy;
 using HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant;
 using HorselessNewspaper.Web.Core.SingletonServices.ViewCompiler;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using Microsoft.Extensions.Configuration;
@@ -79,6 +80,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
             }
 
             );
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             #region multitenancy as per https://www.finbuckle.com/MultiTenant/
             serviceBuilder.Services.AddMultiTenant<Finbuckle.MultiTenant.TenantInfo>()
