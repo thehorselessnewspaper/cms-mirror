@@ -6,7 +6,7 @@
 
 @using Microsoft.AspNetCore.Authentication
 @using HorselessNewspaper.Web.Core.Extensions;
-// @inject IAuthenticationSchemesCache authenticationSchemes;
+@*@inject IAuthenticationSchemesCache authenticationSchemes;*@
 @model AuthenticationScheme[]
 
 @if (Model != null && (User.Claims == null || User.Claims.Count() == 0))
