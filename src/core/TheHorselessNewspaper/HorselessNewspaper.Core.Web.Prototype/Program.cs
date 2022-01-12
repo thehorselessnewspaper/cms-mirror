@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.OData;
 using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
 using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
 using Microsoft.AspNetCore.OData.Routing.Conventions;
+using HorselessNewspaper.RazorClassLibrary.CMS.Default;
 
 var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(builder =>
@@ -43,6 +44,13 @@ builder.Services.AddODataQueryFilter();
 var model = new HorselessOdataModel();
 var edmContent = await model.GetContentEDMModel();
 var edmHosting = await model.GetHostingEDMModel();
+
+// spa concerns 
+// as per https://www.teamscs.com/2021/05/creating-a-vue-js-net-core-web-app/
+builder.Services.AddSpaStaticFiles(options =>
+{
+    options.RootPath = "horseless-vues/dist";
+});
 
 // odata concerns
 builder.Services.AddControllers()
@@ -134,5 +142,15 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+// vue concerns
+app.UseSpaStaticFiles();
+app.UseSpa(spa =>
+{
+    spa.Options.SourcePath = "horseless-vues";
+    if (app.Environment.IsDevelopment())
+    {
+        spa.UserVueDevServer();
+    }
+});
 app.Run();
 
