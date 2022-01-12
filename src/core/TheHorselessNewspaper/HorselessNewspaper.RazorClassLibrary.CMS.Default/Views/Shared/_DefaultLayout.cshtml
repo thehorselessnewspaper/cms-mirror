@@ -30,16 +30,15 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
-                                    @{
-                    @* // support our default signin keycloak *@
-                    @* // expect to find _SignIn.cshtml in the associated *@
-                    @* // canonical keycloak horseless razorclass library *@
+                    @{
+                        @* // support our default signin keycloak *@
+                        @* // expect to find _SignIn.cshtml in the associated *@
+                        @* // canonical keycloak horseless razorclass library *@
 
-                    @* // as per https://docs.microsoft.com/en-us/aspnet/core/mvc/views/partial?view=aspnetcore-6.0 *@
-                    await Html.RenderPartialAsync("_Login");
-                }
+                        @* // as per https://docs.microsoft.com/en-us/aspnet/core/mvc/views/partial?view=aspnetcore-6.0 *@
+                        await Html.RenderPartialAsync("_Login");
+                    }
                 </div>
-
 
             </div>
         </nav>
@@ -48,20 +47,12 @@
 
         <main role="main" class="pb-3">
             @RenderBody()
+
         </main>
-        @if (User.Claims != null && User.Claims.Count() > 0)
-        {
-            <div class="container">
-                @Html.Partial("_GrapeJS")
-            </div>
-        }
+
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - Horseless.Template.MVC.CMS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

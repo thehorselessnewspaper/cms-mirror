@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://unpkg.com/grapesjs/dist/css/grapes.min.css">
-    <link rel="stylesheet" href="~/Horseless.Template.MVC.CMS.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/css/grapejs-editor.css" asp-append-version="true" />
+      <link rel="stylesheet" href="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/css/grapejs-editor.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/css/grapesjs-preset-webpage.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -36,7 +35,7 @@
                     @* // canonical keycloak horseless razorclass library *@
 
                     @* // as per https://docs.microsoft.com/en-us/aspnet/core/mvc/views/partial?view=aspnetcore-6.0 *@
-                    await Html.RenderPartialAsync("_Login");
+
                 }
                 </div>
 
@@ -44,18 +43,18 @@
             </div>
         </nav>
     </header>
-    @{
-        await Html.RenderPartialAsync("_Sidebar");
-    }
+
 
     <div class="container">
 
         <main role="main" class="pb-3">
+            @{ await Html.RenderPartialAsync("_Login");}
             @RenderBody()
         </main>
         @if (User.Claims != null && User.Claims.Count() > 0)
         {
             <div class="container">
+
                 @Html.Partial("_GrapeJS")
             </div>
         }

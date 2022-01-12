@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.FeatureManagement;
+using System.Reflection;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.Schemas.HostingModel.DTO;
@@ -31,7 +32,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
         Action<HorselessServiceBuilder> options = null, ServiceLifetime scope = ServiceLifetime.Scoped)
         {
             var serviceBuilder = new HorselessServiceBuilder(configuration, services);
-
+            
 
             serviceBuilder.Services.AddFeatureManagement();
 
@@ -41,7 +42,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
             // as per https://docs.microsoft.com/en-us/archive/msdn-magazine/2016/september/asp-net-core-feature-slices-for-asp-net-core-mvc
             // as per https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/areas?view=aspnetcore-6.0
-            services.Configure<RazorViewEngineOptions>(o =>
+            services.Configure((Action<RazorViewEngineOptions>)(o =>
             {
 
                 // o.ViewLocationFormats.Clear();
@@ -49,19 +50,37 @@ namespace HorselessNewspaper.Web.Core.Extensions
                 // configure loading HorselessViews
                 // TODO bugfix required
                 // can only discover HorselessViews folder if it already has views
-                Matcher matcher = new();
-                matcher.AddInclude("**/HorselessViews/**/*.cshtml");
-                foreach (var result in matcher.GetResultsInFullPath("../"))
-                {
-                    var split = result.Split('\\', 255);
-                    var path = string.Empty;
-                    foreach (var trimmed in split.Take(split.Count() - 1))
-                    {
-                        path = path + trimmed + "\\";
-                    }
-                    o.ViewLocationFormats.Add($"{path}{1}\\{0}" + RazorViewEngine.ViewExtension);
-                    o.ViewLocationFormats.Add($"{path}Shared\\{0}" + RazorViewEngine.ViewExtension);
-                }
+
+                //var currentDir = Directory.GetCurrentDirectory();
+                //Matcher matcher = new();
+                //matcher.AddInclude("../**/HorselessViews/**/*.cshtml");
+                //foreach (var result in matcher.GetResultsInFullPath(@"..\"))
+                //{
+                //    var split = result.Split(Path.DirectorySeparatorChar, 255);      
+                //    var path = string.Empty;
+                //    foreach (var trimmed in split.Take(split.Count() - 1))
+                //    {
+                //        path = path + trimmed + "/";
+                //    }
+
+                //    if (path.Contains("shared",StringComparison.InvariantCultureIgnoreCase))
+                //    {
+                //        var sharedPath = $"{path}" + @"/{0}" + RazorViewEngine.ViewExtension;
+                //        o.ViewLocationFormats.Add(sharedPath);
+                //    }
+                //    else
+                //    {
+                //        string item = $"{path}" + @"{1}/{0}" + RazorViewEngine.ViewExtension;
+                //        o.ViewLocationFormats.Add(item);
+                //    }
+
+
+                //}
+
+                o.ViewLocationFormats.Add
+                    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/HorselessViews/{1}/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add
+                    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/HorselessViews/Shared/{0}" + RazorViewEngine.ViewExtension);
 
                 o.ViewLocationFormats.Add
                     ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
@@ -77,7 +96,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
                     ("~/../HorselessNewspaper.Web.Core.Auth.Keycloak/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
                 o.ViewLocationFormats.Add
                     ("~/../HorselessNewspaper.Web.Core.Auth.Keycloak/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
-            }
+            })
 
             );
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

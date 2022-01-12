@@ -5,9 +5,8 @@
 .sidebar {
   height: 100%;
   width: 160px;
-  position: fixed;
+  position: absolute;
   z-index: 1;
-  top: 0;
   left: 0;
   background-color: #111;
   overflow-x: hidden;
@@ -29,7 +28,7 @@
 }
 
 /* Style the main content */
-.main {
+.sideNavBody {
   margin-left: 160px; /* Same as the width of the sidenav */
   padding: 0px 10px;
 }
@@ -37,8 +36,6 @@
 </style>
 <!-- The sidebar -->
 <div class="sidebar">
-  <a href="#home"><i class="fa fa-fw fa-home"></i> Home</a>
-  <a href="#services"><i class="fa fa-fw fa-wrench"></i> Services</a>
-  <a href="#clients"><i class="fa fa-fw fa-user"></i> Clients</a>
-  <a href="#contact"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+  <a href="#home"><i class="fa fa-fw fa-home"></i> Dashboard</a>
+  <a href="#services"><i class="fa fa-fw fa-wrench"></i> Register Tenant</a>
 </div>
