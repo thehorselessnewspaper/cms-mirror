@@ -11,12 +11,12 @@ using Microsoft.AspNetCore.Mvc;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
-using Microsoft.AspNet.OData.Routing;
+using Microsoft.AspNetCore.OData.Routing;
 using Microsoft.AspNetCore.OData.Formatter;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    [ODataRoutePrefix("HorselessContent/Tenant")]
+    [Route("HorselessContent/NavigationMenuItem")]
     public class TenantController :
         ODataController, IContentController<ContentModel.Tenant>
 

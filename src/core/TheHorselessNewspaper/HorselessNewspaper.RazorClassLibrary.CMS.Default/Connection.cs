@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
+using Microsoft.Extensions.FileSystemGlobbing;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default
 {
@@ -24,8 +25,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default
 
         public static void UserVueDevServer(this ISpaBuilder spa)
         {
-            spa.UseProxyToSpaDevelopmentServer(async () =>
+            spa.UseProxyToSpaDevelopmentServer(async ()  =>
             {
+     
                 if (IPGlobalProperties.GetIPGlobalProperties()
                         .GetActiveTcpListeners()
                         .Select(x => x.Port)
@@ -34,17 +36,28 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default
                     return DevServerEndpoint;
                 }
 
+                var currentFolder = Directory.GetCurrentDirectory();
+                Matcher matcher = new();
+                matcher.AddInclude("../../**/horseless-vues/package.json");
+                var paths = matcher.GetResultsInFullPath(currentFolder);
+                var filterdPaths = paths.Where(w => !w.Contains("debug", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+                var horselessVuesPath = Path.GetDirectoryName(filterdPaths);
+
                 var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
                 var processInfo = new ProcessStartInfo
                 {
                     FileName = isWindows ? "cmd" : "npm",
-                    Arguments = $"{(isWindows ? "/c npm " : "")}run server",
-                    WorkingDirectory = "ClientApp",
+                    Arguments = $"{(isWindows ? "/c npm " : "")}run serve",
+                    WorkingDirectory = horselessVuesPath, //"horseless-vues",
                     RedirectStandardError = true,
                     RedirectStandardInput = true,
                     RedirectStandardOutput = true,
                     UseShellExecute = false
                 };
+
+                spa.Options.SourcePath = horselessVuesPath;
+               
+                var p = processInfo.FileName;
 
                 var process = Process.Start(processInfo);
                 var tcs = new TaskCompletionSource<int>();

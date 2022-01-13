@@ -131,6 +131,16 @@ app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseSpa(spa =>
+{
+    // spa.Options.SourcePath = "horseless-vues";
+    //if (app.Environment.IsDevelopment())
+    //{
+    //    spa.UserVueDevServer();
+
+    //}
+});
+
 app.UseHorselessNewspaper(app, app.Environment, app.Configuration, options =>
 {
 
@@ -144,13 +154,6 @@ app.MapControllerRoute(
 
 // vue concerns
 app.UseSpaStaticFiles();
-app.UseSpa(spa =>
-{
-    spa.Options.SourcePath = "horseless-vues";
-    if (app.Environment.IsDevelopment())
-    {
-        spa.UserVueDevServer();
-    }
-});
+
 app.Run();
 

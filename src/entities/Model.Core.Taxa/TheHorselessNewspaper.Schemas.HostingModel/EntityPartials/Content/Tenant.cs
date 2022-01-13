@@ -3,6 +3,12 @@ using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
+
+    public enum TenantIdentifierStrategy 
+    {
+
+    }
+    
     public partial class Tenant : IContentRowLevelSecured
     {
         public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
