@@ -78,6 +78,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     options.CustomSchemaIds(type => type.ToString());
+   
 });
 
 // this hardcodes a static reference to the default horseless razor class library
