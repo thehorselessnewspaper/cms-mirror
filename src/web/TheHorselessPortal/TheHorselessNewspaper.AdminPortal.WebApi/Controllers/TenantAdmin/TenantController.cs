@@ -23,14 +23,14 @@ namespace TheHorselessNewspaper.AdminPortal.WebApi.Controllers.TenantAdmin
         public async Task<List<TenantDTO>> FilerTenantsByTenantId(List<string> tenantIds)
         {
 
-            var result = await this.TenantAdminService.GetTenants(t => tenantIds.Contains(t.TenantId));
+            var result = await this.TenantAdminService.GetTenants(t => tenantIds.Contains(t.ObjectId));
             return result;
         }
 
         public async Task<List<TenantDTO>> FilerTenantsByTenantDisplayName(List<string> tenantNames)
         {
 
-            var result = await this.TenantAdminService.GetTenants(t => tenantNames.Contains(t.TenantDisplayName));
+            var result = await this.TenantAdminService.GetTenants(t => tenantNames.Contains(t.DisplayName));
             return result;
         }
     }
