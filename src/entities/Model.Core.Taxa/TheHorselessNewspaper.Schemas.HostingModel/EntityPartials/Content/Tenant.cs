@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
@@ -6,7 +7,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
 
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum TenantIdentifierStrategy 
+    public enum TenantIdentifierStrategyName 
     {
         STATIC,
         BASE_PATH,
@@ -15,6 +16,12 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         DNS_FQDN
     }
     
+    [Owned]
+    public class TenantIdentifierStrategy
+    {
+        public TenantIdentifierStrategyName Strategy { get; set; }  
+    }
+
     public partial class Tenant : IContentRowLevelSecured
     {
         public virtual ICollection<TenantIdentifierStrategy> TenantIdentifierStrategies { get; set; }
