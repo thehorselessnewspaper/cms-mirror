@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.OData.Formatter;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    [Route("HorselessContent/NavigationMenuItem")]
+    [Route("HorselessContent/Tenant")]
     public class TenantController :
         ODataController, IContentController<ContentModel.Tenant>
 

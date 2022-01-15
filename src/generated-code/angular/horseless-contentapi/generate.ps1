@@ -1,15 +1,18 @@
 # as per https://openapi-generator.tech/docs/usage
-
+$theLibraryBuildPath = "horseless-contentapi\projects\wizardcontroller\horseless-contentapi\src"
+$theLibraryDistPath = "horseless-contentapi\dist\wizardcontroller\horseless-contentapi"
 docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate `
-    -i https://raw.githubusercontent.com/ccouzens/keycloak-openapi/main/keycloak/16.0.yml `
-    -g csharp-netcore -o /local/csharp-netcore `
-    --artifact-id "Horseless.Keycloak.Admin.Rest" `
-    --package-name "Horseless.Keycloak.Admin.Rest" `
-    --additional-properties="netCoreProjectFile=true,optionalAssemblyInfo=true,packageName=Horseless.Keycloak.Admin.Rest,targetFramework=net6.0"
+    -i https://localhost:44373/swagger/v1/swagger.json `
+    -g typescript-angular -o /local/projects `
+    -c "/local/horseless-contentapi-opts.json"
 
-    push-location csharp-netcore\src
+$npmrc = ".npmrc"
+pushd $theLibraryBuildPath
+  npm version patch -m "Upgrade to %s for reasons"
+  ng build $theLibrary --prod
+popd
 
-        # as per this clever hack https://stackoverflow.com/questions/39934405/can-i-build-multiple-projects-with-dotnet-build/51904395
-        Get-ChildItem -exclude ".vscode" | %{Write-Host -ForegroundColor DarkMagenta "Building $_..."; dotnet build $_;}
-        
-    pop-location
+pushd $theLibraryDistPath
+    npm publish
+    popd
+popd

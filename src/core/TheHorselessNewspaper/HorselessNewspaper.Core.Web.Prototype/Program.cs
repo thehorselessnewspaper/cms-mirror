@@ -9,6 +9,8 @@ using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
 using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
 using Microsoft.AspNetCore.OData.Routing.Conventions;
 using HorselessNewspaper.RazorClassLibrary.CMS.Default;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(builder =>
@@ -78,6 +80,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     options.CustomSchemaIds(type => type.ToString());
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Horseless Content API", Version = "v1" });
    
 });
 
@@ -103,6 +106,20 @@ builder.Services.AddHorselessKeycloakAuth(builder, keycloakOpts =>
 
  });
 
+// as per https://docs.microsoft.com/en-us/shows/on-net/adding-a-little-swagger-to-odata
+// as per https://github.com/OData/WebApi/issues/2024
+builder.Services.AddMvcCore(options =>
+{
+    foreach (var outputFormatter in options.OutputFormatters.OfType<OutputFormatter>().Where(x => x.SupportedMediaTypes.Count == 0))
+    {
+        outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+    }
+
+    foreach (var inputFormatter in options.InputFormatters.OfType<InputFormatter>().Where(x => x.SupportedMediaTypes.Count == 0))
+    {
+        inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+    }
+});
 
 foreach (var service in builder.Services)
 {
