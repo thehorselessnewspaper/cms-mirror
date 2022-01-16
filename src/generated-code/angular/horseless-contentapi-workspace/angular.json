@@ -3,5 +3,37 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "@wizardcontroller/horseless-contentapi-lib": {
+      "projectType": "library",
+      "root": "projects/wizardcontroller/horseless-contentapi-lib",
+      "sourceRoot": "projects/wizardcontroller/horseless-contentapi-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/wizardcontroller/horseless-contentapi-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/wizardcontroller/horseless-contentapi-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/wizardcontroller/horseless-contentapi-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/wizardcontroller/horseless-contentapi-lib/src/test.ts",
+            "tsConfig": "projects/wizardcontroller/horseless-contentapi-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/wizardcontroller/horseless-contentapi-lib/karma.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "@wizardcontroller/horseless-contentapi-lib"
 }

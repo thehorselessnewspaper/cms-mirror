@@ -2,6 +2,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "@wizardcontroller/horseless-contentapi-lib": [
+        "dist/wizardcontroller/horseless-contentapi-lib/wizardcontroller-horseless-contentapi-lib",
+        "dist/wizardcontroller/horseless-contentapi-lib"
+      ]
+    },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
