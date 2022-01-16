@@ -1,5 +1,7 @@
 # as per https://openapi-generator.tech/docs/usage
 
+# expects for azure devops
+#         npm install -g vsts-npm-auth --registry https://registry.npmjs.com --always-auth false
 # expects 
 #         .npmrc in ~/.npmrc for authenticated npm registries
 # expects 
@@ -19,14 +21,14 @@ npx @openapitools/openapi-generator-cli generate `
     -g typescript-angular -o $outputPath --skip-validate-spec 
 # popd
 
-$npmrc = ".npmrc"
-copy  $npmrc "./horseless-contentapi-workspace/dist/wizardcontroller/horseless-contentapi-lib"
+$npmrc = "horseless-contentapi-workspace/.npmrc"
 
 pushd $theLibraryBuildPath
   npm version patch -m "Upgrade to %s for reasons"
-  ng build $theLibrary --prod# ng build $theLibrary --prod
+  ng build $theLibrary --prod
 popd
 
+copy  $npmrc "./horseless-contentapi-workspace/dist/wizardcontroller/horseless-contentapi-lib"
 
 pushd $theLibraryDistPath
     npm publish
