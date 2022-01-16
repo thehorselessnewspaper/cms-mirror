@@ -8,12 +8,16 @@ using HorselessNewspaper.Web.Core.Interfaces.Controller;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using Microsoft.AspNetCore.OData.Routing;
 using Microsoft.AspNetCore.OData.Formatter;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.OData;
+
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
     [Route("HorselessContent/ContentCollection")]
+
     public class ContentCollectionController :
-        ODataController, IContentController<ContentModel.ContentCollection>
+        ODataController, IContentQueryController<ContentModel.ContentCollection>
     {
         private IContentCollectionService<IQueryableContentModelOperator<ContentCollection>, ContentCollection> _contentCollectionService;
         private ITenantInfo _tenantInfo;
@@ -36,6 +40,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
         [HttpGet("GetByObjectId")]
+        [Produces("application/json")]
         public async Task<IActionResult> GetByObjectId([FromODataUri] string objectId)
         {
 

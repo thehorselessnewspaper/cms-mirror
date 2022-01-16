@@ -3,6 +3,14 @@ using Microsoft.AspNetCore.OData.Query;
 
 namespace HorselessNewspaper.Web.Core.Interfaces.Controller
 {
+    public interface IContentQueryController<Entity>
+    {
+
+        [EnableQuery, HttpGet("Query")]
+        Task<IActionResult> Query();
+
+    }
+
     public interface IContentController<Entity>
     {
         //[HttpPost("Create")]

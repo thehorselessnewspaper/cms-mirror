@@ -16,6 +16,7 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
     [Route("HorselessContent/HorselessContent")]
+    [Produces("application/json")]
     public class HorselessContentController :
         ODataController, IContentController<ContentModel.HorselessContent>
 

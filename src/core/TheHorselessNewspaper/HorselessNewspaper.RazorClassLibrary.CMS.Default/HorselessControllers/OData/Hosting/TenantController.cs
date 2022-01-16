@@ -12,6 +12,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [Route("HorselessHosting/Tenant")]
+    [Produces("application/json")]
     public class TenantController : ODataController
     {
         private readonly IQueryableHostingModelOperator<HostingModel.Tenant> _TenantSvc;

@@ -16,6 +16,7 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
     [Route("HorselessContent/MIMEType")]
+    [Produces("application/json")]
     public class MimeTypeController :
         ODataController, IContentController<ContentModel.MIMEType>
     {

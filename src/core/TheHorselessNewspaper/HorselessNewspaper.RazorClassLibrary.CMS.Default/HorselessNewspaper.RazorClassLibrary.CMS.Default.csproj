@@ -21,6 +21,8 @@
   <!-- end spa config -->
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.OData.Versioning.ApiExplorer" Version="5.0.0" />
       <PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.0.0">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -34,9 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.3.220114.4" />
+    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.3.220115.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.1" />
-    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.2.20220114.4" />
+    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.2.20220115.7" />
   </ItemGroup>
 
   <ItemGroup>

@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.OData.Formatter;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
     [Route("HorselessContent/Tenant")]
+    [Produces("application/json")]
     public class TenantController :
         ODataController, IContentController<ContentModel.Tenant>
 
