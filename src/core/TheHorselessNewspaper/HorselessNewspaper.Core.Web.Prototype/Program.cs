@@ -162,16 +162,6 @@ app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseSpa(spa =>
-{
-    // spa.Options.SourcePath = "horseless-vues";
-    //if (app.Environment.IsDevelopment())
-    //{
-    //    spa.UserVueDevServer();
-
-    //}
-});
-
 app.UseHorselessNewspaper(app, app.Environment, app.Configuration, options =>
 {
 
@@ -183,8 +173,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// vue concerns
-app.UseSpaStaticFiles();
 
 app.Run();
 
