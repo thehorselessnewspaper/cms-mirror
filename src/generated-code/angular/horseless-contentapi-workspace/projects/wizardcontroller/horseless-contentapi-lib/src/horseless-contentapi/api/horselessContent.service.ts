@@ -92,60 +92,14 @@ export class HorselessContentService {
     }
 
     /**
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public contentHorselessContentGet(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HorselessNewspaperCoreInterfacesQueryIHorselessQueryResult1SystemCollectionsGenericList1TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection>;
-    public contentHorselessContentGet(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<HorselessNewspaperCoreInterfacesQueryIHorselessQueryResult1SystemCollectionsGenericList1TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection>>;
-    public contentHorselessContentGet(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<HorselessNewspaperCoreInterfacesQueryIHorselessQueryResult1SystemCollectionsGenericList1TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection>>;
-    public contentHorselessContentGet(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' = 'json';
-        if(localVarHttpHeaderAcceptSelected && localVarHttpHeaderAcceptSelected.startsWith('text')) {
-            responseType_ = 'text';
-        }
-
-        return this.httpClient.get<HorselessNewspaperCoreInterfacesQueryIHorselessQueryResult1SystemCollectionsGenericList1TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection>(`${this.configuration.basePath}/content/HorselessContent`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * @param theHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentHorselessContentCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentHorselessContentCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentHorselessContentCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentHorselessContentCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public horselessContentControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public horselessContentControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public horselessContentControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public horselessContentControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -213,10 +167,10 @@ export class HorselessContentService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentHorselessContentGetByObjectIdGet(objectId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentHorselessContentGetByObjectIdGet(objectId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentHorselessContentGetByObjectIdGet(objectId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentHorselessContentGetByObjectIdGet(objectId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public horselessContentControllerGetByObjectId(objectId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public horselessContentControllerGetByObjectId(objectId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public horselessContentControllerGetByObjectId(objectId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public horselessContentControllerGetByObjectId(objectId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (objectId !== undefined && objectId !== null) {
@@ -265,10 +219,56 @@ export class HorselessContentService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentHorselessContentQueryGet(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentHorselessContentQueryGet(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentHorselessContentQueryGet(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentHorselessContentQueryGet(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public horselessContentControllerGetTenantCollections(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HorselessNewspaperCoreInterfacesQueryIHorselessQueryResult1SystemCollectionsGenericList1TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection>;
+    public horselessContentControllerGetTenantCollections(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<HorselessNewspaperCoreInterfacesQueryIHorselessQueryResult1SystemCollectionsGenericList1TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection>>;
+    public horselessContentControllerGetTenantCollections(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<HorselessNewspaperCoreInterfacesQueryIHorselessQueryResult1SystemCollectionsGenericList1TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection>>;
+    public horselessContentControllerGetTenantCollections(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' = 'json';
+        if(localVarHttpHeaderAcceptSelected && localVarHttpHeaderAcceptSelected.startsWith('text')) {
+            responseType_ = 'text';
+        }
+
+        return this.httpClient.get<HorselessNewspaperCoreInterfacesQueryIHorselessQueryResult1SystemCollectionsGenericList1TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection>(`${this.configuration.basePath}/content/HorselessContent`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public horselessContentControllerQuery(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public horselessContentControllerQuery(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public horselessContentControllerQuery(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public horselessContentControllerQuery(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -312,12 +312,12 @@ export class HorselessContentService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentHorselessContentUpdatePost(horselessContentId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentHorselessContentUpdatePost(horselessContentId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentHorselessContentUpdatePost(horselessContentId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentHorselessContentUpdatePost(horselessContentId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public horselessContentControllerUpdate(horselessContentId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public horselessContentControllerUpdate(horselessContentId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public horselessContentControllerUpdate(horselessContentId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public horselessContentControllerUpdate(horselessContentId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (horselessContentId === null || horselessContentId === undefined) {
-            throw new Error('Required parameter horselessContentId was null or undefined when calling horselessContentHorselessContentUpdatePost.');
+            throw new Error('Required parameter horselessContentId was null or undefined when calling horselessContentControllerUpdate.');
         }
 
         let localVarHeaders = this.defaultHeaders;

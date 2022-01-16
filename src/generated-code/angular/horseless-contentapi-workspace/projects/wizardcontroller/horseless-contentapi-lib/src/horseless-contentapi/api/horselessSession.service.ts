@@ -92,10 +92,10 @@ export class HorselessSessionService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentHorselessSessionCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentHorselessSessionCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentHorselessSessionCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentHorselessSessionCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public horselessSessionControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public horselessSessionControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public horselessSessionControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public horselessSessionControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -163,10 +163,10 @@ export class HorselessSessionService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentHorselessSessionGetByObjectIdGet(objectId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentHorselessSessionGetByObjectIdGet(objectId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentHorselessSessionGetByObjectIdGet(objectId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentHorselessSessionGetByObjectIdGet(objectId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public horselessSessionControllerGetByObjectId(objectId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public horselessSessionControllerGetByObjectId(objectId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public horselessSessionControllerGetByObjectId(objectId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public horselessSessionControllerGetByObjectId(objectId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (objectId !== undefined && objectId !== null) {
@@ -215,10 +215,10 @@ export class HorselessSessionService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentHorselessSessionQueryGet(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentHorselessSessionQueryGet(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentHorselessSessionQueryGet(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentHorselessSessionQueryGet(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public horselessSessionControllerQuery(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public horselessSessionControllerQuery(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public horselessSessionControllerQuery(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public horselessSessionControllerQuery(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -262,12 +262,12 @@ export class HorselessSessionService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentHorselessSessionUpdatePost(horselessSessionId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentHorselessSessionUpdatePost(horselessSessionId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentHorselessSessionUpdatePost(horselessSessionId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentHorselessSessionUpdatePost(horselessSessionId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public horselessSessionControllerUpdate(horselessSessionId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public horselessSessionControllerUpdate(horselessSessionId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public horselessSessionControllerUpdate(horselessSessionId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public horselessSessionControllerUpdate(horselessSessionId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession?: TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessSession, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (horselessSessionId === null || horselessSessionId === undefined) {
-            throw new Error('Required parameter horselessSessionId was null or undefined when calling horselessContentHorselessSessionUpdatePost.');
+            throw new Error('Required parameter horselessSessionId was null or undefined when calling horselessSessionControllerUpdate.');
         }
 
         let localVarHeaders = this.defaultHeaders;

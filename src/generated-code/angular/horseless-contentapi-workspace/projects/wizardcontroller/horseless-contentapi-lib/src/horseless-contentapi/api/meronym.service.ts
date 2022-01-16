@@ -92,10 +92,10 @@ export class MeronymService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentMeronymCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesMeronym?: TheHorselessNewspaperSchemasContentModelContentEntitiesMeronym, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentMeronymCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesMeronym?: TheHorselessNewspaperSchemasContentModelContentEntitiesMeronym, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentMeronymCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesMeronym?: TheHorselessNewspaperSchemasContentModelContentEntitiesMeronym, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentMeronymCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesMeronym?: TheHorselessNewspaperSchemasContentModelContentEntitiesMeronym, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public meronymControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesMeronym?: TheHorselessNewspaperSchemasContentModelContentEntitiesMeronym, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public meronymControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesMeronym?: TheHorselessNewspaperSchemasContentModelContentEntitiesMeronym, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public meronymControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesMeronym?: TheHorselessNewspaperSchemasContentModelContentEntitiesMeronym, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public meronymControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesMeronym?: TheHorselessNewspaperSchemasContentModelContentEntitiesMeronym, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -163,10 +163,10 @@ export class MeronymService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentMeronymGetByObjectIdGet(objectId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentMeronymGetByObjectIdGet(objectId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentMeronymGetByObjectIdGet(objectId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentMeronymGetByObjectIdGet(objectId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public meronymControllerGetByObjectId(objectId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public meronymControllerGetByObjectId(objectId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public meronymControllerGetByObjectId(objectId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public meronymControllerGetByObjectId(objectId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (objectId !== undefined && objectId !== null) {
@@ -215,10 +215,10 @@ export class MeronymService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentMeronymQueryGet(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentMeronymQueryGet(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentMeronymQueryGet(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentMeronymQueryGet(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public meronymControllerQuery(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public meronymControllerQuery(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public meronymControllerQuery(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public meronymControllerQuery(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -262,12 +262,12 @@ export class MeronymService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentMeronymUpdatePost(meronymId: string, theHorselessNewspaperSchemasContentModelContentEntitiesMeronym?: TheHorselessNewspaperSchemasContentModelContentEntitiesMeronym, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentMeronymUpdatePost(meronymId: string, theHorselessNewspaperSchemasContentModelContentEntitiesMeronym?: TheHorselessNewspaperSchemasContentModelContentEntitiesMeronym, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentMeronymUpdatePost(meronymId: string, theHorselessNewspaperSchemasContentModelContentEntitiesMeronym?: TheHorselessNewspaperSchemasContentModelContentEntitiesMeronym, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentMeronymUpdatePost(meronymId: string, theHorselessNewspaperSchemasContentModelContentEntitiesMeronym?: TheHorselessNewspaperSchemasContentModelContentEntitiesMeronym, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public meronymControllerUpdate(meronymId: string, theHorselessNewspaperSchemasContentModelContentEntitiesMeronym?: TheHorselessNewspaperSchemasContentModelContentEntitiesMeronym, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public meronymControllerUpdate(meronymId: string, theHorselessNewspaperSchemasContentModelContentEntitiesMeronym?: TheHorselessNewspaperSchemasContentModelContentEntitiesMeronym, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public meronymControllerUpdate(meronymId: string, theHorselessNewspaperSchemasContentModelContentEntitiesMeronym?: TheHorselessNewspaperSchemasContentModelContentEntitiesMeronym, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public meronymControllerUpdate(meronymId: string, theHorselessNewspaperSchemasContentModelContentEntitiesMeronym?: TheHorselessNewspaperSchemasContentModelContentEntitiesMeronym, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (meronymId === null || meronymId === undefined) {
-            throw new Error('Required parameter meronymId was null or undefined when calling horselessContentMeronymUpdatePost.');
+            throw new Error('Required parameter meronymId was null or undefined when calling meronymControllerUpdate.');
         }
 
         let localVarHeaders = this.defaultHeaders;

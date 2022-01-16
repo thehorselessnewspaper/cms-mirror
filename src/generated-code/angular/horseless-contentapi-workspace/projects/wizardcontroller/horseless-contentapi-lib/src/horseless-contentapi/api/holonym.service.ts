@@ -92,10 +92,10 @@ export class HolonymService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentHolonymCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesHolonym?: TheHorselessNewspaperSchemasContentModelContentEntitiesHolonym, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentHolonymCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesHolonym?: TheHorselessNewspaperSchemasContentModelContentEntitiesHolonym, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentHolonymCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesHolonym?: TheHorselessNewspaperSchemasContentModelContentEntitiesHolonym, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentHolonymCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesHolonym?: TheHorselessNewspaperSchemasContentModelContentEntitiesHolonym, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public holonymControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesHolonym?: TheHorselessNewspaperSchemasContentModelContentEntitiesHolonym, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public holonymControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesHolonym?: TheHorselessNewspaperSchemasContentModelContentEntitiesHolonym, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public holonymControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesHolonym?: TheHorselessNewspaperSchemasContentModelContentEntitiesHolonym, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public holonymControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesHolonym?: TheHorselessNewspaperSchemasContentModelContentEntitiesHolonym, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -163,10 +163,10 @@ export class HolonymService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentHolonymGetByObjectIdGet(objectId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentHolonymGetByObjectIdGet(objectId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentHolonymGetByObjectIdGet(objectId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentHolonymGetByObjectIdGet(objectId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public holonymControllerGetByObjectId(objectId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public holonymControllerGetByObjectId(objectId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public holonymControllerGetByObjectId(objectId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public holonymControllerGetByObjectId(objectId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (objectId !== undefined && objectId !== null) {
@@ -215,10 +215,10 @@ export class HolonymService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentHolonymQueryGet(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentHolonymQueryGet(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentHolonymQueryGet(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentHolonymQueryGet(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public holonymControllerQuery(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public holonymControllerQuery(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public holonymControllerQuery(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public holonymControllerQuery(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -262,12 +262,12 @@ export class HolonymService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentHolonymUpdatePost(holonymId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHolonym?: TheHorselessNewspaperSchemasContentModelContentEntitiesHolonym, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentHolonymUpdatePost(holonymId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHolonym?: TheHorselessNewspaperSchemasContentModelContentEntitiesHolonym, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentHolonymUpdatePost(holonymId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHolonym?: TheHorselessNewspaperSchemasContentModelContentEntitiesHolonym, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentHolonymUpdatePost(holonymId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHolonym?: TheHorselessNewspaperSchemasContentModelContentEntitiesHolonym, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public holonymControllerUpdate(holonymId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHolonym?: TheHorselessNewspaperSchemasContentModelContentEntitiesHolonym, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public holonymControllerUpdate(holonymId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHolonym?: TheHorselessNewspaperSchemasContentModelContentEntitiesHolonym, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public holonymControllerUpdate(holonymId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHolonym?: TheHorselessNewspaperSchemasContentModelContentEntitiesHolonym, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public holonymControllerUpdate(holonymId: string, theHorselessNewspaperSchemasContentModelContentEntitiesHolonym?: TheHorselessNewspaperSchemasContentModelContentEntitiesHolonym, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (holonymId === null || holonymId === undefined) {
-            throw new Error('Required parameter holonymId was null or undefined when calling horselessContentHolonymUpdatePost.');
+            throw new Error('Required parameter holonymId was null or undefined when calling holonymControllerUpdate.');
         }
 
         let localVarHeaders = this.defaultHeaders;

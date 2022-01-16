@@ -92,10 +92,10 @@ export class NavigationMenuItemService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentNavigationMenuItemCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem?: TheHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentNavigationMenuItemCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem?: TheHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentNavigationMenuItemCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem?: TheHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentNavigationMenuItemCreatePost(theHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem?: TheHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public navigationMenuItemControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem?: TheHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public navigationMenuItemControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem?: TheHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public navigationMenuItemControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem?: TheHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public navigationMenuItemControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem?: TheHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -163,10 +163,10 @@ export class NavigationMenuItemService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentNavigationMenuItemGetByObjectIdGet(objectId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentNavigationMenuItemGetByObjectIdGet(objectId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentNavigationMenuItemGetByObjectIdGet(objectId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentNavigationMenuItemGetByObjectIdGet(objectId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public navigationMenuItemControllerGetByObjectId(objectId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public navigationMenuItemControllerGetByObjectId(objectId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public navigationMenuItemControllerGetByObjectId(objectId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public navigationMenuItemControllerGetByObjectId(objectId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (objectId !== undefined && objectId !== null) {
@@ -215,10 +215,10 @@ export class NavigationMenuItemService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentNavigationMenuItemQueryGet(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentNavigationMenuItemQueryGet(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentNavigationMenuItemQueryGet(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentNavigationMenuItemQueryGet(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public navigationMenuItemControllerQuery(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public navigationMenuItemControllerQuery(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public navigationMenuItemControllerQuery(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public navigationMenuItemControllerQuery(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -262,12 +262,12 @@ export class NavigationMenuItemService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public horselessContentNavigationMenuItemUpdatePost(navigationMenuItemId: string, theHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem?: TheHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public horselessContentNavigationMenuItemUpdatePost(navigationMenuItemId: string, theHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem?: TheHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public horselessContentNavigationMenuItemUpdatePost(navigationMenuItemId: string, theHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem?: TheHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public horselessContentNavigationMenuItemUpdatePost(navigationMenuItemId: string, theHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem?: TheHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public navigationMenuItemControllerUpdate(navigationMenuItemId: string, theHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem?: TheHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public navigationMenuItemControllerUpdate(navigationMenuItemId: string, theHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem?: TheHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public navigationMenuItemControllerUpdate(navigationMenuItemId: string, theHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem?: TheHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public navigationMenuItemControllerUpdate(navigationMenuItemId: string, theHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem?: TheHorselessNewspaperSchemasContentModelContentEntitiesNavigationMenuItem, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (navigationMenuItemId === null || navigationMenuItemId === undefined) {
-            throw new Error('Required parameter navigationMenuItemId was null or undefined when calling horselessContentNavigationMenuItemUpdatePost.');
+            throw new Error('Required parameter navigationMenuItemId was null or undefined when calling navigationMenuItemControllerUpdate.');
         }
 
         let localVarHeaders = this.defaultHeaders;
