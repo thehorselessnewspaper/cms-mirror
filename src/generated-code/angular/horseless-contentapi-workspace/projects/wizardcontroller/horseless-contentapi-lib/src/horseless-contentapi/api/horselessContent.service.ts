@@ -19,10 +19,6 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { HorselessNewspaperCoreInterfacesQueryIHorselessQueryResult1SystemCollectionsGenericList1TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection } from '../model/horselessNewspaperCoreInterfacesQueryIHorselessQueryResult1SystemCollectionsGenericList1TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection';
-// @ts-ignore
-import { MicrosoftAspNetCoreMvcProblemDetails } from '../model/microsoftAspNetCoreMvcProblemDetails';
-// @ts-ignore
 import { TheHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent } from '../model/theHorselessNewspaperSchemasContentModelContentEntitiesHorselessContent';
 
 // @ts-ignore
@@ -122,22 +118,7 @@ export class HorselessContentService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
-            'application/json;odata.metadata=minimal;odata.streaming=true',
-            'application/json;odata.metadata=minimal;odata.streaming=false',
-            'application/json;odata.metadata=minimal',
-            'application/json;odata.metadata=full;odata.streaming=true',
-            'application/json;odata.metadata=full;odata.streaming=false',
-            'application/json;odata.metadata=full',
-            'application/json;odata.metadata=none;odata.streaming=true',
-            'application/json;odata.metadata=none;odata.streaming=false',
-            'application/json;odata.metadata=none',
-            'application/json;odata.streaming=true',
-            'application/json;odata.streaming=false',
-            'application/json',
-            'application/xml',
-            'text/plain',
-            'text/json',
-            'application/_*+json'
+            'application/json'
         ];
         const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected !== undefined) {
@@ -206,52 +187,6 @@ export class HorselessContentService {
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public horselessContentControllerGetTenantCollections(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HorselessNewspaperCoreInterfacesQueryIHorselessQueryResult1SystemCollectionsGenericList1TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection>;
-    public horselessContentControllerGetTenantCollections(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<HorselessNewspaperCoreInterfacesQueryIHorselessQueryResult1SystemCollectionsGenericList1TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection>>;
-    public horselessContentControllerGetTenantCollections(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<HorselessNewspaperCoreInterfacesQueryIHorselessQueryResult1SystemCollectionsGenericList1TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection>>;
-    public horselessContentControllerGetTenantCollections(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' = 'json';
-        if(localVarHttpHeaderAcceptSelected && localVarHttpHeaderAcceptSelected.startsWith('text')) {
-            responseType_ = 'text';
-        }
-
-        return this.httpClient.get<HorselessNewspaperCoreInterfacesQueryIHorselessQueryResult1SystemCollectionsGenericList1TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection>(`${this.configuration.basePath}/content/HorselessContent`,
-            {
-                context: localVarHttpContext,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -341,22 +276,7 @@ export class HorselessContentService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
-            'application/json;odata.metadata=minimal;odata.streaming=true',
-            'application/json;odata.metadata=minimal;odata.streaming=false',
-            'application/json;odata.metadata=minimal',
-            'application/json;odata.metadata=full;odata.streaming=true',
-            'application/json;odata.metadata=full;odata.streaming=false',
-            'application/json;odata.metadata=full',
-            'application/json;odata.metadata=none;odata.streaming=true',
-            'application/json;odata.metadata=none;odata.streaming=false',
-            'application/json;odata.metadata=none',
-            'application/json;odata.streaming=true',
-            'application/json;odata.streaming=false',
-            'application/json',
-            'application/xml',
-            'text/plain',
-            'text/json',
-            'application/_*+json'
+            'application/json'
         ];
         const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected !== undefined) {

@@ -77,6 +77,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [HttpPost("Create")]
+        [Consumes("application/json")]
         public async Task<IActionResult> Create([FromBody] ContentModel.Tenant contentCollection)
         {
             if (!ModelState.IsValid)
@@ -97,6 +98,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [HttpPost("Update")]
+        [Consumes("application/json")]
         public async Task<IActionResult> Update([FromRoute] string contentCollectionId, [FromBody] ContentModel.Tenant contentCollection)
         {
             if (!ModelState.IsValid)

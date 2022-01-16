@@ -2,6 +2,10 @@
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.0.
 
+it is the angular client side rest library for the horseless newspaper
+
+use it to connect to the horseless content entities
+
 ## Code scaffolding
 
 Run `ng generate component component-name --project horseless-contentapi-lib` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project horseless-contentapi-lib`.

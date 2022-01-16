@@ -30,6 +30,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [HttpPost("Create")]
+        [Consumes("application/json")]
         public async Task<IActionResult> Post([FromBody]  HostingModel.Tenant tenant)
         {
             return Ok(await _TenantSvc.Create(tenant));

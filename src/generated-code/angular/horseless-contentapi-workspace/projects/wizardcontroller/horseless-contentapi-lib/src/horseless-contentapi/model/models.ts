@@ -1,5 +1,3 @@
-export * from './horselessNewspaperCoreInterfacesQueryIHorselessQueryResult1SystemCollectionsGenericList1TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection';
-export * from './microsoftAspNetCoreMvcProblemDetails';
 export * from './theHorselessNewspaperSchemasContentModelContentEntitiesACEPermission';
 export * from './theHorselessNewspaperSchemasContentModelContentEntitiesACEPermissionScope';
 export * from './theHorselessNewspaperSchemasContentModelContentEntitiesACEPermissionType';

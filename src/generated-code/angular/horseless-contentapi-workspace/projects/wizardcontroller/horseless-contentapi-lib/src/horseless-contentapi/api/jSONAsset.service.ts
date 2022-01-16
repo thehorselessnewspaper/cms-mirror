@@ -118,22 +118,7 @@ export class JSONAssetService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
-            'application/json;odata.metadata=minimal;odata.streaming=true',
-            'application/json;odata.metadata=minimal;odata.streaming=false',
-            'application/json;odata.metadata=minimal',
-            'application/json;odata.metadata=full;odata.streaming=true',
-            'application/json;odata.metadata=full;odata.streaming=false',
-            'application/json;odata.metadata=full',
-            'application/json;odata.metadata=none;odata.streaming=true',
-            'application/json;odata.metadata=none;odata.streaming=false',
-            'application/json;odata.metadata=none',
-            'application/json;odata.streaming=true',
-            'application/json;odata.streaming=false',
-            'application/json',
-            'application/xml',
-            'text/plain',
-            'text/json',
-            'application/_*+json'
+            'application/json'
         ];
         const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected !== undefined) {
@@ -291,22 +276,7 @@ export class JSONAssetService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
-            'application/json;odata.metadata=minimal;odata.streaming=true',
-            'application/json;odata.metadata=minimal;odata.streaming=false',
-            'application/json;odata.metadata=minimal',
-            'application/json;odata.metadata=full;odata.streaming=true',
-            'application/json;odata.metadata=full;odata.streaming=false',
-            'application/json;odata.metadata=full',
-            'application/json;odata.metadata=none;odata.streaming=true',
-            'application/json;odata.metadata=none;odata.streaming=false',
-            'application/json;odata.metadata=none',
-            'application/json;odata.streaming=true',
-            'application/json;odata.streaming=false',
-            'application/json',
-            'application/xml',
-            'text/plain',
-            'text/json',
-            'application/_*+json'
+            'application/json'
         ];
         const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected !== undefined) {
