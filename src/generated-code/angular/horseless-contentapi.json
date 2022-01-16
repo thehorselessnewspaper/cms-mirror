@@ -1,0 +1,4763 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Horseless Content API",
+    "version": "v1"
+  },
+  "paths": {
+    "/HorselessContent/ContentCollection/Query": {
+      "get": {
+        "tags": [
+          "ContentCollection"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/ContentCollection/GetByObjectId": {
+      "get": {
+        "tags": [
+          "ContentCollection"
+        ],
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/ContentCollection/Create": {
+      "post": {
+        "tags": [
+          "ContentCollection"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/ContentCollection/Update": {
+      "post": {
+        "tags": [
+          "ContentCollection"
+        ],
+        "parameters": [
+          {
+            "name": "contentCollectionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/FilesystemAsset/Query": {
+      "get": {
+        "tags": [
+          "FilesystemAsset"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/FilesystemAsset/GetByObjectId": {
+      "get": {
+        "tags": [
+          "FilesystemAsset"
+        ],
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/FilesystemAsset/Create": {
+      "post": {
+        "tags": [
+          "FilesystemAsset"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/FilesystemAsset/Update": {
+      "post": {
+        "tags": [
+          "FilesystemAsset"
+        ],
+        "parameters": [
+          {
+            "name": "filesystemAssetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/Holonym/Query": {
+      "get": {
+        "tags": [
+          "Holonym"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/Holonym/GetByObjectId": {
+      "get": {
+        "tags": [
+          "Holonym"
+        ],
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/Holonym/Create": {
+      "post": {
+        "tags": [
+          "Holonym"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/Holonym/Update": {
+      "post": {
+        "tags": [
+          "Holonym"
+        ],
+        "parameters": [
+          {
+            "name": "holonymId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/HorselessContent/Query": {
+      "get": {
+        "tags": [
+          "HorselessContent"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/HorselessContent/GetByObjectId": {
+      "get": {
+        "tags": [
+          "HorselessContent"
+        ],
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/HorselessContent/Create": {
+      "post": {
+        "tags": [
+          "HorselessContent"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/HorselessContent/Update": {
+      "post": {
+        "tags": [
+          "HorselessContent"
+        ],
+        "parameters": [
+          {
+            "name": "horselessContentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/content/HorselessContent": {
+      "get": {
+        "tags": [
+          "HorselessContent"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HorselessNewspaper.Core.Interfaces.Query.IHorselessQueryResult`1[System.Collections.Generic.List`1[TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection]]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/HorselessContent/HorselessSession/Query": {
+      "get": {
+        "tags": [
+          "HorselessSession"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/HorselessSession/GetByObjectId": {
+      "get": {
+        "tags": [
+          "HorselessSession"
+        ],
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/HorselessSession/Create": {
+      "post": {
+        "tags": [
+          "HorselessSession"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/HorselessSession/Update": {
+      "post": {
+        "tags": [
+          "HorselessSession"
+        ],
+        "parameters": [
+          {
+            "name": "horselessSessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/JSONAsset/Query": {
+      "get": {
+        "tags": [
+          "JSONAsset"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/JSONAsset/GetByObjectId": {
+      "get": {
+        "tags": [
+          "JSONAsset"
+        ],
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/JSONAsset/Create": {
+      "post": {
+        "tags": [
+          "JSONAsset"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/JSONAsset/Update": {
+      "post": {
+        "tags": [
+          "JSONAsset"
+        ],
+        "parameters": [
+          {
+            "name": "jsonAssetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/Meronym/Query": {
+      "get": {
+        "tags": [
+          "Meronym"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/Meronym/GetByObjectId": {
+      "get": {
+        "tags": [
+          "Meronym"
+        ],
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/Meronym/Create": {
+      "post": {
+        "tags": [
+          "Meronym"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/Meronym/Update": {
+      "post": {
+        "tags": [
+          "Meronym"
+        ],
+        "parameters": [
+          {
+            "name": "meronymId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/MIMEType/Query": {
+      "get": {
+        "tags": [
+          "MimeType"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/MIMEType/GetByObjectId": {
+      "get": {
+        "tags": [
+          "MimeType"
+        ],
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/MIMEType/Create": {
+      "post": {
+        "tags": [
+          "MimeType"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/MIMEType/Update": {
+      "post": {
+        "tags": [
+          "MimeType"
+        ],
+        "parameters": [
+          {
+            "name": "mimeTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/NavigationMenu/Query": {
+      "get": {
+        "tags": [
+          "NavigationMenu"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/NavigationMenu/GetByObjectId": {
+      "get": {
+        "tags": [
+          "NavigationMenu"
+        ],
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/NavigationMenu/Create": {
+      "post": {
+        "tags": [
+          "NavigationMenu"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/NavigationMenu/Update": {
+      "post": {
+        "tags": [
+          "NavigationMenu"
+        ],
+        "parameters": [
+          {
+            "name": "navigationMenuId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/NavigationMenuItem/Query": {
+      "get": {
+        "tags": [
+          "NavigationMenuItem"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/NavigationMenuItem/GetByObjectId": {
+      "get": {
+        "tags": [
+          "NavigationMenuItem"
+        ],
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/NavigationMenuItem/Create": {
+      "post": {
+        "tags": [
+          "NavigationMenuItem"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/NavigationMenuItem/Update": {
+      "post": {
+        "tags": [
+          "NavigationMenuItem"
+        ],
+        "parameters": [
+          {
+            "name": "navigationMenuItemId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessHosting/Tenant/Query": {
+      "get": {
+        "tags": [
+          "Tenant"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/Tenant": {
+      "get": {
+        "tags": [
+          "Tenant"
+        ],
+        "operationId": "HorselessContent/Tenant",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Tenant"
+        ],
+        "operationId": "HorselessContent/Tenant",
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/Tenant/$count": {
+      "get": {
+        "tags": [
+          "Tenant"
+        ],
+        "operationId": "HorselessContent/Tenant/$count",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessHosting/Tenant/Create": {
+      "post": {
+        "tags": [
+          "Tenant"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/Tenant/Query": {
+      "get": {
+        "tags": [
+          "Tenant"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/Tenant/GetByObjectId": {
+      "get": {
+        "tags": [
+          "Tenant"
+        ],
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/Tenant/Create": {
+      "post": {
+        "tags": [
+          "Tenant"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/HorselessContent/Tenant/Update": {
+      "post": {
+        "tags": [
+          "Tenant"
+        ],
+        "parameters": [
+          {
+            "name": "contentCollectionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;odata.metadata=minimal;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=minimal;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=minimal": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=full;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=full": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=none;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.metadata=none": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.streaming=true": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json;odata.streaming=false": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HorselessNewspaper.Core.Interfaces.Query.IHorselessQueryResult`1[System.Collections.Generic.List`1[TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection]]": {
+        "type": "object",
+        "properties": {
+          "eTag": {
+            "type": "string",
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "payload": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+            },
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Microsoft.AspNetCore.Mvc.ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry": {
+        "required": [
+          "objectId"
+        ],
+        "type": "object",
+        "properties": {
+          "scope": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ACEPermissionScope"
+          },
+          "permission": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ACEPermission"
+          },
+          "permissionType": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ACEPermissionType"
+          },
+          "commonScopeSubjectPrincipals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string"
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ACEPermission": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ACEPermissionScope": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ACEPermissionType": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "allowAnonymousRead": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isPublished": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "publishedURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "previewURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "childContentCollections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+            },
+            "nullable": true
+          },
+          "mimeContents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+            },
+            "nullable": true
+          },
+          "parentContentCollections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+            },
+            "nullable": true
+          },
+          "publications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Publication"
+            },
+            "nullable": true
+          },
+          "taxonomies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Taxonomy"
+            },
+            "nullable": true
+          },
+          "tenants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+            },
+            "nullable": true
+          },
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "filename": {
+            "type": "string",
+            "nullable": true
+          },
+          "publishedURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "previewURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "horselessContents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+            },
+            "nullable": true
+          },
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "jsonValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "jsonSchema": {
+            "type": "string",
+            "nullable": true
+          },
+          "meronyms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym"
+            },
+            "nullable": true
+          },
+          "taxons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Taxon"
+            },
+            "nullable": true
+          },
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessClaimsPrincipal": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "iss": {
+            "type": "string",
+            "nullable": true
+          },
+          "aud": {
+            "type": "string",
+            "nullable": true
+          },
+          "sub": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenantId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "tenant": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "filesystemAssetId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "jsonAssetId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "mimeTypeId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "isPublished": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "publishedURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "previewURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "filesystemAsset": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset"
+          },
+          "jsonAsset": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset"
+          },
+          "mimeType": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType"
+          },
+          "contentCollections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+            },
+            "nullable": true
+          },
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "sessionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "iss": {
+            "type": "string",
+            "nullable": true
+          },
+          "aud": {
+            "type": "string",
+            "nullable": true
+          },
+          "sub": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAnonymous": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "jsonValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "jsonSchema": {
+            "type": "string",
+            "nullable": true
+          },
+          "horselessContents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+            },
+            "nullable": true
+          },
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Meronym": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "jsonValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "jsonSchema": {
+            "type": "string",
+            "nullable": true
+          },
+          "holonyms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+            },
+            "nullable": true
+          },
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "mimeTypeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "horselessContents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessContent"
+            },
+            "nullable": true
+          },
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "publishAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "unPublishAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isPublished": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "menuLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "menuDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "menuAltText": {
+            "type": "string",
+            "nullable": true
+          },
+          "childNavigationMenuItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+            },
+            "nullable": true
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+            },
+            "nullable": true
+          },
+          "parents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+            },
+            "nullable": true
+          },
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "publishAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "unPublishAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isPublished": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "menuItemLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "menuItemDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "menuItemAltText": {
+            "type": "string",
+            "nullable": true
+          },
+          "childNavigationItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+            },
+            "nullable": true
+          },
+          "parentNavigationItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem"
+            },
+            "nullable": true
+          },
+          "parentNavigationMenus": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu"
+            },
+            "nullable": true
+          },
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "iss": {
+            "type": "string",
+            "nullable": true
+          },
+          "aud": {
+            "type": "string",
+            "nullable": true
+          },
+          "sub": {
+            "type": "string",
+            "nullable": true
+          },
+          "horselessClaimsPrincipal": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessClaimsPrincipal"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Publication": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "publishAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "unPublishAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isPublished": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "publishedURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "previewURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "contentCollections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+            },
+            "nullable": true
+          },
+          "publicationParents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Publication"
+            },
+            "nullable": true
+          },
+          "publicationsChildren": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Publication"
+            },
+            "nullable": true
+          },
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Taxon": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "jsonValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "jsonSchema": {
+            "type": "string",
+            "nullable": true
+          },
+          "antecedentTaxons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Taxon"
+            },
+            "nullable": true
+          },
+          "derivativeTaxons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Taxon"
+            },
+            "nullable": true
+          },
+          "holonyms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Holonym"
+            },
+            "nullable": true
+          },
+          "taxonomies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Taxonomy"
+            },
+            "nullable": true
+          },
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Taxonomy": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "jsonValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "jsonSchema": {
+            "type": "string",
+            "nullable": true
+          },
+          "contentCollections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+            },
+            "nullable": true
+          },
+          "taxons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Taxon"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "horselessClaimsPrincipals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessClaimsPrincipal"
+            },
+            "nullable": true
+          },
+          "contentCollections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection"
+            },
+            "nullable": true
+          },
+          "tenantIdentifierStrategies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.TenantIdentifierStrategy"
+            },
+            "nullable": true
+          },
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.TenantIdentifierStrategy": {
+        "type": "object",
+        "properties": {
+          "strategy": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.TenantIdentifierStrategyName"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.TenantIdentifierStrategyName": {
+        "enum": [
+          "STATIC",
+          "BASE_PATH",
+          "ASPNETCORE_ROUTE",
+          "DNS_HOSTNAME",
+          "DNS_FQDN"
+        ],
+        "type": "string"
+      },
+      "TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.AccessControlEntry": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.ACEPermissionScope"
+          },
+          "permission": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.ACEPermission"
+          },
+          "permissionType": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.ACEPermissionType"
+          },
+          "subjectPrincipals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Principal"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.ACEPermission": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.ACEPermissionScope": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.ACEPermissionType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.HorselessClaimsPrincipal": {
+        "type": "object",
+        "properties": {
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Principal"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "iss": {
+            "type": "string",
+            "nullable": true
+          },
+          "aud": {
+            "type": "string",
+            "nullable": true
+          },
+          "sub": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenantId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "tenant": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Host": {
+        "type": "object",
+        "properties": {
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Principal"
+            },
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tcpHost": {
+            "type": "string",
+            "nullable": true
+          },
+          "isTenanantDiscriminator": {
+            "type": "string",
+            "nullable": true
+          },
+          "routingDiscriminatorId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "htmlLayoutFilename": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "httpPort": {
+            "type": "string",
+            "nullable": true
+          },
+          "routingDiscriminator": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.RoutingDiscriminator"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.KeyCloakConfiguration": {
+        "type": "object",
+        "properties": {
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Principal"
+            },
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "authority": {
+            "type": "string",
+            "nullable": true
+          },
+          "realm": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "iss": {
+            "type": "string",
+            "nullable": true
+          },
+          "aud": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenantInfoId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "tenantInfo": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantInfo"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Principal": {
+        "required": [
+          "objectId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string"
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "iss": {
+            "type": "string",
+            "nullable": true
+          },
+          "aud": {
+            "type": "string",
+            "nullable": true
+          },
+          "sub": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.RoutingDiscriminator": {
+        "type": "object",
+        "properties": {
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Principal"
+            },
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "tenantId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "tenant": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+          },
+          "hosts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Host"
+            },
+            "nullable": true
+          },
+          "uriPaths": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.UriPath"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant": {
+        "type": "object",
+        "properties": {
+          "tenantIdentifierStrategies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantIdentifierStrategy"
+            },
+            "nullable": true
+          },
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Principal"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "horselessClaimsPrincipals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.HorselessClaimsPrincipal"
+            },
+            "nullable": true
+          },
+          "routingDiscriminators": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.RoutingDiscriminator"
+            },
+            "nullable": true
+          },
+          "tenantInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantInfo"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantIdentifierStrategy": {
+        "type": "object",
+        "properties": {
+          "strategy": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantIdentifierStrategyName"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantIdentifierStrategyName": {
+        "enum": [
+          "STATIC",
+          "BASE_PATH",
+          "ASPNETCORE_ROUTE",
+          "DNS_HOSTNAME",
+          "DNS_FQDN"
+        ],
+        "type": "string"
+      },
+      "TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantInfo": {
+        "type": "object",
+        "properties": {
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Principal"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "connectionString": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenantBaseUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenant_Id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "tenant": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant"
+          },
+          "keyCloakConfigurations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.KeyCloakConfiguration"
+            },
+            "nullable": true
+          },
+          "webAPITenantInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.WebAPITenantInfo"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.UriPath": {
+        "type": "object",
+        "properties": {
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Principal"
+            },
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "absoluteURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "isTenantDiscriminator": {
+            "type": "string",
+            "nullable": true
+          },
+          "routingDiscriminatorId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "httpPort": {
+            "type": "string",
+            "nullable": true
+          },
+          "httpScheme": {
+            "type": "string",
+            "nullable": true
+          },
+          "tcpHost": {
+            "type": "string",
+            "nullable": true
+          },
+          "routingDiscriminator": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.RoutingDiscriminator"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.WebAPITenantInfo": {
+        "type": "object",
+        "properties": {
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.AccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Principal"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "connectionString": {
+            "type": "string",
+            "nullable": true
+          },
+          "webAPIBaseUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenantInfoId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "tenantInfo": {
+            "$ref": "#/components/schemas/TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantInfo"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

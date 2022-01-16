@@ -88,7 +88,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [HttpPost("Update")]
-        public async Task<IActionResult> Update([FromBody] ContentModel.FilesystemAsset contentCollection)
+        public async Task<IActionResult> Update([FromRoute] string filesystemAssetId, [FromBody] ContentModel.FilesystemAsset contentCollection)
         {
             if (!ModelState.IsValid)
             {

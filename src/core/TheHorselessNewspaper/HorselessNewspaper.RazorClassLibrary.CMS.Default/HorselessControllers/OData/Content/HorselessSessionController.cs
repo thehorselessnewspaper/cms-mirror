@@ -88,7 +88,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [HttpPost("Update")]
-        public async Task<IActionResult> Update([FromBody] ContentModel.HorselessSession contentCollection)
+        public async Task<IActionResult> Update([FromRoute] string horselessSessionId, [FromBody] ContentModel.HorselessSession contentCollection)
         {
             if (!ModelState.IsValid)
             {

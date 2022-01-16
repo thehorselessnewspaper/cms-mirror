@@ -1,5 +1,5 @@
 {
-	"npmName": "@wizardcontroller/horseless-contentapi",
+	"npmName": "@wizardcontroller/horseless-contentapi-lib",
 	"ngVersion" : "12.0.3",
 	"npmRepository": "@wizardcontroller:registry=https://pkgs.dev.azure.com/electricrucible/_packaging/horseless-artifacts/npm/registry/",
 	"apiTests" : true,
