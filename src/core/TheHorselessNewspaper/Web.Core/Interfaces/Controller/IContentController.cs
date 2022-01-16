@@ -17,8 +17,6 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Controller
         Task<IActionResult> Create([FromBody] Entity contentCollection);
         [EnableQuery, HttpGet("GetByObjectId")]
         Task<IActionResult> GetByObjectId(string objectId);
-        [EnableQuery, HttpGet("Query")]
-        Task<IActionResult> Query();
         //[HttpPost("Update")]
         Task<IActionResult> Update([FromRoute] string contentCollectionId, [FromBody] Entity contentCollection);
     }
