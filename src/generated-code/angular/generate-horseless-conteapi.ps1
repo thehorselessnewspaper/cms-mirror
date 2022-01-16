@@ -1,6 +1,9 @@
 # as per https://openapi-generator.tech/docs/usage
 
-# expects workspace configured as per comments below https://angular.io/guide/creating-libraries
+# expects 
+#         .npmrc in ~/.npmrc for authenticated npm registries
+# expects 
+#         workspace configured as per comments below https://angular.io/guide/creating-libraries
 # ng new horseless-contentapi-workspace --no-create-application
 # cd horseless-contentapi-workspace
 # ng generate library @wizardcontroller/horseless-contentapi-lib
