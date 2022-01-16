@@ -19,7 +19,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { TheHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset } from '../model/theHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset';
+import { ContentEntitiesFilesystemAsset } from '../model/contentEntitiesFilesystemAsset';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -88,14 +88,14 @@ export class FilesystemAssetService {
     }
 
     /**
-     * @param theHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset 
+     * @param contentEntitiesFilesystemAsset 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public filesystemAssetControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset?: TheHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public filesystemAssetControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset?: TheHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public filesystemAssetControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset?: TheHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public filesystemAssetControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset?: TheHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public filesystemAssetControllerCreate(contentEntitiesFilesystemAsset?: ContentEntitiesFilesystemAsset, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public filesystemAssetControllerCreate(contentEntitiesFilesystemAsset?: ContentEntitiesFilesystemAsset, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public filesystemAssetControllerCreate(contentEntitiesFilesystemAsset?: ContentEntitiesFilesystemAsset, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public filesystemAssetControllerCreate(contentEntitiesFilesystemAsset?: ContentEntitiesFilesystemAsset, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -131,7 +131,7 @@ export class FilesystemAssetService {
         }
 
         return this.httpClient.post<any>(`${this.configuration.basePath}/HorselessContent/FilesystemAsset/Create`,
-            theHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset,
+            contentEntitiesFilesystemAsset,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -243,14 +243,14 @@ export class FilesystemAssetService {
 
     /**
      * @param filesystemAssetId 
-     * @param theHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset 
+     * @param contentEntitiesFilesystemAsset 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public filesystemAssetControllerUpdate(filesystemAssetId: string, theHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset?: TheHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public filesystemAssetControllerUpdate(filesystemAssetId: string, theHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset?: TheHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public filesystemAssetControllerUpdate(filesystemAssetId: string, theHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset?: TheHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public filesystemAssetControllerUpdate(filesystemAssetId: string, theHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset?: TheHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public filesystemAssetControllerUpdate(filesystemAssetId: string, contentEntitiesFilesystemAsset?: ContentEntitiesFilesystemAsset, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public filesystemAssetControllerUpdate(filesystemAssetId: string, contentEntitiesFilesystemAsset?: ContentEntitiesFilesystemAsset, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public filesystemAssetControllerUpdate(filesystemAssetId: string, contentEntitiesFilesystemAsset?: ContentEntitiesFilesystemAsset, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public filesystemAssetControllerUpdate(filesystemAssetId: string, contentEntitiesFilesystemAsset?: ContentEntitiesFilesystemAsset, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (filesystemAssetId === null || filesystemAssetId === undefined) {
             throw new Error('Required parameter filesystemAssetId was null or undefined when calling filesystemAssetControllerUpdate.');
         }
@@ -289,7 +289,7 @@ export class FilesystemAssetService {
         }
 
         return this.httpClient.post<any>(`${this.configuration.basePath}/HorselessContent/FilesystemAsset/Update`,
-            theHorselessNewspaperSchemasContentModelContentEntitiesFilesystemAsset,
+            contentEntitiesFilesystemAsset,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

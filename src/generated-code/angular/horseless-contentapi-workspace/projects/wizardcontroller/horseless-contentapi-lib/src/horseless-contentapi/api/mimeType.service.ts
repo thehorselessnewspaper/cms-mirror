@@ -19,7 +19,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { TheHorselessNewspaperSchemasContentModelContentEntitiesMIMEType } from '../model/theHorselessNewspaperSchemasContentModelContentEntitiesMIMEType';
+import { ContentEntitiesMIMEType } from '../model/contentEntitiesMIMEType';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -88,14 +88,14 @@ export class MimeTypeService {
     }
 
     /**
-     * @param theHorselessNewspaperSchemasContentModelContentEntitiesMIMEType 
+     * @param contentEntitiesMIMEType 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public mimeTypeControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesMIMEType?: TheHorselessNewspaperSchemasContentModelContentEntitiesMIMEType, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public mimeTypeControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesMIMEType?: TheHorselessNewspaperSchemasContentModelContentEntitiesMIMEType, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public mimeTypeControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesMIMEType?: TheHorselessNewspaperSchemasContentModelContentEntitiesMIMEType, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public mimeTypeControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesMIMEType?: TheHorselessNewspaperSchemasContentModelContentEntitiesMIMEType, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public mimeTypeControllerCreate(contentEntitiesMIMEType?: ContentEntitiesMIMEType, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public mimeTypeControllerCreate(contentEntitiesMIMEType?: ContentEntitiesMIMEType, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public mimeTypeControllerCreate(contentEntitiesMIMEType?: ContentEntitiesMIMEType, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public mimeTypeControllerCreate(contentEntitiesMIMEType?: ContentEntitiesMIMEType, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -131,7 +131,7 @@ export class MimeTypeService {
         }
 
         return this.httpClient.post<any>(`${this.configuration.basePath}/HorselessContent/MIMEType/Create`,
-            theHorselessNewspaperSchemasContentModelContentEntitiesMIMEType,
+            contentEntitiesMIMEType,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -243,14 +243,14 @@ export class MimeTypeService {
 
     /**
      * @param mimeTypeId 
-     * @param theHorselessNewspaperSchemasContentModelContentEntitiesMIMEType 
+     * @param contentEntitiesMIMEType 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public mimeTypeControllerUpdate(mimeTypeId: string, theHorselessNewspaperSchemasContentModelContentEntitiesMIMEType?: TheHorselessNewspaperSchemasContentModelContentEntitiesMIMEType, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public mimeTypeControllerUpdate(mimeTypeId: string, theHorselessNewspaperSchemasContentModelContentEntitiesMIMEType?: TheHorselessNewspaperSchemasContentModelContentEntitiesMIMEType, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public mimeTypeControllerUpdate(mimeTypeId: string, theHorselessNewspaperSchemasContentModelContentEntitiesMIMEType?: TheHorselessNewspaperSchemasContentModelContentEntitiesMIMEType, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public mimeTypeControllerUpdate(mimeTypeId: string, theHorselessNewspaperSchemasContentModelContentEntitiesMIMEType?: TheHorselessNewspaperSchemasContentModelContentEntitiesMIMEType, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public mimeTypeControllerUpdate(mimeTypeId: string, contentEntitiesMIMEType?: ContentEntitiesMIMEType, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public mimeTypeControllerUpdate(mimeTypeId: string, contentEntitiesMIMEType?: ContentEntitiesMIMEType, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public mimeTypeControllerUpdate(mimeTypeId: string, contentEntitiesMIMEType?: ContentEntitiesMIMEType, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public mimeTypeControllerUpdate(mimeTypeId: string, contentEntitiesMIMEType?: ContentEntitiesMIMEType, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (mimeTypeId === null || mimeTypeId === undefined) {
             throw new Error('Required parameter mimeTypeId was null or undefined when calling mimeTypeControllerUpdate.');
         }
@@ -289,7 +289,7 @@ export class MimeTypeService {
         }
 
         return this.httpClient.post<any>(`${this.configuration.basePath}/HorselessContent/MIMEType/Update`,
-            theHorselessNewspaperSchemasContentModelContentEntitiesMIMEType,
+            contentEntitiesMIMEType,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

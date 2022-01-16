@@ -81,10 +81,17 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.CustomSchemaIds(type => type.ToString());
+    options.CustomSchemaIds(t => {
+        // produce this template export interface ContentEntitiesAccessControlEntry 
+        var frag = t.FullName.Split('.');
+        var container = frag[frag.Length - 2];
+        return container + t.Name;
+        });
     options.CustomOperationIds(apiDesc =>
     {
-        return apiDesc.TryGetMethodInfo(out MethodInfo methodInfo) ? methodInfo.DeclaringType.Name + "_" + methodInfo.Name : null;
+        // produce this template export interface ContentEntitiesAccessControlEntry 
+        return apiDesc.TryGetMethodInfo(out MethodInfo methodInfo) ?  methodInfo.DeclaringType.Name + methodInfo.Name : null;
+
     });
     options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Horseless Content API", Version = "v1" });
    

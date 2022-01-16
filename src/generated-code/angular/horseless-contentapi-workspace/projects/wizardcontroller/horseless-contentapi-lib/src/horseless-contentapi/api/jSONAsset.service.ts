@@ -19,7 +19,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { TheHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset } from '../model/theHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset';
+import { ContentEntitiesJSONAsset } from '../model/contentEntitiesJSONAsset';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -88,14 +88,14 @@ export class JSONAssetService {
     }
 
     /**
-     * @param theHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset 
+     * @param contentEntitiesJSONAsset 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public jSONAssetControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset?: TheHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public jSONAssetControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset?: TheHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public jSONAssetControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset?: TheHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public jSONAssetControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset?: TheHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public jSONAssetControllerCreate(contentEntitiesJSONAsset?: ContentEntitiesJSONAsset, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public jSONAssetControllerCreate(contentEntitiesJSONAsset?: ContentEntitiesJSONAsset, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public jSONAssetControllerCreate(contentEntitiesJSONAsset?: ContentEntitiesJSONAsset, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public jSONAssetControllerCreate(contentEntitiesJSONAsset?: ContentEntitiesJSONAsset, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -131,7 +131,7 @@ export class JSONAssetService {
         }
 
         return this.httpClient.post<any>(`${this.configuration.basePath}/HorselessContent/JSONAsset/Create`,
-            theHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset,
+            contentEntitiesJSONAsset,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -243,14 +243,14 @@ export class JSONAssetService {
 
     /**
      * @param jsonAssetId 
-     * @param theHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset 
+     * @param contentEntitiesJSONAsset 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public jSONAssetControllerUpdate(jsonAssetId: string, theHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset?: TheHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public jSONAssetControllerUpdate(jsonAssetId: string, theHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset?: TheHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public jSONAssetControllerUpdate(jsonAssetId: string, theHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset?: TheHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public jSONAssetControllerUpdate(jsonAssetId: string, theHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset?: TheHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public jSONAssetControllerUpdate(jsonAssetId: string, contentEntitiesJSONAsset?: ContentEntitiesJSONAsset, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public jSONAssetControllerUpdate(jsonAssetId: string, contentEntitiesJSONAsset?: ContentEntitiesJSONAsset, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public jSONAssetControllerUpdate(jsonAssetId: string, contentEntitiesJSONAsset?: ContentEntitiesJSONAsset, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public jSONAssetControllerUpdate(jsonAssetId: string, contentEntitiesJSONAsset?: ContentEntitiesJSONAsset, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (jsonAssetId === null || jsonAssetId === undefined) {
             throw new Error('Required parameter jsonAssetId was null or undefined when calling jSONAssetControllerUpdate.');
         }
@@ -289,7 +289,7 @@ export class JSONAssetService {
         }
 
         return this.httpClient.post<any>(`${this.configuration.basePath}/HorselessContent/JSONAsset/Update`,
-            theHorselessNewspaperSchemasContentModelContentEntitiesJSONAsset,
+            contentEntitiesJSONAsset,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

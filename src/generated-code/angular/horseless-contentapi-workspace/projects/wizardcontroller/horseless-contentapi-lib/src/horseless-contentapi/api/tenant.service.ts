@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { TheHorselessNewspaperSchemasContentModelContentEntitiesTenant } from '../model/theHorselessNewspaperSchemasContentModelContentEntitiesTenant';
+import { ContentEntitiesTenant } from '../model/contentEntitiesTenant';
 // @ts-ignore
-import { TheHorselessNewspaperSchemasHostingModelHostingEntitiesTenant } from '../model/theHorselessNewspaperSchemasHostingModelHostingEntitiesTenant';
+import { HostingEntitiesTenant } from '../model/hostingEntitiesTenant';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -90,14 +90,14 @@ export class TenantService {
     }
 
     /**
-     * @param theHorselessNewspaperSchemasContentModelContentEntitiesTenant 
+     * @param contentEntitiesTenant 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public tenantControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesTenant?: TheHorselessNewspaperSchemasContentModelContentEntitiesTenant, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public tenantControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesTenant?: TheHorselessNewspaperSchemasContentModelContentEntitiesTenant, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public tenantControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesTenant?: TheHorselessNewspaperSchemasContentModelContentEntitiesTenant, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public tenantControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesTenant?: TheHorselessNewspaperSchemasContentModelContentEntitiesTenant, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public tenantControllerCreate(contentEntitiesTenant?: ContentEntitiesTenant, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public tenantControllerCreate(contentEntitiesTenant?: ContentEntitiesTenant, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public tenantControllerCreate(contentEntitiesTenant?: ContentEntitiesTenant, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public tenantControllerCreate(contentEntitiesTenant?: ContentEntitiesTenant, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -133,7 +133,7 @@ export class TenantService {
         }
 
         return this.httpClient.post<any>(`${this.configuration.basePath}/HorselessContent/Tenant/Create`,
-            theHorselessNewspaperSchemasContentModelContentEntitiesTenant,
+            contentEntitiesTenant,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -334,14 +334,14 @@ export class TenantService {
     }
 
     /**
-     * @param theHorselessNewspaperSchemasHostingModelHostingEntitiesTenant 
+     * @param hostingEntitiesTenant 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public tenantControllerPost(theHorselessNewspaperSchemasHostingModelHostingEntitiesTenant?: TheHorselessNewspaperSchemasHostingModelHostingEntitiesTenant, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public tenantControllerPost(theHorselessNewspaperSchemasHostingModelHostingEntitiesTenant?: TheHorselessNewspaperSchemasHostingModelHostingEntitiesTenant, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public tenantControllerPost(theHorselessNewspaperSchemasHostingModelHostingEntitiesTenant?: TheHorselessNewspaperSchemasHostingModelHostingEntitiesTenant, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public tenantControllerPost(theHorselessNewspaperSchemasHostingModelHostingEntitiesTenant?: TheHorselessNewspaperSchemasHostingModelHostingEntitiesTenant, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public tenantControllerPost(hostingEntitiesTenant?: HostingEntitiesTenant, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public tenantControllerPost(hostingEntitiesTenant?: HostingEntitiesTenant, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public tenantControllerPost(hostingEntitiesTenant?: HostingEntitiesTenant, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public tenantControllerPost(hostingEntitiesTenant?: HostingEntitiesTenant, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -377,7 +377,7 @@ export class TenantService {
         }
 
         return this.httpClient.post<any>(`${this.configuration.basePath}/HorselessContent/Tenant`,
-            theHorselessNewspaperSchemasHostingModelHostingEntitiesTenant,
+            hostingEntitiesTenant,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -390,14 +390,14 @@ export class TenantService {
     }
 
     /**
-     * @param theHorselessNewspaperSchemasHostingModelHostingEntitiesTenant 
+     * @param hostingEntitiesTenant 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public tenantControllerPost_3(theHorselessNewspaperSchemasHostingModelHostingEntitiesTenant?: TheHorselessNewspaperSchemasHostingModelHostingEntitiesTenant, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public tenantControllerPost_3(theHorselessNewspaperSchemasHostingModelHostingEntitiesTenant?: TheHorselessNewspaperSchemasHostingModelHostingEntitiesTenant, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public tenantControllerPost_3(theHorselessNewspaperSchemasHostingModelHostingEntitiesTenant?: TheHorselessNewspaperSchemasHostingModelHostingEntitiesTenant, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public tenantControllerPost_3(theHorselessNewspaperSchemasHostingModelHostingEntitiesTenant?: TheHorselessNewspaperSchemasHostingModelHostingEntitiesTenant, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public tenantControllerPost_3(hostingEntitiesTenant?: HostingEntitiesTenant, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public tenantControllerPost_3(hostingEntitiesTenant?: HostingEntitiesTenant, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public tenantControllerPost_3(hostingEntitiesTenant?: HostingEntitiesTenant, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public tenantControllerPost_3(hostingEntitiesTenant?: HostingEntitiesTenant, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -433,7 +433,7 @@ export class TenantService {
         }
 
         return this.httpClient.post<any>(`${this.configuration.basePath}/HorselessHosting/Tenant/Create`,
-            theHorselessNewspaperSchemasHostingModelHostingEntitiesTenant,
+            hostingEntitiesTenant,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -492,14 +492,14 @@ export class TenantService {
 
     /**
      * @param contentCollectionId 
-     * @param theHorselessNewspaperSchemasContentModelContentEntitiesTenant 
+     * @param contentEntitiesTenant 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public tenantControllerUpdate(contentCollectionId: string, theHorselessNewspaperSchemasContentModelContentEntitiesTenant?: TheHorselessNewspaperSchemasContentModelContentEntitiesTenant, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public tenantControllerUpdate(contentCollectionId: string, theHorselessNewspaperSchemasContentModelContentEntitiesTenant?: TheHorselessNewspaperSchemasContentModelContentEntitiesTenant, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public tenantControllerUpdate(contentCollectionId: string, theHorselessNewspaperSchemasContentModelContentEntitiesTenant?: TheHorselessNewspaperSchemasContentModelContentEntitiesTenant, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public tenantControllerUpdate(contentCollectionId: string, theHorselessNewspaperSchemasContentModelContentEntitiesTenant?: TheHorselessNewspaperSchemasContentModelContentEntitiesTenant, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public tenantControllerUpdate(contentCollectionId: string, contentEntitiesTenant?: ContentEntitiesTenant, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public tenantControllerUpdate(contentCollectionId: string, contentEntitiesTenant?: ContentEntitiesTenant, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public tenantControllerUpdate(contentCollectionId: string, contentEntitiesTenant?: ContentEntitiesTenant, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public tenantControllerUpdate(contentCollectionId: string, contentEntitiesTenant?: ContentEntitiesTenant, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (contentCollectionId === null || contentCollectionId === undefined) {
             throw new Error('Required parameter contentCollectionId was null or undefined when calling tenantControllerUpdate.');
         }
@@ -538,7 +538,7 @@ export class TenantService {
         }
 
         return this.httpClient.post<any>(`${this.configuration.basePath}/HorselessContent/Tenant/Update`,
-            theHorselessNewspaperSchemasContentModelContentEntitiesTenant,
+            contentEntitiesTenant,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

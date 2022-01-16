@@ -19,7 +19,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection } from '../model/theHorselessNewspaperSchemasContentModelContentEntitiesContentCollection';
+import { ContentEntitiesContentCollection } from '../model/contentEntitiesContentCollection';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -88,14 +88,14 @@ export class ContentCollectionService {
     }
 
     /**
-     * @param theHorselessNewspaperSchemasContentModelContentEntitiesContentCollection 
+     * @param contentEntitiesContentCollection 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public contentCollectionControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesContentCollection?: TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public contentCollectionControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesContentCollection?: TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public contentCollectionControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesContentCollection?: TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public contentCollectionControllerCreate(theHorselessNewspaperSchemasContentModelContentEntitiesContentCollection?: TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public contentCollectionControllerCreate(contentEntitiesContentCollection?: ContentEntitiesContentCollection, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public contentCollectionControllerCreate(contentEntitiesContentCollection?: ContentEntitiesContentCollection, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public contentCollectionControllerCreate(contentEntitiesContentCollection?: ContentEntitiesContentCollection, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public contentCollectionControllerCreate(contentEntitiesContentCollection?: ContentEntitiesContentCollection, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -131,7 +131,7 @@ export class ContentCollectionService {
         }
 
         return this.httpClient.post<any>(`${this.configuration.basePath}/HorselessContent/ContentCollection/Create`,
-            theHorselessNewspaperSchemasContentModelContentEntitiesContentCollection,
+            contentEntitiesContentCollection,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -243,14 +243,14 @@ export class ContentCollectionService {
 
     /**
      * @param contentCollectionId 
-     * @param theHorselessNewspaperSchemasContentModelContentEntitiesContentCollection 
+     * @param contentEntitiesContentCollection 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public contentCollectionControllerUpdate(contentCollectionId: string, theHorselessNewspaperSchemasContentModelContentEntitiesContentCollection?: TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public contentCollectionControllerUpdate(contentCollectionId: string, theHorselessNewspaperSchemasContentModelContentEntitiesContentCollection?: TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public contentCollectionControllerUpdate(contentCollectionId: string, theHorselessNewspaperSchemasContentModelContentEntitiesContentCollection?: TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public contentCollectionControllerUpdate(contentCollectionId: string, theHorselessNewspaperSchemasContentModelContentEntitiesContentCollection?: TheHorselessNewspaperSchemasContentModelContentEntitiesContentCollection, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public contentCollectionControllerUpdate(contentCollectionId: string, contentEntitiesContentCollection?: ContentEntitiesContentCollection, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public contentCollectionControllerUpdate(contentCollectionId: string, contentEntitiesContentCollection?: ContentEntitiesContentCollection, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public contentCollectionControllerUpdate(contentCollectionId: string, contentEntitiesContentCollection?: ContentEntitiesContentCollection, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public contentCollectionControllerUpdate(contentCollectionId: string, contentEntitiesContentCollection?: ContentEntitiesContentCollection, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (contentCollectionId === null || contentCollectionId === undefined) {
             throw new Error('Required parameter contentCollectionId was null or undefined when calling contentCollectionControllerUpdate.');
         }
@@ -289,7 +289,7 @@ export class ContentCollectionService {
         }
 
         return this.httpClient.post<any>(`${this.configuration.basePath}/HorselessContent/ContentCollection/Update`,
-            theHorselessNewspaperSchemasContentModelContentEntitiesContentCollection,
+            contentEntitiesContentCollection,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
