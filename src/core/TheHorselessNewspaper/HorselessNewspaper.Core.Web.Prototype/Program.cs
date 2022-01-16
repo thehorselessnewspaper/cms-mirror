@@ -51,10 +51,10 @@ var edmHosting = await model.GetHostingEDMModel();
 
 // spa concerns 
 // as per https://www.teamscs.com/2021/05/creating-a-vue-js-net-core-web-app/
-builder.Services.AddSpaStaticFiles(options =>
-{
-    options.RootPath = "horseless-vues/dist";
-});
+//builder.Services.AddSpaStaticFiles(options =>
+//{
+//    options.RootPath = "horseless-vues/dist";
+//});
 
 // odata concerns
 builder.Services.AddControllers()
