@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -9,7 +10,7 @@ import { HorselessTagsModule } from './horseless-tags/horseless-tags.module';
     AppComponent
   ],
   imports: [
-    BrowserModule, HorselessTagsModule
+    BrowserModule, HttpClientModule, HorselessTagsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
