@@ -1,26 +1,23 @@
 ﻿using Finbuckle.MultiTenant;
 using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
-using HorselessNewspaper.Web.Core.Model.Query.ContentCollection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.OData.Formatter;
-using System.Net.Mime;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
-using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST
 {
     [ApiController]
-    [Produces(MediaTypeNames.Application.Json)]
+    [Route("api/ContentCollection")]
+
     public class ContentCollectionRESTController : ControllerBase,
         IContentController<ContentModel.ContentCollection>
     {
         private IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModel.ContentCollection> _contentCollectionService;
         private ITenantInfo _tenantInfo;
-        public ContentCollectionRESTController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModel.ContentCollection> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
+        public ContentCollectionRESTController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, 
+            ContentModel.ContentCollection> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
         {
             this._contentCollectionService = contentCollectionService;
             this._tenantInfo = tenantInfo;
@@ -28,7 +25,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
         [HttpGet("GetByObjectId")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ContentModel.ContentCollection))]
-        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ContentModel.ContentCollection))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ContentModel.ContentCollection>> GetByObjectId([FromRoute] string objectId)
         {
 
@@ -89,7 +86,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [Consumes("application/json")]
         [HttpPost("Update")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentModel.ContentCollection))]
-        [ProducesResponseType(StatusCodes.Status202Accepted-+, Type = typeof(ContentModel.ContentCollection))]
+        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(ContentModel.ContentCollection))]
         public async Task<ActionResult<ContentModel.ContentCollection>> Update([FromRoute] string contentCollectionId, [FromBody] ContentModel.ContentCollection contentCollection)
         {
             if (!ModelState.IsValid)

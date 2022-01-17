@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 
 namespace HorselessNewspaper.Web.Core.Interfaces.Controller
@@ -13,11 +14,19 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Controller
 
     public interface IContentController<Entity>
     {
-        //[HttpPost("Create")]
+        [HttpPost("Create")]
+        [Consumes("application/json")]
+
         Task<ActionResult<Entity>> Create([FromBody] Entity contentCollection);
-        [EnableQuery, HttpGet("GetByObjectId")]
+
+        [HttpGet("GetByObjectId")]
+
         Task<ActionResult<Entity>> GetByObjectId([FromRoute] string objectId);
-        //[HttpPost("Update")]
+
+
+        [Consumes("application/json")]
+        [HttpPost("Update")]
+
         Task<ActionResult<Entity>> Update([FromRoute] string contentCollectionId, [FromBody] Entity contentCollection);
     }
 }
