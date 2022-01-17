@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HorselessTagsComponent } from './horseless-tags.component';
 import { ApiModule, Configuration, ConfigurationParameters } from '@wizardcontroller/horseless-contentapi-lib';
+import { NewTenantComponent } from './new-tenant/new-tenant.component';
 
 export function apiConfigFactory (): Configuration {
   const params: ConfigurationParameters = {
@@ -15,6 +16,7 @@ export function apiConfigFactory (): Configuration {
   imports: [
     CommonModule, ApiModule.forRoot(apiConfigFactory)
   ],
-  declarations: [HorselessTagsComponent]
+  declarations: [HorselessTagsComponent, NewTenantComponent],
+  exports: [HorselessTagsComponent, NewTenantComponent]
 })
 export class HorselessTagsModule { }

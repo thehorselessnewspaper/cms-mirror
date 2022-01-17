@@ -1,3 +1,3 @@
 export interface IHorselessContentApi {
-  contentApiUrl: string;
+  contentApiBaseUrl?: string;
 }

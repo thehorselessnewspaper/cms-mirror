@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Attribute, Component, OnInit } from '@angular/core';
+import { IHorselessHostingAPI } from 'src/app/interfaces/IHorselessHostingAPI';
 
 @Component({
-  selector: 'app-new-tenant',
+  selector: 'horseless-new-tenant',
   templateUrl: './new-tenant.component.html',
   styleUrls: ['./new-tenant.component.css']
 })
-export class NewTenantComponent implements OnInit {
+export class NewTenantComponent implements OnInit, IHorselessHostingAPI{
 
-  constructor() { }
+
+  constructor(@Attribute('baseUrl') public hostingApiBaseUrl: string) { }
 
   ngOnInit() {
+
   }
+
 
 }

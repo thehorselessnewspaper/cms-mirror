@@ -35,3 +35,4 @@ export * from './hostingEntitiesTenantIdentifierStrategyName';
 export * from './hostingEntitiesTenantInfo';
 export * from './hostingEntitiesUriPath';
 export * from './hostingEntitiesWebAPITenantInfo';
+export * from './mvcProblemDetails';
