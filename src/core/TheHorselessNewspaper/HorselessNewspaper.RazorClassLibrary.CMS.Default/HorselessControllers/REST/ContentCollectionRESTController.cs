@@ -14,8 +14,10 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
     public class ContentCollectionRESTController : ControllerBase,
         IContentController<ContentModel.ContentCollection>
     {
-        private IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModel.ContentCollection> _contentCollectionService;
-        private ITenantInfo _tenantInfo;
+
+        public IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModel.ContentCollection> _contentCollectionService { get; set; }
+        public ITenantInfo _tenantInfo { get; set; }
+
         public ContentCollectionRESTController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, 
             ContentModel.ContentCollection> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
         {

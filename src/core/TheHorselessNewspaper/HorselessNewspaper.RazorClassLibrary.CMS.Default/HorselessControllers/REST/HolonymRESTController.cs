@@ -20,8 +20,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         IContentController<ContentModel.Holonym>
     {
 
-        private IContentCollectionService<IQueryableContentModelOperator<ContentModel.Holonym>, ContentModel.Holonym> _contentCollectionService;
-        private ITenantInfo _tenantInfo;
+        public IContentCollectionService<IQueryableContentModelOperator<ContentModel.Holonym>, ContentModel.Holonym> _contentCollectionService { get; set; }
+        public ITenantInfo _tenantInfo { get; set; }
 
         public HolonymRESTController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.Holonym>,
             ContentModel.Holonym> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
