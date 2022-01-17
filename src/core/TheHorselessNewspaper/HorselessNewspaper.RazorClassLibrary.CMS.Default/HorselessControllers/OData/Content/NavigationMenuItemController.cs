@@ -11,9 +11,9 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
     [Route("HorselessContent/NavigationMenuItem")]
-    [Produces("application/json")]
+
     public class NavigationMenuItemController :
-        ODataController, IContentController<ContentModel.NavigationMenuItem>
+        ODataController, IContentQueryController<ContentModel.NavigationMenuItem>
 
     {
         private readonly IContentCollectionService<IQueryableContentModelOperator<ContentModel.NavigationMenuItem>, ContentModel.NavigationMenuItem> _contentCollectionService;

@@ -12,7 +12,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
     [Route("HorselessContent/JSONAsset")]
     [Produces("application/json")]
     public class JSONAssetController :
-        ODataController, IContentController<ContentModel.JSONAsset>
+        ODataController, IContentQueryController<ContentModel.JSONAsset>
     {
         private readonly IContentCollectionService<IQueryableContentModelOperator<ContentModel.JSONAsset>, ContentModel.JSONAsset> _contentCollectionService;
         private readonly ITenantInfo _tenantInfo;

@@ -12,7 +12,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
     [Route("HorselessContent/Meronym")]
     [Produces("application/json")]
     public class MeronymController :
-        ODataController, IContentController<ContentModel.Meronym>
+        ODataController, IContentQueryController<ContentModel.Meronym>
     {
 
         private readonly IContentCollectionService<IQueryableContentModelOperator<ContentModel.Meronym>, ContentModel.Meronym> _contentCollectionService;

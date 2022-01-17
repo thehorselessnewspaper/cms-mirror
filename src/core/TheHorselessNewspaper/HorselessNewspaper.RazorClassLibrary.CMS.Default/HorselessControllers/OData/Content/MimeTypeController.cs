@@ -18,7 +18,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
     [Route("HorselessContent/MIMEType")]
     [Produces("application/json")]
     public class MimeTypeController :
-        ODataController, IContentController<ContentModel.MIMEType>
+        ODataController, IContentQueryController<ContentModel.MIMEType>
     {
         private readonly IContentCollectionService<IQueryableContentModelOperator<ContentModel.MIMEType>, ContentModel.MIMEType> _contentCollectionService;
         private readonly ITenantInfo _tenantInfo;

@@ -14,7 +14,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
     [Route("HorselessContent/NavigationMenu")]
     [Produces("application/json")]
     public class NavigationMenuController :
-        ODataController, IContentController<ContentModel.NavigationMenu>
+        ODataController, IContentQueryController<ContentModel.NavigationMenu>
     { 
         private readonly IContentCollectionService<IQueryableContentModelOperator<ContentModel.NavigationMenu>, ContentModel.NavigationMenu> _contentCollectionService;
         private readonly ITenantInfo _tenantInfo;

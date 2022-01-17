@@ -14,10 +14,10 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Controller
     public interface IContentController<Entity>
     {
         //[HttpPost("Create")]
-        Task<IActionResult> Create([FromBody] Entity contentCollection);
+        Task<ActionResult<Entity>> Create([FromBody] Entity contentCollection);
         [EnableQuery, HttpGet("GetByObjectId")]
-        Task<IActionResult> GetByObjectId(string objectId);
+        Task<ActionResult<Entity>> GetByObjectId([FromRoute] string objectId);
         //[HttpPost("Update")]
-        Task<IActionResult> Update([FromRoute] string contentCollectionId, [FromBody] Entity contentCollection);
+        Task<ActionResult<Entity>> Update([FromRoute] string contentCollectionId, [FromBody] Entity contentCollection);
     }
 }

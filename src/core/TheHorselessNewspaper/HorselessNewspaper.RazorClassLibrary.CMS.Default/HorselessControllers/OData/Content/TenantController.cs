@@ -19,7 +19,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
     [Route("HorselessContent/Tenant")]
     [Produces("application/json")]
     public class TenantController :
-        ODataController, IContentController<ContentModel.Tenant>
+        ODataController, IContentQueryController<ContentModel.Tenant>
 
     {
         private readonly IContentCollectionService<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModel.Tenant> _contentCollectionService;

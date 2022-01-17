@@ -12,7 +12,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
     [Route("HorselessContent/HorselessSession")]
     [Produces("application/json")]
     public class HorselessSessionController :
-        ODataController, IContentController<ContentModel.HorselessSession>
+        ODataController, IContentQueryController<ContentModel.HorselessSession>
     {
         private readonly IContentCollectionService<IQueryableContentModelOperator<ContentModel.HorselessSession>, ContentModel.HorselessSession> _contentCollectionService;
         private readonly ITenantInfo _tenantInfo;

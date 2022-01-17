@@ -12,7 +12,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
     [Route("HorselessContent/Holonym")]
     [Produces("application/json")]
     public class HolonymController :
-        ODataController, IContentController<ContentModel.Holonym>
+        ODataController, IContentQueryController<ContentModel.Holonym>
     {
         private readonly IContentCollectionService<IQueryableContentModelOperator<ContentModel.Holonym>, ContentModel.Holonym> _contentCollectionService;
         private readonly ITenantInfo _tenantInfo;

@@ -12,7 +12,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
     [Route("HorselessContent/FilesystemAsset")]
     [Produces("application/json")]
     public class FilesystemAssetController :
-        ODataController, IContentController<ContentModel.FilesystemAsset>
+        ODataController, IContentQueryController<ContentModel.FilesystemAsset>
     {
         private IContentCollectionService<IQueryableContentModelOperator<FilesystemAsset>, FilesystemAsset> _contentCollectionService;
         private ITenantInfo _tenantInfo;
