@@ -9,6 +9,10 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace HorselessNewspaper.Web.Core.Interfaces.Controller
 {
+    /// <summary>
+    /// specify an ODATA controller friendly query interface
+    /// </summary>
+    /// <typeparam name="Entity"></typeparam>
     public interface IContentQueryController<Entity> where Entity : class, IContentRowLevelSecured
     {
 
@@ -17,6 +21,10 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Controller
 
     }
 
+    /// <summary>
+    /// specify a REST controller CRUD operation friendly interface
+    /// </summary>
+    /// <typeparam name="Entity"></typeparam>
     public interface IContentController<Entity> where Entity : class, IContentRowLevelSecured
     {
         IContentCollectionService<IQueryableContentModelOperator<Entity>, Entity> _contentCollectionService { get; set; }
