@@ -14,6 +14,7 @@ import { HorselessSessionService } from './api/horselessSession.service';
 import { HorselessSessionRESTService } from './api/horselessSessionREST.service';
 import { JSONAssetService } from './api/jSONAsset.service';
 import { JSONAssetRESTService } from './api/jSONAssetREST.service';
+import { KeycloakAuthenticationService } from './api/keycloakAuthentication.service';
 import { MeronymService } from './api/meronym.service';
 import { MeronymRESTService } from './api/meronymREST.service';
 import { MimeTypeService } from './api/mimeType.service';

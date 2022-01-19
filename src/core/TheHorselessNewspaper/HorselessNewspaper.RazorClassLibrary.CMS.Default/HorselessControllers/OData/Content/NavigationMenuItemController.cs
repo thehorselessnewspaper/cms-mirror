@@ -30,7 +30,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [HttpGet("Query")]
 
         // breaks openapi [HttpGet("HorselessContent/ContentCollection/$count")]
-        public async Task<IActionResult> Query()
+        public async Task<ActionResult<IEnumerable<ContentModel.NavigationMenuItem>>> Query()
         {
             var result = await _contentCollectionService.Query();
             return Ok(result);

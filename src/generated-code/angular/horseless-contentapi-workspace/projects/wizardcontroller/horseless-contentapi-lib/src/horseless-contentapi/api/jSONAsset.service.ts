@@ -18,6 +18,8 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
+// @ts-ignore
+import { ContentEntitiesJSONAsset } from '../model/contentEntitiesJSONAsset';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -89,10 +91,10 @@ export class JSONAssetService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public jSONAssetControllerQuery(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public jSONAssetControllerQuery(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public jSONAssetControllerQuery(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public jSONAssetControllerQuery(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public jSONAssetControllerQuery(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<ContentEntitiesJSONAsset>>;
+    public jSONAssetControllerQuery(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<ContentEntitiesJSONAsset>>>;
+    public jSONAssetControllerQuery(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<ContentEntitiesJSONAsset>>>;
+    public jSONAssetControllerQuery(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -100,6 +102,7 @@ export class JSONAssetService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
+                'application/json'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -118,7 +121,7 @@ export class JSONAssetService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.get<any>(`${this.configuration.basePath}/HorselessContent/JSONAsset/Query`,
+        return this.httpClient.get<Array<ContentEntitiesJSONAsset>>(`${this.configuration.basePath}/HorselessContent/JSONAsset/Query`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

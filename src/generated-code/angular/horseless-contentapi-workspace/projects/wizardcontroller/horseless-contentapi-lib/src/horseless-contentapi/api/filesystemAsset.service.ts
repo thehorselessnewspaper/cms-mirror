@@ -18,6 +18,8 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
+// @ts-ignore
+import { ContentEntitiesFilesystemAsset } from '../model/contentEntitiesFilesystemAsset';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -89,10 +91,10 @@ export class FilesystemAssetService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public filesystemAssetControllerQuery(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public filesystemAssetControllerQuery(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public filesystemAssetControllerQuery(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public filesystemAssetControllerQuery(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public filesystemAssetControllerQuery(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<ContentEntitiesFilesystemAsset>>;
+    public filesystemAssetControllerQuery(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<ContentEntitiesFilesystemAsset>>>;
+    public filesystemAssetControllerQuery(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<ContentEntitiesFilesystemAsset>>>;
+    public filesystemAssetControllerQuery(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -100,6 +102,7 @@ export class FilesystemAssetService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
+                'application/json'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -118,7 +121,7 @@ export class FilesystemAssetService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.get<any>(`${this.configuration.basePath}/HorselessContent/FilesystemAsset/Query`,
+        return this.httpClient.get<Array<ContentEntitiesFilesystemAsset>>(`${this.configuration.basePath}/HorselessContent/FilesystemAsset/Query`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

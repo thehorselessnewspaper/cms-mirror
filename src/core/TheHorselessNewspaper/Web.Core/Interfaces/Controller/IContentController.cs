@@ -17,7 +17,7 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Controller
     {
 
         [EnableQuery, HttpGet("Query")]
-        Task<IActionResult> Query();
+        Task<ActionResult<IEnumerable<Entity>>> Query();
 
     }
 

@@ -14,7 +14,137 @@
         "operationId": "ContentCollectionControllerQuery",
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+                  }
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+                  }
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+                  }
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+                  }
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+                  }
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+                  }
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+                  }
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+                  }
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+                  }
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+                  }
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+                  }
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+                  }
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -605,7 +735,17 @@
         "operationId": "FilesystemAssetControllerQuery",
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesFilesystemAsset"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1196,7 +1336,17 @@
         "operationId": "HolonymControllerQuery",
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesHolonym"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1787,7 +1937,17 @@
         "operationId": "HorselessContentControllerQuery",
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -2378,7 +2538,17 @@
         "operationId": "HorselessSessionControllerQuery",
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesHorselessSession"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -2969,7 +3139,17 @@
         "operationId": "JSONAssetControllerQuery",
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesJSONAsset"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -3552,6 +3732,62 @@
         }
       }
     },
+    "/Keycloak/SignIn": {
+      "get": {
+        "tags": [
+          "KeycloakAuthentication"
+        ],
+        "operationId": "KeycloakAuthenticationControllerSignIn",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "KeycloakAuthentication"
+        ],
+        "operationId": "KeycloakAuthenticationControllerSignIn",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "provider": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "provider": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Keycloak/Signout": {
+      "post": {
+        "tags": [
+          "KeycloakAuthentication"
+        ],
+        "operationId": "KeycloakAuthenticationControllerSignOutCurrentUser",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/HorselessContent/Meronym/Query": {
       "get": {
         "tags": [
@@ -3560,7 +3796,17 @@
         "operationId": "MeronymControllerQuery",
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesMeronym"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -4151,7 +4397,17 @@
         "operationId": "MimeTypeControllerQuery",
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesMIMEType"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -4742,7 +4998,17 @@
         "operationId": "NavigationMenuControllerQuery",
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesNavigationMenu"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -4755,7 +5021,137 @@
         "operationId": "NavigationMenuItemControllerQuery",
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
+                  }
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
+                  }
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
+                  }
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
+                  }
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
+                  }
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
+                  }
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
+                  }
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
+                  }
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
+                  }
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
+                  }
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
+                  }
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
+                  }
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -6005,7 +6401,17 @@
         "operationId": "TenantControllerQuery",
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentEntitiesTenant"
+                  }
+                }
+              }
+            }
           }
         }
       }

@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
+using Microsoft.AspNetCore.OData.Formatter;
 
 var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(builder =>
@@ -123,15 +124,23 @@ builder.Services.AddHorselessKeycloakAuth(builder, keycloakOpts =>
 // as per https://github.com/OData/WebApi/issues/2024
 builder.Services.AddMvcCore(options =>
 {
-    foreach (var outputFormatter in options.OutputFormatters.OfType<OutputFormatter>().Where(x => x.SupportedMediaTypes.Count == 0))
-    {
-        outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
-    }
+    IEnumerable<ODataOutputFormatter> outputFormatters =
+    options.OutputFormatters.OfType<ODataOutputFormatter>()
+        .Where(foramtter => foramtter.SupportedMediaTypes.Count == 0);
 
-    foreach (var inputFormatter in options.InputFormatters.OfType<InputFormatter>().Where(x => x.SupportedMediaTypes.Count == 0))
+    foreach (var outputFormatter in outputFormatters)
     {
-        inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+        outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/odata"));
     }
+    //foreach (var outputFormatter in options.OutputFormatters.OfType<OutputFormatter>().Where(x => x.SupportedMediaTypes.Count == 0))
+    //{
+    //    outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+    //}
+
+    //foreach (var inputFormatter in options.InputFormatters.OfType<InputFormatter>().Where(x => x.SupportedMediaTypes.Count == 0))
+    //{
+    //    inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+    //}
 });
 
 foreach (var service in builder.Services)

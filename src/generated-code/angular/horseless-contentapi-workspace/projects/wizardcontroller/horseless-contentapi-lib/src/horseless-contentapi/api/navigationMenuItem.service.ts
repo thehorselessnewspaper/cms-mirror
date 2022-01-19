@@ -18,6 +18,8 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
+// @ts-ignore
+import { ContentEntitiesNavigationMenuItem } from '../model/contentEntitiesNavigationMenuItem';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -89,10 +91,10 @@ export class NavigationMenuItemService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public navigationMenuItemControllerQuery(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public navigationMenuItemControllerQuery(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public navigationMenuItemControllerQuery(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public navigationMenuItemControllerQuery(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public navigationMenuItemControllerQuery(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json;odata.metadata&#x3D;minimal;odata.streaming&#x3D;true' | 'application/json;odata.metadata&#x3D;minimal;odata.streaming&#x3D;false' | 'application/json;odata.metadata&#x3D;minimal' | 'application/json;odata.metadata&#x3D;full;odata.streaming&#x3D;true' | 'application/json;odata.metadata&#x3D;full;odata.streaming&#x3D;false' | 'application/json;odata.metadata&#x3D;full' | 'application/json;odata.metadata&#x3D;none;odata.streaming&#x3D;true' | 'application/json;odata.metadata&#x3D;none;odata.streaming&#x3D;false' | 'application/json;odata.metadata&#x3D;none' | 'application/json;odata.streaming&#x3D;true' | 'application/json;odata.streaming&#x3D;false' | 'application/json' | 'application/xml' | 'text/plain' | 'application/octet-stream' | 'text/json', context?: HttpContext}): Observable<Array<ContentEntitiesNavigationMenuItem>>;
+    public navigationMenuItemControllerQuery(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json;odata.metadata&#x3D;minimal;odata.streaming&#x3D;true' | 'application/json;odata.metadata&#x3D;minimal;odata.streaming&#x3D;false' | 'application/json;odata.metadata&#x3D;minimal' | 'application/json;odata.metadata&#x3D;full;odata.streaming&#x3D;true' | 'application/json;odata.metadata&#x3D;full;odata.streaming&#x3D;false' | 'application/json;odata.metadata&#x3D;full' | 'application/json;odata.metadata&#x3D;none;odata.streaming&#x3D;true' | 'application/json;odata.metadata&#x3D;none;odata.streaming&#x3D;false' | 'application/json;odata.metadata&#x3D;none' | 'application/json;odata.streaming&#x3D;true' | 'application/json;odata.streaming&#x3D;false' | 'application/json' | 'application/xml' | 'text/plain' | 'application/octet-stream' | 'text/json', context?: HttpContext}): Observable<HttpResponse<Array<ContentEntitiesNavigationMenuItem>>>;
+    public navigationMenuItemControllerQuery(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json;odata.metadata&#x3D;minimal;odata.streaming&#x3D;true' | 'application/json;odata.metadata&#x3D;minimal;odata.streaming&#x3D;false' | 'application/json;odata.metadata&#x3D;minimal' | 'application/json;odata.metadata&#x3D;full;odata.streaming&#x3D;true' | 'application/json;odata.metadata&#x3D;full;odata.streaming&#x3D;false' | 'application/json;odata.metadata&#x3D;full' | 'application/json;odata.metadata&#x3D;none;odata.streaming&#x3D;true' | 'application/json;odata.metadata&#x3D;none;odata.streaming&#x3D;false' | 'application/json;odata.metadata&#x3D;none' | 'application/json;odata.streaming&#x3D;true' | 'application/json;odata.streaming&#x3D;false' | 'application/json' | 'application/xml' | 'text/plain' | 'application/octet-stream' | 'text/json', context?: HttpContext}): Observable<HttpEvent<Array<ContentEntitiesNavigationMenuItem>>>;
+    public navigationMenuItemControllerQuery(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json;odata.metadata&#x3D;minimal;odata.streaming&#x3D;true' | 'application/json;odata.metadata&#x3D;minimal;odata.streaming&#x3D;false' | 'application/json;odata.metadata&#x3D;minimal' | 'application/json;odata.metadata&#x3D;full;odata.streaming&#x3D;true' | 'application/json;odata.metadata&#x3D;full;odata.streaming&#x3D;false' | 'application/json;odata.metadata&#x3D;full' | 'application/json;odata.metadata&#x3D;none;odata.streaming&#x3D;true' | 'application/json;odata.metadata&#x3D;none;odata.streaming&#x3D;false' | 'application/json;odata.metadata&#x3D;none' | 'application/json;odata.streaming&#x3D;true' | 'application/json;odata.streaming&#x3D;false' | 'application/json' | 'application/xml' | 'text/plain' | 'application/octet-stream' | 'text/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -100,6 +102,22 @@ export class NavigationMenuItemService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
+                'application/json;odata.metadata=minimal;odata.streaming=true',
+                'application/json;odata.metadata=minimal;odata.streaming=false',
+                'application/json;odata.metadata=minimal',
+                'application/json;odata.metadata=full;odata.streaming=true',
+                'application/json;odata.metadata=full;odata.streaming=false',
+                'application/json;odata.metadata=full',
+                'application/json;odata.metadata=none;odata.streaming=true',
+                'application/json;odata.metadata=none;odata.streaming=false',
+                'application/json;odata.metadata=none',
+                'application/json;odata.streaming=true',
+                'application/json;odata.streaming=false',
+                'application/json',
+                'application/xml',
+                'text/plain',
+                'application/octet-stream',
+                'text/json'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -118,7 +136,7 @@ export class NavigationMenuItemService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.get<any>(`${this.configuration.basePath}/HorselessContent/NavigationMenuItem/Query`,
+        return this.httpClient.get<Array<ContentEntitiesNavigationMenuItem>>(`${this.configuration.basePath}/HorselessContent/NavigationMenuItem/Query`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
