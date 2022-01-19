@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@wizardcontroller/horseless-contentapi-lib": "^0.1.22"
+  }
+}

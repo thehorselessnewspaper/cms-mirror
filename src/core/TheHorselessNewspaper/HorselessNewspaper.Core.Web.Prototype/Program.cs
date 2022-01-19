@@ -132,15 +132,7 @@ builder.Services.AddMvcCore(options =>
     {
         outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/odata"));
     }
-    //foreach (var outputFormatter in options.OutputFormatters.OfType<OutputFormatter>().Where(x => x.SupportedMediaTypes.Count == 0))
-    //{
-    //    outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
-    //}
 
-    //foreach (var inputFormatter in options.InputFormatters.OfType<InputFormatter>().Where(x => x.SupportedMediaTypes.Count == 0))
-    //{
-    //    inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
-    //}
 });
 
 foreach (var service in builder.Services)
