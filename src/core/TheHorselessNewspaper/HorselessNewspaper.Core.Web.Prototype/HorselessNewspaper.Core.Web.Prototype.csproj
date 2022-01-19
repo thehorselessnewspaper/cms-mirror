@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HorselessNewspaper.RazorClassLibrary.CMS.Default\HorselessNewspaper.RazorClassLibrary.CMS.Default.csproj" />
+    <ProjectReference Include="..\HorselessNewspaper.RazorClassLibrary.Keycloak.Default\HorselessNewspaper.RazorClassLibrary.Keycloak.Default.csproj" />
     <ProjectReference Include="..\HorselessNewspaper.Web.Core.Auth.Keycloak\HorselessNewspaper.Web.Core.Auth.Keycloak.csproj" />
     <ProjectReference Include="..\HorselessNewspaper.Web.TagHelpers\HorselessNewspaper.Web.TagHelpers.csproj" />
   </ItemGroup>

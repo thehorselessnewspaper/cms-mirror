@@ -23,50 +23,50 @@ namespace HorselessNewspaper.RazorClassLibrary.Keycloak.Default.Controllers
             this.AuthOptions = keycloakAuthOptions;
         }
 
-        [HttpGet("~/SignIn")]
-        public async Task<IActionResult> SignIn()
-        {
+        //[HttpGet("~/SignIn")]
+        //public async Task<IActionResult> SignIn()
+        //{
 
-            return View("Signin", await HttpContext.GetExternalProvidersAsync());
+        //    return View("Signin", await HttpContext.GetExternalProvidersAsync());
 
-        }
+        //}
 
-        [HttpPost("~/SignIn")]
-        public async Task<IActionResult> SignIn([FromForm] string provider)
-        {
-            // Note: the "provider" parameter corresponds to the external
-            // authentication provider choosen by the user agent.
-            if (string.IsNullOrWhiteSpace(provider))
-            {
-                return BadRequest();
-            }
+        //[HttpPost("~/SignIn")]
+        //public async Task<IActionResult> SignIn([FromForm] string provider)
+        //{
+        //    // Note: the "provider" parameter corresponds to the external
+        //    // authentication provider choosen by the user agent.
+        //    if (string.IsNullOrWhiteSpace(provider))
+        //    {
+        //        return BadRequest();
+        //    }
 
-            if (!await HttpContext.IsProviderSupportedAsync(provider))
-            {
-                return BadRequest();
-            }
+        //    if (!await HttpContext.IsProviderSupportedAsync(provider))
+        //    {
+        //        return BadRequest();
+        //    }
 
-            // Instruct the middleware corresponding to the requested external identity
-            // provider to redirect the user agent to its own authorization endpoint.
-            // Note: the authenticationScheme parameter must match the value configured in Startup.cs
+        //    // Instruct the middleware corresponding to the requested external identity
+        //    // provider to redirect the user agent to its own authorization endpoint.
+        //    // Note: the authenticationScheme parameter must match the value configured in Startup.cs
 
-            // TODO defend against unavailable IDP  here - probe the challenge endpoint
-            // IOException: IDX20804: Unable to retrieve document from: 'System.String'.
-            var challengeResult = Challenge(new AuthenticationProperties { RedirectUri = "/" }, provider);
-            return challengeResult;
-        }
+        //    // TODO defend against unavailable IDP  here - probe the challenge endpoint
+        //    // IOException: IDX20804: Unable to retrieve document from: 'System.String'.
+        //    var challengeResult = Challenge(new AuthenticationProperties { RedirectUri = "/" }, provider);
+        //    return challengeResult;
+        //}
 
-        [HttpGet("Signout")]
-        [HttpPost("Signout")]
-        public  async  Task<IActionResult> SignOutCurrentUser()
-        {
-            // similar to https://docs.identityserver.io/en/release/quickstarts/3_interactive_login.html
-            // similar to https://github.com/tuxiem/AspNetCore-keycloak/blob/master/KeycloakAuth/Controllers/HomeController.cs
-            // similar to https://issues.redhat.com/browse/KEYCLOAK-3399?page=com.atlassian.jira.plugin.system.issuetabpanels%3Achangehistory-tabpanel
-            var redirectUri = await SignoutGetRedirectUrl();
+        //[HttpGet("Signout")]
+        //[HttpPost("Signout")]
+        //public  async  Task<IActionResult> SignOutCurrentUser()
+        //{
+        //    // similar to https://docs.identityserver.io/en/release/quickstarts/3_interactive_login.html
+        //    // similar to https://github.com/tuxiem/AspNetCore-keycloak/blob/master/KeycloakAuth/Controllers/HomeController.cs
+        //    // similar to https://issues.redhat.com/browse/KEYCLOAK-3399?page=com.atlassian.jira.plugin.system.issuetabpanels%3Achangehistory-tabpanel
+        //    var redirectUri = await SignoutGetRedirectUrl();
 
-            return Redirect(redirectUri.AbsolutePath);
-        }
+        //    return Redirect(redirectUri.AbsolutePath);
+        //}
 
         /// <summary>
         /// 

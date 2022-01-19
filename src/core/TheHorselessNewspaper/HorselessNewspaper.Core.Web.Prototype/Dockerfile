@@ -6,26 +6,30 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-
-#
-#ENV DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER=0
-#ENV NUGET_CREDENTIALPROVIDER_SESSIONTOKENCACHE_ENABLED true
-#
-#
-#RUN wget -qO- https://raw.githubusercontent.com/Microsoft/artifacts-credprovider/master/helpers/installcredprovider.sh | bash
-#
-
 WORKDIR /src
 
-# as per https://stackoverflow.com/questions/57462205/how-to-add-private-nuget-source-in-dotnet-dockerfile
-COPY ["HorselessNewspaper.Core.Web.Prototype/nuget.config", "HorselessNewspaper.Core.Web.Prototype/"]
-
-# account for hardcoded visual studio project references
+COPY ["TheHorselessCore.sln", "."]
+COPY ["HorselessNewspaper.Core.Web.Prototype/nuget.config", "."]
+COPY ["HorselessNewspaper.Core.Web.Prototype/HorselessNewspaper.Core.Web.Prototype.csproj", "HorselessNewspaper.Core.Web.Prototype/"]
+COPY ["HorselessNewspaper.RazorClassLibrary.CMS.Default/HorselessNewspaper.RazorClassLibrary.CMS.Default.csproj", "HorselessNewspaper.RazorClassLibrary.CMS.Default/"]
 COPY ["Web.Core/HorselessNewspaper.Web.Core.csproj", "Web.Core/"]
 COPY ["HorselessNewspaper.Web.Core.Auth.Keycloak/HorselessNewspaper.Web.Core.Auth.Keycloak.csproj", "HorselessNewspaper.Web.Core.Auth.Keycloak/"]
+COPY ["HorselessNewspaper.Web.TagHelpers/HorselessNewspaper.Web.TagHelpers.csproj", "HorselessNewspaper.Web.TagHelpers/"]
 
+COPY ["HorselessNewspaper.Client.Nuget/HorselessNewspaper.Client.Nuget.csproj", "HorselessNewspaper.Client.Nuget/"]
 
-COPY ["HorselessNewspaper.Core.Web.Prototype/HorselessNewspaper.Core.Web.Prototype.csproj", "HorselessNewspaper.Core.Web.Prototype/"]
+COPY ["HorselessNewspaper.Core.Interfaces/HorselessNewspaper.Core.Interfaces.csproj", "HorselessNewspaper.Core.Interfaces/"]
+
+COPY ["HorselessNewspaper.Core.Repositories/HorselessNewspaper.Core.Repositories.csproj", "HorselessNewspaper.Core.Repositories/"]
+
+COPY ["HorselessNewspaper.RazorClassLibrary.Keycloak.Default/HorselessNewspaper.RazorClassLibrary.Keycloak.Default.csproj", "HorselessNewspaper.RazorClassLibrary.Keycloak.Default/"]
+
+COPY ["Unit.Tests/HorselessNewspaper.SmokeTests/HorselessNewspaper.SmokeTests.csproj", "Unit.Tests/HorselessNewspaper.SmokeTests/"]
+
+COPY ["HorselessNewspaper.Web.Core.Extensions.MSSQLServer/HorselessNewspaper.Web.Core.Extensions.MSSQLServer.csproj", "HorselessNewspaper.Web.Core.Extensions.MSSQLServer/"]
+COPY ["HorselessNewspaper.Web.Core.Extensions.MySQL/HorselessNewspaper.Web.Core.Extensions.MySQL.csproj", "HorselessNewspaper.Web.Core.Extensions.MySQL/"]
+COPY ["HorselessNewspaper.Web.Core.Services.Query/HorselessNewspaper.Web.Core.Services.Query.csproj", "HorselessNewspaper.Web.Core.Services.Query/"]
+
 RUN dotnet restore "HorselessNewspaper.Core.Web.Prototype/HorselessNewspaper.Core.Web.Prototype.csproj"
 COPY . .
 WORKDIR "/src/HorselessNewspaper.Core.Web.Prototype"
