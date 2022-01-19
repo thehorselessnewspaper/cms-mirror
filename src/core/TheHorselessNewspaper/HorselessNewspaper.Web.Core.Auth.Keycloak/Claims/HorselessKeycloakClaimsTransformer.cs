@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,26 +18,44 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Claims
     /// </summary>
     internal class HorselessKeycloakClaimsTransformer : IClaimsTransformation
     {
+        ILogger<HorselessKeycloakClaimsTransformer> _logger;
+        public HorselessKeycloakClaimsTransformer(ILogger<HorselessKeycloakClaimsTransformer> log)
+        {
+            _logger = log;
+        }
+
         public Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
         {
-            ClaimsIdentity claimsIdentity = (ClaimsIdentity)principal.Identity;
+            ClaimsPrincipal clonedPrincipal = principal.Clone();
 
+            ClaimsIdentity clonedIdentity = (ClaimsIdentity)clonedPrincipal.Identity;
+;
+
+            /// TODO enable this by feature management
             // flatten realm_access because Microsoft identity model doesn't support nested claims
             // by map it to Microsoft identity model, because automatic JWT bearer token mapping already processed here
-            if (claimsIdentity.IsAuthenticated && claimsIdentity.HasClaim((claim) => claim.Type == "realm_access"))
+            if (clonedIdentity.IsAuthenticated && clonedPrincipal.HasClaim((claim) => claim.Type == "realm_access"))
             {
-                var realmAccessClaim = claimsIdentity.FindFirst((claim) => claim.Type == "realm_access");
+
+                var realmAccessClaim = clonedPrincipal.FindFirst((claim) => claim.Type == "realm_access");
                 var realmAccessAsDict = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(realmAccessClaim.Value);
                 if (realmAccessAsDict["roles"] != null)
                 {
                     foreach (var role in realmAccessAsDict["roles"])
                     {
-                        claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, role));
+                        clonedIdentity.AddClaim(new Claim(ClaimTypes.Role, role));
                     }
                 }
             }
+            
+            /// TODO parameterize the claim value filtered here\
+            /// enable by feature management
+            if(clonedIdentity.IsAuthenticated && clonedPrincipal.HasClaim((claim) => claim.Value.ToLower().Contains("admin")))
+            {
+                _logger.LogDebug("user logged in with admin claim value");
+            }
 
-            return Task.FromResult(principal);
+            return Task.FromResult(clonedPrincipal);
         }
     }
 }

@@ -138,6 +138,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
 
                 await HttpContext.SignOutAsync("Cookies");
                 await HttpContext.SignOutAsync("OpenIdConnect");
+                await HttpContext.SignOutAsync();
                 var urlEncodedRedirect = HttpUtility.UrlEncode(AuthOptions.PostLogoutRedirectUri.AbsoluteUri);
                 redirectUri = GetRedirectFormatString(idToken, urlEncodedRedirect);
             }

@@ -1,22 +1,17 @@
-﻿using HorselessNewspaper.Web.Core.Extensions;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HorselessNewspaper.Web.Core.Auth.Keycloak.Claims;
+using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
+using HorselessNewspaper.Web.Core.Authorization.Handler;
+using HorselessNewspaper.Web.Core.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
-using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
-using System.Text.Json;
-using Microsoft.AspNetCore.Authentication;
-using HorselessNewspaper.Web.Core.Auth.Keycloak.Claims;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System.Security.Claims;
+using System.Text.Json;
 
 namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
 {
@@ -43,7 +38,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
 
             };
 
-            serviceBuilder.Services.AddTransient<IClaimsTransformation, HorselessKeycloakClaimsTransformer>();
+            serviceBuilder.Services.AddScoped<IClaimsTransformation, HorselessKeycloakClaimsTransformer>();
 
             serviceBuilder.Services.AddSingleton<IKeycloakAuthOptions>(keycloakAuthOptions);
             #endregion surface the keycloak logout url configuration 
@@ -146,6 +141,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
             });
 
             //.AddOpenId(keyCloakOptions);
+
+            // as per https://docs.microsoft.com/en-us/aspnet/core/security/authorization/resourcebased?view=aspnetcore-6.0
+            serviceBuilder.Services.AddSingleton<IAuthorizationHandler, RLSAuthorizationHandler>();
 
             // alternative approach without keycloak binaries and just JWT https://stackoverflow.com/questions/67532553/secure-asp-net-core-3-1-mvc-app-with-keycloak
             // as per https://github.com/aspnet-contrib/AspNet.Security.OpenId.Providers/tree/dev/samples/Mvc.Client
