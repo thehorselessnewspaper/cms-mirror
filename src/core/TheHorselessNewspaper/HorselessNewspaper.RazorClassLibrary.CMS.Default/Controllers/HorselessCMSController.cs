@@ -61,7 +61,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
             this.AuthOptions = keycloakAuthOptions;
         }
 
-        [HttpGet("SignIn")]
+        [HttpGet("~/SignIn")]
         public async Task<IActionResult> SignIn()
         {
 
@@ -94,8 +94,6 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
             return challengeResult;
         }
 
-
-        // [Authorize]
         public async Task<IActionResult> ViewTemplate()
         {
             var user = User.Identities.First();
@@ -113,7 +111,6 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
             }
         }
 
-        [HttpGet("Signout")]
         [HttpPost("Signout")]
         public async Task<IActionResult> SignOutCurrentUser()
         {
