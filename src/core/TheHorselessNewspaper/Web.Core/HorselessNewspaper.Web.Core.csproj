@@ -19,13 +19,13 @@
 
   <ItemGroup>
     <PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.5.1" />
-    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.3.220116.4" />
+    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.3.220118.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="2.4.0" />
     <PackageReference Include="NuGet.Protocol" Version="6.0.0" />
-    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.2.20220116.4" />
+    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.2.20220118.1" />
   </ItemGroup>
 
   <ItemGroup>
