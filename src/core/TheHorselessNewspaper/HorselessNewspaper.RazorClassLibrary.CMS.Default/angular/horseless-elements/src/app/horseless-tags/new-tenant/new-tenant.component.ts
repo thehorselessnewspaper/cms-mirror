@@ -1,5 +1,7 @@
 import { Attribute, Component, OnInit } from '@angular/core';
-import { IHorselessHostingAPI } from 'src/app/interfaces/IHorselessHostingAPI';
+import { HostingEntitiesTenant, HostingEntitiesTenantIdentifierStrategy } from '@wizardcontroller/horseless-contentapi-lib';
+import { IHorselessHostingAPI } from 'src/app/interfaces/IHorselessHostingApi';
+
 
 @Component({
   selector: 'horseless-new-tenant',
@@ -8,8 +10,12 @@ import { IHorselessHostingAPI } from 'src/app/interfaces/IHorselessHostingAPI';
 })
 export class NewTenantComponent implements OnInit, IHorselessHostingAPI{
 
+  currentTenant! : HostingEntitiesTenant;
+  tenantStrategy! : HostingEntitiesTenantIdentifierStrategy
 
-  constructor(@Attribute('baseUrl') public hostingApiBaseUrl: string) { }
+  constructor(@Attribute('baseUrl') public hostingApiBaseUrl: string) {
+
+   }
 
   ngOnInit() {
 
