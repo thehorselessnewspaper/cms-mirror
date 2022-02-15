@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="angular\horseless-elements\src\app\interfaces\" />
+    <!--<Folder Include="angular\horseless-elements\src\app\interfaces\" />-->
     <Folder Include="Areas\HorselessContent\Controllers\REST\" />
     <Folder Include="Areas\HorselessContent\Views\" />
   </ItemGroup>
