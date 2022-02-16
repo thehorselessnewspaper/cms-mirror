@@ -1,62 +1,60 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-    <PackageId>HorselessNewspaper.RazorClassLibrary.CMS.Default</PackageId>
-    <Version>1.0.0</Version>
-    <Authors>sechele delaruse</Authors>
-    <Company>Ataxlab</Company>
-    <Product>The Horseless Newspaper</Product>
-    <Description>this razor class library implements the default skin of the horseless newspaper</Description>
-    <!-- support embedding dependencies for redistributable packages -->
-    <!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
-    <!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+		<PackageId>HorselessNewspaper.RazorClassLibrary.CMS.Default</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>sechele delaruse</Authors>
+		<Company>Ataxlab</Company>
+		<Product>The Horseless Newspaper</Product>
+		<Description>this razor class library implements the default skin of the horseless newspaper</Description>
+		<!-- support embedding dependencies for redistributable packages -->
+		<!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
+		<!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
 
-  </PropertyGroup>
+	</PropertyGroup>
 
-  <ItemGroup>
+	<!--<ItemGroup>
     <Content Remove="angular\horseless-elements\angular.json" />
     <Content Remove="angular\horseless-elements\package.json" />
     <Content Remove="angular\horseless-elements\tsconfig.json" />
     <Content Remove="angular\package.json" />
-  </ItemGroup>
+  </ItemGroup>-->
 
 
-  <!-- end spa config -->
-  <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-      <PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.0.0">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-  </ItemGroup>
+	<!-- end spa config -->
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+		<PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.1.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <!--<Folder Include="angular\horseless-elements\src\app\interfaces\" />-->
-    <Folder Include="Areas\HorselessContent\Controllers\REST\" />
-    <Folder Include="Areas\HorselessContent\Views\" />
-  </ItemGroup>
+	<ItemGroup>
+		<!--<Folder Include="angular\horseless-elements\src\app\interfaces\" />-->
+		<Folder Include="Areas\HorselessContent\Controllers\REST\" />
+		<Folder Include="Areas\HorselessContent\Views\" />
+		<Folder Include="Angular\" />
+		<Folder Include="Angular\node_modules\**" />
+		<Folder Include="Angular\node_modules\@wizardcontroller\horseless-contentapi-lib\horseless-contentapi\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="angular\horseless-elements\angular.json" />
-    <None Include="angular\horseless-elements\package.json" />
-    <None Include="angular\horseless-elements\tsconfig.json" />
-    <None Include="angular\package.json" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.3.220214.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.2" />
-    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.2.20220214.2" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HorselessNewspaper.Web.Core.Auth.Keycloak\HorselessNewspaper.Web.Core.Auth.Keycloak.csproj" />
-    <ProjectReference Include="..\Web.Core\HorselessNewspaper.Web.Core.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.3.220215.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.2" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.2.20220215.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\HorselessNewspaper.Web.Core.Auth.Keycloak\HorselessNewspaper.Web.Core.Auth.Keycloak.csproj" />
+		<ProjectReference Include="..\Web.Core\HorselessNewspaper.Web.Core.csproj" />
+	</ItemGroup>
 
 
 
