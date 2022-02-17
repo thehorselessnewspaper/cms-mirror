@@ -142,7 +142,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
          
             serviceBuilder.Services.AddScoped<IAuthenticationSchemesCache, AuthenticationSchemesCache>();
                         
-            serviceBuilder.Services.AddSingleton<IHorselessCacheProvider<Guid, TenantDTO>, DefaultTenantCache>();
+            serviceBuilder.Services.AddSingleton<IHorselessCacheProvider<Guid, TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantInfo>, DefaultTenantCache>();
 
             // support dynamic view loading and unloading
             // wholly based on https://stackoverflow.com/questions/48206993/how-to-load-asp-net-core-razor-view-dynamically-at-runtime
