@@ -24,6 +24,7 @@ using TheHorselessNewspaper.Schemas.HostingModel.DTO;
 using HorselessNewspaper.Web.Core.Interfaces.Hosting;
 using HorselessNewspaper.Web.Core.Model.Query.HostingCollection;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
+using HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -204,6 +205,11 @@ namespace HorselessNewspaper.Web.Core.Extensions
             serviceBuilder.Services.AddSingleton<HorselessRouteTransformer>();
 
             #endregion  cms routing pattern services
+
+            #region hosted services
+            services.AddHostedService<TenantCacheService>();
+
+            #endregion hosted services
             options?.Invoke(serviceBuilder);
 
             return services;
