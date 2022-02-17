@@ -15,14 +15,11 @@
 		<!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
 		<!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
 
+		<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+		 <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
+
 	</PropertyGroup>
 
-	<!--<ItemGroup>
-    <Content Remove="angular\horseless-elements\angular.json" />
-    <Content Remove="angular\horseless-elements\package.json" />
-    <Content Remove="angular\horseless-elements\tsconfig.json" />
-    <Content Remove="angular\package.json" />
-  </ItemGroup>-->
 
 
 	<!-- end spa config -->
@@ -38,11 +35,8 @@
 		<!--<Folder Include="angular\horseless-elements\src\app\interfaces\" />-->
 		<Folder Include="Areas\HorselessContent\Controllers\REST\" />
 		<Folder Include="Areas\HorselessContent\Views\" />
-		<Folder Include="Angular\**" />
-		<Folder Include="Angular\node_modules\**" />
-		<Folder Include="Angular\node_modules\@wizardcontroller\horseless-contentapi-lib\horseless-contentapi\**" />
+		<Folder Include="Angular" />
 	</ItemGroup>
-
 
 
 	<ItemGroup>
