@@ -52,7 +52,13 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
             {
                    
                 // test of user defined routing scenario
+
+
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("");
+                options.MapDynamicControllerRoute<HorselessRouteTransformer>("{controller}/{action}");
+                options.MapDynamicControllerRoute<HorselessRouteTransformer>("{area:exists}/{controller}/{action}");
+
+
                 options.MapControllerRoute(
                 name: "Authentication",
                 pattern: "{area:exists}/{controller=KeycloakController}/{action=Signin}/{id?}");

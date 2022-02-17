@@ -25,6 +25,11 @@ namespace HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant
         }
         public System.Collections.Concurrent.ConcurrentDictionary<Guid, HostingEntities.TenantInfo> Tenants { get; set; }
 
+        public async Task<int> Count()
+        {
+            return await Task.FromResult<int>(Tenants.Count);
+        }
+
         public async Task<Guid> Evict(Guid key)
         {
  
