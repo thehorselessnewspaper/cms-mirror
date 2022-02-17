@@ -46,9 +46,9 @@
 
 
 	<ItemGroup>
-		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.3.220215.2" />
+		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.3.220216.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.2" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.2.20220215.2" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.2.20220216.2" />
 	</ItemGroup>
 
 	<ItemGroup>
