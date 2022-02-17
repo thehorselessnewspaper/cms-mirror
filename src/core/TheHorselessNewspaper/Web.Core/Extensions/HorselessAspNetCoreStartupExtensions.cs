@@ -1,10 +1,14 @@
 ﻿using Finbuckle.MultiTenant;
+using HorselessNewspaper.Web.Core.Authorization.Model.MultiTenant;
 using HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.ApplicationPartsLogger;
+using HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
 using HorselessNewspaper.Web.Core.Interfaces.Content;
+using HorselessNewspaper.Web.Core.Interfaces.Hosting;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter.Strategy;
 using HorselessNewspaper.Web.Core.Model.Query.ContentCollection;
+using HorselessNewspaper.Web.Core.Model.Query.HostingCollection;
 using HorselessNewspaper.Web.Core.ScopedServices.AuthenticationSchemes;
 using HorselessNewspaper.Web.Core.ScopedServices.RoutingStrategy;
 using HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant;
@@ -14,17 +18,11 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.FeatureManagement;
-using System.Reflection;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using TheHorselessNewspaper.HostingModel.Entities.Query;
 using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
-using TheHorselessNewspaper.Schemas.HostingModel.DTO;
-using HorselessNewspaper.Web.Core.Interfaces.Hosting;
-using HorselessNewspaper.Web.Core.Model.Query.HostingCollection;
-using TheHorselessNewspaper.HostingModel.Entities.Query;
-using HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -107,10 +105,10 @@ namespace HorselessNewspaper.Web.Core.Extensions
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             #region multitenancy as per https://www.finbuckle.com/MultiTenant/
-            serviceBuilder.Services.AddMultiTenant<Finbuckle.MultiTenant.TenantInfo>()
+            serviceBuilder.Services.AddMultiTenant<HorselessTenantInfo>()
                 .WithInMemoryStore(options =>
                 {
-                    options.Tenants.Add(new TenantInfo()
+                    options.Tenants.Add(new HorselessTenantInfo()
                     {
                         ConnectionString = configuration.GetConnectionString("ContentModelConnection"),
                         Id = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",

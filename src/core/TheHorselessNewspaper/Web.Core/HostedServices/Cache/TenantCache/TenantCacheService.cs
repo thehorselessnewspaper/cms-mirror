@@ -21,7 +21,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
         private readonly ILogger<TenantCacheService> _logger;
         private Timer _timer = null!;
-        IQueryableHostingModelOperator<HostingModel.TenantInfo> _tenantInfoQuery;
+
         IServiceProvider _services;
 
         public TenantCacheService(ILogger<TenantCacheService> logger,
