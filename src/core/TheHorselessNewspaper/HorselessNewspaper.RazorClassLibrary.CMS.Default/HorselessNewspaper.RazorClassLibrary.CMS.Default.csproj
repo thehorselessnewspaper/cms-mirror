@@ -38,7 +38,7 @@
 		<!--<Folder Include="angular\horseless-elements\src\app\interfaces\" />-->
 		<Folder Include="Areas\HorselessContent\Controllers\REST\" />
 		<Folder Include="Areas\HorselessContent\Views\" />
-		<Folder Include="Angular\" />
+		<Folder Include="Angular\**" />
 		<Folder Include="Angular\node_modules\**" />
 		<Folder Include="Angular\node_modules\@wizardcontroller\horseless-contentapi-lib\horseless-contentapi\**" />
 	</ItemGroup>

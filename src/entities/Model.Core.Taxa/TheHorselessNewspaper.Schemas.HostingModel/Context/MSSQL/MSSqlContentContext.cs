@@ -18,7 +18,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         public DatabaseServerFamily SqlDialect { get; set; }
 
 
-        public MSSqlContentContext(DbContextOptions<MSSqlContentContext> options, IConfiguration config, Finbuckle.MultiTenant.TenantInfo tenant) : base(options, tenant)
+        public MSSqlContentContext(DbContextOptions<MSSqlContentContext> options, IConfiguration config, Finbuckle.MultiTenant.ITenantInfo tenant) : base(options, tenant)
         {
             this.TenantInfo = tenant;
             this._configuration = config;

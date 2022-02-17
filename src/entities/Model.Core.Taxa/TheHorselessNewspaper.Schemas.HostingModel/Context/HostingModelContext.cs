@@ -21,7 +21,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     internal partial class THLNPHostingContext : DbContext
     {
 
-        protected THLNPHostingContext(DbContextOptions options, Finbuckle.MultiTenant.TenantInfo tenant)
+        protected THLNPHostingContext(DbContextOptions options, Finbuckle.MultiTenant.ITenantInfo tenant)
         : base(options)
         {
             int i = 0;

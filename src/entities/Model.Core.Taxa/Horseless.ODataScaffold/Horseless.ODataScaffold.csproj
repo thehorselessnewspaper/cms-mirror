@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HorselessNewspaper.RazorClassLibrary.CMS.Default" Version="0.3.220114.1" />
-    <PackageReference Include="HorselessNewspaper.Web.Core.Auth.Keycloak" Version="0.3.220114.1" />
+    <PackageReference Include="HorselessNewspaper.RazorClassLibrary.CMS.Default" Version="0.3.220217.1" />
+    <PackageReference Include="HorselessNewspaper.Web.Core.Auth.Keycloak" Version="0.3.220217.1" />
   </ItemGroup>
 
   <ItemGroup>

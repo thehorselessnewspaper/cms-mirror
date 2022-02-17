@@ -35,7 +35,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         }
         #endregion
 
-        public MSSQLHostingContext(DbContextOptions<MSSQLHostingContext> options, IConfiguration config, Finbuckle.MultiTenant.TenantInfo tenant) : base(options, tenant)
+        public MSSQLHostingContext(DbContextOptions<MSSQLHostingContext> options, IConfiguration config, Finbuckle.MultiTenant.ITenantInfo tenant) : base(options, tenant)
         {
             this.TenantInfo = tenant;
             this._configuration = config;
