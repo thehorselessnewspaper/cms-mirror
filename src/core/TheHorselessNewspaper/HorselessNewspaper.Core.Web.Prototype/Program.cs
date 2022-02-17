@@ -78,7 +78,7 @@ builder.Services.AddControllers()
         options.AddRouteComponents("HorselessHosting", edmHosting);
     });
 
-
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -108,17 +108,21 @@ builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
             new EmbeddedFileProvider(typeof(HorselessCMSController).Assembly));
 });
 
+
+// as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/docs/keycloak.md
+builder.Services.AddHorselessKeycloakAuth(builder, keycloakOpts =>
+{
+
+});
+
 builder.Services.AddHorselessNewspaper(builder.Configuration);
+
 
 // globally enables mssql server
 builder.Services.UseHorselessContentModelMSSqlServer(builder.Configuration, builder.Configuration.GetConnectionString("ContentModelConnection"));
 builder.Services.UseHorselessHostingModelMSSqlServer(builder.Configuration, builder.Configuration.GetConnectionString("HostingModelConnection"));
 
-// as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/docs/keycloak.md
-builder.Services.AddHorselessKeycloakAuth(builder, keycloakOpts =>
- {
 
- });
 
 // as per https://docs.microsoft.com/en-us/shows/on-net/adding-a-little-swagger-to-odata
 // as per https://github.com/OData/WebApi/issues/2024
@@ -134,6 +138,9 @@ builder.Services.AddMvcCore(options =>
     }
 
 });
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
 
 foreach (var service in builder.Services)
 {
@@ -156,12 +163,12 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseRouting();
-
 app.UseCors();
 
 app.UseAuthentication();
+app.UseRouting();
 app.UseAuthorization();
+app.UseSession();
 
 app.UseHorselessNewspaper(app, app.Environment, app.Configuration, options =>
 {

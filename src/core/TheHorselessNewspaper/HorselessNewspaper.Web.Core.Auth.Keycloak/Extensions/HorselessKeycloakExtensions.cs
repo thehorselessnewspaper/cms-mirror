@@ -38,7 +38,6 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
 
             };
 
-            serviceBuilder.Services.AddScoped<IClaimsTransformation, HorselessKeycloakClaimsTransformer>();
 
             serviceBuilder.Services.AddSingleton<IKeycloakAuthOptions>(keycloakAuthOptions);
             #endregion surface the keycloak logout url configuration 
@@ -139,11 +138,14 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                         JsonSerializer.Deserialize<Dictionary<string, string[]>>(c.User?.FindFirst((claim) => claim.Type == "realm_access")?.Value ?? "{}")
                     .FirstOrDefault().Value?.Any(v => v == "admin") ?? false));
             });
+            
 
             //.AddOpenId(keyCloakOptions);
 
             // as per https://docs.microsoft.com/en-us/aspnet/core/security/authorization/resourcebased?view=aspnetcore-6.0
             serviceBuilder.Services.AddSingleton<IAuthorizationHandler, RLSAuthorizationHandler>();
+
+            serviceBuilder.Services.AddSingleton<IClaimsTransformation, HorselessKeycloakClaimsTransformer>();
 
             // alternative approach without keycloak binaries and just JWT https://stackoverflow.com/questions/67532553/secure-asp-net-core-3-1-mvc-app-with-keycloak
             // as per https://github.com/aspnet-contrib/AspNet.Security.OpenId.Providers/tree/dev/samples/Mvc.Client

@@ -90,8 +90,15 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
 
             // TODO defend against unavailable IDP  here - probe the challenge endpoint
             // IOException: IDX20804: Unable to retrieve document from: 'System.String'.
-            var challengeResult = Challenge(new AuthenticationProperties { RedirectUri = "/" }, provider);
-            return challengeResult;
+            try
+            {
+                var challengeResult = Challenge(new AuthenticationProperties { RedirectUri = "/" }, provider);
+                return challengeResult;
+            }
+            catch(Exception ex)
+            {
+                return Redirect("/");
+            }
         }
 
         public async Task<IActionResult> ViewTemplate()
@@ -119,7 +126,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
             // similar to https://issues.redhat.com/browse/KEYCLOAK-3399?page=com.atlassian.jira.plugin.system.issuetabpanels%3Achangehistory-tabpanel
             var redirectUri = await SignoutGetRedirectUrl();
 
-            return Redirect(redirectUri.AbsolutePath);
+            // return Redirect(redirectUri.AbsolutePath);
+            return SignOut("Cookies", "OpenIdConnect");
         }
 
         /// <summary>

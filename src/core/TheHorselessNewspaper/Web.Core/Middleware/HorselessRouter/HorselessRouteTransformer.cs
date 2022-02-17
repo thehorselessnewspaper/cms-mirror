@@ -8,10 +8,30 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Claims;
 using TheHorselessNewspaper.Schemas.HostingModel.DTO;
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
 {
+    public static class HorselessRouteTransformerExtensions
+    {
+
+        public static bool HasAdminClaims(this HttpContext httpContext)
+        {
+            bool ret = false;
+
+            if (httpContext.User.Claims.Any())
+            {
+                // todo - centralize claim name/type/issuer
+
+                
+                var hasAdminClaims = httpContext.User.HasClaim((claim) => claim.Value.ToLower().Contains("admin"));
+                ret = hasAdminClaims;
+            }
+
+            return false;
+        }
+    }
 
     /// <summary>
     /// as per
@@ -27,6 +47,8 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
 
         internal IHorselessCacheProvider<Guid, HostingEntities.TenantInfo>? TenantCache { get; set; }
 
+        IHttpContextAccessor _httpContextAccessor;
+
         public bool IsActive { get; set; } = true;
 
         /// <summary>
@@ -38,15 +60,16 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
         {
             _logger = logger;
             TenantCache = null;
+
             logger.LogWarning("HorselessRouteTransformer initialized without IHorselessCacheProvider. Validate Dependency Injection Registrations");
 
         }
 
-        public HorselessRouteTransformer(IHorselessCacheProvider<Guid, HostingEntities.TenantInfo> tenantCache, ILogger<HorselessRouteTransformer> logger)
+        public HorselessRouteTransformer(IHorselessCacheProvider<Guid, HostingEntities.TenantInfo> tenantCache, ILogger<HorselessRouteTransformer> logger, IHttpContextAccessor httpContextAccessor)
         {
             TenantCache = tenantCache;
             _logger = logger;
-
+            _httpContextAccessor = httpContextAccessor;
             logger.LogTrace("dynamic route transformer initialized normally");
         }
 
@@ -62,12 +85,15 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
             // this code runs each time a cms controlled route is http requested
             _logger.LogTrace($"handling route path {httpContext.Request.Path}: IsActive: {this.IsActive}");
 
-            if(IsActive)
+            if (IsActive)
             {
+                var ctx = _httpContextAccessor.HttpContext;
                 // this really calls for some fancy rules engine eventually
 
                 bool hasNoTenants = await GetTenantCount() == 0;
-                if(hasNoTenants)
+                bool isAdminPrincipal = ctx.HasAdminClaims();
+
+                if (hasNoTenants && isAdminPrincipal)
                 {
                     _logger.LogTrace("no tenants found. redirecting to setup");
                 }
@@ -76,11 +102,16 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
             return await ValueTask.FromResult(values);
         }
 
+        private Task<bool> GetIsAuthenticatedAdmin()
+        {
+            throw new NotImplementedException();
+        }
+
         private async Task<int> GetTenantCount()
         {
             int ret = 0;
 
-            if(TenantCache != null && IsActive)
+            if (TenantCache != null && IsActive)
             {
                 ret = await TenantCache.Count();
             }
