@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,5 +20,13 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Hosting
         where T : class, IQueryableHostingModelOperator<Entity>, IQueryableModelOperator<Entity>
         where Entity : class, IHostingRowLevelSecured
     {
+
+        public Task<Entity> Create([FromBody] Entity entity);
+
+        public Task<Entity> GetByObjectId(string objectId);
+
+        public Task<IQueryable<Entity>> Query();
+
+        public Task<Entity> Update([FromBody] Entity contentCollection);
     }
 }

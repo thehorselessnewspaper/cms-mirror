@@ -36,6 +36,5 @@
   <ItemGroup>
     <Folder Include="BackgroundServices\" />
     <Folder Include="HostedServices\RazorClassLibrary\" />
-    <Folder Include="Model\Query\HostingCollection\" />
   </ItemGroup>
 </Project>

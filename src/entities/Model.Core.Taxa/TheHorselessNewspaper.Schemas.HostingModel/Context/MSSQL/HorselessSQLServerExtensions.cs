@@ -58,6 +58,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
         /// <summary>
         /// globally enables mssql server, pass global connection string
+        /// 
+        /// registers query service
         /// </summary>
         /// <param name="services"></param>
         /// <param name="configuration"></param>

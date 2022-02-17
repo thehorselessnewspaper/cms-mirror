@@ -18,8 +18,12 @@ using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.FeatureManagement;
 using System.Reflection;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
-using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using TheHorselessNewspaper.Schemas.HostingModel.DTO;
+using HorselessNewspaper.Web.Core.Interfaces.Hosting;
+using HorselessNewspaper.Web.Core.Model.Query.HostingCollection;
+using TheHorselessNewspaper.HostingModel.Entities.Query;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -32,7 +36,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
         Action<HorselessServiceBuilder> options = null, ServiceLifetime scope = ServiceLifetime.Scoped)
         {
             var serviceBuilder = new HorselessServiceBuilder(configuration, services);
-            
+
 
             serviceBuilder.Services.AddFeatureManagement();
 
@@ -118,30 +122,42 @@ namespace HorselessNewspaper.Web.Core.Extensions
             #endregion multitenancy as per https://www.finbuckle.com/MultiTenant/
 
             #region content collection query services
-            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<ContentCollection>, ContentCollection>,
-                ContentCollectionService<IQueryableContentModelOperator<ContentCollection>, ContentCollection>>();
-            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<Tenant>, Tenant>,
-                ContentCollectionService<IQueryableContentModelOperator<Tenant>, Tenant>>();
-            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<FilesystemAsset>, FilesystemAsset>,
-                ContentCollectionService<IQueryableContentModelOperator<FilesystemAsset>, FilesystemAsset>>();
-            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<Holonym>, Holonym>,
-                ContentCollectionService<IQueryableContentModelOperator<Holonym>, Holonym>>();
-            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<HorselessContent>, HorselessContent>,
-                ContentCollectionService<IQueryableContentModelOperator<HorselessContent>, HorselessContent>>();
-            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<JSONAsset>, JSONAsset>,
-                ContentCollectionService<IQueryableContentModelOperator<JSONAsset>, JSONAsset>>();
-            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<Meronym>, Meronym>,
-                ContentCollectionService<IQueryableContentModelOperator<Meronym>, Meronym>>();
-            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<MIMEType>, MIMEType>,
-                ContentCollectionService<IQueryableContentModelOperator<MIMEType>, MIMEType>>();
-            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<MIMEType>, MIMEType>,
-                ContentCollectionService<IQueryableContentModelOperator<MIMEType>, MIMEType>>();
-            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<NavigationMenuItem>, NavigationMenuItem>,
-                 ContentCollectionService<IQueryableContentModelOperator<NavigationMenuItem>, NavigationMenuItem>>();
-        #endregion
-         
+            /**
+             * for injection into controllers
+             **/
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.ContentCollection>, ContentEntities.ContentCollection>,
+                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.ContentCollection>, ContentEntities.ContentCollection>>();
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Tenant>, ContentEntities.Tenant>,
+                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Tenant>, ContentEntities.Tenant>>();
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.FilesystemAsset>, ContentEntities.FilesystemAsset>,
+                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.FilesystemAsset>, ContentEntities.FilesystemAsset>>();
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Holonym>, ContentEntities.Holonym>,
+                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Holonym>, ContentEntities.Holonym>>();
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessContent>, ContentEntities.HorselessContent>,
+                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessContent>, ContentEntities.HorselessContent>>();
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.JSONAsset>, ContentEntities.JSONAsset>,
+                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.JSONAsset>, ContentEntities.JSONAsset>>();
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Meronym>, ContentEntities.Meronym>,
+                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Meronym>, ContentEntities.Meronym>>();
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.MIMEType>, ContentEntities.MIMEType>,
+                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.MIMEType>, ContentEntities.MIMEType>>();
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.MIMEType>, ContentEntities.MIMEType>,
+                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.MIMEType>, ContentEntities.MIMEType>>();
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.NavigationMenuItem>, ContentEntities.NavigationMenuItem>,
+                 ContentCollectionService<IQueryableContentModelOperator<ContentEntities.NavigationMenuItem>, ContentEntities.NavigationMenuItem>>();
+            #endregion
+
+            #region hosting collection query services
+            /**
+             * for injection into controllers
+             **/
+            serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.TenantInfo>, HostingEntities.TenantInfo>,
+                     HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.TenantInfo>, HostingEntities.TenantInfo>>();
+
+            #endregion
+
             serviceBuilder.Services.AddScoped<IAuthenticationSchemesCache, AuthenticationSchemesCache>();
-                        
+
             serviceBuilder.Services.AddSingleton<IHorselessCacheProvider<Guid, TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantInfo>, DefaultTenantCache>();
 
             // support dynamic view loading and unloading
