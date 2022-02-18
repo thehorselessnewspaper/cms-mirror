@@ -61,9 +61,6 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
             builder.UseEndpoints(options =>
             {
 
-                // test of user defined routing scenario
-
-
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("");
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("{controller}/{action}");
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("{area:exists}/{controller}/{action}");
