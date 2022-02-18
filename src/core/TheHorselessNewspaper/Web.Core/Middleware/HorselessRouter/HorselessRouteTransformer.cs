@@ -11,27 +11,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Claims;
 using TheHorselessNewspaper.Schemas.HostingModel.DTO;
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+using HorselessNewspaper.Web.Core.Extensions.Claim;
+
 namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
 {
-    public static class HorselessRouteTransformerExtensions
-    {
 
-        public static bool HasAdminClaims(this HttpContext httpContext)
-        {
-            bool ret = false;
-
-            if (httpContext.User.Claims.Any())
-            {
-                // todo - centralize claim name/type/issuer
-
-                
-                var hasAdminClaims = httpContext.User.HasClaim((claim) => claim.Value.ToLower().Contains("admin"));
-                ret = hasAdminClaims;
-            }
-
-            return false;
-        }
-    }
 
     /// <summary>
     /// as per
@@ -91,7 +75,7 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
                 // this really calls for some fancy rules engine eventually
 
                 bool hasNoTenants = await GetTenantCount() == 0;
-                bool isAdminPrincipal = ctx.HasAdminClaims();
+                bool isAdminPrincipal = ctx.HasAdminClaimValues(new List<string>() { "admin", "owner"});
 
                 if (hasNoTenants && isAdminPrincipal)
                 {
