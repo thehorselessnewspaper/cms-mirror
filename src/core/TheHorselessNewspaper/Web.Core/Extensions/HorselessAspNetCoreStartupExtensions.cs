@@ -5,6 +5,7 @@ using HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
 using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Hosting;
+using HorselessNewspaper.Web.Core.Middleware;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter.Strategy;
 using HorselessNewspaper.Web.Core.Model.Query.ContentCollection;
@@ -201,7 +202,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
             // validate that this needs to be a singleton
             // as it's gating every request
             serviceBuilder.Services.AddSingleton<HorselessRouteTransformer>();
-
+            serviceBuilder.Services.AddScoped<HorselessTenantSetupMiddleware>();
             #endregion  cms routing pattern services
 
             #region hosted services

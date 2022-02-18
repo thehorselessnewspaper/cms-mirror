@@ -14,10 +14,10 @@ namespace HorselessNewspaper.Web.Core.Middleware
     public static class MiddlewareExtensions
     {
 
-        public static IApplicationBuilder UseFactoryActivatedMiddleware(
+        public static IApplicationBuilder UseHorselessTenantSetupMiddleware(
             this IApplicationBuilder builder)
         {
-            return builder.UseMiddleware<FactoryActivatedMiddleware>();
+            return builder.UseMiddleware<HorselessTenantSetupMiddleware>();
         }
     }
 }

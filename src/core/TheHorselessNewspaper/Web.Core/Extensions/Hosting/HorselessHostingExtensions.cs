@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using System.Runtime.Loader;
+using HorselessNewspaper.Web.Core.Middleware;
 
 namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 {
@@ -47,7 +48,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
             // due to HorselessRouteTransformer requirement for 
             // populated ClaimsPrincipal
             builder.UseAuthentication();
-  
+
             builder.UseCookiePolicy();
             builder.UseRouting();
             builder.UseCors();
@@ -55,16 +56,31 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 
             builder.UseAuthorization();
 
+
+            builder.UseHorselessTenantSetupMiddleware();
+
             // as per https://docs.microsoft.com/en-us/aspnet/core/fundamentals/static-files?view=aspnetcore-6.0
             builder.UseStaticFiles();
+
 
             builder.UseEndpoints(options =>
             {
 
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("");
-                options.MapDynamicControllerRoute<HorselessRouteTransformer>("{controller}/{action}");
+                options.MapDynamicControllerRoute<HorselessRouteTransformer>("{controller:exists}/{action:exists}");
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("{area:exists}/{controller}/{action}");
 
+                options.MapDynamicControllerRoute<HorselessRouteTransformer>("/{**slug}");
+                //options.MapControllerRoute(
+                //name: "Slugs",
+                //pattern: "{*slug}", new { controller = "Home", action = "Index" });
+
+
+
+                options.MapAreaControllerRoute(
+                    name: "Installer",
+                    areaName: "Installer",
+                    pattern: "Installer/{controller=TenantSetup}/{action=Index}/{id?}");
 
                 options.MapControllerRoute(
                 name: "Authentication",
@@ -74,6 +90,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
                 options.MapControllerRoute(
                 name: "HorselessCMS",
                 pattern: "{controller=HorselessCMS}/{action=ViewTemplate}/{id?}");
+
             });
 
             options?.Invoke(applicationBuilder);

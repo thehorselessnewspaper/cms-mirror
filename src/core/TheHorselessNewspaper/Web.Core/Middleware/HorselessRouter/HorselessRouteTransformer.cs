@@ -75,15 +75,52 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
                 // this really calls for some fancy rules engine eventually
 
                 bool hasNoTenants = await GetTenantCount() == 0;
-                bool isAdminPrincipal = ctx.HasAdminClaimValues(new List<string>() { "admin", "owner"});
-
-                if (hasNoTenants && isAdminPrincipal)
-                {
-                    _logger.LogTrace("no tenants found. redirecting to setup");
-                }
+                bool isAdminPrincipal = ctx.HasAdminClaimValues(new List<string>() { "admin", "owner" });
+                values = HandleInitialTenantSetup(values, hasNoTenants, isAdminPrincipal);
             }
 
             return await ValueTask.FromResult(values);
+        }
+
+        private RouteValueDictionary HandleInitialTenantSetup(RouteValueDictionary values, bool hasNoTenants, bool isAdminPrincipal)
+        {
+            var ctx = _httpContextAccessor.HttpContext;
+            if (hasNoTenants && isAdminPrincipal && values != null && values["controller"] != null)
+            {
+                values = new RouteValueDictionary();
+                _logger.LogTrace("no tenants found. redirecting to setup");
+                values["controller"] = "TenantSetup";
+                values["area"] = "Installer";
+                values["action"] = "Index";
+            }
+            // handle the case of urlpath = /
+            else if (hasNoTenants && isAdminPrincipal
+                && ctx.Request.Path.Equals("/")
+                && values != null
+                && values["slug"] == null
+                )
+            {
+                values = new RouteValueDictionary();
+                _logger.LogTrace("no tenants found. redirecting to setup");
+                values["area"] = "Installer";
+                values["controller"] = "TenantSetup";
+ 
+                values["action"] = "Index";
+            }
+            else if (hasNoTenants && isAdminPrincipal
+                && ctx.Request.Path.Equals("/")
+                && values == null
+                // && values["slug"] != null
+    )
+            {
+                values = new RouteValueDictionary();
+                _logger.LogTrace("no tenants found. redirecting to setup");
+                values["controller"] = "TenantSetup";
+                values["area"] = "Installer";
+                values["action"] = "Index";
+            }
+
+            return values;
         }
 
         private Task<bool> GetIsAuthenticatedAdmin()

@@ -1,5 +1,6 @@
 ﻿
-@if(User.Claims != null)
+
+@if(Context.HasAdminClaimValues(new List<string>() { "editor" }))
 {
 <div class="container" style="height:350px; width:100%;">
     <div class="panel__top">
