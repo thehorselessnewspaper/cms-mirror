@@ -16,6 +16,10 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
         /// such that the program.cs implementer is forced to consider and configure
         /// which routes will be controlled by the cms
         /// and what authentication schemes
+        /// 
+        /// middleware order of registration guided by
+        /// - https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-6.0#middleware-order
+        /// - https://www.finbuckle.com/MultiTenant/Docs/v6.6.0/ConfigurationAndUsage
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="options"></param>
@@ -25,20 +29,13 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
         {
             var applicationBuilder = new HorselessApplicationBuilder(app, builder);
 
-            // avoid doing this such that the implementer has full flexibility
-            //applicationBuilder.Builder
-            //    .UseEndpoints(endpoints =>
-            //    {
-            //        // test of library controlled routing scenario
-            //        // endpoints.MapDynamicControllerRoute<HorselessRouteTransformer>(""); // enabling this here prevents the implementer from configuring it in program.cs
-            //    });
-
             // as per https://stackoverflow.com/questions/40908568/assembly-loading-in-net-core
             // todo - come up with a central way of storing configuration string keys
             var directoryInfo = new DirectoryInfo(env.WebRootPath);
             var pluginPath = Path.Combine(directoryInfo.Parent.FullName, configuration[HorselessApplicationBuilder.TenantFilesystemPathConfigurationKey]);
-            
-            AssemblyLoadContext.Default.Resolving += (context, name) => {
+
+            AssemblyLoadContext.Default.Resolving += (context, name) =>
+            {
                 var resolver = new AssemblyDependencyResolver(pluginPath);
                 string assemblyPath = resolver.ResolveAssemblyToPath(name);
                 if (assemblyPath != null)
@@ -46,11 +43,24 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
                 return null;
             };
 
+            // ordered prior to .UseRouting() 
+            // due to HorselessRouteTransformer requirement for 
+            // populated ClaimsPrincipal
+            builder.UseAuthentication();
+  
+            builder.UseCookiePolicy();
+            builder.UseRouting();
+            builder.UseCors();
             builder.UseMultiTenant();
+
+            builder.UseAuthorization();
+
+            // as per https://docs.microsoft.com/en-us/aspnet/core/fundamentals/static-files?view=aspnetcore-6.0
+            builder.UseStaticFiles();
 
             builder.UseEndpoints(options =>
             {
-                   
+
                 // test of user defined routing scenario
 
 

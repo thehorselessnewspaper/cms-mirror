@@ -39,6 +39,7 @@ builder.Services.AddCors(options =>
 });
 
 
+builder.Services.AddRazorPages();
 
 builder.Services.AddControllersWithViews()
     .AddRazorRuntimeCompilation();
@@ -161,22 +162,30 @@ if (!app.Environment.IsDevelopment())
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 
-app.UseCors();
 
-app.UseAuthentication();
-app.UseRouting();
-app.UseAuthorization();
-app.UseSession();
-
+/// <summary>
+/// enables multitenancy and other cms patterns
+/// with attention to order of registration
+/// as per 
+///     - https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-6.0#middleware-order
+///     - https://www.finbuckle.com/MultiTenant/Docs/v6.6.0/ConfigurationAndUsage
+/// except for
+///     builder.UseAuthentication() situated prior to builder.UseRouting()
+///     due to need for ClaimsPrincipal during routing middleware logic
+///     builder.UseAuthentication();     
+///     builder.UseRouting();
+///     builder.UseCors();
+///     builder.UseMultiTenant();
+///     builder.UseAuthorization();
+/// </summary>
 app.UseHorselessNewspaper(app, app.Environment, app.Configuration, options =>
 {
 
-
+    
 });
 
-
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
