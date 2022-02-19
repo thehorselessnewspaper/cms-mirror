@@ -15,9 +15,7 @@
 		<!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
 		<!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
 
-		<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
-		 <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
-
+	
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -42,9 +40,16 @@
 		<!--<Folder Include="angular\horseless-elements\src\app\interfaces\" />-->
 		<Folder Include="Areas\HorselessContent\Controllers\REST\" />
 		<Folder Include="Areas\HorselessContent\Views\" />
-		<Folder Include="Angular" />
+		<Folder Include="wwwroot\typescript\" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<Content Remove="Angular\**" />
+		<Compile Remove="Angular\**" />
+		<EmbeddedResource Remove="Angular\**" />
+		<None Remove="Angular\**" />
+	</ItemGroup>
+	
 	<ItemGroup>
 	  <None Include="angular\horseless-elements\angular.json" />
 	  <None Include="angular\horseless-elements\package.json" />
