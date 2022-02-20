@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, Injector, OnInit } from '@angular/core';
+import { createCustomElement } from '@angular/elements';
+import { NewTenantComponent } from './new-tenant/new-tenant.component';
 
 @Component({
   selector: 'app-horseless-tags',
@@ -7,8 +8,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./horseless-tags.component.css']
 })
 export class HorselessTagsComponent implements OnInit {
-
-  constructor() { }
 
   ngOnInit() {
   }

@@ -39,6 +39,7 @@
 		<Folder Include="vuejs\" />
 		<Folder Include="typescript\Tenant\" />
 		<Folder Include="typescript\TenantSetup\" />
+		<Folder Include="wwwroot\js\horseless-elements\" />
 	</ItemGroup>
 
 	<ItemGroup>

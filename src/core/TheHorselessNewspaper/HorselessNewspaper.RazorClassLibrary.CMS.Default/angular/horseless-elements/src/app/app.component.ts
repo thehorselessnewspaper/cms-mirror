@@ -10,10 +10,5 @@ import { NewTenantComponent } from './horseless-tags/new-tenant/new-tenant.compo
 export class AppComponent {
   title = 'horseless-elements';
 
-  constructor(injector: Injector) {
-    // Convert `PopupComponent` to a custom element.
-    const NewTenantElement = createCustomElement(NewTenantComponent, { injector });
-    // Register the custom element with the browser.
-    customElements.define('horseless-new-tenant', NewTenantElement);
-  }
+
 }

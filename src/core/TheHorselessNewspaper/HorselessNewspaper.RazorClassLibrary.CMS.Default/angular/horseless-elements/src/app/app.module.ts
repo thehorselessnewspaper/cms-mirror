@@ -8,6 +8,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
+import { NewTenantComponent } from './horseless-tags/new-tenant/new-tenant.component';
+import { Injector } from '@angular/core';
+import { createCustomElement } from '@angular/elements';
 
 
 @NgModule({
@@ -18,6 +21,17 @@ import {MatNativeDateModule} from '@angular/material/core';
     BrowserModule, HttpClientModule, HorselessTagsModule, BrowserAnimationsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private injector: Injector) {
+
+  }
+
+  ngDoBootstrap() {
+    // Convert `PopupComponent` to a custom element.
+    const NewTenantElement = createCustomElement(NewTenantComponent, { injector: this.injector });
+    // Register the custom element with the browser.
+    customElements.define('horseless-new-tenant', NewTenantElement);
+  }
+}
