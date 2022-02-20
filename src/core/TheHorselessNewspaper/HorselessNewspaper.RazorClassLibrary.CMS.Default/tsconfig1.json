@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "compileOnSave" true,
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5",
+    "outDir": "wwwroot/js"
+  },
+  "include": ["typescript/**/*"],
+  "exclude": [
+    "node_modules",
+    "angular/node_modules",
+    "angular/horseless-elements/node_modules",
+    "wwwroot"
+  ]
+}

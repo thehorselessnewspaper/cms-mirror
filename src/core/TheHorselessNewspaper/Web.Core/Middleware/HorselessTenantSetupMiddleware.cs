@@ -15,9 +15,9 @@ namespace HorselessNewspaper.Web.Core.Middleware
     {
         public IHorselessCacheProvider<Guid, TenantInfo> TenantCache { get; private set; }
 
-        private ILogger<HorselessRouteTransformer> _logger;
+        private ILogger<HorselessTenantSetupMiddleware> _logger;
 
-        public HorselessTenantSetupMiddleware(IHorselessCacheProvider<Guid, HostingEntities.TenantInfo> tenantCache, ILogger<HorselessRouteTransformer> logger)
+        public HorselessTenantSetupMiddleware(IHorselessCacheProvider<Guid, HostingEntities.TenantInfo> tenantCache, ILogger<HorselessTenantSetupMiddleware> logger)
         {
             TenantCache = tenantCache;
             _logger = logger;
@@ -63,11 +63,13 @@ namespace HorselessNewspaper.Web.Core.Middleware
             bool hasNoTenants = await GetTenantCount() == 0;
             bool isAdminPrincipal = context.HasAdminClaimValues(new List<string>() { "admin", "owner" });
 
-            if (hasNoTenants && isAdminPrincipal && !context.Request.Path.Equals("/Installer/TenantSetup"))
-            {
-                context.Response.Redirect("/Installer/TenantSetup");
-                return;
-            }
+            //if (hasNoTenants && isAdminPrincipal && !context.Request.Path.Equals("/Installer/TenantSetup"))
+            //{
+            //    // context.Response.Redirect("/Installer/TenantSetup");
+            //    context.Items["controller"] = "TenantSetup";
+            //    context.Items["action"] = "Index";
+            //    context.Items["area"] = "Installer";
+            //}
 
             await next(context);
         }

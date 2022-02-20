@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Claims;
+using System.Security.Claims;
 using TheHorselessNewspaper.Schemas.HostingModel.DTO;
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using HorselessNewspaper.Web.Core.Extensions.Claim;
@@ -76,7 +76,7 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
 
                 bool hasNoTenants = await GetTenantCount() == 0;
                 bool isAdminPrincipal = ctx.HasAdminClaimValues(new List<string>() { "admin", "owner" });
-                values = HandleInitialTenantSetup(values, hasNoTenants, isAdminPrincipal);
+                // values = HandleInitialTenantSetup(values, hasNoTenants, isAdminPrincipal);
             }
 
             return await ValueTask.FromResult(values);

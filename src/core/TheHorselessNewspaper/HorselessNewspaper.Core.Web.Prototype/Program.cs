@@ -14,6 +14,7 @@ using Microsoft.Net.Http.Headers;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 using Microsoft.AspNetCore.OData.Formatter;
+using HorselessNewspaper.Web.Core.Filters.ActionFilters.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(builder =>
@@ -41,8 +42,11 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddRazorPages();
 
-builder.Services.AddControllersWithViews()
-    .AddRazorRuntimeCompilation();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<InstallRequiredActionFilter>(int.MinValue);
+})
+.AddRazorRuntimeCompilation();
 
 builder.Services.AddODataQueryFilter();
 

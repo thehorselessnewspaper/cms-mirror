@@ -15,17 +15,13 @@
 		<!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
 		<!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
 
-	
+
 	</PropertyGroup>
 
-	<ItemGroup>
-	  <Content Remove="angular\horseless-elements\angular.json" />
-	  <Content Remove="angular\horseless-elements\package.json" />
-	  <Content Remove="angular\horseless-elements\tsconfig.json" />
-	  <Content Remove="angular\package.json" />
-	</ItemGroup>
 
-
+	<PropertyGroup>
+		<DefaultItemExcludes>angular/horseless-elements/node_modules/**;$(DefaultItemExcludes)</DefaultItemExcludes>
+	</PropertyGroup>
 
 	<!-- end spa config -->
 	<ItemGroup>
@@ -37,24 +33,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<!--<Folder Include="angular\horseless-elements\src\app\interfaces\" />-->
+		<Folder Include="angular\horseless-elements\" />
 		<Folder Include="Areas\HorselessContent\Controllers\REST\" />
 		<Folder Include="Areas\HorselessContent\Views\" />
-		<Folder Include="wwwroot\typescript\" />
+		<Folder Include="vuejs\" />
+		<Folder Include="typescript\Tenant\" />
+		<Folder Include="typescript\TenantSetup\" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Remove="Angular\**" />
-		<Compile Remove="Angular\**" />
-		<EmbeddedResource Remove="Angular\**" />
-		<None Remove="Angular\**" />
-	</ItemGroup>
-	
-	<ItemGroup>
-	  <None Include="angular\horseless-elements\angular.json" />
-	  <None Include="angular\horseless-elements\package.json" />
-	  <None Include="angular\horseless-elements\tsconfig.json" />
-	  <None Include="angular\package.json" />
+		<Content Remove="Angular\horseless-elements\node_modules\**" />
+		<Compile Remove="Angular\horseless-elements\node_modules\**" />
+		<EmbeddedResource Remove="Angular\horseless-elements\node_modules\**" />
+		<None Remove="Angular\horseless-elements\node_modules\**" />
 	</ItemGroup>
 
 

@@ -1,5 +1,4 @@
-﻿using Finbuckle.MultiTenant;
-using HorselessNewspaper.Web.Core.Authorization.Model.MultiTenant;
+﻿using HorselessNewspaper.Web.Core.Authorization.Model.MultiTenant;
 using HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.ApplicationPartsLogger;
 using HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
