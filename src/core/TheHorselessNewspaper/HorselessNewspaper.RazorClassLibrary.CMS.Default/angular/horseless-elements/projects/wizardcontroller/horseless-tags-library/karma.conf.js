@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, '../../coverage/horseless-tags'),
+      dir: require('path').join(__dirname, '../../../coverage/wizardcontroller/horseless-tags-library'),
       subdir: '.',
       reporters: [
         { type: 'html' },

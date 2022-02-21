@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-horseless-tags',
+  selector: 'lib-horseless-tags-library',
   template: `
     <p>
-      horseless-tags works!
+      horseless-tags-library works!
     </p>
   `,
   styles: [
   ]
 })
-export class HorselessTagsComponent implements OnInit {
+export class HorselessTagsLibraryComponent implements OnInit {
 
   constructor() { }
 

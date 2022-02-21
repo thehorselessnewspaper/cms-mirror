@@ -12,6 +12,10 @@
         "dist/wizardcontroller/horseless-tags/wizardcontroller-horseless-tags",
         "dist/wizardcontroller/horseless-tags"
       ],
+      "@wizardcontroller/horseless-tags-library": [
+        "dist/wizardcontroller/horseless-tags-library/wizardcontroller-horseless-tags-library",
+        "dist/wizardcontroller/horseless-tags-library"
+      ],
       "horseless-tags": [
         "dist/horseless-tags/horseless-tags",
         "dist/horseless-tags"

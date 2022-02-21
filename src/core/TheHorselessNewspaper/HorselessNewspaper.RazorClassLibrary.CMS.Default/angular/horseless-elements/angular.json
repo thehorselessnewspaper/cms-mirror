@@ -103,23 +103,23 @@
         }
       }
     },
-    "horseless-tags": {
+    "@wizardcontroller/horseless-tags-library": {
       "projectType": "library",
-      "root": "projects/horseless-tags",
-      "sourceRoot": "projects/horseless-tags/src",
+      "root": "projects/wizardcontroller/horseless-tags-library",
+      "sourceRoot": "projects/wizardcontroller/horseless-tags-library/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/horseless-tags/ng-package.json"
+            "project": "projects/wizardcontroller/horseless-tags-library/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/horseless-tags/tsconfig.lib.prod.json"
+              "tsConfig": "projects/wizardcontroller/horseless-tags-library/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/horseless-tags/tsconfig.lib.json"
+              "tsConfig": "projects/wizardcontroller/horseless-tags-library/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -127,40 +127,9 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/horseless-tags/src/test.ts",
-            "tsConfig": "projects/horseless-tags/tsconfig.spec.json",
-            "karmaConfig": "projects/horseless-tags/karma.conf.js"
-          }
-        }
-      }
-    },
-    "@wizardcontroller/horseless-tags": {
-      "projectType": "library",
-      "root": "projects/wizardcontroller/horseless-tags",
-      "sourceRoot": "projects/wizardcontroller/horseless-tags/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/wizardcontroller/horseless-tags/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/wizardcontroller/horseless-tags/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/wizardcontroller/horseless-tags/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/wizardcontroller/horseless-tags/src/test.ts",
-            "tsConfig": "projects/wizardcontroller/horseless-tags/tsconfig.spec.json",
-            "karmaConfig": "projects/wizardcontroller/horseless-tags/karma.conf.js"
+            "main": "projects/wizardcontroller/horseless-tags-library/src/test.ts",
+            "tsConfig": "projects/wizardcontroller/horseless-tags-library/tsconfig.spec.json",
+            "karmaConfig": "projects/wizardcontroller/horseless-tags-library/karma.conf.js"
           }
         }
       }
