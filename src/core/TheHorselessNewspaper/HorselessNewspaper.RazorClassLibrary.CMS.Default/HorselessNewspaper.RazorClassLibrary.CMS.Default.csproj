@@ -33,7 +33,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="angular\horseless-elements\" />
 		<Folder Include="Areas\HorselessContent\Controllers\REST\" />
 		<Folder Include="Areas\HorselessContent\Views\" />
 		<Folder Include="vuejs\" />
