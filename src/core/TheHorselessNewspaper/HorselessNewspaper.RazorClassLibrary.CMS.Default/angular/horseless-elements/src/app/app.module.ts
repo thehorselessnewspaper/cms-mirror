@@ -11,13 +11,14 @@ import { Injector } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { TenantChooserComponent } from '@wizardcontroller/horseless-tags-library';
 import { TenantEditorComponent } from '@wizardcontroller/horseless-tags-library';
+import { HorselessTagsLibraryModule } from '@wizardcontroller/horseless-tags-library';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, BrowserAnimationsModule, TenantEditorComponent, TenantChooserComponent
+    BrowserModule, HttpClientModule, BrowserAnimationsModule, HorselessTagsLibraryModule
   ],
   providers: [],
   bootstrap: []
