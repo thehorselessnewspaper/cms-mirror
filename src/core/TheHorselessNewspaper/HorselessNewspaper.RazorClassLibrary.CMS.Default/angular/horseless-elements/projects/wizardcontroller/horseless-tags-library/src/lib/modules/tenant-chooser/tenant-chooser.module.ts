@@ -8,6 +8,8 @@ import { TenantChooserComponent } from './tenant-chooser.component';
   declarations: [TenantChooserComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [
+    TenantChooserComponent]
 })
 export class TenantChooserModule { }

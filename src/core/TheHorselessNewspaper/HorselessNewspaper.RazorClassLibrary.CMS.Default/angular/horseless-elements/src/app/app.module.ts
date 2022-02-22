@@ -17,7 +17,7 @@ import { TenantEditorComponent } from '@wizardcontroller/horseless-tags-library/
     AppComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule,  BrowserAnimationsModule
+    BrowserModule, HttpClientModule, BrowserAnimationsModule, TenantEditorComponent, TenantChooserComponent
   ],
   providers: [],
   bootstrap: []

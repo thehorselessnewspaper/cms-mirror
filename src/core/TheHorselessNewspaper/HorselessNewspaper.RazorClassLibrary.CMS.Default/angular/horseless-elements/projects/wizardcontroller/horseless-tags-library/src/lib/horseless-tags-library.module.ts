@@ -8,12 +8,12 @@ import { createCustomElement } from '@angular/elements';
 
 @NgModule({
   declarations: [
-    HorselessTagsLibraryComponent, TenantChooserComponent, TenantEditorComponent
+    HorselessTagsLibraryComponent
   ],
   imports: [
   ],
   exports: [
-    HorselessTagsLibraryComponent, TenantChooserComponent, TenantEditorComponent
+    HorselessTagsLibraryComponent
   ]
 })
 export class HorselessTagsLibraryModule {

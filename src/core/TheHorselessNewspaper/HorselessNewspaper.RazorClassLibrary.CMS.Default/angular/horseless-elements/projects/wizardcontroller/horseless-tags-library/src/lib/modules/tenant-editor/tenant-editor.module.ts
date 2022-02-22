@@ -8,6 +8,8 @@ import { TenantEditorComponent } from './tenant-editor.component';
   declarations: [TenantEditorComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [
+    TenantEditorComponent]
 })
 export class TenantEditorModule { }
