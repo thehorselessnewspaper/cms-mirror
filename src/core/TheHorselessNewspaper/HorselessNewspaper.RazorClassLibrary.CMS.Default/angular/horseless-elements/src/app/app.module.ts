@@ -9,8 +9,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import { Injector } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
-import { TenantChooserComponent } from '@wizardcontroller/horseless-tags-library/lib/modules/tenant-chooser/tenant-chooser.component';
-import { TenantEditorComponent } from '@wizardcontroller/horseless-tags-library/lib/modules/tenant-editor/tenant-editor.component';
+import { TenantChooserComponent } from '@wizardcontroller/horseless-tags-library';
+import { TenantEditorComponent } from '@wizardcontroller/horseless-tags-library';
 
 @NgModule({
   declarations: [
