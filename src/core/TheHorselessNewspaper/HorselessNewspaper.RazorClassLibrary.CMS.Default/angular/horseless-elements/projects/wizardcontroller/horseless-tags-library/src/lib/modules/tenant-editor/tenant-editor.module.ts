@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TenantEditorComponent } from './tenant-editor.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [TenantEditorComponent],
   imports: [
     CommonModule
   ]
