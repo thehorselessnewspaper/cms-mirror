@@ -100,6 +100,15 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     },
@@ -130,6 +139,15 @@
             "main": "projects/wizardcontroller/horseless-tags-library/src/test.ts",
             "tsConfig": "projects/wizardcontroller/horseless-tags-library/tsconfig.spec.json",
             "karmaConfig": "projects/wizardcontroller/horseless-tags-library/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/wizardcontroller/horseless-tags-library/**/*.ts",
+              "projects/wizardcontroller/horseless-tags-library/**/*.html"
+            ]
           }
         }
       }
