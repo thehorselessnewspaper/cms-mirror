@@ -1,20 +1,19 @@
+using HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers;
+using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
 using HorselessNewspaper.Web.Core.Extensions;
 using HorselessNewspaper.Web.Core.Extensions.Hosting;
-using HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers;
-using Microsoft.Extensions.FileProviders;
+using HorselessNewspaper.Web.Core.Filters.ActionFilters.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
-using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
 using Microsoft.AspNetCore.OData;
-using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
-using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
+using Microsoft.AspNetCore.OData.Formatter;
+using Microsoft.AspNetCore.OData.Extensions;
 using Microsoft.AspNetCore.OData.Routing.Conventions;
-using HorselessNewspaper.RazorClassLibrary.CMS.Default;
-using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Net.Http.Headers;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
-using Microsoft.AspNetCore.OData.Formatter;
-using HorselessNewspaper.Web.Core.Filters.ActionFilters.Infrastructure;
+using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
+using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
 
 var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(builder =>
@@ -63,6 +62,8 @@ var edmHosting = await model.GetHostingEDMModel();
 //});
 
 // odata concerns
+
+
 builder.Services.AddControllers()
     .AddOData(options =>
     {

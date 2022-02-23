@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using System.Runtime.Loader;
 using HorselessNewspaper.Web.Core.Middleware;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.OData.Extensions;
+using Microsoft.AspNetCore.OData;
 
 namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 {
@@ -49,6 +52,9 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
             // populated ClaimsPrincipal
             builder.UseAuthentication();
 
+            // as per https://github.com/OData/AspNetCoreOData/blob/main/sample/ODataRoutingSample/Startup.cs
+            builder.UseODataQueryRequest();
+
             builder.UseCookiePolicy();
             builder.UseRouting();
             builder.UseCors();
@@ -65,7 +71,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 
             builder.UseEndpoints(options =>
             {
-
+                options.MapControllers();
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("");
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("{controller:exists}/{action:exists}");
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("{area:exists}/{controller}/{action}");
