@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HostingEntitiesTenant } from '@wizardcontroller/horseless-contentapi-lib';
 
 @Component({
   selector: 'lib-tenant-chooser',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TenantChooserComponent implements OnInit {
 
+  tenants!: HostingEntitiesTenant[];
   constructor() { }
 
   ngOnInit(): void {
