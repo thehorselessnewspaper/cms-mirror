@@ -9,7 +9,7 @@ using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    [Route("HorselessContent/FilesystemAsset")]
+    //[Route("HorselessContent/FilesystemAsset")]
     [Produces("application/json")]
     public class FilesystemAssetController :
         ODataController, IContentQueryController<ContentModel.FilesystemAsset>

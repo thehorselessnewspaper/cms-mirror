@@ -9,7 +9,7 @@ using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    [Route("HorselessContent/Meronym")]
+    //[Route("HorselessContent/Meronym")]
     [Produces("application/json")]
     public class MeronymController :
         ODataController, IContentQueryController<ContentModel.Meronym>

@@ -9,7 +9,7 @@ using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    [Route("HorselessContent/HorselessSession")]
+    //[Route("HorselessContent/HorselessSession")]
     [Produces("application/json")]
     public class HorselessSessionController :
         ODataController, IContentQueryController<ContentModel.HorselessSession>

@@ -10,7 +10,7 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    [Route("HorselessContent/NavigationMenuItem")]
+    //[Route("HorselessContent/NavigationMenuItem")]
 
     public class NavigationMenuItemController :
         ODataController, IContentQueryController<ContentModel.NavigationMenuItem>

@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.OData;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    [Route("HorselessContent/ContentCollection")]
+    //[Route("HorselessContent/ContentCollection")]
 
     public class ContentCollectionController :
         ODataController, IContentQueryController<ContentModel.ContentCollection>

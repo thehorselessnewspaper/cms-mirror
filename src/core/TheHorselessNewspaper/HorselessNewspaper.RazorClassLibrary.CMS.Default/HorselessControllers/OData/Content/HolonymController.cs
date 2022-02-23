@@ -9,7 +9,7 @@ using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    [Route("HorselessContent/Holonym")]
+    //[Route("HorselessContent/Holonym")]
     [Produces("application/json")]
     public class HolonymController :
         ODataController, IContentQueryController<ContentModel.Holonym>
