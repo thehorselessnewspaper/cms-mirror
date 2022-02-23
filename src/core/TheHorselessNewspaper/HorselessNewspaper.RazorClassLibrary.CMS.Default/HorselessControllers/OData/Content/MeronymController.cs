@@ -26,7 +26,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-        [HttpGet("Query")]
+//        [HttpGet("Query")]
         public async Task<ActionResult<IEnumerable<ContentModel.Meronym>>> Query()
         {
             var result = await _contentCollectionService.Query();

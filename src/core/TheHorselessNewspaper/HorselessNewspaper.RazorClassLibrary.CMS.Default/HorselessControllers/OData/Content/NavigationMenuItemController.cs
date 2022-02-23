@@ -27,7 +27,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-        [HttpGet("Query")]
+        // [HttpGet("Query")]
 
         // breaks openapi [HttpGet("HorselessContent/ContentCollection/$count")]
         public async Task<ActionResult<IEnumerable<ContentModel.NavigationMenuItem>>> Query()

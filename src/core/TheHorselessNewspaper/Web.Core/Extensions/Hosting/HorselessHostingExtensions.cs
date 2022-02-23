@@ -53,7 +53,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
             builder.UseAuthentication();
 
             // as per https://github.com/OData/AspNetCoreOData/blob/main/sample/ODataRoutingSample/Startup.cs
-            builder.UseODataQueryRequest();
+            // builder.UseODataQueryRequest();
 
             builder.UseCookiePolicy();
             builder.UseRouting();
@@ -71,7 +71,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 
             builder.UseEndpoints(options =>
             {
-                options.MapControllers();
+
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("");
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("{controller:exists}/{action:exists}");
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("{area:exists}/{controller}/{action}");
@@ -96,6 +96,8 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
                 options.MapControllerRoute(
                 name: "HorselessCMS",
                 pattern: "{controller=HorselessCMS}/{action=ViewTemplate}/{id?}");
+
+                options.MapControllers();
 
             });
 

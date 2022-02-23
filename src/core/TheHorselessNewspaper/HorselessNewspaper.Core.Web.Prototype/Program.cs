@@ -77,7 +77,7 @@ builder.Services.AddControllers()
         .Count();
 
         options.TimeZone = TimeZoneInfo.Utc;
-        options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
+        // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
 
         /// todo make this an environment configurable item
         options.AddRouteComponents("HorselessContent", edmContent);
