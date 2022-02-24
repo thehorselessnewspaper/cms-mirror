@@ -6,7 +6,7 @@ using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Hosting
 {
 
-    // [Route("HorselessHosting/Tenant")]
+    // [Route("HorselessHosting/Tenants")]
     [Produces("application/json")]
     public class TenantController : ODataController
     {
@@ -19,9 +19,10 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
 
-        // [HttpGet("Query")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IAsyncEnumerable<HostingModel.Tenant>))]
-        public async Task<IActionResult> Get()
+        [HttpGet("HorselessHosting/Query")]
+        // [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IAsyncEnumerable<HostingModel.Tenant>))]
+        public async Task<ActionResult<IEnumerable<HostingModel.Tenant>>> Query()
+
         {
             return Ok(await _TenantSvc.Read());
         }

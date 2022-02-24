@@ -1,6 +1,7 @@
 ﻿using Finbuckle.MultiTenant;
 using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Formatter;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
@@ -25,7 +26,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-        // [HttpGet("Query")]
+        [HttpGet("HorselessContent/FilesystemAsset")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.FilesystemAsset>))]
         public async Task<ActionResult<IEnumerable<ContentModel.FilesystemAsset>>> Query()
         {
             var result = await _contentCollectionService.Query();

@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using Microsoft.AspNetCore.Http;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
@@ -33,8 +34,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-        // [HttpGet("Query")]
-        // breaks openapi [HttpGet("HorselessContent/ContentCollection/$count")]
+        [HttpGet("HorselessContent/HorselessContent")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.HorselessContent>))]
         public async Task<ActionResult<IEnumerable<ContentModel.HorselessContent>>> Query()
         {
             var result = await _contentCollectionService.Query();

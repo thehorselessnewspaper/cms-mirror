@@ -53,7 +53,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
             builder.UseAuthentication();
 
             // as per https://github.com/OData/AspNetCoreOData/blob/main/sample/ODataRoutingSample/Startup.cs
-            // builder.UseODataQueryRequest();
+            builder.UseODataQueryRequest();
 
             builder.UseCookiePolicy();
             builder.UseRouting();

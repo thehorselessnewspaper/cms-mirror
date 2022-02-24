@@ -6,14 +6,13 @@ using HorselessNewspaper.Web.Core.Filters.ActionFilters.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.AspNetCore.OData;
 using Microsoft.AspNetCore.OData.Formatter;
-using Microsoft.AspNetCore.OData.Extensions;
-using Microsoft.AspNetCore.OData.Routing.Conventions;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Net.Http.Headers;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
 using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
+using Microsoft.AspNetCore.OData.Routing.Conventions;
 
 var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(builder =>
@@ -82,26 +81,30 @@ builder.Services.AddControllers()
         /// todo make this an environment configurable item
         options.AddRouteComponents("HorselessContent", edmContent);
         options.AddRouteComponents("HorselessHosting", edmHosting);
+
+        
     });
+
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.CustomSchemaIds(t => {
+    options.CustomSchemaIds(t =>
+    {
         // produce this template export interface ContentEntitiesAccessControlEntry 
         var frag = t.FullName.Split('.');
         var container = frag[frag.Length - 2];
         return container + t.Name;
-        });
+    });
     options.CustomOperationIds(apiDesc =>
     {
         // produce this template export interface ContentEntitiesAccessControlEntry 
-        return apiDesc.TryGetMethodInfo(out MethodInfo methodInfo) ?  methodInfo.DeclaringType.Name + methodInfo.Name : null;
+        return apiDesc.TryGetMethodInfo(out MethodInfo methodInfo) ? methodInfo.DeclaringType.Name + methodInfo.Name : null;
 
     });
     options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Horseless Content API", Version = "v1" });
-   
+
 });
 
 // this hardcodes a static reference to the default horseless razor class library
@@ -161,7 +164,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 
-    
+
 }
 
 app.UseSwagger();
@@ -187,7 +190,7 @@ app.UseHttpsRedirection();
 app.UseHorselessNewspaper(app, app.Environment, app.Configuration, options =>
 {
 
-    
+
 });
 
 app.MapRazorPages();
