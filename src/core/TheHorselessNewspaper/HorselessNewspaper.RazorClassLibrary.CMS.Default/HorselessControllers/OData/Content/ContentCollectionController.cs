@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.OData;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    // [Route("HorselessContent/ContentCollection")]
+    [Route("HorselessContent/ContentCollection")]
 
     public class ContentCollectionController :
         ODataController, IContentQueryController<ContentModel.ContentCollection>
@@ -30,8 +30,12 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-        [HttpGet("HorselessContent/ContentCollection")]
+        [HttpGet("Query")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.ContentCollection>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
+        [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
         public async Task<ActionResult<IEnumerable<ContentModel.ContentCollection>>> Query()
         {
             var result = await _contentCollectionService.Query();

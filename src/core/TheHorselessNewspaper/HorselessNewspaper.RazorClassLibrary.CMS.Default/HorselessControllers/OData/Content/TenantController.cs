@@ -13,10 +13,11 @@ using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
 using Microsoft.AspNetCore.OData.Routing;
 using Microsoft.AspNetCore.OData.Formatter;
+using Microsoft.AspNetCore.Http;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    //[Route("HorselessContent/Tenant")]
+    [Route("HorselessContent/[controller]")]
     [Produces("application/json")]
     public class TenantController :
         ODataController, IContentQueryController<ContentModel.Tenant>
@@ -34,7 +35,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-////        [HttpGet("Query")]
+        [HttpGet("Query")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.Tenant>))]
         public async Task<ActionResult<IEnumerable<ContentModel.Tenant>>> Query()
         {
             var result = await _contentCollectionService.Query();

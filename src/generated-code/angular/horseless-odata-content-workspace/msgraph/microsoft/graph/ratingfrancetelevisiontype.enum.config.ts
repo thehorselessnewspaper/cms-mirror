@@ -1,0 +1,23 @@
+﻿//#region ODataApiGen ODataImports
+import {
+  EnumTypeConfig
+} from 'angular-odata';//#endregion
+
+//#region ODataApiGen Imports
+import { RatingFranceTelevisionType } from './ratingfrancetelevisiontype.enum';
+//#endregion
+
+//#region ODataApiGen EnumTypeConfig
+export const RatingFranceTelevisionTypeConfig = {
+  name: 'ratingFranceTelevisionType',
+  members: RatingFranceTelevisionType,
+  fields: {
+    allAllowed: {value: 0},
+    allBlocked: {value: 1},
+    agesAbove10: {value: 2},
+    agesAbove12: {value: 3},
+    agesAbove16: {value: 4},
+    agesAbove18: {value: 5}
+  }
+} as EnumTypeConfig<RatingFranceTelevisionType>;
+//#endregion

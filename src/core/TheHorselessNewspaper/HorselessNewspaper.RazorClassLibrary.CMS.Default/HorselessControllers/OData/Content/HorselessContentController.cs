@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    //[Route("HorselessContent/HorselessContent")]
+    [Route("HorselessContent/[controller]")]
     [Produces("application/json")]
     public class HorselessContentController :
         ODataController, IContentQueryController<ContentModel.HorselessContent>
@@ -34,7 +34,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-        [HttpGet("HorselessContent/HorselessContent")]
+        [HttpGet("Query")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.HorselessContent>))]
         public async Task<ActionResult<IEnumerable<ContentModel.HorselessContent>>> Query()
         {

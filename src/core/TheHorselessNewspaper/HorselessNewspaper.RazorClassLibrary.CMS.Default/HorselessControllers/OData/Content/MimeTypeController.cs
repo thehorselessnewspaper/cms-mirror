@@ -12,10 +12,11 @@ using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using Microsoft.AspNetCore.Http;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    //[Route("HorselessContent/MIMEType")]
+    [Route("HorselessContent/[controller]")]
     [Produces("application/json")]
     public class MimeTypeController :
         ODataController, IContentQueryController<ContentModel.MIMEType>
@@ -32,7 +33,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-//        [HttpGet("Query")]
+        [HttpGet("Query")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.MIMEType>))]
         public async Task<ActionResult<IEnumerable<ContentModel.MIMEType>>> Query()
         {
             var result = await _contentCollectionService.Query();

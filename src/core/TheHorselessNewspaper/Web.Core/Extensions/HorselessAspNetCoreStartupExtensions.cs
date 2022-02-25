@@ -144,6 +144,8 @@ namespace HorselessNewspaper.Web.Core.Extensions
                 ContentCollectionService<IQueryableContentModelOperator<ContentEntities.MIMEType>, ContentEntities.MIMEType>>();
             serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.NavigationMenuItem>, ContentEntities.NavigationMenuItem>,
                  ContentCollectionService<IQueryableContentModelOperator<ContentEntities.NavigationMenuItem>, ContentEntities.NavigationMenuItem>>();
+            serviceBuilder.Services.AddScoped<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.NavigationMenu>, ContentEntities.NavigationMenu>,
+                 ContentCollectionService<IQueryableContentModelOperator<ContentEntities.NavigationMenu>, ContentEntities.NavigationMenu>>();
             #endregion
 
             #region hosting collection query services

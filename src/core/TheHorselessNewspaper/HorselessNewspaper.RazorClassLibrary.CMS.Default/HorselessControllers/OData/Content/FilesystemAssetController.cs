@@ -10,7 +10,7 @@ using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    //[Route("HorselessContent/FilesystemAsset")]
+    [Route("HorselessContent/[controller]")]
     [Produces("application/json")]
     public class FilesystemAssetController :
         ODataController, IContentQueryController<ContentModel.FilesystemAsset>
@@ -26,7 +26,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-        [HttpGet("HorselessContent/FilesystemAsset")]
+        [HttpGet("Query")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.FilesystemAsset>))]
         public async Task<ActionResult<IEnumerable<ContentModel.FilesystemAsset>>> Query()
         {

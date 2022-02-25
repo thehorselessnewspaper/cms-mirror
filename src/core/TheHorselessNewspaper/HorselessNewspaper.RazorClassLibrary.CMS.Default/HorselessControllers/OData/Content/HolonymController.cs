@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    //[Route("HorselessContent/Holonym")]
+    [Route("HorselessContent/[controller]")]
     [Produces("application/json")]
     public class HolonymController :
         ODataController, IContentQueryController<ContentModel.Holonym>
@@ -28,7 +28,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-        [HttpGet("HorselessContent/Holonym")]
+        [HttpGet("Query")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.Holonym>))]
         public async Task<ActionResult<IEnumerable<ContentModel.Holonym>>> Query()
         {

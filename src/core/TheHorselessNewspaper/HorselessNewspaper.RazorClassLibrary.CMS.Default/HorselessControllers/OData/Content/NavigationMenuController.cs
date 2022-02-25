@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using Microsoft.AspNetCore.Http;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    //[Route("HorselessContent/NavigationMenu")]
+    [Route("HorselessContent/[controller]")]
     [Produces("application/json")]
     public class NavigationMenuController :
         ODataController, IContentQueryController<ContentModel.NavigationMenu>
@@ -27,7 +28,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-//        [HttpGet("Query")]
+        [HttpGet("Query")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.NavigationMenu>))]
         public async Task<ActionResult<IEnumerable<ContentModel.NavigationMenu>>> Query()
         {
             var result = await _contentCollectionService.Query();

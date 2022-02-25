@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.OData.Formatter;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using Microsoft.AspNetCore.Http;
+
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    //[Route("HorselessContent/HorselessSession")]
+    [Route("HorselessContent/[controller]")]
     [Produces("application/json")]
     public class HorselessSessionController :
         ODataController, IContentQueryController<ContentModel.HorselessSession>
@@ -25,7 +27,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-//        [HttpGet("Query")]
+        [HttpGet("Query")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.HorselessSession>))]
         public async Task<ActionResult<IEnumerable<ContentModel.HorselessSession>>> Query()
         {
             var result = await _contentCollectionService.Query();
