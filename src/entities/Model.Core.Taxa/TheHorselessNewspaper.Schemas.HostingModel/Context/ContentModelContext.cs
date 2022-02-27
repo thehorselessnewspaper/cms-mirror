@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 /// <summary>
 /// note this namespace corresponds with the partial class it implements, not this folder
@@ -16,10 +17,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     {
 
 
-        protected THLNPContentContext(DbContextOptions options, Finbuckle.MultiTenant.ITenantInfo tenant)
+        protected THLNPContentContext(DbContextOptions options, Finbuckle.MultiTenant.ITenantInfo tenant, ILogger<THLNPContentContext> logger)
         : base(options)
         {
-              
+            _logger = logger;
         }
     }
 }

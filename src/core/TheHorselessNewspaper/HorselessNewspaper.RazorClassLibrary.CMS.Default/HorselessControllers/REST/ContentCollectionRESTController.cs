@@ -25,10 +25,10 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             this._tenantInfo = tenantInfo;
         }
 
-        [HttpGet("GetByObjectId")]
+        [HttpGet("{objectId}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ContentModel.ContentCollection))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ContentModel.ContentCollection>> GetByObjectId([FromRoute] string objectId)
+        public async Task<ActionResult<ContentModel.ContentCollection>> GetByObjectId(string objectId)
         {
 
             IActionResult result;

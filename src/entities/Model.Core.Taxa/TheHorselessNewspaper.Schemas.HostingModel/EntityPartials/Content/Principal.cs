@@ -4,20 +4,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.Context;
+using Finbuckle.MultiTenant;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-
+    [MultiTenant]
     public partial class HorselessPrincipal
     {
 
     }
 
     [Owned]
-    // [Table("Principals")]
+    // [MultiTenant]
     public partial class Principal : IQueryableModelEntity
     {
         [Key]
+
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
 

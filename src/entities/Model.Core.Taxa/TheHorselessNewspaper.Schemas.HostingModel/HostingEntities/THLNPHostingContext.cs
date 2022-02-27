@@ -4,18 +4,23 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Logging;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
     internal partial class THLNPHostingContext : DbContext
     {
-        public THLNPHostingContext()
+        private ILogger<THLNPHostingContext> _logger;
+
+        public THLNPHostingContext(ILogger<THLNPHostingContext> logger)
         {
+            _logger = logger;
         }
 
-        public THLNPHostingContext(DbContextOptions<THLNPHostingContext> options)
+        public THLNPHostingContext(DbContextOptions<THLNPHostingContext> options, ILogger<THLNPHostingContext> logger)
             : base(options)
         {
+            _logger = logger;
         }
 
         public virtual DbSet<FilesystemAssetLocation> FilesystemAssetLocations { get; set; }

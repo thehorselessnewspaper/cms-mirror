@@ -5,14 +5,16 @@ using HorselessNewspaper.Web.Core.Extensions;
 using HorselessNewspaper.Web.Core.Extensions.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.AspNetCore.OData;
+using Microsoft.AspNetCore.OData.Formatter;
 using Microsoft.Extensions.FileProviders;
 using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
 using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Reflection;
+using Microsoft.Net.Http.Headers;
+using HorselessNewspaper.Web.Core.Filters.ActionFilters.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 
 
 builder.Services.AddCors(options =>
@@ -28,22 +30,26 @@ builder.Services.AddCors(options =>
 
 // setup a default tenant store
 
-builder.Services.AddMultiTenant<TenantInfo>()
-    .WithInMemoryStore(options =>
-    {
-        options.Tenants.Add(new TenantInfo()
-        {
-            ConnectionString = builder.Configuration.GetConnectionString("ContentModelConnection"),
-            Id = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
-            Identifier = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
-            Name = "the horseless phantom tenant"
-        });
-    })
-    .WithStaticStrategy("6da806b8-f7ab-4e3a-8833-7e834a40e9d0");
+//builder.Services.AddMultiTenant<TenantInfo>()
+//    .WithInMemoryStore(options =>
+//    {
+//        options.Tenants.Add(new TenantInfo()
+//        {
+//            ConnectionString = builder.Configuration.GetConnectionString("ContentModelConnection"),
+//            Id = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
+//            Identifier = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
+//            Name = "the horseless phantom tenant"
+//        });
+//    })
+//    .WithStaticStrategy("6da806b8-f7ab-4e3a-8833-7e834a40e9d0");
 
-builder.Services.AddControllersWithViews()
-    .AddRazorRuntimeCompilation();
 
+builder.Services.AddRazorPages();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<InstallRequiredActionFilter>(int.MinValue);
+})
+.AddRazorRuntimeCompilation();
 builder.Services.AddODataQueryFilter();
 // enables odata entities
 var model = new HorselessOdataModel();
@@ -64,8 +70,29 @@ builder.Services.AddControllers()
         options.TimeZone = TimeZoneInfo.Utc;
 
         /// todo make this an environment configurable item
-        options.AddRouteComponents("horselessdata", edm);
+        options.AddRouteComponents("HorselessContent", edm);
     });
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.CustomSchemaIds(t =>
+    {
+        // produce this template export interface ContentEntitiesAccessControlEntry 
+        var frag = t.FullName.Split('.');
+        var container = frag[frag.Length - 2];
+        return container + t.Name;
+    });
+    options.CustomOperationIds(apiDesc =>
+    {
+        // produce this template export interface ContentEntitiesAccessControlEntry 
+        return apiDesc.TryGetMethodInfo(out MethodInfo methodInfo) ? methodInfo.DeclaringType.Name + methodInfo.Name : null;
+
+    });
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Horseless Content API", Version = "v1" });
+
+});
 
 builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
 {
@@ -73,17 +100,34 @@ builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
             new EmbeddedFileProvider(typeof(HorselessCMSController).Assembly));
 });
 
-builder.Services.AddHorselessNewspaper(builder.Configuration);
-
-
-builder.Services.UseHorselessContentModelMSSqlServer(builder.Configuration, builder.Configuration.GetConnectionString("ContentModelConnection"));
-builder.Services.UseHorselessHostingModelMSSqlServer(builder.Configuration, builder.Configuration.GetConnectionString("HostingModelConnection"));
-
 // as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/docs/keycloak.md
 builder.Services.AddHorselessKeycloakAuth(builder, keycloakOpts =>
 {
 
 });
+
+
+builder.Services.AddHorselessNewspaper(builder.Configuration);
+
+
+builder.Services.UseHorselessContentModelMSSqlServer(builder.Configuration, builder.Configuration.GetConnectionString("ContentModelConnection"));
+builder.Services.UseHorselessHostingModelMSSqlServer(builder.Configuration, builder.Configuration.GetConnectionString("HostingModelConnection"));
+builder.Services.AddMvcCore(options =>
+{
+    IEnumerable<ODataOutputFormatter> outputFormatters =
+    options.OutputFormatters.OfType<ODataOutputFormatter>()
+        .Where(foramtter => foramtter.SupportedMediaTypes.Count == 0);
+
+    foreach (var outputFormatter in outputFormatters)
+    {
+        outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/odata"));
+    }
+
+});
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+
 
 
 
@@ -96,25 +140,16 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-
-app.UseCors();
-
-app.UseAuthentication();
-app.UseAuthorization();
-
 app.UseHorselessNewspaper(app, app.Environment, app.Configuration, options =>
 {
 
 
 });
+app.MapRazorPages();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

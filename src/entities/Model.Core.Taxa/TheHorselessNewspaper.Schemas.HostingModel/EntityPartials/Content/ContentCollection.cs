@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Finbuckle.MultiTenant;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
+    [MultiTenant]
     public partial class ContentCollection : IContentRowLevelSecured
     {
 

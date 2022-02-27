@@ -1,14 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Finbuckle.MultiTenant;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    [Owned]
+
+    [MultiTenant]
     public partial class Placeholder : IQueryableModelEntity
     {
+        [Key]
         public System.Guid Id { get; set; }
         public string? DisplayName { get; set; }
+
         public string? ObjectId { get; set; }
         public Nullable<bool> IsSoftDeleted { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }

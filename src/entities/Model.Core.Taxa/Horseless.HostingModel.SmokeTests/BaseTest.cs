@@ -1,4 +1,5 @@
 using Finbuckle.MultiTenant;
+using HorselessNewspaper.Web.Core.Authorization.Model.MultiTenant;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -47,11 +48,11 @@ namespace Horseless.HostingModel.SmokeTests
 
                .BuildServiceProvider();
 
-            builder.Services.AddMultiTenant<TenantInfo>()
+            builder.Services.AddMultiTenant<HorselessTenantInfo>()
 
             .WithInMemoryStore(options =>
                 {
-                    options.Tenants.Add(new Finbuckle.MultiTenant.TenantInfo()
+                    options.Tenants.Add(new HorselessTenantInfo()
                     {
                         ConnectionString = builder.Configuration.GetConnectionString("ContentModelConnection"),
                         Id = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
@@ -61,6 +62,13 @@ namespace Horseless.HostingModel.SmokeTests
                 })
             .WithStaticStrategy("6da806b8-f7ab-4e3a-8833-7e834a40e9d0");
 
+            builder.Services.AddSingleton<ITenantInfo>(new HorselessTenantInfo()
+            {
+                ConnectionString = builder.Configuration.GetConnectionString("ContentModelConnection"),
+                Id = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
+                Identifier = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
+                Name = "the horseless phantom tenant"
+            });
             builder.Services.UseHorselessContentModelMSSqlServer(builder.Configuration, builder.Configuration.GetConnectionString("ContentModelConnection"));
             builder.Services.UseHorselessHostingModelMSSqlServer(builder.Configuration, builder.Configuration.GetConnectionString("HostingModelConnection"));
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Finbuckle.MultiTenant;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -35,11 +36,20 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     /// evaluated as part of AccessControlList
     /// to permit deny principals operations
     /// </summary>
-    [Owned]
+
+    [MultiTenant]
    // [Table("PhantomAccessControlEntries")]
     public partial class AccessControlEntry
     {
+        [Key]
+        public Guid Id { get; set; }
+        public string DisplayName { get; set; }
 
+
+        public string ObjectId { get; set; }
+        public bool? IsSoftDeleted { get; set; }
+        [Column(TypeName = "datetime")]
+        public DateTime? CreatedAt { get; set; }
         public ACEPermissionScope Scope { get; set; }
 
         public ACEPermission Permission { get; set; }
@@ -53,16 +63,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
     }
 
+
     public partial class AccessControlEntry: IQueryableModelEntity
     {
-        [Key]
-        public Guid Id { get; set; }
-        public string? DisplayName { get; set; }
-        [Required]
-        public string? ObjectId { get; set; }
-        public bool? IsSoftDeleted { get; set; }
-        [Column(TypeName = "datetime")]
-        public DateTime? CreatedAt { get; set; }
+
         public bool? IsActive { get; set; }
     }
 

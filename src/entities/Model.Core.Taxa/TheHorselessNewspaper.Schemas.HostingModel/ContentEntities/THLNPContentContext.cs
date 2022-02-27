@@ -4,14 +4,18 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Logging;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     internal partial class THLNPContentContext : DbContext
     {
+
+
         public THLNPContentContext(DbContextOptions<THLNPContentContext> options)
             : base(options)
         {
+            int i = 0;
         }
 
         public virtual DbSet<ContentCollection> ContentCollections { get; set; }

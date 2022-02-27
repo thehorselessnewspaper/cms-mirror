@@ -1,8 +1,10 @@
-﻿using TheHorselessNewspaper.HostingModel.Context;
+﻿using Finbuckle.MultiTenant;
+using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
+    [MultiTenant]
     public partial class JSONAsset : IContentRowLevelSecured
     {
         public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();

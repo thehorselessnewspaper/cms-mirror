@@ -2,6 +2,7 @@
 using Finbuckle.MultiTenant.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
@@ -18,7 +19,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         public DatabaseServerFamily SqlDialect { get; set; }
 
 
-        public MSSqlContentContext(DbContextOptions<MSSqlContentContext> options, IConfiguration config, Finbuckle.MultiTenant.ITenantInfo tenant) : base(options, tenant)
+        public MSSqlContentContext(DbContextOptions<MSSqlContentContext> options, Finbuckle.MultiTenant.ITenantInfo tenant, IConfiguration config, ILogger<MSSqlContentContext> logger = null) : base(options)
         {
             this.TenantInfo = tenant;
             this._configuration = config;
@@ -65,14 +66,63 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             // Configure all entity types marked with the [MultiTenant] data attribute
             builder.ConfigureMultiTenant();
 
-   
+            builder.Entity<ContentCollection>()
+                .HasKey(cc => new { cc.Id, cc.ObjectId });
+
+            builder.Entity<FilesystemAsset>()
+                .HasKey(cc => new { cc.Id, cc.ObjectId });
+
+            builder.Entity<Holonym>()
+                .HasKey(cc => new { cc.Id, cc.ObjectId });
+
+            builder.Entity<HorselessClaimsPrincipal>()
+                .HasKey(cc => new { cc.Id, cc.ObjectId });
+
+
+            builder.Entity<HorselessContent>()
+                .HasKey(cc => new { cc.Id, cc.ObjectId });
+
+            builder.Entity<HorselessSession>()
+                .HasKey(cc => new { cc.Id, cc.ObjectId });
+
+            builder.Entity<JSONAsset>()
+                .HasKey(cc => new { cc.Id, cc.ObjectId });
+
+            builder.Entity<Meronym>()
+                .HasKey(cc => new { cc.Id, cc.ObjectId });
+
+
+
+            builder.Entity<MIMEType>()
+                .HasKey(cc => new { cc.Id, cc.ObjectId });
+
+            builder.Entity<NavigationMenu>()
+                .HasKey(cc => new { cc.Id, cc.ObjectId });
+
+            builder.Entity<NavigationMenuItem>()
+                .HasKey(cc => new { cc.Id, cc.ObjectId });
+
+            builder.Entity<NugetPackage>()
+                .HasKey(cc => new { cc.Id, cc.ObjectId });
+
+
+            builder.Entity<Publication>()
+                .HasKey(cc => new { cc.Id, cc.ObjectId });
+
+            builder.Entity<Taxon>()
+                .HasKey(cc => new { cc.Id, cc.ObjectId });
+
+            builder.Entity<Taxonomy>()
+                .HasKey(cc => new { cc.Id, cc.ObjectId });
+
+            builder.Entity<Tenant>()
+                .HasKey(cc => new { cc.Id, cc.ObjectId });
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
-
-
+ 
         }
     }
 
