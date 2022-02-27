@@ -7,6 +7,14 @@
     <IsPackable>false</IsPackable>
 
     <UserSecretsId>8435cb1e-7333-468d-a35d-a16488c196b5</UserSecretsId>
+
+	  <PackageId>TheHorselessNewspaper.HostingModel.SmokeTests</PackageId>
+	  <Version>0.0.1</Version>
+	  <Authors>sechele</Authors>
+	  <Company>Ataxlab</Company>
+	  <Product>TheHorselessNewspaper.HostingModel</Product>
+	  <Description>entity framework core model base test classes</Description>
+	  
   </PropertyGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
