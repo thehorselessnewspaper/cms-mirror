@@ -35,7 +35,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
     }
 
-    [MultiTenant]
     public partial class Tenant : IContentRowLevelSecured
     {
         public ICollection<TenantIdentifierStrategy> TenantIdentifierStrategies { get; set; } 
