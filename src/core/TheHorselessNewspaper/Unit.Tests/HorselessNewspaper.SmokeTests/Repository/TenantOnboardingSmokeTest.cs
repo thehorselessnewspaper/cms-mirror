@@ -10,10 +10,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using Horseless.HostingModel.SmokeTests;
 
 namespace HorselessNewspaper.SmokeTests.Repository
 { 
-    internal class TenantOnboardingSmokeTest
+    internal class TenantOnboardingSmokeTest : Tests
     {
         //DbContextOptions<THNLPContentContext> contextOptions;
         //THNLPContentContext contentContext;
