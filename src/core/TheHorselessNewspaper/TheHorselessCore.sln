@@ -34,6 +34,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Web.Core
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Web.Core.Services.Query", "HorselessNewspaper.Web.Core.Services.Query\HorselessNewspaper.Web.Core.Services.Query.csproj", "{63E6F9DB-F681-431B-B5F8-0EBC9C3C1C8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorselessNewspaper.Core.Web.SmokeTests", "HorselessNewspaper.Core.Web.SmokeTests\HorselessNewspaper.Core.Web.SmokeTests.csproj", "{7B863379-D900-4F65-BC63-84317E404D0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,10 @@ Global
 		{63E6F9DB-F681-431B-B5F8-0EBC9C3C1C8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63E6F9DB-F681-431B-B5F8-0EBC9C3C1C8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63E6F9DB-F681-431B-B5F8-0EBC9C3C1C8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B863379-D900-4F65-BC63-84317E404D0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B863379-D900-4F65-BC63-84317E404D0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B863379-D900-4F65-BC63-84317E404D0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B863379-D900-4F65-BC63-84317E404D0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

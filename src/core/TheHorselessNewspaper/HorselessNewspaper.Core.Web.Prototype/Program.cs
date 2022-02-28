@@ -13,6 +13,7 @@ using System.Reflection;
 using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
 using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
 using Microsoft.AspNetCore.OData.Routing.Conventions;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(builder =>
@@ -85,6 +86,14 @@ builder.Services.AddControllers()
         
     });
 
+/// <summary>
+/// as per https://www.thecodebuzz.com/failed-to-determine-the-https-port-for-the-redirect/
+/// </summary>
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+});
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
@@ -157,6 +166,11 @@ foreach (var service in builder.Services)
 }
 var app = builder.Build();
 
+/// <summary>
+/// as per https://www.thecodebuzz.com/failed-to-determine-the-https-port-for-the-redirect/
+/// </summary>
+app.UseForwardedHeaders();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -201,3 +215,4 @@ app.MapRazorPages();
 
 app.Run();
 
+public partial class Program { }
