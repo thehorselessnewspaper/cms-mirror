@@ -150,9 +150,22 @@ builder.Services.AddMvcCore(options =>
     options.OutputFormatters.OfType<ODataOutputFormatter>()
         .Where(foramtter => foramtter.SupportedMediaTypes.Count == 0);
 
+    IEnumerable<ODataInputFormatter> inputFormatters =
+        options.InputFormatters.OfType<ODataInputFormatter>()
+            .Where(formatter => formatter.SupportedMediaTypes.Count == 0);
+
     foreach (var outputFormatter in outputFormatters)
     {
         outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/odata"));
+        outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
+
+    }
+
+    foreach (var inputFormatter in inputFormatters)
+    {
+        inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/odata"));
+        inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
+
     }
 
 });

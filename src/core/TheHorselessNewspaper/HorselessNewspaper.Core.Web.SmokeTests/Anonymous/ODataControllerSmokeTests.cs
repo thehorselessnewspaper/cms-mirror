@@ -13,24 +13,21 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 {
     public class ODataControllerSmokeTests : IClassFixture<BaseWebIntegrationTest>
     {
+        private const string oDataResponseHeader = "application/json;odata.metadata=minimal;odata.streaming=true";
         BaseWebIntegrationTest _baseTest;
+        public WebApplicationFactory<Program> application = null;
+        public HttpClient client = null;
 
         public ODataControllerSmokeTests(BaseWebIntegrationTest data)
         {
             _baseTest = data;
+            application = _baseTest.application;
+            client = _baseTest.client;
         }
 
         [Fact]
-        public async Task HelloWorldTest()
+        public async Task CanGetDefaultHtmlPage()
         {
-            var application = new WebApplicationFactory<Program>()
-                .WithWebHostBuilder(builder =>
-                {
-                    // ... Configure test services
-                });
-
-            var client = application.CreateClient();
-            //...
 
             var response = await client.GetAsync("/");
             Assert.NotNull(response);
@@ -43,28 +40,19 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
         [Fact]
         public async Task CanQueryContentCollection()
         {
-            var application = new WebApplicationFactory<Program>()
-                .WithWebHostBuilder(builder =>
-                {
-                    // ... Configure test services
-                });
-
-            var client = application.CreateClient();
-            //...
-
             HttpResponseMessage response = null;
             Exception ex = null;
             string responseContent = String.Empty;
 
             try
             {
-
-                response = await client.GetAsync("/HorselessContent/ContentCollection/Query");
+                client.DefaultRequestHeaders.Add("Accept", "application/json;odata.metadata=none");
+                response = await client.GetAsync("/HorselessContent/ContentCollection/?$top=10&");
                 Assert.NotNull(response);
 
                 response.EnsureSuccessStatusCode(); // Status Code 200-299
-                Assert.Equal("application/json; charset=utf-8",
-                    response.Content.Headers.ContentType.ToString());
+                //Assert.Equal(oDataResponseHeader,
+                //    response.Content.Headers.ContentType.ToString());
 
                 responseContent = await response.Content.ReadAsStringAsync();
 

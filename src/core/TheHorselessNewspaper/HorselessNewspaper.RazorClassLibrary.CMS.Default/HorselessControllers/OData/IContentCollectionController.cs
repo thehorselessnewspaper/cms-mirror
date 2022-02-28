@@ -25,7 +25,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         Task<IActionResult> Create([FromBody] Entity entity);
         [EnableQuery, HttpGet("GetByObjectId")]
         Task<IActionResult> GetByObjectId(string objectId);
-        [EnableQuery, HttpGet("Query")]
+        [EnableQuery, HttpGet()]
         Task<IActionResult> Query();
         //[HttpPost("Update")]
         Task<IActionResult> Update([FromBody] Entity contentCollection);

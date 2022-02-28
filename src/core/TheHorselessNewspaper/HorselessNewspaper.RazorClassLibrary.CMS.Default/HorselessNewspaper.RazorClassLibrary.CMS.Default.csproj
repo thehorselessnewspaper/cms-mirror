@@ -23,7 +23,6 @@
 		<DefaultItemExcludes>angular/horseless-elements/node_modules/**;$(DefaultItemExcludes)</DefaultItemExcludes>
 	</PropertyGroup>
 
-	<!-- end spa config -->
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 		<PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.8" />
@@ -36,6 +35,7 @@
 	<ItemGroup>
 		<Folder Include="Areas\HorselessContent\Controllers\REST\" />
 		<Folder Include="Areas\HorselessContent\Views\" />
+		<Folder Include="openapi\" />
 		<Folder Include="vuejs\" />
 		<Folder Include="typescript\Tenant\" />
 		<Folder Include="typescript\TenantSetup\" />
@@ -53,6 +53,7 @@
 	<ItemGroup>
 		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.3.220226.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.2" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
 		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.2.20220226.1" />
 	</ItemGroup>
 

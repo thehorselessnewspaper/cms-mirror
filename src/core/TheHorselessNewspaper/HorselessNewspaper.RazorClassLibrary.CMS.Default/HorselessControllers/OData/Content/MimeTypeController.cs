@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    [Route("HorselessContent/[controller]")]
+
     [Produces("application/json")]
     public class MimeTypeController :
         ODataController, IContentQueryController<ContentModel.MIMEType>
@@ -33,9 +33,13 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-        [HttpGet("Query")]
+        [HttpGet()]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.MIMEType>))]
-        public async Task<ActionResult<IEnumerable<ContentModel.MIMEType>>> Query()
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
+        [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+        public async Task<ActionResult<IEnumerable<ContentModel.MIMEType>>> Get()
         {
             var result = await _contentCollectionService.Query();
             return Ok(result);

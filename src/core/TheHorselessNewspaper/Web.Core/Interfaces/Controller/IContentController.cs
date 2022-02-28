@@ -16,8 +16,8 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Controller
     public interface IContentQueryController<Entity> where Entity : class, IContentRowLevelSecured
     {
 
-        [EnableQuery, HttpGet("Query")]
-        Task<ActionResult<IEnumerable<Entity>>> Query();
+        [EnableQuery, HttpGet()]
+        Task<ActionResult<IEnumerable<Entity>>> Get();
 
     }
 
