@@ -10,7 +10,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [ApiController]
-    [Route("api/HorselessContent/MIMEType")]
+    [Route("api/HorselessContentModel/MIMEType")]
     public class MimeTypeRESTController : ControllerBase,
         IRESTContentController<MIMEType>
     {

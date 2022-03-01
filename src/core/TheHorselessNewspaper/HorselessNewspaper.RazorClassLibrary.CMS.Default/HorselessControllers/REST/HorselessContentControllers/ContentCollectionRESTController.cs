@@ -9,11 +9,12 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
     [ApiController]
-    [Route("api/HorselessContent/ContentCollection")]
+    [Route(API_HORSELESSCONTENT_CONTENTCOLLECTION)]
 
     public class ContentCollectionRESTController : ControllerBase,
         IRESTContentController<ContentModel.ContentCollection>
     {
+        private const string API_HORSELESSCONTENT_CONTENTCOLLECTION = "api/HorselessContentModel/ContentCollection";
 
         public IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModel.ContentCollection> _contentCollectionService { get; set; }
         public ITenantInfo CurrentTenant { get; set; }

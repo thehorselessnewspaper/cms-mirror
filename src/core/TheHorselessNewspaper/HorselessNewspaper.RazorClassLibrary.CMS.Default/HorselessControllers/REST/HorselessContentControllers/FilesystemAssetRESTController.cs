@@ -10,10 +10,12 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
     [ApiController]
-    [Route("api/HorselessContent/FilesystemAsset")]
+    [Route(API_HORSELESSCONTENT_FILESYSTEM)]
     public class FilesystemAssetRESTController : ControllerBase,
         IRESTContentController<FilesystemAsset>
     {
+        private const string API_HORSELESSCONTENT_FILESYSTEM = "api/HorselessContentModel/FilesystemAsset";
+
         public IContentCollectionService<IQueryableContentModelOperator<FilesystemAsset>, FilesystemAsset> _contentCollectionService { get; set; }
         public ITenantInfo CurrentTenant { get; set; }
 

@@ -10,7 +10,7 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
     [ApiController]
-    [Route("api/HorselessContent/JSONAsset")]
+    [Route("api/HorselessContentModel/JSONAsset")]
     public class JSONAssetRESTController : ControllerBase,
         IRESTContentController<JSONAsset>
     {

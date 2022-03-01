@@ -15,10 +15,11 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [ApiController]
-    [Route("api/HorselessContent/Holonym")]
+    [Route(API_HORSELESSCONTENT_HOLONYM)]
     public class HolonymRESTController : ControllerBase,
         IRESTContentController<Holonym>
     {
+        private const string API_HORSELESSCONTENT_HOLONYM = "api/HorselessContentModel/Holonym";
 
         public IContentCollectionService<IQueryableContentModelOperator<Holonym>, Holonym> _contentCollectionService { get; set; }
         public ITenantInfo CurrentTenant { get; set; }

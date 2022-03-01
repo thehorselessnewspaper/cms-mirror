@@ -15,7 +15,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [ApiController]
-    [Route("api/HorselessContent/HorselessSession")]
+    [Route("api/HorselessContentModel/HorselessSession")]
 
     public class HorselessSessionRESTController : ControllerBase,
         IRESTContentController<HorselessSession>
