@@ -12,6 +12,10 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using Xunit;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using TheHorselessNewspaper.HostingModel.Entities.Query;
+using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 
 namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 {
@@ -22,6 +26,8 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
         public WebApplicationFactory<Program> application = null;
         public HttpClient client = null;
         HostingModel.Tenant testHostingModelTenant = new HostingModel.Tenant();
+        private HostingModel.TenantInfo testHostingModelTenantInfo;
+        IServiceProvider serviceProvider = null;
 
         public RESTControllerSmokeTests(BaseWebIntegrationTest data)
         {
@@ -29,8 +35,11 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
             application = _baseTest.application;
             client = _baseTest.client;
 
-
             testHostingModelTenant = GetNewHostingModelTenant();
+            testHostingModelTenantInfo = GetNewHostingModelTenantInfo();
+
+            serviceProvider = application.Services;
+
         }
 
         [Fact]
@@ -40,60 +49,117 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
             Exception ex = null;
             string responseContent = String.Empty;
 
-
-            try
+            using (IServiceScope scope = serviceProvider.CreateScope())
             {
-                client.DefaultRequestHeaders.Add("Accept", "application/json;odata.metadata=none");
+                var theContentOperator = _baseTest.GetIQueryableContentModelOperator<IQueryableContentModelOperator<ContentModel.Tenant>>(scope);
+                await theContentOperator.ResetDb();
 
-                var route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT + "/CREATE";
-                var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
+                var theHostingOperator = _baseTest.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<HostingModel.Tenant>>(scope);
+                await theHostingOperator.ResetDb();
+
+                try
                 {
-                    Content = GetNewHostingModelTenantAsJsonContent(testHostingModelTenant)
-                };
+                    // arrange
+                    client.DefaultRequestHeaders.Add("Accept", "application/json;odata.metadata=none");
 
-                var postResponse = await client.SendAsync(postRequest);
+                    var route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT + "/CREATE";
+                    
+                    var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
+                    {
+                        Content = GetJsonContent(testHostingModelTenant)
+                    };
 
-                Assert.NotNull(postResponse);
+                    // act
+                    var postResponse = await client.SendAsync(postRequest);
+
+                    Assert.NotNull(postResponse);
+
+                    IQueryable<HostingModel.Tenant> hostingTenantsReadResult = await theHostingOperator.Read();
+                    Assert.NotNull(hostingTenantsReadResult);
+
+                    var tenantCount = hostingTenantsReadResult.ToList().Count();
+                    Assert.True(tenantCount == 1);
+
+                    Assert.True(hostingTenantsReadResult.First().Id == testHostingModelTenant.Id);
+
+                    // here because we can post a tenant to the hosting model tenant endpoint
+                    // add a tenantinfo 
+
+                    // arrange
+                    // add the existing tenant to the new tenantinfo
+                    // testHostingModelTenantInfo.Tenant = hostingTenantsReadResult.First();
+
+                    route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANTINFO + "/CREATE";
+
+                    postRequest = new HttpRequestMessage(HttpMethod.Post, route)
+                    {
+                        Content = GetJsonContent<HostingModel.TenantInfo>(testHostingModelTenantInfo)
+                    };
+
+                    // act
+                    postResponse = await client.SendAsync(postRequest);
+
+                    Assert.NotNull(postResponse);
+
+                    postResponse.EnsureSuccessStatusCode(); // Status Code 200-299
+                                                        //Assert.Equal(oDataResponseHeader,
+                                                        //    response.Content.Headers.ContentType.ToString());
+
+                    responseContent = await postResponse.Content.ReadAsStringAsync();
+                    Assert.NotNull(responseContent);
+
+                    try
+                    {
+
+                        var tenantInfo = JsonConvert.DeserializeObject<HostingModel.TenantInfo>(responseContent);
+                        Assert.NotNull(tenantInfo);
+                        Assert.True(tenantInfo.Id == testHostingModelTenantInfo.Id);
 
 
-                response = await client.GetAsync("/HorselessContent/ContentCollection/?$top=10&");
-                Assert.NotNull(response);
+                        // arrange
+                        // add the new TenantInfo to the new Tenant
 
-                response.EnsureSuccessStatusCode(); // Status Code 200-299
-                //Assert.Equal(oDataResponseHeader,
-                //    response.Content.Headers.ContentType.ToString());
+                        tenantInfo.Tenant_Id = hostingTenantsReadResult.First().Id;
 
-                responseContent = await response.Content.ReadAsStringAsync();
+                        route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANTINFO + $"/Update/{tenantInfo.Id}";
+
+                        postRequest = new HttpRequestMessage(HttpMethod.Post, route)
+                        {
+                            Content = GetJsonContent<HostingModel.TenantInfo>(tenantInfo)
+                        };
+
+                        // act
+                        postResponse = await client.SendAsync(postRequest);
+
+                        Assert.NotNull(postResponse);
+
+                        postResponse.EnsureSuccessStatusCode();
+
+                    }
+                    catch (Exception e)
+                    {
+
+                        ex = e;
+                        throw new Exception("test failure exception", e);
+                    }
+
+                    Assert.Null(ex);
+
+
+                }
+                catch (Exception e)
+                {
+                    ex = e;
+                }
+
+                Assert.Null(ex);
 
             }
-            catch (Exception e)
-            {
-                ex = e;
-            }
-
-            Assert.Null(ex);
-
-
-            Assert.NotNull(responseContent);
-            try
-            {
-
-                var contentCollection = JsonConvert.DeserializeObject<OData<List<HostingModel.Tenant>>>(responseContent);
-                Assert.NotNull(contentCollection);
-                Assert.True(contentCollection.value.Count > 0);
-            }
-            catch (Exception e)
-            {
-
-                ex = e;
-            }
-
-            Assert.Null(ex);
         }
 
-        private JsonContent GetNewHostingModelTenantAsJsonContent(HostingModel.Tenant tenant)
+        private JsonContent GetJsonContent<T>(T content)
         {
-            return JsonContent.Create( tenant);
+            return JsonContent.Create(content);
         }
 
         private HostingModel.Tenant GetNewHostingModelTenant()
@@ -105,6 +171,22 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 DisplayName = "Test Tenant - Can Create Hosting Tenant",
                 IsSoftDeleted = false,
                 ObjectId = Guid.NewGuid().ToString()
+            };
+        }
+
+        private HostingModel.TenantInfo GetNewHostingModelTenantInfo()
+        {
+            return new HostingModel.TenantInfo()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = DateTime.UtcNow,
+                DisplayName = "Test Tenant - Can Create Hosting Tenant",
+                IsSoftDeleted = false,
+                ObjectId = Guid.NewGuid().ToString(),
+                ConnectionString = "server=test.server.com;security=none;",
+                Identifier = "TestTenant",
+                Name = "Test Tenant Name",
+                TenantBaseUrl = "http://localhost/"
             };
         }
     }

@@ -85,7 +85,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [Consumes("application/json")]
-        [HttpPost("Update")]
+        [HttpPost("Update/{entityCollectionId}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(HostingModel.TenantInfo))]
         [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(HostingModel.TenantInfo))]
         public async Task<ActionResult<HostingModel.TenantInfo>> Update([FromRoute] string entityCollectionId, [FromBody] HostingModel.TenantInfo entityCollection)
