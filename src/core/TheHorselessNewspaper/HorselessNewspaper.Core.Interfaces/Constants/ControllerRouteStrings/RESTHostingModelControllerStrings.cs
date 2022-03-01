@@ -9,6 +9,6 @@ namespace HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings
     public class RESTHostingModelControllerStrings
     {
 
-        public const string API_HorselessHosting_Tenant = "api/HorselessHosting/Tenant";
+        public const string API_HORSEHOSTINGMODEL_TENANT = "api/HorselessHostingModel/Tenant";
     }
 }

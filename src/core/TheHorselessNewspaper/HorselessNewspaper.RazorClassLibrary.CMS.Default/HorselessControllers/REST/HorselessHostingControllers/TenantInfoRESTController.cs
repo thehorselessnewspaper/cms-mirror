@@ -1,38 +1,37 @@
 ﻿using Finbuckle.MultiTenant;
-using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
 using HorselessNewspaper.Web.Core.Interfaces.Hosting;
-using HorselessNewspaper.Web.Core.Model.Query.ContentCollection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
-using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessHostingControllers
 {
     [ApiController]
-    [Route(API_HORSEHOSTINGMODEL_TENANT)]
-    public class TenantRESTController : ControllerBase,
-        IRESTHostingController<HostingModel.Tenant>
+    [Route(API_HORSEHOSTINGMODEL_TENANTINFO)]
+    public class TenantInfoRESTController : ControllerBase,
+        IRESTHostingController<HostingModel.TenantInfo>
     {
-        public TenantRESTController(IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.Tenant>, HostingModel.Tenant> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
+        public TenantInfoRESTController(IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.TenantInfo>, HostingModel.TenantInfo> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
         {
             this.EntityCollectionService = contentCollectionService;
             this.CurrentTenant = tenantInfo;
         }
 
-        public const string API_HORSEHOSTINGMODEL_TENANT = "api/HorselessHostingModel/Tenant";
-
-        public IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.Tenant>, HostingModel.Tenant> EntityCollectionService { get; set; }
-        public ITenantInfo CurrentTenant { get; set; }
+        public const string API_HORSEHOSTINGMODEL_TENANTINFO = "api/HorselessHostingModel/TenantInfo";
+        public IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.TenantInfo>, HostingModel.TenantInfo> EntityCollectionService { get; set;}
+        public ITenantInfo CurrentTenant { get; set;}
 
         [HttpPost("Create")]
         [Consumes("application/json")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(HostingModel.Tenant))]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(HostingModel.Tenant))]
-        public async Task<ActionResult<HostingModel.Tenant>> Create([FromBody] HostingModel.Tenant entityCollectionId)
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(HostingModel.TenantInfo))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(HostingModel.TenantInfo))]
+        public async Task<ActionResult<HostingModel.TenantInfo>> Create([FromBody] HostingModel.TenantInfo entityCollectionId)
         {
             if (!ModelState.IsValid)
             {
@@ -50,9 +49,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [HttpGet("GetByObjectId")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HostingModel.Tenant))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HostingModel.TenantInfo))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<HostingModel.Tenant>> GetByObjectId([FromRoute] string objectId)
+        public async Task<ActionResult<HostingModel.TenantInfo>> GetByObjectId([FromRoute] string objectId)
         {
             IActionResult result;
             if (!ModelState.IsValid)
@@ -87,9 +86,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
         [Consumes("application/json")]
         [HttpPost("Update")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(HostingModel.Tenant))]
-        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(HostingModel.Tenant))]
-        public async Task<ActionResult<HostingModel.Tenant>> Update([FromRoute] string entityCollectionId, [FromBody] HostingModel.Tenant entityCollection)
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(HostingModel.TenantInfo))]
+        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(HostingModel.TenantInfo))]
+        public async Task<ActionResult<HostingModel.TenantInfo>> Update([FromRoute] string entityCollectionId, [FromBody] HostingModel.TenantInfo entityCollection)
         {
             if (!ModelState.IsValid)
             {
