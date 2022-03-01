@@ -1,4 +1,5 @@
 ﻿using Finbuckle.MultiTenant;
+using HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings;
 using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
 using Microsoft.AspNetCore.Http;
@@ -9,10 +10,9 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
     [ApiController]
-    [Route(API_HORSELESSCONTENTMODEL_CONTENTCOLLECTION)]
+    [Route(RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_CONTENTCOLLECTION)]
     public class HorselessContentRESTController : ControllerBase, IRESTContentController<ContentModel.HorselessContent>
     {
-        public const string API_HORSELESSCONTENTMODEL_CONTENTCOLLECTION = "api/HorselessContentModel/ContentCollection";
         public HorselessContentRESTController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.HorselessContent>,
             ContentModel.HorselessContent> contentCollectionService, ITenantInfo tenantInfo)
         {

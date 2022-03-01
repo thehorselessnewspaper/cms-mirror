@@ -1,4 +1,5 @@
 ﻿using Finbuckle.MultiTenant;
+using HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings;
 using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
 using Microsoft.AspNetCore.Http;
@@ -10,11 +11,10 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [ApiController]
-    [Route(API_HORSELESSCONTENTMODEL_NAVIGATIONMENUITEM)]
+    [Route(RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_NAVIGATIONMENUITEM)]
     public class NavigationMenuItemRESTController : ControllerBase,
         IRESTContentController<NavigationMenuItem>
     {
-        private const string API_HORSELESSCONTENTMODEL_NAVIGATIONMENUITEM = "api/HorselessContentModel/NavigationMenuItem";
 
         public IContentCollectionService<IQueryableContentModelOperator<NavigationMenuItem>, NavigationMenuItem> _contentCollectionService { get; set; }
         public ITenantInfo CurrentTenant { get; set; }

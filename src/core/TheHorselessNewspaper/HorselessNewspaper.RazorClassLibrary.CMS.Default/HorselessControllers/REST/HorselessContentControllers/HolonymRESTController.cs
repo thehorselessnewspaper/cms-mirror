@@ -1,4 +1,5 @@
 ﻿using Finbuckle.MultiTenant;
+using HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings;
 using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
 using Microsoft.AspNetCore.Http;
@@ -15,11 +16,10 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [ApiController]
-    [Route(API_HORSELESSCONTENT_HOLONYM)]
+    [Route(RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_HOLONYM)]
     public class HolonymRESTController : ControllerBase,
         IRESTContentController<Holonym>
     {
-        private const string API_HORSELESSCONTENT_HOLONYM = "api/HorselessContentModel/Holonym";
 
         public IContentCollectionService<IQueryableContentModelOperator<Holonym>, Holonym> _contentCollectionService { get; set; }
         public ITenantInfo CurrentTenant { get; set; }

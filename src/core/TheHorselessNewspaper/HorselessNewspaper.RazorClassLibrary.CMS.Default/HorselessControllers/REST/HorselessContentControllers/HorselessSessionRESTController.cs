@@ -1,4 +1,5 @@
 ﻿using Finbuckle.MultiTenant;
+using HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings;
 using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
 using Microsoft.AspNetCore.Http;
@@ -15,12 +16,11 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [ApiController]
-    [Route(API_HORSELESSCONTENTMODEL_HORSELESSSESSION)]
+    [Route(RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_HORSELESSSESSION)]
 
     public class HorselessSessionRESTController : ControllerBase,
         IRESTContentController<HorselessSession>
     {
-        private const string API_HORSELESSCONTENTMODEL_HORSELESSSESSION = "api/HorselessContentModel/HorselessSession";
 
         public IContentCollectionService<IQueryableContentModelOperator<HorselessSession>, HorselessSession> _contentCollectionService { get; set; }
         public ITenantInfo CurrentTenant { get; set; }

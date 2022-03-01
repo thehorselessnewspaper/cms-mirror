@@ -5,16 +5,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-
+using HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
     [ApiController]
-    [Route(API_HORSELESSCONTENT_CONTENTCOLLECTION)]
+    [Route(RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_CONTENTCOLLECTION)]
 
     public class ContentCollectionRESTController : ControllerBase,
         IRESTContentController<ContentModel.ContentCollection>
     {
-        private const string API_HORSELESSCONTENT_CONTENTCOLLECTION = "api/HorselessContentModel/ContentCollection";
 
         public IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModel.ContentCollection> _contentCollectionService { get; set; }
         public ITenantInfo CurrentTenant { get; set; }
