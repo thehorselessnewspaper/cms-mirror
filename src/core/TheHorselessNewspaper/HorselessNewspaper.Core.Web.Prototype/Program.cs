@@ -99,6 +99,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
+    options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
     options.CustomSchemaIds(t =>
     {
         // produce this template export interface ContentEntitiesAccessControlEntry 

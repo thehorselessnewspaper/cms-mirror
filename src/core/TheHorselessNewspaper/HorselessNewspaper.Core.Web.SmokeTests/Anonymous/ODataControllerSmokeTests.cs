@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using Xunit;
-
+using TheHorselessNewspaper.HostingModel.DTO;
 namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 {
     public class ODataControllerSmokeTests : IClassFixture<BaseWebIntegrationTest>
@@ -69,9 +69,9 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
             try
             {
 
-                var contentCollection = JsonConvert.DeserializeObject<List<ContentCollection>>(responseContent);
+                var contentCollection = JsonConvert.DeserializeObject<OData<List<ContentCollection>>>(responseContent);
                 Assert.NotNull(contentCollection);
-                Assert.True(contentCollection.Count > 0);
+                Assert.True(contentCollection.value.Count > 0);
             }
             catch (Exception e)
             {
