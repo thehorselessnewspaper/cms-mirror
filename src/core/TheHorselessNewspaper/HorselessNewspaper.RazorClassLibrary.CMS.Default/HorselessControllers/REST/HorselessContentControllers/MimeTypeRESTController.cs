@@ -10,10 +10,12 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [ApiController]
-    [Route("api/HorselessContentModel/MIMEType")]
+    [Route(API_HORSELESSCONTENTMODEL_MIMETYPE)]
     public class MimeTypeRESTController : ControllerBase,
         IRESTContentController<MIMEType>
     {
+        private const string API_HORSELESSCONTENTMODEL_MIMETYPE = "api/HorselessContentModel/MIMEType";
+
         public IContentCollectionService<IQueryableContentModelOperator<MIMEType>, MIMEType> _contentCollectionService { get; set; }
         public ITenantInfo CurrentTenant { get; set; }
 

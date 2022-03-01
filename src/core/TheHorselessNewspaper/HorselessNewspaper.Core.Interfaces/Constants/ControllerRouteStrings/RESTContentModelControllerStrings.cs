@@ -6,10 +6,22 @@ using System.Threading.Tasks;
 
 namespace HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings
 {
+    /// <summary>
+    /// constants used as routes on 
+    /// REST ocntent model controllers
+    /// </summary>
     public class RESTContentModelControllerStrings
     {
-        public const string API_HORSELESSCONTENT_CONTENTCOLLECTION = "api/HorselessContentModel/ContentCollection";
-        private const string API_HORSELESSCONTENT_FILESYSTEM = "api/HorselessContentModel/FilesystemAsset";
-
+        public const string API_HORSELESSCONTENTMODEL_CONTENTCOLLECTION = "api/HorselessContentModel/ContentCollection";
+        public const string API_HORSELESSCONTENTMODEL_FILESYSTEM = "api/HorselessContentModel/FilesystemAsset";
+        public const string API_HORSELESSCONTENTMODEL_HOLONYM = "api/HorselessContentModel/Holonym";
+        public const string API_HORSELESSCONTENTMODEL_HorselessContent = "api/HorselessContentModel/HorselessContent";
+        public const string API_HORSELESSCONTENTMODEL_HORSELESSSESSION = "api/HorselessContentModel/HorselessSession";
+        public const string API_HORSELESSCONTENTMODEL_JSONASSET = "api/HorselessContentModel/JSONAsset";
+        public const string API_HORSELESSCONTENTMODEL_MERONYM = "api/HorselessContentModel/Meronym";
+        public const string API_HORSELESSCONTENTMODEL_MIMETYPE = "api/HorselessContentModel/MIMEType";
+        public const string API_HORSELESSCONTENTMODEL_NAVIGATIONMENUITEM = "api/HorselessContentModel/NavigationMenuItem";
+        public const string API_HORSELESSCONTENTMODEL_NAVIGATIONMENU = "api/HorselessContentModelModel/NavigationMenu";
+        public const string API_HORSELESSCONTENTMODEL_TENANT = "api/HorselessContentModel/Tenant";
     }
 }

@@ -10,10 +10,12 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [ApiController]
-    [Route("api/HorselessContentModelModel/NavigationMenu")]
+    [Route(API_HORSELESSCONTENTMODEL_NAVIGATIONMENU)]
     public class NavigationMenuRESTController : ControllerBase,
         IRESTContentController<NavigationMenu>
     {
+        private const string API_HORSELESSCONTENTMODEL_NAVIGATIONMENU = "api/HorselessContentModelModel/NavigationMenu";
+
         public IContentCollectionService<IQueryableContentModelOperator<NavigationMenu>, NavigationMenu> _contentCollectionService { get; set; }
         public ITenantInfo CurrentTenant { get; set; }
 

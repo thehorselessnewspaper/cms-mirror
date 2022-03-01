@@ -10,10 +10,12 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
     [ApiController]
-    [Route("api/HorselessContentModel/JSONAsset")]
+    [Route(API_HORSELESSCONTENTMODEL_JSONASSET)]
     public class JSONAssetRESTController : ControllerBase,
         IRESTContentController<JSONAsset>
     {
+        private const string API_HORSELESSCONTENTMODEL_JSONASSET = "api/HorselessContentModel/JSONAsset";
+
         public IContentCollectionService<IQueryableContentModelOperator<JSONAsset>, JSONAsset> _contentCollectionService { get; set; }
         public ITenantInfo CurrentTenant { get; set; }
 
