@@ -6,23 +6,23 @@ using Microsoft.AspNetCore.Mvc;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
-namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST
+namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
     [ApiController]
-    [Route("api/ContentCollection")]
+    [Route("api/HorselessContent/ContentCollection")]
 
     public class ContentCollectionRESTController : ControllerBase,
-        IContentController<ContentModel.ContentCollection>
+        IRESTContentController<ContentModel.ContentCollection>
     {
 
         public IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModel.ContentCollection> _contentCollectionService { get; set; }
-        public ITenantInfo _tenantInfo { get; set; }
+        public ITenantInfo CurrentTenant { get; set; }
 
-        public ContentCollectionRESTController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, 
-            ContentModel.ContentCollection> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
+        public ContentCollectionRESTController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>,
+            ContentModel.ContentCollection> contentCollectionService, ITenantInfo tenantInfo)
         {
-            this._contentCollectionService = contentCollectionService;
-            this._tenantInfo = tenantInfo;
+            _contentCollectionService = contentCollectionService;
+            CurrentTenant = tenantInfo;
         }
 
         [HttpGet("{objectId}")]

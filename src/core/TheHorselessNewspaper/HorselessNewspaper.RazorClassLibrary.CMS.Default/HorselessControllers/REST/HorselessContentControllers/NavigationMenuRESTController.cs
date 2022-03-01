@@ -3,38 +3,32 @@ using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST
+namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
 
     [ApiController]
-    [Route("api/Holonym")]
-    public class HolonymRESTController : ControllerBase,
-        IContentController<ContentModel.Holonym>
+    [Route("api/HorselessContent/NavigationMenu")]
+    public class NavigationMenuRESTController : ControllerBase,
+        IRESTContentController<NavigationMenu>
     {
+        public IContentCollectionService<IQueryableContentModelOperator<NavigationMenu>, NavigationMenu> _contentCollectionService { get; set; }
+        public ITenantInfo CurrentTenant { get; set; }
 
-        public IContentCollectionService<IQueryableContentModelOperator<ContentModel.Holonym>, ContentModel.Holonym> _contentCollectionService { get; set; }
-        public ITenantInfo _tenantInfo { get; set; }
-
-        public HolonymRESTController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.Holonym>,
-            ContentModel.Holonym> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
+        public NavigationMenuRESTController(IContentCollectionService<IQueryableContentModelOperator<NavigationMenu>,
+        NavigationMenu> contentCollectionService, ITenantInfo tenantInfo)
         {
-            this._contentCollectionService = contentCollectionService;
-            this._tenantInfo = tenantInfo;
+            _contentCollectionService = contentCollectionService;
+            CurrentTenant = tenantInfo;
         }
 
         [HttpPost("Create")]
         [Consumes("application/json")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentModel.Holonym))]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ContentModel.Holonym))]
-        public async Task<ActionResult<Holonym>> Create([FromBody] Holonym contentCollection)
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(MIMEType))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(MIMEType))]
+        public async Task<ActionResult<NavigationMenu>> Create([FromBody] NavigationMenu contentCollection)
         {
             if (!ModelState.IsValid)
             {
@@ -53,10 +47,11 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [HttpGet("GetByObjectId")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ContentModel.Holonym))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(MIMEType))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Holonym>> GetByObjectId([FromRoute] string objectId)
+        public async Task<ActionResult<NavigationMenu>> GetByObjectId([FromRoute] string objectId)
         {
+
 
             IActionResult result;
             if (!ModelState.IsValid)
@@ -89,13 +84,13 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             return Ok(result);
         }
 
-
         [Consumes("application/json")]
         [HttpPost("Update")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentModel.Holonym))]
-        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(ContentModel.Holonym))]
-        public async Task<ActionResult<Holonym>> Update([FromRoute] string contentCollectionId, [FromBody] Holonym contentCollection)
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(MIMEType))]
+        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(MIMEType))]
+        public async Task<ActionResult<NavigationMenu>> Update([FromRoute] string contentCollectionId, [FromBody] NavigationMenu contentCollection)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest();

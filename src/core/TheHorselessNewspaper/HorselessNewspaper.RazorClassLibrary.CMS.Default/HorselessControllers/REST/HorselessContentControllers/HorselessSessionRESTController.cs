@@ -3,31 +3,38 @@ using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST
+namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
-    [ApiController]
-    [Route("api/Tenant")]
-    public class TenantRESTController : ControllerBase,
-        IContentController<ContentModel.Tenant>
-    {
-        public IContentCollectionService<IQueryableContentModelOperator<Tenant>, Tenant> _contentCollectionService { get; set; }
-        public ITenantInfo _tenantInfo { get; set; }
 
-        public TenantRESTController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.Tenant>,
-           ContentModel.Tenant> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
+    [ApiController]
+    [Route("api/HorselessContent/HorselessSession")]
+
+    public class HorselessSessionRESTController : ControllerBase,
+        IRESTContentController<HorselessSession>
+    {
+        public IContentCollectionService<IQueryableContentModelOperator<HorselessSession>, HorselessSession> _contentCollectionService { get; set; }
+        public ITenantInfo CurrentTenant { get; set; }
+
+        public HorselessSessionRESTController(IContentCollectionService<IQueryableContentModelOperator<HorselessSession>,
+            HorselessSession> contentCollectionService, ITenantInfo tenantInfo)
         {
-            this._contentCollectionService = contentCollectionService;
-            this._tenantInfo = tenantInfo;
+            _contentCollectionService = contentCollectionService;
+            CurrentTenant = tenantInfo;
         }
 
         [HttpPost("Create")]
         [Consumes("application/json")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentModel.Tenant))]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ContentModel.Tenant))]
-        public async Task<ActionResult<Tenant>> Create([FromBody] Tenant contentCollection)
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentCollection))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ContentCollection))]
+        public async Task<ActionResult<HorselessSession>> Create([FromBody] HorselessSession contentCollection)
         {
             if (!ModelState.IsValid)
             {
@@ -44,13 +51,10 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
                 return BadRequest(ex.Message);
             }
         }
-
-
-
         [HttpGet("GetByObjectId")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ContentModel.Tenant))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ContentCollection))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Tenant>> GetByObjectId([FromRoute] string objectId)
+        public async Task<ActionResult<HorselessSession>> GetByObjectId([FromRoute] string objectId)
         {
             IActionResult result;
             if (!ModelState.IsValid)
@@ -82,13 +86,13 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
             return Ok(result);
         }
-
         [Consumes("application/json")]
         [HttpPost("Update")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentModel.Tenant))]
-        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(ContentModel.Tenant))]
-        public async Task<ActionResult<Tenant>> Update([FromRoute] string contentCollectionId, [FromBody] Tenant contentCollection)
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentCollection))]
+        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(ContentCollection))]
+        public async Task<ActionResult<HorselessSession>> Update([FromRoute] string contentCollectionId, [FromBody] HorselessSession contentCollection)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest();

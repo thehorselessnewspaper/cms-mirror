@@ -6,30 +6,29 @@ using Microsoft.AspNetCore.Mvc;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-
-namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST
+namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
+
     [ApiController]
-    [Route("api/Meronym")]
-    public class MeronymRESTController : ControllerBase,
-        IContentController<ContentModel.Meronym>
+    [Route("api/HorselessContent/MIMEType")]
+    public class MimeTypeRESTController : ControllerBase,
+        IRESTContentController<MIMEType>
     {
-        public IContentCollectionService<IQueryableContentModelOperator<Meronym>, Meronym> _contentCollectionService { get; set; }
-        public ITenantInfo _tenantInfo { get; set; }
+        public IContentCollectionService<IQueryableContentModelOperator<MIMEType>, MIMEType> _contentCollectionService { get; set; }
+        public ITenantInfo CurrentTenant { get; set; }
 
-        public MeronymRESTController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.Meronym>,
-            ContentModel.Meronym> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
+        public MimeTypeRESTController(IContentCollectionService<IQueryableContentModelOperator<MIMEType>,
+                MIMEType> contentCollectionService, ITenantInfo tenantInfo)
         {
-            this._contentCollectionService = contentCollectionService;
-            this._tenantInfo = tenantInfo;
+            _contentCollectionService = contentCollectionService;
+            CurrentTenant = tenantInfo;
         }
-
 
         [HttpPost("Create")]
         [Consumes("application/json")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentModel.Meronym))]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ContentModel.Meronym))]
-        public async Task<ActionResult<Meronym>> Create([FromBody] Meronym contentCollection)
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(MIMEType))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(MIMEType))]
+        public async Task<ActionResult<MIMEType>> Create([FromBody] MIMEType contentCollection)
         {
             if (!ModelState.IsValid)
             {
@@ -45,13 +44,12 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             {
                 return BadRequest(ex.Message);
             }
-
         }
 
         [HttpGet("GetByObjectId")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ContentModel.Meronym))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(MIMEType))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Meronym>> GetByObjectId([FromRoute] string objectId)
+        public async Task<ActionResult<MIMEType>> GetByObjectId([FromRoute] string objectId)
         {
 
             IActionResult result;
@@ -87,9 +85,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
         [Consumes("application/json")]
         [HttpPost("Update")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentModel.Meronym))]
-        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(ContentModel.Meronym))]
-        public async Task<ActionResult<Meronym>> Update([FromRoute] string contentCollectionId, [FromBody] Meronym contentCollection)
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(MIMEType))]
+        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(MIMEType))]
+        public async Task<ActionResult<MIMEType>> Update([FromRoute] string contentCollectionId, [FromBody] MIMEType contentCollection)
         {
             if (!ModelState.IsValid)
             {
@@ -105,6 +103,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             {
                 return BadRequest(ex.Message);
             }
+
         }
     }
 }

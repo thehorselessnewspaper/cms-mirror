@@ -6,29 +6,29 @@ using Microsoft.AspNetCore.Mvc;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST
+
+namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
-
     [ApiController]
-    [Route("api/MIMEType")]
-    public class MimeTypeRESTController : ControllerBase,
-        IContentController<ContentModel.MIMEType>
+    [Route("api/HorselessContent/JSONAsset")]
+    public class JSONAssetRESTController : ControllerBase,
+        IRESTContentController<JSONAsset>
     {
-        public IContentCollectionService<IQueryableContentModelOperator<MIMEType>, MIMEType> _contentCollectionService { get; set; }
-        public ITenantInfo _tenantInfo { get; set; }
+        public IContentCollectionService<IQueryableContentModelOperator<JSONAsset>, JSONAsset> _contentCollectionService { get; set; }
+        public ITenantInfo CurrentTenant { get; set; }
 
-        public MimeTypeRESTController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.MIMEType>,
-                ContentModel.MIMEType> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
+        public JSONAssetRESTController(IContentCollectionService<IQueryableContentModelOperator<JSONAsset>,
+                JSONAsset> contentCollectionService, ITenantInfo tenantInfo)
         {
-            this._contentCollectionService = contentCollectionService;
-            this._tenantInfo = tenantInfo;
+            _contentCollectionService = contentCollectionService;
+            CurrentTenant = tenantInfo;
         }
 
         [HttpPost("Create")]
         [Consumes("application/json")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentModel.MIMEType))]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ContentModel.MIMEType))]
-        public async Task<ActionResult<MIMEType>> Create([FromBody] MIMEType contentCollection)
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(JSONAsset))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(JSONAsset))]
+        public async Task<ActionResult<JSONAsset>> Create([FromBody] JSONAsset contentCollection)
         {
             if (!ModelState.IsValid)
             {
@@ -44,12 +44,13 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             {
                 return BadRequest(ex.Message);
             }
+
         }
 
         [HttpGet("GetByObjectId")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ContentModel.MIMEType))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(JSONAsset))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<MIMEType>> GetByObjectId([FromRoute] string objectId)
+        public async Task<ActionResult<JSONAsset>> GetByObjectId([FromRoute] string objectId)
         {
 
             IActionResult result;
@@ -85,10 +86,11 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
         [Consumes("application/json")]
         [HttpPost("Update")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentModel.MIMEType))]
-        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(ContentModel.MIMEType))]
-        public async Task<ActionResult<MIMEType>> Update([FromRoute] string contentCollectionId, [FromBody] MIMEType contentCollection)
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(JSONAsset))]
+        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(JSONAsset))]
+        public async Task<ActionResult<JSONAsset>> Update([FromRoute] string contentCollectionId, [FromBody] JSONAsset contentCollection)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest();
@@ -103,7 +105,6 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             {
                 return BadRequest(ex.Message);
             }
-
         }
     }
 }

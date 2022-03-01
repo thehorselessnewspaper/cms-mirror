@@ -6,28 +6,28 @@ using Microsoft.AspNetCore.Mvc;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST
+namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
     [ApiController]
-    [Route("api/HorselessContent")]
-    public class HorselessContentRESTController : ControllerBase, IContentController<ContentModel.HorselessContent>
+    [Route("api/HorselessContent/HorselessContent")]
+    public class HorselessContentRESTController : ControllerBase, IRESTContentController<ContentModel.HorselessContent>
     {
 
         public HorselessContentRESTController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.HorselessContent>,
-            ContentModel.HorselessContent> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
+            ContentModel.HorselessContent> contentCollectionService, ITenantInfo tenantInfo)
         {
-            this._contentCollectionService = contentCollectionService;
-            this._tenantInfo = tenantInfo;
+            _contentCollectionService = contentCollectionService;
+            CurrentTenant = tenantInfo;
         }
 
-        public  IContentCollectionService<IQueryableContentModelOperator<HorselessContent>, HorselessContent> _contentCollectionService { get; set; }
-        public ITenantInfo _tenantInfo { get; set; }
+        public IContentCollectionService<IQueryableContentModelOperator<ContentModel.HorselessContent>, ContentModel.HorselessContent> _contentCollectionService { get; set; }
+        public ITenantInfo CurrentTenant { get; set; }
 
         [HttpPost("Create")]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentModel.HorselessContent))]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ContentModel.HorselessContent))]
-        public Task<ActionResult<HorselessContent>> Create([FromBody] HorselessContent contentCollection)
+        public Task<ActionResult<ContentModel.HorselessContent>> Create([FromBody] ContentModel.HorselessContent contentCollection)
         {
             throw new NotImplementedException();
         }
@@ -35,7 +35,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [HttpGet("GetByObjectId")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ContentModel.HorselessContent))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public Task<ActionResult<HorselessContent>> GetByObjectId([FromRoute] string objectId)
+        public Task<ActionResult<ContentModel.HorselessContent>> GetByObjectId([FromRoute] string objectId)
         {
             throw new NotImplementedException();
         }
@@ -44,7 +44,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [HttpPost("Update")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentModel.HorselessContent))]
         [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(ContentModel.HorselessContent))]
-        public Task<ActionResult<HorselessContent>> Update([FromRoute] string contentCollectionId, [FromBody] HorselessContent contentCollection)
+        public Task<ActionResult<ContentModel.HorselessContent>> Update([FromRoute] string contentCollectionId, [FromBody] ContentModel.HorselessContent contentCollection)
         {
             throw new NotImplementedException();
         }

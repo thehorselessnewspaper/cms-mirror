@@ -25,10 +25,10 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Controller
     /// specify a REST controller CRUD operation friendly interface
     /// </summary>
     /// <typeparam name="Entity"></typeparam>
-    public interface IContentController<Entity> where Entity : class, IContentRowLevelSecured
+    public interface IRESTContentController<Entity> where Entity : class, IContentRowLevelSecured
     {
         IContentCollectionService<IQueryableContentModelOperator<Entity>, Entity> _contentCollectionService { get; set; }
-        ITenantInfo _tenantInfo { get; set; }
+        ITenantInfo CurrentTenant { get; set; }
 
         [HttpPost("Create")]
         [Consumes("application/json")]

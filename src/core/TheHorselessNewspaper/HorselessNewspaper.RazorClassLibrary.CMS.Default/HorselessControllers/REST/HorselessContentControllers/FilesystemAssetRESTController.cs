@@ -3,33 +3,34 @@ using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mime;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST
+namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
-
     [ApiController]
-    [Route("api/NavigationMenuItem")]
-    public class NavigationMenuItemRESTController : ControllerBase,
-        IContentController<ContentModel.NavigationMenuItem>
+    [Route("api/HorselessContent/FilesystemAsset")]
+    public class FilesystemAssetRESTController : ControllerBase,
+        IRESTContentController<FilesystemAsset>
     {
-        public IContentCollectionService<IQueryableContentModelOperator<NavigationMenuItem>, NavigationMenuItem> _contentCollectionService { get; set; }
-        public ITenantInfo _tenantInfo { get; set; }
+        public IContentCollectionService<IQueryableContentModelOperator<FilesystemAsset>, FilesystemAsset> _contentCollectionService { get; set; }
+        public ITenantInfo CurrentTenant { get; set; }
 
-        public NavigationMenuItemRESTController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.NavigationMenuItem>,
-                ContentModel.NavigationMenuItem> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
+
+
+        public FilesystemAssetRESTController(IContentCollectionService<IQueryableContentModelOperator<FilesystemAsset>,
+            FilesystemAsset> contentCollectionService, ITenantInfo tenantInfo)
         {
-            this._contentCollectionService = contentCollectionService;
-            this._tenantInfo = tenantInfo;
+            _contentCollectionService = contentCollectionService;
+            CurrentTenant = tenantInfo;
         }
 
         [HttpPost("Create")]
         [Consumes("application/json")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentModel.NavigationMenuItem))]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ContentModel.NavigationMenuItem))]
-
-        public async Task<ActionResult<NavigationMenuItem>> Create([FromBody] NavigationMenuItem contentCollection)
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(FilesystemAsset))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(FilesystemAsset))]
+        public async Task<ActionResult<FilesystemAsset>> Create([FromBody] FilesystemAsset contentCollection)
         {
             if (!ModelState.IsValid)
             {
@@ -47,11 +48,10 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             }
         }
 
-
         [HttpGet("GetByObjectId")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ContentModel.NavigationMenuItem))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FilesystemAsset))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<NavigationMenuItem>> GetByObjectId([FromRoute] string objectId)
+        public async Task<ActionResult<FilesystemAsset>> GetByObjectId([FromRoute] string objectId)
         {
 
 
@@ -86,12 +86,12 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             return Ok(result);
         }
 
-
         [Consumes("application/json")]
         [HttpPost("Update")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentModel.NavigationMenuItem))]
-        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(ContentModel.NavigationMenuItem))]
-        public async Task<ActionResult<NavigationMenuItem>> Update([FromRoute] string contentCollectionId, [FromBody] NavigationMenuItem contentCollection)
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(FilesystemAsset))]
+        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(FilesystemAsset))]
+
+        public async Task<ActionResult<FilesystemAsset>> Update([FromRoute] string contentCollectionId, [FromBody] FilesystemAsset contentCollection)
         {
             if (!ModelState.IsValid)
             {
@@ -107,6 +107,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             {
                 return BadRequest(ex.Message);
             }
+
         }
     }
 }

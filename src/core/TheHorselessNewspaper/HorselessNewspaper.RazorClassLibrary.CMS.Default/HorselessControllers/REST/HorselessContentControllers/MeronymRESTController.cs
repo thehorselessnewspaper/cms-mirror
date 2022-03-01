@@ -3,34 +3,33 @@ using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Mime;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST
+
+namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
     [ApiController]
-    [Route("api/FilesystemAsset")]
-    public class FilesystemAssetRESTController : ControllerBase,
-        IContentController<ContentModel.FilesystemAsset>
+    [Route("api/HorselessContent/Meronym")]
+    public class MeronymRESTController : ControllerBase,
+        IRESTContentController<Meronym>
     {
-        public IContentCollectionService<IQueryableContentModelOperator<ContentModel.FilesystemAsset>, ContentModel.FilesystemAsset> _contentCollectionService { get; set; }
-        public ITenantInfo _tenantInfo { get; set; }
+        public IContentCollectionService<IQueryableContentModelOperator<Meronym>, Meronym> _contentCollectionService { get; set; }
+        public ITenantInfo CurrentTenant { get; set; }
 
- 
-
-        public FilesystemAssetRESTController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.FilesystemAsset>,
-            ContentModel.FilesystemAsset> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
+        public MeronymRESTController(IContentCollectionService<IQueryableContentModelOperator<Meronym>,
+            Meronym> contentCollectionService, ITenantInfo tenantInfo)
         {
-            this._contentCollectionService = contentCollectionService;
-            this._tenantInfo = tenantInfo;
+            _contentCollectionService = contentCollectionService;
+            CurrentTenant = tenantInfo;
         }
+
 
         [HttpPost("Create")]
         [Consumes("application/json")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentModel.FilesystemAsset))]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ContentModel.FilesystemAsset))]
-        public async Task<ActionResult<FilesystemAsset>> Create([FromBody] FilesystemAsset contentCollection)
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Meronym))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Meronym))]
+        public async Task<ActionResult<Meronym>> Create([FromBody] Meronym contentCollection)
         {
             if (!ModelState.IsValid)
             {
@@ -46,14 +45,14 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             {
                 return BadRequest(ex.Message);
             }
+
         }
 
         [HttpGet("GetByObjectId")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ContentModel.FilesystemAsset))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Meronym))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<FilesystemAsset>> GetByObjectId([FromRoute] string objectId)
+        public async Task<ActionResult<Meronym>> GetByObjectId([FromRoute] string objectId)
         {
-
 
             IActionResult result;
             if (!ModelState.IsValid)
@@ -88,10 +87,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
         [Consumes("application/json")]
         [HttpPost("Update")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentModel.FilesystemAsset))]
-        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(ContentModel.FilesystemAsset))]
-
-        public async Task<ActionResult<FilesystemAsset>> Update([FromRoute] string contentCollectionId, [FromBody] FilesystemAsset contentCollection)
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Meronym))]
+        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(Meronym))]
+        public async Task<ActionResult<Meronym>> Update([FromRoute] string contentCollectionId, [FromBody] Meronym contentCollection)
         {
             if (!ModelState.IsValid)
             {
@@ -107,7 +105,6 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             {
                 return BadRequest(ex.Message);
             }
-
         }
     }
 }
