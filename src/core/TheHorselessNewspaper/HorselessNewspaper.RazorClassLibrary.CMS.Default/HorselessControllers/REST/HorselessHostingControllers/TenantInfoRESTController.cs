@@ -13,7 +13,7 @@ using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessHostingControllers
 {
     [ApiController]
-    [Route(API_HORSEHOSTINGMODEL_TENANTINFO)]
+    [Route(API_HORSELESSHOSTINGMODEL_TENANTINFO)]
     public class TenantInfoRESTController : ControllerBase,
         IRESTHostingController<HostingModel.TenantInfo>
     {
@@ -23,7 +23,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             this.CurrentTenant = tenantInfo;
         }
 
-        public const string API_HORSEHOSTINGMODEL_TENANTINFO = "api/HorselessHostingModel/TenantInfo";
+        public const string API_HORSELESSHOSTINGMODEL_TENANTINFO = "api/HorselessHostingModel/TenantInfo";
         public IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.TenantInfo>, HostingModel.TenantInfo> EntityCollectionService { get; set;}
         public ITenantInfo CurrentTenant { get; set;}
 
