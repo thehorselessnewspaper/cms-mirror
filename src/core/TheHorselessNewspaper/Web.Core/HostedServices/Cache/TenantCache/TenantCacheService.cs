@@ -151,7 +151,6 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             var hostingModelTenantQueryResult = await hostingModelTenantQuery.Read();
             var hostingModelTenants = hostingModelTenantQueryResult.ToList();
 
-
             _logger.LogInformation($"read {hostingModelTenantQueryResult.ToList().Count()} hosting model tenant records");
 
 
@@ -166,13 +165,21 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             // to the hosting model db
             // the migrated entity should == original entity
             // where == is based on uniquely constrained columns
-            foreach (var originEntity in hostingModelTenantQueryResult)
+            foreach (var originEntity in hostingModelTenants)
             {
                 // filter existing merge targets
-                var existingMergeTarget = hostingModelTenants.Where(r => r.Id == originEntity.Id);
-                if (existingMergeTarget == null)
+                var existingMergeTarget = contentModelTenants.Where(r => r.Id == originEntity.Id).Any();
+                if (existingMergeTarget == false)
                 {
                     _logger.LogInformation($"found new undeployed tenant {originEntity.DisplayName}");
+
+
+                    var hostingModelTenantInfoQuery = this.GetQueryForHostingEntity<HostingModel.TenantInfo>(scope);
+                    var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.Read(w => w.Tenant_Id == originEntity.Id);
+                    var hostingModelTenantInfo = hostingModelTenantInfoQueryResult.ToList().First();
+                    _logger.LogInformation($"found new undeployed tenantInfo {hostingModelTenantInfo.DisplayName}");
+
+
                     var mergeEntity = new ContentModel.Tenant()
                     {
                         Id = originEntity.Id,
@@ -181,17 +188,47 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         IsSoftDeleted = originEntity.IsSoftDeleted,
                         ObjectId = originEntity.ObjectId
                     };
+
+                    using (var innerScope = _services.CreateScope())
+                    {
+                        try
+                        {
+                            _logger.LogInformation($"merging new undeployed tenant {originEntity.DisplayName}");
+                            // collect the content model tenants
+                            var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(innerScope);
+                            var insertResult = await contentModelTenantQuery.Create(mergeEntity);
+
+                            _logger.LogInformation($"inserted new undeployed tenant {originEntity.DisplayName}");
+
+                            var tenantList = await contentModelTenantQuery.Read(r => r.IsSoftDeleted == false);
+
+                            var updatedTenants = tenantList.ToList();
+
+                            _logger.LogInformation($"read {updatedTenants.Count()} content model tenant records");
+
+
+                            // TODO 
+                            // handle multiplicity of TenantInfo per Tenant
+                            // enables tenants of tenants
+                            var inMemoryStoreEntity = new HorselessTenantInfo(hostingModelTenantInfo);
+                            var inMemoryStoreUpdated = await inMemoryStores.TryAddAsync(inMemoryStoreEntity);
+                            _logger.LogInformation($"in memory tenant store updated with tenant: {inMemoryStoreEntity.Payload.DisplayName}");
+                        }
+                        catch (Exception e)
+                        {
+                            _logger.LogError($"problem getting tenants {e.Message}");
+                            throw new Exception("problem merging tenants ", e);
+                        }
+
+                    }
+
+
                 }
                 else
                 {
                     _logger.LogInformation($"found existing deployed tenant {originEntity.DisplayName}");
 
                 }
-
-                // TODO 
-                // handle multiplicity of TenantInfo per Tenant
-                // enables tenants of tenants
-                var inMemoryStoreEntity = new HorselessTenantInfo(originEntity.TenantInfos.FirstOrDefault());
 
 
             }

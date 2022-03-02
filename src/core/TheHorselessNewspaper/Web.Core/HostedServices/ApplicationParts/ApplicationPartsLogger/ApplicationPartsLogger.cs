@@ -55,20 +55,20 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
             var controllers = controllerFeature.Controllers.Select(x => x.FullName);
 
             // Log the application parts and controllers
-            _logger.LogInformation("Found controllers in the following application parts: '{ApplicationParts}' with the following controllers: '{Controllers}'",
+            _logger.LogTrace("Found controllers in the following application parts: '{ApplicationParts}' with the following controllers: '{Controllers}'",
                 string.Join(", ", applicationParts), string.Join(", ", controllers));
             
             
             var tagHelperFeature = new TagHelperFeature();
             _partManager.PopulateFeature(tagHelperFeature);
             var tagHelpers = tagHelperFeature.TagHelpers.Select(x => x.FullName);
-            _logger.LogInformation("Found taghellpers in the following application parts: '{ApplicationParts}' with the following tag helpers: '{tagHelpers}'",
+            _logger.LogTrace("Found taghellpers in the following application parts: '{ApplicationParts}' with the following tag helpers: '{tagHelpers}'",
             string.Join(", ", applicationParts), string.Join(", ", tagHelpers));
 
             var viewsFeature = new ViewsFeature();
             _partManager.PopulateFeature(viewsFeature);
             var views = viewsFeature.ViewDescriptors.Select(x => x.RelativePath);
-            _logger.LogInformation("Found viwes in the following application parts: '{ApplicationParts}' with the following views: '{views}'",
+            _logger.LogTrace("Found viwes in the following application parts: '{ApplicationParts}' with the following views: '{views}'",
             string.Join(", ", applicationParts), string.Join(", ", views));
 
         }
