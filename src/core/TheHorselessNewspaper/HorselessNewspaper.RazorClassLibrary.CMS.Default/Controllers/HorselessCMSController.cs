@@ -1,6 +1,7 @@
 ﻿using HorselessNewspaper.Core.Interfaces.Query;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
-
+using Finbuckle;
+using Finbuckle.MultiTenant;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -52,13 +53,14 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
     [ApiExplorerSettings(IgnoreApi = true)]
     public class HorselessCMSController : Controller
     {
-
+        private ITenantInfo CurrentTenant { get; set; }
 
         private IKeycloakAuthOptions AuthOptions { get; set; }
 
-        public HorselessCMSController(IKeycloakAuthOptions keycloakAuthOptions)
+        public HorselessCMSController(IKeycloakAuthOptions keycloakAuthOptions, ITenantInfo tenant)
         {
             this.AuthOptions = keycloakAuthOptions;
+            this.CurrentTenant = tenant;
         }
 
         [HttpGet("~/SignIn")]

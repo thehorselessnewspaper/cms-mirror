@@ -208,7 +208,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
             // serviceBuilder.Services.AddScoped< HorselessEntityFrameworkQueryProvider<ContentCollection>>();
             // validate that this needs to be a singleton
             // as it's gating every request
-            serviceBuilder.Services.AddSingleton<HorselessRouteTransformer>();
+            serviceBuilder.Services.AddScoped<HorselessRouteTransformer>();
             serviceBuilder.Services.AddScoped<HorselessTenantSetupMiddleware>();
             #endregion  cms routing pattern services
 

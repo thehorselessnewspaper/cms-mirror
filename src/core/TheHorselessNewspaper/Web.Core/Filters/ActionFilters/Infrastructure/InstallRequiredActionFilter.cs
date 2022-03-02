@@ -24,6 +24,10 @@ namespace HorselessNewspaper.Web.Core.Filters.ActionFilters.Infrastructure
         const string installerAction = "Index";
         const string installerArea = "Installer";
 
+        const string signoutAction = "SignOutCurrentUser";
+        const string signoutController = "HorselessCMS";
+        const string signoutArea = "";
+
         public InstallRequiredActionFilter(IHorselessCacheProvider<Guid, ContentEntities.Tenant> tenantCache, ILogger<InstallRequiredActionFilter> logger)
         {
             TenantCache = tenantCache;
@@ -59,6 +63,9 @@ namespace HorselessNewspaper.Web.Core.Filters.ActionFilters.Infrastructure
         private async Task<bool> IsMustCompleteTenantSetup(bool isAdminPrincipal, string area = "", string controller = "", string action = "")
         {
             bool ret = true;
+            area = (area == null) ?  "" : area;
+
+
             bool hasNoTenants = await GetTenantCount() == 0;
 
             var isIgnoredArea = installerArea.Equals(area, StringComparison.OrdinalIgnoreCase);
@@ -67,6 +74,17 @@ namespace HorselessNewspaper.Web.Core.Filters.ActionFilters.Infrastructure
             var isIgnoredAction = installerAction.Equals(area, StringComparison.OrdinalIgnoreCase);
 
             ret = hasNoTenants && isAdminPrincipal && (isIgnoredArea == false) && (isIgnoredController == false) && (isIgnoredAction == false);
+
+            if (ret == true)
+            {
+                // exclude signout requests
+                isIgnoredArea = signoutArea.Equals(area, StringComparison.OrdinalIgnoreCase);
+                isIgnoredController = signoutController.Equals(controller, StringComparison.OrdinalIgnoreCase);
+                isIgnoredAction = signoutAction.Equals(action, StringComparison.OrdinalIgnoreCase);
+
+                ret = !((isIgnoredArea == true) && (isIgnoredAction == true) && (isIgnoredController == true));
+            }
+
             return ret;
         }
 
