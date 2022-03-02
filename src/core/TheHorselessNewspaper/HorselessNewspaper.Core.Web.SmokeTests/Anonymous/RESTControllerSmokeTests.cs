@@ -186,7 +186,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 ConnectionString = "server=test.server.com;security=none;",
                 Identifier = "TestTenant",
                 Name = "Test Tenant Name",
-                TenantBaseUrl = "http://localhost/"
+                TenantBaseUrl = "http://localhost/TestTenant"
             };
         }
     }

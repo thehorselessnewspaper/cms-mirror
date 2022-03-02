@@ -17,6 +17,10 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private async Task CrudHostingCollection()
         {
 

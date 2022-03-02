@@ -21,6 +21,10 @@ namespace TheHorselessNewspaper.HostingModel.Context
         public bool? IsSoftDeleted { get; set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IQueryableModelOperator<T> where T : class
     {
         public Task<IQueryable<T>> Read();

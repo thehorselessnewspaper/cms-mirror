@@ -20,7 +20,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         DNS_FQDN
     }
     
-
+    [Owned]
     public class TenantIdentifierStrategy
     {
         [Key]
@@ -35,6 +35,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
     }
 
+    [Table("Tenants")]
     public partial class Tenant : IContentRowLevelSecured
     {
         public ICollection<TenantIdentifierStrategy> TenantIdentifierStrategies { get; set; } 

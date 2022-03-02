@@ -33,6 +33,10 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             }
         }
 
+        /// <summary>
+        /// reset and delete database
+        /// </summary>
+        /// <returns></returns>
         public async Task ResetDb()
         {
             try
