@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace HorselessNewspaper.Web.Core.Model.Cache
 {
-    public class DefaultCacheOperationResult<T> : ICacheOperationResult<T> where T : new()
+    public class DefaultCacheOperationResult<T> : ICacheOperationResult<T> // where T : new()
     {
         public DefaultCacheOperationResult()
         {
-            this.Payload = new T();
+            this.Payload = default(T);
         }
 
         public DefaultCacheOperationResult(bool isSuccess, T payload)
@@ -28,6 +28,6 @@ namespace HorselessNewspaper.Web.Core.Model.Cache
             }
         }
 
-        public T Payload { get; set; }
+        public T? Payload { get; set; }
     }
 }

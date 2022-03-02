@@ -13,7 +13,7 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Cache
     /// specifies a general cache interface
     /// for use in web applications 
     /// </summary>
-    public interface IHorselessCacheProvider<TCacheKey, TCacheValue> where TCacheValue : new()
+    public interface IHorselessCacheProvider<TCacheKey, TCacheValue> // where TCacheValue : new()
     {
         internal Task<int> Count();
 

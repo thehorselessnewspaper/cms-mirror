@@ -1,4 +1,5 @@
-﻿using HorselessNewspaper.Web.Core.Extensions.Claim;
+﻿using Finbuckle.MultiTenant;
+using HorselessNewspaper.Web.Core.Extensions.Claim;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
 using Microsoft.AspNetCore.Http;
@@ -13,11 +14,11 @@ namespace HorselessNewspaper.Web.Core.Middleware
     /// </summary>
     public class HorselessTenantSetupMiddleware : IMiddleware
     {
-        public IHorselessCacheProvider<Guid, TenantInfo> TenantCache { get; private set; }
+        public IHorselessCacheProvider<Guid, ITenantInfo> TenantCache { get; private set; }
 
         private ILogger<HorselessTenantSetupMiddleware> _logger;
 
-        public HorselessTenantSetupMiddleware(IHorselessCacheProvider<Guid, HostingEntities.TenantInfo> tenantCache, ILogger<HorselessTenantSetupMiddleware> logger)
+        public HorselessTenantSetupMiddleware(IHorselessCacheProvider<Guid, ITenantInfo> tenantCache, ILogger<HorselessTenantSetupMiddleware> logger)
         {
             TenantCache = tenantCache;
             _logger = logger;

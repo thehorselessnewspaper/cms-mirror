@@ -10,7 +10,7 @@ namespace HorselessNewspaper.Web.Core.Model.Cache
     /// encapsulate the result of the cache operation
     /// separate from the cache values
     /// </summary>
-    public interface ICacheOperationResult<T> where T : new()
+    public interface ICacheOperationResult<T> // where T : new()
     {
         public bool IsSuccess { get; set; }
 
@@ -19,6 +19,6 @@ namespace HorselessNewspaper.Web.Core.Model.Cache
         /// </summary>
         public bool IsNullPayload { get; }
 
-        public T Payload  { get; set; }
+        public T? Payload  { get; set; }
     }
 }
