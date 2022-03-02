@@ -41,7 +41,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
                 services.AddSingleton<DbContextOptions<MSSqlContentContext>>(builder.Options);
 
                 // add dbcontext for dependency injectoin
-                services.AddScoped<IContentModelContext, MSSqlContentContext>();
+                services.AddTransient<IContentModelContext, MSSqlContentContext>();
 
                 // register repository-like services that depend on dbcontext
                 ModelOperatorExtensions.RegisterContentModelOperators(services);
@@ -74,7 +74,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             services.AddSingleton<DbContextOptions<MSSQLHostingContext>>(builder.Options);
 
             // add dbcontext for dependency injectoin
-            services.AddScoped<IHostingModelContext, MSSQLHostingContext>();
+            services.AddTransient<IHostingModelContext, MSSQLHostingContext>();
 
             //services.AddDbContext<MSSQLHostingContext>(options =>
             //{

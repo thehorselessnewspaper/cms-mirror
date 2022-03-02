@@ -149,7 +149,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             // collect the hosting model tenants
             var hostingModelTenantQuery = this.GetQueryForHostingEntity<HostingModel.Tenant>(scope);
             var hostingModelTenantQueryResult = await hostingModelTenantQuery.Read();
-            var hostingModelTenants = hostingModelTenantQueryResult.ToList();
+            var hostingModelTenants = hostingModelTenantQueryResult == null ? new List<HostingModel.Tenant>() : hostingModelTenantQueryResult.ToList();
 
             _logger.LogInformation($"read {hostingModelTenantQueryResult.ToList().Count()} hosting model tenant records");
 

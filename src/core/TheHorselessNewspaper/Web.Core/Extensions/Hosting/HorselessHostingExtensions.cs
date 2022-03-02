@@ -76,7 +76,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("{controller:exists}/{action:exists}");
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("{area:exists}/{controller}/{action}");
 
-                // options.MapDynamicControllerRoute<HorselessRouteTransformer>("/{**slug}");
+                options.MapDynamicControllerRoute<HorselessRouteTransformer>("{__tenant__}/{**slug}");
                 //options.MapControllerRoute(
                 //name: "Slugs",
                 //pattern: "{*slug}", new { controller = "Home", action = "Index" });
@@ -96,6 +96,8 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
                 options.MapControllerRoute(
                 name: "HorselessCMS",
                 pattern: "{controller=HorselessCMS}/{action=ViewTemplate}/{id?}");
+
+                options.MapControllerRoute("defaultMultitenant", "{__tenant__}/{area:exists}/{controller=Home}/{action=Index}");
 
                 options.MapControllers();
 
