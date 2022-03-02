@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant
 {
@@ -17,14 +18,14 @@ namespace HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant
     /// simple singleton-safe tenant cache implementation suitable for 
     /// dependency injection into asp.net core di consumers
     /// </summary>
-    public class DefaultTenantCache : IHorselessCacheProvider<Guid, ITenantInfo>
+    public class DefaultTenantCache : IHorselessCacheProvider<Guid, ContentEntities.Tenant>
     {
         public DefaultTenantCache()
         {
-            Tenants = new System.Collections.Concurrent.ConcurrentDictionary<Guid, ITenantInfo>();
+            Tenants = new System.Collections.Concurrent.ConcurrentDictionary<Guid, ContentEntities.Tenant>();
 
         }
-        public System.Collections.Concurrent.ConcurrentDictionary<Guid, ITenantInfo> Tenants { get; set; }
+        public System.Collections.Concurrent.ConcurrentDictionary<Guid, ContentEntities.Tenant> Tenants { get; set; }
 
         public async Task<int> Count()
         {
@@ -45,7 +46,7 @@ namespace HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant
             return await Task.FromResult(key);
         }
 
-        public async Task<List<Guid>> Evict(Expression<Func<KeyValuePair<Guid, ITenantInfo>, bool>> predicate)
+        public async Task<List<Guid>> Evict(Expression<Func<KeyValuePair<Guid, ContentEntities.Tenant>, bool>> predicate)
         {
             var evicted = new List<Guid>();
             var filteredList = Tenants.AsQueryable().Where(predicate).ToList();
@@ -61,11 +62,11 @@ namespace HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant
             return await Task.FromResult(evicted);
         }
 
-        public async Task<ICacheOperationResult<ITenantInfo>> Get(Guid key)
+        public async Task<ICacheOperationResult<ContentEntities.Tenant>> Get(Guid key)
         {
-            var operationResult = new DefaultCacheOperationResult<ITenantInfo>();
+            var operationResult = new DefaultCacheOperationResult<ContentEntities.Tenant>();
 
-            var value = default(ITenantInfo);
+            var value = default(ContentEntities.Tenant);
             var result = Tenants.TryGetValue(key, out value);
 
             operationResult.IsSuccess = result;
@@ -74,9 +75,9 @@ namespace HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant
             return await Task.FromResult(operationResult);
         }
 
-        public async Task<ICacheOperationResult<List<KeyValuePair<Guid, ITenantInfo>>>> Get(Expression<Func<KeyValuePair<Guid, ITenantInfo>, bool>> predicate)
+        public async Task<ICacheOperationResult<List<KeyValuePair<Guid, ContentEntities.Tenant>>>> Get(Expression<Func<KeyValuePair<Guid, ContentEntities.Tenant>, bool>> predicate)
         {
-            var operationResult = new DefaultCacheOperationResult<List<KeyValuePair<Guid, ITenantInfo>>>();
+            var operationResult = new DefaultCacheOperationResult<List<KeyValuePair<Guid, ContentEntities.Tenant>>>();
 
             var filteredList = Tenants.AsQueryable().Where(predicate).ToList();
             operationResult.Payload = filteredList;
@@ -85,7 +86,7 @@ namespace HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant
             return await Task.FromResult(operationResult);
         }
 
-        public async Task<ITenantInfo> Set(Guid key, ITenantInfo value)
+        public async Task<ContentEntities.Tenant> Set(Guid key, ContentEntities.Tenant value)
         {
             var result = this.Tenants.TryAdd(key, value);
 

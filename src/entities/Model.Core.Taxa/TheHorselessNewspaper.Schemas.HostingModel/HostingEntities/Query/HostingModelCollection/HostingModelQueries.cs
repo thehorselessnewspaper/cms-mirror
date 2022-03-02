@@ -133,9 +133,12 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             return await Task.FromResult<IQueryable<T>>(dbSet.AsQueryable<T>());
         }
 
-        public Task<IEnumerable<T>> Read(Expression<Func<T, bool>> query)
+        public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query)
         {
-            throw new NotImplementedException();
+            _logger.LogDebug($"handling Read request");
+            var dbSet = ((DbContext)_context).Set<T>().Where(query);
+
+            return await Task.FromResult<IQueryable<T>>(dbSet.AsQueryable<T>());
         }
 
         public async Task<T> Update(T entity)

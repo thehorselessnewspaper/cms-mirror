@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.Web.Core.Middleware
 {
     /// <summary>
@@ -14,11 +15,11 @@ namespace HorselessNewspaper.Web.Core.Middleware
     /// </summary>
     public class HorselessTenantSetupMiddleware : IMiddleware
     {
-        public IHorselessCacheProvider<Guid, ITenantInfo> TenantCache { get; private set; }
+        public IHorselessCacheProvider<Guid, ContentEntities.Tenant> TenantCache { get; private set; }
 
         private ILogger<HorselessTenantSetupMiddleware> _logger;
 
-        public HorselessTenantSetupMiddleware(IHorselessCacheProvider<Guid, ITenantInfo> tenantCache, ILogger<HorselessTenantSetupMiddleware> logger)
+        public HorselessTenantSetupMiddleware(IHorselessCacheProvider<Guid, ContentEntities.Tenant> tenantCache, ILogger<HorselessTenantSetupMiddleware> logger)
         {
             TenantCache = tenantCache;
             _logger = logger;

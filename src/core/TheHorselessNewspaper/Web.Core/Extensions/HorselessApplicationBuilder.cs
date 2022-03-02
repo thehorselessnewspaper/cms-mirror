@@ -16,7 +16,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
         public HorselessApplicationBuilder(WebApplication app, IApplicationBuilder builder)
         {
             Builder = builder;
-            app = app;
+            this.app = app;
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HorselessNewspaper.Web.Core.Extensions.Claim;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -23,7 +24,7 @@ namespace HorselessNewspaper.Web.Core.Filters.ActionFilters.Infrastructure
         const string installerAction = "Index";
         const string installerArea = "Installer";
 
-        public InstallRequiredActionFilter(IHorselessCacheProvider<Guid, ITenantInfo> tenantCache, ILogger<InstallRequiredActionFilter> logger)
+        public InstallRequiredActionFilter(IHorselessCacheProvider<Guid, ContentEntities.Tenant> tenantCache, ILogger<InstallRequiredActionFilter> logger)
         {
             TenantCache = tenantCache;
             _logger = logger;
@@ -31,7 +32,7 @@ namespace HorselessNewspaper.Web.Core.Filters.ActionFilters.Infrastructure
             logger.LogTrace("InstallRequiredActionFilter initialized normally");
         }
 
-        public IHorselessCacheProvider<Guid, ITenantInfo> TenantCache { get; private set; }
+        public IHorselessCacheProvider<Guid, ContentEntities.Tenant> TenantCache { get; private set; }
 
         private ILogger<InstallRequiredActionFilter> _logger;
 

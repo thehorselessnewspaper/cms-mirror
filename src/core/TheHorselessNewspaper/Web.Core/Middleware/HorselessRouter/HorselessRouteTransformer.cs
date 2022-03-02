@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HorselessNewspaper.Web.Core.Extensions.Claim;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
-using System.Security.Claims;
-using TheHorselessNewspaper.Schemas.HostingModel.DTO;
-using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
-using HorselessNewspaper.Web.Core.Extensions.Claim;
-using Finbuckle.MultiTenant;
+using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
 {
@@ -30,7 +22,7 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
     {
         ILogger<HorselessRouteTransformer> _logger;
 
-        internal IHorselessCacheProvider<Guid, ITenantInfo>? TenantCache { get; set; }
+        internal IHorselessCacheProvider<Guid, ContentEntities.Tenant>? TenantCache { get; set; }
 
         IHttpContextAccessor _httpContextAccessor;
 
@@ -50,7 +42,7 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
 
         }
 
-        public HorselessRouteTransformer(IHorselessCacheProvider<Guid, ITenantInfo> tenantCache, ILogger<HorselessRouteTransformer> logger, IHttpContextAccessor httpContextAccessor)
+        public HorselessRouteTransformer(IHorselessCacheProvider<Guid, ContentEntities.Tenant> tenantCache, ILogger<HorselessRouteTransformer> logger, IHttpContextAccessor httpContextAccessor)
         {
             TenantCache = tenantCache;
             _logger = logger;

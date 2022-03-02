@@ -175,7 +175,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             return await Task.FromResult<IQueryable<T>>(result);
         }
 
-        public async Task<IEnumerable<T>> Read(Expression<Func<T, bool>> query)
+        public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query)
         {
             _logger.LogDebug($"handling get request");
             IQueryable<T> result;
