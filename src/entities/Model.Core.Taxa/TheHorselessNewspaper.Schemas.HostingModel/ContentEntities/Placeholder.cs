@@ -8,8 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    [Index(nameof(HorselessClaimsPrincipalId), Name = "IX_FK_HorselessClaimsPrincipalHorselessSession")]
-    public partial class HorselessSession
+    public partial class Placeholder
     {
         [Key]
         public Guid Id { get; set; }
@@ -18,15 +17,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public bool? IsSoftDeleted { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
-        public string SessionId { get; set; }
-        public string Iss { get; set; }
-        public string Aud { get; set; }
-        public string Sub { get; set; }
-        public bool? IsAnonymous { get; set; }
-        public Guid? HorselessClaimsPrincipalId { get; set; }
-
-        [ForeignKey(nameof(HorselessClaimsPrincipalId))]
-        [InverseProperty("HorselessSessions")]
-        public virtual HorselessClaimsPrincipal HorselessClaimsPrincipal { get; set; }
+        public bool? IsPublished { get; set; }
+        public string Description { get; set; }
     }
 }

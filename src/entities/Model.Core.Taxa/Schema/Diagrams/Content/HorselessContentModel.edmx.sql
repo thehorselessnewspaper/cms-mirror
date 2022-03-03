@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/02/2022 19:03:41
+-- Date Created: 03/03/2022 14:55:13
 -- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [THNLP_Content_Testing];
+USE [THLNP_Content_Modelling];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -107,6 +107,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_TaxonomyContentCollection_ContentCollection]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TaxonomyContentCollection] DROP CONSTRAINT [FK_TaxonomyContentCollection_ContentCollection];
 GO
+IF OBJECT_ID(N'[dbo].[FK_HorselessClaimsPrincipalHorselessSession]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HorselessSessions] DROP CONSTRAINT [FK_HorselessClaimsPrincipalHorselessSession];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -151,8 +154,8 @@ GO
 IF OBJECT_ID(N'[dbo].[NugetPackages]', 'U') IS NOT NULL
     DROP TABLE [dbo].[NugetPackages];
 GO
-IF OBJECT_ID(N'[dbo].[PhantomAccessControlEntries]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PhantomAccessControlEntries];
+IF OBJECT_ID(N'[dbo].[AccessControlEntries]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AccessControlEntries];
 GO
 IF OBJECT_ID(N'[dbo].[HorselessSessions]', 'U') IS NOT NULL
     DROP TABLE [dbo].[HorselessSessions];

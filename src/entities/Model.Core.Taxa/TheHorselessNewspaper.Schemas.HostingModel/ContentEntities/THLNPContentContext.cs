@@ -4,20 +4,17 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Logging;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    internal partial class THLNPContentContext : DbContext
+    public partial class THLNPContentContext : DbContext
     {
-
-
         public THLNPContentContext(DbContextOptions<THLNPContentContext> options)
             : base(options)
         {
-            int i = 0;
         }
 
+        public virtual DbSet<AccessControlEntry> AccessControlEntries { get; set; }
         public virtual DbSet<ContentCollection> ContentCollections { get; set; }
         public virtual DbSet<FilesystemAsset> FilesystemAssets { get; set; }
         public virtual DbSet<Holonym> Holonyms { get; set; }
@@ -30,6 +27,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public virtual DbSet<NavigationMenu> NavigationMenus { get; set; }
         public virtual DbSet<NavigationMenuItem> NavigationMenuItems { get; set; }
         public virtual DbSet<NugetPackage> NugetPackages { get; set; }
+        public virtual DbSet<Placeholder> Placeholders { get; set; }
         public virtual DbSet<Publication> Publications { get; set; }
         public virtual DbSet<Taxon> Taxons { get; set; }
         public virtual DbSet<Taxonomy> Taxonomies { get; set; }
@@ -37,6 +35,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AccessControlEntry>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+            });
+
             modelBuilder.Entity<ContentCollection>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
@@ -145,6 +148,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             modelBuilder.Entity<HorselessSession>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasOne(d => d.HorselessClaimsPrincipal)
+                    .WithMany(p => p.HorselessSessions)
+                    .HasForeignKey(d => d.HorselessClaimsPrincipalId)
+                    .HasConstraintName("FK_HorselessClaimsPrincipalHorselessSession");
             });
 
             modelBuilder.Entity<JSONAsset>(entity =>
@@ -248,6 +256,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             });
 
             modelBuilder.Entity<NugetPackage>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+            });
+
+            modelBuilder.Entity<Placeholder>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
             });

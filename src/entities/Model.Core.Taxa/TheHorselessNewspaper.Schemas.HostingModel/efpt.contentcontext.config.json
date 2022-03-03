@@ -14,6 +14,10 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
+         "Name": "[dbo].[AccessControlEntries]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[ContentCollectionContentCollection]",
          "ObjectType": 0
       },
@@ -86,6 +90,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[Placeholders]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[PublicationContentCollection]",
          "ObjectType": 0
       },
@@ -130,12 +138,13 @@
          "ObjectType": 0
       }
    ],
-   "UiHint": "WIPERS.THLNP_Content",
+   "UiHint": "WIPERS.THLNP_Content_Modelling",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,
    "UseFluentApiOnly": false,
    "UseHandleBars": false,
+   "UseHierarchyId": false,
    "UseInflector": true,
    "UseLegacyPluralizer": false,
    "UseManyToManyEntity": false,

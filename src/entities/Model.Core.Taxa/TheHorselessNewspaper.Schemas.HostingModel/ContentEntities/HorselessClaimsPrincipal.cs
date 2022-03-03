@@ -11,6 +11,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     [Index(nameof(TenantId), Name = "IX_FK_TenantHorselessClaimsPrincipal")]
     public partial class HorselessClaimsPrincipal
     {
+        public HorselessClaimsPrincipal()
+        {
+            HorselessSessions = new HashSet<HorselessSession>();
+        }
+
         [Key]
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
@@ -26,5 +31,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [ForeignKey(nameof(TenantId))]
         [InverseProperty("HorselessClaimsPrincipals")]
         public virtual Tenant Tenant { get; set; }
+        [InverseProperty(nameof(HorselessSession.HorselessClaimsPrincipal))]
+        public virtual ICollection<HorselessSession> HorselessSessions { get; set; }
     }
 }
