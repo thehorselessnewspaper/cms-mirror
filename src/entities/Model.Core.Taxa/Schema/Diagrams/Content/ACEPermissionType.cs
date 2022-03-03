@@ -10,15 +10,10 @@
 namespace Schema.Diagrams.Content
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class PhantomAccessControlEntry
+    public enum ACEPermissionType : int
     {
-        public System.Guid Id { get; set; }
-        public string DisplayName { get; set; }
-        public string ObjectId { get; set; }
-        public Nullable<bool> IsSoftDeleted { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public Nullable<bool> IsActive { get; set; }
+        PERMIT = 0,
+        DENY = 1
     }
 }

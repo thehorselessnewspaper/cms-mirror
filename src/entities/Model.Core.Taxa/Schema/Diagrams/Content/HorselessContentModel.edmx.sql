@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/09/2022 13:38:47
--- Generated from EDMX file: C:\src\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
+-- Date Created: 03/02/2022 19:03:41
+-- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-
+USE [THNLP_Content_Testing];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -165,9 +165,6 @@ IF OBJECT_ID(N'[dbo].[NavigationMenuItems]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Taxonomies]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Taxonomies];
-GO
-IF OBJECT_ID(N'[dbo].[PhantomPrincipals]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PhantomPrincipals];
 GO
 IF OBJECT_ID(N'[dbo].[TenantContentCollection]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TenantContentCollection];
@@ -383,8 +380,8 @@ CREATE TABLE [dbo].[NugetPackages] (
 );
 GO
 
--- Creating table 'PhantomAccessControlEntries'
-CREATE TABLE [dbo].[PhantomAccessControlEntries] (
+-- Creating table 'AccessControlEntries'
+CREATE TABLE [dbo].[AccessControlEntries] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NULL,
@@ -405,7 +402,8 @@ CREATE TABLE [dbo].[HorselessSessions] (
     [Iss] nvarchar(max)  NULL,
     [Aud] nvarchar(max)  NULL,
     [Sub] nvarchar(max)  NULL,
-    [IsAnonymous] bit  NULL
+    [IsAnonymous] bit  NULL,
+    [HorselessClaimsPrincipalId] uniqueidentifier  NULL
 );
 GO
 
@@ -450,19 +448,6 @@ CREATE TABLE [dbo].[Taxonomies] (
     [CreatedAt] datetime  NULL,
     [JsonValue] nvarchar(max)  NULL,
     [JsonSchema] nvarchar(max)  NULL
-);
-GO
-
--- Creating table 'PhantomPrincipals'
-CREATE TABLE [dbo].[PhantomPrincipals] (
-    [Id] uniqueidentifier  NOT NULL,
-    [DisplayName] nvarchar(max)  NULL,
-    [ObjectId] nvarchar(max)  NULL,
-    [IsSoftDeleted] bit  NULL,
-    [CreatedAt] datetime  NULL,
-    [Iss] nvarchar(max)  NULL,
-    [Aud] nvarchar(max)  NULL,
-    [Sub] nvarchar(max)  NULL
 );
 GO
 
@@ -639,9 +624,9 @@ ADD CONSTRAINT [PK_NugetPackages]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'PhantomAccessControlEntries'
-ALTER TABLE [dbo].[PhantomAccessControlEntries]
-ADD CONSTRAINT [PK_PhantomAccessControlEntries]
+-- Creating primary key on [Id] in table 'AccessControlEntries'
+ALTER TABLE [dbo].[AccessControlEntries]
+ADD CONSTRAINT [PK_AccessControlEntries]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -666,12 +651,6 @@ GO
 -- Creating primary key on [Id] in table 'Taxonomies'
 ALTER TABLE [dbo].[Taxonomies]
 ADD CONSTRAINT [PK_Taxonomies]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
--- Creating primary key on [Id] in table 'PhantomPrincipals'
-ALTER TABLE [dbo].[PhantomPrincipals]
-ADD CONSTRAINT [PK_PhantomPrincipals]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -1127,6 +1106,21 @@ GO
 CREATE INDEX [IX_FK_TaxonomyContentCollection_ContentCollection]
 ON [dbo].[TaxonomyContentCollection]
     ([ContentCollections_Id]);
+GO
+
+-- Creating foreign key on [HorselessClaimsPrincipalId] in table 'HorselessSessions'
+ALTER TABLE [dbo].[HorselessSessions]
+ADD CONSTRAINT [FK_HorselessClaimsPrincipalHorselessSession]
+    FOREIGN KEY ([HorselessClaimsPrincipalId])
+    REFERENCES [dbo].[HorselessClaimsPrincipals]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_HorselessClaimsPrincipalHorselessSession'
+CREATE INDEX [IX_FK_HorselessClaimsPrincipalHorselessSession]
+ON [dbo].[HorselessSessions]
+    ([HorselessClaimsPrincipalId]);
 GO
 
 -- --------------------------------------------------

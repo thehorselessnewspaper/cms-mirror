@@ -44,6 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Diagrams\Content\AccessControlEntry.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\ACEPermission.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\ACEPermissionScope.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\ACEPermissionType.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Diagrams\Content\ACEScope.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
@@ -53,6 +65,17 @@
     <Compile Include="Diagrams\Content\ContentCollection.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Diagrams\Content\ContentModelContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContentModelContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\ContentModelContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContentModelContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\ContentRowlevelSecured.cs" />
     <Compile Include="Diagrams\Content\FilesystemAsset.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
@@ -102,12 +125,6 @@
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Content\NugetPackage.cs">
-      <DependentUpon>HorselessContentModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Diagrams\Content\PhantomAccessControlEntry.cs">
-      <DependentUpon>HorselessContentModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Diagrams\Content\PhantomPrincipal.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Content\Placeholder.cs">
@@ -322,6 +339,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Diagrams\Content\ContentModelContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ContentModelContext.Context.cs</LastGenOutput>
+      <DependentUpon>HorselessContentModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Diagrams\Content\ContentModelContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ContentModelContext.cs</LastGenOutput>
+      <DependentUpon>HorselessContentModel.edmx</DependentUpon>
+    </Content>
     <Content Include="Diagrams\Content\HorselessContentModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>HorselessContentModel.Context.cs</LastGenOutput>

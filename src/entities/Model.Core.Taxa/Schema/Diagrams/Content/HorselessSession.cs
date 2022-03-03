@@ -24,5 +24,8 @@ namespace Schema.Diagrams.Content
         public string Aud { get; set; }
         public string Sub { get; set; }
         public Nullable<bool> IsAnonymous { get; set; }
+        public Nullable<System.Guid> HorselessClaimsPrincipalId { get; set; }
+    
+        public virtual HorselessClaimsPrincipal HorselessClaimsPrincipal { get; set; }
     }
 }

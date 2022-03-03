@@ -19,12 +19,11 @@
     <EntitySet Name="Meronyms" EntityType="HorselessContentModel.Store.Meronyms" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="HorselessClaimsPrincipals" EntityType="HorselessContentModel.Store.HorselessClaimsPrincipals" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NugetPackages" EntityType="HorselessContentModel.Store.NugetPackages" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PhantomAccessControlEntries" EntityType="HorselessContentModel.Store.PhantomAccessControlEntries" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AccessControlEntries" EntityType="HorselessContentModel.Store.AccessControlEntries" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="HorselessSessions" EntityType="HorselessContentModel.Store.HorselessSessions" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NavigationMenus" EntityType="HorselessContentModel.Store.NavigationMenus" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NavigationMenuItems" EntityType="HorselessContentModel.Store.NavigationMenuItems" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Taxonomies" EntityType="HorselessContentModel.Store.Taxonomies" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PhantomPrincipals" EntityType="HorselessContentModel.Store.PhantomPrincipals" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TenantContentCollection" EntityType="HorselessContentModel.Store.TenantContentCollection" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ContentCollectionMimeContent" EntityType="HorselessContentModel.Store.ContentCollectionMimeContent" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NavigationMenuNavigationMenu" EntityType="HorselessContentModel.Store.NavigationMenuNavigationMenu" store:Type="Tables" Schema="dbo" />
@@ -157,6 +156,10 @@
     <AssociationSet Name="FK_TaxonomyContentCollection_ContentCollection" Association="HorselessContentModel.Store.FK_TaxonomyContentCollection_ContentCollection">
       <End Role="ContentCollection" EntitySet="ContentCollections" />
       <End Role="TaxonomyContentCollection" EntitySet="TaxonomyContentCollection" />
+    </AssociationSet>
+    <AssociationSet Name="HorselessClaimsPrincipalHorselessSession" Association="HorselessContentModel.Store.HorselessClaimsPrincipalHorselessSession">
+      <End Role="HorselessClaimsPrincipal" EntitySet="HorselessClaimsPrincipals" />
+      <End Role="HorselessSession" EntitySet="HorselessSessions" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="HorselessContents">
@@ -329,7 +332,7 @@
     <Property Name="PackageAuthor" Type="nvarchar(max)" Nullable="true" />
     <Property Name="PackageSource" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
-  <EntityType Name="PhantomAccessControlEntries">
+  <EntityType Name="AccessControlEntries">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -354,6 +357,7 @@
     <Property Name="Aud" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Sub" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsAnonymous" Type="bit" Nullable="true" />
+    <Property Name="HorselessClaimsPrincipalId" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <EntityType Name="NavigationMenus">
     <Key>
@@ -398,19 +402,6 @@
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="JsonValue" Type="nvarchar(max)" Nullable="true" />
     <Property Name="JsonSchema" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="PhantomPrincipals">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
-    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
-    <Property Name="Iss" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Aud" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Sub" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="TenantContentCollection">
     <Key>
@@ -561,6 +552,18 @@
       </Principal>
       <Dependent Role="HorselessClaimsPrincipal">
         <PropertyRef Name="TenantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HorselessClaimsPrincipalHorselessSession">
+    <End Role="HorselessClaimsPrincipal" Type="HorselessContentModel.Store.HorselessClaimsPrincipals" Multiplicity="0..1" />
+    <End Role="HorselessSession" Type="HorselessContentModel.Store.HorselessSessions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HorselessClaimsPrincipal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HorselessSession">
+        <PropertyRef Name="HorselessClaimsPrincipalId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -914,7 +917,7 @@
           <EntitySet Name="Meronyms" EntityType="HorselessContentModel.Meronym" />
           <EntitySet Name="HorselessClaimsPrincipals" EntityType="HorselessContentModel.HorselessClaimsPrincipal" />
           <EntitySet Name="NugetPackages" EntityType="HorselessContentModel.NugetPackage" />
-          <EntitySet Name="PhantomAccessControlEntries" EntityType="HorselessContentModel.PhantomAccessControlEntry" />
+          <EntitySet Name="AccessControlEntries" EntityType="HorselessContentModel.AccessControlEntry" />
           <EntitySet Name="HorselessSessions" EntityType="HorselessContentModel.HorselessSession" />
           <EntitySet Name="NavigationMenus" EntityType="HorselessContentModel.NavigationMenu" />
           <EntitySet Name="NavigationMenuItems" EntityType="HorselessContentModel.NavigationMenuItem" />
@@ -963,10 +966,13 @@
             <End Role="Tenant" EntitySet="Tenants" />
             <End Role="HorselessClaimsPrincipal" EntitySet="HorselessClaimsPrincipals" />
           </AssociationSet>
-          <EntitySet Name="PhantomPrincipals" EntityType="HorselessContentModel.PhantomPrincipal" />
           <AssociationSet Name="TaxonomyContentCollection" Association="HorselessContentModel.TaxonomyContentCollection">
             <End Role="Taxonomy" EntitySet="Taxonomies" />
             <End Role="ContentCollection" EntitySet="ContentCollections" />
+          </AssociationSet>
+          <AssociationSet Name="HorselessClaimsPrincipalHorselessSession" Association="HorselessContentModel.HorselessClaimsPrincipalHorselessSession">
+            <End Role="HorselessClaimsPrincipal" EntitySet="HorselessClaimsPrincipals" />
+            <End Role="HorselessSession" EntitySet="HorselessSessions" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="HorselessContent">
@@ -1191,6 +1197,7 @@
           <Property Name="Sub" Type="String" Nullable="true" />
           <NavigationProperty Name="Tenant" Relationship="HorselessContentModel.TenantHorselessClaimsPrincipal" FromRole="HorselessClaimsPrincipal" ToRole="Tenant" />
           <Property Name="TenantId" Type="Guid" Nullable="true" />
+          <NavigationProperty Name="HorselessSessions" Relationship="HorselessContentModel.HorselessClaimsPrincipalHorselessSession" FromRole="HorselessClaimsPrincipal" ToRole="HorselessSession" />
         </EntityType>
         <EntityType Name="NugetPackage">
           <Key>
@@ -1209,7 +1216,7 @@
           <Property Name="PackageAuthor" Type="String" Nullable="true" />
           <Property Name="PackageSource" Type="String" Nullable="true" />
         </EntityType>
-        <EntityType Name="PhantomAccessControlEntry">
+        <EntityType Name="AccessControlEntry">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -1254,6 +1261,8 @@
           <Property Name="Aud" Type="String" Nullable="true" />
           <Property Name="Sub" Type="String" Nullable="true" />
           <Property Name="IsAnonymous" Type="Boolean" Nullable="true" />
+          <NavigationProperty Name="HorselessClaimsPrincipal" Relationship="HorselessContentModel.HorselessClaimsPrincipalHorselessSession" FromRole="HorselessSession" ToRole="HorselessClaimsPrincipal" />
+          <Property Name="HorselessClaimsPrincipalId" Type="Guid" Nullable="true" />
         </EntityType>
         <EntityType Name="NavigationMenu">
           <Key>
@@ -1359,22 +1368,44 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="PhantomPrincipal">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="true" />
-          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
-          <Property Name="Iss" Type="String" Nullable="true" />
-          <Property Name="Aud" Type="String" Nullable="true" />
-          <Property Name="Sub" Type="String" Nullable="true" />
-        </EntityType>
         <Association Name="TaxonomyContentCollection">
           <End Type="HorselessContentModel.Taxonomy" Role="Taxonomy" Multiplicity="*" />
           <End Type="HorselessContentModel.ContentCollection" Role="ContentCollection" Multiplicity="*" />
+        </Association>
+        <EnumType Name="ACEPermissionScope">
+          <Member Name="OWNER" />
+          <Member Name="ROLE" />
+          <Member Name="GROUP" />
+          <Member Name="WORKFLOW" />
+          <Member Name="ANONYMOUS" />
+          <Member Name="EVERYONE" />
+        </EnumType>
+        <EnumType Name="ACEPermission" IsFlags="true">
+          <Member Name="READ" />
+          <Member Name="CREATE" />
+          <Member Name="UPDATE" />
+          <Member Name="DELETE" />
+          <Member Name="SHARE" />
+          <Member Name="EXECUTE" />
+          <Member Name="SEARCH" />
+          <Member Name="PUBLISH" />
+          <Member Name="UNPUBLISH" />
+        </EnumType>
+        <EnumType Name="ACEPermissionType">
+          <Member Name="PERMIT" />
+          <Member Name="DENY" />
+        </EnumType>
+        <Association Name="HorselessClaimsPrincipalHorselessSession">
+          <End Type="HorselessContentModel.HorselessClaimsPrincipal" Role="HorselessClaimsPrincipal" Multiplicity="0..1" />
+          <End Type="HorselessContentModel.HorselessSession" Role="HorselessSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HorselessClaimsPrincipal">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HorselessSession">
+              <PropertyRef Name="HorselessClaimsPrincipalId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1565,9 +1596,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PhantomAccessControlEntries">
-      <EntityTypeMapping TypeName="IsTypeOf(HorselessContentModel.PhantomAccessControlEntry)">
-        <MappingFragment StoreEntitySet="PhantomAccessControlEntries">
+    <EntitySetMapping Name="AccessControlEntries">
+      <EntityTypeMapping TypeName="IsTypeOf(HorselessContentModel.AccessControlEntry)">
+        <MappingFragment StoreEntitySet="AccessControlEntries">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
           <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
@@ -1590,6 +1621,7 @@
           <ScalarProperty Name="Aud" ColumnName="Aud" />
           <ScalarProperty Name="Sub" ColumnName="Sub" />
           <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+          <ScalarProperty Name="HorselessClaimsPrincipalId" ColumnName="HorselessClaimsPrincipalId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1637,20 +1669,6 @@
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="JsonValue" ColumnName="JsonValue" />
           <ScalarProperty Name="JsonSchema" ColumnName="JsonSchema" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PhantomPrincipals">
-      <EntityTypeMapping TypeName="IsTypeOf(HorselessContentModel.PhantomPrincipal)">
-        <MappingFragment StoreEntitySet="PhantomPrincipals">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
-          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
-          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-          <ScalarProperty Name="Iss" ColumnName="Iss" />
-          <ScalarProperty Name="Aud" ColumnName="Aud" />
-          <ScalarProperty Name="Sub" ColumnName="Sub" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

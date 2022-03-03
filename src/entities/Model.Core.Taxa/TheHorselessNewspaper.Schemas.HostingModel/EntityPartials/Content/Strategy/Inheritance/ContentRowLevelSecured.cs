@@ -8,14 +8,14 @@ using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.HostingModel.EntityPartials.Content.Strategy.Inheritance
 {
-    public class ContentRowLevelSecured : IContentRowLevelSecured
+    public abstract class ContentRowLevelSecured : IContentRowLevelSecured
     {
         public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
-        public Guid Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string? ObjectId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime? CreatedAt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string? DisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool? IsSoftDeleted { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Guid Id { get; set; }
+        public string? ObjectId { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public string? DisplayName { get; set; }
+        public bool? IsSoftDeleted { get; set; }
      }
 }
