@@ -31,7 +31,7 @@ namespace Schema.Diagrams.Content
         public string Sub { get; set; }
         public Nullable<System.Guid> ParentTenantId { get; set; }
     
-        public virtual Tenant Tenant { get; set; }
+        public virtual Tenant ParentTenant { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HorselessSession> HorselessSessions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

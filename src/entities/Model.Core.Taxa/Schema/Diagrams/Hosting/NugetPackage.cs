@@ -24,6 +24,6 @@ namespace Schema.Diagrams.Hosting
         public string DisplayName { get; set; }
         public Nullable<System.Guid> ParentTenantId { get; set; }
     
-        public virtual Tenant Tenant { get; set; }
+        public virtual Tenant ParentTenant { get; set; }
     }
 }

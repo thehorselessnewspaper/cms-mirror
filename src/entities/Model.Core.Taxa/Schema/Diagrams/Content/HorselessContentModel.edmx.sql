@@ -2,10 +2,11 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/03/2022 21:17:10
+-- Date Created: 03/04/2022 13:45:15
 -- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
+SET QUOTED_IDENTIFIER OFF;
 
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
@@ -413,7 +414,7 @@ CREATE TABLE [dbo].[HorselessSessions] (
     [Aud] nvarchar(max)  NULL,
     [Sub] nvarchar(max)  NULL,
     [IsAnonymous] bit  NULL,
-    [HorselessClaimsPrincipalId] uniqueidentifier  NULL
+    [PrincipalId] uniqueidentifier  NULL
 );
 GO
 
@@ -1131,10 +1132,10 @@ ON [dbo].[TaxonomyContentCollection]
     ([ContentCollections_Id]);
 GO
 
--- Creating foreign key on [HorselessClaimsPrincipalId] in table 'HorselessSessions'
+-- Creating foreign key on [PrincipalId] in table 'HorselessSessions'
 ALTER TABLE [dbo].[HorselessSessions]
 ADD CONSTRAINT [FK_HorselessClaimsPrincipalHorselessSession]
-    FOREIGN KEY ([HorselessClaimsPrincipalId])
+    FOREIGN KEY ([PrincipalId])
     REFERENCES [dbo].[Principals]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -1143,7 +1144,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_HorselessClaimsPrincipalHorselessSession'
 CREATE INDEX [IX_FK_HorselessClaimsPrincipalHorselessSession]
 ON [dbo].[HorselessSessions]
-    ([HorselessClaimsPrincipalId]);
+    ([PrincipalId]);
 GO
 
 -- Creating foreign key on [AccessControlEntries_Id] in table 'AccessControlEntryPrincipal'

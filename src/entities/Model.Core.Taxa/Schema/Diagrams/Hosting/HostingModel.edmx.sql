@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/04/2022 00:00:02
+-- Date Created: 03/04/2022 13:49:58
 -- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Hosting\HostingModel.edmx
 -- --------------------------------------------------
 
@@ -31,6 +31,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_TenantNugetPackage]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[NugetPackages] DROP CONSTRAINT [FK_TenantNugetPackage];
 GO
+IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryPrincipal_AccessControlEntry]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AccessControlEntryPrincipal] DROP CONSTRAINT [FK_AccessControlEntryPrincipal_AccessControlEntry];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryPrincipal_Principal]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AccessControlEntryPrincipal] DROP CONSTRAINT [FK_AccessControlEntryPrincipal_Principal];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -53,6 +59,12 @@ IF OBJECT_ID(N'[dbo].[WebAPITenantInfos]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Principals]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Principals];
+GO
+IF OBJECT_ID(N'[dbo].[AccessControlEntries]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AccessControlEntries];
+GO
+IF OBJECT_ID(N'[dbo].[AccessControlEntryPrincipal]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AccessControlEntryPrincipal];
 GO
 
 -- --------------------------------------------------
@@ -108,7 +120,7 @@ CREATE TABLE [dbo].[TenantInfos] (
     [Name] nvarchar(max)  NULL,
     [ConnectionString] nvarchar(max)  NULL,
     [TenantBaseUrl] nvarchar(max)  NULL,
-    [Tenant_Id] uniqueidentifier  NULL
+    [ParentTenant_Id] uniqueidentifier  NULL
 );
 GO
 
@@ -245,10 +257,10 @@ ON [dbo].[KeyCloakConfigurations]
     ([TenantInfoId]);
 GO
 
--- Creating foreign key on [Tenant_Id] in table 'TenantInfos'
+-- Creating foreign key on [ParentTenant_Id] in table 'TenantInfos'
 ALTER TABLE [dbo].[TenantInfos]
 ADD CONSTRAINT [FK_TenantTenantInfo]
-    FOREIGN KEY ([Tenant_Id])
+    FOREIGN KEY ([ParentTenant_Id])
     REFERENCES [dbo].[Tenants]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -257,7 +269,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_TenantTenantInfo'
 CREATE INDEX [IX_FK_TenantTenantInfo]
 ON [dbo].[TenantInfos]
-    ([Tenant_Id]);
+    ([ParentTenant_Id]);
 GO
 
 -- Creating foreign key on [ParentTenantId] in table 'Principals'
