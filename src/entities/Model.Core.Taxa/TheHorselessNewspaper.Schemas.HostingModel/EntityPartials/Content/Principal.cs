@@ -9,7 +9,7 @@ using Finbuckle.MultiTenant;
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
 
-    [MultiTenant]
+    // [MultiTenant]
     public partial class Principal : IQueryableModelEntity, IContentRowLevelSecured
     {
         public byte[] Timestamp {get; set;}

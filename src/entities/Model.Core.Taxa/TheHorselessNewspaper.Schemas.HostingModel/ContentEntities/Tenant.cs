@@ -24,7 +24,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
 
-        [InverseProperty(nameof(Principal.ParentTenant))]
+        [InverseProperty(nameof(Principal.Tenant))]
         public virtual ICollection<Principal> Principals { get; set; }
 
         [ForeignKey("Tenants_Id")]

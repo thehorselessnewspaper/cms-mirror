@@ -101,15 +101,15 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
             modelBuilder.Entity<TenantInfo>(entity =>
             {
-                entity.HasIndex(e => e.Tenant_Id, "IX_FK_TenantTenantInfo");
+                entity.HasIndex(e => e.ParentTenant_Id, "IX_FK_TenantTenantInfo");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
-                entity.HasOne(d => d.Tenant)
+                entity.HasOne(d => d.ParentTenant)
                     .WithMany(p => p.TenantInfos)
-                    .HasForeignKey(d => d.Tenant_Id)
+                    .HasForeignKey(d => d.ParentTenant_Id)
                     .HasConstraintName("FK_TenantTenantInfo");
             });
 

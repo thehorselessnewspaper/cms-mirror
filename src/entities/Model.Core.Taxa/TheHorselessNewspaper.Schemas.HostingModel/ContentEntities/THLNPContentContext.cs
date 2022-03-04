@@ -154,9 +154,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.HasOne(d => d.HorselessClaimsPrincipal)
+                entity.HasOne(d => d.Principal)
                     .WithMany(p => p.HorselessSessions)
-                    .HasForeignKey(d => d.HorselessClaimsPrincipalId)
+                    .HasForeignKey(d => d.PrincipalId)
                     .HasConstraintName("FK_HorselessClaimsPrincipalHorselessSession");
             });
 
@@ -274,9 +274,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.HasOne(d => d.ParentTenant)
+                entity.HasOne(d => d.Tenant)
                     .WithMany(p => p.Principals)
-                    .HasForeignKey(d => d.ParentTenantId)
+                    .HasForeignKey(d => d.TenantId)
                     .HasConstraintName("FK_TenantHorselessClaimsPrincipal");
             });
 

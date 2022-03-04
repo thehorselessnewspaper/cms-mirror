@@ -322,7 +322,7 @@
     <Property Name="Iss" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Aud" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Sub" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ParentTenantId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="TenantId" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <EntityType Name="NugetPackages">
     <Key>
@@ -568,7 +568,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="HorselessClaimsPrincipal">
-        <PropertyRef Name="ParentTenantId" />
+        <PropertyRef Name="TenantId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1240,8 +1240,8 @@
           <Property Name="Iss" Type="String" Nullable="true" />
           <Property Name="Aud" Type="String" Nullable="true" />
           <Property Name="Sub" Type="String" Nullable="true" />
-          <NavigationProperty Name="ParentTenant" Relationship="HorselessContentModel.TenantHorselessClaimsPrincipal" FromRole="HorselessClaimsPrincipal" ToRole="Tenant" />
-          <Property Name="ParentTenantId" Type="Guid" Nullable="true" />
+          <NavigationProperty Name="Tenant" Relationship="HorselessContentModel.TenantHorselessClaimsPrincipal" FromRole="HorselessClaimsPrincipal" ToRole="Tenant" />
+          <Property Name="TenantId" Type="Guid" Nullable="true" />
           <NavigationProperty Name="HorselessSessions" Relationship="HorselessContentModel.HorselessClaimsPrincipalHorselessSession" FromRole="HorselessClaimsPrincipal" ToRole="HorselessSession" />
           <NavigationProperty Name="AccessControlEntries" Relationship="HorselessContentModel.AccessControlEntryPrincipal" FromRole="Principal" ToRole="AccessControlEntry" />
         </EntityType>
@@ -1411,7 +1411,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="HorselessClaimsPrincipal">
-              <PropertyRef Name="ParentTenantId" />
+              <PropertyRef Name="TenantId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1625,7 +1625,7 @@
           <ScalarProperty Name="Iss" ColumnName="Iss" />
           <ScalarProperty Name="Aud" ColumnName="Aud" />
           <ScalarProperty Name="Sub" ColumnName="Sub" />
-          <ScalarProperty Name="ParentTenantId" ColumnName="ParentTenantId" />
+          <ScalarProperty Name="TenantId" ColumnName="TenantId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

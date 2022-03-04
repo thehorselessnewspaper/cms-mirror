@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/04/2022 13:45:15
+-- Date Created: 03/04/2022 15:34:49
 -- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
-
 GO
+
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
 
@@ -370,7 +370,7 @@ CREATE TABLE [dbo].[Principals] (
     [Iss] nvarchar(max)  NULL,
     [Aud] nvarchar(max)  NULL,
     [Sub] nvarchar(max)  NULL,
-    [ParentTenantId] uniqueidentifier  NULL
+    [TenantId] uniqueidentifier  NULL
 );
 GO
 
@@ -1093,10 +1093,10 @@ ON [dbo].[HolonymMeronym]
     ([Meronyms_Id]);
 GO
 
--- Creating foreign key on [ParentTenantId] in table 'Principals'
+-- Creating foreign key on [TenantId] in table 'Principals'
 ALTER TABLE [dbo].[Principals]
 ADD CONSTRAINT [FK_TenantHorselessClaimsPrincipal]
-    FOREIGN KEY ([ParentTenantId])
+    FOREIGN KEY ([TenantId])
     REFERENCES [dbo].[Tenants]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -1105,7 +1105,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_TenantHorselessClaimsPrincipal'
 CREATE INDEX [IX_FK_TenantHorselessClaimsPrincipal]
 ON [dbo].[Principals]
-    ([ParentTenantId]);
+    ([TenantId]);
 GO
 
 -- Creating foreign key on [Taxonomies_Id] in table 'TaxonomyContentCollection'

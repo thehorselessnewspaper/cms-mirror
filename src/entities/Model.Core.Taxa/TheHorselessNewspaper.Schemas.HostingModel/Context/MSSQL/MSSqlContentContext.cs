@@ -63,65 +63,70 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             // Recommended to be called first.
             base.OnModelCreating(builder);
 
+            #region multitenant
             // Configure all entity types marked with the [MultiTenant] data attribute
             builder.ConfigureMultiTenant();
 
-            builder.Entity<ContentCollection>()
-                .HasKey(cc => new { cc.Id, cc.ObjectId });
+            //builder.Entity<ContentCollection>()
+            //    .HasKey(cc => new { cc.Id, cc.ObjectId });
 
-            builder.Entity<FilesystemAsset>()
-                .HasKey(cc => new { cc.Id, cc.ObjectId });
+            //builder.Entity<FilesystemAsset>()
+            //    .HasKey(cc => new { cc.Id, cc.ObjectId });
 
-            builder.Entity<Holonym>()
-                .HasKey(cc => new { cc.Id, cc.ObjectId });
+            //builder.Entity<Holonym>()
+            //    .HasKey(cc => new { cc.Id, cc.ObjectId });
 
-            builder.Entity<HorselessContent>()
-                .HasKey(cc => new { cc.Id, cc.ObjectId });
+            //builder.Entity<HorselessContent>()
+            //    .HasKey(cc => new { cc.Id, cc.ObjectId });
 
-            builder.Entity<HorselessSession>()
-                .HasKey(cc => new { cc.Id, cc.ObjectId });
+            //builder.Entity<HorselessSession>()
+            //    .HasKey(cc => new { cc.Id, cc.ObjectId });
 
-            builder.Entity<JSONAsset>()
-                .HasKey(cc => new { cc.Id, cc.ObjectId });
+            //builder.Entity<JSONAsset>()
+            //    .HasKey(cc => new { cc.Id, cc.ObjectId });
 
-            builder.Entity<Meronym>()
-                .HasKey(cc => new { cc.Id, cc.ObjectId });
+            //builder.Entity<Meronym>()
+            //    .HasKey(cc => new { cc.Id, cc.ObjectId });
 
-            builder.Entity<MIMEType>()
-                .HasKey(cc => new { cc.Id, cc.ObjectId });
+            //builder.Entity<MIMEType>()
+            //    .HasKey(cc => new { cc.Id, cc.ObjectId });
 
-            builder.Entity<NavigationMenu>()
-                .HasKey(cc => new { cc.Id, cc.ObjectId });
+            //builder.Entity<NavigationMenu>()
+            //    .HasKey(cc => new { cc.Id, cc.ObjectId });
 
-            builder.Entity<NavigationMenuItem>()
-                .HasKey(cc => new { cc.Id, cc.ObjectId });
+            //builder.Entity<NavigationMenuItem>()
+            //    .HasKey(cc => new { cc.Id, cc.ObjectId });
 
-            builder.Entity<NugetPackage>()
-                .HasKey(cc => new { cc.Id, cc.ObjectId });
+            //builder.Entity<NugetPackage>()
+            //    .HasKey(cc => new { cc.Id, cc.ObjectId });
 
-            builder.Entity<Principal>()
-                .HasKey(cc => new { cc.Id, cc.ObjectId });
+            //builder.Entity<Principal>()
+            //    .HasKey(cc => new { cc.Id, cc.ObjectId });
 
-            builder.Entity<Placeholder>()
-                .HasKey(cc => new { cc.Id, cc.ObjectId });
+            //builder.Entity<Placeholder>()
+            //    .HasKey(cc => new { cc.Id, cc.ObjectId });
 
-            builder.Entity<Publication>()
-                .HasKey(cc => new { cc.Id, cc.ObjectId });
+            //builder.Entity<Publication>()
+            //    .HasKey(cc => new { cc.Id, cc.ObjectId });
 
-            builder.Entity<Taxon>()
-                .HasKey(cc => new { cc.Id, cc.ObjectId });
+            //builder.Entity<Taxon>()
+            //    .HasKey(cc => new { cc.Id, cc.ObjectId });
 
-            builder.Entity<Taxonomy>()
-                .HasKey(cc => new { cc.Id, cc.ObjectId });
+            //builder.Entity<Taxonomy>()
+            //    .HasKey(cc => new { cc.Id, cc.ObjectId });
 
-            builder.Entity<Tenant>()
-                .HasKey(cc => new { cc.Id, cc.ObjectId });
+            //builder.Entity<Tenant>()
+            //    .HasKey(cc => new { cc.Id, cc.ObjectId });
+
+            #endregion multitenant
+
+    
 
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+            
         }
     }
 
