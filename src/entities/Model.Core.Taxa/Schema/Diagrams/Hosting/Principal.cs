@@ -28,9 +28,9 @@ namespace Schema.Diagrams.Hosting
         public string Iss { get; set; }
         public string Aud { get; set; }
         public string Sub { get; set; }
-        public Nullable<System.Guid> ParentTenantId { get; set; }
+        public Nullable<System.Guid> TenantId { get; set; }
     
-        public virtual Tenant ParentTenant { get; set; }
+        public virtual Tenant Tenant { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
     }

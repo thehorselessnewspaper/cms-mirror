@@ -65,7 +65,7 @@
     <Property Name="Version" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ParentTenantId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="TenantId" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <EntityType Name="KeyCloakConfigurations">
     <Key>
@@ -94,7 +94,7 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ConnectionString" Type="nvarchar(max)" Nullable="true" />
     <Property Name="TenantBaseUrl" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ParentTenant_Id" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="Tenant_Id" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <EntityType Name="WebAPITenantInfos">
     <Key>
@@ -123,7 +123,7 @@
     <Property Name="Iss" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Aud" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Sub" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ParentTenantId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="TenantId" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <EntityType Name="AccessControlEntries">
     <Key>
@@ -176,7 +176,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="TenantInfo">
-        <PropertyRef Name="ParentTenant_Id" />
+        <PropertyRef Name="Tenant_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -188,7 +188,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="HorselessClaimsPrincipal">
-        <PropertyRef Name="ParentTenantId" />
+        <PropertyRef Name="TenantId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -200,7 +200,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="NugetPackage">
-        <PropertyRef Name="ParentTenantId" />
+        <PropertyRef Name="TenantId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -293,8 +293,8 @@
           <Property Name="Version" Type="String" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-          <NavigationProperty Name="ParentTenant" Relationship="HostingModel.TenantNugetPackage" FromRole="NugetPackage" ToRole="Tenant" />
-          <Property Name="ParentTenantId" Type="Guid" Nullable="true" />
+          <NavigationProperty Name="Tenant" Relationship="HostingModel.TenantNugetPackage" FromRole="NugetPackage" ToRole="Tenant" />
+          <Property Name="TenantId" Type="Guid" Nullable="true" />
         </EntityType>
         <EntityType Name="KeyCloakConfiguration">
           <Key>
@@ -326,7 +326,7 @@
           <Property Name="TenantBaseUrl" Type="String" Nullable="true" />
           <NavigationProperty Name="WebAPITenantInfos" Relationship="HostingModel.TenantInfoWebAPITenantInfo" FromRole="TenantInfo" ToRole="WebAPITenantInfo" />
           <NavigationProperty Name="KeyCloakConfigurations" Relationship="HostingModel.TenantInfoKeyCloakConfiguration" FromRole="TenantInfo" ToRole="KeyCloakConfiguration" />
-          <NavigationProperty Name="ParentTenant" Relationship="HostingModel.TenantTenantInfo" FromRole="TenantInfo" ToRole="Tenant" />
+          <NavigationProperty Name="Tenant" Relationship="HostingModel.TenantTenantInfo" FromRole="TenantInfo" ToRole="Tenant" />
         </EntityType>
         <EntityType Name="WebAPITenantInfo">
           <Key>
@@ -384,8 +384,8 @@
           <Property Name="Iss" Type="String" Nullable="true" />
           <Property Name="Aud" Type="String" Nullable="true" />
           <Property Name="Sub" Type="String" Nullable="true" />
-          <NavigationProperty Name="ParentTenant" Relationship="HostingModel.HorselessClaimsPrincipalTenant" FromRole="HorselessClaimsPrincipal" ToRole="Tenant" />
-          <Property Name="ParentTenantId" Type="Guid" Nullable="true" />
+          <NavigationProperty Name="Tenant" Relationship="HostingModel.HorselessClaimsPrincipalTenant" FromRole="HorselessClaimsPrincipal" ToRole="Tenant" />
+          <Property Name="TenantId" Type="Guid" Nullable="true" />
           <NavigationProperty Name="AccessControlEntries" Relationship="HostingModel.AccessControlEntryPrincipal" FromRole="Principal" ToRole="AccessControlEntry" />
         </EntityType>
         <Association Name="HorselessClaimsPrincipalTenant">
@@ -396,7 +396,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="HorselessClaimsPrincipal">
-              <PropertyRef Name="ParentTenantId" />
+              <PropertyRef Name="TenantId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -408,7 +408,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="NugetPackage">
-              <PropertyRef Name="ParentTenantId" />
+              <PropertyRef Name="TenantId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -456,7 +456,7 @@
           <ScalarProperty Name="Version" ColumnName="Version" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-          <ScalarProperty Name="ParentTenantId" ColumnName="ParentTenantId" />
+          <ScalarProperty Name="TenantId" ColumnName="TenantId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -517,7 +517,7 @@
           <ScalarProperty Name="Iss" ColumnName="Iss" />
           <ScalarProperty Name="Aud" ColumnName="Aud" />
           <ScalarProperty Name="Sub" ColumnName="Sub" />
-          <ScalarProperty Name="ParentTenantId" ColumnName="ParentTenantId" />
+          <ScalarProperty Name="TenantId" ColumnName="TenantId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -535,12 +535,12 @@
     </EntitySetMapping>
     <AssociationSetMapping Name="TenantTenantInfo" TypeName="HostingModel.TenantTenantInfo" StoreEntitySet="TenantInfos">
       <EndProperty Name="Tenant">
-        <ScalarProperty Name="Id" ColumnName="ParentTenant_Id" />
+        <ScalarProperty Name="Id" ColumnName="Tenant_Id" />
       </EndProperty>
       <EndProperty Name="TenantInfo">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
-      <Condition ColumnName="ParentTenant_Id" IsNull="false" />
+      <Condition ColumnName="Tenant_Id" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="AccessControlEntryPrincipal" TypeName="HostingModel.AccessControlEntryPrincipal" StoreEntitySet="AccessControlEntryPrincipal">
       <EndProperty Name="AccessControlEntry">

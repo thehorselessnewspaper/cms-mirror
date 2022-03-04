@@ -20,9 +20,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public string Iss { get; set; }
         public string Aud { get; set; }
         public string Sub { get; set; }
-        public Guid? ParentTenantId { get; set; }
+        public Guid? TenantId { get; set; }
 
-        public virtual Tenant ParentTenant { get; set; }
+        public virtual Tenant Tenant { get; set; }
 
         public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
     }

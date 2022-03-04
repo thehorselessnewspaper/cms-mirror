@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/04/2022 13:49:58
+-- Date Created: 03/04/2022 17:30:55
 -- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Hosting\HostingModel.edmx
 -- --------------------------------------------------
 
@@ -91,7 +91,7 @@ CREATE TABLE [dbo].[NugetPackages] (
     [Version] nvarchar(max)  NULL,
     [CreatedAt] datetime  NULL,
     [DisplayName] nvarchar(max)  NULL,
-    [ParentTenantId] uniqueidentifier  NULL
+    [TenantId] uniqueidentifier  NULL
 );
 GO
 
@@ -120,7 +120,7 @@ CREATE TABLE [dbo].[TenantInfos] (
     [Name] nvarchar(max)  NULL,
     [ConnectionString] nvarchar(max)  NULL,
     [TenantBaseUrl] nvarchar(max)  NULL,
-    [ParentTenant_Id] uniqueidentifier  NULL
+    [Tenant_Id] uniqueidentifier  NULL
 );
 GO
 
@@ -149,7 +149,7 @@ CREATE TABLE [dbo].[Principals] (
     [Iss] nvarchar(max)  NULL,
     [Aud] nvarchar(max)  NULL,
     [Sub] nvarchar(max)  NULL,
-    [ParentTenantId] uniqueidentifier  NULL
+    [TenantId] uniqueidentifier  NULL
 );
 GO
 
@@ -257,10 +257,10 @@ ON [dbo].[KeyCloakConfigurations]
     ([TenantInfoId]);
 GO
 
--- Creating foreign key on [ParentTenant_Id] in table 'TenantInfos'
+-- Creating foreign key on [Tenant_Id] in table 'TenantInfos'
 ALTER TABLE [dbo].[TenantInfos]
 ADD CONSTRAINT [FK_TenantTenantInfo]
-    FOREIGN KEY ([ParentTenant_Id])
+    FOREIGN KEY ([Tenant_Id])
     REFERENCES [dbo].[Tenants]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -269,13 +269,13 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_TenantTenantInfo'
 CREATE INDEX [IX_FK_TenantTenantInfo]
 ON [dbo].[TenantInfos]
-    ([ParentTenant_Id]);
+    ([Tenant_Id]);
 GO
 
--- Creating foreign key on [ParentTenantId] in table 'Principals'
+-- Creating foreign key on [TenantId] in table 'Principals'
 ALTER TABLE [dbo].[Principals]
 ADD CONSTRAINT [FK_HorselessClaimsPrincipalTenant]
-    FOREIGN KEY ([ParentTenantId])
+    FOREIGN KEY ([TenantId])
     REFERENCES [dbo].[Tenants]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -284,13 +284,13 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_HorselessClaimsPrincipalTenant'
 CREATE INDEX [IX_FK_HorselessClaimsPrincipalTenant]
 ON [dbo].[Principals]
-    ([ParentTenantId]);
+    ([TenantId]);
 GO
 
--- Creating foreign key on [ParentTenantId] in table 'NugetPackages'
+-- Creating foreign key on [TenantId] in table 'NugetPackages'
 ALTER TABLE [dbo].[NugetPackages]
 ADD CONSTRAINT [FK_TenantNugetPackage]
-    FOREIGN KEY ([ParentTenantId])
+    FOREIGN KEY ([TenantId])
     REFERENCES [dbo].[Tenants]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -299,7 +299,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_TenantNugetPackage'
 CREATE INDEX [IX_FK_TenantNugetPackage]
 ON [dbo].[NugetPackages]
-    ([ParentTenantId]);
+    ([TenantId]);
 GO
 
 -- Creating foreign key on [AccessControlEntries_Id] in table 'AccessControlEntryPrincipal'

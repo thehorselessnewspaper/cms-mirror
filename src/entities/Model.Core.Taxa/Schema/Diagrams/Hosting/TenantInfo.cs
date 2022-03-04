@@ -35,6 +35,6 @@ namespace Schema.Diagrams.Hosting
         public virtual ICollection<WebAPITenantInfo> WebAPITenantInfos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KeyCloakConfiguration> KeyCloakConfigurations { get; set; }
-        public virtual Tenant ParentTenant { get; set; }
+        public virtual Tenant Tenant { get; set; }
     }
 }
