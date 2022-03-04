@@ -158,29 +158,21 @@ namespace HorselessNewspaper.Web.Core.Extensions
             /**
              * for injection into controllers
              **/
-            serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.FilesystemAssetLocation>, HostingEntities.FilesystemAssetLocation>,
-                     HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.FilesystemAssetLocation>, HostingEntities.FilesystemAssetLocation>>();
-            serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.HorselessClaimsPrincipal>, HostingEntities.HorselessClaimsPrincipal>,
-                     HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.HorselessClaimsPrincipal>, HostingEntities.HorselessClaimsPrincipal>>();
-            serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.HorselessSession>, HostingEntities.HorselessSession>,
-                     HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.HorselessSession>, HostingEntities.HorselessSession>>();
-            serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Host>, HostingEntities.Host>,
-                     HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Host>, HostingEntities.Host>>();
-            serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.NugetPackage>, HostingEntities.NugetPackage>,
+           serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.NugetPackage>, HostingEntities.NugetPackage>,
                      HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.NugetPackage>, HostingEntities.NugetPackage>>();
             serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.KeyCloakConfiguration>, HostingEntities.KeyCloakConfiguration>,
                      HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.KeyCloakConfiguration>, HostingEntities.KeyCloakConfiguration>>();
-            serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.RoutingDiscriminator>, HostingEntities.RoutingDiscriminator>,
-                     HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.RoutingDiscriminator>, HostingEntities.RoutingDiscriminator>>();
-            serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Tenant>, HostingEntities.Tenant>,
+             serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Tenant>, HostingEntities.Tenant>,
                      HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Tenant>, HostingEntities.Tenant>>();
-
+            serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Principal>, HostingEntities.Principal>,
+         HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Principal>, HostingEntities.Principal>>();
+            
+            serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessControlEntry>, HostingEntities.AccessControlEntry>,
+HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessControlEntry>, HostingEntities.AccessControlEntry>>();
+            
             serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.TenantInfo>, HostingEntities.TenantInfo>,
                      HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.TenantInfo>, HostingEntities.TenantInfo>>();
-            serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.UriPath>, HostingEntities.UriPath>,
-                     HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.UriPath>, HostingEntities.UriPath>>();
-
-            serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.WebAPITenantInfo>, HostingEntities.WebAPITenantInfo>,
+              serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.WebAPITenantInfo>, HostingEntities.WebAPITenantInfo>,
                      HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.WebAPITenantInfo>, HostingEntities.WebAPITenantInfo>>();
 
             #endregion

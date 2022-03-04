@@ -21,7 +21,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="TheHorselessNewspaper.HostingModel.SmokeTests" Version="0.2.20220304.1" />
+    <PackageReference Include="TheHorselessNewspaper.HostingModel.SmokeTests" Version="0.2.20220304.2" />
   </ItemGroup>
 
   <ItemGroup>
