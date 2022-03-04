@@ -20,26 +20,32 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         DNS_FQDN
     }
     
+    /// <summary>
+    /// collects the strategies thta can be used to identify a tenant
+    /// modelled as a wrapper for a collection payload
+    /// to avoid awkardness with mapping owned collections
+    /// </summary>
     [Owned]
     public class TenantIdentifierStrategy
     {
+
         [Key]
         public Guid Id { get; set; }
-        public string DisplayName { get; set; }
+        public string DisplayName { get; set; } = string.Empty;
 
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
-        public TenantIdentifierStrategyName Strategy { get; set; }  
-
+        public ICollection<TenantIdentifierStrategyName> Strategies { get; set; } = new HashSet<TenantIdentifierStrategyName>();
     }
 
-    [Table("Tenants")]
+
     public partial class Tenant : IContentRowLevelSecured
     {
-        public ICollection<TenantIdentifierStrategy> TenantIdentifierStrategies { get; set; } 
+        public TenantIdentifierStrategy TenantIdentifierStrategy { get; set; } 
         public ICollection<AccessControlEntry> AccessControlList { get; set; }
-        public ICollection<Principal> Owners { get; set; } 
+        public ICollection<Principal> Owners { get; set; }
+        public byte[] Timestamp {get; set;}
     }
 }

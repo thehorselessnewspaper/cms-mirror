@@ -10,6 +10,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     public partial class AccessControlEntry
     {
+        public AccessControlEntry()
+        {
+            Principals = new HashSet<Principal>();
+        }
+
         [Key]
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
@@ -18,5 +23,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
         public bool? IsActive { get; set; }
+
+        [ForeignKey("AccessControlEntries_Id")]
+        [InverseProperty(nameof(Principal.AccessControlEntries))]
+        public virtual ICollection<Principal> Principals { get; set; }
     }
 }

@@ -2,13 +2,11 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/03/2022 14:55:13
+-- Date Created: 03/03/2022 21:17:10
 -- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
-SET QUOTED_IDENTIFIER OFF;
-GO
-USE [THLNP_Content_Modelling];
+
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -99,7 +97,7 @@ IF OBJECT_ID(N'[dbo].[FK_HolonymMeronym_Meronym]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[HolonymMeronym] DROP CONSTRAINT [FK_HolonymMeronym_Meronym];
 GO
 IF OBJECT_ID(N'[dbo].[FK_TenantHorselessClaimsPrincipal]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[HorselessClaimsPrincipals] DROP CONSTRAINT [FK_TenantHorselessClaimsPrincipal];
+    ALTER TABLE [dbo].[Principals] DROP CONSTRAINT [FK_TenantHorselessClaimsPrincipal];
 GO
 IF OBJECT_ID(N'[dbo].[FK_TaxonomyContentCollection_Taxonomy]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TaxonomyContentCollection] DROP CONSTRAINT [FK_TaxonomyContentCollection_Taxonomy];
@@ -109,6 +107,12 @@ IF OBJECT_ID(N'[dbo].[FK_TaxonomyContentCollection_ContentCollection]', 'F') IS 
 GO
 IF OBJECT_ID(N'[dbo].[FK_HorselessClaimsPrincipalHorselessSession]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[HorselessSessions] DROP CONSTRAINT [FK_HorselessClaimsPrincipalHorselessSession];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryPrincipal_AccessControlEntry]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AccessControlEntryPrincipal] DROP CONSTRAINT [FK_AccessControlEntryPrincipal_AccessControlEntry];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryPrincipal_Principal]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AccessControlEntryPrincipal] DROP CONSTRAINT [FK_AccessControlEntryPrincipal_Principal];
 GO
 
 -- --------------------------------------------------
@@ -148,8 +152,8 @@ GO
 IF OBJECT_ID(N'[dbo].[Meronyms]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Meronyms];
 GO
-IF OBJECT_ID(N'[dbo].[HorselessClaimsPrincipals]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[HorselessClaimsPrincipals];
+IF OBJECT_ID(N'[dbo].[Principals]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Principals];
 GO
 IF OBJECT_ID(N'[dbo].[NugetPackages]', 'U') IS NOT NULL
     DROP TABLE [dbo].[NugetPackages];
@@ -207,6 +211,9 @@ IF OBJECT_ID(N'[dbo].[HolonymMeronym]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[TaxonomyContentCollection]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TaxonomyContentCollection];
+GO
+IF OBJECT_ID(N'[dbo].[AccessControlEntryPrincipal]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AccessControlEntryPrincipal];
 GO
 
 -- --------------------------------------------------
@@ -352,8 +359,8 @@ CREATE TABLE [dbo].[Meronyms] (
 );
 GO
 
--- Creating table 'HorselessClaimsPrincipals'
-CREATE TABLE [dbo].[HorselessClaimsPrincipals] (
+-- Creating table 'Principals'
+CREATE TABLE [dbo].[Principals] (
     [Id] uniqueidentifier  NOT NULL,
     [DisplayName] nvarchar(max)  NULL,
     [ObjectId] nvarchar(max)  NULL,
@@ -362,7 +369,7 @@ CREATE TABLE [dbo].[HorselessClaimsPrincipals] (
     [Iss] nvarchar(max)  NULL,
     [Aud] nvarchar(max)  NULL,
     [Sub] nvarchar(max)  NULL,
-    [TenantId] uniqueidentifier  NULL
+    [ParentTenantId] uniqueidentifier  NULL
 );
 GO
 
@@ -545,6 +552,13 @@ CREATE TABLE [dbo].[TaxonomyContentCollection] (
 );
 GO
 
+-- Creating table 'AccessControlEntryPrincipal'
+CREATE TABLE [dbo].[AccessControlEntryPrincipal] (
+    [AccessControlEntries_Id] uniqueidentifier  NOT NULL,
+    [Principals_Id] uniqueidentifier  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -615,9 +629,9 @@ ADD CONSTRAINT [PK_Meronyms]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'HorselessClaimsPrincipals'
-ALTER TABLE [dbo].[HorselessClaimsPrincipals]
-ADD CONSTRAINT [PK_HorselessClaimsPrincipals]
+-- Creating primary key on [Id] in table 'Principals'
+ALTER TABLE [dbo].[Principals]
+ADD CONSTRAINT [PK_Principals]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -733,6 +747,12 @@ GO
 ALTER TABLE [dbo].[TaxonomyContentCollection]
 ADD CONSTRAINT [PK_TaxonomyContentCollection]
     PRIMARY KEY CLUSTERED ([Taxonomies_Id], [ContentCollections_Id] ASC);
+GO
+
+-- Creating primary key on [AccessControlEntries_Id], [Principals_Id] in table 'AccessControlEntryPrincipal'
+ALTER TABLE [dbo].[AccessControlEntryPrincipal]
+ADD CONSTRAINT [PK_AccessControlEntryPrincipal]
+    PRIMARY KEY CLUSTERED ([AccessControlEntries_Id], [Principals_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -1072,10 +1092,10 @@ ON [dbo].[HolonymMeronym]
     ([Meronyms_Id]);
 GO
 
--- Creating foreign key on [TenantId] in table 'HorselessClaimsPrincipals'
-ALTER TABLE [dbo].[HorselessClaimsPrincipals]
+-- Creating foreign key on [ParentTenantId] in table 'Principals'
+ALTER TABLE [dbo].[Principals]
 ADD CONSTRAINT [FK_TenantHorselessClaimsPrincipal]
-    FOREIGN KEY ([TenantId])
+    FOREIGN KEY ([ParentTenantId])
     REFERENCES [dbo].[Tenants]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -1083,8 +1103,8 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TenantHorselessClaimsPrincipal'
 CREATE INDEX [IX_FK_TenantHorselessClaimsPrincipal]
-ON [dbo].[HorselessClaimsPrincipals]
-    ([TenantId]);
+ON [dbo].[Principals]
+    ([ParentTenantId]);
 GO
 
 -- Creating foreign key on [Taxonomies_Id] in table 'TaxonomyContentCollection'
@@ -1115,7 +1135,7 @@ GO
 ALTER TABLE [dbo].[HorselessSessions]
 ADD CONSTRAINT [FK_HorselessClaimsPrincipalHorselessSession]
     FOREIGN KEY ([HorselessClaimsPrincipalId])
-    REFERENCES [dbo].[HorselessClaimsPrincipals]
+    REFERENCES [dbo].[Principals]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -1124,6 +1144,30 @@ GO
 CREATE INDEX [IX_FK_HorselessClaimsPrincipalHorselessSession]
 ON [dbo].[HorselessSessions]
     ([HorselessClaimsPrincipalId]);
+GO
+
+-- Creating foreign key on [AccessControlEntries_Id] in table 'AccessControlEntryPrincipal'
+ALTER TABLE [dbo].[AccessControlEntryPrincipal]
+ADD CONSTRAINT [FK_AccessControlEntryPrincipal_AccessControlEntry]
+    FOREIGN KEY ([AccessControlEntries_Id])
+    REFERENCES [dbo].[AccessControlEntries]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Principals_Id] in table 'AccessControlEntryPrincipal'
+ALTER TABLE [dbo].[AccessControlEntryPrincipal]
+ADD CONSTRAINT [FK_AccessControlEntryPrincipal_Principal]
+    FOREIGN KEY ([Principals_Id])
+    REFERENCES [dbo].[Principals]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AccessControlEntryPrincipal_Principal'
+CREATE INDEX [IX_FK_AccessControlEntryPrincipal_Principal]
+ON [dbo].[AccessControlEntryPrincipal]
+    ([Principals_Id]);
 GO
 
 -- --------------------------------------------------

@@ -26,7 +26,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public Guid? HorselessClaimsPrincipalId { get; set; }
 
         [ForeignKey(nameof(HorselessClaimsPrincipalId))]
-        [InverseProperty("HorselessSessions")]
-        public virtual HorselessClaimsPrincipal HorselessClaimsPrincipal { get; set; }
+        [InverseProperty(nameof(Principal.HorselessSessions))]
+        public virtual Principal HorselessClaimsPrincipal { get; set; }
     }
 }

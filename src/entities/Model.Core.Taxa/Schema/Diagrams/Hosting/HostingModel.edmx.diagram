@@ -4,25 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="004a630ba438496abab63777020bbddd" Name="Diagram1" ZoomLevel="74" >
+      <Diagram DiagramId="004a630ba438496abab63777020bbddd" Name="Diagram1" ZoomLevel="81" >
         <EntityTypeShape EntityType="HostingModel.Tenant" Width="2.875" PointX="8.25" PointY="1" />
-        <EntityTypeShape EntityType="HostingModel.RoutingDiscriminator" Width="2.25" PointX="12.25" PointY="2.125" />
-        <EntityTypeShape EntityType="HostingModel.Host" Width="2.875" PointX="12" PointY="5.875" />
-        <EntityTypeShape EntityType="HostingModel.UriPath" Width="2.5" PointX="16.125" PointY="4.75" />
-        <AssociationConnector Association="HostingModel.RoutingDiscriminatorHost" />
-        <AssociationConnector Association="HostingModel.RoutingDiscriminatorUriPath" />
-        <EntityTypeShape EntityType="HostingModel.NugetPackage" Width="2.875" PointX="8.125" PointY="9.125" />
-        <EntityTypeShape EntityType="HostingModel.FilesystemAssetLocation" Width="2.875" PointX="12.125" PointY="9.75" />
+        <EntityTypeShape EntityType="HostingModel.NugetPackage" Width="2.875" PointX="8.125" PointY="4.625" />
         <EntityTypeShape EntityType="HostingModel.KeyCloakConfiguration" Width="3" PointX="0.5" PointY="5.375" />
         <EntityTypeShape EntityType="HostingModel.TenantInfo" Width="2.375" PointX="1.5" PointY="0.625" />
         <EntityTypeShape EntityType="HostingModel.WebAPITenantInfo" Width="2.625" PointX="4.375" PointY="4.625" />
         <AssociationConnector Association="HostingModel.TenantInfoWebAPITenantInfo" />
         <AssociationConnector Association="HostingModel.TenantInfoKeyCloakConfiguration" />
         <AssociationConnector Association="HostingModel.TenantTenantInfo" />
-        <EntityTypeShape EntityType="HostingModel.HorselessSession" Width="2.25" PointX="4.375" PointY="8.75" />
-        <AssociationConnector Association="HostingModel.TenantRoutingDiscriminator" />
-        <EntityTypeShape EntityType="HostingModel.HorselessClaimsPrincipal" Width="2.5" PointX="18" PointY="0.5" />
+        <EntityTypeShape EntityType="HostingModel.Principal" Width="2.5" PointX="13.25" PointY="0.875" />
         <AssociationConnector Association="HostingModel.HorselessClaimsPrincipalTenant" />
+        <AssociationConnector Association="HostingModel.TenantNugetPackage" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -46,19 +46,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             //builder.Entity<ContentCollection>()
             //    .OwnsMany<AccessControlEntry>(m => m.AccessControlList);
 
-            var autoConfiguredTenant = builder.Model.FindEntityType(typeof(Tenant));
-
-            builder.Entity<Tenant>(buildAction =>
-            {
-                buildAction.OwnsMany<TenantIdentifierStrategy>(
-                    m => m.TenantIdentifierStrategies,
-                o =>
-                {
-                    o.ToTable("TenantTenantIdentifierStrategies");
-                    o.HasKey(k => k.Id);
-
-                });
-            });
 
         }
 

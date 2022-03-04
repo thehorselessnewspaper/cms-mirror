@@ -26,6 +26,6 @@ namespace Schema.Diagrams.Content
         public Nullable<bool> IsAnonymous { get; set; }
         public Nullable<System.Guid> HorselessClaimsPrincipalId { get; set; }
     
-        public virtual HorselessClaimsPrincipal HorselessClaimsPrincipal { get; set; }
+        public virtual Principal HorselessClaimsPrincipal { get; set; }
     }
 }

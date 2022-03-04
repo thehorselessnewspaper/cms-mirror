@@ -28,6 +28,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public string Iss { get; set; }
         public string Aud { get; set; }
         public string Sub { get; set; }
+        public byte[] Timestamp {get; set; }
 
         //public HostingEntities.HorselessClaimsPrincipal? HorselessClaimsPrincipal { get; set; }
     }

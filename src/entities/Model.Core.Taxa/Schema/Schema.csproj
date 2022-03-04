@@ -75,23 +75,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ContentModelContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Diagrams\Content\ContentRowlevelSecured.cs" />
     <Compile Include="Diagrams\Content\FilesystemAsset.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Content\Holonym.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Diagrams\Content\HorselessClaimsPrincipal.cs">
-      <DependentUpon>HorselessContentModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Diagrams\Content\HorselessContent.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Diagrams\Content\HorselessContentModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HorselessContentModel.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Content\HorselessContentModel.cs">
       <AutoGen>True</AutoGen>
@@ -128,6 +119,9 @@
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Content\Placeholder.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Diagrams\Content\Principal.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Content\Publication.cs">
@@ -238,18 +232,6 @@
     <Compile Include="Diagrams\FirstCut\WorkflowActionParameter.cs">
       <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
     </Compile>
-    <Compile Include="Diagrams\Hosting\FilesystemAssetLocation.cs">
-      <DependentUpon>HostingModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Diagrams\Hosting\HorselessClaimsPrincipal.cs">
-      <DependentUpon>HostingModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Diagrams\Hosting\HorselessSession.cs">
-      <DependentUpon>HostingModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Diagrams\Hosting\Host.cs">
-      <DependentUpon>HostingModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Diagrams\Hosting\HostingModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -271,16 +253,13 @@
     <Compile Include="Diagrams\Hosting\NugetPackage.cs">
       <DependentUpon>HostingModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Diagrams\Hosting\RoutingDiscriminator.cs">
+    <Compile Include="Diagrams\Hosting\Principal.cs">
       <DependentUpon>HostingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Hosting\Tenant.cs">
       <DependentUpon>HostingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Hosting\TenantInfo.cs">
-      <DependentUpon>HostingModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Diagrams\Hosting\UriPath.cs">
       <DependentUpon>HostingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Diagrams\Hosting\WebAPITenantInfo.cs">
@@ -347,11 +326,6 @@
     <Content Include="Diagrams\Content\ContentModelContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ContentModelContext.cs</LastGenOutput>
-      <DependentUpon>HorselessContentModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Diagrams\Content\HorselessContentModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>HorselessContentModel.Context.cs</LastGenOutput>
       <DependentUpon>HorselessContentModel.edmx</DependentUpon>
     </Content>
     <Content Include="Diagrams\Content\HorselessContentModel.edmx.sql" />

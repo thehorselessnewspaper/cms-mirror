@@ -46,6 +46,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public DateTime? CreatedAt { get; set; }
         public string? DisplayName { get; set; }
         public bool? IsSoftDeleted { get; set; }
+        public byte[] Timestamp {get; set; }
     }
 
 

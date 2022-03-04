@@ -9,11 +9,12 @@ using Microsoft.EntityFrameworkCore;
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     [Index(nameof(TenantId), Name = "IX_FK_TenantHorselessClaimsPrincipal")]
-    public partial class HorselessClaimsPrincipal
+    public partial class Principal
     {
-        public HorselessClaimsPrincipal()
+        public Principal()
         {
             HorselessSessions = new HashSet<HorselessSession>();
+            AccessControlEntries = new HashSet<AccessControlEntry>();
         }
 
         [Key]
@@ -29,9 +30,13 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public Guid? TenantId { get; set; }
 
         [ForeignKey(nameof(TenantId))]
-        [InverseProperty("HorselessClaimsPrincipals")]
+        [InverseProperty("Principals")]
         public virtual Tenant Tenant { get; set; }
         [InverseProperty(nameof(HorselessSession.HorselessClaimsPrincipal))]
         public virtual ICollection<HorselessSession> HorselessSessions { get; set; }
+
+        [ForeignKey("Principals_Id")]
+        [InverseProperty(nameof(AccessControlEntry.Principals))]
+        public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
     }
 }

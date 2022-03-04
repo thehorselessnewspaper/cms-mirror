@@ -7,24 +7,11 @@
     <Schema Namespace="HostingModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="HostingModelStoreContainer">
     <EntitySet Name="Tenants" EntityType="HostingModel.Store.Tenants" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="RoutingDiscriminators" EntityType="HostingModel.Store.RoutingDiscriminators" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Hosts" EntityType="HostingModel.Store.Hosts" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UriPaths" EntityType="HostingModel.Store.UriPaths" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NugetPackages" EntityType="HostingModel.Store.NugetPackages" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="FilesystemAssetLocations" EntityType="HostingModel.Store.FilesystemAssetLocations" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="KeyCloakConfigurations" EntityType="HostingModel.Store.KeyCloakConfigurations" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TenantInfos" EntityType="HostingModel.Store.TenantInfos" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="WebAPITenantInfos" EntityType="HostingModel.Store.WebAPITenantInfos" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="HorselessSessions" EntityType="HostingModel.Store.HorselessSessions" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="HorselessClaimsPrincipals" EntityType="HostingModel.Store.HorselessClaimsPrincipals" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="RoutingDiscriminatorHost" Association="HostingModel.Store.RoutingDiscriminatorHost">
-      <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
-      <End Role="Host" EntitySet="Hosts" />
-    </AssociationSet>
-    <AssociationSet Name="RoutingDiscriminatorUriPath" Association="HostingModel.Store.RoutingDiscriminatorUriPath">
-      <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
-      <End Role="UriPath" EntitySet="UriPaths" />
-    </AssociationSet>
+    <EntitySet Name="Principals" EntityType="HostingModel.Store.Principals" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="TenantInfoWebAPITenantInfo" Association="HostingModel.Store.TenantInfoWebAPITenantInfo">
       <End Role="TenantInfo" EntitySet="TenantInfos" />
       <End Role="WebAPITenantInfo" EntitySet="WebAPITenantInfos" />
@@ -37,13 +24,13 @@
       <End Role="Tenant" EntitySet="Tenants" />
       <End Role="TenantInfo" EntitySet="TenantInfos" />
     </AssociationSet>
-    <AssociationSet Name="TenantRoutingDiscriminator" Association="HostingModel.Store.TenantRoutingDiscriminator">
-      <End Role="Tenant" EntitySet="Tenants" />
-      <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
-    </AssociationSet>
     <AssociationSet Name="HorselessClaimsPrincipalTenant" Association="HostingModel.Store.HorselessClaimsPrincipalTenant">
-      <End Role="HorselessClaimsPrincipal" EntitySet="HorselessClaimsPrincipals" />
+      <End Role="HorselessClaimsPrincipal" EntitySet="Principals" />
       <End Role="Tenant" EntitySet="Tenants" />
+    </AssociationSet>
+    <AssociationSet Name="TenantNugetPackage" Association="HostingModel.Store.TenantNugetPackage">
+      <End Role="Tenant" EntitySet="Tenants" />
+      <End Role="NugetPackage" EntitySet="NugetPackages" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Tenants">
@@ -55,46 +42,6 @@
     <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="RoutingDiscriminators">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IsActive" Type="bit" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
-    <Property Name="TenantId" Type="uniqueidentifier" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Hosts">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="TCPHost" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="IsTenanantDiscriminator" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="RoutingDiscriminatorId" Type="uniqueidentifier" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="HtmlLayoutFilename" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
-    <Property Name="HTTPPort" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="UriPaths">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="AbsoluteURL" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="IsTenantDiscriminator" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="RoutingDiscriminatorId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
-    <Property Name="HTTPPort" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="HTTPScheme" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="TCPHost" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="NugetPackages">
     <Key>
@@ -108,15 +55,7 @@
     <Property Name="Version" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="FilesystemAssetLocations">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
-    <Property Name="AssetURI" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ParentTenantId" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <EntityType Name="KeyCloakConfigurations">
     <Key>
@@ -162,22 +101,7 @@
     <Property Name="WebAPIBaseUrl" Type="nvarchar(max)" Nullable="true" />
     <Property Name="TenantInfoId" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
-  <EntityType Name="HorselessSessions">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
-    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
-    <Property Name="SessionId" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Iss" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Aud" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Sub" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="IsAnonymous" Type="bit" Nullable="true" />
-  </EntityType>
-  <EntityType Name="HorselessClaimsPrincipals">
+  <EntityType Name="Principals">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -189,32 +113,8 @@
     <Property Name="Iss" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Aud" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Sub" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="TenantId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="ParentTenantId" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
-  <Association Name="RoutingDiscriminatorHost">
-    <End Role="RoutingDiscriminator" Type="HostingModel.Store.RoutingDiscriminators" Multiplicity="0..1" />
-    <End Role="Host" Type="HostingModel.Store.Hosts" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="RoutingDiscriminator">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Host">
-        <PropertyRef Name="RoutingDiscriminatorId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="RoutingDiscriminatorUriPath">
-    <End Role="RoutingDiscriminator" Type="HostingModel.Store.RoutingDiscriminators" Multiplicity="1" />
-    <End Role="UriPath" Type="HostingModel.Store.UriPaths" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="RoutingDiscriminator">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="UriPath">
-        <PropertyRef Name="RoutingDiscriminatorId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="TenantInfoWebAPITenantInfo">
     <End Role="TenantInfo" Type="HostingModel.Store.TenantInfos" Multiplicity="0..1" />
     <End Role="WebAPITenantInfo" Type="HostingModel.Store.WebAPITenantInfos" Multiplicity="*" />
@@ -251,27 +151,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="TenantRoutingDiscriminator">
-    <End Role="Tenant" Type="HostingModel.Store.Tenants" Multiplicity="0..1" />
-    <End Role="RoutingDiscriminator" Type="HostingModel.Store.RoutingDiscriminators" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tenant">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="RoutingDiscriminator">
-        <PropertyRef Name="TenantId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="HorselessClaimsPrincipalTenant">
-    <End Role="HorselessClaimsPrincipal" Type="HostingModel.Store.HorselessClaimsPrincipals" Multiplicity="*" />
+    <End Role="HorselessClaimsPrincipal" Type="HostingModel.Store.Principals" Multiplicity="*" />
     <End Role="Tenant" Type="HostingModel.Store.Tenants" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Tenant">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="HorselessClaimsPrincipal">
-        <PropertyRef Name="TenantId" />
+        <PropertyRef Name="ParentTenantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TenantNugetPackage">
+    <End Role="Tenant" Type="HostingModel.Store.Tenants" Multiplicity="0..1" />
+    <End Role="NugetPackage" Type="HostingModel.Store.NugetPackages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tenant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NugetPackage">
+        <PropertyRef Name="ParentTenantId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -281,19 +181,7 @@
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="HostingModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="HostingModelContainer" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Tenants" EntityType="HostingModel.Tenant" />
-          <EntitySet Name="RoutingDiscriminators" EntityType="HostingModel.RoutingDiscriminator" />
-          <EntitySet Name="Hosts" EntityType="HostingModel.Host" />
-          <EntitySet Name="UriPaths" EntityType="HostingModel.UriPath" />
-          <AssociationSet Name="RoutingDiscriminatorHost" Association="HostingModel.RoutingDiscriminatorHost">
-            <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
-            <End Role="Host" EntitySet="Hosts" />
-          </AssociationSet>
-          <AssociationSet Name="RoutingDiscriminatorUriPath" Association="HostingModel.RoutingDiscriminatorUriPath">
-            <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
-            <End Role="UriPath" EntitySet="UriPaths" />
-          </AssociationSet>
           <EntitySet Name="NugetPackages" EntityType="HostingModel.NugetPackage" />
-          <EntitySet Name="FilesystemAssetLocations" EntityType="HostingModel.FilesystemAssetLocation" />
           <EntitySet Name="KeyCloakConfigurations" EntityType="HostingModel.KeyCloakConfiguration" />
           <EntitySet Name="TenantInfos" EntityType="HostingModel.TenantInfo" />
           <EntitySet Name="WebAPITenantInfos" EntityType="HostingModel.WebAPITenantInfo" />
@@ -309,15 +197,14 @@
             <End Role="Tenant" EntitySet="Tenants" />
             <End Role="TenantInfo" EntitySet="TenantInfos" />
           </AssociationSet>
-          <EntitySet Name="HorselessSessions" EntityType="HostingModel.HorselessSession" />
-          <AssociationSet Name="TenantRoutingDiscriminator" Association="HostingModel.TenantRoutingDiscriminator">
-            <End Role="Tenant" EntitySet="Tenants" />
-            <End Role="RoutingDiscriminator" EntitySet="RoutingDiscriminators" />
-          </AssociationSet>
-          <EntitySet Name="HorselessClaimsPrincipals" EntityType="HostingModel.HorselessClaimsPrincipal" />
+          <EntitySet Name="Principals" EntityType="HostingModel.Principal" />
           <AssociationSet Name="HorselessClaimsPrincipalTenant" Association="HostingModel.HorselessClaimsPrincipalTenant">
-            <End Role="HorselessClaimsPrincipal" EntitySet="HorselessClaimsPrincipals" />
+            <End Role="HorselessClaimsPrincipal" EntitySet="Principals" />
             <End Role="Tenant" EntitySet="Tenants" />
+          </AssociationSet>
+          <AssociationSet Name="TenantNugetPackage" Association="HostingModel.TenantNugetPackage">
+            <End Role="Tenant" EntitySet="Tenants" />
+            <End Role="NugetPackage" EntitySet="NugetPackages" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Tenant">
@@ -330,78 +217,9 @@
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="TenantInfo" Relationship="HostingModel.TenantTenantInfo" FromRole="Tenant" ToRole="TenantInfo" />
-          <NavigationProperty Name="RoutingDiscriminators" Relationship="HostingModel.TenantRoutingDiscriminator" FromRole="Tenant" ToRole="RoutingDiscriminator" />
-          <NavigationProperty Name="HorselessClaimsPrincipals" Relationship="HostingModel.HorselessClaimsPrincipalTenant" FromRole="Tenant" ToRole="HorselessClaimsPrincipal" />
+          <NavigationProperty Name="Principals" Relationship="HostingModel.HorselessClaimsPrincipalTenant" FromRole="Tenant" ToRole="HorselessClaimsPrincipal" />
+          <NavigationProperty Name="NugetPackages" Relationship="HostingModel.TenantNugetPackage" FromRole="Tenant" ToRole="NugetPackage" />
         </EntityType>
-        <EntityType Name="RoutingDiscriminator">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IsActive" Type="Boolean" Nullable="true" />
-          <NavigationProperty Name="Hosts" Relationship="HostingModel.RoutingDiscriminatorHost" FromRole="RoutingDiscriminator" ToRole="Host" />
-          <NavigationProperty Name="UriPaths" Relationship="HostingModel.RoutingDiscriminatorUriPath" FromRole="RoutingDiscriminator" ToRole="UriPath" />
-          <Property Name="ObjectId" Type="String" Nullable="true" />
-          <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
-          <NavigationProperty Name="Tenant" Relationship="HostingModel.TenantRoutingDiscriminator" FromRole="RoutingDiscriminator" ToRole="Tenant" />
-          <Property Name="TenantId" Type="Guid" Nullable="true" />
-        </EntityType>
-        <EntityType Name="Host">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="TCPHost" Type="String" Nullable="true" />
-          <Property Name="IsTenanantDiscriminator" Type="String" Nullable="true" />
-          <NavigationProperty Name="RoutingDiscriminator" Relationship="HostingModel.RoutingDiscriminatorHost" FromRole="Host" ToRole="RoutingDiscriminator" />
-          <Property Name="RoutingDiscriminatorId" Type="Guid" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="true" />
-          <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="HtmlLayoutFilename" Type="String" Nullable="true" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
-          <Property Name="HTTPPort" Type="String" Nullable="true" />
-        </EntityType>
-        <EntityType Name="UriPath">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="AbsoluteURL" Type="String" Nullable="true" />
-          <Property Name="IsTenantDiscriminator" Type="String" Nullable="true" />
-          <NavigationProperty Name="RoutingDiscriminator" Relationship="HostingModel.RoutingDiscriminatorUriPath" FromRole="UriPath" ToRole="RoutingDiscriminator" />
-          <Property Name="RoutingDiscriminatorId" Type="Guid" Nullable="false" />
-          <Property Name="ObjectId" Type="String" Nullable="true" />
-          <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
-          <Property Name="HTTPPort" Type="String" Nullable="true" />
-          <Property Name="HTTPScheme" Type="String" Nullable="true" />
-          <Property Name="TCPHost" Type="String" Nullable="true" />
-        </EntityType>
-        <Association Name="RoutingDiscriminatorHost">
-          <End Type="HostingModel.RoutingDiscriminator" Role="RoutingDiscriminator" Multiplicity="0..1" />
-          <End Type="HostingModel.Host" Role="Host" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RoutingDiscriminator">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Host">
-              <PropertyRef Name="RoutingDiscriminatorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="RoutingDiscriminatorUriPath">
-          <End Type="HostingModel.RoutingDiscriminator" Role="RoutingDiscriminator" Multiplicity="1" />
-          <End Type="HostingModel.UriPath" Role="UriPath" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RoutingDiscriminator">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UriPath">
-              <PropertyRef Name="RoutingDiscriminatorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="NugetPackage">
           <Documentation>
             <LongDescription>imagine all the available nuget packages are in one table</LongDescription>
@@ -417,15 +235,8 @@
           <Property Name="Version" Type="String" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-        </EntityType>
-        <EntityType Name="FilesystemAssetLocation">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
-          <Property Name="AssetURI" Type="String" Nullable="true" />
+          <NavigationProperty Name="Tenant" Relationship="HostingModel.TenantNugetPackage" FromRole="NugetPackage" ToRole="Tenant" />
+          <Property Name="ParentTenantId" Type="Guid" Nullable="true" />
         </EntityType>
         <EntityType Name="KeyCloakConfiguration">
           <Key>
@@ -503,34 +314,7 @@
           <End Type="HostingModel.Tenant" Role="Tenant" Multiplicity="0..1" />
           <End Type="HostingModel.TenantInfo" Role="TenantInfo" Multiplicity="0..1" />
         </Association>
-        <EntityType Name="HorselessSession">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="DisplayName" Type="String" Nullable="true" />
-          <Property Name="ObjectId" Type="String" Nullable="true" />
-          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
-          <Property Name="SessionId" Type="String" Nullable="true" />
-          <Property Name="Iss" Type="String" Nullable="true" />
-          <Property Name="Aud" Type="String" Nullable="true" />
-          <Property Name="Sub" Type="String" Nullable="true" />
-          <Property Name="IsAnonymous" Type="Boolean" Nullable="true" />
-        </EntityType>
-        <Association Name="TenantRoutingDiscriminator">
-          <End Type="HostingModel.Tenant" Role="Tenant" Multiplicity="0..1" />
-          <End Type="HostingModel.RoutingDiscriminator" Role="RoutingDiscriminator" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tenant">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RoutingDiscriminator">
-              <PropertyRef Name="TenantId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="HorselessClaimsPrincipal">
+        <EntityType Name="Principal">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -543,17 +327,29 @@
           <Property Name="Aud" Type="String" Nullable="true" />
           <Property Name="Sub" Type="String" Nullable="true" />
           <NavigationProperty Name="Tenant" Relationship="HostingModel.HorselessClaimsPrincipalTenant" FromRole="HorselessClaimsPrincipal" ToRole="Tenant" />
-          <Property Name="TenantId" Type="Guid" Nullable="true" />
+          <Property Name="ParentTenantId" Type="Guid" Nullable="true" />
         </EntityType>
         <Association Name="HorselessClaimsPrincipalTenant">
-          <End Type="HostingModel.HorselessClaimsPrincipal" Role="HorselessClaimsPrincipal" Multiplicity="*" />
+          <End Type="HostingModel.Principal" Role="HorselessClaimsPrincipal" Multiplicity="*" />
           <End Type="HostingModel.Tenant" Role="Tenant" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Tenant">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="HorselessClaimsPrincipal">
-              <PropertyRef Name="TenantId" />
+              <PropertyRef Name="ParentTenantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TenantNugetPackage">
+          <End Type="HostingModel.Tenant" Role="Tenant" Multiplicity="0..1" />
+          <End Type="HostingModel.NugetPackage" Role="NugetPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tenant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NugetPackage">
+              <PropertyRef Name="ParentTenantId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -574,49 +370,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RoutingDiscriminators">
-      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.RoutingDiscriminator)">
-        <MappingFragment StoreEntitySet="RoutingDiscriminators">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
-          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-          <ScalarProperty Name="TenantId" ColumnName="TenantId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Hosts">
-      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.Host)">
-        <MappingFragment StoreEntitySet="Hosts">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="TCPHost" ColumnName="TCPHost" />
-          <ScalarProperty Name="IsTenanantDiscriminator" ColumnName="IsTenanantDiscriminator" />
-          <ScalarProperty Name="RoutingDiscriminatorId" ColumnName="RoutingDiscriminatorId" />
-          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
-          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-          <ScalarProperty Name="HtmlLayoutFilename" ColumnName="HtmlLayoutFilename" />
-          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-          <ScalarProperty Name="HTTPPort" ColumnName="HTTPPort" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="UriPaths">
-      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.UriPath)">
-        <MappingFragment StoreEntitySet="UriPaths">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="AbsoluteURL" ColumnName="AbsoluteURL" />
-          <ScalarProperty Name="IsTenantDiscriminator" ColumnName="IsTenantDiscriminator" />
-          <ScalarProperty Name="RoutingDiscriminatorId" ColumnName="RoutingDiscriminatorId" />
-          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
-          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-          <ScalarProperty Name="HTTPPort" ColumnName="HTTPPort" />
-          <ScalarProperty Name="HTTPScheme" ColumnName="HTTPScheme" />
-          <ScalarProperty Name="TCPHost" ColumnName="TCPHost" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="NugetPackages">
       <EntityTypeMapping TypeName="IsTypeOf(HostingModel.NugetPackage)">
         <MappingFragment StoreEntitySet="NugetPackages">
@@ -628,16 +381,7 @@
           <ScalarProperty Name="Version" ColumnName="Version" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="FilesystemAssetLocations">
-      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.FilesystemAssetLocation)">
-        <MappingFragment StoreEntitySet="FilesystemAssetLocations">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-          <ScalarProperty Name="AssetURI" ColumnName="AssetURI" />
+          <ScalarProperty Name="ParentTenantId" ColumnName="ParentTenantId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -687,25 +431,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="HorselessSessions">
-      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.HorselessSession)">
-        <MappingFragment StoreEntitySet="HorselessSessions">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
-          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
-          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-          <ScalarProperty Name="SessionId" ColumnName="SessionId" />
-          <ScalarProperty Name="Iss" ColumnName="Iss" />
-          <ScalarProperty Name="Aud" ColumnName="Aud" />
-          <ScalarProperty Name="Sub" ColumnName="Sub" />
-          <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="HorselessClaimsPrincipals">
-      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.HorselessClaimsPrincipal)">
-        <MappingFragment StoreEntitySet="HorselessClaimsPrincipals">
+    <EntitySetMapping Name="Principals">
+      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.Principal)">
+        <MappingFragment StoreEntitySet="Principals">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
           <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
@@ -714,7 +442,7 @@
           <ScalarProperty Name="Iss" ColumnName="Iss" />
           <ScalarProperty Name="Aud" ColumnName="Aud" />
           <ScalarProperty Name="Sub" ColumnName="Sub" />
-          <ScalarProperty Name="TenantId" ColumnName="TenantId" />
+          <ScalarProperty Name="ParentTenantId" ColumnName="ParentTenantId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

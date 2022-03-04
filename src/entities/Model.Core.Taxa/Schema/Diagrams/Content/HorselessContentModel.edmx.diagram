@@ -21,9 +21,9 @@
         <EntityTypeShape EntityType="HorselessContentModel.Taxon" Width="2.125" PointX="7.125" PointY="11.5" />
         <EntityTypeShape EntityType="HorselessContentModel.Holonym" Width="2.125" PointX="4.5" PointY="14.375" />
         <EntityTypeShape EntityType="HorselessContentModel.Meronym" Width="2.125" PointX="7.375" PointY="15.625" />
-        <EntityTypeShape EntityType="HorselessContentModel.HorselessClaimsPrincipal" Width="2.5" PointX="5.5" PointY="2.625" />
+        <EntityTypeShape EntityType="HorselessContentModel.Principal" Width="2.5" PointX="5.5" PointY="2.625" />
         <EntityTypeShape EntityType="HorselessContentModel.NugetPackage" Width="2.625" PointX="9.875" PointY="15.5" />
-        <EntityTypeShape EntityType="HorselessContentModel.AccessControlEntry" Width="2.375" PointX="0.5" PointY="9.125" />
+        <EntityTypeShape EntityType="HorselessContentModel.AccessControlEntry" Width="2.375" PointX="8.875" PointY="2.625" />
         <EntityTypeShape EntityType="HorselessContentModel.HorselessSession" Width="2.75" PointX="0.5" PointY="2.75" />
         <EntityTypeShape EntityType="HorselessContentModel.NavigationMenu" Width="2.125" PointX="13" PointY="12.25" />
         <EntityTypeShape EntityType="HorselessContentModel.NavigationMenuItem" Width="2.375" PointX="13" PointY="16.75" />
@@ -41,6 +41,7 @@
         <AssociationConnector Association="HorselessContentModel.TenantHorselessClaimsPrincipal" />
         <AssociationConnector Association="HorselessContentModel.TaxonomyContentCollection" />
         <AssociationConnector Association="HorselessContentModel.HorselessClaimsPrincipalHorselessSession" />
+        <AssociationConnector Association="HorselessContentModel.AccessControlEntryPrincipal" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

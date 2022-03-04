@@ -12,7 +12,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     {
         public Tenant()
         {
-            HorselessClaimsPrincipals = new HashSet<HorselessClaimsPrincipal>();
+            Principals = new HashSet<Principal>();
             ContentCollections = new HashSet<ContentCollection>();
         }
 
@@ -24,8 +24,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
 
-        [InverseProperty(nameof(HorselessClaimsPrincipal.Tenant))]
-        public virtual ICollection<HorselessClaimsPrincipal> HorselessClaimsPrincipals { get; set; }
+        [InverseProperty(nameof(Principal.Tenant))]
+        public virtual ICollection<Principal> Principals { get; set; }
 
         [ForeignKey("Tenants_Id")]
         [InverseProperty(nameof(ContentCollection.Tenants))]

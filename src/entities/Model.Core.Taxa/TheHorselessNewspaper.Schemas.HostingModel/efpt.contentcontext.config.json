@@ -18,6 +18,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[AccessControlEntryPrincipal]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[ContentCollectionContentCollection]",
          "ObjectType": 0
       },
@@ -39,10 +43,6 @@
       },
       {
          "Name": "[dbo].[Holonyms]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[HorselessClaimsPrincipals]",
          "ObjectType": 0
       },
       {
@@ -91,6 +91,10 @@
       },
       {
          "Name": "[dbo].[Placeholders]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Principals]",
          "ObjectType": 0
       },
       {

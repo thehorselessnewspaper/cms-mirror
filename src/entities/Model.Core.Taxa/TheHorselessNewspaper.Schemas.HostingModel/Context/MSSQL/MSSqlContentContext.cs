@@ -26,7 +26,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             this.SqlDialect = DatabaseServerFamily.IsSQLServer;
         }
 
-  
+
 
         #region finbuckle IMultiTenantDbContext concerns 
         /// <summary>
@@ -75,10 +75,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             builder.Entity<Holonym>()
                 .HasKey(cc => new { cc.Id, cc.ObjectId });
 
-            builder.Entity<HorselessClaimsPrincipal>()
-                .HasKey(cc => new { cc.Id, cc.ObjectId });
-
-
             builder.Entity<HorselessContent>()
                 .HasKey(cc => new { cc.Id, cc.ObjectId });
 
@@ -90,8 +86,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
             builder.Entity<Meronym>()
                 .HasKey(cc => new { cc.Id, cc.ObjectId });
-
-
 
             builder.Entity<MIMEType>()
                 .HasKey(cc => new { cc.Id, cc.ObjectId });
@@ -105,6 +99,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             builder.Entity<NugetPackage>()
                 .HasKey(cc => new { cc.Id, cc.ObjectId });
 
+            builder.Entity<Principal>()
+                .HasKey(cc => new { cc.Id, cc.ObjectId });
+
+            builder.Entity<Placeholder>()
+                .HasKey(cc => new { cc.Id, cc.ObjectId });
 
             builder.Entity<Publication>()
                 .HasKey(cc => new { cc.Id, cc.ObjectId });
@@ -122,7 +121,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
- 
+
         }
     }
 

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    public partial class THLNPContentContext : DbContext
+    internal partial class THLNPContentContext : DbContext
     {
         public THLNPContentContext(DbContextOptions<THLNPContentContext> options)
             : base(options)
@@ -18,7 +18,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public virtual DbSet<ContentCollection> ContentCollections { get; set; }
         public virtual DbSet<FilesystemAsset> FilesystemAssets { get; set; }
         public virtual DbSet<Holonym> Holonyms { get; set; }
-        public virtual DbSet<HorselessClaimsPrincipal> HorselessClaimsPrincipals { get; set; }
         public virtual DbSet<HorselessContent> HorselessContents { get; set; }
         public virtual DbSet<HorselessSession> HorselessSessions { get; set; }
         public virtual DbSet<JSONAsset> JSONAssets { get; set; }
@@ -28,6 +27,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public virtual DbSet<NavigationMenuItem> NavigationMenuItems { get; set; }
         public virtual DbSet<NugetPackage> NugetPackages { get; set; }
         public virtual DbSet<Placeholder> Placeholders { get; set; }
+        public virtual DbSet<Principal> Principals { get; set; }
         public virtual DbSet<Publication> Publications { get; set; }
         public virtual DbSet<Taxon> Taxons { get; set; }
         public virtual DbSet<Taxonomy> Taxonomies { get; set; }
@@ -38,6 +38,21 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             modelBuilder.Entity<AccessControlEntry>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasMany(d => d.Principals)
+                    .WithMany(p => p.AccessControlEntries)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "AccessControlEntryPrincipal",
+                        l => l.HasOne<Principal>().WithMany().HasForeignKey("Principals_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryPrincipal_Principal"),
+                        r => r.HasOne<AccessControlEntry>().WithMany().HasForeignKey("AccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryPrincipal_AccessControlEntry"),
+                        j =>
+                        {
+                            j.HasKey("AccessControlEntries_Id", "Principals_Id");
+
+                            j.ToTable("AccessControlEntryPrincipal");
+
+                            j.HasIndex(new[] { "Principals_Id" }, "IX_FK_AccessControlEntryPrincipal_Principal");
+                        });
             });
 
             modelBuilder.Entity<ContentCollection>(entity =>
@@ -113,16 +128,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
                             j.HasIndex(new[] { "Meronyms_Id" }, "IX_FK_HolonymMeronym_Meronym");
                         });
-            });
-
-            modelBuilder.Entity<HorselessClaimsPrincipal>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.HasOne(d => d.Tenant)
-                    .WithMany(p => p.HorselessClaimsPrincipals)
-                    .HasForeignKey(d => d.TenantId)
-                    .HasConstraintName("FK_TenantHorselessClaimsPrincipal");
             });
 
             modelBuilder.Entity<HorselessContent>(entity =>
@@ -263,6 +268,16 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             modelBuilder.Entity<Placeholder>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
+            });
+
+            modelBuilder.Entity<Principal>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasOne(d => d.Tenant)
+                    .WithMany(p => p.Principals)
+                    .HasForeignKey(d => d.TenantId)
+                    .HasConstraintName("FK_TenantHorselessClaimsPrincipal");
             });
 
             modelBuilder.Entity<Publication>(entity =>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -19,6 +20,13 @@ namespace TheHorselessNewspaper.HostingModel.Context
         public DateTime? CreatedAt { get; set; }
         public string? DisplayName { get; set; }
         public bool? IsSoftDeleted { get; set; }
+
+        /// <summary>
+        /// rowversion exception causing concurrency token as per
+        /// https://docs.microsoft.com/en-us/ef/core/modeling/concurrency?tabs=data-annotations
+        /// </summary>
+        [Timestamp]
+        public byte[] Timestamp { get; set; }
     }
 
     /// <summary>

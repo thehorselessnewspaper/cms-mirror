@@ -41,33 +41,19 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
    // [Table("PhantomAccessControlEntries")]
     public partial class AccessControlEntry
     {
-        [Key]
-        public Guid Id { get; set; }
-        public string DisplayName { get; set; }
 
-
-        public string ObjectId { get; set; }
-        public bool? IsSoftDeleted { get; set; }
-        [Column(TypeName = "datetime")]
-        public DateTime? CreatedAt { get; set; }
         public ACEPermissionScope Scope { get; set; }
 
         public ACEPermission Permission { get; set; }
 
         public ACEPermissionType PermissionType { get; set; }
 
-        /// <summary>
-        /// empty for EVERYONE is a valid non-intuitive state
-        /// </summary>
-        public ICollection<Principal> CommonScopeSubjectPrincipals { get; set; }  = new  HashSet<Principal>();
-
     }
 
 
-    public partial class AccessControlEntry: IQueryableModelEntity
+    public partial class AccessControlEntry : IQueryableModelEntity
     {
-
-        public bool? IsActive { get; set; }
+        public byte[] Timestamp {get; set;}
     }
 
 

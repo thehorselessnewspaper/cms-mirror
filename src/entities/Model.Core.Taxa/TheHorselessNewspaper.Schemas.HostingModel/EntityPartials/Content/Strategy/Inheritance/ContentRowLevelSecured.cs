@@ -10,12 +10,13 @@ namespace TheHorselessNewspaper.HostingModel.EntityPartials.Content.Strategy.Inh
 {
     public abstract class ContentRowLevelSecured : IContentRowLevelSecured
     {
-        public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
-        public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
-        public Guid Id { get; set; }
-        public string? ObjectId { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public string? DisplayName { get; set; }
-        public bool? IsSoftDeleted { get; set; }
-     }
+        public virtual ICollection<AccessControlEntry> AccessControlList { get; set; } = new  List<AccessControlEntry>();
+        public virtual ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
+        public virtual Guid Id { get; set; }
+        public virtual string? ObjectId { get; set; }
+        public virtual DateTime? CreatedAt { get; set; }
+        public virtual string? DisplayName { get; set; }
+        public virtual bool? IsSoftDeleted { get; set; }
+        public byte[] Timestamp {get; set; }
+    }
 }
