@@ -9,8 +9,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     {
         public Tenant()
         {
-            HorselessClaimsPrincipals = new HashSet<HorselessClaimsPrincipal>();
-            RoutingDiscriminators = new HashSet<RoutingDiscriminator>();
+            NugetPackages = new HashSet<NugetPackage>();
+            Principals = new HashSet<Principal>();
             TenantInfos = new HashSet<TenantInfo>();
         }
 
@@ -20,8 +20,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public bool? IsSoftDeleted { get; set; }
         public DateTime? CreatedAt { get; set; }
 
-        public virtual ICollection<HorselessClaimsPrincipal> HorselessClaimsPrincipals { get; set; }
-        public virtual ICollection<RoutingDiscriminator> RoutingDiscriminators { get; set; }
+        public virtual ICollection<NugetPackage> NugetPackages { get; set; }
+        public virtual ICollection<Principal> Principals { get; set; }
         public virtual ICollection<TenantInfo> TenantInfos { get; set; }
     }
 }

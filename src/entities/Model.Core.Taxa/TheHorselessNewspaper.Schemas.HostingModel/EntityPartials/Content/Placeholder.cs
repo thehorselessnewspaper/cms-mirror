@@ -8,8 +8,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
 
     [MultiTenant]
-    public partial class Placeholder : IQueryableModelEntity
+    public partial class Placeholder : IContentRowLevelSecured, IQueryableModelEntity
     {
         public byte[] Timestamp {get; set; }
+        public ICollection<AccessControlEntry> AccessControlList { get; set; }
+        public ICollection<Principal> Owners { get; set; }
     }
 }

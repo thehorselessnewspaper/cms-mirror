@@ -10,8 +10,16 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
 
     [MultiTenant]
-    public partial class Principal : IQueryableModelEntity
+    public partial class Principal : IQueryableModelEntity, IContentRowLevelSecured
     {
         public byte[] Timestamp {get; set;}
+
+        [NotMapped]
+        public ICollection<AccessControlEntry> AccessControlList { get; set; }
+
+        [NotMapped]
+        public ICollection<Principal> Owners { get; set; }
+
+
     }
 }

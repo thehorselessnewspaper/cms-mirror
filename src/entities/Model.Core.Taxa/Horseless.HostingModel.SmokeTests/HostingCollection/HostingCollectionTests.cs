@@ -1,8 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace Horseless.HostingModel.SmokeTests.HostingCollection
@@ -58,11 +56,11 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                         }
                     }
                 },
-                HorselessClaimsPrincipals = new List<HostingEntities.HorselessClaimsPrincipal>()
+                Principals = new List<HostingEntities.Principal>()
                 {
-                    new HostingEntities.HorselessClaimsPrincipal()
+                    new HostingEntities.Principal()
                     {
-                        Id= Guid.NewGuid(), 
+                        Id= Guid.NewGuid(),
                         ObjectId = Guid.NewGuid().ToString(),
                         DisplayName = "principal@tenant.com",
                         CreatedAt = DateTime.UtcNow,
@@ -77,12 +75,11 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
             {
                 var newTenant = await CreateHostingEntity<HostingEntities.Tenant>(tenant);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Assert.Fail($"exception under text {ex.Message}");
             }
 
-            await Task.FromResult(new List<HostingEntities.Host>());
         }
     }
 }

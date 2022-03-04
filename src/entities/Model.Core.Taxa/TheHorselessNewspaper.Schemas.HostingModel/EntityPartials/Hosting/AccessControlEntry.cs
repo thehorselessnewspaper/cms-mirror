@@ -30,8 +30,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     /// evaluated as part of AccessControlList
     /// to permit deny principals operations
     /// </summary>
-    [Owned]
-    public partial class AccessControlEntry : IQueryableModelEntity
+    public partial class AccessControlEntry : IQueryableModelEntity, IHostingRowLevelSecured
     {
 
         public ACEPermissionScope Scope { get; set; }
@@ -40,13 +39,16 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
         public ACEPermissionType PermissionType { get; set; }
 
-        public ICollection<Principal> SubjectPrincipals { get; set; }  = new  HashSet<Principal>();
-        public Guid Id { get; set; }
-        public string? ObjectId { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public string? DisplayName { get; set; }
-        public bool? IsSoftDeleted { get; set; }
+ 
         public byte[] Timestamp {get; set; }
+
+
+        [NotMapped]
+        public ICollection<AccessControlEntry> AccessControlList { get; set; }
+
+
+        [NotMapped]
+        public ICollection<Principal> Owners { get; set; }
     }
 
 

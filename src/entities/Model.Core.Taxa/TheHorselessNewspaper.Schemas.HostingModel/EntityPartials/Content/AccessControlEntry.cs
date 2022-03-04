@@ -51,9 +51,17 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     }
 
 
-    public partial class AccessControlEntry : IQueryableModelEntity
+    public partial class AccessControlEntry : IQueryableModelEntity, IContentRowLevelSecured
     {
         public byte[] Timestamp {get; set;}
+
+        [NotMapped]
+        public virtual ICollection<AccessControlEntry> AccessControlList { get; set; }
+
+
+
+        [NotMapped]
+        public virtual ICollection<Principal> Owners { get; set; }
     }
 
 

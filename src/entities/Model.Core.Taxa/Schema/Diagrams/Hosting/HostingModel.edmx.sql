@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/03/2022 21:13:42
+-- Date Created: 03/04/2022 00:00:02
 -- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Hosting\HostingModel.edmx
 -- --------------------------------------------------
 
@@ -141,6 +141,24 @@ CREATE TABLE [dbo].[Principals] (
 );
 GO
 
+-- Creating table 'AccessControlEntries'
+CREATE TABLE [dbo].[AccessControlEntries] (
+    [Id] uniqueidentifier  NOT NULL,
+    [DisplayName] nvarchar(max)  NULL,
+    [ObjectId] nvarchar(max)  NULL,
+    [IsSoftDeleted] bit  NULL,
+    [CreatedAt] datetime  NULL,
+    [IsActive] bit  NULL
+);
+GO
+
+-- Creating table 'AccessControlEntryPrincipal'
+CREATE TABLE [dbo].[AccessControlEntryPrincipal] (
+    [AccessControlEntries_Id] uniqueidentifier  NOT NULL,
+    [Principals_Id] uniqueidentifier  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -179,6 +197,18 @@ GO
 ALTER TABLE [dbo].[Principals]
 ADD CONSTRAINT [PK_Principals]
     PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'AccessControlEntries'
+ALTER TABLE [dbo].[AccessControlEntries]
+ADD CONSTRAINT [PK_AccessControlEntries]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [AccessControlEntries_Id], [Principals_Id] in table 'AccessControlEntryPrincipal'
+ALTER TABLE [dbo].[AccessControlEntryPrincipal]
+ADD CONSTRAINT [PK_AccessControlEntryPrincipal]
+    PRIMARY KEY CLUSTERED ([AccessControlEntries_Id], [Principals_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -258,6 +288,30 @@ GO
 CREATE INDEX [IX_FK_TenantNugetPackage]
 ON [dbo].[NugetPackages]
     ([ParentTenantId]);
+GO
+
+-- Creating foreign key on [AccessControlEntries_Id] in table 'AccessControlEntryPrincipal'
+ALTER TABLE [dbo].[AccessControlEntryPrincipal]
+ADD CONSTRAINT [FK_AccessControlEntryPrincipal_AccessControlEntry]
+    FOREIGN KEY ([AccessControlEntries_Id])
+    REFERENCES [dbo].[AccessControlEntries]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Principals_Id] in table 'AccessControlEntryPrincipal'
+ALTER TABLE [dbo].[AccessControlEntryPrincipal]
+ADD CONSTRAINT [FK_AccessControlEntryPrincipal_Principal]
+    FOREIGN KEY ([Principals_Id])
+    REFERENCES [dbo].[Principals]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AccessControlEntryPrincipal_Principal'
+CREATE INDEX [IX_FK_AccessControlEntryPrincipal_Principal]
+ON [dbo].[AccessControlEntryPrincipal]
+    ([Principals_Id]);
 GO
 
 -- --------------------------------------------------

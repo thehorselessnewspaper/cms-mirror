@@ -12,12 +12,12 @@ namespace Schema.Diagrams.Hosting
     using System;
     using System.Collections.Generic;
     
-    public partial class Principal
+    public partial class AccessControlEntry
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Principal()
+        public AccessControlEntry()
         {
-            this.AccessControlEntries = new HashSet<AccessControlEntry>();
+            this.Principals = new HashSet<Principal>();
         }
     
         public System.Guid Id { get; set; }
@@ -25,13 +25,9 @@ namespace Schema.Diagrams.Hosting
         public string ObjectId { get; set; }
         public Nullable<bool> IsSoftDeleted { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
-        public string Iss { get; set; }
-        public string Aud { get; set; }
-        public string Sub { get; set; }
-        public Nullable<System.Guid> ParentTenantId { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     
-        public virtual Tenant Tenant { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
+        public virtual ICollection<Principal> Principals { get; set; }
     }
 }

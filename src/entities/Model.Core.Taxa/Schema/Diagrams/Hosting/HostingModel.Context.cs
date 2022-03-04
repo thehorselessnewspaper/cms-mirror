@@ -31,5 +31,6 @@ namespace Schema.Diagrams.Hosting
         public virtual DbSet<TenantInfo> TenantInfos { get; set; }
         public virtual DbSet<WebAPITenantInfo> WebAPITenantInfos { get; set; }
         public virtual DbSet<Principal> Principals { get; set; }
+        public virtual DbSet<AccessControlEntry> AccessControlEntries { get; set; }
     }
 }

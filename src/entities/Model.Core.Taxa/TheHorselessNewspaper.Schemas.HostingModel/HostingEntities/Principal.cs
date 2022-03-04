@@ -5,8 +5,13 @@ using System.Collections.Generic;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
-    public partial class HorselessClaimsPrincipal
+    public partial class Principal
     {
+        public Principal()
+        {
+            AccessControlEntries = new HashSet<AccessControlEntry>();
+        }
+
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
@@ -15,8 +20,10 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public string Iss { get; set; }
         public string Aud { get; set; }
         public string Sub { get; set; }
-        public Guid? TenantId { get; set; }
+        public Guid? ParentTenantId { get; set; }
 
-        public virtual Tenant Tenant { get; set; }
+        public virtual Tenant ParentTenant { get; set; }
+
+        public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
     }
 }

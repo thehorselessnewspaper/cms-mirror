@@ -12,6 +12,8 @@
     <EntitySet Name="TenantInfos" EntityType="HostingModel.Store.TenantInfos" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="WebAPITenantInfos" EntityType="HostingModel.Store.WebAPITenantInfos" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Principals" EntityType="HostingModel.Store.Principals" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AccessControlEntries" EntityType="HostingModel.Store.AccessControlEntries" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AccessControlEntryPrincipal" EntityType="HostingModel.Store.AccessControlEntryPrincipal" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="TenantInfoWebAPITenantInfo" Association="HostingModel.Store.TenantInfoWebAPITenantInfo">
       <End Role="TenantInfo" EntitySet="TenantInfos" />
       <End Role="WebAPITenantInfo" EntitySet="WebAPITenantInfos" />
@@ -31,6 +33,14 @@
     <AssociationSet Name="TenantNugetPackage" Association="HostingModel.Store.TenantNugetPackage">
       <End Role="Tenant" EntitySet="Tenants" />
       <End Role="NugetPackage" EntitySet="NugetPackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccessControlEntryPrincipal_AccessControlEntry" Association="HostingModel.Store.FK_AccessControlEntryPrincipal_AccessControlEntry">
+      <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
+      <End Role="AccessControlEntryPrincipal" EntitySet="AccessControlEntryPrincipal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccessControlEntryPrincipal_Principal" Association="HostingModel.Store.FK_AccessControlEntryPrincipal_Principal">
+      <End Role="Principal" EntitySet="Principals" />
+      <End Role="AccessControlEntryPrincipal" EntitySet="AccessControlEntryPrincipal" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Tenants">
@@ -115,6 +125,25 @@
     <Property Name="Sub" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ParentTenantId" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
+  <EntityType Name="AccessControlEntries">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="IsActive" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="AccessControlEntryPrincipal">
+    <Key>
+      <PropertyRef Name="AccessControlEntries_Id" />
+      <PropertyRef Name="Principals_Id" />
+    </Key>
+    <Property Name="AccessControlEntries_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Principals_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
   <Association Name="TenantInfoWebAPITenantInfo">
     <End Role="TenantInfo" Type="HostingModel.Store.TenantInfos" Multiplicity="0..1" />
     <End Role="WebAPITenantInfo" Type="HostingModel.Store.WebAPITenantInfos" Multiplicity="*" />
@@ -175,6 +204,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_AccessControlEntryPrincipal_AccessControlEntry">
+    <End Role="AccessControlEntry" Type="HostingModel.Store.AccessControlEntries" Multiplicity="1" />
+    <End Role="AccessControlEntryPrincipal" Type="HostingModel.Store.AccessControlEntryPrincipal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccessControlEntry">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AccessControlEntryPrincipal">
+        <PropertyRef Name="AccessControlEntries_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccessControlEntryPrincipal_Principal">
+    <End Role="AccessControlEntryPrincipal" Type="HostingModel.Store.AccessControlEntryPrincipal" Multiplicity="*" />
+    <End Role="Principal" Type="HostingModel.Store.Principals" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Principal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AccessControlEntryPrincipal">
+        <PropertyRef Name="Principals_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -205,6 +258,11 @@
           <AssociationSet Name="TenantNugetPackage" Association="HostingModel.TenantNugetPackage">
             <End Role="Tenant" EntitySet="Tenants" />
             <End Role="NugetPackage" EntitySet="NugetPackages" />
+          </AssociationSet>
+          <EntitySet Name="AccessControlEntries" EntityType="HostingModel.AccessControlEntry" />
+          <AssociationSet Name="AccessControlEntryPrincipal" Association="HostingModel.AccessControlEntryPrincipal">
+            <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
+            <End Role="Principal" EntitySet="Principals" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Tenant">
@@ -328,6 +386,7 @@
           <Property Name="Sub" Type="String" Nullable="true" />
           <NavigationProperty Name="Tenant" Relationship="HostingModel.HorselessClaimsPrincipalTenant" FromRole="HorselessClaimsPrincipal" ToRole="Tenant" />
           <Property Name="ParentTenantId" Type="Guid" Nullable="true" />
+          <NavigationProperty Name="AccessControlEntries" Relationship="HostingModel.AccessControlEntryPrincipal" FromRole="Principal" ToRole="AccessControlEntry" />
         </EntityType>
         <Association Name="HorselessClaimsPrincipalTenant">
           <End Type="HostingModel.Principal" Role="HorselessClaimsPrincipal" Multiplicity="*" />
@@ -352,6 +411,22 @@
               <PropertyRef Name="ParentTenantId" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AccessControlEntry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="true" />
+          <NavigationProperty Name="Principals" Relationship="HostingModel.AccessControlEntryPrincipal" FromRole="AccessControlEntry" ToRole="Principal" />
+        </EntityType>
+        <Association Name="AccessControlEntryPrincipal">
+          <End Type="HostingModel.AccessControlEntry" Role="AccessControlEntry" Multiplicity="*" />
+          <End Type="HostingModel.Principal" Role="Principal" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -446,6 +521,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="AccessControlEntries">
+      <EntityTypeMapping TypeName="IsTypeOf(HostingModel.AccessControlEntry)">
+        <MappingFragment StoreEntitySet="AccessControlEntries">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="TenantTenantInfo" TypeName="HostingModel.TenantTenantInfo" StoreEntitySet="TenantInfos">
       <EndProperty Name="Tenant">
         <ScalarProperty Name="Id" ColumnName="Tenant_Id" />
@@ -454,6 +541,14 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
       <Condition ColumnName="Tenant_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AccessControlEntryPrincipal" TypeName="HostingModel.AccessControlEntryPrincipal" StoreEntitySet="AccessControlEntryPrincipal">
+      <EndProperty Name="AccessControlEntry">
+        <ScalarProperty Name="Id" ColumnName="AccessControlEntries_Id" />
+      </EndProperty>
+      <EndProperty Name="Principal">
+        <ScalarProperty Name="Id" ColumnName="Principals_Id" />
+      </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>

@@ -4,79 +4,50 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Logging;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
     internal partial class THLNPHostingContext : DbContext
     {
-        private ILogger<THLNPHostingContext> _logger;
-
-        public THLNPHostingContext(ILogger<THLNPHostingContext> logger)
+        public THLNPHostingContext()
         {
-            _logger = logger;
         }
 
-        public THLNPHostingContext(DbContextOptions<THLNPHostingContext> options, ILogger<THLNPHostingContext> logger)
+        public THLNPHostingContext(DbContextOptions<THLNPHostingContext> options)
             : base(options)
         {
-            _logger = logger;
         }
 
-        public virtual DbSet<FilesystemAssetLocation> FilesystemAssetLocations { get; set; }
-        public virtual DbSet<HorselessClaimsPrincipal> HorselessClaimsPrincipals { get; set; }
-        public virtual DbSet<HorselessSession> HorselessSessions { get; set; }
-        public virtual DbSet<Host> Hosts { get; set; }
+        public virtual DbSet<AccessControlEntry> AccessControlEntries { get; set; }
         public virtual DbSet<KeyCloakConfiguration> KeyCloakConfigurations { get; set; }
         public virtual DbSet<NugetPackage> NugetPackages { get; set; }
-        public virtual DbSet<RoutingDiscriminator> RoutingDiscriminators { get; set; }
+        public virtual DbSet<Principal> Principals { get; set; }
         public virtual DbSet<Tenant> Tenants { get; set; }
         public virtual DbSet<TenantInfo> TenantInfos { get; set; }
-        public virtual DbSet<UriPath> UriPaths { get; set; }
         public virtual DbSet<WebAPITenantInfo> WebAPITenantInfos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<FilesystemAssetLocation>(entity =>
+            modelBuilder.Entity<AccessControlEntry>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-            });
 
-            modelBuilder.Entity<HorselessClaimsPrincipal>(entity =>
-            {
-                entity.HasIndex(e => e.TenantId, "IX_FK_HorselessClaimsPrincipalTenant");
+                entity.HasMany(d => d.Principals)
+                    .WithMany(p => p.AccessControlEntries)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "AccessControlEntryPrincipal",
+                        l => l.HasOne<Principal>().WithMany().HasForeignKey("Principals_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryPrincipal_Principal"),
+                        r => r.HasOne<AccessControlEntry>().WithMany().HasForeignKey("AccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryPrincipal_AccessControlEntry"),
+                        j =>
+                        {
+                            j.HasKey("AccessControlEntries_Id", "Principals_Id");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                            j.ToTable("AccessControlEntryPrincipal");
 
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.HasOne(d => d.Tenant)
-                    .WithMany(p => p.HorselessClaimsPrincipals)
-                    .HasForeignKey(d => d.TenantId)
-                    .HasConstraintName("FK_HorselessClaimsPrincipalTenant");
-            });
-
-            modelBuilder.Entity<HorselessSession>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-            });
-
-            modelBuilder.Entity<Host>(entity =>
-            {
-                entity.HasIndex(e => e.RoutingDiscriminatorId, "IX_FK_RoutingDiscriminatorHost");
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.HasOne(d => d.RoutingDiscriminator)
-                    .WithMany(p => p.Hosts)
-                    .HasForeignKey(d => d.RoutingDiscriminatorId)
-                    .HasConstraintName("FK_RoutingDiscriminatorHost");
+                            j.HasIndex(new[] { "Principals_Id" }, "IX_FK_AccessControlEntryPrincipal_Principal");
+                        });
             });
 
             modelBuilder.Entity<KeyCloakConfiguration>(entity =>
@@ -95,23 +66,30 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
             modelBuilder.Entity<NugetPackage>(entity =>
             {
+                entity.HasIndex(e => e.ParentTenantId, "IX_FK_TenantNugetPackage");
+
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.HasOne(d => d.ParentTenant)
+                    .WithMany(p => p.NugetPackages)
+                    .HasForeignKey(d => d.ParentTenantId)
+                    .HasConstraintName("FK_TenantNugetPackage");
             });
 
-            modelBuilder.Entity<RoutingDiscriminator>(entity =>
+            modelBuilder.Entity<Principal>(entity =>
             {
-                entity.HasIndex(e => e.TenantId, "IX_FK_TenantRoutingDiscriminator");
+                entity.HasIndex(e => e.ParentTenantId, "IX_FK_HorselessClaimsPrincipalTenant");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
-                entity.HasOne(d => d.Tenant)
-                    .WithMany(p => p.RoutingDiscriminators)
-                    .HasForeignKey(d => d.TenantId)
-                    .HasConstraintName("FK_TenantRoutingDiscriminator");
+                entity.HasOne(d => d.ParentTenant)
+                    .WithMany(p => p.Principals)
+                    .HasForeignKey(d => d.ParentTenantId)
+                    .HasConstraintName("FK_HorselessClaimsPrincipalTenant");
             });
 
             modelBuilder.Entity<Tenant>(entity =>
@@ -133,21 +111,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
                     .WithMany(p => p.TenantInfos)
                     .HasForeignKey(d => d.Tenant_Id)
                     .HasConstraintName("FK_TenantTenantInfo");
-            });
-
-            modelBuilder.Entity<UriPath>(entity =>
-            {
-                entity.HasIndex(e => e.RoutingDiscriminatorId, "IX_FK_RoutingDiscriminatorUriPath");
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.HasOne(d => d.RoutingDiscriminator)
-                    .WithMany(p => p.UriPaths)
-                    .HasForeignKey(d => d.RoutingDiscriminatorId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_RoutingDiscriminatorUriPath");
             });
 
             modelBuilder.Entity<WebAPITenantInfo>(entity =>

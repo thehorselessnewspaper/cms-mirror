@@ -274,9 +274,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.HasOne(d => d.Tenant)
+                entity.HasOne(d => d.ParentTenant)
                     .WithMany(p => p.Principals)
-                    .HasForeignKey(d => d.TenantId)
+                    .HasForeignKey(d => d.ParentTenantId)
                     .HasConstraintName("FK_TenantHorselessClaimsPrincipal");
             });
 

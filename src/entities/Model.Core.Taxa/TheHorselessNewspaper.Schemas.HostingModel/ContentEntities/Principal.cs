@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    [Index(nameof(TenantId), Name = "IX_FK_TenantHorselessClaimsPrincipal")]
+    [Index(nameof(ParentTenantId), Name = "IX_FK_TenantHorselessClaimsPrincipal")]
     public partial class Principal
     {
         public Principal()
@@ -27,11 +27,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string Iss { get; set; }
         public string Aud { get; set; }
         public string Sub { get; set; }
-        public Guid? TenantId { get; set; }
+        public Guid? ParentTenantId { get; set; }
 
-        [ForeignKey(nameof(TenantId))]
-        [InverseProperty("Principals")]
-        public virtual Tenant Tenant { get; set; }
+        [ForeignKey(nameof(ParentTenantId))]
+        [InverseProperty(nameof(Tenant.Principals))]
+        public virtual Tenant ParentTenant { get; set; }
         [InverseProperty(nameof(HorselessSession.HorselessClaimsPrincipal))]
         public virtual ICollection<HorselessSession> HorselessSessions { get; set; }
 

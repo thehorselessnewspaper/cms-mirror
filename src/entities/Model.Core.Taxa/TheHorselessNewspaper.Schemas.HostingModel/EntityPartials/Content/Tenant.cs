@@ -9,7 +9,6 @@ using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum TenantIdentifierStrategyName 
     {
@@ -37,6 +36,12 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public bool? IsSoftDeleted { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
+
+        /// <summary>
+        /// TODO
+        /// resolve this collection chail 
+        /// </summary>
+        [NotMapped]
         public ICollection<TenantIdentifierStrategyName> Strategies { get; set; } = new HashSet<TenantIdentifierStrategyName>();
     }
 

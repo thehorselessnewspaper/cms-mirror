@@ -13,23 +13,18 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
     }
 
-    [Owned]
     // [Table("Principals")]
-    public partial class Principal: IQueryableModelEntity
+    public partial class Principal: IQueryableModelEntity, IHostingRowLevelSecured
     {
-        [Key]
-        public Guid Id { get; set; }
-        public string DisplayName { get; set; }
-        [Required]
-        public string ObjectId { get; set; }
-        public bool? IsSoftDeleted { get; set; }
-        [Column(TypeName = "datetime")]
-        public DateTime? CreatedAt { get; set; }
-        public string Iss { get; set; }
-        public string Aud { get; set; }
-        public string Sub { get; set; }
+
         public byte[] Timestamp {get; set; }
 
-        //public HostingEntities.HorselessClaimsPrincipal? HorselessClaimsPrincipal { get; set; }
+
+        [NotMapped]
+        public ICollection<AccessControlEntry> AccessControlList { get; set; }
+
+
+        [NotMapped]
+        public ICollection<Principal> Owners { get; set;  }
     }
 }

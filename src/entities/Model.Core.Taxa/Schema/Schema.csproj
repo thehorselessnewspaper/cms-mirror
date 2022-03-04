@@ -232,6 +232,9 @@
     <Compile Include="Diagrams\FirstCut\WorkflowActionParameter.cs">
       <DependentUpon>HorselessCarriageCoreTaxa.tt</DependentUpon>
     </Compile>
+    <Compile Include="Diagrams\Hosting\AccessControlEntry.cs">
+      <DependentUpon>HostingModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Diagrams\Hosting\HostingModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

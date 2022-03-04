@@ -1,15 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollections;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
-using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using hostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollections;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
 using TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollection;
+using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using hostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
 namespace TheHorselessNewspaper.HostingModel.Context
 {
@@ -20,17 +15,12 @@ namespace TheHorselessNewspaper.HostingModel.Context
     {
         internal static void RegisterHostingModelOperator(IServiceCollection services)
         {
-            services.AddScoped<IQueryableHostingModelOperator<hostingModel.FilesystemAssetLocation>, HostingModelQueries<hostingModel.FilesystemAssetLocation>>();
-            services.AddScoped<IQueryableHostingModelOperator<hostingModel.HorselessClaimsPrincipal>, HostingModelQueries<hostingModel.HorselessClaimsPrincipal>>();
-
-            services.AddScoped<IQueryableHostingModelOperator<hostingModel.HorselessSession>, HostingModelQueries<hostingModel.HorselessSession>>();
-            services.AddScoped<IQueryableHostingModelOperator<hostingModel.Host>, HostingModelQueries<hostingModel.Host>>();
             services.AddScoped<IQueryableHostingModelOperator<hostingModel.KeyCloakConfiguration>, HostingModelQueries<hostingModel.KeyCloakConfiguration>>();
+            services.AddScoped<IQueryableHostingModelOperator<hostingModel.AccessControlEntry>, HostingModelQueries<hostingModel.AccessControlEntry>>();
+            services.AddScoped<IQueryableHostingModelOperator<hostingModel.Principal>, HostingModelQueries<hostingModel.Principal>>();
             services.AddScoped<IQueryableHostingModelOperator<hostingModel.NugetPackage>, HostingModelQueries<hostingModel.NugetPackage>>();
-            services.AddScoped<IQueryableHostingModelOperator<hostingModel.RoutingDiscriminator>, HostingModelQueries<hostingModel.RoutingDiscriminator>>();
             services.AddScoped<IQueryableHostingModelOperator<hostingModel.Tenant>, HostingModelQueries<hostingModel.Tenant>>();
             services.AddScoped<IQueryableHostingModelOperator<hostingModel.TenantInfo>, HostingModelQueries<hostingModel.TenantInfo>>();
-            services.AddScoped<IQueryableHostingModelOperator<hostingModel.UriPath>, HostingModelQueries<hostingModel.UriPath>>();
             services.AddScoped<IQueryableHostingModelOperator<hostingModel.WebAPITenantInfo>, HostingModelQueries<hostingModel.WebAPITenantInfo>>();
         }
 
@@ -38,6 +28,10 @@ namespace TheHorselessNewspaper.HostingModel.Context
         {
             // add services friendly for odata for each 
             // odata exposed entity
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.Principal>, ContentModelQueries<ContentModel.Principal>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.AccessControlEntry>, ContentModelQueries<ContentModel.AccessControlEntry>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.Placeholder>, ContentModelQueries<ContentModel.Placeholder>>();
+
             services.AddScoped<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModelQueries<ContentModel.ContentCollection>>();
             services.AddScoped<IQueryableContentModelOperator<ContentModel.FilesystemAsset>, ContentModelQueries<ContentModel.FilesystemAsset>>();
             services.AddScoped<IQueryableContentModelOperator<ContentModel.Holonym>, ContentModelQueries<ContentModel.Holonym>>();

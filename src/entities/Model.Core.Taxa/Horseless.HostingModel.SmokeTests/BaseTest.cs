@@ -76,7 +76,7 @@ namespace Horseless.HostingModel.SmokeTests
             var theContentOperator = GetIQueryableContentModelOperator<IQueryableContentModelOperator<ContentModel.ContentCollection>>();
             await theContentOperator.ResetDb();
 
-            var theHostingOperator = GetIQueryableContentModelOperator<IQueryableHostingModelOperator< HostingEntities.Host>>();
+            var theHostingOperator = GetIQueryableContentModelOperator<IQueryableHostingModelOperator< HostingEntities.Tenant>>();
             await theHostingOperator.ResetDb();
             int i = 0;
         }
