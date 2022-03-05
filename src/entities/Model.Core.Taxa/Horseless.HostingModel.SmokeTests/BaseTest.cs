@@ -121,6 +121,7 @@ namespace Horseless.HostingModel.SmokeTests
         {
             var queryProvider = this.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<T>>();
             var result = await queryProvider.Create(entity);
+
             return result;
         }
 

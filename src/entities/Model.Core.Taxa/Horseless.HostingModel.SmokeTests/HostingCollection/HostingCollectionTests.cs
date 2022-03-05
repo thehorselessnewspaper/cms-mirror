@@ -1,7 +1,9 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using TheHorselessNewspaper.HostingModel.Entities.Query;
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace Horseless.HostingModel.SmokeTests.HostingCollection
 {
@@ -11,6 +13,8 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
         public void CRUDTest()
         {
             Assert.DoesNotThrowAsync(CrudHostingCollection, "test failed due to entity not inserted with null objectid");
+            
+            
             Assert.Pass();
 
         }
@@ -22,6 +26,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
         private async Task CrudHostingCollection()
         {
 
+            Guid newPrincipalGuid = Guid.NewGuid();
             var tenant = new HostingEntities.Tenant()
             {
                 Id = Guid.NewGuid(),
@@ -60,7 +65,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                 {
                     new HostingEntities.Principal()
                     {
-                        Id= Guid.NewGuid(),
+                        Id= newPrincipalGuid,
                         ObjectId = Guid.NewGuid().ToString(),
                         DisplayName = "principal@tenant.com",
                         CreatedAt = DateTime.UtcNow,
@@ -74,6 +79,13 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
             try
             {
                 var newTenant = await CreateHostingEntity<HostingEntities.Tenant>(tenant);
+
+                // validate implicit insertion of new principal
+                var principalQuery = this.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<HostingEntities.Principal>>();
+                IQueryable<HostingEntities.Principal> newPrincipalReadResult = await principalQuery.Read(r => r.Id.Equals(newPrincipalGuid));
+
+                Assert.IsTrue(newPrincipalReadResult.Any());
+
             }
             catch (Exception ex)
             {
