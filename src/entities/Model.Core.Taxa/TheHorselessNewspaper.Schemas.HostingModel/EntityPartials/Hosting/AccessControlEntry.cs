@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using TheHorselessNewspaper.HostingModel.Context;
@@ -39,8 +40,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
         public ACEPermissionType PermissionType { get; set; }
 
- 
-        public byte[] Timestamp {get; set; }
+
+        [Timestamp]
+        public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
 
         [NotMapped]

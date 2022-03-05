@@ -53,7 +53,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
     public partial class AccessControlEntry : IQueryableModelEntity, IContentRowLevelSecured
     {
-        public byte[] Timestamp {get; set;}
+        public byte[] Timestamp {get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
         [NotMapped]
         public virtual ICollection<AccessControlEntry> AccessControlList { get; set; }

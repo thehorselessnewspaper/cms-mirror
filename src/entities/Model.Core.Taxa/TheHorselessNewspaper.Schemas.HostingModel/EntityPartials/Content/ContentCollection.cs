@@ -1,6 +1,7 @@
 ﻿using Finbuckle.MultiTenant;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public virtual ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
         public virtual ICollection<Principal> Owners { get; set; } =  new HashSet<Principal>();
-        public byte[] Timestamp {get; set;}
+
+        [Timestamp]
+        public byte[] Timestamp {get; set;}  = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
     }
 }

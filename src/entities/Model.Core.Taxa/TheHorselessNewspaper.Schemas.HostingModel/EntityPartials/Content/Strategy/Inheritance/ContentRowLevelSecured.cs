@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace TheHorselessNewspaper.HostingModel.EntityPartials.Content.Strategy.Inh
         public virtual DateTime? CreatedAt { get; set; }
         public virtual string? DisplayName { get; set; }
         public virtual bool? IsSoftDeleted { get; set; }
-        public byte[] Timestamp {get; set; }
+        [Timestamp]
+        public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
     }
 }

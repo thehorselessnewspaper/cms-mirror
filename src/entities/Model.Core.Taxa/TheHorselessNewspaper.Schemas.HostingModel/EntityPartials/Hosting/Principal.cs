@@ -17,7 +17,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     public partial class Principal: IQueryableModelEntity, IHostingRowLevelSecured
     {
 
-        public byte[] Timestamp {get; set; }
+        [Timestamp]
+        public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
 
         [NotMapped]

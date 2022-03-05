@@ -72,6 +72,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         [NotMapped]
         public virtual ICollection<Principal> Owners { get; set; }
-        public byte[] Timestamp {get; set;}
+        [Timestamp]
+        public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
     }
 }

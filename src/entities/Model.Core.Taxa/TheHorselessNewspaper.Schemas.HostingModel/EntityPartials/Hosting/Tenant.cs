@@ -62,6 +62,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; }
         public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
-        public byte[] Timestamp { get; set; }
+        [Timestamp]
+        public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
     }
 }

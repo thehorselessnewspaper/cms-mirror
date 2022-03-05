@@ -12,7 +12,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     // [MultiTenant]
     public partial class Principal : IQueryableModelEntity, IContentRowLevelSecured
     {
-        public byte[] Timestamp {get; set;}
+        [Timestamp]
+        public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
         [NotMapped]
         public ICollection<AccessControlEntry> AccessControlList { get; set; }
