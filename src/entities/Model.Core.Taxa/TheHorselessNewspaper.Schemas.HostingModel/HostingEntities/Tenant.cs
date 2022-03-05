@@ -10,7 +10,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public Tenant()
         {
             NugetPackages = new HashSet<NugetPackage>();
-            Principals = new HashSet<Principal>();
             TenantInfos = new HashSet<TenantInfo>();
         }
 
@@ -21,7 +20,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public DateTime? CreatedAt { get; set; }
 
         public virtual ICollection<NugetPackage> NugetPackages { get; set; }
-        public virtual ICollection<Principal> Principals { get; set; }
         public virtual ICollection<TenantInfo> TenantInfos { get; set; }
     }
 }

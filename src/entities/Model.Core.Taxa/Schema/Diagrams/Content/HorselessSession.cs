@@ -24,8 +24,5 @@ namespace Schema.Diagrams.Content
         public string Aud { get; set; }
         public string Sub { get; set; }
         public Nullable<bool> IsAnonymous { get; set; }
-        public Nullable<System.Guid> PrincipalId { get; set; }
-    
-        public virtual Principal Principal { get; set; }
     }
 }

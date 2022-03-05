@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="0c7f99035d7540a9858afd51f8273784" Name="Diagram1" ZoomLevel="100" >
         <EntityTypeShape EntityType="HorselessContentModel.HorselessContent" Width="2.375" PointX="12" PointY="6.375" />
-        <EntityTypeShape EntityType="HorselessContentModel.Tenant" Width="3.125" PointX="3.75" PointY="6.5" />
+        <EntityTypeShape EntityType="HorselessContentModel.Tenant" Width="3.125" PointX="3" PointY="6.625" />
         <EntityTypeShape EntityType="HorselessContentModel.MIMEType" Width="2.25" PointX="16.125" PointY="2.375" />
         <EntityTypeShape EntityType="HorselessContentModel.FilesystemAsset" Width="2.875" PointX="15.5" PointY="6.375" />
         <EntityTypeShape EntityType="HorselessContentModel.JSONAsset" Width="2.875" PointX="15.5" PointY="9.625" />
@@ -38,10 +38,7 @@
         <AssociationConnector Association="HorselessContentModel.TaxonTaxon" />
         <AssociationConnector Association="HorselessContentModel.TaxonHolonym" />
         <AssociationConnector Association="HorselessContentModel.HolonymMeronym" />
-        <AssociationConnector Association="HorselessContentModel.TenantHorselessClaimsPrincipal" />
         <AssociationConnector Association="HorselessContentModel.TaxonomyContentCollection" />
-        <AssociationConnector Association="HorselessContentModel.HorselessClaimsPrincipalHorselessSession" />
-        <AssociationConnector Association="HorselessContentModel.AccessControlEntryPrincipal" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

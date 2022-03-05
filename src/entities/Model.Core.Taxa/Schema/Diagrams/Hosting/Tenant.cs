@@ -17,7 +17,6 @@ namespace Schema.Diagrams.Hosting
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tenant()
         {
-            this.Principals = new HashSet<Principal>();
             this.NugetPackages = new HashSet<NugetPackage>();
         }
     
@@ -28,8 +27,6 @@ namespace Schema.Diagrams.Hosting
         public Nullable<System.DateTime> CreatedAt { get; set; }
     
         public virtual TenantInfo TenantInfo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Principal> Principals { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NugetPackage> NugetPackages { get; set; }
     }

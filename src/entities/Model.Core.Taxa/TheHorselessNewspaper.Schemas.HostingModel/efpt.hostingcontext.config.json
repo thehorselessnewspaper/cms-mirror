@@ -18,10 +18,6 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[AccessControlEntryPrincipal]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[dbo].[KeyCloakConfigurations]",
          "ObjectType": 0
       },

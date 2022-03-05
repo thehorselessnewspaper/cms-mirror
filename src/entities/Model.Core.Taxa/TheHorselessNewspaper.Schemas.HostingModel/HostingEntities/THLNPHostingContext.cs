@@ -33,21 +33,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.HasMany(d => d.Principals)
-                    .WithMany(p => p.AccessControlEntries)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "AccessControlEntryPrincipal",
-                        l => l.HasOne<Principal>().WithMany().HasForeignKey("Principals_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryPrincipal_Principal"),
-                        r => r.HasOne<AccessControlEntry>().WithMany().HasForeignKey("AccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryPrincipal_AccessControlEntry"),
-                        j =>
-                        {
-                            j.HasKey("AccessControlEntries_Id", "Principals_Id");
-
-                            j.ToTable("AccessControlEntryPrincipal");
-
-                            j.HasIndex(new[] { "Principals_Id" }, "IX_FK_AccessControlEntryPrincipal_Principal");
-                        });
             });
 
             modelBuilder.Entity<KeyCloakConfiguration>(entity =>
@@ -80,16 +65,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
             modelBuilder.Entity<Principal>(entity =>
             {
-                entity.HasIndex(e => e.TenantId, "IX_FK_HorselessClaimsPrincipalTenant");
-
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.HasOne(d => d.Tenant)
-                    .WithMany(p => p.Principals)
-                    .HasForeignKey(d => d.TenantId)
-                    .HasConstraintName("FK_HorselessClaimsPrincipalTenant");
             });
 
             modelBuilder.Entity<Tenant>(entity =>

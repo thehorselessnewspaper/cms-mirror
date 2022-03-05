@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/04/2022 17:30:55
+-- Date Created: 03/05/2022 13:57:49
 -- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Hosting\HostingModel.edmx
 -- --------------------------------------------------
 
@@ -31,12 +31,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_TenantNugetPackage]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[NugetPackages] DROP CONSTRAINT [FK_TenantNugetPackage];
 GO
-IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryPrincipal_AccessControlEntry]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AccessControlEntryPrincipal] DROP CONSTRAINT [FK_AccessControlEntryPrincipal_AccessControlEntry];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryPrincipal_Principal]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AccessControlEntryPrincipal] DROP CONSTRAINT [FK_AccessControlEntryPrincipal_Principal];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -62,9 +56,6 @@ IF OBJECT_ID(N'[dbo].[Principals]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[AccessControlEntries]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AccessControlEntries];
-GO
-IF OBJECT_ID(N'[dbo].[AccessControlEntryPrincipal]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AccessControlEntryPrincipal];
 GO
 
 -- --------------------------------------------------
@@ -148,8 +139,7 @@ CREATE TABLE [dbo].[Principals] (
     [CreatedAt] datetime  NULL,
     [Iss] nvarchar(max)  NULL,
     [Aud] nvarchar(max)  NULL,
-    [Sub] nvarchar(max)  NULL,
-    [TenantId] uniqueidentifier  NULL
+    [Sub] nvarchar(max)  NULL
 );
 GO
 
@@ -161,13 +151,6 @@ CREATE TABLE [dbo].[AccessControlEntries] (
     [IsSoftDeleted] bit  NULL,
     [CreatedAt] datetime  NULL,
     [IsActive] bit  NULL
-);
-GO
-
--- Creating table 'AccessControlEntryPrincipal'
-CREATE TABLE [dbo].[AccessControlEntryPrincipal] (
-    [AccessControlEntries_Id] uniqueidentifier  NOT NULL,
-    [Principals_Id] uniqueidentifier  NOT NULL
 );
 GO
 
@@ -215,12 +198,6 @@ GO
 ALTER TABLE [dbo].[AccessControlEntries]
 ADD CONSTRAINT [PK_AccessControlEntries]
     PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
--- Creating primary key on [AccessControlEntries_Id], [Principals_Id] in table 'AccessControlEntryPrincipal'
-ALTER TABLE [dbo].[AccessControlEntryPrincipal]
-ADD CONSTRAINT [PK_AccessControlEntryPrincipal]
-    PRIMARY KEY CLUSTERED ([AccessControlEntries_Id], [Principals_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -272,21 +249,6 @@ ON [dbo].[TenantInfos]
     ([Tenant_Id]);
 GO
 
--- Creating foreign key on [TenantId] in table 'Principals'
-ALTER TABLE [dbo].[Principals]
-ADD CONSTRAINT [FK_HorselessClaimsPrincipalTenant]
-    FOREIGN KEY ([TenantId])
-    REFERENCES [dbo].[Tenants]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_HorselessClaimsPrincipalTenant'
-CREATE INDEX [IX_FK_HorselessClaimsPrincipalTenant]
-ON [dbo].[Principals]
-    ([TenantId]);
-GO
-
 -- Creating foreign key on [TenantId] in table 'NugetPackages'
 ALTER TABLE [dbo].[NugetPackages]
 ADD CONSTRAINT [FK_TenantNugetPackage]
@@ -300,30 +262,6 @@ GO
 CREATE INDEX [IX_FK_TenantNugetPackage]
 ON [dbo].[NugetPackages]
     ([TenantId]);
-GO
-
--- Creating foreign key on [AccessControlEntries_Id] in table 'AccessControlEntryPrincipal'
-ALTER TABLE [dbo].[AccessControlEntryPrincipal]
-ADD CONSTRAINT [FK_AccessControlEntryPrincipal_AccessControlEntry]
-    FOREIGN KEY ([AccessControlEntries_Id])
-    REFERENCES [dbo].[AccessControlEntries]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Principals_Id] in table 'AccessControlEntryPrincipal'
-ALTER TABLE [dbo].[AccessControlEntryPrincipal]
-ADD CONSTRAINT [FK_AccessControlEntryPrincipal_Principal]
-    FOREIGN KEY ([Principals_Id])
-    REFERENCES [dbo].[Principals]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_AccessControlEntryPrincipal_Principal'
-CREATE INDEX [IX_FK_AccessControlEntryPrincipal_Principal]
-ON [dbo].[AccessControlEntryPrincipal]
-    ([Principals_Id]);
 GO
 
 -- --------------------------------------------------

@@ -19,6 +19,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         DNS_FQDN
     }
     
+    [Owned]
+    public class TenantIdentifierStrategyContainer
+    {
+        public List<TenantIdentifierStrategyName> TenantIdentifierStrategies { get; set; } = new List<TenantIdentifierStrategyName>();
+    }
     /// <summary>
     /// collects the strategies thta can be used to identify a tenant
     /// modelled as a wrapper for a collection payload
@@ -41,14 +46,13 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         /// TODO
         /// resolve this collection chail 
         /// </summary>
-        [NotMapped]
-        public ICollection<TenantIdentifierStrategyName> Strategies { get; set; } = new HashSet<TenantIdentifierStrategyName>();
+        public virtual TenantIdentifierStrategyContainer TenantIdentifierStrategyContainer { get; set; } = new TenantIdentifierStrategyContainer();
     }
 
 
     public partial class Tenant : IContentRowLevelSecured
     {
-        public TenantIdentifierStrategy TenantIdentifierStrategy { get; set; } 
+        public virtual TenantIdentifierStrategy TenantIdentifierStrategy { get; set; } 
 
         [NotMapped]
         public virtual ICollection<AccessControlEntry> AccessControlList { get; set; }
