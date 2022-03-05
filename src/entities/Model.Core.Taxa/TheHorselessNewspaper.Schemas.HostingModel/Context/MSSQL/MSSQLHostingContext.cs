@@ -10,6 +10,12 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
     internal partial class MSSQLHostingContext : THLNPHostingContext, IHostingModelContext
     {
         public DatabaseServerFamily SqlDialect { get; set; }
+
+        public DbSet<TenantIdentifierStrategy> TenantIdentifierStrategies { get; set; }
+
+        public DbSet<TenantIdentifierStrategyContainer> TenantIdentifierStrategyContainer { get; set; }
+
+
         #region finbuckle IMultiTenantDbContext concerns 
         /// <summary>
         /// as per https://www.finbuckle.com/MultiTenant/Docs/v6.5.1/EFCore#adding-multitenant-functionality-to-an-existing-dbcontext
@@ -51,6 +57,17 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
             // Configure all entity types marked with the [MultiTenant] data attribute
             builder.ConfigureMultiTenant();
+
+
+            builder.Entity<TenantIdentifierStrategy>()
+                .HasMany(m => m.TenantIdentifierStrategyContainers)
+                .WithOne(o => o.TenantIdentifierStrategy)
+                .HasForeignKey(fk => fk.TenantIdentifierStrategyId);
+
+            builder.Entity<TenantIdentifierStrategyContainer>()
+            .HasOne(o => o.TenantIdentifierStrategy)
+            .WithMany(o => o.TenantIdentifierStrategyContainers)
+            .HasForeignKey(fk => fk.TenantIdentifierStrategyId);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -18,7 +18,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         private readonly IConfiguration _configuration;
         public DatabaseServerFamily SqlDialect { get; set; }
 
+        public DbSet<TenantIdentifierStrategy> TenantIdentifierStrategies { get; set; }
 
+        public DbSet<TenantIdentifierStrategyContainer> TenantIdentifierStrategyContainers { get; set; }
         public MSSqlContentContext(DbContextOptions<MSSqlContentContext> options, Finbuckle.MultiTenant.ITenantInfo tenant, IConfiguration config, ILogger<MSSqlContentContext> logger = null) : base(options)
         {
             this.TenantInfo = tenant;
@@ -120,8 +122,16 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
             #endregion multitenant
 
-    
 
+            builder.Entity<TenantIdentifierStrategy>()
+                .HasMany(m => m.TenantIdentifierStrategyContainers)
+                .WithOne(o => o.TenantIdentifierStrategy)
+                .HasForeignKey(fk => fk.TenantIdentifierStrategyId);
+
+            builder.Entity<TenantIdentifierStrategyContainer>()
+                .HasOne(o => o.TenantIdentifierStrategy)
+                .WithMany(o => o.TenantIdentifierStrategyContainers)
+                .HasForeignKey(fk => fk.TenantIdentifierStrategyId);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

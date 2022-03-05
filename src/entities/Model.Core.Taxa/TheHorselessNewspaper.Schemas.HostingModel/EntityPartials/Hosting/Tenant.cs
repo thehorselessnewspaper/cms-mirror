@@ -20,10 +20,24 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         DNS_FQDN
     }
 
-    [Owned]
+    public class TenantIdentifierStrategyContainer
+    {
+        [Key]
+        [Column("TenantIdentifierStrategyContainerId")]
+        public Guid? Id { get; set; }
+        public TenantIdentifierStrategyName TenantIdentifierStrategyName { get; set; }
+
+        [ForeignKey(nameof(TenantIdentifierStrategy))]
+        public Guid? TenantIdentifierStrategyId { get; set; }
+
+        public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; }
+    }
+
+
     public class TenantIdentifierStrategy
     {
         [Key]
+        [Column("TenantIdentifierStrategyId")]
         public Guid Id { get; set; }
         public string DisplayName { get; set; } = string.Empty;
 
@@ -31,14 +45,23 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public bool? IsSoftDeleted { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
-        public ICollection<TenantIdentifierStrategyName> Strategies { get; set; } = new HashSet<TenantIdentifierStrategyName>();
+
+        [ForeignKey(nameof(Tenant))]
+
+        public Guid? TenantId { get; set; }
+
+        public Tenant? Tenant { get; set; }
+        /// TODO
+        /// resolve this collection chail 
+        /// </summary>
+        public virtual ICollection<TenantIdentifierStrategyContainer> TenantIdentifierStrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();
     }
 
     public partial class Tenant : IHostingRowLevelSecured
     {
-        public TenantIdentifierStrategy TenantIdentifierStrategy { get; set; }
+        public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; }
         public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
-        public byte[] Timestamp {get; set; }
+        public byte[] Timestamp { get; set; }
     }
 }

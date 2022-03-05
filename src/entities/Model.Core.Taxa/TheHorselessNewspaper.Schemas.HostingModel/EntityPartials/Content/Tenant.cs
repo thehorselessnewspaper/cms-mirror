@@ -18,23 +18,36 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         DNS_HOSTNAME,
         DNS_FQDN
     }
-    
-    [Owned]
+
+
     public class TenantIdentifierStrategyContainer
     {
-        public List<TenantIdentifierStrategyName> TenantIdentifierStrategies { get; set; } = new List<TenantIdentifierStrategyName>();
+        [Key]
+        [Column("TenantIdentifierStrategyContainerId")]
+        public Guid? Id { get; set; }
+
+        [ForeignKey(nameof(TenantIdentifierStrategy))]
+        public Guid? TenantIdentifierStrategyId { get; set; }
+
+        public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; }
+        public TenantIdentifierStrategyName TenantIdentifierStrategyName { get; set; }
     }
     /// <summary>
     /// collects the strategies thta can be used to identify a tenant
     /// modelled as a wrapper for a collection payload
     /// to avoid awkardness with mapping owned collections
     /// </summary>
-    [Owned]
+
     public class TenantIdentifierStrategy
     {
 
         [Key]
+        [Column("TenantIdentifierStrategyId")]
         public Guid Id { get; set; }
+
+
+        public Guid? TenantId { get; set; }
+        public Tenant? Tenant { get; set; }
         public string DisplayName { get; set; } = string.Empty;
 
         public string ObjectId { get; set; }
@@ -46,13 +59,13 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         /// TODO
         /// resolve this collection chail 
         /// </summary>
-        public virtual TenantIdentifierStrategyContainer TenantIdentifierStrategyContainer { get; set; } = new TenantIdentifierStrategyContainer();
+        public virtual ICollection<TenantIdentifierStrategyContainer> TenantIdentifierStrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();
     }
 
 
     public partial class Tenant : IContentRowLevelSecured
     {
-        public virtual TenantIdentifierStrategy TenantIdentifierStrategy { get; set; } 
+        public virtual TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; } 
 
         [NotMapped]
         public virtual ICollection<AccessControlEntry> AccessControlList { get; set; }
