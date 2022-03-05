@@ -129,7 +129,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
                 .HasForeignKey(fk => fk.TenantIdentifierStrategyId);
 
             builder.Entity<TenantIdentifierStrategyContainer>()
-                .HasOne(o => o.TenantIdentifierStrategy)
+                .HasOne<TenantIdentifierStrategy>(o => o.TenantIdentifierStrategy)
                 .WithMany(o => o.TenantIdentifierStrategyContainers)
                 .HasForeignKey(fk => fk.TenantIdentifierStrategyId);
         }

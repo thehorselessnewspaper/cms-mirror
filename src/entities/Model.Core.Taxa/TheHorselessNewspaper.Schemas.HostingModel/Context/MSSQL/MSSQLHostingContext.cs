@@ -65,9 +65,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
                 .HasForeignKey(fk => fk.TenantIdentifierStrategyId);
 
             builder.Entity<TenantIdentifierStrategyContainer>()
-            .HasOne(o => o.TenantIdentifierStrategy)
-            .WithMany(o => o.TenantIdentifierStrategyContainers)
-            .HasForeignKey(fk => fk.TenantIdentifierStrategyId);
+                .HasOne<TenantIdentifierStrategy>(o => o.TenantIdentifierStrategy)
+                .WithMany(o => o.TenantIdentifierStrategyContainers)
+                .HasForeignKey(fk => fk.TenantIdentifierStrategyId);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

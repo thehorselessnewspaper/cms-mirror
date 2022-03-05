@@ -56,19 +56,19 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                         }
                     }
                 },
-                //Principals = new List<HostingEntities.Principal>()
-                //{
-                //    new HostingEntities.Principal()
-                //    {
-                //        Id= Guid.NewGuid(),
-                //        ObjectId = Guid.NewGuid().ToString(),
-                //        DisplayName = "principal@tenant.com",
-                //        CreatedAt = DateTime.UtcNow,
-                //        Iss = "https://isuer.tenant.com",
-                //        Aud = "client-application",
-                //        Sub = "oauth-sub"
-                //    }
-                //}
+                Principals = new List<HostingEntities.Principal>()
+                {
+                    new HostingEntities.Principal()
+                    {
+                        Id= Guid.NewGuid(),
+                        ObjectId = Guid.NewGuid().ToString(),
+                        DisplayName = "principal@tenant.com",
+                        CreatedAt = DateTime.UtcNow,
+                        Iss = "https://isuer.tenant.com",
+                        Aud = "client-application",
+                        Sub = "oauth-sub"
+                    }
+                }
             };
 
             try
