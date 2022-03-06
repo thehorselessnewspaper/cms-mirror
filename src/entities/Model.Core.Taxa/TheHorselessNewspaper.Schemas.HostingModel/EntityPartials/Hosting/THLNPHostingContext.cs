@@ -18,10 +18,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
             base.OnModelCreating(builder);
 
             // Configure all entity types marked with the [MultiTenant] data attribute
-            builder.ConfigureMultiTenant();
-
-            // Configure an entity type to be multitenant.
-            builder.Entity<Finbuckle.MultiTenant.TenantInfo>().IsMultiTenant();
+            // TODO enable multitenant on the hosting context
+            // builder.ConfigureMultiTenant();
 
 
 

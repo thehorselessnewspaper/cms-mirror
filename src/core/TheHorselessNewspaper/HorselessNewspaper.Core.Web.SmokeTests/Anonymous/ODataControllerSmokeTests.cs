@@ -6,9 +6,12 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using Xunit;
 using TheHorselessNewspaper.HostingModel.DTO;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using Microsoft.Extensions.DependencyInjection;
+
 namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 {
     public class ODataControllerSmokeTests : IClassFixture<BaseWebIntegrationTest>
@@ -44,6 +47,37 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
             Exception ex = null;
             string responseContent = String.Empty;
 
+            // arrange
+            // insert a content collection
+
+            try
+            {
+                using (var scope = application.Services.CreateScope())
+                {
+                    var insertQueryOperator = _baseTest.GetIQueryableContentModelOperator<IQueryableContentModelOperator<ContentEntities.ContentCollection>>(scope);
+                    var insertResult = await insertQueryOperator.Create(
+                        new ContentEntities.ContentCollection()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = "Test Content Collection",
+                            IsPublished = true,
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            PublishedURL = "news"
+                        }
+                        );
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                ex = e;
+            }
+
+            Assert.Null(ex);
+
             try
             {
                 client.DefaultRequestHeaders.Add("Accept", "application/json;odata.metadata=none");
@@ -69,7 +103,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
             try
             {
 
-                var contentCollection = JsonConvert.DeserializeObject<OData<List<ContentCollection>>>(responseContent);
+                var contentCollection = JsonConvert.DeserializeObject<OData<List<ContentEntities.ContentCollection>>>(responseContent);
                 Assert.NotNull(contentCollection);
                 Assert.True(contentCollection.value.Count > 0);
             }

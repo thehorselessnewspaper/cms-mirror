@@ -56,7 +56,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             base.OnModelCreating(builder);
 
             // Configure all entity types marked with the [MultiTenant] data attribute
-            builder.ConfigureMultiTenant();
+            // TODO make multitenant work on the hosting context
+            // builder.ConfigureMultiTenant();
 
 
             builder.Entity<TenantIdentifierStrategy>()
