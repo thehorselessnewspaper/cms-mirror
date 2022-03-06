@@ -12,6 +12,7 @@ using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HorselessNewspaper.Web.Core.Authorization.Model.MultiTenant;
 using System.Collections.Generic;
+using HorselessNewspaper.Web.Core.Interfaces.Cache;
 
 namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 {
@@ -253,6 +254,17 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 {
                     _logger.LogInformation($"found existing deployed tenant {originEntity.DisplayName}");
 
+                    // validate tenant cache updated
+                    // get the tenant cache
+                    var tenantCache = _services.GetRequiredService<IHorselessCacheProvider<Guid, ContentModel.Tenant>>();
+                    _logger.LogInformation($"loaded tenant cache service");
+
+                    foreach(var contentModelTenant in contentModelTenants.Where(r => r.Id == originEntity.Id))
+                    {
+                        _logger.LogInformation($"updating tenant cache");
+                        tenantCache.Set(contentModelTenant.Id, contentModelTenant);
+                        _logger.LogInformation($"tenant cache updated with tenant={contentModelTenant.DisplayName}");
+                    }
                 }
 
 
@@ -294,7 +306,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             var contentModelTenantQueryResult = await contentModelTenantQuery.Read();
             var contentModelTenants = contentModelTenantQueryResult == null ? new List<HostingModel.TenantInfo>() : contentModelTenantQueryResult.ToList();
 
-            _logger.LogInformation($"read {contentModelTenants.Count()} content model tenant records");
+            _logger.LogInformation($"read {contentModelTenants.Count()} hosting model tenantinfo records");
             return contentModelTenants;
         }
 

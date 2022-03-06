@@ -153,6 +153,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     ex = e;
                 }
 
+                await Task.Delay(120000);
                 Assert.Null(ex);
 
             }

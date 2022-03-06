@@ -41,6 +41,11 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 response.Content.Headers.ContentType.ToString());
         }
 
+        /// <summary>
+        /// caveat - this test doesn't check for 
+        /// tenant scoping
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public async Task CanQueryContentCollection()
         {
