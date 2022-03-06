@@ -1,5 +1,4 @@
 using Finbuckle.MultiTenant;
-using HorselessNewspaper.Web.Core.Authorization.Model.MultiTenant;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +13,7 @@ using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
+using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
