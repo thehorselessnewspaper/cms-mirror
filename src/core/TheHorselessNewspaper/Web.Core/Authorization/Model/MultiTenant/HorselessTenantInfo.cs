@@ -8,7 +8,7 @@ using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntiti
 namespace HorselessNewspaper.Web.Core.Authorization.Model.MultiTenant
 {
     [Obsolete]
-    public  class HorselessTenantInfo : Finbuckle.MultiTenant.ITenantInfo
+    public  class HorselessTenantInfoObsolete : Finbuckle.MultiTenant.ITenantInfo
     {
         /// <summary>
         /// this is a DTO that accounts for 
@@ -16,7 +16,7 @@ namespace HorselessNewspaper.Web.Core.Authorization.Model.MultiTenant
         /// 
         /// you must consume this object after initializng a source payload
         /// </summary>
-        public HorselessTenantInfo()
+        public HorselessTenantInfoObsolete()
         {
             Payload = new HostingEntities.TenantInfo();
         }
@@ -25,7 +25,7 @@ namespace HorselessNewspaper.Web.Core.Authorization.Model.MultiTenant
         /// you MUST supply a payload
         /// </summary>
         /// <param name="payload"></param>
-        public HorselessTenantInfo(HostingEntities.TenantInfo payload)
+        public HorselessTenantInfoObsolete(HostingEntities.TenantInfo payload)
         {
             Payload = payload;
         }

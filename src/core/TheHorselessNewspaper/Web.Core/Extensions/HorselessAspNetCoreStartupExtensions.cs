@@ -1,5 +1,4 @@
 ﻿using Finbuckle.MultiTenant;
-using HorselessNewspaper.Web.Core.Authorization.Model.MultiTenant;
 using HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.ApplicationPartsLogger;
 using HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
@@ -22,6 +21,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.FeatureManagement;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
+using TheHorselessNewspaper.HostingModel.MultiTenant;
 using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 

@@ -1,6 +1,6 @@
 ﻿using Finbuckle.MultiTenant;
-using HorselessNewspaper.Web.Core.Authorization.Model.MultiTenant;
 using Microsoft.AspNetCore.Mvc;
+using TheHorselessNewspaper.HostingModel.MultiTenant;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controllers
 {

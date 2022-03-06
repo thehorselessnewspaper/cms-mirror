@@ -13,6 +13,7 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HorselessNewspaper.Web.Core.Authorization.Model.MultiTenant;
 using System.Collections.Generic;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
+using TheHorselessNewspaper.HostingModel.MultiTenant;
 
 namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 {
