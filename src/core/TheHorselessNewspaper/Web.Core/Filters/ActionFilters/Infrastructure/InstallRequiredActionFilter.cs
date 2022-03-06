@@ -28,6 +28,9 @@ namespace HorselessNewspaper.Web.Core.Filters.ActionFilters.Infrastructure
         const string signoutController = "HorselessCMS";
         const string signoutArea = "";
 
+        public bool IsActive { get; set; } = false;
+
+
         public InstallRequiredActionFilter(IHorselessCacheProvider<Guid, ContentEntities.Tenant> tenantCache, ILogger<InstallRequiredActionFilter> logger)
         {
             TenantCache = tenantCache;
@@ -46,7 +49,7 @@ namespace HorselessNewspaper.Web.Core.Filters.ActionFilters.Infrastructure
             string area = (string)context.RouteData.Values["area"];
             string controller = (string)context.RouteData.Values["controller"];
             string action = (string)context.RouteData.Values["action"];
-            if (await IsMustCompleteTenantSetup(isAdminPrincipal, area, controller, action))
+            if (IsActive && await IsMustCompleteTenantSetup(isAdminPrincipal, area, controller, action))
             {
                 _logger.LogWarning("tenant setup required. redirecting");
                 context.Result = new RedirectToRouteResult(

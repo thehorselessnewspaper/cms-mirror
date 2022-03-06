@@ -72,16 +72,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
             builder.UseEndpoints(options =>
             {
 
-                options.MapDynamicControllerRoute<HorselessRouteTransformer>("");
-                options.MapDynamicControllerRoute<HorselessRouteTransformer>("{controller:exists}/{action:exists}");
-                options.MapDynamicControllerRoute<HorselessRouteTransformer>("{area:exists}/{controller}/{action}");
-
-                options.MapDynamicControllerRoute<HorselessRouteTransformer>("{__tenant__}/{**slug}");
-                //options.MapControllerRoute(
-                //name: "Slugs",
-                //pattern: "{*slug}", new { controller = "Home", action = "Index" });
-
-
+                // options.MapDynamicControllerRoute<HorselessRouteTransformer>("{__tenant__}/{**slug}");
 
                 options.MapAreaControllerRoute(
                     name: "Installer",
@@ -93,11 +84,15 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
                 pattern: "{area:exists}/{controller=KeycloakController}/{action=Signin}/{id?}");
 
 
+                options.MapControllerRoute("defaultMultitenant", "{__tenant__}/{area:exists}/{controller=Home}/{action=Index}");
+
+
+                options.MapDynamicControllerRoute<HorselessRouteTransformer>("{__tenant__}/{**slug}");
+
+
                 options.MapControllerRoute(
                 name: "HorselessCMS",
                 pattern: "{controller=HorselessCMS}/{action=ViewTemplate}/{id?}");
-
-                options.MapControllerRoute("defaultMultitenant", "{__tenant__}/{area:exists}/{controller=Home}/{action=Index}");
 
                 options.MapControllers();
 

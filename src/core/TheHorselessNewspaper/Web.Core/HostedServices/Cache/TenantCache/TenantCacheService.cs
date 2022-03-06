@@ -24,6 +24,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
     {
         // as per https://stackoverflow.com/questions/63468682/how-to-stop-a-timer-created-in-a-net-core-controller
         private static readonly object _timerLock = new object();
+        private static int logicLock;
+
         private long _defaultTimerDelayInSeconds = 30;
 
         public long TimerDelayInSeconds { get; set; }
@@ -93,6 +95,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 {
                     return;
                 }
+
                 _timer.Change(Timeout.Infinite, Timeout.Infinite);
 
                 using (var innerScope = _services.CreateScope())
@@ -136,7 +139,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 if (hasLock)
                 {
                     Monitor.Exit(_timerLock);
-                    _timer.Change(GetTimespanForSeconds(0), GetTimespanForSeconds(TimerDelayInSeconds));
+                    _timer.Change(GetTimespanForSeconds(TimerDelayInSeconds), GetTimespanForSeconds(TimerDelayInSeconds));
                 }
             }
 
