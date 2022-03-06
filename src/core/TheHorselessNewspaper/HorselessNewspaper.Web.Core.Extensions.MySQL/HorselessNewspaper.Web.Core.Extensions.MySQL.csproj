@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.1" />
-    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.2.20220304.2" />
+    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.2.20220305.4" />
   </ItemGroup>
 
 </Project>
