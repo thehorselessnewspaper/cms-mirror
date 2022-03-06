@@ -7,7 +7,8 @@ using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntiti
 
 namespace HorselessNewspaper.Web.Core.Authorization.Model.MultiTenant
 {
-    public class HorselessTenantInfo : Finbuckle.MultiTenant.ITenantInfo
+    [Obsolete]
+    public  class HorselessTenantInfo : Finbuckle.MultiTenant.ITenantInfo
     {
         /// <summary>
         /// this is a DTO that accounts for 
