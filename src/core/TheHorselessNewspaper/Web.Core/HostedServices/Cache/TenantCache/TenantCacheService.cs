@@ -1,18 +1,16 @@
-﻿using Finbuckle.MultiTenant.Stores;
-using Finbuckle.MultiTenant;
+﻿using Finbuckle.MultiTenant;
+using Finbuckle.MultiTenant.Stores;
+using HorselessNewspaper.Web.Core.Interfaces.Cache;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
+using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
-using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using HorselessNewspaper.Web.Core.Authorization.Model.MultiTenant;
-using System.Collections.Generic;
-using HorselessNewspaper.Web.Core.Interfaces.Cache;
+using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
 namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 {
