@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 {
+    [Collection("DatabaseMutatingCollection")]
     public class ODataControllerSmokeTests : IClassFixture<BaseWebIntegrationTest>
     {
         private const string oDataResponseHeader = "application/json;odata.metadata=minimal;odata.streaming=true";

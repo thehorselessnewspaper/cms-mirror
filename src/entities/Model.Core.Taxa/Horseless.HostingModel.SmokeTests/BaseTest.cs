@@ -50,6 +50,8 @@ namespace Horseless.HostingModel.SmokeTests
 
             builder.Services.AddMultiTenant<HorselessTenantInfo>()
 
+
+            #region testing tenant setup
             .WithInMemoryStore(options =>
                 {
                     options.Tenants.Add(new HorselessTenantInfo()
@@ -62,6 +64,7 @@ namespace Horseless.HostingModel.SmokeTests
                 })
             .WithStaticStrategy("6da806b8-f7ab-4e3a-8833-7e834a40e9d0");
 
+            // for bootstrappingduring testing only
             builder.Services.AddSingleton<ITenantInfo>(new HorselessTenantInfo()
             {
                 ConnectionString = builder.Configuration.GetConnectionString("ContentModelConnection"),
@@ -69,6 +72,10 @@ namespace Horseless.HostingModel.SmokeTests
                 Identifier = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
                 Name = "the horseless phantom tenant"
             });
+
+            #endregion testing tenant setup
+
+
             builder.Services.UseHorselessContentModelMSSqlServer(builder.Configuration, builder.Configuration.GetConnectionString("ContentModelConnection"));
             builder.Services.UseHorselessHostingModelMSSqlServer(builder.Configuration, builder.Configuration.GetConnectionString("HostingModelConnection"));
 

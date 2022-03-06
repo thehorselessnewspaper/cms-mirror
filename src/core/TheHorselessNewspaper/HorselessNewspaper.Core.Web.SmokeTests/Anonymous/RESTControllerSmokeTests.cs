@@ -19,6 +19,7 @@ using System.Linq;
 
 namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 {
+    [Collection("DatabaseMutatingCollection")]
     public class RESTControllerSmokeTests : IClassFixture<BaseWebIntegrationTest>
     {
         private const string oDataResponseHeader = "application/json;odata.metadata=minimal;odata.streaming=true";

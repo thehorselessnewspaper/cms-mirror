@@ -124,6 +124,15 @@ namespace HorselessNewspaper.Web.Core.Extensions
                 })
                 .WithStaticStrategy("localhost");
 
+            // for bootstrappingduring testing only
+            serviceBuilder.Services.AddSingleton<ITenantInfo>(new HorselessTenantInfo()
+            {
+                ConnectionString = serviceBuilder.Configuration.GetConnectionString("ContentModelConnection"),
+                Id = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
+                Identifier = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
+                Name = "static default tenant"
+            });
+
             #endregion multitenancy as per https://www.finbuckle.com/MultiTenant/
 
             #region content collection query services
