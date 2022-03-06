@@ -34,7 +34,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     }
 
 
-    public class TenantIdentifierStrategy
+    public partial class TenantIdentifierStrategy
     {
         [Key]
         [Column("TenantIdentifierStrategyId")]
@@ -59,6 +59,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
     public partial class Tenant : IHostingRowLevelSecured
     {
+        public bool IsPublished { get; set; }
         public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; }
         public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();

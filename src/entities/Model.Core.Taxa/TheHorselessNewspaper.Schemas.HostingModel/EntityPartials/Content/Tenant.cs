@@ -65,13 +65,17 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
     public partial class Tenant : IContentRowLevelSecured
     {
+        public bool IsPublished { get; set; }
+
         public virtual TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; } 
 
-        [NotMapped]
+
         public virtual ICollection<AccessControlEntry> AccessControlList { get; set; }
 
-        [NotMapped]
         public virtual ICollection<Principal> Owners { get; set; }
+
+        public ICollection<Principal> Principals { get; set; } = new HashSet<Principal>();
+
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
     }
