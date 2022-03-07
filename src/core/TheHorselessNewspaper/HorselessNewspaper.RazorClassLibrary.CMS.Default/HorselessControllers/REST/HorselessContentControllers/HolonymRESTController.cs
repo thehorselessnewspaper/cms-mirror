@@ -92,7 +92,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
 
         [Consumes("application/json")]
-        [HttpPost("Update")]
+        [HttpPost("Update/{contentCollectionId}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Holonym))]
         [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(Holonym))]
         public async Task<ActionResult<Holonym>> Update([FromRoute] string contentCollectionId, [FromBody] Holonym contentCollection)

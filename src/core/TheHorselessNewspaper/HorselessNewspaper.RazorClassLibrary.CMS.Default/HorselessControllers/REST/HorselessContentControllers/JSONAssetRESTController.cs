@@ -1,5 +1,6 @@
 ﻿using Finbuckle.MultiTenant;
 using HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings;
+using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.Util;
 using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
 using Microsoft.AspNetCore.Http;
@@ -87,7 +88,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [Consumes("application/json")]
-        [HttpPost("Update")]
+        [HttpPost("Update/{contentCollectionId}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(JSONAsset))]
         [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(JSONAsset))]
         public async Task<ActionResult<JSONAsset>> Update([FromRoute] string contentCollectionId, [FromBody] JSONAsset contentCollection)
@@ -100,7 +101,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
             try
             {
-                var updateResult = await _contentCollectionService.Update(contentCollection);
+                List<string> updateablePropreties = await EntityReflectionHelpers.GetUpdateableProperties(contentCollection);
+
+                var updateResult = await _contentCollectionService.Update(contentCollection, updateablePropreties);
                 return Ok(updateResult);
             }
             catch (Exception ex)

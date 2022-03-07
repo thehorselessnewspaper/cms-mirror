@@ -1,5 +1,6 @@
 ﻿using Finbuckle.MultiTenant;
 using HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings;
+using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.Util;
 using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
 using Microsoft.AspNetCore.Http;
@@ -27,26 +28,82 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentModel.HorselessContent))]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ContentModel.HorselessContent))]
-        public Task<ActionResult<ContentModel.HorselessContent>> Create([FromBody] ContentModel.HorselessContent contentCollection)
+        public async Task<ActionResult<ContentModel.HorselessContent>> Create([FromBody] ContentModel.HorselessContent contentCollection)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var createResult = await _contentCollectionService.Create(contentCollection);
+                return Ok(createResult);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("GetByObjectId")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ContentModel.HorselessContent))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public Task<ActionResult<ContentModel.HorselessContent>> GetByObjectId([FromRoute] string objectId)
+        public async Task<ActionResult<ContentModel.HorselessContent>> GetByObjectId([FromRoute] string objectId)
         {
-            throw new NotImplementedException();
+            IActionResult result;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var testFind = await _contentCollectionService.GetByObjectId(objectId);
+
+                if (testFind == null)
+                {
+                    return NotFound();
+                }
+                else if (testFind == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    result = Ok(testFind);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(result);
         }
 
         [Consumes("application/json")]
-        [HttpPost("Update")]
+        [HttpPost("Update/{contentCollectionId}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentModel.HorselessContent))]
         [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(ContentModel.HorselessContent))]
-        public Task<ActionResult<ContentModel.HorselessContent>> Update([FromRoute] string contentCollectionId, [FromBody] ContentModel.HorselessContent contentCollection)
+        public async Task<ActionResult<ContentModel.HorselessContent>> Update([FromRoute] string contentCollectionId, [FromBody] ContentModel.HorselessContent contentCollection)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                List<string> updateablePropreties = await EntityReflectionHelpers.GetUpdateableProperties(contentCollection);
+
+                var updateResult = await _contentCollectionService.Update(contentCollection, updateablePropreties);
+                return Ok(updateResult);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

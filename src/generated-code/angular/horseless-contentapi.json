@@ -971,7 +971,7 @@
         }
       }
     },
-    "/api/ContentCollection/{objectId}": {
+    "/api/HorselessContentModel/ContentCollection/GetByObjectId": {
       "get": {
         "tags": [
           "ContentCollectionREST"
@@ -980,8 +980,7 @@
         "parameters": [
           {
             "name": "objectId",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "type": "string"
             }
@@ -1161,7 +1160,7 @@
         }
       }
     },
-    "/api/ContentCollection/Create": {
+    "/api/HorselessContentModel/ContentCollection/Create": {
       "post": {
         "tags": [
           "ContentCollectionREST"
@@ -1350,7 +1349,7 @@
         }
       }
     },
-    "/api/ContentCollection/Update": {
+    "/api/HorselessContentModel/ContentCollection/Update/{contentCollectionId}": {
       "post": {
         "tags": [
           "ContentCollectionREST"
@@ -2515,7 +2514,7 @@
         }
       }
     },
-    "/api/FilesystemAsset/Create": {
+    "/api/HorselessContentModel/FilesystemAsset/Create": {
       "post": {
         "tags": [
           "FilesystemAssetREST"
@@ -2704,7 +2703,7 @@
         }
       }
     },
-    "/api/FilesystemAsset/GetByObjectId": {
+    "/api/HorselessContentModel/FilesystemAsset/GetByObjectId": {
       "get": {
         "tags": [
           "FilesystemAssetREST"
@@ -2894,7 +2893,7 @@
         }
       }
     },
-    "/api/FilesystemAsset/Update": {
+    "/api/HorselessContentModel/FilesystemAsset/Update/{contentCollectionId}": {
       "post": {
         "tags": [
           "FilesystemAssetREST"
@@ -3219,7 +3218,7 @@
         }
       }
     },
-    "/api/Holonym/Create": {
+    "/api/HorselessContentModel/Holonym/Create": {
       "post": {
         "tags": [
           "HolonymREST"
@@ -3408,7 +3407,7 @@
         }
       }
     },
-    "/api/Holonym/GetByObjectId": {
+    "/api/HorselessContentModel/Holonym/GetByObjectId": {
       "get": {
         "tags": [
           "HolonymREST"
@@ -3598,7 +3597,7 @@
         }
       }
     },
-    "/api/Holonym/Update": {
+    "/api/HorselessContentModel/Holonym/Update/{contentCollectionId}": {
       "post": {
         "tags": [
           "HolonymREST"
@@ -3923,584 +3922,6 @@
         }
       }
     },
-    "/api/HorselessContent/Create": {
-      "post": {
-        "tags": [
-          "HorselessContentREST"
-        ],
-        "operationId": "HorselessContentRESTControllerCreate",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-              }
-            }
-          }
-        },
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json;odata.metadata=minimal;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=minimal;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=minimal": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=full;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=full;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=full": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=none;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=none;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=none": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/octet-stream": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Success",
-            "content": {
-              "application/json;odata.metadata=minimal;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=minimal;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=minimal": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=full;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=full;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=full": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=none;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=none;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=none": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/octet-stream": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/HorselessContent/GetByObjectId": {
-      "get": {
-        "tags": [
-          "HorselessContentREST"
-        ],
-        "operationId": "HorselessContentRESTControllerGetByObjectId",
-        "parameters": [
-          {
-            "name": "objectId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json;odata.metadata=minimal;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=minimal;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=minimal": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=full;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=full;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=full": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=none;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=none;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=none": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/octet-stream": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json;odata.metadata=minimal;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/MvcProblemDetails"
-                }
-              },
-              "application/json;odata.metadata=minimal;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/MvcProblemDetails"
-                }
-              },
-              "application/json;odata.metadata=minimal": {
-                "schema": {
-                  "$ref": "#/components/schemas/MvcProblemDetails"
-                }
-              },
-              "application/json;odata.metadata=full;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/MvcProblemDetails"
-                }
-              },
-              "application/json;odata.metadata=full;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/MvcProblemDetails"
-                }
-              },
-              "application/json;odata.metadata=full": {
-                "schema": {
-                  "$ref": "#/components/schemas/MvcProblemDetails"
-                }
-              },
-              "application/json;odata.metadata=none;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/MvcProblemDetails"
-                }
-              },
-              "application/json;odata.metadata=none;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/MvcProblemDetails"
-                }
-              },
-              "application/json;odata.metadata=none": {
-                "schema": {
-                  "$ref": "#/components/schemas/MvcProblemDetails"
-                }
-              },
-              "application/json;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/MvcProblemDetails"
-                }
-              },
-              "application/json;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/MvcProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MvcProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/MvcProblemDetails"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/MvcProblemDetails"
-                }
-              },
-              "application/octet-stream": {
-                "schema": {
-                  "$ref": "#/components/schemas/MvcProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MvcProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/HorselessContent/Update": {
-      "post": {
-        "tags": [
-          "HorselessContentREST"
-        ],
-        "operationId": "HorselessContentRESTControllerUpdate",
-        "parameters": [
-          {
-            "name": "contentCollectionId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-              }
-            }
-          }
-        },
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json;odata.metadata=minimal;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=minimal;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=minimal": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=full;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=full;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=full": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=none;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=none;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=none": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/octet-stream": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              }
-            }
-          },
-          "202": {
-            "description": "Success",
-            "content": {
-              "application/json;odata.metadata=minimal;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=minimal;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=minimal": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=full;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=full;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=full": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=none;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=none;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.metadata=none": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.streaming=true": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json;odata.streaming=false": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "application/octet-stream": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/HorselessContent/HorselessSession": {
       "get": {
         "tags": [
@@ -4627,7 +4048,7 @@
         }
       }
     },
-    "/api/HorselessSession/Create": {
+    "/api/HorselessContentModel/HorselessSession/Create": {
       "post": {
         "tags": [
           "HorselessSessionREST"
@@ -4816,7 +4237,7 @@
         }
       }
     },
-    "/api/HorselessSession/GetByObjectId": {
+    "/api/HorselessContentModel/HorselessSession/GetByObjectId": {
       "get": {
         "tags": [
           "HorselessSessionREST"
@@ -5006,7 +4427,7 @@
         }
       }
     },
-    "/api/HorselessSession/Update": {
+    "/api/HorselessContentModel/HorselessSession/Update/{contentCollectionId}": {
       "post": {
         "tags": [
           "HorselessSessionREST"
@@ -5331,7 +4752,7 @@
         }
       }
     },
-    "/api/JSONAsset/Create": {
+    "/api/HorselessContentModel/JSONAsset/Create": {
       "post": {
         "tags": [
           "JSONAssetREST"
@@ -5520,7 +4941,7 @@
         }
       }
     },
-    "/api/JSONAsset/GetByObjectId": {
+    "/api/HorselessContentModel/JSONAsset/GetByObjectId": {
       "get": {
         "tags": [
           "JSONAssetREST"
@@ -5710,7 +5131,7 @@
         }
       }
     },
-    "/api/JSONAsset/Update": {
+    "/api/HorselessContentModel/JSONAsset/Update/{contentCollectionId}": {
       "post": {
         "tags": [
           "JSONAssetREST"
@@ -6091,7 +5512,7 @@
         }
       }
     },
-    "/api/Meronym/Create": {
+    "/api/HorselessContentModel/Meronym/Create": {
       "post": {
         "tags": [
           "MeronymREST"
@@ -6280,7 +5701,7 @@
         }
       }
     },
-    "/api/Meronym/GetByObjectId": {
+    "/api/HorselessContentModel/Meronym/GetByObjectId": {
       "get": {
         "tags": [
           "MeronymREST"
@@ -6470,7 +5891,7 @@
         }
       }
     },
-    "/api/Meronym/Update": {
+    "/api/HorselessContentModel/Meronym/Update/{contentCollectionId}": {
       "post": {
         "tags": [
           "MeronymREST"
@@ -7049,7 +6470,7 @@
         }
       }
     },
-    "/api/MIMEType/Create": {
+    "/api/HorselessContentModel/MIMEType/Create": {
       "post": {
         "tags": [
           "MimeTypeREST"
@@ -7238,7 +6659,7 @@
         }
       }
     },
-    "/api/MIMEType/GetByObjectId": {
+    "/api/HorselessContentModel/MIMEType/GetByObjectId": {
       "get": {
         "tags": [
           "MimeTypeREST"
@@ -7428,7 +6849,7 @@
         }
       }
     },
-    "/api/MIMEType/Update": {
+    "/api/HorselessContentModel/MIMEType/Update/{contentCollectionId}": {
       "post": {
         "tags": [
           "MimeTypeREST"
@@ -8719,7 +8140,7 @@
         }
       }
     },
-    "/api/NavigationMenuItem/Create": {
+    "/api/HorselessContentModel/NavigationMenuItem/Create": {
       "post": {
         "tags": [
           "NavigationMenuItemREST"
@@ -8908,7 +8329,7 @@
         }
       }
     },
-    "/api/NavigationMenuItem/GetByObjectId": {
+    "/api/HorselessContentModel/NavigationMenuItem/GetByObjectId": {
       "get": {
         "tags": [
           "NavigationMenuItemREST"
@@ -9098,7 +8519,7 @@
         }
       }
     },
-    "/api/NavigationMenuItem/Update": {
+    "/api/HorselessContentModel/NavigationMenuItem/Update/{contentCollectionId}": {
       "post": {
         "tags": [
           "NavigationMenuItemREST"
@@ -9297,7 +8718,7 @@
         }
       }
     },
-    "/api/NavigationMenu/Create": {
+    "/api/HorselessContentModelModel/NavigationMenu/Create": {
       "post": {
         "tags": [
           "NavigationMenuREST"
@@ -9486,7 +8907,7 @@
         }
       }
     },
-    "/api/NavigationMenu/GetByObjectId": {
+    "/api/HorselessContentModelModel/NavigationMenu/GetByObjectId": {
       "get": {
         "tags": [
           "NavigationMenuREST"
@@ -9676,7 +9097,7 @@
         }
       }
     },
-    "/api/NavigationMenu/Update": {
+    "/api/HorselessContentModelModel/NavigationMenu/Update/{contentCollectionId}": {
       "post": {
         "tags": [
           "NavigationMenuREST"
@@ -9875,22 +9296,482 @@
         }
       }
     },
-    "/HorselessHosting/Query": {
+    "/HorselessHosting/Tenant": {
       "get": {
         "tags": [
           "Tenant"
         ],
-        "operationId": "TenantControllerQuery",
+        "operationId": "TenantControllerGet",
         "responses": {
           "200": {
             "description": "Success",
             "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/HostingEntitiesTenant"
                   }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
                 }
               }
             }
@@ -9908,11 +9789,131 @@
           "200": {
             "description": "Success",
             "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ContentEntitiesTenant"
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
                   }
                 }
               }
@@ -9921,7 +9922,82 @@
           "400": {
             "description": "Bad Request",
             "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MvcProblemDetails"
                 }
@@ -9931,7 +10007,82 @@
           "401": {
             "description": "Unauthorized",
             "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MvcProblemDetails"
                 }
@@ -9941,7 +10092,82 @@
           "403": {
             "description": "Forbidden",
             "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MvcProblemDetails"
                 }
@@ -9951,7 +10177,82 @@
           "404": {
             "description": "Not Found",
             "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MvcProblemDetails"
                 }
@@ -9971,11 +10272,131 @@
           "200": {
             "description": "Success",
             "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ContentEntitiesTenant"
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HostingEntitiesTenant"
                   }
                 }
               }
@@ -9984,7 +10405,82 @@
           "400": {
             "description": "Bad Request",
             "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MvcProblemDetails"
                 }
@@ -9994,7 +10490,82 @@
           "401": {
             "description": "Unauthorized",
             "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MvcProblemDetails"
                 }
@@ -10004,7 +10575,82 @@
           "403": {
             "description": "Forbidden",
             "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MvcProblemDetails"
                 }
@@ -10014,7 +10660,82 @@
           "404": {
             "description": "Not Found",
             "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MvcProblemDetails"
                 }
@@ -10024,7 +10745,1163 @@
         }
       }
     },
-    "/api/Tenant/Create": {
+    "/api/HorselessHostingModel/TenantInfo/Create": {
+      "post": {
+        "tags": [
+          "TenantInfoREST"
+        ],
+        "operationId": "TenantInfoRESTControllerCreate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HorselessHostingModel/TenantInfo/GetByObjectId": {
+      "get": {
+        "tags": [
+          "TenantInfoREST"
+        ],
+        "operationId": "TenantInfoRESTControllerGetByObjectId",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HorselessHostingModel/TenantInfo/Update/{entityCollectionId}": {
+      "post": {
+        "tags": [
+          "TenantInfoREST"
+        ],
+        "operationId": "TenantInfoRESTControllerUpdate",
+        "parameters": [
+          {
+            "name": "entityCollectionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Success",
+            "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HorselessHostingModel/Tenant/Create": {
+      "post": {
+        "tags": [
+          "TenantREST"
+        ],
+        "operationId": "TenantRESTControllerCreate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HostingEntitiesTenant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HorselessHostingModel/Tenant/GetByObjectId": {
+      "get": {
+        "tags": [
+          "TenantREST"
+        ],
+        "operationId": "TenantRESTControllerGetByObjectId",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HorselessHostingModel/Tenant/Update/{entityCollectionId}": {
+      "post": {
+        "tags": [
+          "TenantREST"
+        ],
+        "operationId": "TenantRESTControllerUpdate",
+        "parameters": [
+          {
+            "name": "entityCollectionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HostingEntitiesTenant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Success",
+            "content": {
+              "application/json;odata.metadata=minimal;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=minimal;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=minimal": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=full;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=full": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=none;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.metadata=none": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.streaming=true": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json;odata.streaming=false": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostingEntitiesTenant"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HorselessContentModel/Tenant/Create": {
       "post": {
         "tags": [
           "TenantREST"
@@ -10213,7 +12090,7 @@
         }
       }
     },
-    "/api/Tenant/GetByObjectId": {
+    "/api/HorselessContentModel/Tenant/GetByObjectId": {
       "get": {
         "tags": [
           "TenantREST"
@@ -10403,7 +12280,7 @@
         }
       }
     },
-    "/api/Tenant/Update": {
+    "/api/HorselessContentModel/Tenant/Update/{contentCollectionId}": {
       "post": {
         "tags": [
           "TenantREST"
@@ -10629,6 +12506,10 @@
             "format": "date-time",
             "nullable": true
           },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
+          },
           "scope": {
             "$ref": "#/components/schemas/ContentEntitiesACEPermissionScope"
           },
@@ -10638,15 +12519,23 @@
           "permissionType": {
             "$ref": "#/components/schemas/ContentEntitiesACEPermissionType"
           },
-          "commonScopeSubjectPrincipals": {
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
-            "nullable": true
-          },
-          "isActive": {
-            "type": "boolean",
             "nullable": true
           }
         },
@@ -10782,6 +12671,11 @@
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -10841,6 +12735,11 @@
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
             "nullable": true
           }
         },
@@ -10905,53 +12804,11 @@
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ContentEntitiesHorselessClaimsPrincipal": {
-        "type": "object",
-        "properties": {
-          "id": {
+          },
+          "timestamp": {
             "type": "string",
-            "format": "uuid"
-          },
-          "displayName": {
-            "type": "string",
+            "format": "byte",
             "nullable": true
-          },
-          "objectId": {
-            "type": "string",
-            "nullable": true
-          },
-          "isSoftDeleted": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "iss": {
-            "type": "string",
-            "nullable": true
-          },
-          "aud": {
-            "type": "string",
-            "nullable": true
-          },
-          "sub": {
-            "type": "string",
-            "nullable": true
-          },
-          "tenantId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "tenant": {
-            "$ref": "#/components/schemas/ContentEntitiesTenant"
           }
         },
         "additionalProperties": false
@@ -11036,6 +12893,11 @@
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -11097,6 +12959,11 @@
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -11152,6 +13019,11 @@
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
             "nullable": true
           }
         },
@@ -11209,6 +13081,11 @@
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -11260,6 +13137,11 @@
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
             "nullable": true
           }
         },
@@ -11349,6 +13231,11 @@
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -11437,6 +13324,11 @@
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -11477,8 +13369,24 @@
             "type": "string",
             "nullable": true
           },
-          "horselessClaimsPrincipal": {
-            "$ref": "#/components/schemas/ContentEntitiesHorselessClaimsPrincipal"
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -11563,6 +13471,11 @@
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -11639,6 +13552,11 @@
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
             "nullable": true
           }
         },
@@ -11717,13 +13635,6 @@
             "format": "date-time",
             "nullable": true
           },
-          "horselessClaimsPrincipals": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesHorselessClaimsPrincipal"
-            },
-            "nullable": true
-          },
           "contentCollections": {
             "type": "array",
             "items": {
@@ -11731,12 +13642,11 @@
             },
             "nullable": true
           },
-          "tenantIdentifierStrategies": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesTenantIdentifierStrategy"
-            },
-            "nullable": true
+          "isPublished": {
+            "type": "boolean"
+          },
+          "tenantIdentifierStrategy": {
+            "$ref": "#/components/schemas/ContentEntitiesTenantIdentifierStrategy"
           },
           "accessControlList": {
             "type": "array",
@@ -11751,6 +13661,18 @@
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
+          },
+          "principals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
+            },
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -11761,6 +13683,14 @@
           "id": {
             "type": "string",
             "format": "uuid"
+          },
+          "tenantId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "tenant": {
+            "$ref": "#/components/schemas/ContentEntitiesTenant"
           },
           "displayName": {
             "type": "string",
@@ -11779,7 +13709,33 @@
             "format": "date-time",
             "nullable": true
           },
-          "strategy": {
+          "tenantIdentifierStrategyContainers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesTenantIdentifierStrategyContainer"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContentEntitiesTenantIdentifierStrategyContainer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "tenantIdentifierStrategyId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "tenantIdentifierStrategy": {
+            "$ref": "#/components/schemas/ContentEntitiesTenantIdentifierStrategy"
+          },
+          "tenantIdentifierStrategyName": {
             "$ref": "#/components/schemas/ContentEntitiesTenantIdentifierStrategyName"
           }
         },
@@ -12016,7 +13972,19 @@
           "permissionType": {
             "$ref": "#/components/schemas/HostingEntitiesACEPermissionType"
           },
-          "subjectPrincipals": {
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesPrincipal"
@@ -12027,8 +13995,16 @@
             "type": "string",
             "format": "uuid"
           },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
           "objectId": {
             "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
             "nullable": true
           },
           "createdAt": {
@@ -12036,11 +14012,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "displayName": {
-            "type": "string",
-            "nullable": true
-          },
-          "isSoftDeleted": {
+          "isActive": {
             "type": "boolean",
             "nullable": true
           }
@@ -12085,132 +14057,6 @@
         "type": "integer",
         "format": "int32"
       },
-      "HostingEntitiesHorselessClaimsPrincipal": {
-        "type": "object",
-        "properties": {
-          "accessControlList": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
-            },
-            "nullable": true
-          },
-          "owners": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
-            },
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "displayName": {
-            "type": "string",
-            "nullable": true
-          },
-          "objectId": {
-            "type": "string",
-            "nullable": true
-          },
-          "isSoftDeleted": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "iss": {
-            "type": "string",
-            "nullable": true
-          },
-          "aud": {
-            "type": "string",
-            "nullable": true
-          },
-          "sub": {
-            "type": "string",
-            "nullable": true
-          },
-          "tenantId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "tenant": {
-            "$ref": "#/components/schemas/HostingEntitiesTenant"
-          }
-        },
-        "additionalProperties": false
-      },
-      "HostingEntitiesHost": {
-        "type": "object",
-        "properties": {
-          "accessControlList": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
-            },
-            "nullable": true
-          },
-          "owners": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
-            },
-            "nullable": true
-          },
-          "isSoftDeleted": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "tcpHost": {
-            "type": "string",
-            "nullable": true
-          },
-          "isTenanantDiscriminator": {
-            "type": "string",
-            "nullable": true
-          },
-          "routingDiscriminatorId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "objectId": {
-            "type": "string",
-            "nullable": true
-          },
-          "displayName": {
-            "type": "string",
-            "nullable": true
-          },
-          "htmlLayoutFilename": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "httpPort": {
-            "type": "string",
-            "nullable": true
-          },
-          "routingDiscriminator": {
-            "$ref": "#/components/schemas/HostingEntitiesRoutingDiscriminator"
-          }
-        },
-        "additionalProperties": false
-      },
       "HostingEntitiesKeyCloakConfiguration": {
         "type": "object",
         "properties": {
@@ -12230,6 +14076,11 @@
           },
           "isSoftDeleted": {
             "type": "boolean",
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
             "nullable": true
           },
           "id": {
@@ -12276,12 +14127,98 @@
         },
         "additionalProperties": false
       },
-      "HostingEntitiesPrincipal": {
-        "required": [
-          "objectId"
-        ],
+      "HostingEntitiesNugetPackage": {
         "type": "object",
         "properties": {
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
+            },
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "packageName": {
+            "type": "string",
+            "nullable": true
+          },
+          "packageId": {
+            "type": "string",
+            "nullable": true
+          },
+          "publisher": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenantId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "tenant": {
+            "$ref": "#/components/schemas/HostingEntitiesTenant"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HostingEntitiesPrincipal": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "accessControlList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
+            },
+            "nullable": true
+          },
           "id": {
             "type": "string",
             "format": "uuid"
@@ -12291,7 +14228,8 @@
             "nullable": true
           },
           "objectId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "isSoftDeleted": {
             "type": "boolean",
@@ -12317,82 +14255,14 @@
         },
         "additionalProperties": false
       },
-      "HostingEntitiesRoutingDiscriminator": {
-        "type": "object",
-        "properties": {
-          "accessControlList": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
-            },
-            "nullable": true
-          },
-          "owners": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
-            },
-            "nullable": true
-          },
-          "isSoftDeleted": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "isActive": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "objectId": {
-            "type": "string",
-            "nullable": true
-          },
-          "displayName": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "tenantId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "tenant": {
-            "$ref": "#/components/schemas/HostingEntitiesTenant"
-          },
-          "hosts": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesHost"
-            },
-            "nullable": true
-          },
-          "uriPaths": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesUriPath"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "HostingEntitiesTenant": {
         "type": "object",
         "properties": {
-          "tenantIdentifierStrategies": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesTenantIdentifierStrategy"
-            },
-            "nullable": true
+          "isPublished": {
+            "type": "boolean"
+          },
+          "tenantIdentifierStrategy": {
+            "$ref": "#/components/schemas/HostingEntitiesTenantIdentifierStrategy"
           },
           "accessControlList": {
             "type": "array",
@@ -12406,6 +14276,18 @@
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesPrincipal"
             },
+            "nullable": true
+          },
+          "principals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
+            },
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
             "nullable": true
           },
           "id": {
@@ -12429,17 +14311,10 @@
             "format": "date-time",
             "nullable": true
           },
-          "horselessClaimsPrincipals": {
+          "nugetPackages": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/HostingEntitiesHorselessClaimsPrincipal"
-            },
-            "nullable": true
-          },
-          "routingDiscriminators": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesRoutingDiscriminator"
+              "$ref": "#/components/schemas/HostingEntitiesNugetPackage"
             },
             "nullable": true
           },
@@ -12456,8 +14331,63 @@
       "HostingEntitiesTenantIdentifierStrategy": {
         "type": "object",
         "properties": {
-          "strategy": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "tenantId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "tenant": {
+            "$ref": "#/components/schemas/HostingEntitiesTenant"
+          },
+          "tenantIdentifierStrategyContainers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesTenantIdentifierStrategyContainer"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "HostingEntitiesTenantIdentifierStrategyContainer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "tenantIdentifierStrategyName": {
             "$ref": "#/components/schemas/HostingEntitiesTenantIdentifierStrategyName"
+          },
+          "tenantIdentifierStrategyId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "tenantIdentifierStrategy": {
+            "$ref": "#/components/schemas/HostingEntitiesTenantIdentifierStrategy"
           }
         },
         "additionalProperties": false
@@ -12487,6 +14417,11 @@
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesPrincipal"
             },
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
             "nullable": true
           },
           "id": {
@@ -12551,74 +14486,6 @@
         },
         "additionalProperties": false
       },
-      "HostingEntitiesUriPath": {
-        "type": "object",
-        "properties": {
-          "accessControlList": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
-            },
-            "nullable": true
-          },
-          "owners": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
-            },
-            "nullable": true
-          },
-          "isSoftDeleted": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "absoluteURL": {
-            "type": "string",
-            "nullable": true
-          },
-          "isTenantDiscriminator": {
-            "type": "string",
-            "nullable": true
-          },
-          "routingDiscriminatorId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "objectId": {
-            "type": "string",
-            "nullable": true
-          },
-          "displayName": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "httpPort": {
-            "type": "string",
-            "nullable": true
-          },
-          "httpScheme": {
-            "type": "string",
-            "nullable": true
-          },
-          "tcpHost": {
-            "type": "string",
-            "nullable": true
-          },
-          "routingDiscriminator": {
-            "$ref": "#/components/schemas/HostingEntitiesRoutingDiscriminator"
-          }
-        },
-        "additionalProperties": false
-      },
       "HostingEntitiesWebAPITenantInfo": {
         "type": "object",
         "properties": {
@@ -12634,6 +14501,11 @@
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesPrincipal"
             },
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
             "nullable": true
           },
           "id": {

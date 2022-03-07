@@ -41,7 +41,7 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Controller
 
 
         [Consumes("application/json")]
-        [HttpPost("Update")]
+        [HttpPost("Update/{contentCollectionId}")]
 
         Task<ActionResult<Entity>> Update([FromRoute] string contentCollectionId, [FromBody] Entity contentCollection);
     }

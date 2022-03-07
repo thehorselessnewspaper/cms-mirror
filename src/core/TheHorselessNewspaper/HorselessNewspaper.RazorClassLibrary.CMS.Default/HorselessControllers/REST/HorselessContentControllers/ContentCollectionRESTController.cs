@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings;
+using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.Util;
+
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
     [ApiController]
@@ -25,7 +27,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             CurrentTenant = tenantInfo;
         }
 
-        [HttpGet("{objectId}")]
+        [HttpGet("GetByObjectId")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ContentModel.ContentCollection))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ContentModel.ContentCollection>> GetByObjectId(string objectId)
@@ -86,7 +88,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [Consumes("application/json")]
-        [HttpPost("Update")]
+        [HttpPost("Update/{contentCollectionId}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentModel.ContentCollection))]
         [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(ContentModel.ContentCollection))]
         public async Task<ActionResult<ContentModel.ContentCollection>> Update([FromRoute] string contentCollectionId, [FromBody] ContentModel.ContentCollection contentCollection)
@@ -98,7 +100,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
             try
             {
-                var updateResult = await _contentCollectionService.Update(contentCollection);
+                List<string> updateablePropreties = await EntityReflectionHelpers.GetUpdateableProperties(contentCollection);
+
+                var updateResult = await _contentCollectionService.Update(contentCollection, updateablePropreties);
                 return Ok(updateResult);
             }
             catch (Exception ex)
