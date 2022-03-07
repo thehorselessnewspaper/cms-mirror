@@ -40,69 +40,67 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
             serviceBuilder.Services.AddFeatureManagement();
 
-            // todo - why is this here
-            serviceBuilder.AddRazorRuntimeCompilation = true;
-
 
             // as per https://docs.microsoft.com/en-us/archive/msdn-magazine/2016/september/asp-net-core-feature-slices-for-asp-net-core-mvc
             // as per https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/areas?view=aspnetcore-6.0
-            services.Configure((Action<RazorViewEngineOptions>)(o =>
-            {
+            //services.Configure((Action<RazorViewEngineOptions>)(o =>
+            //{
 
-                // o.ViewLocationFormats.Clear();
+            //    // o.ViewLocationFormats.Clear();
 
-                // configure loading HorselessViews
-                // TODO bugfix required
-                // can only discover HorselessViews folder if it already has views
+            //    // configure loading HorselessViews
+            //    // TODO bugfix required
+            //    // can only discover HorselessViews folder if it already has views
 
-                //var currentDir = Directory.GetCurrentDirectory();
-                //Matcher matcher = new();
-                //matcher.AddInclude("../**/HorselessViews/**/*.cshtml");
-                //foreach (var result in matcher.GetResultsInFullPath(@"..\"))
-                //{
-                //    var split = result.Split(Path.DirectorySeparatorChar, 255);      
-                //    var path = string.Empty;
-                //    foreach (var trimmed in split.Take(split.Count() - 1))
-                //    {
-                //        path = path + trimmed + "/";
-                //    }
+            //    //var currentDir = Directory.GetCurrentDirectory();
+            //    //Matcher matcher = new();
+            //    //matcher.AddInclude("../**/HorselessViews/**/*.cshtml");
+            //    //foreach (var result in matcher.GetResultsInFullPath(@"..\"))
+            //    //{
+            //    //    var split = result.Split(Path.DirectorySeparatorChar, 255);      
+            //    //    var path = string.Empty;
+            //    //    foreach (var trimmed in split.Take(split.Count() - 1))
+            //    //    {
+            //    //        path = path + trimmed + "/";
+            //    //    }
 
-                //    if (path.Contains("shared",StringComparison.InvariantCultureIgnoreCase))
-                //    {
-                //        var sharedPath = $"{path}" + @"/{0}" + RazorViewEngine.ViewExtension;
-                //        o.ViewLocationFormats.Add(sharedPath);
-                //    }
-                //    else
-                //    {
-                //        string item = $"{path}" + @"{1}/{0}" + RazorViewEngine.ViewExtension;
-                //        o.ViewLocationFormats.Add(item);
-                //    }
+            //    //    if (path.Contains("shared",StringComparison.InvariantCultureIgnoreCase))
+            //    //    {
+            //    //        var sharedPath = $"{path}" + @"/{0}" + RazorViewEngine.ViewExtension;
+            //    //        o.ViewLocationFormats.Add(sharedPath);
+            //    //    }
+            //    //    else
+            //    //    {
+            //    //        string item = $"{path}" + @"{1}/{0}" + RazorViewEngine.ViewExtension;
+            //    //        o.ViewLocationFormats.Add(item);
+            //    //    }
 
 
-                //}
+            //    //}
 
-                o.ViewLocationFormats.Add
-                    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/HorselessViews/{1}/{0}" + RazorViewEngine.ViewExtension);
-                o.ViewLocationFormats.Add
-                    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/HorselessViews/Shared/{0}" + RazorViewEngine.ViewExtension);
+            //    //o.ViewLocationFormats.Add
+            //    //    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/HorselessViews/{1}/{0}" + RazorViewEngine.ViewExtension);
+            //    //o.ViewLocationFormats.Add
+            //    //    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/HorselessViews/Shared/{0}" + RazorViewEngine.ViewExtension);
 
-                o.ViewLocationFormats.Add
-                    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
-                o.ViewLocationFormats.Add
-                    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
+            //    //o.ViewLocationFormats.Add
+            //    //    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
+            //    //o.ViewLocationFormats.Add
+            //    //    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
 
-                o.PageViewLocationFormats.Add
-                    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
-                o.PageViewLocationFormats.Add
-                    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
+            //    //o.PageViewLocationFormats.Add
+            //    //    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
+            //    //o.PageViewLocationFormats.Add
+            //    //    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
 
-                o.ViewLocationFormats.Add
-                    ("~/../HorselessNewspaper.Web.Core.Auth.Keycloak/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
-                o.ViewLocationFormats.Add
-                    ("~/../HorselessNewspaper.Web.Core.Auth.Keycloak/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
-            })
+            //    //o.ViewLocationFormats.Add
+            //    //    ("~/../HorselessNewspaper.Web.Core.Auth.Keycloak/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
+            //    //o.ViewLocationFormats.Add
+            //    //    ("~/../HorselessNewspaper.Web.Core.Auth.Keycloak/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
+            //})
 
-            );
+            //);
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             #region multitenancy as per https://www.finbuckle.com/MultiTenant/

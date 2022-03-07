@@ -117,15 +117,15 @@ builder.Services.AddSwaggerGen(options =>
 
 });
 
-// this hardcodes a static reference to the default horseless razor class library
-// i am sorry - the hoped for benefit is that this will always have a default implementation
-// .AddApplicationPart(typeof(HorselessCMSController).Assembly);
+//// this hardcodes a static reference to the default horseless razor class library
+//// i am sorry - the hoped for benefit is that this will always have a default implementation
+//// .AddApplicationPart(typeof(HorselessCMSController).Assembly);
 
-builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
-{
-    options.FileProviders.Add(
-            new EmbeddedFileProvider(typeof(HorselessCMSController).Assembly));
-});
+//builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
+//{
+//    options.FileProviders.Add(
+//            new EmbeddedFileProvider(typeof(HorselessCMSController).Assembly));
+//});
 
 
 // as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/docs/keycloak.md

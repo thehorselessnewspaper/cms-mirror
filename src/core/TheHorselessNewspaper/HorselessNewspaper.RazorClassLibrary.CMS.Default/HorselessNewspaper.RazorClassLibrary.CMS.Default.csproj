@@ -25,6 +25,7 @@
 
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.2" />
 		<PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.8" />
 		<PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.1.0">
 			<PrivateAssets>all</PrivateAssets>
@@ -42,19 +43,12 @@
 		<Folder Include="wwwroot\js\horseless-elements\" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Content Remove="Angular\horseless-elements\node_modules\**" />
-		<Compile Remove="Angular\horseless-elements\node_modules\**" />
-		<EmbeddedResource Remove="Angular\horseless-elements\node_modules\**" />
-		<None Remove="Angular\horseless-elements\node_modules\**" />
-	</ItemGroup>
-
 
 	<ItemGroup>
-		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.3.220307.1" />
+		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.3.220307.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.2" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.2.20220307.1" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.2.20220307.3" />
 	</ItemGroup>
 
 	<ItemGroup>

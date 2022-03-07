@@ -89,10 +89,13 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("{__tenant__}/{**slug}");
 
-
                 options.MapControllerRoute(
-                name: "HorselessCMS",
-                pattern: "{controller=HorselessCMS}/{action=ViewTemplate}/{id?}");
+                  name: "default",
+                  pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                //options.MapControllerRoute(
+                //name: "HorselessCMS",
+                //pattern: "{controller=HorselessCMS}/{action=ViewTemplate}/{id?}");
 
                 options.MapControllers();
 

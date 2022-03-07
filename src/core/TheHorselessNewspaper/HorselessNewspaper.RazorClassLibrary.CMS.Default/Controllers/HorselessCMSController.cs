@@ -72,7 +72,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
         }
 
         [HttpPost("~/SignIn")]
-        public async Task<IActionResult> SignIn([FromForm] string provider)
+        public async Task<IActionResult> SignIn([FromForm] string provider, [FromForm] string returnUrl)
         {
             // Note: the "provider" parameter corresponds to the external
             // authentication provider choosen by the user agent.
@@ -94,12 +94,12 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
             // IOException: IDX20804: Unable to retrieve document from: 'System.String'.
             try
             {
-                var challengeResult = Challenge(new AuthenticationProperties { RedirectUri = "/" }, provider);
+                var challengeResult = Challenge(new AuthenticationProperties { RedirectUri = returnUrl }, provider);
                 return challengeResult;
             }
             catch(Exception ex)
             {
-                return Redirect("/");
+                return Redirect(returnUrl);
             }
         }
 
@@ -115,9 +115,11 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
             {
                 // return await Task.FromResult(View("ViewTemplate",));
                 // TODO convert this reference into a devops productoin environment configurable feture toggle
-                return await Task.FromResult(RedirectToAction(actionName: "SignIn"));
+                // return await Task.FromResult(RedirectToAction(actionName: "SignIn"));
                 // return RedirectToRoute(new { action = "signin", controller = "KeyCloakAuthentication", area = "Authentication" });
             }
+
+            return View();
         }
 
         [HttpPost("Signout")]
