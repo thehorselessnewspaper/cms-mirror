@@ -1,4 +1,5 @@
 ﻿using Finbuckle.MultiTenant;
+using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.Util;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
 using HorselessNewspaper.Web.Core.Interfaces.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -97,7 +98,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
             try
             {
-                var updateResult = await EntityCollectionService.Update(entityCollection);
+                List<string> updateablePropreties = await EntityReflectionHelpers.GetUpdateableProperties(entityCollection);
+
+                var updateResult = await EntityCollectionService.Update(entityCollection, updateablePropreties);
                 return Ok(updateResult);
             }
             catch (Exception ex)
@@ -105,5 +108,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
                 return BadRequest(ex.Message);
             }
         }
+
+
     }
 }

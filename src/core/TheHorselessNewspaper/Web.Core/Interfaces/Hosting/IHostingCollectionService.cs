@@ -27,6 +27,6 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Hosting
 
         public Task<IQueryable<Entity>> Query();
 
-        public Task<Entity> Update([FromBody] Entity contentCollection);
+        public Task<Entity> Update([FromBody] Entity contentCollection, List<string> targetProperties = null);
     }
 }

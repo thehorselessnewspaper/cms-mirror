@@ -90,13 +90,13 @@ namespace HorselessNewspaper.Web.Core.Model.Query.HostingCollection
             return result;
         }
 
-        public async Task<Entity> Update([FromBody] Entity contentCollection)
+        public async Task<Entity> Update([FromBody] Entity contentCollection, List<string> targetProperties = null)
         {
             Entity result;
 
             try
             {
-                result = await _hostingModelService.Update(contentCollection);
+                result = await _hostingModelService.Update(contentCollection, targetProperties);
             }
             catch (Exception ex)
             {

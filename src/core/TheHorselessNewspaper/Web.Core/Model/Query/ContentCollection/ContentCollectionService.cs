@@ -84,13 +84,13 @@ namespace HorselessNewspaper.Web.Core.Model.Query.ContentCollection
             return result;
         }
 
-        public async Task<Entity> Update([FromBody] Entity contentCollection)
+        public async Task<Entity> Update([FromBody] Entity contentCollection, List<string> targetProperties = null)
         {
             Entity result;
 
             try
             {
-                result = await _contentModelService.Update(contentCollection);
+                result = await _contentModelService.Update(contentCollection, targetProperties);
             }
             catch (Exception ex)
             {

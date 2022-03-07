@@ -123,10 +123,10 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                         tenantInfo.Tenant_Id = hostingTenantsReadResult.First().Id;
 
                         route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANTINFO + $"/Update/{tenantInfo.Id}";
-
+                        var jsoncontent = GetJsonContent<HostingModel.TenantInfo>(tenantInfo);
                         postRequest = new HttpRequestMessage(HttpMethod.Post, route)
                         {
-                            Content = GetJsonContent<HostingModel.TenantInfo>(tenantInfo)
+                            Content = jsoncontent
                         };
 
                         // act
@@ -153,7 +153,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     ex = e;
                 }
 
-                for (int i = 0; i < 100; i++)
+                for (int i = 0; i < 50; i++)
                 {
                     await Task.Delay(1200);
                 }
@@ -176,7 +176,8 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 CreatedAt = DateTime.UtcNow,
                 DisplayName = "Test Tenant - Can Create Hosting Tenant",
                 IsSoftDeleted = false,
-                ObjectId = Guid.NewGuid().ToString()
+                ObjectId = Guid.NewGuid().ToString(),
+                Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
             };
         }
 
