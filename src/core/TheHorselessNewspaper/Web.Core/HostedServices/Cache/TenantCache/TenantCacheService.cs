@@ -83,6 +83,55 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
         private async void HandleTimerElapsed(object? state)
         {
+            _timer.Change(Timeout.Infinite, Timeout.Infinite);
+            using (var innerScope = _services.CreateScope())
+            {
+                try
+                {
+                    // collect the content model tenants
+                    var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(innerScope);
+
+                    IEnumerable<ContentModel.Tenant> tenantList = await contentModelTenantQuery.Read(r => r.IsSoftDeleted == false);
+
+                    List<ContentModel.Tenant> contentModelTenants = tenantList.ToList();
+
+                    _logger.LogInformation($"read {contentModelTenants.Count()} content model tenant records");
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError($"problem getting tenants {e.Message}");
+                    _timer.Change(GetTimespanForSeconds(TimerDelayInSeconds), GetTimespanForSeconds(TimerDelayInSeconds));
+                }
+
+            }
+
+
+            // retrieve tenants from the hosting collection
+            using (var scope = _services.CreateScope())
+            {
+                try
+                {
+
+                    await HandleScopedLogic(scope);
+
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError($"problem updating tenant cache {e.Message}");
+                    _timer.Change(GetTimespanForSeconds(TimerDelayInSeconds), GetTimespanForSeconds(TimerDelayInSeconds));
+                }
+            }
+
+            _timer.Change(GetTimespanForSeconds(TimerDelayInSeconds), GetTimespanForSeconds(TimerDelayInSeconds));
+        }
+
+        /// <summary>
+        /// thread sync failure if Task.Delay called in debugger test 
+        /// </summary>
+        /// <param name="state"></param>
+        [Obsolete]
+        private async void HandleTimerElapsedObsolete(object? state)
+        {
             // singleton timer overlap issues dealt with as per
             // https://gunnarpeipman.com/avoid-overlapping-timer-calls/
             var hasLock = false;
@@ -156,12 +205,12 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
             var contentModelTenants = await this.GetCurrentContentModelTenants(scope);
 
-            // merge content model tenants with hosting model tenants
-            // meaning, migrate tenant entities from the content model db
-            // to the hosting model db
+            // merge content model tenants with published hosting model tenants
+            // meaning, migrate published tenant entities from the hosting model db
+            // to the content model db
             // the migrated entity should == original entity
             // where == is based on uniquely constrained columns
-            foreach (var originEntity in hostingModelTenants)
+            foreach (var originEntity in hostingModelTenants.Where(w => w.IsPublished == true))
             {
                 // filter existing merge targets
                 var existingMergeTarget = contentModelTenants.Where(r => r.Id == originEntity.Id).Any();
@@ -285,7 +334,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             var hostingModelTenantQueryResult = await hostingModelTenantQuery.Read();
             var hostingModelTenants = hostingModelTenantQueryResult == null ? new List<HostingModel.Tenant>() : hostingModelTenantQueryResult.ToList();
 
-            _logger.LogInformation($"read {hostingModelTenantQueryResult.ToList().Count()} hosting model tenant records");
+            _logger.LogInformation($"read {hostingModelTenantQueryResult.Where(w => w.IsPublished == true).ToList().Count()} published hosting model tenant records");
+            _logger.LogInformation($"read {hostingModelTenantQueryResult.Where(w => w.IsPublished == false).ToList().Count()} unpublished hosting model tenant records");
+
             return hostingModelTenants;
         }
 
@@ -307,7 +358,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             var contentModelTenantQueryResult = await contentModelTenantQuery.Read();
             var contentModelTenants = contentModelTenantQueryResult == null ? new List<HostingModel.TenantInfo>() : contentModelTenantQueryResult.ToList();
 
-            _logger.LogInformation($"read {contentModelTenants.Count()} hosting model tenantinfo records");
+            _logger.LogInformation($"read {contentModelTenants.Count()} content model tenantinfo records");
             return contentModelTenants;
         }
 
