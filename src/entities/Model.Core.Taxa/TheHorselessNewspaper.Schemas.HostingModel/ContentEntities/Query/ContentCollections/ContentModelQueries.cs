@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Linq.Expressions;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query.Extensions;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollections
@@ -200,21 +201,38 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             return await Task.FromResult<IQueryable<T>>(result);
         }
 
-        public async Task<T> Update(T entity)
+        /// <summary>
+        /// your entity must return its concurrency token
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public async Task<T> Update(T entity, List<String> targetProperties = null)
         {
             _logger.LogDebug($"handling Update request");
-            try
-            {
-                var dbSet = ((DbContext)_context).Set<T>();
 
-                dbSet.Update(entity);
-                var updateResult = await ((DbContext)_context).SaveChangesAsync();
+            if (targetProperties == null)
+            {
+                // reject update attempts witout property lists
+                _logger.LogWarning($"update attempt without provided property list");
+                return await Task.FromException<T>(new Exception("update attempt without provided property list"));
             }
-            catch (Exception ex)
-            {
-                _logger.LogError($"problem handling request {ex.Message}");
 
-                return await Task.FromException<T>(ex);
+            var dbSet = ((DbContext)_context).Set<T>();
+
+            // get the existing entity
+            var foundEntity = await dbSet.Where(w => w.Id == entity.Id).FirstAsync();
+
+            if (foundEntity == null)
+            {
+                _logger.LogWarning($"update attempt for nonexistent entity");
+                return await Task.FromException<T>(new Exception("attempt to update non-existent entity"));
+            }
+            else
+            {
+                var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties);
+                dbSet.Update(updatedEntity);
+                var updateResult = await ((DbContext)_context).SaveChangesAsync();
+
             }
 
             return await Task.FromResult<T>(entity);

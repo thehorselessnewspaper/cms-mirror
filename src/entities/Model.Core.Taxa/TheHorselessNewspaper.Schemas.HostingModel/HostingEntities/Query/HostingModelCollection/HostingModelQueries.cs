@@ -1,15 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollections;
 using TheHorselessNewspaper.HostingModel.Context;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
-
+using TheHorselessNewspaper.HostingModel.HostingEntities.Query.Extensions;
 namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollection
 {
     internal class HostingModelQueries<T> : IQueryableHostingModelOperator<T> where T : class, IHostingRowLevelSecured
@@ -141,13 +134,39 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             return await Task.FromResult<IQueryable<T>>(dbSet.AsQueryable<T>());
         }
 
-        public async Task<T> Update(T entity)
+        /// <summary>
+        /// your entity must return its concurrency token
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public async Task<T> Update(T entity, List<String> targetProperties = null)
         {
             _logger.LogDebug($"handling Update request");
+
+            if(targetProperties == null)
+            {
+                // reject update attempts witout property lists
+                _logger.LogWarning($"update attempt without provided property list");
+                return await Task.FromException<T>(new Exception("update attempt without provided property list"));
+            }
+
             var dbSet = ((DbContext)_context).Set<T>();
 
-            dbSet.Update(entity);
-            var updateResult = await ((DbContext)_context).SaveChangesAsync();
+            // get the existing entity
+            var foundEntity = await dbSet.Where(w => w.Id == entity.Id).FirstAsync();
+
+            if (foundEntity == null)
+            {
+                _logger.LogWarning($"update attempt for nonexistent entity");
+                return await Task.FromException<T>(new Exception("attempt to update non-existent entity"));
+            }
+            else
+            {
+                var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties);
+                dbSet.Update(updatedEntity);
+                var updateResult = await ((DbContext)_context).SaveChangesAsync();
+
+            }
 
             return await Task.FromResult<T>(entity);
         }

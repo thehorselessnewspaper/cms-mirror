@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace TheHorselessNewspaper.HostingModel.MultiTenant
 {
     /// <summary>
@@ -19,19 +19,19 @@ namespace TheHorselessNewspaper.HostingModel.MultiTenant
         /// </summary>
         public HorselessTenantInfo()
         {
-            Payload = new HostingEntities.TenantInfo();
+            Payload = new TenantInfo();
         }
 
         /// <summary>
         /// you MUST supply a payload
         /// </summary>
         /// <param name="payload"></param>
-        public HorselessTenantInfo(HostingEntities.TenantInfo payload)
+        public HorselessTenantInfo(TenantInfo payload)
         {
             Payload = payload;
         }
 
-        public HostingEntities.TenantInfo Payload { get; set; }
+        public TenantInfo Payload { get; set; }
 
         public string? Id
         {

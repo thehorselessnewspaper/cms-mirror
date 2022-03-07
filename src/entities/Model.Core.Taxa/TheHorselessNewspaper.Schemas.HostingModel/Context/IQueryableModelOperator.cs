@@ -44,7 +44,7 @@ namespace TheHorselessNewspaper.HostingModel.Context
         public Task<IEnumerable<T>> Create(IEnumerable<T> entity);
 
 
-        public Task<T> Update(T entity);
+        public Task<T> Update(T entity, List<String> targetProperties = null);
 
         Task<IEnumerable<T>> Update(IEnumerable<T> entities);
 

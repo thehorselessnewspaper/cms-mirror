@@ -132,17 +132,17 @@ namespace Horseless.HostingModel.SmokeTests
             return result;
         }
 
-        protected async Task<T> Update<T>(T entity) where T : class, IContentRowLevelSecured
+        protected async Task<T> Update<T>(T entity, List<string> targetProperties = null) where T : class, IContentRowLevelSecured
         {
             var queryProvider = this.GetIQueryableContentModelOperator<IQueryableContentModelOperator<T>>();
-            var result = await queryProvider.Update(entity);
+            var result = await queryProvider.Update(entity, targetProperties);
             return result;
         }
 
-        protected async Task<T> UpdateHostingEntity<T>(T entity) where T : class, IHostingRowLevelSecured
+        protected async Task<T> UpdateHostingEntity<T>(T entity, List<string> targetProperties = null) where T : class, IHostingRowLevelSecured
         {
             var queryProvider = this.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<T>>();
-            var result = await queryProvider.Update(entity);
+            var result = await queryProvider.Update(entity, targetProperties);
             return result;
         }
 

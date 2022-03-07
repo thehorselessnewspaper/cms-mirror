@@ -6,13 +6,65 @@ using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.Context;
+using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query.Extensions;
 namespace Horseless.HostingModel.SmokeTests.ContentCollection
 {
     internal class ContentCollectionTests : Tests
     {
+        [Test]
+        public async Task UpdateModelTest()
+        {
+            // avoid object references becoming equal
+            var initialGuid = Guid.NewGuid();
+
+            IContentRowLevelSecured tenant = new Tenant()
+            {
+                Id = initialGuid,
+                CreatedAt = DateTime.UtcNow,
+                DisplayName = "test update tenant",
+                ObjectId = Guid.NewGuid().ToString(),
+                Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
+            };
+
+            
+
+            var modifiedTenant = new Tenant()
+            {
+                Id = initialGuid,
+                CreatedAt = tenant.CreatedAt,
+                DisplayName = tenant.DisplayName,
+                ObjectId = tenant.ObjectId,
+                Timestamp = tenant.Timestamp
+            };
+            ;
+            modifiedTenant.Id = Guid.NewGuid();
+
+            var unUpdatedtenant = await tenant.UpdateModifiedPropertiesAsync(modifiedTenant);
+
+            // require a list of property names to update
+            Assert.IsTrue(unUpdatedtenant.Id == initialGuid);
+
+            // change the id
+            modifiedTenant.Id = Guid.NewGuid();
+            var updatedtenant = await tenant.UpdateModifiedPropertiesAsync(modifiedTenant, new List<string> 
+            {
+                nameof(modifiedTenant.Id)
+            });
+
+            // validate only the id changed
+            Assert.IsFalse(updatedtenant.Id == initialGuid);
+
+            Assert.IsTrue(updatedtenant.CreatedAt == tenant.CreatedAt);
+            Assert.IsTrue(updatedtenant.DisplayName == tenant.DisplayName);
+            Assert.IsTrue(updatedtenant.ObjectId == tenant.ObjectId);
+            Assert.IsTrue(updatedtenant.Timestamp == tenant.Timestamp);
+
+
+        }
+
         [Test]
         public  void CRUDTest()
         {
@@ -34,13 +86,42 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 throw new Exception("failed to insert entity", ex);
             }
 
-            newcontentCollection.ObjectId = Guid.NewGuid().ToString();
-            var updateResult = await this.Update<ContentModel.ContentCollection>(newcontentCollection);
-
-            if(newcontentCollection.ObjectId != updateResult.ObjectId)
+            try
             {
-                throw new Exception("failed to update existing entity");
+                newcontentCollection.ObjectId = Guid.NewGuid().ToString();
+                var updateResult = await this.Update<ContentModel.ContentCollection>(newcontentCollection);
+
+                if (newcontentCollection.ObjectId != updateResult.ObjectId)
+                {
+                    throw new Exception("failed to update existing entity");
+                }
             }
+            catch (Exception e)
+            {
+                // we expect a failure due to unprovided property list for update
+                Assert.NotNull(e);
+            }
+
+            try
+            {
+                newcontentCollection.ObjectId = Guid.NewGuid().ToString();
+                var updateResult = await this.Update<ContentModel.ContentCollection>(newcontentCollection,
+                    new List<string>
+                    {
+                        nameof(newcontentCollection.ObjectId)
+                    });
+
+                if (newcontentCollection.ObjectId != updateResult.ObjectId)
+                {
+                    throw new Exception("failed to update existing entity");
+                }
+            }
+            catch (Exception e)
+            {
+                // we expect a failure due to unprovided property list for update
+                Assert.NotNull(e);
+            }
+
 
             try
             {
