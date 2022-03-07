@@ -148,7 +148,7 @@ export class MeronymRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.post<ContentEntitiesMeronym>(`${this.configuration.basePath}/api/Meronym/Create`,
+        return this.httpClient.post<ContentEntitiesMeronym>(`${this.configuration.basePath}/api/HorselessContentModel/Meronym/Create`,
             contentEntitiesMeronym,
             {
                 context: localVarHttpContext,
@@ -214,7 +214,7 @@ export class MeronymRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.get<ContentEntitiesMeronym>(`${this.configuration.basePath}/api/Meronym/GetByObjectId`,
+        return this.httpClient.get<ContentEntitiesMeronym>(`${this.configuration.basePath}/api/HorselessContentModel/Meronym/GetByObjectId`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -289,7 +289,7 @@ export class MeronymRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.post<ContentEntitiesMeronym>(`${this.configuration.basePath}/api/Meronym/Update`,
+        return this.httpClient.post<ContentEntitiesMeronym>(`${this.configuration.basePath}/api/HorselessContentModel/Meronym/Update/${encodeURIComponent(String(contentCollectionId))}`,
             contentEntitiesMeronym,
             {
                 context: localVarHttpContext,

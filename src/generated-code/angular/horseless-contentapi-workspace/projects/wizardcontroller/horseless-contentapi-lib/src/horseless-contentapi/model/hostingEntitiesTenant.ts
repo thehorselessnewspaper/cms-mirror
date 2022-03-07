@@ -11,23 +11,24 @@
  */
 import { HostingEntitiesTenantIdentifierStrategy } from './hostingEntitiesTenantIdentifierStrategy';
 import { HostingEntitiesAccessControlEntry } from './hostingEntitiesAccessControlEntry';
-import { HostingEntitiesHorselessClaimsPrincipal } from './hostingEntitiesHorselessClaimsPrincipal';
-import { HostingEntitiesRoutingDiscriminator } from './hostingEntitiesRoutingDiscriminator';
 import { HostingEntitiesPrincipal } from './hostingEntitiesPrincipal';
+import { HostingEntitiesNugetPackage } from './hostingEntitiesNugetPackage';
 import { HostingEntitiesTenantInfo } from './hostingEntitiesTenantInfo';
 
 
 export interface HostingEntitiesTenant { 
-    tenantIdentifierStrategies?: Array<HostingEntitiesTenantIdentifierStrategy> | null;
+    isPublished?: boolean;
+    tenantIdentifierStrategy?: HostingEntitiesTenantIdentifierStrategy;
     accessControlList?: Array<HostingEntitiesAccessControlEntry> | null;
     owners?: Array<HostingEntitiesPrincipal> | null;
+    principals?: Array<HostingEntitiesPrincipal> | null;
+    timestamp?: string | null;
     id?: string;
     displayName?: string | null;
     objectId?: string | null;
     isSoftDeleted?: boolean | null;
     createdAt?: string | null;
-    horselessClaimsPrincipals?: Array<HostingEntitiesHorselessClaimsPrincipal> | null;
-    routingDiscriminators?: Array<HostingEntitiesRoutingDiscriminator> | null;
+    nugetPackages?: Array<HostingEntitiesNugetPackage> | null;
     tenantInfos?: Array<HostingEntitiesTenantInfo> | null;
 }
 

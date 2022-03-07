@@ -12,7 +12,6 @@
 import { ContentEntitiesAccessControlEntry } from './contentEntitiesAccessControlEntry';
 import { ContentEntitiesContentCollection } from './contentEntitiesContentCollection';
 import { ContentEntitiesTenantIdentifierStrategy } from './contentEntitiesTenantIdentifierStrategy';
-import { ContentEntitiesHorselessClaimsPrincipal } from './contentEntitiesHorselessClaimsPrincipal';
 import { ContentEntitiesPrincipal } from './contentEntitiesPrincipal';
 
 
@@ -22,10 +21,12 @@ export interface ContentEntitiesTenant {
     objectId?: string | null;
     isSoftDeleted?: boolean | null;
     createdAt?: string | null;
-    horselessClaimsPrincipals?: Array<ContentEntitiesHorselessClaimsPrincipal> | null;
     contentCollections?: Array<ContentEntitiesContentCollection> | null;
-    tenantIdentifierStrategies?: Array<ContentEntitiesTenantIdentifierStrategy> | null;
+    isPublished?: boolean;
+    tenantIdentifierStrategy?: ContentEntitiesTenantIdentifierStrategy;
     accessControlList?: Array<ContentEntitiesAccessControlEntry> | null;
     owners?: Array<ContentEntitiesPrincipal> | null;
+    principals?: Array<ContentEntitiesPrincipal> | null;
+    timestamp?: string | null;
 }
 

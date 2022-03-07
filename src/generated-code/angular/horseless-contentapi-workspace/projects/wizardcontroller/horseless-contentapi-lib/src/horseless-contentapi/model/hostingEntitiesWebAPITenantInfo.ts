@@ -17,6 +17,7 @@ import { HostingEntitiesTenantInfo } from './hostingEntitiesTenantInfo';
 export interface HostingEntitiesWebAPITenantInfo { 
     accessControlList?: Array<HostingEntitiesAccessControlEntry> | null;
     owners?: Array<HostingEntitiesPrincipal> | null;
+    timestamp?: string | null;
     id?: string;
     displayName?: string | null;
     objectId?: string | null;

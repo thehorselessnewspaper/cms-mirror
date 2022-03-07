@@ -148,7 +148,7 @@ export class HolonymRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.post<ContentEntitiesHolonym>(`${this.configuration.basePath}/api/Holonym/Create`,
+        return this.httpClient.post<ContentEntitiesHolonym>(`${this.configuration.basePath}/api/HorselessContentModel/Holonym/Create`,
             contentEntitiesHolonym,
             {
                 context: localVarHttpContext,
@@ -214,7 +214,7 @@ export class HolonymRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.get<ContentEntitiesHolonym>(`${this.configuration.basePath}/api/Holonym/GetByObjectId`,
+        return this.httpClient.get<ContentEntitiesHolonym>(`${this.configuration.basePath}/api/HorselessContentModel/Holonym/GetByObjectId`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -289,7 +289,7 @@ export class HolonymRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.post<ContentEntitiesHolonym>(`${this.configuration.basePath}/api/Holonym/Update`,
+        return this.httpClient.post<ContentEntitiesHolonym>(`${this.configuration.basePath}/api/HorselessContentModel/Holonym/Update/${encodeURIComponent(String(contentCollectionId))}`,
             contentEntitiesHolonym,
             {
                 context: localVarHttpContext,

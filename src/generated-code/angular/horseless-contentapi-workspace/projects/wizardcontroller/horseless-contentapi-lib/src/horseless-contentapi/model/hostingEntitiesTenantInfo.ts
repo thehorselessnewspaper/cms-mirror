@@ -19,6 +19,7 @@ import { HostingEntitiesKeyCloakConfiguration } from './hostingEntitiesKeyCloakC
 export interface HostingEntitiesTenantInfo { 
     accessControlList?: Array<HostingEntitiesAccessControlEntry> | null;
     owners?: Array<HostingEntitiesPrincipal> | null;
+    timestamp?: string | null;
     id?: string;
     displayName?: string | null;
     objectId?: string | null;

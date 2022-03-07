@@ -35,5 +35,6 @@ export interface ContentEntitiesHorselessContent {
     contentCollections?: Array<ContentEntitiesContentCollection> | null;
     accessControlList?: Array<ContentEntitiesAccessControlEntry> | null;
     owners?: Array<ContentEntitiesPrincipal> | null;
+    timestamp?: string | null;
 }
 

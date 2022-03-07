@@ -148,7 +148,7 @@ export class MimeTypeRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.post<ContentEntitiesMIMEType>(`${this.configuration.basePath}/api/MIMEType/Create`,
+        return this.httpClient.post<ContentEntitiesMIMEType>(`${this.configuration.basePath}/api/HorselessContentModel/MIMEType/Create`,
             contentEntitiesMIMEType,
             {
                 context: localVarHttpContext,
@@ -214,7 +214,7 @@ export class MimeTypeRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.get<ContentEntitiesMIMEType>(`${this.configuration.basePath}/api/MIMEType/GetByObjectId`,
+        return this.httpClient.get<ContentEntitiesMIMEType>(`${this.configuration.basePath}/api/HorselessContentModel/MIMEType/GetByObjectId`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -289,7 +289,7 @@ export class MimeTypeRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.post<ContentEntitiesMIMEType>(`${this.configuration.basePath}/api/MIMEType/Update`,
+        return this.httpClient.post<ContentEntitiesMIMEType>(`${this.configuration.basePath}/api/HorselessContentModel/MIMEType/Update/${encodeURIComponent(String(contentCollectionId))}`,
             contentEntitiesMIMEType,
             {
                 context: localVarHttpContext,

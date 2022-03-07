@@ -18,6 +18,7 @@ export interface HostingEntitiesKeyCloakConfiguration {
     accessControlList?: Array<HostingEntitiesAccessControlEntry> | null;
     owners?: Array<HostingEntitiesPrincipal> | null;
     isSoftDeleted?: boolean | null;
+    timestamp?: string | null;
     id?: string;
     displayName?: string | null;
     authority?: string | null;

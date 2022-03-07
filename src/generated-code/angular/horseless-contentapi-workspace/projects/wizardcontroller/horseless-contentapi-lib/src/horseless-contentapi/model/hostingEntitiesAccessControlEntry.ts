@@ -19,11 +19,14 @@ export interface HostingEntitiesAccessControlEntry {
     scope?: HostingEntitiesACEPermissionScope;
     permission?: HostingEntitiesACEPermission;
     permissionType?: HostingEntitiesACEPermissionType;
-    subjectPrincipals?: Array<HostingEntitiesPrincipal> | null;
+    timestamp?: string | null;
+    accessControlList?: Array<HostingEntitiesAccessControlEntry> | null;
+    owners?: Array<HostingEntitiesPrincipal> | null;
     id?: string;
-    objectId?: string | null;
-    createdAt?: string | null;
     displayName?: string | null;
+    objectId?: string | null;
     isSoftDeleted?: boolean | null;
+    createdAt?: string | null;
+    isActive?: boolean | null;
 }
 

@@ -150,7 +150,7 @@ export class HorselessSessionRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.post<ContentEntitiesContentCollection>(`${this.configuration.basePath}/api/HorselessSession/Create`,
+        return this.httpClient.post<ContentEntitiesContentCollection>(`${this.configuration.basePath}/api/HorselessContentModel/HorselessSession/Create`,
             contentEntitiesHorselessSession,
             {
                 context: localVarHttpContext,
@@ -216,7 +216,7 @@ export class HorselessSessionRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.get<ContentEntitiesContentCollection>(`${this.configuration.basePath}/api/HorselessSession/GetByObjectId`,
+        return this.httpClient.get<ContentEntitiesContentCollection>(`${this.configuration.basePath}/api/HorselessContentModel/HorselessSession/GetByObjectId`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -291,7 +291,7 @@ export class HorselessSessionRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.post<ContentEntitiesContentCollection>(`${this.configuration.basePath}/api/HorselessSession/Update`,
+        return this.httpClient.post<ContentEntitiesContentCollection>(`${this.configuration.basePath}/api/HorselessContentModel/HorselessSession/Update/${encodeURIComponent(String(contentCollectionId))}`,
             contentEntitiesHorselessSession,
             {
                 context: localVarHttpContext,

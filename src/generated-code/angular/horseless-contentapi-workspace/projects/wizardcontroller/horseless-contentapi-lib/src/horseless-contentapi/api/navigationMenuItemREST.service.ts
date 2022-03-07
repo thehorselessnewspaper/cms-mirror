@@ -148,7 +148,7 @@ export class NavigationMenuItemRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.post<ContentEntitiesNavigationMenuItem>(`${this.configuration.basePath}/api/NavigationMenuItem/Create`,
+        return this.httpClient.post<ContentEntitiesNavigationMenuItem>(`${this.configuration.basePath}/api/HorselessContentModel/NavigationMenuItem/Create`,
             contentEntitiesNavigationMenuItem,
             {
                 context: localVarHttpContext,
@@ -214,7 +214,7 @@ export class NavigationMenuItemRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.get<ContentEntitiesNavigationMenuItem>(`${this.configuration.basePath}/api/NavigationMenuItem/GetByObjectId`,
+        return this.httpClient.get<ContentEntitiesNavigationMenuItem>(`${this.configuration.basePath}/api/HorselessContentModel/NavigationMenuItem/GetByObjectId`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -289,7 +289,7 @@ export class NavigationMenuItemRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.post<ContentEntitiesNavigationMenuItem>(`${this.configuration.basePath}/api/NavigationMenuItem/Update`,
+        return this.httpClient.post<ContentEntitiesNavigationMenuItem>(`${this.configuration.basePath}/api/HorselessContentModel/NavigationMenuItem/Update/${encodeURIComponent(String(contentCollectionId))}`,
             contentEntitiesNavigationMenuItem,
             {
                 context: localVarHttpContext,

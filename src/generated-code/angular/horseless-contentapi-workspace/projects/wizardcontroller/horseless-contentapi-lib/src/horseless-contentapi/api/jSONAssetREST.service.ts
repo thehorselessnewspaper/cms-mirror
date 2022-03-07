@@ -148,7 +148,7 @@ export class JSONAssetRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.post<ContentEntitiesJSONAsset>(`${this.configuration.basePath}/api/JSONAsset/Create`,
+        return this.httpClient.post<ContentEntitiesJSONAsset>(`${this.configuration.basePath}/api/HorselessContentModel/JSONAsset/Create`,
             contentEntitiesJSONAsset,
             {
                 context: localVarHttpContext,
@@ -214,7 +214,7 @@ export class JSONAssetRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.get<ContentEntitiesJSONAsset>(`${this.configuration.basePath}/api/JSONAsset/GetByObjectId`,
+        return this.httpClient.get<ContentEntitiesJSONAsset>(`${this.configuration.basePath}/api/HorselessContentModel/JSONAsset/GetByObjectId`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -289,7 +289,7 @@ export class JSONAssetRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.post<ContentEntitiesJSONAsset>(`${this.configuration.basePath}/api/JSONAsset/Update`,
+        return this.httpClient.post<ContentEntitiesJSONAsset>(`${this.configuration.basePath}/api/HorselessContentModel/JSONAsset/Update/${encodeURIComponent(String(contentCollectionId))}`,
             contentEntitiesJSONAsset,
             {
                 context: localVarHttpContext,

@@ -150,7 +150,7 @@ export class NavigationMenuRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.post<ContentEntitiesMIMEType>(`${this.configuration.basePath}/api/NavigationMenu/Create`,
+        return this.httpClient.post<ContentEntitiesMIMEType>(`${this.configuration.basePath}/api/HorselessContentModelModel/NavigationMenu/Create`,
             contentEntitiesNavigationMenu,
             {
                 context: localVarHttpContext,
@@ -216,7 +216,7 @@ export class NavigationMenuRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.get<ContentEntitiesMIMEType>(`${this.configuration.basePath}/api/NavigationMenu/GetByObjectId`,
+        return this.httpClient.get<ContentEntitiesMIMEType>(`${this.configuration.basePath}/api/HorselessContentModelModel/NavigationMenu/GetByObjectId`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -291,7 +291,7 @@ export class NavigationMenuRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.post<ContentEntitiesMIMEType>(`${this.configuration.basePath}/api/NavigationMenu/Update`,
+        return this.httpClient.post<ContentEntitiesMIMEType>(`${this.configuration.basePath}/api/HorselessContentModelModel/NavigationMenu/Update/${encodeURIComponent(String(contentCollectionId))}`,
             contentEntitiesNavigationMenu,
             {
                 context: localVarHttpContext,

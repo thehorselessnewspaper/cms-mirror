@@ -27,5 +27,6 @@ export interface ContentEntitiesHolonym {
     taxons?: Array<ContentEntitiesTaxon> | null;
     accessControlList?: Array<ContentEntitiesAccessControlEntry> | null;
     owners?: Array<ContentEntitiesPrincipal> | null;
+    timestamp?: string | null;
 }
 

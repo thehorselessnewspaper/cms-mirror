@@ -148,7 +148,7 @@ export class FilesystemAssetRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.post<ContentEntitiesFilesystemAsset>(`${this.configuration.basePath}/api/FilesystemAsset/Create`,
+        return this.httpClient.post<ContentEntitiesFilesystemAsset>(`${this.configuration.basePath}/api/HorselessContentModel/FilesystemAsset/Create`,
             contentEntitiesFilesystemAsset,
             {
                 context: localVarHttpContext,
@@ -214,7 +214,7 @@ export class FilesystemAssetRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.get<ContentEntitiesFilesystemAsset>(`${this.configuration.basePath}/api/FilesystemAsset/GetByObjectId`,
+        return this.httpClient.get<ContentEntitiesFilesystemAsset>(`${this.configuration.basePath}/api/HorselessContentModel/FilesystemAsset/GetByObjectId`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -289,7 +289,7 @@ export class FilesystemAssetRESTService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.post<ContentEntitiesFilesystemAsset>(`${this.configuration.basePath}/api/FilesystemAsset/Update`,
+        return this.httpClient.post<ContentEntitiesFilesystemAsset>(`${this.configuration.basePath}/api/HorselessContentModel/FilesystemAsset/Update/${encodeURIComponent(String(contentCollectionId))}`,
             contentEntitiesFilesystemAsset,
             {
                 context: localVarHttpContext,

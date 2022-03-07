@@ -9,10 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ContentEntitiesTenantIdentifierStrategyName } from './contentEntitiesTenantIdentifierStrategyName';
+import { ContentEntitiesTenantIdentifierStrategyContainer } from './contentEntitiesTenantIdentifierStrategyContainer';
+import { ContentEntitiesTenant } from './contentEntitiesTenant';
 
 
 export interface ContentEntitiesTenantIdentifierStrategy { 
-    strategy?: ContentEntitiesTenantIdentifierStrategyName;
+    id?: string;
+    tenantId?: string | null;
+    tenant?: ContentEntitiesTenant;
+    displayName?: string | null;
+    objectId?: string | null;
+    isSoftDeleted?: boolean | null;
+    createdAt?: string | null;
+    tenantIdentifierStrategyContainers?: Array<ContentEntitiesTenantIdentifierStrategyContainer> | null;
 }
 

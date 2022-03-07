@@ -29,5 +29,6 @@ export interface ContentEntitiesTaxon {
     taxonomies?: Array<ContentEntitiesTaxonomy> | null;
     accessControlList?: Array<ContentEntitiesAccessControlEntry> | null;
     owners?: Array<ContentEntitiesPrincipal> | null;
+    timestamp?: string | null;
 }
 

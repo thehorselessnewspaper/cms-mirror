@@ -24,5 +24,6 @@ export interface ContentEntitiesMIMEType {
     horselessContents?: Array<ContentEntitiesHorselessContent> | null;
     accessControlList?: Array<ContentEntitiesAccessControlEntry> | null;
     owners?: Array<ContentEntitiesPrincipal> | null;
+    timestamp?: string | null;
 }
 

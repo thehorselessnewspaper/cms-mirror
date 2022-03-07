@@ -9,7 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ContentEntitiesHorselessClaimsPrincipal } from './contentEntitiesHorselessClaimsPrincipal';
+import { ContentEntitiesAccessControlEntry } from './contentEntitiesAccessControlEntry';
 
 
 export interface ContentEntitiesPrincipal { 
@@ -21,6 +21,8 @@ export interface ContentEntitiesPrincipal {
     iss?: string | null;
     aud?: string | null;
     sub?: string | null;
-    horselessClaimsPrincipal?: ContentEntitiesHorselessClaimsPrincipal;
+    timestamp?: string | null;
+    accessControlList?: Array<ContentEntitiesAccessControlEntry> | null;
+    owners?: Array<ContentEntitiesPrincipal> | null;
 }
 

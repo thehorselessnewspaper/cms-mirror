@@ -5,8 +5,8 @@ import {
 } from 'angular-odata';//#endregion
 
 //#region ODataApiGen Imports
-import { GraphSchema } from './microsoft/graph/graph.schema';
-import { CallRecordsSchema } from './microsoft/graph/callRecords/callrecords.schema';
+import { ContentEntitiesSchema } from './TheHorselessNewspaper/Schemas/ContentModel/ContentEntities/contententities.schema';
+import { DefaultSchema } from './Default/default.schema';
 //#endregion
 
 //#region ODataApiGen ApiConfig
@@ -14,10 +14,10 @@ export const HorselessContentConfig = {
   serviceRootUrl: '',
   name: 'HorselessContent',
   version: '4.0',
-  creation: new Date('2022-02-23T10:14:45.6760390+00:00'),
+  creation: new Date('2022-03-06T04:34:53.4870393+00:00'),
   schemas: [
-    GraphSchema,
-    CallRecordsSchema
+    ContentEntitiesSchema,
+    DefaultSchema
   ],
   parsers: EDM_PARSERS
 } as ApiConfig;

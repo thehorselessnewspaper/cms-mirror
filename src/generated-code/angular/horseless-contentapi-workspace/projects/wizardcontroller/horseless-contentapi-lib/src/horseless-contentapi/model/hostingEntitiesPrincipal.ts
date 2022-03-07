@@ -9,12 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { HostingEntitiesAccessControlEntry } from './hostingEntitiesAccessControlEntry';
 
 
 export interface HostingEntitiesPrincipal { 
+    timestamp?: string | null;
+    accessControlList?: Array<HostingEntitiesAccessControlEntry> | null;
+    owners?: Array<HostingEntitiesPrincipal> | null;
     id?: string;
     displayName?: string | null;
-    objectId: string;
+    objectId?: string | null;
     isSoftDeleted?: boolean | null;
     createdAt?: string | null;
     iss?: string | null;

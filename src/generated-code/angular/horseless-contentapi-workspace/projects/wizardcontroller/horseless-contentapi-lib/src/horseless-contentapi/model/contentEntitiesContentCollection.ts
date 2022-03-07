@@ -35,5 +35,6 @@ export interface ContentEntitiesContentCollection {
     tenants?: Array<ContentEntitiesTenant> | null;
     accessControlList?: Array<ContentEntitiesAccessControlEntry> | null;
     owners?: Array<ContentEntitiesPrincipal> | null;
+    timestamp?: string | null;
 }
 

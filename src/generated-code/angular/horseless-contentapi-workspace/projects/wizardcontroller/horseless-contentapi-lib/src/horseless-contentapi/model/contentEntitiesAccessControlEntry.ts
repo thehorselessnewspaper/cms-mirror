@@ -16,15 +16,17 @@ import { ContentEntitiesPrincipal } from './contentEntitiesPrincipal';
 
 
 export interface ContentEntitiesAccessControlEntry { 
-    scope?: ContentEntitiesACEPermissionScope;
-    permission?: ContentEntitiesACEPermission;
-    permissionType?: ContentEntitiesACEPermissionType;
-    commonScopeSubjectPrincipals?: Array<ContentEntitiesPrincipal> | null;
     id?: string;
     displayName?: string | null;
-    objectId: string;
+    objectId?: string | null;
     isSoftDeleted?: boolean | null;
     createdAt?: string | null;
     isActive?: boolean | null;
+    scope?: ContentEntitiesACEPermissionScope;
+    permission?: ContentEntitiesACEPermission;
+    permissionType?: ContentEntitiesACEPermissionType;
+    timestamp?: string | null;
+    accessControlList?: Array<ContentEntitiesAccessControlEntry> | null;
+    owners?: Array<ContentEntitiesPrincipal> | null;
 }
 
