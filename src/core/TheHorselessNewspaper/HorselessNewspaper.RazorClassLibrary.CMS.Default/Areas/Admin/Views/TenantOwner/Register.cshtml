@@ -8,6 +8,9 @@
 {
     <span>begin registration by clicking the link below</span>
     <a asp-area="Admin" asp-controller="TenantRegistration" asp-action="Create">START</a>
+
+    <span>tenant registration</span>
+    <p>pending registrations: @ViewData["WaitingRequestMessage"]</p>
 }
 else
 {
