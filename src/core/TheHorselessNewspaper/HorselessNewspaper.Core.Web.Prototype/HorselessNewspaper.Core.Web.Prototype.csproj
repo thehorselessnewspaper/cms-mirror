@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>7ba470ef-251f-41f2-a941-94fa24058e8d</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	  <RazorCompileOnPublish>false</RazorCompileOnPublish>
   </PropertyGroup>
 
 	<ItemGroup>

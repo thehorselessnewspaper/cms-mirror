@@ -3,13 +3,26 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@ViewData["Title"] - Default Horseless CMS Grape Skin</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- as per https://bootstrapious.com/p/bootstrap-sidebar -->
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/sidebar/bootstrap-navbar.js"></script>
+
+    <!-- <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://unpkg.com/grapesjs/dist/css/grapes.min.css">
-    <link rel="stylesheet" href="~/Horseless.Template.MVC.CMS.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/css/grapejs-editor.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/css/grapesjs-preset-webpage.min.css" asp-append-version="true" />
+    @*    <link rel="stylesheet" href="https://unpkg.com/grapesjs/dist/css/grapes.min.css">*@
+    <link rel="stylesheet" href="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/css/sidebar/bootstrap-sidebar.css" asp-append-version="true" />
+
+    @*    <link rel="stylesheet" href="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/css/grapejs-editor.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/css/grapesjs-preset-webpage.min.css" asp-append-version="true" />
+    *@
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -47,26 +60,63 @@
             </div>
         </nav>
     </header>
-    <div  style="min-height: calc(50vh - 50px);">
+    <div class="wrapper">
 
-        <main role="main" class="pb-3">
-            @RenderBody()
+        @* // todo - this must become HttpContext.CanShowAdminSidebar *@
+        @if (User.Claims != null && User.Claims.Count() > 0)
+        {
 
-        </main>
+            await Html.RenderPartialAsync("_BootstrapSidebar");
+        }
+
+        <div id="content">
+            <main role="main">
+
+
+                @RenderBody()
+
+            </main>
+
+        </div>
     </div>
+
     <footer class="border-top footer text-muted container-fluid" style="height: 50px;">
         <div class="container">
             &copy; 2021 - Horseless.Template.MVC.CMS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    @*    <script src="~/lib/jquery/dist/jquery.min.js"></script>*@
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*
+        <script src="~/js/site.js" asp-append-version="true"></script>*@
+
+    <!-- as per view-source:https://bootstrapious.com/tutorial/sidebar/index.html-->
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/grapesjs/0.12.17/grapes.min.js" asp-append-version="true"></script>
     <script src="https://unpkg.com/grapesjs@0.17.29/dist/grapes.min.js"></script>
     <script src="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/grapesjs-preset-webpage.min.js"></script>
     <script src="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/grapejs-editor.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- as per https://bootstrapious.com/tutorial/sidebar/index.html -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
 </body>
 </html>

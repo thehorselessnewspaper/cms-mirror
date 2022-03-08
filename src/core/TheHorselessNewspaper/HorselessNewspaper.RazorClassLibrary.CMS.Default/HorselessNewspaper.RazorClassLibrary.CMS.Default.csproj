@@ -20,6 +20,7 @@
 
 
 	<PropertyGroup>
+		<RazorCompileOnPublish>false</RazorCompileOnPublish>
 		<DefaultItemExcludes>angular/horseless-elements/node_modules/**;$(DefaultItemExcludes)</DefaultItemExcludes>
 	</PropertyGroup>
 

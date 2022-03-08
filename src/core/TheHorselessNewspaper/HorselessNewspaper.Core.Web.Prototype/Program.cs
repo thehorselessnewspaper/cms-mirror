@@ -180,7 +180,7 @@ builder.Services.AddMvcCore(options =>
 
     }
 
-});
+}).AddRazorRuntimeCompilation();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
