@@ -1,16 +1,19 @@
-﻿@if (User.Claims != null && User.Claims.Count() > 0)
-{
-    await Html.RenderPartialAsync("_Sidebar");
-}
+﻿<div class="container-fluid"">
+    <div class="container-fluid">
+        @if (User.Claims != null && User.Claims.Count() > 0)
+        {
+            await Html.RenderPartialAsync("_Sidebar");
+        }
+    </div>
+    @* canonical specificationo of a horseless cms root level container layout template*@
+    <HorselessView horseless-content-collection-id="">
 
-@* canonical specificationo of a horseless cms root level container layout template*@
-<HorselessView horseless-content-collection-id="">
+    </HorselessView>
 
-</HorselessView>
-
-<div class="sideNavBody">
-    @if (User.Claims != null && User.Claims.Count() > 0)
-    {
+    @*<div class="sideNavBody">
+        @if (User.Claims != null && User.Claims.Count() > 0)
+        {
         await Html.RenderPartialAsync("_GrapeJS");
-    }
+        }
+        </div>*@
 </div>

@@ -130,7 +130,7 @@ builder.Services.AddHorselessKeycloakAuth(builder, keycloakOpts =>
 
 });
 
-builder.Services.AddHorselessNewspaper(builder.Configuration);
+builder.Services.AddHorselessNewspaper(builder.Configuration, builder.Environment);
 
 builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
 {
