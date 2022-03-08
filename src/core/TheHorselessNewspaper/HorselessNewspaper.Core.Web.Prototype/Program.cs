@@ -39,7 +39,8 @@ builder.Services.AddCors(options =>
 });
 
 
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages()
+    .AddRazorRuntimeCompilation();
 
 builder.Services.AddControllersWithViews(options =>
 {
@@ -121,11 +122,6 @@ builder.Services.AddSwaggerGen(options =>
 //// i am sorry - the hoped for benefit is that this will always have a default implementation
 //// .AddApplicationPart(typeof(HorselessCMSController).Assembly);
 
-//builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
-//{
-//    options.FileProviders.Add(
-//            new EmbeddedFileProvider(typeof(HorselessCMSController).Assembly));
-//});
 
 
 // as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/docs/keycloak.md
@@ -136,6 +132,21 @@ builder.Services.AddHorselessKeycloakAuth(builder, keycloakOpts =>
 
 builder.Services.AddHorselessNewspaper(builder.Configuration);
 
+builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
+{
+    options.FileProviders.Add(
+            new EmbeddedFileProvider(typeof(HorselessCMSController).Assembly));
+
+    var libraryPath = Path.GetFullPath(
+       Path.Combine(builder.Environment.ContentRootPath, "..", "HorselessNewspaper.RazorClassLibrary.CMS.Default"));
+
+    options.FileProviders.Add(new PhysicalFileProvider(libraryPath));
+
+    var contentRootPath = Path.GetFullPath(
+    Path.Combine(builder.Environment.ContentRootPath, ".", ""));
+
+    options.FileProviders.Add(new PhysicalFileProvider(contentRootPath));
+});
 
 // globally enables mssql server
 builder.Services.UseHorselessContentModelMSSqlServer(builder.Configuration, builder.Configuration.GetConnectionString("ContentModelConnection"));

@@ -10,14 +10,17 @@ using HorselessNewspaper.Web.Core.Middleware.HorselessRouter.Strategy;
 using HorselessNewspaper.Web.Core.Model.Query.ContentCollection;
 using HorselessNewspaper.Web.Core.Model.Query.HostingCollection;
 using HorselessNewspaper.Web.Core.ScopedServices.AuthenticationSchemes;
+using HorselessNewspaper.Web.Core.ScopedServices.Contexts;
 using HorselessNewspaper.Web.Core.ScopedServices.RoutingStrategy;
 using HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant;
 using HorselessNewspaper.Web.Core.SingletonServices.ViewCompiler;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
+using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.FeatureManagement;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
@@ -100,6 +103,8 @@ namespace HorselessNewspaper.Web.Core.Extensions
             //})
 
             //);
+
+
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -196,7 +201,7 @@ HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessCo
 
             #region cms routing pattern services
             serviceBuilder.Services.AddScoped<IHorselessRoutingStrategy, UrlSegmentRoutingStrategy>();
-            serviceBuilder.Services.AddHostedService<ApplicationPartsLogger>();
+
 
             // as per https://stackoverflow.com/questions/33566075/generic-repository-in-asp-net-core-without-having-a-separate-addscoped-line-per
             // support injecting a provider for a generic entity type determined by consumers of the injected service
@@ -209,11 +214,19 @@ HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessCo
             // as it's gating every request
             serviceBuilder.Services.AddScoped<HorselessRouteTransformer>();
             serviceBuilder.Services.AddScoped<HorselessTenantSetupMiddleware>();
+            serviceBuilder.Services.AddScoped<IHorselessTenantContext, TenantContext>();
             #endregion  cms routing pattern services
 
             #region hosted services
-            services.AddHostedService<TenantCacheService>();
+            // hosted service di issues handled as per
+            // https://stackoverflow.com/questions/58397807/how-to-resolve-hostedservice-in-controller
+            services.AddSingleton<ApplicationPartsLogger>();
+            serviceBuilder.Services.AddHostedService<ApplicationPartsLogger>(provider => provider.GetService<ApplicationPartsLogger>());
 
+            // hosted service di issues handled as per
+            // https://stackoverflow.com/questions/58397807/how-to-resolve-hostedservice-in-controller
+            services.AddSingleton<TenantCacheService>();
+            services.AddHostedService<TenantCacheService>(provider => provider.GetService<TenantCacheService>());
             #endregion hosted services
             options?.Invoke(serviceBuilder);
 

@@ -1,0 +1,19 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <span>begin registration by clicking the link below</span>
+    <a asp-area="Admin" asp-controller="TenantRegistration" asp-action="Index">START</a>
+}
+else
+{
+    <div>
+        <span>register new tenant</span>
+        <p>you need to login to register</p>
+
+    </div>
+}

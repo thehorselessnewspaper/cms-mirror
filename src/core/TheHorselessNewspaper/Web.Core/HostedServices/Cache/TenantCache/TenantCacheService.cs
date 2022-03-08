@@ -15,10 +15,19 @@ using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 {
     /// <summary>
+    /// use this as the public face of timed updates
+    /// </summary>
+    public interface ITenantCacheService  
+    {
+        public ICollection<ContentModel.Tenant> CurrentContentModelTenants { get; set; }
+        public ICollection<HostingModel.Tenant> CurrentHostingModelTenants { get; set; }
+    }
+
+    /// <summary>
     /// maintain a cache of tenants 
     /// and their web api endpoints
     /// </summary>
-    internal class TenantCacheService : IHostedService
+    internal class TenantCacheService : ITenantCacheService, IHostedService
     {
         // as per https://stackoverflow.com/questions/63468682/how-to-stop-a-timer-created-in-a-net-core-controller
         private static readonly object _timerLock = new object();
@@ -32,6 +41,10 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         private Timer _timer = null!;
 
         IServiceProvider _services;
+
+        public ICollection<ContentModel.Tenant> CurrentContentModelTenants { get; set; } = new List<ContentModel.Tenant>();
+        public ICollection<HostingModel.Tenant> CurrentHostingModelTenants { get; set; } = new List<HostingModel.Tenant>();
+
 
         public TenantCacheService(ILogger<TenantCacheService> logger,
             IServiceProvider services)
@@ -90,8 +103,16 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 {
                     // collect the content model tenants
                     var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(innerScope);
-
                     IEnumerable<ContentModel.Tenant> tenantList = await contentModelTenantQuery.Read(r => r.IsSoftDeleted == false);
+
+                    foreach (var contentModelTenant in tenantList)
+                    {
+                        if (!this.CurrentContentModelTenants.Where(w => w.Id.Equals(contentModelTenant.Id)).Any())
+                        {
+                            // here because we need to cache this tenant in the singleton
+                            this.CurrentContentModelTenants.Add(contentModelTenant);
+                        }
+                    }
 
                     List<ContentModel.Tenant> contentModelTenants = tenantList.ToList();
 
@@ -196,6 +217,14 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         private async Task HandleScopedLogic(IServiceScope scope)
         {
             List<HostingModel.Tenant> hostingModelTenants = await GetCurrentHostingModelTenants(scope);
+            foreach(var hostModelTenant in hostingModelTenants)
+            {
+                if(! this.CurrentHostingModelTenants.Where(w => w.Id.Equals(hostModelTenant.Id)).Any())
+                {
+                    // here because we need to cache this tenant in the singleton
+                    this.CurrentHostingModelTenants.Add(hostModelTenant);
+                }
+            }
 
             // inject the finbuckle in-memory store
             var stores = _services.GetService<IEnumerable<IMultiTenantStore<HorselessTenantInfo>>>().ToList();

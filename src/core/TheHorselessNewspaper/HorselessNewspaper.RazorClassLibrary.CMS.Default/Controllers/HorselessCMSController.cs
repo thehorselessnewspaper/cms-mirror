@@ -14,6 +14,7 @@ using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Web;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using HorselessNewspaper.Web.Core.ScopedServices.Contexts;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
 {
@@ -55,12 +56,15 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
     {
         private ITenantInfo CurrentTenant { get; set; }
 
+        private readonly IHorselessTenantContext tenantContext;
+
         private IKeycloakAuthOptions AuthOptions { get; set; }
 
-        public HorselessCMSController(IKeycloakAuthOptions keycloakAuthOptions, ITenantInfo tenant)
+        public HorselessCMSController(IKeycloakAuthOptions keycloakAuthOptions, ITenantInfo tenant, IHorselessTenantContext tenantContext)
         {
             this.AuthOptions = keycloakAuthOptions;
             this.CurrentTenant = tenant;
+            this.tenantContext = tenantContext;
         }
 
         [HttpGet("~/SignIn")]

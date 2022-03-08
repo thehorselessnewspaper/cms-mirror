@@ -2,7 +2,8 @@
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controllers
 {
-    public class GlobalAdmin : Controller
+    [Area("Admin")]
+    public class GlobalAdminController : Controller
     {
         public IActionResult Index()
         {

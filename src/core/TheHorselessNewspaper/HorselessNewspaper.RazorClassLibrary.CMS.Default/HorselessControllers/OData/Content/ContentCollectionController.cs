@@ -39,6 +39,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         public async Task<ActionResult<IEnumerable<ContentModel.ContentCollection>>> Get()
         {
             var result = await _contentCollectionService.Query();
+            
             return Ok(result);
         }
 

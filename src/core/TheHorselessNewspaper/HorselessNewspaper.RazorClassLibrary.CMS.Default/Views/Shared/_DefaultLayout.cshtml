@@ -29,6 +29,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="TenantOwner" asp-action="Register">New Tenant</a>
+                        </li>
+
                     </ul>
                     @{
                         @* // support our default signin keycloak *@
@@ -50,11 +54,11 @@
 
         </main>
     </div>
-        <footer class="border-top footer text-muted" style="height: 50px;">
-            <div class="container">
-                &copy; 2021 - Horseless.Template.MVC.CMS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer>
+    <footer class="border-top footer text-muted" style="height: 50px;">
+        <div class="container">
+            &copy; 2021 - Horseless.Template.MVC.CMS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

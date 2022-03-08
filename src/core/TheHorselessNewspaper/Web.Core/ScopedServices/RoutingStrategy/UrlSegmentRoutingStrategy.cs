@@ -16,7 +16,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RoutingStrategy
 
         }
 
-        public byte Priority { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public byte Priority {get; set; }
 
         public Task<RoutingStrategyResult> TransformAsync(SocketsHttpConnectionContext httpContext, RouteValueDictionary values)
         {
