@@ -34,28 +34,37 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
 
         public async Task<IActionResult> Index()
         {
-            var iss = User.Claims.FirstOrDefault().Issuer;
-            var sub = User.Claims.FirstOrDefault().Subject.Name;
-
-            var hasUnpublishedTenantQuery = await hostingTenantsCollectionService.Query();
-            var hasWaitingRequest = hasUnpublishedTenantQuery
-                .Where(w => w.Owners.Where(o => o.Iss.Equals(iss) && o.Sub.Equals(sub)).Any()).Any();
-
+            var hasWaitingRequest = await GetPendingRegistrationStatusMessage();
             ViewData["WaitingRequestMessage"] = hasWaitingRequest;
             return View();
         }
 
         public async Task<IActionResult> Register()
         {
-            var iss = User.Claims.FirstOrDefault().Issuer;
-            var sub = User.Claims.FirstOrDefault().Subject.Name;
-
-            var hasUnpublishedTenantQuery = await hostingTenantsCollectionService.Query();
-            var hasWaitingRequest = hasUnpublishedTenantQuery
-                .Where(w => w.Owners.Where(o => o.Iss.Equals(iss) && o.Sub.Equals(sub)).Any()).Any();
-
+            var hasWaitingRequest = await GetPendingRegistrationStatusMessage();
             ViewData["WaitingRequestMessage"] = hasWaitingRequest;
             return View();
+        }
+
+        private async Task<bool> GetPendingRegistrationStatusMessage()
+        {
+            if (User.Identities.Where(w => w.IsAuthenticated).Any())
+            {
+                var iss = User.Claims.FirstOrDefault().Issuer;
+                var sub = User.Claims.FirstOrDefault().Subject.Name;
+
+                var hasUnpublishedTenantQuery = await hostingTenantsCollectionService.Query();
+                var hasWaitingRequest = hasUnpublishedTenantQuery
+                    .Where(w => w.Owners.Where(o => o.Iss.Equals(iss) && o.Sub.Equals(sub)).Any()).Any();
+
+                return hasWaitingRequest;
+
+            }
+            else
+            {
+                return false;
+
+            }
         }
     }
 }

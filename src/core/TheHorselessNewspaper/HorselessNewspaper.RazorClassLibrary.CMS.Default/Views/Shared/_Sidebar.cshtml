@@ -1,41 +1,49 @@
-﻿<!-- Load an icon library -->
+﻿@using HorselessNewspaper.Web.Core.Extensions.Claim;
+
+
+<!-- Load an icon library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
-/* Style the sidebar - fixed full height */
-.sidebar {
-  height: 90%;
-  width: 160px;
-  position: absolute;
-  z-index: 1;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  padding-top: 16px;
-}
+    /* Style the sidebar - fixed full height */
+    .sidebar {
+        height: 90%;
+        width: 160px;
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        padding-top: 16px;
+    }
 
-/* Style sidebar links */
-.sidebar a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 20px;
-  color: #818181;
-  display: block;
-}
+        /* Style sidebar links */
+        .sidebar a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+        }
 
-/* Style links on mouse-over */
-.sidebar a:hover {
-  color: #f1f1f1;
-}
+            /* Style links on mouse-over */
+            .sidebar a:hover {
+                color: #f1f1f1;
+            }
 
-/* Style the main content */
-.sideNavBody {
-  margin-left: 160px; /* Same as the width of the sidenav */
-  padding: 0px 10px;
-}
+    /* Style the main content */
+    .sideNavBody {
+        margin-left: 160px; /* Same as the width of the sidenav */
+        padding: 0px 10px;
+    }
 
 </style>
 <!-- The sidebar -->
 <div class="sidebar">
-  <a href="#home"><i class="fa fa-fw fa-home"></i> Dashboards</a>
-  <a asp-area="Admin" asp-controller="TenantOwner" asp-action="Register"><i class="fa fa-fw fa-wrench"></i> Register Tenant</a>
+    @if (Context.HasAdminClaimValues())
+    {
+        <!-- render global admin button-->
+        <a asp-area="Admin" asp-controller="GlobalAdmin" asp-action="Index"><i class="fa fa-fw fa-wrench"></i>Global Admin Dashboard</a>
+    }
+    <a asp-area="Admin" asp-controller="TenantOwner" asp-action="Register"><i class="fa fa-fw fa-wrench"></i> Register Tenant</a>
+
 </div>
