@@ -101,7 +101,7 @@ a:focus {
         background: #6d7fcc;
     }
 
-a[data-toggle="collapse"] {
+a[data-bs-toggle="collapse"] {
     position: relative;
 }
 
