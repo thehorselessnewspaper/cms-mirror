@@ -7,7 +7,7 @@
 @if (User.Identity.IsAuthenticated)
 {
     <span>begin registration by clicking the link below</span>
-    <a asp-area="Admin" asp-controller="TenantRegistration" asp-action="Index">START</a>
+    <a asp-area="Admin" asp-controller="TenantRegistration" asp-action="Create">START</a>
 }
 else
 {

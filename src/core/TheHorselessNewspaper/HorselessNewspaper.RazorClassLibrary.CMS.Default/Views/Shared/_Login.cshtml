@@ -3,7 +3,8 @@
 @using HorselessNewspaper.Web.Core.Extensions;
 @using HorselessNewspaper.Web.Core.ScopedServices.AuthenticationSchemes;
 @inject IAuthenticationSchemesCache authenticationSchemes;
-@model AuthenticationScheme[]
+
+@* @ @model AuthenticationScheme[] *@
 
 @{
     AuthenticationScheme[] registeredSchemes = await authenticationSchemes.GetExternalProvidersAsync();

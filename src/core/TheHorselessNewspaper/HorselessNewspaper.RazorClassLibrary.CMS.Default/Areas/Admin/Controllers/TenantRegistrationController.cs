@@ -1,12 +1,32 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Finbuckle.MultiTenant;
+using HorselessNewspaper.Web.Core.Interfaces.Content;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using TheHorselessNewspaper.HostingModel.HostingEntities.Query;
+using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+
+using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Model;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controllers
 {
-
+    [Authorize]
+    [Area("Admin")]
     public class TenantRegistrationController : Controller
     {
+        public IContentCollectionService<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModel.Tenant> tenantCollectionService { get; set; }
+        public ITenantInfo CurrentTenant { get; set; }
+
+        public TenantRegistrationController(
+            IContentCollectionService<IQueryableContentModelOperator<ContentModel.Tenant>,
+            ContentModel.Tenant> tenantCollectionService, ITenantInfo tenantInfo)
+        {
+            this.tenantCollectionService = tenantCollectionService;
+            this.CurrentTenant = tenantInfo;
+        }
+
         // GET: TenantRegistrationController
         public ActionResult Index()
         {
@@ -31,7 +51,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
         // POST: TenantRegistrationController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(TenantRegistrationModel model)
         {
             try
             {
