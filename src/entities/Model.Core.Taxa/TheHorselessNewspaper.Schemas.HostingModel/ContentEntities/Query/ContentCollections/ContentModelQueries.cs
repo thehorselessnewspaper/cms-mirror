@@ -180,13 +180,21 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             return await Task.FromResult<IQueryable<T>>(result);
         }
 
-        public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query)
+        public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<Expression<Func<T, bool>>> includeClauses = null)
         {
             _logger.LogDebug($"handling get request");
             IQueryable<T> result;
             try
             {
                 var dbSet = ((DbContext)_context).Set<T>().Where(query);
+                if (includeClauses != null)
+                {
+                    foreach (var clause in includeClauses)
+                    {
+                        dbSet.Include(clause);
+                    }
+                }
+
                 result = dbSet.AsQueryable<T>();
 
             }
@@ -238,7 +246,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             return await Task.FromResult<T>(entity);
         }
 
-        public async Task<IEnumerable<T>> Update(IEnumerable<T> entities)
+        public async Task<IEnumerable<T>> Update(IEnumerable<T> entities, List<String> targetProperties = null)
         {
             _logger.LogDebug($"handling Update request");
             var dbSet = ((DbContext)_context).Set<T>();
@@ -249,6 +257,26 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             return entities;
         }
 
+        public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class
+        {
+            var hasEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
+
+
+            if (hasEntity != null)
+            {
+                var currentValue = ((DbContext)_context).Entry<T>(hasEntity).Property(propertyName).CurrentValue as ICollection<U>;
+
+
+                foreach (var item in relatedEntities)
+                {
+                    currentValue.Add(item);
+                }
+
+                var saveResult = await ((DbContext)_context).SaveChangesAsync();
+            }
+
+            return relatedEntities;
+        }
 
     }
 }

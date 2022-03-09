@@ -3,6 +3,8 @@ using Microsoft.Extensions.Logging;
 using System.Linq.Expressions;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.HostingEntities.Query.Extensions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+
 namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollection
 {
     internal class HostingModelQueries<T> : IQueryableHostingModelOperator<T> where T : class, IHostingRowLevelSecured
@@ -126,10 +128,17 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             return await Task.FromResult<IQueryable<T>>(dbSet.AsQueryable<T>());
         }
 
-        public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query)
+        public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<Expression<Func<T, bool>>> includeClauses = null)
         {
             _logger.LogDebug($"handling Read request");
             var dbSet = ((DbContext)_context).Set<T>().Where(query);
+            if (includeClauses != null)
+            {
+                foreach (var clause in includeClauses)
+                {
+                    dbSet.Include(clause);
+                }
+            }
 
             return await Task.FromResult<IQueryable<T>>(dbSet.AsQueryable<T>());
         }
@@ -143,7 +152,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
         {
             _logger.LogDebug($"handling Update request");
 
-            if(targetProperties == null)
+            if (targetProperties == null)
             {
                 // reject update attempts witout property lists
                 _logger.LogWarning($"update attempt without provided property list");
@@ -171,7 +180,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             return await Task.FromResult<T>(entity);
         }
 
-        public async Task<IEnumerable<T>> Update(IEnumerable<T> entities)
+        public async Task<IEnumerable<T>> Update(IEnumerable<T> entities, List<String> targetProperties = null)
         {
             _logger.LogDebug($"handling Update request");
             var dbSet = ((DbContext)_context).Set<T>();
@@ -180,6 +189,27 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             var saveResult = await ((DbContext)_context).SaveChangesAsync();
 
             return entities;
+        }
+
+        public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class
+        {
+            var hasEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
+
+
+            if (hasEntity != null)
+            {
+                var currentValue = ((DbContext)_context).Entry<T>(hasEntity).Property(propertyName).CurrentValue as ICollection<U>;
+
+
+                foreach (var item in relatedEntities)
+                {
+                    currentValue.Add(item);
+                }
+
+                var saveResult = await ((DbContext)_context).SaveChangesAsync();
+            }
+
+            return relatedEntities;
         }
     }
 }

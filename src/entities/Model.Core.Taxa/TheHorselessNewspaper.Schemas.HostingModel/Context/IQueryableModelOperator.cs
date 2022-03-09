@@ -37,8 +37,7 @@ namespace TheHorselessNewspaper.HostingModel.Context
     {
         public Task<IQueryable<T>> Read();
 
-        public Task<IQueryable<T>> Read(Expression<Func<T, bool>> query);
-
+        public Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<Expression<Func<T, bool>>> includeClauses = null);
 
         public Task<T> Create(T entity);
         public Task<IEnumerable<T>> Create(IEnumerable<T> entity);
@@ -46,11 +45,12 @@ namespace TheHorselessNewspaper.HostingModel.Context
 
         public Task<T> Update(T entity, List<String> targetProperties = null);
 
-        Task<IEnumerable<T>> Update(IEnumerable<T> entities);
+        Task<IEnumerable<T>> Update(IEnumerable<T> entities, List<String> targetProperties = null);
 
+        Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId,  string propertyName,IEnumerable<U> relatedEntities) where U : class;
 
         public Task<T> Delete(string objectId);
-        Task<IEnumerable<T>> Delete(Expression<Func<T, bool>> query, bool softDelete = true, bool whatIf = true);
+        public Task<IEnumerable<T>> Delete(Expression<Func<T, bool>> query, bool softDelete = true, bool whatIf = true);
 
 
         Task ResetDb();
