@@ -1,18 +1,15 @@
 ﻿using Finbuckle.MultiTenant;
+using HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Model;
 using HorselessNewspaper.Web.Core.Interfaces.Content;
+using HorselessNewspaper.Web.Core.Interfaces.Hosting;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
-using TheHorselessNewspaper.HostingModel.HostingEntities.Query;
-using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
-
-using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Model;
-using HorselessNewspaper.Web.Core.Interfaces.Hosting;
-using TheHorselessNewspaper.HostingModel.Entities.Query;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using TheHorselessNewspaper.HostingModel.Entities.Query;
+using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controllers
 {
@@ -57,13 +54,13 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
         /// tenenant registrant management security scope
         /// </summary>
         /// <returns></returns>
-        public ActionResult Registrants()
+        public async Task<ActionResult> Registrants()
         {
-            //var registrantsQuery = await hostingTenantsCollectionService.Query();
-            //var waitingRequests = registrantsQuery
-            //    .Where(w => w.IsPublished == false && w.IsSoftDeleted == false)
-            //    .Take(5)
-            //    .ToList();
+            var hasUnpublishedTenantQuery = await hostingTenantsCollectionService.Query();
+            var hasWaitingRequest = hasUnpublishedTenantQuery
+                .Where(w => w.Owners.Count() > 0)
+                .Where(w => w.TenantInfos.Count() > 0)
+                .ToList();
             return View();
         }
 
@@ -100,41 +97,49 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                     Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
                     Owners = new List<HostingModel.Principal>()
                     {
-                        new HostingModel.Principal()
-                        {
-                            Id = Guid.NewGuid(),
-                            CreatedAt = DateTime.UtcNow,
-                            DisplayName = model.displayName,
-                            IsSoftDeleted = false,
-                            ObjectId = Guid.NewGuid().ToString(),
-                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-// aud is not a guarantee
-//                            Aud = User.Claims.Where(w => w.Type.Contains("aud")).FirstOrDefault().Value,
-
-                            // subject/issuer are technically a compound unique key
-                            Iss = User.Claims.FirstOrDefault().Issuer,
-                            Sub = User.Claims.FirstOrDefault().Subject.Name
-
-                        }
+                       
                     },
                     TenantInfos = new List<HostingModel.TenantInfo>()
                     {
-                        new HostingModel.TenantInfo()
-                        {
 
-                            Id = Guid.NewGuid(),
-                            CreatedAt = DateTime.UtcNow,
-                            DisplayName = model.displayName,
-                            IsSoftDeleted = false,
-                            ObjectId = Guid.NewGuid().ToString(),
-                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                            Identifier = model.tenantIdentifier,
-                            Name = model.displayName
-                        }
                     }
                 };
 
+                var newOwner = new HostingModel.Principal()
+                {
+                    Id = Guid.NewGuid(),
+                    CreatedAt = DateTime.UtcNow,
+                    DisplayName = model.displayName,
+                    IsSoftDeleted = false,
+                    ObjectId = Guid.NewGuid().ToString(),
+                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                    // aud is not a guarantee
+                    //                            Aud = User.Claims.Where(w => w.Type.Contains("aud")).FirstOrDefault().Value,
+
+                    // subject/issuer are technically a compound unique key
+                    Iss = User.Claims.FirstOrDefault().Issuer,
+                    Sub = User.Claims.FirstOrDefault().Subject.Name
+
+                };
+
+                var newTenantInfo = new HostingModel.TenantInfo()
+                {
+
+                    Id = Guid.NewGuid(),
+                    CreatedAt = DateTime.UtcNow,
+                    DisplayName = model.displayName,
+                    IsSoftDeleted = false,
+                    ObjectId = Guid.NewGuid().ToString(),
+                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                    Identifier = model.tenantIdentifier,
+                    Name = model.displayName
+                };
+
                 var insertedTenant = await this.hostingTenantsCollectionService.Create(newTenant);
+                insertedTenant.Owners.Add(newOwner);
+                insertedTenant.TenantInfos.Add(newTenantInfo);
+
+                var insertedPrincipal = await this.hostingTenantsCollectionService.Update(insertedTenant, new List<string>() { "Owners", "TenantInfos" });
 
                 return RedirectToAction(nameof(Index));
             }
@@ -170,7 +175,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
 
         [Authorize]
         // GET: TenantRegistrationController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
             return View();
         }
@@ -179,7 +184,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
         // POST: TenantRegistrationController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(string id, IFormCollection collection)
         {
             try
             {
