@@ -67,14 +67,14 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     {
         public bool IsPublished { get; set; }
 
-        public virtual TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; } 
+        public virtual TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; } = new TenantIdentifierStrategy();
 
 
-        public virtual ICollection<AccessControlEntry> AccessControlList { get; set; }
+        public virtual ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
 
-        public virtual ICollection<Principal> Owners { get; set; }
+        public virtual ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
-        public ICollection<Principal> Principals { get; set; } = new HashSet<Principal>();
+        public virtual ICollection<Principal> Principals { get; set; } = new HashSet<Principal>();
 
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);

@@ -10,6 +10,8 @@ using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query.Extensions;
+using TheHorselessNewspaper.HostingModel.Entities.Query;
+
 namespace Horseless.HostingModel.SmokeTests.ContentCollection
 {
     internal class ContentCollectionTests : Tests
@@ -29,7 +31,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
             };
 
-            
+
 
             var modifiedTenant = new Tenant()
             {
@@ -37,7 +39,14 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 CreatedAt = tenant.CreatedAt,
                 DisplayName = tenant.DisplayName,
                 ObjectId = tenant.ObjectId,
-                Timestamp = tenant.Timestamp
+                Timestamp = tenant.Timestamp,
+                TenantIdentifierStrategy = new TenantIdentifierStrategy()
+                {
+                    Id = initialGuid,
+                    CreatedAt = tenant.CreatedAt,
+                    DisplayName = tenant.DisplayName,
+                    ObjectId = tenant.ObjectId
+                }
             };
             ;
             modifiedTenant.Id = Guid.NewGuid();
@@ -49,7 +58,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
 
             // change the id
             modifiedTenant.Id = Guid.NewGuid();
-            var updatedtenant = await tenant.UpdateModifiedPropertiesAsync(modifiedTenant, new List<string> 
+            var updatedtenant = await tenant.UpdateModifiedPropertiesAsync(modifiedTenant, new List<string>
             {
                 nameof(modifiedTenant.Id)
             });
@@ -62,11 +71,50 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             Assert.IsTrue(updatedtenant.ObjectId == tenant.ObjectId);
             Assert.IsTrue(updatedtenant.Timestamp == tenant.Timestamp);
 
+            // add to a related property
+            updatedtenant.Owners.Add(new Principal()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = tenant.CreatedAt,
+                DisplayName = tenant.DisplayName,
+                ObjectId = Guid.NewGuid().ToString(),
+                Timestamp = tenant.Timestamp
+            });
 
+            var relatedPrincipal = new Principal()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = tenant.CreatedAt,
+                DisplayName = tenant.DisplayName,
+                ObjectId = Guid.NewGuid().ToString(),
+                Timestamp = tenant.Timestamp
+            };
+
+            var principalQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Principal>>();
+
+            var tenantQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Tenant>>();
+
+            var tenantInsertResult = await tenantQuery.Create(modifiedTenant);
+
+            var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(modifiedTenant.Id, nameof(modifiedTenant.Owners), new List<Principal>() { relatedPrincipal });
+            Assert.IsTrue(insertResult != null);
+
+            var validatedInsertResult = await tenantQuery.Read(r => r.Id.Equals(tenant.Id), new List<string>()
+            {
+                nameof(tenant.Owners), nameof(tenant.AccessControlList)
+            });
+
+            Assert.IsTrue(validatedInsertResult != null);
+
+            var updatedRelatedEntitiesResult = validatedInsertResult.First();
+
+            Assert.IsTrue(updatedRelatedEntitiesResult != null);
+
+            Assert.IsTrue(updatedRelatedEntitiesResult.Owners.Count > 0);
         }
 
         [Test]
-        public  void CRUDTest()
+        public void CRUDTest()
         {
             Assert.DoesNotThrowAsync(CrudContentCollection, "test failed due to entity not inserted with null objectid");
             Assert.Pass();

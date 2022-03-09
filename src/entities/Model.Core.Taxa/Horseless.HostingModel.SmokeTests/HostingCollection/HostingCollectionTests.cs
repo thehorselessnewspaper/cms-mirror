@@ -60,34 +60,75 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
             Assert.IsTrue(updatedtenant.Timestamp == tenant.Timestamp);
 
 
-        }
-
-
-        [Test]
-        public void CRUDTest()
-        {
-            Assert.DoesNotThrowAsync(CrudHostingCollection, "test failed due to entity not inserted with null objectid");
-
-
-            Assert.Pass();
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        private async Task CrudHostingCollection()
-        {
-
-            Guid newPrincipalGuid = Guid.NewGuid();
-            var tenant = new Tenant()
+            // add to a related property
+            updatedtenant.Owners.Add(new Principal()
             {
                 Id = Guid.NewGuid(),
-                DisplayName = "test tenant",
+                CreatedAt = tenant.CreatedAt,
+                DisplayName = tenant.DisplayName,
                 ObjectId = Guid.NewGuid().ToString(),
-                CreatedAt = DateTime.UtcNow,
-                TenantInfos = new List<TenantInfo>()
+                Timestamp = tenant.Timestamp
+            });
+
+            var relatedPrincipal = new Principal()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = tenant.CreatedAt,
+                DisplayName = tenant.DisplayName,
+                ObjectId = Guid.NewGuid().ToString(),
+                Timestamp = tenant.Timestamp
+            };
+
+            var principalQuery = this.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<Principal>>();
+
+            var tenantQuery = this.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<Tenant>>();
+
+            var tenantInsertResult = await tenantQuery.Create(modifiedTenant);
+
+            var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(modifiedTenant.Id, nameof(modifiedTenant.Owners), new List<Principal>() { relatedPrincipal });
+            Assert.IsTrue(insertResult != null);
+
+            var validatedInsertResult = await tenantQuery.Read(r => r.Id.Equals(tenant.Id), new List<string>()
+            {
+                nameof(tenant.Owners), nameof(tenant.AccessControlList)
+            });
+
+            Assert.IsTrue(validatedInsertResult != null);
+
+            var updatedRelatedEntitiesResult = validatedInsertResult.First();
+
+            Assert.IsTrue(updatedRelatedEntitiesResult != null);
+
+            Assert.IsTrue(updatedRelatedEntitiesResult.Owners.Count > 0);
+            
+    }
+
+
+    [Test]
+    public void CRUDTest()
+    {
+        Assert.DoesNotThrowAsync(CrudHostingCollection, "test failed due to entity not inserted with null objectid");
+
+
+        Assert.Pass();
+
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    private async Task CrudHostingCollection()
+    {
+
+        Guid newPrincipalGuid = Guid.NewGuid();
+        var tenant = new Tenant()
+        {
+            Id = Guid.NewGuid(),
+            DisplayName = "test tenant",
+            ObjectId = Guid.NewGuid().ToString(),
+            CreatedAt = DateTime.UtcNow,
+            TenantInfos = new List<TenantInfo>()
                 {
                     new TenantInfo()
                     {
@@ -115,7 +156,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                         }
                     }
                 },
-                Principals = new List<Principal>()
+            Principals = new List<Principal>()
                 {
                     new Principal()
                     {
@@ -128,61 +169,61 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                         Sub = "oauth-sub"
                     }
                 }
-            };
+        };
 
-            try
+        try
+        {
+            var newTenant = await CreateHostingEntity<Tenant>(tenant);
+
+            // validate implicit insertion of new principal
+            var principalQuery = this.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<Principal>>();
+            IQueryable<Principal> newPrincipalReadResult = await principalQuery.Read(r => r.Id.Equals(newPrincipalGuid));
+
+            Assert.IsTrue(newPrincipalReadResult.Any());
+
+        }
+        catch (Exception ex)
+        {
+            Assert.Fail($"exception under text {ex.Message}");
+        }
+
+        try
+        {
+            tenant.ObjectId = Guid.NewGuid().ToString();
+            var updateResult = await this.UpdateHostingEntity<Tenant>(tenant);
+
+            if (tenant.ObjectId != updateResult.ObjectId)
             {
-                var newTenant = await CreateHostingEntity<Tenant>(tenant);
-
-                // validate implicit insertion of new principal
-                var principalQuery = this.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<Principal>>();
-                IQueryable<Principal> newPrincipalReadResult = await principalQuery.Read(r => r.Id.Equals(newPrincipalGuid));
-
-                Assert.IsTrue(newPrincipalReadResult.Any());
-
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail($"exception under text {ex.Message}");
-            }
-
-            try
-            {
-                tenant.ObjectId = Guid.NewGuid().ToString();
-                var updateResult = await this.UpdateHostingEntity<Tenant>(tenant);
-
-                if (tenant.ObjectId != updateResult.ObjectId)
-                {
-                    throw new Exception("failed to update existing entity");
-                }
-
-
-            }
-            catch (Exception e)
-            {
-                // we expect a failure due to unprovided property list for update
-                Assert.IsTrue(e != null);
+                throw new Exception("failed to update existing entity");
             }
 
-            try
-            {
-                tenant.ObjectId = Guid.NewGuid().ToString();
-                var updateResult = await this.UpdateHostingEntity<Tenant>(tenant, new List<string> 
+
+        }
+        catch (Exception e)
+        {
+            // we expect a failure due to unprovided property list for update
+            Assert.IsTrue(e != null);
+        }
+
+        try
+        {
+            tenant.ObjectId = Guid.NewGuid().ToString();
+            var updateResult = await this.UpdateHostingEntity<Tenant>(tenant, new List<string>
                 {
                     nameof(tenant.ObjectId)
                 });
 
-                if (tenant.ObjectId != updateResult.ObjectId)
-                {
-                    throw new Exception("failed to update existing entity");
-                }
-
-
-            }
-            catch (Exception e)
+            if (tenant.ObjectId != updateResult.ObjectId)
             {
-                throw new Exception($"problem updating entity due to {e.Message}", e);
+                throw new Exception("failed to update existing entity");
             }
+
+
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"problem updating entity due to {e.Message}", e);
         }
     }
+}
 }

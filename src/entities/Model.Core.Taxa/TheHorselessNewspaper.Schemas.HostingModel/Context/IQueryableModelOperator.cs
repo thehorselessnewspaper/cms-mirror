@@ -37,7 +37,7 @@ namespace TheHorselessNewspaper.HostingModel.Context
     {
         public Task<IQueryable<T>> Read();
 
-        public Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<Expression<Func<T, bool>>> includeClauses = null);
+        public Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null);
 
         public Task<T> Create(T entity);
         public Task<IEnumerable<T>> Create(IEnumerable<T> entity);

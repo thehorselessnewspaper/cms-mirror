@@ -180,7 +180,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             return await Task.FromResult<IQueryable<T>>(result);
         }
 
-        public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<Expression<Func<T, bool>>> includeClauses = null)
+        public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null)
         {
             _logger.LogDebug($"handling get request");
             IQueryable<T> result;
@@ -264,12 +264,13 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
             if (hasEntity != null)
             {
-                var currentValue = ((DbContext)_context).Entry<T>(hasEntity).Property(propertyName).CurrentValue as ICollection<U>;
-
+                var currentValue = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
+                var relatedCollection = currentValue.GetType().GetProperties().Where(w => w.Name.Equals(propertyName)).FirstOrDefault().GetValue(currentValue);
+                var castValue = relatedCollection as ICollection<U>;
 
                 foreach (var item in relatedEntities)
                 {
-                    currentValue.Add(item);
+                    castValue.Add(item);
                 }
 
                 var saveResult = await ((DbContext)_context).SaveChangesAsync();
