@@ -23,8 +23,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public string Name { get; set; }
         public string ConnectionString { get; set; }
         public string TenantBaseUrl { get; set; }
-        public Guid? Tenant_Id { get; set; }
 
+        public Guid? TenantId { get; set; } 
         [ForeignKey("TenantId")]
         public virtual Tenant Tenant { get; set; }
         public virtual ICollection<KeyCloakConfiguration> KeyCloakConfigurations { get; set; }

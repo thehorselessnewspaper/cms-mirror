@@ -120,8 +120,8 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                         // arrange
                         // add the new TenantInfo to the new Tenant
 
-                        tenantInfo.Tenant_Id = hostingTenantsReadResult.First().Id;
-
+                        // tenantInfo.Tenant_Id = hostingTenantsReadResult.First().Id;
+                        tenantInfo.Tenant = testHostingModelTenant;
                         route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANTINFO + $"/Update/{tenantInfo.Id}";
                         var jsoncontent = GetJsonContent<HostingModel.TenantInfo>(tenantInfo);
                         postRequest = new HttpRequestMessage(HttpMethod.Post, route)
