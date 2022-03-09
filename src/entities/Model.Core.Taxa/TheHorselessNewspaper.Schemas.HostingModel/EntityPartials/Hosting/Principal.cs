@@ -20,9 +20,16 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
-
+        [NotMapped]
         public ICollection<AccessControlEntry> AccessControlList { get; set; }
 
+        [NotMapped]
         public ICollection<Principal> Owners { get; set;  }
+
+        public virtual ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
+        
+        [ForeignKey("AccessControlEntryId")]
+        [InverseProperty("Principals")]
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; }
     }
 }

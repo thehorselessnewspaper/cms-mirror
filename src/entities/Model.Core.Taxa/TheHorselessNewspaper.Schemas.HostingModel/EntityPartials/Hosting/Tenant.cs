@@ -23,14 +23,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     public class TenantIdentifierStrategyContainer
     {
         [Key]
-        [Column("TenantIdentifierStrategyContainerId")]
+        // [Column("TenantIdentifierStrategyContainerId")]
         public Guid? Id { get; set; }
         public TenantIdentifierStrategyName TenantIdentifierStrategyName { get; set; }
 
-        [ForeignKey(nameof(TenantIdentifierStrategy))]
-        public Guid? TenantIdentifierStrategyId { get; set; }
-
-        public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; }
+        public TenantIdentifierStrategy? Strategy { get; set; }
     }
 
 
@@ -46,15 +43,10 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
 
-        [ForeignKey(nameof(Tenant))]
-
-        public Guid? TenantId { get; set; }
-
-        public Tenant? Tenant { get; set; }
         /// TODO
         /// resolve this collection chail 
         /// </summary>
-        public virtual ICollection<TenantIdentifierStrategyContainer> TenantIdentifierStrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();
+        public virtual ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();
     }
 
     public partial class Tenant : IHostingRowLevelSecured
@@ -62,7 +54,13 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public bool IsPublished { get; set; }
         public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; }
         public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
+        
+        [NotMapped]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
+
+        [ForeignKey("PrincipalId")]
+        [InverseProperty(nameof(Principal.Tenants))]
+
         public ICollection<Principal> Principals { get; set; } = new HashSet<Principal>();
 
         [Timestamp]

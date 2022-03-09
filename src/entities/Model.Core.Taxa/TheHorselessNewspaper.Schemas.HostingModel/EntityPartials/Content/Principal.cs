@@ -34,5 +34,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [ForeignKey("AccessControlEntryId")]
         [InverseProperty(nameof(AccessControlEntry.Principals))]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+   
+        
     }
 }

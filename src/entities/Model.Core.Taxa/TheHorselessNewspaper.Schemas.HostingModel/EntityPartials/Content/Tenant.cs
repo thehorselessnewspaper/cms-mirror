@@ -10,7 +10,7 @@ using TheHorselessNewspaper.Schemas.HostingModel.Context;
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum TenantIdentifierStrategyName 
+    public enum TenantIdentifierStrategyName
     {
         STATIC,
         BASE_PATH,
@@ -23,14 +23,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     public class TenantIdentifierStrategyContainer
     {
         [Key]
-        [Column("TenantIdentifierStrategyContainerId")]
+        // [Column("TenantIdentifierStrategyContainerId")]
         public Guid? Id { get; set; }
-
-        [ForeignKey(nameof(TenantIdentifierStrategy))]
-        public Guid? TenantIdentifierStrategyId { get; set; }
-
-        public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; }
         public TenantIdentifierStrategyName TenantIdentifierStrategyName { get; set; }
+
+        public TenantIdentifierStrategy? Strategy { get; set; }
     }
     /// <summary>
     /// collects the strategies thta can be used to identify a tenant
@@ -45,9 +42,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Column("TenantIdentifierStrategyId")]
         public Guid Id { get; set; }
 
-
-        public Guid? TenantId { get; set; }
-        public Tenant? Tenant { get; set; }
         public string DisplayName { get; set; } = string.Empty;
 
         public string ObjectId { get; set; }
@@ -59,7 +53,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         /// TODO
         /// resolve this collection chail 
         /// </summary>
-        public virtual ICollection<TenantIdentifierStrategyContainer> TenantIdentifierStrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();
+        public virtual ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();
     }
 
 
