@@ -5,6 +5,15 @@
 @{
 }
 
+@{
+    TenantRegistrationModel tenant = (TenantRegistrationModel)ViewData["Tenant"];
+    if(tenant == null)
+    {
+        // todo react to this beyond preventing null errors
+        tenant = new TenantRegistrationModel();
+    }
+}
+
 <span>reject tenant registration</span>
 <div>
     <form asp-action="delete" method="post">
@@ -18,7 +27,7 @@
                    class="form-control"
                    id="displayName"
                    aria-describedby="displayNameHelp"
-                   placeholder="enter a display name">
+                   placeholder="@tenant.displayName">
 
             <small id="displayNameHelp" class="form-text text-muted">shows in list views.</small>
         </div>
@@ -26,7 +35,7 @@
             <label for="tenantIdentifier">Tenant Identifier</label>
             <input type="text" class="form-control" id="tenantIdentifier" disabled
 @*                   asp-for="tenantIdentifier"*@
-                   placeholder="@Context.Request.Host/mytenant">
+                   placeholder="@tenant.tenantIdentifier">
         </div>
         @*        <div class="form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">

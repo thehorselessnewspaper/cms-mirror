@@ -97,7 +97,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                     Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
                     Owners = new List<HostingModel.Principal>()
                     {
-                       
+
                     },
                     TenantInfos = new List<HostingModel.TenantInfo>()
                     {
@@ -143,7 +143,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
 
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 logger.LogWarning($"exception inserting new tenant {e.Message}");
                 return View();
@@ -175,24 +175,52 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
 
         [Authorize]
         // GET: TenantRegistrationController/Delete/5
-        public ActionResult Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
-            return View();
+            var tenantQuery = await hostingTenantsCollectionService.Query();
+            var tenant = tenantQuery.Where(w => w.Id == Guid.Parse(id)).First();
+            if (tenant != null)
+
+            {
+
+                ViewData["Tenant"] = new TenantRegistrationModel() { displayName = tenant.DisplayName, tenantIdentifier = "invalid registration" };
+
+                return View();
+            }
+            else
+            {
+                ViewData["Tenant"] = new TenantRegistrationModel() { displayName = "tenant not found", tenantIdentifier = "invalid action" };
+                return View();
+            }
+
         }
 
         [Authorize]
         // POST: TenantRegistrationController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(string id, IFormCollection collection)
+        public async Task<ActionResult> Delete(string id, IFormCollection collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var tenantQuery = await hostingTenantsCollectionService.Query();
+                var tenant = tenantQuery.Where(w => w.Id == Guid.Parse(id)).First();
+                if (tenant != null)
+
+                {
+                    tenant.IsSoftDeleted = true;
+                    // reject the application
+                    var rejectResult = await hostingTenantsCollectionService.Update(tenant, new List<string>() { nameof(tenant.IsSoftDeleted) });
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
         }
     }
