@@ -19,6 +19,10 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
     {
         public IContentCollectionService<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModel.Tenant> tenantCollectionService { get; set; }
         public IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.Tenant>, HostingModel.Tenant> hostingTenantsCollectionService { get; set; }
+        public IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.TenantInfo>, HostingModel.TenantInfo> tenantInfoService { get; set; }
+        public IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.Principal>, HostingModel.Principal> principalService { get; set; }
+
+
         public ITenantInfo CurrentTenant { get; set; }
 
         ILogger<TenantRegistrationController> logger;
@@ -86,25 +90,6 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
         {
             try
             {
-                var newTenant = new HostingModel.Tenant()
-                {
-                    Id = Guid.NewGuid(),
-                    CreatedAt = DateTime.UtcNow,
-                    DisplayName = model.displayName,
-                    IsPublished = false,
-                    IsSoftDeleted = false,
-                    ObjectId = Guid.NewGuid().ToString(),
-                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                    Owners = new List<HostingModel.Principal>()
-                    {
-
-                    },
-                    TenantInfos = new List<HostingModel.TenantInfo>()
-                    {
-
-                    }
-                };
-
                 var newOwner = new HostingModel.Principal()
                 {
                     Id = Guid.NewGuid(),
@@ -135,11 +120,22 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                     Name = model.displayName
                 };
 
-                var insertedTenant = await this.hostingTenantsCollectionService.Create(newTenant);
-                insertedTenant.Owners.Add(newOwner);
-                insertedTenant.TenantInfos.Add(newTenantInfo);
+                var newTenant = new HostingModel.Tenant()
+                {
+                    Id = Guid.NewGuid(),
+                    CreatedAt = DateTime.UtcNow,
+                    DisplayName = model.displayName,
+                    IsPublished = false,
+                    IsSoftDeleted = false,
+                    ObjectId = Guid.NewGuid().ToString(),
+                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
+                };
 
-                var insertedPrincipal = await this.hostingTenantsCollectionService.Update(insertedTenant, new List<string>() { "Owners", "TenantInfos" });
+                newTenant.Owners.Add(newOwner);
+                newTenant.TenantInfos.Add(newTenantInfo);
+
+               
+                var insertedTenant = await this.hostingTenantsCollectionService.Create(newTenant);
 
                 return RedirectToAction(nameof(Index));
             }
