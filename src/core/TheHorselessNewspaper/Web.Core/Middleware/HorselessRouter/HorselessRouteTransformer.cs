@@ -68,7 +68,7 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
                 // this really calls for some fancy rules engine eventually
 
                 bool hasNoTenants = await GetTenantCount() == 0;
-                bool isAdminPrincipal = ctx.HasAdminClaimValues(new List<string>() { "admin", "owner" });
+                bool isAdminPrincipal = ctx.HasDevopsAdminClaims(new List<string>() { "admin", "owner" });
                 // values = HandleInitialTenantSetup(values, hasNoTenants, isAdminPrincipal);
             }
 

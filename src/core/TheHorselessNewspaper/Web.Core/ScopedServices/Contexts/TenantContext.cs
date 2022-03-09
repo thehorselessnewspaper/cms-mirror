@@ -38,7 +38,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.Contexts
             {
                 // curently a fuzzy match of claims profile
                 // indicating a user who can log into any tenant
-                var result = this.CurrentHttpContext.HasAdminClaimValues();
+                var result = this.CurrentHttpContext.HasDevopsAdminClaims();
                 return result;
             }
         }

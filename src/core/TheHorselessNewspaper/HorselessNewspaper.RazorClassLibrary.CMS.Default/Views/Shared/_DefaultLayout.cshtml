@@ -1,4 +1,10 @@
-﻿@inject Finbuckle.MultiTenant.ITenantInfo CurrentTenant;
+﻿@using HorselessNewspaper.Web.Core.Extensions.Claim;
+@using Microsoft.Extensions.Configuration
+
+@inject Finbuckle.MultiTenant.ITenantInfo CurrentTenant;
+@inject IServiceProvider serviceProvider;
+@inject IConfiguration configuration;
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,10 +73,13 @@
     <div style="padding-top: 70px;" class="wrapper flex-shrink-0">
 
         @* // todo - this must become HttpContext.CanShowAdminSidebar *@
-        @if (User.Claims != null && User.Claims.Count() > 0)
+        @if (Context.HasDevopsAdminClaims())
         {
-
-            await Html.RenderPartialAsync("_BootstrapSidebar");
+            await Html.RenderPartialAsync("_DevopsSidebar");
+        }
+        else if (await Context.IsTenantOwner(CurrentTenant, configuration, serviceProvider))
+        {
+            await Html.RenderPartialAsync("_TenantAdminSidebar");
         }
 
         <div id="content">

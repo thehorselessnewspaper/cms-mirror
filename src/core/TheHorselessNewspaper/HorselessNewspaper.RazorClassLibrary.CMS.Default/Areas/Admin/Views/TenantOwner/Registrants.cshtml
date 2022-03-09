@@ -1,0 +1,28 @@
+﻿@using HorselessNewspaper.Web.Core.Interfaces.Hosting
+@using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+@using TheHorselessNewspaper.HostingModel.Entities.Query
+
+@inject IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.Tenant>, HostingModel.Tenant> tenantService;
+
+@{
+    var registrantsQuery = await tenantService.Query();
+    var waitingRequests = registrantsQuery
+        .Where(w => w.IsPublished == false && w.IsSoftDeleted == false)
+        .Take(5)
+        .ToList();
+
+    @foreach(var item in waitingRequests)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(d => item.DisplayName)
+            </td>
+            <td>
+                @Html.DisplayFor(d => item.TenantInfos.FirstOrDefault().Identifier);            
+            </td>
+            <td>
+                <a asp-area="Admin" asp-controller="TenantRegistration" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            </td>
+        </tr>
+    }
+}

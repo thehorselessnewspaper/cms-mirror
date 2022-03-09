@@ -1,9 +1,18 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Finbuckle.MultiTenant;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using TheHorselessNewspaper.HostingModel.Context;
+using TheHorselessNewspaper.HostingModel.Entities.Query;
+using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace HorselessNewspaper.Web.Core.Extensions.Claim
 {
@@ -17,7 +26,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Claim
         /// <param name="httpContext"></param>
         /// <param name="validAdminClaims"></param>
         /// <returns></returns>
-        public static bool HasAdminClaimValues(this HttpContext httpContext, List<string>? validAdminClaims = null)
+        public static bool HasDevopsAdminClaims(this HttpContext httpContext, List<string>? validAdminClaims = null)
         {
             bool ret = false;
 
@@ -26,11 +35,11 @@ namespace HorselessNewspaper.Web.Core.Extensions.Claim
             {
                 var claimValues = claims.Select(s => s.Value).ToList();
                 var q = claimValues.Where(w => validAdminClaims.Contains(w)).ToList();
-                if(q.Any())
+                if (q.Any())
                 {
                     ret = true;
                 }
-            
+
             }
             else if (claims.Any())
             {
@@ -42,6 +51,47 @@ namespace HorselessNewspaper.Web.Core.Extensions.Claim
 
             return ret;
         }
+
+        public static async Task<bool> IsTenantOwner(this HttpContext httpContext, ITenantInfo currentTenant, IConfiguration configuration, IServiceProvider serviceProvider)
+        {
+            bool ret = false;
+            try
+            {
+                if(! httpContext.User.Identity.IsAuthenticated)
+                {
+                    return false;
+                }
+
+                var sub = httpContext.User.Claims.FirstOrDefault().Subject.Name;
+                var iss = httpContext.User.Claims.FirstOrDefault().Issuer;
+
+                using (var scope = serviceProvider.CreateScope())
+                {
+                    var tenantQuery = GetQueryForContentEntity<ContentModel.Tenant>(scope);
+                    var tenantQueryResult = await tenantQuery.Read(r => r.Id.Equals(currentTenant.Id));
+                    ret = tenantQueryResult.Where(w => w.Owners.Where(o => o.Sub.Equals(sub) && o.Iss.Equals(iss)).Any()).Any();
+                }
+
+            }
+            catch (Exception e)
+            {
+                ret = false;
+            }
+            return ret;
+        }
+
+        public static IQueryableHostingModelOperator<T> GetQueryForHostingEntity<T>(IServiceScope scope)
+           where T : class, IHostingRowLevelSecured
+        {
+            return scope.ServiceProvider.GetRequiredService<IQueryableHostingModelOperator<T>>();
+        }
+
+        public static IQueryableContentModelOperator<T> GetQueryForContentEntity<T>(IServiceScope scope)
+        where T : class, IContentRowLevelSecured
+        {
+            return scope.ServiceProvider.GetRequiredService<IQueryableContentModelOperator<T>>();
+        }
+
 
         private static bool GetIsMustHandleProvidedClaimValues(HttpContext httpContext, List<string>? validAdminClaims)
         {

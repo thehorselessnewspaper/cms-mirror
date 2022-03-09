@@ -63,7 +63,7 @@ namespace HorselessNewspaper.Web.Core.Middleware
             //        "Bearer"));
 
             bool hasNoTenants = await GetTenantCount() == 0;
-            bool isAdminPrincipal = context.HasAdminClaimValues(new List<string>() { "admin", "owner" });
+            bool isAdminPrincipal = context.HasDevopsAdminClaims(new List<string>() { "admin", "owner" });
 
             //if (hasNoTenants && isAdminPrincipal && !context.Request.Path.Equals("/Installer/TenantSetup"))
             //{

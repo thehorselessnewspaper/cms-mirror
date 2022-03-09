@@ -45,7 +45,7 @@ namespace HorselessNewspaper.Web.Core.Filters.ActionFilters.Infrastructure
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            bool isAdminPrincipal = context.HttpContext.HasAdminClaimValues(new List<string>() { "admin", "owner" });
+            bool isAdminPrincipal = context.HttpContext.HasDevopsAdminClaims(new List<string>() { "admin", "owner" });
             string area = (string)context.RouteData.Values["area"];
             string controller = (string)context.RouteData.Values["controller"];
             string action = (string)context.RouteData.Values["action"];

@@ -53,6 +53,20 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
             return View();
         }
 
+        /// <summary>
+        /// tenenant registrant management security scope
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Registrants()
+        {
+            //var registrantsQuery = await hostingTenantsCollectionService.Query();
+            //var waitingRequests = registrantsQuery
+            //    .Where(w => w.IsPublished == false && w.IsSoftDeleted == false)
+            //    .Take(5)
+            //    .ToList();
+            return View();
+        }
+
         [Authorize]
         // GET: TenantRegistrationController/Details/5
         public ActionResult Details(string id)
@@ -133,7 +147,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
 
         [Authorize]
         // GET: TenantRegistrationController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
             return View();
         }
