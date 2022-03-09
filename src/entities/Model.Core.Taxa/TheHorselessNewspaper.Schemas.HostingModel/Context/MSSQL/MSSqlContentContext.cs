@@ -123,15 +123,15 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             #endregion multitenant
 
 
-            builder.Entity<TenantIdentifierStrategy>()
-                .HasMany(m => m.TenantIdentifierStrategyContainers)
-                .WithOne(o => o.TenantIdentifierStrategy)
-                .HasForeignKey(fk => fk.TenantIdentifierStrategyId);
+            //builder.Entity<TenantIdentifierStrategy>()
+            //    .HasMany(m => m.TenantIdentifierStrategyContainers)
+            //    .WithOne(o => o.TenantIdentifierStrategy)
+            //    .HasForeignKey(fk => fk.TenantIdentifierStrategyId);
 
-            builder.Entity<TenantIdentifierStrategyContainer>()
-                .HasOne<TenantIdentifierStrategy>(o => o.TenantIdentifierStrategy)
-                .WithMany(o => o.TenantIdentifierStrategyContainers)
-                .HasForeignKey(fk => fk.TenantIdentifierStrategyId);
+            //builder.Entity<TenantIdentifierStrategyContainer>()
+            //    .HasOne<TenantIdentifierStrategy>(o => o.TenantIdentifierStrategy)
+            //    .WithMany(o => o.TenantIdentifierStrategyContainers)
+            //    .HasForeignKey(fk => fk.TenantIdentifierStrategyId);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
