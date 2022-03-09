@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
@@ -90,6 +91,13 @@ namespace HorselessNewspaper.Web.Core.Model.Query.HostingCollection
             return result;
         }
 
+        public async Task<IQueryable<Entity>> Query(Expression<Func<Entity, bool>> query, List<string> includeClauses = null)
+        {
+            var result = await _hostingModelService.Read(query, includeClauses);
+
+            return result;
+        }
+
         public async Task<Entity> Update([FromBody] Entity contentCollection, List<string> targetProperties = null)
         {
             Entity result;
@@ -105,6 +113,14 @@ namespace HorselessNewspaper.Web.Core.Model.Query.HostingCollection
 
             return result;
         }
+
+        public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class
+        {
+            var result = await _hostingModelService.InsertRelatedEntity(entityId, propertyName, relatedEntities);
+
+            return result;
+        }
+
     }
 
 }

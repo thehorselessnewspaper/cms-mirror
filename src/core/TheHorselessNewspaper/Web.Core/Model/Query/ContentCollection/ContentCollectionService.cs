@@ -7,6 +7,7 @@ using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using Microsoft.Extensions.Logging;
+using System.Linq.Expressions;
 
 namespace HorselessNewspaper.Web.Core.Model.Query.ContentCollection
 {
@@ -84,6 +85,13 @@ namespace HorselessNewspaper.Web.Core.Model.Query.ContentCollection
             return result;
         }
 
+        public async Task<IQueryable<Entity>> Query(Expression<Func<Entity, bool>> query, List<string> includeClauses = null)
+        {
+            var result = await _contentModelService.Read(query, includeClauses);
+
+            return result;
+        }
+
         public async Task<Entity> Update([FromBody] Entity contentCollection, List<string> targetProperties = null)
         {
             Entity result;
@@ -96,6 +104,13 @@ namespace HorselessNewspaper.Web.Core.Model.Query.ContentCollection
             {
                 throw new Exception($"failed update {ex.Message}");
             }
+
+            return result;
+        }
+
+        public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class
+        {
+            var result = await _contentModelService.InsertRelatedEntity(entityId, propertyName, relatedEntities);
 
             return result;
         }

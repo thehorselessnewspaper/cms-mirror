@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
+using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
@@ -31,10 +32,12 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
             ILogger<TenantRegistrationController> logger,
             IContentCollectionService<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModel.Tenant> tenantCollectionService,
             IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.Tenant>, HostingModel.Tenant> hostingTenantsCollectionService,
+            IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.TenantInfo>, HostingModel.TenantInfo> tenantInfoService,
             ITenantInfo tenantInfo)
         {
             this.tenantCollectionService = tenantCollectionService;
             this.hostingTenantsCollectionService = hostingTenantsCollectionService;
+            this.tenantInfoService = tenantInfoService;
             this.CurrentTenant = tenantInfo;
             this.logger = logger;
         }
@@ -60,10 +63,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
         /// <returns></returns>
         public async Task<ActionResult> Registrants()
         {
-            var hasUnpublishedTenantQuery = await hostingTenantsCollectionService.Query();
+            var hasUnpublishedTenantQuery = await hostingTenantsCollectionService.Query(r => r.IsPublished == false && r.IsSoftDeleted == false, new List<string>() { nameof(Tenant.Owners)});
             var hasWaitingRequest = hasUnpublishedTenantQuery
-                .Where(w => w.Owners.Count() > 0)
-                .Where(w => w.TenantInfos.Count() > 0)
+                .OrderBy(o => o.CreatedAt)
                 .ToList();
             return View();
         }
@@ -136,6 +138,15 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
 
                
                 var insertedTenant = await this.hostingTenantsCollectionService.Create(newTenant);
+
+                var updateOwnerResult = await this.hostingTenantsCollectionService.InsertRelatedEntity<Principal>(insertedTenant.Id, nameof(insertedTenant.Owners),
+                    new List<Principal>() { newOwner});
+
+                var updatedTenantInforesult = await this.hostingTenantsCollectionService.InsertRelatedEntity<HostingModel.TenantInfo>(insertedTenant.Id, nameof(insertedTenant.TenantInfos),
+                    new List<HostingModel.TenantInfo>() { newTenantInfo });
+
+                var tenantInfos = await this.tenantInfoService.Query();
+                var tenantInfosResult = tenantInfos.ToList();
 
                 return RedirectToAction(nameof(Index));
             }
