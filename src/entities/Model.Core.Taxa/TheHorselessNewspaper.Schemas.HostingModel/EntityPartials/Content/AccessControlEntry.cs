@@ -38,7 +38,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     /// </summary>
 
     [MultiTenant]
-   // [Table("PhantomAccessControlEntries")]
+    // [Table("PhantomAccessControlEntries")]
     public partial class AccessControlEntry
     {
 
@@ -53,15 +53,22 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
     public partial class AccessControlEntry : IQueryableModelEntity, IContentRowLevelSecured
     {
-        public byte[] Timestamp {get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
+        public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
         [NotMapped]
         public virtual ICollection<AccessControlEntry> AccessControlList { get; set; }
 
-
-
         [NotMapped]
-        public virtual ICollection<Principal> Owners { get; set; }
+        public virtual ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
+
+        /// <summary>
+        /// principals referred to by this access control entry
+        /// </summary>
+
+
+        [ForeignKey("PrincipalId")]
+        [InverseProperty("AccessControlEntries")]
+        public virtual ICollection<Principal> Principals { get; set; } = new HashSet<Principal>();
     }
 
 
@@ -77,7 +84,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         /// <param name="principal"></param>
         /// <param name="authorizationService"></param>
         /// <returns></returns>
-        public static async Task<bool> IsPermitted<T>(this T entity, ACEPermission permission, ClaimsPrincipal principal, IAuthorizationService service) 
+        public static async Task<bool> IsPermitted<T>(this T entity, ACEPermission permission, ClaimsPrincipal principal, IAuthorizationService service)
             where T : IContentRowLevelSecured
         {
             var isPermittedRead = entity.AccessControlList.First().Permission.HasFlag(ACEPermission.READ) && permission.HasFlag(ACEPermission.READ);

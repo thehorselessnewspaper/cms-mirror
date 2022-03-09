@@ -72,8 +72,14 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public virtual ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
 
+        [NotMapped]
         public virtual ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
+        /// <summary>
+        /// principals who have registered in the tenant
+        /// </summary>
+        [ForeignKey("PrincipalId")]
+        [InverseProperty(nameof(Principal.Tenants))]
         public virtual ICollection<Principal> Principals { get; set; } = new HashSet<Principal>();
 
         [Timestamp]

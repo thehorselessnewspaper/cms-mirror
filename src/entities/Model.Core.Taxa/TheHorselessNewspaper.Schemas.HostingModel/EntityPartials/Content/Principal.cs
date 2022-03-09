@@ -15,12 +15,24 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
+        [NotMapped]
+        public ICollection<AccessControlEntry> AccessControlList { get; set; } = new List<AccessControlEntry>();
 
-        public ICollection<AccessControlEntry> AccessControlList { get; set; }
+        [NotMapped]
+        public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
+        /// <summary>
+        /// tenants where the principal is registered
+        /// </summary>
+        [ForeignKey("TenantId")]
+        [InverseProperty(nameof(Tenant.Principals))]
+        public ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
 
-        public ICollection<Principal> Owners { get; set; }
-
-
+        /// <summary>
+        /// access control entries that refer to this principal
+        /// </summary>
+        [ForeignKey("AccessControlEntryId")]
+        [InverseProperty(nameof(AccessControlEntry.Principals))]
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
     }
 }
