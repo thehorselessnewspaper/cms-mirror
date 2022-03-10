@@ -22,8 +22,5 @@ namespace Schema.Diagrams.Hosting
         public string Version { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public string DisplayName { get; set; }
-        public Nullable<System.Guid> TenantId { get; set; }
-    
-        public virtual Tenant Tenant { get; set; }
     }
 }

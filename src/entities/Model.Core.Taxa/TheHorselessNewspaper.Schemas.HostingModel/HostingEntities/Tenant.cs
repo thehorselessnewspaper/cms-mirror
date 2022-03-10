@@ -7,19 +7,10 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
     public partial class Tenant
     {
-        public Tenant()
-        {
-            NugetPackages = new HashSet<NugetPackage>();
-            TenantInfos = new HashSet<TenantInfo>();
-        }
-
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
         public DateTime? CreatedAt { get; set; }
-
-        public virtual ICollection<NugetPackage> NugetPackages { get; set; }
-        public virtual ICollection<TenantInfo> TenantInfos { get; set; }
     }
 }

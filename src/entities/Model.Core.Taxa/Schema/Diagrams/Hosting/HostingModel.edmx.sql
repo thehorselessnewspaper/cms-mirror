@@ -2,11 +2,10 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/05/2022 13:57:49
+-- Date Created: 03/09/2022 19:57:23
 -- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Hosting\HostingModel.edmx
 -- --------------------------------------------------
 
-SET QUOTED_IDENTIFIER OFF;
 
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
@@ -22,14 +21,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_TenantInfoKeyCloakConfiguration]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[KeyCloakConfigurations] DROP CONSTRAINT [FK_TenantInfoKeyCloakConfiguration];
 GO
-IF OBJECT_ID(N'[dbo].[FK_TenantTenantInfo]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TenantInfos] DROP CONSTRAINT [FK_TenantTenantInfo];
-GO
-IF OBJECT_ID(N'[dbo].[FK_HorselessClaimsPrincipalTenant]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Principals] DROP CONSTRAINT [FK_HorselessClaimsPrincipalTenant];
-GO
 IF OBJECT_ID(N'[dbo].[FK_TenantNugetPackage]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[NugetPackages] DROP CONSTRAINT [FK_TenantNugetPackage];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TenantTenantInfo]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Tenants] DROP CONSTRAINT [FK_TenantTenantInfo];
 GO
 
 -- --------------------------------------------------
@@ -81,8 +77,7 @@ CREATE TABLE [dbo].[NugetPackages] (
     [Publisher] nvarchar(max)  NULL,
     [Version] nvarchar(max)  NULL,
     [CreatedAt] datetime  NULL,
-    [DisplayName] nvarchar(max)  NULL,
-    [TenantId] uniqueidentifier  NULL
+    [DisplayName] nvarchar(max)  NULL
 );
 GO
 
@@ -110,8 +105,7 @@ CREATE TABLE [dbo].[TenantInfos] (
     [Identifier] nvarchar(max)  NULL,
     [Name] nvarchar(max)  NULL,
     [ConnectionString] nvarchar(max)  NULL,
-    [TenantBaseUrl] nvarchar(max)  NULL,
-    [Tenant_Id] uniqueidentifier  NULL
+    [TenantBaseUrl] nvarchar(max)  NULL
 );
 GO
 
@@ -232,36 +226,6 @@ GO
 CREATE INDEX [IX_FK_TenantInfoKeyCloakConfiguration]
 ON [dbo].[KeyCloakConfigurations]
     ([TenantInfoId]);
-GO
-
--- Creating foreign key on [Tenant_Id] in table 'TenantInfos'
-ALTER TABLE [dbo].[TenantInfos]
-ADD CONSTRAINT [FK_TenantTenantInfo]
-    FOREIGN KEY ([Tenant_Id])
-    REFERENCES [dbo].[Tenants]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TenantTenantInfo'
-CREATE INDEX [IX_FK_TenantTenantInfo]
-ON [dbo].[TenantInfos]
-    ([Tenant_Id]);
-GO
-
--- Creating foreign key on [TenantId] in table 'NugetPackages'
-ALTER TABLE [dbo].[NugetPackages]
-ADD CONSTRAINT [FK_TenantNugetPackage]
-    FOREIGN KEY ([TenantId])
-    REFERENCES [dbo].[Tenants]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TenantNugetPackage'
-CREATE INDEX [IX_FK_TenantNugetPackage]
-ON [dbo].[NugetPackages]
-    ([TenantId]);
 GO
 
 -- --------------------------------------------------

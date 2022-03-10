@@ -51,16 +51,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
             modelBuilder.Entity<NugetPackage>(entity =>
             {
-                entity.HasIndex(e => e.TenantId, "IX_FK_TenantNugetPackage");
-
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.HasOne(d => d.Tenant)
-                    .WithMany(p => p.NugetPackages)
-                    .HasForeignKey(d => d.TenantId)
-                    .HasConstraintName("FK_TenantNugetPackage");
             });
 
             modelBuilder.Entity<Principal>(entity =>
@@ -79,16 +72,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
             modelBuilder.Entity<TenantInfo>(entity =>
             {
-                entity.HasIndex(e => e.Tenant_Id, "IX_FK_TenantTenantInfo");
-
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.HasOne(d => d.Tenant)
-                    .WithMany(p => p.TenantInfos)
-                    .HasForeignKey(d => d.Tenant_Id)
-                    .HasConstraintName("FK_TenantTenantInfo");
             });
 
             modelBuilder.Entity<WebAPITenantInfo>(entity =>

@@ -2,7 +2,6 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
@@ -24,9 +23,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public string ConnectionString { get; set; }
         public string TenantBaseUrl { get; set; }
 
-        public Guid? TenantId { get; set; } 
-        [ForeignKey("TenantId")]
-        public virtual Tenant Tenant { get; set; }
         public virtual ICollection<KeyCloakConfiguration> KeyCloakConfigurations { get; set; }
         public virtual ICollection<WebAPITenantInfo> WebAPITenantInfos { get; set; }
     }

@@ -21,14 +21,6 @@
       <End Role="TenantInfo" EntitySet="TenantInfos" />
       <End Role="KeyCloakConfiguration" EntitySet="KeyCloakConfigurations" />
     </AssociationSet>
-    <AssociationSet Name="TenantTenantInfo" Association="HostingModel.Store.TenantTenantInfo">
-      <End Role="Tenant" EntitySet="Tenants" />
-      <End Role="TenantInfo" EntitySet="TenantInfos" />
-    </AssociationSet>
-    <AssociationSet Name="TenantNugetPackage" Association="HostingModel.Store.TenantNugetPackage">
-      <End Role="Tenant" EntitySet="Tenants" />
-      <End Role="NugetPackage" EntitySet="NugetPackages" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Tenants">
     <Key>
@@ -52,7 +44,6 @@
     <Property Name="Version" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="TenantId" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <EntityType Name="KeyCloakConfigurations">
     <Key>
@@ -81,7 +72,6 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ConnectionString" Type="nvarchar(max)" Nullable="true" />
     <Property Name="TenantBaseUrl" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Tenant_Id" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <EntityType Name="WebAPITenantInfos">
     <Key>
@@ -146,30 +136,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="TenantTenantInfo">
-    <End Role="Tenant" Type="HostingModel.Store.Tenants" Multiplicity="0..1" />
-    <End Role="TenantInfo" Type="HostingModel.Store.TenantInfos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tenant">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TenantInfo">
-        <PropertyRef Name="Tenant_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="TenantNugetPackage">
-    <End Role="Tenant" Type="HostingModel.Store.Tenants" Multiplicity="0..1" />
-    <End Role="NugetPackage" Type="HostingModel.Store.NugetPackages" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tenant">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="NugetPackage">
-        <PropertyRef Name="TenantId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -188,15 +154,7 @@
             <End Role="TenantInfo" EntitySet="TenantInfos" />
             <End Role="KeyCloakConfiguration" EntitySet="KeyCloakConfigurations" />
           </AssociationSet>
-          <AssociationSet Name="TenantTenantInfo" Association="HostingModel.TenantTenantInfo">
-            <End Role="Tenant" EntitySet="Tenants" />
-            <End Role="TenantInfo" EntitySet="TenantInfos" />
-          </AssociationSet>
           <EntitySet Name="Principals" EntityType="HostingModel.Principal" />
-          <AssociationSet Name="TenantNugetPackage" Association="HostingModel.TenantNugetPackage">
-            <End Role="Tenant" EntitySet="Tenants" />
-            <End Role="NugetPackage" EntitySet="NugetPackages" />
-          </AssociationSet>
           <EntitySet Name="AccessControlEntries" EntityType="HostingModel.AccessControlEntry" />
         </EntityContainer>
         <EntityType Name="Tenant">
@@ -208,8 +166,6 @@
           <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
-          <NavigationProperty Name="TenantInfo" Relationship="HostingModel.TenantTenantInfo" FromRole="Tenant" ToRole="TenantInfo" />
-          <NavigationProperty Name="NugetPackages" Relationship="HostingModel.TenantNugetPackage" FromRole="Tenant" ToRole="NugetPackage" />
         </EntityType>
         <EntityType Name="NugetPackage">
           <Documentation>
@@ -226,8 +182,6 @@
           <Property Name="Version" Type="String" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
-          <NavigationProperty Name="Tenant" Relationship="HostingModel.TenantNugetPackage" FromRole="NugetPackage" ToRole="Tenant" />
-          <Property Name="TenantId" Type="Guid" Nullable="true" />
         </EntityType>
         <EntityType Name="KeyCloakConfiguration">
           <Key>
@@ -259,7 +213,6 @@
           <Property Name="TenantBaseUrl" Type="String" Nullable="true" />
           <NavigationProperty Name="WebAPITenantInfos" Relationship="HostingModel.TenantInfoWebAPITenantInfo" FromRole="TenantInfo" ToRole="WebAPITenantInfo" />
           <NavigationProperty Name="KeyCloakConfigurations" Relationship="HostingModel.TenantInfoKeyCloakConfiguration" FromRole="TenantInfo" ToRole="KeyCloakConfiguration" />
-          <NavigationProperty Name="Tenant" Relationship="HostingModel.TenantTenantInfo" FromRole="TenantInfo" ToRole="Tenant" />
         </EntityType>
         <EntityType Name="WebAPITenantInfo">
           <Key>
@@ -301,10 +254,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TenantTenantInfo">
-          <End Type="HostingModel.Tenant" Role="Tenant" Multiplicity="0..1" />
-          <End Type="HostingModel.TenantInfo" Role="TenantInfo" Multiplicity="0..1" />
-        </Association>
         <EntityType Name="Principal">
           <Key>
             <PropertyRef Name="Id" />
@@ -318,18 +267,6 @@
           <Property Name="Aud" Type="String" Nullable="true" />
           <Property Name="Sub" Type="String" Nullable="true" />
         </EntityType>
-        <Association Name="TenantNugetPackage">
-          <End Type="HostingModel.Tenant" Role="Tenant" Multiplicity="0..1" />
-          <End Type="HostingModel.NugetPackage" Role="NugetPackage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tenant">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="NugetPackage">
-              <PropertyRef Name="TenantId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="AccessControlEntry">
           <Key>
             <PropertyRef Name="Id" />
@@ -369,7 +306,6 @@
           <ScalarProperty Name="Version" ColumnName="Version" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-          <ScalarProperty Name="TenantId" ColumnName="TenantId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -445,15 +381,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="TenantTenantInfo" TypeName="HostingModel.TenantTenantInfo" StoreEntitySet="TenantInfos">
-      <EndProperty Name="Tenant">
-        <ScalarProperty Name="Id" ColumnName="Tenant_Id" />
-      </EndProperty>
-      <EndProperty Name="TenantInfo">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-      <Condition ColumnName="Tenant_Id" IsNull="false" />
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
