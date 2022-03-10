@@ -62,6 +62,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 {
                     // arrange
                     client.DefaultRequestHeaders.Add("Accept", "application/json;odata.metadata=none");
+                    testHostingModelTenant.TenantInfos.Add(testHostingModelTenantInfo);
 
                     var route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT + "/CREATE";
                     
@@ -86,63 +87,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     // here because we can post a tenant to the hosting model tenant endpoint
                     // add a tenantinfo 
 
-                    // arrange
-                    // add the existing tenant to the new tenantinfo
-                    // testHostingModelTenantInfo.Tenant = hostingTenantsReadResult.First();
-
-                    route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANTINFO + "/CREATE";
-    
-                    postRequest = new HttpRequestMessage(HttpMethod.Post, route)
-                    {
-                        Content = GetJsonContent<HostingModel.TenantInfo>(testHostingModelTenantInfo)
-                    };
-
-                    // act
-                    postResponse = await client.SendAsync(postRequest);
-
-                    Assert.NotNull(postResponse);
-
-                    postResponse.EnsureSuccessStatusCode(); // Status Code 200-299
-                                                        //Assert.Equal(oDataResponseHeader,
-                                                        //    response.Content.Headers.ContentType.ToString());
-
-                    responseContent = await postResponse.Content.ReadAsStringAsync();
-                    Assert.NotNull(responseContent);
-
-                    try
-                    {
-
-                        var tenantInfo = JsonConvert.DeserializeObject<HostingModel.TenantInfo>(responseContent);
-                        Assert.NotNull(tenantInfo);
-                        Assert.True(tenantInfo.Id == testHostingModelTenantInfo.Id);
-
-
-                        // arrange
-                        // add the new TenantInfo to the new Tenant
-
-                        // tenantInfo.Tenant_Id = hostingTenantsReadResult.First().Id;
-                        tenantInfo.Tenant = testHostingModelTenant;
-                        route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANTINFO + $"/Update/{tenantInfo.Id}";
-                        var jsoncontent = GetJsonContent<HostingModel.TenantInfo>(tenantInfo);
-                        postRequest = new HttpRequestMessage(HttpMethod.Post, route)
-                        {
-                            Content = jsoncontent
-                        };
-
-                        // act
-                        postResponse = await client.SendAsync(postRequest);
-
-                        Assert.NotNull(postResponse);
-
-                        postResponse.EnsureSuccessStatusCode();
-
-                    }
-                    catch (Exception e)
-                    {
-
-                        ex = e;
-                        throw new Exception("test failure exception", e);
-                    }
+ 
 
                     Assert.Null(ex);
 
