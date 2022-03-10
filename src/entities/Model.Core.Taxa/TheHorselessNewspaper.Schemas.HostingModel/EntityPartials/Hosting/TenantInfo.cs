@@ -15,7 +15,5 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
         public Guid TenantId { get; set; }
 
-        [ForeignKey(nameof(TenantId))]
-        public Tenant Tenant { get; set; }
     }
 }

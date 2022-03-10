@@ -226,6 +226,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 }
             }
 
+
             // inject the finbuckle in-memory store
             var stores = _services.GetService<IEnumerable<IMultiTenantStore<HorselessTenantInfo>>>().ToList();
 
@@ -365,6 +366,11 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
             _logger.LogInformation($"read {hostingModelTenantQueryResult.Where(w => w.IsPublished == true).ToList().Count()} published hosting model tenant records");
             _logger.LogInformation($"read {hostingModelTenantQueryResult.Where(w => w.IsPublished == false).ToList().Count()} unpublished hosting model tenant records");
+
+            foreach(var t in hostingModelTenantQueryResult)
+            {
+                _logger.LogDebug($"{t.DisplayName} has {t.TenantInfos.Count()} tenantinfo records");
+            }
 
             return hostingModelTenants;
         }
