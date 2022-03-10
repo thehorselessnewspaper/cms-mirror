@@ -37,7 +37,12 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
             try
             {
-                builder.UseSqlServer(connectionString);
+                builder.UseSqlServer(connectionString, options =>
+                {
+                    options.EnableRetryOnFailure();
+                   
+                });
+
                 services.AddSingleton<DbContextOptions<MSSqlContentContext>>(builder.Options);
 
                 // add dbcontext for dependency injectoin
@@ -70,7 +75,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             var builder = new DbContextOptionsBuilder<MSSQLHostingContext>();
             builder.EnableDetailedErrors();
             builder.EnableSensitiveDataLogging();
-            builder.UseSqlServer(connectionString);
+            builder.UseSqlServer(connectionString, options =>
+            {
+                options.EnableRetryOnFailure();
+
+            });
             services.AddSingleton<DbContextOptions<MSSQLHostingContext>>(builder.Options);
 
             // add dbcontext for dependency injectoin

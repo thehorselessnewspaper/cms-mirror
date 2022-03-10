@@ -73,6 +73,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public virtual ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
 
 
+        [InverseProperty(nameof(Principal.OwnedTenants))]
         public virtual ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
         /// <summary>
