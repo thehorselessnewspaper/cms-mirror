@@ -91,7 +91,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     // testHostingModelTenantInfo.Tenant = hostingTenantsReadResult.First();
 
                     route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANTINFO + "/CREATE";
-
+    
                     postRequest = new HttpRequestMessage(HttpMethod.Post, route)
                     {
                         Content = GetJsonContent<HostingModel.TenantInfo>(testHostingModelTenantInfo)
