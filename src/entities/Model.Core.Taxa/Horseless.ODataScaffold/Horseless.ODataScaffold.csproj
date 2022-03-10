@@ -16,8 +16,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="HorselessNewspaper.RazorClassLibrary.CMS.Default" Version="0.3.220309.5" />
-		<PackageReference Include="HorselessNewspaper.Web.Core.Auth.Keycloak" Version="0.3.220309.5" />
+		<PackageReference Include="HorselessNewspaper.RazorClassLibrary.CMS.Default" Version="0.3.220309.11" />
+		<PackageReference Include="HorselessNewspaper.Web.Core.Auth.Keycloak" Version="0.3.220309.11" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
 	</ItemGroup>
