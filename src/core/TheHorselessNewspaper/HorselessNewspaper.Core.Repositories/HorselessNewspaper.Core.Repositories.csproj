@@ -10,8 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HorselessNewspaper.Web.Core" Version="0.4.220310.1" />
-    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220310.1" />
+    <PackageReference Include="HorselessNewspaper.Web.Core" Version="0.4.220310.2" />
+    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220310.2" />
   </ItemGroup>
 
   <ItemGroup>
