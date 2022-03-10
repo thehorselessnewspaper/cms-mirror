@@ -53,6 +53,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public DateTime? CreatedAt { get; set; }
 
         [ForeignKey("TargetTenantId")]
+        [InverseProperty(nameof(Tenant.TenantIdentifierStrategy))]
         public Tenant TargetTenant { get; set; }
 
         [InverseProperty(nameof(TenantIdentifierStrategyContainer.Strategy))]
@@ -82,7 +83,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
-        [ForeignKey("TenantInfoId")]
+        //[ForeignKey("TenantInfoId")]
         [InverseProperty(nameof(TenantInfo.Tenant))]
         public virtual ICollection<TenantInfo> TenantInfos { get; set; } = new HashSet<TenantInfo>();
     }

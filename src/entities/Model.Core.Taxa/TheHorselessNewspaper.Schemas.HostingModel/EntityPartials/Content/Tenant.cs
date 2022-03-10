@@ -27,7 +27,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
- 
+
         public TenantIdentifierStrategy? Strategy { get; set; }
     }
 
@@ -56,6 +56,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
         [ForeignKey("TargetTenantId")]
+        [InverseProperty(nameof(Tenant.TenantIdentifierStrategy))]
         public Tenant TargetTenant { get; set; }
 
         [InverseProperty(nameof(TenantIdentifierStrategyContainer.Strategy))]

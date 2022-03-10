@@ -66,8 +66,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         /// </summary>
 
 
-        [ForeignKey("PrincipalId")]
-        [InverseProperty("AccessControlEntries")]
+        // [ForeignKey("PrincipalId")]
+        [InverseProperty(nameof(Principal.AccessControlEntries))]
         public virtual ICollection<Principal> Principals { get; set; } = new HashSet<Principal>();
     }
 

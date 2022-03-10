@@ -25,14 +25,14 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         /// <summary>
         /// tenants where the principal is registered
         /// </summary>
-        [ForeignKey("TenantId")]
+        // [ForeignKey("Id")]
         [InverseProperty(nameof(Tenant.Principals))]
         public ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
 
         /// <summary>
         /// access control entries that refer to this principal
         /// </summary>
-        [ForeignKey("AccessControlEntryId")]
+        // [ForeignKey("AccessControlEntryId")]
         [InverseProperty(nameof(AccessControlEntry.Principals))]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 

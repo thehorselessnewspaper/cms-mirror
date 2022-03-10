@@ -54,7 +54,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
 
         [ForeignKey("PrincipalId")]
-        [InverseProperty("AccessControlEntries")]
+        [InverseProperty(nameof(Principal.AccessControlEntries))]
         public virtual ICollection<Principal> Principals { get; set; } = new HashSet<Principal>();
 
     }
