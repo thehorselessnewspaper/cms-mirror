@@ -1,10 +1,8 @@
 ﻿using Finbuckle.MultiTenant;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
-using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
@@ -19,22 +17,27 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         DNS_FQDN
     }
 
-
+    [MultiTenant]
     public class TenantIdentifierStrategyContainer
     {
         [Key]
-        // [Column("TenantIdentifierStrategyContainerId")]
         public Guid? Id { get; set; }
         public TenantIdentifierStrategyName TenantIdentifierStrategyName { get; set; }
 
+        [Timestamp]
+        public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
+
+ 
         public TenantIdentifierStrategy? Strategy { get; set; }
     }
+
+
     /// <summary>
     /// collects the strategies thta can be used to identify a tenant
     /// modelled as a wrapper for a collection payload
     /// to avoid awkardness with mapping owned collections
     /// </summary>
-
+    [MultiTenant]
     public class TenantIdentifierStrategy
     {
 
@@ -49,10 +52,13 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
 
-        /// <summary>
-        /// TODO
-        /// resolve this collection chail 
-        /// </summary>
+        [Timestamp]
+        public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
+
+        [ForeignKey("TargetTenantId")]
+        public Tenant TargetTenant { get; set; }
+
+        [InverseProperty(nameof(TenantIdentifierStrategyContainer.Strategy))]
         public virtual ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();
     }
 
