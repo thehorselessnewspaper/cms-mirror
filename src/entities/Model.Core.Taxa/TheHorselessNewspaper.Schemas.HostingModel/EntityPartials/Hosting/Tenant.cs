@@ -34,7 +34,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     public partial class TenantIdentifierStrategy
     {
         [Key]
-        [Column("TenantIdentifierStrategyId")]
+        // [Column("TenantIdentifierStrategyId")]
         public Guid Id { get; set; }
         public string DisplayName { get; set; } = string.Empty;
 

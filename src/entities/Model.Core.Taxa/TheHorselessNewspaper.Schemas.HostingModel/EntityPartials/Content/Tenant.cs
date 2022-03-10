@@ -39,7 +39,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     {
 
         [Key]
-        [Column("TenantIdentifierStrategyId")]
+        // [Column("TenantIdentifierStrategyId")]
         public Guid Id { get; set; }
 
         public string DisplayName { get; set; } = string.Empty;
