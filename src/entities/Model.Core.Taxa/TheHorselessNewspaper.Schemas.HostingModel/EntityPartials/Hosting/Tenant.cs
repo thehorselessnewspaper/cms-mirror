@@ -59,6 +59,10 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public virtual ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();
     }
 
+    /// <summary>
+    /// watch for interactions with
+    /// multitenant subsystem
+    /// </summary>
     public partial class Tenant : IHostingRowLevelSecured
     {
         public bool IsPublished { get; set; }
