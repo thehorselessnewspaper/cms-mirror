@@ -32,7 +32,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [InverseProperty("Principals")]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; }
 
-        [ForeignKey("OwnedTenantsId")]
+
         [InverseProperty(nameof(Tenant.Owners))]
         public ICollection<Tenant> OwnedTenants { get; set; } = new HashSet<Tenant>();
     }
