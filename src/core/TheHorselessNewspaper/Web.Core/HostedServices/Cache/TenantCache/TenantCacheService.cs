@@ -249,7 +249,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
 
                     var hostingModelTenantInfoQuery = this.GetQueryForHostingEntity<HostingModel.TenantInfo>(scope);
-                    var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.Read(w => w.Tenant_Id == originEntity.Id);
+                    var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.Read(w => w.Tenant != null && w.Tenant.Id == originEntity.Id);
                     var hostingModelTenantInfo = hostingModelTenantInfoQueryResult.ToList().First();
                     _logger.LogInformation($"found new undeployed tenantInfo {hostingModelTenantInfo.DisplayName}");
 
@@ -301,9 +301,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             _logger.LogInformation($"in memory tenant store updated with tenant: {inMemoryStoreEntity.Payload.DisplayName}");
 
                             var currentTenantInfoList = await this.GetCurrentContentModelTenantInfo(scope);
-                            foreach(var tenantInfo in currentTenantInfoList.Where(w => w.Tenant_Id != null))
+                            foreach(var tenantInfo in currentTenantInfoList.Where(w => w.Tenant != null))
                             {
-                                var tenantMigrated = updatedTenants.Where(w => w.Id.Equals(tenantInfo.Tenant_Id)).Any();                              
+                                var tenantMigrated = updatedTenants.Where(w => w.Id.Equals(tenantInfo.Tenant.Id)).Any();                              
                                 if(tenantMigrated)
                                 {
                                     var isCachedInMultitenantStore = await inMemoryStores.TryGetAsync(tenantInfo.Id.ToString());
