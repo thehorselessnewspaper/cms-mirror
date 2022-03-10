@@ -31,5 +31,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [ForeignKey("AccessControlEntryId")]
         [InverseProperty("Principals")]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; }
+
+
+        [InverseProperty(nameof(Tenant.Owners))]
+        public ICollection<Tenant> OwnedTenants { get; set; } = new HashSet<Tenant>();
     }
 }

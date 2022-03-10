@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.Context;
 using Finbuckle.MultiTenant;
+using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
@@ -34,7 +35,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [ForeignKey("AccessControlEntryId")]
         [InverseProperty(nameof(AccessControlEntry.Principals))]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
-   
-        
+
+        [InverseProperty(nameof(Tenant.Owners))]
+        public ICollection<Tenant> OwnedTenants { get; set; } = new HashSet<Tenant>();
     }
 }
