@@ -1,36 +1,38 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <PackageId>TheHorselessNewspaper.HostingModel</PackageId>
-    <Version>1.0.0</Version>
-    <Authors>sechele</Authors>
-    <Company>Ataxlab</Company>
-    <Product>TheHorselessNewspaper.HostingModel</Product>
-    <Description>entity framework core model classes</Description>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PackageId>TheHorselessNewspaper.HostingModel</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>sechele</Authors>
+		<Company>Ataxlab</Company>
+		<Product>TheHorselessNewspaper.HostingModel</Product>
+		<Description>entity framework core model classes</Description>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.0.0" PrivateAssets="All"/>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.0" />
+		<PackageReference Include="Finbuckle.MultiTenant.EntityFrameworkCore" Version="6.7.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.8" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.3">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.3" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.0" />
-    <PackageReference Include="Finbuckle.MultiTenant.EntityFrameworkCore" Version="6.7.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.3">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Context\MySQL\" />
-    <Folder Include="Context\PostGIS\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Context\MySQL\" />
+		<Folder Include="Context\PostGIS\" />
+		<Folder Include="Services\" />
+	</ItemGroup>
 
 </Project>
