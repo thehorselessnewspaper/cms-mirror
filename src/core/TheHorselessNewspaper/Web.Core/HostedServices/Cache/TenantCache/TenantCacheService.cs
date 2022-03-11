@@ -9,6 +9,7 @@ using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
+
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
@@ -226,6 +227,11 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 }
             }
 
+            var currentTenantInfoList = await this.GetCurrentContentModelTenantInfo(scope);
+            foreach (var tenantInfo in currentTenantInfoList)
+            {
+                _logger.LogDebug($"tenant cache service found tenantinfo: ${tenantInfo.DisplayName}");
+            }
 
             // inject the finbuckle in-memory store
             var stores = _services.GetService<IEnumerable<IMultiTenantStore<HorselessTenantInfo>>>().ToList();
@@ -250,7 +256,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
 
                     var hostingModelTenantInfoQuery = this.GetQueryForHostingEntity<HostingModel.TenantInfo>(scope);
-                    var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.Read(w => w.Tenant != null && w.Tenant.Id == originEntity.Id);
+                    var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.Read(w => w.TenantId == originEntity.Id);
                     var hostingModelTenantInfo = hostingModelTenantInfoQueryResult.ToList().First();
                     _logger.LogInformation($"found new undeployed tenantInfo {hostingModelTenantInfo.DisplayName}");
 
@@ -301,24 +307,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             var inMemoryStoreUpdated = await inMemoryStores.TryAddAsync(inMemoryStoreEntity);
                             _logger.LogInformation($"in memory tenant store updated with tenant: {inMemoryStoreEntity.Payload.DisplayName}");
 
-                            var currentTenantInfoList = await this.GetCurrentContentModelTenantInfo(scope);
-                            foreach(var tenantInfo in currentTenantInfoList.Where(w => w.Tenant != null))
-                            {
-                                var tenantMigrated = updatedTenants.Where(w => w.Id.Equals(tenantInfo.Tenant.Id)).Any();                              
-                                if(tenantMigrated)
-                                {
-                                    var isCachedInMultitenantStore = await inMemoryStores.TryGetAsync(tenantInfo.Id.ToString());
-                                    if (isCachedInMultitenantStore == null)
-                                    {
-                                        var tenantInfoCacheUpdated = await inMemoryStores.TryAddAsync(new HorselessTenantInfo(tenantInfo));
-                                        _logger.LogInformation($"inserted new tenantinfo in multitenant cache");
-                                    }
-                                    else
-                                    {
-                                        _logger.LogInformation($"visisted already cached tenantinfo");
-                                    }
-                                }
-                            }
+
                         }
                         catch (Exception e)
                         {
@@ -361,7 +350,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         {
             // collect the hosting model tenants
             var hostingModelTenantQuery = this.GetQueryForHostingEntity<HostingModel.Tenant>(scope);
-            var hostingModelTenantQueryResult = await hostingModelTenantQuery.Read();
+            var hostingModelTenantQueryResult = await hostingModelTenantQuery.Read(w => w.IsSoftDeleted == false, new List<string>() { nameof(HostingModel.Tenant.TenantInfos), nameof(HostingModel.Tenant.Owners)});
             var hostingModelTenants = hostingModelTenantQueryResult == null ? new List<HostingModel.Tenant>() : hostingModelTenantQueryResult.ToList();
 
             _logger.LogInformation($"read {hostingModelTenantQueryResult.Where(w => w.IsPublished == true).ToList().Count()} published hosting model tenant records");
@@ -369,7 +358,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
             foreach(var t in hostingModelTenantQueryResult)
             {
-                _logger.LogDebug($"{t.DisplayName} has {t.TenantInfos.Count()} tenantinfo records");
+                _logger.LogInformation($"tenant {t.DisplayName} has {t.TenantInfos.Count()} tenantinfo records");
             }
 
             return hostingModelTenants;
@@ -383,6 +372,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             var contentModelTenants = contentModelTenantQueryResult == null ? new List<ContentModel.Tenant>() : contentModelTenantQueryResult.ToList();
 
             _logger.LogInformation($"read {contentModelTenants.Count()} content model tenant records");
+
             return contentModelTenants;
         }
 
@@ -394,6 +384,11 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             var contentModelTenants = contentModelTenantQueryResult == null ? new List<HostingModel.TenantInfo>() : contentModelTenantQueryResult.ToList();
 
             _logger.LogInformation($"read {contentModelTenants.Count()} content model tenantinfo records");
+            foreach(var ti in contentModelTenants)
+            {
+                _logger.LogInformation($"tenantinfo display name : {ti.DisplayName}, tenant id {ti.TenantId}");
+            }
+
             return contentModelTenants;
         }
 

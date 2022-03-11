@@ -16,6 +16,7 @@ using TheHorselessNewspaper.HostingModel.Entities.Query;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
@@ -155,11 +156,19 @@ namespace Horseless.HostingModel.SmokeTests
 
         protected async Task<IQueryable<T>> ReadHostingEntity<T>() where T : class, IHostingRowLevelSecured
         {
+
             var queryProvider = this.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<T>>();
             var result = await queryProvider.Read();
             return result;
         }
 
+        protected async Task<IQueryable<T>> ReadHostingEntity<T>(Expression<Func<T, bool>> query, List<string> includeClauses) where T : class, IHostingRowLevelSecured
+        {
+
+            var queryProvider = this.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<T>>();
+            var result = await queryProvider.Read(query, includeClauses);
+            return result;
+        }
 
         protected async Task<T> Delete<T>(string entityId) where T : class, IContentRowLevelSecured
         {

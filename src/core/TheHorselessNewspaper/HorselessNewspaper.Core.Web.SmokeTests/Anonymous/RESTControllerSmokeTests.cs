@@ -63,7 +63,9 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     // arrange
 
                     var route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT + "/CREATE";
-                    
+                    testHostingModelTenantInfo.TenantId = testHostingModelTenant.Id;
+
+                    testHostingModelTenant.TenantInfos.Add(testHostingModelTenantInfo);
                     var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
                     {
                         Content = GetJsonContent(testHostingModelTenant)
@@ -74,7 +76,8 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     Assert.NotNull(postResponse);
 
-                    IQueryable<HostingModel.Tenant> hostingTenantsReadResult = await theHostingOperator.Read();
+                    IQueryable<HostingModel.Tenant> hostingTenantsReadResult = await theHostingOperator.Read(w => w.IsSoftDeleted != true,
+                        new List<string>() { nameof(HostingModel.Tenant.Owners), nameof(HostingModel.Tenant.TenantInfos) });
                     Assert.NotNull(hostingTenantsReadResult);
 
                     var tenantCount = hostingTenantsReadResult.ToList().Count();
@@ -82,67 +85,14 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     Assert.True(hostingTenantsReadResult.First().Id == testHostingModelTenant.Id);
 
+                    var insertResult = hostingTenantsReadResult.First();
+                    Assert.True(insertResult.TenantInfos.Count > 0);
                     // here because we can post a tenant to the hosting model tenant endpoint
                     // add a tenantinfo 
 
                     // arrange
                     // add the existing tenant to the new tenantinfo
-                    testHostingModelTenantInfo.TenantId = hostingTenantsReadResult.First().Id;
-
-                    route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANTINFO + "/CREATE";
-    
-                    postRequest = new HttpRequestMessage(HttpMethod.Post, route)
-                    {
-                        Content = GetJsonContent<HostingModel.TenantInfo>(testHostingModelTenantInfo)
-                    };
-
-                    // act
-                    postResponse = await client.SendAsync(postRequest);
-
-                    Assert.NotNull(postResponse);
-
-                    postResponse.EnsureSuccessStatusCode(); // Status Code 200-299
-                                                        //Assert.Equal(oDataResponseHeader,
-                                                        //    response.Content.Headers.ContentType.ToString());
-
-                    responseContent = await postResponse.Content.ReadAsStringAsync();
-                    Assert.NotNull(responseContent);
-
-                    try
-                    {
-
-                        var tenantInfo = JsonConvert.DeserializeObject<HostingModel.TenantInfo>(responseContent);
-                        Assert.NotNull(tenantInfo);
-                        Assert.True(tenantInfo.Id == testHostingModelTenantInfo.Id);
-
-
-                        // arrange
-                        // add the new TenantInfo to the new Tenant
-
-                        // tenantInfo. = hostingTenantsReadResult.First().Id;
-
-                        //route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANTINFO + $"/Update/{tenantInfo.Id}";
-                        //var jsoncontent = GetJsonContent<HostingModel.TenantInfo>(tenantInfo);
-                        //postRequest = new HttpRequestMessage(HttpMethod.Post, route)
-                        //{
-                        //    Content = jsoncontent
-                        //};
-
-                        //// act
-                        //postResponse = await client.SendAsync(postRequest);
-
-                        //Assert.NotNull(postResponse);
-
-                        //postResponse.EnsureSuccessStatusCode();
-
-                    }
-                    catch (Exception e)
-                    {
-
-                        ex = e;
-                        throw new Exception("test failure exception", e);
-                    }
-
+   
                     Assert.Null(ex);
 
 

@@ -122,9 +122,10 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
     {
 
         Guid newPrincipalGuid = Guid.NewGuid();
-        var tenant = new Tenant()
+            Guid newTenantId = Guid.NewGuid();
+            var tenant = new Tenant()
         {
-            Id = Guid.NewGuid(),
+            Id = newTenantId,
             DisplayName = "test tenant",
             ObjectId = Guid.NewGuid().ToString(),
             CreatedAt = DateTime.UtcNow,
@@ -134,6 +135,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                     {
                         Id = Guid.NewGuid(),
                         DisplayName = "finbuckle test tenant",
+                        TenantId = newTenantId,
                         ObjectId = Guid.NewGuid().ToString(),
                         CreatedAt = DateTime.UtcNow,
                         Identifier = "finbuckle-test-tenant",
@@ -224,6 +226,23 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
         {
             throw new Exception($"problem updating entity due to {e.Message}", e);
         }
+
+        try
+        {
+            var readResult = await this.ReadHostingEntity<Tenant>(w => w.Id.Equals(tenant.Id),
+                new List<string>() { nameof(Tenant.Principals), nameof(Tenant.TenantInfos) });
+
+            Assert.True(readResult != null);
+
+            var readEntity = readResult.First();
+            Assert.True(readEntity.Principals.Count() > 0);
+            Assert.True(readEntity.TenantInfos.Count() > 0);
+        }
+        catch(Exception e)
+        {
+            throw new Exception("failed to insert entity", e);
+        }
+
     }
 }
 }

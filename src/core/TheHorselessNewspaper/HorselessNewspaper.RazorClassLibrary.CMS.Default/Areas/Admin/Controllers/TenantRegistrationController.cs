@@ -133,21 +133,12 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                     Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
                 };
 
-                newTenantInfo.Tenant = newTenant;
+                newTenantInfo.TenantId = newTenant.Id;
                 newTenant.Owners.Add(newOwner);
                 newTenant.TenantInfos.Add(newTenantInfo);
 
                
                 var insertedTenant = await this.hostingTenantsCollectionService.Create(newTenant);
-
-                //var updateOwnerResult = await this.hostingTenantsCollectionService.InsertRelatedEntity<Principal>(insertedTenant.Id, nameof(insertedTenant.Owners),
-                //    new List<Principal>() { newOwner});
-
-                //var updatedTenantInforesult = await this.hostingTenantsCollectionService.InsertRelatedEntity<HostingModel.TenantInfo>(insertedTenant.Id, nameof(insertedTenant.TenantInfos),
-                //    new List<HostingModel.TenantInfo>() { newTenantInfo });
-
-                var tenantInfos = await this.tenantInfoService.Query();
-                var tenantInfosResult = tenantInfos.ToList();
 
                 return RedirectToAction(nameof(Index));
             }
