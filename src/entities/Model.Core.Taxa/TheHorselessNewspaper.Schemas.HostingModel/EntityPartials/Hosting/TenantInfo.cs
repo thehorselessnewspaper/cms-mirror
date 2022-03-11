@@ -13,7 +13,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
-        public Guid TenantId { get; set; }
+        public Nullable<Guid> TenantId { get; set; }
+
+        public virtual Tenant Tenant { get; set; }
 
     }
 }
