@@ -77,15 +77,17 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     Assert.NotNull(postResponse);
 
                     IQueryable<HostingModel.Tenant> hostingTenantsReadResult = await theHostingOperator.Read(w => w.IsSoftDeleted != true,
-                        new List<string>() { nameof(HostingModel.Tenant.Owners), nameof(HostingModel.Tenant.TenantInfos) });
+                        new List<string>() {nameof(HostingModel.Tenant.TenantInfos) });
+
                     Assert.NotNull(hostingTenantsReadResult);
 
-                    var tenantCount = hostingTenantsReadResult.ToList().Count();
+                    var readResultAslist = hostingTenantsReadResult.ToList();
+                    var tenantCount = readResultAslist.Count();
                     Assert.True(tenantCount == 1);
 
-                    Assert.True(hostingTenantsReadResult.First().Id == testHostingModelTenant.Id);
+                    Assert.True(readResultAslist.First().Id == testHostingModelTenant.Id);
 
-                    var insertResult = hostingTenantsReadResult.First();
+                    var insertResult = readResultAslist.First();
                     Assert.True(insertResult.TenantInfos.Count > 0);
                     // here because we can post a tenant to the hosting model tenant endpoint
                     // add a tenantinfo 
@@ -100,6 +102,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 catch (Exception e)
                 {
                     ex = e;
+                    Assert.Null(ex);
                 }
 
 
