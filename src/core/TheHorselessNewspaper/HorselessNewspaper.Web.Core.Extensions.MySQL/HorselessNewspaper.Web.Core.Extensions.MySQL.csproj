@@ -11,4 +11,8 @@
     <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220311.9" />
   </ItemGroup>
 
+	<PropertyGroup>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
 </Project>

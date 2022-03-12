@@ -1,42 +1,47 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
-    <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
-    <Version>1.0.0</Version>
-    <PackageId>HorselessNewspaper.Web.Core</PackageId>
-    <Authors>sechele@ataxlab.com</Authors>
-    <Company>ataxlab</Company>
-    <Product>The Horseless Newspaper</Product>
-    <Description>foundational modules of the horseless newspaper web components</Description>
-    <!-- support embedding dependencies for redistributable packages -->
-    <!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
-    <!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
+		<RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+		<Version>1.0.0</Version>
+		<PackageId>HorselessNewspaper.Web.Core</PackageId>
+		<Authors>sechele@ataxlab.com</Authors>
+		<Company>ataxlab</Company>
+		<Product>The Horseless Newspaper</Product>
+		<Description>foundational modules of the horseless newspaper web components</Description>
+		<!-- support embedding dependencies for redistributable packages -->
+		<!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
+		<!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.1" />
-    <PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.4.220311.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.8" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="2.4.0" />
-    <PackageReference Include="NuGet.Protocol" Version="6.1.0" />
-    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220311.9" />
-  </ItemGroup>
+	<PropertyGroup>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.1" />
+		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.4.220311.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.8" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+		<PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="2.4.0" />
+		<PackageReference Include="NuGet.Protocol" Version="6.1.0" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220311.9" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectCapability Include="AspNetCore" />
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectCapability Include="AspNetCore" />
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="BackgroundServices\" />
-    <Folder Include="HostedServices\RazorClassLibrary\" />
-    <Folder Include="SingletonServices\Cache\Tenant\Mock\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="BackgroundServices\" />
+		<Folder Include="HostedServices\RazorClassLibrary\" />
+		<Folder Include="SingletonServices\Cache\Tenant\Mock\" />
+	</ItemGroup>
 </Project>

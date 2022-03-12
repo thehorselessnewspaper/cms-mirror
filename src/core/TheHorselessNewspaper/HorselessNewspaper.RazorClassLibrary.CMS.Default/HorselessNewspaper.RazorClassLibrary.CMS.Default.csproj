@@ -17,7 +17,10 @@
 
 
 	</PropertyGroup>
-
+	<PropertyGroup>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
 
 	<PropertyGroup>
 		<RazorCompileOnPublish>false</RazorCompileOnPublish>

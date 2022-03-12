@@ -1,25 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <PackageId>HorselessNewspaper.Core.Interfaces</PackageId>
-    <Version>1.0.0</Version>
-    <PackageVersion>1.0.0</PackageVersion>
-    <PackageId>HorselessNewspaper.Core.Interfaces</PackageId>
-    <Authors>sechele@ataxlab.com</Authors>
-    <Company>ataxlab</Company>
-    <Product>The Horseless Newspaper</Product>
-    <Description>core interfaces for the horseless newspaper</Description>
-    <!-- support embedding dependencies for redistributable packages -->
-    <!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
-    <!--<CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>-->
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="NuGet.Protocol" Version="6.1.0" />
-    <PackageReference Include="System.Linq.Expressions" Version="4.3.0" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PackageId>HorselessNewspaper.Core.Interfaces</PackageId>
+		<Version>1.0.0</Version>
+		<PackageVersion>1.0.0</PackageVersion>
+		<PackageId>HorselessNewspaper.Core.Interfaces</PackageId>
+		<Authors>sechele@ataxlab.com</Authors>
+		<Company>ataxlab</Company>
+		<Product>The Horseless Newspaper</Product>
+		<Description>core interfaces for the horseless newspaper</Description>
+		<!-- support embedding dependencies for redistributable packages -->
+		<!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
+		<!--<CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>-->
+	</PropertyGroup>
+	<PropertyGroup>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="NuGet.Protocol" Version="6.1.0" />
+		<PackageReference Include="System.Linq.Expressions" Version="4.3.0" />
+	</ItemGroup>
 
 </Project>

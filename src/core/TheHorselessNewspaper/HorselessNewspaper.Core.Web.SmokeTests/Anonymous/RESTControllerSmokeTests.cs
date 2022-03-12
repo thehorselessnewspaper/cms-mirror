@@ -64,6 +64,19 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     var route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT + "/CREATE";
                     testHostingModelTenantInfo.TenantId = testHostingModelTenant.Id;
+                    testHostingModelTenant.Principals = new List<Principal>()
+                    {
+                        new Principal()
+                        {
+                            Id= Guid.NewGuid(),
+                            ObjectId = Guid.NewGuid().ToString(),
+                            DisplayName = "principal@tenant.com",
+                            CreatedAt = DateTime.UtcNow,
+                            Iss = "https://isuer.tenant.com",
+                            Aud = "client-application",
+                            Sub = "oauth-sub"
+                        }
+                    };
 
                     testHostingModelTenantInfo.WebAPITenantInfos.Add(new WebAPITenantInfo()
                     {
@@ -91,7 +104,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     Assert.NotNull(postResponse);
 
                     IQueryable<HostingModel.Tenant> hostingTenantsReadResult = await theHostingOperator.Read(w => w.IsSoftDeleted != true,
-                        new List<string>() {nameof(HostingModel.Tenant.TenantInfos) });
+                        new List<string>() { nameof(HostingModel.Tenant.Principals), nameof(HostingModel.Tenant.TenantInfos) });
 
                     Assert.NotNull(hostingTenantsReadResult);
 
@@ -108,7 +121,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     // arrange
                     // add the existing tenant to the new tenantinfo
-   
+
                     Assert.Null(ex);
 
 

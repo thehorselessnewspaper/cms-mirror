@@ -1,21 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <!-- support embedding dependencies for redistributable packages -->
-    <!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<!-- support embedding dependencies for redistributable packages -->
+		<!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	</PropertyGroup>
+	<PropertyGroup>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="HorselessNewspaper.Web.Core" Version="0.4.220311.5" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220311.9" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="HorselessNewspaper.Web.Core" Version="0.4.220311.5" />
-    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220311.9" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Query\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Query\" />
+	</ItemGroup>
 
 </Project>
