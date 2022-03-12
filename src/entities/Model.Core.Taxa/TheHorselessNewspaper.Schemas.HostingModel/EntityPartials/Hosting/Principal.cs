@@ -26,14 +26,20 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [NotMapped]
         public ICollection<Principal> Owners { get; set;  }
 
-        // [InverseProperty(nameof(Tenant.Principals))]
+        public Guid? TenantsId { get; set; }
+
+        [ForeignKey(nameof(TenantsId))]
         public virtual ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
 
+        public Guid? AccessControlEntriesId { get; set; }
 
+        [ForeignKey(nameof(AccessControlEntriesId))]
         [InverseProperty(nameof(AccessControlEntry.Principals))]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; }
 
+        public Guid? OwnedTenantsId { get; set; }
 
+        [ForeignKey(nameof(OwnedTenantsId))]
         [InverseProperty(nameof(Tenant.Owners))]
         public virtual ICollection<Tenant> OwnedTenants { get; set; } = new HashSet<Tenant>();
     }

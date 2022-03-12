@@ -10,17 +10,17 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     {
         public virtual ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
         
-        
+        [NotMapped]
         public virtual ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
         
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
-        [ForeignKey(nameof(Tenant))]
-        public Nullable<Guid> TenantId { get; set; }
 
-        [InverseProperty(nameof(TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant.TenantInfos))]
-        public Tenant? Tenant { get; set; }
+        public Guid? ParentTenantId { get; set; }
+
+
+        public Tenant? ParentTenant { get; set; }
 
     }
 }

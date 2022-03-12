@@ -96,7 +96,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
-        [InverseProperty(nameof(TenantInfo.Tenant))]
+        public Guid? TenantInfosId { get; set; }
+
+
         public virtual ICollection<TenantInfo> TenantInfos { get; set; } = new HashSet<TenantInfo>();
     }
 }

@@ -135,7 +135,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                     {
                         Id = Guid.NewGuid(),
                         DisplayName = "finbuckle test tenant",
-                        TenantId = newTenantId,
+                        ParentTenantId = newTenantId,
                         ObjectId = Guid.NewGuid().ToString(),
                         CreatedAt = DateTime.UtcNow,
                         Identifier = "finbuckle-test-tenant",
