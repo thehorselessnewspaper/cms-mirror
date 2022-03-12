@@ -165,7 +165,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                         Id= newPrincipalGuid,
                         ObjectId = Guid.NewGuid().ToString(),
                         DisplayName = "principal@tenant.com",
-                        CreatedAt = DateTime.UtcNow,
+                        CreatedAt = DateTime.UtcNow, 
                         Iss = "https://isuer.tenant.com",
                         Aud = "client-application",
                         Sub = "oauth-sub"
