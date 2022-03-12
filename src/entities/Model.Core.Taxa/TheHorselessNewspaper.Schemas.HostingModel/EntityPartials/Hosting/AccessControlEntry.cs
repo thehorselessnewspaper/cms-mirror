@@ -53,8 +53,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public ICollection<Principal> Owners { get; set; }
 
 
-        [ForeignKey("PrincipalId")]
-        [InverseProperty(nameof(Principal.AccessControlEntries))]
+        //[ForeignKey("PrincipalId")]
+        //[InverseProperty(nameof(Principal.AccessControlEntries))]
         public virtual ICollection<Principal> Principals { get; set; } = new HashSet<Principal>();
 
     }

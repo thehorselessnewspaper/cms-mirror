@@ -26,7 +26,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [NotMapped]
         public ICollection<Principal> Owners { get; set;  }
 
-        [InverseProperty(nameof(Tenant.Principals))]
+        // [InverseProperty(nameof(Tenant.Principals))]
         public virtual ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
 
 
