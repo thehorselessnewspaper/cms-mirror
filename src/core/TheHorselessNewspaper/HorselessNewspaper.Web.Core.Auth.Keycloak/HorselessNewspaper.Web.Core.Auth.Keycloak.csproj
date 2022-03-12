@@ -1,28 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <!-- support embedding dependencies for redistributable packages -->
-    <!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
-    <!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
-  </PropertyGroup>
-  
-  
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<!-- support embedding dependencies for redistributable packages -->
+		<!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
+		<!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Web.Core\HorselessNewspaper.Web.Core.csproj" />
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
+	<PropertyGroup>
+		<!-- Include symbol files (*.pdb) in the built .nupkg -->
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Extensions\Hosting\" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Web.Core\HorselessNewspaper.Web.Core.csproj" />
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.3" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Extensions\Hosting\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.3" />
+	</ItemGroup>
 
 </Project>

@@ -16,6 +16,11 @@
 		<!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
 		<!--<CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>-->
 	</PropertyGroup>
+
+	<PropertyGroup>
+		<!-- Include symbol files (*.pdb) in the built .nupkg -->
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+	</PropertyGroup>	
 	<PropertyGroup>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>

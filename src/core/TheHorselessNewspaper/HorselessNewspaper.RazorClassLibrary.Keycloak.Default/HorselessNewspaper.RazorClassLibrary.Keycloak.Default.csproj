@@ -9,10 +9,13 @@
     <!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
     <!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
   </PropertyGroup>
-
+	<PropertyGroup>
+		<!-- Include symbol files (*.pdb) in the built .nupkg -->
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+	</PropertyGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="HorselessNewspaper.Web.Core.Auth.Keycloak" Version="0.4.220311.6" />
+    <PackageReference Include="HorselessNewspaper.Web.Core.Auth.Keycloak" Version="0.4.220311.9" />
   </ItemGroup>
 
   <ItemGroup>
