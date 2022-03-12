@@ -24,14 +24,16 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     public class TenantIdentifierStrategyContainer
     {
         [Key]
-        // [Column("TenantIdentifierStrategyContainerId")]
         public Guid? Id { get; set; }
         public TenantIdentifierStrategyName TenantIdentifierStrategyName { get; set; }
 
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
+        [ForeignKey(nameof(TenantIdentifierStrategyContainer.Strategy))]
+        public Guid? StrategyId { get; set; }
 
+        [InverseProperty(nameof(TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantIdentifierStrategy.StrategyContainers)]
         public TenantIdentifierStrategy? Strategy { get; set; }
     }
 
@@ -52,7 +54,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
 
-        [ForeignKey("TargetTenantId")]
+        public Guid? TargetTenantId { get; set; }
+
+        [ForeignKey(nameof(TenantIdentifierStrategy.TargetTenantId)]
         [InverseProperty(nameof(Tenant.TenantIdentifierStrategy))]
         public Tenant TargetTenant { get; set; }
 
@@ -68,14 +72,23 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     {
         public bool IsPublished { get; set; }
 
+        [InverseProperty(nameof(TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantIdentifierStrategy.TargetTenant))]
         public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; }
-        public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
-        [ForeignKey("OwnedTenantsId")]
 
+
+        public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
+
+
+        public Guid? OwnersId { get; set; }
+
+        [ForeignKey(nameof(OwnersId))]
         [InverseProperty(nameof(Principal.OwnedTenants))]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
-        [ForeignKey("PrincipalId")]
+
+        public Guid? PrincipalsId { get; set; }
+
+        [ForeignKey(nameof(PrincipalsId))]
         [InverseProperty(nameof(Principal.Tenants))]
 
         public ICollection<Principal> Principals { get; set; } = new HashSet<Principal>();
@@ -83,7 +96,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
-        [ForeignKey(nameof(TenantInfo.TenantId))]
+        [InverseProperty(nameof(TenantInfo.Tenant))]
         public virtual ICollection<TenantInfo> TenantInfos { get; set; } = new HashSet<TenantInfo>();
     }
 }

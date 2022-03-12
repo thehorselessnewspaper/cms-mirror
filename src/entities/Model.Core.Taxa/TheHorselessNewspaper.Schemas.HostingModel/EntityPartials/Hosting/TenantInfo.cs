@@ -8,14 +8,19 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
     public partial class TenantInfo : IHostingRowLevelSecured
     {
-        public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
-        public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
+        public virtual ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
+        
+        
+        public virtual ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
+        
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
+        [ForeignKey(nameof(Tenant))]
         public Nullable<Guid> TenantId { get; set; }
 
-        public virtual Tenant Tenant { get; set; }
+        [InverseProperty(nameof(TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant.TenantInfos))]
+        public Tenant? Tenant { get; set; }
 
     }
 }

@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="HorselessNewspaper.Web.Core.Auth.Keycloak" Version="0.4.220311.1" />
+    <PackageReference Include="HorselessNewspaper.Web.Core.Auth.Keycloak" Version="0.4.220311.3" />
   </ItemGroup>
 
   <ItemGroup>

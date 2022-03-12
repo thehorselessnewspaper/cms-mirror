@@ -111,10 +111,10 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 // wait for tenant approval
                 // to propragate 
 
-                for (int i = 0; i < 50; i++)
-                {
-                    await Task.Delay(1200);
-                }
+                //for (int i = 0; i < 50; i++)
+                //{
+                //    await Task.Delay(1200);
+                //}
 
                 Assert.Null(ex);
 
