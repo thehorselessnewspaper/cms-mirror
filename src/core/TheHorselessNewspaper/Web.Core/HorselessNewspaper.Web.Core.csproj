@@ -29,7 +29,7 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 		<PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="2.4.0" />
 		<PackageReference Include="NuGet.Protocol" Version="6.1.0" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220312.4" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220312.5" />
 	</ItemGroup>
 
 	<ItemGroup>

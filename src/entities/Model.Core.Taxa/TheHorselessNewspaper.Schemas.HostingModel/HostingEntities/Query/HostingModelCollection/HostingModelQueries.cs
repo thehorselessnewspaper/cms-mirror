@@ -128,15 +128,22 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             return await Task.FromResult<IQueryable<T>>(dbSet.AsQueryable<T>());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="includeClauses"></param>
+        /// <returns></returns>
         public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null)
         {
             _logger.LogDebug($"handling Read request");
             var dbSet = ((DbContext)_context).Set<T>().Where(query);
+
             if (includeClauses != null)
             {
                 foreach (var clause in includeClauses)
                 {
-                    dbSet.Include(clause);
+                    dbSet.Include(clause).Load();
                 }
             }
 
