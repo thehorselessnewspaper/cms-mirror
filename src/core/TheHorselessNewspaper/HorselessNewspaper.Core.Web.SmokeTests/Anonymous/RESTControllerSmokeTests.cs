@@ -65,6 +65,20 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     var route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT + "/CREATE";
                     testHostingModelTenantInfo.TenantId = testHostingModelTenant.Id;
 
+                    testHostingModelTenantInfo.WebAPITenantInfos.Add(new WebAPITenantInfo()
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedAt = DateTime.UtcNow,
+                        DisplayName = testHostingModelTenant.DisplayName,
+                        ConnectionString = testHostingModelTenantInfo.ConnectionString,
+                        Identifier = testHostingModelTenantInfo.Identifier,
+                        Name = testHostingModelTenantInfo.Name,
+                        IsSoftDeleted = false,
+                        ObjectId = Guid.NewGuid().ToString(),
+                        TenantInfoId = testHostingModelTenantInfo.Id,
+                        WebAPIBaseUrl = "/webapi/url"
+                    });
+
                     testHostingModelTenant.TenantInfos.Add(testHostingModelTenantInfo);
                     var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
                     {
