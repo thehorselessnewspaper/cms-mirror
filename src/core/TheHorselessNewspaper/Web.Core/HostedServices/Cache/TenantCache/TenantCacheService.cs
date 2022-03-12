@@ -256,7 +256,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
 
                     var hostingModelTenantInfoQuery = this.GetQueryForHostingEntity<HostingModel.TenantInfo>(scope);
-                    var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.Read(w => w.TenantId == originEntity.Id);
+                    var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.Read(w => w.ParentTenantId == originEntity.Id);
                     var hostingModelTenantInfo = hostingModelTenantInfoQueryResult.ToList().First();
                     _logger.LogInformation($"found new undeployed tenantInfo {hostingModelTenantInfo.DisplayName}");
 
@@ -386,7 +386,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             _logger.LogInformation($"read {contentModelTenants.Count()} content model tenantinfo records");
             foreach(var ti in contentModelTenants)
             {
-                _logger.LogInformation($"tenantinfo display name : {ti.DisplayName}, tenant id {ti.TenantId}");
+                _logger.LogInformation($"tenantinfo display name : {ti.DisplayName}, tenant id {ti.ParentTenantId}");
             }
 
             return contentModelTenants;

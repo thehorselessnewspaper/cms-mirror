@@ -133,7 +133,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                     Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
                 };
 
-                newTenantInfo.TenantId = newTenant.Id;
+                newTenantInfo.ParentTenantId = newTenant.Id;
                 newTenant.Owners.Add(newOwner);
                 newTenant.TenantInfos.Add(newTenantInfo);
 
