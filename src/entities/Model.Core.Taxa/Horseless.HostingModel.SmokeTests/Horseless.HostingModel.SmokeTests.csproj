@@ -1,49 +1,50 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
 
-    <IsPackable>true</IsPackable>
+		<IsPackable>true</IsPackable>
 
-	  <PropertyGroup>
-		  <IncludeSymbols>true</IncludeSymbols>
-		  <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-	  </PropertyGroup>
-	  
-    <UserSecretsId>8435cb1e-7333-468d-a35d-a16488c196b5</UserSecretsId>
+		<UserSecretsId>8435cb1e-7333-468d-a35d-a16488c196b5</UserSecretsId>
 
-	  <PackageId>TheHorselessNewspaper.HostingModel.SmokeTests</PackageId>
-	  <Version>0.0.1</Version>
-	  <Authors>sechele</Authors>
-	  <Company>Ataxlab</Company>
-	  <Product>TheHorselessNewspaper.HostingModel</Product>
-	  <Description>entity framework core model base test classes</Description>
-	  
-  </PropertyGroup>
-  <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Finbuckle.MultiTenant" Version="6.7.1" />
-    <PackageReference Include="Finbuckle.MultiTenant.EntityFrameworkCore" Version="6.7.1" />
-    <PackageReference Include="HorselessNewspaper.Web.Core" Version="0.4.220311.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
-    <PackageReference Include="NUnit" Version="3.13.2" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
-    <PackageReference Include="coverlet.collector" Version="3.1.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TheHorselessNewspaper.Schemas.HostingModel\TheHorselessNewspaper.HostingModel.csproj" />
-  </ItemGroup>
+		<PackageId>TheHorselessNewspaper.HostingModel.SmokeTests</PackageId>
+		<Version>0.0.1</Version>
+		<Authors>sechele</Authors>
+		<Company>Ataxlab</Company>
+		<Product>TheHorselessNewspaper.HostingModel</Product>
+		<Description>entity framework core model base test classes</Description>
+
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Finbuckle.MultiTenant" Version="6.7.1" />
+		<PackageReference Include="Finbuckle.MultiTenant.EntityFrameworkCore" Version="6.7.1" />
+		<PackageReference Include="HorselessNewspaper.Web.Core" Version="0.4.220311.2" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+		<PackageReference Include="NUnit" Version="3.13.2" />
+		<PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
+		<PackageReference Include="coverlet.collector" Version="3.1.2">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\TheHorselessNewspaper.Schemas.HostingModel\TheHorselessNewspaper.HostingModel.csproj" />
+	</ItemGroup>
 
 </Project>
