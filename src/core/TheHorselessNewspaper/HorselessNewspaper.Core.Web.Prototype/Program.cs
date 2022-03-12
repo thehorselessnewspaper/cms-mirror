@@ -14,6 +14,7 @@ using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
 using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
 using Microsoft.AspNetCore.OData.Routing.Conventions;
 using Microsoft.AspNetCore.HttpOverrides;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(builder =>
@@ -66,6 +67,8 @@ var edmHosting = await model.GetHostingEDMModel();
 
 
 builder.Services.AddControllers()
+    // json cycle handler as per https://gavilan.blog/2021/05/19/fixing-the-error-a-possible-object-cycle-was-detected-in-different-versions-of-asp-net-core/
+    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve)
     .AddOData(options =>
     {
         /// TODO - surface these as configurable parameters 
