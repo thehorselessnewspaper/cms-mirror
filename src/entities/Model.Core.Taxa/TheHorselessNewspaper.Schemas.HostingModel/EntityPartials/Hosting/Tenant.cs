@@ -33,7 +33,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [ForeignKey(nameof(TenantIdentifierStrategyContainer.Strategy))]
         public Guid? StrategyId { get; set; }
 
-        [InverseProperty(nameof(TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantIdentifierStrategy.StrategyContainers)]
+        [InverseProperty(nameof(TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantIdentifierStrategy.StrategyContainers))]
         public TenantIdentifierStrategy? Strategy { get; set; }
     }
 
@@ -56,7 +56,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
         public Guid? TargetTenantId { get; set; }
 
-        [ForeignKey(nameof(TenantIdentifierStrategy.TargetTenantId)]
+        [ForeignKey(nameof(TenantIdentifierStrategy.TargetTenantId))]
         [InverseProperty(nameof(Tenant.TenantIdentifierStrategy))]
         public Tenant TargetTenant { get; set; }
 
