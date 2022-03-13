@@ -18,7 +18,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
     /// <summary>
     /// use this as the public face of timed updates
     /// </summary>
-    public interface ITenantCacheService  
+    public interface ITenantCacheService
     {
         public ICollection<ContentModel.Tenant> CurrentContentModelTenants { get; set; }
         public ICollection<HostingModel.Tenant> CurrentHostingModelTenants { get; set; }
@@ -174,9 +174,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         // collect the content model tenants
                         var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(innerScope);
 
-                        IEnumerable<ContentModel.Tenant> tenantList  = await contentModelTenantQuery.Read(r => r.IsSoftDeleted == false);
+                        IEnumerable<ContentModel.Tenant> tenantList = await contentModelTenantQuery.Read(r => r.IsSoftDeleted == false);
 
-                        List<ContentModel.Tenant> contentModelTenants  = tenantList.ToList();
+                        List<ContentModel.Tenant> contentModelTenants = tenantList.ToList();
 
                         _logger.LogInformation($"read {contentModelTenants.Count()} content model tenant records");
                     }
@@ -218,9 +218,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         private async Task HandleScopedLogic(IServiceScope scope)
         {
             List<HostingModel.Tenant> hostingModelTenants = await GetCurrentHostingModelTenants(scope);
-            foreach(var hostModelTenant in hostingModelTenants)
+            foreach (var hostModelTenant in hostingModelTenants)
             {
-                if(! this.CurrentHostingModelTenants.Where(w => w.Id.Equals(hostModelTenant.Id)).Any())
+                if (!this.CurrentHostingModelTenants.Where(w => w.Id.Equals(hostModelTenant.Id)).Any())
                 {
                     // here because we need to cache this tenant in the singleton
                     this.CurrentHostingModelTenants.Add(hostModelTenant);
@@ -270,13 +270,26 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         ObjectId = originEntity.ObjectId,
                         Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
                         TenantIdentifierStrategy = new ContentModel.TenantIdentifierStrategy()
-                        { 
-                          StrategyContainers = new List<ContentModel.TenantIdentifierStrategyContainer>()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = originEntity.CreatedAt,
+                            DisplayName = originEntity.DisplayName,
+                            IsSoftDeleted = originEntity.IsSoftDeleted,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+
+                            StrategyContainers = new List<ContentModel.TenantIdentifierStrategyContainer>()
                           {
                               new ContentModel.TenantIdentifierStrategyContainer()
                               {
-                                  Id = Guid.NewGuid(),                                  
-                                  TenantIdentifierStrategyName = ContentModel.TenantIdentifierStrategyName.ASPNETCORE_ROUTE
+                                Id = Guid.NewGuid(),
+                                CreatedAt = originEntity.CreatedAt,
+                                DisplayName = originEntity.DisplayName,
+                                IsSoftDeleted = originEntity.IsSoftDeleted,
+                                ObjectId = Guid.NewGuid().ToString(),
+                                Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+
+                                TenantIdentifierStrategyName = ContentModel.TenantIdentifierStrategyName.ASPNETCORE_ROUTE
                               }
                           }
                         }
@@ -298,10 +311,10 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                     var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(tenantUpdateScope);
                                     var insertResult = await contentModelTenantQuery.Create(mergeEntity);
                                 }
-                                catch(Exception e)
+                                catch (Exception e)
                                 {
                                     _logger.LogError($"problem inserting new content model tenant record {e.Message}");
-                                   
+
                                 }
 
                                 _logger.LogInformation($"inserted new undeployed tenant {originEntity.DisplayName}");
@@ -341,7 +354,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     var tenantCache = _services.GetRequiredService<IHorselessCacheProvider<Guid, ContentModel.Tenant>>();
                     _logger.LogInformation($"loaded tenant cache service");
 
-                    foreach(var contentModelTenant in contentModelTenants.Where(r => r.Id == originEntity.Id))
+                    foreach (var contentModelTenant in contentModelTenants.Where(r => r.Id == originEntity.Id))
                     {
                         _logger.LogInformation($"updating tenant cache");
                         tenantCache.Set(contentModelTenant.Id, contentModelTenant);
@@ -353,7 +366,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             }
 
             var currentContentModelTenants = await this.GetCurrentContentModelTenants(scope);
-            foreach(var currentTenant in currentContentModelTenants)
+            foreach (var currentTenant in currentContentModelTenants)
             {
 
             }
@@ -363,13 +376,13 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         {
             // collect the hosting model tenants
             var hostingModelTenantQuery = this.GetQueryForHostingEntity<HostingModel.Tenant>(scope);
-            var hostingModelTenantQueryResult = await hostingModelTenantQuery.Read(w => w.IsSoftDeleted == false, new List<string>() { nameof(HostingModel.Tenant.TenantInfos), nameof(HostingModel.Tenant.Owners)});
+            var hostingModelTenantQueryResult = await hostingModelTenantQuery.Read(w => w.IsSoftDeleted == false, new List<string>() { nameof(HostingModel.Tenant.TenantInfos), nameof(HostingModel.Tenant.Owners) });
             var hostingModelTenants = hostingModelTenantQueryResult == null ? new List<HostingModel.Tenant>() : hostingModelTenantQueryResult.ToList();
 
             _logger.LogInformation($"read {hostingModelTenantQueryResult.Where(w => w.IsPublished == true).ToList().Count()} published hosting model tenant records");
             _logger.LogInformation($"read {hostingModelTenantQueryResult.Where(w => w.IsPublished == false).ToList().Count()} unpublished hosting model tenant records");
 
-            foreach(var t in hostingModelTenantQueryResult)
+            foreach (var t in hostingModelTenantQueryResult)
             {
                 _logger.LogInformation($"tenant {t.DisplayName} has {t.TenantInfos.Count()} tenantinfo records");
             }
@@ -397,7 +410,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             var contentModelTenants = contentModelTenantQueryResult == null ? new List<HostingModel.TenantInfo>() : contentModelTenantQueryResult.ToList();
 
             _logger.LogInformation($"read {contentModelTenants.Count()} content model tenantinfo records");
-            foreach(var ti in contentModelTenants)
+            foreach (var ti in contentModelTenants)
             {
                 _logger.LogInformation($"tenantinfo display name : {ti.DisplayName}, tenant id {ti.ParentTenantId}");
             }

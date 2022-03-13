@@ -13,6 +13,11 @@
 @{
     if (tenantService != null)
     {
+        var publishedRegistrantsQuery = await tenantService.Query(r => r.IsPublished == true && r.IsSoftDeleted == false,
+            new List<string>() { nameof(Tenant.Owners), nameof(Tenant.TenantInfos) });
+
+        var publishedRequests = publishedRegistrantsQuery.ToList();
+
         var registrantsQuery = await tenantService.Query(r => r.IsPublished == false && r.IsSoftDeleted == false,
             new List<string>() { nameof(Tenant.Owners), nameof(Tenant.TenantInfos) });
         var waitingRequests = registrantsQuery
@@ -23,8 +28,27 @@
         var validRequests = waitingRequests.Where(w => w.Owners.Count() > 0 && w.TenantInfos.Count() > 0).ToList();
         var invalidRequests = waitingRequests.Where(w => (w.Owners.Count() == 0) || (w.TenantInfos.Count() == 0)).ToList();
 
-        int i = 0;
+        <div>
+            <span>Published Requests</span>
 
+            <table>
+                @foreach (var item in publishedRequests)
+                {
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(d => item.DisplayName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(d => item.TenantInfos.FirstOrDefault().Identifier)
+                        </td>
+
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <hr />
         <div>
             <span>Valid Requests</span>
 
@@ -41,7 +65,7 @@
                         </td>
                         <td>
                             <a asp-area="Admin" asp-controller="TenantRegistration" asp-action="Approve" asp-route-tenantId="@item.Id">Approve</a>
-                            </td>
+                        </td>
                     </tr>
                 }
             </table>
