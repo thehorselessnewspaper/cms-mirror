@@ -277,7 +277,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             IsSoftDeleted = originEntity.IsSoftDeleted,
                             ObjectId = Guid.NewGuid().ToString(),
                             Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-
+                           
                             StrategyContainers = new List<ContentModel.TenantIdentifierStrategyContainer>()
                           {
                               new ContentModel.TenantIdentifierStrategyContainer()
@@ -288,7 +288,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                 IsSoftDeleted = originEntity.IsSoftDeleted,
                                 ObjectId = Guid.NewGuid().ToString(),
                                 Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-
+                                /// TODO this is optimistic and wrong
+                                /// this code should not run if no tenantinfos exist
+                                TenantIdentifier = originEntity.TenantInfos.FirstOrDefault().Identifier,
                                 TenantIdentifierStrategyName = ContentModel.TenantIdentifierStrategyName.ASPNETCORE_ROUTE
                               }
                           }
@@ -310,14 +312,17 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                 {
                                     var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(tenantUpdateScope);
                                     var insertResult = await contentModelTenantQuery.Create(mergeEntity);
+                                    _logger.LogInformation($"inserted new undeployed tenant {originEntity.DisplayName}");
                                 }
                                 catch (Exception e)
                                 {
                                     _logger.LogError($"problem inserting new content model tenant record {e.Message}");
-
+                                    if(e.InnerException != null)
+                                    {
+                                        _logger.LogError($"problem inserting new content model tenant record {e.InnerException.Message}");
+                                    }
                                 }
 
-                                _logger.LogInformation($"inserted new undeployed tenant {originEntity.DisplayName}");
 
 
                             }
