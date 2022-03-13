@@ -14,6 +14,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Model
 
         }
 
+        public Guid? Id { get; set; }
+
         [Required(ErrorMessage = "the display name is required")]
         public string? displayName { get; set; } = string.Empty;
 

@@ -79,25 +79,16 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
 
 
-        //public Guid? OwnersId { get; set; }
-
-        //[ForeignKey(nameof(OwnersId))]
         [InverseProperty(nameof(Principal.OwnedTenants))]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
 
-        //public Guid? PrincipalsId { get; set; }
-
-        //[ForeignKey(nameof(PrincipalsId))]
         [InverseProperty(nameof(Principal.Tenants))]
 
         public ICollection<Principal> Principals { get; set; } = new HashSet<Principal>();
 
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
-
-        //public Guid? TenantInfosId { get; set; }
-
 
         public virtual ICollection<TenantInfo> TenantInfos { get; set; } = new HashSet<TenantInfo>();
     }

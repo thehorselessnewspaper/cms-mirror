@@ -28,6 +28,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.Extensions
                                  select propertyName;
                 var matchedProperties = matchQuery.ToList();
 
+
                 foreach (var prop in matchedProperties)
                 {
 

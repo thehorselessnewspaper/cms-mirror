@@ -24,9 +24,17 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public Guid? Id { get; set; }
         public TenantIdentifierStrategyName TenantIdentifierStrategyName { get; set; }
 
+        public string DisplayName { get; set; } = string.Empty;
+
+        public string ObjectId { get; set; }
+        public bool? IsSoftDeleted { get; set; }
+        [Column(TypeName = "datetime")]
+        public DateTime? CreatedAt { get; set; }
+
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
+        public string TenantIdentifier { get; set; }
 
         public TenantIdentifierStrategy? Strategy { get; set; }
     }

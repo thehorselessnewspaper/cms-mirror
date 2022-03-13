@@ -267,7 +267,19 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         CreatedAt = originEntity.CreatedAt,
                         DisplayName = originEntity.DisplayName,
                         IsSoftDeleted = originEntity.IsSoftDeleted,
-                        ObjectId = originEntity.ObjectId
+                        ObjectId = originEntity.ObjectId,
+                        Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                        TenantIdentifierStrategy = new ContentModel.TenantIdentifierStrategy()
+                        { 
+                          StrategyContainers = new List<ContentModel.TenantIdentifierStrategyContainer>()
+                          {
+                              new ContentModel.TenantIdentifierStrategyContainer()
+                              {
+                                  Id = Guid.NewGuid(),                                  
+                                  TenantIdentifierStrategyName = ContentModel.TenantIdentifierStrategyName.ASPNETCORE_ROUTE
+                              }
+                          }
+                        }
                     };
 
                     using (var innerScope = _services.CreateScope())
@@ -289,6 +301,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                 catch(Exception e)
                                 {
                                     _logger.LogError($"problem inserting new content model tenant record {e.Message}");
+                                   
                                 }
 
                                 _logger.LogInformation($"inserted new undeployed tenant {originEntity.DisplayName}");

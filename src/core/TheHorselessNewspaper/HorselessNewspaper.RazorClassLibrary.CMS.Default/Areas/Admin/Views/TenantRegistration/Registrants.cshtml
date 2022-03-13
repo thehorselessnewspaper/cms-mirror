@@ -1,13 +1,20 @@
 ﻿@using HorselessNewspaper.Web.Core.Interfaces.Hosting
 @using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 @using TheHorselessNewspaper.HostingModel.Entities.Query
+@using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
 @inject IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.Tenant>, HostingModel.Tenant> tenantService;
 
+<style type="text/css">
+    td {
+        padding: 0 15px;
+    }
+</style>
 @{
     if (tenantService != null)
     {
-        var registrantsQuery = await tenantService.Query();
+        var registrantsQuery = await tenantService.Query(r => r.IsPublished == false && r.IsSoftDeleted == false,
+            new List<string>() { nameof(Tenant.Owners), nameof(Tenant.TenantInfos) });
         var waitingRequests = registrantsQuery
             .Where(w => w.IsPublished == false && w.IsSoftDeleted == false)
             .Take(5)
@@ -20,6 +27,7 @@
 
         <div>
             <span>Valid Requests</span>
+
             <table>
                 @foreach (var item in validRequests)
                 {
@@ -32,14 +40,14 @@
                             @Html.DisplayFor(d => item.TenantInfos.FirstOrDefault().Identifier)
                         </td>
                         <td>
-                            <a asp-area="Admin" asp-controller="TenantRegistration" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        </td>
+                            <a asp-area="Admin" asp-controller="TenantRegistration" asp-action="Approve" asp-route-tenantId="@item.Id">Approve</a>
+                            </td>
                     </tr>
                 }
             </table>
         </div>
 
-        <hr/>
+        <hr />
         <div>
             <span>Invalid Requests</span>
             <table>

@@ -61,12 +61,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
         /// tenenant registrant management security scope
         /// </summary>
         /// <returns></returns>
-        public async Task<ActionResult> Registrants()
+        public ActionResult Registrants()
         {
-            var hasUnpublishedTenantQuery = await hostingTenantsCollectionService.Query(r => r.IsPublished == false && r.IsSoftDeleted == false, new List<string>() { nameof(Tenant.Owners)});
-            var hasWaitingRequest = hasUnpublishedTenantQuery
-                .OrderBy(o => o.CreatedAt)
-                .ToList();
+
             return View();
         }
 
@@ -75,6 +72,57 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
         public ActionResult Details(string id)
         {
             return View();
+        }
+
+        [Authorize]
+        [HttpGet("Approve/{tenantId}")]
+        public async Task<ActionResult> Approve(string tenantId)
+        {
+            if (tenantId == null)
+            {
+                return View(nameof(Index));
+            }
+
+
+            var tenantQueryResult = await hostingTenantsCollectionService.Query(w => w.Id.ToString().Equals(tenantId),
+                new List<string>() { nameof(Tenant.Owners), nameof(Tenant.TenantInfos) , nameof(Tenant.Principals) });
+            var tenantResult = tenantQueryResult.ToList();
+            Tenant currentTenant = tenantResult.First();
+            var tenant = GetTenantRegistrationModel(currentTenant);
+            tenant.Id = currentTenant.Id;
+            ViewData["Tenant"] = tenant;
+            return View();
+        }
+
+
+        [Authorize]
+        // POST: TenantRegistrationController/Create
+        [HttpPost("Approve/{tenantId}")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Approve(string tenantId, TenantRegistrationModel model)
+        {
+            try
+            {
+                var tenantQuery = await hostingTenantsCollectionService.Query(w => w.Id.ToString().Equals(tenantId));
+                var tenant = tenantQuery.Where(w => w.Id == Guid.Parse(tenantId)).First();
+                if (tenant != null)
+
+                {
+                    tenant.IsSoftDeleted = false;
+                    tenant.IsPublished = true;
+                    // reject the application
+                    var rejectResult = await hostingTenantsCollectionService.Update(tenant, new List<string>() { nameof(tenant.IsSoftDeleted), nameof(tenant.IsPublished) });
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         [Authorize]
@@ -137,7 +185,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                 newTenant.Owners.Add(newOwner);
                 newTenant.TenantInfos.Add(newTenantInfo);
 
-               
+
                 var insertedTenant = await this.hostingTenantsCollectionService.Create(newTenant);
 
                 return RedirectToAction(nameof(Index));
@@ -176,13 +224,17 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
         // GET: TenantRegistrationController/Delete/5
         public async Task<ActionResult> Delete(string id)
         {
+            Tenant tenant;
+
             var tenantQuery = await hostingTenantsCollectionService.Query();
-            var tenant = tenantQuery.Where(w => w.Id == Guid.Parse(id)).First();
+            tenant = tenantQuery.Where(w => w.Id == Guid.Parse(id)).First();
+            TenantRegistrationModel tenantRegistrationModel = GetTenantRegistrationModel(tenant);
+
             if (tenant != null)
 
             {
 
-                ViewData["Tenant"] = new TenantRegistrationModel() { displayName = tenant.DisplayName, tenantIdentifier = "invalid registration" };
+                ViewData["Tenant"] = tenantRegistrationModel;
 
                 return View();
             }
@@ -192,6 +244,20 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                 return View();
             }
 
+        }
+
+        public static TenantRegistrationModel GetTenantRegistrationModel(Tenant tenant)
+        {
+            if (tenant == null || tenant.TenantInfos == null || tenant.TenantInfos.Count() == 0)
+            {
+                return new TenantRegistrationModel() { displayName = tenant.DisplayName, tenantIdentifier = "invalid registration" };
+
+            }
+            else
+            {
+                TenantRegistrationModel tenantRegistrationModel = new TenantRegistrationModel() { displayName = tenant.DisplayName, tenantIdentifier = tenant.TenantInfos.First().Identifier };
+                return tenantRegistrationModel;
+            }
         }
 
         [Authorize]

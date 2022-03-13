@@ -28,7 +28,28 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 CreatedAt = DateTime.UtcNow,
                 DisplayName = "test update tenant",
                 ObjectId = Guid.NewGuid().ToString(),
-                Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
+                Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                TenantIdentifierStrategy = new TenantIdentifierStrategy()
+                {
+                    Id = Guid.NewGuid(),
+                    CreatedAt = DateTime.UtcNow,
+                    DisplayName = "test update tenant",
+                    ObjectId = Guid.NewGuid().ToString(),
+                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                    StrategyContainers = new List<TenantIdentifierStrategyContainer>()
+                    {
+                        new TenantIdentifierStrategyContainer()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = "test update tenant",
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            TenantIdentifier = "testUpdateTenant",
+                            TenantIdentifierStrategyName = TenantIdentifierStrategyName.ASPNETCORE_ROUTE
+                        }
+                    }
+                }
             };
 
 
@@ -42,23 +63,44 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 Timestamp = tenant.Timestamp,
                 TenantIdentifierStrategy = new TenantIdentifierStrategy()
                 {
-                    Id = initialGuid,
-                    CreatedAt = tenant.CreatedAt,
-                    DisplayName = tenant.DisplayName,
-                    ObjectId = tenant.ObjectId
+                    Id = Guid.NewGuid(),
+                    CreatedAt = DateTime.UtcNow,
+                    DisplayName = "test update tenant",
+                    ObjectId = Guid.NewGuid().ToString(),
+                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                    StrategyContainers = new List<TenantIdentifierStrategyContainer>()
+                    {
+                        new TenantIdentifierStrategyContainer()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = "test update tenant",
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            TenantIdentifier = "testUpdateTenant",
+                            TenantIdentifierStrategyName = TenantIdentifierStrategyName.ASPNETCORE_ROUTE
+                        }
+                    }
                 }
             };
-            ;
+
             modifiedTenant.Id = Guid.NewGuid();
 
-            var unUpdatedtenant = await tenant.UpdateModifiedPropertiesAsync(modifiedTenant);
+            Tenant unUpdatedtenant = (Tenant)await tenant.UpdateModifiedPropertiesAsync(modifiedTenant);
 
+            Assert.True(unUpdatedtenant.TenantIdentifierStrategy != null);
+
+            Assert.True(unUpdatedtenant.TenantIdentifierStrategy.StrategyContainers != null);
+
+            Assert.True(unUpdatedtenant.TenantIdentifierStrategy.StrategyContainers.Count == 1);
             // require a list of property names to update
             Assert.IsTrue(unUpdatedtenant.Id == initialGuid);
 
+
+
             // change the id
             modifiedTenant.Id = Guid.NewGuid();
-            var updatedtenant = await tenant.UpdateModifiedPropertiesAsync(modifiedTenant, new List<string>
+            var updatedtenant = (Tenant)await tenant.UpdateModifiedPropertiesAsync(modifiedTenant, new List<string>
             {
                 nameof(modifiedTenant.Id)
             });
@@ -70,6 +112,10 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             Assert.IsTrue(updatedtenant.DisplayName == tenant.DisplayName);
             Assert.IsTrue(updatedtenant.ObjectId == tenant.ObjectId);
             Assert.IsTrue(updatedtenant.Timestamp == tenant.Timestamp);
+            Assert.IsTrue(updatedtenant.TenantIdentifierStrategy != null);
+
+            Assert.IsTrue(updatedtenant.TenantIdentifierStrategy.StrategyContainers != null);
+            Assert.IsTrue(updatedtenant.TenantIdentifierStrategy.StrategyContainers.Count == 1);
 
             // add to a related property
             updatedtenant.Owners.Add(new Principal()
@@ -104,6 +150,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 nameof(tenant.Owners), nameof(tenant.AccessControlList)
             });
 
+
             Assert.IsTrue(validatedInsertResult != null);
 
             var updatedRelatedEntitiesResult = validatedInsertResult.First();
@@ -111,6 +158,13 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             Assert.IsTrue(updatedRelatedEntitiesResult != null);
 
             Assert.IsTrue(updatedRelatedEntitiesResult.Owners.Count > 0);
+
+            Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy != null);
+
+            Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy.StrategyContainers != null);
+
+            Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy.StrategyContainers.Count == 1);
+
         }
 
         [Test]
