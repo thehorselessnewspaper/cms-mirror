@@ -334,10 +334,11 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             // TODO 
                             // handle multiplicity of TenantInfo per Tenant
                             // enables tenants of tenants
-                            var inMemoryStoreEntity = new HorselessTenantInfo(hostingModelTenantInfo);
-                            var inMemoryStoreUpdated = await inMemoryStores.TryAddAsync(inMemoryStoreEntity);
-                            _logger.LogInformation($"in memory tenant store updated with tenant: {inMemoryStoreEntity.Payload.DisplayName}");
-
+                            //var inMemoryStoreEntity = new HorselessTenantInfo(hostingModelTenantInfo);
+                            //var inMemoryStoreUpdated = await inMemoryStores.TryAddAsync(inMemoryStoreEntity);
+                            //_logger.LogInformation($"in memory tenant store updated with tenant: {inMemoryStoreEntity.Payload.DisplayName}");
+                            
+                            //await UpdateMultiTenantInMemoryStore(innerScope, inMemoryStores, mergeEntity);
 
                         }
                         catch (Exception e)
@@ -355,16 +356,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     // here because we are updating the in memory tenant cache
                     _logger.LogInformation($"found existing deployed tenant {originEntity.DisplayName}");
 
-                    var hostingModelTenantInfoQuery = this.GetQueryForHostingEntity<HostingModel.TenantInfo>(scope);
-                    var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.Read(w => w.ParentTenantId == originEntity.Id);
-                    var hostingModelTenantInfo = hostingModelTenantInfoQueryResult.ToList().First();
-                    _logger.LogInformation($"found new undeployed tenantInfo {hostingModelTenantInfo.DisplayName}");
-                    // TODO 
-                    // handle multiplicity of TenantInfo per Tenant
-                    // enables tenants of tenants
-                    var inMemoryStoreEntity = new HorselessTenantInfo(hostingModelTenantInfo);
-                    var inMemoryStoreUpdated = await inMemoryStores.TryAddAsync(inMemoryStoreEntity);
-                    _logger.LogInformation($"in memory tenant store updated with tenant: {inMemoryStoreEntity.Payload.DisplayName}");
+                    await UpdateMultiTenantInMemoryStore(scope, inMemoryStores, originEntity);
 
 
                     // validate tenant cache updated
@@ -388,6 +380,20 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             {
 
             }
+        }
+
+        private async Task UpdateMultiTenantInMemoryStore(IServiceScope scope, IMultiTenantStore<HorselessTenantInfo>? inMemoryStores, HostingModel.Tenant originEntity)
+        {
+            var hostingModelTenantInfoQuery = this.GetQueryForHostingEntity<HostingModel.TenantInfo>(scope);
+            var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.Read(w => w.ParentTenantId == originEntity.Id);
+            var hostingModelTenantInfo = hostingModelTenantInfoQueryResult.ToList().First();
+            _logger.LogInformation($"found new undeployed tenantInfo {hostingModelTenantInfo.DisplayName}");
+            // TODO 
+            // handle multiplicity of TenantInfo per Tenant
+            // enables tenants of tenants
+            var inMemoryStoreEntity = new HorselessTenantInfo(hostingModelTenantInfo);
+            var inMemoryStoreUpdated = await inMemoryStores.TryAddAsync(inMemoryStoreEntity);
+            _logger.LogInformation($"in memory tenant store updated with tenant: {inMemoryStoreEntity.Payload.DisplayName}");
         }
 
         private async Task<List<HostingModel.Tenant>> GetCurrentHostingModelTenants(IServiceScope scope)

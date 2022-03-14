@@ -1,9 +1,13 @@
-﻿using HorselessNewspaper.Web.Core.Extensions.Claim;
+﻿using Finbuckle.MultiTenant;
+using Finbuckle.MultiTenant.Stores;
+using HorselessNewspaper.Web.Core.Extensions.Claim;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
+using TheHorselessNewspaper.HostingModel.MultiTenant;
+using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
@@ -28,6 +32,10 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
 
         public bool IsActive { get; set; } = true;
 
+        IMultiTenantStore<HorselessTenantInfo> multitenantStore;
+
+        HorselessSession currentHorselessSession;
+
         /// <summary>
         /// you probably don't want this constructor to execute
         /// it might mean you failed to register a dependency
@@ -37,17 +45,22 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
         {
             _logger = logger;
             TenantCache = null;
-
+ 
             logger.LogWarning("HorselessRouteTransformer initialized without IHorselessCacheProvider. Validate Dependency Injection Registrations");
-
+            throw new Exception("invalid service startup. missing dependency injection dependencies");
         }
 
-        public HorselessRouteTransformer(IHorselessCacheProvider<Guid, ContentEntities.Tenant> tenantCache, ILogger<HorselessRouteTransformer> logger, IHttpContextAccessor httpContextAccessor)
+        public HorselessRouteTransformer(IHorselessCacheProvider<Guid, ContentEntities.Tenant> tenantCache, 
+                            ILogger<HorselessRouteTransformer> logger, IHttpContextAccessor httpContextAccessor,
+                            HorselessSession horselessSession,
+                            IMultiTenantStore<HorselessTenantInfo> multitenantStore)
         {
             TenantCache = tenantCache;
             _logger = logger;
             _httpContextAccessor = httpContextAccessor;
             logger.LogTrace("dynamic route transformer initialized normally");
+            this.multitenantStore = multitenantStore;
+            this.currentHorselessSession = horselessSession;
         }
 
 
@@ -64,6 +77,18 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
 
             if (IsActive)
             {
+                var cachedTenants = await this.multitenantStore.GetAllAsync();
+                if (cachedTenants.Count() > 1)
+                {
+                    int i = 0;
+                    var tenant = values["__tenant__"] as string;
+                    if(cachedTenants.Where(w => w.Identifier.ToLower().Equals(tenant.ToLower())).Any())
+                    {
+                        // here because this is a request for a published tenant
+                        return values;
+                    }
+                }
+
                 var ctx = _httpContextAccessor.HttpContext;
                 // this really calls for some fancy rules engine eventually
 

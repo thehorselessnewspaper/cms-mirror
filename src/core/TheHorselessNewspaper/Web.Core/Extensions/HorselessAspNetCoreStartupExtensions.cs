@@ -27,8 +27,12 @@ using Microsoft.FeatureManagement;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
+using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+using HorselessNewspaper.Web.Core.Extensions.Claim;
+using System.Text.Json.Serialization;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -131,13 +135,13 @@ namespace HorselessNewspaper.Web.Core.Extensions
                 // .WithStaticStrategy("localhost");
 
             // for bootstrappingduring testing only
-            serviceBuilder.Services.AddSingleton<ITenantInfo>(new HorselessTenantInfo()
-            {
-                ConnectionString = serviceBuilder.Configuration.GetConnectionString("ContentModelConnection"),
-                Id = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
-                Identifier = "phantom",
-                Name = "static default tenant"
-            });
+            //serviceBuilder.Services.AddSingleton<ITenantInfo>(new HorselessTenantInfo()
+            //{
+            //    ConnectionString = serviceBuilder.Configuration.GetConnectionString("ContentModelConnection"),
+            //    Id = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
+            //    Identifier = "phantom",
+            //    Name = "static default tenant"
+            //});
 
             #endregion multitenancy as per https://www.finbuckle.com/MultiTenant/
 
@@ -218,6 +222,33 @@ HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessCo
             serviceBuilder.Services.AddScoped<HorselessRouteTransformer>();
             serviceBuilder.Services.AddScoped<HorselessTenantSetupMiddleware>();
             serviceBuilder.Services.AddScoped<IHorselessTenantContext, TenantContext>();
+
+            serviceBuilder.Services.AddScoped<HorselessSession>((instanceFactory) =>
+            {
+                HorselessSession horselessSession = new HorselessSession()
+                {
+                    Id = Guid.NewGuid(),
+                    ObjectId = Guid.NewGuid().ToString()
+                };
+
+                using (var scope = instanceFactory.CreateScope())
+                {
+                    IHttpContextAccessor ctxAccessor = instanceFactory.GetRequiredService<IHttpContextAccessor>();
+                    var httpContext = ctxAccessor.HttpContext;
+
+                    var currentUser = httpContext.User;
+
+                    if(currentUser.Identity.IsAuthenticated && currentUser.Claims != null && currentUser.Claims.Count() > 0 )
+                    {
+                        var candidateClaim = currentUser.Claims.Where(w => w.Issuer != null).FirstOrDefault();
+                        horselessSession.Iss = candidateClaim.Issuer;
+                        horselessSession.Sub = candidateClaim.Subject.Name;
+                    }
+                }
+
+                return horselessSession;
+            });
+
             #endregion  cms routing pattern services
 
             #region hosted services
@@ -231,6 +262,11 @@ HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessCo
             services.AddSingleton<TenantCacheService>();
             services.AddHostedService<TenantCacheService>(provider => provider.GetService<TenantCacheService>());
             #endregion hosted services
+
+            // handle cycles in json responses 
+            // as per https://gavilan.blog/2021/05/19/fixing-the-error-a-possible-object-cycle-was-detected-in-different-versions-of-asp-net-core/
+            services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
             options?.Invoke(serviceBuilder);
 
             return services;
