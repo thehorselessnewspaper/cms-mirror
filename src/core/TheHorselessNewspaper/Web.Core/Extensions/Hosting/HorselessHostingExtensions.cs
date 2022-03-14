@@ -86,6 +86,8 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 
                 options.MapControllerRoute("defaultMultitenant", "{__tenant__}/{area:exists}/{controller=Home}/{action=Index}");
 
+                options.MapControllerRoute("defaultMultitenant", "{__tenant__}/{controller=Home}/{action=Index}");
+
 
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("{__tenant__}/{**slug}");
 

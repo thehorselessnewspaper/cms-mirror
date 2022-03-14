@@ -352,7 +352,20 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 }
                 else
                 {
+                    // here because we are updating the in memory tenant cache
                     _logger.LogInformation($"found existing deployed tenant {originEntity.DisplayName}");
+
+                    var hostingModelTenantInfoQuery = this.GetQueryForHostingEntity<HostingModel.TenantInfo>(scope);
+                    var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.Read(w => w.ParentTenantId == originEntity.Id);
+                    var hostingModelTenantInfo = hostingModelTenantInfoQueryResult.ToList().First();
+                    _logger.LogInformation($"found new undeployed tenantInfo {hostingModelTenantInfo.DisplayName}");
+                    // TODO 
+                    // handle multiplicity of TenantInfo per Tenant
+                    // enables tenants of tenants
+                    var inMemoryStoreEntity = new HorselessTenantInfo(hostingModelTenantInfo);
+                    var inMemoryStoreUpdated = await inMemoryStores.TryAddAsync(inMemoryStoreEntity);
+                    _logger.LogInformation($"in memory tenant store updated with tenant: {inMemoryStoreEntity.Payload.DisplayName}");
+
 
                     // validate tenant cache updated
                     // get the tenant cache

@@ -119,22 +119,23 @@ namespace HorselessNewspaper.Web.Core.Extensions
                         {
                             ConnectionString = configuration.GetConnectionString("ContentModelConnection"),
                             Id = Guid.Parse("6da806b8-f7ab-4e3a-8833-7e834a40e9d0"),
-                            Identifier = "localhost",
+                            Identifier = "phantom",
                             Name = "the horseless phantom tenant",
                             ObjectId = "236324b8-278e-4372-9d06-13c40aabd8b2",
                             CreatedAt = DateTime.UtcNow,
                             DisplayName = "static default tenant"
                         })
-                    ); 
+                    );
                 })
-                .WithStaticStrategy("localhost");
+                .WithRouteStrategy();
+                // .WithStaticStrategy("localhost");
 
             // for bootstrappingduring testing only
             serviceBuilder.Services.AddSingleton<ITenantInfo>(new HorselessTenantInfo()
             {
                 ConnectionString = serviceBuilder.Configuration.GetConnectionString("ContentModelConnection"),
                 Id = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
-                Identifier = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
+                Identifier = "phantom",
                 Name = "static default tenant"
             });
 
