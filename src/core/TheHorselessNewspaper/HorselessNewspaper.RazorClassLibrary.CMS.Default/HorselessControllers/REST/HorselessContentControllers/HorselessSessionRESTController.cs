@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
@@ -33,7 +34,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             CurrentTenant = tenantInfo;
         }
 
-        [HttpPost("Create")]
+        [HttpPost("Create", Name = "[controller]_[action]")]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentCollection))]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ContentCollection))]
@@ -54,7 +55,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet("GetByObjectId")]
+        [HttpGet("GetByObjectId", Name = "[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ContentCollection))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<HorselessSession>> GetByObjectId([FromRoute] string objectId)
@@ -88,9 +89,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             }
 
             return Ok(result);
-        }
+}
         [Consumes("application/json")]
-        [HttpPost("Update/{contentCollectionId}")]
+        [HttpPost("Update/{contentCollectionId}", Name = "[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentCollection))]
         [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(ContentCollection))]
         public async Task<ActionResult<HorselessSession>> Update([FromRoute] string contentCollectionId, [FromBody] HorselessSession contentCollection)

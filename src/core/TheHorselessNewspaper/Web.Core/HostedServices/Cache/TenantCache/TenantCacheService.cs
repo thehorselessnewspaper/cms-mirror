@@ -9,7 +9,9 @@ using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
-
+using TheHorselessNewspaper.CSharp.Rest.Api;
+using TheHorselessNewspaper.CSharp.Rest.Client;
+using TheHorselessNewspaper.CSharp.Rest.Model;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
@@ -189,6 +191,26 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             {
 
             }
+        }
+
+        private async Task<bool> ProbeTenantRouting(string tenantIdentifier, string basePath)
+        {
+            var ret = false;
+
+            using (var scope = _services.CreateScope())
+            {
+                IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
+                var httpClient = clientFactory.CreateClient();
+
+                Configuration config = new Configuration();
+                config.BasePath = "getbasepath";
+                var apiInstance = new ContentCollectionApi(basePath);
+                
+               
+
+            }
+
+            return await Task.FromResult(ret);
         }
 
         private async Task ValidateCaches(IServiceScope scope, IMultiTenantStore<HorselessTenantInfo>? inMemoryStores, List<ContentModel.Tenant> contentModelTenants, HostingModel.Tenant originEntity)

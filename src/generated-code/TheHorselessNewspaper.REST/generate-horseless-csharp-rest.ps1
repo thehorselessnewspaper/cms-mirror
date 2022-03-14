@@ -21,8 +21,7 @@ docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate `
 
         # as per this clever hack https://stackoverflow.com/questions/39934405/can-i-build-multiple-projects-with-dotnet-build/51904395
         dotnet build -c production  TheHorselessNewspaper.CSharp.Rest\TheHorselessNewspaper.CSharp.Rest.csproj
-        dotnet pack --include-source --include-symbols -o build-output TheHorselessNewspaper.CSharp.Rest\TheHorselessNewspaper.CSharp.Rest.csproj
-     pop-location
+      pop-location
 
 
 }

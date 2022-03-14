@@ -38,6 +38,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
 
             };
 
+            serviceBuilder.Services.AddHttpClient();
 
             serviceBuilder.Services.AddSingleton<IKeycloakAuthOptions>(keycloakAuthOptions);
             #endregion surface the keycloak logout url configuration 
