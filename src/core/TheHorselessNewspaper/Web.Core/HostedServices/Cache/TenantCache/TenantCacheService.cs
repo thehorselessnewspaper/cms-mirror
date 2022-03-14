@@ -28,7 +28,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
     /// maintain a cache of tenants 
     /// and their web api endpoints
     /// </summary>
-    internal class TenantCacheService : ITenantCacheService, IHostedService
+    internal class TenantCacheService : ITenantCacheService, IHostedService, IDisposable
     {
         // as per https://stackoverflow.com/questions/63468682/how-to-stop-a-timer-created-in-a-net-core-controller
         private static readonly object _timerLock = new object();
@@ -41,18 +41,15 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         private readonly ILogger<TenantCacheService> _logger;
         private Timer _timer = null!;
 
-        IServiceProvider _services;
-
         public ICollection<ContentModel.Tenant> CurrentContentModelTenants { get; set; } = new List<ContentModel.Tenant>();
         public ICollection<HostingModel.Tenant> CurrentHostingModelTenants { get; set; } = new List<HostingModel.Tenant>();
 
-
-        public TenantCacheService(ILogger<TenantCacheService> logger,
-            IServiceProvider services)
+        IServiceProvider _services;
+        public TenantCacheService(ILogger<TenantCacheService> logger, IServiceProvider services)
         {
             _logger = logger;
-            _services = services;
 
+            _services = services;
             TimerDelayInSeconds = _defaultTimerDelayInSeconds;
 
             _timer = new Timer(HandleTimerElapsed, null, GetTimespanForSeconds(TimerDelayInSeconds),
@@ -98,6 +95,35 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         private async void HandleTimerElapsed(object? state)
         {
             _timer.Change(Timeout.Infinite, Timeout.Infinite);
+
+            await SetCurrentContentModelTenants();
+
+            await HandleTenantCacheWorkflow();
+
+            _timer.Change(GetTimespanForSeconds(TimerDelayInSeconds), GetTimespanForSeconds(TimerDelayInSeconds));
+        }
+
+        private async Task HandleTenantCacheWorkflow()
+        {
+            // retrieve tenants from the hosting collection
+            using (var scope = _services.CreateScope())
+            {
+                try
+                {
+
+                    await HandleScopedLogic(scope);
+
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError($"problem updating tenant cache {e.Message}");
+                    _timer.Change(GetTimespanForSeconds(TimerDelayInSeconds), GetTimespanForSeconds(TimerDelayInSeconds));
+                }
+            }
+        }
+
+        private async Task SetCurrentContentModelTenants()
+        {
             using (var innerScope = _services.CreateScope())
             {
                 try
@@ -126,118 +152,13 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 }
 
             }
-
-
-            // retrieve tenants from the hosting collection
-            using (var scope = _services.CreateScope())
-            {
-                try
-                {
-
-                    await HandleScopedLogic(scope);
-
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError($"problem updating tenant cache {e.Message}");
-                    _timer.Change(GetTimespanForSeconds(TimerDelayInSeconds), GetTimespanForSeconds(TimerDelayInSeconds));
-                }
-            }
-
-            _timer.Change(GetTimespanForSeconds(TimerDelayInSeconds), GetTimespanForSeconds(TimerDelayInSeconds));
-        }
-
-        /// <summary>
-        /// thread sync failure if Task.Delay called in debugger test 
-        /// </summary>
-        /// <param name="state"></param>
-        [Obsolete]
-        private async void HandleTimerElapsedObsolete(object? state)
-        {
-            // singleton timer overlap issues dealt with as per
-            // https://gunnarpeipman.com/avoid-overlapping-timer-calls/
-            var hasLock = false;
-            try
-            {
-                Monitor.TryEnter(_timerLock, ref hasLock);
-                if (!hasLock)
-                {
-                    return;
-                }
-
-                _timer.Change(Timeout.Infinite, Timeout.Infinite);
-
-                using (var innerScope = _services.CreateScope())
-                {
-                    try
-                    {
-                        // collect the content model tenants
-                        var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(innerScope);
-
-                        IEnumerable<ContentModel.Tenant> tenantList = await contentModelTenantQuery.Read(r => r.IsSoftDeleted == false);
-
-                        List<ContentModel.Tenant> contentModelTenants = tenantList.ToList();
-
-                        _logger.LogInformation($"read {contentModelTenants.Count()} content model tenant records");
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogError($"problem getting tenants {e.Message}");
-                    }
-
-                }
-
-
-                // retrieve tenants from the hosting collection
-                using (var scope = _services.CreateScope())
-                {
-                    try
-                    {
-
-                        await HandleScopedLogic(scope);
-
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogError($"problem updating tenant cache {e.Message}");
-                    }
-                }
-            }
-            finally
-            {
-                if (hasLock)
-                {
-                    Monitor.Exit(_timerLock);
-                    _timer.Change(GetTimespanForSeconds(TimerDelayInSeconds), GetTimespanForSeconds(TimerDelayInSeconds));
-                }
-            }
-
-
         }
 
         private async Task HandleScopedLogic(IServiceScope scope)
         {
-            List<HostingModel.Tenant> hostingModelTenants = await GetCurrentHostingModelTenants(scope);
-            foreach (var hostModelTenant in hostingModelTenants)
-            {
-                if (!this.CurrentHostingModelTenants.Where(w => w.Id.Equals(hostModelTenant.Id)).Any())
-                {
-                    // here because we need to cache this tenant in the singleton
-                    this.CurrentHostingModelTenants.Add(hostModelTenant);
-                }
-            }
+            List<HostingModel.Tenant> hostingModelTenants = await GetcurrenthostingModelTenants(scope);
 
-            var currentTenantInfoList = await this.GetCurrentContentModelTenantInfo(scope);
-            foreach (var tenantInfo in currentTenantInfoList)
-            {
-                _logger.LogDebug($"tenant cache service found tenantinfo: ${tenantInfo.DisplayName}");
-            }
-
-            // inject the finbuckle in-memory store
-            var stores = _services.GetService<IEnumerable<IMultiTenantStore<HorselessTenantInfo>>>().ToList();
-
-            var inMemoryStores = stores.Where(s => s.GetType() == typeof(InMemoryStore<HorselessTenantInfo>))
-                   .SingleOrDefault();
+            IMultiTenantStore<HorselessTenantInfo>? inMemoryStores = GetInMemoryTenantStores(scope);
 
             var contentModelTenants = await this.GetCurrentContentModelTenants(scope);
 
@@ -252,33 +173,74 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 var existingMergeTarget = contentModelTenants.Where(r => r.Id == originEntity.Id).Any();
                 if (existingMergeTarget == false)
                 {
-                    _logger.LogInformation($"found new undeployed tenant {originEntity.DisplayName}");
+                    await DeployPublishedTenant(scope, originEntity);
+
+                }
+                else
+                {
+                    await ValidateCaches(scope, inMemoryStores, contentModelTenants, originEntity);
+                }
 
 
-                    var hostingModelTenantInfoQuery = this.GetQueryForHostingEntity<HostingModel.TenantInfo>(scope);
-                    var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.Read(w => w.ParentTenantId == originEntity.Id);
-                    var hostingModelTenantInfo = hostingModelTenantInfoQueryResult.ToList().First();
-                    _logger.LogInformation($"found new undeployed tenantInfo {hostingModelTenantInfo.DisplayName}");
+            }
+
+            var currentContentModelTenants = await this.GetCurrentContentModelTenants(scope);
+            foreach (var currentTenant in currentContentModelTenants)
+            {
+
+            }
+        }
+
+        private async Task ValidateCaches(IServiceScope scope, IMultiTenantStore<HorselessTenantInfo>? inMemoryStores, List<ContentModel.Tenant> contentModelTenants, HostingModel.Tenant originEntity)
+        {
+            // here because we are updating the in memory tenant cache
+            _logger.LogInformation($"found existing deployed tenant {originEntity.DisplayName}");
+
+            await UpdateMultiTenantInMemoryStore(scope, inMemoryStores, originEntity);
 
 
-                    var mergeEntity = new TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant()
-                    {
-                        Id = originEntity.Id,
-                        CreatedAt = originEntity.CreatedAt,
-                        DisplayName = originEntity.DisplayName,
-                        IsSoftDeleted = originEntity.IsSoftDeleted,
-                        ObjectId = originEntity.ObjectId,
-                        Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                        TenantIdentifierStrategy = new ContentModel.TenantIdentifierStrategy()
-                        {
-                            Id = Guid.NewGuid(),
-                            CreatedAt = originEntity.CreatedAt,
-                            DisplayName = originEntity.DisplayName,
-                            IsSoftDeleted = originEntity.IsSoftDeleted,
-                            ObjectId = Guid.NewGuid().ToString(),
-                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                           
-                            StrategyContainers = new List<ContentModel.TenantIdentifierStrategyContainer>()
+            // validate tenant cache updated
+            // get the tenant cache
+            var tenantCache = scope.ServiceProvider.GetRequiredService<IHorselessCacheProvider<Guid, ContentModel.Tenant>>();
+            _logger.LogInformation($"loaded tenant cache service");
+
+            foreach (var contentModelTenant in contentModelTenants.Where(r => r.Id == originEntity.Id))
+            {
+                _logger.LogInformation($"updating tenant cache");
+                tenantCache.Set(contentModelTenant.Id, contentModelTenant);
+                _logger.LogInformation($"tenant cache updated with tenant={contentModelTenant.DisplayName}");
+            }
+        }
+
+        private async Task DeployPublishedTenant(IServiceScope scope, HostingModel.Tenant originEntity)
+        {
+            _logger.LogInformation($"found new undeployed tenant {originEntity.DisplayName}");
+
+
+            var hostingModelTenantInfoQuery = this.GetQueryForHostingEntity<HostingModel.TenantInfo>(scope);
+            var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.Read(w => w.ParentTenantId == originEntity.Id);
+            var hostingModelTenantInfo = hostingModelTenantInfoQueryResult.ToList().First();
+            _logger.LogInformation($"found new undeployed tenantInfo {hostingModelTenantInfo.DisplayName}");
+
+
+            var mergeEntity = new TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant()
+            {
+                Id = originEntity.Id,
+                CreatedAt = originEntity.CreatedAt,
+                DisplayName = originEntity.DisplayName,
+                IsSoftDeleted = originEntity.IsSoftDeleted,
+                ObjectId = originEntity.ObjectId,
+                Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                TenantIdentifierStrategy = new ContentModel.TenantIdentifierStrategy()
+                {
+                    Id = Guid.NewGuid(),
+                    CreatedAt = originEntity.CreatedAt,
+                    DisplayName = originEntity.DisplayName,
+                    IsSoftDeleted = originEntity.IsSoftDeleted,
+                    ObjectId = Guid.NewGuid().ToString(),
+                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+
+                    StrategyContainers = new List<ContentModel.TenantIdentifierStrategyContainer>()
                           {
                               new ContentModel.TenantIdentifierStrategyContainer()
                               {
@@ -294,92 +256,85 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                 TenantIdentifierStrategyName = ContentModel.TenantIdentifierStrategyName.ASPNETCORE_ROUTE
                               }
                           }
-                        }
-                    };
+                }
+            };
 
-                    using (var innerScope = _services.CreateScope())
+            using (var innerScope = _services.CreateScope())
+            {
+                try
+                {
+                    _logger.LogInformation($"merging new undeployed tenant {originEntity.DisplayName}");
+
+                    using (var tenantUpdateScope = _services.CreateScope())
                     {
+
+                        // collect the content model tenants
+
                         try
                         {
-                            _logger.LogInformation($"merging new undeployed tenant {originEntity.DisplayName}");
-
-                            using (var tenantUpdateScope = _services.CreateScope())
-                            {
-
-                                // collect the content model tenants
-
-                                try
-                                {
-                                    var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(tenantUpdateScope);
-                                    var insertResult = await contentModelTenantQuery.Create(mergeEntity);
-                                    _logger.LogInformation($"inserted new undeployed tenant {originEntity.DisplayName}");
-                                }
-                                catch (Exception e)
-                                {
-                                    _logger.LogError($"problem inserting new content model tenant record {e.Message}");
-                                    if(e.InnerException != null)
-                                    {
-                                        _logger.LogError($"problem inserting new content model tenant record {e.InnerException.Message}");
-                                    }
-                                }
-
-
-
-                            }
-                            var updatedTenants = await this.GetCurrentContentModelTenants(scope);
-
-                            _logger.LogInformation($"read {updatedTenants.Count()} content model tenant records");
-
-
-                            // TODO 
-                            // handle multiplicity of TenantInfo per Tenant
-                            // enables tenants of tenants
-                            //var inMemoryStoreEntity = new HorselessTenantInfo(hostingModelTenantInfo);
-                            //var inMemoryStoreUpdated = await inMemoryStores.TryAddAsync(inMemoryStoreEntity);
-                            //_logger.LogInformation($"in memory tenant store updated with tenant: {inMemoryStoreEntity.Payload.DisplayName}");
-                            
-                            //await UpdateMultiTenantInMemoryStore(innerScope, inMemoryStores, mergeEntity);
-
+                            var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(tenantUpdateScope);
+                            var insertResult = await contentModelTenantQuery.Create(mergeEntity);
+                            _logger.LogInformation($"inserted new undeployed tenant {originEntity.DisplayName}");
                         }
                         catch (Exception e)
                         {
-                            _logger.LogError($"problem getting tenants {e.Message}");
-                            throw new Exception("problem merging tenants ", e);
+                            _logger.LogError($"problem inserting new content model tenant record {e.Message}");
+                            if (e.InnerException != null)
+                            {
+                                _logger.LogError($"problem inserting new content model tenant record {e.InnerException.Message}");
+                            }
                         }
 
-                    }
 
+
+                    }
+                    var updatedTenants = await this.GetCurrentContentModelTenants(scope);
+
+                    _logger.LogInformation($"read {updatedTenants.Count()} content model tenant records");
+
+
+                    // TODO 
+                    // handle multiplicity of TenantInfo per Tenant
+                    // enables tenants of tenants
+                    //var inMemoryStoreEntity = new HorselessTenantInfo(hostingModelTenantInfo);
+                    //var inMemoryStoreUpdated = await inMemoryStores.TryAddAsync(inMemoryStoreEntity);
+                    //_logger.LogInformation($"in memory tenant store updated with tenant: {inMemoryStoreEntity.Payload.DisplayName}");
+
+                    //await UpdateMultiTenantInMemoryStore(innerScope, inMemoryStores, mergeEntity);
 
                 }
-                else
+                catch (Exception e)
                 {
-                    // here because we are updating the in memory tenant cache
-                    _logger.LogInformation($"found existing deployed tenant {originEntity.DisplayName}");
-
-                    await UpdateMultiTenantInMemoryStore(scope, inMemoryStores, originEntity);
-
-
-                    // validate tenant cache updated
-                    // get the tenant cache
-                    var tenantCache = _services.GetRequiredService<IHorselessCacheProvider<Guid, ContentModel.Tenant>>();
-                    _logger.LogInformation($"loaded tenant cache service");
-
-                    foreach (var contentModelTenant in contentModelTenants.Where(r => r.Id == originEntity.Id))
-                    {
-                        _logger.LogInformation($"updating tenant cache");
-                        tenantCache.Set(contentModelTenant.Id, contentModelTenant);
-                        _logger.LogInformation($"tenant cache updated with tenant={contentModelTenant.DisplayName}");
-                    }
+                    _logger.LogError($"problem getting tenants {e.Message}");
+                    throw new Exception("problem merging tenants ", e);
                 }
 
-
             }
+        }
 
-            var currentContentModelTenants = await this.GetCurrentContentModelTenants(scope);
-            foreach (var currentTenant in currentContentModelTenants)
+        private static IMultiTenantStore<HorselessTenantInfo>? GetInMemoryTenantStores(IServiceScope scope)
+        {
+            // inject the finbuckle in-memory store
+            var stores = scope.ServiceProvider.GetRequiredService<IEnumerable<IMultiTenantStore<HorselessTenantInfo>>>().ToList();
+
+            var inMemoryStores = stores.Where(s => s.GetType() == typeof(InMemoryStore<HorselessTenantInfo>))
+                   .SingleOrDefault();
+            return inMemoryStores;
+        }
+
+        private async Task<List<HostingModel.Tenant>> GetcurrenthostingModelTenants(IServiceScope scope)
+        {
+            List<HostingModel.Tenant> hostingModelTenants = await GetCurrentHostingModelTenants(scope);
+            foreach (var hostModelTenant in hostingModelTenants)
             {
-
+                if (!this.CurrentHostingModelTenants.Where(w => w.Id.Equals(hostModelTenant.Id)).Any())
+                {
+                    // here because we need to cache this tenant in the singleton
+                    this.CurrentHostingModelTenants.Add(hostModelTenant);
+                }
             }
+
+            return hostingModelTenants;
         }
 
         private async Task UpdateMultiTenantInMemoryStore(IServiceScope scope, IMultiTenantStore<HorselessTenantInfo>? inMemoryStores, HostingModel.Tenant originEntity)
@@ -449,5 +404,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             return Task.CompletedTask;
         }
 
+        public void Dispose()
+        {
+            _timer?.Dispose();
+        }
     }
 }
