@@ -87,6 +87,14 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
                         // here because this is a request for a published tenant
                         return values;
                     }
+                    else
+                    {
+                        // here because this is a request for an unpublished tenant
+                        // handle with a redirect to tenant not found page
+                        values["controller"] = "Home";
+                        values["action"] = "Index";
+                        return values;
+                    }
                 }
 
                 var ctx = _httpContextAccessor.HttpContext;

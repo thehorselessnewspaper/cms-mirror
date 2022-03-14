@@ -116,6 +116,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
             #region multitenancy as per https://www.finbuckle.com/MultiTenant/
             serviceBuilder.Services.AddMultiTenant<HorselessTenantInfo>()
+                .WithRouteStrategy()
                 .WithInMemoryStore(options =>
                 {
                     options.Tenants.Add(new HorselessTenantInfo(
@@ -123,7 +124,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
                         {
                             ConnectionString = configuration.GetConnectionString("ContentModelConnection"),
                             Id = Guid.Parse("6da806b8-f7ab-4e3a-8833-7e834a40e9d0"),
-                            Identifier = "phantom",
+                            Identifier = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
                             Name = "the horseless phantom tenant",
                             ObjectId = "236324b8-278e-4372-9d06-13c40aabd8b2",
                             CreatedAt = DateTime.UtcNow,
@@ -131,8 +132,10 @@ namespace HorselessNewspaper.Web.Core.Extensions
                         })
                     );
                 })
-                .WithRouteStrategy();
-                // .WithStaticStrategy("localhost");
+                .WithDelegateStrategy(async context =>
+                {
+                    return await Task.FromResult<string>("6da806b8-f7ab-4e3a-8833-7e834a40e9d0");
+                });
 
             // for bootstrappingduring testing only
             //serviceBuilder.Services.AddSingleton<ITenantInfo>(new HorselessTenantInfo()
