@@ -175,6 +175,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 var existingMergeTarget = contentModelTenants.Where(r => r.Id == originEntity.Id).Any();
                 if (existingMergeTarget == false)
                 {
+                    var probeResult = await this.ProbeTenantRouting(originEntity);
                     await DeployPublishedTenant(scope, originEntity);
 
                 }
@@ -193,20 +194,30 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             }
         }
 
-        private async Task<bool> ProbeTenantRouting(string tenantIdentifier, string basePath)
+        private async Task<bool> ProbeTenantRouting(HostingModel.Tenant tenant)
         {
             var ret = false;
+            var basePath = tenant.TenantInfos.FirstOrDefault().TenantBaseUrl;
 
             using (var scope = _services.CreateScope())
             {
-                IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
-                var httpClient = clientFactory.CreateClient();
 
-                Configuration config = new Configuration();
-                config.BasePath = "getbasepath";
-                var apiInstance = new ContentCollectionApi(basePath);
-                
-               
+                try
+                {
+                    IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
+                    var httpClient = clientFactory.CreateClient();
+ 
+                    var contentCollectionApi = new ContentCollectionRESTApi(new Configuration() { BasePath = basePath });
+ 
+                    var probeResult = await contentCollectionApi.ContentCollectionRESTControllerGetByObjectIdAsync(tenant.Id.ToString());
+                    ret = true;
+                }
+                catch (Exception e)
+                {
+                    _logger.LogInformation($"exception probing routing tenant {e.Message}");
+                    ret = false;
+                }
+
 
             }
 
@@ -242,6 +253,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             var hostingModelTenantInfoQuery = this.GetQueryForHostingEntity<HostingModel.TenantInfo>(scope);
             var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.Read(w => w.ParentTenantId == originEntity.Id);
             var hostingModelTenantInfo = hostingModelTenantInfoQueryResult.ToList().First();
+            var tenantOwner = originEntity.Owners.FirstOrDefault();
+
             _logger.LogInformation($"found new undeployed tenantInfo {hostingModelTenantInfo.DisplayName}");
 
 
@@ -253,6 +266,21 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 IsSoftDeleted = originEntity.IsSoftDeleted,
                 ObjectId = originEntity.ObjectId,
                 Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                Owners = new List<ContentModel.Principal>()
+                {
+                    new ContentModel.Principal()
+                    {
+                        Id = tenantOwner.Id,
+                        CreatedAt = tenantOwner.CreatedAt,
+                        DisplayName = tenantOwner.DisplayName,
+                        IsSoftDeleted = tenantOwner.IsSoftDeleted,
+                        ObjectId = tenantOwner.ObjectId,
+                        Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                        Aud = tenantOwner.Aud,
+                        Sub = tenantOwner.Sub,
+                        Iss = tenantOwner.Iss
+                    }
+                },
                 TenantIdentifierStrategy = new ContentModel.TenantIdentifierStrategy()
                 {
                     Id = Guid.NewGuid(),
@@ -295,7 +323,12 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         try
                         {
                             var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(tenantUpdateScope);
-                            var insertResult = await contentModelTenantQuery.Create(mergeEntity);
+                            
+                            // this has to be posted to the tenant enabled endpoint
+                            // once routing for the tenant is active
+                            // otherwise these entities are inserted in the context
+                            // of the management tenant
+                            // var insertResult = await contentModelTenantQuery.Create(mergeEntity);
                             _logger.LogInformation($"inserted new undeployed tenant {originEntity.DisplayName}");
                         }
                         catch (Exception e)

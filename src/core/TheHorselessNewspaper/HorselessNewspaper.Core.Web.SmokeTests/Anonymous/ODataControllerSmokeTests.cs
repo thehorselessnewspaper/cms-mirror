@@ -60,9 +60,9 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
             {
                 using (var scope = application.Services.CreateScope())
                 {
-                    var insertQueryOperator = _baseTest.GetIQueryableContentModelOperator<IQueryableContentModelOperator<ContentEntities.ContentCollection>>(scope);
+                    var insertQueryOperator = _baseTest.GetIQueryableContentModelOperator<IQueryableContentModelOperator<ContentEntities.Tenant>>(scope);
                     var insertResult = await insertQueryOperator.Create(
-                        new ContentEntities.ContentCollection()
+                        new ContentEntities.Tenant()
                         {
                             Id = Guid.NewGuid(),
                             CreatedAt = DateTime.UtcNow,
@@ -70,7 +70,14 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                             IsPublished = true,
                             IsSoftDeleted = false,
                             ObjectId = Guid.NewGuid().ToString(),
-                            PublishedURL = "news"
+                            TenantIdentifierStrategy = new ContentEntities.TenantIdentifierStrategy()
+                            {
+                                Id = Guid.NewGuid(),
+                                CreatedAt = DateTime.UtcNow,
+                                DisplayName = "Test Content Collection",
+                                IsSoftDeleted = false,
+                                ObjectId = Guid.NewGuid().ToString()
+                            }
                         }
                         );
                 }
@@ -87,7 +94,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
             try
             {
                 client.DefaultRequestHeaders.Add("Accept", "application/json;odata.metadata=none");
-                response = await client.GetAsync("/HorselessContent/ContentCollection/?$top=10&");
+                response = await client.GetAsync("/HorselessContent/Tenant/?$top=10&");
                 Assert.NotNull(response);
 
                 response.EnsureSuccessStatusCode(); // Status Code 200-299
@@ -109,7 +116,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
             try
             {
 
-                var contentCollection = JsonConvert.DeserializeObject<OData<List<ContentEntities.ContentCollection>>>(responseContent);
+                var contentCollection = JsonConvert.DeserializeObject<OData<List<ContentEntities.Tenant>>>(responseContent);
                 Assert.NotNull(contentCollection);
                 Assert.True(contentCollection.value.Count > 0);
             }

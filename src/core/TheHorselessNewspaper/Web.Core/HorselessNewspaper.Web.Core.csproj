@@ -22,15 +22,15 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.1" />
-		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.4.220313.5" />
+		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.4.220314.5" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.3" />
 		<PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.8" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 		<PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="2.4.0" />
 		<PackageReference Include="NuGet.Protocol" Version="6.1.0" />
-		<PackageReference Include="TheHorselessNewspaper.CSharp.Rest" Version="0.4.220314.4" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220313.5" />
+		<PackageReference Include="TheHorselessNewspaper.CSharp.Rest" Version="0.4.220314.5" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220314.3" />
 	</ItemGroup>
 
 	<ItemGroup>

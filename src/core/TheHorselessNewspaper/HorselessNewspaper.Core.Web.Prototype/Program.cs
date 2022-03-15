@@ -15,6 +15,9 @@ using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
 using Microsoft.AspNetCore.OData.Routing.Conventions;
 using Microsoft.AspNetCore.HttpOverrides;
 using System.Text.Json.Serialization;
+using Finbuckle.MultiTenant;
+using TheHorselessNewspaper.HostingModel.MultiTenant;
+using TheHorselessNewspaper.CSharp.Rest.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(builder =>
@@ -51,6 +54,7 @@ builder.Services.AddControllersWithViews(options =>
 
 builder.Services.AddODataQueryFilter();
 
+
 // enables odata entities
 var model = new HorselessOdataModel();
 var edmContent = await model.GetContentEDMModel();
@@ -85,9 +89,26 @@ builder.Services.AddControllers()
 
         /// todo make this an environment configurable item
         options.AddRouteComponents("HorselessContent", edmContent);
-        options.AddRouteComponents("HorselessHosting", edmHosting);
+
 
         
+    })
+    .AddOData(options =>
+    {
+        /// TODO - surface these as configurable parameters 
+        options
+        .Select()
+        .Expand()
+        .Filter()
+        .OrderBy()
+        .SetMaxTop(100)
+        .Count();
+
+        options.TimeZone = TimeZoneInfo.Utc;
+        // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
+
+        /// todo make this an environment configurable item
+        options.AddRouteComponents("HorselessHosting", edmHosting);
     });
 
 /// <summary>
@@ -192,6 +213,10 @@ foreach (var service in builder.Services)
 {
     logger.LogDebug($"Service: {service.ServiceType.FullName} Lifetime: { service.Lifetime} Instance: { service.ImplementationType?.FullName}");
 }
+
+builder.Services.AddSingleton<TheHorselessNewspaper.CSharp.Rest.Client.Configuration>();
+
+
 var app = builder.Build();
 
 /// <summary>

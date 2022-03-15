@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Security.Claims;
 using System.Text.Json;
+using TheHorselessNewspaper.CSharp.Rest.Api;
 
 namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
 {
@@ -38,7 +39,6 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
 
             };
 
-            serviceBuilder.Services.AddHttpClient();
 
             serviceBuilder.Services.AddSingleton<IKeycloakAuthOptions>(keycloakAuthOptions);
             #endregion surface the keycloak logout url configuration 
@@ -139,7 +139,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                         JsonSerializer.Deserialize<Dictionary<string, string[]>>(c.User?.FindFirst((claim) => claim.Type == "realm_access")?.Value ?? "{}")
                     .FirstOrDefault().Value?.Any(v => v == "admin") ?? false));
             });
-            
+
 
             //.AddOpenId(keyCloakOptions);
 

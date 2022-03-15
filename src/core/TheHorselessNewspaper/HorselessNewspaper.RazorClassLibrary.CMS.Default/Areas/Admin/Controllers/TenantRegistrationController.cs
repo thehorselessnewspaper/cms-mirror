@@ -157,6 +157,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
 
                 };
 
+                var scheme = HttpContext.Request.IsHttps ? "https://" : "http://";
+                var baseUrl = scheme + HttpContext.Request.Host;
+
                 var newTenantInfo = new HostingModel.TenantInfo()
                 {
 
@@ -167,7 +170,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                     ObjectId = Guid.NewGuid().ToString(),
                     Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
                     Identifier = model.tenantIdentifier,
-                    Name = model.displayName
+                    Name = model.displayName,
+                    TenantBaseUrl = baseUrl
                 };
 
                 var newTenant = new HostingModel.Tenant()

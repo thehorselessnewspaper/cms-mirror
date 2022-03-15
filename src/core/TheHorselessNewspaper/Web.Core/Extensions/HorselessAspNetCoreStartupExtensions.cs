@@ -33,6 +33,8 @@ using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntiti
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using HorselessNewspaper.Web.Core.Extensions.Claim;
 using System.Text.Json.Serialization;
+using Microsoft.Extensions.Primitives;
+using TheHorselessNewspaper.CSharp.Rest.Api;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -49,6 +51,23 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
             serviceBuilder.Services.AddFeatureManagement();
 
+            serviceBuilder.Services.AddHttpClient();
+
+            serviceBuilder.Services.AddHttpClient<IContentCollectionRESTApi, ContentCollectionRESTApi>(
+                (provider, client) =>
+                {
+                    client.BaseAddress = new System.Uri("https://petstore.swagger.io/v2/");
+                })
+                .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+                {
+                    ClientCertificateOptions = ClientCertificateOption.Manual,
+                    ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    }
+                });
+
 
             // as per https://docs.microsoft.com/en-us/archive/msdn-magazine/2016/september/asp-net-core-feature-slices-for-asp-net-core-mvc
             // as per https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/areas?view=aspnetcore-6.0
@@ -62,51 +81,51 @@ namespace HorselessNewspaper.Web.Core.Extensions
                 // can only discover HorselessViews folder if it already has views
 
                 var currentDir = Directory.GetCurrentDirectory();
-            Matcher matcher = new();
-            matcher.AddInclude($"/**/*Views/**/*.cshtml");
-            foreach (var result in matcher.GetResultsInFullPath(@"..\"))
-            {
-                var split = result.Split(Path.DirectorySeparatorChar, 255);
-                var path = string.Empty;
-                foreach (var trimmed in split.Take(split.Count() - 1))
+                Matcher matcher = new();
+                matcher.AddInclude($"/**/*Views/**/*.cshtml");
+                foreach (var result in matcher.GetResultsInFullPath(@"..\"))
                 {
-                    path = path + trimmed + "/";
+                    var split = result.Split(Path.DirectorySeparatorChar, 255);
+                    var path = string.Empty;
+                    foreach (var trimmed in split.Take(split.Count() - 1))
+                    {
+                        path = path + trimmed + "/";
+                    }
+
+                    if (path.Contains("shared", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        var sharedPath = $"{path}" + @"/{0}" + RazorViewEngine.ViewExtension;
+                        o.ViewLocationFormats.Add(sharedPath);
+                    }
+                    else
+                    {
+                        string item = $"{path}" + @"{1}/{0}" + RazorViewEngine.ViewExtension;
+                        o.ViewLocationFormats.Add(item);
+                    }
+
+
                 }
 
-                if (path.Contains("shared", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    var sharedPath = $"{path}" + @"/{0}" + RazorViewEngine.ViewExtension;
-                    o.ViewLocationFormats.Add(sharedPath);
-                }
-                else
-                {
-                    string item = $"{path}" + @"{1}/{0}" + RazorViewEngine.ViewExtension;
-                    o.ViewLocationFormats.Add(item);
-                }
+                o.ViewLocationFormats.Add
+                    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/HorselessViews/{1}/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add
+                    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/HorselessViews/Shared/{0}" + RazorViewEngine.ViewExtension);
 
+                o.ViewLocationFormats.Add
+                    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add
+                    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
 
-            }
+                o.PageViewLocationFormats.Add
+                    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
+                o.PageViewLocationFormats.Add
+                    ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
 
-            o.ViewLocationFormats.Add
-                ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/HorselessViews/{1}/{0}" + RazorViewEngine.ViewExtension);
-            o.ViewLocationFormats.Add
-                ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/HorselessViews/Shared/{0}" + RazorViewEngine.ViewExtension);
-
-            o.ViewLocationFormats.Add
-                ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
-            o.ViewLocationFormats.Add
-                ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
-
-            o.PageViewLocationFormats.Add
-                ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
-            o.PageViewLocationFormats.Add
-                ("~/../HorselessNewspaper.RazorClassLibrary.CMS.Default/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
-
-            o.ViewLocationFormats.Add
-                ("~/../HorselessNewspaper.Web.Core.Auth.Keycloak/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
-            o.ViewLocationFormats.Add
-                ("~/../HorselessNewspaper.Web.Core.Auth.Keycloak/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
-        })
+                o.ViewLocationFormats.Add
+                    ("~/../HorselessNewspaper.Web.Core.Auth.Keycloak/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add
+                    ("~/../HorselessNewspaper.Web.Core.Auth.Keycloak/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
+            })
 
             );
 
@@ -119,23 +138,37 @@ namespace HorselessNewspaper.Web.Core.Extensions
                 .WithRouteStrategy()
                 .WithInMemoryStore(options =>
                 {
-                    options.Tenants.Add(new HorselessTenantInfo(
+                    options.Tenants.Add(
+                        new HorselessTenantInfo(
                         new HostingEntities.TenantInfo()
                         {
                             ConnectionString = configuration.GetConnectionString("ContentModelConnection"),
                             Id = Guid.Parse("6da806b8-f7ab-4e3a-8833-7e834a40e9d0"),
                             Identifier = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
-                            Name = "the horseless phantom tenant",
+                            Name = "the Management",
                             ObjectId = "236324b8-278e-4372-9d06-13c40aabd8b2",
                             CreatedAt = DateTime.UtcNow,
-                            DisplayName = "static default tenant"
-                        })
+                            DisplayName = "the management tenant"
+                        }
+                        )
                     );
                 })
-                .WithDelegateStrategy(async context =>
-                {
-                    return await Task.FromResult<string>("6da806b8-f7ab-4e3a-8833-7e834a40e9d0");
-                });
+                .WithStaticStrategy("6da806b8-f7ab-4e3a-8833-7e834a40e9d0");
+
+
+            //.WithDelegateStrategy(async context =>
+            //{
+            //    var httpContext = context as HttpContext;
+            //    if(httpContext == null)
+            //    {
+            //        return "phantom";
+            //    }
+            //    else
+            //    {
+            //        httpContext.Request.Query.TryGetValue("tenant", out StringValues tenantIdParam);
+            //        return tenantIdParam.ToString();
+            //    }
+            //});
 
             // for bootstrappingduring testing only
             //serviceBuilder.Services.AddSingleton<ITenantInfo>(new HorselessTenantInfo()
@@ -180,22 +213,22 @@ namespace HorselessNewspaper.Web.Core.Extensions
             /**
              * for injection into controllers
              **/
-           serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.NugetPackage>, HostingEntities.NugetPackage>,
-                     HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.NugetPackage>, HostingEntities.NugetPackage>>();
+            serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.NugetPackage>, HostingEntities.NugetPackage>,
+                      HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.NugetPackage>, HostingEntities.NugetPackage>>();
             serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.KeyCloakConfiguration>, HostingEntities.KeyCloakConfiguration>,
                      HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.KeyCloakConfiguration>, HostingEntities.KeyCloakConfiguration>>();
-             serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Tenant>, HostingEntities.Tenant>,
-                     HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Tenant>, HostingEntities.Tenant>>();
+            serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Tenant>, HostingEntities.Tenant>,
+                    HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Tenant>, HostingEntities.Tenant>>();
             serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Principal>, HostingEntities.Principal>,
          HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Principal>, HostingEntities.Principal>>();
-            
+
             serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessControlEntry>, HostingEntities.AccessControlEntry>,
 HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessControlEntry>, HostingEntities.AccessControlEntry>>();
-            
+
             serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.TenantInfo>, HostingEntities.TenantInfo>,
                      HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.TenantInfo>, HostingEntities.TenantInfo>>();
-              serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.WebAPITenantInfo>, HostingEntities.WebAPITenantInfo>,
-                     HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.WebAPITenantInfo>, HostingEntities.WebAPITenantInfo>>();
+            serviceBuilder.Services.AddScoped<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.WebAPITenantInfo>, HostingEntities.WebAPITenantInfo>,
+                   HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.WebAPITenantInfo>, HostingEntities.WebAPITenantInfo>>();
 
             #endregion
 
@@ -241,7 +274,7 @@ HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessCo
 
                     var currentUser = httpContext.User;
 
-                    if(currentUser.Identity.IsAuthenticated && currentUser.Claims != null && currentUser.Claims.Count() > 0 )
+                    if (currentUser.Identity.IsAuthenticated && currentUser.Claims != null && currentUser.Claims.Count() > 0)
                     {
                         var candidateClaim = currentUser.Claims.Where(w => w.Issuer != null).FirstOrDefault();
                         horselessSession.Iss = candidateClaim.Issuer;

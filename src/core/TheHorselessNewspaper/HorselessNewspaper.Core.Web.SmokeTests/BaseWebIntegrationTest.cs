@@ -11,6 +11,9 @@ using TheHorselessNewspaper.HostingModel.Entities.Query;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using Xunit;
 using Microsoft.Extensions.DependencyInjection;
+using TheHorselessNewspaper.HostingModel.MultiTenant;
+using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+using Finbuckle.MultiTenant;
 
 namespace HorselessNewspaper.Core.Web.SmokeTests
 {
@@ -35,6 +38,27 @@ namespace HorselessNewspaper.Core.Web.SmokeTests
             .WithWebHostBuilder(builder =>
             {
                 // ... Configure test services
+                builder.ConfigureServices(async builder =>
+                {
+                    builder.AddTransient<ITenantInfo, HorselessTenantInfo>(f =>
+                    {
+                    return new HorselessTenantInfo(
+                    new TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantInfo()
+                    {
+                        // ConnectionString = configuration.GetConnectionString("ContentModelConnection"),
+                        Id = Guid.Parse("6da806b8-f7ab-4e3a-8833-7e834a40e9d0"),
+                        Identifier = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
+                        Name = "the Management",
+                        ObjectId = "236324b8-278e-4372-9d06-13c40aabd8b2",
+                        CreatedAt = DateTime.UtcNow,
+                        DisplayName = "the management tenant"
+                    }
+                    );
+                });
+                        
+
+
+                });
             });
 
             client = application.CreateClient();
