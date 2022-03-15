@@ -15,7 +15,8 @@ docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate `
     --artifact-id "TheHorselessNewspaper.CSharp.Rest" `
     --package-name "TheHorselessNewspaper.CSharp.Rest" `
     --skip-validate-spec `
-    --additional-properties="netCoreProjectFile=true,optionalAssemblyInfo=true,packageName=TheHorselessNewspaper.CSharp.Rest,targetFramework=net6.0,--remove-operation-id-prefix, library=htpclient "
+    --remove-operation-id-prefix `
+    --additional-properties="netCoreProjectFile=true,optionalAssemblyInfo=true,packageName=TheHorselessNewspaper.CSharp.Rest,targetFramework=net6.0,library=httpclient"
 
     push-location csharp-netcore\src
 
