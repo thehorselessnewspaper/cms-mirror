@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheHorselessNewspaper.CSharp.Rest", "src\TheHorselessNewspaper.CSharp.Rest\TheHorselessNewspaper.CSharp.Rest.csproj", "{611E5231-F5AA-4F42-AE75-5B12A56A08FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheHorselessNewspaper.CSharp.Rest", "src\TheHorselessNewspaper.CSharp.Rest\TheHorselessNewspaper.CSharp.Rest.csproj", "{D96428CC-247E-4182-917D-582F859C21E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheHorselessNewspaper.CSharp.Rest.Test", "src\TheHorselessNewspaper.CSharp.Rest.Test\TheHorselessNewspaper.CSharp.Rest.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
 EndProject
@@ -12,10 +12,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{611E5231-F5AA-4F42-AE75-5B12A56A08FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{611E5231-F5AA-4F42-AE75-5B12A56A08FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{611E5231-F5AA-4F42-AE75-5B12A56A08FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{611E5231-F5AA-4F42-AE75-5B12A56A08FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D96428CC-247E-4182-917D-582F859C21E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D96428CC-247E-4182-917D-582F859C21E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D96428CC-247E-4182-917D-582F859C21E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D96428CC-247E-4182-917D-582F859C21E1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
