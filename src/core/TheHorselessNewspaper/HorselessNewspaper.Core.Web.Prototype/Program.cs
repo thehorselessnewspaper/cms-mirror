@@ -17,7 +17,6 @@ using Microsoft.AspNetCore.HttpOverrides;
 using System.Text.Json.Serialization;
 using Finbuckle.MultiTenant;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
-using TheHorselessNewspaper.CSharp.Rest.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(builder =>
@@ -214,7 +213,6 @@ foreach (var service in builder.Services)
     logger.LogDebug($"Service: {service.ServiceType.FullName} Lifetime: { service.Lifetime} Instance: { service.ImplementationType?.FullName}");
 }
 
-builder.Services.AddSingleton<TheHorselessNewspaper.CSharp.Rest.Client.Configuration>();
 
 
 var app = builder.Build();

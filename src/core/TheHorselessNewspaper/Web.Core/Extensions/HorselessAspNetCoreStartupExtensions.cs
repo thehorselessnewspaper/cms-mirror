@@ -34,7 +34,7 @@ using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntiti
 using HorselessNewspaper.Web.Core.Extensions.Claim;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Primitives;
-using TheHorselessNewspaper.CSharp.Rest.Api;
+using TheHorselessNewspaper.REST;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -53,7 +53,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
             serviceBuilder.Services.AddHttpClient();
 
-            serviceBuilder.Services.AddHttpClient<IContentCollectionRESTApi, ContentCollectionRESTApi>(
+            serviceBuilder.Services.AddHttpClient<IClient, Client>(
                 (provider, client) =>
                 {
                     client.BaseAddress = new System.Uri("https://petstore.swagger.io/v2/");

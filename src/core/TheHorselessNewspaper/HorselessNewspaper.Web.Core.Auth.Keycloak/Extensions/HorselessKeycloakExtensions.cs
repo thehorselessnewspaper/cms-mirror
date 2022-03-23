@@ -12,7 +12,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Security.Claims;
 using System.Text.Json;
-using TheHorselessNewspaper.CSharp.Rest.Api;
 
 namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
 {

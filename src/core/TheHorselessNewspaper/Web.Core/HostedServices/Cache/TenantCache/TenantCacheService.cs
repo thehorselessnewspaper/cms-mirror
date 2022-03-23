@@ -1,17 +1,16 @@
 ﻿using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Stores;
+using HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
-using TheHorselessNewspaper.CSharp.Rest.Api;
-using TheHorselessNewspaper.CSharp.Rest.Client;
-using TheHorselessNewspaper.CSharp.Rest.Model;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
@@ -175,9 +174,14 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 var existingMergeTarget = contentModelTenants.Where(r => r.Id == originEntity.Id).Any();
                 if (existingMergeTarget == false)
                 {
+                    // validate the multitenant routing is working for this tenant
+                    // database inserts specific to the tenant can only occur
+                    // after tenant routing is available for a tenant
                     var probeResult = await this.ProbeTenantRouting(originEntity);
-                    await DeployPublishedTenant(scope, originEntity);
-
+                    if (probeResult == true)
+                    {
+                        await DeployPublishedTenant(scope, originEntity);
+                    }
                 }
                 else
                 {
@@ -204,12 +208,20 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                 try
                 {
+                    var route = $"{tenant.TenantInfos.FirstOrDefault().Identifier}" + RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT + $"/GetByObjectId/{tenant.ObjectId}";
                     IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
                     var httpClient = clientFactory.CreateClient();
- 
-                    var contentCollectionApi = new ContentCollectionRESTApi(new Configuration() { BasePath = basePath });
- 
-                    var probeResult = await contentCollectionApi.ContentCollectionRESTControllerGetByObjectIdAsync(tenant.Id.ToString());
+
+					var httpRequestMessage = new HttpRequestMessage(
+						HttpMethod.Get,
+						route)
+					    {
+						    Headers =
+			                {
+				                { HeaderNames.Accept, "application/json" },
+				                { HeaderNames.UserAgent, "HorselessNewspaper" }
+			                }
+					    };
                     ret = true;
                 }
                 catch (Exception e)
@@ -323,7 +335,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         try
                         {
                             var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(tenantUpdateScope);
-                            
+
                             // this has to be posted to the tenant enabled endpoint
                             // once routing for the tenant is active
                             // otherwise these entities are inserted in the context

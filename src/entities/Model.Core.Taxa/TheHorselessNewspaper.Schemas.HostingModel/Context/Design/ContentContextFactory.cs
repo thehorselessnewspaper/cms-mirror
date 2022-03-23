@@ -1,12 +1,18 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Design;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
 
 namespace TheHorselessNewspaper.HostingModel.Context.Design
 {
-    internal class ContentContextFactory
+    internal class ContentContextFactory : IDesignTimeDbContextFactory<MSSqlContentContext>
     {
+        public MSSqlContentContext CreateDbContext(string[] args)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
