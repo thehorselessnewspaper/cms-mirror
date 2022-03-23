@@ -35,6 +35,7 @@ using HorselessNewspaper.Web.Core.Extensions.Claim;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Primitives;
 using TheHorselessNewspaper.REST;
+using Microsoft.Extensions.Options;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -51,8 +52,23 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
             serviceBuilder.Services.AddFeatureManagement();
 
-            serviceBuilder.Services.AddHttpClient();
+            serviceBuilder.Services.AddHttpClient(Options.DefaultName, c =>
+            {
 
+            })
+            /// disable SSL cert validation
+            /// as per https://stackoverflow.com/questions/62860290/disable-ssl-certificate-verification-in-default-injected-ihttpclientfactory
+            /// TODo
+            /// enable via conbfiguration
+            .ConfigurePrimaryHttpMessageHandler(() =>
+            {
+                return new HttpClientHandler
+                {
+                    ClientCertificateOptions = ClientCertificateOption.Manual,
+                    ServerCertificateCustomValidationCallback =
+                        (httpRequestMessage, cert, certChain, policyErrors) => true
+                };
+            });
             serviceBuilder.Services.AddHttpClient<IClient, Client>(
                 (provider, client) =>
                 {

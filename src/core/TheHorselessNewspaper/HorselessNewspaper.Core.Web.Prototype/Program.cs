@@ -223,6 +223,14 @@ var app = builder.Build();
 app.UseForwardedHeaders();
 
 // Configure the HTTP request pipeline.
+
+if(app.Environment.IsDevelopment())
+{
+    // as per https://edi.wang/post/2020/4/29/my-aspnet-core-route-debugger-middleware
+    app.UseRouteDebugger();
+
+}
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");

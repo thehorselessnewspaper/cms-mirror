@@ -6,6 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
@@ -155,6 +158,11 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             }
         }
 
+        private JsonContent GetJsonContent<T>(T content)
+        {
+            return JsonContent.Create(content);
+        }
+
         private async Task HandleScopedLogic(IServiceScope scope)
         {
             List<HostingModel.Tenant> hostingModelTenants = await GetcurrenthostingModelTenants(scope);
@@ -208,7 +216,10 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                 try
                 {
-                    var route = $"{tenant.TenantInfos.FirstOrDefault().Identifier}" + RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT + $"/GetByObjectId/{tenant.ObjectId}";
+                    string identifier = tenant.TenantInfos.FirstOrDefault().Identifier;
+
+                    // get the home page for the tenant
+                    var route = basePath + $"/{identifier}"; //  + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_TENANT + $"/GetByObjectId/{tenant.ObjectId}";
                     IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
                     var httpClient = clientFactory.CreateClient();
 
@@ -218,10 +229,16 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 					    {
 						    Headers =
 			                {
-				                { HeaderNames.Accept, "application/json" },
+				                { HeaderNames.Accept, "text/html" },
 				                { HeaderNames.UserAgent, "HorselessNewspaper" }
 			                }
 					    };
+
+                    var response = await httpClient.SendAsync(httpRequestMessage);
+                    var responseContent = response.Content;
+                    response.EnsureSuccessStatusCode();
+
+                    /// TODO validate the home page of the tenant in additional ways
                     ret = true;
                 }
                 catch (Exception e)
@@ -334,13 +351,38 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                         try
                         {
-                            var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(tenantUpdateScope);
-
+                            IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
+                            var httpClient = clientFactory.CreateClient();
+                            
                             // this has to be posted to the tenant enabled endpoint
                             // once routing for the tenant is active
                             // otherwise these entities are inserted in the context
                             // of the management tenant
                             // var insertResult = await contentModelTenantQuery.Create(mergeEntity);
+
+                            string identifier = originEntity.TenantInfos.FirstOrDefault().Identifier;
+                            var baseUri = originEntity.TenantInfos.FirstOrDefault().TenantBaseUrl;
+
+                            // var route = baseUri +  $"/{identifier}/" + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_TENANT + $"/Create";
+                            var route = baseUri + $"/{identifier}/" + $"api/Tenant/Create";
+                            //var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
+                            //{
+                            //    Content = GetJsonContent(mergeEntity),
+                            //    Headers =
+                            //{
+                            //    { HeaderNames.Accept, "application/json" },
+                            //    { HeaderNames.UserAgent, "HorselessNewspaper" }
+                            //}
+                            //};
+
+                            //var postResponse = await httpClient.PostAsync(postRequest);
+
+                            var newTenantJson = JsonSerializer.Serialize(mergeEntity);
+                            var requestContent = new StringContent(newTenantJson, Encoding.UTF8, "application/json");
+                            var postResponse = await httpClient.PostAsync(route, requestContent);
+                            var responseContent = await postResponse.Content.ReadAsStringAsync();
+                            postResponse.EnsureSuccessStatusCode();
+
                             _logger.LogInformation($"inserted new undeployed tenant {originEntity.DisplayName}");
                         }
                         catch (Exception e)
@@ -358,16 +400,6 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     var updatedTenants = await this.GetCurrentContentModelTenants(scope);
 
                     _logger.LogInformation($"read {updatedTenants.Count()} content model tenant records");
-
-
-                    // TODO 
-                    // handle multiplicity of TenantInfo per Tenant
-                    // enables tenants of tenants
-                    //var inMemoryStoreEntity = new HorselessTenantInfo(hostingModelTenantInfo);
-                    //var inMemoryStoreUpdated = await inMemoryStores.TryAddAsync(inMemoryStoreEntity);
-                    //_logger.LogInformation($"in memory tenant store updated with tenant: {inMemoryStoreEntity.Payload.DisplayName}");
-
-                    //await UpdateMultiTenantInMemoryStore(innerScope, inMemoryStores, mergeEntity);
 
                 }
                 catch (Exception e)

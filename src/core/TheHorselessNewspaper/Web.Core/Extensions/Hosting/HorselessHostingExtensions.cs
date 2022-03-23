@@ -83,8 +83,16 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
                 name: "Authentication",
                 pattern: "{area:exists}/{controller=KeycloakController}/{action=Signin}/{id?}");
 
+                options.MapControllerRoute(
+                  name: "default",
+                  pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                options.MapControllerRoute(
+                  name: "multitenantdefault",
+                  pattern: "{tenant}/{controller}/{action}");
 
 
+                options.MapControllers();
 
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("{__tenant__}/{area:exists}/{controller=Home}/{action=Index}");
 
@@ -92,15 +100,10 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("{__tenant__}/{**slug}");
 
-                options.MapControllerRoute(
-                  name: "default",
-                  pattern: "{controller=Home}/{action=Index}/{id?}");
-
                 //options.MapControllerRoute(
                 //name: "HorselessCMS",
                 //pattern: "{controller=HorselessCMS}/{action=ViewTemplate}/{id?}");
 
-                options.MapControllers();
 
             });
 

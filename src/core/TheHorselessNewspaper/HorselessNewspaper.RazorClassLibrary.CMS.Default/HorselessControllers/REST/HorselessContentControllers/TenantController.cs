@@ -11,22 +11,45 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
     [ApiController]
-    [Route(RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_TENANT)]
-    public class TenantRESTController : ControllerBase,
+    // [Route(RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_TENANT)]
+    [Route("{tenant}/api/[controller]")]
+    public class TenantController : ControllerBase,
         IRESTContentController<Tenant>
     {
 
         public IContentCollectionService<IQueryableContentModelOperator<Tenant>, Tenant> _contentCollectionService { get; set; }
         public ITenantInfo CurrentTenant { get; set; }
 
-        public TenantRESTController(IContentCollectionService<IQueryableContentModelOperator<Tenant>,
+        public TenantController(IContentCollectionService<IQueryableContentModelOperator<Tenant>,
            Tenant> contentCollectionService, ITenantInfo tenantInfo)
         {
             _contentCollectionService = contentCollectionService;
             CurrentTenant = tenantInfo;
         }
 
-        [HttpPost("Create", Name = "[controller]_[action]")]
+        //[HttpPost("Create")]
+        //[Consumes("application/json")]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Tenant))]
+        //[ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Tenant))]
+        //public async Task<ActionResult<Tenant>> Create(string tenant, Tenant contentCollection)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    try
+        //    {
+        //        var createResult = await _contentCollectionService.Create(contentCollection);
+        //        return Ok(createResult);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+
+        [HttpPost("Create")]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Tenant))]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Tenant))]
