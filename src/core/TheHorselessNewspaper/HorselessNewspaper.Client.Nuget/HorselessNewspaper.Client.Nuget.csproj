@@ -20,7 +20,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.4.220315.1" />
+		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.4.220323.2" />
 		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
 		<PackageReference Include="NuGet.Common" Version="6.1.0" />

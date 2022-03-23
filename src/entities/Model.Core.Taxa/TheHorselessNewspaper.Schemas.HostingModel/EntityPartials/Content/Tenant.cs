@@ -65,7 +65,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         [ForeignKey("TargetTenantId")]
         [InverseProperty(nameof(Tenant.TenantIdentifierStrategy))]
-        public Tenant TargetTenant { get; set; }
+        public Tenant? TargetTenant { get; set; }
 
         [InverseProperty(nameof(TenantIdentifierStrategyContainer.Strategy))]
         public virtual ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();

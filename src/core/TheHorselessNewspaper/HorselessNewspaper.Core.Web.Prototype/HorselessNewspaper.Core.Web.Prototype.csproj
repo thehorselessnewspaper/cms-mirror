@@ -17,10 +17,10 @@
     <PackageReference Include="Edi.RouteDebugger" Version="1.3.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.3" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
-    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220315.1" />
+    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220323.2" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,6 +2,7 @@
 using Finbuckle.MultiTenant.Stores;
 using HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -346,7 +347,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                     using (var tenantUpdateScope = _services.CreateScope())
                     {
-
+                        HttpResponseMessage newTenantPostResponse;
+                        var responseContent = String.Empty;
                         // collect the content model tenants
 
                         try
@@ -379,18 +381,29 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                             var newTenantJson = JsonSerializer.Serialize(mergeEntity);
                             var requestContent = new StringContent(newTenantJson, Encoding.UTF8, "application/json");
-                            var postResponse = await httpClient.PostAsync(route, requestContent);
-                            var responseContent = await postResponse.Content.ReadAsStringAsync();
-                            postResponse.EnsureSuccessStatusCode();
+                            newTenantPostResponse = await httpClient.PostAsync(route, requestContent);
+                            responseContent = await newTenantPostResponse.Content.ReadAsStringAsync();
+                            newTenantPostResponse.EnsureSuccessStatusCode();
 
                             _logger.LogInformation($"inserted new undeployed tenant {originEntity.DisplayName}");
                         }
                         catch (Exception e)
                         {
                             _logger.LogError($"problem inserting new content model tenant record {e.Message}");
+
+
                             if (e.InnerException != null)
                             {
                                 _logger.LogError($"problem inserting new content model tenant record {e.InnerException.Message}");
+                            }
+
+                            if (String.IsNullOrEmpty(responseContent))
+                            {
+                                var details = JsonSerializer.Deserialize<ProblemDetails>(responseContent);
+                                if (details != null)
+                                {
+                                    _logger.LogError($"problem details supplied: {details.Title} - {details.Detail}");
+                                }
                             }
                         }
 
