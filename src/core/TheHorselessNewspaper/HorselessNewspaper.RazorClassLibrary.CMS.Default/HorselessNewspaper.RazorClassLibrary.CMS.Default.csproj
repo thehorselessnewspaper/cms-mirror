@@ -18,10 +18,6 @@
 
 	</PropertyGroup>
 
-	<ItemGroup>
-		<!-- exclude angular dev assets from razor class library -->
-		<Content Remove="angular\**\*" />
-	</ItemGroup>
 	<PropertyGroup>
 		<!-- Include symbol files (*.pdb) in the built .nupkg -->
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
@@ -29,9 +25,14 @@
 	
 	<PropertyGroup>
 		<RazorCompileOnPublish>false</RazorCompileOnPublish>
-		<DefaultItemExcludes>angular/**/*.*;$(DefaultItemExcludes)</DefaultItemExcludes>
 		<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
 	</PropertyGroup>
+	
+	<ItemGroup>
+	  <Content Remove="angular\horseless-elements\tsconfig.json" />
+	  <Content Remove="angular\package.json" />
+		<Content Remove="angular" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
@@ -53,6 +54,11 @@
 		<Folder Include="typescript\Tenant\" />
 		<Folder Include="typescript\TenantSetup\" />
 		<Folder Include="wwwroot\js\horseless-elements\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="angular\horseless-elements\tsconfig.json" />
+	  <None Include="angular\package.json" />
 	</ItemGroup>
 
 
