@@ -51,7 +51,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Remove="angular\horseless-elements\tsconfig.json" />
+		<Content Remove="angular\" />
 
 	</ItemGroup>
 
