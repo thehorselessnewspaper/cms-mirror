@@ -1,0 +1,19 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- triage
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: swellaby.mirror-git-repository.mirror-git-repository-vsts-task.mirror-git-repository-vsts-task@1
+  displayName: 'Mirror Git Repository'
+  inputs:
+    sourceGitRepositoryUri: 'https://dev.azure.com/electricrucible/the%20horseless%20newspaper/_git/the%20horseless%20newspaper'
+    sourceVerifySSLCertificate: false
+    destinationGitRepositoryUri: 'https://github.com/thehorselessnewspaper/cms-mirror'
+    destinationGitRepositoryPersonalAccessToken: '$(destinationPat)'
