@@ -177,24 +177,24 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             // to the content model db
             // the migrated entity should == original entity
             // where == is based on uniquely constrained columns
-            foreach (var originEntity in hostingModelTenants.Where(w => w.IsPublished == true))
+            foreach (var publishedTenant in hostingModelTenants.Where(w => w.IsPublished == true))
             {
                 // filter existing merge targets
-                var existingMergeTarget = contentModelTenants.Where(r => r.Id == originEntity.Id).Any();
-                if (existingMergeTarget == false)
+                var isLiveTenant = contentModelTenants.Where(r => r.Id == publishedTenant.Id).Any();
+                if (isLiveTenant == false)
                 {
                     // validate the multitenant routing is working for this tenant
                     // database inserts specific to the tenant can only occur
                     // after tenant routing is available for a tenant
-                    var probeResult = await this.ProbeTenantRouting(originEntity);
+                    var probeResult = await this.ProbeTenantRouting(publishedTenant);
                     if (probeResult == true)
                     {
-                        await DeployPublishedTenant(scope, originEntity);
+                        await DeployPublishedTenant(scope, publishedTenant);
                     }
                 }
                 else
                 {
-                    await ValidateCaches(scope, inMemoryStores, contentModelTenants, originEntity);
+                    await ValidateCaches(scope, inMemoryStores, contentModelTenants, publishedTenant);
                 }
 
 
@@ -254,25 +254,33 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             return await Task.FromResult(ret);
         }
 
-        private async Task ValidateCaches(IServiceScope scope, IMultiTenantStore<HorselessTenantInfo>? inMemoryStores, List<ContentModel.Tenant> contentModelTenants, HostingModel.Tenant originEntity)
+        private async Task ValidateCaches(IServiceScope scope, IMultiTenantStore<HorselessTenantInfo>? inMemoryStores, List<ContentModel.Tenant> contentModelTenants, HostingModel.Tenant publishedTenant)
         {
-            // here because we are updating the in memory tenant cache
-            _logger.LogInformation($"found existing deployed tenant {originEntity.DisplayName}");
-
-            await UpdateMultiTenantInMemoryStore(scope, inMemoryStores, originEntity);
-
-
-            // validate tenant cache updated
-            // get the tenant cache
-            var tenantCache = scope.ServiceProvider.GetRequiredService<IHorselessCacheProvider<Guid, ContentModel.Tenant>>();
-            _logger.LogInformation($"loaded tenant cache service");
-
-            foreach (var contentModelTenant in contentModelTenants.Where(r => r.Id == originEntity.Id))
+            try
             {
-                _logger.LogInformation($"updating tenant cache");
-                tenantCache.Set(contentModelTenant.Id, contentModelTenant);
-                _logger.LogInformation($"tenant cache updated with tenant={contentModelTenant.DisplayName}");
+                // here because we are updating the in memory tenant cache
+                _logger.LogInformation($"found existing deployed tenant {publishedTenant.DisplayName}");
+
+                await UpdateMultiTenantInMemoryStore(scope, inMemoryStores, publishedTenant);
+
+
+                // validate tenant cache updated
+                // get the tenant cache
+                var tenantCache = scope.ServiceProvider.GetRequiredService<IHorselessCacheProvider<Guid, ContentModel.Tenant>>();
+                _logger.LogInformation($"loaded tenant cache service");
+
+                var currentTenants = await GetCurrentContentModelTenants(scope);
+                var liveTenant = currentTenants.Where(w => w.Id.Equals(publishedTenant.Id)).FirstOrDefault();
+                tenantCache.Set(publishedTenant.Id, liveTenant);
             }
+            catch (Exception e)
+            {
+
+                _logger.LogError($"problem validating caches: {e.Message}");
+                throw new Exception("problem validating caches", e);
+            }
+
+
         }
 
         private async Task DeployPublishedTenant(IServiceScope scope, HostingModel.Tenant originEntity)
