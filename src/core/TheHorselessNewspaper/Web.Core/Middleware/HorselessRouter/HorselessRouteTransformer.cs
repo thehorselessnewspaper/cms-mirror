@@ -36,6 +36,7 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
 
         HorselessSession currentHorselessSession;
 
+
         /// <summary>
         /// you probably don't want this constructor to execute
         /// it might mean you failed to register a dependency
@@ -61,6 +62,8 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
             logger.LogTrace("dynamic route transformer initialized normally");
             this.multitenantStore = multitenantStore;
             this.currentHorselessSession = horselessSession;
+            // this.tenantInfo = tenantinfo;
+
         }
 
 
@@ -75,34 +78,41 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
             // this code runs each time a cms controlled route is http requested
             _logger.LogTrace($"handling route path {httpContext.Request.Path}: IsActive: {this.IsActive}");
 
-            if (IsActive)
+            try
             {
-                var cachedTenants = await this.multitenantStore.GetAllAsync();
-                if (cachedTenants.Count() > 1)
+                if (IsActive)
                 {
-                    int i = 0;
-                    var tenant = values["__tenant__"] as string;
-                    if(cachedTenants.Where(w => w.Identifier.ToLower().Equals(tenant.ToLower())).Any())
+                    var cachedTenants = await this.multitenantStore.GetAllAsync();
+                    if (cachedTenants.Count() > 1)
                     {
-                        // here because this is a request for a published tenant
-                        return values;
+                        int i = 0;
+                        var tenant = values["__tenant__"] as string;
+                        if (cachedTenants.Where(w => w.Identifier.ToLower().Equals(tenant.ToLower())).Any())
+                        {
+                            // here because this is a request for a published tenant
+                            return values;
+                        }
+                        else
+                        {
+
+                            // as per https://github.com/dotnet/AspNetCore.Docs/issues/12997
+                            // a per https://github.com/dotnet/AspNetCore.Docs/issues/12997
+                            return null;
+                        }
                     }
-                    else
-                    {
-                        // here because this is a request for an unpublished tenant
-                        // handle with a redirect to tenant not found page
-                        values["controller"] = "Home";
-                        values["action"] = "Index";
-                        return values;
-                    }
+
+                    var ctx = _httpContextAccessor.HttpContext;
+                    // this really calls for some fancy rules engine eventually
+
+                    bool hasNoTenants = await GetTenantCount() == 0;
+                    bool isAdminPrincipal = ctx.HasDevopsAdminClaims(new List<string>() { "admin", "owner" });
+                    // values = HandleInitialTenantSetup(values, hasNoTenants, isAdminPrincipal);
                 }
+            }
+            catch (Exception e)
+            {
 
-                var ctx = _httpContextAccessor.HttpContext;
-                // this really calls for some fancy rules engine eventually
-
-                bool hasNoTenants = await GetTenantCount() == 0;
-                bool isAdminPrincipal = ctx.HasDevopsAdminClaims(new List<string>() { "admin", "owner" });
-                // values = HandleInitialTenantSetup(values, hasNoTenants, isAdminPrincipal);
+                _logger.LogInformation($"exception transforming route {e.Message}");
             }
 
             return await ValueTask.FromResult(values);
