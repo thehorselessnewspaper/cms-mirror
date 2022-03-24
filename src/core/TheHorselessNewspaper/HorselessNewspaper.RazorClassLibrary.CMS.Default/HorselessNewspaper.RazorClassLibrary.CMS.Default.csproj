@@ -30,9 +30,8 @@
 	
 	<ItemGroup>
 	  <Content Remove="angular\horseless-elements\tsconfig.json" />
-	  <Content Remove="angular\package.json" />
-		<Content Remove="angular" />
 	</ItemGroup>
+	
 
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
@@ -57,8 +56,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="angular\horseless-elements\tsconfig.json" />
-	  <None Include="angular\package.json" />
+	  <None Include="angular\horseless-elements\tsconfig.json">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 
@@ -72,6 +72,12 @@
 	<ItemGroup>
 		<ProjectReference Include="..\HorselessNewspaper.Web.Core.Auth.Keycloak\HorselessNewspaper.Web.Core.Auth.Keycloak.csproj" />
 		<ProjectReference Include="..\Web.Core\HorselessNewspaper.Web.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="angular\package.json">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 
