@@ -27,28 +27,6 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             CurrentTenant = tenantInfo;
         }
 
-        //[HttpPost("Create")]
-        //[Consumes("application/json")]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Tenant))]
-        //[ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Tenant))]
-        //public async Task<ActionResult<Tenant>> Create(string tenant, Tenant contentCollection)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    try
-        //    {
-        //        var createResult = await _contentCollectionService.Create(contentCollection);
-        //        return Ok(createResult);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
-
         [HttpPost("Create")]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Tenant))]

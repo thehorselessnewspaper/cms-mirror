@@ -17,13 +17,19 @@
 
 
 	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- exclude angular dev assets from razor class library -->
+		<Content Remove="angular\**\*" />
+	</ItemGroup>
 	<PropertyGroup>
 		<!-- Include symbol files (*.pdb) in the built .nupkg -->
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 	</PropertyGroup>
+	
 	<PropertyGroup>
 		<RazorCompileOnPublish>false</RazorCompileOnPublish>
-		<DefaultItemExcludes>angula/**;$(DefaultItemExcludes)</DefaultItemExcludes>
+		<DefaultItemExcludes>angular/**/*.*;$(DefaultItemExcludes)</DefaultItemExcludes>
 		<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
 	</PropertyGroup>
 
