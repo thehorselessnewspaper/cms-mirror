@@ -29,11 +29,6 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
-	  <Content Remove="angular\horseless-elements\tsconfig.json" />
-	</ItemGroup>
-	
-
-	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.3" />
 		<PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.8" />
@@ -56,11 +51,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="angular\horseless-elements\tsconfig.json">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </None>
-	</ItemGroup>
+		<Content Include="angular">
+			<Pack>false</Pack>
+		</Content>
 
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.4.220323.3" />
@@ -72,12 +67,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\HorselessNewspaper.Web.Core.Auth.Keycloak\HorselessNewspaper.Web.Core.Auth.Keycloak.csproj" />
 		<ProjectReference Include="..\Web.Core\HorselessNewspaper.Web.Core.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Content Update="angular\package.json">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Content>
 	</ItemGroup>
 
 
