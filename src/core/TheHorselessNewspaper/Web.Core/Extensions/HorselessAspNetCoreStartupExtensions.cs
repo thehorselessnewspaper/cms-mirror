@@ -96,31 +96,31 @@ namespace HorselessNewspaper.Web.Core.Extensions
                 // TODO bugfix required
                 // can only discover HorselessViews folder if it already has views
 
-                var currentDir = Directory.GetCurrentDirectory();
-                Matcher matcher = new();
-                matcher.AddInclude($"/**/*Views/**/*.cshtml");
-                foreach (var result in matcher.GetResultsInFullPath(@"..\"))
-                {
-                    var split = result.Split(Path.DirectorySeparatorChar, 255);
-                    var path = string.Empty;
-                    foreach (var trimmed in split.Take(split.Count() - 1))
-                    {
-                        path = path + trimmed + "/";
-                    }
+                //var currentDir = Directory.GetCurrentDirectory();
+                //Matcher matcher = new();
+                //matcher.AddInclude($"/**/*Views/**/*.cshtml");
+                //foreach (var result in matcher.GetResultsInFullPath(@"..\"))
+                //{
+                //    var split = result.Split(Path.DirectorySeparatorChar, 255);
+                //    var path = string.Empty;
+                //    foreach (var trimmed in split.Take(split.Count() - 1))
+                //    {
+                //        path = path + trimmed + "/";
+                //    }
 
-                    if (path.Contains("shared", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        var sharedPath = $"{path}" + @"/{0}" + RazorViewEngine.ViewExtension;
-                        o.ViewLocationFormats.Add(sharedPath);
-                    }
-                    else
-                    {
-                        string item = $"{path}" + @"{1}/{0}" + RazorViewEngine.ViewExtension;
-                        o.ViewLocationFormats.Add(item);
-                    }
+                //    if (path.Contains("shared", StringComparison.InvariantCultureIgnoreCase))
+                //    {
+                //        var sharedPath = $"{path}" + @"/{0}" + RazorViewEngine.ViewExtension;
+                //        o.ViewLocationFormats.Add(sharedPath);
+                //    }
+                //    else
+                //    {
+                //        string item = $"{path}" + @"{1}/{0}" + RazorViewEngine.ViewExtension;
+                //        o.ViewLocationFormats.Add(item);
+                //    }
 
 
-                }
+                //}
 
                 // view locations need to be specified with absolute paths
                 //o.ViewLocationFormats.Add
