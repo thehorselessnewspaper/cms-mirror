@@ -56,6 +56,10 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
             builder.UseODataQueryRequest();
 
             builder.UseCookiePolicy();
+
+            // as per https://docs.microsoft.com/en-us/aspnet/core/fundamentals/static-files?view=aspnetcore-6.0
+            builder.UseStaticFiles();
+
             builder.UseRouting();
             builder.UseCors();
             builder.UseMultiTenant();
@@ -64,10 +68,6 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 
 
             builder.UseHorselessTenantSetupMiddleware();
-
-            // as per https://docs.microsoft.com/en-us/aspnet/core/fundamentals/static-files?view=aspnetcore-6.0
-            builder.UseStaticFiles();
-
 
             builder.UseEndpoints(options =>
             {
