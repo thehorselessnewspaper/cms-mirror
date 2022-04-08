@@ -89,12 +89,33 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             return scope.ServiceProvider.GetRequiredService<IQueryableContentModelOperator<T>>();
         }
 
-        public Task StartAsync(CancellationToken cancellationToken)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
             // start the timer
             _logger.LogInformation("Timed Hosted Service running.");
 
-            return Task.CompletedTask;
+            // ensure databases exist
+            // TODO surface as a feature toggle
+            // hardcodes content and hosting physical db 
+            // as dependencies of tenantcache
+
+            try
+            {
+                using (var scope = _services.CreateScope())
+                {
+                    var contentModelOperator = GetQueryForContentEntity<ContentModel.Tenant>(scope);
+                    var hostingModelOperator = GetQueryForHostingEntity<HostingModel.Tenant>(scope);
+
+                    await contentModelOperator.EnsureDbExists();
+                    await hostingModelOperator.EnsureDbExists();
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning($"problem initializing databases {e.Message}");
+            }
+
+            return;
         }
 
         private async void HandleTimerElapsed(object? state)
