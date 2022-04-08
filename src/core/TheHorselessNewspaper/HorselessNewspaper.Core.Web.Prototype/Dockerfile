@@ -2,8 +2,9 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 6000:80
+EXPOSE 6001:443
+
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
@@ -25,11 +26,13 @@ COPY ["HorselessNewspaper.Core.Repositories/HorselessNewspaper.Core.Repositories
 COPY ["HorselessNewspaper.RazorClassLibrary.Keycloak.Default/HorselessNewspaper.RazorClassLibrary.Keycloak.Default.csproj", "HorselessNewspaper.RazorClassLibrary.Keycloak.Default/"]
 
 COPY ["Unit.Tests/HorselessNewspaper.SmokeTests/HorselessNewspaper.SmokeTests.csproj", "Unit.Tests/HorselessNewspaper.SmokeTests/"]
+COPY ["HorselessNewspaper.Core.Web.SmokeTests/HorselessNewspaper.Core.Web.SmokeTests.csproj", "HorselessNewspaper.Core.Web.SmokeTests/"]
 
 COPY ["HorselessNewspaper.Web.Core.Extensions.MSSQLServer/HorselessNewspaper.Web.Core.Extensions.MSSQLServer.csproj", "HorselessNewspaper.Web.Core.Extensions.MSSQLServer/"]
 COPY ["HorselessNewspaper.Web.Core.Extensions.MySQL/HorselessNewspaper.Web.Core.Extensions.MySQL.csproj", "HorselessNewspaper.Web.Core.Extensions.MySQL/"]
 COPY ["HorselessNewspaper.Web.Core.Services.Query/HorselessNewspaper.Web.Core.Services.Query.csproj", "HorselessNewspaper.Web.Core.Services.Query/"]
 
+RUN dotnet restore "TheHorselessCore.sln"
 RUN dotnet restore "HorselessNewspaper.Core.Web.Prototype/HorselessNewspaper.Core.Web.Prototype.csproj"
 COPY . .
 WORKDIR "/src/HorselessNewspaper.Core.Web.Prototype"

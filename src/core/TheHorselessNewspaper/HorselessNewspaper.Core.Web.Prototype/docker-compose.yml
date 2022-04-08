@@ -1,0 +1,113 @@
+version: '3.9'
+
+volumes:
+  keycloak_postgres_data:
+      driver: local
+
+                  
+                 
+         
+ 
+services:
+  keycloakpostgres:
+    image: postgres
+    #image: postgres:13.5
+    hostname: keycloakpostgres.local
+    volumes:
+        - keycloak_postgres_data:/var/lib/postgresql/data
+    environment:
+        POSTGRES_DB: keycloak
+        POSTGRES_USER: keycloak
+        POSTGRES_PASSWORD: password
+    ports:
+      - "5435:5432"
+    networks:
+      - horselesswan
+  keycloak.local:
+      image: quay.io/keycloak/keycloak-x:latest  
+      hostname: keycloak.local
+      volumes:
+        - ./config/keycloak/horseless-infrastructure-realm-export.json:/tmp/horselessrealm.json  
+        - ./https/keycloak/servercert.pem:/etc/x509/https/tls.crt:z
+        - ./https/keycloak/serverkey.pem:/etc/x509/https/tls.key:z 
+        #- ./data:/opt/keycloak/data:z 
+      command: start --auto-build --hostname=localhost:8443 \ 
+               --https-certificate-file=/etc/x509/https/tls.crt \
+               --https-certificate-key-file=/etc/x509/https/tls.key
+               --db=postgres
+               --db-url-host=keycloakpostgres.local \
+               --db-url-database=keycloak \
+               --db-username=keycloak \
+               --db-password=password \ 
+               --db-schema=public # start-dev
+      # environment configuration for keycloak-x (quarkus) as per https://blog.codecentric.de/en/2021/12/keycloak-keycloak-x/
+      environment:
+        KEYCLOAK_IMPORT: /tmp/horselessrealm.json -Dkeycloak.profile.feature.upload_scripts=enabled  
+        DB_VENDOR: postgres
+        DB_ADDR: keycloakpostgres.local
+        DB_DATABASE: keycloak
+        DB_USER: keycloak
+        DB_SCHEMA: public
+        DB_PASSWORD: password
+        KEYCLOAK_USER: admin
+        KEYCLOAK_PASSWORD: Pa55w0rd
+        # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
+        JDBC_PARAMS: "ssl=false"
+
+        # keycloak-x distribution variables
+        # as per https://github.com/keycloak/keycloak-community/blob/main/design/keycloak.x/configuration.md
+        KEYCLOAK_ADMIN: admin
+        KEYCLOAK_ADMIN_PASSWORD: Pa55w0rd
+        db: postgres
+        kc.db.url.host: keycloakpostgres.local
+        kc.db.url.database: keycloak
+        db.username: admin
+        db.password: Pa55w0rd
+        http-host: 0.0.0.0
+#        db.url: jdbc:postgresql://keycloakpostgres.local/keycloak
+      ports:
+        - 8080:8080
+        - 8443:8443
+      depends_on:
+        - keycloakpostgres
+      networks:
+        - horselesswan
+  horselessnewspaper.local:
+    image: horselessnewspaper.local
+    hostname: horselessnewspaper.local
+    ports:
+      - 6000:6000
+      - 6001:6001
+    networks:
+        - horselesswan
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:6001;http://+:6000
+      - Kestrel__Certificates__Default__Path=/https/servercert.pfx
+      - Kestrel__Certificates__Default__Password=pa55word  
+      - TenantFilesystemPath=assetroot
+      - Keycloak__SignoutRedirectUrl=https://horselessnewspaper.local
+      - Keycloak__Realm=http://keycloak.local:8080/auth/realms/horseless-infrastructure
+      - Keycloak__PostLogoutRedirectUri=https://horselessnewspaper.local
+      - Keycloak__OIDCLogoutUri=http://keycloak.local:8080/auth/realms/horseless-infrastructure/protocol/openid-connect/logout
+      - Keycloak__MetaData=http://keycloak.local:8080/auth/realms/horseless-infrastructure/.well-known/openid-configuration
+      - Keycloak__Issuer=http://keycloak.local:8080/auth/realms/horseless-infrastructure
+      - Keycloak__ClientSecret=chZl0vdUjQJ1NOmSGigflIuKYVnxzjap
+      - Keycloak__ClientId=horseless-prototype
+      - Keycloak__Authority=http://keycloak.local:8080/auth/realms/horseless-infrastructure
+      - Keycloak__Audience=horseless-prototype
+      - FeatureManagement__TenantAdminUI=false
+      - FeatureManagement__ContentEditorUI=false
+    volumes:
+#      - ./https/:/https/
+       - ./https/:/https/
+    depends_on:
+      - keycloak.local    
+    build:
+      context: ../
+      dockerfile: HorselessNewspaper.Core.Web.Prototype/Dockerfile
+
+networks: 
+    default: 
+    horselesswan: 
+        name: horselesswan
