@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using System.Linq.Expressions;
 using TheHorselessNewspaper.HostingModel.Context;
@@ -218,6 +220,28 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             }
 
             return relatedEntities;
+        }
+
+        public async Task EnsureDbExists()
+        {
+            try
+            {
+
+                if (!((DbContext)_context).Database.GetService<IRelationalDatabaseCreator>().Exists())
+                {
+                    _logger.LogInformation($"initializing database");
+                    var dbSet = await ((DbContext)_context).Database.EnsureCreatedAsync();
+                }
+                else
+                {
+                    _logger.LogInformation($"database exists");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"content collections reset exception: {ex.Message}");
+            }
         }
     }
 }

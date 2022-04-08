@@ -55,6 +55,8 @@ namespace TheHorselessNewspaper.HostingModel.Context
 
         Task ResetDb();
 
+        Task EnsureDbExists();
+
     }
 
 

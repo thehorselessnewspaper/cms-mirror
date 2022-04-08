@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using System.Linq.Expressions;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query.Extensions;
@@ -33,6 +35,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 throw new Exception(message, e);
             }
         }
+
 
         /// <summary>
         /// reset and delete database
@@ -279,5 +282,38 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             return relatedEntities;
         }
 
+        /// <summary>
+        /// support db must exist patterns 
+        /// as per https://www.ryadel.com/en/entity-framework-core-migrations-error-database-already-exists-fix-migrate-ef-dotnet/
+        /// 
+        /// note initializing db via entity framework core this way
+        /// precludes subsequent use of dbContext.Database.Migrate()
+        /// 
+        /// cpmplexities as per 
+        /// - https://github.com/dotnet/efcore/issues/2167
+        /// - https://docs.microsoft.com/en-us/ef/ef6/modeling/code-first/migrations/existing-database?redirectedfrom=MSDN
+        /// </summary>
+        /// <returns></returns>
+        public async Task EnsureDbExists()
+        {
+            try
+            {
+
+                if (!((DbContext)_context).Database.GetService<IRelationalDatabaseCreator>().Exists())
+                {
+                    _logger.LogInformation($"initializing database");
+                    var dbSet = await ((DbContext)_context).Database.EnsureCreatedAsync();
+                }
+                else
+                {
+                    _logger.LogInformation($"database exists");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"content collections reset exception: {ex.Message}");
+            }
+        }
     }
 }

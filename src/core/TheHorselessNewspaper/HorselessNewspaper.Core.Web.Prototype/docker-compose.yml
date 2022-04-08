@@ -72,6 +72,29 @@ services:
         - keycloakpostgres
       networks:
         - horselesswan
+
+  #hosting-db:
+  #  image: "mcr.microsoft.com/mssql/server"
+  #  hostname: hostingdb.local
+  #  environment:
+  #      SA_PASSWORD: "Pa55w0rd"
+  #      ACCEPT_EULA: "Y"
+  #  depends_on:
+  #      - keycloak.local
+  #  networks:
+  #      - horselesswan
+
+  content-db:
+    image: "mcr.microsoft.com/mssql/server"
+    hostname: contentdb.local
+    environment:
+        SA_PASSWORD: "Pa55w0rd"
+        ACCEPT_EULA: "Y"
+    depends_on:
+        - keycloak.local
+    networks:
+        - horselesswan
+
   horselessnewspaper.local:
     image: horselessnewspaper.local
     hostname: horselessnewspaper.local
@@ -102,7 +125,7 @@ services:
 #      - ./https/:/https/
        - ./https/:/https/
     depends_on:
-      - keycloak.local    
+      - content-db   
     build:
       context: ../
       dockerfile: HorselessNewspaper.Core.Web.Prototype/Dockerfile

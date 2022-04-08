@@ -179,7 +179,11 @@ namespace Horseless.HostingModel.SmokeTests
 
         protected async Task<IEnumerable<T>> Delete<T>(Expression<Func<T, bool>> query, bool softDelete = true, bool whatIf = true) where T : class, IContentRowLevelSecured
         {
+
             var queryProvider = this.GetIQueryableContentModelOperator<IQueryableContentModelOperator<T>>();
+
+            // sideband test of database creation logic
+            await queryProvider.EnsureDbExists();
             var result = await queryProvider.Delete(query, false, false); ;
             return result;
         }

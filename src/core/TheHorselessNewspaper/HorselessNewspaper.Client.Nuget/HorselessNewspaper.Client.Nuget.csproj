@@ -8,6 +8,12 @@
 		<!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
 		<!--<CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>-->
 	</PropertyGroup>
+
+	<!-- as per https://docs.microsoft.com/en-us/dotnet/core/compatibility/sdk/6.0/duplicate-files-in-output -->
+	<PropertyGroup>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
+	
 	<PropertyGroup>
 		<!-- Include symbol files (*.pdb) in the built .nupkg -->
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>

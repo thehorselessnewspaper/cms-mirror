@@ -135,6 +135,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 {
                     // collect the content model tenants
                     var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(innerScope);
+                    
                     IEnumerable<ContentModel.Tenant> tenantList = await contentModelTenantQuery.Read(r => r.IsSoftDeleted == false);
 
                     foreach (var contentModelTenant in tenantList)
