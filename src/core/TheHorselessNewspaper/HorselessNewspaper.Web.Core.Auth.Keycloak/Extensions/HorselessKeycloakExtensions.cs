@@ -64,6 +64,14 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
             })
             .AddJwtBearer(o =>
             {
+                // handle development vertificate validation check skip
+                // TODO switch via feature toggle
+                // as per https://stackoverflow.com/questions/48550837/net-core-jwtbearer-skip-self-signed-certificate-validation-for-local-communicat
+                o.BackchannelHttpHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = delegate { return true; }                
+                };
+
                 // my API name as defined in Config.cs - new ApiResource... or in DB ApiResources table
                 o.Audience = configuration[KeycloakAuthOptions.AudienceConfigKey];
                 // URL of Auth server(API and Auth are separate projects/applications),
@@ -85,6 +93,13 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
             })
             .AddOpenIdConnect(opts =>
             {
+                // handle development vertificate validation check skip
+                // TODO switch via feature toggle
+                // as per https://stackoverflow.com/questions/48550837/net-core-jwtbearer-skip-self-signed-certificate-validation-for-local-communicat
+                opts.BackchannelHttpHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = delegate { return true; }
+                };
 
                 opts.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 //opts.SignedOutCallbackPath = "/";

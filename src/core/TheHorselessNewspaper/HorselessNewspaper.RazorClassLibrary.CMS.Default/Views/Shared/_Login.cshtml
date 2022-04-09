@@ -20,7 +20,7 @@
                 <form action="/signin" method="post">
                     <input type="hidden" name="provider" value="@scheme.Name" />
                     <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
-
+                    
                     <button class="btn btn-success m-1" type="submit">Connect using @scheme.DisplayName</button>
                 </form>
             }

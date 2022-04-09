@@ -1,12 +1,16 @@
 version: '3.9'
 
+# prototype the docker compose stack 
+# required to boot the cms
+# 
+# most services are defined as using network=horselesswan
+# some services also have nics on network=default
+#
+# assumes base http(s) url of localhost:portnumber
+
 volumes:
   keycloak_postgres_data:
       driver: local
-
-                  
-                 
-         
  
 services:
   keycloakpostgres:
@@ -31,7 +35,7 @@ services:
         - ./https/keycloak/servercert.pem:/etc/x509/https/tls.crt:z
         - ./https/keycloak/serverkey.pem:/etc/x509/https/tls.key:z 
         #- ./data:/opt/keycloak/data:z 
-      command: start --auto-build --hostname=localhost:8443 \ 
+      command: start --auto-build --hostname=lataxlab.foray.ataxlab.com:8443 \ 
                --https-certificate-file=/etc/x509/https/tls.crt \
                --https-certificate-key-file=/etc/x509/https/tls.key
                --db=postgres
@@ -73,19 +77,8 @@ services:
       networks:
         - horselesswan
 
-  #hosting-db:
-  #  image: "mcr.microsoft.com/mssql/server"
-  #  hostname: hostingdb.local
-  #  environment:
-  #      SA_PASSWORD: "Pa55w0rd"
-  #      ACCEPT_EULA: "Y"
-  #  depends_on:
-  #      - keycloak.local
-  #  networks:
-  #      - horselesswan
-
   content-db:
-    image: "mcr.microsoft.com/mssql/server"
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
     hostname: contentdb.local
     environment:
         SA_PASSWORD: "Pa55w0rd"
@@ -94,6 +87,7 @@ services:
         - keycloak.local
     networks:
         - horselesswan
+        - default
 
   horselessnewspaper.local:
     image: horselessnewspaper.local
@@ -103,21 +97,28 @@ services:
       - 6001:6001
     networks:
         - horselesswan
+ 
+
+    dns:
+      - 192.168.10.137
+      - 8.8.8.8
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=https://+:6001;http://+:6000
       - Kestrel__Certificates__Default__Path=/https/servercert.pfx
       - Kestrel__Certificates__Default__Password=pa55word  
       - TenantFilesystemPath=assetroot
-      - Keycloak__SignoutRedirectUrl=https://horselessnewspaper.local
-      - Keycloak__Realm=http://keycloak.local:8080/auth/realms/horseless-infrastructure
-      - Keycloak__PostLogoutRedirectUri=https://horselessnewspaper.local
-      - Keycloak__OIDCLogoutUri=http://keycloak.local:8080/auth/realms/horseless-infrastructure/protocol/openid-connect/logout
-      - Keycloak__MetaData=http://keycloak.local:8080/auth/realms/horseless-infrastructure/.well-known/openid-configuration
-      - Keycloak__Issuer=http://keycloak.local:8080/auth/realms/horseless-infrastructure
-      - Keycloak__ClientSecret=chZl0vdUjQJ1NOmSGigflIuKYVnxzjap
+      - ConnectionStrings__HostingModelConnection=Data Source=contentdb.local;Database=THLNP_Hosting;Integrated Security=false;User ID=sa;Password=Pa55w0rd;
+      - ConnectionStrings__ContentModelConnection=Data Source=contentdb.local;Database=THLNP_Content;Integrated Security=false;User ID=sa;Password=Pa55w0rd;
+      - Keycloak__SignoutRedirectUrl=https://lataxlab.foray.ataxlab.com:6001
+      - Keycloak__Realm=https://lataxlab.foray.ataxlab.com:8443/realms/horseless-infrastructure
+      - Keycloak__PostLogoutRedirectUri=https://lataxlab.foray.ataxlab.com:6001
+      - Keycloak__OIDCLogoutUri=https://lataxlab.foray.ataxlab.com:8443/realms/horseless-infrastructure/protocol/openid-connect/logout
+      - Keycloak__MetaData=https://lataxlab.foray.ataxlab.com:8443/realms/horseless-infrastructure/.well-known/openid-configuration
+      - Keycloak__Issuer=https://lataxlab.foray.ataxlab.com:8443/realms/horseless-infrastructure
+      - Keycloak__ClientSecret=3GJHXbZj152AkTV38qE0Qw3KwZpJjKUk
       - Keycloak__ClientId=horseless-prototype
-      - Keycloak__Authority=http://keycloak.local:8080/auth/realms/horseless-infrastructure
+      - Keycloak__Authority=https://lataxlab.foray.ataxlab.com:8443/auth/realms/horseless-infrastructure
       - Keycloak__Audience=horseless-prototype
       - FeatureManagement__TenantAdminUI=false
       - FeatureManagement__ContentEditorUI=false
@@ -134,3 +135,4 @@ networks:
     default: 
     horselesswan: 
         name: horselesswan
+        

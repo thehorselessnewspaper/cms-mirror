@@ -99,6 +99,13 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             // hardcodes content and hosting physical db 
             // as dependencies of tenantcache
 
+            await EnsurePhysicalDatabases();
+
+            return;
+        }
+
+        private async Task EnsurePhysicalDatabases()
+        {
             try
             {
                 using (var scope = _services.CreateScope())
@@ -114,13 +121,20 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             {
                 _logger.LogWarning($"problem initializing databases {e.Message}");
             }
-
-            return;
         }
 
         private async void HandleTimerElapsed(object? state)
         {
             _timer.Change(Timeout.Infinite, Timeout.Infinite);
+
+            // ensure the db exists
+            // this should actually be handled by polly
+            // due to db container startup lag in 
+            // dockerized environments
+            if (!this.CurrentHostingModelTenants.Any())
+            {
+                await EnsurePhysicalDatabases();
+            }
 
             await SetCurrentContentModelTenants();
 

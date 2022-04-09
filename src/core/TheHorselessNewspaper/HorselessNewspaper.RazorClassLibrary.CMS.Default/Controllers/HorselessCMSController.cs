@@ -15,6 +15,7 @@ using System.Security.Claims;
 using System.Web;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HorselessNewspaper.Web.Core.ScopedServices.Contexts;
+using Microsoft.Extensions.Logging;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
 {
@@ -57,14 +58,16 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
         private ITenantInfo CurrentTenant { get; set; }
 
         private readonly IHorselessTenantContext tenantContext;
+        private readonly ILogger<HorselessCMSController> logger;
 
         private IKeycloakAuthOptions AuthOptions { get; set; }
 
-        public HorselessCMSController(IKeycloakAuthOptions keycloakAuthOptions, ITenantInfo tenant, IHorselessTenantContext tenantContext)
+        public HorselessCMSController(IKeycloakAuthOptions keycloakAuthOptions, ITenantInfo tenant, IHorselessTenantContext tenantContext, ILogger<HorselessCMSController> logger)
         {
             this.AuthOptions = keycloakAuthOptions;
             this.CurrentTenant = tenant;
             this.tenantContext = tenantContext;
+            this.logger = logger;
         }
 
         [HttpGet("~/SignIn")]
@@ -98,11 +101,13 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
             // IOException: IDX20804: Unable to retrieve document from: 'System.String'.
             try
             {
+                logger.LogInformation($"handling signin request return url = {returnUrl}, provider {provider}");
                 var challengeResult = Challenge(new AuthenticationProperties { RedirectUri = returnUrl }, provider);
                 return challengeResult;
             }
             catch(Exception ex)
             {
+                logger.LogWarning($"problem signinging in {ex.Message}");
                 return Redirect(returnUrl);
             }
         }
