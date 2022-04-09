@@ -663,7 +663,7 @@
     {
       "id": "270235d7-194b-4d6a-b1f4-3f9756bb3b4f",
       "clientId": "horseless-prototype",
-      "rootUrl": "https://localhost:8443",
+      "rootUrl": "",
       "adminUrl": "https://localhost:8443",
       "baseUrl": "",
       "surrogateAuthRequired": false,
@@ -672,10 +672,10 @@
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "https://localhost:8443/*"
+        "*"
       ],
       "webOrigins": [
-        "https://localhost:8443"
+        "*"
       ],
       "notBefore": 0,
       "bearerOnly": false,

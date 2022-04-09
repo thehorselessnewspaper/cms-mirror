@@ -35,7 +35,7 @@ services:
         - ./https/keycloak/servercert.pem:/etc/x509/https/tls.crt:z
         - ./https/keycloak/serverkey.pem:/etc/x509/https/tls.key:z 
         #- ./data:/opt/keycloak/data:z 
-      command: start --auto-build --hostname=lataxlab.foray.ataxlab.com:8443 \ 
+      command: start --auto-build --hostname=${KeycloakContainerHostName} \ 
                --https-certificate-file=/etc/x509/https/tls.crt \
                --https-certificate-key-file=/etc/x509/https/tls.key
                --db=postgres
@@ -100,7 +100,7 @@ services:
  
 
     dns:
-      - 192.168.10.137
+      - ${LocalDNS1}
       - 8.8.8.8
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
@@ -110,15 +110,15 @@ services:
       - TenantFilesystemPath=assetroot
       - ConnectionStrings__HostingModelConnection=Data Source=contentdb.local;Database=THLNP_Hosting;Integrated Security=false;User ID=sa;Password=Pa55w0rd;
       - ConnectionStrings__ContentModelConnection=Data Source=contentdb.local;Database=THLNP_Content;Integrated Security=false;User ID=sa;Password=Pa55w0rd;
-      - Keycloak__SignoutRedirectUrl=https://lataxlab.foray.ataxlab.com:6001
-      - Keycloak__Realm=https://lataxlab.foray.ataxlab.com:8443/realms/horseless-infrastructure
-      - Keycloak__PostLogoutRedirectUri=https://lataxlab.foray.ataxlab.com:6001
-      - Keycloak__OIDCLogoutUri=https://lataxlab.foray.ataxlab.com:8443/realms/horseless-infrastructure/protocol/openid-connect/logout
-      - Keycloak__MetaData=https://lataxlab.foray.ataxlab.com:8443/realms/horseless-infrastructure/.well-known/openid-configuration
-      - Keycloak__Issuer=https://lataxlab.foray.ataxlab.com:8443/realms/horseless-infrastructure
-      - Keycloak__ClientSecret=3GJHXbZj152AkTV38qE0Qw3KwZpJjKUk
-      - Keycloak__ClientId=horseless-prototype
-      - Keycloak__Authority=https://lataxlab.foray.ataxlab.com:8443/auth/realms/horseless-infrastructure
+      - Keycloak__SignoutRedirectUrl=${KeycloakSignoutRedirectUrl}
+      - Keycloak__Realm=${KeycloakRealm}
+      - Keycloak__PostLogoutRedirectUri=${KeycloakPostLogoutRedirectUri}
+      - Keycloak__OIDCLogoutUri=${KeycloakOIDCLogoutUri}
+      - Keycloak__MetaData=${KeycloakMetaData}
+      - Keycloak__Issuer=${KeycloakIssuer}
+      - Keycloak__ClientSecret=${KeycloakClientSecret}
+      - Keycloak__ClientId=${KeycloakClientId}
+      - Keycloak__Authority=${KeycloakAuthority}
       - Keycloak__Audience=horseless-prototype
       - FeatureManagement__TenantAdminUI=false
       - FeatureManagement__ContentEditorUI=false
