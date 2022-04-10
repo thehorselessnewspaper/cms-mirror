@@ -3,7 +3,6 @@ version: '3.9'
 # prototype the docker compose stack 
 # required to boot the cms
 # 
-# most services are defined as using network=horselesswan
 # some services also have nics on network=default
 #
 # assumes base http(s) url of localhost:portnumber
@@ -37,13 +36,15 @@ services:
         #- ./data:/opt/keycloak/data:z 
       command: start --auto-build --hostname=${KeycloakContainerHostName} \ 
                --https-certificate-file=/etc/x509/https/tls.crt \
-               --https-certificate-key-file=/etc/x509/https/tls.key
-               --db=postgres
+               --https-certificate-key-file=/etc/x509/https/tls.key \
+               --db=postgres \
                --db-url-host=keycloakpostgres.local \
                --db-url-database=keycloak \
                --db-username=keycloak \
                --db-password=password \ 
-               --db-schema=public # start-dev
+               --db-schema=public \
+               --features-upload_scripts=enabled 
+               # start-dev
       # environment configuration for keycloak-x (quarkus) as per https://blog.codecentric.de/en/2021/12/keycloak-keycloak-x/
       environment:
         KEYCLOAK_IMPORT: /tmp/horselessrealm.json -Dkeycloak.profile.feature.upload_scripts=enabled  
@@ -90,7 +91,7 @@ services:
         - default
 
   horselessnewspaper.local:
-    image: horselessnewspaper.local
+    image: "horselessnewspaper.local"
     hostname: horselessnewspaper.local
     ports:
       - 6000:6000
@@ -123,10 +124,9 @@ services:
       - FeatureManagement__TenantAdminUI=false
       - FeatureManagement__ContentEditorUI=false
     volumes:
-#      - ./https/:/https/
        - ./https/:/https/
     depends_on:
-      - content-db   
+      - content-db  
     build:
       context: ../
       dockerfile: HorselessNewspaper.Core.Web.Prototype/Dockerfile

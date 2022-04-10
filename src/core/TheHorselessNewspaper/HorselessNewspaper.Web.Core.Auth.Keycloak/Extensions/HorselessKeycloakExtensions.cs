@@ -54,13 +54,15 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
 
             })
-            .AddCookie(cookie =>
+            .AddCookie(opts =>
             {
                 // TODO examine this cookie magic string naming business
-                cookie.Cookie.Name = "keycloak.cookie";
-                cookie.Cookie.MaxAge = TimeSpan.FromMinutes(60);
-                cookie.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-                cookie.SlidingExpiration = true;
+                // cookie.Cookie.Name = "keycloak.cookie";
+                opts.Cookie.MaxAge = TimeSpan.FromMinutes(60);
+                opts.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                opts.Cookie.SameSite = SameSiteMode.None;
+                opts.Cookie.IsEssential = true;
+                opts.SlidingExpiration = true;
             })
             .AddJwtBearer(o =>
             {
@@ -113,8 +115,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 opts.GetClaimsFromUserInfoEndpoint = true;
                 opts.SaveTokens = true;
                 opts.Scope.Add("openid email profile roles web-origins");
-                opts.NonceCookie.SameSite = SameSiteMode.Unspecified;
-                opts.CorrelationCookie.SameSite = SameSiteMode.Unspecified;
+                opts.NonceCookie.SameSite = SameSiteMode.None;
+                opts.UseTokenLifetime = true;
+                opts.CorrelationCookie.SameSite = SameSiteMode.None;
 
                 opts.Events = new OpenIdConnectEvents
                 {
@@ -122,10 +125,20 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                     {
                         await Task.Yield();
                     },
+                    OnRemoteFailure = async ctx =>
+                    {
+                        // apparently you can use this to hide signin errors from asp.net core 
+                        // https://stackoverflow.com/questions/53980129/oidc-login-fails-with-correlation-failed-cookie-not-found-while-cookie-is
+                        ctx.Response.Redirect("/");
+                        ctx.HandleResponse();
+
+                        await Task.Yield();
+                    },
                     OnMessageReceived = async ctxt =>
                     {
                         // Invoked when a protocol message is first received.
                         await Task.Yield();
+
                     },
                     OnTicketReceived = async ctxt =>
                     {

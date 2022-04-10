@@ -47,6 +47,9 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
                 return null;
             };
 
+
+            builder.UseCookiePolicy();
+
             // ordered prior to .UseRouting() 
             // due to HorselessRouteTransformer requirement for 
             // populated ClaimsPrincipal
@@ -54,8 +57,6 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 
             // as per https://github.com/OData/AspNetCoreOData/blob/main/sample/ODataRoutingSample/Startup.cs
             builder.UseODataQueryRequest();
-
-            builder.UseCookiePolicy();
 
             // as per https://docs.microsoft.com/en-us/aspnet/core/fundamentals/static-files?view=aspnetcore-6.0
             builder.UseStaticFiles();

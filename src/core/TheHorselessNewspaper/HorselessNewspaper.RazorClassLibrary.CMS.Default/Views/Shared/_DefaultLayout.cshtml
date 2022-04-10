@@ -73,7 +73,7 @@
     <div style="padding-top: 70px;" class="wrapper flex-shrink-0">
 
         @* // todo - this must become HttpContext.CanShowAdminSidebar *@
-        @if (Context.HasDevopsAdminClaims())
+        @if (Context.HasDevopsAdminClaims(new List<string>() { "editor", "admin" }))
         {
             await Html.RenderPartialAsync("_DevopsSidebar");
         }

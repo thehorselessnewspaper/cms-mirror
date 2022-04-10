@@ -206,7 +206,12 @@ builder.Services.AddMvcCore(options =>
 }).AddRazorRuntimeCompilation();
 
 builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    options.Cookie.IsEssential = true;
+});
 
 foreach (var service in builder.Services)
 {
