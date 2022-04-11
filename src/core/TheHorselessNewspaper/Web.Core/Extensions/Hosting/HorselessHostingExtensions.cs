@@ -7,6 +7,7 @@ using HorselessNewspaper.Web.Core.Middleware;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.OData.Extensions;
 using Microsoft.AspNetCore.OData;
+using HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTenantPrincipal;
 
 namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 {
@@ -55,6 +56,8 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
             // populated ClaimsPrincipal
             builder.UseAuthentication();
 
+            // builder.UseHorselessTenantPrincipalMiddleware();
+
             // as per https://github.com/OData/AspNetCoreOData/blob/main/sample/ODataRoutingSample/Startup.cs
             builder.UseODataQueryRequest();
 
@@ -67,6 +70,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 
             builder.UseAuthorization();
 
+            builder.UseMiddleware<HorselessTenantPrincipalMiddleware>();
 
             builder.UseHorselessTenantSetupMiddleware();
 

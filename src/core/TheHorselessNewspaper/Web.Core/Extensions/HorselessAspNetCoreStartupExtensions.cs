@@ -36,6 +36,7 @@ using System.Text.Json.Serialization;
 using Microsoft.Extensions.Primitives;
 using TheHorselessNewspaper.REST;
 using Microsoft.Extensions.Options;
+using HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTenantPrincipal;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {

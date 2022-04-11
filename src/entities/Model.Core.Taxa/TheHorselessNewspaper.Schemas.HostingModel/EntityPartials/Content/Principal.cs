@@ -13,6 +13,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     // [MultiTenant]
     public partial class Principal : IQueryableModelEntity, IContentRowLevelSecured
     {
+
+        public string UPN { get; set; } = string.Empty;
+
+        public string Email { get; set; } = string.Empty;
+
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
