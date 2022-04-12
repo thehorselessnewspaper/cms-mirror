@@ -1,4 +1,4 @@
-﻿@using HorselessNewspaper.Web.Core.Extensions.Claim;
+﻿@using HorselessNewspaper.Web.Core.Extensions.ClaimExtensions;
 @using Microsoft.Extensions.Configuration
 
 @inject Finbuckle.MultiTenant.ITenantInfo CurrentTenant;
@@ -75,10 +75,10 @@
         @* // todo - this must become HttpContext.CanShowAdminSidebar *@
         @if (Context.HasDevopsAdminClaims(new List<string>() { "admin" }))
         {
-            @if ((await AuthorizationService.AuthorizeAsync(User, "PolicyName")).Succeeded)
+@*            @if ((await AuthorizationService.AuthorizeAsync(User, "PolicyName")).Succeeded)
             {
                 <p>This paragraph is displayed because you fulfilled PolicyName.</p>
-            }
+            }*@
             await Html.RenderPartialAsync("_DevopsSidebar");
         }
         else if (await Context.IsTenantOwner(CurrentTenant, configuration, serviceProvider))

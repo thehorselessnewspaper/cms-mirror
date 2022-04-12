@@ -14,11 +14,13 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     }
 
     // [Table("Principals")]
-    public partial class Principal: IQueryableModelEntity, IHostingRowLevelSecured
+    public partial class Principal : IQueryableModelEntity, IHostingRowLevelSecured
     {
         public string UPN { get; set; } = string.Empty;
 
         public string Email { get; set; } = string.Empty;
+
+        public string PreferredUserName { get; set; } = string.Empty;
 
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);

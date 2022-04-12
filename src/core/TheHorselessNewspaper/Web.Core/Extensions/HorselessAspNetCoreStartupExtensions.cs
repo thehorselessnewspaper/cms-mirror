@@ -31,12 +31,13 @@ using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
-using HorselessNewspaper.Web.Core.Extensions.Claim;
+using HorselessNewspaper.Web.Core.Extensions.ClaimExtensions;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Primitives;
 using TheHorselessNewspaper.REST;
 using Microsoft.Extensions.Options;
 using HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTenantPrincipal;
+using HorselessNewspaper.Web.Core.UnitOfWork.ContentModelTasks.PrincipalTasks;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -250,7 +251,13 @@ HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessCo
 
             #endregion
 
+            #region repositories
+            serviceBuilder.Services.AddScoped<IContentPrincipalTasksRepository, ContentPrincipalTasksRepository>();
+
+            #endregion repositories
+
             serviceBuilder.Services.AddScoped<IAuthenticationSchemesCache, AuthenticationSchemesCache>();
+
 
             serviceBuilder.Services.AddSingleton<IHorselessCacheProvider<Guid, ContentEntities.Tenant>, DefaultTenantCache>();
 

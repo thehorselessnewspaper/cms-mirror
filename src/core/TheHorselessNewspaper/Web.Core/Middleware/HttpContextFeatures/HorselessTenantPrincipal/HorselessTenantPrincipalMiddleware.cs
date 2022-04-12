@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using Microsoft.Extensions.DependencyInjection;
+using HorselessNewspaper.Web.Core.UnitOfWork.ContentModelTasks.PrincipalTasks;
+
 namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTenantPrincipal
 {
     /// <summary>
@@ -36,6 +38,8 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
 
                 IQueryableContentModelOperator<ContentModel.Tenant> tenantOperator = serviceProvider.GetRequiredService<IQueryableContentModelOperator<ContentModel.Tenant>>();
 
+                IContentPrincipalTasksRepository principalTasksRepository = serviceProvider.GetRequiredService<IContentPrincipalTasksRepository>();
+
                 if (context.User.Identity.IsAuthenticated)
                 {
                     // handle the authenticated scenario
@@ -44,6 +48,8 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
                         Iss = "",
                         Aud = "",
                         Sub = "",
+                        Email = "",
+                        UPN = "",
                         
                          
                     };
@@ -53,6 +59,8 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
 
                     var tenants = tenantsQuery.ToList();
                     var principals = principalsQuery.ToList();
+
+                    var matchResult = await principalTasksRepository.GetPrincipal(context.User.Claims);
 
                     int i = 0;
                 }

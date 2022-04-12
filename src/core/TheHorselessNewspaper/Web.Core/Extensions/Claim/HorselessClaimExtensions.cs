@@ -13,11 +13,60 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
+using System.Security.Claims;
 
-namespace HorselessNewspaper.Web.Core.Extensions.Claim
+namespace HorselessNewspaper.Web.Core.Extensions.ClaimExtensions
 {
     public static class HorselessClaimExtensions
     {
+        public static string Aud(this IEnumerable<Claim> claims)
+        {
+            var ret = string.Empty;
+            var matchedClaim = claims.Where(w => w.Type == "aud").ToList();
+            ret = matchedClaim.FirstOrDefault().Value;
+            return ret;
+        }
+
+        public static string Iss(this IEnumerable<Claim> claims)
+        {
+            var ret = string.Empty;
+            var matchedClaim = claims.Where(w => w.Type == "iss").ToList();
+            ret = matchedClaim.FirstOrDefault().Value;
+            return ret;
+        }
+
+        public static string Sub(this IEnumerable<Claim> claims)
+        {
+            var ret = string.Empty;
+            var matchedClaim = claims.Where(w => w.Type == ClaimTypes.NameIdentifier).ToList();
+            ret = matchedClaim.FirstOrDefault().Value;
+            return ret;
+        }
+
+        public static string Upn(this IEnumerable<Claim> claims)
+        {
+            var ret = string.Empty;
+            var matchedClaim = claims.Where(w => w.Type == ClaimTypes.Upn).ToList();
+            ret = matchedClaim.FirstOrDefault().Value;
+            return ret;
+        }
+
+        public static string Email(this IEnumerable<Claim> claims)
+        {
+            var ret = string.Empty;
+            var matchedClaim = claims.Where(w => w.Type == ClaimTypes.Email).ToList();
+            ret = matchedClaim.FirstOrDefault().Value;
+            return ret;
+        }
+
+        public static string PreferredUsername(this IEnumerable<Claim> claims)
+        {
+            var ret = string.Empty;
+            var matchedClaim = claims.Where(w => w.Type == "preferred_username").ToList();
+            ret = matchedClaim.FirstOrDefault().Value;
+            return ret;
+        }
+
         /// <summary>
         /// implicit use assumes claime value Admin
         /// 
@@ -57,7 +106,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Claim
             bool ret = false;
             try
             {
-                if(! httpContext.User.Identity.IsAuthenticated)
+                if (!httpContext.User.Identity.IsAuthenticated)
                 {
                     return false;
                 }

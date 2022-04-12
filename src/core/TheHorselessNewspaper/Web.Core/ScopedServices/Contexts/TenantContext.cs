@@ -9,7 +9,7 @@ using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using HorselessNewspaper.Web.Core.Extensions.Claim;
+using HorselessNewspaper.Web.Core.Extensions.ClaimExtensions;
 using Microsoft.AspNetCore.Http;
 
 namespace HorselessNewspaper.Web.Core.ScopedServices.Contexts

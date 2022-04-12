@@ -114,6 +114,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
 
         public async Task<IActionResult> ViewTemplate()
         {
+            var token = await HttpContext.GetTokenAsync("access_token");
             var user = User.Identities.First();
             if (user != null && user.Claims != null && user.Claims.Count() > 0)
             {

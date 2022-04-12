@@ -1,6 +1,6 @@
 ﻿using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Stores;
-using HorselessNewspaper.Web.Core.Extensions.Claim;
+using HorselessNewspaper.Web.Core.Extensions.ClaimExtensions;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Routing;

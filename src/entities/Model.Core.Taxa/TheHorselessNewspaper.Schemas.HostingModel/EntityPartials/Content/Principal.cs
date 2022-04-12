@@ -18,6 +18,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public string Email { get; set; } = string.Empty;
 
+        public string PreferredUserName { get; set; } = string.Empty;
+
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 

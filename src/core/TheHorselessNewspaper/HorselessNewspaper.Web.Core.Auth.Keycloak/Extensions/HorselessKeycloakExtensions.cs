@@ -111,13 +111,22 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 opts.ClientId = builder.Configuration[KeycloakAuthOptions.ClientIdConfigKey];
                 opts.ClientSecret = builder.Configuration[KeycloakAuthOptions.ClientSecretConfigKey];
                 opts.MetadataAddress = builder.Configuration[KeycloakAuthOptions.MetaDataConfigKey];
-                opts.ResponseType = "code";
+                opts.ResponseType = "code id_token";
                 opts.GetClaimsFromUserInfoEndpoint = true;
                 opts.SaveTokens = true;
                 opts.Scope.Add("openid email profile roles web-origins");
                 opts.NonceCookie.SameSite = SameSiteMode.None;
                 opts.UseTokenLifetime = true;
                 opts.CorrelationCookie.SameSite = SameSiteMode.None;
+
+                // tweak the population of user.claims collection
+                // as per https://leastprivilege.com/2017/11/15/missing-claims-in-the-asp-net-core-2-openid-connect-handler/
+                opts.ClaimActions.Remove("aud");
+                opts.ClaimActions.Remove("iss");
+                opts.ClaimActions.Remove("azp"); // authorized party
+                opts.ClaimActions.Remove("sub"); // locally scoped guid shaped string
+
+                opts.ClaimActions.MapUniqueJsonKey("sub", ClaimTypes.NameIdentifier);
 
                 opts.Events = new OpenIdConnectEvents
                 {
@@ -169,6 +178,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
 
 
             //.AddOpenId(keyCloakOptions);
+
 
             // as per https://docs.microsoft.com/en-us/aspnet/core/security/authorization/resourcebased?view=aspnetcore-6.0
             serviceBuilder.Services.AddSingleton<IAuthorizationHandler, RLSAuthorizationHandler>();

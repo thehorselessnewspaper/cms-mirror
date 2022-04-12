@@ -29,7 +29,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Claims
             ClaimsPrincipal clonedPrincipal = principal.Clone();
 
             ClaimsIdentity clonedIdentity = (ClaimsIdentity)clonedPrincipal.Identity;
-;
+
 
             /// TODO enable this by feature management
             // flatten realm_access because Microsoft identity model doesn't support nested claims

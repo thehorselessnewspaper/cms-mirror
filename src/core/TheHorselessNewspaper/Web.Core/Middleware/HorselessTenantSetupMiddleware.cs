@@ -1,5 +1,5 @@
 ﻿using Finbuckle.MultiTenant;
-using HorselessNewspaper.Web.Core.Extensions.Claim;
+using HorselessNewspaper.Web.Core.Extensions.ClaimExtensions;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
 using Microsoft.AspNetCore.Http;

@@ -22,15 +22,15 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.2" />
-		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.4.220408.4" />
+		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.4.220411.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.3" />
 		<PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.8" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 		<PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="2.5.1" />
 		<PackageReference Include="NuGet.Protocol" Version="6.1.0" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220408.4" />
-		<PackageReference Include="TheHorselessNewspaper.REST.Client" Version="0.4.220408.4" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220411.1" />
+		<PackageReference Include="TheHorselessNewspaper.REST.Client" Version="0.4.220411.1" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -42,5 +42,6 @@
 		<Folder Include="BackgroundServices\" />
 		<Folder Include="HostedServices\RazorClassLibrary\" />
 		<Folder Include="SingletonServices\Cache\Tenant\Mock\" />
+		<Folder Include="UnitOfWork\HostingModel\" />
 	</ItemGroup>
 </Project>

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using HorselessNewspaper.Web.Core.Extensions.Claim;
+using HorselessNewspaper.Web.Core.Extensions.ClaimExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Finbuckle.MultiTenant;
