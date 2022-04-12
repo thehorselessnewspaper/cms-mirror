@@ -9,22 +9,27 @@ using TheHorselessNewspaper.Schemas.HostingModel.Context;
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
 
-    [Flags]
+    /// <summary>
+    /// resist the urge to use [Flags]
+    /// due to ACE 1->1 SCOPE
+    ///            1->1 Collection<Principal>
+    /// </summary>
+    /// [Flags]
     public enum ACEPermissionScope
     {
-        OWNER, ROLE, GROUP, WORKFLOW, ANONYMOUS, EVERYONE
+        SITE, TENANT, OWNER, ROLE, GROUP, WORKFLOW, ANONYMOUS, EVERYONE
     }
 
 
     [Flags]
     public enum ACEPermission
     {
-        READ, CREATE, UPDATE, DELETE, SHARE, EXECUTE, SEARCH, PUBLISH, UNPUBLISH
+        READ, CREATE, UPDATE, DELETE, SHARE, EXECUTE, SEARCH, PUBLISH, UNPUBLISH, APPROVE
     }
 
     public enum ACEPermissionType
     {
-        PERMIT, DENY, SUBMIT_REQUEST, APPROVE_REQUEST, DENY_REQUEST
+        PERMIT, DENY
     }
 
     /// <summary>

@@ -17,14 +17,14 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     /// [Flags]
     public enum ACEPermissionScope
     {
-        OWNER, ROLE, GROUP, WORKFLOW, ANONYMOUS, EVERYONE
+        SITE, TENANT, OWNER, ROLE, GROUP, WORKFLOW, ANONYMOUS, EVERYONE
     }
 
 
     [Flags]
     public enum ACEPermission
     {
-        READ, CREATE, UPDATE, DELETE, SHARE, EXECUTE, SEARCH, PUBLISH, UNPUBLISH
+        READ, CREATE, UPDATE, DELETE, SHARE, EXECUTE, SEARCH, PUBLISH, UNPUBLISH, APPROVE
     }
 
     public enum ACEPermissionType
