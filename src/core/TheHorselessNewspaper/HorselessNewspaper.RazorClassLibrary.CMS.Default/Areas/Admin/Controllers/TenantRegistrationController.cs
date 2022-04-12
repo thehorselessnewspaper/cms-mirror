@@ -11,7 +11,7 @@ using TheHorselessNewspaper.HostingModel.Entities.Query;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
-
+using HorselessNewspaper.Web.Core.Extensions.ClaimExtensions;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controllers
 {
     [Authorize]
@@ -85,7 +85,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
 
 
             var tenantQueryResult = await hostingTenantsCollectionService.Query(w => w.Id.ToString().Equals(tenantId),
-                new List<string>() { nameof(Tenant.Owners), nameof(Tenant.TenantInfos) , nameof(Tenant.Principals) });
+                new List<string>() { nameof(Tenant.Owners), nameof(Tenant.TenantInfos), nameof(Tenant.Principals) });
             var tenantResult = tenantQueryResult.ToList();
             Tenant currentTenant = tenantResult.First();
             var tenant = GetTenantRegistrationModel(currentTenant);
@@ -152,8 +152,12 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                     //                            Aud = User.Claims.Where(w => w.Type.Contains("aud")).FirstOrDefault().Value,
 
                     // subject/issuer are technically a compound unique key
-                    Iss = User.Claims.FirstOrDefault().Issuer,
-                    Sub = User.Claims.FirstOrDefault().Subject.Name
+                    Iss = User.Claims.Iss(),
+                    Sub = User.Claims.Sub(),
+                    UPN = User.Claims.Upn(),
+                    Email = User.Claims.Email(),
+                    Aud = User.Claims.Aud(),
+                    PreferredUserName = User.Claims.PreferredUsername()
 
                 };
 

@@ -14,6 +14,7 @@ using HorselessNewspaper.Web.Core.UnitOfWork.ContentModelTasks.PrincipalTasks;
 namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTenantPrincipal
 {
     /// <summary>
+    /// 
     /// populate the HttpRequest.Features collection
     /// with a tenant principal object
     /// 

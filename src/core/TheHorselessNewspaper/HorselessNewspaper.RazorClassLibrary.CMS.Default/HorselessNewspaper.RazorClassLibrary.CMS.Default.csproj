@@ -30,7 +30,7 @@
 	
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.4" />
 		<PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.8" />
 		<PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.1.0">
 			<PrivateAssets>all</PrivateAssets>
@@ -55,14 +55,21 @@
 
 	<ItemGroup>
 		<Content Remove="angular\" />
+		<Content Remove="angular\horseless-elements\tsconfig.json" />
+		<Content Remove="angular\package.json" />
 
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.4.220411.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.3" />
+	  <None Include="angular\horseless-elements\tsconfig.json" />
+	  <None Include="angular\package.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.4.220412.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.4" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220411.1" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220412.1" />
 	</ItemGroup>
 
 	<ItemGroup>

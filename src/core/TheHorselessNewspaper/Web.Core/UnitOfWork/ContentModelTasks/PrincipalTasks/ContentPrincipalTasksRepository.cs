@@ -49,11 +49,13 @@ namespace HorselessNewspaper.Web.Core.UnitOfWork.ContentModelTasks.PrincipalTask
             var ret = new UnitOfWorkResult<ContentModel.Principal>();
 
             var principalMatcher = await ContentModelPrincipalOperator
-                                .Read(w => 
+                                .Read(w =>
                                     w.UPN.Equals(UPN)
                                     && w.Email.Equals(email)
                                     && w.Iss.Equals(ISS)
-                                    && w.Aud.Equals(aud));
+                                    && w.Aud.Equals(aud)
+                                    && w.PreferredUserName.Equals(preferredUserName)
+                                    && w.Sub.Equals(sub));
 
             var matchedPrincipals = principalMatcher.ToList(); 
             var matchedPrincipal = matchedPrincipals.FirstOrDefault();
