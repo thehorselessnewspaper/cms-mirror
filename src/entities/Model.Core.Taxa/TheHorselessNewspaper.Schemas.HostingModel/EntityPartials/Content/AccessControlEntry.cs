@@ -62,10 +62,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
-        [NotMapped]
+        // [NotMapped]
         public virtual ICollection<AccessControlEntry> AccessControlList { get; set; }
 
-        [NotMapped]
+        // [NotMapped]
+        [InverseProperty(nameof(Principal.AccessControlList))]
         public virtual ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
         /// <summary>

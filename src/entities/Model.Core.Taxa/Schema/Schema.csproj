@@ -360,6 +360,7 @@
       <LastGenOutput>HostingModel.cs</LastGenOutput>
       <DependentUpon>HostingModel.edmx</DependentUpon>
     </Content>
+    <Content Include="f.sql" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EntityFramework">

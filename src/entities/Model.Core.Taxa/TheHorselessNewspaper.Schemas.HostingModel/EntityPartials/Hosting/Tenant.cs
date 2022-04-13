@@ -78,9 +78,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
         public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
 
-        public Guid? OwnerId { get; set; }
+        // public Guid? OwnerId { get; set; }
 
-        [ForeignKey(nameof(OwnerId))]
+        // [ForeignKey(nameof(OwnerId))]
         [InverseProperty(nameof(Principal.OwnedTenants))]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
