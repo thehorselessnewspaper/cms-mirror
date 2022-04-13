@@ -186,7 +186,82 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                     IsPublished = false,
                     IsSoftDeleted = false,
                     ObjectId = Guid.NewGuid().ToString(),
-                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
+                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                    AccessControlList = new List<HostingModel.AccessControlEntry>()
+                    {
+                        new AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = model.displayName,
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            Permission = ACEPermission.READ,
+                            PermissionType = ACEPermissionType.PERMIT,
+                            Scope = ACEPermissionScope.OWNER
+                        },
+                        new AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = model.displayName,
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            Permission = ACEPermission.CREATE,
+                            PermissionType = ACEPermissionType.PERMIT,
+                            Scope = ACEPermissionScope.OWNER
+                        },
+                        new AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = model.displayName,
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            Permission = ACEPermission.DELETE,
+                            PermissionType = ACEPermissionType.PERMIT,
+                            Scope = ACEPermissionScope.OWNER
+                        },
+                        new AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = model.displayName,
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            Permission = ACEPermission.EXECUTE,
+                            PermissionType = ACEPermissionType.PERMIT,
+                            Scope = ACEPermissionScope.OWNER
+                        },
+                        new AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = model.displayName,
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            Permission = ACEPermission.PUBLISH,
+                            PermissionType = ACEPermissionType.PERMIT,
+                            Scope = ACEPermissionScope.OWNER
+                        },
+                        new AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = model.displayName,
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            Permission = ACEPermission.SEARCH,
+                            PermissionType = ACEPermissionType.PERMIT,
+                            Scope = ACEPermissionScope.OWNER
+                        }
+                    }
                 };
 
                 newTenantInfo.ParentTenantId = newTenant.Id;

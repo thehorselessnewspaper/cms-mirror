@@ -171,7 +171,82 @@ namespace HorselessNewspaper.SmokeTests.Repository
                         Aud = "client-application",
                         Sub = "oauth-sub"
                     }
-                }
+                },
+                AccessControlList = new List<AccessControlEntry>()
+                    {
+                        new AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = "test tenant",
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            Permission = ACEPermission.READ,
+                            PermissionType = ACEPermissionType.PERMIT,
+                            Scope = ACEPermissionScope.OWNER
+                        },
+                        new AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = "test tenant",
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            Permission = ACEPermission.CREATE,
+                            PermissionType = ACEPermissionType.PERMIT,
+                            Scope = ACEPermissionScope.OWNER
+                        },
+                        new AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = "test tenant",
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            Permission = ACEPermission.DELETE,
+                            PermissionType = ACEPermissionType.PERMIT,
+                            Scope = ACEPermissionScope.OWNER
+                        },
+                        new AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = "test tenant",
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            Permission = ACEPermission.EXECUTE,
+                            PermissionType = ACEPermissionType.PERMIT,
+                            Scope = ACEPermissionScope.OWNER
+                        },
+                        new AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = "test tenant",
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            Permission = ACEPermission.PUBLISH,
+                            PermissionType = ACEPermissionType.PERMIT,
+                            Scope = ACEPermissionScope.OWNER
+                        },
+                        new AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = "test tenant",
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            Permission = ACEPermission.SEARCH,
+                            PermissionType = ACEPermissionType.PERMIT,
+                            Scope = ACEPermissionScope.OWNER
+                        }
+                    }
             };
 
             try
