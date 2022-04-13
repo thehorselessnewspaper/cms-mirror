@@ -256,7 +256,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     string identifier = tenant.TenantInfos.FirstOrDefault().Identifier;
 
                     // get the home page for the tenant
-                    var route = basePath + $"/{identifier}"; //  + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_TENANT + $"/GetByObjectId/{tenant.ObjectId}";
+                    var route = $"https://{identifier}"; // basePath + $"/{identifier}"; //  + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_TENANT + $"/GetByObjectId/{tenant.ObjectId}";
                     IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
                     var httpClient = clientFactory.CreateClient();
 
@@ -380,8 +380,104 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                 TenantIdentifierStrategyName = ContentModel.TenantIdentifierStrategyName.ASPNETCORE_ROUTE
                               }
                           }
+                },
+                AccessControlList = new List<ContentModel.AccessControlEntry>()
+                {
+                      new ContentModel.AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = originEntity.DisplayName,
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            Permission =  ContentModel.ACEPermission.READ,
+                            PermissionType =  ContentModel.ACEPermissionType.PERMIT,
+                            Scope =  ContentModel.ACEPermissionScope.OWNER
+                        },
+                        new ContentModel.AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = originEntity.DisplayName,
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                             Permission =  ContentModel.ACEPermission.CREATE,
+                            PermissionType =  ContentModel.ACEPermissionType.PERMIT,
+                            Scope =  ContentModel.ACEPermissionScope.OWNER
+                        },
+                        new ContentModel.AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = originEntity.DisplayName,
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            Permission =  ContentModel.ACEPermission.DELETE,
+                            PermissionType =  ContentModel.ACEPermissionType.PERMIT,
+                            Scope =  ContentModel.ACEPermissionScope.OWNER
+                        },
+                        new ContentModel.AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = originEntity.DisplayName,
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            Permission =  ContentModel.ACEPermission.EXECUTE,
+                            PermissionType =  ContentModel.ACEPermissionType.PERMIT,
+                            Scope =  ContentModel.ACEPermissionScope.OWNER
+                        },
+                        new ContentModel.AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = originEntity.DisplayName,
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            Permission =  ContentModel.ACEPermission.PUBLISH,
+                            PermissionType =  ContentModel.ACEPermissionType.PERMIT,
+                            Scope =  ContentModel.ACEPermissionScope.OWNER
+                        },
+                        new ContentModel.AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = originEntity.DisplayName,
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            Permission =  ContentModel.ACEPermission.UNPUBLISH,
+                            PermissionType =  ContentModel.ACEPermissionType.PERMIT,
+                            Scope =  ContentModel.ACEPermissionScope.OWNER
+                        },
+                        new ContentModel.AccessControlEntry()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = originEntity.DisplayName,
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                            Permission =  ContentModel.ACEPermission.SEARCH,
+                            PermissionType =  ContentModel.ACEPermissionType.PERMIT,
+                            Scope =  ContentModel.ACEPermissionScope.OWNER
+                        }
                 }
             };
+
+            // populate the access control entries for the new tenant
+            foreach(var user in mergeEntity.Owners)
+            {
+                foreach(var ace in mergeEntity.AccessControlList)
+                {
+                    ace.Principals.Add(user);
+                }
+            }
 
             using (var innerScope = _services.CreateScope())
             {
@@ -410,7 +506,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             var baseUri = originEntity.TenantInfos.FirstOrDefault().TenantBaseUrl;
 
                             // var route = baseUri +  $"/{identifier}/" + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_TENANT + $"/Create";
-                            var route = baseUri + $"/{identifier}/" + $"api/Tenant/Create";
+                            var route = $"https://{identifier}"; // baseUri + $"/{identifier}/" + $"api/Tenant/Create";
                             //var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
                             //{
                             //    Content = GetJsonContent(mergeEntity),

@@ -74,7 +74,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
                 .Navigation(n => n.TenantInfos).AutoInclude();
 
             builder.Entity<Tenant>()
-                .Navigation(n => n.Principals).AutoInclude();
+                .Navigation(n => n.TenantPrincipals).AutoInclude();
 
             builder.Entity<Tenant>()
                 .Navigation(n => n.Owners).AutoInclude();

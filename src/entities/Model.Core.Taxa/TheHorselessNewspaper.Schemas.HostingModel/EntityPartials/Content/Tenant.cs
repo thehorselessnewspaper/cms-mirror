@@ -76,6 +76,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     {
         public bool IsPublished { get; set; }
 
+        /// <summary>
+        /// prospectively overrides all other tenant base url contexts
+        /// </summary>
+        public Uri? BaseUrl { get; set; }
+
         public virtual TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; } = new TenantIdentifierStrategy();
 
 

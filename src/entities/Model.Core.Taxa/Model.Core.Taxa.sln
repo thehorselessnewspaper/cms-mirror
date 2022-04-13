@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TheHorselessNewspaper.Conte
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Horseless.ContentModeller", "horseless.content.modeller\Horseless.ContentModeller\", "{9D1B9BD4-BF8D-41C7-BEAF-1A198CCC70DE}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv3.5"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_1052"
 		Debug.AspNetCompiler.PhysicalPath = "horseless.content.modeller\Horseless.ContentModeller\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_1052\"
@@ -31,9 +31,9 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Horseless.ContentModeller",
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Horseless.ODataScaffold", "Horseless.ODataScaffold\Horseless.ODataScaffold.csproj", "{A0B7640E-1E38-44DA-9645-B4AE5139AC51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Horseless.ODataScaffold", "Horseless.ODataScaffold\Horseless.ODataScaffold.csproj", "{A0B7640E-1E38-44DA-9645-B4AE5139AC51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Horseless.HostingModel.SmokeTests", "Horseless.HostingModel.SmokeTests\Horseless.HostingModel.SmokeTests.csproj", "{F3AC7ECC-8958-4147-A095-66C237F8BDF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Horseless.HostingModel.SmokeTests", "Horseless.HostingModel.SmokeTests\Horseless.HostingModel.SmokeTests.csproj", "{F3AC7ECC-8958-4147-A095-66C237F8BDF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

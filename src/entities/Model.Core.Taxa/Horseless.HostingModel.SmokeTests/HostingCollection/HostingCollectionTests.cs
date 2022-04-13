@@ -158,7 +158,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                         }
                     }
                 },
-            Principals = new List<Principal>()
+            TenantPrincipals = new List<Principal>()
                 {
                     new Principal()
                     {
@@ -230,12 +230,12 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
         try
         {
             var readResult = await this.ReadHostingEntity<Tenant>(w => w.Id.Equals(tenant.Id),
-                new List<string>() { nameof(Tenant.Principals), nameof(Tenant.TenantInfos) });
+                new List<string>() { nameof(Tenant.TenantPrincipals), nameof(Tenant.TenantInfos) });
 
             Assert.True(readResult != null);
 
             var readEntity = readResult.First();
-            Assert.True(readEntity.Principals.Count() > 0);
+            Assert.True(readEntity.TenantPrincipals.Count() > 0);
             Assert.True(readEntity.TenantInfos.Count() > 0);
         }
         catch(Exception e)
