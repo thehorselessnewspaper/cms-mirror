@@ -37,9 +37,21 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     /// to permit deny principals operations
     /// </summary>
 
-    [MultiTenant]
-    // [Table("PhantomAccessControlEntries")]
-    public partial class AccessControlEntry
+    //[MultiTenant]
+    //[Table("AccessControlEntries")]
+    //public partial class AccessControlEntry
+    //{
+
+    //    public ACEPermissionScope Scope { get; set; }
+
+    //    public ACEPermission Permission { get; set; }
+
+    //    public ACEPermissionType PermissionType { get; set; }
+
+    //}
+
+    // [MultiTenant]
+    public partial class AccessControlEntry : IQueryableModelEntity, IContentRowLevelSecured
     {
 
         public ACEPermissionScope Scope { get; set; }
@@ -48,11 +60,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public ACEPermissionType PermissionType { get; set; }
 
-    }
-
-
-    public partial class AccessControlEntry : IQueryableModelEntity, IContentRowLevelSecured
-    {
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
         [NotMapped]

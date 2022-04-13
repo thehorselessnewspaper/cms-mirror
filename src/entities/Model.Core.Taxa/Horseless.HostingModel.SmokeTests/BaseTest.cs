@@ -37,7 +37,7 @@ namespace Horseless.HostingModel.SmokeTests
         public async Task Setup()
         {
             var builder = WebApplication.CreateBuilder();
-   
+
 
             builder.Configuration.AddUserSecrets<SchemaTestsConfig>();
 
@@ -84,7 +84,7 @@ namespace Horseless.HostingModel.SmokeTests
             var theContentOperator = GetIQueryableContentModelOperator<IQueryableContentModelOperator<ContentModel.ContentCollection>>();
             await theContentOperator.ResetDb();
 
-            var theHostingOperator = GetIQueryableContentModelOperator<IQueryableHostingModelOperator< HostingEntities.Tenant>>();
+            var theHostingOperator = GetIQueryableContentModelOperator<IQueryableHostingModelOperator<HostingEntities.Tenant>>();
             await theHostingOperator.ResetDb();
             int i = 0;
         }
@@ -197,7 +197,22 @@ namespace Horseless.HostingModel.SmokeTests
                 DisplayName = $"test created",
                 IsSoftDeleted = false,
                 IsPublished = false,
-                ObjectId = Guid.NewGuid().ToString()
+                ObjectId = Guid.NewGuid().ToString(),
+                AccessControlList = new List<ContentModel.AccessControlEntry>()
+                {
+                    new ContentModel.AccessControlEntry()
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedAt = DateTime.UtcNow,
+                        DisplayName = $"test created",
+                        IsSoftDeleted = false,
+                        ObjectId = Guid.NewGuid().ToString(),
+                        Scope = ContentModel.ACEPermissionScope.EVERYONE,
+                        Permission = ContentModel.ACEPermission.READ,
+                        PermissionType = ContentModel.ACEPermissionType.DENY
+                        
+                    }
+                }
             };
         }
 

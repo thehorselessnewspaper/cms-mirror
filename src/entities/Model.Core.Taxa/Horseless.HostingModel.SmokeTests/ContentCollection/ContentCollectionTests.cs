@@ -29,6 +29,21 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 DisplayName = "test update tenant",
                 ObjectId = Guid.NewGuid().ToString(),
                 Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                AccessControlList = new List<ContentModel.AccessControlEntry>()
+                {
+                    new ContentModel.AccessControlEntry()
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedAt = DateTime.UtcNow,
+                        DisplayName = $"test created",
+                        IsSoftDeleted = false,
+                        ObjectId = Guid.NewGuid().ToString(),
+                        Scope = ContentModel.ACEPermissionScope.EVERYONE,
+                        Permission = ContentModel.ACEPermission.READ,
+                        PermissionType = ContentModel.ACEPermissionType.DENY
+
+                    }
+                },
                 TenantIdentifierStrategy = new TenantIdentifierStrategy()
                 {
                     Id = Guid.NewGuid(),
@@ -61,6 +76,21 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 DisplayName = tenant.DisplayName,
                 ObjectId = tenant.ObjectId,
                 Timestamp = tenant.Timestamp,
+                AccessControlList = new List<ContentModel.AccessControlEntry>()
+                {
+                    new ContentModel.AccessControlEntry()
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedAt = DateTime.UtcNow,
+                        DisplayName = $"test created",
+                        IsSoftDeleted = false,
+                        ObjectId = Guid.NewGuid().ToString(),
+                        Scope = ContentModel.ACEPermissionScope.EVERYONE,
+                        Permission = ContentModel.ACEPermission.READ,
+                        PermissionType = ContentModel.ACEPermissionType.DENY
+
+                    }
+                },
                 TenantIdentifierStrategy = new TenantIdentifierStrategy()
                 {
                     Id = Guid.NewGuid(),

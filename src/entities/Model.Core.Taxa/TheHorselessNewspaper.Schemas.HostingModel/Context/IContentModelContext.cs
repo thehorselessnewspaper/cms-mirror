@@ -16,8 +16,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context
         // db provider discriminator
         internal DatabaseServerFamily SqlDialect { get; set; }
 
-        /// an owned type without a dbset
-        /// internal DbSet<AccessControlEntry> AccessControlEntries { get; set; }
+        internal DbSet<AccessControlEntry> AccessControlEntries { get; set; }
         internal DbSet<ContentCollection> ContentCollections { get; set; }
         internal DbSet<FilesystemAsset> FilesystemAssets { get; set; }
         internal DbSet<Holonym> Holonyms { get; set; }
