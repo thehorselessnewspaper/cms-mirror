@@ -2,15 +2,21 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
+    [Index(nameof(TenantInfoId), Name = "IX_FK_TenantInfoWebAPITenantInfo")]
     public partial class WebAPITenantInfo
     {
+        [Key]
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
+        [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
         public string Identifier { get; set; }
         public string Name { get; set; }
@@ -18,6 +24,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public string WebAPIBaseUrl { get; set; }
         public Guid? TenantInfoId { get; set; }
 
+        [ForeignKey(nameof(TenantInfoId))]
+        [InverseProperty("WebAPITenantInfos")]
         public virtual TenantInfo TenantInfo { get; set; }
     }
 }

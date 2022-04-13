@@ -14,7 +14,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context
     /// </summary>
     public interface IContentRowLevelSecured : IQueryableModelEntity
     {
-        public ICollection<AccessControlEntry> AccessControlList { get; set; }
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; }
         public ICollection<Principal> Owners { get; set; }
     }
 }

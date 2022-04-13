@@ -14,6 +14,13 @@ namespace Schema.Diagrams.Content
     
     public partial class HorselessSession
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HorselessSession()
+        {
+            this.AccessControlEntries = new HashSet<AccessControlEntry>();
+            this.Owners = new HashSet<Principal>();
+        }
+    
         public System.Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
@@ -24,5 +31,12 @@ namespace Schema.Diagrams.Content
         public string Aud { get; set; }
         public string Sub { get; set; }
         public Nullable<bool> IsAnonymous { get; set; }
+        public Nullable<System.Guid> HorselessSessionPrincipalId { get; set; }
+    
+        public virtual Principal HorselessSessionPrincipal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Principal> Owners { get; set; }
     }
 }

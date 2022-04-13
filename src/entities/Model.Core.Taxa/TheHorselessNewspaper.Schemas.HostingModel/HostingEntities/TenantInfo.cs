@@ -2,6 +2,9 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
@@ -13,17 +16,21 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
             WebAPITenantInfos = new HashSet<WebAPITenantInfo>();
         }
 
+        [Key]
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
+        [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
         public string Identifier { get; set; }
         public string Name { get; set; }
         public string ConnectionString { get; set; }
         public string TenantBaseUrl { get; set; }
 
+        [InverseProperty(nameof(KeyCloakConfiguration.TenantInfo))]
         public virtual ICollection<KeyCloakConfiguration> KeyCloakConfigurations { get; set; }
+        [InverseProperty(nameof(WebAPITenantInfo.TenantInfo))]
         public virtual ICollection<WebAPITenantInfo> WebAPITenantInfos { get; set; }
     }
 }

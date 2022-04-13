@@ -25,27 +25,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
-        [NotMapped]
-        public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
 
-        [NotMapped]
-        public ICollection<Principal> Owners { get; set;  }
-
-        [ForeignKey(nameof(TenantId))]
-        [InverseProperty(nameof(Tenant.TenantPrincipals))]
-        public virtual ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
-
-        public Guid? AccessControlEntriesId { get; set; }
-
-        [ForeignKey(nameof(AccessControlEntriesId))]
-        [InverseProperty(nameof(AccessControlEntry.Principals))]
-        public ICollection<AccessControlEntry> AccessControlEntries { get; set; }
-
-        public Guid? TenantId { get; set; }
-        public Guid? OwnedTenantid { get; set; }
-
-        [ForeignKey(nameof(OwnedTenantid))]
-        [InverseProperty(nameof(Tenant.Owners))]
-        public virtual ICollection<Tenant> OwnedTenants { get; set; } = new HashSet<Tenant>();
     }
 }

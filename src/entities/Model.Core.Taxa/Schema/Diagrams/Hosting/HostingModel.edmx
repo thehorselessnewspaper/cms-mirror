@@ -13,6 +13,13 @@
     <EntitySet Name="WebAPITenantInfos" EntityType="HostingModel.Store.WebAPITenantInfos" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Principals" EntityType="HostingModel.Store.Principals" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AccessControlEntries" EntityType="HostingModel.Store.AccessControlEntries" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PrincipalPrincipal" EntityType="HostingModel.Store.PrincipalPrincipal" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PrincipalAccessControlEntry" EntityType="HostingModel.Store.PrincipalAccessControlEntry" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PrincipalAccessControlEntry1" EntityType="HostingModel.Store.PrincipalAccessControlEntry1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AccessControlEntryTenant" EntityType="HostingModel.Store.AccessControlEntryTenant" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TenantPrincipal" EntityType="HostingModel.Store.TenantPrincipal" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TenantPrincipal1" EntityType="HostingModel.Store.TenantPrincipal1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AccessControlledAccessControlEntry" EntityType="HostingModel.Store.AccessControlledAccessControlEntry" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="TenantInfoWebAPITenantInfo" Association="HostingModel.Store.TenantInfoWebAPITenantInfo">
       <End Role="TenantInfo" EntitySet="TenantInfos" />
       <End Role="WebAPITenantInfo" EntitySet="WebAPITenantInfos" />
@@ -20,6 +27,62 @@
     <AssociationSet Name="TenantInfoKeyCloakConfiguration" Association="HostingModel.Store.TenantInfoKeyCloakConfiguration">
       <End Role="TenantInfo" EntitySet="TenantInfos" />
       <End Role="KeyCloakConfiguration" EntitySet="KeyCloakConfigurations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrincipalPrincipal_Principal" Association="HostingModel.Store.FK_PrincipalPrincipal_Principal">
+      <End Role="Principal" EntitySet="Principals" />
+      <End Role="PrincipalPrincipal" EntitySet="PrincipalPrincipal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrincipalPrincipal_Principal1" Association="HostingModel.Store.FK_PrincipalPrincipal_Principal1">
+      <End Role="Principal1" EntitySet="Principals" />
+      <End Role="PrincipalPrincipal" EntitySet="PrincipalPrincipal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrincipalAccessControlEntry_Principal" Association="HostingModel.Store.FK_PrincipalAccessControlEntry_Principal">
+      <End Role="Principal" EntitySet="Principals" />
+      <End Role="PrincipalAccessControlEntry" EntitySet="PrincipalAccessControlEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrincipalAccessControlEntry_AccessControlEntry" Association="HostingModel.Store.FK_PrincipalAccessControlEntry_AccessControlEntry">
+      <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
+      <End Role="PrincipalAccessControlEntry" EntitySet="PrincipalAccessControlEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrincipalAccessControlEntry1_Principal" Association="HostingModel.Store.FK_PrincipalAccessControlEntry1_Principal">
+      <End Role="Principal" EntitySet="Principals" />
+      <End Role="PrincipalAccessControlEntry1" EntitySet="PrincipalAccessControlEntry1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrincipalAccessControlEntry1_AccessControlEntry" Association="HostingModel.Store.FK_PrincipalAccessControlEntry1_AccessControlEntry">
+      <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
+      <End Role="PrincipalAccessControlEntry1" EntitySet="PrincipalAccessControlEntry1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccessControlEntryTenant_AccessControlEntry" Association="HostingModel.Store.FK_AccessControlEntryTenant_AccessControlEntry">
+      <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
+      <End Role="AccessControlEntryTenant" EntitySet="AccessControlEntryTenant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccessControlEntryTenant_SubjectTenant" Association="HostingModel.Store.FK_AccessControlEntryTenant_SubjectTenant">
+      <End Role="SubjectTenant" EntitySet="Tenants" />
+      <End Role="AccessControlEntryTenant" EntitySet="AccessControlEntryTenant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TenantPrincipal_Tenant" Association="HostingModel.Store.FK_TenantPrincipal_Tenant">
+      <End Role="Tenant" EntitySet="Tenants" />
+      <End Role="TenantPrincipal" EntitySet="TenantPrincipal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TenantPrincipal_Principal" Association="HostingModel.Store.FK_TenantPrincipal_Principal">
+      <End Role="Principal" EntitySet="Principals" />
+      <End Role="TenantPrincipal" EntitySet="TenantPrincipal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TenantPrincipal1_Tenant" Association="HostingModel.Store.FK_TenantPrincipal1_Tenant">
+      <End Role="Tenant" EntitySet="Tenants" />
+      <End Role="TenantPrincipal1" EntitySet="TenantPrincipal1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TenantPrincipal1_Principal" Association="HostingModel.Store.FK_TenantPrincipal1_Principal">
+      <End Role="Principal" EntitySet="Principals" />
+      <End Role="TenantPrincipal1" EntitySet="TenantPrincipal1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccessControlledAccessControlEntry_AccessControlEntry" Association="HostingModel.Store.FK_AccessControlledAccessControlEntry_AccessControlEntry">
+      <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
+      <End Role="AccessControlledAccessControlEntry" EntitySet="AccessControlledAccessControlEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccessControlledAccessControlEntry_AccessControlEntry1" Association="HostingModel.Store.FK_AccessControlledAccessControlEntry_AccessControlEntry1">
+      <End Role="AccessControlEntry1" EntitySet="AccessControlEntries" />
+      <End Role="AccessControlledAccessControlEntry" EntitySet="AccessControlledAccessControlEntry" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Tenants">
@@ -112,6 +175,62 @@
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="IsActive" Type="bit" Nullable="true" />
   </EntityType>
+  <EntityType Name="PrincipalPrincipal">
+    <Key>
+      <PropertyRef Name="Owners_Id" />
+      <PropertyRef Name="OwnedPrincipals_Id" />
+    </Key>
+    <Property Name="Owners_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OwnedPrincipals_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PrincipalAccessControlEntry">
+    <Key>
+      <PropertyRef Name="SubjectPrincipals_Id" />
+      <PropertyRef Name="AccessControlEntries_Id" />
+    </Key>
+    <Property Name="SubjectPrincipals_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AccessControlEntries_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PrincipalAccessControlEntry1">
+    <Key>
+      <PropertyRef Name="Owners_Id" />
+      <PropertyRef Name="OwnedAccessControlEntries_Id" />
+    </Key>
+    <Property Name="Owners_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OwnedAccessControlEntries_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AccessControlEntryTenant">
+    <Key>
+      <PropertyRef Name="AccessControlEntries_Id" />
+      <PropertyRef Name="SubjectTenants_Id" />
+    </Key>
+    <Property Name="AccessControlEntries_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SubjectTenants_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TenantPrincipal">
+    <Key>
+      <PropertyRef Name="TenantAccounts_Id" />
+      <PropertyRef Name="Accounts_Id" />
+    </Key>
+    <Property Name="TenantAccounts_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Accounts_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TenantPrincipal1">
+    <Key>
+      <PropertyRef Name="OwnedTenants_Id" />
+      <PropertyRef Name="Owners_Id" />
+    </Key>
+    <Property Name="OwnedTenants_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Owners_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AccessControlledAccessControlEntry">
+    <Key>
+      <PropertyRef Name="SubjectAccessControlEntries_Id" />
+      <PropertyRef Name="AccessControlEntries_Id" />
+    </Key>
+    <Property Name="SubjectAccessControlEntries_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AccessControlEntries_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
   <Association Name="TenantInfoWebAPITenantInfo">
     <End Role="TenantInfo" Type="HostingModel.Store.TenantInfos" Multiplicity="0..1" />
     <End Role="WebAPITenantInfo" Type="HostingModel.Store.WebAPITenantInfos" Multiplicity="*" />
@@ -136,6 +255,174 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_PrincipalPrincipal_Principal">
+    <End Role="Principal" Type="HostingModel.Store.Principals" Multiplicity="1" />
+    <End Role="PrincipalPrincipal" Type="HostingModel.Store.PrincipalPrincipal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Principal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PrincipalPrincipal">
+        <PropertyRef Name="Owners_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PrincipalPrincipal_Principal1">
+    <End Role="PrincipalPrincipal" Type="HostingModel.Store.PrincipalPrincipal" Multiplicity="*" />
+    <End Role="Principal1" Type="HostingModel.Store.Principals" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Principal1">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PrincipalPrincipal">
+        <PropertyRef Name="OwnedPrincipals_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PrincipalAccessControlEntry_Principal">
+    <End Role="Principal" Type="HostingModel.Store.Principals" Multiplicity="1" />
+    <End Role="PrincipalAccessControlEntry" Type="HostingModel.Store.PrincipalAccessControlEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Principal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PrincipalAccessControlEntry">
+        <PropertyRef Name="SubjectPrincipals_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PrincipalAccessControlEntry_AccessControlEntry">
+    <End Role="PrincipalAccessControlEntry" Type="HostingModel.Store.PrincipalAccessControlEntry" Multiplicity="*" />
+    <End Role="AccessControlEntry" Type="HostingModel.Store.AccessControlEntries" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="AccessControlEntry">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PrincipalAccessControlEntry">
+        <PropertyRef Name="AccessControlEntries_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PrincipalAccessControlEntry1_Principal">
+    <End Role="Principal" Type="HostingModel.Store.Principals" Multiplicity="1" />
+    <End Role="PrincipalAccessControlEntry1" Type="HostingModel.Store.PrincipalAccessControlEntry1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Principal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PrincipalAccessControlEntry1">
+        <PropertyRef Name="Owners_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PrincipalAccessControlEntry1_AccessControlEntry">
+    <End Role="PrincipalAccessControlEntry1" Type="HostingModel.Store.PrincipalAccessControlEntry1" Multiplicity="*" />
+    <End Role="AccessControlEntry" Type="HostingModel.Store.AccessControlEntries" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="AccessControlEntry">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PrincipalAccessControlEntry1">
+        <PropertyRef Name="OwnedAccessControlEntries_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccessControlEntryTenant_AccessControlEntry">
+    <End Role="AccessControlEntry" Type="HostingModel.Store.AccessControlEntries" Multiplicity="1" />
+    <End Role="AccessControlEntryTenant" Type="HostingModel.Store.AccessControlEntryTenant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccessControlEntry">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AccessControlEntryTenant">
+        <PropertyRef Name="AccessControlEntries_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccessControlEntryTenant_SubjectTenant">
+    <End Role="AccessControlEntryTenant" Type="HostingModel.Store.AccessControlEntryTenant" Multiplicity="*" />
+    <End Role="SubjectTenant" Type="HostingModel.Store.Tenants" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="SubjectTenant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AccessControlEntryTenant">
+        <PropertyRef Name="SubjectTenants_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TenantPrincipal_Tenant">
+    <End Role="Tenant" Type="HostingModel.Store.Tenants" Multiplicity="1" />
+    <End Role="TenantPrincipal" Type="HostingModel.Store.TenantPrincipal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tenant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TenantPrincipal">
+        <PropertyRef Name="TenantAccounts_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TenantPrincipal_Principal">
+    <End Role="TenantPrincipal" Type="HostingModel.Store.TenantPrincipal" Multiplicity="*" />
+    <End Role="Principal" Type="HostingModel.Store.Principals" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Principal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TenantPrincipal">
+        <PropertyRef Name="Accounts_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TenantPrincipal1_Tenant">
+    <End Role="Tenant" Type="HostingModel.Store.Tenants" Multiplicity="1" />
+    <End Role="TenantPrincipal1" Type="HostingModel.Store.TenantPrincipal1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tenant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TenantPrincipal1">
+        <PropertyRef Name="OwnedTenants_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TenantPrincipal1_Principal">
+    <End Role="TenantPrincipal1" Type="HostingModel.Store.TenantPrincipal1" Multiplicity="*" />
+    <End Role="Principal" Type="HostingModel.Store.Principals" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Principal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TenantPrincipal1">
+        <PropertyRef Name="Owners_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccessControlledAccessControlEntry_AccessControlEntry">
+    <End Role="AccessControlEntry" Type="HostingModel.Store.AccessControlEntries" Multiplicity="1" />
+    <End Role="AccessControlledAccessControlEntry" Type="HostingModel.Store.AccessControlledAccessControlEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccessControlEntry">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AccessControlledAccessControlEntry">
+        <PropertyRef Name="SubjectAccessControlEntries_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccessControlledAccessControlEntry_AccessControlEntry1">
+    <End Role="AccessControlledAccessControlEntry" Type="HostingModel.Store.AccessControlledAccessControlEntry" Multiplicity="*" />
+    <End Role="AccessControlEntry1" Type="HostingModel.Store.AccessControlEntries" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="AccessControlEntry1">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AccessControlledAccessControlEntry">
+        <PropertyRef Name="AccessControlEntries_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -156,6 +443,34 @@
           </AssociationSet>
           <EntitySet Name="Principals" EntityType="HostingModel.Principal" />
           <EntitySet Name="AccessControlEntries" EntityType="HostingModel.AccessControlEntry" />
+          <AssociationSet Name="PrincipalPrincipal" Association="HostingModel.PrincipalPrincipal">
+            <End Role="Principal" EntitySet="Principals" />
+            <End Role="Principal1" EntitySet="Principals" />
+          </AssociationSet>
+          <AssociationSet Name="PrincipalAccessControlEntry" Association="HostingModel.PrincipalAccessControlEntry">
+            <End Role="Principal" EntitySet="Principals" />
+            <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
+          </AssociationSet>
+          <AssociationSet Name="PrincipalAccessControlEntry1" Association="HostingModel.PrincipalAccessControlEntry1">
+            <End Role="Principal" EntitySet="Principals" />
+            <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
+          </AssociationSet>
+          <AssociationSet Name="AccessControlEntryTenant" Association="HostingModel.AccessControlEntryTenant">
+            <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
+            <End Role="SubjectTenant" EntitySet="Tenants" />
+          </AssociationSet>
+          <AssociationSet Name="TenantPrincipal" Association="HostingModel.TenantPrincipal">
+            <End Role="Tenant" EntitySet="Tenants" />
+            <End Role="Principal" EntitySet="Principals" />
+          </AssociationSet>
+          <AssociationSet Name="TenantPrincipal1" Association="HostingModel.TenantPrincipal1">
+            <End Role="Tenant" EntitySet="Tenants" />
+            <End Role="Principal" EntitySet="Principals" />
+          </AssociationSet>
+          <AssociationSet Name="AccessControlledAccessControlEntry" Association="HostingModel.AccessControlledAccessControlEntry">
+            <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
+            <End Role="AccessControlEntry1" EntitySet="AccessControlEntries" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Tenant">
           <Key>
@@ -166,6 +481,9 @@
           <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="AccessControlEntries" Relationship="HostingModel.AccessControlEntryTenant" FromRole="SubjectTenant" ToRole="AccessControlEntry" />
+          <NavigationProperty Name="Accounts" Relationship="HostingModel.TenantPrincipal" FromRole="Tenant" ToRole="Principal" />
+          <NavigationProperty Name="Owners" Relationship="HostingModel.TenantPrincipal1" FromRole="Tenant" ToRole="Principal" />
         </EntityType>
         <EntityType Name="NugetPackage">
           <Documentation>
@@ -266,6 +584,12 @@
           <Property Name="Iss" Type="String" Nullable="true" />
           <Property Name="Aud" Type="String" Nullable="true" />
           <Property Name="Sub" Type="String" Nullable="true" />
+          <NavigationProperty Name="OwnedPrincipals" Relationship="HostingModel.PrincipalPrincipal" FromRole="Principal" ToRole="Principal1" />
+          <NavigationProperty Name="Owners" Relationship="HostingModel.PrincipalPrincipal" FromRole="Principal1" ToRole="Principal" />
+          <NavigationProperty Name="AccessControlEntries" Relationship="HostingModel.PrincipalAccessControlEntry" FromRole="Principal" ToRole="AccessControlEntry" />
+          <NavigationProperty Name="OwnedAccessControlEntries" Relationship="HostingModel.PrincipalAccessControlEntry1" FromRole="Principal" ToRole="AccessControlEntry" />
+          <NavigationProperty Name="TenantAccounts" Relationship="HostingModel.TenantPrincipal" FromRole="Principal" ToRole="Tenant" />
+          <NavigationProperty Name="OwnedTenants" Relationship="HostingModel.TenantPrincipal1" FromRole="Principal" ToRole="Tenant" />
         </EntityType>
         <EntityType Name="AccessControlEntry">
           <Key>
@@ -277,7 +601,40 @@
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="true" />
+          <NavigationProperty Name="SubjectPrincipals" Relationship="HostingModel.PrincipalAccessControlEntry" FromRole="AccessControlEntry" ToRole="Principal" />
+          <NavigationProperty Name="Owners" Relationship="HostingModel.PrincipalAccessControlEntry1" FromRole="AccessControlEntry" ToRole="Principal" />
+          <NavigationProperty Name="SubjectTenants" Relationship="HostingModel.AccessControlEntryTenant" FromRole="AccessControlEntry" ToRole="SubjectTenant" />
+          <NavigationProperty Name="AccessControlEntries" Relationship="HostingModel.AccessControlledAccessControlEntry" FromRole="AccessControlEntry" ToRole="AccessControlEntry1" />
+          <NavigationProperty Name="SubjectAccessControlEntries" Relationship="HostingModel.AccessControlledAccessControlEntry" FromRole="AccessControlEntry1" ToRole="AccessControlEntry" />
         </EntityType>
+        <Association Name="PrincipalPrincipal">
+          <End Type="HostingModel.Principal" Role="Principal" Multiplicity="*" />
+          <End Type="HostingModel.Principal" Role="Principal1" Multiplicity="*" />
+        </Association>
+        <Association Name="PrincipalAccessControlEntry">
+          <End Type="HostingModel.Principal" Role="Principal" Multiplicity="*" />
+          <End Type="HostingModel.AccessControlEntry" Role="AccessControlEntry" Multiplicity="*" />
+        </Association>
+        <Association Name="PrincipalAccessControlEntry1">
+          <End Type="HostingModel.Principal" Role="Principal" Multiplicity="*" />
+          <End Type="HostingModel.AccessControlEntry" Role="AccessControlEntry" Multiplicity="*" />
+        </Association>
+        <Association Name="AccessControlEntryTenant">
+          <End Type="HostingModel.AccessControlEntry" Role="AccessControlEntry" Multiplicity="*" />
+          <End Type="HostingModel.Tenant" Role="SubjectTenant" Multiplicity="*" />
+        </Association>
+        <Association Name="TenantPrincipal">
+          <End Type="HostingModel.Tenant" Role="Tenant" Multiplicity="*" />
+          <End Type="HostingModel.Principal" Role="Principal" Multiplicity="*" />
+        </Association>
+        <Association Name="TenantPrincipal1">
+          <End Type="HostingModel.Tenant" Role="Tenant" Multiplicity="*" />
+          <End Type="HostingModel.Principal" Role="Principal" Multiplicity="*" />
+        </Association>
+        <Association Name="AccessControlledAccessControlEntry">
+          <End Type="HostingModel.AccessControlEntry" Role="AccessControlEntry" Multiplicity="*" />
+          <End Type="HostingModel.AccessControlEntry" Role="AccessControlEntry1" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -381,6 +738,62 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="PrincipalPrincipal" TypeName="HostingModel.PrincipalPrincipal" StoreEntitySet="PrincipalPrincipal">
+      <EndProperty Name="Principal">
+        <ScalarProperty Name="Id" ColumnName="Owners_Id" />
+      </EndProperty>
+      <EndProperty Name="Principal1">
+        <ScalarProperty Name="Id" ColumnName="OwnedPrincipals_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PrincipalAccessControlEntry" TypeName="HostingModel.PrincipalAccessControlEntry" StoreEntitySet="PrincipalAccessControlEntry">
+      <EndProperty Name="Principal">
+        <ScalarProperty Name="Id" ColumnName="SubjectPrincipals_Id" />
+      </EndProperty>
+      <EndProperty Name="AccessControlEntry">
+        <ScalarProperty Name="Id" ColumnName="AccessControlEntries_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PrincipalAccessControlEntry1" TypeName="HostingModel.PrincipalAccessControlEntry1" StoreEntitySet="PrincipalAccessControlEntry1">
+      <EndProperty Name="Principal">
+        <ScalarProperty Name="Id" ColumnName="Owners_Id" />
+      </EndProperty>
+      <EndProperty Name="AccessControlEntry">
+        <ScalarProperty Name="Id" ColumnName="OwnedAccessControlEntries_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AccessControlEntryTenant" TypeName="HostingModel.AccessControlEntryTenant" StoreEntitySet="AccessControlEntryTenant">
+      <EndProperty Name="AccessControlEntry">
+        <ScalarProperty Name="Id" ColumnName="AccessControlEntries_Id" />
+      </EndProperty>
+      <EndProperty Name="SubjectTenant">
+        <ScalarProperty Name="Id" ColumnName="SubjectTenants_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TenantPrincipal" TypeName="HostingModel.TenantPrincipal" StoreEntitySet="TenantPrincipal">
+      <EndProperty Name="Tenant">
+        <ScalarProperty Name="Id" ColumnName="TenantAccounts_Id" />
+      </EndProperty>
+      <EndProperty Name="Principal">
+        <ScalarProperty Name="Id" ColumnName="Accounts_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TenantPrincipal1" TypeName="HostingModel.TenantPrincipal1" StoreEntitySet="TenantPrincipal1">
+      <EndProperty Name="Tenant">
+        <ScalarProperty Name="Id" ColumnName="OwnedTenants_Id" />
+      </EndProperty>
+      <EndProperty Name="Principal">
+        <ScalarProperty Name="Id" ColumnName="Owners_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AccessControlledAccessControlEntry" TypeName="HostingModel.AccessControlledAccessControlEntry" StoreEntitySet="AccessControlledAccessControlEntry">
+      <EndProperty Name="AccessControlEntry">
+        <ScalarProperty Name="Id" ColumnName="SubjectAccessControlEntries_Id" />
+      </EndProperty>
+      <EndProperty Name="AccessControlEntry1">
+        <ScalarProperty Name="Id" ColumnName="AccessControlEntries_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

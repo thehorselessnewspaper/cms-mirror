@@ -10,6 +10,18 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     public partial class Principal
     {
+        public Principal()
+        {
+            HorselessSessions = new HashSet<HorselessSession>();
+            AccessControlEntries = new HashSet<AccessControlEntry>();
+            OwnedAccessControlEntries = new HashSet<AccessControlEntry>();
+            OwnedHorselessSessions = new HashSet<HorselessSession>();
+            OwnedPrincipals = new HashSet<Principal>();
+            OwnedTenants = new HashSet<Tenant>();
+            Owners = new HashSet<Principal>();
+            TenantAccounts = new HashSet<Tenant>();
+        }
+
         [Key]
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
@@ -20,5 +32,30 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string Iss { get; set; }
         public string Aud { get; set; }
         public string Sub { get; set; }
+
+        [InverseProperty(nameof(HorselessSession.HorselessSessionPrincipal))]
+        public virtual ICollection<HorselessSession> HorselessSessions { get; set; }
+
+        [ForeignKey("SubjectPrincipals_Id")]
+        [InverseProperty(nameof(AccessControlEntry.SubjectPrincipals))]
+        public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
+        [ForeignKey("Owners_Id")]
+        [InverseProperty(nameof(AccessControlEntry.Owners))]
+        public virtual ICollection<AccessControlEntry> OwnedAccessControlEntries { get; set; }
+        [ForeignKey("Owners_Id")]
+        [InverseProperty(nameof(HorselessSession.Owners))]
+        public virtual ICollection<HorselessSession> OwnedHorselessSessions { get; set; }
+        [ForeignKey("Owners_Id")]
+        [InverseProperty(nameof(Principal.Owners))]
+        public virtual ICollection<Principal> OwnedPrincipals { get; set; }
+        [ForeignKey("Owners_Id")]
+        [InverseProperty(nameof(Tenant.Owners))]
+        public virtual ICollection<Tenant> OwnedTenants { get; set; }
+        [ForeignKey("OwnedPrincipals_Id")]
+        [InverseProperty(nameof(Principal.OwnedPrincipals))]
+        public virtual ICollection<Principal> Owners { get; set; }
+        [ForeignKey("Accounts_Id")]
+        [InverseProperty(nameof(Tenant.Accounts))]
+        public virtual ICollection<Tenant> TenantAccounts { get; set; }
     }
 }

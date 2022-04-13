@@ -1,14 +1,12 @@
-likes
+
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/13/2022 12:37:32
+-- Date Created: 04/13/2022 16:03:41
 -- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
-SET QUOTED_IDENTIFIER OFF;
-GO
-USE [THNLP_Content];
+
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -119,17 +117,44 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryAccessControlEntry_AccessControlEntry]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AccessControlEntryAccessControlEntry] DROP CONSTRAINT [FK_AccessControlEntryAccessControlEntry_AccessControlEntry];
 GO
-IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryAccessControlEntry_AccessControlEntry1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AccessControlEntryAccessControlEntry] DROP CONSTRAINT [FK_AccessControlEntryAccessControlEntry_AccessControlEntry1];
+IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AccessControlEntryAccessControlEntry] DROP CONSTRAINT [FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry];
 GO
-IF OBJECT_ID(N'[dbo].[FK_OwnedAccessControlEntryPrincipal]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Principals] DROP CONSTRAINT [FK_OwnedAccessControlEntryPrincipal];
+IF OBJECT_ID(N'[dbo].[FK_PrincipalPrincipal_Principal]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PrincipalPrincipal] DROP CONSTRAINT [FK_PrincipalPrincipal_Principal];
 GO
-IF OBJECT_ID(N'[dbo].[FK_TenantAccessControlEntry_Tenant]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TenantAccessControlEntry] DROP CONSTRAINT [FK_TenantAccessControlEntry_Tenant];
+IF OBJECT_ID(N'[dbo].[FK_PrincipalPrincipal_Principal1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PrincipalPrincipal] DROP CONSTRAINT [FK_PrincipalPrincipal_Principal1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryOwners_AccessControlEntry]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AccessControlEntryOwners] DROP CONSTRAINT [FK_AccessControlEntryOwners_AccessControlEntry];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryOwners_Owner]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AccessControlEntryOwners] DROP CONSTRAINT [FK_AccessControlEntryOwners_Owner];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TenantAccounts_Tenant]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TenantAccounts] DROP CONSTRAINT [FK_TenantAccounts_Tenant];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TenantAccounts_Principal]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TenantAccounts] DROP CONSTRAINT [FK_TenantAccounts_Principal];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TenantAccessControlEntry_SubjectTenant]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TenantAccessControlEntry] DROP CONSTRAINT [FK_TenantAccessControlEntry_SubjectTenant];
 GO
 IF OBJECT_ID(N'[dbo].[FK_TenantAccessControlEntry_AccessControlEntry]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TenantAccessControlEntry] DROP CONSTRAINT [FK_TenantAccessControlEntry_AccessControlEntry];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PrincipalHorselessSession]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HorselessSessions] DROP CONSTRAINT [FK_PrincipalHorselessSession];
+GO
+IF OBJECT_ID(N'[dbo].[FK_HorselessSessionAccessControlEntry_SubjectHorselessSession]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HorselessSessionAccessControlEntry] DROP CONSTRAINT [FK_HorselessSessionAccessControlEntry_SubjectHorselessSession];
+GO
+IF OBJECT_ID(N'[dbo].[FK_HorselessSessionAccessControlEntry_AccessControlledHorselessSession]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HorselessSessionAccessControlEntry] DROP CONSTRAINT [FK_HorselessSessionAccessControlEntry_AccessControlledHorselessSession];
+GO
+IF OBJECT_ID(N'[dbo].[FK_HorselessSessionPrincipal]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HorselessSessions] DROP CONSTRAINT [FK_HorselessSessionPrincipal];
 GO
 
 -- --------------------------------------------------
@@ -238,8 +263,20 @@ GO
 IF OBJECT_ID(N'[dbo].[AccessControlEntryAccessControlEntry]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AccessControlEntryAccessControlEntry];
 GO
+IF OBJECT_ID(N'[dbo].[PrincipalPrincipal]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PrincipalPrincipal];
+GO
+IF OBJECT_ID(N'[dbo].[AccessControlEntryOwners]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AccessControlEntryOwners];
+GO
+IF OBJECT_ID(N'[dbo].[TenantAccounts]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TenantAccounts];
+GO
 IF OBJECT_ID(N'[dbo].[TenantAccessControlEntry]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TenantAccessControlEntry];
+GO
+IF OBJECT_ID(N'[dbo].[HorselessSessionAccessControlEntry]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[HorselessSessionAccessControlEntry];
 GO
 
 -- --------------------------------------------------
@@ -394,9 +431,7 @@ CREATE TABLE [dbo].[Principals] (
     [CreatedAt] datetime  NULL,
     [Iss] nvarchar(max)  NULL,
     [Aud] nvarchar(max)  NULL,
-    [Sub] nvarchar(max)  NULL,
-    [PrincipalId] uniqueidentifier  NOT NULL,
-    [AccessControlEntryId] uniqueidentifier  NOT NULL
+    [Sub] nvarchar(max)  NULL
 );
 GO
 
@@ -439,7 +474,8 @@ CREATE TABLE [dbo].[HorselessSessions] (
     [Iss] nvarchar(max)  NULL,
     [Aud] nvarchar(max)  NULL,
     [Sub] nvarchar(max)  NULL,
-    [IsAnonymous] bit  NULL
+    [IsAnonymous] bit  NULL,
+    [HorselessSessionPrincipalId] uniqueidentifier  NULL
 );
 GO
 
@@ -594,14 +630,7 @@ GO
 
 -- Creating table 'AccessControlEntryAccessControlEntry'
 CREATE TABLE [dbo].[AccessControlEntryAccessControlEntry] (
-    [ParentAccessControlEntries_Id] uniqueidentifier  NOT NULL,
-    [AccessControlEntries_Id] uniqueidentifier  NOT NULL
-);
-GO
-
--- Creating table 'TenantAccessControlEntry'
-CREATE TABLE [dbo].[TenantAccessControlEntry] (
-    [AccessControlledTenants_Id] uniqueidentifier  NOT NULL,
+    [SubjectAccessControlEntries_Id] uniqueidentifier  NOT NULL,
     [AccessControlEntries_Id] uniqueidentifier  NOT NULL
 );
 GO
@@ -609,6 +638,41 @@ GO
 -- Creating table 'PrincipalPrincipal'
 CREATE TABLE [dbo].[PrincipalPrincipal] (
     [OwnedPrincipals_Id] uniqueidentifier  NOT NULL,
+    [Owners_Id] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'AccessControlEntryOwners'
+CREATE TABLE [dbo].[AccessControlEntryOwners] (
+    [OwnedAccessControlEntries_Id] uniqueidentifier  NOT NULL,
+    [Owners_Id] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'TenantAccounts'
+CREATE TABLE [dbo].[TenantAccounts] (
+    [TenantAccounts_Id] uniqueidentifier  NOT NULL,
+    [Accounts_Id] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'TenantAccessControlEntry'
+CREATE TABLE [dbo].[TenantAccessControlEntry] (
+    [SubjectTenants_Id] uniqueidentifier  NOT NULL,
+    [AccessControlEntries_Id] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'HorselessSessionAccessControlEntry'
+CREATE TABLE [dbo].[HorselessSessionAccessControlEntry] (
+    [SubjectHorselessSessions_Id] uniqueidentifier  NOT NULL,
+    [AccessControlEntries_Id] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'HorselessSessionPrincipal'
+CREATE TABLE [dbo].[HorselessSessionPrincipal] (
+    [OwnedHorselessSessions_Id] uniqueidentifier  NOT NULL,
     [Owners_Id] uniqueidentifier  NOT NULL
 );
 GO
@@ -815,22 +879,46 @@ ADD CONSTRAINT [PK_PrincipalAccessControlEntry]
     PRIMARY KEY CLUSTERED ([SubjectPrincipals_Id], [AccessControlEntries_Id] ASC);
 GO
 
--- Creating primary key on [ParentAccessControlEntries_Id], [AccessControlEntries_Id] in table 'AccessControlEntryAccessControlEntry'
+-- Creating primary key on [SubjectAccessControlEntries_Id], [AccessControlEntries_Id] in table 'AccessControlEntryAccessControlEntry'
 ALTER TABLE [dbo].[AccessControlEntryAccessControlEntry]
 ADD CONSTRAINT [PK_AccessControlEntryAccessControlEntry]
-    PRIMARY KEY CLUSTERED ([ParentAccessControlEntries_Id], [AccessControlEntries_Id] ASC);
-GO
-
--- Creating primary key on [AccessControlledTenants_Id], [AccessControlEntries_Id] in table 'TenantAccessControlEntry'
-ALTER TABLE [dbo].[TenantAccessControlEntry]
-ADD CONSTRAINT [PK_TenantAccessControlEntry]
-    PRIMARY KEY CLUSTERED ([AccessControlledTenants_Id], [AccessControlEntries_Id] ASC);
+    PRIMARY KEY CLUSTERED ([SubjectAccessControlEntries_Id], [AccessControlEntries_Id] ASC);
 GO
 
 -- Creating primary key on [OwnedPrincipals_Id], [Owners_Id] in table 'PrincipalPrincipal'
 ALTER TABLE [dbo].[PrincipalPrincipal]
 ADD CONSTRAINT [PK_PrincipalPrincipal]
     PRIMARY KEY CLUSTERED ([OwnedPrincipals_Id], [Owners_Id] ASC);
+GO
+
+-- Creating primary key on [OwnedAccessControlEntries_Id], [Owners_Id] in table 'AccessControlEntryOwners'
+ALTER TABLE [dbo].[AccessControlEntryOwners]
+ADD CONSTRAINT [PK_AccessControlEntryOwners]
+    PRIMARY KEY CLUSTERED ([OwnedAccessControlEntries_Id], [Owners_Id] ASC);
+GO
+
+-- Creating primary key on [TenantAccounts_Id], [Accounts_Id] in table 'TenantAccounts'
+ALTER TABLE [dbo].[TenantAccounts]
+ADD CONSTRAINT [PK_TenantAccounts]
+    PRIMARY KEY CLUSTERED ([TenantAccounts_Id], [Accounts_Id] ASC);
+GO
+
+-- Creating primary key on [SubjectTenants_Id], [AccessControlEntries_Id] in table 'TenantAccessControlEntry'
+ALTER TABLE [dbo].[TenantAccessControlEntry]
+ADD CONSTRAINT [PK_TenantAccessControlEntry]
+    PRIMARY KEY CLUSTERED ([SubjectTenants_Id], [AccessControlEntries_Id] ASC);
+GO
+
+-- Creating primary key on [SubjectHorselessSessions_Id], [AccessControlEntries_Id] in table 'HorselessSessionAccessControlEntry'
+ALTER TABLE [dbo].[HorselessSessionAccessControlEntry]
+ADD CONSTRAINT [PK_HorselessSessionAccessControlEntry]
+    PRIMARY KEY CLUSTERED ([SubjectHorselessSessions_Id], [AccessControlEntries_Id] ASC);
+GO
+
+-- Creating primary key on [OwnedHorselessSessions_Id], [Owners_Id] in table 'HorselessSessionPrincipal'
+ALTER TABLE [dbo].[HorselessSessionPrincipal]
+ADD CONSTRAINT [PK_HorselessSessionPrincipal]
+    PRIMARY KEY CLUSTERED ([OwnedHorselessSessions_Id], [Owners_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -1242,10 +1330,10 @@ ON [dbo].[PrincipalAccessControlEntry]
     ([AccessControlEntries_Id]);
 GO
 
--- Creating foreign key on [ParentAccessControlEntries_Id] in table 'AccessControlEntryAccessControlEntry'
+-- Creating foreign key on [SubjectAccessControlEntries_Id] in table 'AccessControlEntryAccessControlEntry'
 ALTER TABLE [dbo].[AccessControlEntryAccessControlEntry]
 ADD CONSTRAINT [FK_AccessControlEntryAccessControlEntry_AccessControlEntry]
-    FOREIGN KEY ([ParentAccessControlEntries_Id])
+    FOREIGN KEY ([SubjectAccessControlEntries_Id])
     REFERENCES [dbo].[AccessControlEntries]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -1253,55 +1341,16 @@ GO
 
 -- Creating foreign key on [AccessControlEntries_Id] in table 'AccessControlEntryAccessControlEntry'
 ALTER TABLE [dbo].[AccessControlEntryAccessControlEntry]
-ADD CONSTRAINT [FK_AccessControlEntryAccessControlEntry_AccessControlEntry1]
+ADD CONSTRAINT [FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry]
     FOREIGN KEY ([AccessControlEntries_Id])
     REFERENCES [dbo].[AccessControlEntries]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_AccessControlEntryAccessControlEntry_AccessControlEntry1'
-CREATE INDEX [IX_FK_AccessControlEntryAccessControlEntry_AccessControlEntry1]
+-- Creating non-clustered index for FOREIGN KEY 'FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry'
+CREATE INDEX [IX_FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry]
 ON [dbo].[AccessControlEntryAccessControlEntry]
-    ([AccessControlEntries_Id]);
-GO
-
--- Creating foreign key on [AccessControlEntryId] in table 'Principals'
-ALTER TABLE [dbo].[Principals]
-ADD CONSTRAINT [FK_OwnedAccessControlEntryPrincipal]
-    FOREIGN KEY ([AccessControlEntryId])
-    REFERENCES [dbo].[AccessControlEntries]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_OwnedAccessControlEntryPrincipal'
-CREATE INDEX [IX_FK_OwnedAccessControlEntryPrincipal]
-ON [dbo].[Principals]
-    ([AccessControlEntryId]);
-GO
-
--- Creating foreign key on [AccessControlledTenants_Id] in table 'TenantAccessControlEntry'
-ALTER TABLE [dbo].[TenantAccessControlEntry]
-ADD CONSTRAINT [FK_TenantAccessControlEntry_Tenant]
-    FOREIGN KEY ([AccessControlledTenants_Id])
-    REFERENCES [dbo].[Tenants]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [AccessControlEntries_Id] in table 'TenantAccessControlEntry'
-ALTER TABLE [dbo].[TenantAccessControlEntry]
-ADD CONSTRAINT [FK_TenantAccessControlEntry_AccessControlEntry]
-    FOREIGN KEY ([AccessControlEntries_Id])
-    REFERENCES [dbo].[AccessControlEntries]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TenantAccessControlEntry_AccessControlEntry'
-CREATE INDEX [IX_FK_TenantAccessControlEntry_AccessControlEntry]
-ON [dbo].[TenantAccessControlEntry]
     ([AccessControlEntries_Id]);
 GO
 
@@ -1326,6 +1375,141 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_PrincipalPrincipal_Principal1'
 CREATE INDEX [IX_FK_PrincipalPrincipal_Principal1]
 ON [dbo].[PrincipalPrincipal]
+    ([Owners_Id]);
+GO
+
+-- Creating foreign key on [OwnedAccessControlEntries_Id] in table 'AccessControlEntryOwners'
+ALTER TABLE [dbo].[AccessControlEntryOwners]
+ADD CONSTRAINT [FK_AccessControlEntryOwners_AccessControlEntry]
+    FOREIGN KEY ([OwnedAccessControlEntries_Id])
+    REFERENCES [dbo].[AccessControlEntries]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Owners_Id] in table 'AccessControlEntryOwners'
+ALTER TABLE [dbo].[AccessControlEntryOwners]
+ADD CONSTRAINT [FK_AccessControlEntryOwners_Owner]
+    FOREIGN KEY ([Owners_Id])
+    REFERENCES [dbo].[Principals]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AccessControlEntryOwners_Owner'
+CREATE INDEX [IX_FK_AccessControlEntryOwners_Owner]
+ON [dbo].[AccessControlEntryOwners]
+    ([Owners_Id]);
+GO
+
+-- Creating foreign key on [TenantAccounts_Id] in table 'TenantAccounts'
+ALTER TABLE [dbo].[TenantAccounts]
+ADD CONSTRAINT [FK_TenantAccounts_Tenant]
+    FOREIGN KEY ([TenantAccounts_Id])
+    REFERENCES [dbo].[Tenants]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Accounts_Id] in table 'TenantAccounts'
+ALTER TABLE [dbo].[TenantAccounts]
+ADD CONSTRAINT [FK_TenantAccounts_Principal]
+    FOREIGN KEY ([Accounts_Id])
+    REFERENCES [dbo].[Principals]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TenantAccounts_Principal'
+CREATE INDEX [IX_FK_TenantAccounts_Principal]
+ON [dbo].[TenantAccounts]
+    ([Accounts_Id]);
+GO
+
+-- Creating foreign key on [SubjectTenants_Id] in table 'TenantAccessControlEntry'
+ALTER TABLE [dbo].[TenantAccessControlEntry]
+ADD CONSTRAINT [FK_TenantAccessControlEntry_SubjectTenant]
+    FOREIGN KEY ([SubjectTenants_Id])
+    REFERENCES [dbo].[Tenants]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [AccessControlEntries_Id] in table 'TenantAccessControlEntry'
+ALTER TABLE [dbo].[TenantAccessControlEntry]
+ADD CONSTRAINT [FK_TenantAccessControlEntry_AccessControlEntry]
+    FOREIGN KEY ([AccessControlEntries_Id])
+    REFERENCES [dbo].[AccessControlEntries]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TenantAccessControlEntry_AccessControlEntry'
+CREATE INDEX [IX_FK_TenantAccessControlEntry_AccessControlEntry]
+ON [dbo].[TenantAccessControlEntry]
+    ([AccessControlEntries_Id]);
+GO
+
+-- Creating foreign key on [HorselessSessionPrincipalId] in table 'HorselessSessions'
+ALTER TABLE [dbo].[HorselessSessions]
+ADD CONSTRAINT [FK_PrincipalHorselessSession]
+    FOREIGN KEY ([HorselessSessionPrincipalId])
+    REFERENCES [dbo].[Principals]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PrincipalHorselessSession'
+CREATE INDEX [IX_FK_PrincipalHorselessSession]
+ON [dbo].[HorselessSessions]
+    ([HorselessSessionPrincipalId]);
+GO
+
+-- Creating foreign key on [SubjectHorselessSessions_Id] in table 'HorselessSessionAccessControlEntry'
+ALTER TABLE [dbo].[HorselessSessionAccessControlEntry]
+ADD CONSTRAINT [FK_HorselessSessionAccessControlEntry_SubjectHorselessSession]
+    FOREIGN KEY ([SubjectHorselessSessions_Id])
+    REFERENCES [dbo].[HorselessSessions]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [AccessControlEntries_Id] in table 'HorselessSessionAccessControlEntry'
+ALTER TABLE [dbo].[HorselessSessionAccessControlEntry]
+ADD CONSTRAINT [FK_HorselessSessionAccessControlEntry_AccessControlledHorselessSession]
+    FOREIGN KEY ([AccessControlEntries_Id])
+    REFERENCES [dbo].[AccessControlEntries]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_HorselessSessionAccessControlEntry_AccessControlledHorselessSession'
+CREATE INDEX [IX_FK_HorselessSessionAccessControlEntry_AccessControlledHorselessSession]
+ON [dbo].[HorselessSessionAccessControlEntry]
+    ([AccessControlEntries_Id]);
+GO
+
+-- Creating foreign key on [OwnedHorselessSessions_Id] in table 'HorselessSessionPrincipal'
+ALTER TABLE [dbo].[HorselessSessionPrincipal]
+ADD CONSTRAINT [FK_HorselessSessionPrincipal_HorselessSession]
+    FOREIGN KEY ([OwnedHorselessSessions_Id])
+    REFERENCES [dbo].[HorselessSessions]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Owners_Id] in table 'HorselessSessionPrincipal'
+ALTER TABLE [dbo].[HorselessSessionPrincipal]
+ADD CONSTRAINT [FK_HorselessSessionPrincipal_Principal]
+    FOREIGN KEY ([Owners_Id])
+    REFERENCES [dbo].[Principals]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_HorselessSessionPrincipal_Principal'
+CREATE INDEX [IX_FK_HorselessSessionPrincipal_Principal]
+ON [dbo].[HorselessSessionPrincipal]
     ([Owners_Id]);
 GO
 

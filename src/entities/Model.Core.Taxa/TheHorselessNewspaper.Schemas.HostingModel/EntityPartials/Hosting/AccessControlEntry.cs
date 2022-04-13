@@ -50,17 +50,17 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
 
-        [NotMapped]
-        public ICollection<AccessControlEntry> AccessControlList { get; set; }
+        //[NotMapped]
+        //public ICollection<AccessControlEntry> AccessControlList { get; set; }
 
 
-        [NotMapped]
-        public ICollection<Principal> Owners { get; set; }
+        //[NotMapped]
+        //public ICollection<Principal> Owners { get; set; }
 
 
-        //[ForeignKey("PrincipalId")]
-        //[InverseProperty(nameof(Principal.AccessControlEntries))]
-        public virtual ICollection<Principal> Principals { get; set; } = new HashSet<Principal>();
+        ////[ForeignKey("PrincipalId")]
+        ////[InverseProperty(nameof(Principal.AccessControlEntries))]
+        //public virtual ICollection<Principal> Principals { get; set; } = new HashSet<Principal>();
 
     }
 
@@ -80,12 +80,12 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public static async Task<bool> IsPermitted<T>(this T entity, ACEPermission permission, ClaimsPrincipal principal, IAuthorizationService service) 
             where T : IContentRowLevelSecured
         {
-            var isPermittedRead = entity.AccessControlList.First().Permission.HasFlag(ACEPermission.READ) && permission.HasFlag(ACEPermission.READ);
-            var isPermittedWrite = entity.AccessControlList.First().Permission.HasFlag(ACEPermission.CREATE) && permission.HasFlag(ACEPermission.CREATE);
+            var isPermittedRead = entity.AccessControlEntries.First().Permission.HasFlag(ACEPermission.READ) && permission.HasFlag(ACEPermission.READ);
+            var isPermittedWrite = entity.AccessControlEntries.First().Permission.HasFlag(ACEPermission.CREATE) && permission.HasFlag(ACEPermission.CREATE);
 
 
-            var isPermittedUpdate = entity.AccessControlList.First().Permission.HasFlag(ACEPermission.UPDATE) && permission.HasFlag(ACEPermission.UPDATE);
-            var isPermittedDelete = entity.AccessControlList.First().Permission.HasFlag(ACEPermission.DELETE) && permission.HasFlag(ACEPermission.DELETE);
+            var isPermittedUpdate = entity.AccessControlEntries.First().Permission.HasFlag(ACEPermission.UPDATE) && permission.HasFlag(ACEPermission.UPDATE);
+            var isPermittedDelete = entity.AccessControlEntries.First().Permission.HasFlag(ACEPermission.DELETE) && permission.HasFlag(ACEPermission.DELETE);
 
             return await Task.FromResult(true);
         }

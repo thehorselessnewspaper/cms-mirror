@@ -2,15 +2,37 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
     public partial class Tenant
     {
+        public Tenant()
+        {
+            AccessControlEntries = new HashSet<AccessControlEntry>();
+            Accounts = new HashSet<Principal>();
+            Owners = new HashSet<Principal>();
+        }
+
+        [Key]
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
+        [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
+
+        [ForeignKey("SubjectTenants_Id")]
+        [InverseProperty(nameof(AccessControlEntry.SubjectTenants))]
+        public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
+        [ForeignKey("TenantAccounts_Id")]
+        [InverseProperty(nameof(Principal.TenantAccounts))]
+        public virtual ICollection<Principal> Accounts { get; set; }
+        [ForeignKey("OwnedTenants_Id")]
+        [InverseProperty(nameof(Principal.OwnedTenants))]
+        public virtual ICollection<Principal> Owners { get; set; }
     }
 }

@@ -40,8 +40,12 @@
     <EntitySet Name="TenantOwners" EntityType="HorselessContentModel.Store.TenantOwners" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PrincipalAccessControlEntry" EntityType="HorselessContentModel.Store.PrincipalAccessControlEntry" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AccessControlEntryAccessControlEntry" EntityType="HorselessContentModel.Store.AccessControlEntryAccessControlEntry" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="TenantAccessControlEntry" EntityType="HorselessContentModel.Store.TenantAccessControlEntry" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PrincipalPrincipal" EntityType="HorselessContentModel.Store.PrincipalPrincipal" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AccessControlEntryOwners" EntityType="HorselessContentModel.Store.AccessControlEntryOwners" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TenantAccounts" EntityType="HorselessContentModel.Store.TenantAccounts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TenantAccessControlEntry" EntityType="HorselessContentModel.Store.TenantAccessControlEntry" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HorselessSessionAccessControlEntry" EntityType="HorselessContentModel.Store.HorselessSessionAccessControlEntry" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HorselessSessionPrincipal" EntityType="HorselessContentModel.Store.HorselessSessionPrincipal" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_TenantContentCollection_Tenant" Association="HorselessContentModel.Store.FK_TenantContentCollection_Tenant">
       <End Role="Tenant" EntitySet="Tenants" />
       <End Role="TenantContentCollection" EntitySet="TenantContentCollection" />
@@ -178,21 +182,9 @@
       <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
       <End Role="AccessControlEntryAccessControlEntry" EntitySet="AccessControlEntryAccessControlEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_AccessControlEntryAccessControlEntry_AccessControlEntry1" Association="HorselessContentModel.Store.FK_AccessControlEntryAccessControlEntry_AccessControlEntry1">
-      <End Role="AccessControlEntry1" EntitySet="AccessControlEntries" />
+    <AssociationSet Name="FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry" Association="HorselessContentModel.Store.FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry">
+      <End Role="SubjectAccessControlEntry" EntitySet="AccessControlEntries" />
       <End Role="AccessControlEntryAccessControlEntry" EntitySet="AccessControlEntryAccessControlEntry" />
-    </AssociationSet>
-    <AssociationSet Name="OwnedAccessControlEntryPrincipal" Association="HorselessContentModel.Store.OwnedAccessControlEntryPrincipal">
-      <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
-      <End Role="Principal" EntitySet="Principals" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TenantAccessControlEntry_Tenant" Association="HorselessContentModel.Store.FK_TenantAccessControlEntry_Tenant">
-      <End Role="Tenant" EntitySet="Tenants" />
-      <End Role="TenantAccessControlEntry" EntitySet="TenantAccessControlEntry" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TenantAccessControlEntry_AccessControlEntry" Association="HorselessContentModel.Store.FK_TenantAccessControlEntry_AccessControlEntry">
-      <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
-      <End Role="TenantAccessControlEntry" EntitySet="TenantAccessControlEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_PrincipalPrincipal_Principal" Association="HorselessContentModel.Store.FK_PrincipalPrincipal_Principal">
       <End Role="Principal" EntitySet="Principals" />
@@ -201,6 +193,50 @@
     <AssociationSet Name="FK_PrincipalPrincipal_Principal1" Association="HorselessContentModel.Store.FK_PrincipalPrincipal_Principal1">
       <End Role="Principal1" EntitySet="Principals" />
       <End Role="PrincipalPrincipal" EntitySet="PrincipalPrincipal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccessControlEntryOwners_AccessControlEntry" Association="HorselessContentModel.Store.FK_AccessControlEntryOwners_AccessControlEntry">
+      <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
+      <End Role="AccessControlEntryOwners" EntitySet="AccessControlEntryOwners" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccessControlEntryOwners_Owner" Association="HorselessContentModel.Store.FK_AccessControlEntryOwners_Owner">
+      <End Role="Owner" EntitySet="Principals" />
+      <End Role="AccessControlEntryOwners" EntitySet="AccessControlEntryOwners" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TenantAccounts_Tenant" Association="HorselessContentModel.Store.FK_TenantAccounts_Tenant">
+      <End Role="Tenant" EntitySet="Tenants" />
+      <End Role="TenantAccounts" EntitySet="TenantAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TenantAccounts_Principal" Association="HorselessContentModel.Store.FK_TenantAccounts_Principal">
+      <End Role="Principal" EntitySet="Principals" />
+      <End Role="TenantAccounts" EntitySet="TenantAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TenantAccessControlEntry_SubjectTenant" Association="HorselessContentModel.Store.FK_TenantAccessControlEntry_SubjectTenant">
+      <End Role="SubjectTenant" EntitySet="Tenants" />
+      <End Role="TenantAccessControlEntry" EntitySet="TenantAccessControlEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TenantAccessControlEntry_AccessControlEntry" Association="HorselessContentModel.Store.FK_TenantAccessControlEntry_AccessControlEntry">
+      <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
+      <End Role="TenantAccessControlEntry" EntitySet="TenantAccessControlEntry" />
+    </AssociationSet>
+    <AssociationSet Name="PrincipalHorselessSession" Association="HorselessContentModel.Store.PrincipalHorselessSession">
+      <End Role="Principal" EntitySet="Principals" />
+      <End Role="HorselessSession" EntitySet="HorselessSessions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HorselessSessionAccessControlEntry_SubjectHorselessSession" Association="HorselessContentModel.Store.FK_HorselessSessionAccessControlEntry_SubjectHorselessSession">
+      <End Role="SubjectHorselessSession" EntitySet="HorselessSessions" />
+      <End Role="HorselessSessionAccessControlEntry" EntitySet="HorselessSessionAccessControlEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HorselessSessionAccessControlEntry_AccessControlledHorselessSession" Association="HorselessContentModel.Store.FK_HorselessSessionAccessControlEntry_AccessControlledHorselessSession">
+      <End Role="AccessControlledHorselessSession" EntitySet="AccessControlEntries" />
+      <End Role="HorselessSessionAccessControlEntry" EntitySet="HorselessSessionAccessControlEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HorselessSessionPrincipal_HorselessSession" Association="HorselessContentModel.Store.FK_HorselessSessionPrincipal_HorselessSession">
+      <End Role="HorselessSession" EntitySet="HorselessSessions" />
+      <End Role="HorselessSessionPrincipal" EntitySet="HorselessSessionPrincipal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HorselessSessionPrincipal_Principal" Association="HorselessContentModel.Store.FK_HorselessSessionPrincipal_Principal">
+      <End Role="Principal" EntitySet="Principals" />
+      <End Role="HorselessSessionPrincipal" EntitySet="HorselessSessionPrincipal" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="HorselessContents">
@@ -354,8 +390,6 @@
     <Property Name="Iss" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Aud" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Sub" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="PrincipalId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="AccessControlEntryId" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="NugetPackages">
     <Key>
@@ -399,6 +433,7 @@
     <Property Name="Aud" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Sub" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsAnonymous" Type="bit" Nullable="true" />
+    <Property Name="HorselessSessionPrincipalId" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <EntityType Name="NavigationMenus">
     <Key>
@@ -566,18 +601,10 @@
   </EntityType>
   <EntityType Name="AccessControlEntryAccessControlEntry">
     <Key>
-      <PropertyRef Name="ParentAccessControlEntries_Id" />
+      <PropertyRef Name="SubjectAccessControlEntries_Id" />
       <PropertyRef Name="AccessControlEntries_Id" />
     </Key>
-    <Property Name="ParentAccessControlEntries_Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="AccessControlEntries_Id" Type="uniqueidentifier" Nullable="false" />
-  </EntityType>
-  <EntityType Name="TenantAccessControlEntry">
-    <Key>
-      <PropertyRef Name="AccessControlledTenants_Id" />
-      <PropertyRef Name="AccessControlEntries_Id" />
-    </Key>
-    <Property Name="AccessControlledTenants_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SubjectAccessControlEntries_Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="AccessControlEntries_Id" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="PrincipalPrincipal">
@@ -586,6 +613,46 @@
       <PropertyRef Name="Owners_Id" />
     </Key>
     <Property Name="OwnedPrincipals_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Owners_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AccessControlEntryOwners">
+    <Key>
+      <PropertyRef Name="OwnedAccessControlEntries_Id" />
+      <PropertyRef Name="Owners_Id" />
+    </Key>
+    <Property Name="OwnedAccessControlEntries_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Owners_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TenantAccounts">
+    <Key>
+      <PropertyRef Name="TenantAccounts_Id" />
+      <PropertyRef Name="Accounts_Id" />
+    </Key>
+    <Property Name="TenantAccounts_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Accounts_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TenantAccessControlEntry">
+    <Key>
+      <PropertyRef Name="SubjectTenants_Id" />
+      <PropertyRef Name="AccessControlEntries_Id" />
+    </Key>
+    <Property Name="SubjectTenants_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AccessControlEntries_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HorselessSessionAccessControlEntry">
+    <Key>
+      <PropertyRef Name="SubjectHorselessSessions_Id" />
+      <PropertyRef Name="AccessControlEntries_Id" />
+    </Key>
+    <Property Name="SubjectHorselessSessions_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AccessControlEntries_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HorselessSessionPrincipal">
+    <Key>
+      <PropertyRef Name="OwnedHorselessSessions_Id" />
+      <PropertyRef Name="Owners_Id" />
+    </Key>
+    <Property Name="OwnedHorselessSessions_Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Owners_Id" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <Association Name="FilesystemAssetMimeContent">
@@ -624,15 +691,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="OwnedAccessControlEntryPrincipal">
-    <End Role="AccessControlEntry" Type="HorselessContentModel.Store.AccessControlEntries" Multiplicity="1" />
-    <End Role="Principal" Type="HorselessContentModel.Store.Principals" Multiplicity="*" />
+  <Association Name="PrincipalHorselessSession">
+    <End Role="Principal" Type="HorselessContentModel.Store.Principals" Multiplicity="0..1" />
+    <End Role="HorselessSession" Type="HorselessContentModel.Store.HorselessSessions" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="AccessControlEntry">
+      <Principal Role="Principal">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Principal">
-        <PropertyRef Name="AccessControlEntryId" />
+      <Dependent Role="HorselessSession">
+        <PropertyRef Name="HorselessSessionPrincipalId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1004,42 +1071,18 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="AccessControlEntryAccessControlEntry">
-        <PropertyRef Name="ParentAccessControlEntries_Id" />
+        <PropertyRef Name="SubjectAccessControlEntries_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_AccessControlEntryAccessControlEntry_AccessControlEntry1">
+  <Association Name="FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry">
     <End Role="AccessControlEntryAccessControlEntry" Type="HorselessContentModel.Store.AccessControlEntryAccessControlEntry" Multiplicity="*" />
-    <End Role="AccessControlEntry1" Type="HorselessContentModel.Store.AccessControlEntries" Multiplicity="1" />
+    <End Role="SubjectAccessControlEntry" Type="HorselessContentModel.Store.AccessControlEntries" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="AccessControlEntry1">
+      <Principal Role="SubjectAccessControlEntry">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="AccessControlEntryAccessControlEntry">
-        <PropertyRef Name="AccessControlEntries_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TenantAccessControlEntry_Tenant">
-    <End Role="Tenant" Type="HorselessContentModel.Store.Tenants" Multiplicity="1" />
-    <End Role="TenantAccessControlEntry" Type="HorselessContentModel.Store.TenantAccessControlEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tenant">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TenantAccessControlEntry">
-        <PropertyRef Name="AccessControlledTenants_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TenantAccessControlEntry_AccessControlEntry">
-    <End Role="TenantAccessControlEntry" Type="HorselessContentModel.Store.TenantAccessControlEntry" Multiplicity="*" />
-    <End Role="AccessControlEntry" Type="HorselessContentModel.Store.AccessControlEntries" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="AccessControlEntry">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TenantAccessControlEntry">
         <PropertyRef Name="AccessControlEntries_Id" />
       </Dependent>
     </ReferentialConstraint>
@@ -1064,6 +1107,126 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="PrincipalPrincipal">
+        <PropertyRef Name="Owners_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccessControlEntryOwners_AccessControlEntry">
+    <End Role="AccessControlEntry" Type="HorselessContentModel.Store.AccessControlEntries" Multiplicity="1" />
+    <End Role="AccessControlEntryOwners" Type="HorselessContentModel.Store.AccessControlEntryOwners" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccessControlEntry">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AccessControlEntryOwners">
+        <PropertyRef Name="OwnedAccessControlEntries_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccessControlEntryOwners_Owner">
+    <End Role="AccessControlEntryOwners" Type="HorselessContentModel.Store.AccessControlEntryOwners" Multiplicity="*" />
+    <End Role="Owner" Type="HorselessContentModel.Store.Principals" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Owner">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AccessControlEntryOwners">
+        <PropertyRef Name="Owners_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TenantAccounts_Tenant">
+    <End Role="Tenant" Type="HorselessContentModel.Store.Tenants" Multiplicity="1" />
+    <End Role="TenantAccounts" Type="HorselessContentModel.Store.TenantAccounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tenant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TenantAccounts">
+        <PropertyRef Name="TenantAccounts_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TenantAccounts_Principal">
+    <End Role="TenantAccounts" Type="HorselessContentModel.Store.TenantAccounts" Multiplicity="*" />
+    <End Role="Principal" Type="HorselessContentModel.Store.Principals" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Principal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TenantAccounts">
+        <PropertyRef Name="Accounts_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TenantAccessControlEntry_SubjectTenant">
+    <End Role="SubjectTenant" Type="HorselessContentModel.Store.Tenants" Multiplicity="1" />
+    <End Role="TenantAccessControlEntry" Type="HorselessContentModel.Store.TenantAccessControlEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubjectTenant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TenantAccessControlEntry">
+        <PropertyRef Name="SubjectTenants_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TenantAccessControlEntry_AccessControlEntry">
+    <End Role="TenantAccessControlEntry" Type="HorselessContentModel.Store.TenantAccessControlEntry" Multiplicity="*" />
+    <End Role="AccessControlEntry" Type="HorselessContentModel.Store.AccessControlEntries" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="AccessControlEntry">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TenantAccessControlEntry">
+        <PropertyRef Name="AccessControlEntries_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HorselessSessionAccessControlEntry_SubjectHorselessSession">
+    <End Role="SubjectHorselessSession" Type="HorselessContentModel.Store.HorselessSessions" Multiplicity="1" />
+    <End Role="HorselessSessionAccessControlEntry" Type="HorselessContentModel.Store.HorselessSessionAccessControlEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubjectHorselessSession">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HorselessSessionAccessControlEntry">
+        <PropertyRef Name="SubjectHorselessSessions_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HorselessSessionAccessControlEntry_AccessControlledHorselessSession">
+    <End Role="HorselessSessionAccessControlEntry" Type="HorselessContentModel.Store.HorselessSessionAccessControlEntry" Multiplicity="*" />
+    <End Role="AccessControlledHorselessSession" Type="HorselessContentModel.Store.AccessControlEntries" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="AccessControlledHorselessSession">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HorselessSessionAccessControlEntry">
+        <PropertyRef Name="AccessControlEntries_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HorselessSessionPrincipal_HorselessSession">
+    <End Role="HorselessSession" Type="HorselessContentModel.Store.HorselessSessions" Multiplicity="1" />
+    <End Role="HorselessSessionPrincipal" Type="HorselessContentModel.Store.HorselessSessionPrincipal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HorselessSession">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HorselessSessionPrincipal">
+        <PropertyRef Name="OwnedHorselessSessions_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HorselessSessionPrincipal_Principal">
+    <End Role="HorselessSessionPrincipal" Type="HorselessContentModel.Store.HorselessSessionPrincipal" Multiplicity="*" />
+    <End Role="Principal" Type="HorselessContentModel.Store.Principals" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Principal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HorselessSessionPrincipal">
         <PropertyRef Name="Owners_Id" />
       </Dependent>
     </ReferentialConstraint>
@@ -1165,19 +1328,35 @@
           </AssociationSet>
           <AssociationSet Name="AccessControlEntryAccessControlEntry" Association="HorselessContentModel.AccessControlEntryAccessControlEntry">
             <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
-            <End Role="AccessControlEntry1" EntitySet="AccessControlEntries" />
-          </AssociationSet>
-          <AssociationSet Name="OwnedAccessControlEntryPrincipal" Association="HorselessContentModel.OwnedAccessControlEntryPrincipal">
-            <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
-            <End Role="Principal" EntitySet="Principals" />
-          </AssociationSet>
-          <AssociationSet Name="TenantAccessControlEntry" Association="HorselessContentModel.TenantAccessControlEntry">
-            <End Role="Tenant" EntitySet="Tenants" />
-            <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
+            <End Role="SubjectAccessControlEntry" EntitySet="AccessControlEntries" />
           </AssociationSet>
           <AssociationSet Name="PrincipalPrincipal" Association="HorselessContentModel.PrincipalPrincipal">
             <End Role="Principal" EntitySet="Principals" />
             <End Role="Principal1" EntitySet="Principals" />
+          </AssociationSet>
+          <AssociationSet Name="AccessControlEntryOwners" Association="HorselessContentModel.AccessControlEntryOwners">
+            <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
+            <End Role="Owner" EntitySet="Principals" />
+          </AssociationSet>
+          <AssociationSet Name="TenantAccounts" Association="HorselessContentModel.TenantAccounts">
+            <End Role="Tenant" EntitySet="Tenants" />
+            <End Role="Principal" EntitySet="Principals" />
+          </AssociationSet>
+          <AssociationSet Name="TenantAccessControlEntry" Association="HorselessContentModel.TenantAccessControlEntry">
+            <End Role="SubjectTenant" EntitySet="Tenants" />
+            <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
+          </AssociationSet>
+          <AssociationSet Name="PrincipalHorselessSession" Association="HorselessContentModel.PrincipalHorselessSession">
+            <End Role="Principal" EntitySet="Principals" />
+            <End Role="HorselessSession" EntitySet="HorselessSessions" />
+          </AssociationSet>
+          <AssociationSet Name="HorselessSessionAccessControlEntry" Association="HorselessContentModel.HorselessSessionAccessControlEntry">
+            <End Role="SubjectHorselessSession" EntitySet="HorselessSessions" />
+            <End Role="AccessControlledHorselessSession" EntitySet="AccessControlEntries" />
+          </AssociationSet>
+          <AssociationSet Name="HorselessSessionPrincipal" Association="HorselessContentModel.HorselessSessionPrincipal">
+            <End Role="HorselessSession" EntitySet="HorselessSessions" />
+            <End Role="Principal" EntitySet="Principals" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="HorselessContent">
@@ -1211,7 +1390,8 @@
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="ContentCollections" Relationship="HorselessContentModel.TenantContentCollection" FromRole="Tenant" ToRole="ContentCollection" />
           <NavigationProperty Name="Owners" Relationship="HorselessContentModel.TenantOwners" FromRole="Tenant" ToRole="Principal" />
-          <NavigationProperty Name="AccessControlEntries" Relationship="HorselessContentModel.TenantAccessControlEntry" FromRole="Tenant" ToRole="AccessControlEntry" />
+          <NavigationProperty Name="Accounts" Relationship="HorselessContentModel.TenantAccounts" FromRole="Tenant" ToRole="Principal" />
+          <NavigationProperty Name="AccessControlEntries" Relationship="HorselessContentModel.TenantAccessControlEntry" FromRole="SubjectTenant" ToRole="AccessControlEntry" />
         </EntityType>
         <EntityType Name="MIMEType">
           <Key>
@@ -1402,12 +1582,13 @@
           <Property Name="Aud" Type="String" Nullable="true" />
           <Property Name="Sub" Type="String" Nullable="true" />
           <NavigationProperty Name="OwnedTenants" Relationship="HorselessContentModel.TenantOwners" FromRole="Principal" ToRole="Tenant" />
-          <Property Name="PrincipalId" Type="Guid" Nullable="false" />
           <NavigationProperty Name="AccessControlEntries" Relationship="HorselessContentModel.PrincipalAccessControlEntry" FromRole="Principal" ToRole="AccessControlEntry" />
-          <NavigationProperty Name="OwnedAccessControlEntries" Relationship="HorselessContentModel.OwnedAccessControlEntryPrincipal" FromRole="Principal" ToRole="AccessControlEntry" />
-          <Property Name="AccessControlEntryId" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Owners" Relationship="HorselessContentModel.PrincipalPrincipal" FromRole="Principal" ToRole="Principal1" />
           <NavigationProperty Name="OwnedPrincipals" Relationship="HorselessContentModel.PrincipalPrincipal" FromRole="Principal1" ToRole="Principal" />
+          <NavigationProperty Name="OwnedAccessControlEntries" Relationship="HorselessContentModel.AccessControlEntryOwners" FromRole="Owner" ToRole="AccessControlEntry" />
+          <NavigationProperty Name="TenantAccounts" Relationship="HorselessContentModel.TenantAccounts" FromRole="Principal" ToRole="Tenant" />
+          <NavigationProperty Name="HorselessSessions" Relationship="HorselessContentModel.PrincipalHorselessSession" FromRole="Principal" ToRole="HorselessSession" />
+          <NavigationProperty Name="OwnedHorselessSessions" Relationship="HorselessContentModel.HorselessSessionPrincipal" FromRole="Principal" ToRole="HorselessSession" />
         </EntityType>
         <EntityType Name="NugetPackage">
           <Key>
@@ -1437,10 +1618,11 @@
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="true" />
           <NavigationProperty Name="SubjectPrincipals" Relationship="HorselessContentModel.PrincipalAccessControlEntry" FromRole="AccessControlEntry" ToRole="Principal" />
-          <NavigationProperty Name="AccessControlEntries" Relationship="HorselessContentModel.AccessControlEntryAccessControlEntry" FromRole="AccessControlEntry" ToRole="AccessControlEntry1" />
-          <NavigationProperty Name="ParentAccessControlEntries" Relationship="HorselessContentModel.AccessControlEntryAccessControlEntry" FromRole="AccessControlEntry1" ToRole="AccessControlEntry" />
-          <NavigationProperty Name="Owners" Relationship="HorselessContentModel.OwnedAccessControlEntryPrincipal" FromRole="AccessControlEntry" ToRole="Principal" />
-          <NavigationProperty Name="AccessControlledTenants" Relationship="HorselessContentModel.TenantAccessControlEntry" FromRole="AccessControlEntry" ToRole="Tenant" />
+          <NavigationProperty Name="AccessControlEntries" Relationship="HorselessContentModel.AccessControlEntryAccessControlEntry" FromRole="AccessControlEntry" ToRole="SubjectAccessControlEntry" />
+          <NavigationProperty Name="SubjectAccessControlEntries" Relationship="HorselessContentModel.AccessControlEntryAccessControlEntry" FromRole="SubjectAccessControlEntry" ToRole="AccessControlEntry" />
+          <NavigationProperty Name="Owners" Relationship="HorselessContentModel.AccessControlEntryOwners" FromRole="AccessControlEntry" ToRole="Owner" />
+          <NavigationProperty Name="SubjectTenants" Relationship="HorselessContentModel.TenantAccessControlEntry" FromRole="AccessControlEntry" ToRole="SubjectTenant" />
+          <NavigationProperty Name="SubjectHorselessSessions" Relationship="HorselessContentModel.HorselessSessionAccessControlEntry" FromRole="AccessControlledHorselessSession" ToRole="SubjectHorselessSession" />
         </EntityType>
         <EnumType Name="ACEType">
           <Member Name="ACCESS_DENIED" />
@@ -1476,6 +1658,10 @@
           <Property Name="Aud" Type="String" Nullable="true" />
           <Property Name="Sub" Type="String" Nullable="true" />
           <Property Name="IsAnonymous" Type="Boolean" Nullable="true" />
+          <NavigationProperty Name="HorselessSessionPrincipal" Relationship="HorselessContentModel.PrincipalHorselessSession" FromRole="HorselessSession" ToRole="Principal" />
+          <Property Name="HorselessSessionPrincipalId" Type="Guid" Nullable="true" />
+          <NavigationProperty Name="AccessControlEntries" Relationship="HorselessContentModel.HorselessSessionAccessControlEntry" FromRole="SubjectHorselessSession" ToRole="AccessControlledHorselessSession" />
+          <NavigationProperty Name="Owners" Relationship="HorselessContentModel.HorselessSessionPrincipal" FromRole="HorselessSession" ToRole="Principal" />
         </EntityType>
         <EntityType Name="NavigationMenu">
           <Key>
@@ -1606,27 +1792,43 @@
         </Association>
         <Association Name="AccessControlEntryAccessControlEntry">
           <End Type="HorselessContentModel.AccessControlEntry" Role="AccessControlEntry" Multiplicity="*" />
-          <End Type="HorselessContentModel.AccessControlEntry" Role="AccessControlEntry1" Multiplicity="*" />
-        </Association>
-        <Association Name="OwnedAccessControlEntryPrincipal">
-          <End Type="HorselessContentModel.AccessControlEntry" Role="AccessControlEntry" Multiplicity="1" />
-          <End Type="HorselessContentModel.Principal" Role="Principal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccessControlEntry">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Principal">
-              <PropertyRef Name="AccessControlEntryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TenantAccessControlEntry">
-          <End Type="HorselessContentModel.Tenant" Role="Tenant" Multiplicity="*" />
-          <End Type="HorselessContentModel.AccessControlEntry" Role="AccessControlEntry" Multiplicity="*" />
+          <End Type="HorselessContentModel.AccessControlEntry" Role="SubjectAccessControlEntry" Multiplicity="*" />
         </Association>
         <Association Name="PrincipalPrincipal">
           <End Type="HorselessContentModel.Principal" Role="Principal" Multiplicity="*" />
           <End Type="HorselessContentModel.Principal" Role="Principal1" Multiplicity="*" />
+        </Association>
+        <Association Name="AccessControlEntryOwners">
+          <End Type="HorselessContentModel.AccessControlEntry" Role="AccessControlEntry" Multiplicity="*" />
+          <End Type="HorselessContentModel.Principal" Role="Owner" Multiplicity="*" />
+        </Association>
+        <Association Name="TenantAccounts">
+          <End Type="HorselessContentModel.Tenant" Role="Tenant" Multiplicity="*" />
+          <End Type="HorselessContentModel.Principal" Role="Principal" Multiplicity="*" />
+        </Association>
+        <Association Name="TenantAccessControlEntry">
+          <End Type="HorselessContentModel.Tenant" Role="SubjectTenant" Multiplicity="*" />
+          <End Type="HorselessContentModel.AccessControlEntry" Role="AccessControlEntry" Multiplicity="*" />
+        </Association>
+        <Association Name="PrincipalHorselessSession">
+          <End Type="HorselessContentModel.Principal" Role="Principal" Multiplicity="0..1" />
+          <End Type="HorselessContentModel.HorselessSession" Role="HorselessSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Principal">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HorselessSession">
+              <PropertyRef Name="HorselessSessionPrincipalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HorselessSessionAccessControlEntry">
+          <End Type="HorselessContentModel.HorselessSession" Role="SubjectHorselessSession" Multiplicity="*" />
+          <End Type="HorselessContentModel.AccessControlEntry" Role="AccessControlledHorselessSession" Multiplicity="*" />
+        </Association>
+        <Association Name="HorselessSessionPrincipal">
+          <End Type="HorselessContentModel.HorselessSession" Role="HorselessSession" Multiplicity="*" />
+          <End Type="HorselessContentModel.Principal" Role="Principal" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1795,8 +1997,6 @@
           <ScalarProperty Name="Iss" ColumnName="Iss" />
           <ScalarProperty Name="Aud" ColumnName="Aud" />
           <ScalarProperty Name="Sub" ColumnName="Sub" />
-          <ScalarProperty Name="PrincipalId" ColumnName="PrincipalId" />
-          <ScalarProperty Name="AccessControlEntryId" ColumnName="AccessControlEntryId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1843,6 +2043,7 @@
           <ScalarProperty Name="Aud" ColumnName="Aud" />
           <ScalarProperty Name="Sub" ColumnName="Sub" />
           <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+          <ScalarProperty Name="HorselessSessionPrincipalId" ColumnName="HorselessSessionPrincipalId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2015,17 +2216,9 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="AccessControlEntryAccessControlEntry" TypeName="HorselessContentModel.AccessControlEntryAccessControlEntry" StoreEntitySet="AccessControlEntryAccessControlEntry">
       <EndProperty Name="AccessControlEntry">
-        <ScalarProperty Name="Id" ColumnName="ParentAccessControlEntries_Id" />
+        <ScalarProperty Name="Id" ColumnName="SubjectAccessControlEntries_Id" />
       </EndProperty>
-      <EndProperty Name="AccessControlEntry1">
-        <ScalarProperty Name="Id" ColumnName="AccessControlEntries_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="TenantAccessControlEntry" TypeName="HorselessContentModel.TenantAccessControlEntry" StoreEntitySet="TenantAccessControlEntry">
-      <EndProperty Name="Tenant">
-        <ScalarProperty Name="Id" ColumnName="AccessControlledTenants_Id" />
-      </EndProperty>
-      <EndProperty Name="AccessControlEntry">
+      <EndProperty Name="SubjectAccessControlEntry">
         <ScalarProperty Name="Id" ColumnName="AccessControlEntries_Id" />
       </EndProperty>
     </AssociationSetMapping>
@@ -2034,6 +2227,46 @@
         <ScalarProperty Name="Id" ColumnName="OwnedPrincipals_Id" />
       </EndProperty>
       <EndProperty Name="Principal1">
+        <ScalarProperty Name="Id" ColumnName="Owners_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AccessControlEntryOwners" TypeName="HorselessContentModel.AccessControlEntryOwners" StoreEntitySet="AccessControlEntryOwners">
+      <EndProperty Name="AccessControlEntry">
+        <ScalarProperty Name="Id" ColumnName="OwnedAccessControlEntries_Id" />
+      </EndProperty>
+      <EndProperty Name="Owner">
+        <ScalarProperty Name="Id" ColumnName="Owners_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TenantAccounts" TypeName="HorselessContentModel.TenantAccounts" StoreEntitySet="TenantAccounts">
+      <EndProperty Name="Tenant">
+        <ScalarProperty Name="Id" ColumnName="TenantAccounts_Id" />
+      </EndProperty>
+      <EndProperty Name="Principal">
+        <ScalarProperty Name="Id" ColumnName="Accounts_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TenantAccessControlEntry" TypeName="HorselessContentModel.TenantAccessControlEntry" StoreEntitySet="TenantAccessControlEntry">
+      <EndProperty Name="SubjectTenant">
+        <ScalarProperty Name="Id" ColumnName="SubjectTenants_Id" />
+      </EndProperty>
+      <EndProperty Name="AccessControlEntry">
+        <ScalarProperty Name="Id" ColumnName="AccessControlEntries_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="HorselessSessionAccessControlEntry" TypeName="HorselessContentModel.HorselessSessionAccessControlEntry" StoreEntitySet="HorselessSessionAccessControlEntry">
+      <EndProperty Name="SubjectHorselessSession">
+        <ScalarProperty Name="Id" ColumnName="SubjectHorselessSessions_Id" />
+      </EndProperty>
+      <EndProperty Name="AccessControlledHorselessSession">
+        <ScalarProperty Name="Id" ColumnName="AccessControlEntries_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="HorselessSessionPrincipal" TypeName="HorselessContentModel.HorselessSessionPrincipal" StoreEntitySet="HorselessSessionPrincipal">
+      <EndProperty Name="HorselessSession">
+        <ScalarProperty Name="Id" ColumnName="OwnedHorselessSessions_Id" />
+      </EndProperty>
+      <EndProperty Name="Principal">
         <ScalarProperty Name="Id" ColumnName="Owners_Id" />
       </EndProperty>
     </AssociationSetMapping>

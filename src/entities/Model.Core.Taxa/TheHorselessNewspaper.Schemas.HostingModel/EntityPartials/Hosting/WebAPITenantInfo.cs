@@ -7,7 +7,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
     public partial class WebAPITenantInfo : IHostingRowLevelSecured
     {
-        public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);

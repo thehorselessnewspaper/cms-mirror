@@ -32,16 +32,55 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+                entity.HasMany(d => d.AccessControlEntries)
+                    .WithMany(p => p.SubjectAccessControlEntries)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "AccessControlledAccessControlEntry",
+                        l => l.HasOne<AccessControlEntry>().WithMany().HasForeignKey("AccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlledAccessControlEntry_AccessControlEntry1"),
+                        r => r.HasOne<AccessControlEntry>().WithMany().HasForeignKey("SubjectAccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlledAccessControlEntry_AccessControlEntry"),
+                        j =>
+                        {
+                            j.HasKey("SubjectAccessControlEntries_Id", "AccessControlEntries_Id");
+
+                            j.ToTable("AccessControlledAccessControlEntry");
+
+                            j.HasIndex(new[] { "AccessControlEntries_Id" }, "IX_FK_AccessControlledAccessControlEntry_AccessControlEntry1");
+                        });
+
+                entity.HasMany(d => d.SubjectAccessControlEntries)
+                    .WithMany(p => p.AccessControlEntries)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "AccessControlledAccessControlEntry",
+                        l => l.HasOne<AccessControlEntry>().WithMany().HasForeignKey("SubjectAccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlledAccessControlEntry_AccessControlEntry"),
+                        r => r.HasOne<AccessControlEntry>().WithMany().HasForeignKey("AccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlledAccessControlEntry_AccessControlEntry1"),
+                        j =>
+                        {
+                            j.HasKey("SubjectAccessControlEntries_Id", "AccessControlEntries_Id");
+
+                            j.ToTable("AccessControlledAccessControlEntry");
+
+                            j.HasIndex(new[] { "AccessControlEntries_Id" }, "IX_FK_AccessControlledAccessControlEntry_AccessControlEntry1");
+                        });
+
+                entity.HasMany(d => d.SubjectTenants)
+                    .WithMany(p => p.AccessControlEntries)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "AccessControlEntryTenant",
+                        l => l.HasOne<Tenant>().WithMany().HasForeignKey("SubjectTenants_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryTenant_SubjectTenant"),
+                        r => r.HasOne<AccessControlEntry>().WithMany().HasForeignKey("AccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryTenant_AccessControlEntry"),
+                        j =>
+                        {
+                            j.HasKey("AccessControlEntries_Id", "SubjectTenants_Id");
+
+                            j.ToTable("AccessControlEntryTenant");
+
+                            j.HasIndex(new[] { "SubjectTenants_Id" }, "IX_FK_AccessControlEntryTenant_SubjectTenant");
+                        });
             });
 
             modelBuilder.Entity<KeyCloakConfiguration>(entity =>
             {
-                entity.HasIndex(e => e.TenantInfoId, "IX_FK_TenantInfoKeyCloakConfiguration");
-
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
                 entity.HasOne(d => d.TenantInfo)
                     .WithMany(p => p.KeyCloakConfigurations)
@@ -52,38 +91,116 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
             modelBuilder.Entity<NugetPackage>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<Principal>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+                entity.HasMany(d => d.AccessControlEntries)
+                    .WithMany(p => p.SubjectPrincipals)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "PrincipalAccessControlEntry",
+                        l => l.HasOne<AccessControlEntry>().WithMany().HasForeignKey("AccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalAccessControlEntry_AccessControlEntry"),
+                        r => r.HasOne<Principal>().WithMany().HasForeignKey("SubjectPrincipals_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalAccessControlEntry_Principal"),
+                        j =>
+                        {
+                            j.HasKey("SubjectPrincipals_Id", "AccessControlEntries_Id");
+
+                            j.ToTable("PrincipalAccessControlEntry");
+
+                            j.HasIndex(new[] { "AccessControlEntries_Id" }, "IX_FK_PrincipalAccessControlEntry_AccessControlEntry");
+                        });
+
+                entity.HasMany(d => d.OwnedAccessControlEntries)
+                    .WithMany(p => p.Owners)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "PrincipalAccessControlEntry1",
+                        l => l.HasOne<AccessControlEntry>().WithMany().HasForeignKey("OwnedAccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalAccessControlEntry1_AccessControlEntry"),
+                        r => r.HasOne<Principal>().WithMany().HasForeignKey("Owners_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalAccessControlEntry1_Principal"),
+                        j =>
+                        {
+                            j.HasKey("Owners_Id", "OwnedAccessControlEntries_Id");
+
+                            j.ToTable("PrincipalAccessControlEntry1");
+
+                            j.HasIndex(new[] { "OwnedAccessControlEntries_Id" }, "IX_FK_PrincipalAccessControlEntry1_AccessControlEntry");
+                        });
+
+                entity.HasMany(d => d.OwnedPrincipals)
+                    .WithMany(p => p.Owners)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "PrincipalPrincipal",
+                        l => l.HasOne<Principal>().WithMany().HasForeignKey("OwnedPrincipals_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalPrincipal_Principal1"),
+                        r => r.HasOne<Principal>().WithMany().HasForeignKey("Owners_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalPrincipal_Principal"),
+                        j =>
+                        {
+                            j.HasKey("Owners_Id", "OwnedPrincipals_Id");
+
+                            j.ToTable("PrincipalPrincipal");
+
+                            j.HasIndex(new[] { "OwnedPrincipals_Id" }, "IX_FK_PrincipalPrincipal_Principal1");
+                        });
+
+                entity.HasMany(d => d.Owners)
+                    .WithMany(p => p.OwnedPrincipals)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "PrincipalPrincipal",
+                        l => l.HasOne<Principal>().WithMany().HasForeignKey("Owners_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalPrincipal_Principal"),
+                        r => r.HasOne<Principal>().WithMany().HasForeignKey("OwnedPrincipals_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalPrincipal_Principal1"),
+                        j =>
+                        {
+                            j.HasKey("Owners_Id", "OwnedPrincipals_Id");
+
+                            j.ToTable("PrincipalPrincipal");
+
+                            j.HasIndex(new[] { "OwnedPrincipals_Id" }, "IX_FK_PrincipalPrincipal_Principal1");
+                        });
             });
 
             modelBuilder.Entity<Tenant>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+                entity.HasMany(d => d.Accounts)
+                    .WithMany(p => p.TenantAccounts)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "TenantPrincipal",
+                        l => l.HasOne<Principal>().WithMany().HasForeignKey("Accounts_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TenantPrincipal_Principal"),
+                        r => r.HasOne<Tenant>().WithMany().HasForeignKey("TenantAccounts_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TenantPrincipal_Tenant"),
+                        j =>
+                        {
+                            j.HasKey("TenantAccounts_Id", "Accounts_Id");
+
+                            j.ToTable("TenantPrincipal");
+
+                            j.HasIndex(new[] { "Accounts_Id" }, "IX_FK_TenantPrincipal_Principal");
+                        });
+
+                entity.HasMany(d => d.Owners)
+                    .WithMany(p => p.OwnedTenants)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "TenantPrincipal1",
+                        l => l.HasOne<Principal>().WithMany().HasForeignKey("Owners_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TenantPrincipal1_Principal"),
+                        r => r.HasOne<Tenant>().WithMany().HasForeignKey("OwnedTenants_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TenantPrincipal1_Tenant"),
+                        j =>
+                        {
+                            j.HasKey("OwnedTenants_Id", "Owners_Id");
+
+                            j.ToTable("TenantPrincipal1");
+
+                            j.HasIndex(new[] { "Owners_Id" }, "IX_FK_TenantPrincipal1_Principal");
+                        });
             });
 
             modelBuilder.Entity<TenantInfo>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<WebAPITenantInfo>(entity =>
             {
-                entity.HasIndex(e => e.TenantInfoId, "IX_FK_TenantInfoWebAPITenantInfo");
-
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
                 entity.HasOne(d => d.TenantInfo)
                     .WithMany(p => p.WebAPITenantInfos)

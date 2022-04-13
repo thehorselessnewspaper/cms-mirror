@@ -8,8 +8,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
+    [Index(nameof(HorselessSessionPrincipalId), Name = "IX_FK_PrincipalHorselessSession")]
     public partial class HorselessSession
     {
+        public HorselessSession()
+        {
+            AccessControlEntries = new HashSet<AccessControlEntry>();
+            Owners = new HashSet<Principal>();
+        }
+
         [Key]
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
@@ -22,5 +29,17 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string Aud { get; set; }
         public string Sub { get; set; }
         public bool? IsAnonymous { get; set; }
+        public Guid? HorselessSessionPrincipalId { get; set; }
+
+        [ForeignKey(nameof(HorselessSessionPrincipalId))]
+        [InverseProperty(nameof(Principal.HorselessSessions))]
+        public virtual Principal HorselessSessionPrincipal { get; set; }
+
+        [ForeignKey("SubjectHorselessSessions_Id")]
+        [InverseProperty(nameof(AccessControlEntry.SubjectHorselessSessions))]
+        public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
+        [ForeignKey("OwnedHorselessSessions_Id")]
+        [InverseProperty(nameof(Principal.OwnedHorselessSessions))]
+        public virtual ICollection<Principal> Owners { get; set; }
     }
 }

@@ -18,6 +18,14 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[AccessControlEntryAccessControlEntry]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AccessControlEntryOwners]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[ContentCollectionContentCollection]",
          "ObjectType": 0
       },
@@ -43,6 +51,14 @@
       },
       {
          "Name": "[dbo].[HorselessContents]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HorselessSessionAccessControlEntry]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HorselessSessionPrincipal]",
          "ObjectType": 0
       },
       {
@@ -90,6 +106,14 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[PrincipalAccessControlEntry]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PrincipalPrincipal]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Principals]",
          "ObjectType": 0
       },
@@ -130,7 +154,19 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[TenantAccessControlEntry]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TenantAccounts]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[TenantContentCollection]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TenantOwners]",
          "ObjectType": 0
       },
       {

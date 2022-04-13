@@ -38,6 +38,51 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             modelBuilder.Entity<AccessControlEntry>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasMany(d => d.AccessControlEntries)
+                    .WithMany(p => p.SubjectAccessControlEntries)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "AccessControlEntryAccessControlEntry",
+                        l => l.HasOne<AccessControlEntry>().WithMany().HasForeignKey("AccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry"),
+                        r => r.HasOne<AccessControlEntry>().WithMany().HasForeignKey("SubjectAccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryAccessControlEntry_AccessControlEntry"),
+                        j =>
+                        {
+                            j.HasKey("SubjectAccessControlEntries_Id", "AccessControlEntries_Id");
+
+                            j.ToTable("AccessControlEntryAccessControlEntry");
+
+                            j.HasIndex(new[] { "AccessControlEntries_Id" }, "IX_FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry");
+                        });
+
+                entity.HasMany(d => d.Owners)
+                    .WithMany(p => p.OwnedAccessControlEntries)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "AccessControlEntryOwner",
+                        l => l.HasOne<Principal>().WithMany().HasForeignKey("Owners_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryOwners_Owner"),
+                        r => r.HasOne<AccessControlEntry>().WithMany().HasForeignKey("OwnedAccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryOwners_AccessControlEntry"),
+                        j =>
+                        {
+                            j.HasKey("OwnedAccessControlEntries_Id", "Owners_Id");
+
+                            j.ToTable("AccessControlEntryOwners");
+
+                            j.HasIndex(new[] { "Owners_Id" }, "IX_FK_AccessControlEntryOwners_Owner");
+                        });
+
+                entity.HasMany(d => d.SubjectAccessControlEntries)
+                    .WithMany(p => p.AccessControlEntries)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "AccessControlEntryAccessControlEntry",
+                        l => l.HasOne<AccessControlEntry>().WithMany().HasForeignKey("SubjectAccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryAccessControlEntry_AccessControlEntry"),
+                        r => r.HasOne<AccessControlEntry>().WithMany().HasForeignKey("AccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry"),
+                        j =>
+                        {
+                            j.HasKey("SubjectAccessControlEntries_Id", "AccessControlEntries_Id");
+
+                            j.ToTable("AccessControlEntryAccessControlEntry");
+
+                            j.HasIndex(new[] { "AccessControlEntries_Id" }, "IX_FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry");
+                        });
             });
 
             modelBuilder.Entity<ContentCollection>(entity =>
@@ -138,6 +183,41 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             modelBuilder.Entity<HorselessSession>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasOne(d => d.HorselessSessionPrincipal)
+                    .WithMany(p => p.HorselessSessions)
+                    .HasForeignKey(d => d.HorselessSessionPrincipalId)
+                    .HasConstraintName("FK_PrincipalHorselessSession");
+
+                entity.HasMany(d => d.AccessControlEntries)
+                    .WithMany(p => p.SubjectHorselessSessions)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "HorselessSessionAccessControlEntry",
+                        l => l.HasOne<AccessControlEntry>().WithMany().HasForeignKey("AccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_HorselessSessionAccessControlEntry_AccessControlledHorselessSession"),
+                        r => r.HasOne<HorselessSession>().WithMany().HasForeignKey("SubjectHorselessSessions_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_HorselessSessionAccessControlEntry_SubjectHorselessSession"),
+                        j =>
+                        {
+                            j.HasKey("SubjectHorselessSessions_Id", "AccessControlEntries_Id");
+
+                            j.ToTable("HorselessSessionAccessControlEntry");
+
+                            j.HasIndex(new[] { "AccessControlEntries_Id" }, "IX_FK_HorselessSessionAccessControlEntry_AccessControlledHorselessSession");
+                        });
+
+                entity.HasMany(d => d.Owners)
+                    .WithMany(p => p.OwnedHorselessSessions)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "HorselessSessionPrincipal",
+                        l => l.HasOne<Principal>().WithMany().HasForeignKey("Owners_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_HorselessSessionPrincipal_Principal"),
+                        r => r.HasOne<HorselessSession>().WithMany().HasForeignKey("OwnedHorselessSessions_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_HorselessSessionPrincipal_HorselessSession"),
+                        j =>
+                        {
+                            j.HasKey("OwnedHorselessSessions_Id", "Owners_Id");
+
+                            j.ToTable("HorselessSessionPrincipal");
+
+                            j.HasIndex(new[] { "Owners_Id" }, "IX_FK_HorselessSessionPrincipal_Principal");
+                        });
             });
 
             modelBuilder.Entity<JSONAsset>(entity =>
@@ -253,6 +333,51 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             modelBuilder.Entity<Principal>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasMany(d => d.AccessControlEntries)
+                    .WithMany(p => p.SubjectPrincipals)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "PrincipalAccessControlEntry",
+                        l => l.HasOne<AccessControlEntry>().WithMany().HasForeignKey("AccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalAccessControlEntry_AccessControlEntry"),
+                        r => r.HasOne<Principal>().WithMany().HasForeignKey("SubjectPrincipals_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalAccessControlEntry_Principal"),
+                        j =>
+                        {
+                            j.HasKey("SubjectPrincipals_Id", "AccessControlEntries_Id");
+
+                            j.ToTable("PrincipalAccessControlEntry");
+
+                            j.HasIndex(new[] { "AccessControlEntries_Id" }, "IX_FK_PrincipalAccessControlEntry_AccessControlEntry");
+                        });
+
+                entity.HasMany(d => d.OwnedPrincipals)
+                    .WithMany(p => p.Owners)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "PrincipalPrincipal",
+                        l => l.HasOne<Principal>().WithMany().HasForeignKey("OwnedPrincipals_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalPrincipal_Principal"),
+                        r => r.HasOne<Principal>().WithMany().HasForeignKey("Owners_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalPrincipal_Principal1"),
+                        j =>
+                        {
+                            j.HasKey("OwnedPrincipals_Id", "Owners_Id");
+
+                            j.ToTable("PrincipalPrincipal");
+
+                            j.HasIndex(new[] { "Owners_Id" }, "IX_FK_PrincipalPrincipal_Principal1");
+                        });
+
+                entity.HasMany(d => d.Owners)
+                    .WithMany(p => p.OwnedPrincipals)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "PrincipalPrincipal",
+                        l => l.HasOne<Principal>().WithMany().HasForeignKey("Owners_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalPrincipal_Principal1"),
+                        r => r.HasOne<Principal>().WithMany().HasForeignKey("OwnedPrincipals_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PrincipalPrincipal_Principal"),
+                        j =>
+                        {
+                            j.HasKey("OwnedPrincipals_Id", "Owners_Id");
+
+                            j.ToTable("PrincipalPrincipal");
+
+                            j.HasIndex(new[] { "Owners_Id" }, "IX_FK_PrincipalPrincipal_Principal1");
+                        });
             });
 
             modelBuilder.Entity<Publication>(entity =>
@@ -394,6 +519,36 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
+                entity.HasMany(d => d.AccessControlEntries)
+                    .WithMany(p => p.SubjectTenants)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "TenantAccessControlEntry",
+                        l => l.HasOne<AccessControlEntry>().WithMany().HasForeignKey("AccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TenantAccessControlEntry_AccessControlEntry"),
+                        r => r.HasOne<Tenant>().WithMany().HasForeignKey("SubjectTenants_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TenantAccessControlEntry_SubjectTenant"),
+                        j =>
+                        {
+                            j.HasKey("SubjectTenants_Id", "AccessControlEntries_Id");
+
+                            j.ToTable("TenantAccessControlEntry");
+
+                            j.HasIndex(new[] { "AccessControlEntries_Id" }, "IX_FK_TenantAccessControlEntry_AccessControlEntry");
+                        });
+
+                entity.HasMany(d => d.Accounts)
+                    .WithMany(p => p.TenantAccounts)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "TenantAccount",
+                        l => l.HasOne<Principal>().WithMany().HasForeignKey("Accounts_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TenantAccounts_Principal"),
+                        r => r.HasOne<Tenant>().WithMany().HasForeignKey("TenantAccounts_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TenantAccounts_Tenant"),
+                        j =>
+                        {
+                            j.HasKey("TenantAccounts_Id", "Accounts_Id");
+
+                            j.ToTable("TenantAccounts");
+
+                            j.HasIndex(new[] { "Accounts_Id" }, "IX_FK_TenantAccounts_Principal");
+                        });
+
                 entity.HasMany(d => d.ContentCollections)
                     .WithMany(p => p.Tenants)
                     .UsingEntity<Dictionary<string, object>>(
@@ -407,6 +562,21 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
                             j.ToTable("TenantContentCollection");
 
                             j.HasIndex(new[] { "ContentCollections_Id" }, "IX_FK_TenantContentCollection_ContentCollection");
+                        });
+
+                entity.HasMany(d => d.Owners)
+                    .WithMany(p => p.OwnedTenants)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "TenantOwner",
+                        l => l.HasOne<Principal>().WithMany().HasForeignKey("Owners_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TenantOwners_Principal"),
+                        r => r.HasOne<Tenant>().WithMany().HasForeignKey("OwnedTenants_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TenantOwners_Tenant"),
+                        j =>
+                        {
+                            j.HasKey("OwnedTenants_Id", "Owners_Id");
+
+                            j.ToTable("TenantOwners");
+
+                            j.HasIndex(new[] { "Owners_Id" }, "IX_FK_TenantOwners_Principal");
                         });
             });
 

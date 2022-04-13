@@ -2,21 +2,29 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
+    [Index(nameof(TenantInfoId), Name = "IX_FK_TenantInfoKeyCloakConfiguration")]
     public partial class KeyCloakConfiguration
     {
+        [Key]
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string Authority { get; set; }
         public string Realm { get; set; }
         public string ObjectId { get; set; }
+        [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
         public string Iss { get; set; }
         public string Aud { get; set; }
         public Guid? TenantInfoId { get; set; }
 
+        [ForeignKey(nameof(TenantInfoId))]
+        [InverseProperty("KeyCloakConfigurations")]
         public virtual TenantInfo TenantInfo { get; set; }
     }
 }

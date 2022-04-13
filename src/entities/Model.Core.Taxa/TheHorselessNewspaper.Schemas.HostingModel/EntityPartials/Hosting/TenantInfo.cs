@@ -8,7 +8,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
     public partial class TenantInfo : IHostingRowLevelSecured
     {
-        public virtual ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
+        public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
         
         [NotMapped]
         public virtual ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();

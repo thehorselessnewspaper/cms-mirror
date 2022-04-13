@@ -21,6 +21,10 @@ namespace Schema.Diagrams.Content
             this.AccessControlEntries = new HashSet<AccessControlEntry>();
             this.Owners = new HashSet<Principal>();
             this.OwnedPrincipals = new HashSet<Principal>();
+            this.OwnedAccessControlEntries = new HashSet<AccessControlEntry>();
+            this.TenantAccounts = new HashSet<Tenant>();
+            this.HorselessSessions = new HashSet<HorselessSession>();
+            this.OwnedHorselessSessions = new HashSet<HorselessSession>();
         }
     
         public System.Guid Id { get; set; }
@@ -31,17 +35,22 @@ namespace Schema.Diagrams.Content
         public string Iss { get; set; }
         public string Aud { get; set; }
         public string Sub { get; set; }
-        public System.Guid PrincipalId { get; set; }
-        public System.Guid AccessControlEntryId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tenant> OwnedTenants { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
-        public virtual AccessControlEntry OwnedAccessControlEntries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Principal> Owners { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Principal> OwnedPrincipals { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AccessControlEntry> OwnedAccessControlEntries { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tenant> TenantAccounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HorselessSession> HorselessSessions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HorselessSession> OwnedHorselessSessions { get; set; }
     }
 }

@@ -29,7 +29,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 DisplayName = "test update tenant",
                 ObjectId = Guid.NewGuid().ToString(),
                 Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                AccessControlList = new List<ContentModel.AccessControlEntry>()
+                AccessControlEntries = new List<ContentModel.AccessControlEntry>()
                 {
                     new ContentModel.AccessControlEntry()
                     {
@@ -76,7 +76,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 DisplayName = tenant.DisplayName,
                 ObjectId = tenant.ObjectId,
                 Timestamp = tenant.Timestamp,
-                AccessControlList = new List<ContentModel.AccessControlEntry>()
+                AccessControlEntries = new List<ContentModel.AccessControlEntry>()
                 {
                     new ContentModel.AccessControlEntry()
                     {
@@ -104,7 +104,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                         {
                             Id = Guid.NewGuid(),
                             CreatedAt = DateTime.UtcNow,
-                            DisplayName = "test update tenant",
+                            DisplayName = "test update tenants",
                             ObjectId = Guid.NewGuid().ToString(),
                             Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
                             TenantIdentifier = "testUpdateTenant",
@@ -177,7 +177,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
 
             var validatedInsertResult = await tenantQuery.Read(r => r.Id.Equals(tenant.Id), new List<string>()
             {
-                nameof(tenant.Owners), nameof(tenant.AccessControlList)
+                nameof(tenant.Owners), nameof(tenant.AccessControlEntries)
             });
 
 

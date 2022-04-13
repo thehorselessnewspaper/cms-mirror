@@ -198,7 +198,7 @@ namespace Horseless.HostingModel.SmokeTests
                 IsSoftDeleted = false,
                 IsPublished = false,
                 ObjectId = Guid.NewGuid().ToString(),
-                AccessControlList = new List<ContentModel.AccessControlEntry>()
+                AccessControlEntries = new List<ContentModel.AccessControlEntry>()
                 {
                     new ContentModel.AccessControlEntry()
                     {

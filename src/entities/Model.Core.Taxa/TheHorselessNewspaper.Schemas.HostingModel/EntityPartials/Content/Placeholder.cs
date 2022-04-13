@@ -12,7 +12,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     {
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
-        public ICollection<AccessControlEntry> AccessControlList { get; set; }
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; }
         public ICollection<Principal> Owners { get; set; }
     }
 }

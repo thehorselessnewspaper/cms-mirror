@@ -11,7 +11,7 @@ namespace TheHorselessNewspaper.HostingModel.EntityPartials.Content.Strategy.Inh
 {
     public abstract class ContentRowLevelSecured : IContentRowLevelSecured
     {
-        public virtual ICollection<AccessControlEntry> AccessControlList { get; set; } = new  List<AccessControlEntry>();
+        public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new  List<AccessControlEntry>();
         public virtual ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
         public virtual Guid Id { get; set; }
         public virtual string? ObjectId { get; set; }

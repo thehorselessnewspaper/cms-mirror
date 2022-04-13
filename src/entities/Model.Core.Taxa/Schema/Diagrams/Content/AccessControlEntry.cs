@@ -19,9 +19,10 @@ namespace Schema.Diagrams.Content
         {
             this.SubjectPrincipals = new HashSet<Principal>();
             this.AccessControlEntries = new HashSet<AccessControlEntry>();
-            this.ParentAccessControlEntries = new HashSet<AccessControlEntry>();
+            this.SubjectAccessControlEntries = new HashSet<AccessControlEntry>();
             this.Owners = new HashSet<Principal>();
-            this.AccessControlledTenants = new HashSet<Tenant>();
+            this.SubjectTenants = new HashSet<Tenant>();
+            this.SubjectHorselessSessions = new HashSet<HorselessSession>();
         }
     
         public System.Guid Id { get; set; }
@@ -36,10 +37,12 @@ namespace Schema.Diagrams.Content
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccessControlEntry> ParentAccessControlEntries { get; set; }
+        public virtual ICollection<AccessControlEntry> SubjectAccessControlEntries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Principal> Owners { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tenant> AccessControlledTenants { get; set; }
+        public virtual ICollection<Tenant> SubjectTenants { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HorselessSession> SubjectHorselessSessions { get; set; }
     }
 }

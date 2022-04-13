@@ -18,6 +18,14 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[AccessControlEntryTenant]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AccessControlledAccessControlEntry]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[KeyCloakConfigurations]",
          "ObjectType": 0
       },
@@ -26,11 +34,31 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[PrincipalAccessControlEntry]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PrincipalAccessControlEntry1]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PrincipalPrincipal]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Principals]",
          "ObjectType": 0
       },
       {
          "Name": "[dbo].[TenantInfos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TenantPrincipal]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TenantPrincipal1]",
          "ObjectType": 0
       },
       {
@@ -46,7 +74,7 @@
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,
-   "UseFluentApiOnly": true,
+   "UseFluentApiOnly": false,
    "UseHandleBars": false,
    "UseHierarchyId": false,
    "UseInflector": true,
