@@ -219,31 +219,39 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         /// <returns></returns>
         public async Task<T> Update(T entity, List<String> targetProperties = null)
         {
-            _logger.LogDebug($"handling Update request");
-
-            if (targetProperties == null)
+            try
             {
-                // reject update attempts witout property lists
-                _logger.LogWarning($"update attempt without provided property list");
-                return await Task.FromException<T>(new Exception("update attempt without provided property list"));
+                _logger.LogDebug($"handling Update request");
+
+                if (targetProperties == null)
+                {
+                    // reject update attempts witout property lists
+                    _logger.LogWarning($"update attempt without provided property list");
+                    return await Task.FromException<T>(new Exception("update attempt without provided property list"));
+                }
+
+                var dbSet = ((DbContext)_context).Set<T>();
+
+                // get the existing entity
+                var foundEntity = await dbSet.Where(w => w.Id == entity.Id).FirstAsync();
+
+                if (foundEntity == null)
+                {
+                    _logger.LogWarning($"update attempt for nonexistent entity");
+                    return await Task.FromException<T>(new Exception("attempt to update non-existent entity"));
+                }
+                else
+                {
+                    var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties);
+                    dbSet.Update(updatedEntity);
+                    var updateResult = await ((DbContext)_context).SaveChangesAsync();
+
+                }
             }
-
-            var dbSet = ((DbContext)_context).Set<T>();
-
-            // get the existing entity
-            var foundEntity = await dbSet.Where(w => w.Id == entity.Id).FirstAsync();
-
-            if (foundEntity == null)
+            catch(Exception ex)
             {
-                _logger.LogWarning($"update attempt for nonexistent entity");
-                return await Task.FromException<T>(new Exception("attempt to update non-existent entity"));
-            }
-            else
-            {
-                var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties);
-                dbSet.Update(updatedEntity);
-                var updateResult = await ((DbContext)_context).SaveChangesAsync();
-
+                _logger.LogError($"problem updating entity {ex.Message}");
+                throw new Exception($"problem updating {ex.Message}", ex);
             }
 
             return await Task.FromResult<T>(entity);
