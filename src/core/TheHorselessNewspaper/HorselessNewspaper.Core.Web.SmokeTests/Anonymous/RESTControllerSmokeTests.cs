@@ -64,7 +64,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     var route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT + "/CREATE";
                     //testHostingModelTenantInfo.TenantId = testHostingModelTenant.Id;
-                    testHostingModelTenant.Principals = new List<Principal>()
+                    testHostingModelTenant.Accounts = new List<Principal>()
                     {
                         new Principal()
                         {
@@ -104,7 +104,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     Assert.NotNull(postResponse);
 
                     IQueryable<HostingModel.Tenant> hostingTenantsReadResult = await theHostingOperator.Read(w => w.IsSoftDeleted != true && w.Id.Equals(testHostingModelTenant.Id),
-                        new List<string>() { nameof(HostingModel.Tenant.Owners), nameof(HostingModel.Tenant.Principals), nameof(HostingModel.Tenant.TenantInfos) });
+                        new List<string>() { nameof(HostingModel.Tenant.Owners), nameof(HostingModel.Tenant.Accounts), nameof(HostingModel.Tenant.TenantInfos) });
 
                     Assert.NotNull(hostingTenantsReadResult);
 

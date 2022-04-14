@@ -52,7 +52,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.Contexts
                     this.tenantCacheService.CurrentContentModelTenants
                     .Where(w => w.Id.Equals(this.CurrentTenant.Id))
                     .FirstOrDefault()
-                    .Principals.ToList();
+                    .Accounts.ToList();
             }
             set
             {

@@ -91,7 +91,7 @@ namespace HorselessNewspaper.SmokeTests.Repository
 
             var validatedInsertResult = await tenantQuery.Read(r => r.Id.Equals(tenant.Id), new List<string>()
             {
-                nameof(tenant.Owners), nameof(tenant.AccessControlList)
+                nameof(tenant.Owners), nameof(tenant.AccessControlEntries)
             });
 
             Assert.IsTrue(validatedInsertResult != null);
@@ -159,7 +159,7 @@ namespace HorselessNewspaper.SmokeTests.Repository
                         }
                     }
                 },
-                Principals = new List<Principal>()
+                Accounts = new List<Principal>()
                 {
                     new Principal()
                     {
@@ -172,7 +172,7 @@ namespace HorselessNewspaper.SmokeTests.Repository
                         Sub = "oauth-sub"
                     }
                 },
-                AccessControlList = new List<AccessControlEntry>()
+                AccessControlEntries = new List<AccessControlEntry>()
                     {
                         new AccessControlEntry()
                         {
@@ -306,12 +306,12 @@ namespace HorselessNewspaper.SmokeTests.Repository
             try
             {
                 var readResult = await this.ReadHostingEntity<Tenant>(w => w.Id.Equals(tenant.Id),
-                    new List<string>() { nameof(Tenant.Principals), nameof(Tenant.TenantInfos) });
+                    new List<string>() { nameof(Tenant.Accounts), nameof(Tenant.TenantInfos) });
 
                 Assert.True(readResult != null);
 
                 var readEntity = readResult.First();
-                Assert.True(readEntity.Principals.Count() > 0);
+                Assert.True(readEntity.Accounts.Count() > 0);
                 Assert.True(readEntity.TenantInfos.Count() > 0);
             }
             catch (Exception e)

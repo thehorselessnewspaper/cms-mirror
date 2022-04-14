@@ -381,7 +381,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                               }
                           }
                 },
-                AccessControlList = new List<ContentModel.AccessControlEntry>()
+                AccessControlEntries = new List<ContentModel.AccessControlEntry>()
                 {
                       new ContentModel.AccessControlEntry()
                         {
@@ -473,9 +473,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             // populate the access control entries for the new tenant
             foreach(var user in mergeEntity.Owners)
             {
-                foreach(var ace in mergeEntity.AccessControlList)
+                foreach(var ace in mergeEntity.AccessControlEntries)
                 {
-                    ace.Principals.Add(user);
+                    ace.SubjectPrincipals.Add(user);
                 }
             }
 
