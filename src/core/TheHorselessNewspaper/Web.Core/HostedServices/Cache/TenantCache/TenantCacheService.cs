@@ -249,6 +249,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             var basePath = tenant.BaseUrl == null ? 
                 tenant.TenantInfos.FirstOrDefault().TenantBaseUrl.ToString() : 
                 tenant.BaseUrl.ToString();
+            basePath = basePath.TrimEnd('/');
 
             using (var scope = _services.CreateScope())
             {
@@ -344,7 +345,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 ObjectId = originEntity.ObjectId,
                 Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
                 TenantIdentifier = originEntity.TenantIdentifier,
-                BaseUrl = originEntity.BaseUrl,
+                BaseUrl = new Uri(originEntity.BaseUrl.ToString().TrimEnd('/')),
                 Owners = new List<ContentModel.Principal>()
                 {
                     new ContentModel.Principal()
@@ -475,14 +476,6 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 }
             };
 
-            // populate the access control entries for the new tenant
-            foreach(var user in mergeEntity.Owners)
-            {
-                foreach(var ace in mergeEntity.AccessControlEntries)
-                {
-                    ace.SubjectPrincipals.Add(user);
-                }
-            }
 
             using (var innerScope = _services.CreateScope())
             {
@@ -495,6 +488,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         HttpResponseMessage newTenantPostResponse;
                         var responseContent = String.Empty;
                         // collect the content model tenants
+
+                        var createdTenant = new ContentModel.Tenant();
 
                         try
                         {
@@ -509,6 +504,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                             string identifier = originEntity.TenantIdentifier;
                             var baseUri = originEntity.BaseUrl.ToString();
+                            baseUri = baseUri.TrimEnd('/');
 
                             // var route = baseUri +  $"/{identifier}/" + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_TENANT + $"/Create";
                             var route = $"{baseUri}/{identifier}/api/Tenant/Create";
@@ -524,13 +520,45 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                             var postResponse = await httpClient.SendAsync(postRequest);
 
-                            var newTenantJson = JsonSerializer.Serialize(mergeEntity);
-                            var requestContent = new StringContent(newTenantJson, Encoding.UTF8, "application/json");
-                            newTenantPostResponse = await httpClient.PostAsync(route, requestContent);
-                            responseContent = await newTenantPostResponse.Content.ReadAsStringAsync();
-                            newTenantPostResponse.EnsureSuccessStatusCode();
 
-                            _logger.LogInformation($"inserted new undeployed tenant {originEntity.DisplayName}");
+                            string postResponseJson = await postResponse.Content.ReadAsStringAsync();
+                            createdTenant = JsonSerializer.Deserialize<ContentModel.Tenant>(postResponseJson);
+
+                            var updatedRoute = $"{baseUri}/{identifier}/api/Tenant/Update/{createdTenant.Id}";
+
+                            // update the acess control entries
+                            // populate the access control entries for the new tenant
+                            foreach (var user in createdTenant.Owners)
+                            {
+                                foreach (var ace in createdTenant.AccessControlEntries)
+                                {
+                                    ace.SubjectPrincipals.Add(user);
+                                }
+                            }
+
+                            var updateRequest = new HttpRequestMessage(HttpMethod.Post, updatedRoute)
+                            {
+                                Content = GetJsonContent(createdTenant),
+                                Headers =
+                            {
+                                { HeaderNames.Accept, "application/json" },
+                                { HeaderNames.UserAgent, "HorselessNewspaper" }
+                            }
+                            };
+
+                            var updatedPostResponse = await httpClient.SendAsync(updateRequest);
+
+
+                            string updatepostResponseJson = await updatedPostResponse.Content.ReadAsStringAsync();
+                            var updatedTenant = JsonSerializer.Deserialize<ContentModel.Tenant>(updatepostResponseJson);
+
+                            //var newTenantJson = JsonSerializer.Serialize(mergeEntity);
+                            //var requestContent = new StringContent(newTenantJson, Encoding.UTF8, "application/json");
+                            //newTenantPostResponse = await httpClient.PostAsync(route, requestContent);
+                            //responseContent = await newTenantPostResponse.Content.ReadAsStringAsync();
+                            //newTenantPostResponse.EnsureSuccessStatusCode();
+
+                            _logger.LogInformation($"inserted access control entries for new undeployed tenant {updatedTenant.DisplayName}");
                         }
                         catch (Exception e)
                         {
@@ -551,7 +579,6 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                 }
                             }
                         }
-
 
 
                     }

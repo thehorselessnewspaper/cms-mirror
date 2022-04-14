@@ -143,6 +143,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
 
                 var scheme = HttpContext.Request.IsHttps ? "https://" : "http://";
                 var baseUrl = scheme + HttpContext.Request.Host;
+                baseUrl = baseUrl.TrimEnd('/');
 
                 var newOwner = new HostingModel.Principal()
                 {
