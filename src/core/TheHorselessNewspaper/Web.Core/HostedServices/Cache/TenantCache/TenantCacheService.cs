@@ -246,17 +246,19 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         private async Task<bool> ProbeTenantRouting(HostingModel.Tenant tenant)
         {
             var ret = false;
-            var basePath = tenant.TenantInfos.FirstOrDefault().TenantBaseUrl;
+            var basePath = tenant.BaseUrl == null ? 
+                tenant.TenantInfos.FirstOrDefault().TenantBaseUrl.ToString() : 
+                tenant.BaseUrl.ToString();
 
             using (var scope = _services.CreateScope())
             {
 
                 try
                 {
-                    string identifier = tenant.TenantInfos.FirstOrDefault().Identifier;
+                    string identifier = tenant.TenantIdentifier;
 
                     // get the home page for the tenant
-                    var route = $"https://{identifier}"; // basePath + $"/{identifier}"; //  + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_TENANT + $"/GetByObjectId/{tenant.ObjectId}";
+                    var route = $"{basePath}/{identifier}"; // + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_TENANT + $"/GetByObjectId/{tenant.ObjectId}";
                     IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
                     var httpClient = clientFactory.CreateClient();
 
@@ -328,6 +330,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.Read(w => w.ParentTenantId == originEntity.Id);
             var hostingModelTenantInfo = hostingModelTenantInfoQueryResult.ToList().First();
             var tenantOwner = originEntity.Owners.FirstOrDefault();
+            var tenantIdentifier = originEntity.TenantIdentifier;
 
             _logger.LogInformation($"found new undeployed tenantInfo {hostingModelTenantInfo.DisplayName}");
 
@@ -340,6 +343,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 IsSoftDeleted = originEntity.IsSoftDeleted,
                 ObjectId = originEntity.ObjectId,
                 Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                TenantIdentifier = originEntity.TenantIdentifier,
+                BaseUrl = originEntity.BaseUrl,
                 Owners = new List<ContentModel.Principal>()
                 {
                     new ContentModel.Principal()
@@ -502,22 +507,22 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             // of the management tenant
                             // var insertResult = await contentModelTenantQuery.Create(mergeEntity);
 
-                            string identifier = originEntity.TenantInfos.FirstOrDefault().Identifier;
-                            var baseUri = originEntity.TenantInfos.FirstOrDefault().TenantBaseUrl;
+                            string identifier = originEntity.TenantIdentifier;
+                            var baseUri = originEntity.BaseUrl.ToString();
 
                             // var route = baseUri +  $"/{identifier}/" + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_TENANT + $"/Create";
-                            var route = $"https://{identifier}"; // baseUri + $"/{identifier}/" + $"api/Tenant/Create";
-                            //var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
-                            //{
-                            //    Content = GetJsonContent(mergeEntity),
-                            //    Headers =
-                            //{
-                            //    { HeaderNames.Accept, "application/json" },
-                            //    { HeaderNames.UserAgent, "HorselessNewspaper" }
-                            //}
-                            //};
+                            var route = $"{baseUri}/{identifier}/api/Tenant/Create";
+                            var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
+                            {
+                                Content = GetJsonContent(mergeEntity),
+                                Headers =
+                            {
+                                { HeaderNames.Accept, "application/json" },
+                                { HeaderNames.UserAgent, "HorselessNewspaper" }
+                            }
+                            };
 
-                            //var postResponse = await httpClient.PostAsync(postRequest);
+                            var postResponse = await httpClient.SendAsync(postRequest);
 
                             var newTenantJson = JsonSerializer.Serialize(mergeEntity);
                             var requestContent = new StringContent(newTenantJson, Encoding.UTF8, "application/json");
