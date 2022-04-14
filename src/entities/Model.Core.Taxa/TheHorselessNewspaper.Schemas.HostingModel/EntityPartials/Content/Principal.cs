@@ -10,7 +10,7 @@ using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
 
-    // [MultiTenant]
+    [MultiTenant]
     public partial class Principal : IQueryableModelEntity, IContentRowLevelSecured
     {
 
