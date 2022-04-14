@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
+using Newtonsoft.Json;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
@@ -489,8 +490,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         var responseContent = String.Empty;
                         // collect the content model tenants
 
-                        var createdTenant = new ContentModel.Tenant();
-
+          
                         try
                         {
                             IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
@@ -522,8 +522,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
 
                             string postResponseJson = await postResponse.Content.ReadAsStringAsync();
-                            createdTenant = JsonSerializer.Deserialize<ContentModel.Tenant>(postResponseJson);
-
+                            var createdTenant = JsonConvert.DeserializeObject<ContentModel.Tenant>(postResponseJson); // doesn't work JsonSerializer.Deserialize<ContentModel.Tenant>(postResponseJson);
+                            
                             var updatedRoute = $"{baseUri}/{identifier}/api/Tenant/Update/{createdTenant.Id}";
 
                             // update the acess control entries
@@ -550,7 +550,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
 
                             string updatepostResponseJson = await updatedPostResponse.Content.ReadAsStringAsync();
-                            var updatedTenant = JsonSerializer.Deserialize<ContentModel.Tenant>(updatepostResponseJson);
+                            var updatedTenant = JsonConvert.DeserializeObject<ContentModel.Tenant>(updatepostResponseJson); 
 
                             //var newTenantJson = JsonSerializer.Serialize(mergeEntity);
                             //var requestContent = new StringContent(newTenantJson, Encoding.UTF8, "application/json");
@@ -572,7 +572,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                             if (String.IsNullOrEmpty(responseContent))
                             {
-                                var details = JsonSerializer.Deserialize<ProblemDetails>(responseContent);
+                                var details = JsonConvert.DeserializeObject<ProblemDetails>(responseContent);
                                 if (details != null)
                                 {
                                     _logger.LogError($"problem details supplied: {details.Title} - {details.Detail}");
