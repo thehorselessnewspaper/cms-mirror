@@ -95,8 +95,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public virtual TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; } = new TenantIdentifierStrategy();
 
+        /// <summary>
+        /// prospectively override other tenant identifier definitions
+        /// </summary>
+        public string? TenantIdentifier { get; set; }
 
-        //public virtual ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
 
 
         [Timestamp]

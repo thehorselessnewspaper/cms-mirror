@@ -70,25 +70,19 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     {
         public bool IsPublished { get; set; }
 
+        /// <summary>
+        /// prospectively overrides all other tenant base url contexts
+        /// </summary>
+        public Uri? BaseUrl { get; set; }
+
+        /// <summary>
+        /// prospectively override other tenant identifier definitions
+        /// </summary>
+        public string? TenantIdentifier { get; set; }
+
         [InverseProperty(nameof(TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantIdentifierStrategy.TargetTenant))]
         public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; }
 
-
-        //public ICollection<AccessControlEntry> AccessControlList { get; set; } = new HashSet<AccessControlEntry>();
-
-        // public Guid? OwnerId { get; set; }
-
-        //[ForeignKey(nameof(OwnerId))]
-        //[InverseProperty(nameof(Principal.OwnedTenants))]
-        //public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
-
-
-        //public Guid? PrincipalId { get; set;
-        //}
-        
-        //[InverseProperty(nameof(Principal.Tenants))]
-        //[ForeignKey(nameof(PrincipalId))]
-        //public ICollection<Principal> TenantPrincipals { get; set; } = new HashSet<Principal>();
 
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
