@@ -64,6 +64,10 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 var dbSet = ((DbContext)_context).Set<T>();
                 var addResult = await dbSet.AddAsync(entity);
                 var saveResult = await ((DbContext)_context).SaveChangesAsync();
+
+                var savedQuery = await this.Read(w => w.Id == entity.Id);
+                var savedEntity = await savedQuery.FirstOrDefaultAsync();
+                return await Task.FromResult<T>(savedEntity);
             }
             catch (Exception ex)
             {
