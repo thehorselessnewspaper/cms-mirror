@@ -71,7 +71,19 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public virtual ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();
     }
 
-
+    /// <summary>
+    /// tenant is a singleton in the current multitenant topology
+    /// and is at the root of the data model affected by user interactions
+    /// 
+    /// due to finbuckle's tenant resolution strategies in the absence
+    /// of a current http context tenant resolution middleware misfires
+    /// 
+    /// this implies a fallback strategy and a catchall tenant, implemented
+    /// as a management tenant that is the source of all other tenant registrations
+    /// 
+    /// the management tenant can scan tenant collections more easily if the
+    /// tenant entity is not multitenanted
+    /// </summary>
     public partial class Tenant : IContentRowLevelSecured
     {
         public bool IsPublished { get; set; }

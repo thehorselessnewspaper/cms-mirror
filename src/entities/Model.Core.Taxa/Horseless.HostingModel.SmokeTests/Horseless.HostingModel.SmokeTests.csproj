@@ -26,8 +26,8 @@
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Finbuckle.MultiTenant" Version="6.7.1" />
-		<PackageReference Include="Finbuckle.MultiTenant.EntityFrameworkCore" Version="6.7.1" />
+		<PackageReference Include="Finbuckle.MultiTenant" Version="6.7.2" />
+		<PackageReference Include="Finbuckle.MultiTenant.EntityFrameworkCore" Version="6.7.2" />
 		<PackageReference Include="HorselessNewspaper.Web.Core" Version="0.4.220311.2" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
@@ -36,7 +36,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
-		<PackageReference Include="NUnit" Version="3.13.2" />
+		<PackageReference Include="NUnit" Version="3.13.3" />
 		<PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
 		<PackageReference Include="coverlet.collector" Version="3.1.2">
 			<PrivateAssets>all</PrivateAssets>

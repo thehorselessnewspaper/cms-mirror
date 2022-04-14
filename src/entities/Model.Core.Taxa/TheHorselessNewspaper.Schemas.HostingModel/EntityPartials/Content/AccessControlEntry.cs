@@ -50,7 +50,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
     //}
 
-    // [MultiTenant]
+    [MultiTenant]
     public partial class AccessControlEntry : IQueryableModelEntity, IContentRowLevelSecured
     {
 

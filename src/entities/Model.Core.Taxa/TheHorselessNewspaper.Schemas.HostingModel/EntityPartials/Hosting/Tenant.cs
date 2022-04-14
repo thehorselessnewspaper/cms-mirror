@@ -20,7 +20,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         DNS_FQDN
     }
 
-    [MultiTenant]
     public class TenantIdentifierStrategyContainer
     {
         [Key]
@@ -42,7 +41,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     /// modelled as a wrapper for a collection payload
     /// to avoid awkardness with mapping owned collections
     /// </summary>
-    [MultiTenant]
     public partial class TenantIdentifierStrategy
     {
         [Key]
