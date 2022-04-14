@@ -203,11 +203,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
         private async Task HandleScopedLogic(IServiceScope scope)
         {
-            List<HostingModel.Tenant> hostingModelTenants = await GetcurrenthostingModelTenants(scope);
-
+            List<HostingModel.Tenant> hostingModelTenants = await UpdateLocalHostingTenantCache(scope);
+            List<ContentModel.Tenant> contentModelTenants = await this.GetCurrentContentModelTenants(scope);
             IMultiTenantStore<HorselessTenantInfo>? inMemoryStores = GetInMemoryTenantStores(scope);
-
-            var contentModelTenants = await this.GetCurrentContentModelTenants(scope);
 
             // merge content model tenants with published hosting model tenants
             // meaning, migrate published tenant entities from the hosting model db
@@ -217,8 +215,10 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             foreach (var publishedTenant in hostingModelTenants.Where(w => w.IsPublished == true))
             {
                 // filter existing merge targets
-                var isLiveTenant = contentModelTenants.Where(r => r.Id == publishedTenant.Id).Any();
-                if (isLiveTenant == false)
+                // evaluate wether final tenant deployment
+                // workflow step completed
+                var isTenantDeploymentWorkflowComplete = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.IsPublished == true).Any();
+                if (isTenantDeploymentWorkflowComplete == false)
                 {
                     // validate the multitenant routing is working for this tenant
                     // database inserts specific to the tenant can only occur
@@ -340,6 +340,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             var mergeEntity = new TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant()
             {
                 Id = originEntity.Id,
+                IsPublished = false,
                 CreatedAt = originEntity.CreatedAt,
                 DisplayName = originEntity.DisplayName,
                 IsSoftDeleted = originEntity.IsSoftDeleted,
@@ -523,7 +524,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                             string postResponseJson = await postResponse.Content.ReadAsStringAsync();
                             var createdTenant = JsonConvert.DeserializeObject<ContentModel.Tenant>(postResponseJson); // doesn't work JsonSerializer.Deserialize<ContentModel.Tenant>(postResponseJson);
-                            
+                            createdTenant.IsPublished = true; //mark workflow complete
+
                             var updatedRoute = $"{baseUri}/{identifier}/api/Tenant/Update/{createdTenant.Id}";
 
                             // update the acess control entries
@@ -606,7 +608,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             return inMemoryStores;
         }
 
-        private async Task<List<HostingModel.Tenant>> GetcurrenthostingModelTenants(IServiceScope scope)
+        private async Task<List<HostingModel.Tenant>> UpdateLocalHostingTenantCache(IServiceScope scope)
         {
             List<HostingModel.Tenant> hostingModelTenants = await GetCurrentHostingModelTenants(scope);
             foreach (var hostModelTenant in hostingModelTenants)
@@ -657,10 +659,10 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         {
             // collect the hosting model tenants
             var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(scope);
-            var contentModelTenantQueryResult = await contentModelTenantQuery.Read();
+            var contentModelTenantQueryResult = await contentModelTenantQuery.Read(w => w.IsPublished == true && w.IsSoftDeleted == false);
             var contentModelTenants = contentModelTenantQueryResult == null ? new List<ContentModel.Tenant>() : contentModelTenantQueryResult.ToList();
 
-            _logger.LogInformation($"read {contentModelTenants.Count()} content model tenant records");
+            _logger.LogInformation($"read {contentModelTenants.Count()} published content model tenant records");
 
             return contentModelTenants;
         }
