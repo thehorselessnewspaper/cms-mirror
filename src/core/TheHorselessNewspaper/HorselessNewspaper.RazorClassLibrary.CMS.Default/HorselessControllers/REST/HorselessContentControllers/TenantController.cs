@@ -91,7 +91,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [HttpPost("Update/{contentCollectionId}", Name = "[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Tenant))]
         [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(Tenant))]
-        public async Task<ActionResult<Tenant>> Update([FromRoute] string contentCollectionId, [FromBody] Tenant contentCollection)
+        public async Task<ActionResult<Tenant>> Update( [FromRoute] string contentCollectionId, [FromBody] Tenant contentCollection)
         {
             if (!ModelState.IsValid)
             {

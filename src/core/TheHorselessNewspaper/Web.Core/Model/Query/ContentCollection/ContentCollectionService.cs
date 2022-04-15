@@ -102,7 +102,7 @@ namespace HorselessNewspaper.Web.Core.Model.Query.ContentCollection
             }
             catch (Exception ex)
             {
-                throw new Exception($"failed update {ex.Message}");
+                throw new Exception($"failed update {ex.Message}", ex);
             }
 
             return result;

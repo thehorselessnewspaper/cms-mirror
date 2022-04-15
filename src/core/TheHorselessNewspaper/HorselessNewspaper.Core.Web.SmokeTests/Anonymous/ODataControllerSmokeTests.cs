@@ -11,6 +11,7 @@ using Xunit;
 using TheHorselessNewspaper.HostingModel.DTO;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using Microsoft.Extensions.DependencyInjection;
+using Finbuckle.MultiTenant;
 
 namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 {
@@ -60,6 +61,9 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
             {
                 using (var scope = application.Services.CreateScope())
                 {
+                    ITenantInfo tenant = scope.ServiceProvider.GetRequiredService<ITenantInfo>();
+                    Assert.NotNull(tenant);
+
                     var insertQueryOperator = _baseTest.GetIQueryableContentModelOperator<IQueryableContentModelOperator<ContentEntities.Tenant>>(scope);
                     var insertResult = await insertQueryOperator.Create(
                         new ContentEntities.Tenant()
