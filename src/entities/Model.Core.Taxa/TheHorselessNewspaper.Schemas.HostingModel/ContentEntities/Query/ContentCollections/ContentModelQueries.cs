@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Finbuckle.MultiTenant;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using System.Linq.Expressions;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query.Extensions;
+using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollections
@@ -18,15 +20,17 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
     {
         private readonly ILogger<ContentModelQueries<T>> _logger;
         private readonly IContentModelContext _context;
-        public ContentModelQueries(IContentModelContext ctx, ILogger<ContentModelQueries<T>> logger)
+        private ITenantInfo _tenantInfo;
+        public ContentModelQueries(IContentModelContext ctx, ILogger<ContentModelQueries<T>> logger, ITenantInfo tenantInfo)
         {
             this._context = ctx;
             this._logger = logger;
+            this._tenantInfo = tenantInfo;
 
             try
             {
                 var providerName = ((DbContext)ctx).Database.ProviderName;
-                _logger.LogDebug($"content collections context using provider named {providerName}");
+                _logger.LogInformation($"content collections context using provider named {providerName}");
             }
             catch (Exception e)
             {
@@ -56,7 +60,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         public async Task<T> Create(T entity)
         {
-            _logger.LogDebug($"handling Create request");
+            _logger.LogInformation($"handling Create request for tenant context {_tenantInfo.Identifier}");
 
 
             try
@@ -81,7 +85,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         public async Task<IEnumerable<T>> Create(IEnumerable<T> entities)
         {
-            _logger.LogDebug($"handling Create request");
+            _logger.LogInformation($"handling Create request for tenant context {_tenantInfo.Identifier}");
             try
             {
                 var dbSet = ((DbContext)_context).Set<T>();
@@ -103,7 +107,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         public async Task<T> Delete(string entityId)
         {
             T? entity;
-            _logger.LogDebug($"handling Delete request");
+            _logger.LogInformation($"handling Delete request for tenant context {_tenantInfo.Identifier}");
             try
             {
                 var dbSet = ((DbContext)_context).Set<T>();
@@ -168,7 +172,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         public async Task<IQueryable<T>> Read()
         {
-            _logger.LogDebug($"handling get request");
+            _logger.LogInformation($"handling get request for tenant context {_tenantInfo.Identifier}");
             IQueryable<T> result;
             try
             {
@@ -189,7 +193,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null)
         {
-            _logger.LogDebug($"handling get request");
+            _logger.LogInformation($"handling get request for tenant context {_tenantInfo.Identifier}");
             IQueryable<T> result;
             try
             {
@@ -225,7 +229,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         {
             try
             {
-                _logger.LogDebug($"handling Update request");
+                _logger.LogInformation($"handling Update request for tenant context {_tenantInfo.Identifier}");
 
                 if (targetProperties == null)
                 {
@@ -263,7 +267,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         public async Task<IEnumerable<T>> Update(IEnumerable<T> entities, List<String> targetProperties = null)
         {
-            _logger.LogDebug($"handling Update request");
+            _logger.LogInformation($"handling Update request for tenant context {_tenantInfo.Identifier}");
             var dbSet = ((DbContext)_context).Set<T>();
 
             dbSet.UpdateRange(entities);

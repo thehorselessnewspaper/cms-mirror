@@ -28,10 +28,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context
         internal DbSet<NavigationMenu> NavigationMenus { get; set; }
         internal DbSet<NavigationMenuItem> NavigationMenuItems { get; set; }
         internal DbSet<NugetPackage> NugetPackages { get; set; }
-        /// an owned type without a dbset
-        /// internal DbSet<Placeholder> Placeholders { get; set; }
-        /// an owned type without a dbset
-        ///internal DbSet<Principal> Principals { get; set; }
+        internal DbSet<Placeholder> Placeholders { get; set; }
+        internal DbSet<Principal> Principals { get; set; }
         internal DbSet<Publication> Publications { get; set; }
         internal DbSet<Taxon> Taxons { get; set; }
         internal DbSet<Tenant> Tenants { get; set; }

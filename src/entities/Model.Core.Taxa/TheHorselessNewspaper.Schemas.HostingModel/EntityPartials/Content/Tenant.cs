@@ -83,7 +83,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     /// 
     /// the management tenant can scan tenant collections more easily if the
     /// tenant entity is not multitenanted
+    /// 
+    /// or maybe not - we will se
     /// </summary>
+    [MultiTenant]
     public partial class Tenant : IContentRowLevelSecured
     {
         public bool IsPublished { get; set; }
