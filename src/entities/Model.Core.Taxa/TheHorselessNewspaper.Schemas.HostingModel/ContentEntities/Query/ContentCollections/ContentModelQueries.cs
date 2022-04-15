@@ -20,8 +20,8 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
     {
         private readonly ILogger<ContentModelQueries<T>> _logger;
         private readonly IContentModelContext _context;
-        private ITenantInfo _tenantInfo;
-        public ContentModelQueries(IContentModelContext ctx, ILogger<ContentModelQueries<T>> logger, ITenantInfo tenantInfo)
+        private HorselessTenantInfo _tenantInfo;
+        public ContentModelQueries(IContentModelContext ctx, ILogger<ContentModelQueries<T>> logger, HorselessTenantInfo tenantInfo)
         {
             this._context = ctx;
             this._logger = logger;
@@ -52,7 +52,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 var dbreset = await ((DbContext)_context).Database.EnsureDeletedAsync();
                 var dbSet = await ((DbContext)_context).Database.EnsureCreatedAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogDebug($"content collections reset exception: {ex.Message}");
             }
@@ -77,7 +77,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             {
                 _logger.LogError($"problem handling request {ex.Message}");
 
-                return await Task.FromException<T>(ex);
+                throw new Exception($"entity creation exception {ex.Message}", ex);
             }
 
             return await Task.FromResult<T>(entity);
@@ -85,7 +85,6 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         public async Task<IEnumerable<T>> Create(IEnumerable<T> entities)
         {
-            _logger.LogInformation($"handling Create request for tenant context {_tenantInfo.Identifier}");
             try
             {
                 var dbSet = ((DbContext)_context).Set<T>();
@@ -98,7 +97,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             {
                 _logger.LogError($"problem handling request {ex.Message}");
 
-                return await Task.FromException<IEnumerable<T>>(ex);
+                throw new Exception($"entity creation exception {ex.Message}", ex);
             }
 
             return entities;
@@ -107,7 +106,6 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         public async Task<T> Delete(string entityId)
         {
             T? entity;
-            _logger.LogInformation($"handling Delete request for tenant context {_tenantInfo.Identifier}");
             try
             {
                 var dbSet = ((DbContext)_context).Set<T>();
@@ -119,7 +117,8 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             {
                 _logger.LogError($"problem handling request {ex.Message}");
 
-                return await Task.FromException<T>(ex);
+                throw new Exception($"entity delete exception {ex.Message}", ex);
+
             }
 
             return await Task.FromResult<T>(entity);
@@ -128,16 +127,16 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         {
             var ret = new List<T>();
 
-            if(whatIf == true)
+            if (whatIf == true)
             {
                 return await this.Read(query);
             }
-            else if(softDelete == true)
+            else if (softDelete == true)
             {
                 try
                 {
                     ret = await ((DbContext)_context).Set<T>().Where(query).ToListAsync();
-                    foreach(var e in ret)
+                    foreach (var e in ret)
                     {
                         // TODO softdelete has to depend on an interface on T
                     }
@@ -147,11 +146,12 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 {
                     _logger.LogError($"problem handling request {ex.Message}");
 
-                    return await Task.FromException<IEnumerable<T>>(ex);
+                    throw new Exception($"entity delete exception {ex.Message}", ex);
+
                 }
 
             }
-            else if(softDelete == false)
+            else if (softDelete == false)
             {
                 try
                 {
@@ -162,8 +162,8 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 catch (Exception ex)
                 {
                     _logger.LogError($"problem handling request {ex.Message}");
+                    throw new Exception($"entity delete exception {ex.Message}", ex);
 
-                    return await Task.FromException<IEnumerable<T>>(ex);
                 }
             }
 
@@ -172,7 +172,6 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         public async Task<IQueryable<T>> Read()
         {
-            _logger.LogInformation($"handling get request for tenant context {_tenantInfo.Identifier}");
             IQueryable<T> result;
             try
             {
@@ -184,8 +183,8 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             {
 
                 _logger.LogError($"problem handling request {ex.Message}");
+                throw new Exception($"entity read exception {ex.Message}", ex);
 
-                return await Task.FromException<IQueryable<T>>(ex);
             }
 
             return await Task.FromResult<IQueryable<T>>(result);
@@ -193,7 +192,6 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null)
         {
-            _logger.LogInformation($"handling get request for tenant context {_tenantInfo.Identifier}");
             IQueryable<T> result;
             try
             {
@@ -213,8 +211,8 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             {
 
                 _logger.LogError($"problem handling request {ex.Message}");
+                throw new Exception($"entity read exception {ex.Message}", ex);
 
-                return await Task.FromException<IQueryable<T>>(ex);
             }
 
             return await Task.FromResult<IQueryable<T>>(result);
@@ -235,7 +233,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 {
                     // reject update attempts witout property lists
                     _logger.LogWarning($"update attempt without provided property list");
-                    return await Task.FromException<T>(new Exception("update attempt without provided property list"));
+                    throw new Exception("update attempt without provided property list");
                 }
 
                 var dbSet = ((DbContext)_context).Set<T>();
@@ -246,7 +244,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 if (foundEntity == null)
                 {
                     _logger.LogWarning($"update attempt for nonexistent entity");
-                    return await Task.FromException<T>(new Exception("attempt to update non-existent entity"));
+                    throw new Exception("attempt to update non-existent entity");
                 }
                 else
                 {
@@ -256,7 +254,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"problem updating entity {ex.Message}");
                 throw new Exception($"problem updating {ex.Message}", ex);
@@ -267,35 +265,50 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         public async Task<IEnumerable<T>> Update(IEnumerable<T> entities, List<String> targetProperties = null)
         {
-            _logger.LogInformation($"handling Update request for tenant context {_tenantInfo.Identifier}");
-            var dbSet = ((DbContext)_context).Set<T>();
+            try
+            {
+                _logger.LogInformation($"handling Update request for tenant context {_tenantInfo.Identifier}");
+                var dbSet = ((DbContext)_context).Set<T>();
 
-            dbSet.UpdateRange(entities);
-            var saveResult = await ((DbContext)_context).SaveChangesAsync();
+                dbSet.UpdateRange(entities);
+                var saveResult = await ((DbContext)_context).SaveChangesAsync();
 
-            return entities;
+                return entities;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"entity update exception {ex.Message}", ex);
+            }
         }
 
         public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class
         {
-            var hasEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
-
-
-            if (hasEntity != null)
+            try
             {
-                var currentValue = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
-                var relatedCollection = currentValue.GetType().GetProperties().Where(w => w.Name.Equals(propertyName)).FirstOrDefault().GetValue(currentValue);
-                var castValue = relatedCollection as ICollection<U>;
+                var hasEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
 
-                foreach (var item in relatedEntities)
+
+                if (hasEntity != null)
                 {
-                    castValue.Add(item);
+                    var currentValue = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
+                    var relatedCollection = currentValue.GetType().GetProperties().Where(w => w.Name.Equals(propertyName)).FirstOrDefault().GetValue(currentValue);
+                    var castValue = relatedCollection as ICollection<U>;
+
+                    foreach (var item in relatedEntities)
+                    {
+                        castValue.Add(item);
+                    }
+
+                    var saveResult = await ((DbContext)_context).SaveChangesAsync();
                 }
 
-                var saveResult = await ((DbContext)_context).SaveChangesAsync();
+                return relatedEntities;
             }
+            catch (Exception ex)
+            {
+                throw new Exception($"entity insert exception {ex.Message}", ex);
 
-            return relatedEntities;
+            }
         }
 
         /// <summary>
