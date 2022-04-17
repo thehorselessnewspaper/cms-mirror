@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Http;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
 
-    [Produces("application/json")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class JSONAssetController :
         ODataController, IContentQueryController<ContentModel.JSONAsset>
     {

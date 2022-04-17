@@ -15,6 +15,7 @@
 		<!-- support embedding dependencies for redistributable packages -->
 		<!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
 		<!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	</PropertyGroup>
 	<PropertyGroup>
 		<!-- Include symbol files (*.pdb) in the built .nupkg -->
@@ -34,12 +35,12 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 		<PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="2.5.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="NSwag.ApiDescription.Client" Version="13.15.10">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		<PackageReference Include="NSwag.MSBuild" Version="13.15.10">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="NuGet.Protocol" Version="6.1.0" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220416.2" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220416.3" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -57,9 +58,15 @@
 	<ItemGroup>
 		<OpenApiReference Include="..\..\..\generated-code\TheHorselessNewspaper.REST\HorselessRestApiClient.json" CodeGenerator="NSwagCSharp" Namespace="HorselessNewspaper.Web.Core.ScopedServices.RestClients" ClassName="HorselessRestApiClient" Link="OpenAPIs\HorselessRestApiClient.json">
 			<OutputPath>$(ProjectDir)/ScopedServices/RestClients/HorselessRestClient.cs</OutputPath>
-			<Options>/GenerateClientInterfaces:true,/injectHttpClient:true</Options>
+			<Options>/GenerateClientInterfaces:true</Options>
 		</OpenApiReference>
 	</ItemGroup>
 
-	
+	<!--<PropertyGroup>
+		<RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+	</PropertyGroup>
+
+	<Target Name="NSwag" AfterTargets="PostBuildEvent" Condition=" '$(Configuration)' == 'Debug' ">
+		<Exec WorkingDirectory="$(ProjectDir)" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net50) run nswag.json /variables:Configuration=$(Configuration)" />
+	</Target>-->
 </Project>

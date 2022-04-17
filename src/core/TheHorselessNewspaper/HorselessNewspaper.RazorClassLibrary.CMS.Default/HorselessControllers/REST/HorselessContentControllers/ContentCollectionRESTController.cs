@@ -11,7 +11,7 @@ using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
     [ApiController]
-    [Route("{__tenant__}/" + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_CONTENTCOLLECTION)]
+    [Route(RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_CONTENTCOLLECTION)]
 
     public class ContentCollectionRESTController : ControllerBase,
         IRESTContentController<ContentModel.ContentCollection>
@@ -110,6 +110,18 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
                 return BadRequest(ex.Message);
             }
 
+        }
+
+        [HttpGet("GetByPageNumber", Name = "[controller]_[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ContentModel.ContentCollection))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+        public async Task<IEnumerable<ContentModel.ContentCollection>> GetByPageNumber(int offset, int pagesize, int pageNumber)
+        {
+
+            var result = await _contentCollectionService.Query();
+            var rt = result.Skip(offset * pageNumber).Take(pagesize).ToList();
+            return rt;
         }
     }
 }
