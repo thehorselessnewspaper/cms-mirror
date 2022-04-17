@@ -154,7 +154,6 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
             #region multitenancy as per https://www.finbuckle.com/MultiTenant/
             serviceBuilder.Services.AddMultiTenant<HorselessTenantInfo>()
-                .WithRouteStrategy()
                 .WithInMemoryStore(options =>
                 {
                     options.Tenants.Add(
@@ -172,20 +171,25 @@ namespace HorselessNewspaper.Web.Core.Extensions
                         )
                     );
                 })
-                .WithStaticStrategy("6da806b8-f7ab-4e3a-8833-7e834a40e9d0"); 
-                //.WithDelegateStrategy(async context =>
-                //{
-                //    var httpContext = context as HttpContext;
-                //    if (httpContext == null)
-                //    {
-                //        return "6da806b8-f7ab-4e3a-8833-7e834a40e9d0";
-                //    }
-                //    else
-                //    {
-                //        httpContext.Request.Query.TryGetValue("tenant", out StringValues tenantIdParam);
-                //        return tenantIdParam.ToString();
-                //    }
-                //});
+                .WithRouteStrategy()
+                .WithDelegateStrategy(async context =>
+                {
+                    return await Task.FromResult<string>("6da806b8-f7ab-4e3a-8833-7e834a40e9d0");
+                })
+                .WithStaticStrategy("6da806b8-f7ab-4e3a-8833-7e834a40e9d0");
+            //.WithDelegateStrategy(async context =>
+            //{
+            //    var httpContext = context as HttpContext;
+            //    if (httpContext == null)
+            //    {
+            //        return "6da806b8-f7ab-4e3a-8833-7e834a40e9d0";
+            //    }
+            //    else
+            //    {
+            //        httpContext.Request.Query.TryGetValue("tenant", out StringValues tenantIdParam);
+            //        return tenantIdParam.ToString();
+            //    }
+            //});
 
 
             //.WithDelegateStrategy(async context =>

@@ -118,7 +118,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 try
                 {
 
-                    var tenantInfo = scope.ServiceProvider.GetRequiredService<ITenantInfo>();
+                    var tenantInfo = scope.ServiceProvider.GetRequiredService<HorselessTenantInfo>();
 
                     var contentModelOperator = GetQueryForContentEntity<ContentModel.Tenant>(scope);
                     var hostingModelOperator = GetQueryForHostingEntity<HostingModel.Tenant>(scope);
@@ -182,7 +182,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             {
                 // collect the content model tenants
                 var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(scope);
-                var tenantInfo = scope.ServiceProvider.GetRequiredService<ITenantInfo>();
+                var tenantInfo = scope.ServiceProvider.GetRequiredService<HorselessTenantInfo>();
 
                 IEnumerable<ContentModel.Tenant> tenantList = await contentModelTenantQuery.Read(r => r.IsSoftDeleted == false);
 
