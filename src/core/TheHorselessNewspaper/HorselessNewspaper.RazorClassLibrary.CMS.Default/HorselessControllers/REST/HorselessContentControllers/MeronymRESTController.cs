@@ -12,7 +12,7 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
     [ApiController]
-    [Route(RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_MERONYM)]
+    [Route("{__tenant__}/" + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_MERONYM)]
     public class MeronymRESTController : ControllerBase,
         IRESTContentController<Meronym>
     {

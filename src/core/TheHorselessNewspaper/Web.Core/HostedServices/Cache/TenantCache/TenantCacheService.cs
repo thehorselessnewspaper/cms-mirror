@@ -933,14 +933,18 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
         private async Task<List<ContentModel.Tenant>> GetCurrentContentModelTenants(IServiceScope scope)
         {
-            // collect the hosting model tenants
-            var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(scope);
-            var contentModelTenantQueryResult = await contentModelTenantQuery.Read(w => w.IsPublished == true && w.IsSoftDeleted == false);
-            var contentModelTenants = contentModelTenantQueryResult == null ? new List<ContentModel.Tenant>() : contentModelTenantQueryResult.ToList();
+            using(var localScope = _services.CreateScope())
+            {
+                // collect the hosting model tenants
+                var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(localScope);
+                var contentModelTenantQueryResult = await contentModelTenantQuery.Read(w => w.IsPublished == true && w.IsSoftDeleted == false);
+                var contentModelTenants = contentModelTenantQueryResult == null ? new List<ContentModel.Tenant>() : contentModelTenantQueryResult.ToList();
 
-            _logger.LogInformation($"read {contentModelTenants.Count()} published content model tenant records");
+                _logger.LogInformation($"read {contentModelTenants.Count()} published content model tenant records");
 
-            return contentModelTenants;
+                return contentModelTenants;
+            }
+
         }
 
         private async Task<List<HostingModel.TenantInfo>> GetCurrentContentModelTenantInfo(IServiceScope scope)

@@ -12,7 +12,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [ApiController]
-    [Route(RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_MIMETYPE)]
+    [Route("{__tenant__}/" + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_MIMETYPE)]
     public class MimeTypeRESTController : ControllerBase,
         IRESTContentController<MIMEType>
     {

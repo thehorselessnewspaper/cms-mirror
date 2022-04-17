@@ -13,7 +13,7 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
     [ApiController]
-    [Route(RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_FILESYSTEM)]
+    [Route("{__tenant__}/" + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_FILESYSTEM)]
     public class FilesystemAssetRESTController : ControllerBase,
         IRESTContentController<FilesystemAsset>
     {

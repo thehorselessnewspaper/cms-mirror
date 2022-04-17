@@ -16,7 +16,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [ApiController]
-    [Route(RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_HOLONYM)]
+    [Route("{__tenant__}/" + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_HOLONYM)]
     public class HolonymRESTController : ControllerBase,
         IRESTContentController<Holonym>
     {

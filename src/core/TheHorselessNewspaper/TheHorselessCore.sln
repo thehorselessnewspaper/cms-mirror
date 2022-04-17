@@ -4,12 +4,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Client.Nuget", "HorselessNewspaper.Client.Nuget\HorselessNewspaper.Client.Nuget.csproj", "{5C766FC8-35D8-4F76-B544-B5F9B911797D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A3C89049-17DD-4568-8EBB-FBBF17DF7819} = {A3C89049-17DD-4568-8EBB-FBBF17DF7819}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Core.Interfaces", "HorselessNewspaper.Core.Interfaces\HorselessNewspaper.Core.Interfaces.csproj", "{A3C89049-17DD-4568-8EBB-FBBF17DF7819}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.SmokeTests", "Unit.Tests\HorselessNewspaper.SmokeTests\HorselessNewspaper.SmokeTests.csproj", "{19071800-2AC6-4FD1-86B7-5BFA3E3C1FDC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Web.Core", "Web.Core\HorselessNewspaper.Web.Core.csproj", "{6BCA4CB6-5574-40A7-A196-7CB6B9CCD539}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A3C89049-17DD-4568-8EBB-FBBF17DF7819} = {A3C89049-17DD-4568-8EBB-FBBF17DF7819}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{25BF4201-5602-4A85-B3F3-B7E328B125B9}"
 	ProjectSection(SolutionItems) = preProject
@@ -19,8 +25,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Core.Web.Prototype", "HorselessNewspaper.Core.Web.Prototype\HorselessNewspaper.Core.Web.Prototype.csproj", "{E16E3AD0-784F-44D5-8AE5-C8E86547FAF6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Web.Core.Auth.Keycloak", "HorselessNewspaper.Web.Core.Auth.Keycloak\HorselessNewspaper.Web.Core.Auth.Keycloak.csproj", "{E26646D7-38E1-4F56-9EEC-039205E1CE3F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A3C89049-17DD-4568-8EBB-FBBF17DF7819} = {A3C89049-17DD-4568-8EBB-FBBF17DF7819}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.RazorClassLibrary.CMS.Default", "HorselessNewspaper.RazorClassLibrary.CMS.Default\HorselessNewspaper.RazorClassLibrary.CMS.Default.csproj", "{56BDE1B4-838E-491E-A9C0-9648FB3CF788}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A3C89049-17DD-4568-8EBB-FBBF17DF7819} = {A3C89049-17DD-4568-8EBB-FBBF17DF7819}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Core.Repositories", "HorselessNewspaper.Core.Repositories\HorselessNewspaper.Core.Repositories.csproj", "{BB3F1432-BD07-4B1C-996F-2A8740CE1DAC}"
 EndProject
@@ -29,8 +41,16 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.RazorClassLibrary.Keycloak.Default", "HorselessNewspaper.RazorClassLibrary.Keycloak.Default\HorselessNewspaper.RazorClassLibrary.Keycloak.Default.csproj", "{FC6BB660-0BD4-4A02-AB79-B8A6C1FBBC1B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Web.Core.Extensions.MSSQLServer", "HorselessNewspaper.Web.Core.Extensions.MSSQLServer\HorselessNewspaper.Web.Core.Extensions.MSSQLServer.csproj", "{68C78FFB-7BA0-463B-A9C3-FD8E069054F4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A3C89049-17DD-4568-8EBB-FBBF17DF7819} = {A3C89049-17DD-4568-8EBB-FBBF17DF7819}
+		{6BCA4CB6-5574-40A7-A196-7CB6B9CCD539} = {6BCA4CB6-5574-40A7-A196-7CB6B9CCD539}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Web.Core.Extensions.MySQL", "HorselessNewspaper.Web.Core.Extensions.MySQL\HorselessNewspaper.Web.Core.Extensions.MySQL.csproj", "{FEC81F63-4E51-4D9C-AB51-8781557F725F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A3C89049-17DD-4568-8EBB-FBBF17DF7819} = {A3C89049-17DD-4568-8EBB-FBBF17DF7819}
+		{6BCA4CB6-5574-40A7-A196-7CB6B9CCD539} = {6BCA4CB6-5574-40A7-A196-7CB6B9CCD539}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Web.Core.Services.Query", "HorselessNewspaper.Web.Core.Services.Query\HorselessNewspaper.Web.Core.Services.Query.csproj", "{63E6F9DB-F681-431B-B5F8-0EBC9C3C1C8B}"
 EndProject

@@ -13,7 +13,7 @@ using TheHorselessNewspaper.HostingModel.Entities.Query;
 
 namespace HorselessNewspaper.Web.Core.Interfaces.Controller
 {
-    public interface IRESTHostingController<Entity> where Entity : class, IHostingRowLevelSecured
+    public partial interface IRESTHostingController<Entity> where Entity : class, IHostingRowLevelSecured
     {
 
         IHostingCollectionService<IQueryableHostingModelOperator<Entity>, Entity> EntityCollectionService { get; set; }

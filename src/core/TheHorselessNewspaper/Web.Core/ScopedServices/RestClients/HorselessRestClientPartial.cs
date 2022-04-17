@@ -12,7 +12,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         public string BaseUrl { get; set; }
     }
 
-    public partial class HorselessRestApiClient
+    public partial class HorselessRestApiClient : IHorselessRestApiClient
     {
         /// <summary>
         /// avoid the nswag generated constructor

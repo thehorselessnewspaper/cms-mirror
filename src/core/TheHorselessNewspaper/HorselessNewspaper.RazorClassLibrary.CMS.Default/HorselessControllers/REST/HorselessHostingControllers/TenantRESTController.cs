@@ -19,7 +19,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             this.CurrentTenant = tenantInfo;
         }
 
-        public const string API_HORSELESSHOSTINGMODEL_TENANT = "api/HorselessHostingModel/Tenant";
+        protected const string API_HORSELESSHOSTINGMODEL_TENANT = "api/HorselessHostingModel/Tenant";
 
         public IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.Tenant>, HostingModel.Tenant> EntityCollectionService { get; set; }
         public ITenantInfo CurrentTenant { get; set; }

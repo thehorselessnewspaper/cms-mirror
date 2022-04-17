@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using System.Text.Json.Serialization;
 using Finbuckle.MultiTenant;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
+using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST;
 
 var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(builder =>
@@ -138,7 +139,7 @@ builder.Services.AddSwaggerGen(options =>
 
     });
     options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Horseless Content API", Version = "v1" });
-
+    options.DocumentFilter<SwaggerODataControllerDocumentFilter>();
 });
 
 //// this hardcodes a static reference to the default horseless razor class library

@@ -12,7 +12,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [ApiController]
-    [Route(RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_NAVIGATIONMENU)]
+    [Route("{__tenant__}/" + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_NAVIGATIONMENU)]
     public class NavigationMenuRESTController : ControllerBase,
         IRESTContentController<NavigationMenu>
     {

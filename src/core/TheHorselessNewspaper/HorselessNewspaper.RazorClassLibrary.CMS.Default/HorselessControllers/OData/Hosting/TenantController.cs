@@ -8,7 +8,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [ODataRouteComponent("HorselessHosting")]
-    // [ApiExplorerSettings(IgnoreApi = false)]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class TenantController : ODataController
     {
         private readonly IQueryableHostingModelOperator<HostingModel.Tenant> _TenantSvc;
