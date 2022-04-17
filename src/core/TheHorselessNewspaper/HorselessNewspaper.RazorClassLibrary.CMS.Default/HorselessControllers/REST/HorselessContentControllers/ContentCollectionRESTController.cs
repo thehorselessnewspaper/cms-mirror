@@ -111,5 +111,17 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             }
 
         }
+
+        [HttpGet("GetByPageNumber", Name = "[controller]_[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ContentModel.ContentCollection))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+        public async Task<IEnumerable<ContentModel.ContentCollection>> GetByPageNumber(int offset, int pagesize, int pageNumber)
+        {
+
+            var result = await _contentCollectionService.Query();
+            var rt = result.Skip(offset * pageNumber).Take(pagesize).ToList();
+            return rt;
+        }
     }
 }

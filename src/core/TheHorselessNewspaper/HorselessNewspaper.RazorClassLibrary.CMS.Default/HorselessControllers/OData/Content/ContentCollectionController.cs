@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.OData;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
 
-    [ApiExplorerSettings(IgnoreApi = false)]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class ContentCollectionController :
         ODataController, IContentQueryController<ContentModel.ContentCollection>
     {
