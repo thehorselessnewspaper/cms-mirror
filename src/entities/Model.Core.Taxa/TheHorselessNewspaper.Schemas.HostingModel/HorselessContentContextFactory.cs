@@ -23,7 +23,7 @@ namespace TheHorselessNewspaper.HostingModel
         public MSSqlContentContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<MSSqlContentContext>();
-            optionsBuilder.UseSqlServer("Data Source=blog.db");
+            optionsBuilder.UseSqlServer(GetAppConfiguration().GetConnectionString("ContentModelConnection"));
 
             return new MSSqlContentContext(optionsBuilder.Options,
                 new HorselessTenantInfo()
