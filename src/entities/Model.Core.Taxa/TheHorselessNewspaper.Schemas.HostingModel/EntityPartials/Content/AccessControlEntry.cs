@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
+using System.Text.Json.Serialization;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
@@ -15,18 +16,21 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     ///            1->1 Collection<Principal>
     /// </summary>
     /// [Flags]
+
+
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ACEPermissionScope
     {
         SITE, TENANT, OWNER, ROLE, GROUP, WORKFLOW, ANONYMOUS, EVERYONE
     }
 
-
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     [Flags]
     public enum ACEPermission
     {
         READ, CREATE, UPDATE, DELETE, SHARE, EXECUTE, SEARCH, PUBLISH, UNPUBLISH, APPROVE
     }
-
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ACEPermissionType
     {
         PERMIT, DENY
