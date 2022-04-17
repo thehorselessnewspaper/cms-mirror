@@ -10,9 +10,9 @@ namespace HorselessNewspaper.Web.Core.UnitOfWork.ContentModelTasks.Strategy
 {
     internal class ClaimsMatcherStrategy : IBooleanResultStrategy<IEnumerable<Claim>>
     {
-        public Task<bool> ApplyStrategy(IEnumerable<Claim> payload)
+        public async Task<bool> ApplyStrategy(IEnumerable<Claim> payload)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(payload.Any());
         }
     }
 }
