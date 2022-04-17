@@ -21,40 +21,45 @@
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
 		<PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.2" />
-		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.4.220415.2" />
+		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.4.220416.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.4" />
 		<PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.9" />
-		<PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="3.0.0">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		<PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="6.0.4">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 		<PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="2.5.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="NSwag.ApiDescription.Client" Version="13.0.5">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		<PackageReference Include="NSwag.ApiDescription.Client" Version="13.15.10">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="NuGet.Protocol" Version="6.1.0" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220415.2" />
-		<PackageReference Include="TheHorselessNewspaper.REST.Client" Version="0.4.220415.2" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220416.2" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectCapability Include="AspNetCore" />
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-	</ItemGroup> 
+	</ItemGroup>
 
 	<ItemGroup>
 		<Folder Include="BackgroundServices\" />
 		<Folder Include="HostedServices\RazorClassLibrary\" />
 		<Folder Include="SingletonServices\Cache\Tenant\Mock\" />
 		<Folder Include="UnitOfWork\HostingModel\" />
-	</ItemGroup> 
+	</ItemGroup>
 
 	<ItemGroup>
-	  <OpenApiReference OutputPath="$(ProjectDir)/ScopedServices/RestClients/HorselessRestClient.cs" Include="..\..\..\generated-code\TheHorselessNewspaper.REST\HorselessRestApiClient.json" CodeGenerator="NSwagCSharp" Namespace="HorselessNewspaper.Web.Core.ScopedServices.RestClients" ClassName="HorselessRestApiClient" Link="OpenAPIs\HorselessRestApiClient.json" />
+		<OpenApiReference Include="..\..\..\generated-code\TheHorselessNewspaper.REST\HorselessRestApiClient.json" CodeGenerator="NSwagCSharp" Namespace="HorselessNewspaper.Web.Core.ScopedServices.RestClients" ClassName="HorselessRestApiClient" Link="OpenAPIs\HorselessRestApiClient.json">
+			<OutputPath>$(ProjectDir)/ScopedServices/RestClients/HorselessRestClient.cs</OutputPath>
+			<Options>/GenerateClientInterfaces:true,/injectHttpClient:true</Options>
+		</OpenApiReference>
 	</ItemGroup>
+
+	
 </Project>

@@ -123,6 +123,8 @@ services:
       - Keycloak__Audience=horseless-prototype
       - FeatureManagement__TenantAdminUI=false
       - FeatureManagement__ContentEditorUI=false
+      - RestApiBaseUrl=${RestApiBaseUrl}  
+      - OdataApiBaseUrl={OdataApiBaseUrl}
     volumes:
        - ./https/:/https/
     depends_on:

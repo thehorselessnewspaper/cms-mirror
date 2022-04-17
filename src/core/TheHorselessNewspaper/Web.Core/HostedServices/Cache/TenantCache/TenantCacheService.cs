@@ -1,9 +1,12 @@
-﻿using Finbuckle.MultiTenant;
+﻿using AutoMapper;
+using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Stores;
 using HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
+using HorselessNewspaper.Web.Core.ScopedServices.RestClients;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -59,7 +62,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
             _services = services;
             TimerDelayInSeconds = _defaultTimerDelayInSeconds;
-
+            this.CurrentContentModelTenants = new List<ContentModel.Tenant>();
             _timer = new Timer(HandleTimerElapsed, null, GetTimespanForSeconds(TimerDelayInSeconds),
             GetTimespanForSeconds(TimerDelayInSeconds));
 
@@ -180,24 +183,34 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
             try
             {
+
+                var autoMapper = scope.ServiceProvider.GetRequiredService<IMapper>();
+                var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+
+                var apiClient = scope.ServiceProvider.GetRequiredService<IHorselessRestApiClient>();
+                var configuredRestBaseUrl = configuration["RestApiBaseUrl"];
+                apiClient.BaseUrl = configuredRestBaseUrl;
+
+                // var clientTenantlist = await apiClient.getbypa);
+
+                // var mappedTenantList = autoMapper.Map<ICollection<ContentEntitiesTenant>, IEnumerable<ContentModel.Tenant>>(clientTenantlist);
+
                 // collect the content model tenants
                 var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(scope);
-                var tenantInfo = scope.ServiceProvider.GetRequiredService<HorselessTenantInfo>();
+                var tenantList = await contentModelTenantQuery.Read(r => r.IsSoftDeleted == false);
+                //var tenants = tenantList.ToList();
+                //foreach (var contentModelTenant in tenants )
+                //{
+                //    if (!this.CurrentContentModelTenants.Where(w => w.Id.Equals(contentModelTenant.Id)).Any())
+                //    {
+                //        // here because we need to cache this tenant in the singleton
+                //        this.CurrentContentModelTenants.Add(contentModelTenant);
+                //    }
+                //}
 
-                IEnumerable<ContentModel.Tenant> tenantList = await contentModelTenantQuery.Read(r => r.IsSoftDeleted == false);
+                //List<ContentModel.Tenant> contentModelTenants = tenantList.ToList();
 
-                foreach (var contentModelTenant in tenantList)
-                {
-                    if (!this.CurrentContentModelTenants.Where(w => w.Id.Equals(contentModelTenant.Id)).Any())
-                    {
-                        // here because we need to cache this tenant in the singleton
-                        this.CurrentContentModelTenants.Add(contentModelTenant);
-                    }
-                }
-
-                List<ContentModel.Tenant> contentModelTenants = tenantList.ToList();
-
-                _logger.LogInformation($"read {contentModelTenants.Count()} content model tenant records");
+                //_logger.LogInformation($"read {contentModelTenants.Count()} content model tenant records");
             }
             catch (Exception e)
             {

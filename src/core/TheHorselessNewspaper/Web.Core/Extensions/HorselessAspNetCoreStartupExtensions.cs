@@ -34,10 +34,12 @@ using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntiti
 using HorselessNewspaper.Web.Core.Extensions.ClaimExtensions;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Primitives;
-using TheHorselessNewspaper.REST;
 using Microsoft.Extensions.Options;
 using HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTenantPrincipal;
 using HorselessNewspaper.Web.Core.UnitOfWork.ContentModelTasks.PrincipalTasks;
+using HorselessNewspaper.Web.Core.ScopedServices.RestClients;
+using AutoMapper;
+using HorselessNewspaper.Web.Core.Automapper;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -51,12 +53,23 @@ namespace HorselessNewspaper.Web.Core.Extensions
         {
             var serviceBuilder = new HorselessServiceBuilder(configuration, services);
 
-
+            serviceBuilder.Services.AddSingleton<IConfiguration>(configuration);
             serviceBuilder.Services.AddFeatureManagement();
+
+            var automapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AutoMapperProfile());
+            });
+
+            IMapper mapper = automapperConfig.CreateMapper();
+
+            serviceBuilder.Services.AddSingleton(mapper);
 
             serviceBuilder.Services.AddHttpClient(Options.DefaultName, c =>
             {
-
+                var baseUrl = configuration["RestApiBaseUrl"];
+                c.BaseAddress = new System.Uri(baseUrl);
+                int i = 0;
             })
             /// disable SSL cert validation
             /// as per https://stackoverflow.com/questions/62860290/disable-ssl-certificate-verification-in-default-injected-ihttpclientfactory
@@ -71,21 +84,35 @@ namespace HorselessNewspaper.Web.Core.Extensions
                         (httpRequestMessage, cert, certChain, policyErrors) => true
                 };
             });
-            serviceBuilder.Services.AddHttpClient<IClient, Client>(
-                (provider, client) =>
+
+            serviceBuilder.Services.AddTransient<IHorselessRestApiClient, HorselessRestApiClient>(
+
+                s =>
                 {
-                    client.BaseAddress = new System.Uri("https://petstore.swagger.io/v2/");
-                })
-                .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
-                {
-                    ClientCertificateOptions = ClientCertificateOption.Manual,
-                    ServerCertificateCustomValidationCallback =
-                    (httpRequestMessage, cert, cetChain, policyErrors) =>
-                    {
-                        return true;
-                    }
+                    var baseUrl = configuration["RestApiBaseUrl"];
+                    return new HorselessRestApiClient(
+                        baseUrl: baseUrl, s.GetRequiredService<HttpClient>()
+                    );
                 });
 
+            //serviceBuilder.Services.AddHttpClient<IHorselessRestApiClient, HorselessRestApiClient>(
+            //    (provider, client) =>
+            //    {
+            //        var baseUrl = configuration["RestApiBaseUrl"];
+            //        client.BaseAddress = new System.Uri(baseUrl);
+            //        int i = 0;
+            //    })
+            //    .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+            //    {
+            //        ClientCertificateOptions = ClientCertificateOption.Manual,
+            //        ServerCertificateCustomValidationCallback =
+            //        (httpRequestMessage, cert, cetChain, policyErrors) =>
+            //        {
+            //            return true;
+            //        }
+            //    });
+
+            // serviceBuilder.Services.AddScoped<IHorselessRestApiClient, HorselessRestApiClient>();
 
             // as per https://docs.microsoft.com/en-us/archive/msdn-magazine/2016/september/asp-net-core-feature-slices-for-asp-net-core-mvc
             // as per https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/areas?view=aspnetcore-6.0

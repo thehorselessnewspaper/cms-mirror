@@ -11,7 +11,7 @@ using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessContentControllers
 {
     [ApiController]
-    [Route("{__tenasnt__}/" + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_CONTENTCOLLECTION)]
+    [Route("{__tenant__}/" + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_CONTENTCOLLECTION)]
 
     public class ContentCollectionRESTController : ControllerBase,
         IRESTContentController<ContentModel.ContentCollection>

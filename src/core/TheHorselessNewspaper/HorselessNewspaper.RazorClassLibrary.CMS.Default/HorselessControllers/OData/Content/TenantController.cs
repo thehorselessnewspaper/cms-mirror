@@ -48,5 +48,13 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             return Ok(result);
         }
 
+        [HttpGet("GetByPageNumber", Name = "[controller]_[action]")]
+        public async Task<IEnumerable<ContentModel.Tenant>> GetByPageNumber(int offset, int pagesize, int pageNumber)
+        {
+
+            var result = await _contentCollectionService.Query();
+            var rt = result.Skip(offset * pageNumber).Take(pagesize);
+            return rt;
+        }
     }
 }
