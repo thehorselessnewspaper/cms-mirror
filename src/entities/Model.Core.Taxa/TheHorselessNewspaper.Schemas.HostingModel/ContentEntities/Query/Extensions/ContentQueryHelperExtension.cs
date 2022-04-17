@@ -31,7 +31,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.Extensions
 
                 foreach (var prop in matchedProperties)
                 {
-
+                    
                     var value = prop.GetValue(source, null);
                     if (value != null)
                         prop.SetValue(target, value, null);

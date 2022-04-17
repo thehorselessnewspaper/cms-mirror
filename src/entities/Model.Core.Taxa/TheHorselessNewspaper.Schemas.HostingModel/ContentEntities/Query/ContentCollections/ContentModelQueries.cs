@@ -60,7 +60,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         public async Task<T> Create(T entity)
         {
-            _logger.LogInformation($"handling Create request for tenant context {_tenantInfo.Identifier}");
+            // _logger.LogInformation($"handling Create request for tenant context {_tenantInfo.Identifier}");
 
 
             try
@@ -227,7 +227,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         {
             try
             {
-                _logger.LogInformation($"handling Update request for tenant context {_tenantInfo.Identifier}");
+                // _logger.LogInformation($"handling Update request for tenant context {_tenantInfo.Identifier}");
 
                 if (targetProperties == null)
                 {
@@ -249,6 +249,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 else
                 {
                     var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties);
+                    ((DbContext)_context).Entry(updatedEntity).State = EntityState.Modified;
                     dbSet.Update(updatedEntity);
                     var updateResult = await ((DbContext)_context).SaveChangesAsync();
 
@@ -267,7 +268,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         {
             try
             {
-                _logger.LogInformation($"handling Update request for tenant context {_tenantInfo.Identifier}");
+                // _logger.LogInformation($"handling Update request for tenant context {_tenantInfo.Identifier}");
                 var dbSet = ((DbContext)_context).Set<T>();
 
                 dbSet.UpdateRange(entities);
