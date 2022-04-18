@@ -124,7 +124,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 try
                 {
 
-                    var tenantInfo = scope.ServiceProvider.GetRequiredService<HorselessTenantInfo>();
+                    // var tenantInfo = scope.ServiceProvider.GetRequiredService<HorselessTenantInfo>();
 
                     var contentModelOperator = GetQueryForContentEntity<ContentModel.Tenant>(scope);
                     var hostingModelOperator = GetQueryForHostingEntity<HostingModel.Tenant>(scope);
