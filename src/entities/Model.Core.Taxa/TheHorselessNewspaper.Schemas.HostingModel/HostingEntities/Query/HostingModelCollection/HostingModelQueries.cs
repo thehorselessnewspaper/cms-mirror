@@ -152,6 +152,24 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             return await Task.FromResult<IQueryable<T>>(dbSet.AsQueryable<T>());
         }
 
+        public async Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null)
+        {
+            IEnumerable<T> result = new List<T>();
+            _logger.LogDebug($"handling Read request");
+            var dbSet = ((DbContext)_context).Set<T>().Where(query);
+
+            if (includeClauses != null)
+            {
+                foreach (var clause in includeClauses)
+                {
+                    dbSet.Include(clause).Load();
+                }
+            }
+
+            result = await dbSet.ToListAsync();
+            return result;
+        }
+
         /// <summary>
         /// your entity must return its concurrency token
         /// </summary>

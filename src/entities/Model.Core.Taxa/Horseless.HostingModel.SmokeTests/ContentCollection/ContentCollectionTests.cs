@@ -269,6 +269,9 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 throw new Exception("failed to read existing entity", e);
             }
 
+            var readListResult = await this.ReadContentEntityAsEnumerable<ContentModel.ContentCollection>(query: w => w.ObjectId == newcontentCollection.ObjectId, includeClauses: new List<string>() {  });
+            Assert.IsNotNull(readListResult);
+            Assert.IsTrue(readListResult.Count() > 0);
 
             var deleteResult = await this.Delete<ContentModel.ContentCollection>(newcontentCollection.ObjectId);
 

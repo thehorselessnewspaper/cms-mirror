@@ -154,6 +154,7 @@ namespace Horseless.HostingModel.SmokeTests
             return result;
         }
 
+
         protected async Task<IQueryable<T>> ReadHostingEntity<T>() where T : class, IHostingRowLevelSecured
         {
 
@@ -167,6 +168,22 @@ namespace Horseless.HostingModel.SmokeTests
 
             var queryProvider = this.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<T>>();
             var result = await queryProvider.Read(query, includeClauses);
+            return result;
+        }
+
+        protected async Task<IEnumerable<T>> ReadHostingEntityAsEnumerable<T>(Expression<Func<T, bool>> query, List<string> includeClauses) where T : class, IHostingRowLevelSecured
+        {
+
+            var queryProvider = this.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<T>>();
+            var result = await queryProvider.ReadAsEnumerable(query, includeClauses);
+            return result;
+        }
+
+        protected async Task<IEnumerable<T>> ReadContentEntityAsEnumerable<T>(Expression<Func<T, bool>> query, List<string> includeClauses) where T : class, IContentRowLevelSecured
+        {
+
+            var queryProvider = this.GetIQueryableContentModelOperator<IQueryableContentModelOperator<T>>();
+            var result = await queryProvider.ReadAsEnumerable(query, includeClauses);
             return result;
         }
 

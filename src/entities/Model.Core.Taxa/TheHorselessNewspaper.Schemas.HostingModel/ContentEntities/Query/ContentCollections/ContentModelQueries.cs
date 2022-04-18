@@ -170,6 +170,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             return ret;
         }
 
+ 
         public async Task<IQueryable<T>> Read()
         {
             IQueryable<T> result;
@@ -216,6 +217,34 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             }
 
             return await Task.FromResult<IQueryable<T>>(result);
+        }
+
+        public async Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null)
+        {
+            IEnumerable<T> result = new List<T>();
+            try
+            {
+                var dbSet = ((DbContext)_context).Set<T>().Where(query);
+                if (includeClauses != null)
+                {
+                    foreach (var clause in includeClauses)
+                    {
+                        dbSet.Include(clause);
+                    }
+                }
+
+                result = await dbSet.ToListAsync<T>();
+
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError($"problem handling request {ex.Message}");
+                throw new Exception($"entity read exception {ex.Message}", ex);
+
+            }
+
+            return await Task.FromResult<IEnumerable<T>>(result);
         }
 
         /// <summary>
