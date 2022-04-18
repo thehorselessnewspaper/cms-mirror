@@ -56,11 +56,14 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         public ICollection<HostingModel.Tenant> CurrentHostingModelTenants { get; set; } = new List<HostingModel.Tenant>();
 
         IServiceProvider _services;
-        public TenantCacheService(ILogger<TenantCacheService> logger, IServiceProvider services)
+        IServiceScopeFactory _scopeFactory;
+
+        public TenantCacheService(ILogger<TenantCacheService> logger, IServiceProvider services, IServiceScopeFactory scopeFactory)
         {
             _logger = logger;
 
             _services = services;
+            _scopeFactory = scopeFactory;
             TimerDelayInSeconds = _defaultTimerDelayInSeconds;
             this.CurrentContentModelTenants = new List<ContentModel.Tenant>();
             _timer = new Timer(HandleTimerElapsed, null, GetTimespanForSeconds(TimerDelayInSeconds),
@@ -150,7 +153,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 await EnsurePhysicalDatabases();
             }
 
-            using (var scope = _services.CreateScope())
+            using (var scope = _scopeFactory.CreateScope())
             {
                 await SetCurrentContentModelTenants(scope);
 
@@ -933,7 +936,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
         private async Task<List<ContentModel.Tenant>> GetCurrentContentModelTenants(IServiceScope scope)
         {
-            using(var localScope = _services.CreateAsyncScope())
+            using(var localScope = _scopeFactory.CreateAsyncScope())
             {
                 // collect the hosting model tenants
                 var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(localScope);

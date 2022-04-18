@@ -48,11 +48,12 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.Contexts
         {
             get
             {
-                return
-                    this.tenantCacheService.CurrentContentModelTenants
-                    .Where(w => w.Id.Equals(this.CurrentTenant.Id))
-                    .FirstOrDefault()
-                    .Accounts.ToList();
+                return new List<ContentModel.Principal>();
+
+                    //this.tenantCacheService.CurrentContentModelTenants
+                    //.Where(w => w.Id.Equals(this.CurrentTenant.Id))
+                    //.FirstOrDefault()
+                    //.Accounts.ToList();
             }
             set
             {
@@ -63,7 +64,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.Contexts
         public TenantContext(
             //IQueryableContentModelOperator<ContentModel.ContentCollection> contentCollectionService,
             //IQueryableContentModelOperator<ContentModel.Tenant> tenantCollectionService,
-            TenantCacheService tenantCacheService,
+            // TenantCacheService tenantCacheService,
             ITenantInfo currentTenant,
             IHttpContextAccessor ctxAccessor
             )
@@ -71,7 +72,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.Contexts
             //this.contentCollectionServce = contentCollectionService;
             //this.tenantCollectionService = tenantCollectionService;
             this.CurrentTenant = currentTenant;
-            this.tenantCacheService = tenantCacheService;
+            // this.tenantCacheService = tenantCacheService;
             this.CurrentHttpContext = ctxAccessor.HttpContext;
         }
 
