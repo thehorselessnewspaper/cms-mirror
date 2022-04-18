@@ -217,7 +217,31 @@ namespace HorselessNewspaper.Web.Core.Extensions
             //    }
             //});
 
-            // for bootstrappingduring testing only
+            // apply a tenantinfo factory for 
+            // non httpcontext scenarios
+            serviceBuilder.Services.AddSingleton<ITenantInfo>((services) =>
+            {
+                try
+                {
+                    using (var scope = services.CreateScope())
+                    {
+                        var tenantInfo = scope.ServiceProvider.GetService<ITenantInfo>();
+                        return tenantInfo;
+                    }
+                }
+                catch (Exception e)
+                {
+
+                    return new HorselessTenantInfo()
+                    {
+                        ConnectionString = serviceBuilder.Configuration.GetConnectionString("ContentModelConnection"),
+                        Id = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
+                        Identifier = "phantom",
+                        Name = "static default tenant"
+                    };
+                }
+            });
+
             //serviceBuilder.Services.AddSingleton<ITenantInfo>(new HorselessTenantInfo()
             //{
             //    ConnectionString = serviceBuilder.Configuration.GetConnectionString("ContentModelConnection"),
