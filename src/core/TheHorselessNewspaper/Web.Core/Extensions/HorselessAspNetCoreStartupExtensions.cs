@@ -310,6 +310,7 @@ HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessCo
             // as it's gating every request
             serviceBuilder.Services.AddScoped<HorselessRouteTransformer>();
             serviceBuilder.Services.AddScoped<HorselessTenantSetupMiddleware>();
+            
             serviceBuilder.Services.AddScoped<IHorselessTenantContext, TenantContext>();
 
             serviceBuilder.Services.AddScoped<HorselessSession>((instanceFactory) =>
