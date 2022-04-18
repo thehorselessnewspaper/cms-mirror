@@ -124,10 +124,18 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 
         public async Task<IQueryable<T>> Read()
         {
-            _logger.LogDebug($"handling get request");
-            var dbSet = ((DbContext)_context).Set<T>();
+            try
+            {
+                _logger.LogDebug($"handling get request");
+                var dbSet = ((DbContext)_context).Set<T>();
 
-            return await Task.FromResult<IQueryable<T>>(dbSet.AsQueryable<T>());
+                return await Task.FromResult<IQueryable<T>>(dbSet.AsQueryable<T>());
+            }
+            catch(Exception e)
+            {
+                _logger.LogError($"exception executing read {e.Message}");
+                throw new Exception($"exception executing read {e.Message}", e);
+            }
         }
 
         /// <summary>
@@ -138,36 +146,52 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
         /// <returns></returns>
         public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null)
         {
-            _logger.LogDebug($"handling Read request");
-            var dbSet = ((DbContext)_context).Set<T>().Where(query);
-
-            if (includeClauses != null)
+            try
             {
-                foreach (var clause in includeClauses)
-                {
-                    dbSet.Include(clause).Load();
-                }
-            }
+                _logger.LogDebug($"handling Read request");
+                var dbSet = ((DbContext)_context).Set<T>().Where(query);
 
-            return await Task.FromResult<IQueryable<T>>(dbSet.AsQueryable<T>());
+                if (includeClauses != null)
+                {
+                    foreach (var clause in includeClauses)
+                    {
+                        dbSet.Include(clause).Load();
+                    }
+                }
+
+                return await Task.FromResult<IQueryable<T>>(dbSet.AsQueryable<T>());
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"problem executing read {e.Message}");
+                throw new Exception($"problem executing read {e.Message}", e);
+            }
         }
 
         public async Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null)
         {
-            IEnumerable<T> result = new List<T>();
-            _logger.LogDebug($"handling Read request");
-            var dbSet = ((DbContext)_context).Set<T>().Where(query);
-
-            if (includeClauses != null)
+            try
             {
-                foreach (var clause in includeClauses)
-                {
-                    dbSet.Include(clause).Load();
-                }
-            }
+                IEnumerable<T> result = new List<T>();
+                _logger.LogDebug($"handling Read request");
+                var dbSet = ((DbContext)_context).Set<T>().Where(query);
 
-            result = await dbSet.ToListAsync();
-            return result;
+                if (includeClauses != null)
+                {
+                    foreach (var clause in includeClauses)
+                    {
+                        dbSet.Include(clause).Load();
+                    }
+                }
+
+                result = await dbSet.ToListAsync();
+                return result;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"problem executing read {e.Message}");
+                throw new Exception($"problem executing read {e.Message}", e);
+            }
         }
 
         /// <summary>

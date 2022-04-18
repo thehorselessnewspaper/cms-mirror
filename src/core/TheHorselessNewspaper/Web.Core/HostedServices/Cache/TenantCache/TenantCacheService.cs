@@ -200,8 +200,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                 // collect the content model tenants
                 var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(scope);
-                var tenantList = await contentModelTenantQuery.Read(r => r.IsSoftDeleted == false);
-                //var tenants = tenantList.ToList();
+                var tenantList = await contentModelTenantQuery.ReadAsEnumerable(r => r.IsSoftDeleted == false);
+                var tenants = tenantList.ToList();
                 //foreach (var contentModelTenant in tenants )
                 //{
                 //    if (!this.CurrentContentModelTenants.Where(w => w.Id.Equals(contentModelTenant.Id)).Any())
@@ -358,7 +358,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                 var currentTenants = await GetCurrentContentModelTenants(scope);
                 var liveTenant = currentTenants.Where(w => w.Id.Equals(publishedTenant.Id)).FirstOrDefault();
-                tenantCache.Set(publishedTenant.Id, liveTenant);
+                await tenantCache.Set(publishedTenant.Id, liveTenant);
             }
             catch (Exception e)
             {
@@ -377,7 +377,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
 
             var hostingModelTenantInfoQuery = this.GetQueryForHostingEntity<HostingModel.TenantInfo>(scope);
-            var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.Read(w => w.ParentTenantId == originEntity.Id);
+            var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.ReadAsEnumerable(w => w.ParentTenantId == originEntity.Id);
             var hostingModelTenantInfo = hostingModelTenantInfoQueryResult.ToList().First();
             var tenantOwner = originEntity.Owners.FirstOrDefault();
             var tenantIdentifier = originEntity.TenantIdentifier;
@@ -903,7 +903,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         private async Task UpdateMultiTenantInMemoryStore(IServiceScope scope, IMultiTenantStore<HorselessTenantInfo>? inMemoryStores, HostingModel.Tenant originEntity)
         {
             var hostingModelTenantInfoQuery = this.GetQueryForHostingEntity<HostingModel.TenantInfo>(scope);
-            var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.Read(w => w.ParentTenantId == originEntity.Id);
+            var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.ReadAsEnumerable(w => w.ParentTenantId == originEntity.Id);
             var hostingModelTenantInfo = hostingModelTenantInfoQueryResult.ToList().First();
             _logger.LogInformation($"found new undeployed tenantInfo {hostingModelTenantInfo.DisplayName}");
             // TODO 
@@ -919,7 +919,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
             // collect the hosting model tenants
             var hostingModelTenantQuery = this.GetQueryForHostingEntity<HostingModel.Tenant>(scope);
-            var hostingModelTenantQueryResult = await hostingModelTenantQuery.Read(w => w.IsSoftDeleted == false, new List<string>() { nameof(HostingModel.Tenant.TenantInfos), nameof(HostingModel.Tenant.Owners) });
+            var hostingModelTenantQueryResult = await hostingModelTenantQuery.ReadAsEnumerable(w => w.IsSoftDeleted == false, new List<string>() { nameof(HostingModel.Tenant.TenantInfos), nameof(HostingModel.Tenant.Owners) });
             var hostingModelTenants = hostingModelTenantQueryResult == null ? new List<HostingModel.Tenant>() : hostingModelTenantQueryResult.ToList();
 
             _logger.LogInformation($"read {hostingModelTenantQueryResult.Where(w => w.IsPublished == true).ToList().Count()} published hosting model tenant records");
@@ -940,7 +940,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             {
                 // collect the hosting model tenants
                 var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(localScope);
-                var contentModelTenantQueryResult = await contentModelTenantQuery.Read(w => w.IsPublished == true && w.IsSoftDeleted == false);
+                var contentModelTenantQueryResult = await contentModelTenantQuery.ReadAsEnumerable(w => w.IsPublished == true && w.IsSoftDeleted == false);
                 var results = contentModelTenantQueryResult.ToList<ContentModel.Tenant>();
 
                 var contentModelTenants = contentModelTenantQueryResult == null ? new List<ContentModel.Tenant>() : contentModelTenantQueryResult.ToList();
@@ -956,7 +956,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         {
             // collect the hosting model tenants
             var contentModelTenantQuery = this.GetQueryForHostingEntity<HostingModel.TenantInfo>(scope);
-            var contentModelTenantQueryResult = await contentModelTenantQuery.Read();
+            var contentModelTenantQueryResult = await contentModelTenantQuery.ReadAsEnumerable(w => w.IsSoftDeleted == false);
             var contentModelTenants = contentModelTenantQueryResult == null ? new List<HostingModel.TenantInfo>() : contentModelTenantQueryResult.ToList();
 
             _logger.LogInformation($"read {contentModelTenants.Count()} content model tenantinfo records");

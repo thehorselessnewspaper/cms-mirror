@@ -20,12 +20,12 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
     {
         private readonly ILogger<ContentModelQueries<T>> _logger;
         private readonly IContentModelContext _context;
-        private HorselessTenantInfo _tenantInfo;
-        public ContentModelQueries(IContentModelContext ctx, ILogger<ContentModelQueries<T>> logger, HorselessTenantInfo tenantInfo)
+        // private ITenantInfo _tenantInfo;
+        public ContentModelQueries(IContentModelContext ctx, ILogger<ContentModelQueries<T>> logger)
         {
             this._context = ctx;
             this._logger = logger;
-            this._tenantInfo = tenantInfo;
+            // this._tenantInfo = tenantInfo;
 
             try
             {
