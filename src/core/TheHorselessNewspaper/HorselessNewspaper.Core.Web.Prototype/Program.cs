@@ -48,7 +48,7 @@ builder.Services.AddRazorPages()
 
 builder.Services.AddControllersWithViews(options =>
 {
-    options.Filters.Add<InstallRequiredActionFilter>(int.MinValue);
+    // options.Filters.Add<InstallRequiredActionFilter>(int.MinValue);
 })
 .AddRazorRuntimeCompilation();
 
@@ -139,7 +139,7 @@ builder.Services.AddSwaggerGen(options =>
 
     });
     options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Horseless Content API", Version = "v1" });
-    options.DocumentFilter<SwaggerODataControllerDocumentFilter>();
+    // options.DocumentFilter<SwaggerODataControllerDocumentFilter>();
 });
 
 //// this hardcodes a static reference to the default horseless razor class library
@@ -158,18 +158,18 @@ builder.Services.AddHorselessNewspaper(builder.Configuration, builder.Environmen
 
 builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
 {
-    //options.FileProviders.Add(
-    //        new EmbeddedFileProvider(typeof(HorselessCMSController).Assembly));
+    options.FileProviders.Add(
+            new EmbeddedFileProvider(typeof(HorselessCMSController).Assembly));
 
-    //var libraryPath = Path.GetFullPath(
-    //   Path.Combine(builder.Environment.ContentRootPath, "..", "HorselessNewspaper.RazorClassLibrary.CMS.Default"));
+    var libraryPath = Path.GetFullPath(
+       Path.Combine(builder.Environment.ContentRootPath, "..", "HorselessNewspaper.RazorClassLibrary.CMS.Default"));
 
-    //options.FileProviders.Add(new PhysicalFileProvider(libraryPath));
+    options.FileProviders.Add(new PhysicalFileProvider(libraryPath));
 
-    //var contentRootPath = Path.GetFullPath(
-    //Path.Combine(builder.Environment.ContentRootPath, ".", ""));
+    var contentRootPath = Path.GetFullPath(
+    Path.Combine(builder.Environment.ContentRootPath, ".", ""));
 
-    //options.FileProviders.Add(new PhysicalFileProvider(contentRootPath));
+    options.FileProviders.Add(new PhysicalFileProvider(contentRootPath));
 });
 
 // globally enables mssql server
