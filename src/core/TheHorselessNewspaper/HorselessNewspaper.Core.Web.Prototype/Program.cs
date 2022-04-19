@@ -139,7 +139,10 @@ builder.Services.AddSwaggerGen(options =>
 
     });
     options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Horseless Content API", Version = "v1" });
-    // options.DocumentFilter<SwaggerODataControllerDocumentFilter>();
+
+    // eliminate odata metadata controller from swagger doc
+    // as per https://stackoverflow.com/questions/70472622/how-to-hide-odata-metadata-controller-in-swagger
+    options.DocumentFilter<SwaggerODataControllerDocumentFilter>();
 });
 
 //// this hardcodes a static reference to the default horseless razor class library
