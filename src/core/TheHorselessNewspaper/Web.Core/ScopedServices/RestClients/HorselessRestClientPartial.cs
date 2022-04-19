@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
 {
@@ -20,17 +21,12 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// scenarios
         /// </summary>
         /// <param name="httpClient"></param>
-        public HorselessRestApiClient(System.Net.Http.HttpClient httpClient, IConfiguration configuration)
+        public HorselessRestApiClient(string baseUrl, System.Net.Http.HttpClient httpClient, IConfiguration configuration)
         {
             var configuredRestBaseUrl = configuration["RestApiBaseUrl"];
             BaseUrl = configuredRestBaseUrl;
             _httpClient = httpClient;
-            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() =>
-            {
-                var settings = new Newtonsoft.Json.JsonSerializerSettings();
-                UpdateJsonSerializerSettings(settings);
-                return settings;
-            });
+            _settings = new System.Lazy<System.Text.Json.JsonSerializerOptions>(CreateSerializerSettings);
         }
     }
 }

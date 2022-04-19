@@ -56,8 +56,8 @@
 		<Folder Include="UnitOfWork\HostingModel\" />
 	</ItemGroup>
 
-	<ItemGroup>
+	<!--<ItemGroup>
 	  <OpenApiReference Include="..\..\..\generated-code\TheHorselessNewspaper.REST\HorselessRestApiClient.json" CodeGenerator="NSwagCSharp" Namespace="HorselessNewspaper.Web.Core.ScopedServices.RestClients" ClassName="HorselessRestApiClient" Link="OpenAPIs\HorselessRestApiClient.json" />
-	</ItemGroup>
+	</ItemGroup>-->
 
 </Project>

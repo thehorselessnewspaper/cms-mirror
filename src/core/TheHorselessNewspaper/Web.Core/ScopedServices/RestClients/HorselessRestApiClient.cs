@@ -4,6 +4,8 @@
 // </auto-generated>
 //----------------------
 
+#nullable enable
+
 #pragma warning disable 108 // Disable "CS0108 '{derivedDto}.ToJson()' hides inherited member '{dtoBase}.ToJson()'. Use the new keyword if hiding was intended."
 #pragma warning disable 114 // Disable "CS0114 '{derivedDto}.RaisePropertyChanged(String)' hides inherited member 'dtoBase.RaisePropertyChanged(String)'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword."
 #pragma warning disable 472 // Disable "CS0472 The result of the expression is always 'false' since a value of type 'Int32' is never equal to 'null' of type 'Int32?'
@@ -24,212 +26,212 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ContentCollectionRESTControllerGetByObjectIdAsync(string __tenant__, string objectId = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionGetByObjectIdAsync(string __tenant__, string? objectId = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ContentCollectionRESTControllerCreateAsync(string __tenant__, ContentEntitiesContentCollection body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionCreateAsync(string __tenant__, ContentEntitiesContentCollection? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ContentCollectionRESTControllerUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesContentCollection body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesContentCollection? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ContentCollectionRESTControllerGetByPageNumberAsync(string __tenant__, int? offset = null, int? pagesize = null, int? pageNumber = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionGetByPageNumberAsync(string __tenant__, int? offset = null, int? pagesize = null, int? pageNumber = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesFilesystemAsset>> FilesystemAssetRESTControllerCreateAsync(string __tenant__, ContentEntitiesFilesystemAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetCreateAsync(string __tenant__, ContentEntitiesFilesystemAsset? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesFilesystemAsset>> FilesystemAssetRESTControllerGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesFilesystemAsset>> FilesystemAssetRESTControllerUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesFilesystemAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesFilesystemAsset? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesHolonym>> HolonymRESTControllerCreateAsync(string __tenant__, ContentEntitiesHolonym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymCreateAsync(string __tenant__, ContentEntitiesHolonym? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesHolonym>> HolonymRESTControllerGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesHolonym>> HolonymRESTControllerUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHolonym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHolonym? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> HorselessSessionRESTControllerCreateAsync(string __tenant__, ContentEntitiesHorselessSession body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ApiHorselessContentModelHorselessSessionCreateAsync(string __tenant__, ContentEntitiesHorselessSession? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> HorselessSessionRESTControllerGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ApiHorselessContentModelHorselessSessionGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> HorselessSessionRESTControllerUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessSession body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ApiHorselessContentModelHorselessSessionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessSession? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesJSONAsset>> JSONAssetRESTControllerCreateAsync(string __tenant__, ContentEntitiesJSONAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetCreateAsync(string __tenant__, ContentEntitiesJSONAsset? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesJSONAsset>> JSONAssetRESTControllerGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesJSONAsset>> JSONAssetRESTControllerUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesJSONAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesJSONAsset? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response> KeycloakAuthenticationControllerSignInGETAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response> KeycloakSignInGetAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response> KeycloakAuthenticationControllerSignInPOSTAsync(string provider = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response> KeycloakSignInPostAsync(string? provider = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response> KeycloakAuthenticationControllerSignOutCurrentUserAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response> KeycloakSignoutAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesMeronym>> MeronymRESTControllerCreateAsync(string __tenant__, ContentEntitiesMeronym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymCreateAsync(string __tenant__, ContentEntitiesMeronym? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesMeronym>> MeronymRESTControllerGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesMeronym>> MeronymRESTControllerUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMeronym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMeronym? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> MimeTypeRESTControllerCreateAsync(string __tenant__, ContentEntitiesMIMEType body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeCreateAsync(string __tenant__, ContentEntitiesMIMEType? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> MimeTypeRESTControllerGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> MimeTypeRESTControllerUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMIMEType body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMIMEType? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesNavigationMenuItem>> NavigationMenuItemRESTControllerCreateAsync(string __tenant__, ContentEntitiesNavigationMenuItem body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemCreateAsync(string __tenant__, ContentEntitiesNavigationMenuItem? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesNavigationMenuItem>> NavigationMenuItemRESTControllerGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesNavigationMenuItem>> NavigationMenuItemRESTControllerUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenuItem body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenuItem? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> NavigationMenuRESTControllerCreateAsync(string __tenant__, ContentEntitiesNavigationMenu body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> ApiHorselessContentModelModelNavigationMenuCreateAsync(string __tenant__, ContentEntitiesNavigationMenu? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> NavigationMenuRESTControllerGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> ApiHorselessContentModelModelNavigationMenuGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> NavigationMenuRESTControllerUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenu body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> ApiHorselessContentModelModelNavigationMenuUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenu? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<HostingEntitiesTenantInfo>> TenantInfoRESTControllerCreateAsync(HostingEntitiesTenantInfo body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoCreateAsync(HostingEntitiesTenantInfo? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<HostingEntitiesTenantInfo>> TenantInfoRESTControllerGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<HostingEntitiesTenantInfo>> TenantInfoRESTControllerUpdateAsync(string entityCollectionId, HostingEntitiesTenantInfo body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoUpdateAsync(string entityCollectionId, HostingEntitiesTenantInfo? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response> TenantRegistrationControllerApproveGETAsync(string tenantId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response> ApproveGetAsync(string tenantId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response> TenantRegistrationControllerApprovePOSTAsync(string tenantId, string displayName, string tenantIdentifier, System.Guid? id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response> ApprovePostAsync(string tenantId, string displayName, string tenantIdentifier, System.Guid? id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<HostingEntitiesTenant>> TenantRESTControllerCreateAsync(HostingEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<HostingEntitiesTenant>> ApiHorselessHostingModelTenantCreateAsync(HostingEntitiesTenant? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<HostingEntitiesTenant>> TenantRESTControllerGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<HostingEntitiesTenant>> ApiHorselessHostingModelTenantGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<HostingEntitiesTenant>> TenantRESTControllerUpdateAsync(string entityCollectionId, HostingEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<HostingEntitiesTenant>> ApiHorselessHostingModelTenantUpdateAsync(string entityCollectionId, HostingEntitiesTenant? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesTenant>> TenantRESTControllerCreate2Async(string __tenant__, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesTenant>> ApiHorselessContentModelTenantCreateAsync(string __tenant__, ContentEntitiesTenant? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesTenant>> TenantRESTControllerGetByObjectId2Async(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesTenant>> ApiHorselessContentModelTenantGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<ContentEntitiesTenant>> TenantRESTControllerUpdate2Async(string contentCollectionId, string __tenant__, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<ContentEntitiesTenant>> ApiHorselessContentModelTenantUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesTenant? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
     }
 
@@ -238,18 +240,18 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     {
         private string _baseUrl = "";
         private System.Net.Http.HttpClient _httpClient;
-        private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
+        private System.Lazy<System.Text.Json.JsonSerializerOptions> _settings;
 
         public HorselessRestApiClient(string baseUrl, System.Net.Http.HttpClient httpClient)
         {
             BaseUrl = baseUrl;
             _httpClient = httpClient;
-            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings);
+            _settings = new System.Lazy<System.Text.Json.JsonSerializerOptions>(CreateSerializerSettings);
         }
 
-        private Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
+        private System.Text.Json.JsonSerializerOptions CreateSerializerSettings()
         {
-            var settings = new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All };
+            var settings = new System.Text.Json.JsonSerializerOptions();
             UpdateJsonSerializerSettings(settings);
             return settings;
         }
@@ -260,9 +262,9 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             set { _baseUrl = value; }
         }
 
-        protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
+        public System.Text.Json.JsonSerializerOptions JsonSerializerSettings { get { return _settings.Value; } }
 
-        partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
+        partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings);
 
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
@@ -271,7 +273,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ContentCollectionRESTControllerGetByObjectIdAsync(string __tenant__, string objectId = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionGetByObjectIdAsync(string __tenant__, string? objectId = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -357,7 +359,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ContentCollectionRESTControllerCreateAsync(string __tenant__, ContentEntitiesContentCollection body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionCreateAsync(string __tenant__, ContentEntitiesContentCollection? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -372,7 +374,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -441,7 +443,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ContentCollectionRESTControllerUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesContentCollection body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesContentCollection? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -460,7 +462,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -529,7 +531,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ContentCollectionRESTControllerGetByPageNumberAsync(string __tenant__, int? offset = null, int? pagesize = null, int? pageNumber = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionGetByPageNumberAsync(string __tenant__, int? offset = null, int? pagesize = null, int? pageNumber = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -623,7 +625,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesFilesystemAsset>> FilesystemAssetRESTControllerCreateAsync(string __tenant__, ContentEntitiesFilesystemAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetCreateAsync(string __tenant__, ContentEntitiesFilesystemAsset? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -638,7 +640,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -707,7 +709,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesFilesystemAsset>> FilesystemAssetRESTControllerGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -792,7 +794,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesFilesystemAsset>> FilesystemAssetRESTControllerUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesFilesystemAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesFilesystemAsset? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -811,7 +813,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -880,7 +882,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesHolonym>> HolonymRESTControllerCreateAsync(string __tenant__, ContentEntitiesHolonym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymCreateAsync(string __tenant__, ContentEntitiesHolonym? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -895,7 +897,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -964,7 +966,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesHolonym>> HolonymRESTControllerGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -1049,7 +1051,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesHolonym>> HolonymRESTControllerUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHolonym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHolonym? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -1068,7 +1070,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -1137,7 +1139,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> HorselessSessionRESTControllerCreateAsync(string __tenant__, ContentEntitiesHorselessSession body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ApiHorselessContentModelHorselessSessionCreateAsync(string __tenant__, ContentEntitiesHorselessSession? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -1152,7 +1154,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -1221,7 +1223,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> HorselessSessionRESTControllerGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ApiHorselessContentModelHorselessSessionGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -1306,7 +1308,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> HorselessSessionRESTControllerUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessSession body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesContentCollection>> ApiHorselessContentModelHorselessSessionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessSession? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -1325,7 +1327,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -1394,7 +1396,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesJSONAsset>> JSONAssetRESTControllerCreateAsync(string __tenant__, ContentEntitiesJSONAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetCreateAsync(string __tenant__, ContentEntitiesJSONAsset? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -1409,7 +1411,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -1478,7 +1480,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesJSONAsset>> JSONAssetRESTControllerGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -1563,7 +1565,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesJSONAsset>> JSONAssetRESTControllerUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesJSONAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesJSONAsset? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -1582,7 +1584,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -1651,7 +1653,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response> KeycloakAuthenticationControllerSignInGETAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response> KeycloakSignInGetAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Keycloak/SignIn");
@@ -1712,7 +1714,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response> KeycloakAuthenticationControllerSignInPOSTAsync(string provider = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response> KeycloakSignInPostAsync(string? provider = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Keycloak/SignIn");
@@ -1785,7 +1787,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response> KeycloakAuthenticationControllerSignOutCurrentUserAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response> KeycloakSignoutAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Keycloak/Signout");
@@ -1847,7 +1849,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesMeronym>> MeronymRESTControllerCreateAsync(string __tenant__, ContentEntitiesMeronym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymCreateAsync(string __tenant__, ContentEntitiesMeronym? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -1862,7 +1864,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -1931,7 +1933,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesMeronym>> MeronymRESTControllerGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -2016,7 +2018,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesMeronym>> MeronymRESTControllerUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMeronym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMeronym? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -2035,7 +2037,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -2104,7 +2106,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> MimeTypeRESTControllerCreateAsync(string __tenant__, ContentEntitiesMIMEType body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeCreateAsync(string __tenant__, ContentEntitiesMIMEType? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -2119,7 +2121,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -2188,7 +2190,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> MimeTypeRESTControllerGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -2273,7 +2275,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> MimeTypeRESTControllerUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMIMEType body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMIMEType? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -2292,7 +2294,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -2361,7 +2363,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesNavigationMenuItem>> NavigationMenuItemRESTControllerCreateAsync(string __tenant__, ContentEntitiesNavigationMenuItem body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemCreateAsync(string __tenant__, ContentEntitiesNavigationMenuItem? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -2376,7 +2378,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -2445,7 +2447,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesNavigationMenuItem>> NavigationMenuItemRESTControllerGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -2530,7 +2532,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesNavigationMenuItem>> NavigationMenuItemRESTControllerUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenuItem body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenuItem? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -2549,7 +2551,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -2618,7 +2620,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> NavigationMenuRESTControllerCreateAsync(string __tenant__, ContentEntitiesNavigationMenu body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> ApiHorselessContentModelModelNavigationMenuCreateAsync(string __tenant__, ContentEntitiesNavigationMenu? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -2633,7 +2635,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -2702,7 +2704,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> NavigationMenuRESTControllerGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> ApiHorselessContentModelModelNavigationMenuGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -2787,7 +2789,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> NavigationMenuRESTControllerUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenu body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesMIMEType>> ApiHorselessContentModelModelNavigationMenuUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenu? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -2806,7 +2808,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -2875,7 +2877,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<HostingEntitiesTenantInfo>> TenantInfoRESTControllerCreateAsync(HostingEntitiesTenantInfo body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoCreateAsync(HostingEntitiesTenantInfo? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/HorselessHostingModel/TenantInfo/Create");
@@ -2886,7 +2888,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -2955,7 +2957,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<HostingEntitiesTenantInfo>> TenantInfoRESTControllerGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -3036,7 +3038,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<HostingEntitiesTenantInfo>> TenantInfoRESTControllerUpdateAsync(string entityCollectionId, HostingEntitiesTenantInfo body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoUpdateAsync(string entityCollectionId, HostingEntitiesTenantInfo? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (entityCollectionId == null)
                 throw new System.ArgumentNullException("entityCollectionId");
@@ -3051,7 +3053,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -3120,7 +3122,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response> TenantRegistrationControllerApproveGETAsync(string tenantId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response> ApproveGetAsync(string tenantId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -3185,7 +3187,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response> TenantRegistrationControllerApprovePOSTAsync(string tenantId, string displayName, string tenantIdentifier, System.Guid? id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response> ApprovePostAsync(string tenantId, string displayName, string tenantIdentifier, System.Guid? id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -3264,7 +3266,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<HostingEntitiesTenant>> TenantRESTControllerCreateAsync(HostingEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<HostingEntitiesTenant>> ApiHorselessHostingModelTenantCreateAsync(HostingEntitiesTenant? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/HorselessHostingModel/Tenant/Create");
@@ -3275,7 +3277,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -3344,7 +3346,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<HostingEntitiesTenant>> TenantRESTControllerGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<HostingEntitiesTenant>> ApiHorselessHostingModelTenantGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -3425,7 +3427,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<HostingEntitiesTenant>> TenantRESTControllerUpdateAsync(string entityCollectionId, HostingEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<HostingEntitiesTenant>> ApiHorselessHostingModelTenantUpdateAsync(string entityCollectionId, HostingEntitiesTenant? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (entityCollectionId == null)
                 throw new System.ArgumentNullException("entityCollectionId");
@@ -3440,7 +3442,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -3509,7 +3511,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesTenant>> TenantRESTControllerCreate2Async(string __tenant__, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesTenant>> ApiHorselessContentModelTenantCreateAsync(string __tenant__, ContentEntitiesTenant? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -3524,7 +3526,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -3593,7 +3595,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesTenant>> TenantRESTControllerGetByObjectId2Async(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesTenant>> ApiHorselessContentModelTenantGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -3678,7 +3680,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesTenant>> TenantRESTControllerUpdate2Async(string contentCollectionId, string __tenant__, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response<ContentEntitiesTenant>> ApiHorselessContentModelTenantUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesTenant? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -3697,7 +3699,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -3782,7 +3784,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         {
             if (response == null || response.Content == null)
             {
-                return new ObjectResponseResult<T>(default(T), string.Empty);
+                return new ObjectResponseResult<T>(default(T)!, string.Empty);
             }
 
             if (ReadResponseAsString)
@@ -3790,10 +3792,10 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
                 var responseText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    var typedBody = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(responseText, JsonSerializerSettings);
-                    return new ObjectResponseResult<T>(typedBody, responseText);
+                    var typedBody = System.Text.Json.JsonSerializer.Deserialize<T>(responseText, JsonSerializerSettings);
+                    return new ObjectResponseResult<T>(typedBody!, responseText);
                 }
-                catch (Newtonsoft.Json.JsonException exception)
+                catch (System.Text.Json.JsonException exception)
                 {
                     var message = "Could not deserialize the response body string as " + typeof(T).FullName + ".";
                     throw new ApiException(message, (int)response.StatusCode, responseText, headers, exception);
@@ -3804,15 +3806,12 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
                 try
                 {
                     using (var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
-                    using (var streamReader = new System.IO.StreamReader(responseStream))
-                    using (var jsonTextReader = new Newtonsoft.Json.JsonTextReader(streamReader))
                     {
-                        var serializer = Newtonsoft.Json.JsonSerializer.Create(JsonSerializerSettings);
-                        var typedBody = serializer.Deserialize<T>(jsonTextReader);
-                        return new ObjectResponseResult<T>(typedBody, string.Empty);
+                        var typedBody = await System.Text.Json.JsonSerializer.DeserializeAsync<T>(responseStream, JsonSerializerSettings, cancellationToken).ConfigureAwait(false);
+                        return new ObjectResponseResult<T>(typedBody!, string.Empty);
                     }
                 }
-                catch (Newtonsoft.Json.JsonException exception)
+                catch (System.Text.Json.JsonException exception)
                 {
                     var message = "Could not deserialize the response body stream as " + typeof(T).FullName + ".";
                     throw new ApiException(message, (int)response.StatusCode, string.Empty, headers, exception);
@@ -3820,7 +3819,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
             }
         }
 
-        private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
+        private string ConvertToString(object? value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value == null)
             {
@@ -3947,67 +3946,72 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentEntitiesAccessControlEntry
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isActive", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsActive { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isActive")]
+        public bool? IsActive { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("subjectAccessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> SubjectAccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("subjectHorselessSessions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessSession> SubjectHorselessSessions { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("subjectAccessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? SubjectAccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("subjectPrincipals", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> SubjectPrincipals { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("subjectHorselessSessions")]
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessSession>? SubjectHorselessSessions { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("subjectTenants", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesTenant> SubjectTenants { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("subjectPrincipals")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? SubjectPrincipals { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("scope", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ContentEntitiesACEPermissionScope Scope { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("subjectTenants")]
+        public System.Collections.Generic.ICollection<ContentEntitiesTenant>? SubjectTenants { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("permission", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ContentEntitiesACEPermission Permission { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("scope")]
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+        public ContentEntitiesACEPermissionScope Scope { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("permissionType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ContentEntitiesACEPermissionType PermissionType { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("permission")]
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+        public ContentEntitiesACEPermission Permission { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("permissionType")]
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+        public ContentEntitiesACEPermissionType PermissionType { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static ContentEntitiesAccessControlEntry FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentEntitiesAccessControlEntry>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesAccessControlEntry>(data, options);
 
         }
 
@@ -4016,70 +4020,75 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentEntitiesContentCollection
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("allowAnonymousRead", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? AllowAnonymousRead { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isPublished", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsPublished { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("allowAnonymousRead")]
+        public bool? AllowAnonymousRead { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("publishedURL", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PublishedURL { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isPublished")]
+        public bool? IsPublished { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("previewURL", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PreviewURL { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("publishedURL")]
+        public string? PublishedURL { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("childContentCollections", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ChildContentCollections { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("previewURL")]
+        public string? PreviewURL { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("mimeContents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent> MimeContents { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("childContentCollections")]
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection>? ChildContentCollections { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("parentContentCollections", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ParentContentCollections { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("mimeContents")]
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>? MimeContents { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("publications", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPublication> Publications { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("parentContentCollections")]
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection>? ParentContentCollections { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("taxonomies", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesTaxonomy> Taxonomies { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("publications")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPublication>? Publications { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tenants", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesTenant> Tenants { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("taxonomies")]
+        public System.Collections.Generic.ICollection<ContentEntitiesTaxonomy>? Taxonomies { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("tenants")]
+        public System.Collections.Generic.ICollection<ContentEntitiesTenant>? Tenants { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static ContentEntitiesContentCollection FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentEntitiesContentCollection>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesContentCollection>(data, options);
 
         }
 
@@ -4088,52 +4097,57 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentEntitiesFilesystemAsset
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("filename", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Filename { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("publishedURL", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PublishedURL { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("filename")]
+        public string? Filename { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("previewURL", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PreviewURL { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("publishedURL")]
+        public string? PublishedURL { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("horselessContents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent> HorselessContents { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("previewURL")]
+        public string? PreviewURL { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("horselessContents")]
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>? HorselessContents { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static ContentEntitiesFilesystemAsset FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentEntitiesFilesystemAsset>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesFilesystemAsset>(data, options);
 
         }
 
@@ -4142,52 +4156,57 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentEntitiesHolonym
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jsonValue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string JsonValue { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jsonSchema", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string JsonSchema { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("jsonValue")]
+        public string? JsonValue { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("meronyms", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesMeronym> Meronyms { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("jsonSchema")]
+        public string? JsonSchema { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("taxons", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesTaxon> Taxons { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meronyms")]
+        public System.Collections.Generic.ICollection<ContentEntitiesMeronym>? Meronyms { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("taxons")]
+        public System.Collections.Generic.ICollection<ContentEntitiesTaxon>? Taxons { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static ContentEntitiesHolonym FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentEntitiesHolonym>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesHolonym>(data, options);
 
         }
 
@@ -4196,70 +4215,75 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentEntitiesHorselessContent
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("filesystemAssetId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? FilesystemAssetId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jsonAssetId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? JsonAssetId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("filesystemAssetId")]
+        public System.Guid? FilesystemAssetId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("mimeTypeId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? MimeTypeId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("jsonAssetId")]
+        public System.Guid? JsonAssetId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isPublished", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsPublished { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("mimeTypeId")]
+        public System.Guid? MimeTypeId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("publishedURL", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PublishedURL { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isPublished")]
+        public bool? IsPublished { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("previewURL", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PreviewURL { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("publishedURL")]
+        public string? PublishedURL { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("filesystemAsset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ContentEntitiesFilesystemAsset FilesystemAsset { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("previewURL")]
+        public string? PreviewURL { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jsonAsset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ContentEntitiesJSONAsset JsonAsset { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("filesystemAsset")]
+        public ContentEntitiesFilesystemAsset FilesystemAsset { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("mimeType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ContentEntitiesMIMEType MimeType { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("jsonAsset")]
+        public ContentEntitiesJSONAsset JsonAsset { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("contentCollections", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ContentCollections { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("mimeType")]
+        public ContentEntitiesMIMEType MimeType { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("contentCollections")]
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection>? ContentCollections { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static ContentEntitiesHorselessContent FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentEntitiesHorselessContent>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesHorselessContent>(data, options);
 
         }
 
@@ -4268,61 +4292,66 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentEntitiesHorselessSession
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("sessionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string SessionId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("iss", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Iss { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("sessionId")]
+        public string? SessionId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aud", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Aud { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("iss")]
+        public string? Iss { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("sub", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Sub { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("aud")]
+        public string? Aud { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isAnonymous", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsAnonymous { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("sub")]
+        public string? Sub { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("horselessSessionPrincipalId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? HorselessSessionPrincipalId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isAnonymous")]
+        public bool? IsAnonymous { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("horselessSessionPrincipal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ContentEntitiesPrincipal HorselessSessionPrincipal { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("horselessSessionPrincipalId")]
+        public System.Guid? HorselessSessionPrincipalId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("horselessSessionPrincipal")]
+        public ContentEntitiesPrincipal HorselessSessionPrincipal { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static ContentEntitiesHorselessSession FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentEntitiesHorselessSession>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesHorselessSession>(data, options);
 
         }
 
@@ -4331,49 +4360,54 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentEntitiesJSONAsset
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jsonValue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string JsonValue { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jsonSchema", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string JsonSchema { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("jsonValue")]
+        public string? JsonValue { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("horselessContents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent> HorselessContents { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("jsonSchema")]
+        public string? JsonSchema { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("horselessContents")]
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>? HorselessContents { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static ContentEntitiesJSONAsset FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentEntitiesJSONAsset>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesJSONAsset>(data, options);
 
         }
 
@@ -4382,46 +4416,51 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentEntitiesMIMEType
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("mimeTypeName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string MimeTypeName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("horselessContents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent> HorselessContents { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("mimeTypeName")]
+        public string? MimeTypeName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("horselessContents")]
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>? HorselessContents { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static ContentEntitiesMIMEType FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentEntitiesMIMEType>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesMIMEType>(data, options);
 
         }
 
@@ -4430,49 +4469,54 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentEntitiesMeronym
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jsonValue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string JsonValue { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jsonSchema", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string JsonSchema { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("jsonValue")]
+        public string? JsonValue { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("holonyms", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesHolonym> Holonyms { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("jsonSchema")]
+        public string? JsonSchema { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("holonyms")]
+        public System.Collections.Generic.ICollection<ContentEntitiesHolonym>? Holonyms { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static ContentEntitiesMeronym FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentEntitiesMeronym>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesMeronym>(data, options);
 
         }
 
@@ -4481,67 +4525,72 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentEntitiesNavigationMenu
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("publishAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? PublishAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("unPublishAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? UnPublishAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("publishAt")]
+        public System.DateTimeOffset? PublishAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isPublished", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsPublished { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("unPublishAt")]
+        public System.DateTimeOffset? UnPublishAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("menuLabel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string MenuLabel { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isPublished")]
+        public bool? IsPublished { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("menuDescription", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string MenuDescription { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("menuLabel")]
+        public string? MenuLabel { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("menuAltText", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string MenuAltText { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("menuDescription")]
+        public string? MenuDescription { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("childNavigationMenuItems", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem> ChildNavigationMenuItems { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("menuAltText")]
+        public string? MenuAltText { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("children", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu> Children { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("childNavigationMenuItems")]
+        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem>? ChildNavigationMenuItems { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("parents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu> Parents { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("children")]
+        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu>? Children { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("parents")]
+        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu>? Parents { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static ContentEntitiesNavigationMenu FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentEntitiesNavigationMenu>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesNavigationMenu>(data, options);
 
         }
 
@@ -4550,67 +4599,72 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentEntitiesNavigationMenuItem
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("publishAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? PublishAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("unPublishAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? UnPublishAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("publishAt")]
+        public System.DateTimeOffset? PublishAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isPublished", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsPublished { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("unPublishAt")]
+        public System.DateTimeOffset? UnPublishAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("menuItemLabel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string MenuItemLabel { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isPublished")]
+        public bool? IsPublished { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("menuItemDescription", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string MenuItemDescription { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("menuItemLabel")]
+        public string? MenuItemLabel { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("menuItemAltText", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string MenuItemAltText { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("menuItemDescription")]
+        public string? MenuItemDescription { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("childNavigationItems", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem> ChildNavigationItems { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("menuItemAltText")]
+        public string? MenuItemAltText { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("parentNavigationItems", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem> ParentNavigationItems { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("childNavigationItems")]
+        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem>? ChildNavigationItems { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("parentNavigationMenus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu> ParentNavigationMenus { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("parentNavigationItems")]
+        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem>? ParentNavigationItems { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("parentNavigationMenus")]
+        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu>? ParentNavigationMenus { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static ContentEntitiesNavigationMenuItem FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentEntitiesNavigationMenuItem>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesNavigationMenuItem>(data, options);
 
         }
 
@@ -4619,76 +4673,81 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentEntitiesPrincipal
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("iss", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Iss { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aud", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Aud { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("iss")]
+        public string? Iss { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("sub", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Sub { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("aud")]
+        public string? Aud { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("horselessSessions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessSession> HorselessSessions { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("sub")]
+        public string? Sub { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("horselessSessions")]
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessSession>? HorselessSessions { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("ownedAccessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> OwnedAccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("ownedHorselessSessions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessSession> OwnedHorselessSessions { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("ownedAccessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? OwnedAccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("ownedPrincipals", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> OwnedPrincipals { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("ownedHorselessSessions")]
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessSession>? OwnedHorselessSessions { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("ownedTenants", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesTenant> OwnedTenants { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("ownedPrincipals")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? OwnedPrincipals { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("ownedTenants")]
+        public System.Collections.Generic.ICollection<ContentEntitiesTenant>? OwnedTenants { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tenantAccounts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesTenant> TenantAccounts { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("upn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Upn { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("tenantAccounts")]
+        public System.Collections.Generic.ICollection<ContentEntitiesTenant>? TenantAccounts { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Email { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("upn")]
+        public string? Upn { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("preferredUserName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PreferredUserName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("email")]
+        public string? Email { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("preferredUserName")]
+        public string? PreferredUserName { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static ContentEntitiesPrincipal FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentEntitiesPrincipal>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesPrincipal>(data, options);
 
         }
 
@@ -4697,64 +4756,69 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentEntitiesPublication
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("publishAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? PublishAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("unPublishAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? UnPublishAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("publishAt")]
+        public System.DateTimeOffset? PublishAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isPublished", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsPublished { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("unPublishAt")]
+        public System.DateTimeOffset? UnPublishAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("publishedURL", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PublishedURL { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isPublished")]
+        public bool? IsPublished { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("previewURL", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PreviewURL { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("publishedURL")]
+        public string? PublishedURL { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("contentCollections", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ContentCollections { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("previewURL")]
+        public string? PreviewURL { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("publicationParents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPublication> PublicationParents { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("contentCollections")]
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection>? ContentCollections { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("publicationsChildren", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPublication> PublicationsChildren { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("publicationParents")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPublication>? PublicationParents { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("publicationsChildren")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPublication>? PublicationsChildren { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static ContentEntitiesPublication FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentEntitiesPublication>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesPublication>(data, options);
 
         }
 
@@ -4763,58 +4827,63 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentEntitiesTaxon
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jsonValue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string JsonValue { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jsonSchema", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string JsonSchema { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("jsonValue")]
+        public string? JsonValue { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("antecedentTaxons", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesTaxon> AntecedentTaxons { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("jsonSchema")]
+        public string? JsonSchema { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("derivativeTaxons", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesTaxon> DerivativeTaxons { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("antecedentTaxons")]
+        public System.Collections.Generic.ICollection<ContentEntitiesTaxon>? AntecedentTaxons { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("holonyms", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesHolonym> Holonyms { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("derivativeTaxons")]
+        public System.Collections.Generic.ICollection<ContentEntitiesTaxon>? DerivativeTaxons { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("taxonomies", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesTaxonomy> Taxonomies { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("holonyms")]
+        public System.Collections.Generic.ICollection<ContentEntitiesHolonym>? Holonyms { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("taxonomies")]
+        public System.Collections.Generic.ICollection<ContentEntitiesTaxonomy>? Taxonomies { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static ContentEntitiesTaxon FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentEntitiesTaxon>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesTaxon>(data, options);
 
         }
 
@@ -4823,43 +4892,48 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentEntitiesTaxonomy
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jsonValue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string JsonValue { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jsonSchema", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string JsonSchema { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("jsonValue")]
+        public string? JsonValue { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("contentCollections", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ContentCollections { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("jsonSchema")]
+        public string? JsonSchema { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("taxons", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesTaxon> Taxons { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("contentCollections")]
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection>? ContentCollections { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("taxons")]
+        public System.Collections.Generic.ICollection<ContentEntitiesTaxon>? Taxons { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static ContentEntitiesTaxonomy FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentEntitiesTaxonomy>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesTaxonomy>(data, options);
 
         }
 
@@ -4868,58 +4942,63 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentEntitiesTenant
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accounts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Accounts { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("contentCollections", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ContentCollections { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accounts")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Accounts { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("contentCollections")]
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection>? ContentCollections { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isPublished", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsPublished { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("baseUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Uri BaseUrl { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isPublished")]
+        public bool IsPublished { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tenantIdentifierStrategy", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ContentEntitiesTenantIdentifierStrategy TenantIdentifierStrategy { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("baseUrl")]
+        public System.Uri? BaseUrl { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tenantIdentifier", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TenantIdentifier { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("tenantIdentifierStrategy")]
+        public ContentEntitiesTenantIdentifierStrategy TenantIdentifierStrategy { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("tenantIdentifier")]
+        public string? TenantIdentifier { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static ContentEntitiesTenant FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentEntitiesTenant>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesTenant>(data, options);
 
         }
 
@@ -4928,40 +5007,45 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentEntitiesTenantIdentifierStrategy
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("targetTenant", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ContentEntitiesTenant TargetTenant { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("strategyContainers", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ContentEntitiesTenantIdentifierStrategyContainer> StrategyContainers { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("targetTenant")]
+        public ContentEntitiesTenant TargetTenant { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("strategyContainers")]
+        public System.Collections.Generic.ICollection<ContentEntitiesTenantIdentifierStrategyContainer>? StrategyContainers { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static ContentEntitiesTenantIdentifierStrategy FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentEntitiesTenantIdentifierStrategy>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesTenantIdentifierStrategy>(data, options);
 
         }
 
@@ -4970,44 +5054,49 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ContentEntitiesTenantIdentifierStrategyContainer
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("tenantIdentifierStrategyName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ContentEntitiesTenantIdentifierStrategyName TenantIdentifierStrategyName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid? Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("tenantIdentifierStrategyName")]
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+        public ContentEntitiesTenantIdentifierStrategyName TenantIdentifierStrategyName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tenantIdentifier", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TenantIdentifier { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("strategy", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ContentEntitiesTenantIdentifierStrategy Strategy { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("tenantIdentifier")]
+        public string? TenantIdentifier { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("strategy")]
+        public ContentEntitiesTenantIdentifierStrategy Strategy { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static ContentEntitiesTenantIdentifierStrategyContainer FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentEntitiesTenantIdentifierStrategyContainer>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesTenantIdentifierStrategyContainer>(data, options);
 
         }
 
@@ -5115,64 +5204,69 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class HostingEntitiesAccessControlEntry
     {
-        [Newtonsoft.Json.JsonProperty("scope", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public HostingEntitiesACEPermissionScope Scope { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("permission", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public HostingEntitiesACEPermission Permission { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("scope")]
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+        public HostingEntitiesACEPermissionScope Scope { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("permissionType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public HostingEntitiesACEPermissionType PermissionType { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("permission")]
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+        public HostingEntitiesACEPermission Permission { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("permissionType")]
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+        public HostingEntitiesACEPermissionType PermissionType { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isActive", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsActive { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isActive")]
+        public bool? IsActive { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("subjectAccessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> SubjectAccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal>? Owners { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("subjectPrincipals", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> SubjectPrincipals { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("subjectAccessControlEntries")]
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry>? SubjectAccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("subjectTenants", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesTenant> SubjectTenants { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("subjectPrincipals")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal>? SubjectPrincipals { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("subjectTenants")]
+        public System.Collections.Generic.ICollection<HostingEntitiesTenant>? SubjectTenants { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static HostingEntitiesAccessControlEntry FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<HostingEntitiesAccessControlEntry>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<HostingEntitiesAccessControlEntry>(data, options);
 
         }
 
@@ -5181,58 +5275,63 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class HostingEntitiesKeyCloakConfiguration
     {
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal>? Owners { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("authority", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Authority { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("realm", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Realm { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("authority")]
+        public string? Authority { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("realm")]
+        public string? Realm { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("iss", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Iss { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aud", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Aud { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("iss")]
+        public string? Iss { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tenantInfoId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? TenantInfoId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("aud")]
+        public string? Aud { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tenantInfo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public HostingEntitiesTenantInfo TenantInfo { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("tenantInfoId")]
+        public System.Guid? TenantInfoId { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("tenantInfo")]
+        public HostingEntitiesTenantInfo TenantInfo { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static HostingEntitiesKeyCloakConfiguration FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<HostingEntitiesKeyCloakConfiguration>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<HostingEntitiesKeyCloakConfiguration>(data, options);
 
         }
 
@@ -5241,70 +5340,75 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class HostingEntitiesPrincipal
     {
-        [Newtonsoft.Json.JsonProperty("upn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Upn { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Email { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("upn")]
+        public string? Upn { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("preferredUserName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PreferredUserName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("email")]
+        public string? Email { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("preferredUserName")]
+        public string? PreferredUserName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("iss", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Iss { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aud", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Aud { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("iss")]
+        public string? Iss { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("sub", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Sub { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("aud")]
+        public string? Aud { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("sub")]
+        public string? Sub { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("ownedAccessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> OwnedAccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("ownedPrincipals", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> OwnedPrincipals { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("ownedAccessControlEntries")]
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry>? OwnedAccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("ownedTenants", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesTenant> OwnedTenants { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("ownedPrincipals")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal>? OwnedPrincipals { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("ownedTenants")]
+        public System.Collections.Generic.ICollection<HostingEntitiesTenant>? OwnedTenants { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tenantAccounts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesTenant> TenantAccounts { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal>? Owners { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("tenantAccounts")]
+        public System.Collections.Generic.ICollection<HostingEntitiesTenant>? TenantAccounts { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static HostingEntitiesPrincipal FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<HostingEntitiesPrincipal>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<HostingEntitiesPrincipal>(data, options);
 
         }
 
@@ -5313,58 +5417,63 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class HostingEntitiesTenant
     {
-        [Newtonsoft.Json.JsonProperty("isPublished", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsPublished { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("baseUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Uri BaseUrl { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isPublished")]
+        public bool IsPublished { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tenantIdentifier", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TenantIdentifier { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("baseUrl")]
+        public System.Uri? BaseUrl { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tenantIdentifierStrategy", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public HostingEntitiesTenantIdentifierStrategy TenantIdentifierStrategy { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("tenantIdentifier")]
+        public string? TenantIdentifier { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("tenantIdentifierStrategy")]
+        public HostingEntitiesTenantIdentifierStrategy TenantIdentifierStrategy { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tenantInfos", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesTenantInfo> TenantInfos { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("tenantInfos")]
+        public System.Collections.Generic.ICollection<HostingEntitiesTenantInfo>? TenantInfos { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accounts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Accounts { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accounts")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal>? Accounts { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal>? Owners { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static HostingEntitiesTenant FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<HostingEntitiesTenant>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<HostingEntitiesTenant>(data, options);
 
         }
 
@@ -5373,40 +5482,45 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class HostingEntitiesTenantIdentifierStrategy
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("targetTenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? TargetTenantId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("targetTenant", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public HostingEntitiesTenant TargetTenant { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("targetTenantId")]
+        public System.Guid? TargetTenantId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("strategyContainers", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesTenantIdentifierStrategyContainer> StrategyContainers { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("targetTenant")]
+        public HostingEntitiesTenant TargetTenant { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("strategyContainers")]
+        public System.Collections.Generic.ICollection<HostingEntitiesTenantIdentifierStrategyContainer>? StrategyContainers { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static HostingEntitiesTenantIdentifierStrategy FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<HostingEntitiesTenantIdentifierStrategy>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<HostingEntitiesTenantIdentifierStrategy>(data, options);
 
         }
 
@@ -5415,32 +5529,37 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class HostingEntitiesTenantIdentifierStrategyContainer
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("tenantIdentifierStrategyName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public HostingEntitiesTenantIdentifierStrategyName TenantIdentifierStrategyName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid? Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("tenantIdentifierStrategyName")]
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+        public HostingEntitiesTenantIdentifierStrategyName TenantIdentifierStrategyName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("strategyId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? StrategyId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("strategy", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public HostingEntitiesTenantIdentifierStrategy Strategy { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("strategyId")]
+        public System.Guid? StrategyId { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("strategy")]
+        public HostingEntitiesTenantIdentifierStrategy Strategy { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static HostingEntitiesTenantIdentifierStrategyContainer FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<HostingEntitiesTenantIdentifierStrategyContainer>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<HostingEntitiesTenantIdentifierStrategyContainer>(data, options);
 
         }
 
@@ -5470,64 +5589,69 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class HostingEntitiesTenantInfo
     {
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal>? Owners { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("parentTenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? ParentTenantId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("parentTenant", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public HostingEntitiesTenant ParentTenant { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("parentTenantId")]
+        public System.Guid? ParentTenantId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("parentTenant")]
+        public HostingEntitiesTenant ParentTenant { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("identifier", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Identifier { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("identifier")]
+        public string? Identifier { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("connectionString", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ConnectionString { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string? Name { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tenantBaseUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TenantBaseUrl { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("connectionString")]
+        public string? ConnectionString { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("keyCloakConfigurations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesKeyCloakConfiguration> KeyCloakConfigurations { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("tenantBaseUrl")]
+        public string? TenantBaseUrl { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("webAPITenantInfos", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesWebAPITenantInfo> WebAPITenantInfos { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("keyCloakConfigurations")]
+        public System.Collections.Generic.ICollection<HostingEntitiesKeyCloakConfiguration>? KeyCloakConfigurations { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("webAPITenantInfos")]
+        public System.Collections.Generic.ICollection<HostingEntitiesWebAPITenantInfo>? WebAPITenantInfos { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static HostingEntitiesTenantInfo FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<HostingEntitiesTenantInfo>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<HostingEntitiesTenantInfo>(data, options);
 
         }
 
@@ -5536,58 +5660,63 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class HostingEntitiesWebAPITenantInfo
     {
-        [Newtonsoft.Json.JsonProperty("accessControlEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("owners", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("accessControlEntries")]
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry>? AccessControlEntries { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Timestamp { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owners")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal>? Owners { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid Id { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("timestamp")]
+        public byte[]? Timestamp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("displayName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("objectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ObjectId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("isSoftDeleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsSoftDeleted { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+        public string? ObjectId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("isSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("identifier", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Identifier { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTimeOffset? CreatedAt { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("identifier")]
+        public string? Identifier { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("connectionString", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ConnectionString { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string? Name { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("webAPIBaseUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string WebAPIBaseUrl { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("connectionString")]
+        public string? ConnectionString { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tenantInfoId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? TenantInfoId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("webAPIBaseUrl")]
+        public string? WebAPIBaseUrl { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tenantInfo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public HostingEntitiesTenantInfo TenantInfo { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("tenantInfoId")]
+        public System.Guid? TenantInfoId { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("tenantInfo")]
+        public HostingEntitiesTenantInfo TenantInfo { get; set; } = default!;
 
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static HostingEntitiesWebAPITenantInfo FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<HostingEntitiesWebAPITenantInfo>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<HostingEntitiesWebAPITenantInfo>(data, options);
 
         }
 
@@ -5596,24 +5725,25 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class MvcProblemDetails
     {
-        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Type { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Title { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("type")]
+        public string? Type { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Status { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("title")]
+        public string? Title { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("detail", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Detail { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("status")]
+        public int? Status { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("instance", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Instance { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("detail")]
+        public string? Detail { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("instance")]
+        public string? Instance { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties; }
@@ -5623,13 +5753,17 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
         public string ToJson()
         {
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
 
         }
         public static MvcProblemDetails FromJson(string data)
         {
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<MvcProblemDetails>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+            var options = new System.Text.Json.JsonSerializerOptions();
+
+            return System.Text.Json.JsonSerializer.Deserialize<MvcProblemDetails>(data, options);
 
         }
 
@@ -5668,11 +5802,11 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     {
         public int StatusCode { get; private set; }
 
-        public string Response { get; private set; }
+        public string? Response { get; private set; }
 
         public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> Headers { get; private set; }
 
-        public ApiException(string message, int statusCode, string response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, System.Exception innerException)
+        public ApiException(string message, int statusCode, string? response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, System.Exception? innerException)
             : base(message + "\n\nStatus: " + statusCode + "\nResponse: \n" + ((response == null) ? "(null)" : response.Substring(0, response.Length >= 512 ? 512 : response.Length)), innerException)
         {
             StatusCode = statusCode;
@@ -5691,7 +5825,7 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     {
         public TResult Result { get; private set; }
 
-        public ApiException(string message, int statusCode, string response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, TResult result, System.Exception innerException)
+        public ApiException(string message, int statusCode, string? response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, TResult result, System.Exception? innerException)
             : base(message, statusCode, response, headers, innerException)
         {
             Result = result;
