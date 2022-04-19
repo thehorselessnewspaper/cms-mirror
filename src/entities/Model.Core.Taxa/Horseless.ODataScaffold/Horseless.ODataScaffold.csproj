@@ -16,7 +16,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="HorselessNewspaper.RazorClassLibrary.CMS.Default" Version="0.4.220418.7" />
+		<PackageReference Include="HorselessNewspaper.RazorClassLibrary.CMS.Default" Version="0.4.220418.9" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.3" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
 	</ItemGroup>
