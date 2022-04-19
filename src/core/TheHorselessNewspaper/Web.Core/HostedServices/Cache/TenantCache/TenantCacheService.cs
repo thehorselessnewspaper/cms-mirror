@@ -225,7 +225,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                     var apiClient = innerScope.ServiceProvider.GetRequiredService<IHorselessRestApiClient>();
                     var configuredRestBaseUrl = configuration["RestApiBaseUrl"];
-                    apiClient.BaseUrl = configuredRestBaseUrl;
+                   apiClient.BaseUrl = configuredRestBaseUrl;
 
                 }
 

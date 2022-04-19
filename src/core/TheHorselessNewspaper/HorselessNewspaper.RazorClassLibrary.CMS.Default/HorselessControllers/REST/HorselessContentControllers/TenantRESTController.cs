@@ -13,14 +13,14 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
     [ApiController]
     [Route("{__tenant__}/" + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_TENANT)]
     // [Route("{tenant}/api/[controller]")]
-    public class TenantController : ControllerBase,
+    public class TenantRESTController : ControllerBase,
         IRESTContentController<Tenant>
     {
 
         public IContentCollectionService<IQueryableContentModelOperator<Tenant>, Tenant> _contentCollectionService { get; set; }
         public ITenantInfo CurrentTenant { get; set; }
 
-        public TenantController(IContentCollectionService<IQueryableContentModelOperator<Tenant>,
+        public TenantRESTController(IContentCollectionService<IQueryableContentModelOperator<Tenant>,
            Tenant> contentCollectionService, ITenantInfo tenantInfo)
         {
             _contentCollectionService = contentCollectionService;
