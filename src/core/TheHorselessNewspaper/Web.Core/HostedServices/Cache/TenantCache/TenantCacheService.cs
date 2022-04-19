@@ -97,9 +97,10 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         public IQueryableContentModelOperator<T> GetQueryForContentEntity<T>(IServiceScope scope)
         where T : class, IContentRowLevelSecured
         {
-            
-                return scope.ServiceProvider.GetRequiredService<IQueryableContentModelOperator<T>>();
-            
+
+
+            return scope.ServiceProvider.GetRequiredService<IQueryableContentModelOperator<T>>();
+
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
@@ -111,8 +112,17 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             // TODO surface as a feature toggle
             // hardcodes content and hosting physical db 
             // as dependencies of tenantcache
-
-            await EnsurePhysicalDatabases();
+            try
+            {
+                _logger.LogInformation("ensuring databases.");
+                // await EnsurePhysicalDatabases();
+                _logger.LogInformation("databases ensured.");
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation("exception ensuring databases.");
+                int i = 0;
+            }
 
             return;
         }
@@ -125,18 +135,26 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 {
 
                     // var tenantInfo = scope.ServiceProvider.GetRequiredService<HorselessTenantInfo>();
-
+                    _logger.LogInformation("getting db query");
                     var contentModelOperator = GetQueryForContentEntity<ContentModel.Tenant>(scope);
-                    var hostingModelOperator = GetQueryForHostingEntity<HostingModel.Tenant>(scope);
-
+                    _logger.LogInformation("ensuring content db");
                     await contentModelOperator.EnsureDbExists();
-                    await hostingModelOperator.EnsureDbExists();
+                    _logger.LogInformation("content db ensured");
+
+                    _logger.LogInformation("hosting db ensured");
 
                 }
                 catch (Exception e)
                 {
                     _logger.LogWarning($"problem initializing databases {e.Message}");
                 }
+            }
+
+            using (var scope = _services.CreateScope())
+            {
+
+                var hostingModelOperator = GetQueryForHostingEntity<HostingModel.Tenant>(scope);
+                await hostingModelOperator.EnsureDbExists();
             }
         }
 
@@ -148,16 +166,29 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             // this should actually be handled by polly
             // due to db container startup lag in 
             // dockerized environments
-            if (!this.CurrentHostingModelTenants.Any())
+            //if (!this.CurrentHostingModelTenants.Any())
+            //{
+            //    await EnsurePhysicalDatabases();
+            //}
+
+            try
             {
-                await EnsurePhysicalDatabases();
+
+                await SetCurrentContentModelTenants();
+
+
+                using (var scope = _services.CreateScope())
+                {
+
+                    await HandleTenantCacheWorkflow(scope);
+                }
+
+
             }
-
-            using (var scope = _scopeFactory.CreateScope())
+            catch (Exception e)
             {
-                await SetCurrentContentModelTenants(scope);
-
-                await HandleTenantCacheWorkflow(scope);
+                _logger.LogWarning($"exception in tenant cache service {e.Message}");
+                throw;
             }
 
             _timer.Change(GetTimespanForSeconds(TimerDelayInSeconds), GetTimespanForSeconds(TimerDelayInSeconds));
@@ -181,39 +212,45 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
         }
 
-        private async Task SetCurrentContentModelTenants(IServiceScope scope)
+        private async Task SetCurrentContentModelTenants()
         {
 
             try
             {
 
-                var autoMapper = scope.ServiceProvider.GetRequiredService<IMapper>();
-                var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+                using (var innerScope = _services.CreateScope())
+                {
+                    // var autoMapper = scope.ServiceProvider.GetRequiredService<IMapper>();
+                    var configuration = innerScope.ServiceProvider.GetRequiredService<IConfiguration>();
 
-                var apiClient = scope.ServiceProvider.GetRequiredService<IHorselessRestApiClient>();
-                var configuredRestBaseUrl = configuration["RestApiBaseUrl"];
-                apiClient.BaseUrl = configuredRestBaseUrl;
+                    var apiClient = innerScope.ServiceProvider.GetRequiredService<IHorselessRestApiClient>();
+                    var configuredRestBaseUrl = configuration["RestApiBaseUrl"];
+                    apiClient.BaseUrl = configuredRestBaseUrl;
 
-                // var clientTenantlist = await apiClient.getbypa);
+                }
 
-                // var mappedTenantList = autoMapper.Map<ICollection<ContentEntitiesTenant>, IEnumerable<ContentModel.Tenant>>(clientTenantlist);
 
-                // collect the content model tenants
-                var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(scope);
-                var tenantList = await contentModelTenantQuery.ReadAsEnumerable(r => r.IsSoftDeleted == false);
-                var tenants = tenantList.ToList();
-                //foreach (var contentModelTenant in tenants )
-                //{
-                //    if (!this.CurrentContentModelTenants.Where(w => w.Id.Equals(contentModelTenant.Id)).Any())
-                //    {
-                //        // here because we need to cache this tenant in the singleton
-                //        this.CurrentContentModelTenants.Add(contentModelTenant);
-                //    }
-                //}
+                using (var innerScope = _services.CreateAsyncScope())
+                {
 
-                //List<ContentModel.Tenant> contentModelTenants = tenantList.ToList();
+                    // var clientTenantlist = await apiClient.getbypa);
 
-                //_logger.LogInformation($"read {contentModelTenants.Count()} content model tenant records");
+                    // var mappedTenantList = autoMapper.Map<ICollection<ContentEntitiesTenant>, IEnumerable<ContentModel.Tenant>>(clientTenantlist);
+
+                    // collect the content model tenants
+
+                    var contentModelTenantQuery = innerScope.ServiceProvider.GetRequiredService<IQueryableContentModelOperator<ContentModel.Tenant>>();  // this.GetQueryForContentEntity<ContentModel.Tenant>(innerScope);
+                    var tenantList = await contentModelTenantQuery.ReadAsEnumerable(r => r.IsSoftDeleted == false);
+                    var tenants = tenantList.ToList();
+                    foreach (var contentModelTenant in tenants)
+                    {
+                        if (!this.CurrentContentModelTenants.Where(w => w.Id.Equals(contentModelTenant.Id)).Any())
+                        {
+                            // here because we need to cache this tenant in the singleton
+                            this.CurrentContentModelTenants.Add(contentModelTenant);
+                        }
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -936,7 +973,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
         private async Task<List<ContentModel.Tenant>> GetCurrentContentModelTenants(IServiceScope scope)
         {
-            using(var localScope = _scopeFactory.CreateAsyncScope())
+            using (var localScope = _scopeFactory.CreateAsyncScope())
             {
                 // collect the hosting model tenants
                 var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(localScope);
