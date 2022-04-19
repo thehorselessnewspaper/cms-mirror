@@ -86,7 +86,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     /// 
     /// or maybe not - we will se
     /// </summary>
-    [MultiTenant]
+    // [MultiTenant]
     public partial class Tenant : IContentRowLevelSecured
     {
         public bool IsPublished { get; set; }
