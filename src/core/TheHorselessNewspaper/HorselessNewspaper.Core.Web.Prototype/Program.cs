@@ -43,14 +43,14 @@ builder.Services.AddCors(options =>
 });
 
 
-builder.Services.AddRazorPages()
-    .AddRazorRuntimeCompilation();
+builder.Services.AddRazorPages();
+// .AddRazorRuntimeCompilation();
 
 builder.Services.AddControllersWithViews(options =>
 {
     // options.Filters.Add<InstallRequiredActionFilter>(int.MinValue);
-})
-.AddRazorRuntimeCompilation();
+}); 
+// .AddRazorRuntimeCompilation();
 
 builder.Services.AddODataQueryFilter();
 
@@ -161,18 +161,18 @@ builder.Services.AddHorselessNewspaper(builder.Configuration, builder.Environmen
 
 builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
 {
-    options.FileProviders.Add(
-            new EmbeddedFileProvider(typeof(HorselessCMSController).Assembly));
+    //options.FileProviders.Add(
+    //        new EmbeddedFileProvider(typeof(HorselessCMSController).Assembly));
 
     var libraryPath = Path.GetFullPath(
        Path.Combine(builder.Environment.ContentRootPath, "..", "HorselessNewspaper.RazorClassLibrary.CMS.Default"));
 
     options.FileProviders.Add(new PhysicalFileProvider(libraryPath));
 
-    var contentRootPath = Path.GetFullPath(
-    Path.Combine(builder.Environment.ContentRootPath, ".", ""));
+    //var contentRootPath = Path.GetFullPath(
+    //Path.Combine(builder.Environment.ContentRootPath, ".", ""));
 
-    options.FileProviders.Add(new PhysicalFileProvider(contentRootPath));
+    //options.FileProviders.Add(new PhysicalFileProvider(contentRootPath));
 });
 
 // globally enables mssql server
@@ -207,7 +207,9 @@ builder.Services.AddMvcCore(options =>
 
     }
 
-}).AddRazorRuntimeCompilation();
+}); //.AddRazorRuntimeCompilation();
+
+
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
