@@ -176,6 +176,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                 await SetCurrentContentModelTenants();
 
+                _logger.LogInformation("got current content model tenants");
 
                 using (var scope = _services.CreateScope())
                 {
