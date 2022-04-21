@@ -6,6 +6,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.ODATA
 {
     public class HorselessOdataModel
     {
+
         private Type[] GetTypesInNamespace(System.Reflection.Assembly assembly, string nameSpace)
         {
             return assembly.GetTypes()
@@ -20,9 +21,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.ODATA
         /// <returns></returns>
         public async Task<IEdmModel> GetContentEDMModel()
         {
+            string modelNamespace = "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities";
+
             var builder = new ODataConventionModelBuilder();
             /// TODO load fro ma configurable location
-            foreach (Type item in GetTypesInNamespace(System.Reflection.Assembly.Load("TheHorselessNewspaper.HostingModel"), "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities"))
+            foreach (Type item in GetTypesInNamespace(System.Reflection.Assembly.Load("TheHorselessNewspaper.HostingModel"), modelNamespace))
             {
 
                 //My models have a key named "Id"
@@ -32,16 +35,20 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.ODATA
                 EntityTypeConfiguration entityType = builder.AddEntityType(item);
                 entityType.HasKey(item.GetProperty("Id"));
                 builder.AddEntitySet(item.Name, entityType);
+
             }
 
+            builder.ContainerName = "ContentEntities";
+            builder.Namespace = modelNamespace;
             return await Task.FromResult(builder.GetEdmModel());
         }
 
         public async Task<IEdmModel> GetHostingEDMModel()
         {
             var builder = new ODataConventionModelBuilder();
+            const string modelNamespace = "TheHorselessNewspaper.Schemas.HostingModel.HostingEntities";
             /// TODO load fro ma configurable location
-            foreach (Type item in GetTypesInNamespace(System.Reflection.Assembly.Load("TheHorselessNewspaper.HostingModel"), "TheHorselessNewspaper.Schemas.HostingModel.Entities"))
+            foreach (Type item in GetTypesInNamespace(System.Reflection.Assembly.Load("TheHorselessNewspaper.HostingModel"), modelNamespace))
             {
 
                 //My models have a key named "Id"
@@ -53,6 +60,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.ODATA
                 builder.AddEntitySet(item.Name, entityType);
             }
 
+            builder.ContainerName = "HostingEntities";
+            builder.Namespace = modelNamespace;
             return await Task.FromResult(builder.GetEdmModel());
         }
     }
