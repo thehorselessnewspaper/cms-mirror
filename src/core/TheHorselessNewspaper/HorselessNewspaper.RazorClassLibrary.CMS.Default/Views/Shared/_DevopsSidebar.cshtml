@@ -9,9 +9,9 @@
     <div class="sidebar-header">
         <h3>Operations</h3>
     </div>
-
+    <p>Dashboard</p>
     <ul class="list-unstyled components">
-        <p>Dashboard</p>
+
         <li class="active">
             <a href="#tenantSubMenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Tenants</a>
             <ul class="collapse list-unstyled" id="tenantSubMenu">
@@ -19,7 +19,7 @@
                     <a class="nav-link text-dark" asp-area="Admin" asp-controller="TenantRegistration" asp-action="Registrants">Registrants</a>
                 </li>
                 <li>
-                    <a href="#">Principals</a>
+                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="GlobalAdmin" asp-action="ResetDatabase">Database</a>
                 </li>
                 <li>
                     <a href="#">Security</a>
