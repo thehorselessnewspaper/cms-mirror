@@ -63,10 +63,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.4.220419.5" />
+		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.4.220420.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.4" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220419.5" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220420.2" />
 	</ItemGroup>
 
 	<ItemGroup>
