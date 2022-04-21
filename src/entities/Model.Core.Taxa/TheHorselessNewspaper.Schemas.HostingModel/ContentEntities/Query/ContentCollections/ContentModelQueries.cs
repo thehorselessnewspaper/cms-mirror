@@ -65,6 +65,12 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
             try
             {
+                await EnsureDbExists();
+            }
+            catch (Exception e) { }
+
+            try
+            {
                 var dbSet = ((DbContext)_context).Set<T>();
                 var addResult = await dbSet.AddAsync(entity);
                 var saveResult = await ((DbContext)_context).SaveChangesAsync();
@@ -85,6 +91,14 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         public async Task<IEnumerable<T>> Create(IEnumerable<T> entities)
         {
+
+            try
+            {
+                await EnsureDbExists();
+            }
+            catch (Exception e) { }
+
+
             try
             {
                 var dbSet = ((DbContext)_context).Set<T>();
@@ -106,6 +120,13 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         public async Task<T> Delete(string entityId)
         {
             T? entity;
+
+            try
+            {
+                await EnsureDbExists();
+            }
+            catch (Exception e) { }
+
             try
             {
                 var dbSet = ((DbContext)_context).Set<T>();
@@ -126,6 +147,13 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         public async Task<IEnumerable<T>> Delete(Expression<Func<T, bool>> query, bool softDelete = true, bool whatIf = true)
         {
             var ret = new List<T>();
+
+            try
+            {
+                await EnsureDbExists();
+            }
+            catch (Exception e) { }
+
 
             if (whatIf == true)
             {
@@ -174,6 +202,13 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         public async Task<IQueryable<T>> Read()
         {
             IQueryable<T> result;
+
+            try
+            {
+                await EnsureDbExists();
+            }
+            catch (Exception e) { }
+
             try
             {
                 var dbSet = ((DbContext)_context).Set<T>();
@@ -194,6 +229,12 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null)
         {
             IQueryable<T> result;
+            try
+            {
+                await EnsureDbExists();
+            }
+            catch (Exception e) { }
+
             try
             {
                 var dbSet = ((DbContext)_context).Set<T>().Where(query);
@@ -222,6 +263,12 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         public async Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null)
         {
             IEnumerable<T> result = new List<T>();
+            try
+            {
+                await EnsureDbExists();
+            }
+            catch (Exception e) { }
+
             try
             {
                 var dbSet = ((DbContext)_context).Set<T>().Where(query);
@@ -254,6 +301,12 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         /// <returns></returns>
         public async Task<T> Update(T entity, List<String> targetProperties = null)
         {
+            try
+            {
+                await EnsureDbExists();
+            }
+            catch (Exception e) { }
+
             try
             {
                 // _logger.LogInformation($"handling Update request for tenant context {_tenantInfo.Identifier}");
@@ -297,6 +350,12 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         {
             try
             {
+                await EnsureDbExists();
+            }
+            catch (Exception e) { }
+
+            try
+            {
                 // _logger.LogInformation($"handling Update request for tenant context {_tenantInfo.Identifier}");
                 var dbSet = ((DbContext)_context).Set<T>();
 
@@ -313,6 +372,13 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class
         {
+
+            try
+            {
+                await EnsureDbExists();
+            }
+            catch(Exception e) { }
+
             try
             {
                 var hasEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
