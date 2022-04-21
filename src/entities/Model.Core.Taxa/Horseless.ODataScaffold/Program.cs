@@ -54,6 +54,7 @@ builder.Services.AddODataQueryFilter();
 // enables odata entities
 var model = new HorselessOdataModel();
 var edm = await model.GetContentEDMModel();
+var edmHosting = await model.GetHostingEDMModel();
 // odata concerns
 builder.Services.AddControllers()
     .AddOData(options =>
@@ -71,7 +72,24 @@ builder.Services.AddControllers()
 
         /// todo make this an environment configurable item
         options.AddRouteComponents("HorselessContent", edm);
-    });
+    })
+      .AddOData(options =>
+      {
+          /// TODO - surface these as configurable parameters 
+          options
+          .Select()
+          .Expand()
+          .Filter()
+          .OrderBy()
+          .SetMaxTop(100)
+          .Count();
+
+          options.TimeZone = TimeZoneInfo.Utc;
+          // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
+
+          /// todo make this an environment configurable item
+          options.AddRouteComponents("HorselessHosting", edmHosting);
+      });
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
