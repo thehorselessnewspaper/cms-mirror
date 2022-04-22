@@ -682,7 +682,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 createdTenant.IsPublished = true; //mark workflow complete
                 _logger.LogInformation($"will change state of tenant {createdTenant.IsPublished} to true");
 
-                var updatedRoute = $"{baseUri}/{identifier}/api/Tenant/Update/{createdTenant.Id}";
+                var updatedRoute = $"{baseUri}/{identifier}/api/HorselessContentModel/Tenant/Update/{createdTenant.Id}";
 
                 // update the acess control entries
                 // populate the access control entries for the new tenant
@@ -730,7 +730,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             var httpClient = clientFactory.CreateClient();
             try
             {
-                var route = $"{baseUri}/{identifier}/api/Tenant/Create";
+                var route = $"{baseUri}/{identifier}/api/HorselessContentModel/Tenant/Create";
                 var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
                 {
                     Content = GetJsonContent(mergeEntity),
