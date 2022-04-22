@@ -3,37 +3,36 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Routing.Attributes;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
+using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Hosting
 {
-
-    [Route("HorselessHosting/Tenant")]
+    [Route("HorselessHosting/Principal")]
     [Produces("application/json")]
     [ApiExplorerSettings(IgnoreApi = true)]
-    public class TenantController : ODataController
+    public class PrincipalController : ODataController
     {
-        private readonly IQueryableHostingModelOperator<HostingModel.Tenant> _TenantSvc;
+        private IQueryableHostingModelOperator<Principal> _principalSvc;
 
-        public TenantController(IQueryableHostingModelOperator<HostingModel.Tenant> TenantSvc)
+        public PrincipalController(IQueryableHostingModelOperator<HostingModel.Principal> principalSvc)
         {
-            this._TenantSvc = TenantSvc;
+            this._principalSvc = principalSvc;
         }
-
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
         [HttpGet()]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<HostingModel.Tenant>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<HostingModel.Principal>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
 
-        public async Task<ActionResult<IQueryable<HostingModel.Tenant>>> Get()
+        public async Task<ActionResult<IQueryable<HostingModel.Principal>>> Get()
 
         {
-            return Ok(await _TenantSvc.Read());
+            return Ok(await _principalSvc.Read());
         }
-
 
     }
 }
