@@ -332,8 +332,19 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     var mirrorTenantHasAccessControlEntries = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.AccessControlEntries.Count() > 0).Any();
 
                     var isTenantDeploymentWorkflowComplete = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.IsPublished == true).Any();
-
-                    if (mirrorTenantExists && mirrorTenantHasOwners && mirrorTenantHasAccessControlEntries && isTenantDeploymentWorkflowComplete == false)
+ 
+                    if (mirrorTenantExists == false)
+                    {
+                        // validate the multitenant routing is working for this tenant
+                        // database inserts specific to the tenant can only occur
+                        // after tenant routing is available for a tenant
+                        var probeResult = await this.ProbeTenantRouting(scope, publishedTenant);
+                        if (probeResult == true)
+                        {
+                            await DeployPublishedTenant(scope, publishedTenant);
+                        }
+                    }
+                    else if (mirrorTenantExists && mirrorTenantHasOwners && mirrorTenantHasAccessControlEntries && isTenantDeploymentWorkflowComplete == false)
                     {
                         try
                         {
@@ -365,22 +376,14 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             _logger.LogError($"problem marking workflow complete {e.Message}");
                         }
                     }
-
-                    else if (isTenantDeploymentWorkflowComplete == false)
-                    {
-                        // validate the multitenant routing is working for this tenant
-                        // database inserts specific to the tenant can only occur
-                        // after tenant routing is available for a tenant
-                        var probeResult = await this.ProbeTenantRouting(scope, publishedTenant);
-                        if (probeResult == true)
-                        {
-                            await DeployPublishedTenant(scope, publishedTenant);
-                        }
-                    }
                     else
                     {
                         await ValidateCaches(scope, inMemoryStores, contentModelTenants, publishedTenant);
                     }
+
+
+
+
 
 
                 }
