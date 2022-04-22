@@ -41,6 +41,8 @@ using HorselessNewspaper.Web.Core.ScopedServices.RestClients;
 using AutoMapper;
 using HorselessNewspaper.Web.Core.Automapper;
 using HorselessNewspaper.Web.Core.ScopedServices.RestClients.Also;
+using Microsoft.AspNetCore.OData;
+using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -182,7 +184,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
                 .WithDelegateStrategy(async context =>
                 {
                     var httpContext = context as HttpContext;
-                    if(httpContext == null)
+                    if (httpContext == null)
                     {
                         return "6da806b8-f7ab-4e3a-8833-7e834a40e9d0";
                     }
@@ -222,7 +224,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
             //    }
             //});
 
-  
+
 
 
             #endregion multitenancy as per https://www.finbuckle.com/MultiTenant/
@@ -309,7 +311,7 @@ HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessCo
             // as it's gating every request
             serviceBuilder.Services.AddScoped<HorselessRouteTransformer>();
             serviceBuilder.Services.AddScoped<HorselessTenantSetupMiddleware>();
-            
+
             serviceBuilder.Services.AddScoped<IHorselessTenantContext, TenantContext>();
 
             serviceBuilder.Services.AddScoped<HorselessSession>((instanceFactory) =>
@@ -352,10 +354,51 @@ HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessCo
             serviceBuilder.Services.AddHostedService<TenantCacheService>(provider => provider.GetService<TenantCacheService>());
             #endregion hosted services
 
+            var model = new HorselessOdataModel();
+            var edmContent = model.GetContentEDMModel().Result;
+            var edmHosting = model.GetHostingEDMModel().Result;
             // handle cycles in json responses 
             // as per https://gavilan.blog/2021/05/19/fixing-the-error-a-possible-object-cycle-was-detected-in-different-versions-of-asp-net-core/
             services.AddControllers().AddJsonOptions(x =>
-                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles)
+                    .AddOData(options =>
+                    {
+                        /// TODO - surface these as configurable parameters 
+                        options
+                        .Select()
+                        .Expand()
+                        .Filter()
+                        .OrderBy()
+                        .SetMaxTop(100)
+                        .Count();
+
+                        options.TimeZone = TimeZoneInfo.Utc;
+                        // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
+
+                        /// todo make this an environment configurable item
+                        options.AddRouteComponents("{__tenant__}/HorselessContent", edmContent);
+
+
+
+                    })
+                    .AddOData(options =>
+                    {
+                        /// TODO - surface these as configurable parameters 
+                        options
+                        .Select()
+                        .Expand()
+                        .Filter()
+                        .OrderBy()
+                        .SetMaxTop(100)
+                        .Count();
+
+                        options.TimeZone = TimeZoneInfo.Utc;
+                        // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
+
+                        /// todo make this an environment configurable item
+                        options.AddRouteComponents("HorselessHosting", edmHosting);
+                    });
+
             options?.Invoke(serviceBuilder);
 
             return services;

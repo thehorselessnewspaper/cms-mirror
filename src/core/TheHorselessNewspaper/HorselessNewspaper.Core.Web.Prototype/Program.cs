@@ -56,9 +56,9 @@ builder.Services.AddODataQueryFilter();
 
 
 // enables odata entities
-var model = new HorselessOdataModel();
-var edmContent = await model.GetContentEDMModel();
-var edmHosting = await model.GetHostingEDMModel();
+//var model = new HorselessOdataModel();
+//var edmContent = await model.GetContentEDMModel();
+//var edmHosting = await model.GetHostingEDMModel();
 
 // spa concerns 
 // as per https://www.teamscs.com/2021/05/creating-a-vue-js-net-core-web-app/
@@ -70,46 +70,46 @@ var edmHosting = await model.GetHostingEDMModel();
 // odata concerns
 
 
-builder.Services.AddControllers()
-    // json cycle handler as per https://gavilan.blog/2021/05/19/fixing-the-error-a-possible-object-cycle-was-detected-in-different-versions-of-asp-net-core/
-    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve)
-    .AddOData(options =>
-    {
-        /// TODO - surface these as configurable parameters 
-        options
-        .Select()
-        .Expand()
-        .Filter()
-        .OrderBy()
-        .SetMaxTop(100)
-        .Count();
+//builder.Services.AddControllers()
+//    // json cycle handler as per https://gavilan.blog/2021/05/19/fixing-the-error-a-possible-object-cycle-was-detected-in-different-versions-of-asp-net-core/
+//    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve)
+//    .AddOData(options =>
+//    {
+//        /// TODO - surface these as configurable parameters 
+//        options
+//        .Select()
+//        .Expand()
+//        .Filter()
+//        .OrderBy()
+//        .SetMaxTop(100)
+//        .Count();
 
-        options.TimeZone = TimeZoneInfo.Utc;
-        // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
+//        options.TimeZone = TimeZoneInfo.Utc;
+//        // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
 
-        /// todo make this an environment configurable item
-        options.AddRouteComponents("{__tenant__}/HorselessContent", edmContent);
+//        /// todo make this an environment configurable item
+//        options.AddRouteComponents("{__tenant__}/HorselessContent", edmContent);
 
 
         
-    })
-    .AddOData(options =>
-    {
-        /// TODO - surface these as configurable parameters 
-        options
-        .Select()
-        .Expand()
-        .Filter()
-        .OrderBy()
-        .SetMaxTop(100)
-        .Count();
+//    })
+//    .AddOData(options =>
+//    {
+//        /// TODO - surface these as configurable parameters 
+//        options
+//        .Select()
+//        .Expand()
+//        .Filter()
+//        .OrderBy()
+//        .SetMaxTop(100)
+//        .Count();
 
-        options.TimeZone = TimeZoneInfo.Utc;
-        // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
+//        options.TimeZone = TimeZoneInfo.Utc;
+//        // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
 
-        /// todo make this an environment configurable item
-        options.AddRouteComponents("HorselessHosting", edmHosting);
-    });
+//        /// todo make this an environment configurable item
+//        options.AddRouteComponents("HorselessHosting", edmHosting);
+//    });
 
 /// <summary>
 /// as per https://www.thecodebuzz.com/failed-to-determine-the-https-port-for-the-redirect/
