@@ -3,6 +3,7 @@ using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Stores;
 using HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
+using HorselessNewspaper.Web.Core.Model.Query;
 using HorselessNewspaper.Web.Core.ScopedServices.RestClients;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -222,10 +223,10 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 using (var innerScope = _services.CreateScope())
                 {
                     // var autoMapper = scope.ServiceProvider.GetRequiredService<IMapper>();
-                    var configuration = innerScope.ServiceProvider.GetRequiredService<IConfiguration>();
+                    string configuredRestBaseUrl = GetRestBaseUrl(innerScope);
 
                     var apiClient = innerScope.ServiceProvider.GetRequiredService<IHorselessRestApiClient>();
-                    var configuredRestBaseUrl = configuration["RestApiBaseUrl"];
+
                     apiClient.BaseUrl = configuredRestBaseUrl;
 
                     // apiClient.
@@ -261,6 +262,20 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             }
 
 
+        }
+
+        private string GetRestBaseUrl(IServiceScope innerScope)
+        {
+            var configuration = innerScope.ServiceProvider.GetRequiredService<IConfiguration>();
+            var configuredRestBaseUrl = configuration["RestApiBaseUrl"];
+            return configuredRestBaseUrl;
+        }
+
+        private string GetOdataBaseUrl(IServiceScope innerScope)
+        {
+            var configuration = innerScope.ServiceProvider.GetRequiredService<IConfiguration>();
+            var configuredRestBaseUrl = configuration["OdataApiBaseUrl"];
+            return configuredRestBaseUrl;
         }
 
         private JsonContent GetJsonContent<T>(T content)
@@ -956,7 +971,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         private async Task<List<HostingModel.Tenant>> GetCurrentHostingModelTenants(IServiceScope scope)
         {
             var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRestApiClient>();
-            
+
 
             // collect the hosting model tenants
             var hostingModelTenantQuery = this.GetQueryForHostingEntity<HostingModel.Tenant>(scope);
@@ -977,20 +992,67 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
         private async Task<List<ContentModel.Tenant>> GetCurrentContentModelTenants(IServiceScope scope)
         {
-            using (var localScope = _scopeFactory.CreateAsyncScope())
+
+            var ret = new List<ContentModel.Tenant>();
+
+            try
             {
-                // collect the hosting model tenants
-                var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(localScope);
-                var contentModelTenantQueryResult = await contentModelTenantQuery.ReadAsEnumerable(w => w.IsPublished == true && w.IsSoftDeleted == false);
-                var results = contentModelTenantQueryResult.ToList<ContentModel.Tenant>();
+                var tenantStore = this.GetInMemoryTenantStores(scope);
+                var allCachedTenants = await tenantStore.GetAllAsync();
 
-                var contentModelTenants = contentModelTenantQueryResult == null ? new List<ContentModel.Tenant>() : contentModelTenantQueryResult.ToList();
+                IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
+                var httpClient = clientFactory.CreateClient();
 
-                _logger.LogInformation($"read {contentModelTenants.Count()} published content model tenant records");
+                var baseUri = this.GetOdataBaseUrl(scope);
+                baseUri = baseUri.TrimEnd('/');
 
-                return contentModelTenants;
+                foreach (var cachedTenant in allCachedTenants)
+                {
+                    var odataContentModelTenantQuery = $"{baseUri}/{cachedTenant.Identifier}/{ODataControllerStrings.ODATA_CONTENTMODEL_TENANT}$expand=Owners";
+
+                    var odataContentModelQueryMessage = new HttpRequestMessage(
+                        HttpMethod.Get,
+                        odataContentModelTenantQuery)
+                    {
+                        Headers =
+                            {
+                                { HeaderNames.Accept, "application/json;odata.metadata=none" },
+                                { HeaderNames.UserAgent, "HorselessNewspaper" }
+                            }
+                    };
+
+
+                    var odataResponse = await httpClient.SendAsync(odataContentModelQueryMessage);
+                    var probeResponseContent = await odataResponse.Content.ReadAsStringAsync();
+                    var contentModelTenantList = System.Text.Json.JsonSerializer.Deserialize<ODataResponse<ContentModel.Tenant>>(probeResponseContent); // JsonConvert.DeserializeObject<ODataResponse<ContentModel.Tenant>>(probeResponseContent);
+                    ret.AddRange(contentModelTenantList.Value);
+
+                }
+
+
+                using (var localScope = _scopeFactory.CreateAsyncScope())
+                {
+                    // collect the hosting model tenants
+                    var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(localScope);
+                    var contentModelTenantQueryResult = await contentModelTenantQuery.ReadAsEnumerable(w => w.IsPublished == true && w.IsSoftDeleted == false);
+                    var results = contentModelTenantQueryResult.ToList<ContentModel.Tenant>();
+
+                    var contentModelTenants = contentModelTenantQueryResult == null ? new List<ContentModel.Tenant>() : contentModelTenantQueryResult.ToList();
+
+                    _logger.LogInformation($"read {contentModelTenants.Count()} published content model tenant records");
+
+                    return contentModelTenants;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                // ret = string.Empty;
+                _logger.LogWarning($"problem getting hosting model tenant by object id");
             }
 
+            return ret;
         }
 
         private async Task<List<HostingModel.TenantInfo>> GetCurrentContentModelTenantInfo(IServiceScope scope)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace HorselessNewspaper.Web.Core.Model.Query
@@ -16,6 +17,10 @@ namespace HorselessNewspaper.Web.Core.Model.Query
     /// <typeparam name="T"></typeparam>
     public class ODataResponse<T>
     {
+
+        public ODataResponse() { }
+
+        [JsonPropertyName("value")]
         public List<T> Value { get; set; }
     }
 }

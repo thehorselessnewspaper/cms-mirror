@@ -73,7 +73,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         /// <summary>
         /// prospectively overrides all other tenant base url contexts
         /// </summary>
-        public Uri? BaseUrl { get; set; }
+        public string? BaseUrl { get; set; }
 
         /// <summary>
         /// prospectively override other tenant identifier definitions

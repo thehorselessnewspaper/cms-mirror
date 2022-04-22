@@ -94,7 +94,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         /// <summary>
         /// prospectively overrides all other tenant base url contexts
         /// </summary>
-        public Uri? BaseUrl { get; set; }
+        public string? BaseUrl { get; set; }
 
         public virtual TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; } = new TenantIdentifierStrategy();
 
