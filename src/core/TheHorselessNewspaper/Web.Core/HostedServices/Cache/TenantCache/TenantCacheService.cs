@@ -1008,7 +1008,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                 foreach (var cachedTenant in allCachedTenants)
                 {
-                    var odataContentModelTenantQuery = $"{baseUri}/{cachedTenant.Identifier}/{ODataControllerStrings.ODATA_CONTENTMODEL_TENANT}$expand=Owners";
+                    var odataContentModelTenantQuery = $"{baseUri}/{cachedTenant.Identifier}/{ODataControllerStrings.ODATA_CONTENTMODEL_TENANT}$expand=Owners, AccessControlEntries";
 
                     var odataContentModelQueryMessage = new HttpRequestMessage(
                         HttpMethod.Get,
@@ -1030,19 +1030,19 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 }
 
 
-                using (var localScope = _scopeFactory.CreateAsyncScope())
-                {
-                    // collect the hosting model tenants
-                    var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(localScope);
-                    var contentModelTenantQueryResult = await contentModelTenantQuery.ReadAsEnumerable(w => w.IsPublished == true && w.IsSoftDeleted == false);
-                    var results = contentModelTenantQueryResult.ToList<ContentModel.Tenant>();
+                //using (var localScope = _scopeFactory.CreateAsyncScope())
+                //{
+                //    // collect the hosting model tenants
+                //    var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(localScope);
+                //    var contentModelTenantQueryResult = await contentModelTenantQuery.ReadAsEnumerable(w => w.IsPublished == true && w.IsSoftDeleted == false);
+                //    var results = contentModelTenantQueryResult.ToList<ContentModel.Tenant>();
 
-                    var contentModelTenants = contentModelTenantQueryResult == null ? new List<ContentModel.Tenant>() : contentModelTenantQueryResult.ToList();
+                //    var contentModelTenants = contentModelTenantQueryResult == null ? new List<ContentModel.Tenant>() : contentModelTenantQueryResult.ToList();
 
-                    _logger.LogInformation($"read {contentModelTenants.Count()} published content model tenant records");
+                //    _logger.LogInformation($"read {contentModelTenants.Count()} published content model tenant records");
 
-                    return contentModelTenants;
-                }
+                //    return contentModelTenants;
+                //}
 
 
             }
