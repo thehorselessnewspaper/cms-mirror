@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-
+    [Route("__tenant__/HorselessContent/NavigationMenu")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class NavigationMenuController :
         ODataController, IContentQueryController<ContentModel.NavigationMenu>

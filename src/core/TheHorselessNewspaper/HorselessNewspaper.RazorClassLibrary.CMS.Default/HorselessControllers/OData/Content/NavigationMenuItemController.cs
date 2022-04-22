@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
+    [Route("__tenant__/HorselessContent/NavigationMenuItem")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class NavigationMenuItemController :
         ODataController, IContentQueryController<ContentModel.NavigationMenuItem>

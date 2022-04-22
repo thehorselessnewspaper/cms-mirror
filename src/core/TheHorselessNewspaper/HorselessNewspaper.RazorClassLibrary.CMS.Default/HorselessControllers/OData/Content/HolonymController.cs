@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-
+    [Route("__tenant__/HorselessContent/Holonym")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class HolonymController :
         ODataController, IContentQueryController<ContentModel.Holonym>
