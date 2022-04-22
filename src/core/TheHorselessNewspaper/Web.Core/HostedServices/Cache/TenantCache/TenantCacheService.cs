@@ -955,6 +955,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
         private async Task<List<HostingModel.Tenant>> GetCurrentHostingModelTenants(IServiceScope scope)
         {
+            var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRestApiClient>();
+            
 
             // collect the hosting model tenants
             var hostingModelTenantQuery = this.GetQueryForHostingEntity<HostingModel.Tenant>(scope);
