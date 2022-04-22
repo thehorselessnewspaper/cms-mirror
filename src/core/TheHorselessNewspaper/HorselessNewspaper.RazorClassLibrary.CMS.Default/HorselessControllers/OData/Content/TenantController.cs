@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
+    [Route("__tenant__/HorselessContent/Tenant")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class TenantController :
         ODataController, IContentQueryController<ContentModel.Tenant>

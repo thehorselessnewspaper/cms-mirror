@@ -5,16 +5,19 @@ using HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
 using HorselessNewspaper.Web.Core.Model.Query;
 using HorselessNewspaper.Web.Core.ScopedServices.RestClients;
+using RestClientAlso = HorselessNewspaper.Web.Core.ScopedServices.RestClients.Also;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.Context;
@@ -287,12 +290,12 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         {
 
             List<HostingModel.Tenant> hostingModelTenants = await UpdateLocalHostingTenantCache(scope);
-            List<ContentModel.Tenant> contentModelTenants = await this.GetCurrentContentModelTenants(scope);
+            List<ContentModel.Tenant> contentModelTenants = await this.GetCurrentContentModelTenants(scope, "$expand=Owners, AccessControlEntries");
             IMultiTenantStore<HorselessTenantInfo>? inMemoryStores = GetInMemoryTenantStores(scope);
 
             await EnsureTenantEntityWorkflow(scope, hostingModelTenants, contentModelTenants, inMemoryStores);
 
-            var currentContentModelTenants = await this.GetCurrentContentModelTenants(scope);
+            var currentContentModelTenants = await this.GetCurrentContentModelTenants(scope, "$expand=Owners, AccessControlEntries");
             foreach (var currentTenant in currentContentModelTenants)
             {
 
@@ -309,6 +312,13 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             // to the content model db
             // the migrated entity should == original entity
             // where == is based on uniquely constrained columns
+            var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRestApiClient>();
+            var restClientAlso = scope.ServiceProvider.GetRequiredService<RestClientAlso.IHorselessRestApiClientAlso>();
+
+            var iAutoMapper = scope.ServiceProvider.GetRequiredService<IMapper>();
+            var defaultTenantQuery = await inMemoryStores.GetAllAsync();
+            var defaultTenant = defaultTenantQuery.FirstOrDefault();
+
             foreach (var publishedTenant in hostingModelTenants.Where(w => w.IsPublished == true))
             {
                 try
@@ -316,8 +326,47 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     // filter existing merge targets
                     // evaluate wether final tenant deployment
                     // workflow step completed
+
+                    var mirrorTenantExists = contentModelTenants.Where(r => r.Id == publishedTenant.Id).Any();
+                    var mirrorTenantHasOwners = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.Owners.Count() > 0).Any();
+                    var mirrorTenantHasAccessControlEntries = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.AccessControlEntries.Count() > 0).Any();
+
                     var isTenantDeploymentWorkflowComplete = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.IsPublished == true).Any();
-                    if (isTenantDeploymentWorkflowComplete == false)
+
+                    if (mirrorTenantExists && mirrorTenantHasOwners && mirrorTenantHasAccessControlEntries && isTenantDeploymentWorkflowComplete == false)
+                    {
+                        try
+                        {
+
+                            // detect final step, setting the tenant to published in the content model database
+                            var mirrorTenant = contentModelTenants.Where(r => r.Id == publishedTenant.Id).FirstOrDefault();
+                            mirrorTenant.IsPublished = true; // set the workflow complete flag
+                            var options = new JsonSerializerOptions
+                            {
+                                PropertyNameCaseInsensitive = true
+                            };
+
+                            mirrorTenant.Owners.Clear();
+                            mirrorTenant.AccessControlEntries.Clear();
+                            
+                            /// TODO don't do this
+                            mirrorTenant.TenantIdentifierStrategy = null;
+
+                            var tenantJson = System.Text.Json.JsonSerializer.Serialize(mirrorTenant, options);
+                            var restClientEntity = System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesTenant>(tenantJson, options); // RestClientAlso.ContentEntitiesTenant.FromJson(tenantJson); // iAutoMapper.Map<ContentEntitiesTenant>(mirrorTenant); 
+                            var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.IsPublished) };
+
+                            var updateResponse = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), defaultTenant.Identifier, updatedProperties, restClientEntity);
+                            var currentContentModelTenants = this.GetCurrentContentModelTenants(scope, "$expand=Owners, AccessControlEntries");
+                            int i = 0;
+                        }
+                        catch (Exception e)
+                        {
+                            _logger.LogError($"problem marking workflow complete {e.Message}");
+                        }
+                    }
+
+                    else if (isTenantDeploymentWorkflowComplete == false)
                     {
                         // validate the multitenant routing is working for this tenant
                         // database inserts specific to the tenant can only occur
@@ -990,7 +1039,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
         }
 
-        private async Task<List<ContentModel.Tenant>> GetCurrentContentModelTenants(IServiceScope scope)
+        private async Task<List<ContentModel.Tenant>> GetCurrentContentModelTenants(IServiceScope scope, string expandList = "")
         {
 
             var ret = new List<ContentModel.Tenant>();
@@ -1005,10 +1054,16 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                 var baseUri = this.GetOdataBaseUrl(scope);
                 baseUri = baseUri.TrimEnd('/');
+                var expandClause = @"";
+
+                if(expandList != "")
+                {
+                    expandClause = expandClause + expandList;
+                }
 
                 foreach (var cachedTenant in allCachedTenants)
                 {
-                    var odataContentModelTenantQuery = $"{baseUri}/{cachedTenant.Identifier}/{ODataControllerStrings.ODATA_CONTENTMODEL_TENANT}$expand=Owners, AccessControlEntries";
+                    var odataContentModelTenantQuery = $"{baseUri}/{cachedTenant.Identifier}/{ODataControllerStrings.ODATA_CONTENTMODEL_TENANT}{expandClause}";
 
                     var odataContentModelQueryMessage = new HttpRequestMessage(
                         HttpMethod.Get,
@@ -1024,6 +1079,11 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                     var odataResponse = await httpClient.SendAsync(odataContentModelQueryMessage);
                     var probeResponseContent = await odataResponse.Content.ReadAsStringAsync();
+                    if(probeResponseContent == null || probeResponseContent.Equals(string.Empty))
+                    {
+                        return ret;
+                    }
+
                     var contentModelTenantList = System.Text.Json.JsonSerializer.Deserialize<ODataResponse<ContentModel.Tenant>>(probeResponseContent); // JsonConvert.DeserializeObject<ODataResponse<ContentModel.Tenant>>(probeResponseContent);
                     ret.AddRange(contentModelTenantList.Value);
 

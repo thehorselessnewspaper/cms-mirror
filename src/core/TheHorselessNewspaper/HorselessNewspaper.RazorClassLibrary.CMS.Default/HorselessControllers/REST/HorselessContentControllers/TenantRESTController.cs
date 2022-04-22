@@ -110,5 +110,33 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
                 return BadRequest(ex.Message);
             }
         }
+
+        [Consumes("application/json")]
+        [HttpPost("UpdateProperties/{contentCollectionId}", Name = "[controller]_[action]")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Tenant))]
+        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(Tenant))]
+        public async Task<ActionResult<Tenant>> UpdateProperties([FromRoute] string contentCollectionId, [FromHeader] List<String> updatedProperties, [FromBody] Tenant contentCollection)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                List<string> updateablePropreties = await EntityReflectionHelpers.GetUpdateableProperties(contentCollection);
+                if(updatedProperties != null && updatedProperties.Count > 0)
+                {
+                    updateablePropreties = new List<string>(updatedProperties);
+                }
+
+                var updateResult = await _contentCollectionService.Update(contentCollection, updateablePropreties);
+                return Ok(updateResult);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

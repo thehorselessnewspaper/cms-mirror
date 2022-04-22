@@ -15,12 +15,12 @@
 #pragma warning disable 3016 // Disable "CS3016 Arrays as attribute arguments is not CLS-compliant"
 #pragma warning disable 8603 // Disable "CS8603 Possible null reference return"
 
-namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
+namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients.Also
 {
     using System = global::System;
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface IHorselessRestApiClient
+    public partial interface IHorselessRestApiClientAlso
     {
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -256,13 +256,13 @@ namespace HorselessNewspaper.Web.Core.ScopedServices.RestClients
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class HorselessRestApiClient : IHorselessRestApiClient
+    public partial class HorselessRestApiClientAlso : IHorselessRestApiClientAlso
     {
         private string _baseUrl = "";
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<System.Text.Json.JsonSerializerOptions> _settings;
 
-        public HorselessRestApiClient(string baseUrl, System.Net.Http.HttpClient httpClient)
+        public HorselessRestApiClientAlso(string baseUrl, System.Net.Http.HttpClient httpClient)
         {
             BaseUrl = baseUrl;
             _httpClient = httpClient;
