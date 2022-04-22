@@ -88,7 +88,7 @@ builder.Services.AddControllers()
         // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
 
         /// todo make this an environment configurable item
-        options.AddRouteComponents("HorselessContent", edmContent);
+        options.AddRouteComponents("{__tenant__}/HorselessContent", edmContent);
 
 
         
@@ -108,7 +108,7 @@ builder.Services.AddControllers()
         // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
 
         /// todo make this an environment configurable item
-        options.AddRouteComponents("HorselessHosting", edmHosting);
+        options.AddRouteComponents("{__tenant__}/HorselessHosting", edmHosting);
     });
 
 /// <summary>
