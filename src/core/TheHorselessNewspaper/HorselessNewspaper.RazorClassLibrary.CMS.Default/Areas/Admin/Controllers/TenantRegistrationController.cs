@@ -190,7 +190,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                     IsSoftDeleted = false,
                     ObjectId = Guid.NewGuid().ToString(),
                     Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                    BaseUrl = new Uri(baseUrl),
+                    BaseUrl = baseUrl,
                     TenantIdentifier = model.tenantIdentifier,
                     AccessControlEntries = new List<HostingModel.AccessControlEntry>()
                     {

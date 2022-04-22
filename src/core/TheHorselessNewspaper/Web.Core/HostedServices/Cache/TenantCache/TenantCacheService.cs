@@ -449,7 +449,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 ObjectId = originEntity.ObjectId,
                 Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
                 TenantIdentifier = originEntity.TenantIdentifier,
-                BaseUrl = new Uri(originEntity.BaseUrl.ToString().TrimEnd('/')),
+                BaseUrl = originEntity.BaseUrl.TrimEnd('/'),
                 Owners = new List<ContentModel.Principal>()
                 {
                     new ContentModel.Principal()

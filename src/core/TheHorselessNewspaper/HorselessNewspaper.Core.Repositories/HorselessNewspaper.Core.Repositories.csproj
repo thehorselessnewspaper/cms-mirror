@@ -17,8 +17,8 @@
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="HorselessNewspaper.Web.Core" Version="0.4.220421.5" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220421.5" />
+		<PackageReference Include="HorselessNewspaper.Web.Core" Version="0.4.220422.2" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220422.2" />
 	</ItemGroup>
 
 	<ItemGroup>
