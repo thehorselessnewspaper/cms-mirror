@@ -19,7 +19,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.ODATA
         ///     - https://stackoverflow.com/questions/28200511/how-to-build-edm-model-for-odata-web-api-in-runtime
         /// </summary>
         /// <returns></returns>
-        public async Task<IEdmModel> GetContentEDMModel()
+        public IEdmModel GetContentEDMModel()
         {
             string modelNamespace = "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities";
 
@@ -40,10 +40,10 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.ODATA
 
             builder.ContainerName = "ContentEntities";
             builder.Namespace = modelNamespace;
-            return await Task.FromResult(builder.GetEdmModel());
+            return builder.GetEdmModel();
         }
 
-        public async Task<IEdmModel> GetHostingEDMModel()
+        public IEdmModel GetHostingEDMModel()
         {
             var builder = new ODataConventionModelBuilder();
             const string modelNamespace = "TheHorselessNewspaper.Schemas.HostingModel.HostingEntities";
@@ -62,7 +62,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.ODATA
 
             builder.ContainerName = "HostingEntities";
             builder.Namespace = modelNamespace;
-            return await Task.FromResult(builder.GetEdmModel());
+            return builder.GetEdmModel();
         }
     }
 }

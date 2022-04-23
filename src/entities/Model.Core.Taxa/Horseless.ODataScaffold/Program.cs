@@ -53,8 +53,8 @@ builder.Services.AddControllersWithViews(options =>
 builder.Services.AddODataQueryFilter();
 // enables odata entities
 var model = new HorselessOdataModel();
-var edm = await model.GetContentEDMModel();
-var edmHosting = await model.GetHostingEDMModel();
+var edm =  model.GetContentEDMModel();
+var edmHosting =  model.GetHostingEDMModel();
 // odata concerns
 builder.Services.AddControllers()
     .AddOData(options =>
