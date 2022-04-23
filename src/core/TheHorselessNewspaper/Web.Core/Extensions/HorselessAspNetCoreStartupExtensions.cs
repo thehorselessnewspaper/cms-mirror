@@ -355,8 +355,8 @@ HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessCo
             #endregion hosted services
 
             var model = new HorselessOdataModel();
-            var edmContent = model.GetContentEDMModel().Result;
-            var edmHosting = model.GetHostingEDMModel().Result;
+            var edmContent = model.GetContentEDMModel();
+            var edmHosting = model.GetHostingEDMModel();
             // handle cycles in json responses 
             // as per https://gavilan.blog/2021/05/19/fixing-the-error-a-possible-object-cycle-was-detected-in-different-versions-of-asp-net-core/
             services.AddControllers().AddJsonOptions(x =>
