@@ -124,7 +124,7 @@ services:
       - FeatureManagement__TenantAdminUI=false
       - FeatureManagement__ContentEditorUI=false
       - RestApiBaseUrl=${RestApiBaseUrl}  
-      - OdataApiBaseUrl={OdataApiBaseUrl}
+      - OdataApiBaseUrl=${OdataApiBaseUrl}
     volumes:
        - ./https/:/https/
     depends_on:
