@@ -6,13 +6,20 @@ using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.Context;
 using Finbuckle.MultiTenant;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+using System.Security.Claims;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
+    [Owned]
+    public partial class PrincipalClaimContainer
+    {
+        public List<Claim> Claims { get; set; } = new List<Claim>();
+    }
 
     [MultiTenant]
     public partial class Principal : IQueryableModelEntity, IContentRowLevelSecured
     {
+        public bool IsAnonymous { get; set; } = true;
 
         public string UPN { get; set; } = string.Empty;
 
@@ -22,6 +29,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
+
+        public PrincipalClaimContainer PrincipalClaims { get; set; } = new PrincipalClaimContainer();
 
         // [NotMapped]
         //[InverseProperty(nameof(AccessControlEntry.Owners))]
