@@ -272,9 +272,20 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             }
             else
             {
+                // as per https://www.learnentityframeworkcore.com/dbcontext/modifying-data
                 var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties);
-                dbSet.Update(updatedEntity);
+                ((DbContext)_context).Attach(updatedEntity);
+
+                foreach (var propertyName in targetProperties)
+                {
+                    ((DbContext)_context).Entry(updatedEntity).Property(propertyName).IsModified = true;
+                }
+
                 var updateResult = await ((DbContext)_context).SaveChangesAsync();
+
+                //var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties);
+                //dbSet.Update(updatedEntity);
+                //var updateResult = await ((DbContext)_context).SaveChangesAsync();
 
             }
 
