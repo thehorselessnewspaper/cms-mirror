@@ -2,6 +2,7 @@
 using HorselessNewspaper.Web.Core.Interfaces.Content;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
@@ -16,16 +17,19 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
         ILogger<GlobalAdminController> _logger;
         IContentCollectionService<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModel.Tenant> _tenantCollectionService;
         IQueryableHostingModelOperator<HostingModel.Tenant> _hostModelOperator;
+        private IConfiguration _configuration;
         IQueryableContentModelOperator<ContentModel.Tenant> _modelOperator;
         public GlobalAdminController(ILogger<GlobalAdminController> logger,
             IContentCollectionService<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModel.Tenant> tenantCollectionService,
             IQueryableContentModelOperator<ContentModel.Tenant> modelOperator,
-            IQueryableHostingModelOperator<HostingModel.Tenant> hostModelOperator)
+            IQueryableHostingModelOperator<HostingModel.Tenant> hostModelOperator,
+            IConfiguration configuration)
         {
             this._logger = logger;
             this._tenantCollectionService = tenantCollectionService;
             this._modelOperator = modelOperator;
             this._hostModelOperator = hostModelOperator;
+            this._configuration = configuration;
         }
 
         public IActionResult Index()
@@ -36,7 +40,13 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
         [HttpGet()]
         public ActionResult ResetDatabase()
         {
-            return View();
+            var model = new ResetDatabaseModel()
+            {
+                ContentDbConnectionString = _configuration.GetConnectionString("ContentModelConnection"),
+                HostingDbConnectionString = _configuration.GetConnectionString("HostingModelConnection")
+            };
+
+            return View(model);
         }
 
         [HttpPost()]
