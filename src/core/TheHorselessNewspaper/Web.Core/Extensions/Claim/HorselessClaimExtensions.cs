@@ -23,7 +23,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.ClaimExtensions
         {
             var ret = string.Empty;
             var matchedClaim = claims.Where(w => w.Type == "aud").ToList();
-            ret = matchedClaim.FirstOrDefault().Value;
+            ret = matchedClaim == null || matchedClaim.Count() == 0 ? "" : matchedClaim.FirstOrDefault().Value;
             return ret;
         }
 
@@ -31,7 +31,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.ClaimExtensions
         {
             var ret = string.Empty;
             var matchedClaim = claims.Where(w => w.Type == "iss").ToList();
-            ret = matchedClaim.FirstOrDefault().Value;
+            ret = matchedClaim == null || matchedClaim.Count() == 0 ? "" : matchedClaim.FirstOrDefault().Value;
             return ret;
         }
 
@@ -39,7 +39,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.ClaimExtensions
         {
             var ret = string.Empty;
             var matchedClaim = claims.Where(w => w.Type == ClaimTypes.NameIdentifier).ToList();
-            ret = matchedClaim.FirstOrDefault().Value;
+            ret = matchedClaim == null || matchedClaim.Count() == 0 ? "" : matchedClaim.FirstOrDefault().Value;
             return ret;
         }
 
@@ -47,7 +47,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.ClaimExtensions
         {
             var ret = string.Empty;
             var matchedClaim = claims.Where(w => w.Type == ClaimTypes.Upn).ToList();
-            ret = matchedClaim.FirstOrDefault().Value;
+            ret = matchedClaim == null || matchedClaim.Count() == 0 ? "" : matchedClaim.FirstOrDefault().Value;
             return ret;
         }
 
@@ -55,7 +55,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.ClaimExtensions
         {
             var ret = string.Empty;
             var matchedClaim = claims.Where(w => w.Type == ClaimTypes.Email).ToList();
-            ret = matchedClaim.FirstOrDefault().Value;
+            ret = matchedClaim == null || matchedClaim.Count() == 0 ? "" : matchedClaim.FirstOrDefault().Value;
             return ret;
         }
 
@@ -63,7 +63,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.ClaimExtensions
         {
             var ret = string.Empty;
             var matchedClaim = claims.Where(w => w.Type == "preferred_username").ToList();
-            ret = matchedClaim.FirstOrDefault().Value;
+            ret = matchedClaim == null || matchedClaim.Count() == 0 ? "" : matchedClaim.FirstOrDefault().Value;
             return ret;
         }
 

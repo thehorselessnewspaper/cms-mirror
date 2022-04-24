@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using HorselessNewspaper.Web.Core.Authorization.Model;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
@@ -40,7 +41,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
 
         [HttpGet()]
@@ -70,7 +71,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
             if(isFailedAuthorization)
             {
-                return BadRequest();
+                return Unauthorized();
             }
 
             var result = await _contentCollectionService.Query();

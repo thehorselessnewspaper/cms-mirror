@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using Microsoft.Extensions.Logging;
+using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
 
 namespace HorselessNewspaper.Web.Core.Authorization.Handler
 {
@@ -17,15 +18,21 @@ namespace HorselessNewspaper.Web.Core.Authorization.Handler
     public class RLSAuthorizationHandler : AuthorizationHandler<OperationAuthorizationRequirement, IContentRowLevelSecured>
     {
         ILogger<RLSAuthorizationHandler> _logger;
-        public RLSAuthorizationHandler(ILogger<RLSAuthorizationHandler> log)
+        ISecurityPrincipalResolver _securityPrincipalResolver;
+
+        public RLSAuthorizationHandler(ILogger<RLSAuthorizationHandler> log, ISecurityPrincipalResolver securityPrincipalResolver)
         {
             _logger = log;
+            this._securityPrincipalResolver = securityPrincipalResolver;
         }
 
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, OperationAuthorizationRequirement requirement, IContentRowLevelSecured resource)
         {
             // evaluate access control list against principal 
             var resourceName = resource.GetType().Name;
+            var principal = await _securityPrincipalResolver.GetCurrentPrincipal();
+
+            context.Succeed(requirement);
             return;
         }
     }

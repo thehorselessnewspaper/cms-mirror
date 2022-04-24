@@ -106,8 +106,16 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                             w.Aud.Equals(principal.Aud) &&
                                             w.UPN.Equals(principal.UPN));
                         var result = query.FirstOrDefault();
-                        principal.ObjectId = result.ObjectId;
-                        principal.Id = result.Id;
+
+                        if (result != null)
+                        {
+                            principal.ObjectId = result.ObjectId;
+                            principal.Id = result.Id;
+                        }
+                        else
+                        {
+
+                        }
                     }
                 }
 
