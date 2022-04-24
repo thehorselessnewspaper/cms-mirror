@@ -1,5 +1,8 @@
-﻿@using  HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Model;
+﻿@using HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Model;
+@using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+@using TheHorselessNewspaper.HostingModel.Entities.Query
 @model ResetDatabaseModel;
+@inject IQueryableHostingModelOperator<HostingModel.Tenant> hostModelOperator;
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,12 +15,28 @@
 <form asp-action="ResetDatabase" method="Post">
     <div class="form-group">
         <label for="IsMustResetDatabase">Reset Db</label>
-        <input asp-for="IsMustResetDatabase" type="checkbox" id="IsMustResetDatabase"/>
+        <input asp-for="IsMustResetDatabase" type="checkbox" id="IsMustResetDatabase" />
     </div>
     <div class="form-group">
-        <button type="submit"  class="btn btn-primary">Reset Database</button>
+        <button type="submit" class="btn btn-primary">Reset Database</button>
     </div>
 </form>
+
+<div>
+    @{
+        try
+        {
+            var query = await hostModelOperator.ReadAsEnumerable(w => w.IsSoftDeleted == false);
+            var items = query.ToList();
+            <div>no issues connecting to database</div>
+        }
+        catch(Exception e)
+        {
+            <div>Exception connecting to database @e.Message</div>
+        }
+
+    }
+</div>
 
 <div>
     <span>Content Db Connection String</span>

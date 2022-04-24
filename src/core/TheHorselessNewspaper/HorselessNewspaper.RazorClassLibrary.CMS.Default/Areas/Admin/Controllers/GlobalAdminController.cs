@@ -88,7 +88,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                 _logger.LogError($"problem resetting database {e.Message}");
             }
 
-            return View();
+            model.IsMustResetDatabase = false;
+            return View(model);
         }
 
     }
