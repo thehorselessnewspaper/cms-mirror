@@ -1062,7 +1062,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
                 var token = await tokenService.GetClientCredentialsGrantToken();
 
-                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                /httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
                 var baseUri = this.GetOdataBaseUrl(scope);
                 baseUri = baseUri.TrimEnd('/');

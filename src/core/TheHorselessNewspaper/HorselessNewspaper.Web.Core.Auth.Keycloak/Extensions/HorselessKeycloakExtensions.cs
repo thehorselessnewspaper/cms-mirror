@@ -47,9 +47,11 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
 
+
             })
-            .AddCookie(opts =>
+                .AddCookie(opts =>
             {
+                
                 // TODO examine this cookie magic string naming business
                 // cookie.Cookie.Name = "keycloak.cookie";
                 opts.Cookie.MaxAge = TimeSpan.FromMinutes(60);
