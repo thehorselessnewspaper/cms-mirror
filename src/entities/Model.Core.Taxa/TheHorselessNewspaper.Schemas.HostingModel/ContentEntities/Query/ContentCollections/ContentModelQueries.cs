@@ -337,17 +337,20 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
                     foreach(var propertyName in targetProperties)
                     {
-                        ((DbContext)_context).Entry(updatedEntity).Property(propertyName).IsModified = true;
+                        var hasTargetedMember = ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
+                        if(hasTargetedMember)
+                        {
+                            ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).First().IsModified = true; ;
+                        }
+                        else
+                        {
+                            // todo validate fail silent
+                        }
+
                     }
 
                     var updateResult = await ((DbContext)_context).SaveChangesAsync();
 
-                    // ((DbContext)_context).Entry(updatedEntity).State = EntityState.Modified;
-                    // dbSet.Update(updatedEntity);
-
-                    // ((DbContext)_context).Update(updatedEntity);
-
-                    // var updateResult = await ((DbContext)_context).SaveChangesAsync();
 
                 }
             }
