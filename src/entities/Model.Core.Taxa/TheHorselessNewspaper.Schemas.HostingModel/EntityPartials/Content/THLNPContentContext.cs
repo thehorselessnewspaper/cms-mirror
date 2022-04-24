@@ -40,12 +40,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             // todo -- support not hardcoding this here
             builder.Entity<HorselessTenantInfo>().IsMultiTenant();
 
-            //builder.Entity<ContentCollection>()
-            //    .OwnsMany<Principal>(m => m.Owners)
-            //    .WithOwner().HasForeignKey(k => k.Id);
-            //builder.Entity<ContentCollection>()
-            //    .OwnsMany<AccessControlEntry>(m => m.AccessControlList);
-
 
         }
 

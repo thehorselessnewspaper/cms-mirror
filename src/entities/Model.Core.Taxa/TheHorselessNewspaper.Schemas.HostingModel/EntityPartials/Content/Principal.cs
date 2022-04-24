@@ -10,10 +10,33 @@ using System.Security.Claims;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    [Owned]
+
+    [MultiTenant]
+    public partial class PrincipalClaim
+    {
+        [Key]
+        public Guid Id { get; set; }
+
+        public string ClaimType { get; set; } = String.Empty;
+        public string ClaimValue { get; set; } = String.Empty;
+        public string ClaimValueType { get; set; } = String.Empty;
+
+        public string ClaimIssuer { get; set; } = String.Empty;
+
+        public Guid PrincipalClaimContainerId { get; set; }
+
+    }
+
+ 
+    [MultiTenant]
     public partial class PrincipalClaimContainer
     {
-        public List<Claim> Claims { get; set; } = new List<Claim>();
+        [Key]
+        public Guid Id { get; set; }
+
+        public string? DisplayName { get; set; }
+        public Guid PrincipalId { get; set; }
+        public List<PrincipalClaim> Claims { get; set; } = new List<PrincipalClaim>();
     }
 
     [MultiTenant]
@@ -30,7 +53,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
-        public PrincipalClaimContainer PrincipalClaims { get; set; } = new PrincipalClaimContainer();
+        public PrincipalClaimContainer? PrincipalClaimContainer { get; set; } = new PrincipalClaimContainer();
 
         // [NotMapped]
         //[InverseProperty(nameof(AccessControlEntry.Owners))]
