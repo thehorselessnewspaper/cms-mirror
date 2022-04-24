@@ -21,6 +21,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
+
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("__tenant__/HorselessContent/Tenant")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class TenantController :
@@ -41,7 +43,6 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
 
         [HttpGet()]

@@ -10,10 +10,14 @@ using Microsoft.AspNetCore.OData.Routing;
 using Microsoft.AspNetCore.OData.Formatter;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.OData;
-
+using System.Net;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
+
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("__tenant__/HorselessContent/ContentCollection")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class ContentCollectionController :

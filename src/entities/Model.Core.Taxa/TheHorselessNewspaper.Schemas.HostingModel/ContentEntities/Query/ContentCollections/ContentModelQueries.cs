@@ -330,15 +330,14 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 }
                 else
                 {
-
                     // as per https://www.learnentityframeworkcore.com/dbcontext/modifying-data
                     var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties);
                     ((DbContext)_context).Attach(updatedEntity);
 
-                    foreach(var propertyName in targetProperties)
+                    foreach (var propertyName in targetProperties)
                     {
                         var hasTargetedMember = ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
-                        if(hasTargetedMember)
+                        if (hasTargetedMember)
                         {
                             ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).First().IsModified = true; ;
                         }
@@ -348,7 +347,6 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                         }
 
                     }
-
                     var updateResult = await ((DbContext)_context).SaveChangesAsync();
 
 
