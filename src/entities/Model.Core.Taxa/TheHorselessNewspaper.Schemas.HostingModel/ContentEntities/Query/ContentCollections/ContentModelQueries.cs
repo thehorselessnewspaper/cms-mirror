@@ -365,6 +365,8 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         public async Task<IEnumerable<T>> Update(IEnumerable<T> entities, List<String> targetProperties = null)
         {
+            var ret = new List<T>();
+
             try
             {
                 await EnsureDbExists();
@@ -373,19 +375,18 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
             try
             {
-                // _logger.LogInformation($"handling Update request for tenant context {_tenantInfo.Identifier}");
-                var dbSet = ((DbContext)_context).Set<T>();
-
-                ((DbContext)_context).UpdateRange(entities);
-                // dbSet.UpdateRange(entities);
-                var saveResult = await ((DbContext)_context).SaveChangesAsync();
-
-                return entities;
+                foreach (var entity in entities)
+                {
+                    var updateResult = await this.Update(entity, targetProperties);
+                    ret.Add(updateResult);
+                }
             }
             catch (Exception ex)
             {
                 throw new Exception($"entity update exception {ex.Message}", ex);
             }
+
+            return ret;
         }
 
         public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class

@@ -300,6 +300,8 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 
         public async Task<IEnumerable<T>> Update(IEnumerable<T> entities, List<String> targetProperties = null)
         {
+            var ret = new List<T>();
+
             _logger.LogDebug($"handling Update request");
             try
             {
@@ -307,12 +309,18 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             }
             catch (Exception e) { }
 
-            var dbSet = ((DbContext)_context).Set<T>();
+            foreach(var entity in entities)
+            {
+                var updateResult = await this.Update(entity, targetProperties);
+                ret.Add(updateResult);
+            }
 
-            dbSet.UpdateRange(entities);
-            var saveResult = await ((DbContext)_context).SaveChangesAsync();
+            //var dbSet = ((DbContext)_context).Set<T>();
 
-            return entities;
+            //dbSet.UpdateRange(entities);
+            //var saveResult = await ((DbContext)_context).SaveChangesAsync();
+
+            return ret;
         }
 
         public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class
