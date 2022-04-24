@@ -101,8 +101,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
             if (tenantQueryResult != null)
             {
-
                 _logger.LogInformation($"{this._iTenantInfo.Identifier} exists in db");
+
+                return tenantQueryResult;
             }
             else
             {
@@ -124,10 +125,12 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                     }
 
                     HorselessTenantInfo tenantInfo = this._iTenantInfo as HorselessTenantInfo;
+                    tenant.Id = tenantInfo.Payload.Id;
                     tenant.ObjectId = tenantInfo.Payload.ObjectId;
                     tenant.DisplayName = this._iTenantInfo.Name;
                     tenant.BaseUrl = tenantInfo.Payload.TenantBaseUrl;
                     tenant.Timestamp = tenantInfo.Payload.Timestamp;
+                    tenant.TenantIdentifier = tenantInfo.Payload.Identifier;
                     tenant.TenantIdentifierStrategy = new TenantIdentifierStrategy()
                     {
                         Id = Guid.NewGuid(),
@@ -147,7 +150,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                 TenantIdentifier = this._iTenantInfo.Identifier,
                                 TenantIdentifierStrategyName = new TenantIdentifierStrategyName()
                                 {
-                                    
+
                                 }
                             }
                         }
@@ -282,8 +285,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                     var sessionId = _httpContextAccessor.HttpContext.Session.IsAvailable ? _httpContextAccessor.HttpContext.Session.Id : "";
 
                     if (user.Identities.Any() &&
-                        user.Identities.Where(w => w.IsAuthenticated).Any())
+                        user.Identities.Where(w => w.IsAuthenticated == true).Any())
                     {
+                        /// the authenticated scenario
                         principal.Aud = user.Claims.Aud();
                         principal.UPN = user.Claims.Upn();
                         principal.Iss = user.Claims.Iss();
@@ -299,13 +303,177 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                         if (result != null)
                         {
-                            principal.ObjectId = result.ObjectId;
-                            principal.Id = result.Id;
+                            // the authenticated scenario has already recorded this principal
+                            return result;
                         }
                         else
                         {
+                            // the authenticated scenario must record this principal
+                            principal.Id = Guid.NewGuid();
+                            principal.DisplayName = user.Claims.PreferredUsername();
+                            principal.CreatedAt = DateTime.UtcNow;
+                            principal.IsAnonymous = false;
+                            principal.IsSoftDeleted = false;
+                            principal.ObjectId = Guid.NewGuid().ToString();
+
+                            principal.PrincipalClaimContainer = new PrincipalClaimContainer()
+                            {
+                                Id = Guid.NewGuid(),
+                                DisplayName = user.Claims.PreferredUsername()
+                               
+                            };
+
+                            foreach(var claim in user.Claims)
+                            {
+                                principal.PrincipalClaimContainer.Claims.Add(
+                                    new PrincipalClaim()
+                                    {
+                                        ClaimType = claim.Type,
+                                        ClaimValue = claim.Value,
+                                        ClaimIssuer = claim.Issuer,
+                                        Id = Guid.NewGuid(),
+                                        ClaimValueType = claim.ValueType
+                                    });
+                            }
+
+                            principal.HorselessSessions.Add(new HorselessSession()
+                            {
+                                Id = Guid.NewGuid(),
+                                DisplayName = user.Claims.PreferredUsername(),
+                                Aud = user.Claims.Aud(),
+                                CreatedAt = DateTime.UtcNow,
+                                IsAnonymous = false,
+                                Iss = user.Claims.Iss(),
+                                ObjectId = Guid.NewGuid().ToString(),
+                                SessionId = _httpContextAccessor.HttpContext.Session.Id,
+                                IsSoftDeleted = false,
+                                Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
+                            });;
+
+                            // resolve the tenant
+                            var tenantQuery = await _tenantOperator.ReadAsEnumerable(w =>
+                                w.TenantIdentifier.Equals(_iTenantInfo.Identifier));
+                            var tenantQueryResult = tenantQuery == null ? null : tenantQuery.ToList().FirstOrDefault();
+
+                            if (tenantQueryResult != null)
+                            {
+                                try
+                                {
+                                    // add a new principal to this tenant
+                                    tenantQueryResult.Accounts.Add(principal);
+
+                                    // insert the unknown authenticated principal and session
+                                    var insertResult = await this._tenantOperator.Update(tenantQueryResult,
+                                      new List<string>()
+                                      {
+                                        nameof(Tenant.Accounts)
+                                      });
+
+                                    var newAccountQuery = insertResult.Accounts.Where(w => w.ObjectId == _httpContextAccessor.HttpContext.Session.Id);
+                                    if (newAccountQuery != null)
+                                    {
+                                        return newAccountQuery.FirstOrDefault();
+                                    }
+                                }
+                                catch (Exception e)
+                                {
+                                    _logger.LogError($"problem creating anonymous session: {e.Message}");
+                                }
+
+                            }
 
                         }
+                    }
+                    else if (user.Identities.Any() &&
+                        user.Identities.Where(w => w.IsAuthenticated == false).Any())
+                    {
+                        // the anonymous scenario
+
+                        // resolve the tenant
+                        var tenantQuery = await _tenantOperator.ReadAsEnumerable(w =>
+                            w.TenantIdentifier.Equals(_iTenantInfo.Identifier));
+                        var tenantQueryResult = tenantQuery == null ? null : tenantQuery.ToList().FirstOrDefault();
+
+                        if (tenantQueryResult != null)
+                        {
+                            var httpCtx = _httpContextAccessor.HttpContext;
+                            // tenant exists
+
+                            // search for tne anononymous principal by it's session profile
+                            var principalQuery = await _principalOperator.ReadAsEnumerable(w =>
+                                        w.ObjectId.Equals(_httpContextAccessor.HttpContext.Session.Id));
+
+                            
+                            var principalQueryResult = principalQuery == null ? null : principalQuery.ToList().FirstOrDefault();
+
+                            var sessionQuery = await _principalOperator.ReadAsEnumerable(w =>
+                                                                    w.HorselessSessions
+                                                                    .Where(w => w.SessionId.Equals(_httpContextAccessor.HttpContext.Session.Id)).Any());
+                            var sessionQueryResult = sessionQuery == null ? null : sessionQuery.FirstOrDefault();
+
+                            if (principalQueryResult != null)
+                            {
+                                return principalQueryResult;
+                            }
+                            else if(sessionQueryResult != null)
+                            {
+                                // found the user by session id
+                                return sessionQueryResult;
+                            }
+                            else
+                            {
+                                // insert an anonymous principal and session
+                                tenantQueryResult.Accounts.Add(new Principal()
+                                {
+                                    IsAnonymous = true,
+                                    Id = Guid.NewGuid(),
+                                    ObjectId = _httpContextAccessor.HttpContext.Session.Id,
+                                    DisplayName = httpCtx.Connection.RemoteIpAddress.ToString(),
+                                    CreatedAt = DateTime.UtcNow,
+                                    HorselessSessions = new List<HorselessSession>()
+                               {
+                                   new HorselessSession()
+                                   {
+                                        IsAnonymous = true,
+                                        Id = Guid.NewGuid(),
+                                        ObjectId = _httpContextAccessor.HttpContext.Session.Id,
+                                        DisplayName = httpCtx.Connection.RemoteIpAddress.ToString(),
+                                        CreatedAt = DateTime.UtcNow,
+                                        SessionId = httpCtx.Session.Id
+                                   }
+                               }
+                                });
+                                try
+                                {
+                                    var insertResult = await this._tenantOperator.Update(tenantQueryResult,
+                                      new List<string>()
+                                      {
+                                        nameof(Tenant.Accounts)
+                                      });
+
+                                    var newAccountQuery = insertResult.Accounts.Where(w => w.ObjectId == _httpContextAccessor.HttpContext.Session.Id);
+                                    if (newAccountQuery != null)
+                                    {
+                                        return newAccountQuery.FirstOrDefault();
+                                    }
+                                }
+                                catch (Exception e)
+                                {
+                                    _logger.LogError($"problem creating anonymous session: {e.Message}");
+                                }
+
+                                _logger.LogWarning($"problem ensuring current principal");
+                                return null;
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        // the catch all scenario
+                        // probaby because the tenant resolution
+                        // subsystem is leaky
+                        _logger.LogWarning("unable to get current principal in current context ");
                     }
                 }
                 else

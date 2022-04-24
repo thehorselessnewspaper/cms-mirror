@@ -330,9 +330,13 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 }
                 else
                 {
+
                     var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties);
-                    ((DbContext)_context).Entry(updatedEntity).State = EntityState.Modified;
-                    dbSet.Update(updatedEntity);
+                    // ((DbContext)_context).Entry(updatedEntity).State = EntityState.Modified;
+                    // dbSet.Update(updatedEntity);
+
+                    ((DbContext)_context).Update(updatedEntity);
+
                     var updateResult = await ((DbContext)_context).SaveChangesAsync();
 
                 }
@@ -359,7 +363,8 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 // _logger.LogInformation($"handling Update request for tenant context {_tenantInfo.Identifier}");
                 var dbSet = ((DbContext)_context).Set<T>();
 
-                dbSet.UpdateRange(entities);
+                ((DbContext)_context).UpdateRange(entities);
+                // dbSet.UpdateRange(entities);
                 var saveResult = await ((DbContext)_context).SaveChangesAsync();
 
                 return entities;
