@@ -1,7 +1,9 @@
 ﻿using HorselessNewspaper.Web.Core.Auth.Keycloak.Claims;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
+using HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalResolver;
 using HorselessNewspaper.Web.Core.Authorization.Handler;
 using HorselessNewspaper.Web.Core.Extensions;
+using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -27,28 +29,20 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
             Action<HorselessServiceBuilder> options = null, ServiceLifetime scope = ServiceLifetime.Scoped)
         {
             IConfiguration configuration = builder.Configuration;
-            var serviceBuilder = new HorselessServiceBuilder(configuration, services);
-
-
+            var serviceBuilder = new HorselessServiceBuilder(configuration, services); 
             #region surface the keycloak logout url configuration 
-            IKeycloakAuthOptions keycloakAuthOptions = new KeycloakAuthOptions()
-            {
-                OIDCLogoutUri = new Uri(configuration[KeycloakAuthOptions.OIDCLogoutUriConfigKey]),
-                PostLogoutRedirectUri = new Uri(configuration[KeycloakAuthOptions.PostLogoutRedirectUriConfigKey])
 
-            };
+            // todo - make ServiceProvider available here so that 
+            // IFeatureManager can be injected to enable/disable this feature
+            serviceBuilder.Services.AddSingleton<IKeycloakAuthOptions, KeycloakAuthOptions>();
 
+            serviceBuilder.Services.AddTransient<ISecurityPrincipalResolver, KeycloakSecurityPrincipalResolver>();
 
-            serviceBuilder.Services.AddSingleton<IKeycloakAuthOptions>(keycloakAuthOptions);
             #endregion surface the keycloak logout url configuration 
 
             #region as per https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/social-without-identity?view=aspnetcore-6.0
             serviceBuilder.Services.AddAuthentication(options =>
             {
-                //options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                //options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                //options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
@@ -64,7 +58,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 opts.Cookie.IsEssential = true;
                 opts.SlidingExpiration = true;
             })
-            .AddJwtBearer(o =>
+            .AddJwtBearer("keycloak", o =>
             {
                 // handle development vertificate validation check skip
                 // TODO switch via feature toggle
@@ -83,15 +77,40 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 o.ClaimsIssuer = configuration[KeycloakAuthOptions.IssuerConfigKey];
                 o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                 {
-                    ValidateAudience = true,
+                    ValidateAudience = false, ValidateLifetime = false,
                     // Scopes supported by API as defined in Config.cs - new ApiResource... or in DB ApiScopes table
-                    ValidAudiences = new List<string>() {
-                                    "api.read",
-                                    "api.write"
-                                },
-                    ValidateIssuer = true
+                    //ValidAudiences = new List<string>() {
+                    //                "api.read",
+                    //                "api.write"
+                    //            },
+                    ValidateIssuer = false
                 };
 
+                o.Events = new Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents()
+                {
+                    OnAuthenticationFailed = ctxt => 
+                    {
+                        var error = ctxt.Response.StatusCode;
+                        return Task.CompletedTask;
+                    },
+                    OnForbidden = ctxt =>
+                    {
+                        var error = ctxt.Response.StatusCode;
+                        return Task.CompletedTask;
+                    },
+                    OnChallenge = ctxt =>
+                    {
+                        var error = ctxt.Response.StatusCode;
+                        return Task.CompletedTask;
+                    },
+                    OnMessageReceived = ctxt =>
+                    {
+                        var error = ctxt.Response.StatusCode;
+                        return Task.CompletedTask;
+                    }
+
+                    
+                };
             })
             .AddOpenIdConnect(opts =>
             {
@@ -170,10 +189,17 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
             // as per https://stackoverflow.com/questions/53702555/cant-access-roles-in-jwt-token-net-core/53817194#53817194
             serviceBuilder.Services.AddAuthorization(options =>
             {
-                options.AddPolicy("Administrator", policy =>
-                 policy.RequireAssertion(c =>
-                        JsonSerializer.Deserialize<Dictionary<string, string[]>>(c.User?.FindFirst((claim) => claim.Type == "realm_access")?.Value ?? "{}")
-                    .FirstOrDefault().Value?.Any(v => v == "admin") ?? false));
+
+
+                options.DefaultPolicy = new AuthorizationPolicyBuilder()
+                                        .RequireAuthenticatedUser()
+                                        .Build();
+
+                //options.AddPolicy("Administrator", policy =>
+                // policy.RequireAssertion(c =>
+                //        JsonSerializer.Deserialize<Dictionary<string, string[]>>(c.User?.FindFirst((claim) => claim.Type == "realm_access")?.Value ?? "{}")
+                //    .FirstOrDefault().Value?.Any(v => v == "admin") ?? false));
+
             });
 
 

@@ -25,7 +25,7 @@ namespace HorselessNewspaper.Web.Core.Authorization.Handler
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, OperationAuthorizationRequirement requirement, IContentRowLevelSecured resource)
         {
             // evaluate access control list against principal 
-            
+            var resourceName = resource.GetType().Name;
             return;
         }
     }

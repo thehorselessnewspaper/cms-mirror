@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,11 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Model
 
     public interface IKeycloakAuthOptions
     {
-        public Uri OIDCLogoutUri { get; set; }
-        public Uri PostLogoutRedirectUri { get; set; }
+        public Uri OIDCLogoutUri { get; }
+        public Uri PostLogoutRedirectUri { get; }
+        string Client_Secret { get; }
+        string Client_Id { get; }
+        Uri TokenEndpoint { get; }
     }
 
     /// <summary>
@@ -20,6 +24,13 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Model
     /// </summary>
     public class KeycloakAuthOptions : IKeycloakAuthOptions
     {
+
+        IConfiguration _configuration;
+        public KeycloakAuthOptions(IConfiguration configuration)
+        {
+            this._configuration = configuration;
+        }
+
         #region Configuration["Keys"]
         // ouch how to enforce a nomenclature here for embedded magic strings
         // that must surface as a runtime introspectable list of feature toggles 
@@ -38,7 +49,45 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Model
         /// <summary>
         /// as per https://issues.redhat.com/browse/KEYCLOAK-3399?page=com.atlassian.jira.plugin.system.issuetabpanels%3Achangehistory-tabpanel
         /// </summary>
-        public Uri OIDCLogoutUri { get; set; }
-        public Uri PostLogoutRedirectUri { get; set; }
+        public Uri OIDCLogoutUri
+        {
+            get
+            {
+                return new Uri(_configuration[OIDCLogoutUriConfigKey]);
+            }
+
+        }
+        public Uri PostLogoutRedirectUri
+        {
+            get
+            {
+                return new Uri(_configuration[PostLogoutRedirectUriConfigKey]);
+            }
+        }
+
+        public Uri TokenEndpoint
+        {
+            get
+            {
+                var tokenEndpoint = _configuration[AuthorityConfigKey].TrimEnd('/') + "/protocol/openid-connect/token";
+                return new Uri(tokenEndpoint);
+            }
+        }
+
+        public string Client_Id
+        {
+            get
+            {
+                return _configuration[ClientIdConfigKey];
+            }
+        }
+
+        public string Client_Secret
+        {
+            get
+            {
+                return _configuration[ClientSecretConfigKey];
+            }
+        }
     }
 }
