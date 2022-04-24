@@ -12,6 +12,8 @@ using TheHorselessNewspaper.HostingModel.DTO;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using Microsoft.Extensions.DependencyInjection;
 using Finbuckle.MultiTenant;
+using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
+using NuGet.Common;
 
 namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 {
@@ -97,15 +99,21 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
             try
             {
-                client.DefaultRequestHeaders.Add("Accept", "application/json;odata.metadata=none");
-                response = await client.GetAsync("phantom/HorselessContent/Tenant/?$top=10&");
-                Assert.NotNull(response);
+                using (var scope = application.Services.CreateScope())
+                {
+                    var principalResolver = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", await principalResolver.GetClientCredentialsGrantToken());
+                    client.DefaultRequestHeaders.Add("Accept", "application/json;odata.metadata=none");
+                    response = await client.GetAsync("phantom/HorselessContent/Tenant/?$top=10&");
+                    Assert.NotNull(response);
 
-                response.EnsureSuccessStatusCode(); // Status Code 200-299
-                //Assert.Equal(oDataResponseHeader,
-                //    response.Content.Headers.ContentType.ToString());
+                    response.EnsureSuccessStatusCode(); // Status Code 200-299
+                                                        //Assert.Equal(oDataResponseHeader,
+                                                        //    response.Content.Headers.ContentType.ToString());
 
-                responseContent = await response.Content.ReadAsStringAsync();
+                    responseContent = await response.Content.ReadAsStringAsync();
+                }
+
 
             }
             catch (Exception e)

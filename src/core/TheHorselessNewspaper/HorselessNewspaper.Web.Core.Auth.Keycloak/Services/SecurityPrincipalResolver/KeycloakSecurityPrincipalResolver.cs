@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using HorselessNewspaper.Web.Core.Model.Security;
 using Finbuckle.MultiTenant;
+using TheHorselessNewspaper.HostingModel.MultiTenant;
 
 namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalResolver
 {
@@ -112,9 +113,21 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                     Guid newId = Guid.NewGuid();
                     var idIsGuid = Guid.TryParse(this._iTenantInfo.Id, out newId);
 
-                    if (!idIsGuid) tenant.Id = newId;
-                    tenant.ObjectId = this._iTenantInfo.Id;
+                    if (idIsGuid)
+                    {
+                        tenant.Id = newId;
+                    }
+
+                    else
+                    {
+                        tenant.Id = Guid.NewGuid();
+                    }
+
+                    HorselessTenantInfo tenantInfo = this._iTenantInfo as HorselessTenantInfo;
+                    tenant.ObjectId = tenantInfo.Payload.ObjectId;
                     tenant.DisplayName = this._iTenantInfo.Name;
+                    tenant.BaseUrl = tenantInfo.Payload.TenantBaseUrl;
+                    tenant.Timestamp = tenantInfo.Payload.Timestamp;
                     tenant.TenantIdentifierStrategy = new TenantIdentifierStrategy()
                     {
                         Id = Guid.NewGuid(),
