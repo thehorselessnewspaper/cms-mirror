@@ -9,6 +9,7 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Security.Resolver
 {
     public interface ISecurityPrincipalResolver
     {
+        Task<Tenant> EnsureTenant();
         Task<string> GetClientCredentialsGrantToken();
 
         /// <summary>

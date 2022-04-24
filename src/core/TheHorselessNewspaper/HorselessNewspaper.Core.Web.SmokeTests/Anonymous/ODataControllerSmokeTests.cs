@@ -98,7 +98,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
             try
             {
                 client.DefaultRequestHeaders.Add("Accept", "application/json;odata.metadata=none");
-                response = await client.GetAsync("/HorselessContent/Tenant/?$top=10&");
+                response = await client.GetAsync("phantom/HorselessContent/Tenant/?$top=10&");
                 Assert.NotNull(response);
 
                 response.EnsureSuccessStatusCode(); // Status Code 200-299

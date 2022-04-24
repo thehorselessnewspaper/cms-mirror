@@ -62,7 +62,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 {
                     // arrange
 
-                    var route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT + "/CREATE";
+                    var route = "phantom/" +RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT + "/CREATE";
                     //testHostingModelTenantInfo.TenantId = testHostingModelTenant.Id;
                     testHostingModelTenant.Accounts = new List<Principal>()
                     {
