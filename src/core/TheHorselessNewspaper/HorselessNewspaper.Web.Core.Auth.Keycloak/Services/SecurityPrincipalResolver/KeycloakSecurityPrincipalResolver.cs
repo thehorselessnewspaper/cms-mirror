@@ -254,10 +254,10 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
 
                     });
-                    // add the new principal to this tenant
-                    tenantQueryResult.Accounts.Add(principal);
-                    var insertResult = await this._tenantOperator.Update(tenantQueryResult,
-                        new List<string>() { nameof(Tenant.Accounts) });
+
+
+                    var insertResult = await this._tenantOperator.InsertRelatedEntity<Principal>(tenantQueryResult.Id, nameof(Tenant.Accounts),
+                        new List<Principal>() { principal });
 
                     _logger.LogInformation("initialized new authenticated session");
 
