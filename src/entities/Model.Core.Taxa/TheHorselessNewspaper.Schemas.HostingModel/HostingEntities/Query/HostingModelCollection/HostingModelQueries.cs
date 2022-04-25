@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using System.Linq.Expressions;
+using System.Reflection;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.HostingEntities.Query.Extensions;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -337,24 +338,42 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             }
             catch (Exception e) { }
 
-            var hasEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
-
-
-            if (hasEntity != null)
+            try
             {
-                var currentValue = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
-                var relatedCollection = currentValue.GetType().GetProperties().Where(w => w.Name.Equals(propertyName)).FirstOrDefault().GetValue(currentValue);
-                var castValue = relatedCollection as ICollection<U>;
+                var hasEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
+                T trackedEntity = default(T);
 
-                foreach (var item in relatedEntities)
+                if (hasEntity != null)
                 {
-                    castValue.Add(item);
+                    trackedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).Include(propertyName).First();
+                    foreach (var item in relatedEntities)
+                    {
+
+                        ((ICollection<U>)trackedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(trackedEntity)).Add(item);
+                    }
+
+                    ((DbContext)_context).Entry(trackedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).First().IsModified = true;
+
+                    var saveResult = await ((DbContext)_context).SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception($"update failed. entity does not exist");
                 }
 
-                var saveResult = await ((DbContext)_context).SaveChangesAsync();
-            }
+                // avoid doing the following
+                // leaks different data than the user passed
+                // var updatedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).Include(propertyName).First();
+                // var updatedCollection = ((ICollection<U>)updatedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(updatedEntity));
 
-            return relatedEntities;
+
+                return relatedEntities;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"entity insert exception {ex.Message}", ex);
+
+            }
         }
 
         public async Task EnsureDbExists()

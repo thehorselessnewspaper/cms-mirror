@@ -357,7 +357,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                                 target.SetValue(foundEntity, foundEntityValue);
                             }
 
-                            ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).First().IsModified = true; ;
+                             ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).First().IsModified = true; ;
                         }
                         else
                         {
@@ -417,21 +417,31 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             try
             {
                 var hasEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
-
+                T trackedEntity = default(T);
 
                 if (hasEntity != null)
                 {
-                    var currentValue = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
-                    var relatedCollection = currentValue.GetType().GetProperties().Where(w => w.Name.Equals(propertyName)).FirstOrDefault().GetValue(currentValue);
-                    var castValue = relatedCollection as ICollection<U>;
-
+                    trackedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).Include(propertyName).First();
                     foreach (var item in relatedEntities)
                     {
-                        castValue.Add(item);
+
+                        ((ICollection<U>)trackedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(trackedEntity)).Add(item);
                     }
+
+                    ((DbContext)_context).Entry(trackedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).First().IsModified = true;
 
                     var saveResult = await ((DbContext)_context).SaveChangesAsync();
                 }
+                else
+                {
+                    throw new Exception($"update failed. entity does not exist");
+                }
+
+                // avoid doing the following
+                // leaks different data than the user passed
+                // var updatedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).Include(propertyName).First();
+                // var updatedCollection = ((ICollection<U>)updatedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(updatedEntity));
+
 
                 return relatedEntities;
             }
