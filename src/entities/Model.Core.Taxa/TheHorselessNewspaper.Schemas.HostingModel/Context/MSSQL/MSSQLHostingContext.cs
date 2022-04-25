@@ -24,11 +24,14 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
         private IConfiguration _configuration;
 
-        public TenantMismatchMode TenantMismatchMode { get; }
-        public TenantNotSetMode TenantNotSetMode { get; }
+        public TenantMismatchMode TenantMismatchMode { get; set; }
+        public TenantNotSetMode TenantNotSetMode { get; set; }
+
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
+            this.TenantMismatchMode = TenantMismatchMode.Overwrite;
+            this.TenantNotSetMode = TenantNotSetMode.Overwrite;
             this.EnforceMultiTenant();
             return base.SaveChanges(acceptAllChangesOnSuccess);
         }
@@ -36,6 +39,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
             CancellationToken cancellationToken = default(CancellationToken))
         {
+            this.TenantMismatchMode = TenantMismatchMode.Overwrite;
+            this.TenantNotSetMode = TenantNotSetMode.Overwrite;
             this.EnforceMultiTenant();
             return await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }

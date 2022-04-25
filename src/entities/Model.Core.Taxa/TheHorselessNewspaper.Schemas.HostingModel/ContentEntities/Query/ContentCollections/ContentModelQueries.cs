@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
+using System.Collections;
 using System.Linq.Expressions;
+using System.Reflection;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query.Extensions;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
@@ -296,6 +298,11 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         /// <summary>
         /// your entity must return its concurrency token
+        /// this method updates non-collection properties
+        /// and fails silently for any target properties
+        /// that are collections
+        /// 
+        /// related entity inserts are handled elsewhere
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
@@ -330,10 +337,36 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 }
                 else
                 {
+                    // as per https://www.learnentityframeworkcore.com/dbcontext/modifying-data
                     var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties);
-                    ((DbContext)_context).Entry(updatedEntity).State = EntityState.Modified;
-                    dbSet.Update(updatedEntity);
+                    ((DbContext)_context).Attach(updatedEntity);
+
+                    foreach (var propertyName in targetProperties)
+                    {
+                        var hasTargetedMember = ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
+                        if (hasTargetedMember)
+                        {
+                            var hasTargetedCollection = ((DbContext)_context).Entry(updatedEntity).Collections.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
+                            var hasTargetedProperty = ((DbContext)_context).Entry(updatedEntity).Properties.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
+
+                            if(hasTargetedProperty)
+                            {
+                                var foundEntityValue = foundEntity.GetType().GetProperty(propertyName).GetValue(foundEntity);
+                                var sourceProperty = entity.GetType().GetProperty(propertyName).GetValue(entity);
+                                var target = foundEntity.GetType().GetProperty(propertyName);
+                                target.SetValue(foundEntity, foundEntityValue);
+                            }
+
+                            ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).First().IsModified = true; ;
+                        }
+                        else
+                        {
+                            // todo validate fail silent
+                        }
+
+                    }
                     var updateResult = await ((DbContext)_context).SaveChangesAsync();
+
 
                 }
             }
@@ -348,6 +381,8 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         public async Task<IEnumerable<T>> Update(IEnumerable<T> entities, List<String> targetProperties = null)
         {
+            var ret = new List<T>();
+
             try
             {
                 await EnsureDbExists();
@@ -356,18 +391,18 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
             try
             {
-                // _logger.LogInformation($"handling Update request for tenant context {_tenantInfo.Identifier}");
-                var dbSet = ((DbContext)_context).Set<T>();
-
-                dbSet.UpdateRange(entities);
-                var saveResult = await ((DbContext)_context).SaveChangesAsync();
-
-                return entities;
+                foreach (var entity in entities)
+                {
+                    var updateResult = await this.Update(entity, targetProperties);
+                    ret.Add(updateResult);
+                }
             }
             catch (Exception ex)
             {
                 throw new Exception($"entity update exception {ex.Message}", ex);
             }
+
+            return ret;
         }
 
         public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class

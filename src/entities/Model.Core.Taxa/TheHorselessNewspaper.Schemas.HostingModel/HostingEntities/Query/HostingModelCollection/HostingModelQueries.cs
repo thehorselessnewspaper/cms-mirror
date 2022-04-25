@@ -272,9 +272,32 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             }
             else
             {
+                // as per https://www.learnentityframeworkcore.com/dbcontext/modifying-data
                 var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties);
-                dbSet.Update(updatedEntity);
+                ((DbContext)_context).Attach(updatedEntity);
+
+                foreach (var propertyName in targetProperties)
+                {
+                    var hasTargetedMember = ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
+                    var hasTargetedProperty = ((DbContext)_context).Entry(updatedEntity).Properties.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
+
+                    if (hasTargetedProperty)
+                    {
+                        var foundEntityValue = foundEntity.GetType().GetProperty(propertyName).GetValue(foundEntity);
+                        var sourceProperty = entity.GetType().GetProperty(propertyName).GetValue(entity);
+                        var target = foundEntity.GetType().GetProperty(propertyName);
+                        target.SetValue(foundEntity, foundEntityValue);
+                        ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).First().IsModified = true; ;
+                    }
+                    else
+                    {
+                        // todo validate fail silent
+                    }
+
+                }
+
                 var updateResult = await ((DbContext)_context).SaveChangesAsync();
+
 
             }
 
@@ -283,6 +306,8 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 
         public async Task<IEnumerable<T>> Update(IEnumerable<T> entities, List<String> targetProperties = null)
         {
+            var ret = new List<T>();
+
             _logger.LogDebug($"handling Update request");
             try
             {
@@ -290,12 +315,18 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             }
             catch (Exception e) { }
 
-            var dbSet = ((DbContext)_context).Set<T>();
+            foreach(var entity in entities)
+            {
+                var updateResult = await this.Update(entity, targetProperties);
+                ret.Add(updateResult);
+            }
 
-            dbSet.UpdateRange(entities);
-            var saveResult = await ((DbContext)_context).SaveChangesAsync();
+            //var dbSet = ((DbContext)_context).Set<T>();
 
-            return entities;
+            //dbSet.UpdateRange(entities);
+            //var saveResult = await ((DbContext)_context).SaveChangesAsync();
+
+            return ret;
         }
 
         public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class

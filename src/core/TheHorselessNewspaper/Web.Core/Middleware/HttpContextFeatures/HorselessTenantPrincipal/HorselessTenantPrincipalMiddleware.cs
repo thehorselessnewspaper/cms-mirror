@@ -11,6 +11,7 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using Microsoft.Extensions.DependencyInjection;
 using HorselessNewspaper.Web.Core.UnitOfWork.ContentModelTasks.PrincipalTasks;
 using Microsoft.Extensions.Logging;
+using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
 
 namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTenantPrincipal
 {
@@ -25,56 +26,34 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
     {
 
         private readonly RequestDelegate _next;
-
-        public HorselessTenantPrincipalMiddleware(RequestDelegate next)
+        ISecurityPrincipalResolver _securityPrincipalResolver;
+        ILogger<HorselessTenantPrincipalMiddleware> _logger;
+        /// <summary>
+        /// should probably accept an IEnumerable<ISecurityPrincipalResolver>
+        /// as per https://stackoverflow.com/questions/39174989/how-to-register-multiple-implementations-of-the-same-interface-in-asp-net-core
+        /// </summary>
+        /// <param name="next"></param>
+        /// <param name="securityPrincipalResolver"></param>
+        public HorselessTenantPrincipalMiddleware(RequestDelegate next, ILogger<HorselessTenantPrincipalMiddleware> logger )
         {
             _next = next;
+            // this._securityPrincipalResolver = securityPrincipalResolver;
+            this._logger = logger;
         }
 
-        public async Task InvokeAsync(HttpContext context, IServiceProvider serviceProvider)
+        public async Task InvokeAsync(HttpContext context, IServiceProvider serviceProvider, ISecurityPrincipalResolver securityPrincipalResolver)
         {
             try
             {
-                //using (var scope = serviceProvider.CreateAsyncScope())
-                //{
+                var ensuredTenant = await securityPrincipalResolver.EnsureTenant();
 
-                //    IQueryableContentModelOperator<ContentModel.Principal> principalOperator = serviceProvider.GetRequiredService<IQueryableContentModelOperator<ContentModel.Principal>>();
+                var currentPrincipal = await securityPrincipalResolver.GetCurrentPrincipal();
 
-                //    IQueryableContentModelOperator<ContentModel.Tenant> tenantOperator = serviceProvider.GetRequiredService<IQueryableContentModelOperator<ContentModel.Tenant>>();
-
-                //    IContentPrincipalTasksRepository principalTasksRepository = serviceProvider.GetRequiredService<IContentPrincipalTasksRepository>();
-
-                //    if (context.User.Identity.IsAuthenticated)
-                //    {
-                //        // handle the authenticated scenario
-                //        var blah = new ContentModel.Principal()
-                //        {
-                //            Iss = "",
-                //            Aud = "",
-                //            Sub = "",
-                //            Email = "",
-                //            UPN = "",
-
-
-                //        };
-
-                //        var tenantsQuery = await tenantOperator.Read();
-                //        var principalsQuery = await principalOperator.Read();
-
-                //        var tenants = tenantsQuery.ToList();
-                //        var principals = principalsQuery.ToList();
-
-                //        var matchResult = await principalTasksRepository.GetPrincipal(context.User.Claims);
-
-                //        int i = 0;
-                //    }
-
-                //}
-
+                int i = 0;
             }
             catch (Exception e)
             {
-                // logger.LogError($"problem initializing horseless tenant principal {e.Message}");
+                _logger.LogError($"problem initializing horseless tenant principal {e.Message}");
             }
 
             await _next(context);

@@ -1,4 +1,14 @@
-﻿using Finbuckle.MultiTenant;
+﻿using HorselessNewspaper.Web.Core.Interfaces.Content;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using Finbuckle.MultiTenant;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
@@ -13,40 +23,39 @@ using Microsoft.AspNetCore.OData;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using HorselessNewspaper.Web.Core.Model.Query.ContentCollection;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("__tenant__/HorselessContent/ContentCollection")]
+    [Route("__tenant__/HorselessContent/Principal")]
     [ApiExplorerSettings(IgnoreApi = true)]
-    public class ContentCollectionController :
-        ODataController, IContentQueryController<ContentModel.ContentCollection>
+    public class PrincipalController :
+        ODataController, IContentQueryController<ContentModel.Principal>
     {
-        private IContentCollectionService<IQueryableContentModelOperator<ContentCollection>, ContentCollection> _contentCollectionService;
+        private IContentCollectionService<IQueryableContentModelOperator<Principal>, Principal> principalCollectionService;
         private ITenantInfo _tenantInfo;
 
-        public ContentCollectionController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.ContentCollection>, ContentModel.ContentCollection> contentCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
+        public PrincipalController(IContentCollectionService<IQueryableContentModelOperator<ContentModel.Principal>, ContentModel.Principal> principalCollectionService, Finbuckle.MultiTenant.ITenantInfo tenantInfo)
         {
-            this._contentCollectionService = contentCollectionService;
+            this.principalCollectionService = principalCollectionService;
             this._tenantInfo = tenantInfo;
         }
 
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.ContentCollection>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.Principal>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-        public async Task<ActionResult<IEnumerable<ContentModel.ContentCollection>>> Get()
+        public async Task<ActionResult<IEnumerable<ContentModel.Principal>>> Get()
         {
-            var result = await _contentCollectionService.Query();
-            
+            var result = await principalCollectionService.Query();
+
             return Ok(result);
         }
-
 
     }
 }

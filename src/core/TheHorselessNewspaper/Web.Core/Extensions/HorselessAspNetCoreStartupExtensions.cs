@@ -243,6 +243,9 @@ namespace HorselessNewspaper.Web.Core.Extensions
                 ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Holonym>, ContentEntities.Holonym>>();
             serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessContent>, ContentEntities.HorselessContent>,
                 ContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessContent>, ContentEntities.HorselessContent>>();
+            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessSession>, ContentEntities.HorselessSession>,
+                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessSession>, ContentEntities.HorselessSession>>();
+
             serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.JSONAsset>, ContentEntities.JSONAsset>,
                 ContentCollectionService<IQueryableContentModelOperator<ContentEntities.JSONAsset>, ContentEntities.JSONAsset>>();
             serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Meronym>, ContentEntities.Meronym>,
@@ -255,6 +258,8 @@ namespace HorselessNewspaper.Web.Core.Extensions
                  ContentCollectionService<IQueryableContentModelOperator<ContentEntities.NavigationMenuItem>, ContentEntities.NavigationMenuItem>>();
             serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.NavigationMenu>, ContentEntities.NavigationMenu>,
                  ContentCollectionService<IQueryableContentModelOperator<ContentEntities.NavigationMenu>, ContentEntities.NavigationMenu>>();
+            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Principal>, ContentEntities.Principal>,
+                 ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Principal>, ContentEntities.Principal>>();
             #endregion
 
             #region hosting collection query services
@@ -355,8 +360,8 @@ HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessCo
             #endregion hosted services
 
             var model = new HorselessOdataModel();
-            var edmContent = model.GetContentEDMModel().Result;
-            var edmHosting = model.GetHostingEDMModel().Result;
+            var edmContent = model.GetContentEDMModel();
+            var edmHosting = model.GetHostingEDMModel();
             // handle cycles in json responses 
             // as per https://gavilan.blog/2021/05/19/fixing-the-error-a-possible-object-cycle-was-detected-in-different-versions-of-asp-net-core/
             services.AddControllers().AddJsonOptions(x =>

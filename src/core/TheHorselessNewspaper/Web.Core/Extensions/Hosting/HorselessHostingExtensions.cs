@@ -69,6 +69,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
             builder.UseMultiTenant();
 
             builder.UseAuthorization();
+            builder.UseSession();
 
             builder.UseMiddleware<HorselessTenantPrincipalMiddleware>();
 

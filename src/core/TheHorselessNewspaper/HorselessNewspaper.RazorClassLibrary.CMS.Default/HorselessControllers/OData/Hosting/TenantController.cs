@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Routing.Attributes;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
@@ -7,6 +9,7 @@ using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Hosting
 {
 
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("HorselessHosting/Tenant")]
     [Produces("application/json")]
     [ApiExplorerSettings(IgnoreApi = true)]

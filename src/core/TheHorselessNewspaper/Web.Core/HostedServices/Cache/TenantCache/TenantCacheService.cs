@@ -27,6 +27,7 @@ using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using static System.Formats.Asn1.AsnWriter;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
 
 namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 {
@@ -742,6 +743,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             try
             {
                 IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
+                ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
+                var token = await tokenService.GetClientCredentialsGrantToken();
+
                 var httpClient = clientFactory.CreateClient();
 
                 var createdTenant = JsonConvert.DeserializeObject<ContentModel.Tenant>(createdTenantJson);
@@ -1055,6 +1059,11 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
                 var httpClient = clientFactory.CreateClient();
 
+                ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
+                var token = await tokenService.GetClientCredentialsGrantToken();
+
+                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
                 var baseUri = this.GetOdataBaseUrl(scope);
                 baseUri = baseUri.TrimEnd('/');
                 var expandClause = @"";
@@ -1079,6 +1088,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             }
                     };
 
+                    odataContentModelQueryMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
                     var odataResponse = await httpClient.SendAsync(odataContentModelQueryMessage);
                     var probeResponseContent = await odataResponse.Content.ReadAsStringAsync();

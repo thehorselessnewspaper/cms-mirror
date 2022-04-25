@@ -1,39 +1,42 @@
-﻿
-@using Microsoft.AspNetCore.Authentication
+﻿@using Microsoft.AspNetCore.Authentication
 @using HorselessNewspaper.Web.Core.Extensions;
 @using HorselessNewspaper.Web.Core.ScopedServices.AuthenticationSchemes;
+@using Microsoft.Extensions.Configuration
 @inject IAuthenticationSchemesCache authenticationSchemes;
+@inject IConfiguration configuration;
 
 @* @ @model AuthenticationScheme[] *@
 
 @{
     AuthenticationScheme[] registeredSchemes = await authenticationSchemes.GetExternalProvidersAsync();
+    var authority = configuration["Keycloak:Authority"];
 }
 @if (registeredSchemes != null && (User.Claims == null || User.Claims.Count() == 0))
 {
     <div>
 
         <p class="lead text-right">available authorities</p>
-        <div >
+        <small>Auth Authority: @authority</small>
+        <div>
             @foreach (var scheme in registeredSchemes.OrderBy(p => p.DisplayName))
             {
                 <form action="/signin" method="post">
                     <input type="hidden" name="provider" value="@scheme.Name" />
                     <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
-                    
+
                     <button class="btn btn-success m-1" type="submit">Connect using @scheme.DisplayName</button>
                 </form>
             }
         </div>
     </div>
 }
-else if(registeredSchemes != null)
+else if (registeredSchemes != null)
 {
     <div>
         <div>Welcome, @User.Identity.Name</div>
-
+        <small>Auth Authority: @authority</small>
         <form action="/signout" method="post">
             <button class="btn btn-success m-1" type="submit">Sign Out</button>
         </form>
-     </div>
+    </div>
 }

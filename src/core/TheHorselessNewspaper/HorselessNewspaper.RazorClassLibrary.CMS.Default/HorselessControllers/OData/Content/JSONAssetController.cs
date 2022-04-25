@@ -8,9 +8,13 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
+
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("__tenant__/HorselessContent/JSONAsset")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class JSONAssetController :

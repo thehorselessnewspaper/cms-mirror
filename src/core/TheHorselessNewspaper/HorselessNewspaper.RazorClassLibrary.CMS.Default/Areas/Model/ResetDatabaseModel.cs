@@ -13,5 +13,10 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Model
         public ResetDatabaseModel() { }
 
         public bool IsMustResetDatabase { get; set; }
+
+        public string ContentDbConnectionString { get; set; }
+
+        public string HostingDbConnectionString { get; set; }
+
     }
 }
