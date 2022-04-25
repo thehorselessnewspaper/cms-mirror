@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
+using System.Collections;
 using System.Linq.Expressions;
+using System.Reflection;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query.Extensions;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
@@ -296,6 +298,11 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         /// <summary>
         /// your entity must return its concurrency token
+        /// this method updates non-collection properties
+        /// and fails silently for any target properties
+        /// that are collections
+        /// 
+        /// related entity inserts are handled elsewhere
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
@@ -339,6 +346,17 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                         var hasTargetedMember = ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
                         if (hasTargetedMember)
                         {
+                            var hasTargetedCollection = ((DbContext)_context).Entry(updatedEntity).Collections.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
+                            var hasTargetedProperty = ((DbContext)_context).Entry(updatedEntity).Properties.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
+
+                            if(hasTargetedProperty)
+                            {
+                                var foundEntityValue = foundEntity.GetType().GetProperty(propertyName).GetValue(foundEntity);
+                                var sourceProperty = entity.GetType().GetProperty(propertyName).GetValue(entity);
+                                var target = foundEntity.GetType().GetProperty(propertyName);
+                                target.SetValue(foundEntity, foundEntityValue);
+                            }
+
                             ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).First().IsModified = true; ;
                         }
                         else

@@ -279,8 +279,14 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
                 foreach (var propertyName in targetProperties)
                 {
                     var hasTargetedMember = ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
-                    if (hasTargetedMember)
+                    var hasTargetedProperty = ((DbContext)_context).Entry(updatedEntity).Properties.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
+
+                    if (hasTargetedProperty)
                     {
+                        var foundEntityValue = foundEntity.GetType().GetProperty(propertyName).GetValue(foundEntity);
+                        var sourceProperty = entity.GetType().GetProperty(propertyName).GetValue(entity);
+                        var target = foundEntity.GetType().GetProperty(propertyName);
+                        target.SetValue(foundEntity, foundEntityValue);
                         ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).First().IsModified = true; ;
                     }
                     else

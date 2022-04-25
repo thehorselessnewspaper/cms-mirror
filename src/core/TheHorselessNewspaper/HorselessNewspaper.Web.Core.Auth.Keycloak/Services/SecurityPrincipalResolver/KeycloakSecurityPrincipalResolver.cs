@@ -324,10 +324,10 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             {
                                 Id = Guid.NewGuid(),
                                 DisplayName = user.Claims.PreferredUsername()
-                               
+
                             };
 
-                            foreach(var claim in user.Claims)
+                            foreach (var claim in user.Claims)
                             {
                                 principal.PrincipalClaimContainer.Claims.Add(
                                     new PrincipalClaim()
@@ -352,7 +352,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                 SessionId = _httpContextAccessor.HttpContext.Session.Id,
                                 IsSoftDeleted = false,
                                 Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
-                            });;
+                            }); ;
 
                             // resolve the tenant
                             var tenantQuery = await _tenantOperator.ReadAsEnumerable(w =>
@@ -403,11 +403,11 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             var httpCtx = _httpContextAccessor.HttpContext;
                             // tenant exists
 
-                            // search for tne anononymous principal by it's session profile
+                            // search for tne anononymous principal 
                             var principalQuery = await _principalOperator.ReadAsEnumerable(w =>
-                                        w.ObjectId.Equals(_httpContextAccessor.HttpContext.Session.Id));
+                                        w.IsAnonymous == true);
 
-                            
+
                             var principalQueryResult = principalQuery == null ? null : principalQuery.ToList().FirstOrDefault();
 
                             var sessionQuery = await _principalOperator.ReadAsEnumerable(w =>
@@ -419,11 +419,6 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             {
                                 return principalQueryResult;
                             }
-                            else if(sessionQueryResult != null)
-                            {
-                                // found the user by session id
-                                return sessionQueryResult;
-                            }
                             else
                             {
                                 // insert an anonymous principal and session
@@ -432,20 +427,26 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                     IsAnonymous = true,
                                     Id = Guid.NewGuid(),
                                     ObjectId = _httpContextAccessor.HttpContext.Session.Id,
-                                    DisplayName = httpCtx.Connection.RemoteIpAddress.ToString(),
+                                    DisplayName = "Anonymous User",
+                                    IsSoftDeleted = false,
+                                    PreferredUserName = "anonymous",
+                                    UPN = "anonymous",
+                                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
                                     CreatedAt = DateTime.UtcNow,
                                     HorselessSessions = new List<HorselessSession>()
-                               {
-                                   new HorselessSession()
-                                   {
-                                        IsAnonymous = true,
-                                        Id = Guid.NewGuid(),
-                                        ObjectId = _httpContextAccessor.HttpContext.Session.Id,
-                                        DisplayName = httpCtx.Connection.RemoteIpAddress.ToString(),
-                                        CreatedAt = DateTime.UtcNow,
-                                        SessionId = httpCtx.Session.Id
-                                   }
-                               }
+                                       {
+                                           new HorselessSession()
+                                           {
+                                                IsAnonymous = true,
+                                                DisplayName = "Anonymous User",
+                                                IsSoftDeleted = false,
+                                                Id = Guid.NewGuid(),
+                                                Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                                                ObjectId = Guid.NewGuid().ToString(),
+                                                CreatedAt = DateTime.UtcNow,
+                                                SessionId = httpCtx.Session.Id
+                                           }
+                                       }
                                 });
                                 try
                                 {
@@ -455,7 +456,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                         nameof(Tenant.Accounts)
                                       });
 
-                                    var newAccountQuery = insertResult.Accounts.Where(w => w.ObjectId == _httpContextAccessor.HttpContext.Session.Id);
+                                    var newAccountQuery = insertResult.Accounts.Where(w => w.IsAnonymous = true);
                                     if (newAccountQuery != null)
                                     {
                                         return newAccountQuery.FirstOrDefault();
