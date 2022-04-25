@@ -294,11 +294,15 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         principal.Email = user.Claims.Email();
                         principal.PreferredUserName = user.Claims.PreferredUsername();
 
+                        var everythingQery = await _principalOperator.Read();
+                        var everythingResult = everythingQery.ToList();
+
+                        var allTenants = await _tenantOperator.Read();
+                        var allTenantsList = allTenants.ToList();
+
                         var query = await _principalOperator
                                         .ReadAsEnumerable(w =>
-                                            w.Iss.Equals(principal.Iss) &&
-                                            w.Aud.Equals(principal.Aud) &&
-                                            w.UPN.Equals(principal.UPN));
+                                           w.UPN.Equals(principal.UPN));
                         var result = query.FirstOrDefault();
 
                         if (result != null)
