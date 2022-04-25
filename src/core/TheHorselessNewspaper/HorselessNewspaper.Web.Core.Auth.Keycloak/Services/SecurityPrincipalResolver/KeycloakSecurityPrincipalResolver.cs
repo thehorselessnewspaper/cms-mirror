@@ -364,16 +364,13 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                 try
                                 {
                                     // add a new principal to this tenant
-                                    tenantQueryResult.Accounts.Add(principal);
+                                    // tenantQueryResult.Accounts.Add(principal);
 
                                     // insert the unknown authenticated principal and session
-                                    var insertResult = await this._tenantOperator.Update(tenantQueryResult,
-                                      new List<string>()
-                                      {
-                                        nameof(Tenant.Accounts)
-                                      });
-
-                                    var newAccountQuery = insertResult.Accounts.Where(w => w.ObjectId == _httpContextAccessor.HttpContext.Session.Id);
+                                    var insertRelatedResult = await this._tenantOperator.InsertRelatedEntity<Principal>(
+                                        tenantQueryResult.Id, nameof(Tenant.Accounts), new List<Principal>() { principal });
+ 
+                                    var newAccountQuery = insertRelatedResult.Where(w => w.ObjectId == _httpContextAccessor.HttpContext.Session.Id);
                                     if (newAccountQuery != null)
                                     {
                                         return newAccountQuery.FirstOrDefault();
@@ -410,11 +407,6 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                             var principalQueryResult = principalQuery == null ? null : principalQuery.ToList().FirstOrDefault();
 
-                            var sessionQuery = await _principalOperator.ReadAsEnumerable(w =>
-                                                                    w.HorselessSessions
-                                                                    .Where(w => w.SessionId.Equals(_httpContextAccessor.HttpContext.Session.Id)).Any());
-                            var sessionQueryResult = sessionQuery == null ? null : sessionQuery.FirstOrDefault();
-
                             if (principalQueryResult != null)
                             {
                                 return principalQueryResult;
@@ -422,7 +414,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             else
                             {
                                 // insert an anonymous principal and session
-                                tenantQueryResult.Accounts.Add(new Principal()
+                                var newPrincipal = new Principal()
                                 {
                                     IsAnonymous = true,
                                     Id = Guid.NewGuid(),
@@ -447,16 +439,15 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                                 SessionId = httpCtx.Session.Id
                                            }
                                        }
-                                });
+                                };
+
                                 try
                                 {
-                                    var insertResult = await this._tenantOperator.Update(tenantQueryResult,
-                                      new List<string>()
-                                      {
-                                        nameof(Tenant.Accounts)
-                                      });
+                                    var insertResult = await this._tenantOperator.InsertRelatedEntity<Principal>(tenantQueryResult.Id,
+                                        nameof(Tenant.Accounts), new List<Principal>() { newPrincipal });
 
-                                    var newAccountQuery = insertResult.Accounts.Where(w => w.IsAnonymous = true);
+            
+                                    var newAccountQuery = insertResult.Where(w => w.IsAnonymous = true);
                                     if (newAccountQuery != null)
                                     {
                                         return newAccountQuery.FirstOrDefault();
