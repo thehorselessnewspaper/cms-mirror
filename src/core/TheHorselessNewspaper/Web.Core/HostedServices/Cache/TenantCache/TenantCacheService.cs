@@ -183,11 +183,11 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                 _logger.LogInformation("got current content model tenants");
 
-                using (var scope = _services.CreateScope())
-                {
+                //using (var scope = _services.CreateScope())
+                //{
 
-                    await HandleTenantCacheWorkflow(scope);
-                }
+                    await HandleTenantCacheWorkflow();
+                //}
 
 
             }
@@ -200,14 +200,14 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             _timer.Change(GetTimespanForSeconds(TimerDelayInSeconds), GetTimespanForSeconds(TimerDelayInSeconds));
         }
 
-        private async Task HandleTenantCacheWorkflow(IServiceScope scope)
+        private async Task HandleTenantCacheWorkflow()
         {
             // retrieve tenants from the hosting collection
 
             try
             {
 
-                await HandleScopedLogic(scope);
+                await HandleScopedLogic();
 
             }
             catch (Exception e)
@@ -287,19 +287,21 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             return JsonContent.Create(content);
         }
 
-        private async Task HandleScopedLogic(IServiceScope scope)
+        private async Task HandleScopedLogic()
         {
-
-            List<HostingModel.Tenant> hostingModelTenants = await UpdateLocalHostingTenantCache(scope);
-            var contentModelTenants = await this.GetCurrentContentModelTenants(scope, "$expand=Owners, AccessControlEntries");
-            IMultiTenantStore<HorselessTenantInfo>? inMemoryStores = GetInMemoryTenantStores(scope);
-
-            await EnsureTenantEntityWorkflow(scope, hostingModelTenants, contentModelTenants, inMemoryStores);
-
-            var currentContentModelTenants = await this.GetCurrentContentModelTenants(scope, "$expand=Owners, AccessControlEntries");
-            foreach (var currentTenant in currentContentModelTenants)
+            using (var scope = _services.CreateScope())
             {
+                List<HostingModel.Tenant> hostingModelTenants = await UpdateLocalHostingTenantCache(scope);
+                var contentModelTenants = await this.GetCurrentContentModelTenants(scope, "$expand=Owners, AccessControlEntries");
+                IMultiTenantStore<HorselessTenantInfo>? inMemoryStores = GetInMemoryTenantStores(scope);
 
+                await EnsureTenantEntityWorkflow(scope, hostingModelTenants, contentModelTenants, inMemoryStores);
+
+                var currentContentModelTenants = await this.GetCurrentContentModelTenants(scope, "$expand=Owners, AccessControlEntries");
+                foreach (var currentTenant in currentContentModelTenants)
+                {
+
+                }
             }
 
         }
