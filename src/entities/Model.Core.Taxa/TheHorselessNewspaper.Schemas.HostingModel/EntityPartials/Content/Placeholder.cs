@@ -14,5 +14,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; }
         public ICollection<Principal> Owners { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }

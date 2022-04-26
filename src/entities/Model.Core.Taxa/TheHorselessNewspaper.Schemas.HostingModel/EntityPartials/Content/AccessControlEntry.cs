@@ -65,6 +65,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public ACEPermissionType PermissionType { get; set; }
 
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
+        public DateTime? UpdatedAt { get; set; }
 
         //// [NotMapped]
         //public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }

@@ -10,40 +10,47 @@
 @{
 }
 
-<span>reset database</span>
+<div class="container">
 
-<form asp-action="ResetDatabase" method="Post">
-    <div class="form-group">
-        <label for="IsMustResetDatabase">Reset Db</label>
-        <input asp-for="IsMustResetDatabase" type="checkbox" id="IsMustResetDatabase" />
-    </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Reset Database</button>
-    </div>
-</form>
+    <span>reset database</span>
 
-<div>
+</div>
+
+<div class="container row">
+
+    <form asp-action="ResetDatabase" method="Post">
+        <div class="form-group form-check">
+            <label class="form-check-label" for="IsMustResetDatabase">Reset Db</label>
+            <input class="form-check-input" asp-for="IsMustResetDatabase" type="checkbox" id="IsMustResetDatabase" />
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Reset Database</button>
+        </div>
+    </form>
+
+</div>
+<div class="row container">
     @{
         try
         {
             var query = await hostModelOperator.ReadAsEnumerable(w => w.IsSoftDeleted == false);
             var items = query.ToList();
-            <div>no issues connecting to database</div>
+            <span>no issues connecting to database</span>
         }
-        catch(Exception e)
+        catch (Exception e)
         {
-            <div>Exception connecting to database @e.Message</div>
+            <p>Exception connecting to database @e.Message</p>
         }
 
     }
 </div>
 
-<div>
+<div class="row container">
     <span>Content Db Connection String</span>
     <span>@Model.ContentDbConnectionString</span>
 </div>
 
-<div>
+<div class="row container">
     <span>Hosting Db Connection String</span>
     <span>@Model.HostingDbConnectionString</span>
 </div>

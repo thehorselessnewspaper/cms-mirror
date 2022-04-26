@@ -89,7 +89,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
             }
 
             model.IsMustResetDatabase = false;
-            return View(model);
+            return RedirectToAction(nameof(ResetDatabase));
         }
 
     }

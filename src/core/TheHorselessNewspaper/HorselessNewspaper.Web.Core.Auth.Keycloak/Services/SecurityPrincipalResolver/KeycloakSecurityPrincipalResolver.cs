@@ -311,7 +311,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                         w.IsAnonymous == true);
 
 
-                            var principalQueryResult = principalQuery == null ? null : principalQuery.ToList().FirstOrDefault();
+                            var principalQueryResult = principalQuery == null ? null : principalQuery.ToList().First();
 
                             if (principalQueryResult != null)
                             {

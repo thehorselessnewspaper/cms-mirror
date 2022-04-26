@@ -88,6 +88,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
         public virtual ICollection<TenantInfo> TenantInfos { get; set; } = new HashSet<TenantInfo>();
+        public DateTime? UpdatedAt { get; set; }
     }
 
 

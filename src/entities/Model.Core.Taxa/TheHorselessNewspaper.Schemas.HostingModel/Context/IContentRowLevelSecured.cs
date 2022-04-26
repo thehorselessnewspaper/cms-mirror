@@ -16,5 +16,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context
     {
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; }
         public ICollection<Principal> Owners { get; set; }
+
     }
 }

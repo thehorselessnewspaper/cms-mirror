@@ -23,7 +23,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public string ClaimIssuer { get; set; } = String.Empty;
 
-        public Guid PrincipalClaimContainerId { get; set; }
+        public Guid? PrincipalClaimContainerId { get; set; }
+
+        public PrincipalClaimContainer? PrincipalClaimContainer { get; set; }
 
     }
 
@@ -38,7 +40,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public string? DisplayName { get; set; }
 
-        public List<PrincipalClaim> Claims { get; set; } = new List<PrincipalClaim>();
+        public ICollection<PrincipalClaim> PrincipalClaim { get; set; } = new HashSet<PrincipalClaim>();
 
         public Guid? PrincipalId { get; set; }
         public Principal? Principal { get; set; }   
@@ -59,6 +61,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
         public PrincipalClaimContainer? PrincipalClaimContainer { get; set; } = new PrincipalClaimContainer();
+        public DateTime? UpdatedAt { get; set; }
 
         // [NotMapped]
         //[InverseProperty(nameof(AccessControlEntry.Owners))]
@@ -82,7 +85,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         //[InverseProperty(nameof(AccessControlEntry.Principals))]
         //public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
-        
+
         //[InverseProperty(nameof(Tenant.Owners))]
         //public ICollection<Tenant> OwnedTenants { get; set; } = new HashSet<Tenant>();
     }

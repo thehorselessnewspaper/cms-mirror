@@ -9,6 +9,7 @@ using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.HostingModel.EntityPartials.Content.Strategy.Inheritance
 {
+    [Obsolete]
     public abstract class ContentRowLevelSecured : IContentRowLevelSecured
     {
         public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new  List<AccessControlEntry>();
@@ -20,5 +21,6 @@ namespace TheHorselessNewspaper.HostingModel.EntityPartials.Content.Strategy.Inh
         public virtual bool? IsSoftDeleted { get; set; }
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
+        public DateTime? UpdatedAt { get; set; }
     }
 }

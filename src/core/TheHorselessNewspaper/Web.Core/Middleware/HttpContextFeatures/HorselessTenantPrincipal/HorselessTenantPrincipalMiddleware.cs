@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using HorselessNewspaper.Web.Core.UnitOfWork.ContentModelTasks.PrincipalTasks;
 using Microsoft.Extensions.Logging;
 using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
+using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTenantPrincipal
 {
@@ -45,11 +46,33 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
         {
             try
             {
-                var ensuredTenant = await securityPrincipalResolver.EnsureTenant();
+                try
+                {
+                    _logger.LogInformation("preparing HttpRequest.Feature.Tenant");
+                    var ensuredTenant = await securityPrincipalResolver.EnsureTenant();
 
-                var currentPrincipal = await securityPrincipalResolver.GetCurrentPrincipal();
+                    context.Features.Set<Tenant>(ensuredTenant);
+                    _logger.LogInformation($"tenant feature set to tenant identifier {ensuredTenant.TenantIdentifier}");
 
-                int i = 0;
+                }
+                catch (Exception e)
+                {
+                    _logger.LogWarning($"exception initializing tenant feature: {e.Message}");
+                }
+
+                try
+                {
+                    _logger.LogInformation("preparing HttpRequest.Feature.Principal");
+                    var currentPrincipal = await securityPrincipalResolver.GetCurrentPrincipal();
+
+                    context.Features.Set<Principal>((currentPrincipal));
+                    _logger.LogInformation($"principal feature set for UPN: {currentPrincipal.UPN}");
+
+                }
+                catch (Exception e)
+                {
+                    _logger.LogWarning($"exception initializing current principal feature: {e.Message}");
+                }
             }
             catch (Exception e)
             {
