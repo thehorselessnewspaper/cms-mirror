@@ -348,11 +348,10 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
                     trackedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).Include(propertyName).First();
                     foreach (var item in relatedEntities)
                     {
+                        ((DbContext)_context).Entry<U>(item);
 
                         ((ICollection<U>)trackedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(trackedEntity)).Add(item);
                     }
-
-                    ((DbContext)_context).Entry(trackedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).First().IsModified = true;
 
                     var saveResult = await ((DbContext)_context).SaveChangesAsync();
                 }

@@ -424,24 +424,12 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 {
 
                     trackedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).Include(propertyName).First();
-                    // ((DbContext)_context).Set<T>().Update(trackedEntity);
-                    trackedEntity.CreatedAt = DateTime.UtcNow;
-
-                    // var untrackedCollection = ((ICollection<U>)trackedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(trackedEntity));
-
                     foreach (var item in relatedEntities)
                     {
                         ((DbContext)_context).Entry<U>(item);
                         ((ICollection<U>)trackedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(trackedEntity)).Add(item);
-                        // untrackedCollection.Add(item);
                     }
 
-                    // ((DbContext)_context).Entry(trackedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).First().IsModified = true;
-
-                    // trackedEntity.GetType().GetRuntimeProperty(propertyName).SetValue(trackedEntity, untrackedCollection);
-  
-                     // ((DbContext)_context).ChangeTracker.DetectChanges();
-                    // _logger.LogInformation(((DbContext)_context).ChangeTracker.DebugView.LongView);
                     var saveResult = await ((DbContext)_context).SaveChangesAsync();
                     _logger.LogInformation($"inserted related entity");
                 }
@@ -454,7 +442,6 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 // leaks different data than the user passed
                 // var updatedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).Include(propertyName).First();
                 // var updatedCollection = ((ICollection<U>)updatedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(updatedEntity));
-
 
                 return relatedEntities;
             }
