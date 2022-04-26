@@ -91,55 +91,85 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
             return ret;
         }
 
+
+        public async Task<bool> EnsureCanResoleCurrentTenant()
+        {
+            try
+            {
+                var tenantQuery = await _tenantOperator.ReadAsEnumerable(w =>
+                w.TenantIdentifier.Equals(_iTenantInfo.Identifier));
+                var tenantQueryResult = tenantQuery == null ? null : tenantQuery.ToList();
+
+                if (tenantQueryResult != null && tenantQueryResult.Count() > 0 && this._iTenantInfo != null)
+                {
+                    _logger.LogInformation($"current tenant {this._iTenantInfo.Identifier} exists in db");
+
+                    return true;
+                }
+                else
+                {
+                    _logger.LogWarning("could not find a current tenant in tne db");
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"tenant resolution fails due to {e.Message}");
+                return false;
+            }
+        }
+
         public async Task<Tenant> EnsureTenant()
         {
-            var tenant = new Tenant();
-
-            var tenantQuery = await _tenantOperator.ReadAsEnumerable(w =>
-                    w.TenantIdentifier.Equals(_iTenantInfo.Identifier));
-            var tenantQueryResult = tenantQuery == null ? null : tenantQuery.ToList().FirstOrDefault();
-
-            if (tenantQueryResult != null && this._iTenantInfo != null)
+            try
             {
-                _logger.LogInformation($"current tenant {this._iTenantInfo.Identifier} exists in db");
+                var tenant = new Tenant();
 
-                return tenantQueryResult;
-            }
-            else if(tenantQueryResult == null && this._iTenantInfo != null)
-            {
-                try
+                var tenantQuery = await _tenantOperator.ReadAsEnumerable(w =>
+                        w.TenantIdentifier.Equals(_iTenantInfo.Identifier));
+                var tenantQueryResult = tenantQuery == null || tenantQuery.Count() == 0 ? null : tenantQuery.ToList();
+
+                if (tenantQueryResult != null && tenantQueryResult.Count() > 0 && this._iTenantInfo != null)
                 {
-                    _logger.LogWarning($"current tenant does not exist in db {this._iTenantInfo.Identifier}");
-                    // must create new tenant for this tenantidentifier
-                    // very likely a phantom tenant
-                    Guid newId = Guid.NewGuid();
-                    var idIsGuid = Guid.TryParse(this._iTenantInfo.Id, out newId);
+                    _logger.LogInformation($"current tenant {this._iTenantInfo.Identifier} exists in db");
 
-                    if (idIsGuid)
+                    return tenantQueryResult.First();
+                }
+                else if (tenantQueryResult == null && this._iTenantInfo != null)
+                {
+                    try
                     {
-                        tenant.Id = newId;
-                    }
+                        _logger.LogWarning($"current tenant does not exist in db {this._iTenantInfo.Identifier}");
+                        // must create new tenant for this tenantidentifier
+                        // very likely a phantom tenant
+                        Guid newId = Guid.NewGuid();
+                        var idIsGuid = Guid.TryParse(this._iTenantInfo.Id, out newId);
 
-                    else
-                    {
-                        tenant.Id = Guid.NewGuid();
-                    }
+                        if (idIsGuid)
+                        {
+                            tenant.Id = newId;
+                        }
 
-                    HorselessTenantInfo tenantInfo = this._iTenantInfo as HorselessTenantInfo;
-                    tenant.Id = tenantInfo.Payload.Id;
-                    tenant.ObjectId = tenantInfo.Payload.ObjectId;
-                    tenant.DisplayName = this._iTenantInfo.Name;
-                    tenant.BaseUrl = tenantInfo.Payload.TenantBaseUrl;
-                    // tenant.Timestamp = tenantInfo.Payload.Timestamp;
-                    tenant.TenantIdentifier = tenantInfo.Payload.Identifier;
-                    tenant.TenantIdentifierStrategy = new TenantIdentifierStrategy()
-                    {
-                        Id = Guid.NewGuid(),
-                        ObjectId = Guid.NewGuid().ToString(),
-                        DisplayName = tenant.DisplayName,
-                        CreatedAt = DateTime.UtcNow,
-                        IsSoftDeleted = false,
-                        StrategyContainers = new List<TenantIdentifierStrategyContainer>()
+                        else
+                        {
+                            tenant.Id = Guid.NewGuid();
+                        }
+
+                        HorselessTenantInfo tenantInfo = this._iTenantInfo as HorselessTenantInfo;
+                        tenant.Id = tenantInfo.Payload.Id;
+                        tenant.ObjectId = tenantInfo.Payload.ObjectId;
+                        tenant.DisplayName = this._iTenantInfo.Name;
+                        tenant.BaseUrl = tenantInfo.Payload.TenantBaseUrl;
+                        // tenant.Timestamp = tenantInfo.Payload.Timestamp;
+                        tenant.TenantIdentifier = tenantInfo.Payload.Identifier;
+                        tenant.TenantIdentifierStrategy = new TenantIdentifierStrategy()
+                        {
+                            Id = Guid.NewGuid(),
+                            ObjectId = Guid.NewGuid().ToString(),
+                            DisplayName = tenant.DisplayName,
+                            CreatedAt = DateTime.UtcNow,
+                            IsSoftDeleted = false,
+                            StrategyContainers = new List<TenantIdentifierStrategyContainer>()
                         {
                             new TenantIdentifierStrategyContainer()
                             {
@@ -155,22 +185,34 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                 }
                             }
                         }
-                    };
+                        };
 
-                    var tenantInsertResult = await this._tenantOperator.Create(tenant);
-                    if (tenantInsertResult != null)
+                        var tenantInsertResult = await this._tenantOperator.Create(tenant);
+                        if (tenantInsertResult != null)
+                        {
+                            tenant = tenantInsertResult;
+                        }
+                    }
+                    catch (Exception e)
                     {
-                        tenant = tenantInsertResult;
+                        _logger.LogWarning($"problem ensuring tenant");
+                        throw;
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    _logger.LogWarning($"problem ensuring tenant");
-                    throw;
+                    throw new Exception($"{this.GetType().Name}cannot ensure tenant");
                 }
+
+                return tenant;
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"{this.GetType().Name} failed ensuring tenant");
+                throw new Exception($"failed ensuring tenant due to {e.Message}");
             }
 
-            return tenant;
         }
 
 
@@ -198,25 +240,33 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         principal.Email = user.Claims.Email();
                         principal.PreferredUserName = user.Claims.PreferredUsername();
 
-                        var everythingQery = await _principalOperator.Read();
-                        var everythingResult = everythingQery.ToList();
-
-                        var allTenants = await _tenantOperator.ReadAsEnumerable(w => w.IsSoftDeleted != true, new List<string> { nameof(Tenant.Accounts), nameof(Tenant.Owners) });
+                        var allTenants = await _tenantOperator
+                            .Read(w => w.IsSoftDeleted != true || w.IsSoftDeleted == null,
+                                new List<string> { nameof(Tenant.Accounts), nameof(Tenant.Owners) });
                         var allTenantsList = allTenants.ToList();
                         var isAnOwner = allTenantsList.Where(w => w.Owners
-                                        .Where(w => w.UPN.Equals(user.Claims.Upn())).Any()).Any();
+                                                            .Where(w => w.UPN.Equals(user.Claims.Upn()))
+                                                            .Any()).Any();
                         var isAnAccount = allTenantsList.Where(w => w.Accounts
                             .Where(w => w.UPN.Equals(user.Claims.Upn())).Any()).Any();
-                        var query = await _principalOperator
-                                        .ReadAsEnumerable(w =>
-                                           w.UPN.Equals(principal.UPN));
-                        var result = query.FirstOrDefault();
 
-                        if (result != null)
+                        if (isAnAccount)
                         {
                             // the authenticated scenario has already recorded this principal
                             _logger.LogInformation($"found authenticated user in database with upn={user.Claims.Upn()}");
-                            return result;
+                            var homeTenant = allTenantsList.Where(w => w.Accounts
+                            .Where(w => w.UPN.Equals(user.Claims.Upn())).Any()).FirstOrDefault();
+                            var resolvedPrincipal = homeTenant.Accounts.Where(w => w.UPN.Equals(user.Claims.Upn())).FirstOrDefault();
+                            return resolvedPrincipal;
+                        }
+                        else if (isAnOwner)
+                        {
+                            // the authenticated scenario has already recorded this principal
+                            _logger.LogInformation($"found authenticated user in database with upn={user.Claims.Upn()}");
+                            var homeTenant = allTenantsList.Where(w => w.Accounts
+                            .Where(w => w.UPN.Equals(user.Claims.Upn())).Any()).FirstOrDefault();
+                            var resolvedPrincipal = homeTenant.Owners.Where(w => w.UPN.Equals(user.Claims.Upn())).FirstOrDefault();
+                            return resolvedPrincipal;
                         }
                         else
                         {
@@ -275,7 +325,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                     // insert the unknown authenticated principal and session
                                     var insertRelatedResult = await this._tenantOperator.InsertRelatedEntity<Principal>(
                                         tenantQueryResult.Id, nameof(Tenant.Accounts), new List<Principal>() { principal });
- 
+
                                     var newAccountQuery = insertRelatedResult.Where(w => w.ObjectId == _httpContextAccessor.HttpContext.Session.Id);
                                     if (newAccountQuery != null)
                                     {
@@ -297,21 +347,40 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         // the anonymous scenario
                         _logger.LogInformation($"handling anonymous request");
                         // resolve the tenant
-                        var tenantQuery = await _tenantOperator.ReadAsEnumerable(w =>
-                            w.TenantIdentifier.Equals(_iTenantInfo.Identifier));
+                        var tenantQuery = await _tenantOperator.Read(w =>
+                            w.TenantIdentifier.Equals(_iTenantInfo.Identifier), new List<string> { nameof(Tenant.Owners), nameof(Tenant.Accounts)});
                         var tenantQueryResult = tenantQuery == null ? null : tenantQuery.ToList().FirstOrDefault();
 
-                        if (tenantQueryResult != null)
+                        var allTenants = await _tenantOperator.Read(w => w.IsSoftDeleted != true, new List<string> { nameof(Tenant.Accounts), nameof(Tenant.Owners) });
+
+                        var allTenantsList = allTenants.ToList();
+                        var isAnOwner = allTenantsList.Where(w => w.Owners
+                                        .Where(w => w.IsAnonymous == true).Any()).Any();
+                        var isAnAccount = allTenantsList.Where(w => w.Accounts
+                            .Where(w => w.IsAnonymous = true).Any()).Any();
+
+                        if(isAnAccount)
+                        {
+                            _logger.LogInformation("anonymous user is an account in current tenant");
+                        }
+                        else if(isAnOwner)
+                        {
+                            _logger.LogInformation("anonymous user is an owner in current tenant");
+                        }
+                        else if (tenantQueryResult != null)
                         {
                             var httpCtx = _httpContextAccessor.HttpContext;
                             // tenant exists
 
                             // search for tne anononymous principal 
                             var principalQuery = await _principalOperator.ReadAsEnumerable(w =>
-                                        w.IsAnonymous == true);
+                                        w.IsSoftDeleted == false, new List<string> { nameof(Tenant.Owners), nameof(Tenant.Accounts) });
 
 
-                            var principalQueryResult = principalQuery == null ? null : principalQuery.ToList().First();
+                            var principalQueryResult = principalQuery == null 
+                                                                || principalQuery.Count() == 0 
+                                                                ? null : 
+                                                                principalQuery.ToList().First();
 
                             if (principalQueryResult != null)
                             {
@@ -354,7 +423,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                     var insertResult = await this._tenantOperator.InsertRelatedEntity<Principal>(tenantQueryResult.Id,
                                         nameof(Tenant.Accounts), new List<Principal>() { newPrincipal });
 
-            
+
                                     var newAccountQuery = insertResult.Where(w => w.IsAnonymous = true);
                                     if (newAccountQuery != null)
                                     {
@@ -393,5 +462,6 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
             return principal;
         }
+
     }
 }

@@ -49,8 +49,17 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
                 try
                 {
                     _logger.LogInformation("preparing HttpRequest.Feature.Tenant");
-                    var ensuredTenant = await securityPrincipalResolver.EnsureTenant();
-                    _logger.LogInformation($"tenant ensured");
+                    var isFunctionalTenantResolver = await securityPrincipalResolver.EnsureCanResoleCurrentTenant();
+                    if (isFunctionalTenantResolver)
+                    {
+                        var ensuredTenant = await securityPrincipalResolver.EnsureTenant();
+                        _logger.LogInformation($"tenant ensured");
+
+                    }
+                    else
+                    {
+                        _logger.LogWarning("tenant resolver not ready");
+                    }
                 }
                 catch (Exception e)
                 {
@@ -60,11 +69,19 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
 
                 try
                 {
-                    _logger.LogInformation("preparing HttpRequest.Feature.Principal");
-                    var currentPrincipal = await securityPrincipalResolver.GetCurrentPrincipal();
+                    var isFunctionalTenantResolver = await securityPrincipalResolver.EnsureCanResoleCurrentTenant();
+                    if (isFunctionalTenantResolver)
+                    {
+                        _logger.LogInformation("preparing HttpRequest.Feature.Principal");
+                        var currentPrincipal = await securityPrincipalResolver.GetCurrentPrincipal();
 
-                    context.Features.Set<Principal>((currentPrincipal));
-                    _logger.LogInformation($"principal feature set for UPN: {currentPrincipal.UPN}");
+                        context.Features.Set<Principal>((currentPrincipal));
+                        _logger.LogInformation($"principal feature set for UPN: {currentPrincipal.UPN}");
+                    }
+                    else
+                    {
+                        _logger.LogWarning("tenant resolver not ready");
+                    }
 
                 }
                 catch (Exception e)

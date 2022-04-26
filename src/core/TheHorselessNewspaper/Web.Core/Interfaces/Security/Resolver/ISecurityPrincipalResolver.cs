@@ -19,5 +19,8 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Security.Resolver
         /// </summary>
         /// <returns></returns>
         public Task<Principal> GetCurrentPrincipal();
+
+        public Task<bool> EnsureCanResoleCurrentTenant();
+
     }
 }

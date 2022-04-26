@@ -34,11 +34,15 @@ namespace HorselessNewspaper.Web.Core.Authorization.Handler
             // resolve the tenant
             try
             {
-                var tenant = await _securityPrincipalResolver.EnsureTenant();
-                if(tenant != null && tenant.TenantIdentifier != null && tenant.TenantIdentifier.Length > 0)
+                _logger.LogInformation($"{this.GetType().Name} is confirming tenant context resolver operational");
+
+                var isFunctionalTenantResolution = await _securityPrincipalResolver.EnsureCanResoleCurrentTenant();
+                if (isFunctionalTenantResolution)
                 {
                     try
                     {
+                        _logger.LogInformation($"{this.GetType().Name} has confirmed tenant context resolver operational for tenant resolution");
+
                         var principal = await _securityPrincipalResolver.GetCurrentPrincipal();
                         _logger.LogInformation($"auth handler has resolved current principal {principal.DisplayName}");
                     }
