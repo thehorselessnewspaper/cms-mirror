@@ -36,7 +36,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Key]
         public Guid Id { get; set; }
 
-        public string ObjectId { get; set; }
+        public string? ObjectId { get; set; }
 
         public string? DisplayName { get; set; }
 

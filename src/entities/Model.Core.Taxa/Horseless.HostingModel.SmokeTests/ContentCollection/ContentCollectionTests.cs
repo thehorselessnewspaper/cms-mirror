@@ -334,6 +334,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             try
             {
                 newcontentCollection.ObjectId = Guid.NewGuid().ToString();
+                newcontentCollection.UpdatedAt = DateTime.UtcNow;
                 var updateResult = await this.Update<ContentModel.ContentCollection>(newcontentCollection,
                     new List<string>
                     {
