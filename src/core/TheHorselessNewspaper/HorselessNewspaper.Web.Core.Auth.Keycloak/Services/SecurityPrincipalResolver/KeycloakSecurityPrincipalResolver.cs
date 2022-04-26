@@ -229,25 +229,25 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             principal.IsSoftDeleted = false;
                             principal.ObjectId = Guid.NewGuid().ToString();
 
-                            principal.PrincipalClaimContainer = new PrincipalClaimContainer()
-                            {
-                                Id = Guid.NewGuid(),
-                                DisplayName = user.Claims.PreferredUsername()
+                            //principal.PrincipalClaimContainer = new PrincipalClaimContainer()
+                            //{
+                            //    Id = Guid.NewGuid(),
+                            //    DisplayName = user.Claims.PreferredUsername()
 
-                            };
+                            //};
 
-                            foreach (var claim in user.Claims)
-                            {
-                                principal.PrincipalClaimContainer.Claims.Add(
-                                    new PrincipalClaim()
-                                    {
-                                        ClaimType = claim.Type,
-                                        ClaimValue = claim.Value,
-                                        ClaimIssuer = claim.Issuer,
-                                        Id = Guid.NewGuid(),
-                                        ClaimValueType = claim.ValueType
-                                    });
-                            }
+                            //foreach (var claim in user.Claims)
+                            //{
+                            //    principal.PrincipalClaimContainer.Claims.Add(
+                            //        new PrincipalClaim()
+                            //        {
+                            //            ClaimType = claim.Type,
+                            //            ClaimValue = claim.Value,
+                            //            ClaimIssuer = claim.Issuer,
+                            //            Id = Guid.NewGuid(),
+                            //            ClaimValueType = claim.ValueType
+                            //        });
+                            //}
 
                             principal.HorselessSessions.Add(new HorselessSession()
                             {

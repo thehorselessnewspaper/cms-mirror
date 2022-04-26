@@ -34,9 +34,14 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Key]
         public Guid Id { get; set; }
 
+        public string ObjectId { get; set; }
+
         public string? DisplayName { get; set; }
-        public Guid PrincipalId { get; set; }
+
         public List<PrincipalClaim> Claims { get; set; } = new List<PrincipalClaim>();
+
+        public Guid? PrincipalId { get; set; }
+        public Principal? Principal { get; set; }   
     }
 
     [MultiTenant]
