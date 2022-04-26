@@ -50,14 +50,12 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
                 {
                     _logger.LogInformation("preparing HttpRequest.Feature.Tenant");
                     var ensuredTenant = await securityPrincipalResolver.EnsureTenant();
-
-                    context.Features.Set<Tenant>(ensuredTenant);
-                    _logger.LogInformation($"tenant feature set to tenant identifier {ensuredTenant.TenantIdentifier}");
-
+                    _logger.LogInformation($"tenant ensured");
                 }
                 catch (Exception e)
                 {
                     _logger.LogWarning($"exception initializing tenant feature: {e.Message}");
+                    throw new Exception($"exception initializing tenant feature {e.Message}");
                 }
 
                 try
@@ -72,6 +70,7 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
                 catch (Exception e)
                 {
                     _logger.LogWarning($"exception initializing current principal feature: {e.Message}");
+                    throw new Exception($"exception initializing principal feature {e.Message}");
                 }
             }
             catch (Exception e)

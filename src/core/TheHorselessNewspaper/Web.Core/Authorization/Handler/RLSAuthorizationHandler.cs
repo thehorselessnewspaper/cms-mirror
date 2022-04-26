@@ -30,7 +30,31 @@ namespace HorselessNewspaper.Web.Core.Authorization.Handler
         {
             // evaluate access control list against principal 
             var resourceName = resource.GetType().Name;
-            var principal = await _securityPrincipalResolver.GetCurrentPrincipal();
+
+            // resolve the tenant
+            try
+            {
+                var tenant = await _securityPrincipalResolver.EnsureTenant();
+                if(tenant != null && tenant.TenantIdentifier != null && tenant.TenantIdentifier.Length > 0)
+                {
+                    try
+                    {
+                        var principal = await _securityPrincipalResolver.GetCurrentPrincipal();
+                        _logger.LogInformation($"auth handler has resolved current principal {principal.DisplayName}");
+                    }
+                    catch(Exception e)
+                    {
+                        _logger.LogError($"auth handler failed to resolve current principal {e.Message}");
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                _logger.LogError($"exception authorizing user {e.Message}");
+                context.Fail(new AuthorizationFailureReason(this, $"auth failed due to {e.Message}") );
+                return;
+            }
+
 
             context.Succeed(requirement);
             return;
