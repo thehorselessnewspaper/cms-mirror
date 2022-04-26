@@ -33,12 +33,21 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
         {
             try
             {
-                var dbreset = await ((DbContext)_context).Database.EnsureDeletedAsync();
-                var dbSet = await ((DbContext)_context).Database.EnsureCreatedAsync();
+                try
+                {
+                    var dbreset = await ((DbContext)_context).Database.EnsureDeletedAsync();
+
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError($"content collections reset exception: {ex.Message}");                    
+                }
+
+                var tryResetAgain = await ((DbContext)_context).Database.EnsureCreatedAsync();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                _logger.LogDebug($"content collections reset exception: {ex.Message}");
+                _logger.LogError($"exception resetting db {e.Message}");
             }
         }
 
