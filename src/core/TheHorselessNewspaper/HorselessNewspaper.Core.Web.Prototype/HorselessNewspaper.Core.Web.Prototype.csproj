@@ -23,7 +23,7 @@
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.16.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
 		<PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220425.7" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220425.8" />
 	</ItemGroup>
 
 	<ItemGroup>

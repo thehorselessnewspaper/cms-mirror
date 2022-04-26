@@ -363,9 +363,6 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             {
                                 try
                                 {
-                                    // add a new principal to this tenant
-                                    // tenantQueryResult.Accounts.Add(principal);
-
                                     // insert the unknown authenticated principal and session
                                     var insertRelatedResult = await this._tenantOperator.InsertRelatedEntity<Principal>(
                                         tenantQueryResult.Id, nameof(Tenant.Accounts), new List<Principal>() { principal });
