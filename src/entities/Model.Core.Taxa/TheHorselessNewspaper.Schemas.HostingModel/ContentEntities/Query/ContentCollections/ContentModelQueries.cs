@@ -417,19 +417,24 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             try
             {
                 var hasEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
+                
                 T trackedEntity = default(T);
 
                 if (hasEntity != null)
                 {
+
                     trackedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).Include(propertyName).First();
+                    // ((DbContext)_context).Set<T>().Update(trackedEntity);
                     foreach (var item in relatedEntities)
                     {
-
                         ((ICollection<U>)trackedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(trackedEntity)).Add(item);
                     }
 
-                    ((DbContext)_context).Entry(trackedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).First().IsModified = true;
+                    // ((DbContext)_context).Entry(trackedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).First().IsModified = true;
+                    // ((DbContext)_context).Set<T>().Update(trackedEntity);
 
+                     ((DbContext)_context).ChangeTracker.DetectChanges();
+                    _logger.LogInformation(((DbContext)_context).ChangeTracker.DebugView.LongView);
                     var saveResult = await ((DbContext)_context).SaveChangesAsync();
                 }
                 else
