@@ -238,7 +238,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                             foreach (var claim in user.Claims)
                             {
-                                principal.PrincipalClaimContainer.Claims.Add(
+                                principal.PrincipalClaimContainer.PrincipalClaim.Add(
                                     new PrincipalClaim()
                                     {
                                         ClaimType = claim.Type,
