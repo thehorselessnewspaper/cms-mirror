@@ -65,11 +65,6 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             // _logger.LogInformation($"handling Create request for tenant context {_tenantInfo.Identifier}");
 
 
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
 
             try
             {
@@ -94,13 +89,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         public async Task<IEnumerable<T>> Create(IEnumerable<T> entities)
         {
 
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
-
-
+  
             try
             {
                 var dbSet = ((DbContext)_context).Set<T>();
@@ -123,11 +112,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         {
             T? entity;
 
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
+   
 
             try
             {
@@ -150,11 +135,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         {
             var ret = new List<T>();
 
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
+ 
 
 
             if (whatIf == true)
@@ -231,11 +212,6 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null)
         {
             IQueryable<T> result;
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
 
             try
             {
@@ -265,12 +241,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         public async Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null)
         {
             IEnumerable<T> result = new List<T>();
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
-
+   
             try
             {
                 var dbSet = ((DbContext)_context).Set<T>().Where(query);
@@ -308,11 +279,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         /// <returns></returns>
         public async Task<T> Update(T entity, List<String> targetProperties = null)
         {
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
+  
 
             try
             {
@@ -408,11 +375,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class
         {
 
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
+
 
             try
             {
