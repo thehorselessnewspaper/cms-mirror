@@ -14,7 +14,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("__tenant__/HorselessContent/FilesystemAsset")]
+    [Route("{__tenant__}/HorselessContent/FilesystemAsset")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class FilesystemAssetController :
         ODataController, IContentQueryController<ContentModel.FilesystemAsset>

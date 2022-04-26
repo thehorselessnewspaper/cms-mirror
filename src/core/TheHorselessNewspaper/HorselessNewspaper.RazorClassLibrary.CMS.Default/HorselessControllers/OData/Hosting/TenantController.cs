@@ -8,9 +8,8 @@ using TheHorselessNewspaper.HostingModel.Entities.Query;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Hosting
 {
-
+    [Route("{__tenant__}/HorselessHosting/Tenant")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("HorselessHosting/Tenant")]
     [Produces("application/json")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class TenantController : ODataController
@@ -24,8 +23,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
+
         [HttpGet()]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<HostingModel.Tenant>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<HostingModel.Tenant>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]

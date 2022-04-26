@@ -291,7 +291,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         {
 
             List<HostingModel.Tenant> hostingModelTenants = await UpdateLocalHostingTenantCache(scope);
-            List<ContentModel.Tenant> contentModelTenants = await this.GetCurrentContentModelTenants(scope, "$expand=Owners, AccessControlEntries");
+            var contentModelTenants = await this.GetCurrentContentModelTenants(scope, "$expand=Owners, AccessControlEntries");
             IMultiTenantStore<HorselessTenantInfo>? inMemoryStores = GetInMemoryTenantStores(scope);
 
             await EnsureTenantEntityWorkflow(scope, hostingModelTenants, contentModelTenants, inMemoryStores);

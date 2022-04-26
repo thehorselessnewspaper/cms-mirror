@@ -401,7 +401,7 @@ HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessCo
                         // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
 
                         /// todo make this an environment configurable item
-                        options.AddRouteComponents("HorselessHosting", edmHosting);
+                        options.AddRouteComponents("{__tenant__}/HorselessHosting", edmHosting);
                     });
 
             options?.Invoke(serviceBuilder);
