@@ -173,8 +173,33 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             var tenantInsertResult = await tenantQuery.Create(modifiedTenant);
 
             var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(modifiedTenant.Id, nameof(modifiedTenant.Owners), new List<Principal>() { relatedPrincipal });
+
+
             Assert.IsTrue(insertResult != null);
 
+            for (int i = 0; i < 99; i++)
+            {
+                await InsertRelatedOwner(tenant);
+                await InsertRelatedAccount(tenant);
+            }
+
+            var validatedInsertResult = await tenantQuery.Read(r => r.Id.Equals(tenant.Id), new List<string>()
+            {
+                nameof(Tenant.Owners), nameof(Tenant.Accounts), nameof(Tenant.AccessControlEntries)
+            });
+
+            Assert.IsTrue(validatedInsertResult.First().Owners.Count > 50);
+
+            Assert.IsTrue(validatedInsertResult.First().Accounts.Count > 0);
+
+            var principals = await principalQuery.Read();
+            var principalCount = principals.Count();
+            Assert.IsTrue(principalCount > 100);
+        }
+
+        private async Task InsertRelatedOwner(IContentRowLevelSecured tenant)
+        {
+            var tenantQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Tenant>>();
             var validatedInsertResult = await tenantQuery.Read(r => r.Id.Equals(tenant.Id), new List<string>()
             {
                 nameof(tenant.Owners), nameof(tenant.AccessControlEntries)
@@ -194,6 +219,78 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy.StrategyContainers != null);
 
             Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy.StrategyContainers.Count == 1);
+
+            var relatedPrincipal = new Principal()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = tenant.CreatedAt,
+                DisplayName = tenant.DisplayName,
+                ObjectId = Guid.NewGuid().ToString(),
+                Timestamp = tenant.Timestamp,
+                HorselessSessions = new List<HorselessSession>()
+                {
+                    new HorselessSession()
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedAt = tenant.CreatedAt,
+                        DisplayName = tenant.DisplayName,
+                        ObjectId = Guid.NewGuid().ToString()
+                    }
+                }
+            };
+
+            var principalQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Principal>>();
+
+            var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(tenant.Id, nameof(tenant.Owners), new List<Principal>() { relatedPrincipal });
+
+
+        }
+
+        private async Task InsertRelatedAccount(IContentRowLevelSecured tenant)
+        {
+            var tenantQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Tenant>>();
+            var validatedInsertResult = await tenantQuery.Read(r => r.Id.Equals(tenant.Id), new List<string>()
+            {
+                nameof(Tenant.Owners), nameof(Tenant.Accounts), nameof(Tenant.AccessControlEntries)
+            });
+
+
+            Assert.IsTrue(validatedInsertResult != null);
+
+            var updatedRelatedEntitiesResult = validatedInsertResult.First();
+
+            Assert.IsTrue(updatedRelatedEntitiesResult != null);
+
+            Assert.IsTrue(updatedRelatedEntitiesResult.Owners.Count > 0);
+
+            Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy != null);
+
+            Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy.StrategyContainers != null);
+
+            Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy.StrategyContainers.Count == 1);
+
+            var relatedPrincipal = new Principal()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = tenant.CreatedAt,
+                DisplayName = tenant.DisplayName,
+                ObjectId = Guid.NewGuid().ToString(),
+                Timestamp = tenant.Timestamp,
+                HorselessSessions = new List<HorselessSession>()
+                {
+                    new HorselessSession()
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedAt = tenant.CreatedAt,
+                        DisplayName = tenant.DisplayName,
+                        ObjectId = Guid.NewGuid().ToString()
+                    }
+                }
+            };
+
+ 
+            var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(tenant.Id, nameof(Tenant.Accounts), new List<Principal>() { relatedPrincipal });
+
 
         }
 
@@ -269,7 +366,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 throw new Exception("failed to read existing entity", e);
             }
 
-            var readListResult = await this.ReadContentEntityAsEnumerable<ContentModel.ContentCollection>(query: w => w.ObjectId == newcontentCollection.ObjectId, includeClauses: new List<string>() {  });
+            var readListResult = await this.ReadContentEntityAsEnumerable<ContentModel.ContentCollection>(query: w => w.ObjectId == newcontentCollection.ObjectId, includeClauses: new List<string>() { });
             Assert.IsNotNull(readListResult);
             Assert.IsTrue(readListResult.Count() > 0);
 
