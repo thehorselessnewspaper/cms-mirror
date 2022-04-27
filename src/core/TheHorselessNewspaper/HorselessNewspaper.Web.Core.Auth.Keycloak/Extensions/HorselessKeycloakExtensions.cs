@@ -37,7 +37,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
             // IFeatureManager can be injected to enable/disable this feature
             serviceBuilder.Services.AddSingleton<IKeycloakAuthOptions, KeycloakAuthOptions>();
 
-            serviceBuilder.Services.AddScoped<ISecurityPrincipalResolver, KeycloakSecurityPrincipalResolver>();
+            serviceBuilder.Services.AddTransient<ISecurityPrincipalResolver, KeycloakSecurityPrincipalResolver>();
 
             #endregion surface the keycloak logout url configuration 
 
