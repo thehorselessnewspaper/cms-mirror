@@ -10,7 +10,9 @@ version: '3.9'
 volumes:
   keycloak_postgres_data:
       driver: local
- 
+  prototype-content-db:
+      driver: local
+
 services:
   keycloakpostgres:
     image: postgres
@@ -82,6 +84,8 @@ services:
   content-db:
     image: "mcr.microsoft.com/mssql/server:2019-latest"
     hostname: contentdb.local
+    volumes:
+        - prototype-content-db:/var/opt/mssql
     environment:
         SA_PASSWORD: "Pa55w0rd"
         ACCEPT_EULA: "Y"
