@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// these entities support asp.net core HttpContext.Features specifications
+/// </summary>
 namespace HorselessNewspaper.Core.Interfaces.Model.HttpContextFeatureModels
 {
     /// <summary>
