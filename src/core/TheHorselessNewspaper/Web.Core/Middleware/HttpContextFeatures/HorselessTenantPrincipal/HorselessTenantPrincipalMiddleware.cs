@@ -44,8 +44,13 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
 
         public async Task InvokeAsync(HttpContext context, IServiceProvider serviceProvider, ISecurityPrincipalResolver securityPrincipalResolver)
         {
+            bool hasEnsuredTenant = false;
+            bool hasEnsuredPrincipal = false;
+            bool hasEnsuredSession = false;
+
             try
             {
+                // ensure current tenant
                 try
                 {
                     _logger.LogInformation("preparing HttpRequest.Feature.Tenant");
@@ -56,6 +61,7 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
                         _logger.LogInformation($"tenant ensured");
                         context.Features.Set<Tenant>((ensuredTenant));
                         _logger.LogInformation($"httpcontext tenant feature initialized");
+                        hasEnsuredTenant = true;
                     }
                     else
                     {
@@ -74,12 +80,38 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
                     throw new Exception($"exception initializing tenant feature {e.Message}");
                 }
 
+                // ensure current principal
                 try
                 {
                     var isFunctionalTenantResolver = await securityPrincipalResolver.EnsureCanResoleCurrentTenant();
-                    if (isFunctionalTenantResolver)
+                    if (isFunctionalTenantResolver && hasEnsuredTenant)
                     {
                         _logger.LogInformation("preparing HttpRequest.Feature.Principal");
+                        var currentPrincipal = await securityPrincipalResolver.GetCurrentPrincipal();
+
+                        context.Features.Set<Principal>((currentPrincipal));
+                        _logger.LogInformation($"principal feature set for UPN: {currentPrincipal.UPN}");
+                        hasEnsuredPrincipal = true;
+                    }
+                    else
+                    {
+                        _logger.LogWarning("tenant resolver not ready");
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    _logger.LogWarning($"exception initializing current principal feature: {e.Message}");
+                    throw new Exception($"exception initializing principal feature {e.Message}");
+                }
+
+                // ensure principal session
+                try
+                {
+                    var isFunctionalTenantResolver = await securityPrincipalResolver.EnsureCanResoleCurrentTenant();
+                    if (isFunctionalTenantResolver && hasEnsuredPrincipal && hasEnsuredTenant)
+                    {
+                        _logger.LogInformation("preparing HttpRequest.Feature.Session");
                         var currentPrincipal = await securityPrincipalResolver.GetCurrentPrincipal();
 
                         context.Features.Set<Principal>((currentPrincipal));

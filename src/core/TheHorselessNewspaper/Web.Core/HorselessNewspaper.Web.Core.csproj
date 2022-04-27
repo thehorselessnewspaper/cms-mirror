@@ -51,6 +51,7 @@
 	<ItemGroup>
 		<Folder Include="BackgroundServices\" />
 		<Folder Include="HostedServices\RazorClassLibrary\" />
+		<Folder Include="Model\HttpContextFeatures\" />
 		<Folder Include="SingletonServices\Cache\Tenant\Mock\" />
 		<Folder Include="swagger\" />
 		<Folder Include="UnitOfWork\HostingModel\" />

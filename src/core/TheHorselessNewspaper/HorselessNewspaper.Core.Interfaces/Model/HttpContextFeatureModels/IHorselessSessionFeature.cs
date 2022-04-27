@@ -16,6 +16,8 @@ namespace HorselessNewspaper.Core.Interfaces.Model.HttpContextFeatureModels
     public interface IHorselessFeature<T>
     {
         public T FeaturePayload { get; set; }
+
+        public bool IsHttpContextAvailable { get; set; }
     }
 
     /// <summary>
@@ -24,7 +26,7 @@ namespace HorselessNewspaper.Core.Interfaces.Model.HttpContextFeatureModels
     /// <typeparam name="T"></typeparam>
     public interface IHorselessHttpContextFeature<T> : IHorselessFeature<T>
     {
-
+        public Uri HttpUrl { get; set; }
     }
 
     public interface IHorselessHttpSessionFeature<T> : IHorselessHttpContextFeature<T>

@@ -477,5 +477,17 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
             return principal;
         }
 
+        //public async Task<HorselessSession> GetCurrentSessionForPrincipal(Principal sessionPrincipal)
+        //{
+        //    if (_httpContextAccessor.HttpContext != null)
+        //    {
+
+        //    }
+        //    else
+        //    {
+
+        //    }
+        //}
+
     }
 }
