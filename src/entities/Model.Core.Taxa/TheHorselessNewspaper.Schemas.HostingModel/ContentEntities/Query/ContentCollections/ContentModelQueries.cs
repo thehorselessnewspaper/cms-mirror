@@ -51,9 +51,11 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         {
             try
             {
+                _logger.LogWarning($"{this.GetType().Name} is resetting content db");
                 try
                 {
                     var dbreset = await ((DbContext)_context).Database.EnsureDeletedAsync();
+                    _logger.LogWarning($"{this.GetType().Name} has reset content db");
 
                 }
                 catch (Exception ex)
@@ -61,7 +63,11 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                     _logger.LogError($"content collections reset exception: {ex.Message}");
                 }
 
+                _logger.LogWarning($"{this.GetType().Name} is resetting hosting db");
+
                 var tryResetAgain = await ((DbContext)_context).Database.EnsureCreatedAsync();
+
+                _logger.LogWarning($"{this.GetType().Name} has reset hosting db");
 
                 await ((DbContext)_context).SaveChangesAsync();
             }
