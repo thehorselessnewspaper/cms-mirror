@@ -17,6 +17,7 @@ using TheHorselessNewspaper.HostingModel.MultiTenant;
 using HorselessNewspaper.Core.Interfaces.Model.HttpContextFeatureModels;
 using HorselessNewspaper.Web.Core.Model.HttpContextFeatures;
 using HorselessNewspaper.Web.Core.Extensions.HttpRequestExtensions;
+using System.Collections.Concurrent;
 
 namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalResolver
 {
@@ -26,7 +27,10 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
     /// </summary>
     public class KeycloakSecurityPrincipalResolver : ISecurityPrincipalResolver
     {
-
+        /// <summary>
+        /// TODO - clear this on a timer
+        /// </summary>
+        private static ConcurrentDictionary<string, HorselessSession> LocallyCachedSessions { get; set; } = new ConcurrentDictionary<string, HorselessSession>();
 
         IHttpContextAccessor _httpContextAccessor;
         private IQueryableContentModelOperator<Tenant> _tenantOperator;
@@ -523,11 +527,15 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                     HorselessSessionPrincipalId = principalQueryResult.Id
                 };
 
-                //principalQueryResult.HorselessSessions.Add(newSession);
+                principalQueryResult.HorselessSessions.Add(newSession);
 
                 var insertResult = await this._horselessSessionOperator.Create(newSession);
                 if(insertResult != null)
                 {
+                    // cache the inserted session to hedge against
+                    // new requests using the resolver before dbcontext is flushed
+                    LocallyCachedSessions.TryAdd(newSession.SessionId, newSession);
+
                     IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(sessionPrincipalId);
 
                     return ret;
@@ -556,6 +564,13 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                 // session already created for this principal scenario
                 var payload = hasInsertedSessionQuery.FirstOrDefault();
+
+                HorselessSession cachedPayload = null;
+                var hasCachedPayload = LocallyCachedSessions.TryGetValue(httpContext.Session.Id, out cachedPayload);
+                if(hasCachedPayload)
+                {
+                    payload = cachedPayload;
+                }
 
                 IHorselessHttpSessionFeature<HorselessSession> ret = new HorselessHttpSessionFeature();
                 ret.FeaturePayload = payload;
