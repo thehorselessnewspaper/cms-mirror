@@ -172,10 +172,10 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             // this should actually be handled by polly
             // due to db container startup lag in 
             // dockerized environments
-            //if (!this.CurrentHostingModelTenants.Any())
-            //{
-            //    await EnsurePhysicalDatabases();
-            //}
+            if (!this.CurrentContentModelTenants.Any())
+            {
+                await EnsurePhysicalDatabases();
+            }
 
             try
             {
