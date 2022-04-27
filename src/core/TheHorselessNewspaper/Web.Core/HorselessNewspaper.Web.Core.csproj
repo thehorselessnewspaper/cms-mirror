@@ -24,7 +24,7 @@
 	<ItemGroup>
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
 		<PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.2" />
-		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.4.220426.9" />
+		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.4.220427.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.4" />
 		<PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.9" />
@@ -40,7 +40,7 @@
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="NuGet.Protocol" Version="6.1.0" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220426.9" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220427.1" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -18,7 +18,7 @@ namespace TheHorselessNewspaper.HostingModel
 
     }
 
-    internal class HorselessContentContextFactory : IDesignTimeDbContextFactory<MSSqlContentContext>
+    public class HorselessContentContextFactory : IDesignTimeDbContextFactory<MSSqlContentContext>
     {
         public MSSqlContentContext CreateDbContext(string[] args)
         {

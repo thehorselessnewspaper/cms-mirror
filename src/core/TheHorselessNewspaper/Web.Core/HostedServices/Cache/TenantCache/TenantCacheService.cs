@@ -186,7 +186,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 //using (var scope = _services.CreateScope())
                 //{
 
-                    await HandleTenantCacheWorkflow();
+                await HandleTenantCacheWorkflow();
                 //}
 
 
@@ -246,9 +246,11 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                     // collect the content model tenants
 
-                    var contentModelTenantQuery = innerScope.ServiceProvider.GetRequiredService<IQueryableContentModelOperator<ContentModel.Tenant>>();  // this.GetQueryForContentEntity<ContentModel.Tenant>(innerScope);
-                    var tenantList = await contentModelTenantQuery.ReadAsEnumerable(r => r.IsSoftDeleted == false);
-                    var tenants = tenantList.ToList();
+                    //var contentModelTenantQuery = innerScope.ServiceProvider.GetRequiredService<IQueryableContentModelOperator<ContentModel.Tenant>>();  // this.GetQueryForContentEntity<ContentModel.Tenant>(innerScope);
+                    //var tenantList = await contentModelTenantQuery.Read(r => r.IsSoftDeleted == false);
+                    //var tenants = tenantList == null || tenantList.Count() == 0 ? new List<ContentModel.Tenant>() : tenantList.ToList();
+
+                    var tenants = await GetCurrentContentModelTenants(innerScope);
                     foreach (var contentModelTenant in tenants)
                     {
                         if (!this.CurrentContentModelTenants.Where(w => w.Id.Equals(contentModelTenant.Id)).Any())
@@ -335,7 +337,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     var mirrorTenantHasAccessControlEntries = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.AccessControlEntries.Count() > 0).Any();
 
                     var isTenantDeploymentWorkflowComplete = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.IsPublished == true).Any();
- 
+
                     if (mirrorTenantExists == false)
                     {
                         // validate the multitenant routing is working for this tenant
@@ -362,7 +364,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                             mirrorTenant.Owners.Clear();
                             mirrorTenant.AccessControlEntries.Clear();
-                            
+
                             /// TODO don't do this
                             mirrorTenant.TenantIdentifierStrategy = null;
 
@@ -1070,7 +1072,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 baseUri = baseUri.TrimEnd('/');
                 var expandClause = @"";
 
-                if(expandList != "")
+                if (expandList != "")
                 {
                     expandClause = expandClause + expandList;
                 }
@@ -1094,7 +1096,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                     var odataResponse = await httpClient.SendAsync(odataContentModelQueryMessage);
                     var probeResponseContent = await odataResponse.Content.ReadAsStringAsync();
-                    if(probeResponseContent == null || probeResponseContent.Equals(string.Empty))
+                    if (probeResponseContent == null || probeResponseContent.Equals(string.Empty))
                     {
                         return ret;
                     }

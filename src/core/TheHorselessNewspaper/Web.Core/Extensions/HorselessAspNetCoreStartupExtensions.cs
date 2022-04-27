@@ -177,10 +177,10 @@ namespace HorselessNewspaper.Web.Core.Extensions
                     );
                 })
                 .WithRouteStrategy()
-                .WithDelegateStrategy(async context =>
-                {
-                    return await Task.FromResult<string>("6da806b8-f7ab-4e3a-8833-7e834a40e9d0");
-                })
+                //.WithDelegateStrategy(async context =>
+                //{
+                //    return await Task.FromResult<string>("6da806b8-f7ab-4e3a-8833-7e834a40e9d0");
+                //})
                 .WithDelegateStrategy(async context =>
                 {
                     var httpContext = context as HttpContext;
@@ -191,7 +191,15 @@ namespace HorselessNewspaper.Web.Core.Extensions
                     else
                     {
                         httpContext.Request.Query.TryGetValue("tenant", out StringValues tenantIdParam);
-                        return tenantIdParam.ToString();
+                        var tenantIdParm = tenantIdParam.ToString();
+                        if(tenantIdParm != String.Empty)
+                        {
+                            return tenantIdParm;
+                        }
+                        else
+                        {
+                            return "6da806b8-f7ab-4e3a-8833-7e834a40e9d0";
+                        }
                     }
                 })
                 .WithStaticStrategy("6da806b8-f7ab-4e3a-8833-7e834a40e9d0");

@@ -329,14 +329,16 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             {
                                 try
                                 {
-                                    // insert the unknown authenticated principal and session
-                                    var insertRelatedResult = await this._tenantOperator.InsertRelatedEntity<Principal>(
-                                        tenantQueryResult.Id, nameof(Tenant.Accounts), new List<Principal>() { principal });
+                                    tenantQueryResult.Accounts.Add(principal);
+                                    var principalInsertResult = await this._principalOperator.Create(principal);
 
-                                    var newAccountQuery = insertRelatedResult.Where(w => w.ObjectId == _httpContextAccessor.HttpContext.Session.Id);
-                                    if (newAccountQuery != null)
+                                    // insert the unknown authenticated principal and session
+                                    //var insertRelatedResult = await this._tenantOperator.InsertRelatedEntity<Principal>(
+                                    //    tenantQueryResult.Id, nameof(Tenant.Accounts), new List<Principal>() { principal });
+
+                                      if (principalInsertResult != null)
                                     {
-                                        return newAccountQuery.FirstOrDefault();
+                                        return principalInsertResult;
                                     }
                                 }
                                 catch (Exception e)
