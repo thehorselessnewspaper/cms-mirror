@@ -54,11 +54,18 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
                     {
                         var ensuredTenant = await securityPrincipalResolver.EnsureTenant();
                         _logger.LogInformation($"tenant ensured");
-
+                        context.Features.Set<Tenant>((ensuredTenant));
+                        _logger.LogInformation($"httpcontext tenant feature initialized");
                     }
                     else
                     {
                         _logger.LogWarning("tenant resolver not ready");
+                        var ensuredTenant = await securityPrincipalResolver.EnsureTenant();
+                        _logger.LogInformation($"tenant ensured for tenant identifier {ensuredTenant.TenantIdentifier}");
+
+                        // try to initialize the feature again
+                        context.Features.Set<Tenant>((ensuredTenant));
+                        _logger.LogInformation($"httpcontext tenant feature initialized");
                     }
                 }
                 catch (Exception e)

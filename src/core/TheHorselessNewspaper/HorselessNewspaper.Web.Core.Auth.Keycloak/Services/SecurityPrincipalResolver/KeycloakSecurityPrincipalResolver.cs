@@ -229,8 +229,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                     var user = _httpContextAccessor.HttpContext.User;
                     var sessionId = _httpContextAccessor.HttpContext.Session.IsAvailable ? _httpContextAccessor.HttpContext.Session.Id : "";
 
-                    if (user.Identities.Any() &&
-                        user.Identities.Where(w => w.IsAuthenticated == true).Any())
+                    if (user.Claims.Count() > 0)
                     {
                         _logger.LogInformation($"handling authenticated request for sessionId={sessionId}");
                         /// the authenticated scenario
@@ -241,7 +240,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         principal.PreferredUserName = user.Claims.PreferredUsername();
 
                         var allTenants = await _tenantOperator
-                            .Read(w => w.IsSoftDeleted != true || w.IsSoftDeleted == null,
+                            .Read(w => w.IsSoftDeleted != true,
                                 new List<string> { nameof(Tenant.Accounts), nameof(Tenant.Owners) });
                         var allTenantsList = allTenants.ToList();
                         var isAnOwner = allTenantsList.Where(w => w.Owners
@@ -250,6 +249,14 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         var isAnAccount = allTenantsList.Where(w => w.Accounts
                             .Where(w => w.UPN.Equals(user.Claims.Upn())).Any()).Any();
 
+                        var principalQuery = await this._principalOperator.Read(r => r.IsAnonymous == false);
+                        var principalCollection = principalQuery.ToList();
+                        var principalQueryResult = principalQuery == null || principalCollection.Count() == 0 ? null : principalQuery.ToList().First();
+                        if(principalQueryResult != null)
+                        {
+                            _logger.LogInformation($"found authenticated user in database with upn={user.Claims.Upn()}");
+                            return principalQueryResult;
+                        }
                         if (isAnAccount)
                         {
                             // the authenticated scenario has already recorded this principal
@@ -341,8 +348,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                         }
                     }
-                    else if (user.Identities.Any() &&
-                        user.Identities.Where(w => w.IsAuthenticated == false).Any())
+                    else if (user.Claims.Count() == 0)
                     {
                         // the anonymous scenario
                         _logger.LogInformation($"handling anonymous request");
@@ -359,6 +365,12 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         var isAnAccount = allTenantsList.Where(w => w.Accounts
                             .Where(w => w.IsAnonymous = true).Any()).Any();
 
+                        var anonymousPrincipalQuery = await _principalOperator.Read(r => r.IsAnonymous == true);
+                        var anonymousPrincipalQueryResult = anonymousPrincipalQuery == null ? null : anonymousPrincipalQuery.ToList().FirstOrDefault();
+                        if (anonymousPrincipalQueryResult != null)
+                        {
+                            return anonymousPrincipalQueryResult;
+                        }
                         if(isAnAccount)
                         {
                             _logger.LogInformation("anonymous user is an account in current tenant");
