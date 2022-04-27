@@ -32,6 +32,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             this.serviceProvider = serviceProvider;
             this.logger = logger;
             this.SqlDialect = DatabaseServerFamily.IsSQLServer;
+
+            this.ResolveTenant().RunSynchronously();
         }
 
 
@@ -65,7 +67,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
                         var identifier = await s.GetIdentifierAsync("randomtextstrategymatcher");
                         if (identifier != null)
                         {
-                            logger.LogInformation($"resolved a tenant with the strategy");
+                            logger.LogInformation($"{this.GetType().Name} resolved a tenant with the multitenant strategy");
 
                             var allResult = await resolver.Stores.First().GetAllAsync();
                             var filtered = allResult.Where(w => w.Identifier.Equals(identifier)).First();
@@ -82,6 +84,10 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
                         logger.LogWarning($"problem resolving tenant {e.Message}");
                     }
                 }
+            }
+            else
+            {
+                this.logger.LogWarning($"{this.GetType().Name} is handling a previously initialized tenant context");
             }
 
         }

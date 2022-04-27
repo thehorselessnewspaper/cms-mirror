@@ -2,7 +2,11 @@
 using Finbuckle.MultiTenant.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System;
 using TheHorselessNewspaper.HostingModel.Context;
+using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
@@ -10,6 +14,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
     internal partial class MSSQLHostingContext : THLNPHostingContext, IHostingModelContext
     {
         public DatabaseServerFamily SqlDialect { get; set; }
+
+        private ILogger<MSSqlContentContext> logger;
+        private IServiceProvider serviceProvider;
 
         public DbSet<TenantIdentifierStrategy> TenantIdentifierStrategies { get; set; }
 
@@ -20,14 +27,57 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         /// <summary>
         /// as per https://www.finbuckle.com/MultiTenant/Docs/v6.5.1/EFCore#adding-multitenant-functionality-to-an-existing-dbcontext
         /// </summary>
-        public ITenantInfo TenantInfo { get; }
+        public ITenantInfo TenantInfo { get; set; }
 
         private IConfiguration _configuration;
 
         public TenantMismatchMode TenantMismatchMode { get; set; }
         public TenantNotSetMode TenantNotSetMode { get; set; }
 
+        private async Task ResolveTenant()
+        {
 
+            if (this.TenantInfo == null)
+            {
+                this.logger.LogWarning($"{this.GetType().Name} is handling a null tenant context");
+                var tenant = new HorselessTenantInfo();
+                // here TTenatInfo is the type of your custom tenant info object
+                var resolver = serviceProvider.GetRequiredService<ITenantResolver<HorselessTenantInfo>>();
+                // here context is whatever your strategy needs passed to it
+                // in ASP.Net Core it's usually HttpContext, but it can be anything
+                // you can then use this multitenant context as needed in your service
+                foreach (var s in resolver.Strategies)
+                {
+
+                    try
+                    {
+                        var identifier = await s.GetIdentifierAsync("randomtextstrategymatcher");
+                        if (identifier != null)
+                        {
+                            logger.LogInformation($"{this.GetType().Name} resolved a tenant with the multitenant strategy");
+
+                            var allResult = await resolver.Stores.First().GetAllAsync();
+                            var filtered = allResult.Where(w => w.Identifier.Equals(identifier)).First();
+                            logger.LogInformation("resolved tenant");
+                            this.TenantInfo = filtered as ITenantInfo;
+                        }
+                        else
+                        {
+                            throw new Exception($"{this.GetType().Name} unable to resolve tenant;");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        logger.LogWarning($"{this.GetType().Name} problem resolving tenant {e.Message}");
+                    }
+                }
+            }
+            else
+            {
+                this.logger.LogWarning($"{this.GetType().Name} is handling a previously initialized tenant context");
+            }
+
+        }
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             this.TenantMismatchMode = TenantMismatchMode.Overwrite;
@@ -46,11 +96,15 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         }
         #endregion
 
-        public MSSQLHostingContext(DbContextOptions<MSSQLHostingContext> options, IConfiguration config, Finbuckle.MultiTenant.ITenantInfo tenant) : base(options, tenant)
+        public MSSQLHostingContext(DbContextOptions<MSSQLHostingContext> options, ILogger<MSSqlContentContext> logger, IServiceProvider serviceProvider, IConfiguration config, Finbuckle.MultiTenant.ITenantInfo tenant) : base(options, tenant)
         {
             this.TenantInfo = tenant;
             this._configuration = config;
             this.SqlDialect = DatabaseServerFamily.IsSQLServer;
+            this.logger = logger;
+            this.serviceProvider = serviceProvider;
+
+            this.ResolveTenant().RunSynchronously();
         }
 
         void OnModelCreatingPartial(ModelBuilder builder)
