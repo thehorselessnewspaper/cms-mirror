@@ -33,7 +33,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             this.logger = logger;
             this.SqlDialect = DatabaseServerFamily.IsSQLServer;
 
-            this.ResolveTenant().RunSynchronously();
+            this.ResolveTenant().GetAwaiter().GetResult();
+
         }
 
 

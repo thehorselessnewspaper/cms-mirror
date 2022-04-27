@@ -104,7 +104,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             this.logger = logger;
             this.serviceProvider = serviceProvider;
 
-            this.ResolveTenant().RunSynchronously();
+            this.ResolveTenant().GetAwaiter().GetResult();
         }
 
         void OnModelCreatingPartial(ModelBuilder builder)
