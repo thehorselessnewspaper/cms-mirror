@@ -2,8 +2,10 @@
 using Finbuckle.MultiTenant.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TheHorselessNewspaper.HostingModel.Context;
+using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 
@@ -20,11 +22,15 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
         public DbSet<TenantIdentifierStrategy> TenantIdentifierStrategies { get; set; }
 
+        private IServiceProvider serviceProvider;
+        private ILogger<MSSqlContentContext> logger;
         public DbSet<TenantIdentifierStrategyContainer> TenantIdentifierStrategyContainers { get; set; }
-        public MSSqlContentContext(DbContextOptions<MSSqlContentContext> options, Finbuckle.MultiTenant.ITenantInfo tenant, IConfiguration config, ILogger<MSSqlContentContext> logger = null) : base(options)
+        public MSSqlContentContext(DbContextOptions<MSSqlContentContext> options, ILogger<MSSqlContentContext> logger,  IServiceProvider serviceProvider, Finbuckle.MultiTenant.ITenantInfo tenant, IConfiguration config) : base(options)
         {
             this.TenantInfo = tenant;
             this._configuration = config;
+            this.serviceProvider = serviceProvider;
+            this.logger = logger;
             this.SqlDialect = DatabaseServerFamily.IsSQLServer;
         }
 
@@ -34,12 +40,56 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         /// <summary>
         /// as per https://www.finbuckle.com/MultiTenant/Docs/v6.5.1/EFCore#adding-multitenant-functionality-to-an-existing-dbcontext
         /// </summary>
-        public ITenantInfo TenantInfo { get; }
+        public ITenantInfo TenantInfo { get; set; }
         public TenantMismatchMode TenantMismatchMode { get; set; }
         public TenantNotSetMode TenantNotSetMode { get; set; }
 
+        private async Task ResolveTenant()
+        {
+
+            if (this.TenantInfo == null)
+            {
+                this.logger.LogWarning($"{this.GetType().Name} is handling a null tenant context");
+
+                var tenant = new HorselessTenantInfo();
+                // here TTenatInfo is the type of your custom tenant info object
+                var resolver = serviceProvider.GetRequiredService<ITenantResolver<HorselessTenantInfo>>();
+                // here context is whatever your strategy needs passed to it
+                // in ASP.Net Core it's usually HttpContext, but it can be anything
+                // you can then use this multitenant context as needed in your service
+                foreach (var s in resolver.Strategies)
+                {
+
+                    try
+                    {
+                        var identifier = await s.GetIdentifierAsync("randomtextstrategymatcher");
+                        if (identifier != null)
+                        {
+                            logger.LogInformation($"resolved a tenant with the strategy");
+
+                            var allResult = await resolver.Stores.First().GetAllAsync();
+                            var filtered = allResult.Where(w => w.Identifier.Equals(identifier)).First();
+                            logger.LogInformation("resolved tenant");
+                            this.TenantInfo = filtered as ITenantInfo;
+                        }
+                        else
+                        {
+                            throw new Exception("unable to resolve tenant;");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        logger.LogWarning($"problem resolving tenant {e.Message}");
+                    }
+                }
+            }
+
+        }
+
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
+            this.ResolveTenant().RunSynchronously();
+
             this.TenantMismatchMode = TenantMismatchMode.Overwrite;
             this.TenantNotSetMode = TenantNotSetMode.Overwrite;
             this.EnforceMultiTenant();
@@ -49,6 +99,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
             CancellationToken cancellationToken = default(CancellationToken))
         {
+
+            await this.ResolveTenant();
             this.TenantMismatchMode = TenantMismatchMode.Overwrite;
             this.TenantNotSetMode = TenantNotSetMode.Overwrite;
             this.EnforceMultiTenant();

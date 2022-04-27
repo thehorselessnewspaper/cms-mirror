@@ -28,6 +28,7 @@ using static System.Formats.Asn1.AsnWriter;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
+using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
 namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 {
@@ -226,6 +227,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                 using (var innerScope = _services.CreateScope())
                 {
+
                     // var autoMapper = scope.ServiceProvider.GetRequiredService<IMapper>();
                     string configuredRestBaseUrl = GetRestBaseUrl(innerScope);
 
