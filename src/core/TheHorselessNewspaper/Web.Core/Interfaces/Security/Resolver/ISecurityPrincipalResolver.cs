@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using HorselessNewspaper.Core.Interfaces.Model.HttpContextFeatureModels;
 
 namespace HorselessNewspaper.Web.Core.Interfaces.Security.Resolver
 {
@@ -22,6 +23,6 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Security.Resolver
 
         public Task<bool> EnsureCanResoleCurrentTenant();
 
-        // public Task<HorselessSession> GetCurrentSessionForPrincipal(Principal sessionPrincipal);
+        public Task<IHorselessHttpSessionFeature<HorselessSession>> GetCurrentSessionForPrincipal(Guid sessionPrincipalId);
     }
 }

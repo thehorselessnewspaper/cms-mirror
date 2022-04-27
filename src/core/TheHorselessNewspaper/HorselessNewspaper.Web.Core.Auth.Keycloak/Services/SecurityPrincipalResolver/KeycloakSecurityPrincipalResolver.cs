@@ -14,6 +14,9 @@ using System.Text.Json;
 using HorselessNewspaper.Web.Core.Model.Security;
 using Finbuckle.MultiTenant;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
+using HorselessNewspaper.Core.Interfaces.Model.HttpContextFeatureModels;
+using HorselessNewspaper.Web.Core.Model.HttpContextFeatures;
+using HorselessNewspaper.Web.Core.Extensions.HttpRequestExtensions;
 
 namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalResolver
 {
@@ -23,9 +26,12 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
     /// </summary>
     public class KeycloakSecurityPrincipalResolver : ISecurityPrincipalResolver
     {
+
+
         IHttpContextAccessor _httpContextAccessor;
         private IQueryableContentModelOperator<Tenant> _tenantOperator;
         private IQueryableContentModelOperator<Principal> _principalOperator;
+        private IQueryableContentModelOperator<HorselessSession> _horselessSessionOperator;
         private IKeycloakAuthOptions _keycloakAuthOptions;
         private HttpClient _httpClient;
         ILogger<KeycloakSecurityPrincipalResolver> _logger;
@@ -36,6 +42,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
             IKeycloakAuthOptions keycloakOptions,
             IQueryableContentModelOperator<Tenant> tenantOperator,
                IQueryableContentModelOperator<Principal> principalOperator,
+               IQueryableContentModelOperator<HorselessSession> horselessSessionOperator,
                HttpClient httpClient,
                ILogger<KeycloakSecurityPrincipalResolver> logger,
                ITenantInfo tenantInfo)
@@ -47,6 +54,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
             this._httpClient = httpClient;
             this._logger = logger;
             this._iTenantInfo = tenantInfo;
+            this._horselessSessionOperator = horselessSessionOperator;
         }
 
         /// <summary>
@@ -252,7 +260,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         var principalQuery = await this._principalOperator.Read(r => r.IsAnonymous == false);
                         var principalCollection = principalQuery.ToList();
                         var principalQueryResult = principalQuery == null || principalCollection.Count() == 0 ? null : principalQuery.ToList().First();
-                        if(principalQueryResult != null)
+                        if (principalQueryResult != null)
                         {
                             _logger.LogInformation($"found authenticated user in database with upn={user.Claims.Upn()}");
                             return principalQueryResult;
@@ -336,7 +344,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                     //var insertRelatedResult = await this._tenantOperator.InsertRelatedEntity<Principal>(
                                     //    tenantQueryResult.Id, nameof(Tenant.Accounts), new List<Principal>() { principal });
 
-                                      if (principalInsertResult != null)
+                                    if (principalInsertResult != null)
                                     {
                                         return principalInsertResult;
                                     }
@@ -356,7 +364,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         _logger.LogInformation($"handling anonymous request");
                         // resolve the tenant
                         var tenantQuery = await _tenantOperator.Read(w =>
-                            w.TenantIdentifier.Equals(_iTenantInfo.Identifier), new List<string> { nameof(Tenant.Owners), nameof(Tenant.Accounts)});
+                            w.TenantIdentifier.Equals(_iTenantInfo.Identifier), new List<string> { nameof(Tenant.Owners), nameof(Tenant.Accounts) });
                         var tenantQueryResult = tenantQuery == null ? null : tenantQuery.ToList().FirstOrDefault();
 
                         var allTenants = await _tenantOperator.Read(w => w.IsSoftDeleted != true, new List<string> { nameof(Tenant.Accounts), nameof(Tenant.Owners) });
@@ -373,11 +381,11 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         {
                             return anonymousPrincipalQueryResult;
                         }
-                        if(isAnAccount)
+                        if (isAnAccount)
                         {
                             _logger.LogInformation("anonymous user is an account in current tenant");
                         }
-                        else if(isAnOwner)
+                        else if (isAnOwner)
                         {
                             _logger.LogInformation("anonymous user is an owner in current tenant");
                         }
@@ -391,9 +399,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                         w.IsSoftDeleted == false, new List<string> { nameof(Tenant.Owners), nameof(Tenant.Accounts) });
 
 
-                            var principalQueryResult = principalQuery == null 
-                                                                || principalQuery.Count() == 0 
-                                                                ? null : 
+                            var principalQueryResult = principalQuery == null
+                                                                || principalQuery.Count() == 0
+                                                                ? null :
                                                                 principalQuery.ToList().First();
 
                             if (principalQueryResult != null)
@@ -477,17 +485,102 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
             return principal;
         }
 
-        //public async Task<HorselessSession> GetCurrentSessionForPrincipal(Principal sessionPrincipal)
-        //{
-        //    if (_httpContextAccessor.HttpContext != null)
-        //    {
+        public async Task<IHorselessHttpSessionFeature<HorselessSession>> GetCurrentSessionForPrincipal(Guid sessionPrincipalId)
+        {
 
-        //    }
-        //    else
-        //    {
 
-        //    }
-        //}
+            var httpContext = this._httpContextAccessor.HttpContext;
 
+            var principalQuery = await this._principalOperator.Read(w => w.Id == sessionPrincipalId);
+
+            var hasInsertedSessionQuery = await this._horselessSessionOperator.ReadAsEnumerable(w => w.HorselessSessionPrincipalId.Equals(httpContext.Session.Id));
+
+            if(hasInsertedSessionQuery != null && hasInsertedSessionQuery.Any() == true)
+            {
+                IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(sessionPrincipalId);
+
+                return ret;
+
+            }
+
+            else if (principalQuery != null && httpContext != null )
+            {
+                var principalQueryResult = principalQuery.First();
+
+                var newSession = new HorselessSession()
+                {
+                    Id = Guid.NewGuid(),
+                    DisplayName = principalQueryResult.DisplayName,
+                    IsAnonymous = principalQueryResult.IsAnonymous,
+                    Aud = principalQueryResult.Aud,
+                    CreatedAt = DateTime.UtcNow,
+                    Iss = principalQueryResult.Iss,
+                    IsSoftDeleted = false,
+                    ObjectId = Guid.NewGuid().ToString(),
+                    SessionId = httpContext.Session.Id,
+                    Sub = principalQueryResult.Sub,
+                    UpdatedAt = DateTime.UtcNow,
+                    HorselessSessionPrincipalId = principalQueryResult.Id
+                };
+
+                //principalQueryResult.HorselessSessions.Add(newSession);
+
+                var insertResult = await this._horselessSessionOperator.Create(newSession);
+                if(insertResult != null)
+                {
+                    IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(sessionPrincipalId);
+
+                    return ret;
+                }
+                else
+                {
+                    throw new Exception($"{this.GetType().Name} is unable to initialize the current session. failed to insert new session");
+                }
+            }
+            else
+            {
+                throw new Exception($"{this.GetType().Name} is unable to initialize the current session");
+            }
+
+        }
+
+        private async Task<IHorselessHttpSessionFeature<HorselessSession>> GetSessionFeature(Guid sessionPrincipalId)
+        {
+            try
+            {
+                var httpContext = this._httpContextAccessor.HttpContext;
+
+                var principalQuery = await this._principalOperator.ReadAsEnumerable(w => w.Id == sessionPrincipalId);
+
+                var hasInsertedSessionQuery = await this._horselessSessionOperator.ReadAsEnumerable(w => w.HorselessSessionPrincipalId.Equals(httpContext.Session.Id));
+
+                // session already created for this principal scenario
+                var payload = hasInsertedSessionQuery.FirstOrDefault();
+
+                IHorselessHttpSessionFeature<HorselessSession> ret = new HorselessHttpSessionFeature();
+                ret.FeaturePayload = payload;
+                ret.HttpUrl = new Uri(httpContext.Request.GetFullHttpUrl());
+                ret.HttpSessionId = httpContext.Session.Id;
+
+                ret.SessionStartedAt = DateTime.UtcNow;
+                ret.SessionLastUpdatedAt = DateTime.UtcNow;
+
+                if (payload.IsAnonymous == true)
+                {
+                    ret.IsAnonymous = true;
+                }
+                else
+                {
+                    ret.IsAnonymous = false;
+                }
+
+                return ret;
+            }
+            catch(Exception ex)
+            {
+                this._logger.LogError($"{this.GetType().Name} problem initializing session feature {ex.Message}");
+                throw new Exception($"{this.GetType().Name} problem initializing session feature {ex.Message}", ex);
+            }
+        }
     }
 }

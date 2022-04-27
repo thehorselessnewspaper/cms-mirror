@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HorselessNewspaper.Core.Interfaces\HorselessNewspaper.Core.Interfaces.csproj" />
     <ProjectReference Include="..\HorselessNewspaper.Core.Web.Prototype\HorselessNewspaper.Core.Web.Prototype.csproj" />
   </ItemGroup>
 

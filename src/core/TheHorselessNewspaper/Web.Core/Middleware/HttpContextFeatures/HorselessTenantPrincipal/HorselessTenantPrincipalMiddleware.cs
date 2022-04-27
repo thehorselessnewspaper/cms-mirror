@@ -114,8 +114,8 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
                         _logger.LogInformation("preparing HttpRequest.Feature.Session");
                         var currentPrincipal = await securityPrincipalResolver.GetCurrentPrincipal();
 
-                        context.Features.Set<Principal>((currentPrincipal));
-                        _logger.LogInformation($"principal feature set for UPN: {currentPrincipal.UPN}");
+                        var sessionFeature = await securityPrincipalResolver.GetCurrentSessionForPrincipal(currentPrincipal.Id);
+                        _logger.LogInformation($"session feature set for UPN: {currentPrincipal.UPN}");
                     }
                     else
                     {

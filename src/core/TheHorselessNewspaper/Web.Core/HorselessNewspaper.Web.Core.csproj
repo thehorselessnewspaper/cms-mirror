@@ -24,7 +24,6 @@
 	<ItemGroup>
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
 		<PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.2" />
-		<PackageReference Include="HorselessNewspaper.Core.Interfaces" Version="0.4.220427.13" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.4" />
 		<PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.10" />
@@ -51,10 +50,13 @@
 	<ItemGroup>
 		<Folder Include="BackgroundServices\" />
 		<Folder Include="HostedServices\RazorClassLibrary\" />
-		<Folder Include="Model\HttpContextFeatures\" />
 		<Folder Include="SingletonServices\Cache\Tenant\Mock\" />
 		<Folder Include="swagger\" />
 		<Folder Include="UnitOfWork\HostingModel\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\HorselessNewspaper.Core.Interfaces\HorselessNewspaper.Core.Interfaces.csproj" />
 	</ItemGroup>
 
 	<!--<ItemGroup>
