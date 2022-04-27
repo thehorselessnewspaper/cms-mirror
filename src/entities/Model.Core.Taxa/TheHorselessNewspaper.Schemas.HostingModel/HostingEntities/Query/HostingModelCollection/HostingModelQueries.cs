@@ -44,6 +44,8 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
                 }
 
                 var tryResetAgain = await ((DbContext)_context).Database.EnsureCreatedAsync();
+
+                await ((DbContext)_context).SaveChangesAsync();
             }
             catch (Exception e)
             {
