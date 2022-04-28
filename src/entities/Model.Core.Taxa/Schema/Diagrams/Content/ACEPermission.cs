@@ -9,11 +9,8 @@
 
 namespace Schema.Diagrams.Content
 {
-
     using System;
-    using System.Text.Json.Serialization;
-
-    [JsonConverter(typeof(JsonStringEnumConverter))]
+    
     [Flags]
     public enum ACEPermission : int
     {
