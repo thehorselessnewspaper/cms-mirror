@@ -57,7 +57,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 
         public async Task<T> Create(T entity)
         {
-            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
+            var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
 
             _logger.LogDebug($"handling Create request");
             var dbSet = ((DbContext)_context).Set<T>();
@@ -85,7 +85,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
         {
             T? entity;
 
-            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
+            var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
 
             _logger.LogDebug($"handling Delete request");
             var dbSet = ((DbContext)_context).Set<T>();
@@ -99,7 +99,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
         public async Task<IEnumerable<T>> Delete(Expression<Func<T, bool>> query, bool softDelete = true, bool whatIf = true)
         {
             var ret = new List<T>();
-            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
+            var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
 
             if (whatIf == true)
             {
@@ -145,7 +145,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 
         public async Task<IQueryable<T>> Read()
         {
-            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
+            var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
 
             try
             {
@@ -169,7 +169,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
         /// <returns></returns>
         public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null)
         {
-            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
+            var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
 
             try
             {
@@ -195,7 +195,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 
         public async Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null)
         {
-            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
+            var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
 
             try
             {
@@ -292,7 +292,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             var ret = new List<T>();
 
             _logger.LogDebug($"handling Update request");
-            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
+            var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
 
             foreach (var entity in entities)
             {
@@ -310,7 +310,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 
         public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class
         {
-            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
+            var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
 
             try
             {
