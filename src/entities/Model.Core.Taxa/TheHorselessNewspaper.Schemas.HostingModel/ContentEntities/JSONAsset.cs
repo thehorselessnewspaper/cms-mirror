@@ -25,7 +25,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string JsonValue { get; set; }
         public string JsonSchema { get; set; }
 
-        [InverseProperty(nameof(HorselessContent.JSONAsset))]
+        [InverseProperty("JSONAsset")]
         public virtual ICollection<HorselessContent> HorselessContents { get; set; }
     }
 }

@@ -26,7 +26,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string PublishedURL { get; set; }
         public string PreviewURL { get; set; }
 
-        [InverseProperty(nameof(HorselessContent.FilesystemAsset))]
+        [InverseProperty("FilesystemAsset")]
         public virtual ICollection<HorselessContent> HorselessContents { get; set; }
     }
 }

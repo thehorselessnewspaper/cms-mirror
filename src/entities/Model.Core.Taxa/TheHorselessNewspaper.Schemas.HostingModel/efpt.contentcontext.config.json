@@ -66,6 +66,14 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[HorselessViewContentCollection]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HorselessViews]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[JSONAssets]",
          "ObjectType": 0
       },

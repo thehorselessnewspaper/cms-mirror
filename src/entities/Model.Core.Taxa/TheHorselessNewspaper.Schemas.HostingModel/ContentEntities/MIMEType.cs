@@ -24,7 +24,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public DateTime? CreatedAt { get; set; }
         public string MIMETypeName { get; set; }
 
-        [InverseProperty(nameof(HorselessContent.MIMEType))]
+        [InverseProperty("MIMEType")]
         public virtual ICollection<HorselessContent> HorselessContents { get; set; }
     }
 }

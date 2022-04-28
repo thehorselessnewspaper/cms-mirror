@@ -29,16 +29,16 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string JsonSchema { get; set; }
 
         [ForeignKey("DerivativeTaxons_Id")]
-        [InverseProperty(nameof(Taxon.DerivativeTaxons))]
+        [InverseProperty("DerivativeTaxons")]
         public virtual ICollection<Taxon> AntecedentTaxons { get; set; }
         [ForeignKey("AntecedentTaxons_Id")]
-        [InverseProperty(nameof(Taxon.AntecedentTaxons))]
+        [InverseProperty("AntecedentTaxons")]
         public virtual ICollection<Taxon> DerivativeTaxons { get; set; }
         [ForeignKey("Taxons_Id")]
-        [InverseProperty(nameof(Holonym.Taxons))]
+        [InverseProperty("Taxons")]
         public virtual ICollection<Holonym> Holonyms { get; set; }
         [ForeignKey("Taxons_Id")]
-        [InverseProperty(nameof(Taxonomy.Taxons))]
+        [InverseProperty("Taxons")]
         public virtual ICollection<Taxonomy> Taxonomies { get; set; }
     }
 }

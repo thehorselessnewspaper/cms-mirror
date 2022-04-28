@@ -30,22 +30,22 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public bool? IsActive { get; set; }
 
         [ForeignKey("SubjectAccessControlEntries_Id")]
-        [InverseProperty(nameof(AccessControlEntry.SubjectAccessControlEntries))]
+        [InverseProperty("SubjectAccessControlEntries")]
         public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
         [ForeignKey("OwnedAccessControlEntries_Id")]
-        [InverseProperty(nameof(Principal.OwnedAccessControlEntries))]
+        [InverseProperty("OwnedAccessControlEntries")]
         public virtual ICollection<Principal> Owners { get; set; }
         [ForeignKey("AccessControlEntries_Id")]
-        [InverseProperty(nameof(AccessControlEntry.AccessControlEntries))]
+        [InverseProperty("AccessControlEntries")]
         public virtual ICollection<AccessControlEntry> SubjectAccessControlEntries { get; set; }
         [ForeignKey("AccessControlEntries_Id")]
-        [InverseProperty(nameof(HorselessSession.AccessControlEntries))]
+        [InverseProperty("AccessControlEntries")]
         public virtual ICollection<HorselessSession> SubjectHorselessSessions { get; set; }
         [ForeignKey("AccessControlEntries_Id")]
-        [InverseProperty(nameof(Principal.AccessControlEntries))]
+        [InverseProperty("AccessControlEntries")]
         public virtual ICollection<Principal> SubjectPrincipals { get; set; }
         [ForeignKey("AccessControlEntries_Id")]
-        [InverseProperty(nameof(Tenant.AccessControlEntries))]
+        [InverseProperty("AccessControlEntries")]
         public virtual ICollection<Tenant> SubjectTenants { get; set; }
     }
 }

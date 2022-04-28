@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    [Index(nameof(FilesystemAssetId), Name = "IX_FK_FilesystemAssetMimeContent")]
-    [Index(nameof(JSONAssetId), Name = "IX_FK_MimeContentJSONAsset")]
-    [Index(nameof(MIMETypeId), Name = "IX_FK_MimeContentMIMEType")]
+    [Index("FilesystemAssetId", Name = "IX_FK_FilesystemAssetMimeContent")]
+    [Index("JSONAssetId", Name = "IX_FK_MimeContentJSONAsset")]
+    [Index("MIMETypeId", Name = "IX_FK_MimeContentMIMEType")]
     public partial class HorselessContent
     {
         public HorselessContent()
@@ -32,18 +32,18 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string PublishedURL { get; set; }
         public string PreviewURL { get; set; }
 
-        [ForeignKey(nameof(FilesystemAssetId))]
+        [ForeignKey("FilesystemAssetId")]
         [InverseProperty("HorselessContents")]
         public virtual FilesystemAsset FilesystemAsset { get; set; }
-        [ForeignKey(nameof(JSONAssetId))]
+        [ForeignKey("JSONAssetId")]
         [InverseProperty("HorselessContents")]
         public virtual JSONAsset JSONAsset { get; set; }
-        [ForeignKey(nameof(MIMETypeId))]
+        [ForeignKey("MIMETypeId")]
         [InverseProperty("HorselessContents")]
         public virtual MIMEType MIMEType { get; set; }
 
         [ForeignKey("MimeContents_Id")]
-        [InverseProperty(nameof(ContentCollection.MimeContents))]
+        [InverseProperty("MimeContents")]
         public virtual ICollection<ContentCollection> ContentCollections { get; set; }
     }
 }
