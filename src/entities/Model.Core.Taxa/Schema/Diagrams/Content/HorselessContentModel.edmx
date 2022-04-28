@@ -24,6 +24,7 @@
     <EntitySet Name="NavigationMenus" EntityType="HorselessContentModel.Store.NavigationMenus" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NavigationMenuItems" EntityType="HorselessContentModel.Store.NavigationMenuItems" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Taxonomies" EntityType="HorselessContentModel.Store.Taxonomies" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HorselessViews" EntityType="HorselessContentModel.Store.HorselessViews" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TenantContentCollection" EntityType="HorselessContentModel.Store.TenantContentCollection" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ContentCollectionMimeContent" EntityType="HorselessContentModel.Store.ContentCollectionMimeContent" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NavigationMenuNavigationMenu" EntityType="HorselessContentModel.Store.NavigationMenuNavigationMenu" store:Type="Tables" Schema="dbo" />
@@ -46,6 +47,7 @@
     <EntitySet Name="TenantAccessControlEntry" EntityType="HorselessContentModel.Store.TenantAccessControlEntry" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="HorselessSessionAccessControlEntry" EntityType="HorselessContentModel.Store.HorselessSessionAccessControlEntry" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="HorselessSessionPrincipal" EntityType="HorselessContentModel.Store.HorselessSessionPrincipal" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HorselessViewContentCollection" EntityType="HorselessContentModel.Store.HorselessViewContentCollection" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_TenantContentCollection_Tenant" Association="HorselessContentModel.Store.FK_TenantContentCollection_Tenant">
       <End Role="Tenant" EntitySet="Tenants" />
       <End Role="TenantContentCollection" EntitySet="TenantContentCollection" />
@@ -237,6 +239,14 @@
     <AssociationSet Name="FK_HorselessSessionPrincipal_Principal" Association="HorselessContentModel.Store.FK_HorselessSessionPrincipal_Principal">
       <End Role="Principal" EntitySet="Principals" />
       <End Role="HorselessSessionPrincipal" EntitySet="HorselessSessionPrincipal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HorselessViewContentCollection_HorselessView" Association="HorselessContentModel.Store.FK_HorselessViewContentCollection_HorselessView">
+      <End Role="HorselessView" EntitySet="HorselessViews" />
+      <End Role="HorselessViewContentCollection" EntitySet="HorselessViewContentCollection" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HorselessViewContentCollection_ContentCollection" Association="HorselessContentModel.Store.FK_HorselessViewContentCollection_ContentCollection">
+      <End Role="ContentCollection" EntitySet="ContentCollections" />
+      <End Role="HorselessViewContentCollection" EntitySet="HorselessViewContentCollection" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="HorselessContents">
@@ -479,6 +489,17 @@
     <Property Name="JsonValue" Type="nvarchar(max)" Nullable="true" />
     <Property Name="JsonSchema" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
+  <EntityType Name="HorselessViews">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ObjectId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="IsSoftDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="true" />
+    <Property Name="IsActive" Type="bit" Nullable="true" />
+  </EntityType>
   <EntityType Name="TenantContentCollection">
     <Key>
       <PropertyRef Name="Tenants_Id" />
@@ -654,6 +675,14 @@
     </Key>
     <Property Name="OwnedHorselessSessions_Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Owners_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HorselessViewContentCollection">
+    <Key>
+      <PropertyRef Name="HorselessViews_Id" />
+      <PropertyRef Name="ContentCollections_Id" />
+    </Key>
+    <Property Name="HorselessViews_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ContentCollections_Id" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <Association Name="FilesystemAssetMimeContent">
     <End Role="MimeContent" Type="HorselessContentModel.Store.HorselessContents" Multiplicity="*" />
@@ -1231,6 +1260,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_HorselessViewContentCollection_HorselessView">
+    <End Role="HorselessView" Type="HorselessContentModel.Store.HorselessViews" Multiplicity="1" />
+    <End Role="HorselessViewContentCollection" Type="HorselessContentModel.Store.HorselessViewContentCollection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HorselessView">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HorselessViewContentCollection">
+        <PropertyRef Name="HorselessViews_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HorselessViewContentCollection_ContentCollection">
+    <End Role="HorselessViewContentCollection" Type="HorselessContentModel.Store.HorselessViewContentCollection" Multiplicity="*" />
+    <End Role="ContentCollection" Type="HorselessContentModel.Store.ContentCollections" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ContentCollection">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HorselessViewContentCollection">
+        <PropertyRef Name="ContentCollections_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -1358,6 +1411,11 @@
             <End Role="HorselessSession" EntitySet="HorselessSessions" />
             <End Role="Principal" EntitySet="Principals" />
           </AssociationSet>
+          <EntitySet Name="HorselessViews" EntityType="HorselessContentModel.HorselessView" />
+          <AssociationSet Name="HorselessViewContentCollection" Association="HorselessContentModel.HorselessViewContentCollection">
+            <End Role="HorselessView" EntitySet="HorselessViews" />
+            <End Role="ContentCollection" EntitySet="ContentCollections" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="HorselessContent">
           <Key>
@@ -1451,6 +1509,7 @@
           <NavigationProperty Name="Publications" Relationship="HorselessContentModel.PublicationContentCollection" FromRole="ContentCollection" ToRole="Publication" />
           <Property Name="PreviewURL" Type="String" Nullable="true" />
           <NavigationProperty Name="Taxonomies" Relationship="HorselessContentModel.TaxonomyContentCollection" FromRole="ContentCollection" ToRole="Taxonomy" />
+          <NavigationProperty Name="HorselessViews" Relationship="HorselessContentModel.HorselessViewContentCollection" FromRole="ContentCollection" ToRole="HorselessView" />
         </EntityType>
         <Association Name="TenantContentCollection">
           <End Type="HorselessContentModel.Tenant" Role="Tenant" Multiplicity="*" />
@@ -1830,6 +1889,22 @@
           <End Type="HorselessContentModel.HorselessSession" Role="HorselessSession" Multiplicity="*" />
           <End Type="HorselessContentModel.Principal" Role="Principal" Multiplicity="*" />
         </Association>
+        <EntityType Name="HorselessView">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
+          <Property Name="ObjectId" Type="String" Nullable="true" />
+          <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="true" />
+          <NavigationProperty Name="ContentCollections" Relationship="HorselessContentModel.HorselessViewContentCollection" FromRole="HorselessView" ToRole="ContentCollection" />
+        </EntityType>
+        <Association Name="HorselessViewContentCollection">
+          <End Type="HorselessContentModel.HorselessView" Role="HorselessView" Multiplicity="*" />
+          <End Type="HorselessContentModel.ContentCollection" Role="ContentCollection" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2094,6 +2169,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="HorselessViews">
+      <EntityTypeMapping TypeName="IsTypeOf(HorselessContentModel.HorselessView)">
+        <MappingFragment StoreEntitySet="HorselessViews">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="IsSoftDeleted" ColumnName="IsSoftDeleted" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="TenantContentCollection" TypeName="HorselessContentModel.TenantContentCollection" StoreEntitySet="TenantContentCollection">
       <EndProperty Name="Tenant">
         <ScalarProperty Name="Id" ColumnName="Tenants_Id" />
@@ -2268,6 +2355,14 @@
       </EndProperty>
       <EndProperty Name="Principal">
         <ScalarProperty Name="Id" ColumnName="Owners_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="HorselessViewContentCollection" TypeName="HorselessContentModel.HorselessViewContentCollection" StoreEntitySet="HorselessViewContentCollection">
+      <EndProperty Name="HorselessView">
+        <ScalarProperty Name="Id" ColumnName="HorselessViews_Id" />
+      </EndProperty>
+      <EndProperty Name="ContentCollection">
+        <ScalarProperty Name="Id" ColumnName="ContentCollections_Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

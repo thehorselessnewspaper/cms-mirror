@@ -23,6 +23,7 @@ namespace Schema.Diagrams.Content
             this.ChildContentCollections = new HashSet<ContentCollection>();
             this.Publications = new HashSet<Publication>();
             this.Taxonomies = new HashSet<Taxonomy>();
+            this.HorselessViews = new HashSet<HorselessView>();
         }
     
         public System.Guid Id { get; set; }
@@ -47,5 +48,7 @@ namespace Schema.Diagrams.Content
         public virtual ICollection<Publication> Publications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Taxonomy> Taxonomies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HorselessView> HorselessViews { get; set; }
     }
 }

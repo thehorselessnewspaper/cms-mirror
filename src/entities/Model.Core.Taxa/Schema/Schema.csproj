@@ -100,6 +100,9 @@
     <Compile Include="Diagrams\Content\HorselessSession.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Diagrams\Content\HorselessView.cs">
+      <DependentUpon>HorselessContentModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Diagrams\Content\JSONAsset.cs">
       <DependentUpon>HorselessContentModel.tt</DependentUpon>
     </Compile>

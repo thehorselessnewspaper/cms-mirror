@@ -43,5 +43,6 @@ namespace Schema.Diagrams.Content
         public virtual DbSet<NavigationMenu> NavigationMenus { get; set; }
         public virtual DbSet<NavigationMenuItem> NavigationMenuItems { get; set; }
         public virtual DbSet<Taxonomy> Taxonomies { get; set; }
+        public virtual DbSet<HorselessView> HorselessViews { get; set; }
     }
 }
