@@ -26,7 +26,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string JsonSchema { get; set; }
 
         [ForeignKey("Meronyms_Id")]
-        [InverseProperty(nameof(Holonym.Meronyms))]
+        [InverseProperty("Meronyms")]
         public virtual ICollection<Holonym> Holonyms { get; set; }
     }
 }

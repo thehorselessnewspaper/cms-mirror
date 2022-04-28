@@ -33,13 +33,13 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string PreviewURL { get; set; }
 
         [ForeignKey("Publications_Id")]
-        [InverseProperty(nameof(ContentCollection.Publications))]
+        [InverseProperty("Publications")]
         public virtual ICollection<ContentCollection> ContentCollections { get; set; }
         [ForeignKey("PublicationsChildren_Id")]
-        [InverseProperty(nameof(Publication.PublicationsChildren))]
+        [InverseProperty("PublicationsChildren")]
         public virtual ICollection<Publication> PublicationParents { get; set; }
         [ForeignKey("PublicationParents_Id")]
-        [InverseProperty(nameof(Publication.PublicationParents))]
+        [InverseProperty("PublicationParents")]
         public virtual ICollection<Publication> PublicationsChildren { get; set; }
     }
 }

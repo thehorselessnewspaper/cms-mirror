@@ -8,12 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    public partial class Taxonomy
+    public partial class HorselessView
     {
-        public Taxonomy()
+        public HorselessView()
         {
             ContentCollections = new HashSet<ContentCollection>();
-            Taxons = new HashSet<Taxon>();
         }
 
         [Key]
@@ -23,14 +22,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public bool? IsSoftDeleted { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
-        public string JsonValue { get; set; }
-        public string JsonSchema { get; set; }
+        public bool? IsActive { get; set; }
 
-        [ForeignKey("Taxonomies_Id")]
-        [InverseProperty("Taxonomies")]
+        [ForeignKey("HorselessViews_Id")]
+        [InverseProperty("HorselessViews")]
         public virtual ICollection<ContentCollection> ContentCollections { get; set; }
-        [ForeignKey("Taxonomies_Id")]
-        [InverseProperty("Taxonomies")]
-        public virtual ICollection<Taxon> Taxons { get; set; }
     }
 }

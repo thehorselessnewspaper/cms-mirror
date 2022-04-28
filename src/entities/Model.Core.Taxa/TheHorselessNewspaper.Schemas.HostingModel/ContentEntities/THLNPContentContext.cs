@@ -20,6 +20,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public virtual DbSet<Holonym> Holonyms { get; set; }
         public virtual DbSet<HorselessContent> HorselessContents { get; set; }
         public virtual DbSet<HorselessSession> HorselessSessions { get; set; }
+        public virtual DbSet<HorselessView> HorselessViews { get; set; }
         public virtual DbSet<JSONAsset> JSONAssets { get; set; }
         public virtual DbSet<MIMEType> MIMETypes { get; set; }
         public virtual DbSet<Meronym> Meronyms { get; set; }
@@ -217,6 +218,26 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
                             j.ToTable("HorselessSessionPrincipal");
 
                             j.HasIndex(new[] { "Owners_Id" }, "IX_FK_HorselessSessionPrincipal_Principal");
+                        });
+            });
+
+            modelBuilder.Entity<HorselessView>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasMany(d => d.ContentCollections)
+                    .WithMany(p => p.HorselessViews)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "HorselessViewContentCollection",
+                        l => l.HasOne<ContentCollection>().WithMany().HasForeignKey("ContentCollections_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_HorselessViewContentCollection_ContentCollection"),
+                        r => r.HasOne<HorselessView>().WithMany().HasForeignKey("HorselessViews_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_HorselessViewContentCollection_HorselessView"),
+                        j =>
+                        {
+                            j.HasKey("HorselessViews_Id", "ContentCollections_Id");
+
+                            j.ToTable("HorselessViewContentCollection");
+
+                            j.HasIndex(new[] { "ContentCollections_Id" }, "IX_FK_HorselessViewContentCollection_ContentCollection");
                         });
             });
 

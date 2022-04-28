@@ -33,29 +33,29 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string Aud { get; set; }
         public string Sub { get; set; }
 
-        [InverseProperty(nameof(HorselessSession.HorselessSessionPrincipal))]
+        [InverseProperty("HorselessSessionPrincipal")]
         public virtual ICollection<HorselessSession> HorselessSessions { get; set; }
 
         [ForeignKey("SubjectPrincipals_Id")]
-        [InverseProperty(nameof(AccessControlEntry.SubjectPrincipals))]
+        [InverseProperty("SubjectPrincipals")]
         public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
         [ForeignKey("Owners_Id")]
-        [InverseProperty(nameof(AccessControlEntry.Owners))]
+        [InverseProperty("Owners")]
         public virtual ICollection<AccessControlEntry> OwnedAccessControlEntries { get; set; }
         [ForeignKey("Owners_Id")]
-        [InverseProperty(nameof(HorselessSession.Owners))]
+        [InverseProperty("Owners")]
         public virtual ICollection<HorselessSession> OwnedHorselessSessions { get; set; }
         [ForeignKey("Owners_Id")]
-        [InverseProperty(nameof(Principal.Owners))]
+        [InverseProperty("Owners")]
         public virtual ICollection<Principal> OwnedPrincipals { get; set; }
         [ForeignKey("Owners_Id")]
-        [InverseProperty(nameof(Tenant.Owners))]
+        [InverseProperty("Owners")]
         public virtual ICollection<Tenant> OwnedTenants { get; set; }
         [ForeignKey("OwnedPrincipals_Id")]
-        [InverseProperty(nameof(Principal.OwnedPrincipals))]
+        [InverseProperty("OwnedPrincipals")]
         public virtual ICollection<Principal> Owners { get; set; }
         [ForeignKey("Accounts_Id")]
-        [InverseProperty(nameof(Tenant.Accounts))]
+        [InverseProperty("Accounts")]
         public virtual ICollection<Tenant> TenantAccounts { get; set; }
     }
 }

@@ -34,13 +34,13 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string MenuItemAltText { get; set; }
 
         [ForeignKey("ParentNavigationItems_Id")]
-        [InverseProperty(nameof(NavigationMenuItem.ParentNavigationItems))]
+        [InverseProperty("ParentNavigationItems")]
         public virtual ICollection<NavigationMenuItem> ChildNavigationItems { get; set; }
         [ForeignKey("ChildNavigationItems_Id")]
-        [InverseProperty(nameof(NavigationMenuItem.ChildNavigationItems))]
+        [InverseProperty("ChildNavigationItems")]
         public virtual ICollection<NavigationMenuItem> ParentNavigationItems { get; set; }
         [ForeignKey("ChildNavigationMenuItems_Id")]
-        [InverseProperty(nameof(NavigationMenu.ChildNavigationMenuItems))]
+        [InverseProperty("ChildNavigationMenuItems")]
         public virtual ICollection<NavigationMenu> ParentNavigationMenus { get; set; }
     }
 }

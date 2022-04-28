@@ -13,6 +13,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public ContentCollection()
         {
             ChildContentCollections = new HashSet<ContentCollection>();
+            HorselessViews = new HashSet<HorselessView>();
             MimeContents = new HashSet<HorselessContent>();
             ParentContentCollections = new HashSet<ContentCollection>();
             Publications = new HashSet<Publication>();
@@ -33,22 +34,25 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string PreviewURL { get; set; }
 
         [ForeignKey("ParentContentCollections_Id")]
-        [InverseProperty(nameof(ContentCollection.ParentContentCollections))]
+        [InverseProperty("ParentContentCollections")]
         public virtual ICollection<ContentCollection> ChildContentCollections { get; set; }
         [ForeignKey("ContentCollections_Id")]
-        [InverseProperty(nameof(HorselessContent.ContentCollections))]
+        [InverseProperty("ContentCollections")]
+        public virtual ICollection<HorselessView> HorselessViews { get; set; }
+        [ForeignKey("ContentCollections_Id")]
+        [InverseProperty("ContentCollections")]
         public virtual ICollection<HorselessContent> MimeContents { get; set; }
         [ForeignKey("ChildContentCollections_Id")]
-        [InverseProperty(nameof(ContentCollection.ChildContentCollections))]
+        [InverseProperty("ChildContentCollections")]
         public virtual ICollection<ContentCollection> ParentContentCollections { get; set; }
         [ForeignKey("ContentCollections_Id")]
-        [InverseProperty(nameof(Publication.ContentCollections))]
+        [InverseProperty("ContentCollections")]
         public virtual ICollection<Publication> Publications { get; set; }
         [ForeignKey("ContentCollections_Id")]
-        [InverseProperty(nameof(Taxonomy.ContentCollections))]
+        [InverseProperty("ContentCollections")]
         public virtual ICollection<Taxonomy> Taxonomies { get; set; }
         [ForeignKey("ContentCollections_Id")]
-        [InverseProperty(nameof(Tenant.ContentCollections))]
+        [InverseProperty("ContentCollections")]
         public virtual ICollection<Tenant> Tenants { get; set; }
     }
 }
