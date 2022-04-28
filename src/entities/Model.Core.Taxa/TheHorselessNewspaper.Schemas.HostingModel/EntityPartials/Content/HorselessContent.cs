@@ -5,6 +5,7 @@ using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
+    
     [MultiTenant]
     public partial class HorselessContent : IContentRowLevelSecured
     {

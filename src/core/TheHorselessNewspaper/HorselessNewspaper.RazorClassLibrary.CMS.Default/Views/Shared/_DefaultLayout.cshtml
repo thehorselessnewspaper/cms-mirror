@@ -70,7 +70,7 @@
             </div>
         </nav>
     </header>
-    <div style="padding-top: 70px;" class="container-fluid wrapper flex-shrink-0">
+    <div style="margin-top: 70px;" class="container-fluid wrapper flex-shrink-0">
 
         @* // todo - this must become HttpContext.CanShowAdminSidebar *@
         @if (Context.HasDevopsAdminClaims(new List<string>() { "admin" }))
@@ -86,7 +86,7 @@
             await Html.RenderPartialAsync("_TenantAdminSidebar");
         }
 
-        <div id="content">
+        <div style="margin-top: 70px;" id="content">
             <main role="main">
 
 

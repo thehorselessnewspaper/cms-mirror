@@ -8,9 +8,11 @@ using TheHorselessNewspaper.HostingModel.Entities.Query;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controllers
 {
+
     [Area("Admin")]
     public class TenantOwnerController : Controller
     {
@@ -32,6 +34,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
             this.CurrentTenant = tenantInfo;
         }
 
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var hasWaitingRequest = await GetPendingRegistrationStatusMessage();
@@ -39,6 +42,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
             return View();
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Register()
         {
             var hasWaitingRequest = await GetPendingRegistrationStatusMessage();

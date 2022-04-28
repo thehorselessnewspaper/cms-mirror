@@ -10,9 +10,7 @@
 namespace Schema.Diagrams.Content
 {
     using System;
-    using System.Text.Json.Serialization;
-
-    [JsonConverter(typeof(JsonStringEnumConverter))]
+    
     public enum ACEPermissionScope : int
     {
         OWNER = 0,

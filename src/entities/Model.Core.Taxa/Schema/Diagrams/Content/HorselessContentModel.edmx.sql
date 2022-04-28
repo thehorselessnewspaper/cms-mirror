@@ -2,11 +2,11 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/13/2022 16:03:41
--- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
+-- Date Created: 04/28/2022 15:20:24
+-- Generated from EDMX file: E:\src\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
-
+SET QUOTED_IDENTIFIER OFF
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -153,8 +153,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_HorselessSessionAccessControlEntry_AccessControlledHorselessSession]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[HorselessSessionAccessControlEntry] DROP CONSTRAINT [FK_HorselessSessionAccessControlEntry_AccessControlledHorselessSession];
 GO
-IF OBJECT_ID(N'[dbo].[FK_HorselessSessionPrincipal]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[HorselessSessions] DROP CONSTRAINT [FK_HorselessSessionPrincipal];
+IF OBJECT_ID(N'[dbo].[FK_HorselessSessionPrincipal_HorselessSession]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HorselessSessionPrincipal] DROP CONSTRAINT [FK_HorselessSessionPrincipal_HorselessSession];
+GO
+IF OBJECT_ID(N'[dbo].[FK_HorselessSessionPrincipal_Principal]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HorselessSessionPrincipal] DROP CONSTRAINT [FK_HorselessSessionPrincipal_Principal];
 GO
 
 -- --------------------------------------------------
@@ -277,6 +280,9 @@ IF OBJECT_ID(N'[dbo].[TenantAccessControlEntry]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[HorselessSessionAccessControlEntry]', 'U') IS NOT NULL
     DROP TABLE [dbo].[HorselessSessionAccessControlEntry];
+GO
+IF OBJECT_ID(N'[dbo].[HorselessSessionPrincipal]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[HorselessSessionPrincipal];
 GO
 
 -- --------------------------------------------------
@@ -523,6 +529,17 @@ CREATE TABLE [dbo].[Taxonomies] (
 );
 GO
 
+-- Creating table 'HorselessViews'
+CREATE TABLE [dbo].[HorselessViews] (
+    [Id] uniqueidentifier  NOT NULL,
+    [DisplayName] nvarchar(max)  NULL,
+    [ObjectId] nvarchar(max)  NULL,
+    [IsSoftDeleted] bit  NULL,
+    [CreatedAt] datetime  NULL,
+    [IsActive] bit  NULL
+);
+GO
+
 -- Creating table 'TenantContentCollection'
 CREATE TABLE [dbo].[TenantContentCollection] (
     [Tenants_Id] uniqueidentifier  NOT NULL,
@@ -677,6 +694,13 @@ CREATE TABLE [dbo].[HorselessSessionPrincipal] (
 );
 GO
 
+-- Creating table 'HorselessViewContentCollection'
+CREATE TABLE [dbo].[HorselessViewContentCollection] (
+    [HorselessViews_Id] uniqueidentifier  NOT NULL,
+    [ContentCollections_Id] uniqueidentifier  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -786,6 +810,12 @@ GO
 -- Creating primary key on [Id] in table 'Taxonomies'
 ALTER TABLE [dbo].[Taxonomies]
 ADD CONSTRAINT [PK_Taxonomies]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'HorselessViews'
+ALTER TABLE [dbo].[HorselessViews]
+ADD CONSTRAINT [PK_HorselessViews]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -919,6 +949,12 @@ GO
 ALTER TABLE [dbo].[HorselessSessionPrincipal]
 ADD CONSTRAINT [PK_HorselessSessionPrincipal]
     PRIMARY KEY CLUSTERED ([OwnedHorselessSessions_Id], [Owners_Id] ASC);
+GO
+
+-- Creating primary key on [HorselessViews_Id], [ContentCollections_Id] in table 'HorselessViewContentCollection'
+ALTER TABLE [dbo].[HorselessViewContentCollection]
+ADD CONSTRAINT [PK_HorselessViewContentCollection]
+    PRIMARY KEY CLUSTERED ([HorselessViews_Id], [ContentCollections_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -1511,6 +1547,30 @@ GO
 CREATE INDEX [IX_FK_HorselessSessionPrincipal_Principal]
 ON [dbo].[HorselessSessionPrincipal]
     ([Owners_Id]);
+GO
+
+-- Creating foreign key on [HorselessViews_Id] in table 'HorselessViewContentCollection'
+ALTER TABLE [dbo].[HorselessViewContentCollection]
+ADD CONSTRAINT [FK_HorselessViewContentCollection_HorselessView]
+    FOREIGN KEY ([HorselessViews_Id])
+    REFERENCES [dbo].[HorselessViews]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ContentCollections_Id] in table 'HorselessViewContentCollection'
+ALTER TABLE [dbo].[HorselessViewContentCollection]
+ADD CONSTRAINT [FK_HorselessViewContentCollection_ContentCollection]
+    FOREIGN KEY ([ContentCollections_Id])
+    REFERENCES [dbo].[ContentCollections]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_HorselessViewContentCollection_ContentCollection'
+CREATE INDEX [IX_FK_HorselessViewContentCollection_ContentCollection]
+ON [dbo].[HorselessViewContentCollection]
+    ([ContentCollections_Id]);
 GO
 
 -- --------------------------------------------------

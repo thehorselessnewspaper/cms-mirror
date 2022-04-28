@@ -4,19 +4,23 @@
 @{
 }
 
-@if (User.Identity.IsAuthenticated)
-{
-    <span>begin registration by clicking the link below</span>
-    <a asp-area="Admin" asp-controller="TenantRegistration" asp-action="Create">START</a>
+<div class="row">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="container">
+            <span>begin registration by clicking the link below</span>
+            <a asp-area="Admin" asp-controller="TenantRegistration" asp-action="Create">START</a>
 
-    <span>tenant registration</span>
-    <p>pending registrations: @ViewData["WaitingRequestMessage"]</p>
-}
-else
-{
-    <div>
-        <span>register new tenant</span>
-        <p>you need to login to register</p>
+            <span>tenant registration</span>
+            <p>pending registrations: @ViewData["WaitingRequestMessage"]</p>
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <span>register new tenant</span>
+            <p>you need to login to register</p>
 
-    </div>
-}
+        </div>
+    }
+</div>

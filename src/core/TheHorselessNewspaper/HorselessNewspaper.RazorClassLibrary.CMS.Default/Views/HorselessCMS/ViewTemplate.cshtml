@@ -1,9 +1,15 @@
-﻿
+﻿@using HorselessNewspaper.Web.Core.Authorization.Model
+@using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         @* // todo - this must become HttpContext.CanShowAdminSidebar *@
-        @if (User.Claims != null && User.Claims.Count() > 0)
+        @{
+            var currentTenant = this.Context.Features.Get<Tenant>();
+            var isAuthorizedForAdminSidebarButton = await AuthorizationService.AuthorizeAsync(User, currentTenant, AccessControlledOperations.Execute);
+            var isAuthorizedResult = isAuthorizedForAdminSidebarButton.Succeeded;
+        }
+        @if (isAuthorizedForAdminSidebarButton.Succeeded)
         {
             <button type="button" id="sidebarCollapse" class="btn btn-info">
                 <i class="fas fa-align-left"></i>
