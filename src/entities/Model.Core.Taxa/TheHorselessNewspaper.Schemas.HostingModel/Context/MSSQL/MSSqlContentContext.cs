@@ -33,8 +33,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             this.logger = logger;
             this.SqlDialect = DatabaseServerFamily.IsSQLServer;
 
-            this.ResolveTenant().GetAwaiter().GetResult();
-
         }
 
 
@@ -47,7 +45,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         public TenantMismatchMode TenantMismatchMode { get; set; }
         public TenantNotSetMode TenantNotSetMode { get; set; }
 
-        private async Task ResolveTenant()
+        public async Task<ITenantInfo> ResolveTenant()
         {
 
             if (this.TenantInfo == null)
@@ -74,6 +72,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
                             var filtered = allResult.Where(w => w.Identifier.Equals(identifier)).First();
                             logger.LogInformation("resolved tenant");
                             this.TenantInfo = filtered as ITenantInfo;
+                            return this.TenantInfo;
                         }
                         else
                         {
@@ -91,12 +90,13 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
                 this.logger.LogWarning($"{this.GetType().Name} is handling a previously initialized tenant context");
             }
 
+            return this.TenantInfo;
+
         }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
-            this.ResolveTenant().RunSynchronously();
-
+  
             this.TenantMismatchMode = TenantMismatchMode.Overwrite;
             this.TenantNotSetMode = TenantNotSetMode.Overwrite;
             this.EnforceMultiTenant();

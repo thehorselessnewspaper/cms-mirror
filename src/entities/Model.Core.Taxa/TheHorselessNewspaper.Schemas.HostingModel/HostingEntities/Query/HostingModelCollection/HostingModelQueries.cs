@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.HostingEntities.Query.Extensions;
+using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollection
@@ -56,12 +57,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 
         public async Task<T> Create(T entity)
         {
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
-
+            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
 
             _logger.LogDebug($"handling Create request");
             var dbSet = ((DbContext)_context).Set<T>();
@@ -75,12 +71,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
         public async Task<IEnumerable<T>> Create(IEnumerable<T> entities)
         {
             _logger.LogDebug($"handling Create request");
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
-
+            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
 
             var dbSet = ((DbContext)_context).Set<T>();
 
@@ -94,11 +85,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
         {
             T? entity;
 
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
+            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
 
             _logger.LogDebug($"handling Delete request");
             var dbSet = ((DbContext)_context).Set<T>();
@@ -112,11 +99,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
         public async Task<IEnumerable<T>> Delete(Expression<Func<T, bool>> query, bool softDelete = true, bool whatIf = true)
         {
             var ret = new List<T>();
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
+            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
 
             if (whatIf == true)
             {
@@ -162,11 +145,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 
         public async Task<IQueryable<T>> Read()
         {
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
+            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
 
             try
             {
@@ -190,11 +169,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
         /// <returns></returns>
         public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null)
         {
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
+            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
 
             try
             {
@@ -220,11 +195,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 
         public async Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null)
         {
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
+            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
 
             try
             {
@@ -321,13 +292,9 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             var ret = new List<T>();
 
             _logger.LogDebug($"handling Update request");
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
+            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
 
-            foreach(var entity in entities)
+            foreach (var entity in entities)
             {
                 var updateResult = await this.Update(entity, targetProperties);
                 ret.Add(updateResult);
@@ -343,11 +310,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 
         public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class
         {
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
+            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
 
             try
             {

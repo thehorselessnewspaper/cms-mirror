@@ -80,8 +80,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         public async Task<T> Create(T entity)
         {
             // _logger.LogInformation($"handling Create request for tenant context {_tenantInfo.Identifier}");
-
-
+            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
 
             try
             {
@@ -106,7 +105,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         public async Task<IEnumerable<T>> Create(IEnumerable<T> entities)
         {
 
-  
+            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
             try
             {
                 var dbSet = ((DbContext)_context).Set<T>();
@@ -129,7 +128,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         {
             T? entity;
 
-   
+            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
 
             try
             {
@@ -152,7 +151,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         {
             var ret = new List<T>();
 
- 
+            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
 
 
             if (whatIf == true)
@@ -203,14 +202,10 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         {
             IQueryable<T> result;
 
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
 
             try
             {
+                var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
                 var dbSet = ((DbContext)_context).Set<T>();
                 result = dbSet.AsQueryable<T>();
 
@@ -261,6 +256,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
    
             try
             {
+                var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
                 var dbSet = ((DbContext)_context).Set<T>().Where(query);
                 if (includeClauses != null)
                 {
@@ -300,6 +296,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
             try
             {
+                var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
                 // _logger.LogInformation($"handling Update request for tenant context {_tenantInfo.Identifier}");
 
                 if (targetProperties == null)
@@ -366,12 +363,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         public async Task<IEnumerable<T>> Update(IEnumerable<T> entities, List<String> targetProperties = null)
         {
             var ret = new List<T>();
-
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
+            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
 
             try
             {
@@ -396,6 +388,8 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
             try
             {
+
+                var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
                 var hasEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
 
                 T trackedEntity = default(T);

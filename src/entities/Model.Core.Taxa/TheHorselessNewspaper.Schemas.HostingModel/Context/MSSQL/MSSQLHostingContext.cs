@@ -34,7 +34,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         public TenantMismatchMode TenantMismatchMode { get; set; }
         public TenantNotSetMode TenantNotSetMode { get; set; }
 
-        private async Task ResolveTenant()
+        public async Task<ITenantInfo> ResolveTenant()
         {
 
             if (this.TenantInfo == null)
@@ -60,6 +60,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
                             var filtered = allResult.Where(w => w.Identifier.Equals(identifier)).First();
                             logger.LogInformation("resolved tenant");
                             this.TenantInfo = filtered as ITenantInfo;
+                            return this.TenantInfo;
                         }
                         else
                         {
@@ -75,8 +76,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             else
             {
                 this.logger.LogWarning($"{this.GetType().Name} is handling a previously initialized tenant context");
+                return this.TenantInfo;
             }
 
+            /// TODO make sure this is always valid
+            return this.TenantInfo;
         }
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
@@ -89,6 +93,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
             CancellationToken cancellationToken = default(CancellationToken))
         {
+            await this.ResolveTenant();
             this.TenantMismatchMode = TenantMismatchMode.Overwrite;
             this.TenantNotSetMode = TenantNotSetMode.Overwrite;
             this.EnforceMultiTenant();
@@ -104,7 +109,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             this.logger = logger;
             this.serviceProvider = serviceProvider;
 
-            this.ResolveTenant().GetAwaiter().GetResult();
         }
 
         void OnModelCreatingPartial(ModelBuilder builder)

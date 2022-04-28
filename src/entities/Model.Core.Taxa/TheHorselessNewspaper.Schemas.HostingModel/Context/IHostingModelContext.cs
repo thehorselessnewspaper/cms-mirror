@@ -1,4 +1,5 @@
-﻿using Finbuckle.MultiTenant.EntityFrameworkCore;
+﻿using Finbuckle.MultiTenant;
+using Finbuckle.MultiTenant.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,10 @@ namespace TheHorselessNewspaper.HostingModel.Context
         public DbSet<NugetPackage> NugetPackages { get; set; }
 
         public DbSet<Tenant> Tenants { get; set; }
-        public DbSet<TenantInfo> TenantInfos { get; set; }
+        public DbSet<TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantInfo> TenantInfos { get; set; }
 
         public DbSet<WebAPITenantInfo> WebAPITenantInfos { get; set; }
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        public Task<Finbuckle.MultiTenant.ITenantInfo> ResolveTenant();
     }
 }

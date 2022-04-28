@@ -1,4 +1,5 @@
-﻿using Finbuckle.MultiTenant.EntityFrameworkCore;
+﻿using Finbuckle.MultiTenant;
+using Finbuckle.MultiTenant.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
@@ -35,5 +36,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context
         internal DbSet<Tenant> Tenants { get; set; }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        public Task<ITenantInfo> ResolveTenant();
     }
 }
