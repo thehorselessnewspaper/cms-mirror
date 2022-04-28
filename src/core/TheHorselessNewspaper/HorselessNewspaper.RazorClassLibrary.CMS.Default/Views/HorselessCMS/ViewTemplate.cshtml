@@ -6,7 +6,7 @@
         @* // todo - this must become HttpContext.CanShowAdminSidebar *@
         @{
             var currentTenant = this.Context.Features.Get<Tenant>();
-            var isAuthorizedForAdminSidebarButton = await AuthorizationService.AuthorizeAsync(User, currentTenant, AccessControlledOperations.Create);
+            var isAuthorizedForAdminSidebarButton = await AuthorizationService.AuthorizeAsync(User, currentTenant, AccessControlledOperations.Execute);
             var isAuthorizedResult = isAuthorizedForAdminSidebarButton.Succeeded;
         }
         @if (isAuthorizedForAdminSidebarButton.Succeeded)

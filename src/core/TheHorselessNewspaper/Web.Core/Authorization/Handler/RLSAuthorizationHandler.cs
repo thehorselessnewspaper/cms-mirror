@@ -66,7 +66,8 @@ namespace HorselessNewspaper.Web.Core.Authorization.Handler
                             context.Succeed(requirement);
                         }
 
-                        if(!this._httpcontextAccessor.HttpContext.HasDevopsAdminClaims() && requirement == AccessControlledOperations.Create)
+                        // todo - make this heuristic more robust 
+                        if(!this._httpcontextAccessor.HttpContext.HasDevopsAdminClaims() && requirement == AccessControlledOperations.Execute)
                         {
                             context.Fail();
                             return;
