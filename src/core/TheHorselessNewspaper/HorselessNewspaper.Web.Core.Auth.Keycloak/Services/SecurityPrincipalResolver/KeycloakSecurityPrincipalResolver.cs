@@ -138,7 +138,8 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                 var tenant = new Tenant();
 
                 var tenantQuery = await _tenantOperator.ReadAsEnumerable(w =>
-                        w.TenantIdentifier.Equals(_iTenantInfo.Identifier));
+                        w.TenantIdentifier.Equals(_iTenantInfo.Identifier),
+                        new List<string>() { nameof(Tenant.AccessControlEntries), nameof(Tenant.Owners), nameof(Tenant.Accounts)});
                 var tenantQueryResult = tenantQuery == null || tenantQuery.Count() == 0 ? null : tenantQuery.ToList();
 
                 if (tenantQueryResult != null && tenantQueryResult.Count() > 0 && this._iTenantInfo != null)
@@ -151,9 +152,11 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                 {
                     try
                     {
-                        _logger.LogWarning($"current tenant does not exist in db {this._iTenantInfo.Identifier}");
+                        _logger.LogWarning($"current tenant does not exist in content db {this._iTenantInfo.Identifier}");
                         // must create new tenant for this tenantidentifier
                         // very likely a phantom tenant
+                        // expect post insertion administrative duties
+                        // to assign access control lists and owners
                         Guid newId = Guid.NewGuid();
                         var idIsGuid = Guid.TryParse(this._iTenantInfo.Id, out newId);
 
@@ -174,6 +177,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         tenant.BaseUrl = tenantInfo.Payload.TenantBaseUrl;
                         // tenant.Timestamp = tenantInfo.Payload.Timestamp;
                         tenant.TenantIdentifier = tenantInfo.Payload.Identifier;
+                        tenant.IsPublished = false;
                         tenant.TenantIdentifierStrategy = new TenantIdentifierStrategy()
                         {
                             Id = Guid.NewGuid(),
