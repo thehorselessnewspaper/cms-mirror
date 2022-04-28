@@ -253,7 +253,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                         var allTenants = await _tenantOperator
                             .Read(w => w.IsSoftDeleted != true,
-                                new List<string> { nameof(Tenant.Accounts), nameof(Tenant.Owners) });
+                                new List<string> { nameof(Tenant.Accounts), nameof(Tenant.Owners), nameof(Tenant.AccessControlEntries) });
                         var allTenantsList = allTenants.ToList();
                         var isAnOwner = allTenantsList.Where(w => w.Owners
                                                             .Where(w => w.UPN.Equals(user.Claims.Upn()))
@@ -261,7 +261,8 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         var isAnAccount = allTenantsList.Where(w => w.Accounts
                             .Where(w => w.UPN.Equals(user.Claims.Upn())).Any()).Any();
 
-                        var principalQuery = await this._principalOperator.Read(r => r.IsAnonymous == false && r.UPN == user.Claims.Upn());
+                        var principalQuery = await this._principalOperator.Read(r => r.IsAnonymous == false && r.UPN == user.Claims.Upn(),
+                            new List<string>() { nameof(Principal.AccessControlEntries)});
                         var principalCollection = principalQuery.ToList();
                         var principalQueryResult = principalQuery == null || principalCollection.Count() == 0 ? null : principalQuery.ToList().First();
                         if (principalQueryResult != null)
@@ -344,9 +345,6 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                     tenantQueryResult.Accounts.Add(principal);
                                     var principalInsertResult = await this._principalOperator.Create(principal);
 
-                                    // insert the unknown authenticated principal and session
-                                    //var insertRelatedResult = await this._tenantOperator.InsertRelatedEntity<Principal>(
-                                    //    tenantQueryResult.Id, nameof(Tenant.Accounts), new List<Principal>() { principal });
 
                                     if (principalInsertResult != null)
                                     {

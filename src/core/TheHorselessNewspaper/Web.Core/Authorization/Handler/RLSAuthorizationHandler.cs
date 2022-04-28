@@ -39,6 +39,7 @@ namespace HorselessNewspaper.Web.Core.Authorization.Handler
                 _logger.LogInformation($"{this.GetType().Name} is confirming tenant context resolver operational");
 
                 var currentPrincipal = this._httpcontextAccessor.HttpContext.Features.Get<Principal>();
+                var currentTenant = this._httpcontextAccessor.HttpContext.Features.Get<Tenant>();
                 var isFunctionalTenantResolution = currentPrincipal == null ? false : true;
                 if (isFunctionalTenantResolution)
                 {
