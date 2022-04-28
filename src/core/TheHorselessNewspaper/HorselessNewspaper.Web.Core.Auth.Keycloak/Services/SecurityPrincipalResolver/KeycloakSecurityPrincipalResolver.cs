@@ -261,7 +261,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         var isAnAccount = allTenantsList.Where(w => w.Accounts
                             .Where(w => w.UPN.Equals(user.Claims.Upn())).Any()).Any();
 
-                        var principalQuery = await this._principalOperator.Read(r => r.IsAnonymous == false);
+                        var principalQuery = await this._principalOperator.Read(r => r.IsAnonymous == false && r.UPN == user.Claims.Upn());
                         var principalCollection = principalQuery.ToList();
                         var principalQueryResult = principalQuery == null || principalCollection.Count() == 0 ? null : principalQuery.ToList().First();
                         if (principalQueryResult != null)
@@ -499,7 +499,24 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
             var hasInsertedSessionQuery = await this._horselessSessionOperator.ReadAsEnumerable(w => w.HorselessSessionPrincipalId.Equals(httpContext.Session.Id));
 
-            if(hasInsertedSessionQuery != null && hasInsertedSessionQuery.Any() == true)
+            var allSessionsQuery = await this._horselessSessionOperator.ReadAsEnumerable(w => w.IsSoftDeleted == false);
+            var allSessions = allSessionsQuery.ToList();
+            var hasSesion = allSessions.Where(w => w.SessionId == httpContext.Session.Id).Any();
+
+            var currentUpdateTime = httpContext.Session.GetString("UTC_UPDATED_TIME");
+
+            HorselessSession cachedSession;
+            
+            var hasCachedSession = LocallyCachedSessions.TryGetValue(httpContext.Session.Id, out cachedSession);
+
+            if(hasCachedSession)
+            {
+                IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(sessionPrincipalId);
+
+                return ret;
+            }
+            
+            else if (hasInsertedSessionQuery != null && hasInsertedSessionQuery.Any() == true)
             {
                 IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(sessionPrincipalId);
 

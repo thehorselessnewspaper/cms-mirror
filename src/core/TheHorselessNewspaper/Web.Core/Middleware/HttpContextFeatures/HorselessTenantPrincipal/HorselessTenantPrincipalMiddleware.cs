@@ -55,6 +55,9 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
                 {
                     _logger.LogInformation("preparing HttpRequest.Feature.Tenant");
                     var isFunctionalTenantResolver = await securityPrincipalResolver.EnsureCanResoleCurrentTenant();
+
+                    // set a variable in session otherwise the id always changes
+                    context.Session.SetString("INITIAL_SESSIONID", context.Session.Id);
                     if (isFunctionalTenantResolver)
                     {
                         var ensuredTenant = await securityPrincipalResolver.EnsureTenant();
