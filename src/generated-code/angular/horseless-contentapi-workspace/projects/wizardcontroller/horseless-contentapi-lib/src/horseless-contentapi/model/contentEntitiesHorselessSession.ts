@@ -24,8 +24,11 @@ export interface ContentEntitiesHorselessSession {
     aud?: string | null;
     sub?: string | null;
     isAnonymous?: boolean | null;
-    accessControlList?: Array<ContentEntitiesAccessControlEntry> | null;
+    horselessSessionPrincipalId?: string | null;
+    horselessSessionPrincipal?: ContentEntitiesPrincipal;
+    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
     owners?: Array<ContentEntitiesPrincipal> | null;
     timestamp?: string | null;
+    updatedAt?: string | null;
 }
 

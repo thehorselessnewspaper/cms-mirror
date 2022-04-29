@@ -11,6 +11,7 @@
  */
 import { HostingEntitiesACEPermission } from './hostingEntitiesACEPermission';
 import { HostingEntitiesPrincipal } from './hostingEntitiesPrincipal';
+import { HostingEntitiesTenant } from './hostingEntitiesTenant';
 import { HostingEntitiesACEPermissionScope } from './hostingEntitiesACEPermissionScope';
 import { HostingEntitiesACEPermissionType } from './hostingEntitiesACEPermissionType';
 
@@ -20,13 +21,17 @@ export interface HostingEntitiesAccessControlEntry {
     permission?: HostingEntitiesACEPermission;
     permissionType?: HostingEntitiesACEPermissionType;
     timestamp?: string | null;
-    accessControlList?: Array<HostingEntitiesAccessControlEntry> | null;
-    owners?: Array<HostingEntitiesPrincipal> | null;
+    updatedAt?: string | null;
     id?: string;
     displayName?: string | null;
     objectId?: string | null;
     isSoftDeleted?: boolean | null;
     createdAt?: string | null;
     isActive?: boolean | null;
+    accessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
+    owners?: Array<HostingEntitiesPrincipal> | null;
+    subjectAccessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
+    subjectPrincipals?: Array<HostingEntitiesPrincipal> | null;
+    subjectTenants?: Array<HostingEntitiesTenant> | null;
 }
 

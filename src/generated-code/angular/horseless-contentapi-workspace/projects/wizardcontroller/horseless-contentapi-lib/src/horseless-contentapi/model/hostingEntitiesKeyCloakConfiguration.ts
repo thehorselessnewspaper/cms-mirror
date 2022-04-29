@@ -15,10 +15,11 @@ import { HostingEntitiesTenantInfo } from './hostingEntitiesTenantInfo';
 
 
 export interface HostingEntitiesKeyCloakConfiguration { 
-    accessControlList?: Array<HostingEntitiesAccessControlEntry> | null;
+    accessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
     owners?: Array<HostingEntitiesPrincipal> | null;
     isSoftDeleted?: boolean | null;
     timestamp?: string | null;
+    updatedAt?: string | null;
     id?: string;
     displayName?: string | null;
     authority?: string | null;

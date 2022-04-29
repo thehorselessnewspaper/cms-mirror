@@ -12,23 +12,24 @@
 import { HostingEntitiesTenantIdentifierStrategy } from './hostingEntitiesTenantIdentifierStrategy';
 import { HostingEntitiesAccessControlEntry } from './hostingEntitiesAccessControlEntry';
 import { HostingEntitiesPrincipal } from './hostingEntitiesPrincipal';
-import { HostingEntitiesNugetPackage } from './hostingEntitiesNugetPackage';
 import { HostingEntitiesTenantInfo } from './hostingEntitiesTenantInfo';
 
 
 export interface HostingEntitiesTenant { 
     isPublished?: boolean;
+    baseUrl?: string | null;
+    tenantIdentifier?: string | null;
     tenantIdentifierStrategy?: HostingEntitiesTenantIdentifierStrategy;
-    accessControlList?: Array<HostingEntitiesAccessControlEntry> | null;
-    owners?: Array<HostingEntitiesPrincipal> | null;
-    principals?: Array<HostingEntitiesPrincipal> | null;
     timestamp?: string | null;
+    tenantInfos?: Array<HostingEntitiesTenantInfo> | null;
+    updatedAt?: string | null;
     id?: string;
     displayName?: string | null;
     objectId?: string | null;
     isSoftDeleted?: boolean | null;
     createdAt?: string | null;
-    nugetPackages?: Array<HostingEntitiesNugetPackage> | null;
-    tenantInfos?: Array<HostingEntitiesTenantInfo> | null;
+    accessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
+    accounts?: Array<HostingEntitiesPrincipal> | null;
+    owners?: Array<HostingEntitiesPrincipal> | null;
 }
 

@@ -28,8 +28,9 @@ export interface ContentEntitiesPublication {
     contentCollections?: Array<ContentEntitiesContentCollection> | null;
     publicationParents?: Array<ContentEntitiesPublication> | null;
     publicationsChildren?: Array<ContentEntitiesPublication> | null;
-    accessControlList?: Array<ContentEntitiesAccessControlEntry> | null;
+    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
     owners?: Array<ContentEntitiesPrincipal> | null;
     timestamp?: string | null;
+    updatedAt?: string | null;
 }
 

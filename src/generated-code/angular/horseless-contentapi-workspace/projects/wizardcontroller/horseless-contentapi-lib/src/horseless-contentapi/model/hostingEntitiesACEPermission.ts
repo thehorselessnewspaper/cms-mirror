@@ -12,14 +12,15 @@
 
 
 export enum HostingEntitiesACEPermission {
-    NUMBER_0 = 0,
-    NUMBER_1 = 1,
-    NUMBER_2 = 2,
-    NUMBER_3 = 3,
-    NUMBER_4 = 4,
-    NUMBER_5 = 5,
-    NUMBER_6 = 6,
-    NUMBER_7 = 7,
-    NUMBER_8 = 8
+    read = 'READ',
+    create = 'CREATE',
+    update = 'UPDATE',
+    delete = 'DELETE',
+    share = 'SHARE',
+    execute = 'EXECUTE',
+    search = 'SEARCH',
+    publish = 'PUBLISH',
+    unpublish = 'UNPUBLISH',
+    approve = 'APPROVE'
 };
 

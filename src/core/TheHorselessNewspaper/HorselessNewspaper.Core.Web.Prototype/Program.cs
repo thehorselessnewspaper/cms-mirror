@@ -18,6 +18,7 @@ using System.Text.Json.Serialization;
 using Finbuckle.MultiTenant;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
 using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST;
+using Microsoft.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(builder =>
@@ -164,10 +165,10 @@ builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
     //options.FileProviders.Add(
     //        new EmbeddedFileProvider(typeof(HorselessCMSController).Assembly));
 
-    var libraryPath = Path.GetFullPath(
-       Path.Combine(builder.Environment.ContentRootPath, "..", "HorselessNewspaper.RazorClassLibrary.CMS.Default"));
+    //var libraryPath = Path.GetFullPath(
+    //   Path.Combine(builder.Environment.ContentRootPath, "..", "HorselessNewspaper.RazorClassLibrary.CMS.Default"));
 
-    options.FileProviders.Add(new PhysicalFileProvider(libraryPath));
+    options.FileProviders.Add(new PhysicalFileProvider(builder.Environment.ContentRootPath));
 
     //var contentRootPath = Path.GetFullPath(
     //Path.Combine(builder.Environment.ContentRootPath, ".", ""));
@@ -207,8 +208,14 @@ builder.Services.AddMvcCore(options =>
 
     }
 
-}); //.AddRazorRuntimeCompilation();
+}).AddRazorRuntimeCompilation(
+                opt =>
+                {
+// This would be useful but it's READ-ONLY
+// opt.AdditionalReferencePaths = Path.Combine(WebRoot,"bin");
 
+                    opt.FileProviders.Add(new PhysicalFileProvider(builder.Environment.WebRootPath));
+                });
 
 
 builder.Services.AddDistributedMemoryCache();

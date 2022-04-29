@@ -25,8 +25,9 @@ export interface ContentEntitiesHolonym {
     jsonSchema?: string | null;
     meronyms?: Array<ContentEntitiesMeronym> | null;
     taxons?: Array<ContentEntitiesTaxon> | null;
-    accessControlList?: Array<ContentEntitiesAccessControlEntry> | null;
+    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
     owners?: Array<ContentEntitiesPrincipal> | null;
     timestamp?: string | null;
+    updatedAt?: string | null;
 }
 

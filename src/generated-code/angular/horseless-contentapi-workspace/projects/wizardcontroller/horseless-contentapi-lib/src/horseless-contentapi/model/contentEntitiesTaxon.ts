@@ -27,8 +27,9 @@ export interface ContentEntitiesTaxon {
     derivativeTaxons?: Array<ContentEntitiesTaxon> | null;
     holonyms?: Array<ContentEntitiesHolonym> | null;
     taxonomies?: Array<ContentEntitiesTaxonomy> | null;
-    accessControlList?: Array<ContentEntitiesAccessControlEntry> | null;
+    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
     owners?: Array<ContentEntitiesPrincipal> | null;
     timestamp?: string | null;
+    updatedAt?: string | null;
 }
 

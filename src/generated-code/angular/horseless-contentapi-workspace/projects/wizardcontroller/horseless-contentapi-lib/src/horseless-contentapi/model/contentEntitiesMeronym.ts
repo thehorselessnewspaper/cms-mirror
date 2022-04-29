@@ -23,8 +23,9 @@ export interface ContentEntitiesMeronym {
     jsonValue?: string | null;
     jsonSchema?: string | null;
     holonyms?: Array<ContentEntitiesHolonym> | null;
-    accessControlList?: Array<ContentEntitiesAccessControlEntry> | null;
+    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
     owners?: Array<ContentEntitiesPrincipal> | null;
     timestamp?: string | null;
+    updatedAt?: string | null;
 }
 

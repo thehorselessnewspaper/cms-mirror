@@ -19,8 +19,8 @@ export interface HostingEntitiesTenantIdentifierStrategy {
     objectId?: string | null;
     isSoftDeleted?: boolean | null;
     createdAt?: string | null;
-    tenantId?: string | null;
-    tenant?: HostingEntitiesTenant;
-    tenantIdentifierStrategyContainers?: Array<HostingEntitiesTenantIdentifierStrategyContainer> | null;
+    targetTenantId?: string | null;
+    targetTenant?: HostingEntitiesTenant;
+    strategyContainers?: Array<HostingEntitiesTenantIdentifierStrategyContainer> | null;
 }
 

@@ -10,12 +10,15 @@
  * Do not edit the class manually.
  */
 import { HostingEntitiesAccessControlEntry } from './hostingEntitiesAccessControlEntry';
+import { HostingEntitiesTenant } from './hostingEntitiesTenant';
 
 
 export interface HostingEntitiesPrincipal { 
+    upn?: string | null;
+    email?: string | null;
+    preferredUserName?: string | null;
     timestamp?: string | null;
-    accessControlList?: Array<HostingEntitiesAccessControlEntry> | null;
-    owners?: Array<HostingEntitiesPrincipal> | null;
+    updatedAt?: string | null;
     id?: string;
     displayName?: string | null;
     objectId?: string | null;
@@ -24,5 +27,11 @@ export interface HostingEntitiesPrincipal {
     iss?: string | null;
     aud?: string | null;
     sub?: string | null;
+    accessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
+    ownedAccessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
+    ownedPrincipals?: Array<HostingEntitiesPrincipal> | null;
+    ownedTenants?: Array<HostingEntitiesTenant> | null;
+    owners?: Array<HostingEntitiesPrincipal> | null;
+    tenantAccounts?: Array<HostingEntitiesTenant> | null;
 }
 

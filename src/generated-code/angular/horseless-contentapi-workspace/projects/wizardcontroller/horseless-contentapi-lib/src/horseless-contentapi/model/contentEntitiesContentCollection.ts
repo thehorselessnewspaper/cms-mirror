@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { ContentEntitiesAccessControlEntry } from './contentEntitiesAccessControlEntry';
+import { ContentEntitiesHorselessView } from './contentEntitiesHorselessView';
 import { ContentEntitiesTaxonomy } from './contentEntitiesTaxonomy';
 import { ContentEntitiesHorselessContent } from './contentEntitiesHorselessContent';
 import { ContentEntitiesPublication } from './contentEntitiesPublication';
@@ -28,13 +29,15 @@ export interface ContentEntitiesContentCollection {
     publishedURL?: string | null;
     previewURL?: string | null;
     childContentCollections?: Array<ContentEntitiesContentCollection> | null;
+    horselessViews?: Array<ContentEntitiesHorselessView> | null;
     mimeContents?: Array<ContentEntitiesHorselessContent> | null;
     parentContentCollections?: Array<ContentEntitiesContentCollection> | null;
     publications?: Array<ContentEntitiesPublication> | null;
     taxonomies?: Array<ContentEntitiesTaxonomy> | null;
     tenants?: Array<ContentEntitiesTenant> | null;
-    accessControlList?: Array<ContentEntitiesAccessControlEntry> | null;
+    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
     owners?: Array<ContentEntitiesPrincipal> | null;
     timestamp?: string | null;
+    updatedAt?: string | null;
 }
 

@@ -17,9 +17,12 @@ import { HostingEntitiesKeyCloakConfiguration } from './hostingEntitiesKeyCloakC
 
 
 export interface HostingEntitiesTenantInfo { 
-    accessControlList?: Array<HostingEntitiesAccessControlEntry> | null;
+    accessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
     owners?: Array<HostingEntitiesPrincipal> | null;
     timestamp?: string | null;
+    parentTenantId?: string | null;
+    parentTenant?: HostingEntitiesTenant;
+    updatedAt?: string | null;
     id?: string;
     displayName?: string | null;
     objectId?: string | null;
@@ -29,8 +32,6 @@ export interface HostingEntitiesTenantInfo {
     name?: string | null;
     connectionString?: string | null;
     tenantBaseUrl?: string | null;
-    tenant_Id?: string | null;
-    tenant?: HostingEntitiesTenant;
     keyCloakConfigurations?: Array<HostingEntitiesKeyCloakConfiguration> | null;
     webAPITenantInfos?: Array<HostingEntitiesWebAPITenantInfo> | null;
 }

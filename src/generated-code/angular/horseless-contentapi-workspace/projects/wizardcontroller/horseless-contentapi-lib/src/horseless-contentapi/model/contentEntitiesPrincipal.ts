@@ -9,7 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { ContentEntitiesPrincipalClaimContainer } from './contentEntitiesPrincipalClaimContainer';
 import { ContentEntitiesAccessControlEntry } from './contentEntitiesAccessControlEntry';
+import { ContentEntitiesHorselessSession } from './contentEntitiesHorselessSession';
+import { ContentEntitiesTenant } from './contentEntitiesTenant';
 
 
 export interface ContentEntitiesPrincipal { 
@@ -21,8 +24,20 @@ export interface ContentEntitiesPrincipal {
     iss?: string | null;
     aud?: string | null;
     sub?: string | null;
-    timestamp?: string | null;
-    accessControlList?: Array<ContentEntitiesAccessControlEntry> | null;
+    horselessSessions?: Array<ContentEntitiesHorselessSession> | null;
+    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
+    ownedAccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
+    ownedHorselessSessions?: Array<ContentEntitiesHorselessSession> | null;
+    ownedPrincipals?: Array<ContentEntitiesPrincipal> | null;
+    ownedTenants?: Array<ContentEntitiesTenant> | null;
     owners?: Array<ContentEntitiesPrincipal> | null;
+    tenantAccounts?: Array<ContentEntitiesTenant> | null;
+    isAnonymous?: boolean;
+    upn?: string | null;
+    email?: string | null;
+    preferredUserName?: string | null;
+    timestamp?: string | null;
+    principalClaimContainer?: ContentEntitiesPrincipalClaimContainer;
+    updatedAt?: string | null;
 }
 

@@ -21,12 +21,15 @@ export interface ContentEntitiesTenant {
     objectId?: string | null;
     isSoftDeleted?: boolean | null;
     createdAt?: string | null;
+    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
+    accounts?: Array<ContentEntitiesPrincipal> | null;
     contentCollections?: Array<ContentEntitiesContentCollection> | null;
-    isPublished?: boolean;
-    tenantIdentifierStrategy?: ContentEntitiesTenantIdentifierStrategy;
-    accessControlList?: Array<ContentEntitiesAccessControlEntry> | null;
     owners?: Array<ContentEntitiesPrincipal> | null;
-    principals?: Array<ContentEntitiesPrincipal> | null;
+    isPublished?: boolean;
+    baseUrl?: string | null;
+    tenantIdentifierStrategy?: ContentEntitiesTenantIdentifierStrategy;
+    tenantIdentifier?: string | null;
     timestamp?: string | null;
+    updatedAt?: string | null;
 }
 

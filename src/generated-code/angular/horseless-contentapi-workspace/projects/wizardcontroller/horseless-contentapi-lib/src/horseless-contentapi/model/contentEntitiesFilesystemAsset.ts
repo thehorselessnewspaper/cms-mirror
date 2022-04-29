@@ -24,8 +24,9 @@ export interface ContentEntitiesFilesystemAsset {
     publishedURL?: string | null;
     previewURL?: string | null;
     horselessContents?: Array<ContentEntitiesHorselessContent> | null;
-    accessControlList?: Array<ContentEntitiesAccessControlEntry> | null;
+    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
     owners?: Array<ContentEntitiesPrincipal> | null;
     timestamp?: string | null;
+    updatedAt?: string | null;
 }
 

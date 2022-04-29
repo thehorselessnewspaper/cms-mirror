@@ -15,12 +15,12 @@ import { ContentEntitiesTenant } from './contentEntitiesTenant';
 
 export interface ContentEntitiesTenantIdentifierStrategy { 
     id?: string;
-    tenantId?: string | null;
-    tenant?: ContentEntitiesTenant;
     displayName?: string | null;
     objectId?: string | null;
     isSoftDeleted?: boolean | null;
     createdAt?: string | null;
-    tenantIdentifierStrategyContainers?: Array<ContentEntitiesTenantIdentifierStrategyContainer> | null;
+    timestamp?: string | null;
+    targetTenant?: ContentEntitiesTenant;
+    strategyContainers?: Array<ContentEntitiesTenantIdentifierStrategyContainer> | null;
 }
 

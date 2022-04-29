@@ -12,7 +12,7 @@
 
 
 export enum ContentEntitiesACEPermissionType {
-    NUMBER_0 = 0,
-    NUMBER_1 = 1
+    permit = 'PERMIT',
+    deny = 'DENY'
 };
 
