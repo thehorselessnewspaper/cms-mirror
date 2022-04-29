@@ -28,8 +28,14 @@
 	</PropertyGroup>
 	
 	<PropertyGroup>
+		<!--- as per https://docs.microsoft.com/en-us/aspnet/core/razor-pages/ui-class?view=aspnetcore-6.0&tabs=visual-studio-->
 		<RazorCompileOnPublish>false</RazorCompileOnPublish>
-		<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+		<!--<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>-->
+		<TypescriptOutDir>wwwroot\js\typescript</TypescriptOutDir>
+		<ResolveCurrentProjectStaticWebAssetsInputsDependsOn>
+			CompileTypeScript;
+			$(ResolveCurrentProjectStaticWebAssetsInputs)
+		</ResolveCurrentProjectStaticWebAssetsInputsDependsOn>	
 	</PropertyGroup>
 	
 	<ItemGroup>
