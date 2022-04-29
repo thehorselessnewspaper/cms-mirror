@@ -9,10 +9,10 @@
 # ng new horseless-contentapi-workspace --no-create-application
 # cd horseless-contentapi-workspace
 # ng generate library @wizardcontroller/horseless-contentapi-lib
-$outputPath = "horseless-contentapi-workspace\projects\wizardcontroller\horseless-contentapi-lib\src\horseless-contentapi"
-$theLibrary = '@wizardcontroller/horseless-contentapi-lib'
-$theLibraryBuildPath = "horseless-contentapi-workspace/projects/wizardcontroller/horseless-contentapi-lib/src/"
-$theLibraryDistPath = ".\horseless-contentapi-workspace\dist\wizardcontroller\horseless-contentapi-lib"
+$outputPath = "horseless-contentapi-workspace\projects\wizardcontrollerprerelease\horseless-contentapi-lib\src\horseless-contentapi"
+$theLibrary = '@wizardcontrollerprerelease/horseless-contentapi-lib'
+$theLibraryBuildPath = "horseless-contentapi-workspace/projects/wizardcontrollerprerelease/horseless-contentapi-lib/src/"
+$theLibraryDistPath = ".\horseless-contentapi-workspace\dist\wizardcontrollerprerelease\horseless-contentapi-lib"
 
 # pushd horseless-contentapi
 npx @openapitools/openapi-generator-cli generate `
@@ -25,10 +25,10 @@ $npmrc = "horseless-contentapi-workspace/.npmrc"
 
 pushd $theLibraryBuildPath
   npm version patch -m "Upgrade to %s for reasons"
-  ng build $theLibrary --prod
+  ng build $theLibrary --output-path $outputPath --prod
 popd
 
-copy  $npmrc "./horseless-contentapi-workspace/dist/wizardcontroller/horseless-contentapi-lib"
+# copy  $npmrc "./horseless-contentapi-workspace/dist/wizardcontroller/horseless-contentapi-lib"
 
 pushd $theLibraryDistPath
     npm publish

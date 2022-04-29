@@ -1,11 +1,11 @@
 {
-	"npmName": "@wizardcontroller/horseless-contentapi-lib",
-	"ngVersion" : "12.0.3",
-	"npmRepository": "@wizardcontroller:registry=https://pkgs.dev.azure.com/electricrucible/_packaging/horseless-artifacts/npm/registry/",
-	"apiTests" : true,
-	"modelTests" : true,
+	"npmName": "@wizardcontrollerprerelease/horseless-contentapi-lib",
+	"ngVersion": "12.0.3",
+	"npmRepository": "@wizardcontrollerprerelease:registry=https://registry.npmjs.com/",
+	"apiTests": true,
+	"modelTests": true,
 	"supportsES6": true,
-	"withProgressSubscriber" : true,
-	"enumPropertyNaming" : "camelCase",
-	"stringEnums" : "true"
+	"withProgressSubscriber": true,
+	"enumPropertyNaming": "camelCase",
+	"stringEnums": "true"
 }

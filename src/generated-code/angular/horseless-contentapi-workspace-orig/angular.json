@@ -9,6 +9,9 @@
       "sourceRoot": "projects/wizardcontrollerprerelease/horseless-contentapi-lib/src",
       "prefix": "lib",
       "architect": {
+        "options": {
+          "outputPath": "dist/wizardcontrollerprerelease/horseless-contentapi-lib"
+        },
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {

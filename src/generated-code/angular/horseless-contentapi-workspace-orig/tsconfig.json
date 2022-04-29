@@ -4,7 +4,7 @@
   "compilerOptions": {
     "paths": {
       "@wizardcontrollerprerelease/horseless-contentapi-lib": [
-        "dist/wizardcontrollerprerelease/horseless-contentapi-lib/wizardcontrollerprerelease-horseless-contentapi-lib",
+        "dist/wizardcontrollerprerelease/horseless-contentapi-lib/wizardcontroller-horseless-contentapi-lib",
         "dist/wizardcontrollerprerelease/horseless-contentapi-lib"
       ]
     },
