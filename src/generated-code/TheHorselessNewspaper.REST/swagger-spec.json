@@ -8480,6 +8480,11 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -8528,6 +8533,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+            },
+            "nullable": true
+          },
+          "horselessViews": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesHorselessView"
             },
             "nullable": true
           },
@@ -8583,6 +8595,11 @@
           "timestamp": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         },
@@ -8648,6 +8665,11 @@
           "timestamp": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         },
@@ -8716,6 +8738,11 @@
           "timestamp": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         },
@@ -8806,6 +8833,11 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -8880,6 +8912,100 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContentEntitiesHorselessView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "contentCollections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+            },
+            "nullable": true
+          },
+          "accessControlEntries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
+            },
+            "nullable": true
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
+            },
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "exists": {
+            "type": "boolean"
+          },
+          "isDirectory": {
+            "type": "boolean"
+          },
+          "lastModified": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "length": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "physicalPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "viewContent": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -8941,6 +9067,11 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -8997,6 +9128,11 @@
           "timestamp": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         },
@@ -9058,6 +9194,11 @@
           "timestamp": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         },
@@ -9152,6 +9293,11 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -9244,6 +9390,11 @@
           "timestamp": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         },
@@ -9341,6 +9492,9 @@
             },
             "nullable": true
           },
+          "isAnonymous": {
+            "type": "boolean"
+          },
           "upn": {
             "type": "string",
             "nullable": true
@@ -9357,6 +9511,81 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          },
+          "principalClaimContainer": {
+            "$ref": "#/components/schemas/ContentEntitiesPrincipalClaimContainer"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContentEntitiesPrincipalClaim": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "claimType": {
+            "type": "string",
+            "nullable": true
+          },
+          "claimValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "claimValueType": {
+            "type": "string",
+            "nullable": true
+          },
+          "claimIssuer": {
+            "type": "string",
+            "nullable": true
+          },
+          "principalClaimContainerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "principalClaimContainer": {
+            "$ref": "#/components/schemas/ContentEntitiesPrincipalClaimContainer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContentEntitiesPrincipalClaimContainer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "objectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "principalClaim": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPrincipalClaim"
+            },
+            "nullable": true
+          },
+          "principalId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "principal": {
+            "$ref": "#/components/schemas/ContentEntitiesPrincipal"
           }
         },
         "additionalProperties": false
@@ -9446,6 +9675,11 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -9527,6 +9761,11 @@
           "timestamp": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         },
@@ -9650,6 +9889,11 @@
           "timestamp": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         },
@@ -9788,10 +10032,6 @@
       "HostingEntitiesAccessControlEntry": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
           "scope": {
             "$ref": "#/components/schemas/HostingEntitiesACEPermissionScope"
           },
@@ -9805,6 +10045,15 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
           },
           "displayName": {
             "type": "string",
@@ -9891,6 +10140,11 @@
             "format": "byte",
             "nullable": true
           },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "id": {
             "type": "string",
             "format": "uuid"
@@ -9938,10 +10192,6 @@
       "HostingEntitiesPrincipal": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
           "upn": {
             "type": "string",
             "nullable": true
@@ -9958,6 +10208,15 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
           },
           "displayName": {
             "type": "string",
@@ -10036,10 +10295,6 @@
       "HostingEntitiesTenant": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
           "isPublished": {
             "type": "boolean"
           },
@@ -10065,6 +10320,15 @@
               "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
             },
             "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
           },
           "displayName": {
             "type": "string",
@@ -10216,6 +10480,11 @@
           "parentTenant": {
             "$ref": "#/components/schemas/HostingEntitiesTenant"
           },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "id": {
             "type": "string",
             "format": "uuid"
@@ -10292,6 +10561,11 @@
             "format": "byte",
             "nullable": true
           },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "id": {
             "type": "string",
             "format": "uuid"
@@ -10365,7 +10639,7 @@
             "nullable": true
           }
         },
-        "additionalProperties": { }
+        "additionalProperties": {}
       }
     }
   }

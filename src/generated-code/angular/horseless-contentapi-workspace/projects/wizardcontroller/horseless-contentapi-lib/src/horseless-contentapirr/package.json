@@ -1,0 +1,34 @@
+{
+  "name": "@wizardcontroller/horseless-contentapi-lib",
+  "version": "v1",
+  "description": "OpenAPI client for @wizardcontroller/horseless-contentapi-lib",
+  "author": "OpenAPI-Generator Contributors",
+  "keywords": [
+    "openapi-client",
+    "openapi-generator"
+  ],
+  "license": "Unlicense",
+  "scripts": {
+    "build": "ng-packagr -p ng-package.json"
+  },
+  "peerDependencies": {
+    "@angular/core": "^12.0.3",
+    "rxjs": "^6.6.0"
+  },
+  "devDependencies": {
+    "@angular/common": "^12.0.3",
+    "@angular/compiler": "^12.0.3",
+    "@angular/compiler-cli": "^12.0.3",
+    "@angular/core": "^12.0.3",
+    "@angular/platform-browser": "^12.0.3",
+    "ng-packagr": "^12.2.1",
+    "reflect-metadata": "^0.1.3",
+    "rxjs": "^6.6.0",
+    "tsickle": "^0.43.0",
+    "typescript": ">=4.3.0 <4.4.0",
+    "zone.js": "^0.11.4"
+  },
+  "publishConfig": {
+    "registry": "@wizardcontroller:registry=https://pkgs.dev.azure.com/electricrucible/_packaging/horseless-artifacts/npm/registry/"
+  }
+}
