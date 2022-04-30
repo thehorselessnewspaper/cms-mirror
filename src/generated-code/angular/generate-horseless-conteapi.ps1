@@ -25,12 +25,12 @@ $npmrc = "horseless-contentapi-workspace/.npmrc"
 
 pushd $theLibraryBuildPath
   npm version patch -m "Upgrade to %s for reasons"
-  ng build $theLibrary --output-path $outputPath --prod
+  ng build $theLibrary 
 popd
 
-# copy  $npmrc "./horseless-contentapi-workspace/dist/wizardcontroller/horseless-contentapi-lib"
+copy  $npmrc "./horseless-contentapi-workspace/dist/wizardcontrollerprerelease/horseless-contentapi-lib"
 
 pushd $theLibraryDistPath
-    npm publish
+    npm publish -access public
     popd
 popd
