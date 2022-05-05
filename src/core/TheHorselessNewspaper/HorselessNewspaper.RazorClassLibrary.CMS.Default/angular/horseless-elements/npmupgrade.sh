@@ -1,3 +1,5 @@
+#!/usr/bin/bash
+
 set -e
 set -x
 
@@ -6,3 +8,4 @@ do
     echo "upgrading $package"
     npm -g install "$package"
 done
+
