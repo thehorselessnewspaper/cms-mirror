@@ -30,7 +30,7 @@ popd
 
 copy  $npmrc "./horseless-contentapi-workspace/dist/wizardcontrollerprerelease/horseless-contentapi-lib"
 
-pushd $theLibraryDistPath
-    npm publish -access public
-    popd
-popd
+# pushd $theLibraryDistPath
+#    npm publish -access public
+#    popd
+# popd
