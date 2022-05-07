@@ -3,8 +3,6 @@
   "dest": "../../../dist/wizardcontroller/horseless-tags-library",
   "lib": {
     "entryFile": "src/public-api.ts"
-  },
-   "allowedNonPeerDependencies": [
-    "@wizardcontrollerprerelease/horseless-contentapi-lib"
-]
+  }
+
 }

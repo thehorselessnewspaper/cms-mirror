@@ -7,7 +7,7 @@ import { MatSliderModule } from '@angular/material/slider';
 @NgModule({
   declarations: [TenantChooserComponent],
   imports: [
-    CommonModule, 
+    CommonModule,
     MatListModule,
     MatSliderModule
   ],
