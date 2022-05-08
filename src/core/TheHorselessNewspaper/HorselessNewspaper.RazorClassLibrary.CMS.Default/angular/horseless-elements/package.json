@@ -12,8 +12,7 @@
   },
   "private": true,
   "peerDependencies": {
-    "@wizardcontroller/horseless-tags-library": "^0.0.59",
-    "@wizardcontrollerprerelease/horseless-contentapi-lib": "^0.0.28"
+    "@wizardcontrollerprerelease/horseless-contentapi-lib": "^0.0.29"
   },
   "dependencies": {
     "@angular/animations": "^13.2.3",
