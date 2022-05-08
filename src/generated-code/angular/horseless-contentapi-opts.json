@@ -7,5 +7,10 @@
 	"supportsES6": true,
 	"withProgressSubscriber": true,
 	"enumPropertyNaming": "camelCase",
-	"stringEnums": "true"
+	"stringEnums": true,
+	"useRxJS": true,
+	"apiModulePrefix" : "Horseless",
+	"configurationPrefix": "Horseless",
+	"modelPropertyNaming" : "original",
+	"withInterfaces": true
 }
