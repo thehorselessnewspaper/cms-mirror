@@ -24,7 +24,7 @@ npx @openapitools/openapi-generator-cli generate `
 $npmrc = "horseless-contentapi-workspace/.npmrc"
 
 pushd $theLibraryBuildPath
-  npm version patch -m "Upgrade to %s for reasons"
+#  npm version patch -m "Upgrade to %s for reasons"
   ng build $theLibrary 
 popd
 
