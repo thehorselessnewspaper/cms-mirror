@@ -29,6 +29,6 @@
     "zone.js": "^0.11.4"
   },
   "publishConfig": {
-    "registry": "@wizardcontrollerprerelease:registry=https://registry.npmjs.com/"
+    "registry": "registry=https://registry.npmjs.com/"
   }
 }

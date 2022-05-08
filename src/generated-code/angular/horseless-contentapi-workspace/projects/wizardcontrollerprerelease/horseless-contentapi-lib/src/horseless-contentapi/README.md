@@ -1,4 +1,4 @@
-## @wizardcontrollerprerelease/horseless-contentapi-lib
+## @wizardcontrollerprerelease/horseless-contentapi-lib@v1
 
 ### Building
 
@@ -54,12 +54,12 @@ In your Angular project:
 
 ```
 // without configuring providers
-import { ApiModule } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
+import { HorselessApiModule } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     imports: [
-        ApiModule,
+        HorselessApiModule,
         // make sure to import the HttpClientModule in the AppModule only,
         // see https://github.com/angular/angular/issues/20575
         HttpClientModule
@@ -73,17 +73,17 @@ export class AppModule {}
 
 ```
 // configuring providers
-import { ApiModule, Configuration, ConfigurationParameters } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
+import { HorselessApiModule, HorselessConfiguration, HorselessConfigurationParameters } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 
-export function apiConfigFactory (): Configuration {
-  const params: ConfigurationParameters = {
+export function apiConfigFactory (): HorselessConfiguration {
+  const params: HorselessConfigurationParameters = {
     // set configuration parameters here.
   }
-  return new Configuration(params);
+  return new HorselessConfiguration(params);
 }
 
 @NgModule({
-    imports: [ ApiModule.forRoot(apiConfigFactory) ],
+    imports: [ HorselessApiModule.forRoot(apiConfigFactory) ],
     declarations: [ AppComponent ],
     providers: [],
     bootstrap: [ AppComponent ]
@@ -93,15 +93,15 @@ export class AppModule {}
 
 ```
 // configuring providers with an authentication service that manages your access tokens
-import { ApiModule, Configuration } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
+import { HorselessApiModule, HorselessConfiguration } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 
 @NgModule({
-    imports: [ ApiModule ],
+    imports: [ HorselessApiModule ],
     declarations: [ AppComponent ],
     providers: [
       {
-        provide: Configuration,
-        useFactory: (authService: AuthService) => new Configuration(
+        provide: HorselessConfiguration,
+        useFactory: (authService: AuthService) => new HorselessConfiguration(
           {
             basePath: environment.apiUrl,
             accessToken: authService.getAccessToken.bind(authService)
@@ -124,21 +124,21 @@ export class AppComponent {
 }
 ```
 
-Note: The ApiModule is restricted to being instantiated once app wide.
+Note: The HorselessApiModule is restricted to being instantiated once app wide.
 This is to ensure that all services are treated as singletons.
 
-#### Using multiple OpenAPI files / APIs / ApiModules
-In order to use multiple `ApiModules` generated from different OpenAPI files,
+#### Using multiple OpenAPI files / APIs / HorselessApiModules
+In order to use multiple `HorselessApiModules` generated from different OpenAPI files,
 you can create an alias name when importing the modules
 in order to avoid naming conflicts:
 ```
-import { ApiModule } from 'my-api-path';
-import { ApiModule as OtherApiModule } from 'my-other-api-path';
+import { HorselessApiModule } from 'my-api-path';
+import { HorselessApiModule as OtherApiModule } from 'my-other-api-path';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
-    ApiModule,
+    HorselessApiModule,
     OtherApiModule,
     // make sure to import the HttpClientModule in the AppModule only,
     // see https://github.com/angular/angular/issues/20575

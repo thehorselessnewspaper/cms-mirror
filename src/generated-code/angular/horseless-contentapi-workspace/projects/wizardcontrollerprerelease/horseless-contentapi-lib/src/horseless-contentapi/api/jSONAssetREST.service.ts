@@ -25,21 +25,24 @@ import { MvcProblemDetails } from '../model/mvcProblemDetails';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
-import { Configuration }                                     from '../configuration';
+import { HorselessConfiguration }                                     from '../configuration';
+import {
+    JSONAssetRESTServiceInterface
+} from './jSONAssetREST.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class JSONAssetRESTService {
+export class JSONAssetRESTService implements JSONAssetRESTServiceInterface {
 
     protected basePath = 'http://localhost';
     public defaultHeaders = new HttpHeaders();
-    public configuration = new Configuration();
+    public configuration = new HorselessConfiguration();
     public encoder: HttpParameterCodec;
 
-    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: HorselessConfiguration) {
         if (configuration) {
             this.configuration = configuration;
         }
