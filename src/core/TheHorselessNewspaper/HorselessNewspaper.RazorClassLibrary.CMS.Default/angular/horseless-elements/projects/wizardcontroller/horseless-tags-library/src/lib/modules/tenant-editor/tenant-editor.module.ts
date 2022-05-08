@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TenantEditorComponent } from './tenant-editor.component';
-
+import {HorselessApiModule} from '@wizardcontrollerprerelease/horseless-contentapi-lib/public-api'
 
 
 @NgModule({
   declarations: [TenantEditorComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    HorselessApiModule
   ],
   exports: [
     TenantEditorComponent]

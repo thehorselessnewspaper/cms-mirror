@@ -1,4 +1,4 @@
-## @wizardcontrollerprerelease/horseless-contentapi-lib@v1
+## @wizardcontrollerprerelease/horseless-contentapi-lib
 
 ### Building
 
