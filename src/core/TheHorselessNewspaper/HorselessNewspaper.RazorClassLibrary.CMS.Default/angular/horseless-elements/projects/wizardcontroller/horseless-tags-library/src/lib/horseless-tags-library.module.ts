@@ -11,7 +11,6 @@ import { MatListModule } from '@angular/material/list';
     HorselessTagsLibraryComponent
   ],
   imports: [
-
   ],
   exports: [
     HorselessTagsLibraryComponent
