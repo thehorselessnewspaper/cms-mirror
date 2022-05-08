@@ -2,7 +2,7 @@
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.0.
 
-It has been modified to emit deployable assets
+It has been modified to emit deployable assets suitable for use in html pages as custom tags
 
 Modifications as per https://medium.com/vendasta/angular-elements-a-guide-to-shipping-framework-agnostic-libraries-13b02b2b284f
 - library packaging
