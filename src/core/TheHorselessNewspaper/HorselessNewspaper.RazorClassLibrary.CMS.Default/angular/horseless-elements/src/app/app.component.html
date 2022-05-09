@@ -1,8 +1,24 @@
 <div>
-  <!--<p>
-    <horseless-new-tenant baseUrl="https://localhost/from-tag"> </horseless-new-tenant>
-  </p>-->
-  <span>horseless client harness</span>
+  <div>horseless client harness: app component</div>
 
-  <router-outlet></router-outlet>
+  <nav>
+    <ul>
+      <li><a routerLink="/tenants" routerLinkActive="active">Tenant Blade</a></li>
+      <li><a routerLink="/users" routerLinkActive="active">User Blade</a></li>
+    </ul>
+  </nav>
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        router outlet
+      </mat-panel-title>
+      <mat-panel-description>
+        this is where router outlet content is displayed
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <router-outlet></router-outlet>
+  </mat-expansion-panel>
+  <div>
+    <app-login></app-login>
+  </div>
 </div>

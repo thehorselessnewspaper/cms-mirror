@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router'
-
+import {MatExpansionModule} from '@angular/material/expansion';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -18,18 +18,21 @@ import { LoginComponent } from './modules/HorselessClientAuth/components/Login/L
 import { UnauthorizedComponent } from './modules/HorselessClientAuth/components/Unauthorized/Unauthorized.component';
 import { filter } from 'rxjs';
 import { ApplicationRef } from '@angular/core';
+import { TenantBladeComponent } from './modules/HorselessClientAuth/components/TenantBlade/TenantBlade.component';
+import { UserBladeComponent } from './modules/HorselessClientAuth/components/UserBlade/UserBlade.component';
+import { LandingPageComponent } from './modules/HorselessClientAuth/components/LandingPage/LandingPage.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, UnauthorizedComponent
+    AppComponent, LoginComponent, UnauthorizedComponent, TenantBladeComponent
   ],
   imports: [
     AuthModule.forRoot({
       config: {
         authority: 'https://awsdev.ataxlab.com:8443/realms/horseless-infrastructure',
-        redirectUrl: window.location.origin,
-        postLogoutRedirectUri: window.location.origin,
+        redirectUrl: window.location.origin + "/tenants" ,
+        postLogoutRedirectUri: window.location.origin + "/index",
         clientId: 'horseless-prototype-public',
         scope: 'openid profile email offline_access',
         responseType: 'code',
@@ -38,18 +41,24 @@ import { ApplicationRef } from '@angular/core';
         logLevel: LogLevel.Debug,
       }
     }),
-    BrowserModule, HttpClientModule, BrowserAnimationsModule, HorselessTagsLibraryModule, AuthConfigModule,
+    MatExpansionModule,
+    BrowserModule, HttpClientModule,
+    BrowserAnimationsModule, HorselessTagsLibraryModule,
+    AuthConfigModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: LoginComponent },
+
+      { path: 'default', component: LandingPageComponent},
+      { path: 'tenants', component: TenantBladeComponent},
+      { path: 'users', component: UserBladeComponent},
       { path: 'forbidden', component: UnauthorizedComponent },
       { path: 'unauthorized', component: UnauthorizedComponent },
+      { path: '', redirectTo: 'default', pathMatch: 'full' }
     ]),
   ],
   exports: [],
   providers: [],
   bootstrap: [],
-  entryComponents: [TenantChooserComponent, TenantEditorComponent]
+  entryComponents: [TenantChooserComponent, TenantEditorComponent, LoginComponent]
 })
 
 /*
