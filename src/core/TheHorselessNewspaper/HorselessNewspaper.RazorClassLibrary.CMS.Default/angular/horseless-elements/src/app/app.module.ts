@@ -12,12 +12,17 @@ import { Injector } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { HorselessTagsLibraryModule, TenantChooserComponent, TenantEditorComponent } from '@wizardcontroller/horseless-tags-library';
 import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
+import { EventTypes, PublicEventsService } from 'angular-auth-oidc-client';
 import { AuthConfigModule } from './auth/auth-config.module';
 import { LoginComponent } from './modules/HorselessClientAuth/components/Login/Login.component';
 import { UnauthorizedComponent } from './modules/HorselessClientAuth/components/Unauthorized/Unauthorized.component';
+import { filter } from 'rxjs';
+import { ApplicationRef } from '@angular/core';
+
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, LoginComponent, UnauthorizedComponent
   ],
   imports: [
     AuthModule.forRoot({
@@ -43,16 +48,28 @@ import { UnauthorizedComponent } from './modules/HorselessClientAuth/components/
   ],
   exports: [],
   providers: [],
-  bootstrap: []
+  bootstrap: [],
+  entryComponents: [TenantChooserComponent, TenantEditorComponent]
 })
 
+/*
+  oidc client integration as per
+  https://github.com/damienbod/angular-auth-oidc-client/blob/main/projects/sample-code-flow-refresh-tokens/src/app/app.module.ts
+*/
 export class AppModule {
 
-  constructor(private injector: Injector) {
+  constructor(private injector: Injector, private readonly eventService: PublicEventsService) {
+
+    this.eventService
+    .registerForEvents()
+    .pipe(filter((notification) => notification.type === EventTypes.ConfigLoaded))
+    .subscribe((config) => {
+      console.log('ConfigLoaded', config);
+    });
 
   }
 
-  ngDoBootstrap() {
+  ngDoBootstrap(app: ApplicationRef) {
     // Convert `PopupComponent` to a custom element.
     const tenantChooserElement = createCustomElement(TenantChooserComponent, { injector: this.injector });
     // Register the custom element with the browser.
@@ -62,5 +79,12 @@ export class AppModule {
     const tenantEditorComponent = createCustomElement(TenantEditorComponent, { injector: this.injector });
     // Register the custom element with the browser.
     customElements.define('horseless-tenant-editor', tenantEditorComponent);
+
+    app.bootstrap(AppComponent);
   }
+
+
+
 }
+
+
