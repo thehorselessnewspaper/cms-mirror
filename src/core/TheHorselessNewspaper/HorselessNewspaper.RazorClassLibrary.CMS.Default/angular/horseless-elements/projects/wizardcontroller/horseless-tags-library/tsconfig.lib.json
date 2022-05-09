@@ -3,6 +3,7 @@
   "extends": "../../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../../out-tsc/lib",
+    // "outDir": "./dist/wizardcontroller/horseless-tags-library",
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
