@@ -2,7 +2,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../wwwroot/js/horseless-elements",
+    "outDir": "../../wwwroot/js/horseless-elements/",
     "types": []
   },
   "files": [

@@ -160,21 +160,21 @@ builder.Services.AddHorselessKeycloakAuth(builder, keycloakOpts =>
 
 builder.Services.AddHorselessNewspaper(builder.Configuration, builder.Environment);
 
-builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
-{
-    //options.FileProviders.Add(
-    //        new EmbeddedFileProvider(typeof(HorselessCMSController).Assembly));
+//builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
+//{
+//    //options.FileProviders.Add(
+//    //        new EmbeddedFileProvider(typeof(HorselessCMSController).Assembly));
 
-    //var libraryPath = Path.GetFullPath(
-    //   Path.Combine(builder.Environment.ContentRootPath, "..", "HorselessNewspaper.RazorClassLibrary.CMS.Default"));
+//    //var libraryPath = Path.GetFullPath(
+//    //   Path.Combine(builder.Environment.ContentRootPath, "..", "HorselessNewspaper.RazorClassLibrary.CMS.Default"));
 
-    options.FileProviders.Add(new PhysicalFileProvider(builder.Environment.ContentRootPath));
+//    options.FileProviders.Add(new PhysicalFileProvider(builder.Environment.ContentRootPath));
 
-    //var contentRootPath = Path.GetFullPath(
-    //Path.Combine(builder.Environment.ContentRootPath, ".", ""));
+//    //var contentRootPath = Path.GetFullPath(
+//    //Path.Combine(builder.Environment.ContentRootPath, ".", ""));
 
-    //options.FileProviders.Add(new PhysicalFileProvider(contentRootPath));
-});
+//    //options.FileProviders.Add(new PhysicalFileProvider(contentRootPath));
+//});
 
 // globally enables mssql server
 builder.Services.UseHorselessContentModelMSSqlServer(builder.Configuration, builder.Configuration.GetConnectionString("ContentModelConnection"));
@@ -208,14 +208,15 @@ builder.Services.AddMvcCore(options =>
 
     }
 
-}).AddRazorRuntimeCompilation(
-                opt =>
-                {
-// This would be useful but it's READ-ONLY
-// opt.AdditionalReferencePaths = Path.Combine(WebRoot,"bin");
+});
+//    .AddRazorRuntimeCompilation(
+//                opt =>
+//                {
+//// This would be useful but it's READ-ONLY
+//// opt.AdditionalReferencePaths = Path.Combine(WebRoot,"bin");
 
-                    opt.FileProviders.Add(new PhysicalFileProvider(builder.Environment.WebRootPath));
-                });
+//                    opt.FileProviders.Add(new PhysicalFileProvider(builder.Environment.WebRootPath));
+//                });
 
 
 builder.Services.AddDistributedMemoryCache();

@@ -32,7 +32,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
             this._configuration = configuration;
         }
 
-        public IActionResult Index()
+        public IActionResult Dashboard()
         {
             return View();
         }
