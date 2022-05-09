@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router'
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,21 +10,23 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import { Injector } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
-
-// import { HorselessTagsLibraryModule, TenantChooserComponent, TenantEditorComponent } from '../../dist/wizardcontroller/horseless-tags-library'; // '@wizardcontroller/horseless-tags-library';
 import { HorselessTagsLibraryModule, TenantChooserComponent, TenantEditorComponent } from '@wizardcontroller/horseless-tags-library';
+import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
+import { AuthConfigModule } from './auth/auth-config.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, BrowserAnimationsModule, HorselessTagsLibraryModule
+    BrowserModule, HttpClientModule, BrowserAnimationsModule, HorselessTagsLibraryModule, AuthConfigModule, RouterModule
   ],
   providers: [],
   bootstrap: []
 })
+
 export class AppModule {
+
   constructor(private injector: Injector) {
 
   }
