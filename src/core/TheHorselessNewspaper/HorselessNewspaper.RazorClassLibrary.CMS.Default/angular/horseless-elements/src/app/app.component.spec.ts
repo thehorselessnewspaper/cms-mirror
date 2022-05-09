@@ -1,12 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
         AppComponent
-      ],
+      ], imports : [OidcSecurityService],
     }).compileComponents();
   });
 
@@ -19,6 +22,7 @@ describe('AppComponent', () => {
   it(`should have as title 'horseless-elements'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
+    fixture.detectChanges();
     expect(app.title).toEqual('horseless-elements');
   });
 

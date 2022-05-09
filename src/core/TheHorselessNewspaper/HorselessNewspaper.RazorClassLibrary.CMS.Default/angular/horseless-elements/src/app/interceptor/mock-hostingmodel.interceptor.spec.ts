@@ -14,3 +14,7 @@ describe('MockHostingmodelInterceptor', () => {
     expect(interceptor).toBeTruthy();
   });
 });
+function beforeEach(arg0: () => import("@angular/core/testing").TestBedStatic) {
+  throw new Error('Function not implemented.');
+}
+
