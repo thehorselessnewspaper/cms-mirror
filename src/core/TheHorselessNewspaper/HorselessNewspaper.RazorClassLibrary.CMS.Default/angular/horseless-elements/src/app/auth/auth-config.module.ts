@@ -8,8 +8,8 @@ import { AuthModule } from 'angular-auth-oidc-client';
               authority: 'https://awsdev.ataxlab.com:8443/realms/horseless-infrastructure',
               redirectUrl: window.location.origin,
               postLogoutRedirectUri: window.location.origin,
-              clientId: 'please-enter-clientId',
-              scope: 'please-enter-scopes', // 'openid profile offline_access ' + your scopes
+              clientId: 'horseless-prototype-public',
+              scope: 'openid profile email offline_access',
               responseType: 'code',
               silentRenew: true,
               useRefreshToken: true,

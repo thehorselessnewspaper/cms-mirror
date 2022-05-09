@@ -13,14 +13,35 @@ import { createCustomElement } from '@angular/elements';
 import { HorselessTagsLibraryModule, TenantChooserComponent, TenantEditorComponent } from '@wizardcontroller/horseless-tags-library';
 import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
 import { AuthConfigModule } from './auth/auth-config.module';
-
+import { LoginComponent } from './modules/HorselessClientAuth/components/Login/Login.component';
+import { UnauthorizedComponent } from './modules/HorselessClientAuth/components/Unauthorized/Unauthorized.component';
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, BrowserAnimationsModule, HorselessTagsLibraryModule, AuthConfigModule, RouterModule
+    AuthModule.forRoot({
+      config: {
+        authority: 'https://awsdev.ataxlab.com:8443/realms/horseless-infrastructure',
+        redirectUrl: window.location.origin,
+        postLogoutRedirectUri: window.location.origin,
+        clientId: 'horseless-prototype-public',
+        scope: 'openid profile email offline_access',
+        responseType: 'code',
+        silentRenew: true,
+        useRefreshToken: true,
+        logLevel: LogLevel.Debug,
+      }
+    }),
+    BrowserModule, HttpClientModule, BrowserAnimationsModule, HorselessTagsLibraryModule, AuthConfigModule,
+    RouterModule.forRoot([
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: LoginComponent },
+      { path: 'forbidden', component: UnauthorizedComponent },
+      { path: 'unauthorized', component: UnauthorizedComponent },
+    ]),
   ],
+  exports: [],
   providers: [],
   bootstrap: []
 })
