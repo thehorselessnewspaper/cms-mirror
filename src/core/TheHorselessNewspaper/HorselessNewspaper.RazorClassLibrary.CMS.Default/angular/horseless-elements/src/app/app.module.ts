@@ -23,7 +23,11 @@ import { TenantBladeComponent } from './modules/HorselessClientAuth/components/T
 import { UserBladeComponent } from './modules/HorselessClientAuth/components/UserBlade/UserBlade.component';
 import { LandingPageComponent } from './modules/HorselessClientAuth/components/LandingPage/LandingPage.component';
 import { HorselessClientAuthModule } from './modules/HorselessClientAuth/HorselessClientAuth.module';
-import { HorselessApiModule } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { BASE_PATH } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
+import { environment } from '../environments/environment';
+// configuring providers with an authentication service that manages your access tokens
+import { HorselessApiModule, HorselessConfiguration } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 
 @NgModule({
   declarations: [
@@ -44,6 +48,7 @@ import { HorselessApiModule } from '@wizardcontrollerprerelease/horseless-conten
       }
     }),
     MatExpansionModule,
+    MatToolbarModule,
     HttpClientModule,
     TenantEditorModule,
     TenantChooserModule,
@@ -64,7 +69,21 @@ import { HorselessApiModule } from '@wizardcontrollerprerelease/horseless-conten
     ]),
   ],
   exports: [],
-  providers: [OidcSecurityService],
+  providers: [
+    OidcSecurityService,
+    { provide: BASE_PATH, useValue: environment.API_BASE_PATH },
+    {
+      provide: HorselessConfiguration,
+      useFactory: (authService: OidcSecurityService) => new HorselessConfiguration(
+        {
+          basePath: environment.API_BASE_PATH,
+          credentials: {"Bearer": authService.getAccessToken.bind(authService).toString()}
+        }
+      ),
+      deps: [OidcSecurityService],
+      multi: false
+    }
+  ],
   bootstrap: [],
   entryComponents: [TenantChooserComponent, TenantEditorComponent, LoginComponent, LandingPageComponent]
 })
@@ -75,7 +94,9 @@ import { HorselessApiModule } from '@wizardcontrollerprerelease/horseless-conten
 */
 export class AppModule {
 
-  constructor(private injector: Injector, private readonly eventService: PublicEventsService) {
+  constructor(private injector: Injector,
+    private oidcSecurityService: OidcSecurityService,
+    private readonly eventService: PublicEventsService) {
 
     this.eventService
     .registerForEvents()
