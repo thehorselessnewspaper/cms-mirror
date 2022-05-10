@@ -36,18 +36,33 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 
             // as per https://stackoverflow.com/questions/40908568/assembly-loading-in-net-core
             // todo - come up with a central way of storing configuration string keys
-            var directoryInfo = new DirectoryInfo(env.WebRootPath);
-            var pluginPath = Path.Combine(directoryInfo.Parent.FullName, configuration[HorselessApplicationBuilder.TenantFilesystemPathConfigurationKey]);
-
-            AssemblyLoadContext.Default.Resolving += (context, name) =>
+            try
             {
-                var resolver = new AssemblyDependencyResolver(pluginPath);
-                string assemblyPath = resolver.ResolveAssemblyToPath(name);
-                if (assemblyPath != null)
-                    return context.LoadFromAssemblyPath(assemblyPath);
-                return null;
-            };
+                // harden against nulls during executions by
+                // dotnet tool run invocations 
+                var directoryInfo = new DirectoryInfo(env.WebRootPath);
+                if (directoryInfo != null 
+                    && directoryInfo.Exists 
+                    && configuration[HorselessApplicationBuilder.TenantFilesystemPathConfigurationKey] != null)
+                {
+                    string path2 = configuration[HorselessApplicationBuilder.TenantFilesystemPathConfigurationKey];
+                    string fullName = directoryInfo.Parent.FullName;
+                    var pluginPath = Path.Combine(fullName, path2);
 
+                    AssemblyLoadContext.Default.Resolving += (context, name) =>
+                    {
+                        var resolver = new AssemblyDependencyResolver(pluginPath);
+                        string assemblyPath = resolver.ResolveAssemblyToPath(name);
+                        if (assemblyPath != null)
+                            return context.LoadFromAssemblyPath(assemblyPath);
+                        return null;
+                    };
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
 
             builder.UseCookiePolicy();
 
