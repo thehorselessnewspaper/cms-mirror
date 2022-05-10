@@ -23,7 +23,7 @@ import { TenantBladeComponent } from './modules/HorselessClientAuth/components/T
 import { UserBladeComponent } from './modules/HorselessClientAuth/components/UserBlade/UserBlade.component';
 import { LandingPageComponent } from './modules/HorselessClientAuth/components/LandingPage/LandingPage.component';
 import { HorselessClientAuthModule } from './modules/HorselessClientAuth/HorselessClientAuth.module';
-
+import { HorselessApiModule } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 
 @NgModule({
   declarations: [
@@ -49,6 +49,7 @@ import { HorselessClientAuthModule } from './modules/HorselessClientAuth/Horsele
     TenantChooserModule,
     HorselessClientAuthModule,
     HorselessTagsLibraryModule,
+    HorselessApiModule,
     BrowserModule,
     BrowserAnimationsModule,
     AuthConfigModule,

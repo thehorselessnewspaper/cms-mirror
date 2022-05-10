@@ -5,7 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { AuthModule, OidcSecurityService, LogLevel } from 'angular-auth-oidc-client';
 import { AuthConfigModule } from 'src/app/auth/auth-config.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/Login/Login.component';
 import { TenantBladeComponent } from './components/TenantBlade/TenantBlade.component';
 import { UnauthorizedComponent } from './components/Unauthorized/Unauthorized.component';
@@ -19,7 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   providers: [],
   imports: [
-    CommonModule, AuthConfigModule,   BrowserModule,  FormsModule, MatExpansionModule, HttpClientModule, BrowserAnimationsModule,
+    CommonModule, AuthConfigModule,   BrowserModule,  FormsModule, MatExpansionModule, BrowserAnimationsModule,
     AuthModule.forRoot({
       config: {
         authority: 'https://awsdev.ataxlab.com:8443/realms/horseless-infrastructure',
