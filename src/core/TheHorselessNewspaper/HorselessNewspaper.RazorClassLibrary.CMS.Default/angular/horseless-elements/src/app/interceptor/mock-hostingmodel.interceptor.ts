@@ -411,7 +411,9 @@ const mockHostingModelTenant = {
 ]
 };
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class MockHostingmodelInterceptor implements HttpInterceptor {
 
   constructor(private injector: Injector) {}

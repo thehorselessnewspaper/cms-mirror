@@ -2,16 +2,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router'
-import {MatExpansionModule} from '@angular/material/expansion';
+import {MatExpansionModule, MatExpansionPanel} from '@angular/material/expansion';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import { Injector } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
-import { HorselessTagsLibraryModule, TenantChooserComponent, TenantEditorComponent } from '@wizardcontroller/horseless-tags-library';
-import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
+import { TenantChooserComponent, TenantChooserModule, TenantEditorComponent, TenantEditorModule } from '@wizardcontroller/horseless-tags-library';
+import { HorselessTagsLibraryModule } from '@wizardcontroller/horseless-tags-library'
+import { AuthModule, OidcSecurityService, LogLevel } from 'angular-auth-oidc-client';
 import { EventTypes, PublicEventsService } from 'angular-auth-oidc-client';
 import { AuthConfigModule } from './auth/auth-config.module';
 import { LoginComponent } from './modules/HorselessClientAuth/components/Login/Login.component';
@@ -21,11 +22,12 @@ import { ApplicationRef } from '@angular/core';
 import { TenantBladeComponent } from './modules/HorselessClientAuth/components/TenantBlade/TenantBlade.component';
 import { UserBladeComponent } from './modules/HorselessClientAuth/components/UserBlade/UserBlade.component';
 import { LandingPageComponent } from './modules/HorselessClientAuth/components/LandingPage/LandingPage.component';
+import { HorselessClientAuthModule } from './modules/HorselessClientAuth/HorselessClientAuth.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, UnauthorizedComponent, TenantBladeComponent
+    AppComponent
   ],
   imports: [
     AuthModule.forRoot({
@@ -42,8 +44,13 @@ import { LandingPageComponent } from './modules/HorselessClientAuth/components/L
       }
     }),
     MatExpansionModule,
-    BrowserModule, HttpClientModule,
-    BrowserAnimationsModule, HorselessTagsLibraryModule,
+    HttpClientModule,
+    TenantEditorModule,
+    TenantChooserModule,
+    HorselessClientAuthModule,
+    HorselessTagsLibraryModule,
+    BrowserModule,
+    BrowserAnimationsModule,
     AuthConfigModule,
     RouterModule.forRoot([
 
@@ -56,9 +63,9 @@ import { LandingPageComponent } from './modules/HorselessClientAuth/components/L
     ]),
   ],
   exports: [],
-  providers: [],
+  providers: [OidcSecurityService],
   bootstrap: [],
-  entryComponents: [TenantChooserComponent, TenantEditorComponent, LoginComponent]
+  entryComponents: [TenantChooserComponent, TenantEditorComponent, LoginComponent, LandingPageComponent]
 })
 
 /*
