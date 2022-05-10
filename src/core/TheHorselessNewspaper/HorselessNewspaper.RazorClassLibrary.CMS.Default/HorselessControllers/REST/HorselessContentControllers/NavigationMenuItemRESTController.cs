@@ -27,7 +27,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             CurrentTenant = tenantInfo;
         }
 
-        [HttpPost("Create")]
+        [HttpPost("Create", Name = "ContentEntities[controller]_[action]")]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(NavigationMenuItem))]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(NavigationMenuItem))]
@@ -51,7 +51,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
 
-        [HttpGet("GetByObjectId")]
+        [HttpGet("GetByObjectId", Name = "ContentEntities[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NavigationMenuItem))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<NavigationMenuItem>> GetByObjectId([FromRoute] string objectId)
@@ -91,7 +91,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
 
         [Consumes("application/json")]
-        [HttpPost("Update/{contentCollectionId}")]
+        [HttpPost("Update/{contentCollectionId}", Name = "ContentEntities[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(NavigationMenuItem))]
         [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(NavigationMenuItem))]
         public async Task<ActionResult<NavigationMenuItem>> Update([FromRoute] string contentCollectionId, [FromBody] NavigationMenuItem contentCollection)

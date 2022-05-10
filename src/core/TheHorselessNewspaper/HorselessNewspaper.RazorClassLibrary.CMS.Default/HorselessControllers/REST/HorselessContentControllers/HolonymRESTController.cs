@@ -31,7 +31,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             CurrentTenant = tenantInfo;
         }
 
-        [HttpPost("Create", Name = "[controller]_[action]")]
+        [HttpPost("Create", Name = "ContentEntities[controller]_[action]")]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Holonym))]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Holonym))]
@@ -53,7 +53,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             }
         }
 
-        [HttpGet("GetByObjectId", Name = "[controller]_[action]")]
+        [HttpGet("GetByObjectId", Name = "ContentEntities[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Holonym))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Holonym>> GetByObjectId([FromRoute] string objectId)
@@ -92,7 +92,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
 
         [Consumes("application/json")]
-        [HttpPost("Update/{contentCollectionId}", Name = "[controller]_[action]")]
+        [HttpPost("Update/{contentCollectionId}", Name = "ContentEntities[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Holonym))]
         [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(Holonym))]
         public async Task<ActionResult<Holonym>> Update([FromRoute] string contentCollectionId, [FromBody] Holonym contentCollection)

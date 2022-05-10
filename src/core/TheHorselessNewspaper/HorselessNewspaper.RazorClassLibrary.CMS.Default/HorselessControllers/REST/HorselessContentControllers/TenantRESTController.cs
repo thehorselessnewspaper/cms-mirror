@@ -51,7 +51,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
 
 
-        [HttpGet("GetByObjectId", Name = "[controller]_[action]")]
+        [HttpGet("GetByObjectId", Name = "ContentEntities[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Tenant))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Tenant>> GetByObjectId([FromRoute] string objectId)
@@ -88,7 +88,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [Consumes("application/json")]
-        [HttpPost("Update/{contentCollectionId}", Name = "[controller]_[action]")]
+        [HttpPost("Update/{contentCollectionId}", Name = "ContentEntities[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Tenant))]
         [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(Tenant))]
         public async Task<ActionResult<Tenant>> Update( [FromRoute] string contentCollectionId, [FromBody] Tenant contentCollection)
@@ -112,7 +112,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [Consumes("application/json")]
-        [HttpPost("UpdateProperties/{contentCollectionId}", Name = "[controller]_[action]")]
+        [HttpPost("UpdateProperties/{contentCollectionId}", Name = "ContentEntities[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Tenant))]
         [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(Tenant))]
         public async Task<ActionResult<Tenant>> UpdateProperties([FromRoute] string contentCollectionId, [FromHeader] List<String> updatedProperties, [FromBody] Tenant contentCollection)

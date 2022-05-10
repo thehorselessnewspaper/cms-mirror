@@ -24,7 +24,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         public IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.Tenant>, HostingModel.Tenant> EntityCollectionService { get; set; }
         public ITenantInfo CurrentTenant { get; set; }
 
-        [HttpPost("Create", Name = "Hosting[controller]_[action]")]
+        [HttpPost("Create", Name = "HostingEntities[controller]_[action]")]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(HostingModel.Tenant))]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(HostingModel.Tenant))]
@@ -45,7 +45,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             }
         }
 
-        [HttpGet("GetByObjectId", Name = "Hosting[controller]_[action]")]
+        [HttpGet("GetByObjectId", Name = "HostingEntities[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HostingModel.Tenant))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<HostingModel.Tenant>> GetByObjectId([FromRoute] string objectId)
@@ -82,7 +82,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [Consumes("application/json")]
-        [HttpPost("Update/{entityCollectionId}", Name = "Hosting[controller]_[action]")]
+        [HttpPost("Update/{entityCollectionId}", Name = "HostingEntities[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(HostingModel.Tenant))]
         [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(HostingModel.Tenant))]
         public async Task<ActionResult<HostingModel.Tenant>> Update([FromRoute] string entityCollectionId, [FromBody] HostingModel.Tenant entityCollection)

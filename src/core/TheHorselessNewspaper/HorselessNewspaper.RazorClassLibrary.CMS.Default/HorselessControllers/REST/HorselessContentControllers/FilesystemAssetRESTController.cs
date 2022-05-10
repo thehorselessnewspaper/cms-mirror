@@ -30,7 +30,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             CurrentTenant = tenantInfo;
         }
 
-        [HttpPost("Create", Name = "[controller]_[action]")]
+        [HttpPost("Create", Name = "ContentEntities[controller]_[action]")]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(FilesystemAsset))]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(FilesystemAsset))]
@@ -52,7 +52,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             }
         }
 
-        [HttpGet("GetByObjectId", Name = "[controller]_[action]")]
+        [HttpGet("GetByObjectId", Name = "ContentEntities[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FilesystemAsset))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<FilesystemAsset>> GetByObjectId([FromRoute] string objectId)
@@ -91,7 +91,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 }
 
         [Consumes("application/json")]
-        [HttpPost("Update/{contentCollectionId}", Name = "[controller]_[action]")]
+        [HttpPost("Update/{contentCollectionId}", Name = "ContentEntities[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(FilesystemAsset))]
         [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(FilesystemAsset))]
         public async Task<ActionResult<FilesystemAsset>> Update([FromRoute] string contentCollectionId, [FromBody] FilesystemAsset contentCollection)
