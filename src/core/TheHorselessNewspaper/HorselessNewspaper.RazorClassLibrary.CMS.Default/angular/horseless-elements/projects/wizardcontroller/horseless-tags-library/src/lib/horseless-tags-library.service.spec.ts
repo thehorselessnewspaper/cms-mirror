@@ -6,7 +6,9 @@ describe('HorselessTagsLibraryService', () => {
   let service: HorselessTagsLibraryService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [HorselessTagsLibraryService]
+    });
     service = TestBed.inject(HorselessTagsLibraryService);
   });
 
