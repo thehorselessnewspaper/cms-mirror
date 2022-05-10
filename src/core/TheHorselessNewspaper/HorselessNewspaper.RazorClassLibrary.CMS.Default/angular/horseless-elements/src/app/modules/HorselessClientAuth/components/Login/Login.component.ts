@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OidcClientNotification, OidcSecurityService, OpenIdConfiguration, UserDataResult } from 'angular-auth-oidc-client';
 import { Observable, of, pipe} from 'rxjs';
-import {MatExpansionPanel} from '@angular/material/expansion';
+import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from '@angular/material/expansion';
 import { map, filter, tap } from 'rxjs/operators'
 @Component({
   selector: 'app-login',

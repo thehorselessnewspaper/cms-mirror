@@ -7,6 +7,7 @@ import { AuthModule, OidcSecurityService, LogLevel } from 'angular-auth-oidc-cli
 import { LoginComponent } from './Login.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
@@ -18,6 +19,7 @@ describe('LoginComponent', () => {
         RouterTestingModule,
         MatExpansionModule,
         HttpClientTestingModule,
+        BrowserAnimationsModule,
         AuthModule.forRoot({
           config: {
             authority: 'https://awsdev.ataxlab.com:8443/realms/horseless-infrastructure',

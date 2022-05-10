@@ -15,10 +15,11 @@ import { LandingPageComponent } from './components/LandingPage/LandingPage.compo
 import { UserBladeComponent } from './components/UserBlade/UserBlade.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatExpansionPanel} from '@angular/material/expansion';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   providers: [],
   imports: [
-    CommonModule, AuthConfigModule,   BrowserModule,  FormsModule, MatExpansionModule, HttpClientModule,
+    CommonModule, AuthConfigModule,   BrowserModule,  FormsModule, MatExpansionModule, HttpClientModule, BrowserAnimationsModule,
     AuthModule.forRoot({
       config: {
         authority: 'https://awsdev.ataxlab.com:8443/realms/horseless-infrastructure',
