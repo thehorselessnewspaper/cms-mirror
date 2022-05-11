@@ -31,7 +31,7 @@ export interface ContentCollectionRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesContentCollection 
      */
-    contentCollectionRESTControllerCreate(tenant: string, contentEntitiesContentCollection?: ContentEntitiesContentCollection, extraHttpRequestParams?: any): Observable<ContentEntitiesContentCollection>;
+    contentEntitiesContentCollectionRESTCreate(tenant: string, contentEntitiesContentCollection?: ContentEntitiesContentCollection, extraHttpRequestParams?: any): Observable<ContentEntitiesContentCollection>;
 
     /**
      * 
@@ -39,7 +39,7 @@ export interface ContentCollectionRESTServiceInterface {
      * @param tenant 
      * @param objectId 
      */
-    contentCollectionRESTControllerGetByObjectId(tenant: string, objectId?: string, extraHttpRequestParams?: any): Observable<ContentEntitiesContentCollection>;
+    contentEntitiesContentCollectionRESTGetByObjectId(tenant: string, objectId?: string, extraHttpRequestParams?: any): Observable<ContentEntitiesContentCollection>;
 
     /**
      * 
@@ -49,7 +49,7 @@ export interface ContentCollectionRESTServiceInterface {
      * @param pagesize 
      * @param pageNumber 
      */
-    contentCollectionRESTControllerGetByPageNumber(tenant: string, offset?: number, pagesize?: number, pageNumber?: number, extraHttpRequestParams?: any): Observable<ContentEntitiesContentCollection>;
+    contentEntitiesContentCollectionRESTGetByPageNumber(tenant: string, offset?: number, pagesize?: number, pageNumber?: number, extraHttpRequestParams?: any): Observable<ContentEntitiesContentCollection>;
 
     /**
      * 
@@ -58,6 +58,6 @@ export interface ContentCollectionRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesContentCollection 
      */
-    contentCollectionRESTControllerUpdate(contentCollectionId: string, tenant: string, contentEntitiesContentCollection?: ContentEntitiesContentCollection, extraHttpRequestParams?: any): Observable<ContentEntitiesContentCollection>;
+    contentEntitiesContentCollectionRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesContentCollection?: ContentEntitiesContentCollection, extraHttpRequestParams?: any): Observable<ContentEntitiesContentCollection>;
 
 }

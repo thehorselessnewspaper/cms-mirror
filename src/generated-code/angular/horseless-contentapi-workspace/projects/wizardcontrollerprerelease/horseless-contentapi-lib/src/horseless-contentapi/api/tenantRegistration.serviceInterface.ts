@@ -28,7 +28,7 @@ export interface TenantRegistrationServiceInterface {
      * 
      * @param tenantId 
      */
-    tenantRegistrationControllerApprove(tenantId: string, extraHttpRequestParams?: any): Observable<{}>;
+    approveTenantIdGet(tenantId: string, extraHttpRequestParams?: any): Observable<{}>;
 
     /**
      * 
@@ -38,6 +38,6 @@ export interface TenantRegistrationServiceInterface {
      * @param tenantIdentifier 
      * @param id 
      */
-    tenantRegistrationControllerApprove_1(tenantId: string, displayName: string, tenantIdentifier: string, id?: string, extraHttpRequestParams?: any): Observable<{}>;
+    approveTenantIdPost(tenantId: string, displayName: string, tenantIdentifier: string, id?: string, extraHttpRequestParams?: any): Observable<{}>;
 
 }

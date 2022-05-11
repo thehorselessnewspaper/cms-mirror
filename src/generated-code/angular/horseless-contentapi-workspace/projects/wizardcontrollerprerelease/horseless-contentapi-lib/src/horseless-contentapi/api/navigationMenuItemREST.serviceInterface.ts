@@ -31,7 +31,7 @@ export interface NavigationMenuItemRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesNavigationMenuItem 
      */
-    navigationMenuItemRESTControllerCreate(tenant: string, contentEntitiesNavigationMenuItem?: ContentEntitiesNavigationMenuItem, extraHttpRequestParams?: any): Observable<ContentEntitiesNavigationMenuItem>;
+    contentEntitiesNavigationMenuItemRESTCreate(tenant: string, contentEntitiesNavigationMenuItem?: ContentEntitiesNavigationMenuItem, extraHttpRequestParams?: any): Observable<ContentEntitiesNavigationMenuItem>;
 
     /**
      * 
@@ -39,7 +39,7 @@ export interface NavigationMenuItemRESTServiceInterface {
      * @param objectId 
      * @param tenant 
      */
-    navigationMenuItemRESTControllerGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesNavigationMenuItem>;
+    contentEntitiesNavigationMenuItemRESTGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesNavigationMenuItem>;
 
     /**
      * 
@@ -48,6 +48,6 @@ export interface NavigationMenuItemRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesNavigationMenuItem 
      */
-    navigationMenuItemRESTControllerUpdate(contentCollectionId: string, tenant: string, contentEntitiesNavigationMenuItem?: ContentEntitiesNavigationMenuItem, extraHttpRequestParams?: any): Observable<ContentEntitiesNavigationMenuItem>;
+    contentEntitiesNavigationMenuItemRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesNavigationMenuItem?: ContentEntitiesNavigationMenuItem, extraHttpRequestParams?: any): Observable<ContentEntitiesNavigationMenuItem>;
 
 }

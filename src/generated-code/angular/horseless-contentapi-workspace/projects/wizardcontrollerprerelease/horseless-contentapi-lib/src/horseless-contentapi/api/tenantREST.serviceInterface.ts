@@ -29,40 +29,19 @@ export interface TenantRESTServiceInterface {
     /**
      * 
      * 
-     * @param hostingEntitiesTenant 
+     * @param objectId 
+     * @param tenant 
      */
-    tenantRESTControllerCreate(hostingEntitiesTenant?: HostingEntitiesTenant, extraHttpRequestParams?: any): Observable<HostingEntitiesTenant>;
+    contentEntitiesTenantRESTGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesTenant>;
 
     /**
      * 
      * 
+     * @param contentCollectionId 
      * @param tenant 
      * @param contentEntitiesTenant 
      */
-    tenantRESTControllerCreate_1(tenant: string, contentEntitiesTenant?: ContentEntitiesTenant, extraHttpRequestParams?: any): Observable<ContentEntitiesTenant>;
-
-    /**
-     * 
-     * 
-     * @param objectId 
-     */
-    tenantRESTControllerGetByObjectId(objectId: string, extraHttpRequestParams?: any): Observable<HostingEntitiesTenant>;
-
-    /**
-     * 
-     * 
-     * @param objectId 
-     * @param tenant 
-     */
-    tenantRESTControllerGetByObjectId_2(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesTenant>;
-
-    /**
-     * 
-     * 
-     * @param entityCollectionId 
-     * @param hostingEntitiesTenant 
-     */
-    tenantRESTControllerUpdate(entityCollectionId: string, hostingEntitiesTenant?: HostingEntitiesTenant, extraHttpRequestParams?: any): Observable<HostingEntitiesTenant>;
+    contentEntitiesTenantRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesTenant?: ContentEntitiesTenant, extraHttpRequestParams?: any): Observable<ContentEntitiesTenant>;
 
     /**
      * 
@@ -72,15 +51,36 @@ export interface TenantRESTServiceInterface {
      * @param updatedProperties 
      * @param contentEntitiesTenant 
      */
-    tenantRESTControllerUpdateProperties(contentCollectionId: string, tenant: string, updatedProperties?: Array<string>, contentEntitiesTenant?: ContentEntitiesTenant, extraHttpRequestParams?: any): Observable<ContentEntitiesTenant>;
+    contentEntitiesTenantRESTUpdateProperties(contentCollectionId: string, tenant: string, updatedProperties?: Array<string>, contentEntitiesTenant?: ContentEntitiesTenant, extraHttpRequestParams?: any): Observable<ContentEntitiesTenant>;
 
     /**
      * 
      * 
-     * @param contentCollectionId 
+     * @param hostingEntitiesTenant 
+     */
+    hostingEntitiesTenantRESTCreate(hostingEntitiesTenant?: HostingEntitiesTenant, extraHttpRequestParams?: any): Observable<HostingEntitiesTenant>;
+
+    /**
+     * 
+     * 
+     * @param objectId 
+     */
+    hostingEntitiesTenantRESTGetByObjectId(objectId: string, extraHttpRequestParams?: any): Observable<HostingEntitiesTenant>;
+
+    /**
+     * 
+     * 
+     * @param entityCollectionId 
+     * @param hostingEntitiesTenant 
+     */
+    hostingEntitiesTenantRESTUpdate(entityCollectionId: string, hostingEntitiesTenant?: HostingEntitiesTenant, extraHttpRequestParams?: any): Observable<HostingEntitiesTenant>;
+
+    /**
+     * 
+     * 
      * @param tenant 
      * @param contentEntitiesTenant 
      */
-    tenantRESTControllerUpdate_3(contentCollectionId: string, tenant: string, contentEntitiesTenant?: ContentEntitiesTenant, extraHttpRequestParams?: any): Observable<ContentEntitiesTenant>;
+    tenantApiHorselessContentModelTenantCreatePost(tenant: string, contentEntitiesTenant?: ContentEntitiesTenant, extraHttpRequestParams?: any): Observable<ContentEntitiesTenant>;
 
 }

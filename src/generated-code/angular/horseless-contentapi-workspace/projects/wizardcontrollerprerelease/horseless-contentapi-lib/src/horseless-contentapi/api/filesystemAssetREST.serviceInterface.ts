@@ -31,7 +31,7 @@ export interface FilesystemAssetRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesFilesystemAsset 
      */
-    filesystemAssetRESTControllerCreate(tenant: string, contentEntitiesFilesystemAsset?: ContentEntitiesFilesystemAsset, extraHttpRequestParams?: any): Observable<ContentEntitiesFilesystemAsset>;
+    contentEntitiesFilesystemAssetRESTCreate(tenant: string, contentEntitiesFilesystemAsset?: ContentEntitiesFilesystemAsset, extraHttpRequestParams?: any): Observable<ContentEntitiesFilesystemAsset>;
 
     /**
      * 
@@ -39,7 +39,7 @@ export interface FilesystemAssetRESTServiceInterface {
      * @param objectId 
      * @param tenant 
      */
-    filesystemAssetRESTControllerGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesFilesystemAsset>;
+    contentEntitiesFilesystemAssetRESTGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesFilesystemAsset>;
 
     /**
      * 
@@ -48,6 +48,6 @@ export interface FilesystemAssetRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesFilesystemAsset 
      */
-    filesystemAssetRESTControllerUpdate(contentCollectionId: string, tenant: string, contentEntitiesFilesystemAsset?: ContentEntitiesFilesystemAsset, extraHttpRequestParams?: any): Observable<ContentEntitiesFilesystemAsset>;
+    contentEntitiesFilesystemAssetRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesFilesystemAsset?: ContentEntitiesFilesystemAsset, extraHttpRequestParams?: any): Observable<ContentEntitiesFilesystemAsset>;
 
 }

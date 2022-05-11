@@ -31,7 +31,7 @@ export interface MeronymRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesMeronym 
      */
-    meronymRESTControllerCreate(tenant: string, contentEntitiesMeronym?: ContentEntitiesMeronym, extraHttpRequestParams?: any): Observable<ContentEntitiesMeronym>;
+    contentEntitiesMeronymRESTCreate(tenant: string, contentEntitiesMeronym?: ContentEntitiesMeronym, extraHttpRequestParams?: any): Observable<ContentEntitiesMeronym>;
 
     /**
      * 
@@ -39,7 +39,7 @@ export interface MeronymRESTServiceInterface {
      * @param objectId 
      * @param tenant 
      */
-    meronymRESTControllerGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesMeronym>;
+    contentEntitiesMeronymRESTGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesMeronym>;
 
     /**
      * 
@@ -48,6 +48,6 @@ export interface MeronymRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesMeronym 
      */
-    meronymRESTControllerUpdate(contentCollectionId: string, tenant: string, contentEntitiesMeronym?: ContentEntitiesMeronym, extraHttpRequestParams?: any): Observable<ContentEntitiesMeronym>;
+    contentEntitiesMeronymRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesMeronym?: ContentEntitiesMeronym, extraHttpRequestParams?: any): Observable<ContentEntitiesMeronym>;
 
 }

@@ -27,19 +27,19 @@ export interface KeycloakAuthenticationServiceInterface {
      * 
      * 
      */
-    keycloakAuthenticationControllerSignIn(extraHttpRequestParams?: any): Observable<{}>;
+    keycloakSignInGet(extraHttpRequestParams?: any): Observable<{}>;
 
     /**
      * 
      * 
      * @param provider 
      */
-    keycloakAuthenticationControllerSignIn_1(provider?: string, extraHttpRequestParams?: any): Observable<{}>;
+    keycloakSignInPost(provider?: string, extraHttpRequestParams?: any): Observable<{}>;
 
     /**
      * 
      * 
      */
-    keycloakAuthenticationControllerSignOutCurrentUser(extraHttpRequestParams?: any): Observable<{}>;
+    keycloakSignoutPost(extraHttpRequestParams?: any): Observable<{}>;
 
 }

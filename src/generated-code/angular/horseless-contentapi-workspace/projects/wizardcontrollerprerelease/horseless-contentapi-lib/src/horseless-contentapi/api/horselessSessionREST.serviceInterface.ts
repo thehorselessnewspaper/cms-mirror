@@ -32,7 +32,7 @@ export interface HorselessSessionRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesHorselessSession 
      */
-    horselessSessionRESTControllerCreate(tenant: string, contentEntitiesHorselessSession?: ContentEntitiesHorselessSession, extraHttpRequestParams?: any): Observable<ContentEntitiesContentCollection>;
+    contentEntitiesHorselessSessionRESTCreate(tenant: string, contentEntitiesHorselessSession?: ContentEntitiesHorselessSession, extraHttpRequestParams?: any): Observable<ContentEntitiesContentCollection>;
 
     /**
      * 
@@ -40,7 +40,7 @@ export interface HorselessSessionRESTServiceInterface {
      * @param objectId 
      * @param tenant 
      */
-    horselessSessionRESTControllerGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesContentCollection>;
+    contentEntitiesHorselessSessionRESTGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesContentCollection>;
 
     /**
      * 
@@ -49,6 +49,6 @@ export interface HorselessSessionRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesHorselessSession 
      */
-    horselessSessionRESTControllerUpdate(contentCollectionId: string, tenant: string, contentEntitiesHorselessSession?: ContentEntitiesHorselessSession, extraHttpRequestParams?: any): Observable<ContentEntitiesContentCollection>;
+    contentEntitiesHorselessSessionRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesHorselessSession?: ContentEntitiesHorselessSession, extraHttpRequestParams?: any): Observable<ContentEntitiesContentCollection>;
 
 }

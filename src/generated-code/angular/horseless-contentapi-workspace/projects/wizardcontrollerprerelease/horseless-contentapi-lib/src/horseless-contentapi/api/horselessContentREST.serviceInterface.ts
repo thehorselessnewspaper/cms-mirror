@@ -31,7 +31,7 @@ export interface HorselessContentRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesHorselessContent 
      */
-    horselessContentRESTControllerCreate(tenant: string, contentEntitiesHorselessContent?: ContentEntitiesHorselessContent, extraHttpRequestParams?: any): Observable<ContentEntitiesHorselessContent>;
+    contentEntitiesHorselessContentRESTCreate(tenant: string, contentEntitiesHorselessContent?: ContentEntitiesHorselessContent, extraHttpRequestParams?: any): Observable<ContentEntitiesHorselessContent>;
 
     /**
      * 
@@ -39,7 +39,7 @@ export interface HorselessContentRESTServiceInterface {
      * @param objectId 
      * @param tenant 
      */
-    horselessContentRESTControllerGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesHorselessContent>;
+    contentEntitiesHorselessContentRESTGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesHorselessContent>;
 
     /**
      * 
@@ -48,6 +48,6 @@ export interface HorselessContentRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesHorselessContent 
      */
-    horselessContentRESTControllerUpdate(contentCollectionId: string, tenant: string, contentEntitiesHorselessContent?: ContentEntitiesHorselessContent, extraHttpRequestParams?: any): Observable<ContentEntitiesHorselessContent>;
+    contentEntitiesHorselessContentRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesHorselessContent?: ContentEntitiesHorselessContent, extraHttpRequestParams?: any): Observable<ContentEntitiesHorselessContent>;
 
 }

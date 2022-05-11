@@ -31,7 +31,7 @@ export interface JSONAssetRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesJSONAsset 
      */
-    jSONAssetRESTControllerCreate(tenant: string, contentEntitiesJSONAsset?: ContentEntitiesJSONAsset, extraHttpRequestParams?: any): Observable<ContentEntitiesJSONAsset>;
+    contentEntitiesJSONAssetRESTCreate(tenant: string, contentEntitiesJSONAsset?: ContentEntitiesJSONAsset, extraHttpRequestParams?: any): Observable<ContentEntitiesJSONAsset>;
 
     /**
      * 
@@ -39,7 +39,7 @@ export interface JSONAssetRESTServiceInterface {
      * @param objectId 
      * @param tenant 
      */
-    jSONAssetRESTControllerGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesJSONAsset>;
+    contentEntitiesJSONAssetRESTGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesJSONAsset>;
 
     /**
      * 
@@ -48,6 +48,6 @@ export interface JSONAssetRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesJSONAsset 
      */
-    jSONAssetRESTControllerUpdate(contentCollectionId: string, tenant: string, contentEntitiesJSONAsset?: ContentEntitiesJSONAsset, extraHttpRequestParams?: any): Observable<ContentEntitiesJSONAsset>;
+    contentEntitiesJSONAssetRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesJSONAsset?: ContentEntitiesJSONAsset, extraHttpRequestParams?: any): Observable<ContentEntitiesJSONAsset>;
 
 }

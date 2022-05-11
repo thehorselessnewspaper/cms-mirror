@@ -31,7 +31,7 @@ export interface HolonymRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesHolonym 
      */
-    holonymRESTControllerCreate(tenant: string, contentEntitiesHolonym?: ContentEntitiesHolonym, extraHttpRequestParams?: any): Observable<ContentEntitiesHolonym>;
+    contentEntitiesHolonymRESTCreate(tenant: string, contentEntitiesHolonym?: ContentEntitiesHolonym, extraHttpRequestParams?: any): Observable<ContentEntitiesHolonym>;
 
     /**
      * 
@@ -39,7 +39,7 @@ export interface HolonymRESTServiceInterface {
      * @param objectId 
      * @param tenant 
      */
-    holonymRESTControllerGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesHolonym>;
+    contentEntitiesHolonymRESTGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesHolonym>;
 
     /**
      * 
@@ -48,6 +48,6 @@ export interface HolonymRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesHolonym 
      */
-    holonymRESTControllerUpdate(contentCollectionId: string, tenant: string, contentEntitiesHolonym?: ContentEntitiesHolonym, extraHttpRequestParams?: any): Observable<ContentEntitiesHolonym>;
+    contentEntitiesHolonymRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesHolonym?: ContentEntitiesHolonym, extraHttpRequestParams?: any): Observable<ContentEntitiesHolonym>;
 
 }

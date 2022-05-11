@@ -93,12 +93,12 @@ export class TenantRegistrationService implements TenantRegistrationServiceInter
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public tenantRegistrationControllerApprove(tenantId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public tenantRegistrationControllerApprove(tenantId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public tenantRegistrationControllerApprove(tenantId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public tenantRegistrationControllerApprove(tenantId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public approveTenantIdGet(tenantId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public approveTenantIdGet(tenantId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public approveTenantIdGet(tenantId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public approveTenantIdGet(tenantId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (tenantId === null || tenantId === undefined) {
-            throw new Error('Required parameter tenantId was null or undefined when calling tenantRegistrationControllerApprove.');
+            throw new Error('Required parameter tenantId was null or undefined when calling approveTenantIdGet.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -145,18 +145,18 @@ export class TenantRegistrationService implements TenantRegistrationServiceInter
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public tenantRegistrationControllerApprove_1(tenantId: string, displayName: string, tenantIdentifier: string, id?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public tenantRegistrationControllerApprove_1(tenantId: string, displayName: string, tenantIdentifier: string, id?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public tenantRegistrationControllerApprove_1(tenantId: string, displayName: string, tenantIdentifier: string, id?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public tenantRegistrationControllerApprove_1(tenantId: string, displayName: string, tenantIdentifier: string, id?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public approveTenantIdPost(tenantId: string, displayName: string, tenantIdentifier: string, id?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public approveTenantIdPost(tenantId: string, displayName: string, tenantIdentifier: string, id?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public approveTenantIdPost(tenantId: string, displayName: string, tenantIdentifier: string, id?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public approveTenantIdPost(tenantId: string, displayName: string, tenantIdentifier: string, id?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (tenantId === null || tenantId === undefined) {
-            throw new Error('Required parameter tenantId was null or undefined when calling tenantRegistrationControllerApprove_1.');
+            throw new Error('Required parameter tenantId was null or undefined when calling approveTenantIdPost.');
         }
         if (displayName === null || displayName === undefined) {
-            throw new Error('Required parameter displayName was null or undefined when calling tenantRegistrationControllerApprove_1.');
+            throw new Error('Required parameter displayName was null or undefined when calling approveTenantIdPost.');
         }
         if (tenantIdentifier === null || tenantIdentifier === undefined) {
-            throw new Error('Required parameter tenantIdentifier was null or undefined when calling tenantRegistrationControllerApprove_1.');
+            throw new Error('Required parameter tenantIdentifier was null or undefined when calling approveTenantIdPost.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

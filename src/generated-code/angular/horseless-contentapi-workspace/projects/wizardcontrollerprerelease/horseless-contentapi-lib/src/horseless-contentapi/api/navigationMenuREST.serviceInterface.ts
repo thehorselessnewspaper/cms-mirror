@@ -32,7 +32,7 @@ export interface NavigationMenuRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesNavigationMenu 
      */
-    navigationMenuRESTControllerCreate(tenant: string, contentEntitiesNavigationMenu?: ContentEntitiesNavigationMenu, extraHttpRequestParams?: any): Observable<ContentEntitiesMIMEType>;
+    contentEntitiesNavigationMenuRESTCreate(tenant: string, contentEntitiesNavigationMenu?: ContentEntitiesNavigationMenu, extraHttpRequestParams?: any): Observable<ContentEntitiesMIMEType>;
 
     /**
      * 
@@ -40,7 +40,7 @@ export interface NavigationMenuRESTServiceInterface {
      * @param objectId 
      * @param tenant 
      */
-    navigationMenuRESTControllerGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesMIMEType>;
+    contentEntitiesNavigationMenuRESTGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesMIMEType>;
 
     /**
      * 
@@ -49,6 +49,6 @@ export interface NavigationMenuRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesNavigationMenu 
      */
-    navigationMenuRESTControllerUpdate(contentCollectionId: string, tenant: string, contentEntitiesNavigationMenu?: ContentEntitiesNavigationMenu, extraHttpRequestParams?: any): Observable<ContentEntitiesMIMEType>;
+    contentEntitiesNavigationMenuRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesNavigationMenu?: ContentEntitiesNavigationMenu, extraHttpRequestParams?: any): Observable<ContentEntitiesMIMEType>;
 
 }

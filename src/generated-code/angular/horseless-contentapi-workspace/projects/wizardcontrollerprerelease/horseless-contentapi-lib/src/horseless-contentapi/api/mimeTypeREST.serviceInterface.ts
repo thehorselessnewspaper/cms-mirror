@@ -31,7 +31,7 @@ export interface MimeTypeRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesMIMEType 
      */
-    mimeTypeRESTControllerCreate(tenant: string, contentEntitiesMIMEType?: ContentEntitiesMIMEType, extraHttpRequestParams?: any): Observable<ContentEntitiesMIMEType>;
+    contentEntitiesMimeTypeRESTCreate(tenant: string, contentEntitiesMIMEType?: ContentEntitiesMIMEType, extraHttpRequestParams?: any): Observable<ContentEntitiesMIMEType>;
 
     /**
      * 
@@ -39,7 +39,7 @@ export interface MimeTypeRESTServiceInterface {
      * @param objectId 
      * @param tenant 
      */
-    mimeTypeRESTControllerGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesMIMEType>;
+    contentEntitiesMimeTypeRESTGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesMIMEType>;
 
     /**
      * 
@@ -48,6 +48,6 @@ export interface MimeTypeRESTServiceInterface {
      * @param tenant 
      * @param contentEntitiesMIMEType 
      */
-    mimeTypeRESTControllerUpdate(contentCollectionId: string, tenant: string, contentEntitiesMIMEType?: ContentEntitiesMIMEType, extraHttpRequestParams?: any): Observable<ContentEntitiesMIMEType>;
+    contentEntitiesMimeTypeRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesMIMEType?: ContentEntitiesMIMEType, extraHttpRequestParams?: any): Observable<ContentEntitiesMIMEType>;
 
 }
