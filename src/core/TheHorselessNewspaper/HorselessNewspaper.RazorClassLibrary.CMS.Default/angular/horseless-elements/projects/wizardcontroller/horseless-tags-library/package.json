@@ -1,14 +1,13 @@
 {
   "name": "@wizardcontroller/horseless-tags-library",
-  "version": "0.0.76",
+  "version": "0.0.77",
   "peerDependencies": {
-    "rxjs": "^7.5.5",
     "@angular/common": "^13.1.0",
     "@angular/core": "^13.1.0",
-    "@wizardcontrollerprerelease/horseless-contentapi-lib": "^0.0.33"
+    "@wizardcontrollerprerelease/horseless-contentapi-lib": "^0.0.38",
+    "rxjs": "^7.5.5"
   },
   "devDependencies": {
     "tslib": "^2.3.1"
-  },
-  "dependencies": {}
+  }
 }
