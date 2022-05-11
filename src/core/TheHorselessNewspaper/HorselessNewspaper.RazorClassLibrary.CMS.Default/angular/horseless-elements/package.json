@@ -1,6 +1,6 @@
 {
   "name": "horseless-elements",
-  "version": "0.0.56",
+  "version": "0.0.58",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -14,7 +14,7 @@
   "peerDependencies": {
     "@angular/animations": "^13.2.3",
     "@angular/elements": "^13.3.6",
-    "@wizardcontrollerprerelease/horseless-contentapi-lib": "^0.0.38",
+    "@wizardcontrollerprerelease/horseless-contentapi-lib": "~x.x.x",
     "angular-auth-oidc-client": "14.0.0",
     "rxjs": "~7.5.4"
   },
