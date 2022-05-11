@@ -14,10 +14,11 @@ import { UserBladeComponent } from './components/UserBlade/UserBlade.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatExpansionPanel} from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TenantChooserModule, TenantEditorModule } from '@wizardcontroller/horseless-tags-library';
 @NgModule({
   providers: [],
   imports: [
-    CommonModule, AuthConfigModule,   BrowserModule,  FormsModule, MatExpansionModule, BrowserAnimationsModule
+    CommonModule, AuthConfigModule,   BrowserModule,  FormsModule, MatExpansionModule, BrowserAnimationsModule, TenantChooserModule, TenantEditorModule
   ],
   declarations: [HorselessClientAuthComponent, LoginComponent, UnauthorizedComponent, TenantBladeComponent, LandingPageComponent, UserBladeComponent],
   exports: [HorselessClientAuthComponent, LoginComponent, UnauthorizedComponent, TenantBladeComponent, LandingPageComponent, UserBladeComponent]

@@ -15,6 +15,7 @@
     "@angular/animations": "^13.2.3",
     "@angular/elements": "^13.3.6",
     "@wizardcontrollerprerelease/horseless-contentapi-lib": "~x.x.x",
+    "@wizardcontroller/horseless-tags-library" : "~x.x.x",
     "angular-auth-oidc-client": "14.0.0",
     "rxjs": "~7.5.4"
   },
@@ -63,6 +64,8 @@
     "karma-jasmine": "^5.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "ng-packagr": "^13.0.0",
+    "@wizardcontrollerprerelease/horseless-contentapi-lib": "~x.x.x",
+    "@wizardcontroller/horseless-tags-library": "~x.x.x",
     "typescript": "^4.5.2"
   }
 }

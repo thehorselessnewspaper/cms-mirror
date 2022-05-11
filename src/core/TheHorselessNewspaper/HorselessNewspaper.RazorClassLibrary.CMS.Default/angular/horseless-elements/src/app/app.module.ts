@@ -11,7 +11,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { Injector } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { TenantChooserComponent, TenantChooserModule, TenantEditorComponent, TenantEditorModule } from '@wizardcontroller/horseless-tags-library';
-import { HorselessTagsLibraryModule } from '@wizardcontroller/horseless-tags-library'
+import { HorselessTagsLibraryModule } from '@wizardcontroller/horseless-tags-library';
 import { AuthModule, OidcSecurityService, LogLevel } from 'angular-auth-oidc-client';
 import { EventTypes, PublicEventsService } from 'angular-auth-oidc-client';
 import { AuthConfigModule } from './auth/auth-config.module';

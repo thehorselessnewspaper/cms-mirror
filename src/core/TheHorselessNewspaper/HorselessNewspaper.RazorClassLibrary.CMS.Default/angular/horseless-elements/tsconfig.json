@@ -9,7 +9,7 @@
     "noImplicitOverride": true,
     "paths": {
       "@wizardcontroller/horseless-tags-library": [
-        "dist/wizardcontroller/horseless-tags-library/*",
+        "dist/wizardcontroller/horseless-tags-library/lib",
         "dist/wizardcontroller/horseless-tags-library"
       ]
     },

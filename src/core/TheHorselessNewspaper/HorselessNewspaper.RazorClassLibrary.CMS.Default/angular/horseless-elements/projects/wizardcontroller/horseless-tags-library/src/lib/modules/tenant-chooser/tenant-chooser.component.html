@@ -1,5 +1,16 @@
-<p>choose tenant</p>
+<p>tenant chooser</p>
 
-<mat-list #tenants>
+
+<div *ngIf="isAuthenticated; else unauthorized">
+<div>tenant list</div>
+  <mat-list #tenants>
 
 </mat-list>
+</div>
+
+<ng-template #unauthorized>
+  <div>
+    <span>unauthorized</span>
+  </div>
+</ng-template>
+
