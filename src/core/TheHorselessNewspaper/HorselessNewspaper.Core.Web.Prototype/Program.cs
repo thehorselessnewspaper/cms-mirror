@@ -125,8 +125,8 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
-    
+    // options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+
     options.CustomSchemaIds(t =>
     {
         // produce this template export interface ContentEntitiesAccessControlEntry 
@@ -134,12 +134,12 @@ builder.Services.AddSwaggerGen(options =>
         var container = frag[frag.Length - 2];
         return container + t.Name;
     });
-    options.CustomOperationIds(apiDesc =>
-    {
-        // produce this template export interface ContentEntitiesAccessControlEntry 
-        return apiDesc.TryGetMethodInfo(out MethodInfo methodInfo) ? methodInfo.DeclaringType.Name + methodInfo.Name : null;
+    //options.CustomOperationIds(apiDesc =>
+    //{
+    //    // produce this template export interface ContentEntitiesAccessControlEntry 
+    //    return apiDesc.TryGetMethodInfo(out MethodInfo methodInfo) ? methodInfo.DeclaringType.Name + methodInfo.Name : null;
 
-    });
+    //});
     options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Horseless Content API", Version = "v1" });
 
     // eliminate odata metadata controller from swagger doc

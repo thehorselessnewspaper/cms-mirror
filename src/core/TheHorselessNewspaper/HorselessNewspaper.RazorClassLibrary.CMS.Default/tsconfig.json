@@ -5,7 +5,7 @@
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
-    "target": "ES2021",
+    "target": "ES6",
     "outDir": "wwwroot/js/typescript"
   },
 
@@ -13,7 +13,7 @@
     "typescript/**/*"
   ],
   "exclude": [
-    "node_modules",
+    "**/node_modules",
     "wwwroot/js/typescript"
   ]
 }

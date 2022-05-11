@@ -1,13 +1,12 @@
 <div>
   <div>horseless client harness: app component</div>
+  <p-toolbar >
+    <div class="p-toolbar-group-right">
+      <p-button routerLink="/tenants" routerLinkActive="active" label="Tenant Blade" icon="pi"></p-button>
+      <p-button routerLink="/users" routerLinkActive="active" label="User Blade" icon="pi" styleClass="p-button-success"></p-button>
+    </div>
+  </p-toolbar>
 
-  <nav>
-    <ul>
-      <li><a routerLink="/tenants" routerLinkActive="active">Tenant Blade</a></li>
-      <li><a routerLink="/users" routerLinkActive="active">User Blade</a></li>
-      <li><a routerLink="/users" routerLinkActive="active">User Blade</a></li>
-    </ul>
-  </nav>
   <mat-expansion-panel hideToggle>
     <mat-expansion-panel-header>
       <mat-panel-title>

@@ -28,7 +28,9 @@ import { BASE_PATH } from '@wizardcontrollerprerelease/horseless-contentapi-lib'
 import { environment } from '../environments/environment';
 // configuring providers with an authentication service that manages your access tokens
 import { HorselessApiModule, HorselessConfiguration } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
-
+import { ToolbarModule } from 'primeng/toolbar';
+import { ButtonModule } from 'primeng/button';
+import { PrimeIcons } from 'primeng/api';
 @NgModule({
   declarations: [
     AppComponent
@@ -47,6 +49,8 @@ import { HorselessApiModule, HorselessConfiguration } from '@wizardcontrollerpre
         logLevel: LogLevel.Debug,
       }
     }),
+    ToolbarModule,
+    ButtonModule,
     MatExpansionModule,
     MatToolbarModule,
     HttpClientModule,
