@@ -15,10 +15,9 @@ docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate `
     --artifact-id "TheHorselessNewspaper.CSharp.Rest" `
     --package-name "TheHorselessNewspaper.CSharp.Rest" `
     --skip-validate-spec `
-    --remove-operation-id-prefix `
-    --additional-properties="netCoreProjectFile=true,optionalAssemblyInfo=true,packageName=TheHorselessNewspaper.CSharp.Rest,targetFramework=net6.0,library=httpclient"
-
-    push-location csharp-netcore\src
+    --additional-properties="netCoreProjectFile=true,optionalAssemblyInfo=true,packageName=TheHorselessNewspaper.CSharp.Rest,targetFramework=net6.0,library=generichost"
+    #     --remove-operation-id-prefix `
+    push-location csharp-netcore/src
 
         # as per this clever hack https://stackoverflow.com/questions/39934405/can-i-build-multiple-projects-with-dotnet-build/51904395
         dotnet build -c production  TheHorselessNewspaper.CSharp.Rest\TheHorselessNewspaper.CSharp.Rest.csproj

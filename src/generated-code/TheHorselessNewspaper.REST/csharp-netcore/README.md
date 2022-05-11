@@ -85,16 +85,18 @@ namespace Example
 
             Configuration config = new Configuration();
             config.BasePath = "http://localhost";
-            var apiInstance = new ContentCollectionApi(config);
+            var apiInstance = new ContentCollectionRESTApi(config);
+            var tenant = "tenant_example";  // string | 
+            var contentEntitiesContentCollection = new ContentEntitiesContentCollection?(); // ContentEntitiesContentCollection? |  (optional) 
 
             try
             {
-                List<ContentEntitiesContentCollection> result = apiInstance.ContentCollectionControllerGet();
+                ContentEntitiesContentCollection result = apiInstance.ContentEntitiesContentCollectionRESTCreate(tenant, contentEntitiesContentCollection);
                 Debug.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling ContentCollectionApi.ContentCollectionControllerGet: " + e.Message );
+                Debug.Print("Exception when calling ContentCollectionRESTApi.ContentEntitiesContentCollectionRESTCreate: " + e.Message );
                 Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
@@ -111,72 +113,52 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ContentCollectionApi* | [**ContentCollectionControllerGet**](docs/ContentCollectionApi.md#contentcollectioncontrollerget) | **GET** /HorselessContent/ContentCollection | 
-*ContentCollectionApi* | [**ContentCollectionControllerGet_0**](docs/ContentCollectionApi.md#contentcollectioncontrollerget_0) | **GET** /HorselessContent/ContentCollection/$count | 
-*ContentCollectionRESTApi* | [**ContentCollectionRESTControllerCreate**](docs/ContentCollectionRESTApi.md#contentcollectionrestcontrollercreate) | **POST** /api/HorselessContentModel/ContentCollection/Create | 
-*ContentCollectionRESTApi* | [**ContentCollectionRESTControllerGetByObjectId**](docs/ContentCollectionRESTApi.md#contentcollectionrestcontrollergetbyobjectid) | **GET** /api/HorselessContentModel/ContentCollection/GetByObjectId | 
-*ContentCollectionRESTApi* | [**ContentCollectionRESTControllerUpdate**](docs/ContentCollectionRESTApi.md#contentcollectionrestcontrollerupdate) | **POST** /api/HorselessContentModel/ContentCollection/Update/{contentCollectionId} | 
-*FilesystemAssetApi* | [**FilesystemAssetControllerGet**](docs/FilesystemAssetApi.md#filesystemassetcontrollerget) | **GET** /HorselessContent/FilesystemAsset | 
-*FilesystemAssetApi* | [**FilesystemAssetControllerGet_0**](docs/FilesystemAssetApi.md#filesystemassetcontrollerget_0) | **GET** /HorselessContent/FilesystemAsset/$count | 
-*FilesystemAssetRESTApi* | [**FilesystemAssetRESTControllerCreate**](docs/FilesystemAssetRESTApi.md#filesystemassetrestcontrollercreate) | **POST** /api/HorselessContentModel/FilesystemAsset/Create | 
-*FilesystemAssetRESTApi* | [**FilesystemAssetRESTControllerGetByObjectId**](docs/FilesystemAssetRESTApi.md#filesystemassetrestcontrollergetbyobjectid) | **GET** /api/HorselessContentModel/FilesystemAsset/GetByObjectId | 
-*FilesystemAssetRESTApi* | [**FilesystemAssetRESTControllerUpdate**](docs/FilesystemAssetRESTApi.md#filesystemassetrestcontrollerupdate) | **POST** /api/HorselessContentModel/FilesystemAsset/Update/{contentCollectionId} | 
-*HolonymApi* | [**HolonymControllerGet**](docs/HolonymApi.md#holonymcontrollerget) | **GET** /HorselessContent/Holonym | 
-*HolonymApi* | [**HolonymControllerGet_0**](docs/HolonymApi.md#holonymcontrollerget_0) | **GET** /HorselessContent/Holonym/$count | 
-*HolonymRESTApi* | [**HolonymRESTControllerCreate**](docs/HolonymRESTApi.md#holonymrestcontrollercreate) | **POST** /api/HorselessContentModel/Holonym/Create | 
-*HolonymRESTApi* | [**HolonymRESTControllerGetByObjectId**](docs/HolonymRESTApi.md#holonymrestcontrollergetbyobjectid) | **GET** /api/HorselessContentModel/Holonym/GetByObjectId | 
-*HolonymRESTApi* | [**HolonymRESTControllerUpdate**](docs/HolonymRESTApi.md#holonymrestcontrollerupdate) | **POST** /api/HorselessContentModel/Holonym/Update/{contentCollectionId} | 
-*HorselessContentApi* | [**HorselessContentControllerGet**](docs/HorselessContentApi.md#horselesscontentcontrollerget) | **GET** /HorselessContent/HorselessContent | 
-*HorselessContentApi* | [**HorselessContentControllerGet_0**](docs/HorselessContentApi.md#horselesscontentcontrollerget_0) | **GET** /HorselessContent/HorselessContent/$count | 
-*HorselessSessionApi* | [**HorselessSessionControllerGet**](docs/HorselessSessionApi.md#horselesssessioncontrollerget) | **GET** /HorselessContent/HorselessSession | 
-*HorselessSessionApi* | [**HorselessSessionControllerGet_0**](docs/HorselessSessionApi.md#horselesssessioncontrollerget_0) | **GET** /HorselessContent/HorselessSession/$count | 
-*HorselessSessionRESTApi* | [**HorselessSessionRESTControllerCreate**](docs/HorselessSessionRESTApi.md#horselesssessionrestcontrollercreate) | **POST** /api/HorselessContentModel/HorselessSession/Create | 
-*HorselessSessionRESTApi* | [**HorselessSessionRESTControllerGetByObjectId**](docs/HorselessSessionRESTApi.md#horselesssessionrestcontrollergetbyobjectid) | **GET** /api/HorselessContentModel/HorselessSession/GetByObjectId | 
-*HorselessSessionRESTApi* | [**HorselessSessionRESTControllerUpdate**](docs/HorselessSessionRESTApi.md#horselesssessionrestcontrollerupdate) | **POST** /api/HorselessContentModel/HorselessSession/Update/{contentCollectionId} | 
-*JSONAssetApi* | [**JSONAssetControllerGet**](docs/JSONAssetApi.md#jsonassetcontrollerget) | **GET** /HorselessContent/JSONAsset | 
-*JSONAssetApi* | [**JSONAssetControllerGet_0**](docs/JSONAssetApi.md#jsonassetcontrollerget_0) | **GET** /HorselessContent/JSONAsset/$count | 
-*JSONAssetRESTApi* | [**JSONAssetRESTControllerCreate**](docs/JSONAssetRESTApi.md#jsonassetrestcontrollercreate) | **POST** /api/HorselessContentModel/JSONAsset/Create | 
-*JSONAssetRESTApi* | [**JSONAssetRESTControllerGetByObjectId**](docs/JSONAssetRESTApi.md#jsonassetrestcontrollergetbyobjectid) | **GET** /api/HorselessContentModel/JSONAsset/GetByObjectId | 
-*JSONAssetRESTApi* | [**JSONAssetRESTControllerUpdate**](docs/JSONAssetRESTApi.md#jsonassetrestcontrollerupdate) | **POST** /api/HorselessContentModel/JSONAsset/Update/{contentCollectionId} | 
-*KeycloakAuthenticationApi* | [**KeycloakAuthenticationControllerSignIn**](docs/KeycloakAuthenticationApi.md#keycloakauthenticationcontrollersignin) | **GET** /Keycloak/SignIn | 
-*KeycloakAuthenticationApi* | [**KeycloakAuthenticationControllerSignIn_0**](docs/KeycloakAuthenticationApi.md#keycloakauthenticationcontrollersignin_0) | **POST** /Keycloak/SignIn | 
-*KeycloakAuthenticationApi* | [**KeycloakAuthenticationControllerSignOutCurrentUser**](docs/KeycloakAuthenticationApi.md#keycloakauthenticationcontrollersignoutcurrentuser) | **POST** /Keycloak/Signout | 
-*MeronymApi* | [**MeronymControllerGet**](docs/MeronymApi.md#meronymcontrollerget) | **GET** /HorselessContent/Meronym | 
-*MeronymApi* | [**MeronymControllerGet_0**](docs/MeronymApi.md#meronymcontrollerget_0) | **GET** /HorselessContent/Meronym/$count | 
-*MeronymRESTApi* | [**MeronymRESTControllerCreate**](docs/MeronymRESTApi.md#meronymrestcontrollercreate) | **POST** /api/HorselessContentModel/Meronym/Create | 
-*MeronymRESTApi* | [**MeronymRESTControllerGetByObjectId**](docs/MeronymRESTApi.md#meronymrestcontrollergetbyobjectid) | **GET** /api/HorselessContentModel/Meronym/GetByObjectId | 
-*MeronymRESTApi* | [**MeronymRESTControllerUpdate**](docs/MeronymRESTApi.md#meronymrestcontrollerupdate) | **POST** /api/HorselessContentModel/Meronym/Update/{contentCollectionId} | 
-*MetadataApi* | [**MetadataControllerGetMetadata**](docs/MetadataApi.md#metadatacontrollergetmetadata) | **GET** /HorselessContent/$metadata | 
-*MetadataApi* | [**MetadataControllerGetMetadata_0**](docs/MetadataApi.md#metadatacontrollergetmetadata_0) | **GET** /HorselessHosting/$metadata | 
-*MetadataApi* | [**MetadataControllerGetServiceDocument**](docs/MetadataApi.md#metadatacontrollergetservicedocument) | **GET** /HorselessContent | 
-*MetadataApi* | [**MetadataControllerGetServiceDocument_0**](docs/MetadataApi.md#metadatacontrollergetservicedocument_0) | **GET** /HorselessHosting | 
-*MimeTypeRESTApi* | [**MimeTypeRESTControllerCreate**](docs/MimeTypeRESTApi.md#mimetyperestcontrollercreate) | **POST** /api/HorselessContentModel/MIMEType/Create | 
-*MimeTypeRESTApi* | [**MimeTypeRESTControllerGetByObjectId**](docs/MimeTypeRESTApi.md#mimetyperestcontrollergetbyobjectid) | **GET** /api/HorselessContentModel/MIMEType/GetByObjectId | 
-*MimeTypeRESTApi* | [**MimeTypeRESTControllerUpdate**](docs/MimeTypeRESTApi.md#mimetyperestcontrollerupdate) | **POST** /api/HorselessContentModel/MIMEType/Update/{contentCollectionId} | 
-*NavigationMenuApi* | [**NavigationMenuControllerGet**](docs/NavigationMenuApi.md#navigationmenucontrollerget) | **GET** /HorselessContent/NavigationMenu | 
-*NavigationMenuApi* | [**NavigationMenuControllerGet_0**](docs/NavigationMenuApi.md#navigationmenucontrollerget_0) | **GET** /HorselessContent/NavigationMenu/$count | 
-*NavigationMenuItemApi* | [**NavigationMenuItemControllerGet**](docs/NavigationMenuItemApi.md#navigationmenuitemcontrollerget) | **GET** /HorselessContent/NavigationMenuItem | 
-*NavigationMenuItemApi* | [**NavigationMenuItemControllerGet_0**](docs/NavigationMenuItemApi.md#navigationmenuitemcontrollerget_0) | **GET** /HorselessContent/NavigationMenuItem/$count | 
-*NavigationMenuItemRESTApi* | [**NavigationMenuItemRESTControllerCreate**](docs/NavigationMenuItemRESTApi.md#navigationmenuitemrestcontrollercreate) | **POST** /api/HorselessContentModel/NavigationMenuItem/Create | 
-*NavigationMenuItemRESTApi* | [**NavigationMenuItemRESTControllerGetByObjectId**](docs/NavigationMenuItemRESTApi.md#navigationmenuitemrestcontrollergetbyobjectid) | **GET** /api/HorselessContentModel/NavigationMenuItem/GetByObjectId | 
-*NavigationMenuItemRESTApi* | [**NavigationMenuItemRESTControllerUpdate**](docs/NavigationMenuItemRESTApi.md#navigationmenuitemrestcontrollerupdate) | **POST** /api/HorselessContentModel/NavigationMenuItem/Update/{contentCollectionId} | 
-*NavigationMenuRESTApi* | [**NavigationMenuRESTControllerCreate**](docs/NavigationMenuRESTApi.md#navigationmenurestcontrollercreate) | **POST** /api/HorselessContentModelModel/NavigationMenu/Create | 
-*NavigationMenuRESTApi* | [**NavigationMenuRESTControllerGetByObjectId**](docs/NavigationMenuRESTApi.md#navigationmenurestcontrollergetbyobjectid) | **GET** /api/HorselessContentModelModel/NavigationMenu/GetByObjectId | 
-*NavigationMenuRESTApi* | [**NavigationMenuRESTControllerUpdate**](docs/NavigationMenuRESTApi.md#navigationmenurestcontrollerupdate) | **POST** /api/HorselessContentModelModel/NavigationMenu/Update/{contentCollectionId} | 
-*TenantApi* | [**TenantControllerGet**](docs/TenantApi.md#tenantcontrollerget) | **GET** /HorselessHosting/Tenant | 
-*TenantApi* | [**TenantControllerGet_0**](docs/TenantApi.md#tenantcontrollerget_0) | **GET** /HorselessContent/Tenant | 
-*TenantApi* | [**TenantControllerGet_1**](docs/TenantApi.md#tenantcontrollerget_1) | **GET** /HorselessContent/Tenant/$count | 
-*TenantInfoRESTApi* | [**TenantInfoRESTControllerCreate**](docs/TenantInfoRESTApi.md#tenantinforestcontrollercreate) | **POST** /api/HorselessHostingModel/TenantInfo/Create | 
-*TenantInfoRESTApi* | [**TenantInfoRESTControllerGetByObjectId**](docs/TenantInfoRESTApi.md#tenantinforestcontrollergetbyobjectid) | **GET** /api/HorselessHostingModel/TenantInfo/GetByObjectId | 
-*TenantInfoRESTApi* | [**TenantInfoRESTControllerUpdate**](docs/TenantInfoRESTApi.md#tenantinforestcontrollerupdate) | **POST** /api/HorselessHostingModel/TenantInfo/Update/{entityCollectionId} | 
-*TenantRESTApi* | [**TenantRESTControllerCreate**](docs/TenantRESTApi.md#tenantrestcontrollercreate) | **POST** /api/HorselessHostingModel/Tenant/Create | 
-*TenantRESTApi* | [**TenantRESTControllerCreate_0**](docs/TenantRESTApi.md#tenantrestcontrollercreate_0) | **POST** /api/HorselessContentModel/Tenant/Create | 
-*TenantRESTApi* | [**TenantRESTControllerGetByObjectId**](docs/TenantRESTApi.md#tenantrestcontrollergetbyobjectid) | **GET** /api/HorselessHostingModel/Tenant/GetByObjectId | 
-*TenantRESTApi* | [**TenantRESTControllerGetByObjectId_0**](docs/TenantRESTApi.md#tenantrestcontrollergetbyobjectid_0) | **GET** /api/HorselessContentModel/Tenant/GetByObjectId | 
-*TenantRESTApi* | [**TenantRESTControllerUpdate**](docs/TenantRESTApi.md#tenantrestcontrollerupdate) | **POST** /api/HorselessHostingModel/Tenant/Update/{entityCollectionId} | 
-*TenantRESTApi* | [**TenantRESTControllerUpdate_0**](docs/TenantRESTApi.md#tenantrestcontrollerupdate_0) | **POST** /api/HorselessContentModel/Tenant/Update/{contentCollectionId} | 
-*TenantRegistrationApi* | [**TenantRegistrationControllerApprove**](docs/TenantRegistrationApi.md#tenantregistrationcontrollerapprove) | **GET** /Approve/{tenantId} | 
-*TenantRegistrationApi* | [**TenantRegistrationControllerApprove_0**](docs/TenantRegistrationApi.md#tenantregistrationcontrollerapprove_0) | **POST** /Approve/{tenantId} | 
+*ContentCollectionRESTApi* | [**ContentEntitiesContentCollectionRESTCreate**](docs/ContentCollectionRESTApi.md#contententitiescontentcollectionrestcreate) | **POST** /{__tenant__}/api/HorselessContentModel/ContentCollection/Create | 
+*ContentCollectionRESTApi* | [**ContentEntitiesContentCollectionRESTGetByObjectId**](docs/ContentCollectionRESTApi.md#contententitiescontentcollectionrestgetbyobjectid) | **GET** /{__tenant__}/api/HorselessContentModel/ContentCollection/GetByObjectId | 
+*ContentCollectionRESTApi* | [**ContentEntitiesContentCollectionRESTGetByPageNumber**](docs/ContentCollectionRESTApi.md#contententitiescontentcollectionrestgetbypagenumber) | **GET** /{__tenant__}/api/HorselessContentModel/ContentCollection/GetByPageNumber | 
+*ContentCollectionRESTApi* | [**ContentEntitiesContentCollectionRESTUpdate**](docs/ContentCollectionRESTApi.md#contententitiescontentcollectionrestupdate) | **POST** /{__tenant__}/api/HorselessContentModel/ContentCollection/Update/{contentCollectionId} | 
+*FilesystemAssetRESTApi* | [**ContentEntitiesFilesystemAssetRESTCreate**](docs/FilesystemAssetRESTApi.md#contententitiesfilesystemassetrestcreate) | **POST** /{__tenant__}/api/HorselessContentModel/FilesystemAsset/Create | 
+*FilesystemAssetRESTApi* | [**ContentEntitiesFilesystemAssetRESTGetByObjectId**](docs/FilesystemAssetRESTApi.md#contententitiesfilesystemassetrestgetbyobjectid) | **GET** /{__tenant__}/api/HorselessContentModel/FilesystemAsset/GetByObjectId | 
+*FilesystemAssetRESTApi* | [**ContentEntitiesFilesystemAssetRESTUpdate**](docs/FilesystemAssetRESTApi.md#contententitiesfilesystemassetrestupdate) | **POST** /{__tenant__}/api/HorselessContentModel/FilesystemAsset/Update/{contentCollectionId} | 
+*HolonymRESTApi* | [**ContentEntitiesHolonymRESTCreate**](docs/HolonymRESTApi.md#contententitiesholonymrestcreate) | **POST** /{__tenant__}/api/HorselessContentModel/Holonym/Create | 
+*HolonymRESTApi* | [**ContentEntitiesHolonymRESTGetByObjectId**](docs/HolonymRESTApi.md#contententitiesholonymrestgetbyobjectid) | **GET** /{__tenant__}/api/HorselessContentModel/Holonym/GetByObjectId | 
+*HolonymRESTApi* | [**ContentEntitiesHolonymRESTUpdate**](docs/HolonymRESTApi.md#contententitiesholonymrestupdate) | **POST** /{__tenant__}/api/HorselessContentModel/Holonym/Update/{contentCollectionId} | 
+*HorselessContentRESTApi* | [**ContentEntitiesHorselessContentRESTCreate**](docs/HorselessContentRESTApi.md#contententitieshorselesscontentrestcreate) | **POST** /{__tenant__}/api/HorselessContentModel/HorselessContent/Create | 
+*HorselessContentRESTApi* | [**ContentEntitiesHorselessContentRESTGetByObjectId**](docs/HorselessContentRESTApi.md#contententitieshorselesscontentrestgetbyobjectid) | **GET** /{__tenant__}/api/HorselessContentModel/HorselessContent/GetByObjectId | 
+*HorselessContentRESTApi* | [**ContentEntitiesHorselessContentRESTUpdate**](docs/HorselessContentRESTApi.md#contententitieshorselesscontentrestupdate) | **POST** /{__tenant__}/api/HorselessContentModel/HorselessContent/Update/{contentCollectionId} | 
+*HorselessSessionRESTApi* | [**ContentEntitiesHorselessSessionRESTCreate**](docs/HorselessSessionRESTApi.md#contententitieshorselesssessionrestcreate) | **POST** /{__tenant__}/api/HorselessContentModel/HorselessSession/Create | 
+*HorselessSessionRESTApi* | [**ContentEntitiesHorselessSessionRESTGetByObjectId**](docs/HorselessSessionRESTApi.md#contententitieshorselesssessionrestgetbyobjectid) | **GET** /{__tenant__}/api/HorselessContentModel/HorselessSession/GetByObjectId | 
+*HorselessSessionRESTApi* | [**ContentEntitiesHorselessSessionRESTUpdate**](docs/HorselessSessionRESTApi.md#contententitieshorselesssessionrestupdate) | **POST** /{__tenant__}/api/HorselessContentModel/HorselessSession/Update/{contentCollectionId} | 
+*JSONAssetRESTApi* | [**ContentEntitiesJSONAssetRESTCreate**](docs/JSONAssetRESTApi.md#contententitiesjsonassetrestcreate) | **POST** /{__tenant__}/api/HorselessContentModel/JSONAsset/Create | 
+*JSONAssetRESTApi* | [**ContentEntitiesJSONAssetRESTGetByObjectId**](docs/JSONAssetRESTApi.md#contententitiesjsonassetrestgetbyobjectid) | **GET** /{__tenant__}/api/HorselessContentModel/JSONAsset/GetByObjectId | 
+*JSONAssetRESTApi* | [**ContentEntitiesJSONAssetRESTUpdate**](docs/JSONAssetRESTApi.md#contententitiesjsonassetrestupdate) | **POST** /{__tenant__}/api/HorselessContentModel/JSONAsset/Update/{contentCollectionId} | 
+*KeycloakAuthenticationApi* | [**KeycloakSignInGet**](docs/KeycloakAuthenticationApi.md#keycloaksigninget) | **GET** /Keycloak/SignIn | 
+*KeycloakAuthenticationApi* | [**KeycloakSignInPost**](docs/KeycloakAuthenticationApi.md#keycloaksigninpost) | **POST** /Keycloak/SignIn | 
+*KeycloakAuthenticationApi* | [**KeycloakSignoutPost**](docs/KeycloakAuthenticationApi.md#keycloaksignoutpost) | **POST** /Keycloak/Signout | 
+*MeronymRESTApi* | [**ContentEntitiesMeronymRESTCreate**](docs/MeronymRESTApi.md#contententitiesmeronymrestcreate) | **POST** /{__tenant__}/api/HorselessContentModel/Meronym/Create | 
+*MeronymRESTApi* | [**ContentEntitiesMeronymRESTGetByObjectId**](docs/MeronymRESTApi.md#contententitiesmeronymrestgetbyobjectid) | **GET** /{__tenant__}/api/HorselessContentModel/Meronym/GetByObjectId | 
+*MeronymRESTApi* | [**ContentEntitiesMeronymRESTUpdate**](docs/MeronymRESTApi.md#contententitiesmeronymrestupdate) | **POST** /{__tenant__}/api/HorselessContentModel/Meronym/Update/{contentCollectionId} | 
+*MimeTypeRESTApi* | [**ContentEntitiesMimeTypeRESTCreate**](docs/MimeTypeRESTApi.md#contententitiesmimetyperestcreate) | **POST** /{__tenant__}/api/HorselessContentModel/MIMEType/Create | 
+*MimeTypeRESTApi* | [**ContentEntitiesMimeTypeRESTGetByObjectId**](docs/MimeTypeRESTApi.md#contententitiesmimetyperestgetbyobjectid) | **GET** /{__tenant__}/api/HorselessContentModel/MIMEType/GetByObjectId | 
+*MimeTypeRESTApi* | [**ContentEntitiesMimeTypeRESTUpdate**](docs/MimeTypeRESTApi.md#contententitiesmimetyperestupdate) | **POST** /{__tenant__}/api/HorselessContentModel/MIMEType/Update/{contentCollectionId} | 
+*NavigationMenuItemRESTApi* | [**ContentEntitiesNavigationMenuItemRESTCreate**](docs/NavigationMenuItemRESTApi.md#contententitiesnavigationmenuitemrestcreate) | **POST** /{__tenant__}/api/HorselessContentModel/NavigationMenuItem/Create | 
+*NavigationMenuItemRESTApi* | [**ContentEntitiesNavigationMenuItemRESTGetByObjectId**](docs/NavigationMenuItemRESTApi.md#contententitiesnavigationmenuitemrestgetbyobjectid) | **GET** /{__tenant__}/api/HorselessContentModel/NavigationMenuItem/GetByObjectId | 
+*NavigationMenuItemRESTApi* | [**ContentEntitiesNavigationMenuItemRESTUpdate**](docs/NavigationMenuItemRESTApi.md#contententitiesnavigationmenuitemrestupdate) | **POST** /{__tenant__}/api/HorselessContentModel/NavigationMenuItem/Update/{contentCollectionId} | 
+*NavigationMenuRESTApi* | [**ContentEntitiesNavigationMenuRESTCreate**](docs/NavigationMenuRESTApi.md#contententitiesnavigationmenurestcreate) | **POST** /{__tenant__}/api/HorselessContentModelModel/NavigationMenu/Create | 
+*NavigationMenuRESTApi* | [**ContentEntitiesNavigationMenuRESTGetByObjectId**](docs/NavigationMenuRESTApi.md#contententitiesnavigationmenurestgetbyobjectid) | **GET** /{__tenant__}/api/HorselessContentModelModel/NavigationMenu/GetByObjectId | 
+*NavigationMenuRESTApi* | [**ContentEntitiesNavigationMenuRESTUpdate**](docs/NavigationMenuRESTApi.md#contententitiesnavigationmenurestupdate) | **POST** /{__tenant__}/api/HorselessContentModelModel/NavigationMenu/Update/{contentCollectionId} | 
+*TenantInfoRESTApi* | [**HostingEntitiesTenantInfoRESTCreate**](docs/TenantInfoRESTApi.md#hostingentitiestenantinforestcreate) | **POST** /api/HorselessHostingModel/TenantInfo/HostingEntitiesTenantInfoCreate | 
+*TenantInfoRESTApi* | [**HostingEntitiesTenantInfoRESTGetByObjectId**](docs/TenantInfoRESTApi.md#hostingentitiestenantinforestgetbyobjectid) | **GET** /api/HorselessHostingModel/TenantInfo/HostingEntitiesTenantInfoGetByObjectId | 
+*TenantInfoRESTApi* | [**HostingEntitiesTenantInfoRESTUpdate**](docs/TenantInfoRESTApi.md#hostingentitiestenantinforestupdate) | **POST** /api/HorselessHostingModel/TenantInfo/HostingEntitiesTenantInfoUpdate/{entityCollectionId} | 
+*TenantRESTApi* | [**ContentEntitiesTenantRESTGetByObjectId**](docs/TenantRESTApi.md#contententitiestenantrestgetbyobjectid) | **GET** /{__tenant__}/api/HorselessContentModel/Tenant/GetByObjectId | 
+*TenantRESTApi* | [**ContentEntitiesTenantRESTUpdate**](docs/TenantRESTApi.md#contententitiestenantrestupdate) | **POST** /{__tenant__}/api/HorselessContentModel/Tenant/Update/{contentCollectionId} | 
+*TenantRESTApi* | [**ContentEntitiesTenantRESTUpdateProperties**](docs/TenantRESTApi.md#contententitiestenantrestupdateproperties) | **POST** /{__tenant__}/api/HorselessContentModel/Tenant/UpdateProperties/{contentCollectionId} | 
+*TenantRESTApi* | [**HostingEntitiesTenantRESTCreate**](docs/TenantRESTApi.md#hostingentitiestenantrestcreate) | **POST** /api/HorselessHostingModel/TenantREST/HostingEntitiesTenantCreate | 
+*TenantRESTApi* | [**HostingEntitiesTenantRESTGetByObjectId**](docs/TenantRESTApi.md#hostingentitiestenantrestgetbyobjectid) | **GET** /api/HorselessHostingModel/TenantREST/HostingEntitiesTenantGetByObjectId | 
+*TenantRESTApi* | [**HostingEntitiesTenantRESTUpdate**](docs/TenantRESTApi.md#hostingentitiestenantrestupdate) | **POST** /api/HorselessHostingModel/TenantREST/HostingEntitiesTenantUpdate/{entityCollectionId} | 
+*TenantRESTApi* | [**TenantApiHorselessContentModelTenantCreatePost**](docs/TenantRESTApi.md#tenantapihorselesscontentmodeltenantcreatepost) | **POST** /{__tenant__}/api/HorselessContentModel/Tenant/Create | 
+*TenantRegistrationApi* | [**ApproveTenantIdGet**](docs/TenantRegistrationApi.md#approvetenantidget) | **GET** /Approve/{tenantId} | 
+*TenantRegistrationApi* | [**ApproveTenantIdPost**](docs/TenantRegistrationApi.md#approvetenantidpost) | **POST** /Approve/{tenantId} | 
 
 
 <a name="documentation-for-models"></a>
@@ -191,12 +173,15 @@ Class | Method | HTTP request | Description
  - [Model.ContentEntitiesHolonym](docs/ContentEntitiesHolonym.md)
  - [Model.ContentEntitiesHorselessContent](docs/ContentEntitiesHorselessContent.md)
  - [Model.ContentEntitiesHorselessSession](docs/ContentEntitiesHorselessSession.md)
+ - [Model.ContentEntitiesHorselessView](docs/ContentEntitiesHorselessView.md)
  - [Model.ContentEntitiesJSONAsset](docs/ContentEntitiesJSONAsset.md)
  - [Model.ContentEntitiesMIMEType](docs/ContentEntitiesMIMEType.md)
  - [Model.ContentEntitiesMeronym](docs/ContentEntitiesMeronym.md)
  - [Model.ContentEntitiesNavigationMenu](docs/ContentEntitiesNavigationMenu.md)
  - [Model.ContentEntitiesNavigationMenuItem](docs/ContentEntitiesNavigationMenuItem.md)
  - [Model.ContentEntitiesPrincipal](docs/ContentEntitiesPrincipal.md)
+ - [Model.ContentEntitiesPrincipalClaim](docs/ContentEntitiesPrincipalClaim.md)
+ - [Model.ContentEntitiesPrincipalClaimContainer](docs/ContentEntitiesPrincipalClaimContainer.md)
  - [Model.ContentEntitiesPublication](docs/ContentEntitiesPublication.md)
  - [Model.ContentEntitiesTaxon](docs/ContentEntitiesTaxon.md)
  - [Model.ContentEntitiesTaxonomy](docs/ContentEntitiesTaxonomy.md)
@@ -204,17 +189,6 @@ Class | Method | HTTP request | Description
  - [Model.ContentEntitiesTenantIdentifierStrategy](docs/ContentEntitiesTenantIdentifierStrategy.md)
  - [Model.ContentEntitiesTenantIdentifierStrategyContainer](docs/ContentEntitiesTenantIdentifierStrategyContainer.md)
  - [Model.ContentEntitiesTenantIdentifierStrategyName](docs/ContentEntitiesTenantIdentifierStrategyName.md)
- - [Model.EdmEdmContainerElementKind](docs/EdmEdmContainerElementKind.md)
- - [Model.EdmEdmExpressionKind](docs/EdmEdmExpressionKind.md)
- - [Model.EdmEdmSchemaElementKind](docs/EdmEdmSchemaElementKind.md)
- - [Model.EdmEdmTypeKind](docs/EdmEdmTypeKind.md)
- - [Model.EdmIEdmEntityContainer](docs/EdmIEdmEntityContainer.md)
- - [Model.EdmIEdmEntityContainerElement](docs/EdmIEdmEntityContainerElement.md)
- - [Model.EdmIEdmExpression](docs/EdmIEdmExpression.md)
- - [Model.EdmIEdmModel](docs/EdmIEdmModel.md)
- - [Model.EdmIEdmSchemaElement](docs/EdmIEdmSchemaElement.md)
- - [Model.EdmIEdmType](docs/EdmIEdmType.md)
- - [Model.EdmIEdmTypeReference](docs/EdmIEdmTypeReference.md)
  - [Model.HostingEntitiesACEPermission](docs/HostingEntitiesACEPermission.md)
  - [Model.HostingEntitiesACEPermissionScope](docs/HostingEntitiesACEPermissionScope.md)
  - [Model.HostingEntitiesACEPermissionType](docs/HostingEntitiesACEPermissionType.md)
@@ -228,13 +202,6 @@ Class | Method | HTTP request | Description
  - [Model.HostingEntitiesTenantInfo](docs/HostingEntitiesTenantInfo.md)
  - [Model.HostingEntitiesWebAPITenantInfo](docs/HostingEntitiesWebAPITenantInfo.md)
  - [Model.MvcProblemDetails](docs/MvcProblemDetails.md)
- - [Model.ODataODataEntitySetInfo](docs/ODataODataEntitySetInfo.md)
- - [Model.ODataODataFunctionImportInfo](docs/ODataODataFunctionImportInfo.md)
- - [Model.ODataODataServiceDocument](docs/ODataODataServiceDocument.md)
- - [Model.ODataODataSingletonInfo](docs/ODataODataSingletonInfo.md)
- - [Model.ODataODataTypeAnnotation](docs/ODataODataTypeAnnotation.md)
- - [Model.VocabulariesIEdmTerm](docs/VocabulariesIEdmTerm.md)
- - [Model.VocabulariesIEdmVocabularyAnnotation](docs/VocabulariesIEdmVocabularyAnnotation.md)
 
 
 <a name="documentation-for-authorization"></a>
