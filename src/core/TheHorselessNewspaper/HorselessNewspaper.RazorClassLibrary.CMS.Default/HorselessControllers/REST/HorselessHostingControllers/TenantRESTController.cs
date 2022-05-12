@@ -5,6 +5,7 @@ using HorselessNewspaper.Web.Core.Interfaces.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
+using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessHostingControllers
 {
@@ -104,6 +105,43 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpGet("HostingEntitiesTenantGetByPageNumber", Name = "HostingEntities[controller]_[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<HostingModel.Tenant>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<HostingModel.Tenant>>> GetByPageNumber(int pageSize = 10, int pageNumber = 1, int pageCount = 1)
+        {
+
+            IActionResult result;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var testFind = await EntityCollectionService.Query(pageSize, pageNumber, pageCount);
+
+                if (testFind == null)
+                {
+                    return NotFound();
+                }
+                else if (testFind == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    result = Ok(testFind);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(result);
         }
     }
 }

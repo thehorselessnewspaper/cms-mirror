@@ -29,8 +29,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
         [HttpPost("Create", Name = "ContentEntities[controller]_[action]")]
         [Consumes("application/json")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(MIMEType))]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(MIMEType))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(NavigationMenu))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(NavigationMenu))]
         public async Task<ActionResult<NavigationMenu>> Create([FromBody] NavigationMenu contentCollection)
         {
             if (!ModelState.IsValid)
@@ -50,7 +50,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [HttpGet("GetByObjectId", Name = "ContentEntities[controller]_[action]")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(MIMEType))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NavigationMenu))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<NavigationMenu>> GetByObjectId([FromRoute] string objectId)
         {
@@ -89,8 +89,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
         [Consumes("application/json")]
         [HttpPost("Update/{contentCollectionId}", Name = "ContentEntities[controller]_[action]")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(MIMEType))]
-        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(MIMEType))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(NavigationMenu))]
+        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(NavigationMenu))]
         public async Task<ActionResult<NavigationMenu>> Update([FromRoute] string contentCollectionId, [FromBody] NavigationMenu contentCollection)
         {
 
@@ -110,6 +110,44 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+
+        [HttpGet("GetByPageNumber", Name = "ContentEntities[controller]_[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<NavigationMenu>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<ContentModel.NavigationMenu>>> GetByPageNumber(int pageSize = 10, int pageNumber = 1, int pageCount = 1)
+        {
+
+            IActionResult result;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var testFind = await _contentCollectionService.Query(pageSize, pageNumber, pageCount);
+
+                if (testFind == null)
+                {
+                    return NotFound();
+                }
+                else if (testFind == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    result = Ok(testFind);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(result);
         }
     }
 }

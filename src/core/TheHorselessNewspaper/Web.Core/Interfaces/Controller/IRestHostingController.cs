@@ -34,5 +34,7 @@ namespace HorselessNewspaper.Web.Core.Interfaces.Controller
         [HttpPost("Update/{entityCollectionId}")]
 
         Task<ActionResult<Entity>> Update([FromRoute] string entityCollectionId, [FromBody] Entity entityCollection);
+
+        Task<ActionResult<IEnumerable<Entity>>> GetByPageNumber(int pageSize = 10, int pageNumber = 1, int pageCount = 1);
     }
 }

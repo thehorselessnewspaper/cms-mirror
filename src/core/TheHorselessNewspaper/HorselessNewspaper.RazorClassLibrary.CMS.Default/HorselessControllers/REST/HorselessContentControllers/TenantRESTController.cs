@@ -138,5 +138,42 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("GetByPageNumber", Name = "ContentEntities[controller]_[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Tenant>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<Tenant>>> GetByPageNumber(int pageSize = 10, int pageNumber = 1, int pageCount = 1)
+        {
+
+            IActionResult result;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var testFind = await _contentCollectionService.Query(pageSize, pageNumber, pageCount);
+
+                if (testFind == null)
+                {
+                    return NotFound();
+                }
+                else if (testFind == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    result = Ok(testFind);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(result);
+        }
     }
 }

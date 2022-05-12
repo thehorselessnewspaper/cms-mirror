@@ -5,6 +5,7 @@ using HorselessNewspaper.Web.Core.Interfaces.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Net.Mime;
 using System.Xml.Linq;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
@@ -113,6 +114,43 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
                 return BadRequest(ex.Message);
             }
 
+        }
+
+        [HttpGet("GetByPageNumber", Name = "ContentEntities[controller]_[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<FilesystemAsset>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<FilesystemAsset>>> GetByPageNumber(int pageSize = 10, int pageNumber = 1, int pageCount = 1)
+        {
+
+            IActionResult result;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            try
+{
+                var testFind = await _contentCollectionService.Query(pageSize, pageNumber, pageCount);
+
+                if (testFind == null)
+                {
+                    return NotFound();
+                }
+                else if (testFind == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    result = Ok(testFind);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(result);
         }
     }
 }

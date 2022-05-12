@@ -36,8 +36,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
         [HttpPost("Create", Name = "ContentEntities[controller]_[action]")]
         [Consumes("application/json")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentCollection))]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ContentCollection))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(HorselessSession))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(HorselessSession))]
         public async Task<ActionResult<HorselessSession>> Create([FromBody] HorselessSession contentCollection)
         {
             if (!ModelState.IsValid)
@@ -89,11 +89,11 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             }
 
             return Ok(result);
-}
+        }
         [Consumes("application/json")]
         [HttpPost("Update/{contentCollectionId}", Name = "ContentEntities[controller]_[action]")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ContentCollection))]
-        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(ContentCollection))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(HorselessSession))]
+        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(HorselessSession))]
         public async Task<ActionResult<HorselessSession>> Update([FromRoute] string contentCollectionId, [FromBody] HorselessSession contentCollection)
         {
 
@@ -113,6 +113,44 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+
+        [HttpGet("GetByPageNumber", Name = "ContentEntities[controller]_[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.HorselessSession>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<ContentModel.HorselessSession>>> GetByPageNumber(int pageSize = 10, int pageNumber = 1, int pageCount = 1)
+        {
+
+            IActionResult result;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var testFind = await _contentCollectionService.Query(pageSize, pageNumber, pageCount);
+
+                if (testFind == null)
+                {
+                    return NotFound();
+                }
+                else if (testFind == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    result = Ok(testFind);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(result);
         }
     }
 }
