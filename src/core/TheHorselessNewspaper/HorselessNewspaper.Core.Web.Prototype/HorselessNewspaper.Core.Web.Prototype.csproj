@@ -11,12 +11,12 @@
 
 	<!-- support automated openpi spec rendering as per -->
 	<!-- https://tonylunt.medium.com/swashbuckle-cli-automating-asp-net-core-api-swagger-definitions-during-build-f3ee2b8e857a -->
-	<Target Name="SwaggerPostBuildTarget" AfterTargets="Build">
+	<Target Condition=" '$(Configuration)'=='Debug' "  Name="SwaggerPostBuildTarget" AfterTargets="Build">
 		<Exec Command="dotnet tool restore"></Exec>
 		<Exec Command="dotnet tool run swagger tofile --output ..\..\..\generated-code\angular\horseless-contentapi.json .\bin\Debug\net6.0\HorselessNewspaper.Core.Web.Prototype.dll v1"></Exec>
 	</Target>
 
-	<Target Name="SwaggerPostBuildTargetAlso" AfterTargets="Build">
+	<Target Condition=" '$(Configuration)'=='Debug' " Name="SwaggerPostBuildTargetAlso" AfterTargets="Build">
 		<Exec Command="dotnet tool restore"></Exec>
 		<Exec Command="dotnet tool run swagger tofile --output ..\..\..\generated-code\TheHorselessNewspaper.REST\swagger-spec.json .\bin\Debug\net6.0\HorselessNewspaper.Core.Web.Prototype.dll v1"></Exec>
 	</Target>
