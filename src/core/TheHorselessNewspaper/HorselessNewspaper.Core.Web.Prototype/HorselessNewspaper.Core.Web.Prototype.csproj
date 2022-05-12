@@ -11,7 +11,7 @@
 
 	<!-- support automated openpi spec rendering as per -->
 	<!-- https://tonylunt.medium.com/swashbuckle-cli-automating-asp-net-core-api-swagger-definitions-during-build-f3ee2b8e857a -->
-	<Target Condition=" '$(Configuration)'=='Debug' "  Name="SwaggerPostBuildTarget" AfterTargets="Build">
+	<Target Condition=" '$(Configuration)'=='Debug' " Name="SwaggerPostBuildTarget" AfterTargets="Build">
 		<Exec Command="dotnet tool restore"></Exec>
 		<Exec Command="dotnet tool run swagger tofile --output ..\..\..\generated-code\angular\horseless-contentapi.json .\bin\Debug\net6.0\HorselessNewspaper.Core.Web.Prototype.dll v1"></Exec>
 	</Target>
@@ -33,10 +33,10 @@
 		<PackageReference Include="Edi.RouteDebugger" Version="1.3.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.5" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.5" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.16.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.16.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
 		<PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220511.11" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220511.16" />
 	</ItemGroup>
 
 	<ItemGroup>

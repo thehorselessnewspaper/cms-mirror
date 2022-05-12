@@ -78,16 +78,16 @@ namespace HorselessNewspaper.Web.Core.Model.Query.ContentCollection
             return result;
         }
 
-        public async Task<IQueryable<Entity>> Query()
+        public async Task<IQueryable<Entity>> Query(int pageSize = 10, int pageNumber = 1, int pageCount = 1)
         {
-            var result = await _contentModelService.Read();
+            var result = await _contentModelService.Read(pageSize, pageNumber, pageCount);
 
             return result;
         }
 
-        public async Task<IQueryable<Entity>> Query(Expression<Func<Entity, bool>> query, List<string> includeClauses = null)
+        public async Task<IQueryable<Entity>> Query(Expression<Func<Entity, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1)
         {
-            var result = await _contentModelService.Read(query, includeClauses);
+            var result = await _contentModelService.Read(query, includeClauses, pageSize, pageNumber, pageCount);
 
             return result;
         }
