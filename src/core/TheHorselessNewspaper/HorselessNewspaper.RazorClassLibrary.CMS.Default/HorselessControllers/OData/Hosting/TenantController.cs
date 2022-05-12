@@ -8,7 +8,7 @@ using TheHorselessNewspaper.HostingModel.Entities.Query;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Hosting
 {
-    [Route("ODataHosting/{__tenant__}/Tenant")]
+    [Route("{__tenant__}/ODataHosting/Tenant")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Produces("application/json")]
     [ApiExplorerSettings(IgnoreApi = true)]

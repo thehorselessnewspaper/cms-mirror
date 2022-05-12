@@ -12,7 +12,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("ODataHosting/{__tenant__}/Tenant")]
+    [Route("{__tenant__}/ODataHosting/Principal")]
     [Produces("application/json")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class PrincipalController : ODataController

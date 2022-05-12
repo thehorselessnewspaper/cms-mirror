@@ -20,7 +20,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("ODataContent/{__tenant__}/HorselessContent")]
+    [Route("{__tenant__}/ODataContent/HorselessContent")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class HorselessContentController :
         ODataController, IContentQueryController<ContentModel.HorselessContent>
