@@ -11,6 +11,6 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query
 {
     public interface IQueryableHostingModelOperator<T> : IQueryableModelOperator<T> where T : class, IHostingRowLevelSecured
     {
-        Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null);
+        Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1);
     }
 }

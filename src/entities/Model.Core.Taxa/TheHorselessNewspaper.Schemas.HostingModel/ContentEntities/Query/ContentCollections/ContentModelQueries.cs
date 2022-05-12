@@ -198,7 +198,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         }
 
 
-        public async Task<IQueryable<T>> Read()
+        public async Task<IQueryable<T>> Read(int pageSize = 10, int pageNumber = 1, int pageCount = 1)
         {
             IQueryable<T> result;
 
@@ -206,7 +206,10 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             try
             {
                 var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
-                var dbSet = ((DbContext)_context).Set<T>();
+                var dbSet = ((DbContext)_context).Set<T>()
+                                        .OrderBy(o => o.CreatedAt)
+                                        .Skip((pageNumber - 1) * pageSize)
+                                        .Take(pageSize * pageCount); ;
                 result = dbSet.AsQueryable<T>();
 
             }
@@ -221,7 +224,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             return await Task.FromResult<IQueryable<T>>(result);
         }
 
-        public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null)
+        public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize=10, int pageNumber=1, int pageCount=1)
         {
             IQueryable<T> result;
 
@@ -236,7 +239,10 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                     }
                 }
 
-                result = dbSet.AsQueryable<T>();
+                result = dbSet.OrderBy(o => o.CreatedAt)
+                                        .Skip((pageNumber - 1  ) * pageSize)
+                                        .Take(pageSize * pageCount)
+                                        .AsQueryable<T>();
 
             }
             catch (Exception ex)
@@ -250,14 +256,17 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             return await Task.FromResult<IQueryable<T>>(result);
         }
 
-        public async Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null)
+        public async Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1)
         {
             IEnumerable<T> result = new List<T>();
    
             try
             {
                 var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
-                var dbSet = ((DbContext)_context).Set<T>().Where(query);
+                var dbSet = ((DbContext)_context).Set<T>().Where(query)
+                                        .OrderBy(o => o.CreatedAt)
+                                        .Skip((pageNumber - 1) * pageSize)
+                                        .Take(pageSize * pageCount);
                 if (includeClauses != null)
                 {
                     foreach (var clause in includeClauses)

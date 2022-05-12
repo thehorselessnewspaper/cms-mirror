@@ -36,9 +36,9 @@ namespace TheHorselessNewspaper.HostingModel.Context
     /// <typeparam name="T"></typeparam>
     public interface IQueryableModelOperator<T> where T : class
     {
-        public Task<IQueryable<T>> Read();
+        public Task<IQueryable<T>> Read(int pageSize = 10, int pageNumber = 1, int pageCount = 1);
 
-        public Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null);
+        public Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1);
 
         public Task<T> Create(T entity);
         public Task<IEnumerable<T>> Create(IEnumerable<T> entity);

@@ -143,7 +143,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             return ret;
         }
 
-        public async Task<IQueryable<T>> Read()
+        public async Task<IQueryable<T>> Read(int pageSize = 10, int pageNumber = 1, int pageCount = 1)
         {
             var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
 
@@ -152,7 +152,10 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
                 _logger.LogDebug($"handling get request");
                 var dbSet = ((DbContext)_context).Set<T>();
 
-                return await Task.FromResult<IQueryable<T>>(dbSet.AsQueryable<T>());
+                return await Task.FromResult<IQueryable<T>>(dbSet
+                                        .OrderBy(o => o.CreatedAt)
+                                        .Skip((pageNumber - 1 ) * pageSize)
+                                        .Take(pageSize * pageCount).AsQueryable<T>());
             }
             catch(Exception e)
             {
@@ -167,14 +170,17 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
         /// <param name="query"></param>
         /// <param name="includeClauses"></param>
         /// <returns></returns>
-        public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null)
+        public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1)
         {
             var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
 
             try
             {
                 _logger.LogDebug($"handling Read request");
-                var dbSet = ((DbContext)_context).Set<T>().Where(query);
+                var dbSet = ((DbContext)_context).Set<T>().Where(query)
+                                        .OrderBy(o => o.CreatedAt)
+                                        .Skip((pageNumber - 1) * pageSize)
+                                        .Take(pageSize * pageCount); 
 
                 if (includeClauses != null)
                 {
@@ -193,7 +199,8 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             }
         }
 
-        public async Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null)
+        public async Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null,
+                                                            int pageSize = 10, int pageNumber = 1, int pageCount = 1)
         {
             var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
 
@@ -201,7 +208,10 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             {
                 IEnumerable<T> result = new List<T>();
                 _logger.LogDebug($"handling Read request");
-                var dbSet = ((DbContext)_context).Set<T>().Where(query);
+                var dbSet = ((DbContext)_context).Set<T>().Where(query)
+                                        .OrderBy(o => o.CreatedAt)
+                                        .Skip((pageNumber - 1) * pageSize)
+                                        .Take(pageSize * pageCount);
 
                 if (includeClauses != null)
                 {

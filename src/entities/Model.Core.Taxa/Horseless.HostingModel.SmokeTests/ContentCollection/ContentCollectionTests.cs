@@ -177,7 +177,8 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
 
             Assert.IsTrue(insertResult != null);
 
-            for (int i = 0; i < 99; i++)
+            int insertCount = 99;
+            for (int i = 0; i < insertCount; i++)
             {
                 await InsertRelatedOwner(tenant);
                 await InsertRelatedAccount(tenant);
@@ -186,13 +187,14 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             var validatedInsertResult = await tenantQuery.Read(r => r.Id.Equals(tenant.Id), new List<string>()
             {
                 nameof(Tenant.Owners), nameof(Tenant.Accounts), nameof(Tenant.AccessControlEntries)
-            });
+            },
+            insertCount + 1, 1, 1);
 
             Assert.IsTrue(validatedInsertResult.First().Owners.Count > 50);
 
             Assert.IsTrue(validatedInsertResult.First().Accounts.Count > 0);
 
-            var principals = await principalQuery.Read();
+            var principals = await principalQuery.Read(insertCount + 1, 1, 2);
             var principalCount = principals.Count();
             Assert.IsTrue(principalCount > 100);
         }
