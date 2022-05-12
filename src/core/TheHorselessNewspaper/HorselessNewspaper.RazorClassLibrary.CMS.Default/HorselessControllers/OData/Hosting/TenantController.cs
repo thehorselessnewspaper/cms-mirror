@@ -8,7 +8,7 @@ using TheHorselessNewspaper.HostingModel.Entities.Query;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Hosting
 {
-    [Route("{__tenant__}/HorselessHosting/Tenant")]
+    [Route("ODataHosting/{__tenant__}/Tenant")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Produces("application/json")]
     [ApiExplorerSettings(IgnoreApi = true)]
@@ -22,6 +22,12 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
 
+        /// <summary>
+        /// todo - 
+        /// rationalize the return types of odata Get()
+        /// is it IQueryable<T> or IEnumerable<T>>
+        /// </summary>
+        /// <returns></returns>
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
 
         [HttpGet()]

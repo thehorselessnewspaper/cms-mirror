@@ -103,8 +103,8 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 {
                     var principalResolver = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
                     client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", await principalResolver.GetClientCredentialsGrantToken());
-                    client.DefaultRequestHeaders.Add("Accept", "application/json;odata.metadata=none");
-                    response = await client.GetAsync("phantom/HorselessContent/Tenant/?$top=10&");
+                    // client.DefaultRequestHeaders.Add("Accept", "application/json;odata.metadata=none");
+                    response = await client.GetAsync("ODataContent/phantom/Tenant?$top=10&");
                     Assert.NotNull(response);
 
                     response.EnsureSuccessStatusCode(); // Status Code 200-299
@@ -128,9 +128,9 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
             try
             {
 
-                var contentCollection = JsonConvert.DeserializeObject<OData<List<ContentEntities.Tenant>>>(responseContent);
+                var contentCollection = JsonConvert.DeserializeObject<List<ContentEntities.Tenant>>(responseContent);
                 Assert.NotNull(contentCollection);
-                Assert.True(contentCollection.value.Count > 0);
+                Assert.True(contentCollection.Count > 0);
             }
             catch (Exception e)
             {
