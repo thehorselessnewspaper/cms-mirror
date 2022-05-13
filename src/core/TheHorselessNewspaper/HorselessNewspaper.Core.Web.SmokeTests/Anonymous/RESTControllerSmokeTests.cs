@@ -16,6 +16,8 @@ using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
+using HorselessNewspaper.Web.Core.Model.Security;
+using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
 
 namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 {
@@ -40,6 +42,92 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
             testHostingModelTenantInfo = GetNewHostingModelTenantInfo();
 
             serviceProvider = application.Services;
+
+        }
+
+        [Fact]
+        public async Task CanGetClientConfigurationForDefaultTenant()
+        {
+            // arrange
+            HttpResponseMessage response = null;
+            Exception ex = null;
+            string responseContent = String.Empty;
+            var route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT + "/HostingEntitiesTenantCreate";
+
+            // post bad request to a valid route 
+            // without sending client config endpoint
+            // control channel commands
+            // expect no client configuration returned
+            var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
+            {
+                Content = GetJsonContent(testHostingModelTenant)
+            };
+
+
+            // act
+            var postResponse = await client.SendAsync(postRequest);
+
+            // validate
+
+            Assert.NotNull(postResponse);
+            Exception serializationException = null;
+
+            try
+            {
+                RestClientConfiguration clientConfig = JsonConvert.DeserializeObject<RestClientConfiguration>(await postResponse.Content.ReadAsStringAsync());
+                Assert.True(clientConfig == null, "client config overrode a route and was invoked without endpoint command");
+
+                Assert.True(clientConfig.AccessToken == null || clientConfig.AccessToken == String.Empty, "client config endpoint issued access token to unauthenticated user");
+            }
+            catch(Exception e)
+            {
+                serializationException = e;
+            }
+
+            Assert.True(serializationException != null, $"client configuration endpoint command channel failure: endpoint returned response in absence of control channel commands: {serializationException.Message}");
+
+
+
+            try
+            {
+                postRequest = new HttpRequestMessage(HttpMethod.Post, route)
+                {
+                    Content = GetJsonContent(testHostingModelTenant)
+                };
+
+                // get an auth token
+                var principalResolver = this.serviceProvider.GetRequiredService<ISecurityPrincipalResolver>();
+                string token = await principalResolver.GetClientCredentialsGrantToken();
+                Assert.True(token != null && token != String.Empty);
+
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                // amend arrangement
+                // add control channel messages
+                // for clientconfiguration endpoint
+                postRequest.Headers.Add("RestClientConfigurationEndpoint", "get");
+
+                // act
+                postResponse = await client.SendAsync(postRequest);
+
+                // validate
+
+                Assert.NotNull(postResponse);
+                serializationException = null;
+
+                RestClientConfiguration clientConfig = JsonConvert.DeserializeObject<RestClientConfiguration>(await postResponse.Content.ReadAsStringAsync());
+                Assert.True(clientConfig != null, "client config endpoint did not respond");
+
+                Assert.True(clientConfig.AccessToken != null && clientConfig.AccessToken != String.Empty, "client config endpoint did not trust the bearer token");
+
+                Assert.True(clientConfig.TenantIdentifier != null && clientConfig.TenantIdentifier != String.Empty, "client config failed tenant resolution");
+            }
+            catch (Exception e)
+            {
+                serializationException = e;
+            }
+
+            int i = 0;
 
         }
 

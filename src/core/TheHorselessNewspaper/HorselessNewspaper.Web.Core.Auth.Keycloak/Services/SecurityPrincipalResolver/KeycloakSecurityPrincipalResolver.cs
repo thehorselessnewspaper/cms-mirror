@@ -65,6 +65,11 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
         }
 
         /// <summary>
+        /// convenience method for obtaining a keycloak 
+        /// issued access token
+        /// 
+        /// TODO remove this from the public api
+        /// in favor of protected internal to discourage its use
         /// as per https://dzone.com/articles/get-access-token-from-keycloak-using-postman
         /// </summary>
         /// <returns></returns>

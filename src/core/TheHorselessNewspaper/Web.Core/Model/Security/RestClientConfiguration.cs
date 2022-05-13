@@ -20,6 +20,6 @@ namespace HorselessNewspaper.Web.Core.Model.Security
         public string ODataEndpoint { get; set; } = string.Empty;
 
         public string RESTEndpoint { get; set; } = string.Empty;
-        public string TenantIdentifier { get; internal set; }
+        public string TenantIdentifier { get; set; }
     }
 }
