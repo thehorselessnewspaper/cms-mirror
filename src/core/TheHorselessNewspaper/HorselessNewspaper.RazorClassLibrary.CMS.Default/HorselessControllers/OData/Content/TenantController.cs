@@ -21,7 +21,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    [Route("ODataContent/{__tenant__}/Tenant")]
+    [Route("{__tenant__}/ODataContent/Tenant")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     [ApiExplorerSettings(IgnoreApi = true)]

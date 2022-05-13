@@ -17,6 +17,8 @@ COPY ["Web.Core/HorselessNewspaper.Web.Core.csproj", "Web.Core/"]
 COPY ["HorselessNewspaper.Web.Core.Auth.Keycloak/HorselessNewspaper.Web.Core.Auth.Keycloak.csproj", "HorselessNewspaper.Web.Core.Auth.Keycloak/"]
 COPY ["HorselessNewspaper.Web.TagHelpers/HorselessNewspaper.Web.TagHelpers.csproj", "HorselessNewspaper.Web.TagHelpers/"]
 
+COPY ["HorselessNewspaper.Core.Workflow.AzureFunctions/HorselessNewspaper.Core.Workflow.AzureFunctions.csproj", "HorselessNewspaper.Core.Workflow.AzureFunctions/"]
+
 COPY ["HorselessNewspaper.Client.Nuget/HorselessNewspaper.Client.Nuget.csproj", "HorselessNewspaper.Client.Nuget/"]
 
 COPY ["HorselessNewspaper.Core.Interfaces/HorselessNewspaper.Core.Interfaces.csproj", "HorselessNewspaper.Core.Interfaces/"]

@@ -390,27 +390,27 @@ HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessCo
 
                         /// todo make this an environment configurable item
                         options.AddRouteComponents("ODataContent", edmContent);
+
+
+
+                    })
+                    .AddOData(options =>
+                    {
+                        /// TODO - surface these as configurable parameters 
+                        options
+                        .Select()
+                        .Expand()
+                        .Filter()
+                        .OrderBy()
+                        .SetMaxTop(100)
+                        .Count();
+
+                        options.TimeZone = TimeZoneInfo.Utc;
+                        // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
+
+                        /// todo make this an environment configurable item
                         options.AddRouteComponents("ODataHosting", edmHosting);
-
-
                     });
-                    //.AddOData(options =>
-                    //{
-                    //    /// TODO - surface these as configurable parameters 
-                    //    options
-                    //    .Select()
-                    //    .Expand()
-                    //    .Filter()
-                    //    .OrderBy()
-                    //    .SetMaxTop(100)
-                    //    .Count();
-
-                    //    options.TimeZone = TimeZoneInfo.Utc;
-                    //    // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
-
-                    //    /// todo make this an environment configurable item
-                    //    options.AddRouteComponents("ODataHosting", edmHosting);
-                    //});
 
             options?.Invoke(serviceBuilder);
 
