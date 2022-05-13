@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.OData.Extensions;
 using Microsoft.AspNetCore.OData;
 using HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTenantPrincipal;
+using HorselessNewspaper.Web.Core.Middleware.ClientConfigurationMiddleware;
 
 namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 {
@@ -87,6 +88,11 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
             builder.UseSession();
 
             builder.UseMiddleware<HorselessTenantPrincipalMiddleware>();
+
+
+            // answers POST requests with hader key = RestClientConfigurationEndpoint
+            // returns RestclientConfiguration - appsettings by ajax 
+            builder.UseMiddleware<RestClientConfigurationEndpoint>();
 
             builder.UseHorselessTenantSetupMiddleware();
 
