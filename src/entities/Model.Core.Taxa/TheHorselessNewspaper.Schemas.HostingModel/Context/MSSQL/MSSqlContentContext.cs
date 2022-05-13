@@ -21,7 +21,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         public DatabaseServerFamily SqlDialect { get; set; }
 
         public DbSet<TenantIdentifierStrategy> TenantIdentifierStrategies { get; set; }
-
+        public Guid DbContextInstanceId { get; set; } = Guid.NewGuid();
         private IServiceProvider serviceProvider;
         private ILogger<MSSqlContentContext> logger;
         public DbSet<TenantIdentifierStrategyContainer> TenantIdentifierStrategyContainers { get; set; }
@@ -44,6 +44,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         public ITenantInfo TenantInfo { get; set; }
         public TenantMismatchMode TenantMismatchMode { get; set; }
         public TenantNotSetMode TenantNotSetMode { get; set; }
+
 
         public async Task<ITenantInfo> ResolveTenant()
         {

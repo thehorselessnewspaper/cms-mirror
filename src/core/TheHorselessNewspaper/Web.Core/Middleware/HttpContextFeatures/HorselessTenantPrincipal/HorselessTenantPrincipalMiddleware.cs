@@ -38,7 +38,6 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
         public HorselessTenantPrincipalMiddleware(RequestDelegate next, ILogger<HorselessTenantPrincipalMiddleware> logger )
         {
             _next = next;
-            // this._securityPrincipalResolver = securityPrincipalResolver;
             this._logger = logger;
         }
 

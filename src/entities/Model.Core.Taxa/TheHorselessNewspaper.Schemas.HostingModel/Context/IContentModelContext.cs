@@ -34,7 +34,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context
         internal DbSet<Publication> Publications { get; set; }
         internal DbSet<Taxon> Taxons { get; set; }
         internal DbSet<Tenant> Tenants { get; set; }
-
+        public Guid DbContextInstanceId { get; set; }
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
         public Task<ITenantInfo> ResolveTenant();
     }

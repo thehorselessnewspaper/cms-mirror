@@ -12,6 +12,7 @@ namespace TheHorselessNewspaper.HostingModel.Context
 {
     internal partial interface IHostingModelContext : IMultiTenantDbContext
     {
+        public Guid DbContextInstanceId { get; set; } 
 
         internal DatabaseServerFamily SqlDialect { get; set; }
 
