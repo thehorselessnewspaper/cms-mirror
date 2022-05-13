@@ -13,6 +13,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 {
     internal partial class MSSQLHostingContext : THLNPHostingContext, IHostingModelContext
     {
+        public Guid DbContextInstanceId { get; set; } = Guid.NewGuid();
+
         public DatabaseServerFamily SqlDialect { get; set; }
 
         private ILogger<MSSqlContentContext> logger;
@@ -33,7 +35,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
         public TenantMismatchMode TenantMismatchMode { get; set; }
         public TenantNotSetMode TenantNotSetMode { get; set; }
-
+ 
         public async Task<ITenantInfo> ResolveTenant()
         {
 

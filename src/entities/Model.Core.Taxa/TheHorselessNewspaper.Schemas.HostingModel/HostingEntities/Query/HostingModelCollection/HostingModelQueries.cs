@@ -13,6 +13,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 {
     internal class HostingModelQueries<T> : IQueryableHostingModelOperator<T> where T : class, IHostingRowLevelSecured
     {
+        public Guid DbContextInstanceId { get; set; } = Guid.NewGuid();
 
         private readonly ILogger<HostingModelQueries<T>> _logger;
         private readonly IHostingModelContext _context;
@@ -25,7 +26,9 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             try
             {
                 var providerName = ((DbContext)ctx).Database.ProviderName;
-                _logger.LogDebug($"hosting collections context using provider named {providerName}");
+
+                _logger.LogInformation($"hosting collections context using provider named {providerName} on dbcontext instance {((IContentModelContext)ctx).DbContextInstanceId.ToString()}");
+
             }
             catch (Exception e) { }
         }
