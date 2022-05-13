@@ -239,7 +239,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 }
 
 
-                using (var innerScope = _services.CreateAsyncScope())
+                using (var innerScope = _services.CreateScope())
                 {
 
                     // var clientTenantlist = await apiClient.getbypa);
@@ -252,12 +252,13 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     //var tenantList = await contentModelTenantQuery.Read(r => r.IsSoftDeleted == false);
                     //var tenants = tenantList == null || tenantList.Count() == 0 ? new List<ContentModel.Tenant>() : tenantList.ToList();
 
-                    var tenants = await GetCurrentContentModelTenants(innerScope);
+                    var tenants = await GetCurrentContentModelTenants();
                     foreach (var contentModelTenant in tenants)
                     {
                         if (!this.CurrentContentModelTenants.Where(w => w.Id.Equals(contentModelTenant.Id)).Any())
                         {
                             // here because we need to cache this tenant in the singleton
+                            _logger.LogWarning($"{this.GetType().FullName} has cached a content model tenant locally");
                             this.CurrentContentModelTenants.Add(contentModelTenant);
                         }
                     }
@@ -272,18 +273,26 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
         }
 
-        private string GetRestBaseUrl(IServiceScope innerScope)
+        private string GetRestBaseUrl(IServiceScope scope = null)
         {
-            var configuration = innerScope.ServiceProvider.GetRequiredService<IConfiguration>();
-            var configuredRestBaseUrl = configuration["RestApiBaseUrl"];
-            return configuredRestBaseUrl;
+            using (var innerScope = this._services.CreateScope())
+            {
+
+                var configuration = innerScope.ServiceProvider.GetRequiredService<IConfiguration>();
+                var configuredRestBaseUrl = configuration["RestApiBaseUrl"];
+                return configuredRestBaseUrl; 
+            }
         }
 
-        private string GetOdataBaseUrl(IServiceScope innerScope)
+        private string GetOdataBaseUrl(IServiceScope ascope = null)
         {
-            var configuration = innerScope.ServiceProvider.GetRequiredService<IConfiguration>();
-            var configuredRestBaseUrl = configuration["OdataApiBaseUrl"];
-            return configuredRestBaseUrl;
+            using (var innerScope = this._services.CreateScope())
+            {
+
+                var configuration = innerScope.ServiceProvider.GetRequiredService<IConfiguration>();
+                var configuredRestBaseUrl = configuration["OdataApiBaseUrl"];
+                return configuredRestBaseUrl; 
+            }
         }
 
         private JsonContent GetJsonContent<T>(T content)
@@ -295,13 +304,13 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         {
             using (var scope = _services.CreateScope())
             {
-                List<HostingModel.Tenant> hostingModelTenants = await UpdateLocalHostingTenantCache(scope);
-                var contentModelTenants = await this.GetCurrentContentModelTenants(scope, "$expand=Owners, AccessControlEntries");
-                IMultiTenantStore<HorselessTenantInfo>? inMemoryStores = GetInMemoryTenantStores(scope);
+                List<HostingModel.Tenant> hostingModelTenants = await UpdateLocalHostingTenantCache();
+                var contentModelTenants = await this.GetCurrentContentModelTenants("$expand=Owners, AccessControlEntries");
+                IMultiTenantStore<HorselessTenantInfo>? inMemoryStores = GetInMemoryTenantStores();
 
-                await EnsureTenantEntityWorkflow(scope, hostingModelTenants, contentModelTenants, inMemoryStores);
+                await EnsureTenantEntityWorkflow(hostingModelTenants, contentModelTenants, inMemoryStores);
 
-                var currentContentModelTenants = await this.GetCurrentContentModelTenants(scope, "$expand=Owners, AccessControlEntries");
+                var currentContentModelTenants = await this.GetCurrentContentModelTenants("$expand=Owners, AccessControlEntries");
                 foreach (var currentTenant in currentContentModelTenants)
                 {
 
@@ -310,100 +319,103 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
         }
 
-        private async Task<bool> EnsureTenantEntityWorkflow(IServiceScope scope, List<HostingModel.Tenant> hostingModelTenants, List<ContentModel.Tenant> contentModelTenants, IMultiTenantStore<HorselessTenantInfo>? inMemoryStores)
+        private async Task<bool> EnsureTenantEntityWorkflow(List<HostingModel.Tenant> hostingModelTenants, List<ContentModel.Tenant> contentModelTenants, IMultiTenantStore<HorselessTenantInfo>? inMemoryStores)
         {
             var ret = false;
-
-            // merge content model tenants with published hosting model tenants
-            // meaning, migrate published tenant entities from the hosting model db
-            // to the content model db
-            // the migrated entity should == original entity
-            // where == is based on uniquely constrained columns
-            var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRestApiClient>();
-            var restClientAlso = scope.ServiceProvider.GetRequiredService<RestClientAlso.IHorselessRestApiClientAlso>();
-
-            var iAutoMapper = scope.ServiceProvider.GetRequiredService<IMapper>();
-            var defaultTenantQuery = await inMemoryStores.GetAllAsync();
-            var defaultTenant = defaultTenantQuery.FirstOrDefault();
-
-            foreach (var publishedTenant in hostingModelTenants.Where(w => w.IsPublished == true))
+            using (var scope = this._services.CreateScope())
             {
-                try
+
+                // merge content model tenants with published hosting model tenants
+                // meaning, migrate published tenant entities from the hosting model db
+                // to the content model db
+                // the migrated entity should == original entity
+                // where == is based on uniquely constrained columns
+                var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRestApiClient>();
+                var restClientAlso = scope.ServiceProvider.GetRequiredService<RestClientAlso.IHorselessRestApiClientAlso>();
+
+                var iAutoMapper = scope.ServiceProvider.GetRequiredService<IMapper>();
+                var defaultTenantQuery = await inMemoryStores.GetAllAsync();
+                var defaultTenant = defaultTenantQuery.FirstOrDefault();
+
+                foreach (var publishedTenant in hostingModelTenants.Where(w => w.IsPublished == true))
                 {
-                    // filter existing merge targets
-                    // evaluate wether final tenant deployment
-                    // workflow step completed
-
-                    var mirrorTenantExists = contentModelTenants.Where(r => r.Id == publishedTenant.Id).Any();
-                    var mirrorTenantHasOwners = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.Owners.Count() > 0).Any();
-                    var mirrorTenantHasAccessControlEntries = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.AccessControlEntries.Count() > 0).Any();
-
-                    var isTenantDeploymentWorkflowComplete = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.IsPublished == true).Any();
-
-                    if (mirrorTenantExists == false)
+                    try
                     {
-                        // validate the multitenant routing is working for this tenant
-                        // database inserts specific to the tenant can only occur
-                        // after tenant routing is available for a tenant
-                        var probeResult = await this.ProbeTenantRouting(scope, publishedTenant);
-                        if (probeResult == true)
-                        {
-                            await DeployPublishedTenant(scope, publishedTenant);
-                        }
-                    }
-                    else if (mirrorTenantExists && mirrorTenantHasOwners && mirrorTenantHasAccessControlEntries && isTenantDeploymentWorkflowComplete == false)
-                    {
-                        try
-                        {
+                        // filter existing merge targets
+                        // evaluate wether final tenant deployment
+                        // workflow step completed
 
-                            // detect final step, setting the tenant to published in the content model database
-                            var mirrorTenant = contentModelTenants.Where(r => r.Id == publishedTenant.Id).FirstOrDefault();
-                            mirrorTenant.IsPublished = true; // set the workflow complete flag
-                            var options = new JsonSerializerOptions
+                        var mirrorTenantExists = contentModelTenants.Where(r => r.Id == publishedTenant.Id).Any();
+                        var mirrorTenantHasOwners = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.Owners.Count() > 0).Any();
+                        var mirrorTenantHasAccessControlEntries = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.AccessControlEntries.Count() > 0).Any();
+
+                        var isTenantDeploymentWorkflowComplete = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.IsPublished == true).Any();
+
+                        if (mirrorTenantExists == false)
+                        {
+                            // validate the multitenant routing is working for this tenant
+                            // database inserts specific to the tenant can only occur
+                            // after tenant routing is available for a tenant
+                            var probeResult = await this.ProbeTenantRouting(scope, publishedTenant);
+                            if (probeResult == true)
                             {
-                                PropertyNameCaseInsensitive = true
-                            };
-
-                            mirrorTenant.Owners.Clear();
-                            mirrorTenant.AccessControlEntries.Clear();
-
-                            /// TODO don't do this
-                            mirrorTenant.TenantIdentifierStrategy = null;
-
-                            var tenantJson = System.Text.Json.JsonSerializer.Serialize(mirrorTenant, options);
-                            var restClientEntity = System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesTenant>(tenantJson, options); // RestClientAlso.ContentEntitiesTenant.FromJson(tenantJson); // iAutoMapper.Map<ContentEntitiesTenant>(mirrorTenant); 
-                            var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.IsPublished) };
-
-                            var updateResponse = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), defaultTenant.Identifier, updatedProperties, restClientEntity);
-                            var currentContentModelTenants = this.GetCurrentContentModelTenants(scope, "$expand=Owners, AccessControlEntries");
-                            int i = 0;
+                                await DeployPublishedTenant(scope, publishedTenant);
+                            }
                         }
-                        catch (Exception e)
+                        else if (mirrorTenantExists && mirrorTenantHasOwners && mirrorTenantHasAccessControlEntries && isTenantDeploymentWorkflowComplete == false)
                         {
-                            _logger.LogError($"problem marking workflow complete {e.Message}");
+                            try
+                            {
+
+                                // detect final step, setting the tenant to published in the content model database
+                                var mirrorTenant = contentModelTenants.Where(r => r.Id == publishedTenant.Id).FirstOrDefault();
+                                mirrorTenant.IsPublished = true; // set the workflow complete flag
+                                var options = new JsonSerializerOptions
+                                {
+                                    PropertyNameCaseInsensitive = true
+                                };
+
+                                mirrorTenant.Owners.Clear();
+                                mirrorTenant.AccessControlEntries.Clear();
+
+                                /// TODO don't do this
+                                mirrorTenant.TenantIdentifierStrategy = null;
+
+                                var tenantJson = System.Text.Json.JsonSerializer.Serialize(mirrorTenant, options);
+                                var restClientEntity = System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesTenant>(tenantJson, options); // RestClientAlso.ContentEntitiesTenant.FromJson(tenantJson); // iAutoMapper.Map<ContentEntitiesTenant>(mirrorTenant); 
+                                var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.IsPublished) };
+
+                                var updateResponse = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), defaultTenant.Identifier, updatedProperties, restClientEntity);
+                                var currentContentModelTenants = this.GetCurrentContentModelTenants("$expand=Owners, AccessControlEntries");
+                                int i = 0;
+                            }
+                            catch (Exception e)
+                            {
+                                _logger.LogError($"problem marking workflow complete {e.Message}");
+                            }
                         }
+                        else
+                        {
+                            await ValidateCaches(scope, inMemoryStores, contentModelTenants, publishedTenant);
+                        }
+
+
+
+
+
+
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        await ValidateCaches(scope, inMemoryStores, contentModelTenants, publishedTenant);
+                        // we don't want errors to stop the entire loop here
+                        _logger.LogWarning($"problem publishing tenants for tenantIdentifier={publishedTenant.TenantIdentifier}: exception {ex.Message}");
                     }
 
-
-
-
-
-
                 }
-                catch (Exception ex)
-                {
-                    // we don't want errors to stop the entire loop here
-                    _logger.LogWarning($"problem publishing tenants for tenantIdentifier={publishedTenant.TenantIdentifier}: exception {ex.Message}");
-                }
+
+                ret = true;
 
             }
-
-            ret = true;
-
             return ret;
         }
 
@@ -469,7 +481,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 var tenantCache = scope.ServiceProvider.GetRequiredService<IHorselessCacheProvider<Guid, ContentModel.Tenant>>();
                 _logger.LogInformation($"loaded tenant cache service");
 
-                var currentTenants = await GetCurrentContentModelTenants(scope);
+                var currentTenants = await GetCurrentContentModelTenants();
                 var liveTenant = currentTenants.Where(w => w.Id.Equals(publishedTenant.Id)).FirstOrDefault();
                 await tenantCache.Set(publishedTenant.Id, liveTenant);
             }
@@ -694,7 +706,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 }
 
 
-                var updatedTenants = await this.GetCurrentContentModelTenants(scope);
+                var updatedTenants = await this.GetCurrentContentModelTenants();
 
                 _logger.LogInformation($"read {updatedTenants.Count()} content model tenant records");
 
@@ -990,31 +1002,38 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             return ret;
         }
 
-        private IMultiTenantStore<HorselessTenantInfo>? GetInMemoryTenantStores(IServiceScope scope)
+        private IMultiTenantStore<HorselessTenantInfo>? GetInMemoryTenantStores()
         {
-            // inject the finbuckle in-memory store
-            var stores = scope.ServiceProvider.GetRequiredService<IEnumerable<IMultiTenantStore<HorselessTenantInfo>>>().ToList();
-
-            var inMemoryStores = stores.Where(s => s.GetType() == typeof(InMemoryStore<HorselessTenantInfo>))
-                   .SingleOrDefault();
-            return inMemoryStores;
-
-        }
-
-        private async Task<List<HostingModel.Tenant>> UpdateLocalHostingTenantCache(IServiceScope scope)
-        {
-            List<HostingModel.Tenant> hostingModelTenants = await GetCurrentHostingModelTenants(scope);
-            foreach (var hostModelTenant in hostingModelTenants)
+            using (var scope = this._services.CreateScope())
             {
-                if (!this.CurrentHostingModelTenants.Where(w => w.Id.Equals(hostModelTenant.Id)).Any())
-                {
-                    // here because we need to cache this tenant in the singleton
-                    this.CurrentHostingModelTenants.Add(hostModelTenant);
-                }
+
+                // inject the finbuckle in-memory store
+                var stores = scope.ServiceProvider.GetRequiredService<IEnumerable<IMultiTenantStore<HorselessTenantInfo>>>().ToList();
+
+                var inMemoryStores = stores.Where(s => s.GetType() == typeof(InMemoryStore<HorselessTenantInfo>))
+                       .SingleOrDefault();
+                return inMemoryStores; 
             }
 
-            return hostingModelTenants;
         }
+
+        private async Task<List<HostingModel.Tenant>> UpdateLocalHostingTenantCache()
+        {
+            using (var scope = this._services.CreateScope())
+            {
+                List<HostingModel.Tenant> hostingModelTenants = await GetCurrentHostingModelTenants(scope);
+                foreach (var hostModelTenant in hostingModelTenants)
+                {
+                    if (!this.CurrentHostingModelTenants.Where(w => w.Id.Equals(hostModelTenant.Id)).Any())
+                    {
+                        // here because we need to cache this tenant in the singleton
+                        this.CurrentHostingModelTenants.Add(hostModelTenant);
+                    }
+                }
+
+                return hostingModelTenants;
+
+            }        }
 
         private async Task UpdateMultiTenantInMemoryStore(IServiceScope scope, IMultiTenantStore<HorselessTenantInfo>? inMemoryStores, HostingModel.Tenant originEntity)
         {
@@ -1052,60 +1071,75 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
         }
 
-        private async Task<List<ContentModel.Tenant>> GetCurrentContentModelTenants(IServiceScope scope, string expandList = "")
+        private async Task<List<ContentModel.Tenant>> GetCurrentContentModelTenants(string expandList = "")
         {
 
             var ret = new List<ContentModel.Tenant>();
+            string token = string.Empty;
 
             try
             {
-                var tenantStore = this.GetInMemoryTenantStores(scope);
-                var allCachedTenants = await tenantStore.GetAllAsync();
 
-                IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
-                var httpClient = clientFactory.CreateClient();
 
-                ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
-                var token = await tokenService.GetClientCredentialsGrantToken();
+                IEnumerable<HorselessTenantInfo> allCachedTenants = new List<HorselessTenantInfo>();
 
-                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-
-                var baseUri = this.GetOdataBaseUrl(scope);
-                baseUri = baseUri.TrimEnd('/');
-                var expandClause = @"";
-
-                if (expandList != "")
+                using (var scope = this._services.CreateScope())
                 {
-                    expandClause = expandClause + expandList;
+
+                    var tenantStore = this.GetInMemoryTenantStores();
+                    var cachedTenants = await tenantStore.GetAllAsync();
+                    ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
+
+                    allCachedTenants = cachedTenants.ToList();
+
+                    token = await tokenService.GetClientCredentialsGrantToken();
+
                 }
 
-                foreach (var cachedTenant in allCachedTenants)
+                using (var innerScope = this._services.CreateScope())
                 {
-                    var odataContentModelTenantQuery = $"{baseUri}/{cachedTenant.Identifier}/{ODataControllerStrings.ODATA_CONTENTMODEL_TENANT}{expandClause}";
+                    IHttpClientFactory clientFactory = innerScope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
+                    var httpClient = clientFactory.CreateClient();
 
-                    var odataContentModelQueryMessage = new HttpRequestMessage(
-                        HttpMethod.Get,
-                        odataContentModelTenantQuery)
+                    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                    var baseUri = this.GetOdataBaseUrl(innerScope);
+                    baseUri = baseUri.TrimEnd('/');
+                    var expandClause = @"";
+
+                    if (expandList != "")
                     {
-                        Headers =
+                        expandClause = expandClause + expandList;
+                    }
+
+                    foreach (var cachedTenant in allCachedTenants)
+                    {
+                        var odataContentModelTenantQuery = $"{baseUri}/{cachedTenant.Identifier}/{ODataControllerStrings.ODATA_CONTENTMODEL_TENANT}{expandClause}";
+
+                        var odataContentModelQueryMessage = new HttpRequestMessage(
+                            HttpMethod.Get,
+                            odataContentModelTenantQuery)
+                        {
+                            Headers =
                             {
                                 { HeaderNames.Accept, "application/json;odata.metadata=none" },
                                 { HeaderNames.UserAgent, "HorselessNewspaper" }
                             }
-                    };
+                        };
 
-                    odataContentModelQueryMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                        odataContentModelQueryMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-                    var odataResponse = await httpClient.SendAsync(odataContentModelQueryMessage);
-                    var probeResponseContent = await odataResponse.Content.ReadAsStringAsync();
-                    if (probeResponseContent == null || probeResponseContent.Equals(string.Empty))
-                    {
-                        return ret;
-                    }
+                        var odataResponse = await httpClient.SendAsync(odataContentModelQueryMessage);
+                        var probeResponseContent = await odataResponse.Content.ReadAsStringAsync();
+                        if (probeResponseContent == null || probeResponseContent.Equals(string.Empty))
+                        {
+                            return ret;
+                        }
 
-                    var contentModelTenantList = System.Text.Json.JsonSerializer.Deserialize<ODataResponse<ContentModel.Tenant>>(probeResponseContent); // JsonConvert.DeserializeObject<ODataResponse<ContentModel.Tenant>>(probeResponseContent);
-                    ret.AddRange(contentModelTenantList.Value);
-
+                        var contentModelTenantList = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<ContentModel.Tenant>>(probeResponseContent); // JsonConvert.DeserializeObject<ODataResponse<ContentModel.Tenant>>(probeResponseContent);
+                        ret.AddRange(contentModelTenantList);
+                        this._logger.LogInformation($"{this.GetType().FullName} has cmpleted retrieving content model tenants");
+                    } 
                 }
 
 
@@ -1128,7 +1162,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             catch (Exception ex)
             {
                 // ret = string.Empty;
-                _logger.LogWarning($"problem getting hosting model tenant by object id");
+                _logger.LogWarning($"problem getting content model tenant by object id");
             }
 
             return ret;

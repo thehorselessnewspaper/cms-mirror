@@ -29,8 +29,11 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
     {
         /// <summary>
         /// TODO - clear this on a timer
+        /// warning - this used to be static
+        /// instead these should be dematerializd
+        /// so the scopes that retrieved them can be disposed
         /// </summary>
-        private static ConcurrentDictionary<string, HorselessSession> LocallyCachedSessions { get; set; } = new ConcurrentDictionary<string, HorselessSession>();
+        private ConcurrentDictionary<string, HorselessSession> LocallyCachedSessions { get; set; } = new ConcurrentDictionary<string, HorselessSession>();
 
         IHttpContextAccessor _httpContextAccessor;
         private IQueryableContentModelOperator<Tenant> _tenantOperator;
@@ -513,6 +516,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
             if(hasCachedSession)
             {
+                _logger.LogWarning($"{this.GetType().FullName} has cached HorselessSession entity");
                 IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(sessionPrincipalId);
 
                 return ret;
@@ -554,7 +558,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                     // cache the inserted session to hedge against
                     // new requests using the resolver before dbcontext is flushed
                     LocallyCachedSessions.TryAdd(newSession.SessionId, newSession);
-
+                    _logger.LogWarning($"{this.GetType().FullName} has added a HorselessSession entity to local cache");
                     IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(sessionPrincipalId);
 
                     return ret;
@@ -588,6 +592,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                 var hasCachedPayload = LocallyCachedSessions.TryGetValue(httpContext.Session.Id, out cachedPayload);
                 if(hasCachedPayload)
                 {
+                    _logger.LogWarning($"{this.GetType().FullName} has retrieved HorselessSession entity from local cache");
                     payload = cachedPayload;
                 }
 
