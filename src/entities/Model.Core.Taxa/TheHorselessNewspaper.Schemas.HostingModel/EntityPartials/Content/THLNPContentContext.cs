@@ -18,6 +18,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     /// </summary>
     internal partial class THLNPContentContext : DbContext
     {
+        public Guid ContextInstanceId { get; set; } = Guid.NewGuid();
+
         private ILogger<THLNPContentContext> _logger;
         protected THLNPContentContext(DbContextOptions options)
             : base(options)
@@ -40,7 +42,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             // todo -- support not hardcoding this here
             builder.Entity<HorselessTenantInfo>().IsMultiTenant();
 
-
+            Console.WriteLine($"{this.GetType().FullName} OnModelCreatingPartial() is executing with instance id {this.ContextId}");
         }
 
     }

@@ -10,6 +10,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
     internal partial class THLNPHostingContext : DbContext
     {
+        public Guid ContextInstanceId { get; set; } = Guid.NewGuid();
+
         partial void OnModelCreatingPartial(ModelBuilder builder)
         {
 
@@ -23,6 +25,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
 
 
+            Console.WriteLine($"{this.GetType().FullName} OnModelCreatingPartial() is executing with instance id {this.ContextId}");
 
         }
 
