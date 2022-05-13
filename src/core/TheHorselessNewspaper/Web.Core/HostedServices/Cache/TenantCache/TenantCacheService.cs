@@ -943,7 +943,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             catch (Exception ex)
             {
                 ret = string.Empty;
-                _logger.LogWarning($"problem getting hosting model tenant by object id");
+                _logger.LogWarning($"problem getting content model tenant by object id");
             }
 
 
@@ -963,7 +963,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 var baseUri = originEntity.BaseUrl.ToString();
                 baseUri = baseUri.TrimEnd('/');
 
-                var tenantProbeRoute = $"{baseUri}/{identifier}/{RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT}/GetByObjectId/{originEntity.ObjectId}";
+                var tenantProbeRoute = $"{baseUri}/{identifier}/{RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT}/HostingEntitiesGetByObjectId/{originEntity.ObjectId}";
 
                 var tenantProbeRequestmessage = new HttpRequestMessage(
                     HttpMethod.Get,
