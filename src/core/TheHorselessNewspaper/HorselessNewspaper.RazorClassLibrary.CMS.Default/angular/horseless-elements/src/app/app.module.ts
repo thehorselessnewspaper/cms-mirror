@@ -24,13 +24,21 @@ import { UserBladeComponent } from './modules/HorselessClientAuth/components/Use
 import { LandingPageComponent } from './modules/HorselessClientAuth/components/LandingPage/LandingPage.component';
 import { HorselessClientAuthModule } from './modules/HorselessClientAuth/HorselessClientAuth.module';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { BASE_PATH } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
+import { BASE_PATH, TenantRESTService } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 import { environment } from '../environments/environment';
 // configuring providers with an authentication service that manages your access tokens
-import { HorselessApiModule, HorselessConfiguration } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
+import { HorselessApiModule} from '@wizardcontrollerprerelease/horseless-contentapi-lib';
+import { HorselessConfiguration, HorselessConfigurationParameters } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { PrimeIcons } from 'primeng/api';
+
+export function apiConfigFactory (): HorselessConfiguration {
+  const params: HorselessConfigurationParameters = {
+    // set configuration parameters here.
+  }
+  return new HorselessConfiguration(params);
+}
 @NgModule({
   declarations: [
     AppComponent
@@ -58,7 +66,7 @@ import { PrimeIcons } from 'primeng/api';
     TenantChooserModule,
     HorselessClientAuthModule,
     HorselessTagsLibraryModule,
-    HorselessApiModule,
+    HorselessApiModule.forRoot(apiConfigFactory),
     BrowserModule,
     BrowserAnimationsModule,
     AuthConfigModule,

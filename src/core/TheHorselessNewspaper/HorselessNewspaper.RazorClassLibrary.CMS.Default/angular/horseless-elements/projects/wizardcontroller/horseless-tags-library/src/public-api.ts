@@ -11,5 +11,5 @@ export * from './lib/modules/tenant-editor/tenant-editor.module';
 export * from './lib/modules/tenant-chooser/tenant-chooser.component';
 export * from './lib/modules/tenant-editor/tenant-editor.component';
 
-// export { TenantChooserComponent } from './lib/modules/tenant-chooser/tenant-chooser.component';
-// export { TenantEditorComponent } from './lib/modules/tenant-editor/tenant-editor.component';
+export { TenantChooserComponent } from './lib/modules/tenant-chooser/tenant-chooser.component';
+export { TenantEditorComponent } from './lib/modules/tenant-editor/tenant-editor.component';
