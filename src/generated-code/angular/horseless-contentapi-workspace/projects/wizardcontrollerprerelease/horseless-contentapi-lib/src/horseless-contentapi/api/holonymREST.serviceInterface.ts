@@ -44,6 +44,16 @@ export interface HolonymRESTServiceInterface {
     /**
      * 
      * 
+     * @param tenant 
+     * @param pageSize 
+     * @param pageNumber 
+     * @param pageCount 
+     */
+    contentEntitiesHolonymRESTGetByPageNumber(tenant: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesHolonym>>;
+
+    /**
+     * 
+     * 
      * @param contentCollectionId 
      * @param tenant 
      * @param contentEntitiesHolonym 

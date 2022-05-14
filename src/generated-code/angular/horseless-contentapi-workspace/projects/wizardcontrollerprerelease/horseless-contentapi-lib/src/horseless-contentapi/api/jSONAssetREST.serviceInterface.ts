@@ -44,6 +44,16 @@ export interface JSONAssetRESTServiceInterface {
     /**
      * 
      * 
+     * @param tenant 
+     * @param pageSize 
+     * @param pageNumber 
+     * @param pageCount 
+     */
+    contentEntitiesJSONAssetRESTGetByPageNumber(tenant: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesJSONAsset>>;
+
+    /**
+     * 
+     * 
      * @param contentCollectionId 
      * @param tenant 
      * @param contentEntitiesJSONAsset 

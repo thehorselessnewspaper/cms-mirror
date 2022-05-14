@@ -37,6 +37,16 @@ export interface TenantRESTServiceInterface {
     /**
      * 
      * 
+     * @param tenant 
+     * @param pageSize 
+     * @param pageNumber 
+     * @param pageCount 
+     */
+    contentEntitiesTenantRESTGetByPageNumber(tenant: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesTenant>>;
+
+    /**
+     * 
+     * 
      * @param contentCollectionId 
      * @param tenant 
      * @param contentEntitiesTenant 
@@ -66,6 +76,15 @@ export interface TenantRESTServiceInterface {
      * @param objectId 
      */
     hostingEntitiesTenantRESTGetByObjectId(objectId: string, extraHttpRequestParams?: any): Observable<HostingEntitiesTenant>;
+
+    /**
+     * 
+     * 
+     * @param pageSize 
+     * @param pageNumber 
+     * @param pageCount 
+     */
+    hostingEntitiesTenantRESTGetByPageNumber(pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<HostingEntitiesTenant>>;
 
     /**
      * 

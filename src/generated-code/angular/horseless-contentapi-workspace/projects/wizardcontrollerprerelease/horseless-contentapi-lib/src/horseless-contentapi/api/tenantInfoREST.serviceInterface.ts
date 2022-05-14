@@ -14,6 +14,7 @@ import { HttpHeaders }                                       from '@angular/comm
 import { Observable }                                        from 'rxjs';
 
 import { HostingEntitiesTenantInfo } from '../model/models';
+import { MultiTenantTenantInfo } from '../model/models';
 import { MvcProblemDetails } from '../model/models';
 
 
@@ -24,6 +25,15 @@ import { HorselessConfiguration }                                     from '../c
 export interface TenantInfoRESTServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: HorselessConfiguration;
+
+    /**
+     * 
+     * 
+     * @param pageSize 
+     * @param pageNumber 
+     * @param pageCount 
+     */
+    contentEntitiesTenantInfoRESTGetByPageNumber(pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<MultiTenantTenantInfo>>;
 
     /**
      * 

@@ -2,6 +2,7 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HorselessConfiguration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
+import { ClientConfigurationService } from './api/clientConfiguration.service';
 import { ContentCollectionRESTService } from './api/contentCollectionREST.service';
 import { FilesystemAssetRESTService } from './api/filesystemAssetREST.service';
 import { HolonymRESTService } from './api/holonymREST.service';
