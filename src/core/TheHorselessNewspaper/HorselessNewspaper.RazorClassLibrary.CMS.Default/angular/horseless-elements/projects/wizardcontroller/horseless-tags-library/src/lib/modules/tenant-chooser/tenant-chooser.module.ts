@@ -4,7 +4,7 @@ import { TenantChooserComponent } from './tenant-chooser.component';
 import { MatListModule } from '@angular/material/list';
 import { MatSliderModule } from '@angular/material/slider';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import { TenantRESTService } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
+import { ClientConfigurationService, TenantRESTService } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 
 @NgModule({
   declarations: [TenantChooserComponent],
@@ -15,6 +15,7 @@ import { TenantRESTService } from '@wizardcontrollerprerelease/horseless-content
   ],
   providers: [
     TenantRESTService,
+    ClientConfigurationService,
     OidcSecurityService],
   exports: [
     TenantChooserComponent]

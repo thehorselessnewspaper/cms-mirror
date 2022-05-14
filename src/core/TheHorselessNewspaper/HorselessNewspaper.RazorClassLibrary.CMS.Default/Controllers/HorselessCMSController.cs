@@ -62,12 +62,16 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
 
         private IKeycloakAuthOptions AuthOptions { get; set; }
 
-        public HorselessCMSController(IKeycloakAuthOptions keycloakAuthOptions, ITenantInfo tenant, IHorselessTenantContext tenantContext, ILogger<HorselessCMSController> logger)
+        public HorselessCMSController(IAuthenticationService authService, IKeycloakAuthOptions keycloakAuthOptions, ITenantInfo tenant, IHorselessTenantContext tenantContext, ILogger<HorselessCMSController> logger)
         {
+
+            var svcMetaData = authService.GetType().FullName;
+
             this.AuthOptions = keycloakAuthOptions;
             this.CurrentTenant = tenant;
             this.tenantContext = tenantContext;
             this.logger = logger;
+
         }
 
         [HttpGet("~/SignIn")]
@@ -103,9 +107,20 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
             {
                 logger.LogInformation($"handling signin request return url = {returnUrl}, provider {provider}");
                 var challengeResult = Challenge(new AuthenticationProperties { RedirectUri = returnUrl }, provider);
+  
                 return challengeResult;
             }
-            catch(Exception ex)
+            catch(InvalidOperationException iEx)
+            {
+                logger.LogWarning($"problem signinging in {iEx.Message}");
+                return Redirect(returnUrl);
+            }
+            catch (NotImplementedException iEx)
+            {
+                logger.LogWarning($"problem signinging in {iEx.Message}");
+                return Redirect(returnUrl);
+            }
+            catch (Exception ex)
             {
                 logger.LogWarning($"problem signinging in {ex.Message}");
                 return Redirect(returnUrl);
