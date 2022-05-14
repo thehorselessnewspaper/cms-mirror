@@ -21,6 +21,8 @@ COPY ["HorselessNewspaper.Core.Workflow.AzureFunctions/HorselessNewspaper.Core.W
 
 COPY ["HorselessNewspaper.Client.Nuget/HorselessNewspaper.Client.Nuget.csproj", "HorselessNewspaper.Client.Nuget/"]
 
+COPY ["HorselessNewspaper.Web.Core.Startup/HorselessNewspaper.Web.Core.Startup.csproj", "HorselessNewspaper.Web.Core.Startup/"]
+
 COPY ["HorselessNewspaper.Core.Interfaces/HorselessNewspaper.Core.Interfaces.csproj", "HorselessNewspaper.Core.Interfaces/"]
 
 COPY ["HorselessNewspaper.Core.Repositories/HorselessNewspaper.Core.Repositories.csproj", "HorselessNewspaper.Core.Repositories/"]

@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="HorselessAppStartup.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="HorselessAppStartup.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220514.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HorselessNewspaper.RazorClassLibrary.CMS.Default\HorselessNewspaper.RazorClassLibrary.CMS.Default.csproj" />
+    <ProjectReference Include="..\HorselessNewspaper.RazorClassLibrary.Keycloak.Default\HorselessNewspaper.RazorClassLibrary.Keycloak.Default.csproj" />
+    <ProjectReference Include="..\HorselessNewspaper.Web.Core.Auth.Keycloak\HorselessNewspaper.Web.Core.Auth.Keycloak.csproj" />
+    <ProjectReference Include="..\Web.Core\HorselessNewspaper.Web.Core.csproj" />
+  </ItemGroup>
+
+</Project>

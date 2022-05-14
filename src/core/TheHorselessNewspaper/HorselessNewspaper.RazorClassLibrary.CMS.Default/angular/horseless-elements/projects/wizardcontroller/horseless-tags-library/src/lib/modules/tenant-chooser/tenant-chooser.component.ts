@@ -7,13 +7,17 @@ import {
 } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { ConfigurationEndpointService } from '../../services/configuration-endpoint.service';
-
+import { Router,NavigationStart} from '@angular/router';
+import { Observable, tap } from 'rxjs';
 @Component({
   selector: 'lib-tenant-chooser',
   templateUrl: './tenant-chooser.component.html',
   styleUrls: ['./tenant-chooser.component.css'],
 })
 export class TenantChooserComponent implements OnInit {
+
+  clientConfiguration$! : Observable<SecurityRestClientConfiguration>;
+
   tenants!: ContentEntitiesTenant[];
   isAuthenticated: boolean = false;
 
@@ -24,7 +28,8 @@ export class TenantChooserComponent implements OnInit {
   private tenantService: TenantRESTService;
   private oidcService: OidcSecurityService;
 
-  constructor(tenantSvc: TenantRESTService,
+  constructor(private router: Router,
+                tenantSvc: TenantRESTService,
                 oidcAuthSvc: OidcSecurityService,
                 private clientConfigService: ConfigurationEndpointService) {
     this.tenantService = tenantSvc;
@@ -32,8 +37,6 @@ export class TenantChooserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('ngOnInit starting');
-    this.subscribeToConfiguration();
 
     this.oidcService
       .checkAuth(window.location.href)
@@ -41,10 +44,21 @@ export class TenantChooserComponent implements OnInit {
   }
 
   private subscribeToConfiguration(){
-    this.clientConfigService.probeClientConfiguration().subscribe(clienConfig => {
+
+    this.clientConfiguration$ = this.clientConfigService.probeClientConfiguration()
+    .pipe(
+      tap(data => {
+        console.log(`got client config for current url: ${window.location.href};`);
+        console.log(`got access token for current url: ${data.accessToken};`);
+      })
+    );
+
+    /*
+    .subscribe(clienConfig => {
       console.log("rest endpoint is %s",clienConfig.restEndpoint);
       console.log("odata endpoint is %s", clienConfig.oDataEndpoint);
     });
+    */
   }
 
   public loadTeants(): void {

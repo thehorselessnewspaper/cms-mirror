@@ -14,7 +14,7 @@ import { ConfigurationEndpointService } from './services/configuration-endpoint.
   imports: [
   ],
   providers: [
-    ConfigurationEndpointService, ConfigurationEndpointService
+    ConfigurationEndpointService
   ],
   exports: [
     HorselessTagsLibraryComponent
