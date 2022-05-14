@@ -1,3 +1,6 @@
+export * from './clientConfiguration.service';
+import { ClientConfigurationService } from './clientConfiguration.service';
+export * from './clientConfiguration.serviceInterface';
 export * from './contentCollectionREST.service';
 import { ContentCollectionRESTService } from './contentCollectionREST.service';
 export * from './contentCollectionREST.serviceInterface';
@@ -40,4 +43,4 @@ export * from './tenantREST.serviceInterface';
 export * from './tenantRegistration.service';
 import { TenantRegistrationService } from './tenantRegistration.service';
 export * from './tenantRegistration.serviceInterface';
-export const APIS = [ContentCollectionRESTService, FilesystemAssetRESTService, HolonymRESTService, HorselessContentRESTService, HorselessSessionRESTService, JSONAssetRESTService, KeycloakAuthenticationService, MeronymRESTService, MimeTypeRESTService, NavigationMenuItemRESTService, NavigationMenuRESTService, TenantInfoRESTService, TenantRESTService, TenantRegistrationService];
+export const APIS = [ClientConfigurationService, ContentCollectionRESTService, FilesystemAssetRESTService, HolonymRESTService, HorselessContentRESTService, HorselessSessionRESTService, JSONAssetRESTService, KeycloakAuthenticationService, MeronymRESTService, MimeTypeRESTService, NavigationMenuItemRESTService, NavigationMenuRESTService, TenantInfoRESTService, TenantRESTService, TenantRegistrationService];

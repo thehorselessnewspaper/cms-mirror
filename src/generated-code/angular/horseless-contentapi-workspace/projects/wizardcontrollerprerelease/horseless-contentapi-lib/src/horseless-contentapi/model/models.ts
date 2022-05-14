@@ -35,4 +35,6 @@ export * from './hostingEntitiesTenantIdentifierStrategyContainer';
 export * from './hostingEntitiesTenantIdentifierStrategyName';
 export * from './hostingEntitiesTenantInfo';
 export * from './hostingEntitiesWebAPITenantInfo';
+export * from './multiTenantTenantInfo';
 export * from './mvcProblemDetails';
+export * from './securityRestClientConfiguration';

@@ -44,6 +44,16 @@ export interface MeronymRESTServiceInterface {
     /**
      * 
      * 
+     * @param tenant 
+     * @param pageSize 
+     * @param pageNumber 
+     * @param pageCount 
+     */
+    contentEntitiesMeronymRESTGetByPageNumber(tenant: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesMeronym>>;
+
+    /**
+     * 
+     * 
      * @param contentCollectionId 
      * @param tenant 
      * @param contentEntitiesMeronym 

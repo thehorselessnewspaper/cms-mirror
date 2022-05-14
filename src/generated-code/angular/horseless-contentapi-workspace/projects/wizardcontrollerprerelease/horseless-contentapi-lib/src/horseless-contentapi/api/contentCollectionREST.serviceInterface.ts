@@ -45,11 +45,11 @@ export interface ContentCollectionRESTServiceInterface {
      * 
      * 
      * @param tenant 
-     * @param offset 
-     * @param pagesize 
+     * @param pageSize 
      * @param pageNumber 
+     * @param pageCount 
      */
-    contentEntitiesContentCollectionRESTGetByPageNumber(tenant: string, offset?: number, pagesize?: number, pageNumber?: number, extraHttpRequestParams?: any): Observable<ContentEntitiesContentCollection>;
+    contentEntitiesContentCollectionRESTGetByPageNumber(tenant: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesContentCollection>>;
 
     /**
      * 

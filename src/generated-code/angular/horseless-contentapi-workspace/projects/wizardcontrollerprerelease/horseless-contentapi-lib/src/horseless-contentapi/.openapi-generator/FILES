@@ -2,6 +2,8 @@
 README.md
 api.module.ts
 api/api.ts
+api/clientConfiguration.service.ts
+api/clientConfiguration.serviceInterface.ts
 api/contentCollectionREST.service.ts
 api/contentCollectionREST.serviceInterface.ts
 api/filesystemAssetREST.service.ts
@@ -72,7 +74,9 @@ model/hostingEntitiesTenantIdentifierStrategyName.ts
 model/hostingEntitiesTenantInfo.ts
 model/hostingEntitiesWebAPITenantInfo.ts
 model/models.ts
+model/multiTenantTenantInfo.ts
 model/mvcProblemDetails.ts
+model/securityRestClientConfiguration.ts
 ng-package.json
 package.json
 tsconfig.json

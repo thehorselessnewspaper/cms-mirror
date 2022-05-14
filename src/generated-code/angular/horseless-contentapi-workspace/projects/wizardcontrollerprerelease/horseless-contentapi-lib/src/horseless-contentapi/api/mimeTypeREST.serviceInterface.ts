@@ -44,6 +44,16 @@ export interface MimeTypeRESTServiceInterface {
     /**
      * 
      * 
+     * @param tenant 
+     * @param pageSize 
+     * @param pageNumber 
+     * @param pageCount 
+     */
+    contentEntitiesMimeTypeRESTGetByPageNumber(tenant: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesMIMEType>>;
+
+    /**
+     * 
+     * 
      * @param contentCollectionId 
      * @param tenant 
      * @param contentEntitiesMIMEType 
