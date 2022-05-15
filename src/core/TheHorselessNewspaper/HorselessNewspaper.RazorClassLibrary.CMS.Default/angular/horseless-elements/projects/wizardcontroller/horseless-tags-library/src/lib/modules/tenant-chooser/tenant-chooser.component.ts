@@ -38,6 +38,8 @@ export class TenantChooserComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.subscribeToConfiguration();
+
     this.oidcService
       .checkAuth(window.location.href)
       .subscribe((x) => (this.isAuthenticated = x.isAuthenticated));

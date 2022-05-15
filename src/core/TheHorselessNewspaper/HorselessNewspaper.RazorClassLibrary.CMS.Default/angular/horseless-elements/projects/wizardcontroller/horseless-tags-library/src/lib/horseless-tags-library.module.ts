@@ -14,7 +14,7 @@ import { ConfigurationEndpointService } from './services/configuration-endpoint.
   imports: [
   ],
   providers: [
-    ConfigurationEndpointService
+
   ],
   exports: [
     HorselessTagsLibraryComponent
@@ -26,15 +26,4 @@ export class HorselessTagsLibraryModule {
 
   }
 
-  ngDoBootstrap() {
-    // Convert `PopupComponent` to a custom element.
-    const tenantChooserElement = createCustomElement(TenantChooserComponent, { injector: this.injector });
-    // Register the custom element with the browser.
-    customElements.define('horseless-tenant-chooser', tenantChooserElement);
-
-    // Convert `PopupComponent` to a custom element.
-    const tenantEditorElement = createCustomElement(TenantEditorComponent, { injector: this.injector });
-    // Register the custom element with the browser.
-    customElements.define('horseless-tenant-editor', tenantEditorElement);
-  }
 }

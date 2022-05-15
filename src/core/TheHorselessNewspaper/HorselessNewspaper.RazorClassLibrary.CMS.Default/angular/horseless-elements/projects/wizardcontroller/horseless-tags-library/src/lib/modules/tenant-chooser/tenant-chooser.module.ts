@@ -15,8 +15,7 @@ import { ClientConfigurationService, TenantRESTService } from '@wizardcontroller
   ],
   providers: [
     TenantRESTService,
-    ClientConfigurationService,
-    OidcSecurityService],
+    ClientConfigurationService],
   exports: [
     TenantChooserComponent]
 })

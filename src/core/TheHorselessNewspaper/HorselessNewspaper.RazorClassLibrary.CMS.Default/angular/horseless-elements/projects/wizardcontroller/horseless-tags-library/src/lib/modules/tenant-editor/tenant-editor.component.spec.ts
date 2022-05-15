@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {HorselessApiModule} from '@wizardcontrollerprerelease/horseless-contentapi-lib'
@@ -10,7 +11,7 @@ describe('TenantEditorComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ TenantEditorComponent ],
-      imports: [HttpClientTestingModule, HorselessApiModule]
+      imports: [CommonModule]
     })
     .compileComponents();
   });

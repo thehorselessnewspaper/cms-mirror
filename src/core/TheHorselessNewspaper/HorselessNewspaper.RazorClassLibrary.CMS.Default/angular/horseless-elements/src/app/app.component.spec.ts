@@ -5,6 +5,12 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { AuthModule, OidcSecurityService, LogLevel } from 'angular-auth-oidc-client';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockHostingmodelInterceptor } from './interceptor/mock-hostingmodel.interceptor';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { ButtonModule } from 'primeng/button';
+import { ToolbarModule } from 'primeng/toolbar';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -15,6 +21,12 @@ describe('AppComponent', () => {
       ],
       imports : [
         RouterTestingModule,
+        BrowserAnimationsModule,
+        ToolbarModule,
+        ButtonModule,
+        MatExpansionModule,
+        MatToolbarModule,
+        NgbModule,
         AuthModule.forRoot({
           config: {
             authority: 'https://awsdev.ataxlab.com:8443/realms/horseless-infrastructure',

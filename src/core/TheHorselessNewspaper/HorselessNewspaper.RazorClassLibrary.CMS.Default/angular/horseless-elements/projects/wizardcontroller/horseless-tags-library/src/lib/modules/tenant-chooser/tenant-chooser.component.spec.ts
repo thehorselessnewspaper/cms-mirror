@@ -22,7 +22,8 @@ describe('TenantChooserComponent', () => {
       imports: [
         MatListModule,
         MatSliderModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        CommonModule
       ],
         providers: [
           TenantRESTService,
@@ -36,9 +37,6 @@ describe('TenantChooserComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TenantChooserComponent);
     component = fixture.componentInstance;
-
-     tenantSvc = fixture.debugElement.injector.get(TenantRESTService);
-     oidcService = fixture.debugElement.injector.get(OidcSecurityService);
 
     fixture.detectChanges();
   });

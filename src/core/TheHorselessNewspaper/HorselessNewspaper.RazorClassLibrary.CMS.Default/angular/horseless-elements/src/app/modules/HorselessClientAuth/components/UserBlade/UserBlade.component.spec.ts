@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { UserBladeComponent } from './UserBlade.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('UserBladeComponent', () => {
   let component: UserBladeComponent;
@@ -11,7 +12,9 @@ describe('UserBladeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserBladeComponent ]
+      declarations: [ UserBladeComponent ],
+      imports: [
+        RouterTestingModule]
     })
     .compileComponents();
   }));
