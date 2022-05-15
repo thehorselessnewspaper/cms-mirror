@@ -48,6 +48,7 @@
 
 	<ItemGroup>
 		<Folder Include="assetroot\RazorClassLibrary\" />
+		<Folder Include="config\gravitee\" />
 		<Folder Include="tenant-filesystem\nuget\" />
 		<Folder Include="Views\Shared\DisplayTemplates\" />
 		<Folder Include="Views\Shared\EditorTemplates\" />
