@@ -12,7 +12,8 @@ volumes:
       driver: local
   prototype-content-db:
       driver: local
-
+  critical-rabbitmq-volume:
+      driver: local
 services:
   keycloakpostgres:
     image: postgres
@@ -72,7 +73,6 @@ services:
         db.username: admin
         db.password: Pa55w0rd
         http-host: 0.0.0.0
-#        db.url: jdbc:postgresql://keycloakpostgres.local/keycloak
       ports:
         - 8080:8080
         - 8443:8443
@@ -80,6 +80,20 @@ services:
         - keycloakpostgres
       networks:
         - horselesswan
+
+  critical-rabbitmq:
+    hostname: "critical-rabbitmq"
+    image: rabbitmq:3-management
+    container_name: critical-rabbitmq
+    ports:
+      - "4369:4369"
+      - "5671:5671"
+      - "5672:5672"
+      - "25672:25672"
+      - "15671:15671"
+      - "15672:15672"
+    volumes:
+      - critical-rabbitmq-volume:/var/lib/rabbitmq
 
   content-db:
     image: "mcr.microsoft.com/mssql/server:2019-latest"
