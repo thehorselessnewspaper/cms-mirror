@@ -1,9 +1,14 @@
 <div>
   <div>horseless client harness: app component</div>
   <p-toolbar >
+    <div style="display: none;" class="p-toolbar-group-right">
+      <p-button routerLink="./tenants"  routerLinkActive="active" label="Tenant Blade" icon="pi"></p-button>
+      <p-button  routerLink="./users" routerLinkActive="active" label="User Blade" icon="pi" styleClass="p-button-success"></p-button>
+    </div>
+
     <div class="p-toolbar-group-right">
-      <p-button routerLink="/tenants" routerLinkActive="active" label="Tenant Blade" icon="pi"></p-button>
-      <p-button routerLink="/users" routerLinkActive="active" label="User Blade" icon="pi" styleClass="p-button-success"></p-button>
+      <p-button  (click)="onSwitch('tenants')"   routerLinkActive="active" label="Tenant Bladed" icon="pi"></p-button>
+      <p-button    (click)="onSwitch('users')" routerLinkActive="active" label="User Bladed" icon="pi" styleClass="p-button-success"></p-button>
     </div>
   </p-toolbar>
 
