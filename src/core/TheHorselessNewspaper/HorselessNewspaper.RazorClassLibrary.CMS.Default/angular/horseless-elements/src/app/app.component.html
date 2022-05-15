@@ -1,27 +1,34 @@
 <div>
   <div>horseless client harness: app component</div>
-  <p-toolbar >
-    <div style="display: none;" class="p-toolbar-group-right">
-      <p-button routerLink="./tenants"  routerLinkActive="active" label="Tenant Blade" icon="pi"></p-button>
-      <p-button  routerLink="./users" routerLinkActive="active" label="User Blade" icon="pi" styleClass="p-button-success"></p-button>
-    </div>
-
+  <p-toolbar>
     <div class="p-toolbar-group-right">
-      <p-button  (click)="onSwitch('tenants')"   routerLinkActive="active" label="Tenant Bladed" icon="pi"></p-button>
-      <p-button    (click)="onSwitch('users')" routerLinkActive="active" label="User Bladed" icon="pi" styleClass="p-button-success"></p-button>
+      <ul ngbNav #nav="ngbNav" class="nav-pills">
+        <li ngbNavItem>
+          <a ngbNavLink>users</a>
+
+          <ng-template ngbNavContent>
+            <app-userblade></app-userblade>
+          </ng-template>
+        </li>
+        <li ngbNavItem>
+          <a ngbNavLink>tenants</a>
+          <ng-template ngbNavContent>
+            <app-tenantblade></app-tenantblade>
+          </ng-template>
+        </li>
+      </ul>
     </div>
   </p-toolbar>
 
   <mat-expansion-panel hideToggle>
     <mat-expansion-panel-header>
-      <mat-panel-title>
-        router outlet
-      </mat-panel-title>
+      <mat-panel-title> router outlet </mat-panel-title>
       <mat-panel-description>
         this is where router outlet content is displayed
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <router-outlet></router-outlet>
+
+    <div [ngbNavOutlet]="nav"></div>
   </mat-expansion-panel>
   <div>
     <app-login></app-login>

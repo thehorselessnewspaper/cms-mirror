@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 @Component({
-  selector: 'lib-UserBlade',
+  selector: 'app-userblade',
   templateUrl: './UserBlade.component.html',
   styleUrls: ['./UserBlade.component.css'],
 })

@@ -48,6 +48,8 @@ import {
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { PrimeIcons } from 'primeng/api';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 export function apiConfigFactory(): HorselessConfiguration {
   const params: HorselessConfigurationParameters = {
@@ -84,10 +86,9 @@ export function apiConfigFactory(): HorselessConfiguration {
     BrowserModule,
     BrowserAnimationsModule,
     AuthConfigModule,
+    NgbModule,
     RouterModule.forRoot([
       { path: 'default', component: LandingPageComponent },
-      { path: 'tenants', component: TenantBladeComponent },
-      { path: 'users', component: UserBladeComponent },
       { path: 'forbidden', component: UnauthorizedComponent },
       { path: 'unauthorized', component: UnauthorizedComponent },
       { path: '', redirectTo: 'default', pathMatch: 'full' },
