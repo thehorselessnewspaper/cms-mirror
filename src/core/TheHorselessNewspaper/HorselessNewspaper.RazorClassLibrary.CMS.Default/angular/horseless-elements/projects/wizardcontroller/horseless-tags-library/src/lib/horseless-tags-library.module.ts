@@ -14,12 +14,13 @@ import { ConfigurationEndpointService } from './services/configuration-endpoint.
   imports: [
   ],
   providers: [
-
+    ConfigurationEndpointService
   ],
   exports: [
     HorselessTagsLibraryComponent
   ]
 })
+
 export class HorselessTagsLibraryModule {
 
   constructor(private injector: Injector) {

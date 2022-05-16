@@ -26,8 +26,6 @@ describe('TenantChooserComponent', () => {
         CommonModule
       ],
         providers: [
-          TenantRESTService,
-          OidcSecurityService
         ],
         declarations: [ TenantChooserComponent ]
     })

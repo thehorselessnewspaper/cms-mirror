@@ -9,6 +9,7 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { ConfigurationEndpointService } from '../../services/configuration-endpoint.service';
 import { Router,NavigationStart} from '@angular/router';
 import { Observable, tap } from 'rxjs';
+import { TenantChooserService } from './services/TenantChooser.service';
 @Component({
   selector: 'lib-tenant-chooser',
   templateUrl: './tenant-chooser.component.html',
@@ -31,6 +32,7 @@ export class TenantChooserComponent implements OnInit {
   constructor(private router: Router,
                 tenantSvc: TenantRESTService,
                 oidcAuthSvc: OidcSecurityService,
+                private tenantChooserSevce: TenantChooserService,
                 private clientConfigService: ConfigurationEndpointService) {
     this.tenantService = tenantSvc;
     this.oidcService = oidcAuthSvc;
@@ -55,12 +57,6 @@ export class TenantChooserComponent implements OnInit {
       })
     );
 
-    /*
-    .subscribe(clienConfig => {
-      console.log("rest endpoint is %s",clienConfig.restEndpoint);
-      console.log("odata endpoint is %s", clienConfig.oDataEndpoint);
-    });
-    */
   }
 
   public loadTeants(): void {

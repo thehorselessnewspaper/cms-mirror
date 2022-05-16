@@ -50,7 +50,6 @@ import { ButtonModule } from 'primeng/button';
 import { PrimeIcons } from 'primeng/api';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
 export function apiConfigFactory(): HorselessConfiguration {
   const params: HorselessConfigurationParameters = {
     // set configuration parameters here.
@@ -97,7 +96,6 @@ export function apiConfigFactory(): HorselessConfiguration {
   exports: [],
   providers: [
     OidcSecurityService,
-
     { provide: BASE_PATH, useValue: environment.API_BASE_PATH },
     {
       provide: HorselessConfiguration,

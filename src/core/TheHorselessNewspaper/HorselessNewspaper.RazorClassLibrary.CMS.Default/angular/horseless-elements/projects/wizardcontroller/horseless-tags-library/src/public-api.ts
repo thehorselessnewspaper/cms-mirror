@@ -2,6 +2,8 @@
  * Public API Surface of horseless-tags-library
  */
 
+import { ConfigurationEndpointService } from './lib/services/configuration-endpoint.service';
+
 export * from './lib/horseless-tags-library.service';
 export * from './lib/horseless-tags-library.component';
 export * from './lib/horseless-tags-library.module';
@@ -13,5 +15,7 @@ export * from './lib/modules/tenant-editor/tenant-editor.component';
 
 // export { TenantChooserComponent } from './lib/modules/tenant-chooser/tenant-chooser.component';
 // export { TenantEditorComponent } from './lib/modules/tenant-editor/tenant-editor.component';
-export {TenantEditorModule} from './lib/modules/tenant-editor/tenant-editor.module';
-export {TenantChooserModule} from './lib/modules/tenant-chooser/tenant-chooser.module';
+export * from './lib/modules/tenant-editor/tenant-editor.module';
+export * from './lib/modules/tenant-chooser/tenant-chooser.module';
+
+// export { ConfigurationEndpointService } from './lib/services/configuration-endpoint.service'
