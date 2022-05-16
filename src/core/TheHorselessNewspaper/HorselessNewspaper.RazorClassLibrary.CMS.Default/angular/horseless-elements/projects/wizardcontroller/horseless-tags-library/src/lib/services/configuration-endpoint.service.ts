@@ -15,14 +15,14 @@ export class ConfigurationEndpointService {
   clientConfiguration$!: Observable<SecurityRestClientConfiguration>;
 
   constructor(private httpClient: HttpClient) {
-    this.ensureConfigurationPipe();
+    this.pullClientConfiguration();
   }
 
   /**
    * call the client configuration endpoint
    * and set the result to the the observable
    */
-  public ensureConfigurationPipe() {
+  public pullClientConfiguration() {
     let url = window.location.href;
     let headers = new HttpHeaders();
     // command channel message to the client configuration endpoint middleware
