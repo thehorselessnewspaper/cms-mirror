@@ -4,11 +4,11 @@
   "peerDependencies": {
     "@angular/common": "^13.1.0",
     "@angular/core": "^13.1.0",
-    "@wizardcontrollerprerelease/horseless-contentapi-lib": "~x.x.x",
+    "@wizardcontrollerprerelease/horseless-contentapi-lib": "^x.x.x",
     "rxjs": "^7.5.5"
   },
   "devDependencies": {
-    "tslib": "^2.3.1",
-    "@wizardcontrollerprerelease/horseless-contentapi-lib": "~x.x.x"
+    "@wizardcontrollerprerelease/horseless-contentapi-lib": "^x.x.x",
+    "tslib": "^2.3.1"
   }
 }

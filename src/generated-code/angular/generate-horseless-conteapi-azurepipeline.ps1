@@ -18,7 +18,7 @@ $theLibraryDistPath = ".\horseless-contentapi-workspace\dist\wizardcontrollerpre
 npx @openapitools/openapi-generator-cli generate `
     -i horseless-contentapi.json `
     -c horseless-contentapi-opts.json `
-    -g typescript-angular -o $outputPath --skip-validate-spec 
+    -g typescript-angular -o $outputPath --additional-properties modelPropertyNaming=original --skip-validate-spec 
 # popd
 
 $npmrc = "horseless-contentapi-workspace/.npmrc"

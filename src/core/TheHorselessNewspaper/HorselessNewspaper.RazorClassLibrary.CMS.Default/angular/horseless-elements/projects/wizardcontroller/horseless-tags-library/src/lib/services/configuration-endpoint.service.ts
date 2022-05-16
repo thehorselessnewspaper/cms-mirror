@@ -33,26 +33,22 @@ export class ConfigurationEndpointService {
 
     console.log(`getting client configuration for ${url}`);
 
+    this.httpClient.post<any>(url, '', {
+      headers: headers
+    })
+    .subscribe(rawResult => {
+      console.log('raw config result probe returned result');
+      console.log(rawResult);
+    });
+
     this.httpClient.post<SecurityRestClientConfiguration>(url, '', {
-        headers: headers,
+        headers: headers
       })
-      .pipe(
+      .subscribe(requestResult => {
+        console.log('configuration endpoint service has new route data for tenant=%s', requestResult.tenantIdentifier)
+        this.clientConfiguration$.next(requestResult)
+      })
 
-        tap(t => {
-          console.log("configuration endpoint service has a request result.")
-        }),
-
-        tap(requestResult => {
-          // update subscribers to client config
-          this.clientConfiguration$.next(requestResult);
-        }),
-
-        tap(t => {
-          console.log("configuration endpoint service has updated subscribers");
-        }),
-
-        catchError(this.handleError)
-      ).subscribe();
 
   }
 
