@@ -37,15 +37,23 @@ export class ConfigurationEndpointService {
         headers: headers,
       })
       .pipe(
-        catchError(this.handleError),
+
         tap(t => {
-          console.log("configuration endpoint service has a request result")
-        })
-      )
-      .subscribe(requestResult => {
-        // update subscribers to client config
-        this.clientConfiguration$.next(requestResult);
-      });
+          console.log("configuration endpoint service has a request result.")
+        }),
+
+        tap(requestResult => {
+          // update subscribers to client config
+          this.clientConfiguration$.next(requestResult);
+        }),
+
+        tap(t => {
+          console.log("configuration endpoint service has updated subscribers");
+        }),
+
+        catchError(this.handleError)
+      ).subscribe();
+
   }
 
   /**
