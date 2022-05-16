@@ -15,10 +15,10 @@ export class ConfigurationEndpointService {
   public clientConfiguration: Observable<SecurityRestClientConfiguration> =
     new Observable<SecurityRestClientConfiguration>();
 
-  clientConfiguration$!: ReplaySubject<SecurityRestClientConfiguration>;
+  clientConfiguration$: ReplaySubject<SecurityRestClientConfiguration> = new ReplaySubject<SecurityRestClientConfiguration>(1);
 
   constructor(private httpClient: HttpClient) {
-    this.pullClientConfiguration();
+
   }
 
   /**

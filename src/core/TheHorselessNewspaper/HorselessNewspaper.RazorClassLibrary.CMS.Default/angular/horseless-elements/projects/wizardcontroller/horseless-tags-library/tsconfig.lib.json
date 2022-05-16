@@ -7,11 +7,12 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-     "preserveSymlinks": true,
      "types": []
   },
   "exclude": [
     "src/test.ts",
-    "**/*.spec.ts"
+    // "**/*.spec.ts",
+    "**/node_modules/*",
+    "**/dist/*"
   ]
 }

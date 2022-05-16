@@ -32,7 +32,7 @@ export class TenantChooserComponent implements OnInit {
   constructor(private router: Router,
                 tenantSvc: TenantRESTService,
                 oidcAuthSvc: OidcSecurityService,
-                private tenantChooserSevce: TenantChooserService,
+                private tenantChooserService: TenantChooserService,
                 private clientConfigService: ConfigurationEndpointService) {
     this.tenantService = tenantSvc;
     this.oidcService = oidcAuthSvc;
@@ -49,7 +49,8 @@ export class TenantChooserComponent implements OnInit {
 
   private subscribeToConfiguration(){
 
-    this.clientConfiguration$ = this.clientConfigService.probeClientConfiguration()
+
+    this.clientConfigService.clientConfiguration$
     .pipe(
       tap(data => {
         console.log(`got client config for current url: ${window.location.href};`);

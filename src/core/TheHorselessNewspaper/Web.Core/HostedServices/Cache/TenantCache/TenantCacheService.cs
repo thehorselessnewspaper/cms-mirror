@@ -1162,7 +1162,15 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             catch (Exception ex)
             {
                 // ret = string.Empty;
-                _logger.LogWarning($"problem getting content model tenant by object id");
+
+                if(ex.InnerException != null && (ex.InnerException.Message.Contains("operation") && ex.InnerException.Message.Contains("cancelled")))
+                {
+                    _logger.LogWarning($"operation cancelled exception {ex.Message}");
+                }
+                else
+                {
+                    _logger.LogError($"problem getting content model tenants: {ex.Message}" );
+                }
             }
 
             return ret;
