@@ -1,6 +1,6 @@
 {
   "name": "@wizardcontroller/horseless-tags-library",
-  "version": "0.0.83",
+  "version": "0.0.84",
   "peerDependencies": {
     "@angular/common": "^13.1.0",
     "@angular/core": "^13.1.0",
