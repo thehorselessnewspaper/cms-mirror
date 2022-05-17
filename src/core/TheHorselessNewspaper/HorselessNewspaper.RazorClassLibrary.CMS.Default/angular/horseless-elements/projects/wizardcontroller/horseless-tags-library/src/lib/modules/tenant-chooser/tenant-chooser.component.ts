@@ -46,8 +46,6 @@ export class TenantChooserComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log('tenant chooser component is subscribing to ')
-    this.tenantChooserService.subscribeToConfiguration();
 
     console.log('tenant chooser component is pulling configuration');
 

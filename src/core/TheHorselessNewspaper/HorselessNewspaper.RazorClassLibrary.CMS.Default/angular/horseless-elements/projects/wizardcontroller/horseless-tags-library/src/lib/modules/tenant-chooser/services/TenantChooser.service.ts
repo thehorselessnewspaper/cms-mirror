@@ -12,7 +12,7 @@ export class TenantChooserService {
 
 constructor(private clientConfigService : ConfigurationEndpointService, private tenantService: TenantRESTService) { }
 
-public subscribeToConfiguration(){
+public pullClientConfiguration(){
 
   console.log("tenant chooser service is subscribing to client configuration");
   this.clientConfigService.clientConfiguration$
@@ -24,7 +24,7 @@ public subscribeToConfiguration(){
   )
   .subscribe(
     currentClientConfig => {
-      console.log(`tenant chooser has client config: rest api endpoint %s`, currentClientConfig.RESTEndpoint);
+      console.log(`tenant chooser service has client config: rest api endpoint %s`, currentClientConfig.RESTEndpoint);
     }
   );
 
