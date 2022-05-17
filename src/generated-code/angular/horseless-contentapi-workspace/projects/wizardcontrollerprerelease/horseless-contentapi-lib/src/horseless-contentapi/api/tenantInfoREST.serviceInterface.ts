@@ -38,9 +38,9 @@ export interface TenantInfoRESTServiceInterface {
     /**
      * 
      * 
-     * @param hostingEntitiesTenantInfo 
+     * @param HostingEntitiesTenantInfo 
      */
-    hostingEntitiesTenantInfoRESTCreate(hostingEntitiesTenantInfo?: HostingEntitiesTenantInfo, extraHttpRequestParams?: any): Observable<HostingEntitiesTenantInfo>;
+    hostingEntitiesTenantInfoRESTCreate(HostingEntitiesTenantInfo?: HostingEntitiesTenantInfo, extraHttpRequestParams?: any): Observable<HostingEntitiesTenantInfo>;
 
     /**
      * 
@@ -53,8 +53,8 @@ export interface TenantInfoRESTServiceInterface {
      * 
      * 
      * @param entityCollectionId 
-     * @param hostingEntitiesTenantInfo 
+     * @param HostingEntitiesTenantInfo 
      */
-    hostingEntitiesTenantInfoRESTUpdate(entityCollectionId: string, hostingEntitiesTenantInfo?: HostingEntitiesTenantInfo, extraHttpRequestParams?: any): Observable<HostingEntitiesTenantInfo>;
+    hostingEntitiesTenantInfoRESTUpdate(entityCollectionId: string, HostingEntitiesTenantInfo?: HostingEntitiesTenantInfo, extraHttpRequestParams?: any): Observable<HostingEntitiesTenantInfo>;
 
 }

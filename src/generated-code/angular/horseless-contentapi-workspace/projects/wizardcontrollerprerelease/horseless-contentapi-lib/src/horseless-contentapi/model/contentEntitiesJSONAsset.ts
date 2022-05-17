@@ -15,17 +15,17 @@ import { ContentEntitiesPrincipal } from './contentEntitiesPrincipal';
 
 
 export interface ContentEntitiesJSONAsset { 
-    id?: string;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    jsonValue?: string | null;
-    jsonSchema?: string | null;
-    horselessContents?: Array<ContentEntitiesHorselessContent> | null;
-    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
-    owners?: Array<ContentEntitiesPrincipal> | null;
-    timestamp?: string | null;
-    updatedAt?: string | null;
+    Id?: string;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    JsonValue?: string | null;
+    JsonSchema?: string | null;
+    HorselessContents?: Array<ContentEntitiesHorselessContent> | null;
+    AccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
+    Owners?: Array<ContentEntitiesPrincipal> | null;
+    Timestamp?: string | null;
+    UpdatedAt?: string | null;
 }
 

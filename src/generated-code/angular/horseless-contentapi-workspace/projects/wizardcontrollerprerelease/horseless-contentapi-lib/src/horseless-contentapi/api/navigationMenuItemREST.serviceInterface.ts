@@ -28,36 +28,36 @@ export interface NavigationMenuItemRESTServiceInterface {
     /**
      * 
      * 
-     * @param tenant 
-     * @param contentEntitiesNavigationMenuItem 
+     * @param __tenant__ 
+     * @param ContentEntitiesNavigationMenuItem 
      */
-    contentEntitiesNavigationMenuItemRESTCreate(tenant: string, contentEntitiesNavigationMenuItem?: ContentEntitiesNavigationMenuItem, extraHttpRequestParams?: any): Observable<ContentEntitiesNavigationMenuItem>;
+    contentEntitiesNavigationMenuItemRESTCreate(__tenant__: string, ContentEntitiesNavigationMenuItem?: ContentEntitiesNavigationMenuItem, extraHttpRequestParams?: any): Observable<ContentEntitiesNavigationMenuItem>;
 
     /**
      * 
      * 
      * @param objectId 
-     * @param tenant 
+     * @param __tenant__ 
      */
-    contentEntitiesNavigationMenuItemRESTGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesNavigationMenuItem>;
+    contentEntitiesNavigationMenuItemRESTGetByObjectId(objectId: string, __tenant__: string, extraHttpRequestParams?: any): Observable<ContentEntitiesNavigationMenuItem>;
 
     /**
      * 
      * 
-     * @param tenant 
+     * @param __tenant__ 
      * @param pageSize 
      * @param pageNumber 
      * @param pageCount 
      */
-    contentEntitiesNavigationMenuItemRESTGetByPageNumber(tenant: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesNavigationMenuItem>>;
+    contentEntitiesNavigationMenuItemRESTGetByPageNumber(__tenant__: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesNavigationMenuItem>>;
 
     /**
      * 
      * 
      * @param contentCollectionId 
-     * @param tenant 
-     * @param contentEntitiesNavigationMenuItem 
+     * @param __tenant__ 
+     * @param ContentEntitiesNavigationMenuItem 
      */
-    contentEntitiesNavigationMenuItemRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesNavigationMenuItem?: ContentEntitiesNavigationMenuItem, extraHttpRequestParams?: any): Observable<ContentEntitiesNavigationMenuItem>;
+    contentEntitiesNavigationMenuItemRESTUpdate(contentCollectionId: string, __tenant__: string, ContentEntitiesNavigationMenuItem?: ContentEntitiesNavigationMenuItem, extraHttpRequestParams?: any): Observable<ContentEntitiesNavigationMenuItem>;
 
 }

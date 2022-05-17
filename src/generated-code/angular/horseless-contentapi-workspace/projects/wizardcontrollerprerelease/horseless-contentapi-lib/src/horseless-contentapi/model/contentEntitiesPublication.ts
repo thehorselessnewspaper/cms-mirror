@@ -15,22 +15,22 @@ import { ContentEntitiesPrincipal } from './contentEntitiesPrincipal';
 
 
 export interface ContentEntitiesPublication { 
-    id?: string;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    publishAt?: string | null;
-    unPublishAt?: string | null;
-    isPublished?: boolean | null;
-    publishedURL?: string | null;
-    previewURL?: string | null;
-    contentCollections?: Array<ContentEntitiesContentCollection> | null;
-    publicationParents?: Array<ContentEntitiesPublication> | null;
-    publicationsChildren?: Array<ContentEntitiesPublication> | null;
-    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
-    owners?: Array<ContentEntitiesPrincipal> | null;
-    timestamp?: string | null;
-    updatedAt?: string | null;
+    Id?: string;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    PublishAt?: string | null;
+    UnPublishAt?: string | null;
+    IsPublished?: boolean | null;
+    PublishedURL?: string | null;
+    PreviewURL?: string | null;
+    ContentCollections?: Array<ContentEntitiesContentCollection> | null;
+    PublicationParents?: Array<ContentEntitiesPublication> | null;
+    PublicationsChildren?: Array<ContentEntitiesPublication> | null;
+    AccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
+    Owners?: Array<ContentEntitiesPrincipal> | null;
+    Timestamp?: string | null;
+    UpdatedAt?: string | null;
 }
 

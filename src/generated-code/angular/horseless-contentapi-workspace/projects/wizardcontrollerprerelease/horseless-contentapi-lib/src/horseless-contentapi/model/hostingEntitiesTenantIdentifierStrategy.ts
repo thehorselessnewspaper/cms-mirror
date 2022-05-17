@@ -14,13 +14,13 @@ import { HostingEntitiesTenantIdentifierStrategyContainer } from './hostingEntit
 
 
 export interface HostingEntitiesTenantIdentifierStrategy { 
-    id?: string;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    targetTenantId?: string | null;
-    targetTenant?: HostingEntitiesTenant;
-    strategyContainers?: Array<HostingEntitiesTenantIdentifierStrategyContainer> | null;
+    Id?: string;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    TargetTenantId?: string | null;
+    TargetTenant?: HostingEntitiesTenant;
+    StrategyContainers?: Array<HostingEntitiesTenantIdentifierStrategyContainer> | null;
 }
 

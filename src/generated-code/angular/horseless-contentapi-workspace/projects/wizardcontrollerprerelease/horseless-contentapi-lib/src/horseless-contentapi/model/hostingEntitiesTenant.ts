@@ -16,20 +16,20 @@ import { HostingEntitiesTenantInfo } from './hostingEntitiesTenantInfo';
 
 
 export interface HostingEntitiesTenant { 
-    isPublished?: boolean;
-    baseUrl?: string | null;
-    tenantIdentifier?: string | null;
-    tenantIdentifierStrategy?: HostingEntitiesTenantIdentifierStrategy;
-    timestamp?: string | null;
-    tenantInfos?: Array<HostingEntitiesTenantInfo> | null;
-    updatedAt?: string | null;
-    id?: string;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    accessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
-    accounts?: Array<HostingEntitiesPrincipal> | null;
-    owners?: Array<HostingEntitiesPrincipal> | null;
+    IsPublished?: boolean;
+    BaseUrl?: string | null;
+    TenantIdentifier?: string | null;
+    TenantIdentifierStrategy?: HostingEntitiesTenantIdentifierStrategy;
+    Timestamp?: string | null;
+    TenantInfos?: Array<HostingEntitiesTenantInfo> | null;
+    UpdatedAt?: string | null;
+    Id?: string;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    AccessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
+    Accounts?: Array<HostingEntitiesPrincipal> | null;
+    Owners?: Array<HostingEntitiesPrincipal> | null;
 }
 

@@ -16,28 +16,28 @@ import { ContentEntitiesTenant } from './contentEntitiesTenant';
 
 
 export interface ContentEntitiesPrincipal { 
-    id?: string;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    iss?: string | null;
-    aud?: string | null;
-    sub?: string | null;
-    horselessSessions?: Array<ContentEntitiesHorselessSession> | null;
-    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
-    ownedAccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
-    ownedHorselessSessions?: Array<ContentEntitiesHorselessSession> | null;
-    ownedPrincipals?: Array<ContentEntitiesPrincipal> | null;
-    ownedTenants?: Array<ContentEntitiesTenant> | null;
-    owners?: Array<ContentEntitiesPrincipal> | null;
-    tenantAccounts?: Array<ContentEntitiesTenant> | null;
-    isAnonymous?: boolean;
-    upn?: string | null;
-    email?: string | null;
-    preferredUserName?: string | null;
-    timestamp?: string | null;
-    principalClaimContainer?: ContentEntitiesPrincipalClaimContainer;
-    updatedAt?: string | null;
+    Id?: string;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    Iss?: string | null;
+    Aud?: string | null;
+    Sub?: string | null;
+    HorselessSessions?: Array<ContentEntitiesHorselessSession> | null;
+    AccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
+    OwnedAccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
+    OwnedHorselessSessions?: Array<ContentEntitiesHorselessSession> | null;
+    OwnedPrincipals?: Array<ContentEntitiesPrincipal> | null;
+    OwnedTenants?: Array<ContentEntitiesTenant> | null;
+    Owners?: Array<ContentEntitiesPrincipal> | null;
+    TenantAccounts?: Array<ContentEntitiesTenant> | null;
+    IsAnonymous?: boolean;
+    UPN?: string | null;
+    Email?: string | null;
+    PreferredUserName?: string | null;
+    Timestamp?: string | null;
+    PrincipalClaimContainer?: ContentEntitiesPrincipalClaimContainer;
+    UpdatedAt?: string | null;
 }
 

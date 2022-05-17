@@ -28,36 +28,36 @@ export interface HorselessContentRESTServiceInterface {
     /**
      * 
      * 
-     * @param tenant 
-     * @param contentEntitiesHorselessContent 
+     * @param __tenant__ 
+     * @param ContentEntitiesHorselessContent 
      */
-    contentEntitiesHorselessContentRESTCreate(tenant: string, contentEntitiesHorselessContent?: ContentEntitiesHorselessContent, extraHttpRequestParams?: any): Observable<ContentEntitiesHorselessContent>;
+    contentEntitiesHorselessContentRESTCreate(__tenant__: string, ContentEntitiesHorselessContent?: ContentEntitiesHorselessContent, extraHttpRequestParams?: any): Observable<ContentEntitiesHorselessContent>;
 
     /**
      * 
      * 
      * @param objectId 
-     * @param tenant 
+     * @param __tenant__ 
      */
-    contentEntitiesHorselessContentRESTGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesHorselessContent>;
+    contentEntitiesHorselessContentRESTGetByObjectId(objectId: string, __tenant__: string, extraHttpRequestParams?: any): Observable<ContentEntitiesHorselessContent>;
 
     /**
      * 
      * 
-     * @param tenant 
+     * @param __tenant__ 
      * @param pageSize 
      * @param pageNumber 
      * @param pageCount 
      */
-    contentEntitiesHorselessContentRESTGetByPageNumber(tenant: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesHorselessContent>>;
+    contentEntitiesHorselessContentRESTGetByPageNumber(__tenant__: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesHorselessContent>>;
 
     /**
      * 
      * 
      * @param contentCollectionId 
-     * @param tenant 
-     * @param contentEntitiesHorselessContent 
+     * @param __tenant__ 
+     * @param ContentEntitiesHorselessContent 
      */
-    contentEntitiesHorselessContentRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesHorselessContent?: ContentEntitiesHorselessContent, extraHttpRequestParams?: any): Observable<ContentEntitiesHorselessContent>;
+    contentEntitiesHorselessContentRESTUpdate(contentCollectionId: string, __tenant__: string, ContentEntitiesHorselessContent?: ContentEntitiesHorselessContent, extraHttpRequestParams?: any): Observable<ContentEntitiesHorselessContent>;
 
 }

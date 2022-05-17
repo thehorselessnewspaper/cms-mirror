@@ -12,10 +12,10 @@
 
 
 export enum HostingEntitiesTenantIdentifierStrategyName {
-    static = 'STATIC',
-    basePath = 'BASE_PATH',
-    aspnetcoreRoute = 'ASPNETCORE_ROUTE',
-    dnsHostname = 'DNS_HOSTNAME',
-    dnsFqdn = 'DNS_FQDN'
+    STATIC = 'STATIC',
+    BASE_PATH = 'BASE_PATH',
+    ASPNETCORE_ROUTE = 'ASPNETCORE_ROUTE',
+    DNS_HOSTNAME = 'DNS_HOSTNAME',
+    DNS_FQDN = 'DNS_FQDN'
 };
 

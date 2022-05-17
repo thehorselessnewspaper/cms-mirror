@@ -12,9 +12,9 @@
 
 
 export interface MultiTenantTenantInfo { 
-    id?: string | null;
-    identifier?: string | null;
-    name?: string | null;
-    connectionString?: string | null;
+    Id?: string | null;
+    Identifier?: string | null;
+    Name?: string | null;
+    ConnectionString?: string | null;
 }
 

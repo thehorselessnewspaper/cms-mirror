@@ -18,24 +18,24 @@ import { ContentEntitiesJSONAsset } from './contentEntitiesJSONAsset';
 
 
 export interface ContentEntitiesHorselessContent { 
-    id?: string;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    filesystemAssetId?: string | null;
-    jsonAssetId?: string | null;
-    mimeTypeId?: string | null;
-    isPublished?: boolean | null;
-    publishedURL?: string | null;
-    previewURL?: string | null;
-    filesystemAsset?: ContentEntitiesFilesystemAsset;
-    jsonAsset?: ContentEntitiesJSONAsset;
-    mimeType?: ContentEntitiesMIMEType;
-    contentCollections?: Array<ContentEntitiesContentCollection> | null;
-    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
-    owners?: Array<ContentEntitiesPrincipal> | null;
-    timestamp?: string | null;
-    updatedAt?: string | null;
+    Id?: string;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    FilesystemAssetId?: string | null;
+    JSONAssetId?: string | null;
+    MIMETypeId?: string | null;
+    IsPublished?: boolean | null;
+    PublishedURL?: string | null;
+    PreviewURL?: string | null;
+    FilesystemAsset?: ContentEntitiesFilesystemAsset;
+    JSONAsset?: ContentEntitiesJSONAsset;
+    MIMEType?: ContentEntitiesMIMEType;
+    ContentCollections?: Array<ContentEntitiesContentCollection> | null;
+    AccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
+    Owners?: Array<ContentEntitiesPrincipal> | null;
+    Timestamp?: string | null;
+    UpdatedAt?: string | null;
 }
 

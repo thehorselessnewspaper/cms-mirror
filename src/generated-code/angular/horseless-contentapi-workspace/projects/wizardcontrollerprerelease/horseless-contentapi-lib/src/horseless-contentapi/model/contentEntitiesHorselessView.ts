@@ -15,23 +15,23 @@ import { ContentEntitiesPrincipal } from './contentEntitiesPrincipal';
 
 
 export interface ContentEntitiesHorselessView { 
-    id?: string;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    isActive?: boolean | null;
-    contentCollections?: Array<ContentEntitiesContentCollection> | null;
-    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
-    owners?: Array<ContentEntitiesPrincipal> | null;
-    updatedAt?: string | null;
-    timestamp?: string | null;
-    exists?: boolean;
-    isDirectory?: boolean;
-    lastModified?: string;
-    length?: number;
-    name?: string | null;
-    physicalPath?: string | null;
-    viewContent?: string | null;
+    Id?: string;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    IsActive?: boolean | null;
+    ContentCollections?: Array<ContentEntitiesContentCollection> | null;
+    AccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
+    Owners?: Array<ContentEntitiesPrincipal> | null;
+    UpdatedAt?: string | null;
+    Timestamp?: string | null;
+    Exists?: boolean;
+    IsDirectory?: boolean;
+    LastModified?: string;
+    Length?: number;
+    Name?: string | null;
+    PhysicalPath?: string | null;
+    ViewContent?: string | null;
 }
 

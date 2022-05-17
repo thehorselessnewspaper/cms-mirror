@@ -14,11 +14,11 @@ import { ContentEntitiesPrincipal } from './contentEntitiesPrincipal';
 
 
 export interface ContentEntitiesPrincipalClaimContainer { 
-    id?: string;
-    objectId?: string | null;
-    displayName?: string | null;
-    principalClaim?: Array<ContentEntitiesPrincipalClaim> | null;
-    principalId?: string | null;
-    principal?: ContentEntitiesPrincipal;
+    Id?: string;
+    ObjectId?: string | null;
+    DisplayName?: string | null;
+    PrincipalClaim?: Array<ContentEntitiesPrincipalClaim> | null;
+    PrincipalId?: string | null;
+    Principal?: ContentEntitiesPrincipal;
 }
 

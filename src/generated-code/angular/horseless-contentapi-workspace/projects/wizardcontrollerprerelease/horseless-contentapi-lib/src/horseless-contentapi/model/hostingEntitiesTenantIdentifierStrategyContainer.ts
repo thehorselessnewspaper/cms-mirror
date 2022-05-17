@@ -14,10 +14,10 @@ import { HostingEntitiesTenantIdentifierStrategyName } from './hostingEntitiesTe
 
 
 export interface HostingEntitiesTenantIdentifierStrategyContainer { 
-    id?: string | null;
-    tenantIdentifierStrategyName?: HostingEntitiesTenantIdentifierStrategyName;
-    timestamp?: string | null;
-    strategyId?: string | null;
-    strategy?: HostingEntitiesTenantIdentifierStrategy;
+    Id?: string | null;
+    TenantIdentifierStrategyName?: HostingEntitiesTenantIdentifierStrategyName;
+    Timestamp?: string | null;
+    StrategyId?: string | null;
+    Strategy?: HostingEntitiesTenantIdentifierStrategy;
 }
 

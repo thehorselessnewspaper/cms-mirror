@@ -16,20 +16,20 @@ import { ContentEntitiesPrincipal } from './contentEntitiesPrincipal';
 
 
 export interface ContentEntitiesTenant { 
-    id?: string;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
-    accounts?: Array<ContentEntitiesPrincipal> | null;
-    contentCollections?: Array<ContentEntitiesContentCollection> | null;
-    owners?: Array<ContentEntitiesPrincipal> | null;
-    isPublished?: boolean;
-    baseUrl?: string | null;
-    tenantIdentifierStrategy?: ContentEntitiesTenantIdentifierStrategy;
-    tenantIdentifier?: string | null;
-    timestamp?: string | null;
-    updatedAt?: string | null;
+    Id?: string;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    AccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
+    Accounts?: Array<ContentEntitiesPrincipal> | null;
+    ContentCollections?: Array<ContentEntitiesContentCollection> | null;
+    Owners?: Array<ContentEntitiesPrincipal> | null;
+    IsPublished?: boolean;
+    BaseUrl?: string | null;
+    TenantIdentifierStrategy?: ContentEntitiesTenantIdentifierStrategy;
+    TenantIdentifier?: string | null;
+    Timestamp?: string | null;
+    UpdatedAt?: string | null;
 }
 

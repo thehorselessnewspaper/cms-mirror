@@ -28,36 +28,36 @@ export interface FilesystemAssetRESTServiceInterface {
     /**
      * 
      * 
-     * @param tenant 
-     * @param contentEntitiesFilesystemAsset 
+     * @param __tenant__ 
+     * @param ContentEntitiesFilesystemAsset 
      */
-    contentEntitiesFilesystemAssetRESTCreate(tenant: string, contentEntitiesFilesystemAsset?: ContentEntitiesFilesystemAsset, extraHttpRequestParams?: any): Observable<ContentEntitiesFilesystemAsset>;
+    contentEntitiesFilesystemAssetRESTCreate(__tenant__: string, ContentEntitiesFilesystemAsset?: ContentEntitiesFilesystemAsset, extraHttpRequestParams?: any): Observable<ContentEntitiesFilesystemAsset>;
 
     /**
      * 
      * 
      * @param objectId 
-     * @param tenant 
+     * @param __tenant__ 
      */
-    contentEntitiesFilesystemAssetRESTGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesFilesystemAsset>;
+    contentEntitiesFilesystemAssetRESTGetByObjectId(objectId: string, __tenant__: string, extraHttpRequestParams?: any): Observable<ContentEntitiesFilesystemAsset>;
 
     /**
      * 
      * 
-     * @param tenant 
+     * @param __tenant__ 
      * @param pageSize 
      * @param pageNumber 
      * @param pageCount 
      */
-    contentEntitiesFilesystemAssetRESTGetByPageNumber(tenant: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesFilesystemAsset>>;
+    contentEntitiesFilesystemAssetRESTGetByPageNumber(__tenant__: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesFilesystemAsset>>;
 
     /**
      * 
      * 
      * @param contentCollectionId 
-     * @param tenant 
-     * @param contentEntitiesFilesystemAsset 
+     * @param __tenant__ 
+     * @param ContentEntitiesFilesystemAsset 
      */
-    contentEntitiesFilesystemAssetRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesFilesystemAsset?: ContentEntitiesFilesystemAsset, extraHttpRequestParams?: any): Observable<ContentEntitiesFilesystemAsset>;
+    contentEntitiesFilesystemAssetRESTUpdate(contentCollectionId: string, __tenant__: string, ContentEntitiesFilesystemAsset?: ContentEntitiesFilesystemAsset, extraHttpRequestParams?: any): Observable<ContentEntitiesFilesystemAsset>;
 
 }

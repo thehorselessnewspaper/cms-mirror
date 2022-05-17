@@ -28,36 +28,36 @@ export interface MimeTypeRESTServiceInterface {
     /**
      * 
      * 
-     * @param tenant 
-     * @param contentEntitiesMIMEType 
+     * @param __tenant__ 
+     * @param ContentEntitiesMIMEType 
      */
-    contentEntitiesMimeTypeRESTCreate(tenant: string, contentEntitiesMIMEType?: ContentEntitiesMIMEType, extraHttpRequestParams?: any): Observable<ContentEntitiesMIMEType>;
+    contentEntitiesMimeTypeRESTCreate(__tenant__: string, ContentEntitiesMIMEType?: ContentEntitiesMIMEType, extraHttpRequestParams?: any): Observable<ContentEntitiesMIMEType>;
 
     /**
      * 
      * 
      * @param objectId 
-     * @param tenant 
+     * @param __tenant__ 
      */
-    contentEntitiesMimeTypeRESTGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesMIMEType>;
+    contentEntitiesMimeTypeRESTGetByObjectId(objectId: string, __tenant__: string, extraHttpRequestParams?: any): Observable<ContentEntitiesMIMEType>;
 
     /**
      * 
      * 
-     * @param tenant 
+     * @param __tenant__ 
      * @param pageSize 
      * @param pageNumber 
      * @param pageCount 
      */
-    contentEntitiesMimeTypeRESTGetByPageNumber(tenant: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesMIMEType>>;
+    contentEntitiesMimeTypeRESTGetByPageNumber(__tenant__: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesMIMEType>>;
 
     /**
      * 
      * 
      * @param contentCollectionId 
-     * @param tenant 
-     * @param contentEntitiesMIMEType 
+     * @param __tenant__ 
+     * @param ContentEntitiesMIMEType 
      */
-    contentEntitiesMimeTypeRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesMIMEType?: ContentEntitiesMIMEType, extraHttpRequestParams?: any): Observable<ContentEntitiesMIMEType>;
+    contentEntitiesMimeTypeRESTUpdate(contentCollectionId: string, __tenant__: string, ContentEntitiesMIMEType?: ContentEntitiesMIMEType, extraHttpRequestParams?: any): Observable<ContentEntitiesMIMEType>;
 
 }

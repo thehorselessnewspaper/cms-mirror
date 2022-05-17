@@ -17,21 +17,21 @@ import { HostingEntitiesACEPermissionType } from './hostingEntitiesACEPermission
 
 
 export interface HostingEntitiesAccessControlEntry { 
-    scope?: HostingEntitiesACEPermissionScope;
-    permission?: HostingEntitiesACEPermission;
-    permissionType?: HostingEntitiesACEPermissionType;
-    timestamp?: string | null;
-    updatedAt?: string | null;
-    id?: string;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    isActive?: boolean | null;
-    accessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
-    owners?: Array<HostingEntitiesPrincipal> | null;
-    subjectAccessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
-    subjectPrincipals?: Array<HostingEntitiesPrincipal> | null;
-    subjectTenants?: Array<HostingEntitiesTenant> | null;
+    Scope?: HostingEntitiesACEPermissionScope;
+    Permission?: HostingEntitiesACEPermission;
+    PermissionType?: HostingEntitiesACEPermissionType;
+    Timestamp?: string | null;
+    UpdatedAt?: string | null;
+    Id?: string;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    IsActive?: boolean | null;
+    AccessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
+    Owners?: Array<HostingEntitiesPrincipal> | null;
+    SubjectAccessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
+    SubjectPrincipals?: Array<HostingEntitiesPrincipal> | null;
+    SubjectTenants?: Array<HostingEntitiesTenant> | null;
 }
 

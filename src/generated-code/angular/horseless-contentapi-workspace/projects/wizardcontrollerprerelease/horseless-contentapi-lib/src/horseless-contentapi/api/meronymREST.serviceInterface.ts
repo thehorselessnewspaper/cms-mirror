@@ -28,36 +28,36 @@ export interface MeronymRESTServiceInterface {
     /**
      * 
      * 
-     * @param tenant 
-     * @param contentEntitiesMeronym 
+     * @param __tenant__ 
+     * @param ContentEntitiesMeronym 
      */
-    contentEntitiesMeronymRESTCreate(tenant: string, contentEntitiesMeronym?: ContentEntitiesMeronym, extraHttpRequestParams?: any): Observable<ContentEntitiesMeronym>;
+    contentEntitiesMeronymRESTCreate(__tenant__: string, ContentEntitiesMeronym?: ContentEntitiesMeronym, extraHttpRequestParams?: any): Observable<ContentEntitiesMeronym>;
 
     /**
      * 
      * 
      * @param objectId 
-     * @param tenant 
+     * @param __tenant__ 
      */
-    contentEntitiesMeronymRESTGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesMeronym>;
+    contentEntitiesMeronymRESTGetByObjectId(objectId: string, __tenant__: string, extraHttpRequestParams?: any): Observable<ContentEntitiesMeronym>;
 
     /**
      * 
      * 
-     * @param tenant 
+     * @param __tenant__ 
      * @param pageSize 
      * @param pageNumber 
      * @param pageCount 
      */
-    contentEntitiesMeronymRESTGetByPageNumber(tenant: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesMeronym>>;
+    contentEntitiesMeronymRESTGetByPageNumber(__tenant__: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesMeronym>>;
 
     /**
      * 
      * 
      * @param contentCollectionId 
-     * @param tenant 
-     * @param contentEntitiesMeronym 
+     * @param __tenant__ 
+     * @param ContentEntitiesMeronym 
      */
-    contentEntitiesMeronymRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesMeronym?: ContentEntitiesMeronym, extraHttpRequestParams?: any): Observable<ContentEntitiesMeronym>;
+    contentEntitiesMeronymRESTUpdate(contentCollectionId: string, __tenant__: string, ContentEntitiesMeronym?: ContentEntitiesMeronym, extraHttpRequestParams?: any): Observable<ContentEntitiesMeronym>;
 
 }

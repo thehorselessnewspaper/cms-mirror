@@ -14,13 +14,13 @@ import { ContentEntitiesTenant } from './contentEntitiesTenant';
 
 
 export interface ContentEntitiesTenantIdentifierStrategy { 
-    id?: string;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    timestamp?: string | null;
-    targetTenant?: ContentEntitiesTenant;
-    strategyContainers?: Array<ContentEntitiesTenantIdentifierStrategyContainer> | null;
+    Id?: string;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    Timestamp?: string | null;
+    TargetTenant?: ContentEntitiesTenant;
+    StrategyContainers?: Array<ContentEntitiesTenantIdentifierStrategyContainer> | null;
 }
 

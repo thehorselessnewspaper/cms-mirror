@@ -12,7 +12,7 @@
 
 
 export enum HostingEntitiesACEPermissionType {
-    permit = 'PERMIT',
-    deny = 'DENY'
+    PERMIT = 'PERMIT',
+    DENY = 'DENY'
 };
 

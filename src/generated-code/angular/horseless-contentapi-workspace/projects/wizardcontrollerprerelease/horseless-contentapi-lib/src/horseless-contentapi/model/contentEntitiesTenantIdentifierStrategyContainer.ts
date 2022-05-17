@@ -14,14 +14,14 @@ import { ContentEntitiesTenantIdentifierStrategy } from './contentEntitiesTenant
 
 
 export interface ContentEntitiesTenantIdentifierStrategyContainer { 
-    id?: string | null;
-    tenantIdentifierStrategyName?: ContentEntitiesTenantIdentifierStrategyName;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    timestamp?: string | null;
-    tenantIdentifier?: string | null;
-    strategy?: ContentEntitiesTenantIdentifierStrategy;
+    Id?: string | null;
+    TenantIdentifierStrategyName?: ContentEntitiesTenantIdentifierStrategyName;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    Timestamp?: string | null;
+    TenantIdentifier?: string | null;
+    Strategy?: ContentEntitiesTenantIdentifierStrategy;
 }
 

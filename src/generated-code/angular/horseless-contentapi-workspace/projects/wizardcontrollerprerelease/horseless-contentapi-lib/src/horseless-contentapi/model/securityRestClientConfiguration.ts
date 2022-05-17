@@ -12,10 +12,10 @@
 
 
 export interface SecurityRestClientConfiguration { 
-    isClaimsIdentity?: boolean;
-    accessToken?: string | null;
-    oDataEndpoint?: string | null;
-    restEndpoint?: string | null;
-    tenantIdentifier?: string | null;
+    IsClaimsIdentity?: boolean;
+    AccessToken?: string | null;
+    ODataEndpoint?: string | null;
+    RESTEndpoint?: string | null;
+    TenantIdentifier?: string | null;
 }
 

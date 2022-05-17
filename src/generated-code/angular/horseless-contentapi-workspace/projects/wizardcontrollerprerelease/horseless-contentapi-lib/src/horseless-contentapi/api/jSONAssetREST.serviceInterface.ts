@@ -28,36 +28,36 @@ export interface JSONAssetRESTServiceInterface {
     /**
      * 
      * 
-     * @param tenant 
-     * @param contentEntitiesJSONAsset 
+     * @param __tenant__ 
+     * @param ContentEntitiesJSONAsset 
      */
-    contentEntitiesJSONAssetRESTCreate(tenant: string, contentEntitiesJSONAsset?: ContentEntitiesJSONAsset, extraHttpRequestParams?: any): Observable<ContentEntitiesJSONAsset>;
+    contentEntitiesJSONAssetRESTCreate(__tenant__: string, ContentEntitiesJSONAsset?: ContentEntitiesJSONAsset, extraHttpRequestParams?: any): Observable<ContentEntitiesJSONAsset>;
 
     /**
      * 
      * 
      * @param objectId 
-     * @param tenant 
+     * @param __tenant__ 
      */
-    contentEntitiesJSONAssetRESTGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesJSONAsset>;
+    contentEntitiesJSONAssetRESTGetByObjectId(objectId: string, __tenant__: string, extraHttpRequestParams?: any): Observable<ContentEntitiesJSONAsset>;
 
     /**
      * 
      * 
-     * @param tenant 
+     * @param __tenant__ 
      * @param pageSize 
      * @param pageNumber 
      * @param pageCount 
      */
-    contentEntitiesJSONAssetRESTGetByPageNumber(tenant: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesJSONAsset>>;
+    contentEntitiesJSONAssetRESTGetByPageNumber(__tenant__: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesJSONAsset>>;
 
     /**
      * 
      * 
      * @param contentCollectionId 
-     * @param tenant 
-     * @param contentEntitiesJSONAsset 
+     * @param __tenant__ 
+     * @param ContentEntitiesJSONAsset 
      */
-    contentEntitiesJSONAssetRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesJSONAsset?: ContentEntitiesJSONAsset, extraHttpRequestParams?: any): Observable<ContentEntitiesJSONAsset>;
+    contentEntitiesJSONAssetRESTUpdate(contentCollectionId: string, __tenant__: string, ContentEntitiesJSONAsset?: ContentEntitiesJSONAsset, extraHttpRequestParams?: any): Observable<ContentEntitiesJSONAsset>;
 
 }

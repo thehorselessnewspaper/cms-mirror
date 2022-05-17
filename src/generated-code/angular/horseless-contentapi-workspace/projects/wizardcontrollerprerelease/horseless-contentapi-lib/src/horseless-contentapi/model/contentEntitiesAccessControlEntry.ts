@@ -18,22 +18,22 @@ import { ContentEntitiesTenant } from './contentEntitiesTenant';
 
 
 export interface ContentEntitiesAccessControlEntry { 
-    id?: string;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    isActive?: boolean | null;
-    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
-    owners?: Array<ContentEntitiesPrincipal> | null;
-    subjectAccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
-    subjectHorselessSessions?: Array<ContentEntitiesHorselessSession> | null;
-    subjectPrincipals?: Array<ContentEntitiesPrincipal> | null;
-    subjectTenants?: Array<ContentEntitiesTenant> | null;
-    scope?: ContentEntitiesACEPermissionScope;
-    permission?: ContentEntitiesACEPermission;
-    permissionType?: ContentEntitiesACEPermissionType;
-    timestamp?: string | null;
-    updatedAt?: string | null;
+    Id?: string;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    IsActive?: boolean | null;
+    AccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
+    Owners?: Array<ContentEntitiesPrincipal> | null;
+    SubjectAccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
+    SubjectHorselessSessions?: Array<ContentEntitiesHorselessSession> | null;
+    SubjectPrincipals?: Array<ContentEntitiesPrincipal> | null;
+    SubjectTenants?: Array<ContentEntitiesTenant> | null;
+    Scope?: ContentEntitiesACEPermissionScope;
+    Permission?: ContentEntitiesACEPermission;
+    PermissionType?: ContentEntitiesACEPermissionType;
+    Timestamp?: string | null;
+    UpdatedAt?: string | null;
 }
 

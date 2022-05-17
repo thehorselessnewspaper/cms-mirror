@@ -28,36 +28,36 @@ export interface HolonymRESTServiceInterface {
     /**
      * 
      * 
-     * @param tenant 
-     * @param contentEntitiesHolonym 
+     * @param __tenant__ 
+     * @param ContentEntitiesHolonym 
      */
-    contentEntitiesHolonymRESTCreate(tenant: string, contentEntitiesHolonym?: ContentEntitiesHolonym, extraHttpRequestParams?: any): Observable<ContentEntitiesHolonym>;
+    contentEntitiesHolonymRESTCreate(__tenant__: string, ContentEntitiesHolonym?: ContentEntitiesHolonym, extraHttpRequestParams?: any): Observable<ContentEntitiesHolonym>;
 
     /**
      * 
      * 
      * @param objectId 
-     * @param tenant 
+     * @param __tenant__ 
      */
-    contentEntitiesHolonymRESTGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesHolonym>;
+    contentEntitiesHolonymRESTGetByObjectId(objectId: string, __tenant__: string, extraHttpRequestParams?: any): Observable<ContentEntitiesHolonym>;
 
     /**
      * 
      * 
-     * @param tenant 
+     * @param __tenant__ 
      * @param pageSize 
      * @param pageNumber 
      * @param pageCount 
      */
-    contentEntitiesHolonymRESTGetByPageNumber(tenant: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesHolonym>>;
+    contentEntitiesHolonymRESTGetByPageNumber(__tenant__: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesHolonym>>;
 
     /**
      * 
      * 
      * @param contentCollectionId 
-     * @param tenant 
-     * @param contentEntitiesHolonym 
+     * @param __tenant__ 
+     * @param ContentEntitiesHolonym 
      */
-    contentEntitiesHolonymRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesHolonym?: ContentEntitiesHolonym, extraHttpRequestParams?: any): Observable<ContentEntitiesHolonym>;
+    contentEntitiesHolonymRESTUpdate(contentCollectionId: string, __tenant__: string, ContentEntitiesHolonym?: ContentEntitiesHolonym, extraHttpRequestParams?: any): Observable<ContentEntitiesHolonym>;
 
 }

@@ -15,20 +15,20 @@ import { HostingEntitiesTenantInfo } from './hostingEntitiesTenantInfo';
 
 
 export interface HostingEntitiesWebAPITenantInfo { 
-    accessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
-    owners?: Array<HostingEntitiesPrincipal> | null;
-    timestamp?: string | null;
-    updatedAt?: string | null;
-    id?: string;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    identifier?: string | null;
-    name?: string | null;
-    connectionString?: string | null;
-    webAPIBaseUrl?: string | null;
-    tenantInfoId?: string | null;
-    tenantInfo?: HostingEntitiesTenantInfo;
+    AccessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
+    Owners?: Array<HostingEntitiesPrincipal> | null;
+    Timestamp?: string | null;
+    UpdatedAt?: string | null;
+    Id?: string;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    Identifier?: string | null;
+    Name?: string | null;
+    ConnectionString?: string | null;
+    WebAPIBaseUrl?: string | null;
+    TenantInfoId?: string | null;
+    TenantInfo?: HostingEntitiesTenantInfo;
 }
 

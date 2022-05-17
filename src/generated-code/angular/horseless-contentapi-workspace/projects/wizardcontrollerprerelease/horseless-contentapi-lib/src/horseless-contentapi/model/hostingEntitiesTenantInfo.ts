@@ -17,22 +17,22 @@ import { HostingEntitiesKeyCloakConfiguration } from './hostingEntitiesKeyCloakC
 
 
 export interface HostingEntitiesTenantInfo { 
-    accessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
-    owners?: Array<HostingEntitiesPrincipal> | null;
-    timestamp?: string | null;
-    parentTenantId?: string | null;
-    parentTenant?: HostingEntitiesTenant;
-    updatedAt?: string | null;
-    id?: string;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    identifier?: string | null;
-    name?: string | null;
-    connectionString?: string | null;
-    tenantBaseUrl?: string | null;
-    keyCloakConfigurations?: Array<HostingEntitiesKeyCloakConfiguration> | null;
-    webAPITenantInfos?: Array<HostingEntitiesWebAPITenantInfo> | null;
+    AccessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
+    Owners?: Array<HostingEntitiesPrincipal> | null;
+    Timestamp?: string | null;
+    ParentTenantId?: string | null;
+    ParentTenant?: HostingEntitiesTenant;
+    UpdatedAt?: string | null;
+    Id?: string;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    Identifier?: string | null;
+    Name?: string | null;
+    ConnectionString?: string | null;
+    TenantBaseUrl?: string | null;
+    KeyCloakConfigurations?: Array<HostingEntitiesKeyCloakConfiguration> | null;
+    WebAPITenantInfos?: Array<HostingEntitiesWebAPITenantInfo> | null;
 }
 

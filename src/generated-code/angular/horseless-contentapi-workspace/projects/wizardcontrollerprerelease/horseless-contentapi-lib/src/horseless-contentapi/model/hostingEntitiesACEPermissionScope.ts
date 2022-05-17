@@ -12,13 +12,13 @@
 
 
 export enum HostingEntitiesACEPermissionScope {
-    site = 'SITE',
-    tenant = 'TENANT',
-    owner = 'OWNER',
-    role = 'ROLE',
-    group = 'GROUP',
-    workflow = 'WORKFLOW',
-    anonymous = 'ANONYMOUS',
-    everyone = 'EVERYONE'
+    SITE = 'SITE',
+    TENANT = 'TENANT',
+    OWNER = 'OWNER',
+    ROLE = 'ROLE',
+    GROUP = 'GROUP',
+    WORKFLOW = 'WORKFLOW',
+    ANONYMOUS = 'ANONYMOUS',
+    EVERYONE = 'EVERYONE'
 };
 

@@ -15,23 +15,23 @@ import { ContentEntitiesNavigationMenu } from './contentEntitiesNavigationMenu';
 
 
 export interface ContentEntitiesNavigationMenuItem { 
-    id?: string;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    publishAt?: string | null;
-    unPublishAt?: string | null;
-    isPublished?: boolean | null;
-    menuItemLabel?: string | null;
-    menuItemDescription?: string | null;
-    menuItemAltText?: string | null;
-    childNavigationItems?: Array<ContentEntitiesNavigationMenuItem> | null;
-    parentNavigationItems?: Array<ContentEntitiesNavigationMenuItem> | null;
-    parentNavigationMenus?: Array<ContentEntitiesNavigationMenu> | null;
-    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
-    owners?: Array<ContentEntitiesPrincipal> | null;
-    timestamp?: string | null;
-    updatedAt?: string | null;
+    Id?: string;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    PublishAt?: string | null;
+    UnPublishAt?: string | null;
+    IsPublished?: boolean | null;
+    MenuItemLabel?: string | null;
+    MenuItemDescription?: string | null;
+    MenuItemAltText?: string | null;
+    ChildNavigationItems?: Array<ContentEntitiesNavigationMenuItem> | null;
+    ParentNavigationItems?: Array<ContentEntitiesNavigationMenuItem> | null;
+    ParentNavigationMenus?: Array<ContentEntitiesNavigationMenu> | null;
+    AccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
+    Owners?: Array<ContentEntitiesPrincipal> | null;
+    Timestamp?: string | null;
+    UpdatedAt?: string | null;
 }
 

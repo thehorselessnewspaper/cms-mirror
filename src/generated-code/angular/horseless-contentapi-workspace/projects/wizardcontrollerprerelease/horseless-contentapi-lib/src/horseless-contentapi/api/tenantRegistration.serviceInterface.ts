@@ -36,8 +36,8 @@ export interface TenantRegistrationServiceInterface {
      * @param tenantId 
      * @param displayName 
      * @param tenantIdentifier 
-     * @param id 
+     * @param Id 
      */
-    approveTenantIdPost(tenantId: string, displayName: string, tenantIdentifier: string, id?: string, extraHttpRequestParams?: any): Observable<{}>;
+    approveTenantIdPost(tenantId: string, displayName: string, tenantIdentifier: string, Id?: string, extraHttpRequestParams?: any): Observable<{}>;
 
 }

@@ -14,24 +14,24 @@ import { HostingEntitiesTenant } from './hostingEntitiesTenant';
 
 
 export interface HostingEntitiesPrincipal { 
-    upn?: string | null;
-    email?: string | null;
-    preferredUserName?: string | null;
-    timestamp?: string | null;
-    updatedAt?: string | null;
-    id?: string;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    iss?: string | null;
-    aud?: string | null;
-    sub?: string | null;
-    accessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
-    ownedAccessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
-    ownedPrincipals?: Array<HostingEntitiesPrincipal> | null;
-    ownedTenants?: Array<HostingEntitiesTenant> | null;
-    owners?: Array<HostingEntitiesPrincipal> | null;
-    tenantAccounts?: Array<HostingEntitiesTenant> | null;
+    UPN?: string | null;
+    Email?: string | null;
+    PreferredUserName?: string | null;
+    Timestamp?: string | null;
+    UpdatedAt?: string | null;
+    Id?: string;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    Iss?: string | null;
+    Aud?: string | null;
+    Sub?: string | null;
+    AccessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
+    OwnedAccessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
+    OwnedPrincipals?: Array<HostingEntitiesPrincipal> | null;
+    OwnedTenants?: Array<HostingEntitiesTenant> | null;
+    Owners?: Array<HostingEntitiesPrincipal> | null;
+    TenantAccounts?: Array<HostingEntitiesTenant> | null;
 }
 

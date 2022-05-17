@@ -13,12 +13,12 @@ import { ContentEntitiesPrincipalClaimContainer } from './contentEntitiesPrincip
 
 
 export interface ContentEntitiesPrincipalClaim { 
-    id?: string;
-    claimType?: string | null;
-    claimValue?: string | null;
-    claimValueType?: string | null;
-    claimIssuer?: string | null;
-    principalClaimContainerId?: string | null;
-    principalClaimContainer?: ContentEntitiesPrincipalClaimContainer;
+    Id?: string;
+    ClaimType?: string | null;
+    ClaimValue?: string | null;
+    ClaimValueType?: string | null;
+    ClaimIssuer?: string | null;
+    PrincipalClaimContainerId?: string | null;
+    PrincipalClaimContainer?: ContentEntitiesPrincipalClaimContainer;
 }
 

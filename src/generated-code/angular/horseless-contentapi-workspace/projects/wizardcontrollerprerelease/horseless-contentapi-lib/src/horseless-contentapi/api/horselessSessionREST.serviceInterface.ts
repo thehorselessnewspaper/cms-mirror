@@ -29,36 +29,36 @@ export interface HorselessSessionRESTServiceInterface {
     /**
      * 
      * 
-     * @param tenant 
-     * @param contentEntitiesHorselessSession 
+     * @param __tenant__ 
+     * @param ContentEntitiesHorselessSession 
      */
-    contentEntitiesHorselessSessionRESTCreate(tenant: string, contentEntitiesHorselessSession?: ContentEntitiesHorselessSession, extraHttpRequestParams?: any): Observable<ContentEntitiesHorselessSession>;
+    contentEntitiesHorselessSessionRESTCreate(__tenant__: string, ContentEntitiesHorselessSession?: ContentEntitiesHorselessSession, extraHttpRequestParams?: any): Observable<ContentEntitiesHorselessSession>;
 
     /**
      * 
      * 
      * @param objectId 
-     * @param tenant 
+     * @param __tenant__ 
      */
-    contentEntitiesHorselessSessionRESTGetByObjectId(objectId: string, tenant: string, extraHttpRequestParams?: any): Observable<ContentEntitiesContentCollection>;
+    contentEntitiesHorselessSessionRESTGetByObjectId(objectId: string, __tenant__: string, extraHttpRequestParams?: any): Observable<ContentEntitiesContentCollection>;
 
     /**
      * 
      * 
-     * @param tenant 
+     * @param __tenant__ 
      * @param pageSize 
      * @param pageNumber 
      * @param pageCount 
      */
-    contentEntitiesHorselessSessionRESTGetByPageNumber(tenant: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesHorselessSession>>;
+    contentEntitiesHorselessSessionRESTGetByPageNumber(__tenant__: string, pageSize?: number, pageNumber?: number, pageCount?: number, extraHttpRequestParams?: any): Observable<Array<ContentEntitiesHorselessSession>>;
 
     /**
      * 
      * 
      * @param contentCollectionId 
-     * @param tenant 
-     * @param contentEntitiesHorselessSession 
+     * @param __tenant__ 
+     * @param ContentEntitiesHorselessSession 
      */
-    contentEntitiesHorselessSessionRESTUpdate(contentCollectionId: string, tenant: string, contentEntitiesHorselessSession?: ContentEntitiesHorselessSession, extraHttpRequestParams?: any): Observable<ContentEntitiesHorselessSession>;
+    contentEntitiesHorselessSessionRESTUpdate(contentCollectionId: string, __tenant__: string, ContentEntitiesHorselessSession?: ContentEntitiesHorselessSession, extraHttpRequestParams?: any): Observable<ContentEntitiesHorselessSession>;
 
 }

@@ -15,20 +15,20 @@ import { HostingEntitiesTenantInfo } from './hostingEntitiesTenantInfo';
 
 
 export interface HostingEntitiesKeyCloakConfiguration { 
-    accessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
-    owners?: Array<HostingEntitiesPrincipal> | null;
-    isSoftDeleted?: boolean | null;
-    timestamp?: string | null;
-    updatedAt?: string | null;
-    id?: string;
-    displayName?: string | null;
-    authority?: string | null;
-    realm?: string | null;
-    objectId?: string | null;
-    createdAt?: string | null;
-    iss?: string | null;
-    aud?: string | null;
-    tenantInfoId?: string | null;
-    tenantInfo?: HostingEntitiesTenantInfo;
+    AccessControlEntries?: Array<HostingEntitiesAccessControlEntry> | null;
+    Owners?: Array<HostingEntitiesPrincipal> | null;
+    IsSoftDeleted?: boolean | null;
+    Timestamp?: string | null;
+    UpdatedAt?: string | null;
+    Id?: string;
+    DisplayName?: string | null;
+    Authority?: string | null;
+    Realm?: string | null;
+    ObjectId?: string | null;
+    CreatedAt?: string | null;
+    Iss?: string | null;
+    Aud?: string | null;
+    TenantInfoId?: string | null;
+    TenantInfo?: HostingEntitiesTenantInfo;
 }
 

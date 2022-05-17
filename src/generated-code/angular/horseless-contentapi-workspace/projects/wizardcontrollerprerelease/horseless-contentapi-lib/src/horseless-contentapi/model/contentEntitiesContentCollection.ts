@@ -19,25 +19,25 @@ import { ContentEntitiesTenant } from './contentEntitiesTenant';
 
 
 export interface ContentEntitiesContentCollection { 
-    id?: string;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    allowAnonymousRead?: boolean | null;
-    isPublished?: boolean | null;
-    publishedURL?: string | null;
-    previewURL?: string | null;
-    childContentCollections?: Array<ContentEntitiesContentCollection> | null;
-    horselessViews?: Array<ContentEntitiesHorselessView> | null;
-    mimeContents?: Array<ContentEntitiesHorselessContent> | null;
-    parentContentCollections?: Array<ContentEntitiesContentCollection> | null;
-    publications?: Array<ContentEntitiesPublication> | null;
-    taxonomies?: Array<ContentEntitiesTaxonomy> | null;
-    tenants?: Array<ContentEntitiesTenant> | null;
-    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
-    owners?: Array<ContentEntitiesPrincipal> | null;
-    timestamp?: string | null;
-    updatedAt?: string | null;
+    Id?: string;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    AllowAnonymousRead?: boolean | null;
+    IsPublished?: boolean | null;
+    PublishedURL?: string | null;
+    PreviewURL?: string | null;
+    ChildContentCollections?: Array<ContentEntitiesContentCollection> | null;
+    HorselessViews?: Array<ContentEntitiesHorselessView> | null;
+    MimeContents?: Array<ContentEntitiesHorselessContent> | null;
+    ParentContentCollections?: Array<ContentEntitiesContentCollection> | null;
+    Publications?: Array<ContentEntitiesPublication> | null;
+    Taxonomies?: Array<ContentEntitiesTaxonomy> | null;
+    Tenants?: Array<ContentEntitiesTenant> | null;
+    AccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
+    Owners?: Array<ContentEntitiesPrincipal> | null;
+    Timestamp?: string | null;
+    UpdatedAt?: string | null;
 }
 

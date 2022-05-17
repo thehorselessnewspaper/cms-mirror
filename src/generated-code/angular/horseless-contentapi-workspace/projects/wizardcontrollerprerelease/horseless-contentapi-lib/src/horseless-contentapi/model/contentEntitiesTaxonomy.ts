@@ -14,14 +14,14 @@ import { ContentEntitiesTaxon } from './contentEntitiesTaxon';
 
 
 export interface ContentEntitiesTaxonomy { 
-    id?: string;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    jsonValue?: string | null;
-    jsonSchema?: string | null;
-    contentCollections?: Array<ContentEntitiesContentCollection> | null;
-    taxons?: Array<ContentEntitiesTaxon> | null;
+    Id?: string;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    JsonValue?: string | null;
+    JsonSchema?: string | null;
+    ContentCollections?: Array<ContentEntitiesContentCollection> | null;
+    Taxons?: Array<ContentEntitiesTaxon> | null;
 }
 

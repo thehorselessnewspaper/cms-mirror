@@ -14,21 +14,21 @@ import { ContentEntitiesPrincipal } from './contentEntitiesPrincipal';
 
 
 export interface ContentEntitiesHorselessSession { 
-    id?: string;
-    displayName?: string | null;
-    objectId?: string | null;
-    isSoftDeleted?: boolean | null;
-    createdAt?: string | null;
-    sessionId?: string | null;
-    iss?: string | null;
-    aud?: string | null;
-    sub?: string | null;
-    isAnonymous?: boolean | null;
-    horselessSessionPrincipalId?: string | null;
-    horselessSessionPrincipal?: ContentEntitiesPrincipal;
-    accessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
-    owners?: Array<ContentEntitiesPrincipal> | null;
-    timestamp?: string | null;
-    updatedAt?: string | null;
+    Id?: string;
+    DisplayName?: string | null;
+    ObjectId?: string | null;
+    IsSoftDeleted?: boolean | null;
+    CreatedAt?: string | null;
+    SessionId?: string | null;
+    Iss?: string | null;
+    Aud?: string | null;
+    Sub?: string | null;
+    IsAnonymous?: boolean | null;
+    HorselessSessionPrincipalId?: string | null;
+    HorselessSessionPrincipal?: ContentEntitiesPrincipal;
+    AccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
+    Owners?: Array<ContentEntitiesPrincipal> | null;
+    Timestamp?: string | null;
+    UpdatedAt?: string | null;
 }
 
