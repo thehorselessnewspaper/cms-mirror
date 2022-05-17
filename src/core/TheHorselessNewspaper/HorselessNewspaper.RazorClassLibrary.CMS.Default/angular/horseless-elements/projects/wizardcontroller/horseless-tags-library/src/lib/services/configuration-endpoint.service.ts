@@ -3,7 +3,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SecurityRestClientConfiguration } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
-import { catchError, Observable, ReplaySubject, tap, throwError } from 'rxjs';
+import { catchError, Observable, ReplaySubject, take, tap, throwError } from 'rxjs';
 import { HorselessTagsLibraryModule } from '../horseless-tags-library.module';
 
 @Injectable(
@@ -44,8 +44,14 @@ export class ConfigurationEndpointService {
     this.httpClient.post<SecurityRestClientConfiguration>(url, '', {
         headers: headers
       })
+      .pipe(
+        take(1),
+        tap(t => {
+          console.log('configuration endpoint service has new data %s', t)
+        })
+      )
       .subscribe(requestResult => {
-        console.log('configuration endpoint service has new route data for tenant=%s', requestResult.tenantIdentifier)
+        console.log('configuration endpoint service has new route data for tenant=%s', requestResult.TenantIdentifier)
         this.clientConfiguration$.next(requestResult)
       })
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ClientConfigurationService, ContentEntitiesTenant, TenantRESTService } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
+import { take, tap } from 'rxjs';
 import { ConfigurationEndpointService } from '../../../services/configuration-endpoint.service';
 
 @Injectable({
@@ -15,9 +16,15 @@ public subscribeToConfiguration(){
 
   console.log("tenant chooser service is subscribing to client configuration");
   this.clientConfigService.clientConfiguration$
+  .pipe(
+    take(1),
+    tap(t =>{
+      console.log('tenant chooser service has new client configuration %s', t);
+    })
+  )
   .subscribe(
     currentClientConfig => {
-      console.log(`tenant chooser has client config: rest api endpoint %s`, currentClientConfig.restEndpoint);
+      console.log(`tenant chooser has client config: rest api endpoint %s`, currentClientConfig.RESTEndpoint);
     }
   );
 
