@@ -192,7 +192,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
                     {
                         httpContext.Request.Query.TryGetValue("tenant", out StringValues tenantIdParam);
                         var tenantIdParm = tenantIdParam.ToString();
-                        if(tenantIdParm != String.Empty)
+                        if (tenantIdParm != String.Empty)
                         {
                             return tenantIdParm;
                         }
@@ -373,7 +373,12 @@ HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessCo
             // handle cycles in json responses 
             // as per https://gavilan.blog/2021/05/19/fixing-the-error-a-possible-object-cycle-was-detected-in-different-versions-of-asp-net-core/
             services.AddControllers().AddJsonOptions(x =>
-                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles)
+                {
+                    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                    x.JsonSerializerOptions.PropertyNamingPolicy = null; // leave property names unchanged
+                    x.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                    x.JsonSerializerOptions.ReadCommentHandling = System.Text.Json.JsonCommentHandling.Skip;
+                })
                     .AddOData(options =>
                     {
                         /// TODO - surface these as configurable parameters 

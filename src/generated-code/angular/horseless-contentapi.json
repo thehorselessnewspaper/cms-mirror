@@ -11790,88 +11790,88 @@
       "ContentEntitiesAccessControlEntry": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "isActive": {
+          "IsActive": {
             "type": "boolean",
             "nullable": true
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "subjectAccessControlEntries": {
+          "SubjectAccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "subjectHorselessSessions": {
+          "SubjectHorselessSessions": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesHorselessSession"
             },
             "nullable": true
           },
-          "subjectPrincipals": {
+          "SubjectPrincipals": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "subjectTenants": {
+          "SubjectTenants": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesTenant"
             },
             "nullable": true
           },
-          "scope": {
+          "Scope": {
             "$ref": "#/components/schemas/ContentEntitiesACEPermissionScope"
           },
-          "permission": {
+          "Permission": {
             "$ref": "#/components/schemas/ContentEntitiesACEPermission"
           },
-          "permissionType": {
+          "PermissionType": {
             "$ref": "#/components/schemas/ContentEntitiesACEPermissionType"
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -11882,112 +11882,112 @@
       "ContentEntitiesContentCollection": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "allowAnonymousRead": {
+          "AllowAnonymousRead": {
             "type": "boolean",
             "nullable": true
           },
-          "isPublished": {
+          "IsPublished": {
             "type": "boolean",
             "nullable": true
           },
-          "publishedURL": {
+          "PublishedURL": {
             "type": "string",
             "nullable": true
           },
-          "previewURL": {
+          "PreviewURL": {
             "type": "string",
             "nullable": true
           },
-          "childContentCollections": {
+          "ChildContentCollections": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesContentCollection"
             },
             "nullable": true
           },
-          "horselessViews": {
+          "HorselessViews": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesHorselessView"
             },
             "nullable": true
           },
-          "mimeContents": {
+          "MimeContents": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
             },
             "nullable": true
           },
-          "parentContentCollections": {
+          "ParentContentCollections": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesContentCollection"
             },
             "nullable": true
           },
-          "publications": {
+          "Publications": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPublication"
             },
             "nullable": true
           },
-          "taxonomies": {
+          "Taxonomies": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesTaxonomy"
             },
             "nullable": true
           },
-          "tenants": {
+          "Tenants": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesTenant"
             },
             "nullable": true
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -11998,66 +11998,66 @@
       "ContentEntitiesFilesystemAsset": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "filename": {
+          "Filename": {
             "type": "string",
             "nullable": true
           },
-          "publishedURL": {
+          "PublishedURL": {
             "type": "string",
             "nullable": true
           },
-          "previewURL": {
+          "PreviewURL": {
             "type": "string",
             "nullable": true
           },
-          "horselessContents": {
+          "HorselessContents": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
             },
             "nullable": true
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -12068,69 +12068,69 @@
       "ContentEntitiesHolonym": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "jsonValue": {
+          "JsonValue": {
             "type": "string",
             "nullable": true
           },
-          "jsonSchema": {
+          "JsonSchema": {
             "type": "string",
             "nullable": true
           },
-          "meronyms": {
+          "Meronyms": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesMeronym"
             },
             "nullable": true
           },
-          "taxons": {
+          "Taxons": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesTaxon"
             },
             "nullable": true
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -12141,90 +12141,90 @@
       "ContentEntitiesHorselessContent": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "filesystemAssetId": {
+          "FilesystemAssetId": {
             "type": "string",
             "format": "uuid",
             "nullable": true
           },
-          "jsonAssetId": {
+          "JSONAssetId": {
             "type": "string",
             "format": "uuid",
             "nullable": true
           },
-          "mimeTypeId": {
+          "MIMETypeId": {
             "type": "string",
             "format": "uuid",
             "nullable": true
           },
-          "isPublished": {
+          "IsPublished": {
             "type": "boolean",
             "nullable": true
           },
-          "publishedURL": {
+          "PublishedURL": {
             "type": "string",
             "nullable": true
           },
-          "previewURL": {
+          "PreviewURL": {
             "type": "string",
             "nullable": true
           },
-          "filesystemAsset": {
+          "FilesystemAsset": {
             "$ref": "#/components/schemas/ContentEntitiesFilesystemAsset"
           },
-          "jsonAsset": {
+          "JSONAsset": {
             "$ref": "#/components/schemas/ContentEntitiesJSONAsset"
           },
-          "mimeType": {
+          "MIMEType": {
             "$ref": "#/components/schemas/ContentEntitiesMIMEType"
           },
-          "contentCollections": {
+          "ContentCollections": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesContentCollection"
             },
             "nullable": true
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -12235,75 +12235,75 @@
       "ContentEntitiesHorselessSession": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "sessionId": {
+          "SessionId": {
             "type": "string",
             "nullable": true
           },
-          "iss": {
+          "Iss": {
             "type": "string",
             "nullable": true
           },
-          "aud": {
+          "Aud": {
             "type": "string",
             "nullable": true
           },
-          "sub": {
+          "Sub": {
             "type": "string",
             "nullable": true
           },
-          "isAnonymous": {
+          "IsAnonymous": {
             "type": "boolean",
             "nullable": true
           },
-          "horselessSessionPrincipalId": {
+          "HorselessSessionPrincipalId": {
             "type": "string",
             "format": "uuid",
             "nullable": true
           },
-          "horselessSessionPrincipal": {
+          "HorselessSessionPrincipal": {
             "$ref": "#/components/schemas/ContentEntitiesPrincipal"
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -12314,85 +12314,85 @@
       "ContentEntitiesHorselessView": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "isActive": {
+          "IsActive": {
             "type": "boolean",
             "nullable": true
           },
-          "contentCollections": {
+          "ContentCollections": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesContentCollection"
             },
             "nullable": true
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "exists": {
+          "Exists": {
             "type": "boolean"
           },
-          "isDirectory": {
+          "IsDirectory": {
             "type": "boolean"
           },
-          "lastModified": {
+          "LastModified": {
             "type": "string",
             "format": "date-time"
           },
-          "length": {
+          "Length": {
             "type": "integer",
             "format": "int64"
           },
-          "name": {
+          "Name": {
             "type": "string",
             "nullable": true
           },
-          "physicalPath": {
+          "PhysicalPath": {
             "type": "string",
             "nullable": true
           },
-          "viewContent": {
+          "ViewContent": {
             "type": "string",
             "format": "byte",
             "nullable": true
@@ -12403,62 +12403,62 @@
       "ContentEntitiesJSONAsset": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "jsonValue": {
+          "JsonValue": {
             "type": "string",
             "nullable": true
           },
-          "jsonSchema": {
+          "JsonSchema": {
             "type": "string",
             "nullable": true
           },
-          "horselessContents": {
+          "HorselessContents": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
             },
             "nullable": true
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -12469,58 +12469,58 @@
       "ContentEntitiesMIMEType": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "mimeTypeName": {
+          "MIMETypeName": {
             "type": "string",
             "nullable": true
           },
-          "horselessContents": {
+          "HorselessContents": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
             },
             "nullable": true
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -12531,62 +12531,62 @@
       "ContentEntitiesMeronym": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "jsonValue": {
+          "JsonValue": {
             "type": "string",
             "nullable": true
           },
-          "jsonSchema": {
+          "JsonSchema": {
             "type": "string",
             "nullable": true
           },
-          "holonyms": {
+          "Holonyms": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesHolonym"
             },
             "nullable": true
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -12597,94 +12597,94 @@
       "ContentEntitiesNavigationMenu": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "publishAt": {
+          "PublishAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "unPublishAt": {
+          "UnPublishAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "isPublished": {
+          "IsPublished": {
             "type": "boolean",
             "nullable": true
           },
-          "menuLabel": {
+          "MenuLabel": {
             "type": "string",
             "nullable": true
           },
-          "menuDescription": {
+          "MenuDescription": {
             "type": "string",
             "nullable": true
           },
-          "menuAltText": {
+          "MenuAltText": {
             "type": "string",
             "nullable": true
           },
-          "childNavigationMenuItems": {
+          "ChildNavigationMenuItems": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
             },
             "nullable": true
           },
-          "children": {
+          "Children": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesNavigationMenu"
             },
             "nullable": true
           },
-          "parents": {
+          "Parents": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesNavigationMenu"
             },
             "nullable": true
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -12695,94 +12695,94 @@
       "ContentEntitiesNavigationMenuItem": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "publishAt": {
+          "PublishAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "unPublishAt": {
+          "UnPublishAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "isPublished": {
+          "IsPublished": {
             "type": "boolean",
             "nullable": true
           },
-          "menuItemLabel": {
+          "MenuItemLabel": {
             "type": "string",
             "nullable": true
           },
-          "menuItemDescription": {
+          "MenuItemDescription": {
             "type": "string",
             "nullable": true
           },
-          "menuItemAltText": {
+          "MenuItemAltText": {
             "type": "string",
             "nullable": true
           },
-          "childNavigationItems": {
+          "ChildNavigationItems": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
             },
             "nullable": true
           },
-          "parentNavigationItems": {
+          "ParentNavigationItems": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesNavigationMenuItem"
             },
             "nullable": true
           },
-          "parentNavigationMenus": {
+          "ParentNavigationMenus": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesNavigationMenu"
             },
             "nullable": true
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -12793,119 +12793,119 @@
       "ContentEntitiesPrincipal": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "iss": {
+          "Iss": {
             "type": "string",
             "nullable": true
           },
-          "aud": {
+          "Aud": {
             "type": "string",
             "nullable": true
           },
-          "sub": {
+          "Sub": {
             "type": "string",
             "nullable": true
           },
-          "horselessSessions": {
+          "HorselessSessions": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesHorselessSession"
             },
             "nullable": true
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "ownedAccessControlEntries": {
+          "OwnedAccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "ownedHorselessSessions": {
+          "OwnedHorselessSessions": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesHorselessSession"
             },
             "nullable": true
           },
-          "ownedPrincipals": {
+          "OwnedPrincipals": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "ownedTenants": {
+          "OwnedTenants": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesTenant"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "tenantAccounts": {
+          "TenantAccounts": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesTenant"
             },
             "nullable": true
           },
-          "isAnonymous": {
+          "IsAnonymous": {
             "type": "boolean"
           },
-          "upn": {
+          "UPN": {
             "type": "string",
             "nullable": true
           },
-          "email": {
+          "Email": {
             "type": "string",
             "nullable": true
           },
-          "preferredUserName": {
+          "PreferredUserName": {
             "type": "string",
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "principalClaimContainer": {
+          "PrincipalClaimContainer": {
             "$ref": "#/components/schemas/ContentEntitiesPrincipalClaimContainer"
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -12916,32 +12916,32 @@
       "ContentEntitiesPrincipalClaim": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "claimType": {
+          "ClaimType": {
             "type": "string",
             "nullable": true
           },
-          "claimValue": {
+          "ClaimValue": {
             "type": "string",
             "nullable": true
           },
-          "claimValueType": {
+          "ClaimValueType": {
             "type": "string",
             "nullable": true
           },
-          "claimIssuer": {
+          "ClaimIssuer": {
             "type": "string",
             "nullable": true
           },
-          "principalClaimContainerId": {
+          "PrincipalClaimContainerId": {
             "type": "string",
             "format": "uuid",
             "nullable": true
           },
-          "principalClaimContainer": {
+          "PrincipalClaimContainer": {
             "$ref": "#/components/schemas/ContentEntitiesPrincipalClaimContainer"
           }
         },
@@ -12950,31 +12950,31 @@
       "ContentEntitiesPrincipalClaimContainer": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "principalClaim": {
+          "PrincipalClaim": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipalClaim"
             },
             "nullable": true
           },
-          "principalId": {
+          "PrincipalId": {
             "type": "string",
             "format": "uuid",
             "nullable": true
           },
-          "principal": {
+          "Principal": {
             "$ref": "#/components/schemas/ContentEntitiesPrincipal"
           }
         },
@@ -12983,90 +12983,90 @@
       "ContentEntitiesPublication": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "publishAt": {
+          "PublishAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "unPublishAt": {
+          "UnPublishAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "isPublished": {
+          "IsPublished": {
             "type": "boolean",
             "nullable": true
           },
-          "publishedURL": {
+          "PublishedURL": {
             "type": "string",
             "nullable": true
           },
-          "previewURL": {
+          "PreviewURL": {
             "type": "string",
             "nullable": true
           },
-          "contentCollections": {
+          "ContentCollections": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesContentCollection"
             },
             "nullable": true
           },
-          "publicationParents": {
+          "PublicationParents": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPublication"
             },
             "nullable": true
           },
-          "publicationsChildren": {
+          "PublicationsChildren": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPublication"
             },
             "nullable": true
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -13077,83 +13077,83 @@
       "ContentEntitiesTaxon": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "jsonValue": {
+          "JsonValue": {
             "type": "string",
             "nullable": true
           },
-          "jsonSchema": {
+          "JsonSchema": {
             "type": "string",
             "nullable": true
           },
-          "antecedentTaxons": {
+          "AntecedentTaxons": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesTaxon"
             },
             "nullable": true
           },
-          "derivativeTaxons": {
+          "DerivativeTaxons": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesTaxon"
             },
             "nullable": true
           },
-          "holonyms": {
+          "Holonyms": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesHolonym"
             },
             "nullable": true
           },
-          "taxonomies": {
+          "Taxonomies": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesTaxonomy"
             },
             "nullable": true
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -13164,43 +13164,43 @@
       "ContentEntitiesTaxonomy": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "jsonValue": {
+          "JsonValue": {
             "type": "string",
             "nullable": true
           },
-          "jsonSchema": {
+          "JsonSchema": {
             "type": "string",
             "nullable": true
           },
-          "contentCollections": {
+          "ContentCollections": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesContentCollection"
             },
             "nullable": true
           },
-          "taxons": {
+          "Taxons": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesTaxon"
@@ -13213,75 +13213,75 @@
       "ContentEntitiesTenant": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "accounts": {
+          "Accounts": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "contentCollections": {
+          "ContentCollections": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesContentCollection"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
           },
-          "isPublished": {
+          "IsPublished": {
             "type": "boolean"
           },
-          "baseUrl": {
+          "BaseUrl": {
             "type": "string",
             "nullable": true
           },
-          "tenantIdentifierStrategy": {
+          "TenantIdentifierStrategy": {
             "$ref": "#/components/schemas/ContentEntitiesTenantIdentifierStrategy"
           },
-          "tenantIdentifier": {
+          "TenantIdentifier": {
             "type": "string",
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -13292,36 +13292,36 @@
       "ContentEntitiesTenantIdentifierStrategy": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "targetTenant": {
+          "TargetTenant": {
             "$ref": "#/components/schemas/ContentEntitiesTenant"
           },
-          "strategyContainers": {
+          "StrategyContainers": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesTenantIdentifierStrategyContainer"
@@ -13334,41 +13334,41 @@
       "ContentEntitiesTenantIdentifierStrategyContainer": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid",
             "nullable": true
           },
-          "tenantIdentifierStrategyName": {
+          "TenantIdentifierStrategyName": {
             "$ref": "#/components/schemas/ContentEntitiesTenantIdentifierStrategyName"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "tenantIdentifier": {
+          "TenantIdentifier": {
             "type": "string",
             "nullable": true
           },
-          "strategy": {
+          "Strategy": {
             "$ref": "#/components/schemas/ContentEntitiesTenantIdentifierStrategy"
           }
         },
@@ -13422,79 +13422,79 @@
       "HostingEntitiesAccessControlEntry": {
         "type": "object",
         "properties": {
-          "scope": {
+          "Scope": {
             "$ref": "#/components/schemas/HostingEntitiesACEPermissionScope"
           },
-          "permission": {
+          "Permission": {
             "$ref": "#/components/schemas/HostingEntitiesACEPermission"
           },
-          "permissionType": {
+          "PermissionType": {
             "$ref": "#/components/schemas/HostingEntitiesACEPermissionType"
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "isActive": {
+          "IsActive": {
             "type": "boolean",
             "nullable": true
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesPrincipal"
             },
             "nullable": true
           },
-          "subjectAccessControlEntries": {
+          "SubjectAccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "subjectPrincipals": {
+          "SubjectPrincipals": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesPrincipal"
             },
             "nullable": true
           },
-          "subjectTenants": {
+          "SubjectTenants": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesTenant"
@@ -13507,73 +13507,73 @@
       "HostingEntitiesKeyCloakConfiguration": {
         "type": "object",
         "properties": {
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesPrincipal"
             },
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "authority": {
+          "Authority": {
             "type": "string",
             "nullable": true
           },
-          "realm": {
+          "Realm": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "iss": {
+          "Iss": {
             "type": "string",
             "nullable": true
           },
-          "aud": {
+          "Aud": {
             "type": "string",
             "nullable": true
           },
-          "tenantInfoId": {
+          "TenantInfoId": {
             "type": "string",
             "format": "uuid",
             "nullable": true
           },
-          "tenantInfo": {
+          "TenantInfo": {
             "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
           }
         },
@@ -13582,97 +13582,97 @@
       "HostingEntitiesPrincipal": {
         "type": "object",
         "properties": {
-          "upn": {
+          "UPN": {
             "type": "string",
             "nullable": true
           },
-          "email": {
+          "Email": {
             "type": "string",
             "nullable": true
           },
-          "preferredUserName": {
+          "PreferredUserName": {
             "type": "string",
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "iss": {
+          "Iss": {
             "type": "string",
             "nullable": true
           },
-          "aud": {
+          "Aud": {
             "type": "string",
             "nullable": true
           },
-          "sub": {
+          "Sub": {
             "type": "string",
             "nullable": true
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "ownedAccessControlEntries": {
+          "OwnedAccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "ownedPrincipals": {
+          "OwnedPrincipals": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesPrincipal"
             },
             "nullable": true
           },
-          "ownedTenants": {
+          "OwnedTenants": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesTenant"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesPrincipal"
             },
             "nullable": true
           },
-          "tenantAccounts": {
+          "TenantAccounts": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesTenant"
@@ -13685,73 +13685,73 @@
       "HostingEntitiesTenant": {
         "type": "object",
         "properties": {
-          "isPublished": {
+          "IsPublished": {
             "type": "boolean"
           },
-          "baseUrl": {
+          "BaseUrl": {
             "type": "string",
             "nullable": true
           },
-          "tenantIdentifier": {
+          "TenantIdentifier": {
             "type": "string",
             "nullable": true
           },
-          "tenantIdentifierStrategy": {
+          "TenantIdentifierStrategy": {
             "$ref": "#/components/schemas/HostingEntitiesTenantIdentifierStrategy"
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "tenantInfos": {
+          "TenantInfos": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
             },
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "accounts": {
+          "Accounts": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesPrincipal"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesPrincipal"
@@ -13764,36 +13764,36 @@
       "HostingEntitiesTenantIdentifierStrategy": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "targetTenantId": {
+          "TargetTenantId": {
             "type": "string",
             "format": "uuid",
             "nullable": true
           },
-          "targetTenant": {
+          "TargetTenant": {
             "$ref": "#/components/schemas/HostingEntitiesTenant"
           },
-          "strategyContainers": {
+          "StrategyContainers": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesTenantIdentifierStrategyContainer"
@@ -13806,25 +13806,25 @@
       "HostingEntitiesTenantIdentifierStrategyContainer": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid",
             "nullable": true
           },
-          "tenantIdentifierStrategyName": {
+          "TenantIdentifierStrategyName": {
             "$ref": "#/components/schemas/HostingEntitiesTenantIdentifierStrategyName"
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "strategyId": {
+          "StrategyId": {
             "type": "string",
             "format": "uuid",
             "nullable": true
           },
-          "strategy": {
+          "Strategy": {
             "$ref": "#/components/schemas/HostingEntitiesTenantIdentifierStrategy"
           }
         },
@@ -13843,83 +13843,83 @@
       "HostingEntitiesTenantInfo": {
         "type": "object",
         "properties": {
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesPrincipal"
             },
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "parentTenantId": {
+          "ParentTenantId": {
             "type": "string",
             "format": "uuid",
             "nullable": true
           },
-          "parentTenant": {
+          "ParentTenant": {
             "$ref": "#/components/schemas/HostingEntitiesTenant"
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "identifier": {
+          "Identifier": {
             "type": "string",
             "nullable": true
           },
-          "name": {
+          "Name": {
             "type": "string",
             "nullable": true
           },
-          "connectionString": {
+          "ConnectionString": {
             "type": "string",
             "nullable": true
           },
-          "tenantBaseUrl": {
+          "TenantBaseUrl": {
             "type": "string",
             "nullable": true
           },
-          "keyCloakConfigurations": {
+          "KeyCloakConfigurations": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesKeyCloakConfiguration"
             },
             "nullable": true
           },
-          "webAPITenantInfos": {
+          "WebAPITenantInfos": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesWebAPITenantInfo"
@@ -13932,73 +13932,73 @@
       "HostingEntitiesWebAPITenantInfo": {
         "type": "object",
         "properties": {
-          "accessControlEntries": {
+          "AccessControlEntries": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
             },
             "nullable": true
           },
-          "owners": {
+          "Owners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesPrincipal"
             },
             "nullable": true
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "byte",
             "nullable": true
           },
-          "updatedAt": {
+          "UpdatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "id": {
+          "Id": {
             "type": "string",
             "format": "uuid"
           },
-          "displayName": {
+          "DisplayName": {
             "type": "string",
             "nullable": true
           },
-          "objectId": {
+          "ObjectId": {
             "type": "string",
             "nullable": true
           },
-          "isSoftDeleted": {
+          "IsSoftDeleted": {
             "type": "boolean",
             "nullable": true
           },
-          "createdAt": {
+          "CreatedAt": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "identifier": {
+          "Identifier": {
             "type": "string",
             "nullable": true
           },
-          "name": {
+          "Name": {
             "type": "string",
             "nullable": true
           },
-          "connectionString": {
+          "ConnectionString": {
             "type": "string",
             "nullable": true
           },
-          "webAPIBaseUrl": {
+          "WebAPIBaseUrl": {
             "type": "string",
             "nullable": true
           },
-          "tenantInfoId": {
+          "TenantInfoId": {
             "type": "string",
             "format": "uuid",
             "nullable": true
           },
-          "tenantInfo": {
+          "TenantInfo": {
             "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
           }
         },
@@ -14007,19 +14007,19 @@
       "MultiTenantTenantInfo": {
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "nullable": true
           },
-          "identifier": {
+          "Identifier": {
             "type": "string",
             "nullable": true
           },
-          "name": {
+          "Name": {
             "type": "string",
             "nullable": true
           },
-          "connectionString": {
+          "ConnectionString": {
             "type": "string",
             "nullable": true
           }
@@ -14056,22 +14056,22 @@
       "SecurityRestClientConfiguration": {
         "type": "object",
         "properties": {
-          "isClaimsIdentity": {
+          "IsClaimsIdentity": {
             "type": "boolean"
           },
-          "accessToken": {
+          "AccessToken": {
             "type": "string",
             "nullable": true
           },
-          "oDataEndpoint": {
+          "ODataEndpoint": {
             "type": "string",
             "nullable": true
           },
-          "restEndpoint": {
+          "RESTEndpoint": {
             "type": "string",
             "nullable": true
           },
-          "tenantIdentifier": {
+          "TenantIdentifier": {
             "type": "string",
             "nullable": true
           }
