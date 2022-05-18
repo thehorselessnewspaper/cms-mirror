@@ -14,8 +14,9 @@ volumes:
       driver: local
   critical-rabbitmq-volume:
       driver: local
-  horseless-webapp-https:
-      driver: local
+  # gravitee.io api management dependencies
+  data-elasticsearch:
+  data-mongo:
 
 services:
   keycloakpostgres:
@@ -98,6 +99,111 @@ services:
     volumes:
       - critical-rabbitmq-volume:/var/lib/rabbitmq
   
+  # begin gravitee.io dependencies
+  mongodb:
+    image: mongo:${MONGODB_VERSION:-3.6}
+    container_name: gio_apim_mongodb
+    restart: always
+    volumes:
+      - data-mongo:/data/db
+      - ./logs/apim-mongodb:/var/log/mongodb
+    networks:
+      - storage
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTIC_VERSION:-7.7.0}
+    container_name: gio_apim_elasticsearch
+    restart: always
+    volumes:
+      - data-elasticsearch:/usr/share/elasticsearch/data
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=0.0.0.0
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=false
+      - cluster.name=elasticsearch
+      - bootstrap.memory_lock=true
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile: 65536
+    networks:
+      - storage
+
+  gateway:
+    image: graviteeio/apim-gateway:${APIM_VERSION:-3}
+    container_name: gio_apim_gateway
+    restart: always
+    ports:
+      - "8082:8082"
+    depends_on:
+      - mongodb
+      - elasticsearch
+    volumes:
+      - ./logs/apim-gateway:/opt/graviteeio-gateway/logs
+    environment:
+      - gravitee_management_mongodb_uri=mongodb://mongodb:27017/gravitee?serverSelectionTimeoutMS=5000&connectTimeoutMS=5000&socketTimeoutMS=5000
+      - gravitee_ratelimit_mongodb_uri=mongodb://mongodb:27017/gravitee?serverSelectionTimeoutMS=5000&connectTimeoutMS=5000&socketTimeoutMS=5000
+      - gravitee_reporters_elasticsearch_endpoints_0=http://elasticsearch:9200
+    networks:
+      - storage
+      - frontend
+
+  management_api:
+    image: graviteeio/apim-management-api:${APIM_VERSION:-3}
+    container_name: gio_apim_management_api
+    restart: always
+    ports:
+      - "8083:8083"
+    links:
+      - mongodb
+      - elasticsearch
+    depends_on:
+      - mongodb
+      - elasticsearch
+    volumes:
+      - ./logs/apim-management-api:/opt/graviteeio-management-api/logs
+    environment:
+      - gravitee_management_mongodb_uri=mongodb://mongodb:27017/gravitee?serverSelectionTimeoutMS=5000&connectTimeoutMS=5000&socketTimeoutMS=5000
+      - gravitee_analytics_elasticsearch_endpoints_0=http://elasticsearch:9200
+    networks:
+      - storage
+      - frontend
+
+  management_ui:
+    image: graviteeio/apim-management-ui:${APIM_VERSION:-3}
+    container_name: gio_apim_management_ui
+    restart: always
+    ports:
+      - "8084:8080"
+    depends_on:
+      - management_api
+    environment:
+      - MGMT_API_URL=http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/
+    volumes:
+      - ./logs/apim-management-ui:/var/log/nginx
+    networks:
+      - frontend
+
+  portal_ui:
+    image: graviteeio/apim-portal-ui:${APIM_VERSION:-3}
+    container_name: gio_apim_portal_ui
+    restart: always
+    ports:
+      - "8085:8080"
+    depends_on:
+      - management_api
+    environment:
+      - PORTAL_API_URL=http://localhost:8083/portal/environments/DEFAULT
+    volumes:
+      - ./logs/apim-portal-ui:/var/log/nginx
+    networks:
+      - frontend
+  # end gravitee.io dependencies
+
   content-db:
     image: "mcr.microsoft.com/mssql/server:2019-latest"
     hostname: contentdb.local
@@ -119,14 +225,16 @@ services:
       - 6001:6001
     networks:
         - horselesswan
+ 
+
     dns:
       - ${LocalDNS1}
       - 8.8.8.8
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=http://+:6000
-      # - Kestrel__Certificates__Default__Path=/https/servercert.pfx
-      # - Kestrel__Certificates__Default__Password=pa55word  
+      - ASPNETCORE_URLS=https://+:6001;http://+:6000
+      - Kestrel__Certificates__Default__Path=/https/servercert.pfx
+      - Kestrel__Certificates__Default__Password=pa55word  
       - TenantFilesystemPath=assetroot
       - ConnectionStrings__HostingModelConnection=Data Source=contentdb.local;Database=THLNP_Hosting;Integrated Security=false;User ID=sa;Password=Pa55w0rd;
       - ConnectionStrings__ContentModelConnection=Data Source=contentdb.local;Database=THLNP_Content;Integrated Security=false;User ID=sa;Password=Pa55w0rd;
@@ -145,9 +253,7 @@ services:
       - RestApiBaseUrl=${RestApiBaseUrl}  
       - OdataApiBaseUrl=${OdataApiBaseUrl}
     volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-      - horseless-webapp-https:/https
+       - ./https/:/https/
     depends_on:
       - content-db  
     build:
@@ -157,4 +263,8 @@ services:
 networks: 
     horselesswan: 
         name: horselesswan 
-    
+    # gravitee.io dependencies
+    frontend:
+        name: frontend
+    storage:
+        name: storage        

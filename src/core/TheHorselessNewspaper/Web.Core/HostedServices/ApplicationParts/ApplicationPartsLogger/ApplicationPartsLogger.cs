@@ -24,11 +24,11 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
     /// as per https://andrewlock.net/when-asp-net-core-cant-find-your-controller-debugging-application-parts/
     /// as per https://docs.microsoft.com/en-us/aspnet/core/mvc/advanced/app-parts?view=aspnetcore-6.0
     /// </summary>
-    internal class ApplicationPartsLogger : IHostedService
+    internal class ApplicationPartsLogger : IHostedService, IDisposable
     {
         private readonly ILogger<ApplicationPartsLogger> _logger;
         private readonly ApplicationPartManager _partManager;
-        private Timer _timer = null!;
+        private Timer _timer;
         private long _defaultTimerDelayInSeconds = 30;
 
         IServiceProvider _services;
@@ -90,39 +90,46 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
 
         internal void DoWork(object? state)
         {
+            try
+            {
 
-            _timer.Change(Timeout.Infinite, Timeout.Infinite);
-
-
-            // Get the names of all the application parts. This is the short assembly name for AssemblyParts
-            var applicationParts = _partManager.ApplicationParts.Select(x => x.Name);
-
-            // Create a controller feature, and populate it from the application parts
-            var controllerFeature = new ControllerFeature();
-            _partManager.PopulateFeature(controllerFeature);
-
-            // Get the names of all of the controllers
-            var controllers = controllerFeature.Controllers.Select(x => x.FullName);
-
-            // Log the application parts and controllers
-            _logger.LogTrace("Found controllers in the following application parts: '{ApplicationParts}' with the following controllers: '{Controllers}'",
-                string.Join(", ", applicationParts), string.Join(", ", controllers));
-            
-            
-            var tagHelperFeature = new TagHelperFeature();
-            _partManager.PopulateFeature(tagHelperFeature);
-            var tagHelpers = tagHelperFeature.TagHelpers.Select(x => x.FullName);
-            _logger.LogTrace("Found taghellpers in the following application parts: '{ApplicationParts}' with the following tag helpers: '{tagHelpers}'",
-            string.Join(", ", applicationParts), string.Join(", ", tagHelpers));
-
-            var viewsFeature = new ViewsFeature();
-            _partManager.PopulateFeature(viewsFeature);
-            var views = viewsFeature.ViewDescriptors.Select(x => x.RelativePath);
-            _logger.LogTrace("Found viwes in the following application parts: '{ApplicationParts}' with the following views: '{views}'",
-            string.Join(", ", applicationParts), string.Join(", ", views));
+                _timer.Change(Timeout.Infinite, Timeout.Infinite);
 
 
-            _timer.Change(GetTimespanForSeconds(TimerDelayInSeconds), GetTimespanForSeconds(TimerDelayInSeconds));
+                // Get the names of all the application parts. This is the short assembly name for AssemblyParts
+                var applicationParts = _partManager.ApplicationParts.Select(x => x.Name);
+
+                // Create a controller feature, and populate it from the application parts
+                var controllerFeature = new ControllerFeature();
+                _partManager.PopulateFeature(controllerFeature);
+
+                // Get the names of all of the controllers
+                var controllers = controllerFeature.Controllers.Select(x => x.FullName);
+
+                // Log the application parts and controllers
+                _logger.LogTrace("Found controllers in the following application parts: '{ApplicationParts}' with the following controllers: '{Controllers}'",
+                    string.Join(", ", applicationParts), string.Join(", ", controllers));
+
+
+                var tagHelperFeature = new TagHelperFeature();
+                _partManager.PopulateFeature(tagHelperFeature);
+                var tagHelpers = tagHelperFeature.TagHelpers.Select(x => x.FullName);
+                _logger.LogTrace("Found taghellpers in the following application parts: '{ApplicationParts}' with the following tag helpers: '{tagHelpers}'",
+                string.Join(", ", applicationParts), string.Join(", ", tagHelpers));
+
+                var viewsFeature = new ViewsFeature();
+                _partManager.PopulateFeature(viewsFeature);
+                var views = viewsFeature.ViewDescriptors.Select(x => x.RelativePath);
+                _logger.LogTrace("Found viwes in the following application parts: '{ApplicationParts}' with the following views: '{views}'",
+                string.Join(", ", applicationParts), string.Join(", ", views));
+
+
+                _timer.Change(GetTimespanForSeconds(TimerDelayInSeconds), GetTimespanForSeconds(TimerDelayInSeconds));
+            }
+            catch (Exception e)
+            {
+                this._logger.LogError($"{this.GetType().FullName} threw an exception {e.Message}");
+            }
         }
 
 
@@ -138,7 +145,13 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
         {
             _logger.LogInformation("Timed Hosted Service is stopping.");
             _timer?.Change(Timeout.Infinite, 0);
+ 
             return Task.CompletedTask;
+        }
+
+        public void Dispose()
+        {
+            _timer.Dispose();
         }
     }
 }

@@ -55,6 +55,15 @@ builder.Services.AddControllersWithViews(options =>
 
 builder.Services.AddODataQueryFilter();
 
+/// <summary>
+/// as per https://www.thecodebuzz.com/failed-to-determine-the-https-port-for-the-redirect/
+/// </summary>
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+});
+
 
 // enables odata entities
 //var model = new HorselessOdataModel();
@@ -92,7 +101,7 @@ builder.Services.AddODataQueryFilter();
 //        options.AddRouteComponents("{__tenant__}/HorselessContent", edmContent);
 
 
-        
+
 //    })
 //    .AddOData(options =>
 //    {
@@ -112,14 +121,6 @@ builder.Services.AddODataQueryFilter();
 //        options.AddRouteComponents("HorselessHosting", edmHosting);
 //    });
 
-/// <summary>
-/// as per https://www.thecodebuzz.com/failed-to-determine-the-https-port-for-the-redirect/
-/// </summary>
-builder.Services.Configure<ForwardedHeadersOptions>(options =>
-{
-    options.ForwardedHeaders =
-        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-});
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
@@ -262,7 +263,11 @@ app.UseStatusCodePages();
 
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseHttpsRedirection();
+
+// no enforcement of https in dev
+// since https won't exist on containers in kubernetes
+// without great antipattern effort
+// app.UseHttpsRedirection();
 
 
 /// <summary>
