@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Security.Claims;
@@ -121,7 +122,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 //opts.SignedOutCallbackPath = "/";
                 //opts.SignedOutRedirectUri = builder.Configuration[KeycloakAuthOptions.SignoutRedirectUrlConfigKey];
                 opts.Authority = builder.Configuration[KeycloakAuthOptions.RealmConfigKey];
-                opts.RequireHttpsMetadata = false;
+                opts.RequireHttpsMetadata = true;
                 opts.ClientId = builder.Configuration[KeycloakAuthOptions.ClientIdConfigKey];
                 opts.ClientSecret = builder.Configuration[KeycloakAuthOptions.ClientSecretConfigKey];
                 opts.MetadataAddress = builder.Configuration[KeycloakAuthOptions.MetaDataConfigKey];
@@ -146,6 +147,15 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 {
                     OnRedirectToIdentityProvider = async ctx =>
                     {
+                        // ensure https redirect url
+                        var currentUrl = ctx.Request.GetDisplayUrl();
+                        var redirectUri = new UriBuilder(currentUrl)
+                        {
+                            Scheme = Uri.UriSchemeHttps,
+                            Port = 443
+                        };
+
+                        ctx.ProtocolMessage.RedirectUri = redirectUri.ToString();
                         await Task.Yield();
                     },
                     OnRemoteFailure = async ctx =>
