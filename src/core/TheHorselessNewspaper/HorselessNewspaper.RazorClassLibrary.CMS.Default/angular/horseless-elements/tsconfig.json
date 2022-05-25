@@ -29,6 +29,7 @@
       "dom"
     ]
   },
+  "include": ["./src/app/**/*.ts"],
   "exclude": [ "**/node_modules" ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
