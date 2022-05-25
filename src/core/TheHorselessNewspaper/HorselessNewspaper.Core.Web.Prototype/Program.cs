@@ -62,6 +62,7 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
     options.ForwardedHeaders =
         ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+
 });
 
 
