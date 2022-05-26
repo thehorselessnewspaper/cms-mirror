@@ -8,6 +8,7 @@
     "rxjs": "^7.5.5"
   },
   "devDependencies": {
+    "@angular/cli": "^13.3.7",
     "@wizardcontrollerprerelease/horseless-contentapi-lib": "^x.x.x",
     "tslib": "^2.3.1"
   }
