@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="235c0c0820144074950f9a2eacee2540" Name="Diagram1" ZoomLevel="85" DisplayType="false">
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.AccessControlEntry" Width="2.875" PointX="8" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.AccessControlEntry1" Width="2.875" PointX="30" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.AccessControlEntryHorselessSession" Width="2.875" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.AccessControlEntryPrincipal" Width="2.875" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.AccessControlEntryPrincipal1" Width="2.875" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.AccessControlEntryTenant" Width="2.875" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.ContentCollectionHorselessContent" Width="2.875" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.ContentCollectionHorselessView" Width="2.875" PointX="4.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.ContentCollectionPublication" Width="2.875" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.ContentCollection" Width="2.875" PointX="4.375" PointY="25.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.ContentCollectionTaxonomy" Width="2.875" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.ContentCollectionTenant" Width="2.875" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.FilesystemAsset" Width="2.875" PointX="4.375" PointY="31.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.Holonym" Width="2.875" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.HolonymTaxon" Width="2.875" PointX="4.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.HorselessContent" Width="2.875" PointX="4.375" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.HorselessSession" Width="2.875" PointX="19.25" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.HorselessTenantInfo" Width="2.875" PointX="26.375" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.HorselessView" Width="2.875" PointX="4.375" PointY="43.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.JSONAsset" Width="2.875" PointX="0.75" PointY="36.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.KeyCloakConfiguration" Width="2.875" PointX="26.375" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.Meronym" Width="2.875" PointX="4.375" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.MIMEType" Width="2.875" PointX="0.75" PointY="40.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.NavigationMenuItem" Width="2.875" PointX="4.375" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.NavigationMenuNavigationMenuItem" Width="2.875" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.NavigationMenu" Width="2.875" PointX="0.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.NugetPackage" Width="2.875" PointX="4.375" PointY="54.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.Placeholder" Width="2.875" PointX="4.375" PointY="59.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.Principal" Width="2.875" PointX="33.625" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.PrincipalClaim" Width="2.875" PointX="18.875" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.PrincipalClaimContainer" Width="2.875" PointX="15.25" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.Principal1" Width="2.875" PointX="11.625" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.PrincipalTenant" Width="2.875" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.PrincipalTenant1" Width="2.875" PointX="12.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.Publication" Width="2.875" PointX="4.375" PointY="63.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.Taxonomy" Width="2.875" PointX="8" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.Taxon" Width="2.875" PointX="4.375" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.Tenant" Width="2.875" PointX="37.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.TenantIdentifierStrategy" Width="2.875" PointX="18.875" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.TenantIdentifierStrategy1" Width="2.875" PointX="40.875" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.TenantIdentifierStrategyContainer" Width="2.875" PointX="44.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.TenantIdentifierStrategyContainer1" Width="2.875" PointX="22.5" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.TenantInfo" Width="2.875" PointX="22.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.Tenant1" Width="2.875" PointX="15.25" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="THLNP_Content_TestingModel.WebAPITenantInfo" Width="2.875" PointX="26.375" PointY="17.375" IsExpanded="true" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_AccessControlEntries_ContentCollections_ContentCollectionId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_AccessControlEntries_FilesystemAssets_FilesystemAssetId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_AccessControlEntries_Holonyms_HolonymId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_AccessControlEntries_HorselessContents_HorselessContentId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_AccessControlEntries_HorselessViews_HorselessViewId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_AccessControlEntries_JSONAssets_JSONAssetId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_AccessControlEntries_Meronyms_MeronymId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_AccessControlEntries_MIMETypes_MIMETypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_AccessControlEntries_NavigationMenuItems_NavigationMenuItemId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_AccessControlEntries_NavigationMenus_NavigationMenuId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_AccessControlEntries_NugetPackages_NugetPackageId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_AccessControlEntries_Placeholders_PlaceholderId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_AccessControlEntries_Publications_PublicationId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_AccessControlEntries_Taxons_TaxonId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_AccessControlEntry_KeyCloakConfiguration_KeyCloakConfigurationId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_AccessControlEntry_TenantInfo_TenantInfoId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_AccessControlEntry_WebAPITenantInfo_WebAPITenantInfoId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_Principals_ContentCollections_ContentCollectionId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_FilesystemAssetMimeContent" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_Principals_FilesystemAssets_FilesystemAssetId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_Principals_Holonyms_HolonymId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_MimeContentJSONAsset" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_MimeContentMIMEType" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_Principals_HorselessContents_HorselessContentId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_PrincipalHorselessSession" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_HorselessTenantInfo_TenantInfo_PayloadId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_Principals_HorselessViews_HorselessViewId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_Principals_JSONAssets_JSONAssetId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_KeyCloakConfiguration_TenantInfo_TenantInfoId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_Principal_KeyCloakConfiguration_KeyCloakConfigurationId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_Principals_Meronyms_MeronymId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_Principals_MIMETypes_MIMETypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_Principals_NavigationMenuItems_NavigationMenuItemId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_Principals_NavigationMenus_NavigationMenuId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_Principals_NugetPackages_NugetPackageId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_Principals_Placeholders_PlaceholderId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_Principal_WebAPITenantInfo_WebAPITenantInfoId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_PrincipalClaim_PrincipalClaimContainer_PrincipalClaimContainerId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_PrincipalClaimContainer_Principals_PrincipalId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_Principals_Publications_PublicationId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_Principals_Taxons_TaxonId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_TenantIdentifierStrategy_Tenant_TargetTenantId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_TenantInfo_Tenant_ParentTenantId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_TenantIdentifierStrategies_Tenants_TargetTenantId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_TenantIdentifierStrategyContainers_TenantIdentifierStrategies_StrategyId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_TenantIdentifierStrategyContainer_TenantIdentifierStrategy_StrategyId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.FK_WebAPITenantInfo_TenantInfo_TenantInfoId" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.AccessControlEntryAccessControlEntry" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.AccessControlEntryAccessControlEntry1" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.AccessControlEntryOwners" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.AccessControlEntryPrincipal2" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.AccessControlEntryPrincipal3" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.AccessControlEntryTenant1" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.ContentCollectionContentCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.ContentCollectionMimeContent" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.HolonymMeronym" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.HorselessSessionAccessControlEntry" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.HorselessSessionPrincipal" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.HorselessViewContentCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.NavigationMenuItemNavigationMenu" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.NavigationMenuItemNavigationMenuItem" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.NavigationMenuNavigationMenu" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.PrincipalAccessControlEntry" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.PrincipalPrincipal" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.PrincipalPrincipal1" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.PrincipalTenant2" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.PrincipalTenant3" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.PublicationContentCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.PublicationPublication" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.TaxonHolonym" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.TaxonomyContentCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.TaxonTaxon" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.TaxonTaxonomy" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.TenantAccessControlEntry" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.TenantAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.TenantContentCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="THLNP_Content_TestingModel.TenantOwners" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
