@@ -20,8 +20,9 @@
     var currentUrl = Context.Request.GetDisplayUrl();
     var redirectUri = new UriBuilder(currentUrl)
                 {
-                    Scheme = Uri.UriSchemeHttps,
-                    Port = 443
+                    Scheme = Uri.UriSchemeHttps
+                    @*,
+                    Port = Context.Connection.LocalPort*@
                 };
 
     <div>

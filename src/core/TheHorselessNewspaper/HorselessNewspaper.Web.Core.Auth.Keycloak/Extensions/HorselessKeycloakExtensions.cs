@@ -147,15 +147,6 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 {
                     OnRedirectToIdentityProvider = async ctx =>
                     {
-                        // ensure https redirect url
-                        var currentUrl = ctx.Request.GetDisplayUrl();
-                        var redirectUri = new UriBuilder(currentUrl)
-                        {
-                            Scheme = Uri.UriSchemeHttps,
-                            Port = 443
-                        };
-
-                        ctx.ProtocolMessage.RedirectUri = redirectUri.ToString();
                         await Task.Yield();
                     },
                     OnRemoteFailure = async ctx =>
