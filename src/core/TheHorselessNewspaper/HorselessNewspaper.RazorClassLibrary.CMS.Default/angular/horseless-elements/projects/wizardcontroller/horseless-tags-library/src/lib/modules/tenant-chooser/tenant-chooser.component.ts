@@ -12,8 +12,9 @@ import {
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { ConfigurationEndpointService } from '../../services/configuration-endpoint.service';
 import { Router, NavigationStart } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, take, tap } from 'rxjs';
 import { TenantChooserService } from './services/TenantChooser.service';
+import { HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'lib-tenant-chooser',
   templateUrl: './tenant-chooser.component.html',
@@ -23,6 +24,8 @@ export class TenantChooserComponent implements OnInit {
   clientConfiguration$!: Observable<SecurityRestClientConfiguration>;
 
   tenants!: ContentEntitiesTenant[];
+  hostingModelTenants!: HostingEntitiesTenant[];
+
   isAuthenticated: boolean = false;
 
   pageSize: number | undefined = 10;
@@ -32,6 +35,7 @@ export class TenantChooserComponent implements OnInit {
 
   private tenantService: TenantRESTService;
   private oidcService: OidcSecurityService;
+
 
   constructor(
     private router: Router,
@@ -46,11 +50,43 @@ export class TenantChooserComponent implements OnInit {
 
   ngOnInit(): void {
 
+    let applicationJson = new HttpHeaders();
+    applicationJson.append("Accept", "application/json");
 
     console.log('tenant chooser component is pulling configuration');
 
     this.clientConfigService.pullClientConfiguration();
 
+    this.clientConfigService.clientConfiguration$
+    .pipe(
+      take(1),
+      tap(t => {
+        console.log(`tenant chooser component has new client configuration `, t);
+      }),
+      map(m => {
+        console.log("setting tenant rest base path to %s", m.RESTEndpoint);
+        this.tenantService.configuration.basePath = m.RESTEndpoint as string | undefined;
+
+
+        console.log("authenticated state transition with token %s", m.AccessToken);
+        this.isAuthenticated = true;
+
+        this.tenantService.hostingEntitiesTenantRESTGetByPageNumber(10, 1, 1, "body", true,
+        {
+          httpHeaderAccept : "text/json"
+        })
+        .pipe(
+          map(t =>{
+            if (t != undefined) console.log("tenant service has returned %s results");
+            this.hostingModelTenants = t;
+          }
+         )
+        )
+        .subscribe();
+
+      })
+    )
+    .subscribe();
 
     /*
     this.oidcService

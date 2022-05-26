@@ -5,8 +5,15 @@
 <div>tenant list</div>
   <mat-list #tenants>
 
-</mat-list>
+  </mat-list>
 </div>
+
+<mat-selection-list #selectionList>
+  <mat-list-option *ngFor="let tenant of hostingModelTenants">
+    {{tenant.DisplayName}}
+  </mat-list-option>
+</mat-selection-list>
+
 
 <ng-template #unauthorized>
   <div>

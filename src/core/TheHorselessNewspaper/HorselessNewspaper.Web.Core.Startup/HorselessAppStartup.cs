@@ -122,8 +122,9 @@ namespace HorselessNewspaper.Web.Core.Startup
 
             // as per https://docs.microsoft.com/en-us/shows/on-net/adding-a-little-swagger-to-odata
             // as per https://github.com/OData/WebApi/issues/2024
-            services.AddMvcCore(options =>
+            services.AddMvc(options =>
             {
+                options.RespectBrowserAcceptHeader = true;
                 IEnumerable<ODataOutputFormatter> outputFormatters =
                 options.OutputFormatters.OfType<ODataOutputFormatter>()
                     .Where(foramtter => foramtter.SupportedMediaTypes.Count == 0);

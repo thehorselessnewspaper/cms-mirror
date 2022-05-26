@@ -10,7 +10,9 @@ import { ConfigurationEndpointService } from '../../../services/configuration-en
 export class TenantChooserService {
   tenants!: ContentEntitiesTenant[];
 
-constructor(private clientConfigService : ConfigurationEndpointService, private tenantService: TenantRESTService) { }
+constructor(private clientConfigService : ConfigurationEndpointService, private tenantService: TenantRESTService) {
+
+ }
 
 public pullClientConfiguration(){
 

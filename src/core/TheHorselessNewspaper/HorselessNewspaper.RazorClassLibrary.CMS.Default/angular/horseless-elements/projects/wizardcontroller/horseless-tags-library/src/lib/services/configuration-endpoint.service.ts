@@ -2,6 +2,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AutoUnsubscribe } from "ngx-auto-unsubscribe";
 import { SecurityRestClientConfiguration } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 import {
   catchError,
@@ -15,6 +16,7 @@ import {
 import { HorselessTagsLibraryModule } from '../horseless-tags-library.module';
 import { IClaimsIdentityAuthService as IClaimsIdentiyAuthService } from './IClaimsIdentityAuthService';
 
+@AutoUnsubscribe()
 @Injectable({
   providedIn: 'any',
 })
@@ -34,6 +36,8 @@ export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
    */
   getAccessToken(): string {
     let ret = "";
+
+    console.log("getAccessToken is running");
 
     this.clientConfiguration$.pipe(
       take(1),
@@ -112,5 +116,9 @@ export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
     return throwError(
       () => new Error('Something bad happened; please try again later.')
     );
+  }
+
+  ngOnDestroy() {
+    // We'll throw an error if it doesn't
   }
 }

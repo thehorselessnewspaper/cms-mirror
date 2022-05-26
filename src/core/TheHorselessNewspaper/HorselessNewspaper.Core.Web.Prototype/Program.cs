@@ -187,31 +187,32 @@ builder.Services.UseHorselessHostingModelMSSqlServer(builder.Configuration, buil
 
 // as per https://docs.microsoft.com/en-us/shows/on-net/adding-a-little-swagger-to-odata
 // as per https://github.com/OData/WebApi/issues/2024
-builder.Services.AddMvcCore(options =>
-{
-    IEnumerable<ODataOutputFormatter> outputFormatters =
-    options.OutputFormatters.OfType<ODataOutputFormatter>()
-        .Where(foramtter => foramtter.SupportedMediaTypes.Count == 0);
+//builder.Services.AddMvcCore(options =>
+//{
+//    options.RespectBrowserAcceptHeader = true;
+//    IEnumerable<ODataOutputFormatter> outputFormatters =
+//    options.OutputFormatters.OfType<ODataOutputFormatter>()
+//        .Where(foramtter => foramtter.SupportedMediaTypes.Count == 0);
 
-    IEnumerable<ODataInputFormatter> inputFormatters =
-        options.InputFormatters.OfType<ODataInputFormatter>()
-            .Where(formatter => formatter.SupportedMediaTypes.Count == 0);
+//    IEnumerable<ODataInputFormatter> inputFormatters =
+//        options.InputFormatters.OfType<ODataInputFormatter>()
+//            .Where(formatter => formatter.SupportedMediaTypes.Count == 0);
 
-    foreach (var outputFormatter in outputFormatters)
-    {
-        outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/odata"));
-        outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
+//    foreach (var outputFormatter in outputFormatters)
+//    {
+//        outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/odata"));
+//        outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
 
-    }
+//    }
 
-    foreach (var inputFormatter in inputFormatters)
-    {
-        inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/odata"));
-        inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
+//    foreach (var inputFormatter in inputFormatters)
+//    {
+//        inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/odata"));
+//        inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
 
-    }
+//    }
 
-});
+//});
 //    .AddRazorRuntimeCompilation(
 //                opt =>
 //                {

@@ -372,12 +372,19 @@ HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessCo
             var edmHosting = model.GetHostingEDMModel();
             // handle cycles in json responses 
             // as per https://gavilan.blog/2021/05/19/fixing-the-error-a-possible-object-cycle-was-detected-in-different-versions-of-asp-net-core/
-            services.AddControllers().AddJsonOptions(x =>
+            services.AddControllers(
+                    opts =>
+                    {
+                        // permit content negotiation
+                        opts.RespectBrowserAcceptHeader = true;
+                    }
+                ).AddJsonOptions(x =>
                 {
                     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                     x.JsonSerializerOptions.PropertyNamingPolicy = null; // leave property names unchanged
                     x.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                     x.JsonSerializerOptions.ReadCommentHandling = System.Text.Json.JsonCommentHandling.Skip;
+                   
                 })
                     .AddOData(options =>
                     {
