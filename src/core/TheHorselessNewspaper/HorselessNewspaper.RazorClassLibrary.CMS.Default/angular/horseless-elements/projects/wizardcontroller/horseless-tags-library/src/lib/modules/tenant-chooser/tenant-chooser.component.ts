@@ -73,9 +73,16 @@ export class TenantChooserComponent implements OnInit {
 
         this.tenantService.hostingEntitiesTenantRESTGetByPageNumber(10, 1, 1, "body", true,
         {
-          httpHeaderAccept : "text/json"
+          httpHeaderAccept : "application/json"
         })
         .pipe(
+          map(actionResult  =>{
+            // the rest api actually returns
+            // asp.net core ActionResult<T>
+            let realResult = actionResult as any;
+            return realResult.Value;
+
+          }),
           map(t =>{
             if (t != undefined) console.log("tenant service has returned %s results");
             this.hostingModelTenants = t;

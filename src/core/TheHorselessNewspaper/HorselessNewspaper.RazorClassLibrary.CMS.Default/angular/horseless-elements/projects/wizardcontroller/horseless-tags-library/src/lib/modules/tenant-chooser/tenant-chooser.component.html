@@ -1,12 +1,9 @@
-<p>tenant choosey</p>
-
 
 <div *ngIf="isAuthenticated; else unauthorized">
-<div>tenant list</div>
-  <mat-list #tenants>
 
-  </mat-list>
-</div>
+  <p-dataView>
+
+  </p-dataView>
 
 <mat-selection-list #selectionList>
   <mat-list-option *ngFor="let tenant of hostingModelTenants">

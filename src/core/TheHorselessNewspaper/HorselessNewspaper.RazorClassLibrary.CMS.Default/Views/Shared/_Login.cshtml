@@ -28,7 +28,9 @@
     <div>
 
         <p class="lead text-right">available authorities</p>
-        <small>Auth Authority: @authority</small>
+        <small>Auth Authority:</small>
+        <br/>
+        <small> @authority</small>
         <div>
             @foreach (var scheme in registeredSchemes.OrderBy(p => p.DisplayName))
             {
@@ -46,7 +48,9 @@ else if (registeredSchemes != null)
 {
     <div>
         <div>Welcome, @User.Identity.Name</div>
-        <small>Auth Authority: @authority</small>
+        <small>Auth Authority:</small>
+        <br/>
+        <small> @authority</small>
         <form action="/signout" method="post">
             <button class="btn btn-success m-1" type="submit">Sign Out</button>
         </form>

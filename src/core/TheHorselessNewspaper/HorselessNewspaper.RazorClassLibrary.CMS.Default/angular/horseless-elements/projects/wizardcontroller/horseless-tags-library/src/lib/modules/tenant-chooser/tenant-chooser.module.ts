@@ -9,12 +9,14 @@ import { TenantChooserService } from './services/TenantChooser.service';
 import { ConfigurationEndpointService } from '../../services/configuration-endpoint.service';
 import { AuthStateService } from 'angular-auth-oidc-client/lib/auth-state/auth-state.service';
 import { HttpHeaders } from '@angular/common/http';
+import {DataViewModule} from 'primeng/dataview';
 @NgModule({
   declarations: [TenantChooserComponent],
   imports: [
     CommonModule,
     MatListModule,
     MatSliderModule,
+    DataViewModule,
     HorselessApiModule
   ],
   providers: [TenantChooserService,

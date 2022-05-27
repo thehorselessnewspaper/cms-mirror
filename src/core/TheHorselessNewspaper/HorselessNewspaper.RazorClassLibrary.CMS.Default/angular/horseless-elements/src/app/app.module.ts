@@ -56,6 +56,14 @@ export function apiConfigFactory(): HorselessConfiguration {
   };
   return new HorselessConfiguration(params);
 }
+
+const routes: Routes = [
+  { path: 'default', component: LandingPageComponent },
+  { path: 'forbidden', component: UnauthorizedComponent },
+  { path: 'unauthorized', component: UnauthorizedComponent },
+  { path: '', redirectTo: 'default', pathMatch: 'full' },
+];
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -86,12 +94,7 @@ export function apiConfigFactory(): HorselessConfiguration {
     BrowserAnimationsModule,
     AuthConfigModule,
     NgbModule,
-    RouterModule.forRoot([
-      { path: 'default', component: LandingPageComponent },
-      { path: 'forbidden', component: UnauthorizedComponent },
-      { path: 'unauthorized', component: UnauthorizedComponent },
-      { path: '', redirectTo: 'default', pathMatch: 'full' },
-    ]),
+    RouterModule.forRoot(routes),
   ],
   exports: [],
   providers: [
