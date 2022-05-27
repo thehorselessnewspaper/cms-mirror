@@ -52,8 +52,6 @@
 		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
 	</PropertyGroup>
 	<ItemGroup>
-		<Folder Include="Areas\Admin\Views\Shared\DisplayTemplates\" />
-		<Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
 		<Folder Include="Areas\HorselessContent\Controllers\REST\" />
 		<Folder Include="Areas\HorselessContent\Views\" />
 		<Folder Include="openapi\" />
