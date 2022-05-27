@@ -116,7 +116,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 
                 options.MapControllerRoute(
                   name: "multitenantdefault",
-                  pattern: "{tenant}/{controller}/{action}");
+                  pattern: "{__tenant__}/{controller}/{action}");
 
 
                 options.MapControllers();

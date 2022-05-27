@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controllers
 {
-
+    [Authorize]
     [Area("Admin")]
     public class TenantOwnerController : Controller
     {
