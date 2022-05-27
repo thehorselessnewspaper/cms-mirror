@@ -1054,6 +1054,42 @@
         }
       }
     },
+    "/GetDynamicView": {
+      "get": {
+        "tags": [
+          "DynamicViewServer"
+        ],
+        "operationId": "PresentationDynamicViewServer_GetDynamicView",
+        "parameters": [
+          {
+            "name": "viewName",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "parentContentCollectionObjectId",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
     "/{__tenant__}/api/HorselessContentModel/FilesystemAsset/Create": {
       "post": {
         "tags": [

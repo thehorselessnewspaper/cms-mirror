@@ -54,8 +54,6 @@
 	<ItemGroup>
 		<Folder Include="Areas\HorselessContent\Controllers\REST\" />
 		<Folder Include="Areas\HorselessContent\Views\" />
-		<Folder Include="openapi\" />
-		<Folder Include="vuejs\" />
 		<Folder Include="typescript\Tenant\" />
 		<Folder Include="typescript\TenantSetup\" />
 		<Folder Include="wwwroot\js\horseless-elements\" />

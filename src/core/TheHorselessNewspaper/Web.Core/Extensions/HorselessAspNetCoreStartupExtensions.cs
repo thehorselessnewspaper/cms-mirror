@@ -268,6 +268,20 @@ namespace HorselessNewspaper.Web.Core.Extensions
                  ContentCollectionService<IQueryableContentModelOperator<ContentEntities.NavigationMenu>, ContentEntities.NavigationMenu>>();
             serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Principal>, ContentEntities.Principal>,
                  ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Principal>, ContentEntities.Principal>>();
+            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.AccessControlEntry>, ContentEntities.AccessControlEntry>,
+                       ContentCollectionService<IQueryableContentModelOperator<ContentEntities.AccessControlEntry>, ContentEntities.AccessControlEntry>>();
+            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessView>, ContentEntities.HorselessView>,
+                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessView>, ContentEntities.HorselessView>>();
+            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Publication>, ContentEntities.Publication>,
+                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Publication>, ContentEntities.Publication>>();
+            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.NugetPackage>, ContentEntities.NugetPackage>,
+                   ContentCollectionService<IQueryableContentModelOperator<ContentEntities.NugetPackage>, ContentEntities.NugetPackage>>();
+            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Taxon>, ContentEntities.Taxon>,
+                            ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Taxon>, ContentEntities.Taxon>>();
+            //serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Taxonomy>, ContentEntities.Taxonomy>,
+            //                 ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Taxonomy>, ContentEntities.Taxonomy>>();
+            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Placeholder>, ContentEntities.Placeholder>,
+                            ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Placeholder>, ContentEntities.Placeholder>>();
             #endregion
 
             #region hosting collection query services
@@ -384,7 +398,7 @@ HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessCo
                     x.JsonSerializerOptions.PropertyNamingPolicy = null; // leave property names unchanged
                     x.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                     x.JsonSerializerOptions.ReadCommentHandling = System.Text.Json.JsonCommentHandling.Skip;
-                   
+
                 })
                     .AddOData(options =>
                     {

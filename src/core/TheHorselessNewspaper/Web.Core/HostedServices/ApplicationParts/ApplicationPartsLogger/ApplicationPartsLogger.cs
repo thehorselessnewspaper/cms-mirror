@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ApplicationParts;
+﻿using HorselessNewspaper.Web.Core.Interfaces.Content;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
+using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.ApplicationPartsLogger
@@ -88,7 +90,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
 
         }
 
-        internal void DoWork(object? state)
+        internal async void DoWork(object? state)
         {
             try
             {
@@ -119,16 +121,48 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
 
                 var viewsFeature = new ViewsFeature();
                 _partManager.PopulateFeature(viewsFeature);
-                var views = viewsFeature.ViewDescriptors.Select(x => x.RelativePath);
-                _logger.LogTrace("Found viwes in the following application parts: '{ApplicationParts}' with the following views: '{views}'",
-                string.Join(", ", applicationParts), string.Join(", ", views));
+                var viewPaths = viewsFeature.ViewDescriptors.Select(x => x.RelativePath);
+                _logger.LogTrace("Found views in the following application parts: '{ApplicationParts}' with the following views: '{views}'",
+                string.Join(", ", applicationParts), string.Join(", ", viewPaths));
 
+                // update database
+                using(var scope = this._services.CreateScope())
+                {
+                    var viewOperator = this._services
+                        .GetRequiredService<IContentCollectionService<IQueryableContentModelOperator<HorselessView>, HorselessView>>();
 
-                _timer.Change(GetTimespanForSeconds(TimerDelayInSeconds), GetTimespanForSeconds(TimerDelayInSeconds));
+                    foreach (var view in viewsFeature.ViewDescriptors)
+                    {
+                        var query = await viewOperator.Query(r => r.Name.Equals(view.RelativePath));
+                        var queryResult = query.ToList();
+                        var isPreviouslyRegistered = queryResult.Any();
+
+                        if(!isPreviouslyRegistered)
+                        {
+                            // handle the case of a view that must
+                            // be added to the database
+                            var newView = new HorselessView()
+                            {
+                                Id = Guid.NewGuid(),
+                                ObjectId = Guid.NewGuid().ToString(),
+                                Name = view.RelativePath,
+                                DisplayName = view.Item.Kind,
+                                CreatedAt = DateTime.UtcNow,
+                                PhysicalPath = view.RelativePath
+                            };
+
+                            int i = 0;
+                        }
+                    }
+
+                }
+
+ 
             }
             catch (Exception e)
             {
                 this._logger.LogError($"{this.GetType().FullName} threw an exception {e.Message}");
+                _timer.Change(GetTimespanForSeconds(TimerDelayInSeconds), GetTimespanForSeconds(TimerDelayInSeconds));
             }
         }
 

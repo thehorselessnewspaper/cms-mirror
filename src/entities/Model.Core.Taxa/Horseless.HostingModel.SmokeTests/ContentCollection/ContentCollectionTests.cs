@@ -299,7 +299,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
         [Test]
         public void CRUDTest()
         {
-            Assert.DoesNotThrowAsync(CrudContentCollection, "test failed due to entity not inserted with null objectid");
+            Assert.DoesNotThrowAsync(CrudContentCollection, "test failed ");
             Assert.Pass();
 
         }
@@ -373,7 +373,21 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             Assert.IsNotNull(readListResult);
             Assert.IsTrue(readListResult.Count() > 0);
 
-            var deleteResult = await this.Delete<ContentModel.ContentCollection>(newcontentCollection.ObjectId);
+            // sever foreign key relationships
+            newcontentCollection.AccessControlEntries.Clear();
+            newcontentCollection.Owners.Clear();
+            newcontentCollection.ParentContentCollections.Clear();
+
+            try
+            {
+                var deleteResult = await this.Delete<ContentModel.ContentCollection>(newcontentCollection.ObjectId);
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("exception deleting content collection " + e.Message, e);
+            }
 
             var deleteQuery = await this.Delete<ContentModel.ContentCollection>(w => w.DisplayName.Length > 0);
         }

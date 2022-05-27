@@ -42,7 +42,7 @@ namespace HorselessNewspaper.Web.Core.Authorization.Handler
             // resolve the tenant
             try
             {
-                _logger.LogInformation($"{this.GetType().Name} is confirming tenant context resolver operational");
+                _logger.LogTrace($"{this.GetType().Name} is confirming tenant context resolver operational");
 
                 var currentPrincipal = this._httpcontextAccessor.HttpContext.Features.Get<Principal>();
                 var currentTenant = this._httpcontextAccessor.HttpContext.Features.Get<Tenant>();
@@ -55,7 +55,7 @@ namespace HorselessNewspaper.Web.Core.Authorization.Handler
                         { nameof(Tenant.AccessControlEntries)});
                         var tenantAccessControlEntries = tenantQuery.SelectMany(s => s.AccessControlEntries).ToList();
 
-                        _logger.LogInformation($"{this.GetType().Name} has confirmed tenant context resolver operational for tenant resolution");
+                        _logger.LogTrace($"{this.GetType().Name} has confirmed tenant context resolver operational for tenant resolution");
 
                         var principal = currentPrincipal;
                         _logger.LogInformation($"{this.GetType().Name} is evaluating upn={principal.UPN}");
