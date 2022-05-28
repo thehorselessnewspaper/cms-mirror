@@ -11911,6 +11911,34 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "ManagedContentCollections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+            },
+            "nullable": true
+          },
+          "ManagedHorselessContents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
+            },
+            "nullable": true
+          },
+          "ManagedHorselessViews": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesHorselessView"
+            },
+            "nullable": true
+          },
+          "ManagedPublications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPublication"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -12956,6 +12984,20 @@
             "type": "string",
             "format": "uuid"
           },
+          "AccessControlEntries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
+            },
+            "nullable": true
+          },
+          "Owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
+            },
+            "nullable": true
+          },
           "ClaimType": {
             "type": "string",
             "nullable": true
@@ -13012,6 +13054,20 @@
           },
           "Principal": {
             "$ref": "#/components/schemas/ContentEntitiesPrincipal"
+          },
+          "AccessControlEntries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
+            },
+            "nullable": true
+          },
+          "Owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -13069,14 +13125,14 @@
             },
             "nullable": true
           },
-          "PublicationParents": {
+          "PublicationChildrens": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPublication"
             },
             "nullable": true
           },
-          "PublicationsChildren": {
+          "PublicationParents": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPublication"
@@ -13241,6 +13297,30 @@
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesTaxon"
             },
+            "nullable": true
+          },
+          "AccessControlEntries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
+            },
+            "nullable": true
+          },
+          "Owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
+            },
+            "nullable": true
+          },
+          "Timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "UpdatedAt": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         },
@@ -13466,6 +13546,10 @@
           },
           "PermissionType": {
             "$ref": "#/components/schemas/HostingEntitiesACEPermissionType"
+          },
+          "WhatSWrongHere": {
+            "type": "string",
+            "nullable": true
           },
           "Timestamp": {
             "type": "string",

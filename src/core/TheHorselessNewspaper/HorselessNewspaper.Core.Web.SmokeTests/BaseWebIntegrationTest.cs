@@ -126,7 +126,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests
         protected async Task<T> Delete<T>(string entityId, IServiceScope scope) where T : class, IContentRowLevelSecured
         {
             var queryProvider = this.GetIQueryableContentModelOperator<IQueryableContentModelOperator<T>>(scope);
-            var result = await queryProvider.Delete(entityId);
+            var result = await queryProvider.DeleteByObjectId(entityId);
             return result;
         }
 
