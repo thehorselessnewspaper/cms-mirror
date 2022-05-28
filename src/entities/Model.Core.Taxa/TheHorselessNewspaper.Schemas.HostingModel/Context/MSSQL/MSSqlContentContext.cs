@@ -88,7 +88,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             }
             else
             {
-                this.logger.LogWarning($"{this.GetType().Name} is handling a previously initialized tenant context");
+                this.logger.LogTrace($"{this.GetType().Name} is handling a previously initialized tenant context");
             }
 
             return this.TenantInfo;

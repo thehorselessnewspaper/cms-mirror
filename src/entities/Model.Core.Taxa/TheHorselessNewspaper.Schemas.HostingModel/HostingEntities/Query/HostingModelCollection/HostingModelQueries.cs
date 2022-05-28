@@ -84,7 +84,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             return entities;
         }
 
-        public async Task<T> Delete(string entityId)
+        public async Task<T> DeleteByEntityId(Guid entityId, bool isSoftDelete = true)
         {
             T? entity;
 
@@ -92,7 +92,22 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 
             _logger.LogDebug($"handling Delete request");
             var dbSet = ((DbContext)_context).Set<T>();
-            entity = await dbSet.Where(w => w.ObjectId == entityId).FirstOrDefaultAsync<T>();
+            entity = await dbSet.Where(w => w.Id == entityId).FirstOrDefaultAsync<T>();
+            var removeState = dbSet.Remove(entity);
+            var updateResult = await ((DbContext)_context).SaveChangesAsync();
+
+            return await Task.FromResult<T>(entity);
+        }
+
+        public async Task<T> DeleteByObjectId(string objectId, bool isSoftDelete = true )
+        {
+            T? entity;
+
+            var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
+
+            _logger.LogDebug($"handling Delete request");
+            var dbSet = ((DbContext)_context).Set<T>();
+            entity = await dbSet.Where(w => w.ObjectId == objectId).FirstOrDefaultAsync<T>();
             var removeState = dbSet.Remove(entity);
             var updateResult = await ((DbContext)_context).SaveChangesAsync();
 

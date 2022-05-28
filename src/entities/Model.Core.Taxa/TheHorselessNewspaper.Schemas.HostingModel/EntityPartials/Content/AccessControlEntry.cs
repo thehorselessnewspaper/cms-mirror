@@ -67,21 +67,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
         public DateTime? UpdatedAt { get; set; }
 
-        //// [NotMapped]
-        //public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
-
-        // [NotMapped]
-        //[InverseProperty(nameof(Principal.AccessControlList))]
-        //public virtual ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
-
-        /// <summary>
-        /// principals referred to by this access control entry
-        /// </summary>
-
-
-        //// [ForeignKey("PrincipalId")]
-        //[InverseProperty(nameof(Principal.AccessControlEntries))]
-        //public virtual ICollection<Principal> Principals { get; set; } = new HashSet<Principal>();
+        [InverseProperty(nameof(ContentCollection.AccessControlEntries))]
+        public virtual ICollection<ContentCollection> ContentCollections { get; set; }
     }
 
 

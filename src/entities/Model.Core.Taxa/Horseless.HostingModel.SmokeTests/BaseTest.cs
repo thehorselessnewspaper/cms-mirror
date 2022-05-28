@@ -187,10 +187,17 @@ namespace Horseless.HostingModel.SmokeTests
             return result;
         }
 
-        protected async Task<T> Delete<T>(string entityId) where T : class, IContentRowLevelSecured
+        protected async Task<T> DeleteByEntityId<T>(Guid entityId) where T : class, IContentRowLevelSecured
         {
             var queryProvider = this.GetIQueryableContentModelOperator<IQueryableContentModelOperator<T>>();
-            var result = await queryProvider.Delete(entityId);
+            var result = await queryProvider.DeleteByEntityId(entityId);
+            return result;
+        }
+
+        protected async Task<T> DeleteByObjectId<T>(string entityId) where T : class, IContentRowLevelSecured
+        {
+            var queryProvider = this.GetIQueryableContentModelOperator<IQueryableContentModelOperator<T>>();
+            var result = await queryProvider.DeleteByObjectId(entityId);
             return result;
         }
 

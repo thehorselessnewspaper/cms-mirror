@@ -41,7 +41,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
             if (this.TenantInfo == null)
             {
-                this.logger.LogWarning($"{this.GetType().Name} is handling a null tenant context");
+                this.logger.LogTrace($"{this.GetType().Name} is handling a null tenant context");
                 var tenant = new HorselessTenantInfo();
                 // here TTenatInfo is the type of your custom tenant info object
                 var resolver = serviceProvider.GetRequiredService<ITenantResolver<HorselessTenantInfo>>();
@@ -56,11 +56,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
                         var identifier = await s.GetIdentifierAsync("randomtextstrategymatcher");
                         if (identifier != null)
                         {
-                            logger.LogInformation($"{this.GetType().Name} resolved a tenant with the multitenant strategy");
+                            logger.LogTrace($"{this.GetType().Name} resolved a tenant with the multitenant strategy");
 
                             var allResult = await resolver.Stores.First().GetAllAsync();
                             var filtered = allResult.Where(w => w.Identifier.Equals(identifier)).First();
-                            logger.LogInformation("resolved tenant");
+                            logger.LogTrace("resolved tenant");
                             this.TenantInfo = filtered as ITenantInfo;
                             return this.TenantInfo;
                         }
@@ -71,13 +71,13 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
                     }
                     catch (Exception e)
                     {
-                        logger.LogWarning($"{this.GetType().Name} problem resolving tenant {e.Message}");
+                        logger.LogTrace($"{this.GetType().Name} problem resolving tenant {e.Message}");
                     }
                 }
             }
             else
             {
-                this.logger.LogWarning($"{this.GetType().Name} is handling a previously initialized tenant context");
+                this.logger.LogTrace($"{this.GetType().Name} is handling a previously initialized tenant context");
                 return this.TenantInfo;
             }
 

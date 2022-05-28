@@ -51,7 +51,8 @@ namespace TheHorselessNewspaper.HostingModel.Context
 
         Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId,  string propertyName,IEnumerable<U> relatedEntities) where U : class;
 
-        public Task<T> Delete(string objectId);
+        public Task<T> DeleteByEntityId(Guid entityId, bool softDelete = true);
+        public Task<T> DeleteByObjectId(string objectId, bool isSoftDelete = true);
         public Task<IEnumerable<T>> Delete(Expression<Func<T, bool>> query, bool softDelete = true, bool whatIf = true);
 
 

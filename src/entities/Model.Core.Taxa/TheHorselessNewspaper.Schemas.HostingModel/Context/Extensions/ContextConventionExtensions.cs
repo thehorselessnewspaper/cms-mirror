@@ -28,13 +28,12 @@ namespace TheHorselessNewspaper.HostingModel.Context.Extensions
             Conventions.Add(et =>
             {
                 var keys = et.GetForeignKeys().Where(fk => !fk.IsOwnership).Select(s => s.DeleteBehavior).ToList();
-                var keys2 = et.GetForeignKeys().Where(fk => fk.IsOwnership).Select(s => s.DeleteBehavior).ToList();
+                var keys2 = et.GetForeignKeys().Where(fk => fk.IsRequired).ToList();
 
                 int i = 0;
             });
 
             Conventions.Add(et => et.GetForeignKeys()
-                .Where(fk => !fk.IsOwnership || fk.IsOwnership)
                 .ToList()
                 .ForEach(fk => fk.DeleteBehavior = DeleteBehavior.ClientSetNull));
         }

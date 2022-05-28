@@ -47,6 +47,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
         public ACEPermissionType PermissionType { get; set; }
 
+        public string WhatSWrongHere { get; set; }
 
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);

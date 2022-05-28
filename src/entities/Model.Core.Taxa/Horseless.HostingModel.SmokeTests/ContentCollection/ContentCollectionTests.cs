@@ -180,6 +180,8 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             int insertCount = 99;
             for (int i = 0; i < insertCount; i++)
             {
+                // this loop will not result in equal quantities at this time
+                
                 await InsertRelatedOwner(tenant);
                 await InsertRelatedAccount(tenant);
             }
@@ -188,24 +190,28 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             {
                 nameof(Tenant.Owners), nameof(Tenant.Accounts), nameof(Tenant.AccessControlEntries)
             },
-            insertCount + 1, 1, 1);
-
+            insertCount + 1, 1, 10);
+            
             Assert.IsTrue(validatedInsertResult.First().Owners.Count > 50);
 
+            // pessimistic insert test
             Assert.IsTrue(validatedInsertResult.First().Accounts.Count > 0);
 
             var principals = await principalQuery.Read(insertCount + 1, 1, 2);
             var principalCount = principals.Count();
-            Assert.IsTrue(principalCount > 100);
+
+            // exact insert test, adjust value as necessary
+            Assert.IsTrue(principalCount == 199);
         }
 
         private async Task InsertRelatedOwner(IContentRowLevelSecured tenant)
         {
             var tenantQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Tenant>>();
-            var validatedInsertResult = await tenantQuery.ReadAsEnumerable(r => r.Id.Equals(tenant.Id), new List<string>()
+            var validatedInsertResult = await tenantQuery.Read(r => r.Id.Equals(tenant.Id), new List<string>()
             {
-                nameof(tenant.Owners), nameof(tenant.AccessControlEntries)
+                nameof(tenant.Owners), nameof(Tenant.AccessControlEntries)
             });
+
 
 
             Assert.IsTrue(validatedInsertResult != null);
@@ -380,8 +386,10 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
 
             try
             {
-                var deleteResult = await this.Delete<ContentModel.ContentCollection>(newcontentCollection.ObjectId);
+                // var deleteResult = await this.DeleteByObjectId<ContentModel.ContentCollection>(newcontentCollection.ObjectId);
 
+                var deleteResult = await this.DeleteByEntityId<ContentModel.ContentCollection>(newcontentCollection.Id);
+                Assert.IsNotNull(deleteResult);
             }
             catch (Exception e)
             {

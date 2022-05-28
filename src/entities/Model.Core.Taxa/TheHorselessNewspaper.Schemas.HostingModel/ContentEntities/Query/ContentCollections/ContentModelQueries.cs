@@ -124,7 +124,8 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             return entities;
         }
 
-        public async Task<T> Delete(string entityId)
+
+        public async Task<T> DeleteByEntityId(Guid entityId, bool isSoftDelete = true)
         {
             T? entity;
 
@@ -133,9 +134,37 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             try
             {
                 var dbSet = ((DbContext)_context).Set<T>();
-                entity = dbSet.Where(w => w.ObjectId == entityId).FirstOrDefault<T>();
+                entity = await dbSet.FindAsync(entityId); //.Where(w => w.Id == entityId).FirstOrDefault<T>();
                 var removeState = dbSet.Remove(entity);
                 var updateResult = await ((DbContext)_context).SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"problem handling request {ex.Message}");
+
+                throw new Exception($"entity delete exception {ex.Message}", ex);
+
+            }
+
+            return await Task.FromResult<T>(entity);
+        }
+
+        public async Task<T> DeleteByObjectId(string entityId, bool isSoftDelete = true)
+        {
+            T? entity;
+
+            var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
+
+            try
+            {
+                var dbSet = ((DbContext)_context).Set<T>();
+                entity = await dbSet.Where(w => w.ObjectId == entityId).FirstAsync<T>();
+
+                if (entity != null)
+                {
+                    var removeState = dbSet.Remove(entity);
+                    var updateResult = await ((DbContext)_context).SaveChangesAsync();
+                }
             }
             catch (Exception ex)
             {
@@ -165,7 +194,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                     ret = await ((DbContext)_context).Set<T>().Where(query).ToListAsync();
                     foreach (var e in ret)
                     {
-                        // TODO softdelete has to depend on an interface on T
+                        e.IsSoftDeleted = true; // TODO softdelete has to depend on an interface on T
                     }
                     var updateResult = await ((DbContext)_context).SaveChangesAsync();
                 }
