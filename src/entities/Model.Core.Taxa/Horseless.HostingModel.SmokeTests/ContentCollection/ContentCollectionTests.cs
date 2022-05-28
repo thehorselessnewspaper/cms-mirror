@@ -22,6 +22,8 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             // avoid object references becoming equal
             var initialGuid = Guid.NewGuid();
 
+            // arrange
+            // initialize a tenant
             IContentRowLevelSecured tenant = new Tenant()
             {
                 Id = initialGuid,
@@ -66,9 +68,8 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                     }
                 }
             };
-
-
-
+    
+            // clone previous tenant
             var modifiedTenant = new Tenant()
             {
                 Id = initialGuid,
@@ -114,10 +115,13 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 }
             };
 
+            // give the clone a different id
             modifiedTenant.Id = Guid.NewGuid();
 
+            // update the original tenant with the clone's properties
             Tenant unUpdatedtenant = (Tenant)await tenant.UpdateModifiedPropertiesAsync(modifiedTenant);
 
+            // validate the clone traversals lost no data
             Assert.True(unUpdatedtenant.TenantIdentifierStrategy != null);
 
             Assert.True(unUpdatedtenant.TenantIdentifierStrategy.StrategyContainers != null);
@@ -126,9 +130,10 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             // require a list of property names to update
             Assert.IsTrue(unUpdatedtenant.Id == initialGuid);
 
-
-
-            // change the id
+            // change the id of the cloned tenant
+            // and update the original tenant with 
+            // the cloned tenant's properties
+           
             modifiedTenant.Id = Guid.NewGuid();
             var updatedtenant = (Tenant)await tenant.UpdateModifiedPropertiesAsync(modifiedTenant, new List<string>
             {
@@ -147,7 +152,8 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             Assert.IsTrue(updatedtenant.TenantIdentifierStrategy.StrategyContainers != null);
             Assert.IsTrue(updatedtenant.TenantIdentifierStrategy.StrategyContainers.Count == 1);
 
-            // add to a related property
+            // add a related property
+            // add an owner to the tenant
             updatedtenant.Owners.Add(new Principal()
             {
                 Id = Guid.NewGuid(),
@@ -157,6 +163,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 Timestamp = tenant.Timestamp
             });
 
+            // create a different principal
             var relatedPrincipal = new Principal()
             {
                 Id = Guid.NewGuid(),
@@ -170,11 +177,13 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
 
             var tenantQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Tenant>>();
 
+            
+            // insert the cloned tenant into the database
             var tenantInsertResult = await tenantQuery.Create(modifiedTenant);
 
             var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(modifiedTenant.Id, nameof(modifiedTenant.Owners), new List<Principal>() { relatedPrincipal });
 
-
+            // insert 99 copies
             Assert.IsTrue(insertResult != null);
 
             int insertCount = 99;
@@ -192,6 +201,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             },
             insertCount + 1, 1, 10);
             
+            // validate the object graph counts
             Assert.IsTrue(validatedInsertResult.First().Owners.Count > 50);
 
             // pessimistic insert test
@@ -206,13 +216,15 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
 
         private async Task InsertRelatedOwner(IContentRowLevelSecured tenant)
         {
+
             var tenantQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Tenant>>();
             var validatedInsertResult = await tenantQuery.Read(r => r.Id.Equals(tenant.Id), new List<string>()
             {
                 nameof(tenant.Owners), nameof(Tenant.AccessControlEntries)
             });
 
-
+            // validate we can retrieve inserted items
+            // and their related entities
 
             Assert.IsTrue(validatedInsertResult != null);
 
@@ -249,6 +261,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
 
             var principalQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Principal>>();
 
+            // insert the related principal
             var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(tenant.Id, nameof(tenant.Owners), new List<Principal>() { relatedPrincipal });
 
 

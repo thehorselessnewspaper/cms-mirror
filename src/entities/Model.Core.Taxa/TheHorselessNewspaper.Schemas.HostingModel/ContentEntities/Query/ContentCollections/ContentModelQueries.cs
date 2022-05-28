@@ -465,7 +465,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                         ((ICollection<U>)trackedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(trackedEntity)).Add(item);
                     }
 
-                    ((DbContext)_context).Update<T>(trackedEntity);
+                    // ((DbContext)_context).Update<T>(trackedEntity);
                     var saveResult = await ((DbContext)_context).SaveChangesAsync();
                     _logger.LogInformation($"inserted related entity");
                 }
