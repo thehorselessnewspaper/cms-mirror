@@ -47,7 +47,9 @@ namespace TheHorselessNewspaper.HostingModel.Context
             services.AddScoped<IQueryableContentModelOperator<ContentModel.HorselessView>, ContentModelQueries<ContentModel.HorselessView>>();
             services.AddScoped<IQueryableContentModelOperator<ContentModel.Publication>, ContentModelQueries<ContentModel.Publication>>();
             services.AddScoped<IQueryableContentModelOperator<ContentModel.Taxon>, ContentModelQueries<ContentModel.Taxon>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.Taxonomy>, ContentModelQueries<ContentModel.Taxonomy>>();
             services.AddScoped<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModelQueries<ContentModel.Tenant>>();
+            services.AddScoped<IQueryableContentModelOperator<ContentModel.HorselessView>, ContentModelQueries<ContentModel.HorselessView>>();
         }
     }
 }
