@@ -14,7 +14,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     /// support loading razor (and other) views from the database
     /// totally as per https://www.mikesdotnetting.com/article/301/loading-asp-net-core-mvc-views-from-a-database-or-other-location
     /// </summary>
-    public partial class HorselessView : IContentRowLevelSecured
+    public partial class HorselessView : IContentRowLevelSecured, IFileInfo
     {
 
         [InverseProperty(nameof(AccessControlEntry.ManagedHorselessViews))]
@@ -37,6 +37,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public byte[] ViewContent { get; set; } = new byte[0];
 
- 
+        public Stream CreateReadStream()
+        {
+            return new MemoryStream(ViewContent);
+        }
     }
 }
