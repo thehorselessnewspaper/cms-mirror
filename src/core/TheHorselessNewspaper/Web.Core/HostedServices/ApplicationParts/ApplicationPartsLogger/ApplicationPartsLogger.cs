@@ -128,7 +128,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
                 // update database
                 using(var scope = this._services.CreateScope())
                 {
-                    var viewOperator = this._services
+
+
+                    var viewOperator = scope.ServiceProvider
                         .GetRequiredService<IContentCollectionService<IQueryableContentModelOperator<HorselessView>, HorselessView>>();
 
                     foreach (var view in viewsFeature.ViewDescriptors)
