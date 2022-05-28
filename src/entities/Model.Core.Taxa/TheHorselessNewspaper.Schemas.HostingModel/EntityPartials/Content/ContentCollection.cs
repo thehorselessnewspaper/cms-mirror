@@ -14,7 +14,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     [MultiTenant]
     public partial class ContentCollection : IContentRowLevelSecured
     {
-        [ForeignKey("FK_ContentCollection_AccessControlEntries")]
+        [InverseProperty(nameof(AccessControlEntry.ManagedContentCollections))]
         public virtual ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
         [ForeignKey("FK_ContentCollection_Owners")]

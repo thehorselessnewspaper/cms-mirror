@@ -45,14 +45,14 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
             // tweak modelbuilder conventions due to reverse engineering issues with cascade.delete
             // as per https://www.red-gate.com/simple-talk/blogs/change-delete-behavior-and-more-on-ef-core/
-            builder.AddRemoveOneToManyCascadeConvention();
+            //builder.AddRemoveOneToManyCascadeConvention();
 
-            builder.ApplyConventions();
+            //builder.ApplyConventions();
 
 
-            // Configure an entity type to be multitenant.
-            // todo -- support not hardcoding this here
-            builder.Entity<HorselessTenantInfo>().IsMultiTenant();
+            //// Configure an entity type to be multitenant.
+            //// todo -- support not hardcoding this here
+            //builder.Entity<HorselessTenantInfo>().IsMultiTenant();
 
             builder.Entity<Tenant>()
                 .Navigation(n => n.Accounts).AutoInclude();

@@ -16,6 +16,8 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
 {
     internal class ContentCollectionTests : Tests
     {
+
+
         [Test]
         public async Task UpdateModelTest()
         {
@@ -68,7 +70,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                     }
                 }
             };
-    
+
             // clone previous tenant
             var modifiedTenant = new Tenant()
             {
@@ -133,7 +135,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             // change the id of the cloned tenant
             // and update the original tenant with 
             // the cloned tenant's properties
-           
+
             modifiedTenant.Id = Guid.NewGuid();
             var updatedtenant = (Tenant)await tenant.UpdateModifiedPropertiesAsync(modifiedTenant, new List<string>
             {
@@ -177,20 +179,21 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
 
             var tenantQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Tenant>>();
 
-            
+
             // insert the cloned tenant into the database
             var tenantInsertResult = await tenantQuery.Create(modifiedTenant);
 
             var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(modifiedTenant.Id, nameof(modifiedTenant.Owners), new List<Principal>() { relatedPrincipal });
 
-            // insert 99 copies
+
             Assert.IsTrue(insertResult != null);
 
-            int insertCount = 99;
+            // insert insertCount copies; expect Principals.insertCount + 1 at the end of the loop
+            int insertCount = 10;
             for (int i = 0; i < insertCount; i++)
             {
                 // this loop will not result in equal quantities at this time
-                
+
                 await InsertRelatedOwner(tenant);
                 await InsertRelatedAccount(tenant);
             }
@@ -200,18 +203,23 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 nameof(Tenant.Owners), nameof(Tenant.Accounts), nameof(Tenant.AccessControlEntries)
             },
             insertCount + 1, 1, 10);
-            
+
+
+            double measuredSuccessPercentage = 100;
             // validate the object graph counts
-            Assert.IsTrue(validatedInsertResult.First().Owners.Count > 50);
+            int ownersCount = validatedInsertResult.First().Owners.Count;
+            var expectedSuccessCount = Convert.ToInt32((insertCount * (measuredSuccessPercentage * .01)));
+            Assert.IsTrue(ownersCount >= expectedSuccessCount); // looking for 50% success
 
             // pessimistic insert test
-            Assert.IsTrue(validatedInsertResult.First().Accounts.Count > 0);
+            Assert.IsTrue(validatedInsertResult.First().Accounts.Count > 0); // looking for any success
 
             var principals = await principalQuery.Read(insertCount + 1, 1, 2);
             var principalCount = principals.Count();
 
             // exact insert test, adjust value as necessary
-            Assert.IsTrue(principalCount == 199);
+            var expectedPrincipalCount = ((insertCount * 2) + 1); // insertLoopTotal + 1 prior
+            Assert.IsTrue(principalCount == expectedPrincipalCount);
         }
 
         private async Task InsertRelatedOwner(IContentRowLevelSecured tenant)
@@ -309,7 +317,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 }
             };
 
- 
+
             var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(tenant.Id, nameof(Tenant.Accounts), new List<Principal>() { relatedPrincipal });
 
 

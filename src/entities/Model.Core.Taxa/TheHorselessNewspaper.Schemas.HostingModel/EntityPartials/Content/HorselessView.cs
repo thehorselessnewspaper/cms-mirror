@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     /// </summary>
     public partial class HorselessView : IContentRowLevelSecured, IFileInfo
     {
+
+        [InverseProperty(nameof(AccessControlEntry.ManagedHorselessViews))]
         public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
         public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
         public DateTime? UpdatedAt { get; set; }

@@ -67,8 +67,21 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
         public DateTime? UpdatedAt { get; set; }
 
-        [InverseProperty(nameof(ContentCollection.AccessControlEntries))] 
-        public virtual ICollection<ContentCollection?>? ContentCollections { get; set; } = new HashSet<ContentCollection?>();
+        [InverseProperty(nameof(ContentCollection.AccessControlEntries))]
+        public virtual ICollection<ContentCollection?>? ManagedContentCollections { get; set; } = new HashSet<ContentCollection?>();
+
+        //[InverseProperty(nameof(ContentCollection.AccessControlEntries))]
+        //public virtual ICollection<HorselessSession?>? ManagedHorselessSessions { get; set; } = new HashSet<HorselessSession?>();
+
+        [InverseProperty(nameof(HorselessContent.AccessControlEntries))]
+        public virtual ICollection<HorselessContent?>? ManagedHorselessContents { get; set; } = new HashSet<HorselessContent?>();
+
+        [InverseProperty(nameof(HorselessView.AccessControlEntries))]
+        public virtual ICollection<HorselessView?>? ManagedHorselessViews { get; set; } = new HashSet<HorselessView?>();
+
+        [InverseProperty(nameof(Publication.AccessControlEntries))]
+        public virtual ICollection<Publication?>? ManagedPublications { get; set; } = new HashSet<Publication?>();
+
     }
 
 
