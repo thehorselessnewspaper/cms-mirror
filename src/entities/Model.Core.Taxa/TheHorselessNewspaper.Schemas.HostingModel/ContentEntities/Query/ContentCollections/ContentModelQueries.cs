@@ -134,6 +134,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             try
             {
                 var dbSet = ((DbContext)_context).Set<T>();
+
                 entity = await dbSet.FindAsync(entityId); //.Where(w => w.Id == entityId).FirstOrDefault<T>();
                 var removeState = dbSet.Remove(entity);
                 var updateResult = await ((DbContext)_context).SaveChangesAsync();
@@ -268,13 +269,15 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 {
                     foreach (var clause in includeClauses)
                     {
-                        foreach(var item in dbSet)
-                        {
-                            await ((DbContext)_context).Entry(item)
-                                .Collection(clause)
-                                .LoadAsync();
-                        }
-    
+                        // avoid due to performance issues
+                        //foreach(var item in dbSet)
+                        //{
+                        //    await ((DbContext)_context).Entry(item)
+                        //        .Collection(clause)
+                        //        .LoadAsync();
+                        //}
+
+                        dbSet.Include(clause);
                     }
                 }
 
@@ -311,12 +314,15 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 {
                     foreach (var clause in includeClauses)
                     {
-                        foreach (var item in dbSet)
-                        {
-                            await ((DbContext)_context).Entry(item)
-                                .Collection(clause)
-                                .LoadAsync();
-                        }
+                        // avoid due to performance issues
+                        //foreach(var item in dbSet)
+                        //{
+                        //    await ((DbContext)_context).Entry(item)
+                        //        .Collection(clause)
+                        //        .LoadAsync();
+                        //}
+
+                        dbSet.Include(clause);
 
                     }
                 }
