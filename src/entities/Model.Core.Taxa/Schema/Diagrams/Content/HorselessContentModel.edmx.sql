@@ -2,11 +2,11 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/28/2022 15:20:24
--- Generated from EDMX file: E:\src\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
+-- Date Created: 05/27/2022 19:10:20
+-- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
-SET QUOTED_IDENTIFIER OFF
+
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -15,11 +15,11 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_TenantContentCollection_Tenant]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TenantContentCollection] DROP CONSTRAINT [FK_TenantContentCollection_Tenant];
+IF OBJECT_ID(N'[dbo].[FK_TenantContentCollections_Tenant]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TenantContentCollections] DROP CONSTRAINT [FK_TenantContentCollections_Tenant];
 GO
-IF OBJECT_ID(N'[dbo].[FK_TenantContentCollection_ContentCollection]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TenantContentCollection] DROP CONSTRAINT [FK_TenantContentCollection_ContentCollection];
+IF OBJECT_ID(N'[dbo].[FK_TenantContentCollections_ContentCollection]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TenantContentCollections] DROP CONSTRAINT [FK_TenantContentCollections_ContentCollection];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ContentCollectionMimeContent_ContentCollection]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ContentCollectionMimeContent] DROP CONSTRAINT [FK_ContentCollectionMimeContent_ContentCollection];
@@ -36,17 +36,17 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_MimeContentMIMEType]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[HorselessContents] DROP CONSTRAINT [FK_MimeContentMIMEType];
 GO
-IF OBJECT_ID(N'[dbo].[FK_NavigationMenuNavigationMenu_NavigationMenu]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[NavigationMenuNavigationMenu] DROP CONSTRAINT [FK_NavigationMenuNavigationMenu_NavigationMenu];
+IF OBJECT_ID(N'[dbo].[FK_NavigationMenuHierarchy_NavigationMenu]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[NavigationMenuHierarchy] DROP CONSTRAINT [FK_NavigationMenuHierarchy_NavigationMenu];
 GO
-IF OBJECT_ID(N'[dbo].[FK_NavigationMenuNavigationMenu_NavigationMenu1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[NavigationMenuNavigationMenu] DROP CONSTRAINT [FK_NavigationMenuNavigationMenu_NavigationMenu1];
+IF OBJECT_ID(N'[dbo].[FK_NavigationMenuHierarchy_Children]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[NavigationMenuHierarchy] DROP CONSTRAINT [FK_NavigationMenuHierarchy_Children];
 GO
-IF OBJECT_ID(N'[dbo].[FK_NavigationMenuItemNavigationMenuItem_NavigationMenuItem]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[NavigationMenuItemNavigationMenuItem] DROP CONSTRAINT [FK_NavigationMenuItemNavigationMenuItem_NavigationMenuItem];
+IF OBJECT_ID(N'[dbo].[FK_NavigationMenuItemHierarchy_NavigationMenuItem]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[NavigationMenuItemHierarchy] DROP CONSTRAINT [FK_NavigationMenuItemHierarchy_NavigationMenuItem];
 GO
-IF OBJECT_ID(N'[dbo].[FK_NavigationMenuItemNavigationMenuItem_NavigationMenuItem1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[NavigationMenuItemNavigationMenuItem] DROP CONSTRAINT [FK_NavigationMenuItemNavigationMenuItem_NavigationMenuItem1];
+IF OBJECT_ID(N'[dbo].[FK_NavigationMenuItemHierarchy_ChildNavigationItems]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[NavigationMenuItemHierarchy] DROP CONSTRAINT [FK_NavigationMenuItemHierarchy_ChildNavigationItems];
 GO
 IF OBJECT_ID(N'[dbo].[FK_NavigationMenuItemNavigationMenu_NavigationMenuItem]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[NavigationMenuItemNavigationMenu] DROP CONSTRAINT [FK_NavigationMenuItemNavigationMenu_NavigationMenuItem];
@@ -54,17 +54,17 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_NavigationMenuItemNavigationMenu_NavigationMenu]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[NavigationMenuItemNavigationMenu] DROP CONSTRAINT [FK_NavigationMenuItemNavigationMenu_NavigationMenu];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ContentCollectionContentCollection_ContentCollection]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ContentCollectionContentCollection] DROP CONSTRAINT [FK_ContentCollectionContentCollection_ContentCollection];
+IF OBJECT_ID(N'[dbo].[FK_ContentCollectionHierarchy_ContentCollection]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ContentCollectionHierarchy] DROP CONSTRAINT [FK_ContentCollectionHierarchy_ContentCollection];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ContentCollectionContentCollection_ContentCollection1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ContentCollectionContentCollection] DROP CONSTRAINT [FK_ContentCollectionContentCollection_ContentCollection1];
+IF OBJECT_ID(N'[dbo].[FK_ContentCollectionHierarchy_ChildContentCollections]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ContentCollectionHierarchy] DROP CONSTRAINT [FK_ContentCollectionHierarchy_ChildContentCollections];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PublicationPublication_Publication]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PublicationPublication] DROP CONSTRAINT [FK_PublicationPublication_Publication];
+IF OBJECT_ID(N'[dbo].[FK_PublicationHierarchy_Publication]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PublicationHierarchy] DROP CONSTRAINT [FK_PublicationHierarchy_Publication];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PublicationPublication_Publication1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PublicationPublication] DROP CONSTRAINT [FK_PublicationPublication_Publication1];
+IF OBJECT_ID(N'[dbo].[FK_PublicationHierarchy_PublicationChildren]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PublicationHierarchy] DROP CONSTRAINT [FK_PublicationHierarchy_PublicationChildren];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PublicationContentCollection_Publication]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PublicationContentCollection] DROP CONSTRAINT [FK_PublicationContentCollection_Publication];
@@ -79,10 +79,10 @@ IF OBJECT_ID(N'[dbo].[FK_TaxonTaxonomy_Taxonomy]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TaxonTaxonomy] DROP CONSTRAINT [FK_TaxonTaxonomy_Taxonomy];
 GO
 IF OBJECT_ID(N'[dbo].[FK_TaxonTaxon_Taxon]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TaxonTaxon] DROP CONSTRAINT [FK_TaxonTaxon_Taxon];
+    ALTER TABLE [dbo].[TaxonHirearchy] DROP CONSTRAINT [FK_TaxonTaxon_Taxon];
 GO
 IF OBJECT_ID(N'[dbo].[FK_TaxonTaxon_Taxon1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TaxonTaxon] DROP CONSTRAINT [FK_TaxonTaxon_Taxon1];
+    ALTER TABLE [dbo].[TaxonHirearchy] DROP CONSTRAINT [FK_TaxonTaxon_Taxon1];
 GO
 IF OBJECT_ID(N'[dbo].[FK_TaxonHolonym_Taxon]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TaxonHolonym] DROP CONSTRAINT [FK_TaxonHolonym_Taxon];
@@ -96,11 +96,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_HolonymMeronym_Meronym]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[HolonymMeronym] DROP CONSTRAINT [FK_HolonymMeronym_Meronym];
 GO
-IF OBJECT_ID(N'[dbo].[FK_TaxonomyContentCollection_Taxonomy]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TaxonomyContentCollection] DROP CONSTRAINT [FK_TaxonomyContentCollection_Taxonomy];
+IF OBJECT_ID(N'[dbo].[FK_ContentCollectionTaxonomies_Taxonomy]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ContentCollectionTaxonomies] DROP CONSTRAINT [FK_ContentCollectionTaxonomies_Taxonomy];
 GO
-IF OBJECT_ID(N'[dbo].[FK_TaxonomyContentCollection_ContentCollection]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TaxonomyContentCollection] DROP CONSTRAINT [FK_TaxonomyContentCollection_ContentCollection];
+IF OBJECT_ID(N'[dbo].[FK_ContentCollectionTaxonomies_ContentCollection]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ContentCollectionTaxonomies] DROP CONSTRAINT [FK_ContentCollectionTaxonomies_ContentCollection];
 GO
 IF OBJECT_ID(N'[dbo].[FK_TenantOwners_Tenant]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TenantOwners] DROP CONSTRAINT [FK_TenantOwners_Tenant];
@@ -114,17 +114,17 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PrincipalAccessControlEntry_AccessControlEntry]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PrincipalAccessControlEntry] DROP CONSTRAINT [FK_PrincipalAccessControlEntry_AccessControlEntry];
 GO
-IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryAccessControlEntry_AccessControlEntry]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AccessControlEntryAccessControlEntry] DROP CONSTRAINT [FK_AccessControlEntryAccessControlEntry_AccessControlEntry];
+IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryHierarchy_AccessControlEntry]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AccessControlEntryHierarchy] DROP CONSTRAINT [FK_AccessControlEntryHierarchy_AccessControlEntry];
 GO
-IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AccessControlEntryAccessControlEntry] DROP CONSTRAINT [FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry];
+IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryHierarchy_SubjectAccessControlEntry]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AccessControlEntryHierarchy] DROP CONSTRAINT [FK_AccessControlEntryHierarchy_SubjectAccessControlEntry];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PrincipalPrincipal_Principal]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PrincipalPrincipal] DROP CONSTRAINT [FK_PrincipalPrincipal_Principal];
+IF OBJECT_ID(N'[dbo].[FK_PrincipalHierarchy_Principal]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PrincipalHierarchy] DROP CONSTRAINT [FK_PrincipalHierarchy_Principal];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PrincipalPrincipal_Principal1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PrincipalPrincipal] DROP CONSTRAINT [FK_PrincipalPrincipal_Principal1];
+IF OBJECT_ID(N'[dbo].[FK_PrincipalHierarchy_Owned]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PrincipalHierarchy] DROP CONSTRAINT [FK_PrincipalHierarchy_Owned];
 GO
 IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryOwners_AccessControlEntry]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AccessControlEntryOwners] DROP CONSTRAINT [FK_AccessControlEntryOwners_AccessControlEntry];
@@ -138,11 +138,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_TenantAccounts_Principal]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TenantAccounts] DROP CONSTRAINT [FK_TenantAccounts_Principal];
 GO
-IF OBJECT_ID(N'[dbo].[FK_TenantAccessControlEntry_SubjectTenant]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TenantAccessControlEntry] DROP CONSTRAINT [FK_TenantAccessControlEntry_SubjectTenant];
+IF OBJECT_ID(N'[dbo].[FK_TenantAccessControlEntries_SubjectTenant]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TenantAccessControlEntries] DROP CONSTRAINT [FK_TenantAccessControlEntries_SubjectTenant];
 GO
-IF OBJECT_ID(N'[dbo].[FK_TenantAccessControlEntry_AccessControlEntry]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TenantAccessControlEntry] DROP CONSTRAINT [FK_TenantAccessControlEntry_AccessControlEntry];
+IF OBJECT_ID(N'[dbo].[FK_TenantAccessControlEntries_AccessControlEntry]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TenantAccessControlEntries] DROP CONSTRAINT [FK_TenantAccessControlEntries_AccessControlEntry];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PrincipalHorselessSession]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[HorselessSessions] DROP CONSTRAINT [FK_PrincipalHorselessSession];
@@ -158,6 +158,12 @@ IF OBJECT_ID(N'[dbo].[FK_HorselessSessionPrincipal_HorselessSession]', 'F') IS N
 GO
 IF OBJECT_ID(N'[dbo].[FK_HorselessSessionPrincipal_Principal]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[HorselessSessionPrincipal] DROP CONSTRAINT [FK_HorselessSessionPrincipal_Principal];
+GO
+IF OBJECT_ID(N'[dbo].[FK_HorselessViewContentCollection_HorselessView]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HorselessViewContentCollection] DROP CONSTRAINT [FK_HorselessViewContentCollection_HorselessView];
+GO
+IF OBJECT_ID(N'[dbo].[FK_HorselessViewContentCollection_ContentCollection]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HorselessViewContentCollection] DROP CONSTRAINT [FK_HorselessViewContentCollection_ContentCollection];
 GO
 
 -- --------------------------------------------------
@@ -218,26 +224,29 @@ GO
 IF OBJECT_ID(N'[dbo].[Taxonomies]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Taxonomies];
 GO
-IF OBJECT_ID(N'[dbo].[TenantContentCollection]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TenantContentCollection];
+IF OBJECT_ID(N'[dbo].[HorselessViews]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[HorselessViews];
+GO
+IF OBJECT_ID(N'[dbo].[TenantContentCollections]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TenantContentCollections];
 GO
 IF OBJECT_ID(N'[dbo].[ContentCollectionMimeContent]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ContentCollectionMimeContent];
 GO
-IF OBJECT_ID(N'[dbo].[NavigationMenuNavigationMenu]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[NavigationMenuNavigationMenu];
+IF OBJECT_ID(N'[dbo].[NavigationMenuHierarchy]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[NavigationMenuHierarchy];
 GO
-IF OBJECT_ID(N'[dbo].[NavigationMenuItemNavigationMenuItem]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[NavigationMenuItemNavigationMenuItem];
+IF OBJECT_ID(N'[dbo].[NavigationMenuItemHierarchy]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[NavigationMenuItemHierarchy];
 GO
 IF OBJECT_ID(N'[dbo].[NavigationMenuItemNavigationMenu]', 'U') IS NOT NULL
     DROP TABLE [dbo].[NavigationMenuItemNavigationMenu];
 GO
-IF OBJECT_ID(N'[dbo].[ContentCollectionContentCollection]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ContentCollectionContentCollection];
+IF OBJECT_ID(N'[dbo].[ContentCollectionHierarchy]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ContentCollectionHierarchy];
 GO
-IF OBJECT_ID(N'[dbo].[PublicationPublication]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PublicationPublication];
+IF OBJECT_ID(N'[dbo].[PublicationHierarchy]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PublicationHierarchy];
 GO
 IF OBJECT_ID(N'[dbo].[PublicationContentCollection]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PublicationContentCollection];
@@ -245,8 +254,8 @@ GO
 IF OBJECT_ID(N'[dbo].[TaxonTaxonomy]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TaxonTaxonomy];
 GO
-IF OBJECT_ID(N'[dbo].[TaxonTaxon]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TaxonTaxon];
+IF OBJECT_ID(N'[dbo].[TaxonHirearchy]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TaxonHirearchy];
 GO
 IF OBJECT_ID(N'[dbo].[TaxonHolonym]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TaxonHolonym];
@@ -254,8 +263,8 @@ GO
 IF OBJECT_ID(N'[dbo].[HolonymMeronym]', 'U') IS NOT NULL
     DROP TABLE [dbo].[HolonymMeronym];
 GO
-IF OBJECT_ID(N'[dbo].[TaxonomyContentCollection]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TaxonomyContentCollection];
+IF OBJECT_ID(N'[dbo].[ContentCollectionTaxonomies]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ContentCollectionTaxonomies];
 GO
 IF OBJECT_ID(N'[dbo].[TenantOwners]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TenantOwners];
@@ -263,11 +272,11 @@ GO
 IF OBJECT_ID(N'[dbo].[PrincipalAccessControlEntry]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PrincipalAccessControlEntry];
 GO
-IF OBJECT_ID(N'[dbo].[AccessControlEntryAccessControlEntry]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AccessControlEntryAccessControlEntry];
+IF OBJECT_ID(N'[dbo].[AccessControlEntryHierarchy]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AccessControlEntryHierarchy];
 GO
-IF OBJECT_ID(N'[dbo].[PrincipalPrincipal]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PrincipalPrincipal];
+IF OBJECT_ID(N'[dbo].[PrincipalHierarchy]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PrincipalHierarchy];
 GO
 IF OBJECT_ID(N'[dbo].[AccessControlEntryOwners]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AccessControlEntryOwners];
@@ -275,14 +284,17 @@ GO
 IF OBJECT_ID(N'[dbo].[TenantAccounts]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TenantAccounts];
 GO
-IF OBJECT_ID(N'[dbo].[TenantAccessControlEntry]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TenantAccessControlEntry];
+IF OBJECT_ID(N'[dbo].[TenantAccessControlEntries]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TenantAccessControlEntries];
 GO
 IF OBJECT_ID(N'[dbo].[HorselessSessionAccessControlEntry]', 'U') IS NOT NULL
     DROP TABLE [dbo].[HorselessSessionAccessControlEntry];
 GO
 IF OBJECT_ID(N'[dbo].[HorselessSessionPrincipal]', 'U') IS NOT NULL
     DROP TABLE [dbo].[HorselessSessionPrincipal];
+GO
+IF OBJECT_ID(N'[dbo].[HorselessViewContentCollection]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[HorselessViewContentCollection];
 GO
 
 -- --------------------------------------------------
@@ -540,8 +552,8 @@ CREATE TABLE [dbo].[HorselessViews] (
 );
 GO
 
--- Creating table 'TenantContentCollection'
-CREATE TABLE [dbo].[TenantContentCollection] (
+-- Creating table 'TenantContentCollections'
+CREATE TABLE [dbo].[TenantContentCollections] (
     [Tenants_Id] uniqueidentifier  NOT NULL,
     [ContentCollections_Id] uniqueidentifier  NOT NULL
 );
@@ -554,15 +566,15 @@ CREATE TABLE [dbo].[ContentCollectionMimeContent] (
 );
 GO
 
--- Creating table 'NavigationMenuNavigationMenu'
-CREATE TABLE [dbo].[NavigationMenuNavigationMenu] (
+-- Creating table 'NavigationMenuHierarchy'
+CREATE TABLE [dbo].[NavigationMenuHierarchy] (
     [Children_Id] uniqueidentifier  NOT NULL,
     [Parents_Id] uniqueidentifier  NOT NULL
 );
 GO
 
--- Creating table 'NavigationMenuItemNavigationMenuItem'
-CREATE TABLE [dbo].[NavigationMenuItemNavigationMenuItem] (
+-- Creating table 'NavigationMenuItemHierarchy'
+CREATE TABLE [dbo].[NavigationMenuItemHierarchy] (
     [ChildNavigationItems_Id] uniqueidentifier  NOT NULL,
     [ParentNavigationItems_Id] uniqueidentifier  NOT NULL
 );
@@ -575,16 +587,16 @@ CREATE TABLE [dbo].[NavigationMenuItemNavigationMenu] (
 );
 GO
 
--- Creating table 'ContentCollectionContentCollection'
-CREATE TABLE [dbo].[ContentCollectionContentCollection] (
+-- Creating table 'ContentCollectionHierarchy'
+CREATE TABLE [dbo].[ContentCollectionHierarchy] (
     [ChildContentCollections_Id] uniqueidentifier  NOT NULL,
     [ParentContentCollections_Id] uniqueidentifier  NOT NULL
 );
 GO
 
--- Creating table 'PublicationPublication'
-CREATE TABLE [dbo].[PublicationPublication] (
-    [PublicationsChildren_Id] uniqueidentifier  NOT NULL,
+-- Creating table 'PublicationHierarchy'
+CREATE TABLE [dbo].[PublicationHierarchy] (
+    [PublicationChildren_Id] uniqueidentifier  NOT NULL,
     [PublicationParents_Id] uniqueidentifier  NOT NULL
 );
 GO
@@ -603,8 +615,8 @@ CREATE TABLE [dbo].[TaxonTaxonomy] (
 );
 GO
 
--- Creating table 'TaxonTaxon'
-CREATE TABLE [dbo].[TaxonTaxon] (
+-- Creating table 'TaxonHirearchy'
+CREATE TABLE [dbo].[TaxonHirearchy] (
     [AntecedentTaxons_Id] uniqueidentifier  NOT NULL,
     [DerivativeTaxons_Id] uniqueidentifier  NOT NULL
 );
@@ -624,8 +636,8 @@ CREATE TABLE [dbo].[HolonymMeronym] (
 );
 GO
 
--- Creating table 'TaxonomyContentCollection'
-CREATE TABLE [dbo].[TaxonomyContentCollection] (
+-- Creating table 'ContentCollectionTaxonomies'
+CREATE TABLE [dbo].[ContentCollectionTaxonomies] (
     [Taxonomies_Id] uniqueidentifier  NOT NULL,
     [ContentCollections_Id] uniqueidentifier  NOT NULL
 );
@@ -645,15 +657,15 @@ CREATE TABLE [dbo].[PrincipalAccessControlEntry] (
 );
 GO
 
--- Creating table 'AccessControlEntryAccessControlEntry'
-CREATE TABLE [dbo].[AccessControlEntryAccessControlEntry] (
+-- Creating table 'AccessControlEntryHierarchy'
+CREATE TABLE [dbo].[AccessControlEntryHierarchy] (
     [SubjectAccessControlEntries_Id] uniqueidentifier  NOT NULL,
     [AccessControlEntries_Id] uniqueidentifier  NOT NULL
 );
 GO
 
--- Creating table 'PrincipalPrincipal'
-CREATE TABLE [dbo].[PrincipalPrincipal] (
+-- Creating table 'PrincipalHierarchy'
+CREATE TABLE [dbo].[PrincipalHierarchy] (
     [OwnedPrincipals_Id] uniqueidentifier  NOT NULL,
     [Owners_Id] uniqueidentifier  NOT NULL
 );
@@ -673,8 +685,8 @@ CREATE TABLE [dbo].[TenantAccounts] (
 );
 GO
 
--- Creating table 'TenantAccessControlEntry'
-CREATE TABLE [dbo].[TenantAccessControlEntry] (
+-- Creating table 'TenantAccessControlEntries'
+CREATE TABLE [dbo].[TenantAccessControlEntries] (
     [SubjectTenants_Id] uniqueidentifier  NOT NULL,
     [AccessControlEntries_Id] uniqueidentifier  NOT NULL
 );
@@ -819,9 +831,9 @@ ADD CONSTRAINT [PK_HorselessViews]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Tenants_Id], [ContentCollections_Id] in table 'TenantContentCollection'
-ALTER TABLE [dbo].[TenantContentCollection]
-ADD CONSTRAINT [PK_TenantContentCollection]
+-- Creating primary key on [Tenants_Id], [ContentCollections_Id] in table 'TenantContentCollections'
+ALTER TABLE [dbo].[TenantContentCollections]
+ADD CONSTRAINT [PK_TenantContentCollections]
     PRIMARY KEY CLUSTERED ([Tenants_Id], [ContentCollections_Id] ASC);
 GO
 
@@ -831,15 +843,15 @@ ADD CONSTRAINT [PK_ContentCollectionMimeContent]
     PRIMARY KEY CLUSTERED ([ContentCollections_Id], [MimeContents_Id] ASC);
 GO
 
--- Creating primary key on [Children_Id], [Parents_Id] in table 'NavigationMenuNavigationMenu'
-ALTER TABLE [dbo].[NavigationMenuNavigationMenu]
-ADD CONSTRAINT [PK_NavigationMenuNavigationMenu]
+-- Creating primary key on [Children_Id], [Parents_Id] in table 'NavigationMenuHierarchy'
+ALTER TABLE [dbo].[NavigationMenuHierarchy]
+ADD CONSTRAINT [PK_NavigationMenuHierarchy]
     PRIMARY KEY CLUSTERED ([Children_Id], [Parents_Id] ASC);
 GO
 
--- Creating primary key on [ChildNavigationItems_Id], [ParentNavigationItems_Id] in table 'NavigationMenuItemNavigationMenuItem'
-ALTER TABLE [dbo].[NavigationMenuItemNavigationMenuItem]
-ADD CONSTRAINT [PK_NavigationMenuItemNavigationMenuItem]
+-- Creating primary key on [ChildNavigationItems_Id], [ParentNavigationItems_Id] in table 'NavigationMenuItemHierarchy'
+ALTER TABLE [dbo].[NavigationMenuItemHierarchy]
+ADD CONSTRAINT [PK_NavigationMenuItemHierarchy]
     PRIMARY KEY CLUSTERED ([ChildNavigationItems_Id], [ParentNavigationItems_Id] ASC);
 GO
 
@@ -849,16 +861,16 @@ ADD CONSTRAINT [PK_NavigationMenuItemNavigationMenu]
     PRIMARY KEY CLUSTERED ([ChildNavigationMenuItems_Id], [ParentNavigationMenus_Id] ASC);
 GO
 
--- Creating primary key on [ChildContentCollections_Id], [ParentContentCollections_Id] in table 'ContentCollectionContentCollection'
-ALTER TABLE [dbo].[ContentCollectionContentCollection]
-ADD CONSTRAINT [PK_ContentCollectionContentCollection]
+-- Creating primary key on [ChildContentCollections_Id], [ParentContentCollections_Id] in table 'ContentCollectionHierarchy'
+ALTER TABLE [dbo].[ContentCollectionHierarchy]
+ADD CONSTRAINT [PK_ContentCollectionHierarchy]
     PRIMARY KEY CLUSTERED ([ChildContentCollections_Id], [ParentContentCollections_Id] ASC);
 GO
 
--- Creating primary key on [PublicationsChildren_Id], [PublicationParents_Id] in table 'PublicationPublication'
-ALTER TABLE [dbo].[PublicationPublication]
-ADD CONSTRAINT [PK_PublicationPublication]
-    PRIMARY KEY CLUSTERED ([PublicationsChildren_Id], [PublicationParents_Id] ASC);
+-- Creating primary key on [PublicationChildren_Id], [PublicationParents_Id] in table 'PublicationHierarchy'
+ALTER TABLE [dbo].[PublicationHierarchy]
+ADD CONSTRAINT [PK_PublicationHierarchy]
+    PRIMARY KEY CLUSTERED ([PublicationChildren_Id], [PublicationParents_Id] ASC);
 GO
 
 -- Creating primary key on [Publications_Id], [ContentCollections_Id] in table 'PublicationContentCollection'
@@ -873,9 +885,9 @@ ADD CONSTRAINT [PK_TaxonTaxonomy]
     PRIMARY KEY CLUSTERED ([Taxons_Id], [Taxonomies_Id] ASC);
 GO
 
--- Creating primary key on [AntecedentTaxons_Id], [DerivativeTaxons_Id] in table 'TaxonTaxon'
-ALTER TABLE [dbo].[TaxonTaxon]
-ADD CONSTRAINT [PK_TaxonTaxon]
+-- Creating primary key on [AntecedentTaxons_Id], [DerivativeTaxons_Id] in table 'TaxonHirearchy'
+ALTER TABLE [dbo].[TaxonHirearchy]
+ADD CONSTRAINT [PK_TaxonHirearchy]
     PRIMARY KEY CLUSTERED ([AntecedentTaxons_Id], [DerivativeTaxons_Id] ASC);
 GO
 
@@ -891,9 +903,9 @@ ADD CONSTRAINT [PK_HolonymMeronym]
     PRIMARY KEY CLUSTERED ([Holonyms_Id], [Meronyms_Id] ASC);
 GO
 
--- Creating primary key on [Taxonomies_Id], [ContentCollections_Id] in table 'TaxonomyContentCollection'
-ALTER TABLE [dbo].[TaxonomyContentCollection]
-ADD CONSTRAINT [PK_TaxonomyContentCollection]
+-- Creating primary key on [Taxonomies_Id], [ContentCollections_Id] in table 'ContentCollectionTaxonomies'
+ALTER TABLE [dbo].[ContentCollectionTaxonomies]
+ADD CONSTRAINT [PK_ContentCollectionTaxonomies]
     PRIMARY KEY CLUSTERED ([Taxonomies_Id], [ContentCollections_Id] ASC);
 GO
 
@@ -909,15 +921,15 @@ ADD CONSTRAINT [PK_PrincipalAccessControlEntry]
     PRIMARY KEY CLUSTERED ([SubjectPrincipals_Id], [AccessControlEntries_Id] ASC);
 GO
 
--- Creating primary key on [SubjectAccessControlEntries_Id], [AccessControlEntries_Id] in table 'AccessControlEntryAccessControlEntry'
-ALTER TABLE [dbo].[AccessControlEntryAccessControlEntry]
-ADD CONSTRAINT [PK_AccessControlEntryAccessControlEntry]
+-- Creating primary key on [SubjectAccessControlEntries_Id], [AccessControlEntries_Id] in table 'AccessControlEntryHierarchy'
+ALTER TABLE [dbo].[AccessControlEntryHierarchy]
+ADD CONSTRAINT [PK_AccessControlEntryHierarchy]
     PRIMARY KEY CLUSTERED ([SubjectAccessControlEntries_Id], [AccessControlEntries_Id] ASC);
 GO
 
--- Creating primary key on [OwnedPrincipals_Id], [Owners_Id] in table 'PrincipalPrincipal'
-ALTER TABLE [dbo].[PrincipalPrincipal]
-ADD CONSTRAINT [PK_PrincipalPrincipal]
+-- Creating primary key on [OwnedPrincipals_Id], [Owners_Id] in table 'PrincipalHierarchy'
+ALTER TABLE [dbo].[PrincipalHierarchy]
+ADD CONSTRAINT [PK_PrincipalHierarchy]
     PRIMARY KEY CLUSTERED ([OwnedPrincipals_Id], [Owners_Id] ASC);
 GO
 
@@ -933,9 +945,9 @@ ADD CONSTRAINT [PK_TenantAccounts]
     PRIMARY KEY CLUSTERED ([TenantAccounts_Id], [Accounts_Id] ASC);
 GO
 
--- Creating primary key on [SubjectTenants_Id], [AccessControlEntries_Id] in table 'TenantAccessControlEntry'
-ALTER TABLE [dbo].[TenantAccessControlEntry]
-ADD CONSTRAINT [PK_TenantAccessControlEntry]
+-- Creating primary key on [SubjectTenants_Id], [AccessControlEntries_Id] in table 'TenantAccessControlEntries'
+ALTER TABLE [dbo].[TenantAccessControlEntries]
+ADD CONSTRAINT [PK_TenantAccessControlEntries]
     PRIMARY KEY CLUSTERED ([SubjectTenants_Id], [AccessControlEntries_Id] ASC);
 GO
 
@@ -961,27 +973,27 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [Tenants_Id] in table 'TenantContentCollection'
-ALTER TABLE [dbo].[TenantContentCollection]
-ADD CONSTRAINT [FK_TenantContentCollection_Tenant]
+-- Creating foreign key on [Tenants_Id] in table 'TenantContentCollections'
+ALTER TABLE [dbo].[TenantContentCollections]
+ADD CONSTRAINT [FK_TenantContentCollections_Tenant]
     FOREIGN KEY ([Tenants_Id])
     REFERENCES [dbo].[Tenants]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [ContentCollections_Id] in table 'TenantContentCollection'
-ALTER TABLE [dbo].[TenantContentCollection]
-ADD CONSTRAINT [FK_TenantContentCollection_ContentCollection]
+-- Creating foreign key on [ContentCollections_Id] in table 'TenantContentCollections'
+ALTER TABLE [dbo].[TenantContentCollections]
+ADD CONSTRAINT [FK_TenantContentCollections_ContentCollection]
     FOREIGN KEY ([ContentCollections_Id])
     REFERENCES [dbo].[ContentCollections]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_TenantContentCollection_ContentCollection'
-CREATE INDEX [IX_FK_TenantContentCollection_ContentCollection]
-ON [dbo].[TenantContentCollection]
+-- Creating non-clustered index for FOREIGN KEY 'FK_TenantContentCollections_ContentCollection'
+CREATE INDEX [IX_FK_TenantContentCollections_ContentCollection]
+ON [dbo].[TenantContentCollections]
     ([ContentCollections_Id]);
 GO
 
@@ -1054,51 +1066,51 @@ ON [dbo].[HorselessContents]
     ([MIMETypeId]);
 GO
 
--- Creating foreign key on [Children_Id] in table 'NavigationMenuNavigationMenu'
-ALTER TABLE [dbo].[NavigationMenuNavigationMenu]
-ADD CONSTRAINT [FK_NavigationMenuNavigationMenu_NavigationMenu]
+-- Creating foreign key on [Children_Id] in table 'NavigationMenuHierarchy'
+ALTER TABLE [dbo].[NavigationMenuHierarchy]
+ADD CONSTRAINT [FK_NavigationMenuHierarchy_NavigationMenu]
     FOREIGN KEY ([Children_Id])
     REFERENCES [dbo].[NavigationMenus]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [Parents_Id] in table 'NavigationMenuNavigationMenu'
-ALTER TABLE [dbo].[NavigationMenuNavigationMenu]
-ADD CONSTRAINT [FK_NavigationMenuNavigationMenu_NavigationMenu1]
+-- Creating foreign key on [Parents_Id] in table 'NavigationMenuHierarchy'
+ALTER TABLE [dbo].[NavigationMenuHierarchy]
+ADD CONSTRAINT [FK_NavigationMenuHierarchy_Children]
     FOREIGN KEY ([Parents_Id])
     REFERENCES [dbo].[NavigationMenus]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_NavigationMenuNavigationMenu_NavigationMenu1'
-CREATE INDEX [IX_FK_NavigationMenuNavigationMenu_NavigationMenu1]
-ON [dbo].[NavigationMenuNavigationMenu]
+-- Creating non-clustered index for FOREIGN KEY 'FK_NavigationMenuHierarchy_Children'
+CREATE INDEX [IX_FK_NavigationMenuHierarchy_Children]
+ON [dbo].[NavigationMenuHierarchy]
     ([Parents_Id]);
 GO
 
--- Creating foreign key on [ChildNavigationItems_Id] in table 'NavigationMenuItemNavigationMenuItem'
-ALTER TABLE [dbo].[NavigationMenuItemNavigationMenuItem]
-ADD CONSTRAINT [FK_NavigationMenuItemNavigationMenuItem_NavigationMenuItem]
+-- Creating foreign key on [ChildNavigationItems_Id] in table 'NavigationMenuItemHierarchy'
+ALTER TABLE [dbo].[NavigationMenuItemHierarchy]
+ADD CONSTRAINT [FK_NavigationMenuItemHierarchy_NavigationMenuItem]
     FOREIGN KEY ([ChildNavigationItems_Id])
     REFERENCES [dbo].[NavigationMenuItems]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [ParentNavigationItems_Id] in table 'NavigationMenuItemNavigationMenuItem'
-ALTER TABLE [dbo].[NavigationMenuItemNavigationMenuItem]
-ADD CONSTRAINT [FK_NavigationMenuItemNavigationMenuItem_NavigationMenuItem1]
+-- Creating foreign key on [ParentNavigationItems_Id] in table 'NavigationMenuItemHierarchy'
+ALTER TABLE [dbo].[NavigationMenuItemHierarchy]
+ADD CONSTRAINT [FK_NavigationMenuItemHierarchy_ChildNavigationItems]
     FOREIGN KEY ([ParentNavigationItems_Id])
     REFERENCES [dbo].[NavigationMenuItems]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_NavigationMenuItemNavigationMenuItem_NavigationMenuItem1'
-CREATE INDEX [IX_FK_NavigationMenuItemNavigationMenuItem_NavigationMenuItem1]
-ON [dbo].[NavigationMenuItemNavigationMenuItem]
+-- Creating non-clustered index for FOREIGN KEY 'FK_NavigationMenuItemHierarchy_ChildNavigationItems'
+CREATE INDEX [IX_FK_NavigationMenuItemHierarchy_ChildNavigationItems]
+ON [dbo].[NavigationMenuItemHierarchy]
     ([ParentNavigationItems_Id]);
 GO
 
@@ -1126,51 +1138,51 @@ ON [dbo].[NavigationMenuItemNavigationMenu]
     ([ParentNavigationMenus_Id]);
 GO
 
--- Creating foreign key on [ChildContentCollections_Id] in table 'ContentCollectionContentCollection'
-ALTER TABLE [dbo].[ContentCollectionContentCollection]
-ADD CONSTRAINT [FK_ContentCollectionContentCollection_ContentCollection]
+-- Creating foreign key on [ChildContentCollections_Id] in table 'ContentCollectionHierarchy'
+ALTER TABLE [dbo].[ContentCollectionHierarchy]
+ADD CONSTRAINT [FK_ContentCollectionHierarchy_ContentCollection]
     FOREIGN KEY ([ChildContentCollections_Id])
     REFERENCES [dbo].[ContentCollections]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [ParentContentCollections_Id] in table 'ContentCollectionContentCollection'
-ALTER TABLE [dbo].[ContentCollectionContentCollection]
-ADD CONSTRAINT [FK_ContentCollectionContentCollection_ContentCollection1]
+-- Creating foreign key on [ParentContentCollections_Id] in table 'ContentCollectionHierarchy'
+ALTER TABLE [dbo].[ContentCollectionHierarchy]
+ADD CONSTRAINT [FK_ContentCollectionHierarchy_ChildContentCollections]
     FOREIGN KEY ([ParentContentCollections_Id])
     REFERENCES [dbo].[ContentCollections]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_ContentCollectionContentCollection_ContentCollection1'
-CREATE INDEX [IX_FK_ContentCollectionContentCollection_ContentCollection1]
-ON [dbo].[ContentCollectionContentCollection]
+-- Creating non-clustered index for FOREIGN KEY 'FK_ContentCollectionHierarchy_ChildContentCollections'
+CREATE INDEX [IX_FK_ContentCollectionHierarchy_ChildContentCollections]
+ON [dbo].[ContentCollectionHierarchy]
     ([ParentContentCollections_Id]);
 GO
 
--- Creating foreign key on [PublicationsChildren_Id] in table 'PublicationPublication'
-ALTER TABLE [dbo].[PublicationPublication]
-ADD CONSTRAINT [FK_PublicationPublication_Publication]
-    FOREIGN KEY ([PublicationsChildren_Id])
+-- Creating foreign key on [PublicationChildren_Id] in table 'PublicationHierarchy'
+ALTER TABLE [dbo].[PublicationHierarchy]
+ADD CONSTRAINT [FK_PublicationHierarchy_Publication]
+    FOREIGN KEY ([PublicationChildren_Id])
     REFERENCES [dbo].[Publications]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [PublicationParents_Id] in table 'PublicationPublication'
-ALTER TABLE [dbo].[PublicationPublication]
-ADD CONSTRAINT [FK_PublicationPublication_Publication1]
+-- Creating foreign key on [PublicationParents_Id] in table 'PublicationHierarchy'
+ALTER TABLE [dbo].[PublicationHierarchy]
+ADD CONSTRAINT [FK_PublicationHierarchy_PublicationChildren]
     FOREIGN KEY ([PublicationParents_Id])
     REFERENCES [dbo].[Publications]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_PublicationPublication_Publication1'
-CREATE INDEX [IX_FK_PublicationPublication_Publication1]
-ON [dbo].[PublicationPublication]
+-- Creating non-clustered index for FOREIGN KEY 'FK_PublicationHierarchy_PublicationChildren'
+CREATE INDEX [IX_FK_PublicationHierarchy_PublicationChildren]
+ON [dbo].[PublicationHierarchy]
     ([PublicationParents_Id]);
 GO
 
@@ -1222,8 +1234,8 @@ ON [dbo].[TaxonTaxonomy]
     ([Taxonomies_Id]);
 GO
 
--- Creating foreign key on [AntecedentTaxons_Id] in table 'TaxonTaxon'
-ALTER TABLE [dbo].[TaxonTaxon]
+-- Creating foreign key on [AntecedentTaxons_Id] in table 'TaxonHirearchy'
+ALTER TABLE [dbo].[TaxonHirearchy]
 ADD CONSTRAINT [FK_TaxonTaxon_Taxon]
     FOREIGN KEY ([AntecedentTaxons_Id])
     REFERENCES [dbo].[Taxons]
@@ -1231,8 +1243,8 @@ ADD CONSTRAINT [FK_TaxonTaxon_Taxon]
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [DerivativeTaxons_Id] in table 'TaxonTaxon'
-ALTER TABLE [dbo].[TaxonTaxon]
+-- Creating foreign key on [DerivativeTaxons_Id] in table 'TaxonHirearchy'
+ALTER TABLE [dbo].[TaxonHirearchy]
 ADD CONSTRAINT [FK_TaxonTaxon_Taxon1]
     FOREIGN KEY ([DerivativeTaxons_Id])
     REFERENCES [dbo].[Taxons]
@@ -1242,7 +1254,7 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TaxonTaxon_Taxon1'
 CREATE INDEX [IX_FK_TaxonTaxon_Taxon1]
-ON [dbo].[TaxonTaxon]
+ON [dbo].[TaxonHirearchy]
     ([DerivativeTaxons_Id]);
 GO
 
@@ -1294,27 +1306,27 @@ ON [dbo].[HolonymMeronym]
     ([Meronyms_Id]);
 GO
 
--- Creating foreign key on [Taxonomies_Id] in table 'TaxonomyContentCollection'
-ALTER TABLE [dbo].[TaxonomyContentCollection]
-ADD CONSTRAINT [FK_TaxonomyContentCollection_Taxonomy]
+-- Creating foreign key on [Taxonomies_Id] in table 'ContentCollectionTaxonomies'
+ALTER TABLE [dbo].[ContentCollectionTaxonomies]
+ADD CONSTRAINT [FK_ContentCollectionTaxonomies_Taxonomy]
     FOREIGN KEY ([Taxonomies_Id])
     REFERENCES [dbo].[Taxonomies]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [ContentCollections_Id] in table 'TaxonomyContentCollection'
-ALTER TABLE [dbo].[TaxonomyContentCollection]
-ADD CONSTRAINT [FK_TaxonomyContentCollection_ContentCollection]
+-- Creating foreign key on [ContentCollections_Id] in table 'ContentCollectionTaxonomies'
+ALTER TABLE [dbo].[ContentCollectionTaxonomies]
+ADD CONSTRAINT [FK_ContentCollectionTaxonomies_ContentCollection]
     FOREIGN KEY ([ContentCollections_Id])
     REFERENCES [dbo].[ContentCollections]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_TaxonomyContentCollection_ContentCollection'
-CREATE INDEX [IX_FK_TaxonomyContentCollection_ContentCollection]
-ON [dbo].[TaxonomyContentCollection]
+-- Creating non-clustered index for FOREIGN KEY 'FK_ContentCollectionTaxonomies_ContentCollection'
+CREATE INDEX [IX_FK_ContentCollectionTaxonomies_ContentCollection]
+ON [dbo].[ContentCollectionTaxonomies]
     ([ContentCollections_Id]);
 GO
 
@@ -1366,51 +1378,51 @@ ON [dbo].[PrincipalAccessControlEntry]
     ([AccessControlEntries_Id]);
 GO
 
--- Creating foreign key on [SubjectAccessControlEntries_Id] in table 'AccessControlEntryAccessControlEntry'
-ALTER TABLE [dbo].[AccessControlEntryAccessControlEntry]
-ADD CONSTRAINT [FK_AccessControlEntryAccessControlEntry_AccessControlEntry]
+-- Creating foreign key on [SubjectAccessControlEntries_Id] in table 'AccessControlEntryHierarchy'
+ALTER TABLE [dbo].[AccessControlEntryHierarchy]
+ADD CONSTRAINT [FK_AccessControlEntryHierarchy_DependentAccessControlEntry]
     FOREIGN KEY ([SubjectAccessControlEntries_Id])
     REFERENCES [dbo].[AccessControlEntries]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [AccessControlEntries_Id] in table 'AccessControlEntryAccessControlEntry'
-ALTER TABLE [dbo].[AccessControlEntryAccessControlEntry]
-ADD CONSTRAINT [FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry]
+-- Creating foreign key on [AccessControlEntries_Id] in table 'AccessControlEntryHierarchy'
+ALTER TABLE [dbo].[AccessControlEntryHierarchy]
+ADD CONSTRAINT [FK_AccessControlEntryHierarchy_SubjectAccessControlEntry]
     FOREIGN KEY ([AccessControlEntries_Id])
     REFERENCES [dbo].[AccessControlEntries]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry'
-CREATE INDEX [IX_FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry]
-ON [dbo].[AccessControlEntryAccessControlEntry]
+-- Creating non-clustered index for FOREIGN KEY 'FK_AccessControlEntryHierarchy_SubjectAccessControlEntry'
+CREATE INDEX [IX_FK_AccessControlEntryHierarchy_SubjectAccessControlEntry]
+ON [dbo].[AccessControlEntryHierarchy]
     ([AccessControlEntries_Id]);
 GO
 
--- Creating foreign key on [OwnedPrincipals_Id] in table 'PrincipalPrincipal'
-ALTER TABLE [dbo].[PrincipalPrincipal]
-ADD CONSTRAINT [FK_PrincipalPrincipal_Principal]
+-- Creating foreign key on [OwnedPrincipals_Id] in table 'PrincipalHierarchy'
+ALTER TABLE [dbo].[PrincipalHierarchy]
+ADD CONSTRAINT [FK_PrincipalHierarchy_OwnerPrincipals]
     FOREIGN KEY ([OwnedPrincipals_Id])
     REFERENCES [dbo].[Principals]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [Owners_Id] in table 'PrincipalPrincipal'
-ALTER TABLE [dbo].[PrincipalPrincipal]
-ADD CONSTRAINT [FK_PrincipalPrincipal_Principal1]
+-- Creating foreign key on [Owners_Id] in table 'PrincipalHierarchy'
+ALTER TABLE [dbo].[PrincipalHierarchy]
+ADD CONSTRAINT [FK_PrincipalHierarchy_Owned]
     FOREIGN KEY ([Owners_Id])
     REFERENCES [dbo].[Principals]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_PrincipalPrincipal_Principal1'
-CREATE INDEX [IX_FK_PrincipalPrincipal_Principal1]
-ON [dbo].[PrincipalPrincipal]
+-- Creating non-clustered index for FOREIGN KEY 'FK_PrincipalHierarchy_Owned'
+CREATE INDEX [IX_FK_PrincipalHierarchy_Owned]
+ON [dbo].[PrincipalHierarchy]
     ([Owners_Id]);
 GO
 
@@ -1462,27 +1474,27 @@ ON [dbo].[TenantAccounts]
     ([Accounts_Id]);
 GO
 
--- Creating foreign key on [SubjectTenants_Id] in table 'TenantAccessControlEntry'
-ALTER TABLE [dbo].[TenantAccessControlEntry]
-ADD CONSTRAINT [FK_TenantAccessControlEntry_SubjectTenant]
+-- Creating foreign key on [SubjectTenants_Id] in table 'TenantAccessControlEntries'
+ALTER TABLE [dbo].[TenantAccessControlEntries]
+ADD CONSTRAINT [FK_TenantAccessControlEntries_SubjectTenant]
     FOREIGN KEY ([SubjectTenants_Id])
     REFERENCES [dbo].[Tenants]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [AccessControlEntries_Id] in table 'TenantAccessControlEntry'
-ALTER TABLE [dbo].[TenantAccessControlEntry]
-ADD CONSTRAINT [FK_TenantAccessControlEntry_AccessControlEntry]
+-- Creating foreign key on [AccessControlEntries_Id] in table 'TenantAccessControlEntries'
+ALTER TABLE [dbo].[TenantAccessControlEntries]
+ADD CONSTRAINT [FK_TenantAccessControlEntries_AccessControlEntry]
     FOREIGN KEY ([AccessControlEntries_Id])
     REFERENCES [dbo].[AccessControlEntries]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_TenantAccessControlEntry_AccessControlEntry'
-CREATE INDEX [IX_FK_TenantAccessControlEntry_AccessControlEntry]
-ON [dbo].[TenantAccessControlEntry]
+-- Creating non-clustered index for FOREIGN KEY 'FK_TenantAccessControlEntries_AccessControlEntry'
+CREATE INDEX [IX_FK_TenantAccessControlEntries_AccessControlEntry]
+ON [dbo].[TenantAccessControlEntries]
     ([AccessControlEntries_Id]);
 GO
 

@@ -15,8 +15,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     /// </summary>
     public partial class HorselessView : IContentRowLevelSecured, IFileInfo
     {
-        public ICollection<AccessControlEntry> AccessControlEntries { get; set; }
-        public ICollection<Principal> Owners { get; set; }
+        public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+        public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
         public DateTime? UpdatedAt { get; set; }
         public byte[] Timestamp { get; set; }
 

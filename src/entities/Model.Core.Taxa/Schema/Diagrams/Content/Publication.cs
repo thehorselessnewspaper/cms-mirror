@@ -18,7 +18,7 @@ namespace Schema.Diagrams.Content
         public Publication()
         {
             this.PublicationParents = new HashSet<Publication>();
-            this.PublicationsChildren = new HashSet<Publication>();
+            this.PublicationChildren = new HashSet<Publication>();
             this.ContentCollections = new HashSet<ContentCollection>();
         }
     
@@ -36,7 +36,7 @@ namespace Schema.Diagrams.Content
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Publication> PublicationParents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Publication> PublicationsChildren { get; set; }
+        public virtual ICollection<Publication> PublicationChildren { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ContentCollection> ContentCollections { get; set; }
     }

@@ -14,8 +14,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     public partial class ContentCollection : IContentRowLevelSecured
     {
 
-        public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
-        public virtual ICollection<Principal> Owners { get; set; } =  new HashSet<Principal>();
+        public virtual ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+        public virtual ICollection<Principal>? Owners { get; set; } =  new HashSet<Principal>();
 
         [Timestamp]
         public byte[] Timestamp {get; set;}  = BitConverter.GetBytes(DateTime.UtcNow.Ticks);

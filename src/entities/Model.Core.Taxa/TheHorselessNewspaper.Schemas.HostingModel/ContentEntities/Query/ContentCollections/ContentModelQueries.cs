@@ -230,20 +230,31 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
             try
             {
-                var dbSet = ((DbContext)_context).Set<T>().Where(query);
+                var dbSet = ((DbContext)_context).Set<T>().Where(query)
+                                        .OrderBy(o => o.CreatedAt)
+                                        .Skip((pageNumber - 1) * pageSize)
+                                        .Take(pageSize * pageCount);
+
                 if (includeClauses != null)
                 {
                     foreach (var clause in includeClauses)
                     {
-                        dbSet.Include(clause);
+                        foreach(var item in dbSet)
+                        {
+                            await ((DbContext)_context).Entry(item)
+                                .Collection(clause)
+                                .LoadAsync();
+                        }
+    
                     }
                 }
 
-                result = dbSet.OrderBy(o => o.CreatedAt)
-                                        .Skip((pageNumber - 1  ) * pageSize)
-                                        .Take(pageSize * pageCount)
-                                        .AsQueryable<T>();
+                //result = dbSet.OrderBy(o => o.CreatedAt)
+                //                        .Skip((pageNumber - 1  ) * pageSize)
+                //                        .Take(pageSize * pageCount)
+                //                        .AsQueryable<T>();
 
+                result = dbSet.AsQueryable<T>();
             }
             catch (Exception ex)
             {
@@ -271,10 +282,15 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 {
                     foreach (var clause in includeClauses)
                     {
-                        dbSet.Include(clause);
+                        foreach (var item in dbSet)
+                        {
+                            await ((DbContext)_context).Entry(item)
+                                .Collection(clause)
+                                .LoadAsync();
+                        }
+
                     }
                 }
-
                 result = await dbSet.ToListAsync<T>();
 
             }
@@ -401,18 +417,20 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
                 var hasEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
 
-                T trackedEntity = default(T);
+                // T trackedEntity = default(T);
 
                 if (hasEntity != null)
                 {
 
-                    trackedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).Include(propertyName).First();
+                    var trackedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).Include(propertyName).First();
                     foreach (var item in relatedEntities)
                     {
-                        ((DbContext)_context).Entry<U>(item);
+                        // ((DbContext)_context).Entry<U>(item);
+
                         ((ICollection<U>)trackedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(trackedEntity)).Add(item);
                     }
 
+                    ((DbContext)_context).Update<T>(trackedEntity);
                     var saveResult = await ((DbContext)_context).SaveChangesAsync();
                     _logger.LogInformation($"inserted related entity");
                 }

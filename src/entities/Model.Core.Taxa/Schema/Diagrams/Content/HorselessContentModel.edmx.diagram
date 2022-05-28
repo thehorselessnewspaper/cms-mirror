@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0c7f99035d7540a9858afd51f8273784" Name="Diagram1" ZoomLevel="80" >
+      <Diagram DiagramId="0c7f99035d7540a9858afd51f8273784" Name="Diagram1" ZoomLevel="92" >
         <EntityTypeShape EntityType="HorselessContentModel.HorselessContent" Width="2.375" PointX="14.375" PointY="13.5" />
         <EntityTypeShape EntityType="HorselessContentModel.Tenant" Width="3.125" PointX="2.5" PointY="7.25" />
         <EntityTypeShape EntityType="HorselessContentModel.MIMEType" Width="2.25" PointX="18.5" PointY="9.5" />
         <EntityTypeShape EntityType="HorselessContentModel.FilesystemAsset" Width="2.875" PointX="17.875" PointY="13.5" />
         <EntityTypeShape EntityType="HorselessContentModel.JSONAsset" Width="2.875" PointX="17.875" PointY="16.75" />
         <EntityTypeShape EntityType="HorselessContentModel.ContentCollection" Width="2.875" PointX="10.25" PointY="13.5" />
-        <AssociationConnector Association="HorselessContentModel.TenantContentCollection" />
+        <AssociationConnector Association="HorselessContentModel.TenantContentCollections" />
         <AssociationConnector Association="HorselessContentModel.ContentCollectionMimeContent" />
         <AssociationConnector Association="HorselessContentModel.FilesystemAssetMimeContent" />
         <AssociationConnector Association="HorselessContentModel.MimeContentJSONAsset" />
@@ -27,25 +27,25 @@
         <EntityTypeShape EntityType="HorselessContentModel.HorselessSession" Width="3.25" PointX="14" PointY="6.75" />
         <EntityTypeShape EntityType="HorselessContentModel.NavigationMenu" Width="2.125" PointX="15.375" PointY="19.375" />
         <EntityTypeShape EntityType="HorselessContentModel.NavigationMenuItem" Width="2.375" PointX="15.375" PointY="23.875" />
-        <AssociationConnector Association="HorselessContentModel.NavigationMenuNavigationMenu" />
-        <AssociationConnector Association="HorselessContentModel.NavigationMenuItemNavigationMenuItem" />
+        <AssociationConnector Association="HorselessContentModel.NavigationMenuHierarchy" />
+        <AssociationConnector Association="HorselessContentModel.NavigationMenuItemHierarchy" />
         <AssociationConnector Association="HorselessContentModel.NavigationMenuItemNavigationMenu" />
-        <AssociationConnector Association="HorselessContentModel.ContentCollectionContentCollection" />
-        <AssociationConnector Association="HorselessContentModel.PublicationPublication" />
+        <AssociationConnector Association="HorselessContentModel.ContentCollectionHierarchy" />
+        <AssociationConnector Association="HorselessContentModel.PublicationHierarchy" />
         <AssociationConnector Association="HorselessContentModel.PublicationContentCollection" />
         <EntityTypeShape EntityType="HorselessContentModel.Taxonomy" Width="2.25" PointX="12.5" PointY="19" />
         <AssociationConnector Association="HorselessContentModel.TaxonTaxonomy" />
         <AssociationConnector Association="HorselessContentModel.TaxonTaxon" />
         <AssociationConnector Association="HorselessContentModel.TaxonHolonym" />
         <AssociationConnector Association="HorselessContentModel.HolonymMeronym" />
-        <AssociationConnector Association="HorselessContentModel.TaxonomyContentCollection" />
+        <AssociationConnector Association="HorselessContentModel.ContentCollectionTaxonomies" />
         <AssociationConnector Association="HorselessContentModel.TenantOwners" />
         <AssociationConnector Association="HorselessContentModel.PrincipalAccessControlEntry" />
-        <AssociationConnector Association="HorselessContentModel.AccessControlEntryAccessControlEntry" />
-        <AssociationConnector Association="HorselessContentModel.PrincipalPrincipal" />
+        <AssociationConnector Association="HorselessContentModel.AccessControlEntryHierarchy" />
+        <AssociationConnector Association="HorselessContentModel.PrincipalHierarchy" />
         <AssociationConnector Association="HorselessContentModel.AccessControlEntryOwners" />
         <AssociationConnector Association="HorselessContentModel.TenantAccounts" />
-        <AssociationConnector Association="HorselessContentModel.TenantAccessControlEntry" />
+        <AssociationConnector Association="HorselessContentModel.TenantAccessControlEntries" />
         <AssociationConnector Association="HorselessContentModel.PrincipalHorselessSession" />
         <AssociationConnector Association="HorselessContentModel.HorselessSessionAccessControlEntry" />
         <AssociationConnector Association="HorselessContentModel.HorselessSessionPrincipal" />

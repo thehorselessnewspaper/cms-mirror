@@ -25,36 +25,36 @@
     <EntitySet Name="NavigationMenuItems" EntityType="HorselessContentModel.Store.NavigationMenuItems" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Taxonomies" EntityType="HorselessContentModel.Store.Taxonomies" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="HorselessViews" EntityType="HorselessContentModel.Store.HorselessViews" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="TenantContentCollection" EntityType="HorselessContentModel.Store.TenantContentCollection" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TenantContentCollections" EntityType="HorselessContentModel.Store.TenantContentCollections" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ContentCollectionMimeContent" EntityType="HorselessContentModel.Store.ContentCollectionMimeContent" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="NavigationMenuNavigationMenu" EntityType="HorselessContentModel.Store.NavigationMenuNavigationMenu" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="NavigationMenuItemNavigationMenuItem" EntityType="HorselessContentModel.Store.NavigationMenuItemNavigationMenuItem" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NavigationMenuHierarchy" EntityType="HorselessContentModel.Store.NavigationMenuHierarchy" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NavigationMenuItemHierarchy" EntityType="HorselessContentModel.Store.NavigationMenuItemHierarchy" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NavigationMenuItemNavigationMenu" EntityType="HorselessContentModel.Store.NavigationMenuItemNavigationMenu" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ContentCollectionContentCollection" EntityType="HorselessContentModel.Store.ContentCollectionContentCollection" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PublicationPublication" EntityType="HorselessContentModel.Store.PublicationPublication" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContentCollectionHierarchy" EntityType="HorselessContentModel.Store.ContentCollectionHierarchy" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PublicationHierarchy" EntityType="HorselessContentModel.Store.PublicationHierarchy" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PublicationContentCollection" EntityType="HorselessContentModel.Store.PublicationContentCollection" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TaxonTaxonomy" EntityType="HorselessContentModel.Store.TaxonTaxonomy" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="TaxonTaxon" EntityType="HorselessContentModel.Store.TaxonTaxon" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TaxonHirearchy" EntityType="HorselessContentModel.Store.TaxonTaxon" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TaxonHolonym" EntityType="HorselessContentModel.Store.TaxonHolonym" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="HolonymMeronym" EntityType="HorselessContentModel.Store.HolonymMeronym" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="TaxonomyContentCollection" EntityType="HorselessContentModel.Store.TaxonomyContentCollection" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContentCollectionTaxonomies" EntityType="HorselessContentModel.Store.ContentCollectionTaxonomies" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TenantOwners" EntityType="HorselessContentModel.Store.TenantOwners" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PrincipalAccessControlEntry" EntityType="HorselessContentModel.Store.PrincipalAccessControlEntry" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="AccessControlEntryAccessControlEntry" EntityType="HorselessContentModel.Store.AccessControlEntryAccessControlEntry" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PrincipalPrincipal" EntityType="HorselessContentModel.Store.PrincipalPrincipal" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AccessControlEntryHierarchy" EntityType="HorselessContentModel.Store.AccessControlEntryHierarchy" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PrincipalHierarchy" EntityType="HorselessContentModel.Store.PrincipalHierarchy" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AccessControlEntryOwners" EntityType="HorselessContentModel.Store.AccessControlEntryOwners" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TenantAccounts" EntityType="HorselessContentModel.Store.TenantAccounts" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="TenantAccessControlEntry" EntityType="HorselessContentModel.Store.TenantAccessControlEntry" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TenantAccessControlEntries" EntityType="HorselessContentModel.Store.TenantAccessControlEntries" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="HorselessSessionAccessControlEntry" EntityType="HorselessContentModel.Store.HorselessSessionAccessControlEntry" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="HorselessSessionPrincipal" EntityType="HorselessContentModel.Store.HorselessSessionPrincipal" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="HorselessViewContentCollection" EntityType="HorselessContentModel.Store.HorselessViewContentCollection" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_TenantContentCollection_Tenant" Association="HorselessContentModel.Store.FK_TenantContentCollection_Tenant">
+    <AssociationSet Name="FK_TenantContentCollections_Tenant" Association="HorselessContentModel.Store.FK_TenantContentCollections_Tenant">
       <End Role="Tenant" EntitySet="Tenants" />
-      <End Role="TenantContentCollection" EntitySet="TenantContentCollection" />
+      <End Role="TenantContentCollections" EntitySet="TenantContentCollections" />
     </AssociationSet>
-    <AssociationSet Name="FK_TenantContentCollection_ContentCollection" Association="HorselessContentModel.Store.FK_TenantContentCollection_ContentCollection">
+    <AssociationSet Name="FK_TenantContentCollections_ContentCollection" Association="HorselessContentModel.Store.FK_TenantContentCollections_ContentCollection">
       <End Role="ContentCollection" EntitySet="ContentCollections" />
-      <End Role="TenantContentCollection" EntitySet="TenantContentCollection" />
+      <End Role="TenantContentCollections" EntitySet="TenantContentCollections" />
     </AssociationSet>
     <AssociationSet Name="FK_ContentCollectionMimeContent_ContentCollection" Association="HorselessContentModel.Store.FK_ContentCollectionMimeContent_ContentCollection">
       <End Role="ContentCollection" EntitySet="ContentCollections" />
@@ -76,21 +76,21 @@
       <End Role="MimeContent" EntitySet="HorselessContents" />
       <End Role="MIMEType" EntitySet="MIMETypes" />
     </AssociationSet>
-    <AssociationSet Name="FK_NavigationMenuNavigationMenu_NavigationMenu" Association="HorselessContentModel.Store.FK_NavigationMenuNavigationMenu_NavigationMenu">
+    <AssociationSet Name="FK_NavigationMenuHierarchy_NavigationMenu" Association="HorselessContentModel.Store.FK_NavigationMenuHierarchy_NavigationMenu">
       <End Role="NavigationMenu" EntitySet="NavigationMenus" />
-      <End Role="NavigationMenuNavigationMenu" EntitySet="NavigationMenuNavigationMenu" />
+      <End Role="NavigationMenuHierarchy" EntitySet="NavigationMenuHierarchy" />
     </AssociationSet>
-    <AssociationSet Name="FK_NavigationMenuNavigationMenu_NavigationMenu1" Association="HorselessContentModel.Store.FK_NavigationMenuNavigationMenu_NavigationMenu1">
-      <End Role="NavigationMenu1" EntitySet="NavigationMenus" />
-      <End Role="NavigationMenuNavigationMenu" EntitySet="NavigationMenuNavigationMenu" />
+    <AssociationSet Name="FK_NavigationMenuHierarchy_Children" Association="HorselessContentModel.Store.FK_NavigationMenuHierarchy_Children">
+      <End Role="Children" EntitySet="NavigationMenus" />
+      <End Role="NavigationMenuHierarchy" EntitySet="NavigationMenuHierarchy" />
     </AssociationSet>
-    <AssociationSet Name="FK_NavigationMenuItemNavigationMenuItem_NavigationMenuItem" Association="HorselessContentModel.Store.FK_NavigationMenuItemNavigationMenuItem_NavigationMenuItem">
+    <AssociationSet Name="FK_NavigationMenuItemHierarchy_NavigationMenuItem" Association="HorselessContentModel.Store.FK_NavigationMenuItemHierarchy_NavigationMenuItem">
       <End Role="NavigationMenuItem" EntitySet="NavigationMenuItems" />
-      <End Role="NavigationMenuItemNavigationMenuItem" EntitySet="NavigationMenuItemNavigationMenuItem" />
+      <End Role="NavigationMenuItemHierarchy" EntitySet="NavigationMenuItemHierarchy" />
     </AssociationSet>
-    <AssociationSet Name="FK_NavigationMenuItemNavigationMenuItem_NavigationMenuItem1" Association="HorselessContentModel.Store.FK_NavigationMenuItemNavigationMenuItem_NavigationMenuItem1">
-      <End Role="NavigationMenuItem1" EntitySet="NavigationMenuItems" />
-      <End Role="NavigationMenuItemNavigationMenuItem" EntitySet="NavigationMenuItemNavigationMenuItem" />
+    <AssociationSet Name="FK_NavigationMenuItemHierarchy_ChildNavigationItems" Association="HorselessContentModel.Store.FK_NavigationMenuItemHierarchy_ChildNavigationItems">
+      <End Role="ChildNavigationItems" EntitySet="NavigationMenuItems" />
+      <End Role="NavigationMenuItemHierarchy" EntitySet="NavigationMenuItemHierarchy" />
     </AssociationSet>
     <AssociationSet Name="FK_NavigationMenuItemNavigationMenu_NavigationMenuItem" Association="HorselessContentModel.Store.FK_NavigationMenuItemNavigationMenu_NavigationMenuItem">
       <End Role="NavigationMenuItem" EntitySet="NavigationMenuItems" />
@@ -100,21 +100,21 @@
       <End Role="NavigationMenu" EntitySet="NavigationMenus" />
       <End Role="NavigationMenuItemNavigationMenu" EntitySet="NavigationMenuItemNavigationMenu" />
     </AssociationSet>
-    <AssociationSet Name="FK_ContentCollectionContentCollection_ContentCollection" Association="HorselessContentModel.Store.FK_ContentCollectionContentCollection_ContentCollection">
+    <AssociationSet Name="FK_ContentCollectionHierarchy_ContentCollection" Association="HorselessContentModel.Store.FK_ContentCollectionHierarchy_ContentCollection">
       <End Role="ContentCollection" EntitySet="ContentCollections" />
-      <End Role="ContentCollectionContentCollection" EntitySet="ContentCollectionContentCollection" />
+      <End Role="ContentCollectionHierarchy" EntitySet="ContentCollectionHierarchy" />
     </AssociationSet>
-    <AssociationSet Name="FK_ContentCollectionContentCollection_ContentCollection1" Association="HorselessContentModel.Store.FK_ContentCollectionContentCollection_ContentCollection1">
-      <End Role="ContentCollection1" EntitySet="ContentCollections" />
-      <End Role="ContentCollectionContentCollection" EntitySet="ContentCollectionContentCollection" />
+    <AssociationSet Name="FK_ContentCollectionHierarchy_ChildContentCollections" Association="HorselessContentModel.Store.FK_ContentCollectionHierarchy_ChildContentCollections">
+      <End Role="ChildContentCollections" EntitySet="ContentCollections" />
+      <End Role="ContentCollectionHierarchy" EntitySet="ContentCollectionHierarchy" />
     </AssociationSet>
-    <AssociationSet Name="FK_PublicationPublication_Publication" Association="HorselessContentModel.Store.FK_PublicationPublication_Publication">
+    <AssociationSet Name="FK_PublicationHierarchy_Publication" Association="HorselessContentModel.Store.FK_PublicationHierarchy_Publication">
       <End Role="Publication" EntitySet="Publications" />
-      <End Role="PublicationPublication" EntitySet="PublicationPublication" />
+      <End Role="PublicationHierarchy" EntitySet="PublicationHierarchy" />
     </AssociationSet>
-    <AssociationSet Name="FK_PublicationPublication_Publication1" Association="HorselessContentModel.Store.FK_PublicationPublication_Publication1">
-      <End Role="Publication1" EntitySet="Publications" />
-      <End Role="PublicationPublication" EntitySet="PublicationPublication" />
+    <AssociationSet Name="FK_PublicationHierarchy_PublicationChildren" Association="HorselessContentModel.Store.FK_PublicationHierarchy_PublicationChildren">
+      <End Role="PublicationChildren" EntitySet="Publications" />
+      <End Role="PublicationHierarchy" EntitySet="PublicationHierarchy" />
     </AssociationSet>
     <AssociationSet Name="FK_PublicationContentCollection_Publication" Association="HorselessContentModel.Store.FK_PublicationContentCollection_Publication">
       <End Role="Publication" EntitySet="Publications" />
@@ -132,13 +132,13 @@
       <End Role="Taxonomy" EntitySet="Taxonomies" />
       <End Role="TaxonTaxonomy" EntitySet="TaxonTaxonomy" />
     </AssociationSet>
-    <AssociationSet Name="FK_TaxonTaxon_Taxon" Association="HorselessContentModel.Store.FK_TaxonTaxon_Taxon">
+    <AssociationSet Name="FK_TaxonHirearchy_Taxon" Association="HorselessContentModel.Store.FK_TaxonTaxon_Taxon">
       <End Role="Taxon" EntitySet="Taxons" />
-      <End Role="TaxonTaxon" EntitySet="TaxonTaxon" />
+      <End Role="TaxonTaxon" EntitySet="TaxonHirearchy" />
     </AssociationSet>
-    <AssociationSet Name="FK_TaxonTaxon_Taxon1" Association="HorselessContentModel.Store.FK_TaxonTaxon_Taxon1">
+    <AssociationSet Name="FK_TaxonHirearchy_Taxon1" Association="HorselessContentModel.Store.FK_TaxonTaxon_Taxon1">
       <End Role="Taxon1" EntitySet="Taxons" />
-      <End Role="TaxonTaxon" EntitySet="TaxonTaxon" />
+      <End Role="TaxonTaxon" EntitySet="TaxonHirearchy" />
     </AssociationSet>
     <AssociationSet Name="FK_TaxonHolonym_Taxon" Association="HorselessContentModel.Store.FK_TaxonHolonym_Taxon">
       <End Role="Taxon" EntitySet="Taxons" />
@@ -156,13 +156,13 @@
       <End Role="Meronym" EntitySet="Meronyms" />
       <End Role="HolonymMeronym" EntitySet="HolonymMeronym" />
     </AssociationSet>
-    <AssociationSet Name="FK_TaxonomyContentCollection_Taxonomy" Association="HorselessContentModel.Store.FK_TaxonomyContentCollection_Taxonomy">
+    <AssociationSet Name="FK_ContentCollectionTaxonomies_Taxonomy" Association="HorselessContentModel.Store.FK_ContentCollectionTaxonomies_Taxonomy">
       <End Role="Taxonomy" EntitySet="Taxonomies" />
-      <End Role="TaxonomyContentCollection" EntitySet="TaxonomyContentCollection" />
+      <End Role="ContentCollectionTaxonomies" EntitySet="ContentCollectionTaxonomies" />
     </AssociationSet>
-    <AssociationSet Name="FK_TaxonomyContentCollection_ContentCollection" Association="HorselessContentModel.Store.FK_TaxonomyContentCollection_ContentCollection">
+    <AssociationSet Name="FK_ContentCollectionTaxonomies_ContentCollection" Association="HorselessContentModel.Store.FK_ContentCollectionTaxonomies_ContentCollection">
       <End Role="ContentCollection" EntitySet="ContentCollections" />
-      <End Role="TaxonomyContentCollection" EntitySet="TaxonomyContentCollection" />
+      <End Role="ContentCollectionTaxonomies" EntitySet="ContentCollectionTaxonomies" />
     </AssociationSet>
     <AssociationSet Name="FK_TenantOwners_Tenant" Association="HorselessContentModel.Store.FK_TenantOwners_Tenant">
       <End Role="Tenant" EntitySet="Tenants" />
@@ -180,21 +180,21 @@
       <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
       <End Role="PrincipalAccessControlEntry" EntitySet="PrincipalAccessControlEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_AccessControlEntryAccessControlEntry_AccessControlEntry" Association="HorselessContentModel.Store.FK_AccessControlEntryAccessControlEntry_AccessControlEntry">
-      <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
-      <End Role="AccessControlEntryAccessControlEntry" EntitySet="AccessControlEntryAccessControlEntry" />
+    <AssociationSet Name="FK_AccessControlEntryHierarchy_DependentAccessControlEntry" Association="HorselessContentModel.Store.FK_AccessControlEntryHierarchy_DependentAccessControlEntry">
+      <End Role="DependentAccessControlEntry" EntitySet="AccessControlEntries" />
+      <End Role="AccessControlEntryHierarchy" EntitySet="AccessControlEntryHierarchy" />
     </AssociationSet>
-    <AssociationSet Name="FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry" Association="HorselessContentModel.Store.FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry">
+    <AssociationSet Name="FK_AccessControlEntryHierarchy_SubjectAccessControlEntry" Association="HorselessContentModel.Store.FK_AccessControlEntryHierarchy_SubjectAccessControlEntry">
       <End Role="SubjectAccessControlEntry" EntitySet="AccessControlEntries" />
-      <End Role="AccessControlEntryAccessControlEntry" EntitySet="AccessControlEntryAccessControlEntry" />
+      <End Role="AccessControlEntryHierarchy" EntitySet="AccessControlEntryHierarchy" />
     </AssociationSet>
-    <AssociationSet Name="FK_PrincipalPrincipal_Principal" Association="HorselessContentModel.Store.FK_PrincipalPrincipal_Principal">
-      <End Role="Principal" EntitySet="Principals" />
-      <End Role="PrincipalPrincipal" EntitySet="PrincipalPrincipal" />
+    <AssociationSet Name="FK_PrincipalHierarchy_OwnerPrincipals" Association="HorselessContentModel.Store.FK_PrincipalHierarchy_OwnerPrincipals">
+      <End Role="OwnerPrincipals" EntitySet="Principals" />
+      <End Role="PrincipalHierarchy" EntitySet="PrincipalHierarchy" />
     </AssociationSet>
-    <AssociationSet Name="FK_PrincipalPrincipal_Principal1" Association="HorselessContentModel.Store.FK_PrincipalPrincipal_Principal1">
-      <End Role="Principal1" EntitySet="Principals" />
-      <End Role="PrincipalPrincipal" EntitySet="PrincipalPrincipal" />
+    <AssociationSet Name="FK_PrincipalHierarchy_Owned" Association="HorselessContentModel.Store.FK_PrincipalHierarchy_Owned">
+      <End Role="Owned" EntitySet="Principals" />
+      <End Role="PrincipalHierarchy" EntitySet="PrincipalHierarchy" />
     </AssociationSet>
     <AssociationSet Name="FK_AccessControlEntryOwners_AccessControlEntry" Association="HorselessContentModel.Store.FK_AccessControlEntryOwners_AccessControlEntry">
       <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
@@ -212,13 +212,13 @@
       <End Role="Principal" EntitySet="Principals" />
       <End Role="TenantAccounts" EntitySet="TenantAccounts" />
     </AssociationSet>
-    <AssociationSet Name="FK_TenantAccessControlEntry_SubjectTenant" Association="HorselessContentModel.Store.FK_TenantAccessControlEntry_SubjectTenant">
+    <AssociationSet Name="FK_TenantAccessControlEntries_SubjectTenant" Association="HorselessContentModel.Store.FK_TenantAccessControlEntries_SubjectTenant">
       <End Role="SubjectTenant" EntitySet="Tenants" />
-      <End Role="TenantAccessControlEntry" EntitySet="TenantAccessControlEntry" />
+      <End Role="TenantAccessControlEntries" EntitySet="TenantAccessControlEntries" />
     </AssociationSet>
-    <AssociationSet Name="FK_TenantAccessControlEntry_AccessControlEntry" Association="HorselessContentModel.Store.FK_TenantAccessControlEntry_AccessControlEntry">
+    <AssociationSet Name="FK_TenantAccessControlEntries_AccessControlEntry" Association="HorselessContentModel.Store.FK_TenantAccessControlEntries_AccessControlEntry">
       <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
-      <End Role="TenantAccessControlEntry" EntitySet="TenantAccessControlEntry" />
+      <End Role="TenantAccessControlEntries" EntitySet="TenantAccessControlEntries" />
     </AssociationSet>
     <AssociationSet Name="PrincipalHorselessSession" Association="HorselessContentModel.Store.PrincipalHorselessSession">
       <End Role="Principal" EntitySet="Principals" />
@@ -500,7 +500,7 @@
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="IsActive" Type="bit" Nullable="true" />
   </EntityType>
-  <EntityType Name="TenantContentCollection">
+  <EntityType Name="TenantContentCollections">
     <Key>
       <PropertyRef Name="Tenants_Id" />
       <PropertyRef Name="ContentCollections_Id" />
@@ -516,7 +516,7 @@
     <Property Name="ContentCollections_Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="MimeContents_Id" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
-  <EntityType Name="NavigationMenuNavigationMenu">
+  <EntityType Name="NavigationMenuHierarchy">
     <Key>
       <PropertyRef Name="Children_Id" />
       <PropertyRef Name="Parents_Id" />
@@ -524,7 +524,7 @@
     <Property Name="Children_Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Parents_Id" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
-  <EntityType Name="NavigationMenuItemNavigationMenuItem">
+  <EntityType Name="NavigationMenuItemHierarchy">
     <Key>
       <PropertyRef Name="ChildNavigationItems_Id" />
       <PropertyRef Name="ParentNavigationItems_Id" />
@@ -540,7 +540,7 @@
     <Property Name="ChildNavigationMenuItems_Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ParentNavigationMenus_Id" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
-  <EntityType Name="ContentCollectionContentCollection">
+  <EntityType Name="ContentCollectionHierarchy">
     <Key>
       <PropertyRef Name="ChildContentCollections_Id" />
       <PropertyRef Name="ParentContentCollections_Id" />
@@ -548,12 +548,12 @@
     <Property Name="ChildContentCollections_Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ParentContentCollections_Id" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
-  <EntityType Name="PublicationPublication">
+  <EntityType Name="PublicationHierarchy">
     <Key>
-      <PropertyRef Name="PublicationsChildren_Id" />
+      <PropertyRef Name="PublicationChildren_Id" />
       <PropertyRef Name="PublicationParents_Id" />
     </Key>
-    <Property Name="PublicationsChildren_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PublicationChildren_Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="PublicationParents_Id" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="PublicationContentCollection">
@@ -596,7 +596,7 @@
     <Property Name="Holonyms_Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Meronyms_Id" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
-  <EntityType Name="TaxonomyContentCollection">
+  <EntityType Name="ContentCollectionTaxonomies">
     <Key>
       <PropertyRef Name="Taxonomies_Id" />
       <PropertyRef Name="ContentCollections_Id" />
@@ -620,7 +620,7 @@
     <Property Name="SubjectPrincipals_Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="AccessControlEntries_Id" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
-  <EntityType Name="AccessControlEntryAccessControlEntry">
+  <EntityType Name="AccessControlEntryHierarchy">
     <Key>
       <PropertyRef Name="SubjectAccessControlEntries_Id" />
       <PropertyRef Name="AccessControlEntries_Id" />
@@ -628,7 +628,7 @@
     <Property Name="SubjectAccessControlEntries_Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="AccessControlEntries_Id" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
-  <EntityType Name="PrincipalPrincipal">
+  <EntityType Name="PrincipalHierarchy">
     <Key>
       <PropertyRef Name="OwnedPrincipals_Id" />
       <PropertyRef Name="Owners_Id" />
@@ -652,7 +652,7 @@
     <Property Name="TenantAccounts_Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Accounts_Id" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
-  <EntityType Name="TenantAccessControlEntry">
+  <EntityType Name="TenantAccessControlEntries">
     <Key>
       <PropertyRef Name="SubjectTenants_Id" />
       <PropertyRef Name="AccessControlEntries_Id" />
@@ -732,26 +732,26 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TenantContentCollection_Tenant">
+  <Association Name="FK_TenantContentCollections_Tenant">
     <End Role="Tenant" Type="HorselessContentModel.Store.Tenants" Multiplicity="1" />
-    <End Role="TenantContentCollection" Type="HorselessContentModel.Store.TenantContentCollection" Multiplicity="*" />
+    <End Role="TenantContentCollections" Type="HorselessContentModel.Store.TenantContentCollections" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Tenant">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="TenantContentCollection">
+      <Dependent Role="TenantContentCollections">
         <PropertyRef Name="Tenants_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TenantContentCollection_ContentCollection">
-    <End Role="TenantContentCollection" Type="HorselessContentModel.Store.TenantContentCollection" Multiplicity="*" />
+  <Association Name="FK_TenantContentCollections_ContentCollection">
+    <End Role="TenantContentCollections" Type="HorselessContentModel.Store.TenantContentCollections" Multiplicity="*" />
     <End Role="ContentCollection" Type="HorselessContentModel.Store.ContentCollections" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="ContentCollection">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="TenantContentCollection">
+      <Dependent Role="TenantContentCollections">
         <PropertyRef Name="ContentCollections_Id" />
       </Dependent>
     </ReferentialConstraint>
@@ -780,50 +780,50 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_NavigationMenuNavigationMenu_NavigationMenu">
+  <Association Name="FK_NavigationMenuHierarchy_NavigationMenu">
     <End Role="NavigationMenu" Type="HorselessContentModel.Store.NavigationMenus" Multiplicity="1" />
-    <End Role="NavigationMenuNavigationMenu" Type="HorselessContentModel.Store.NavigationMenuNavigationMenu" Multiplicity="*" />
+    <End Role="NavigationMenuHierarchy" Type="HorselessContentModel.Store.NavigationMenuHierarchy" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="NavigationMenu">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="NavigationMenuNavigationMenu">
+      <Dependent Role="NavigationMenuHierarchy">
         <PropertyRef Name="Children_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_NavigationMenuNavigationMenu_NavigationMenu1">
-    <End Role="NavigationMenuNavigationMenu" Type="HorselessContentModel.Store.NavigationMenuNavigationMenu" Multiplicity="*" />
-    <End Role="NavigationMenu1" Type="HorselessContentModel.Store.NavigationMenus" Multiplicity="1" />
+  <Association Name="FK_NavigationMenuHierarchy_Children">
+    <End Role="NavigationMenuHierarchy" Type="HorselessContentModel.Store.NavigationMenuHierarchy" Multiplicity="*" />
+    <End Role="Children" Type="HorselessContentModel.Store.NavigationMenus" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="NavigationMenu1">
+      <Principal Role="Children">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="NavigationMenuNavigationMenu">
+      <Dependent Role="NavigationMenuHierarchy">
         <PropertyRef Name="Parents_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_NavigationMenuItemNavigationMenuItem_NavigationMenuItem">
+  <Association Name="FK_NavigationMenuItemHierarchy_NavigationMenuItem">
     <End Role="NavigationMenuItem" Type="HorselessContentModel.Store.NavigationMenuItems" Multiplicity="1" />
-    <End Role="NavigationMenuItemNavigationMenuItem" Type="HorselessContentModel.Store.NavigationMenuItemNavigationMenuItem" Multiplicity="*" />
+    <End Role="NavigationMenuItemHierarchy" Type="HorselessContentModel.Store.NavigationMenuItemHierarchy" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="NavigationMenuItem">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="NavigationMenuItemNavigationMenuItem">
+      <Dependent Role="NavigationMenuItemHierarchy">
         <PropertyRef Name="ChildNavigationItems_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_NavigationMenuItemNavigationMenuItem_NavigationMenuItem1">
-    <End Role="NavigationMenuItemNavigationMenuItem" Type="HorselessContentModel.Store.NavigationMenuItemNavigationMenuItem" Multiplicity="*" />
-    <End Role="NavigationMenuItem1" Type="HorselessContentModel.Store.NavigationMenuItems" Multiplicity="1" />
+  <Association Name="FK_NavigationMenuItemHierarchy_ChildNavigationItems">
+    <End Role="NavigationMenuItemHierarchy" Type="HorselessContentModel.Store.NavigationMenuItemHierarchy" Multiplicity="*" />
+    <End Role="ChildNavigationItems" Type="HorselessContentModel.Store.NavigationMenuItems" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="NavigationMenuItem1">
+      <Principal Role="ChildNavigationItems">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="NavigationMenuItemNavigationMenuItem">
+      <Dependent Role="NavigationMenuItemHierarchy">
         <PropertyRef Name="ParentNavigationItems_Id" />
       </Dependent>
     </ReferentialConstraint>
@@ -852,50 +852,50 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ContentCollectionContentCollection_ContentCollection">
+  <Association Name="FK_ContentCollectionHierarchy_ContentCollection">
     <End Role="ContentCollection" Type="HorselessContentModel.Store.ContentCollections" Multiplicity="1" />
-    <End Role="ContentCollectionContentCollection" Type="HorselessContentModel.Store.ContentCollectionContentCollection" Multiplicity="*" />
+    <End Role="ContentCollectionHierarchy" Type="HorselessContentModel.Store.ContentCollectionHierarchy" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ContentCollection">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="ContentCollectionContentCollection">
+      <Dependent Role="ContentCollectionHierarchy">
         <PropertyRef Name="ChildContentCollections_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ContentCollectionContentCollection_ContentCollection1">
-    <End Role="ContentCollectionContentCollection" Type="HorselessContentModel.Store.ContentCollectionContentCollection" Multiplicity="*" />
-    <End Role="ContentCollection1" Type="HorselessContentModel.Store.ContentCollections" Multiplicity="1" />
+  <Association Name="FK_ContentCollectionHierarchy_ChildContentCollections">
+    <End Role="ContentCollectionHierarchy" Type="HorselessContentModel.Store.ContentCollectionHierarchy" Multiplicity="*" />
+    <End Role="ChildContentCollections" Type="HorselessContentModel.Store.ContentCollections" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="ContentCollection1">
+      <Principal Role="ChildContentCollections">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="ContentCollectionContentCollection">
+      <Dependent Role="ContentCollectionHierarchy">
         <PropertyRef Name="ParentContentCollections_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PublicationPublication_Publication">
+  <Association Name="FK_PublicationHierarchy_Publication">
     <End Role="Publication" Type="HorselessContentModel.Store.Publications" Multiplicity="1" />
-    <End Role="PublicationPublication" Type="HorselessContentModel.Store.PublicationPublication" Multiplicity="*" />
+    <End Role="PublicationHierarchy" Type="HorselessContentModel.Store.PublicationHierarchy" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Publication">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="PublicationPublication">
-        <PropertyRef Name="PublicationsChildren_Id" />
+      <Dependent Role="PublicationHierarchy">
+        <PropertyRef Name="PublicationChildren_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PublicationPublication_Publication1">
-    <End Role="PublicationPublication" Type="HorselessContentModel.Store.PublicationPublication" Multiplicity="*" />
-    <End Role="Publication1" Type="HorselessContentModel.Store.Publications" Multiplicity="1" />
+  <Association Name="FK_PublicationHierarchy_PublicationChildren">
+    <End Role="PublicationHierarchy" Type="HorselessContentModel.Store.PublicationHierarchy" Multiplicity="*" />
+    <End Role="PublicationChildren" Type="HorselessContentModel.Store.Publications" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="Publication1">
+      <Principal Role="PublicationChildren">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="PublicationPublication">
+      <Dependent Role="PublicationHierarchy">
         <PropertyRef Name="PublicationParents_Id" />
       </Dependent>
     </ReferentialConstraint>
@@ -1020,26 +1020,26 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TaxonomyContentCollection_Taxonomy">
+  <Association Name="FK_ContentCollectionTaxonomies_Taxonomy">
     <End Role="Taxonomy" Type="HorselessContentModel.Store.Taxonomies" Multiplicity="1" />
-    <End Role="TaxonomyContentCollection" Type="HorselessContentModel.Store.TaxonomyContentCollection" Multiplicity="*" />
+    <End Role="ContentCollectionTaxonomies" Type="HorselessContentModel.Store.ContentCollectionTaxonomies" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Taxonomy">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="TaxonomyContentCollection">
+      <Dependent Role="ContentCollectionTaxonomies">
         <PropertyRef Name="Taxonomies_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TaxonomyContentCollection_ContentCollection">
-    <End Role="TaxonomyContentCollection" Type="HorselessContentModel.Store.TaxonomyContentCollection" Multiplicity="*" />
+  <Association Name="FK_ContentCollectionTaxonomies_ContentCollection">
+    <End Role="ContentCollectionTaxonomies" Type="HorselessContentModel.Store.ContentCollectionTaxonomies" Multiplicity="*" />
     <End Role="ContentCollection" Type="HorselessContentModel.Store.ContentCollections" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="ContentCollection">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="TaxonomyContentCollection">
+      <Dependent Role="ContentCollectionTaxonomies">
         <PropertyRef Name="ContentCollections_Id" />
       </Dependent>
     </ReferentialConstraint>
@@ -1092,50 +1092,50 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_AccessControlEntryAccessControlEntry_AccessControlEntry">
-    <End Role="AccessControlEntry" Type="HorselessContentModel.Store.AccessControlEntries" Multiplicity="1" />
-    <End Role="AccessControlEntryAccessControlEntry" Type="HorselessContentModel.Store.AccessControlEntryAccessControlEntry" Multiplicity="*" />
+  <Association Name="FK_AccessControlEntryHierarchy_DependentAccessControlEntry">
+    <End Role="DependentAccessControlEntry" Type="HorselessContentModel.Store.AccessControlEntries" Multiplicity="1" />
+    <End Role="AccessControlEntryHierarchy" Type="HorselessContentModel.Store.AccessControlEntryHierarchy" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="AccessControlEntry">
+      <Principal Role="DependentAccessControlEntry">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="AccessControlEntryAccessControlEntry">
+      <Dependent Role="AccessControlEntryHierarchy">
         <PropertyRef Name="SubjectAccessControlEntries_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_AccessControlEntryAccessControlEntry_SubjectAccessControlEntry">
-    <End Role="AccessControlEntryAccessControlEntry" Type="HorselessContentModel.Store.AccessControlEntryAccessControlEntry" Multiplicity="*" />
+  <Association Name="FK_AccessControlEntryHierarchy_SubjectAccessControlEntry">
+    <End Role="AccessControlEntryHierarchy" Type="HorselessContentModel.Store.AccessControlEntryHierarchy" Multiplicity="*" />
     <End Role="SubjectAccessControlEntry" Type="HorselessContentModel.Store.AccessControlEntries" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="SubjectAccessControlEntry">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="AccessControlEntryAccessControlEntry">
+      <Dependent Role="AccessControlEntryHierarchy">
         <PropertyRef Name="AccessControlEntries_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PrincipalPrincipal_Principal">
-    <End Role="Principal" Type="HorselessContentModel.Store.Principals" Multiplicity="1" />
-    <End Role="PrincipalPrincipal" Type="HorselessContentModel.Store.PrincipalPrincipal" Multiplicity="*" />
+  <Association Name="FK_PrincipalHierarchy_OwnerPrincipals">
+    <End Role="OwnerPrincipals" Type="HorselessContentModel.Store.Principals" Multiplicity="1" />
+    <End Role="PrincipalHierarchy" Type="HorselessContentModel.Store.PrincipalHierarchy" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Principal">
+      <Principal Role="OwnerPrincipals">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="PrincipalPrincipal">
+      <Dependent Role="PrincipalHierarchy">
         <PropertyRef Name="OwnedPrincipals_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PrincipalPrincipal_Principal1">
-    <End Role="PrincipalPrincipal" Type="HorselessContentModel.Store.PrincipalPrincipal" Multiplicity="*" />
-    <End Role="Principal1" Type="HorselessContentModel.Store.Principals" Multiplicity="1" />
+  <Association Name="FK_PrincipalHierarchy_Owned">
+    <End Role="PrincipalHierarchy" Type="HorselessContentModel.Store.PrincipalHierarchy" Multiplicity="*" />
+    <End Role="Owned" Type="HorselessContentModel.Store.Principals" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="Principal1">
+      <Principal Role="Owned">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="PrincipalPrincipal">
+      <Dependent Role="PrincipalHierarchy">
         <PropertyRef Name="Owners_Id" />
       </Dependent>
     </ReferentialConstraint>
@@ -1188,26 +1188,26 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TenantAccessControlEntry_SubjectTenant">
+  <Association Name="FK_TenantAccessControlEntries_SubjectTenant">
     <End Role="SubjectTenant" Type="HorselessContentModel.Store.Tenants" Multiplicity="1" />
-    <End Role="TenantAccessControlEntry" Type="HorselessContentModel.Store.TenantAccessControlEntry" Multiplicity="*" />
+    <End Role="TenantAccessControlEntries" Type="HorselessContentModel.Store.TenantAccessControlEntries" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SubjectTenant">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="TenantAccessControlEntry">
+      <Dependent Role="TenantAccessControlEntries">
         <PropertyRef Name="SubjectTenants_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TenantAccessControlEntry_AccessControlEntry">
-    <End Role="TenantAccessControlEntry" Type="HorselessContentModel.Store.TenantAccessControlEntry" Multiplicity="*" />
+  <Association Name="FK_TenantAccessControlEntries_AccessControlEntry">
+    <End Role="TenantAccessControlEntries" Type="HorselessContentModel.Store.TenantAccessControlEntries" Multiplicity="*" />
     <End Role="AccessControlEntry" Type="HorselessContentModel.Store.AccessControlEntries" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="AccessControlEntry">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="TenantAccessControlEntry">
+      <Dependent Role="TenantAccessControlEntries">
         <PropertyRef Name="AccessControlEntries_Id" />
       </Dependent>
     </ReferentialConstraint>
@@ -1295,7 +1295,7 @@
           <EntitySet Name="FilesystemAssets" EntityType="HorselessContentModel.FilesystemAsset" />
           <EntitySet Name="JSONAssets" EntityType="HorselessContentModel.JSONAsset" />
           <EntitySet Name="ContentCollections" EntityType="HorselessContentModel.ContentCollection" />
-          <AssociationSet Name="TenantContentCollection" Association="HorselessContentModel.TenantContentCollection">
+          <AssociationSet Name="TenantContentCollections" Association="HorselessContentModel.TenantContentCollections">
             <End Role="Tenant" EntitySet="Tenants" />
             <End Role="ContentCollection" EntitySet="ContentCollections" />
           </AssociationSet>
@@ -1326,25 +1326,25 @@
           <EntitySet Name="HorselessSessions" EntityType="HorselessContentModel.HorselessSession" />
           <EntitySet Name="NavigationMenus" EntityType="HorselessContentModel.NavigationMenu" />
           <EntitySet Name="NavigationMenuItems" EntityType="HorselessContentModel.NavigationMenuItem" />
-          <AssociationSet Name="NavigationMenuNavigationMenu" Association="HorselessContentModel.NavigationMenuNavigationMenu">
+          <AssociationSet Name="NavigationMenuHierarchy" Association="HorselessContentModel.NavigationMenuHierarchy">
             <End Role="NavigationMenu" EntitySet="NavigationMenus" />
-            <End Role="NavigationMenu1" EntitySet="NavigationMenus" />
+            <End Role="Children" EntitySet="NavigationMenus" />
           </AssociationSet>
-          <AssociationSet Name="NavigationMenuItemNavigationMenuItem" Association="HorselessContentModel.NavigationMenuItemNavigationMenuItem">
+          <AssociationSet Name="NavigationMenuItemHierarchy" Association="HorselessContentModel.NavigationMenuItemHierarchy">
             <End Role="NavigationMenuItem" EntitySet="NavigationMenuItems" />
-            <End Role="NavigationMenuItem1" EntitySet="NavigationMenuItems" />
+            <End Role="ChildNavigationItems" EntitySet="NavigationMenuItems" />
           </AssociationSet>
           <AssociationSet Name="NavigationMenuItemNavigationMenu" Association="HorselessContentModel.NavigationMenuItemNavigationMenu">
             <End Role="NavigationMenuItem" EntitySet="NavigationMenuItems" />
             <End Role="NavigationMenu" EntitySet="NavigationMenus" />
           </AssociationSet>
-          <AssociationSet Name="ContentCollectionContentCollection" Association="HorselessContentModel.ContentCollectionContentCollection">
+          <AssociationSet Name="ContentCollectionHierarchy" Association="HorselessContentModel.ContentCollectionHierarchy">
             <End Role="ContentCollection" EntitySet="ContentCollections" />
-            <End Role="ContentCollection1" EntitySet="ContentCollections" />
+            <End Role="ChildContentCollections" EntitySet="ContentCollections" />
           </AssociationSet>
-          <AssociationSet Name="PublicationPublication" Association="HorselessContentModel.PublicationPublication">
+          <AssociationSet Name="PublicationHierarchy" Association="HorselessContentModel.PublicationHierarchy">
             <End Role="Publication" EntitySet="Publications" />
-            <End Role="Publication1" EntitySet="Publications" />
+            <End Role="PublicationChildren" EntitySet="Publications" />
           </AssociationSet>
           <AssociationSet Name="PublicationContentCollection" Association="HorselessContentModel.PublicationContentCollection">
             <End Role="Publication" EntitySet="Publications" />
@@ -1355,7 +1355,7 @@
             <End Role="Taxon" EntitySet="Taxons" />
             <End Role="Taxonomy" EntitySet="Taxonomies" />
           </AssociationSet>
-          <AssociationSet Name="TaxonTaxon" Association="HorselessContentModel.TaxonTaxon">
+          <AssociationSet Name="TaxonHirearchy" Association="HorselessContentModel.TaxonTaxon">
             <End Role="Taxon" EntitySet="Taxons" />
             <End Role="Taxon1" EntitySet="Taxons" />
           </AssociationSet>
@@ -1367,7 +1367,7 @@
             <End Role="Holonym" EntitySet="Holonyms" />
             <End Role="Meronym" EntitySet="Meronyms" />
           </AssociationSet>
-          <AssociationSet Name="TaxonomyContentCollection" Association="HorselessContentModel.TaxonomyContentCollection">
+          <AssociationSet Name="ContentCollectionTaxonomies" Association="HorselessContentModel.ContentCollectionTaxonomies">
             <End Role="Taxonomy" EntitySet="Taxonomies" />
             <End Role="ContentCollection" EntitySet="ContentCollections" />
           </AssociationSet>
@@ -1379,13 +1379,13 @@
             <End Role="Principal" EntitySet="Principals" />
             <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
           </AssociationSet>
-          <AssociationSet Name="AccessControlEntryAccessControlEntry" Association="HorselessContentModel.AccessControlEntryAccessControlEntry">
-            <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
+          <AssociationSet Name="AccessControlEntryHierarchy" Association="HorselessContentModel.AccessControlEntryHierarchy">
+            <End Role="DependentAccessControlEntry" EntitySet="AccessControlEntries" />
             <End Role="SubjectAccessControlEntry" EntitySet="AccessControlEntries" />
           </AssociationSet>
-          <AssociationSet Name="PrincipalPrincipal" Association="HorselessContentModel.PrincipalPrincipal">
-            <End Role="Principal" EntitySet="Principals" />
-            <End Role="Principal1" EntitySet="Principals" />
+          <AssociationSet Name="PrincipalHierarchy" Association="HorselessContentModel.PrincipalHierarchy">
+            <End Role="OwnerPrincipals" EntitySet="Principals" />
+            <End Role="Owned" EntitySet="Principals" />
           </AssociationSet>
           <AssociationSet Name="AccessControlEntryOwners" Association="HorselessContentModel.AccessControlEntryOwners">
             <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
@@ -1395,7 +1395,7 @@
             <End Role="Tenant" EntitySet="Tenants" />
             <End Role="Principal" EntitySet="Principals" />
           </AssociationSet>
-          <AssociationSet Name="TenantAccessControlEntry" Association="HorselessContentModel.TenantAccessControlEntry">
+          <AssociationSet Name="TenantAccessControlEntries" Association="HorselessContentModel.TenantAccessControlEntries">
             <End Role="SubjectTenant" EntitySet="Tenants" />
             <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
           </AssociationSet>
@@ -1446,10 +1446,10 @@
           <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
-          <NavigationProperty Name="ContentCollections" Relationship="HorselessContentModel.TenantContentCollection" FromRole="Tenant" ToRole="ContentCollection" />
+          <NavigationProperty Name="ContentCollections" Relationship="HorselessContentModel.TenantContentCollections" FromRole="Tenant" ToRole="ContentCollection" />
           <NavigationProperty Name="Owners" Relationship="HorselessContentModel.TenantOwners" FromRole="Tenant" ToRole="Principal" />
           <NavigationProperty Name="Accounts" Relationship="HorselessContentModel.TenantAccounts" FromRole="Tenant" ToRole="Principal" />
-          <NavigationProperty Name="AccessControlEntries" Relationship="HorselessContentModel.TenantAccessControlEntry" FromRole="SubjectTenant" ToRole="AccessControlEntry" />
+          <NavigationProperty Name="AccessControlEntries" Relationship="HorselessContentModel.TenantAccessControlEntries" FromRole="SubjectTenant" ToRole="AccessControlEntry" />
         </EntityType>
         <EntityType Name="MIMEType">
           <Key>
@@ -1499,19 +1499,19 @@
           <Property Name="ObjectId" Type="String" Nullable="true" />
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
-          <NavigationProperty Name="Tenants" Relationship="HorselessContentModel.TenantContentCollection" FromRole="ContentCollection" ToRole="Tenant" />
+          <NavigationProperty Name="Tenants" Relationship="HorselessContentModel.TenantContentCollections" FromRole="ContentCollection" ToRole="Tenant" />
           <NavigationProperty Name="MimeContents" Relationship="HorselessContentModel.ContentCollectionMimeContent" FromRole="ContentCollection" ToRole="MimeContent" />
           <Property Name="AllowAnonymousRead" Type="Boolean" Nullable="true" />
           <Property Name="IsPublished" Type="Boolean" Nullable="true" />
-          <NavigationProperty Name="ParentContentCollections" Relationship="HorselessContentModel.ContentCollectionContentCollection" FromRole="ContentCollection" ToRole="ContentCollection1" />
-          <NavigationProperty Name="ChildContentCollections" Relationship="HorselessContentModel.ContentCollectionContentCollection" FromRole="ContentCollection1" ToRole="ContentCollection" />
+          <NavigationProperty Name="ParentContentCollections" Relationship="HorselessContentModel.ContentCollectionHierarchy" FromRole="ContentCollection" ToRole="ChildContentCollections" />
+          <NavigationProperty Name="ChildContentCollections" Relationship="HorselessContentModel.ContentCollectionHierarchy" FromRole="ChildContentCollections" ToRole="ContentCollection" />
           <Property Name="PublishedURL" Type="String" Nullable="true" />
           <NavigationProperty Name="Publications" Relationship="HorselessContentModel.PublicationContentCollection" FromRole="ContentCollection" ToRole="Publication" />
           <Property Name="PreviewURL" Type="String" Nullable="true" />
-          <NavigationProperty Name="Taxonomies" Relationship="HorselessContentModel.TaxonomyContentCollection" FromRole="ContentCollection" ToRole="Taxonomy" />
+          <NavigationProperty Name="Taxonomies" Relationship="HorselessContentModel.ContentCollectionTaxonomies" FromRole="ContentCollection" ToRole="Taxonomy" />
           <NavigationProperty Name="HorselessViews" Relationship="HorselessContentModel.HorselessViewContentCollection" FromRole="ContentCollection" ToRole="HorselessView" />
         </EntityType>
-        <Association Name="TenantContentCollection">
+        <Association Name="TenantContentCollections">
           <End Type="HorselessContentModel.Tenant" Role="Tenant" Multiplicity="*" />
           <End Type="HorselessContentModel.ContentCollection" Role="ContentCollection" Multiplicity="*" />
         </Association>
@@ -1567,8 +1567,8 @@
           <Property Name="PublishAt" Type="DateTime" Nullable="true" />
           <Property Name="UnPublishAt" Type="DateTime" Nullable="true" />
           <Property Name="IsPublished" Type="Boolean" Nullable="true" />
-          <NavigationProperty Name="PublicationParents" Relationship="HorselessContentModel.PublicationPublication" FromRole="Publication" ToRole="Publication1" />
-          <NavigationProperty Name="PublicationsChildren" Relationship="HorselessContentModel.PublicationPublication" FromRole="Publication1" ToRole="Publication" />
+          <NavigationProperty Name="PublicationParents" Relationship="HorselessContentModel.PublicationHierarchy" FromRole="Publication" ToRole="PublicationChildren" />
+          <NavigationProperty Name="PublicationChildren" Relationship="HorselessContentModel.PublicationHierarchy" FromRole="PublicationChildren" ToRole="Publication" />
           <NavigationProperty Name="ContentCollections" Relationship="HorselessContentModel.PublicationContentCollection" FromRole="Publication" ToRole="ContentCollection" />
           <Property Name="PublishedURL" Type="String" Nullable="true" />
           <Property Name="PreviewURL" Type="String" Nullable="true" />
@@ -1642,8 +1642,8 @@
           <Property Name="Sub" Type="String" Nullable="true" />
           <NavigationProperty Name="OwnedTenants" Relationship="HorselessContentModel.TenantOwners" FromRole="Principal" ToRole="Tenant" />
           <NavigationProperty Name="AccessControlEntries" Relationship="HorselessContentModel.PrincipalAccessControlEntry" FromRole="Principal" ToRole="AccessControlEntry" />
-          <NavigationProperty Name="Owners" Relationship="HorselessContentModel.PrincipalPrincipal" FromRole="Principal" ToRole="Principal1" />
-          <NavigationProperty Name="OwnedPrincipals" Relationship="HorselessContentModel.PrincipalPrincipal" FromRole="Principal1" ToRole="Principal" />
+          <NavigationProperty Name="Owners" Relationship="HorselessContentModel.PrincipalHierarchy" FromRole="OwnerPrincipals" ToRole="Owned" />
+          <NavigationProperty Name="OwnedPrincipals" Relationship="HorselessContentModel.PrincipalHierarchy" FromRole="Owned" ToRole="OwnerPrincipals" />
           <NavigationProperty Name="OwnedAccessControlEntries" Relationship="HorselessContentModel.AccessControlEntryOwners" FromRole="Owner" ToRole="AccessControlEntry" />
           <NavigationProperty Name="TenantAccounts" Relationship="HorselessContentModel.TenantAccounts" FromRole="Principal" ToRole="Tenant" />
           <NavigationProperty Name="HorselessSessions" Relationship="HorselessContentModel.PrincipalHorselessSession" FromRole="Principal" ToRole="HorselessSession" />
@@ -1677,10 +1677,10 @@
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="true" />
           <NavigationProperty Name="SubjectPrincipals" Relationship="HorselessContentModel.PrincipalAccessControlEntry" FromRole="AccessControlEntry" ToRole="Principal" />
-          <NavigationProperty Name="AccessControlEntries" Relationship="HorselessContentModel.AccessControlEntryAccessControlEntry" FromRole="AccessControlEntry" ToRole="SubjectAccessControlEntry" />
-          <NavigationProperty Name="SubjectAccessControlEntries" Relationship="HorselessContentModel.AccessControlEntryAccessControlEntry" FromRole="SubjectAccessControlEntry" ToRole="AccessControlEntry" />
+          <NavigationProperty Name="AccessControlEntries" Relationship="HorselessContentModel.AccessControlEntryHierarchy" FromRole="DependentAccessControlEntry" ToRole="SubjectAccessControlEntry" />
+          <NavigationProperty Name="SubjectAccessControlEntries" Relationship="HorselessContentModel.AccessControlEntryHierarchy" FromRole="SubjectAccessControlEntry" ToRole="DependentAccessControlEntry" />
           <NavigationProperty Name="Owners" Relationship="HorselessContentModel.AccessControlEntryOwners" FromRole="AccessControlEntry" ToRole="Owner" />
-          <NavigationProperty Name="SubjectTenants" Relationship="HorselessContentModel.TenantAccessControlEntry" FromRole="AccessControlEntry" ToRole="SubjectTenant" />
+          <NavigationProperty Name="SubjectTenants" Relationship="HorselessContentModel.TenantAccessControlEntries" FromRole="AccessControlEntry" ToRole="SubjectTenant" />
           <NavigationProperty Name="SubjectHorselessSessions" Relationship="HorselessContentModel.HorselessSessionAccessControlEntry" FromRole="AccessControlledHorselessSession" ToRole="SubjectHorselessSession" />
         </EntityType>
         <EnumType Name="ACEType">
@@ -1734,8 +1734,8 @@
           <Property Name="PublishAt" Type="DateTime" Nullable="true" />
           <Property Name="UnPublishAt" Type="DateTime" Nullable="true" />
           <Property Name="IsPublished" Type="Boolean" Nullable="true" />
-          <NavigationProperty Name="Parents" Relationship="HorselessContentModel.NavigationMenuNavigationMenu" FromRole="NavigationMenu" ToRole="NavigationMenu1" />
-          <NavigationProperty Name="Children" Relationship="HorselessContentModel.NavigationMenuNavigationMenu" FromRole="NavigationMenu1" ToRole="NavigationMenu" />
+          <NavigationProperty Name="Parents" Relationship="HorselessContentModel.NavigationMenuHierarchy" FromRole="NavigationMenu" ToRole="Children" />
+          <NavigationProperty Name="Children" Relationship="HorselessContentModel.NavigationMenuHierarchy" FromRole="Children" ToRole="NavigationMenu" />
           <Property Name="MenuLabel" Type="String" Nullable="true" />
           <Property Name="MenuDescription" Type="String" Nullable="true" />
           <Property Name="MenuAltText" Type="String" Nullable="true" />
@@ -1756,29 +1756,29 @@
           <Property Name="MenuItemLabel" Type="String" Nullable="true" />
           <Property Name="MenuItemDescription" Type="String" Nullable="true" />
           <Property Name="MenuItemAltText" Type="String" Nullable="true" />
-          <NavigationProperty Name="ParentNavigationItems" Relationship="HorselessContentModel.NavigationMenuItemNavigationMenuItem" FromRole="NavigationMenuItem" ToRole="NavigationMenuItem1" />
-          <NavigationProperty Name="ChildNavigationItems" Relationship="HorselessContentModel.NavigationMenuItemNavigationMenuItem" FromRole="NavigationMenuItem1" ToRole="NavigationMenuItem" />
+          <NavigationProperty Name="ParentNavigationItems" Relationship="HorselessContentModel.NavigationMenuItemHierarchy" FromRole="NavigationMenuItem" ToRole="ChildNavigationItems" />
+          <NavigationProperty Name="ChildNavigationItems" Relationship="HorselessContentModel.NavigationMenuItemHierarchy" FromRole="ChildNavigationItems" ToRole="NavigationMenuItem" />
           <NavigationProperty Name="ParentNavigationMenus" Relationship="HorselessContentModel.NavigationMenuItemNavigationMenu" FromRole="NavigationMenuItem" ToRole="NavigationMenu" />
         </EntityType>
-        <Association Name="NavigationMenuNavigationMenu">
+        <Association Name="NavigationMenuHierarchy">
           <End Type="HorselessContentModel.NavigationMenu" Role="NavigationMenu" Multiplicity="*" />
-          <End Type="HorselessContentModel.NavigationMenu" Role="NavigationMenu1" Multiplicity="*" />
+          <End Type="HorselessContentModel.NavigationMenu" Role="Children" Multiplicity="*" />
         </Association>
-        <Association Name="NavigationMenuItemNavigationMenuItem">
+        <Association Name="NavigationMenuItemHierarchy">
           <End Type="HorselessContentModel.NavigationMenuItem" Role="NavigationMenuItem" Multiplicity="*" />
-          <End Type="HorselessContentModel.NavigationMenuItem" Role="NavigationMenuItem1" Multiplicity="*" />
+          <End Type="HorselessContentModel.NavigationMenuItem" Role="ChildNavigationItems" Multiplicity="*" />
         </Association>
         <Association Name="NavigationMenuItemNavigationMenu">
           <End Type="HorselessContentModel.NavigationMenuItem" Role="NavigationMenuItem" Multiplicity="*" />
           <End Type="HorselessContentModel.NavigationMenu" Role="NavigationMenu" Multiplicity="*" />
         </Association>
-        <Association Name="ContentCollectionContentCollection">
+        <Association Name="ContentCollectionHierarchy">
           <End Type="HorselessContentModel.ContentCollection" Role="ContentCollection" Multiplicity="*" />
-          <End Type="HorselessContentModel.ContentCollection" Role="ContentCollection1" Multiplicity="*" />
+          <End Type="HorselessContentModel.ContentCollection" Role="ChildContentCollections" Multiplicity="*" />
         </Association>
-        <Association Name="PublicationPublication">
+        <Association Name="PublicationHierarchy">
           <End Type="HorselessContentModel.Publication" Role="Publication" Multiplicity="*" />
-          <End Type="HorselessContentModel.Publication" Role="Publication1" Multiplicity="*" />
+          <End Type="HorselessContentModel.Publication" Role="PublicationChildren" Multiplicity="*" />
         </Association>
         <Association Name="PublicationContentCollection">
           <End Type="HorselessContentModel.Publication" Role="Publication" Multiplicity="*" />
@@ -1796,7 +1796,7 @@
           <Property Name="JsonValue" Type="String" Nullable="true" />
           <Property Name="JsonSchema" Type="String" Nullable="true" />
           <NavigationProperty Name="Taxons" Relationship="HorselessContentModel.TaxonTaxonomy" FromRole="Taxonomy" ToRole="Taxon" />
-          <NavigationProperty Name="ContentCollections" Relationship="HorselessContentModel.TaxonomyContentCollection" FromRole="Taxonomy" ToRole="ContentCollection" />
+          <NavigationProperty Name="ContentCollections" Relationship="HorselessContentModel.ContentCollectionTaxonomies" FromRole="Taxonomy" ToRole="ContentCollection" />
         </EntityType>
         <Association Name="TaxonTaxonomy">
           <End Type="HorselessContentModel.Taxon" Role="Taxon" Multiplicity="*" />
@@ -1814,7 +1814,7 @@
           <End Type="HorselessContentModel.Holonym" Role="Holonym" Multiplicity="*" />
           <End Type="HorselessContentModel.Meronym" Role="Meronym" Multiplicity="*" />
         </Association>
-        <Association Name="TaxonomyContentCollection">
+        <Association Name="ContentCollectionTaxonomies">
           <End Type="HorselessContentModel.Taxonomy" Role="Taxonomy" Multiplicity="*" />
           <End Type="HorselessContentModel.ContentCollection" Role="ContentCollection" Multiplicity="*" />
         </Association>
@@ -1849,13 +1849,13 @@
           <End Type="HorselessContentModel.Principal" Role="Principal" Multiplicity="*" />
           <End Type="HorselessContentModel.AccessControlEntry" Role="AccessControlEntry" Multiplicity="*" />
         </Association>
-        <Association Name="AccessControlEntryAccessControlEntry">
-          <End Type="HorselessContentModel.AccessControlEntry" Role="AccessControlEntry" Multiplicity="*" />
+        <Association Name="AccessControlEntryHierarchy">
+          <End Type="HorselessContentModel.AccessControlEntry" Role="DependentAccessControlEntry" Multiplicity="*" />
           <End Type="HorselessContentModel.AccessControlEntry" Role="SubjectAccessControlEntry" Multiplicity="*" />
         </Association>
-        <Association Name="PrincipalPrincipal">
-          <End Type="HorselessContentModel.Principal" Role="Principal" Multiplicity="*" />
-          <End Type="HorselessContentModel.Principal" Role="Principal1" Multiplicity="*" />
+        <Association Name="PrincipalHierarchy">
+          <End Type="HorselessContentModel.Principal" Role="OwnerPrincipals" Multiplicity="*" />
+          <End Type="HorselessContentModel.Principal" Role="Owned" Multiplicity="*" />
         </Association>
         <Association Name="AccessControlEntryOwners">
           <End Type="HorselessContentModel.AccessControlEntry" Role="AccessControlEntry" Multiplicity="*" />
@@ -1865,7 +1865,7 @@
           <End Type="HorselessContentModel.Tenant" Role="Tenant" Multiplicity="*" />
           <End Type="HorselessContentModel.Principal" Role="Principal" Multiplicity="*" />
         </Association>
-        <Association Name="TenantAccessControlEntry">
+        <Association Name="TenantAccessControlEntries">
           <End Type="HorselessContentModel.Tenant" Role="SubjectTenant" Multiplicity="*" />
           <End Type="HorselessContentModel.AccessControlEntry" Role="AccessControlEntry" Multiplicity="*" />
         </Association>
@@ -2181,7 +2181,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="TenantContentCollection" TypeName="HorselessContentModel.TenantContentCollection" StoreEntitySet="TenantContentCollection">
+    <AssociationSetMapping Name="TenantContentCollections" TypeName="HorselessContentModel.TenantContentCollections" StoreEntitySet="TenantContentCollections">
       <EndProperty Name="Tenant">
         <ScalarProperty Name="Id" ColumnName="Tenants_Id" />
       </EndProperty>
@@ -2197,19 +2197,19 @@
         <ScalarProperty Name="Id" ColumnName="MimeContents_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="NavigationMenuNavigationMenu" TypeName="HorselessContentModel.NavigationMenuNavigationMenu" StoreEntitySet="NavigationMenuNavigationMenu">
+    <AssociationSetMapping Name="NavigationMenuHierarchy" TypeName="HorselessContentModel.NavigationMenuHierarchy" StoreEntitySet="NavigationMenuHierarchy">
       <EndProperty Name="NavigationMenu">
         <ScalarProperty Name="Id" ColumnName="Children_Id" />
       </EndProperty>
-      <EndProperty Name="NavigationMenu1">
+      <EndProperty Name="Children">
         <ScalarProperty Name="Id" ColumnName="Parents_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="NavigationMenuItemNavigationMenuItem" TypeName="HorselessContentModel.NavigationMenuItemNavigationMenuItem" StoreEntitySet="NavigationMenuItemNavigationMenuItem">
+    <AssociationSetMapping Name="NavigationMenuItemHierarchy" TypeName="HorselessContentModel.NavigationMenuItemHierarchy" StoreEntitySet="NavigationMenuItemHierarchy">
       <EndProperty Name="NavigationMenuItem">
         <ScalarProperty Name="Id" ColumnName="ChildNavigationItems_Id" />
       </EndProperty>
-      <EndProperty Name="NavigationMenuItem1">
+      <EndProperty Name="ChildNavigationItems">
         <ScalarProperty Name="Id" ColumnName="ParentNavigationItems_Id" />
       </EndProperty>
     </AssociationSetMapping>
@@ -2221,19 +2221,19 @@
         <ScalarProperty Name="Id" ColumnName="ParentNavigationMenus_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="ContentCollectionContentCollection" TypeName="HorselessContentModel.ContentCollectionContentCollection" StoreEntitySet="ContentCollectionContentCollection">
+    <AssociationSetMapping Name="ContentCollectionHierarchy" TypeName="HorselessContentModel.ContentCollectionHierarchy" StoreEntitySet="ContentCollectionHierarchy">
       <EndProperty Name="ContentCollection">
         <ScalarProperty Name="Id" ColumnName="ChildContentCollections_Id" />
       </EndProperty>
-      <EndProperty Name="ContentCollection1">
+      <EndProperty Name="ChildContentCollections">
         <ScalarProperty Name="Id" ColumnName="ParentContentCollections_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="PublicationPublication" TypeName="HorselessContentModel.PublicationPublication" StoreEntitySet="PublicationPublication">
+    <AssociationSetMapping Name="PublicationHierarchy" TypeName="HorselessContentModel.PublicationHierarchy" StoreEntitySet="PublicationHierarchy">
       <EndProperty Name="Publication">
-        <ScalarProperty Name="Id" ColumnName="PublicationsChildren_Id" />
+        <ScalarProperty Name="Id" ColumnName="PublicationChildren_Id" />
       </EndProperty>
-      <EndProperty Name="Publication1">
+      <EndProperty Name="PublicationChildren">
         <ScalarProperty Name="Id" ColumnName="PublicationParents_Id" />
       </EndProperty>
     </AssociationSetMapping>
@@ -2253,7 +2253,7 @@
         <ScalarProperty Name="Id" ColumnName="Taxonomies_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="TaxonTaxon" TypeName="HorselessContentModel.TaxonTaxon" StoreEntitySet="TaxonTaxon">
+    <AssociationSetMapping Name="TaxonHirearchy" TypeName="HorselessContentModel.TaxonTaxon" StoreEntitySet="TaxonHirearchy">
       <EndProperty Name="Taxon">
         <ScalarProperty Name="Id" ColumnName="AntecedentTaxons_Id" />
       </EndProperty>
@@ -2277,7 +2277,7 @@
         <ScalarProperty Name="Id" ColumnName="Meronyms_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="TaxonomyContentCollection" TypeName="HorselessContentModel.TaxonomyContentCollection" StoreEntitySet="TaxonomyContentCollection">
+    <AssociationSetMapping Name="ContentCollectionTaxonomies" TypeName="HorselessContentModel.ContentCollectionTaxonomies" StoreEntitySet="ContentCollectionTaxonomies">
       <EndProperty Name="Taxonomy">
         <ScalarProperty Name="Id" ColumnName="Taxonomies_Id" />
       </EndProperty>
@@ -2301,19 +2301,19 @@
         <ScalarProperty Name="Id" ColumnName="AccessControlEntries_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="AccessControlEntryAccessControlEntry" TypeName="HorselessContentModel.AccessControlEntryAccessControlEntry" StoreEntitySet="AccessControlEntryAccessControlEntry">
-      <EndProperty Name="AccessControlEntry">
+    <AssociationSetMapping Name="AccessControlEntryHierarchy" TypeName="HorselessContentModel.AccessControlEntryHierarchy" StoreEntitySet="AccessControlEntryHierarchy">
+      <EndProperty Name="DependentAccessControlEntry">
         <ScalarProperty Name="Id" ColumnName="SubjectAccessControlEntries_Id" />
       </EndProperty>
       <EndProperty Name="SubjectAccessControlEntry">
         <ScalarProperty Name="Id" ColumnName="AccessControlEntries_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="PrincipalPrincipal" TypeName="HorselessContentModel.PrincipalPrincipal" StoreEntitySet="PrincipalPrincipal">
-      <EndProperty Name="Principal">
+    <AssociationSetMapping Name="PrincipalHierarchy" TypeName="HorselessContentModel.PrincipalHierarchy" StoreEntitySet="PrincipalHierarchy">
+      <EndProperty Name="OwnerPrincipals">
         <ScalarProperty Name="Id" ColumnName="OwnedPrincipals_Id" />
       </EndProperty>
-      <EndProperty Name="Principal1">
+      <EndProperty Name="Owned">
         <ScalarProperty Name="Id" ColumnName="Owners_Id" />
       </EndProperty>
     </AssociationSetMapping>
@@ -2333,7 +2333,7 @@
         <ScalarProperty Name="Id" ColumnName="Accounts_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="TenantAccessControlEntry" TypeName="HorselessContentModel.TenantAccessControlEntry" StoreEntitySet="TenantAccessControlEntry">
+    <AssociationSetMapping Name="TenantAccessControlEntries" TypeName="HorselessContentModel.TenantAccessControlEntries" StoreEntitySet="TenantAccessControlEntries">
       <EndProperty Name="SubjectTenant">
         <ScalarProperty Name="Id" ColumnName="SubjectTenants_Id" />
       </EndProperty>

@@ -16,6 +16,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     {
         [Key]
         public Guid Id { get; set; }
+        public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+        public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
 
         public string ClaimType { get; set; } = String.Empty;
         public string ClaimValue { get; set; } = String.Empty;
@@ -42,8 +44,14 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public ICollection<PrincipalClaim> PrincipalClaim { get; set; } = new HashSet<PrincipalClaim>();
 
+        [ForeignKey("Principal")]
         public Guid? PrincipalId { get; set; }
-        public Principal? Principal { get; set; }   
+        public Principal? Principal { get; set; }
+
+        [ForeignKey("FK_AccessControlEntries")]
+        public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+        [ForeignKey("FK_OWNERS")]
+        public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
     }
 
     [MultiTenant]
@@ -60,33 +68,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
+        [InverseProperty("Principal")]
         public PrincipalClaimContainer? PrincipalClaimContainer { get; set; } = new PrincipalClaimContainer();
         public DateTime? UpdatedAt { get; set; }
 
-        // [NotMapped]
-        //[InverseProperty(nameof(AccessControlEntry.Owners))]
-        //public ICollection<AccessControlEntry> AccessControlList { get; set; } = new List<AccessControlEntry>();
-
-        // [NotMapped]
-        // [InverseProperty(nameof(Tenant.Principals))]
-        //public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
-
-        /// <summary>
-        /// tenants where the principal is registered
-        /// </summary>
-        // [ForeignKey("Id")]
-        //[InverseProperty(nameof(Tenant.Principals))]
-        //public ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
-
-        /// <summary>
-        /// access control entries that refer to this principal
-        /// </summary>
-        // [ForeignKey("AccessControlEntryId")]
-        //[InverseProperty(nameof(AccessControlEntry.Principals))]
-        //public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
-
-
-        //[InverseProperty(nameof(Tenant.Owners))]
-        //public ICollection<Tenant> OwnedTenants { get; set; } = new HashSet<Tenant>();
+   
     }
 }

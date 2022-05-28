@@ -1,0 +1,203 @@
+﻿{
+   "CodeGenerationMode": 2,
+   "ContextClassName": "THLNP_ContentContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": null,
+   "ProjectRootNamespace": "TheHorselessNewspaper.Schemas.ContentModel.ContentEntities",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[AccessControlEntries]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AccessControlEntryHierarchy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AccessControlEntryOwners]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContentCollectionHierarchy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContentCollectionMimeContent]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContentCollections]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContentCollectionTaxonomies]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[FilesystemAssets]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HolonymMeronym]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Holonyms]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HorselessContents]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HorselessSessionAccessControlEntry]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HorselessSessionPrincipal]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HorselessSessions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HorselessViewContentCollection]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HorselessViews]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[JSONAssets]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Meronyms]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MIMETypes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NavigationMenuHierarchy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NavigationMenuItemHierarchy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NavigationMenuItemNavigationMenu]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NavigationMenuItems]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NavigationMenus]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NugetPackages]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Placeholders]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PrincipalAccessControlEntry]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PrincipalHierarchy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Principals]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PublicationContentCollection]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PublicationHierarchy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Publications]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TaxonHirearchy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TaxonHolonym]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Taxonomies]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Taxons]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TaxonTaxonomy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TenantAccessControlEntries]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TenantAccounts]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TenantContentCollections]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TenantOwners]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Tenants]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "WIPERS.THLNP_Content_Modelling",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": true,
+   "UseFluentApiOnly": false,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": true,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": true,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}

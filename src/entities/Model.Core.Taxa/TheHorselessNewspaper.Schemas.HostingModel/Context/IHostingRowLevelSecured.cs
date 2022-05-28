@@ -8,7 +8,7 @@ namespace TheHorselessNewspaper.HostingModel.Context
 {
     public interface IHostingRowLevelSecured : IQueryableModelEntity
     {
-        public ICollection<AccessControlEntry> AccessControlEntries { get; set; }
-        public ICollection<Principal> Owners { get; set; }
+        public ICollection<AccessControlEntry>? AccessControlEntries { get; set; }
+        public ICollection<Principal>? Owners { get; set; }
     }
 }

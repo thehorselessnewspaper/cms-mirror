@@ -5,8 +5,10 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using TheHorselessNewspaper.HostingModel.Context.Extensions;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
@@ -31,9 +33,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         partial void OnModelCreatingPartial(ModelBuilder builder)
         {
 
-            // If necessary call the base class method.
-            // Recommended to be called first.
-            base.OnModelCreating(builder);
+            // tweak modelbuilder conventions due to reverse engineering issues with cascade.delete
+            // as per https://www.red-gate.com/simple-talk/blogs/change-delete-behavior-and-more-on-ef-core/
+            builder.AddRemoveOneToManyCascadeConvention();
+
+            builder.ApplyConventions();
 
             // Configure all entity types marked with the [MultiTenant] data attribute
             builder.ConfigureMultiTenant();
@@ -42,7 +46,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             // todo -- support not hardcoding this here
             builder.Entity<HorselessTenantInfo>().IsMultiTenant();
 
-            Console.WriteLine($"{this.GetType().FullName} OnModelCreatingPartial() is executing with instance id {this.ContextId}");
+            // If necessary call the base class method.
+            // Recommended to be called first.
+            base.OnModelCreating(builder);
+
         }
 
     }

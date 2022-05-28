@@ -202,7 +202,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
         private async Task InsertRelatedOwner(IContentRowLevelSecured tenant)
         {
             var tenantQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Tenant>>();
-            var validatedInsertResult = await tenantQuery.Read(r => r.Id.Equals(tenant.Id), new List<string>()
+            var validatedInsertResult = await tenantQuery.ReadAsEnumerable(r => r.Id.Equals(tenant.Id), new List<string>()
             {
                 nameof(tenant.Owners), nameof(tenant.AccessControlEntries)
             });
