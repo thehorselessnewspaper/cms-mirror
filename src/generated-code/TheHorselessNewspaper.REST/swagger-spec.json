@@ -13547,10 +13547,6 @@
           "PermissionType": {
             "$ref": "#/components/schemas/HostingEntitiesACEPermissionType"
           },
-          "WhatSWrongHere": {
-            "type": "string",
-            "nullable": true
-          },
           "Timestamp": {
             "type": "string",
             "format": "byte",
