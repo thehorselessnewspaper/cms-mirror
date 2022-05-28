@@ -35,13 +35,13 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         {
 
 
-
             // If necessary call the base class method.
             // Recommended to be called first.
             base.OnModelCreating(builder);
  
             // Configure all entity types marked with the [MultiTenant] data attribute
             builder.ConfigureMultiTenant();
+
 
             // tweak modelbuilder conventions due to reverse engineering issues with cascade.delete
             // as per https://www.red-gate.com/simple-talk/blogs/change-delete-behavior-and-more-on-ef-core/

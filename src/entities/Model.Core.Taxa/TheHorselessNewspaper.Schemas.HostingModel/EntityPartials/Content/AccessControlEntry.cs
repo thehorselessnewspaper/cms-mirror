@@ -67,8 +67,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
         public DateTime? UpdatedAt { get; set; }
 
-        [InverseProperty(nameof(ContentCollection.AccessControlEntries))]
-        public virtual ICollection<ContentCollection> ContentCollections { get; set; }
+        [InverseProperty(nameof(ContentCollection.AccessControlEntries))] 
+        public virtual ICollection<ContentCollection?>? ContentCollections { get; set; } = new HashSet<ContentCollection?>();
     }
 
 

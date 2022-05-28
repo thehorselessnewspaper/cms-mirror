@@ -185,7 +185,7 @@
    "UiHint": "WIPERS.THLNP_Content_Modelling",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
-   "UseDbContextSplitting": true,
+   "UseDbContextSplitting": false,
    "UseFluentApiOnly": false,
    "UseHandleBars": false,
    "UseHierarchyId": false,

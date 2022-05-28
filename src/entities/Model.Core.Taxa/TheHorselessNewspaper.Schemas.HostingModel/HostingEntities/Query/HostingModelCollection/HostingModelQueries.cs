@@ -26,7 +26,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             try
             {
                 var providerName = ((DbContext)ctx).Database.ProviderName;
-
+                var dbName = ((DbContext)ctx).Database.GetDbConnection().Database;
                 _logger.LogInformation($"hosting collections context using provider named {providerName} on dbcontext instance {((IContentModelContext)ctx).DbContextInstanceId.ToString()}");
 
             }

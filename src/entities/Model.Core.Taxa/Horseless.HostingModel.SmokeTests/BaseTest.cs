@@ -24,7 +24,7 @@ namespace Horseless.HostingModel.SmokeTests
 {
     internal class SchemaTestsConfig
     {
-        public string SqlServerConnextoinString { get; set; }
+        public string[] ConnectionStrings { get; set; }
 
     }
 

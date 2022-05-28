@@ -126,7 +126,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
             var tenant = new Tenant()
             {
                 Id = newTenantId,
-                DisplayName = "test tenant",
+                DisplayName = "created crudhostingcollection() ",
                 ObjectId = Guid.NewGuid().ToString(),
                 CreatedAt = DateTime.UtcNow,
                 TenantInfos = new List<TenantInfo>()
@@ -147,7 +147,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                             new WebAPITenantInfo()
                             {
                                 Id = Guid.NewGuid(),
-                                Name = "test web api",
+                                Name = "created crudhostingcollection() ",
                                 ObjectId = Guid.NewGuid().ToString(),
                                 IsSoftDeleted = false,
                                 CreatedAt = DateTime.UtcNow,

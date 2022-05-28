@@ -25,17 +25,11 @@ namespace TheHorselessNewspaper.HostingModel.Context.Extensions
 
         public static void AddRemoveOneToManyCascadeConvention(this ModelBuilder builder)
         {
-            Conventions.Add(et =>
-            {
-                var keys = et.GetForeignKeys().Where(fk => !fk.IsOwnership).Select(s => s.DeleteBehavior).ToList();
-                var keys2 = et.GetForeignKeys().Where(fk => fk.IsRequired).ToList();
-
-                int i = 0;
-            });
 
             Conventions.Add(et => et.GetForeignKeys()
                 .ToList()
-                .ForEach(fk => fk.DeleteBehavior = DeleteBehavior.ClientSetNull));
+                .ForEach(fk => fk.DeleteBehavior = DeleteBehavior.Restrict));
+
         }
 
         public static void ApplyConventions(this ModelBuilder builder)

@@ -115,34 +115,12 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
         void OnModelCreatingPartial(ModelBuilder builder)
         {
+
+            builder.HasDefaultSchema("HorselessHosting");
             // do mssql specific things here
             // If necessary call the base class method.
             // Recommended to be called first.
             base.OnModelCreating(builder);
-
-            // Configure all entity types marked with the [MultiTenant] data attribute
-            // TODO make multitenant work on the hosting context
-            // builder.ConfigureMultiTenant();
-
-
-            //builder.Entity<TenantIdentifierStrategy>()
-            //    .HasMany(m => m.TenantIdentifierStrategyContainers)
-            //    .WithOne(o => o.TenantIdentifierStrategy)
-            //    .HasForeignKey(fk => fk.TenantIdentifierStrategyId);
-
-            //builder.Entity<TenantIdentifierStrategyContainer>()
-            //    .HasOne<TenantIdentifierStrategy>(o => o.TenantIdentifierStrategy)
-            //    .WithMany(o => o.TenantIdentifierStrategyContainers)
-            //    .HasForeignKey(fk => fk.TenantIdentifierStrategyId);
-
-            builder.Entity<Tenant>()
-                .Navigation(n => n.TenantInfos).AutoInclude();
-
-            builder.Entity<Tenant>()
-                .Navigation(n => n.Accounts).AutoInclude();
-
-            builder.Entity<Tenant>()
-                .Navigation(n => n.Owners).AutoInclude();
 
         }
 
