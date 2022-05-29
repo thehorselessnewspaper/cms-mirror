@@ -125,8 +125,8 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:6001;http://+:6000
-      # - Kestrel__Certificates__Default__Path=/https/servercert.pfx
-      # - Kestrel__Certificates__Default__Password=pa55word  
+      - Kestrel__Certificates__Default__Path=/https/servercert.pfx
+      - Kestrel__Certificates__Default__Password=pa55word  
       - TenantFilesystemPath=assetroot
       - ConnectionStrings__HostingModelConnection=Data Source=contentdb.local;Database=THLNP_Hosting;Integrated Security=false;User ID=sa;Password=Pa55w0rd;
       - ConnectionStrings__ContentModelConnection=Data Source=contentdb.local;Database=THLNP_Content;Integrated Security=false;User ID=sa;Password=Pa55w0rd;
@@ -145,9 +145,7 @@ services:
       - RestApiBaseUrl=${RestApiBaseUrl}  
       - OdataApiBaseUrl=${OdataApiBaseUrl}
     volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-      - horseless-webapp-https:/https
+      - ./https/:/https
     depends_on:
       - content-db  
     build:

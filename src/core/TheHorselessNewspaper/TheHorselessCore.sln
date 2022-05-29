@@ -60,8 +60,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Core.Wor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Web.Core.Startup", "HorselessNewspaper.Web.Core.Startup\HorselessNewspaper.Web.Core.Startup.csproj", "{FA16FB00-EDB9-4BB0-A37F-B8EEB93D919B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorselessNewspaper.HostedServices.Core", "HorselessNewspaper.HostedServices.Core\HorselessNewspaper.HostedServices.Core.csproj", "{AFF6B36E-620A-43CD-9089-1F28A049B152}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -132,10 +130,6 @@ Global
 		{FA16FB00-EDB9-4BB0-A37F-B8EEB93D919B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA16FB00-EDB9-4BB0-A37F-B8EEB93D919B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA16FB00-EDB9-4BB0-A37F-B8EEB93D919B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AFF6B36E-620A-43CD-9089-1F28A049B152}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AFF6B36E-620A-43CD-9089-1F28A049B152}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AFF6B36E-620A-43CD-9089-1F28A049B152}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AFF6B36E-620A-43CD-9089-1F28A049B152}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

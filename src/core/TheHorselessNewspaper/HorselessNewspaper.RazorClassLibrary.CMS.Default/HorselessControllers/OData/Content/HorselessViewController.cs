@@ -1,23 +1,14 @@
-﻿using Microsoft.AspNetCore.OData.Routing.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Finbuckle.MultiTenant;
+using HorselessNewspaper.Web.Core.Authorization.Model;
+using HorselessNewspaper.Web.Core.Interfaces.Controller;
+using HorselessNewspaper.Web.Core.Services.Query.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using Finbuckle.MultiTenant;
-using Microsoft.AspNetCore.Mvc;
-using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using HorselessNewspaper.Web.Core.Interfaces.Content;
-using HorselessNewspaper.Web.Core.Interfaces.Controller;
-using Microsoft.AspNetCore.OData.Routing;
-using Microsoft.AspNetCore.OData.Formatter;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
-using HorselessNewspaper.Web.Core.Authorization.Model;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
