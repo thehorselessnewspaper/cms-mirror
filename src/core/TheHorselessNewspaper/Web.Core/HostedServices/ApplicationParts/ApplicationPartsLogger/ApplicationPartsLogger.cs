@@ -48,7 +48,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
 
             // start the timer
             _logger.LogInformation("Timed Hosted Service running.");
-            _timer = new Timer(DoWork, null, TimeSpan.Zero,
+            _timer = new Timer(DoWork, null, TimeSpan.FromSeconds(60),
                 TimeSpan.FromSeconds(TimerDelayInSeconds));
 
 
@@ -105,28 +105,16 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
                 var controllerFeature = new ControllerFeature();
                 _partManager.PopulateFeature(controllerFeature);
 
-                // Get the names of all of the controllers
-                var controllers = controllerFeature.Controllers.Select(x => x.FullName);
-
-                // Log the application parts and controllers
-                _logger.LogTrace("Found controllers in the following application parts: '{ApplicationParts}' with the following controllers: '{Controllers}'",
-                    string.Join(", ", applicationParts), string.Join(", ", controllers));
-
 
                 var tagHelperFeature = new TagHelperFeature();
                 _partManager.PopulateFeature(tagHelperFeature);
-                var tagHelpers = tagHelperFeature.TagHelpers.Select(x => x.FullName);
-                _logger.LogTrace("Found taghellpers in the following application parts: '{ApplicationParts}' with the following tag helpers: '{tagHelpers}'",
-                string.Join(", ", applicationParts), string.Join(", ", tagHelpers));
+
 
                 var viewsFeature = new ViewsFeature();
                 _partManager.PopulateFeature(viewsFeature);
-                var viewPaths = viewsFeature.ViewDescriptors.Select(x => x.RelativePath);
-                _logger.LogTrace("Found views in the following application parts: '{ApplicationParts}' with the following views: '{views}'",
-                string.Join(", ", applicationParts), string.Join(", ", viewPaths));
-
+ 
                 // update database
-                using(var scope = this._services.CreateScope())
+                using (var scope = this._services.CreateScope())
                 {
 
 
@@ -135,11 +123,11 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
 
                     foreach (var view in viewsFeature.ViewDescriptors)
                     {
-                        var query = await viewOperator.Query(r => r.Name.Equals(view.RelativePath));
+                        var query = await viewOperator.Query(r => r.PhysicalPath.Equals(view.RelativePath));
                         var queryResult = query.ToList();
                         var isPreviouslyRegistered = queryResult.Any();
 
-                        if(!isPreviouslyRegistered)
+                        if (!isPreviouslyRegistered)
                         {
                             // handle the case of a view that must
                             // be added to the database
@@ -147,19 +135,34 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
                             {
                                 Id = Guid.NewGuid(),
                                 ObjectId = Guid.NewGuid().ToString(),
-                                Name = view.RelativePath,
-                                DisplayName = view.Item.Kind,
+                                Name = view.GetType().Name,
+                                DisplayName = view.GetType().FullName,
                                 CreatedAt = DateTime.UtcNow,
-                                PhysicalPath = view.RelativePath
+                                PhysicalPath = view.RelativePath,
+                                IsActive = true,
+                                Exists = true,
+                                IsDirectory = false,
+                                Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
                             };
 
-                            int i = 0;
+                            try
+                            {
+                                // insert this view
+                                var insertResult = await viewOperator.Create(newView);
+                                this._logger.LogTrace($"{this.GetType().Name} is registering a new view named {newView.Name}");
+                            }
+                            catch(Exception e)
+                            {
+                                // permit continue on exception 
+                                // prbably want to emit a failed event here
+                                this._logger.LogError($"problem registering view {e.Message}");
+                            }
                         }
                     }
 
                 }
 
- 
+
             }
             catch (Exception e)
             {
@@ -181,7 +184,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
         {
             _logger.LogInformation("Timed Hosted Service is stopping.");
             _timer?.Change(Timeout.Infinite, 0);
- 
+
             return Task.CompletedTask;
         }
 
