@@ -108,7 +108,7 @@ namespace HorselessNewspaper.Client.Nuget
             string packageId = nugetPackageId;
             NuGetVersion packageVersion = nugetVersion;
 
-            using FileStream packageStream = File.Open(folderPath, FileMode.Create);
+            using FileStream packageStream = File.Open(folderPath + packageId + ".nupkg", FileMode.Create);
             await resource.CopyNupkgToStreamAsync(
                 packageId,
                 packageVersion,

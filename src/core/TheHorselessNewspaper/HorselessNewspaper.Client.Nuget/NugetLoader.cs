@@ -80,7 +80,7 @@ namespace HorselessNewspaper.Client.Nuget
         {
             // Disposable source cache.
             using var sourceCacheContext = new SourceCacheContext();
-            sourceCacheContext.GeneratedTempFolder = packageDirectory; // + "\\cache";
+            var tmpFolder = sourceCacheContext.GeneratedTempFolder; 
             // The framework we're using.
             var targetFramework = NuGetFramework.ParseFolder(nugetFrameworkParseFolder);
 
