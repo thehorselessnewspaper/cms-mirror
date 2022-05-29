@@ -137,14 +137,19 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         {
             using (var scope = _services.CreateScope())
             {
+                var contentModelOperator = GetQueryForContentEntity<ContentModel.Tenant>(scope);
                 try
                 {
 
+
                     // var tenantInfo = scope.ServiceProvider.GetRequiredService<HorselessTenantInfo>();
                     _logger.LogInformation("getting db query");
-                    var contentModelOperator = GetQueryForContentEntity<ContentModel.Tenant>(scope);
                     _logger.LogInformation("ensuring content db");
                     await contentModelOperator.EnsureDbExists();
+                    var probeQuery = await contentModelOperator.Read(r => r.DisplayName.Equals("EnsureQueryWorks"));
+                    var probeResult = probeQuery.FirstOrDefault();
+
+                    // should fail by here if the db schema is different
                     _logger.LogInformation("content db ensured");
 
                     _logger.LogInformation("hosting db ensured");
@@ -153,14 +158,32 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 catch (Exception e)
                 {
                     _logger.LogWarning($"problem initializing databases {e.Message}");
+
+                    // self healing databae feature
+                    // TODO - enable this some safe way
+                    await contentModelOperator.ResetDb();
                 }
             }
 
             using (var scope = _services.CreateScope())
             {
-
+                
                 var hostingModelOperator = GetQueryForHostingEntity<HostingModel.Tenant>(scope);
-                await hostingModelOperator.EnsureDbExists();
+                try
+                {
+                    await hostingModelOperator.EnsureDbExists();
+
+                    var probeQuery = await hostingModelOperator.Read(r => r.DisplayName.Equals("probetext"));
+                    var probeQueryResult = probeQuery.First();
+                }
+                catch (Exception e)
+                {
+                    _logger.LogWarning($"problem initializing databases {e.Message}");
+
+                    // self healing databae feature
+                    // TODO - enable this some safe way
+                    await hostingModelOperator.ResetDb();
+                }
             }
         }
 

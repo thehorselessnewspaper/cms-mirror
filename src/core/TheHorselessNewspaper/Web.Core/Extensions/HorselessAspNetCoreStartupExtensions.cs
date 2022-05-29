@@ -332,7 +332,9 @@ HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessCo
             // validate that this needs to be a singleton
             // as it's gating every request
             serviceBuilder.Services.AddScoped<HorselessRouteTransformer>();
-            serviceBuilder.Services.AddScoped<HorselessTenantSetupMiddleware>();
+            
+            // obsolete
+            // serviceBuilder.Services.AddScoped<HorselessTenantSetupMiddleware>();
 
             serviceBuilder.Services.AddScoped<IHorselessTenantContext, TenantContext>();
 

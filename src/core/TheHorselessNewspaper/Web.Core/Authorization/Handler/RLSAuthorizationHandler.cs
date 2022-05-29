@@ -35,13 +35,21 @@ namespace HorselessNewspaper.Web.Core.Authorization.Handler
 
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, OperationAuthorizationRequirement requirement, IContentRowLevelSecured resource)
         {
-            // evaluate access control list against principal \
-            var upn = _httpcontextAccessor.HttpContext.Features.Get<Principal>().UPN;
-            var resourceName = resource.GetType().Name;
-
+ 
             // resolve the tenant
             try
             {
+                try
+                {
+                    // evaluate access control list against principal \
+                    var upn = _httpcontextAccessor.HttpContext.Features.Get<Principal>().UPN;
+                    var resourceName = resource.GetType().Name;
+                }
+                catch(Exception e)
+                {
+                    this._logger.LogWarning($"{this.GetType().FullName} failed probe for user UPN");
+                }
+
                 _logger.LogTrace($"{this.GetType().Name} is confirming tenant context resolver operational");
 
                 var currentPrincipal = this._httpcontextAccessor.HttpContext.Features.Get<Principal>();

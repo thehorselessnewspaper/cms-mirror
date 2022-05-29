@@ -94,7 +94,8 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
             // returns RestclientConfiguration - appsettings by ajax 
             builder.UseMiddleware<RestClientConfigurationEndpoint>();
 
-            builder.UseHorselessTenantSetupMiddleware();
+            //obsolete
+            //  builder.UseHorselessTenantSetupMiddleware();
 
             builder.UseEndpoints(options =>
             {
