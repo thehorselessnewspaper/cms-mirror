@@ -73,7 +73,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\HorselessNewspaper.Web.Core.Auth.Keycloak\HorselessNewspaper.Web.Core.Auth.Keycloak.csproj" />
 		<ProjectReference Include="..\HorselessNewspaper.Web.Core.Services.Query\HorselessNewspaper.Web.Core.Services.Query.csproj" />
-		<ProjectReference Include="..\Web.Core\HorselessNewspaper.Web.Core.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
