@@ -22,5 +22,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
         public Tenant? ParentTenant { get; set; }
         public DateTime? UpdatedAt { get; set; }
+        public string? DictionaryKey { get; set; }
     }
 }

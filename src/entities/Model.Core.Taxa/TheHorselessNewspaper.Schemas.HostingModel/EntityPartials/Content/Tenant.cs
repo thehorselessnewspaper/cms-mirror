@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
@@ -87,7 +88,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     /// or maybe not - we will se
     /// </summary>
     [MultiTenant]
-    public partial class Tenant : IContentRowLevelSecured
+    public partial class Tenant : IContentRowLevelSecured, IMetaDataModelEntity
     {
         public bool IsPublished { get; set; }
 
@@ -108,5 +109,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
         public DateTime? UpdatedAt { get; set; }
+        public HashSet<JSONAsset> MetaData { get; set; } = new HashSet<JSONAsset>();
+        public string? DictionaryKey { get; set; }
     }
 }

@@ -15,5 +15,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
         public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
         public DateTime? UpdatedAt { get; set; }
+        public string? DictionaryKey { get; set; }
     }
 }

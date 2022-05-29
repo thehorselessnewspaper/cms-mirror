@@ -36,6 +36,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string PhysicalPath { get; set; }
 
         public byte[] ViewContent { get; set; } = new byte[0];
+        public string? DictionaryKey { get; set; }
 
         public Stream CreateReadStream()
         {

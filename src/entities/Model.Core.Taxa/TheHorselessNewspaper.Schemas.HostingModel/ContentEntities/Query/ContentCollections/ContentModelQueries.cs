@@ -4,9 +4,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using System.Collections;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query.Extensions;
+using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
@@ -520,6 +522,52 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             {
                 _logger.LogDebug($"content collections reset exception: {ex.Message}");
             }
+        }
+
+        public async Task<IQueryable<U>> ReadFilterByMetaData<U>(Expression<Func<U, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1) where U : class, IContentRowLevelSecured, IQueryableMetaDataModelEntity
+        {
+            IQueryable<U> result;
+
+            try
+            {
+                var dbSet = ((DbContext)_context).Set<U>().Where(query)
+                                        // .Where(u => u.HasJsonMetaDataProperty("somekey", "somepropertyName").Result)
+                                        .OrderBy(o => o.CreatedAt)
+                                        .Skip((pageNumber - 1) * pageSize)
+                                        .Take(pageSize * pageCount);
+
+                if (includeClauses != null)
+                {
+                    foreach (var clause in includeClauses)
+                    {
+                        // avoid due to performance issues
+                        //foreach(var item in dbSet)
+                        //{
+                        //    await ((DbContext)_context).Entry(item)
+                        //        .Collection(clause)
+                        //        .LoadAsync();
+                        //}
+
+                        dbSet.Include(clause);
+                    }
+                }
+
+                //result = dbSet.OrderBy(o => o.CreatedAt)
+                //                        .Skip((pageNumber - 1  ) * pageSize)
+                //                        .Take(pageSize * pageCount)
+                //                        .AsQueryable<T>();
+
+                result = dbSet.AsQueryable<U>();
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError($"problem handling request {ex.Message}");
+                throw new Exception($"entity read exception {ex.Message}", ex);
+
+            }
+
+            return await Task.FromResult<IQueryable<U>>(result);
         }
     }
 }

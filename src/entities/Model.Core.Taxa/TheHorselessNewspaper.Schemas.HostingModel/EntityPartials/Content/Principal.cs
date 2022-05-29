@@ -71,7 +71,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [InverseProperty("Principal")]
         public PrincipalClaimContainer? PrincipalClaimContainer { get; set; } = new PrincipalClaimContainer();
         public DateTime? UpdatedAt { get; set; }
-
-   
+        public string? DictionaryKey { get; set; }
     }
 }

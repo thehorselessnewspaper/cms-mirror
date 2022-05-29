@@ -5,15 +5,37 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
+using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.HostingModel.Context
 {
+
+    public delegate Task<string> GetJsonMetaDataByKeyDelegate(string keyName, bool isUseNewtonSoft = false);
+
+    public delegate Task<bool> HasJsonMetaDataKeyDelegate(string keyName);
+
+    public delegate Task<bool> HasJsonMetaDataPropertyDelegate(string keyName, string jsonPropertyKName);
+
+    public delegate Task<bool> QueryJsonMetaDataDelegate(string keyName, string jsonPropertyName, Func<JsonObject, bool> jsonObjectQuery);
+
+    public interface IKeyValueModelEntity
+    {
+        public string? DictionaryKey { get; set; }
+    }
+
+    public interface IMetaDataModelEntity : IKeyValueModelEntity
+    {
+        public HashSet<JSONAsset> MetaData { get; set; }
+    }
+
+
     /// <summary>
     /// queryable properties on a horseless content managed entity
     /// </summary>
-    public interface IQueryableModelEntity
+    public interface IQueryableModelEntity :IKeyValueModelEntity
     {
         public Guid Id { get; set; }
         public string? ObjectId { get; set; }
@@ -29,6 +51,17 @@ namespace TheHorselessNewspaper.HostingModel.Context
         /// </summary>
         [Timestamp]
         public byte[] Timestamp { get; set; }
+
+
+    }
+
+    /// <summary>
+    /// a composition interface
+    /// adds metadata query capability to IQueryableModelEntity
+    /// </summary>
+    public interface IQueryableMetaDataModelEntity : IQueryableModelEntity, IMetaDataModelEntity
+    {
+
     }
 
     /// <summary>
@@ -37,6 +70,7 @@ namespace TheHorselessNewspaper.HostingModel.Context
     /// <typeparam name="T"></typeparam>
     public interface IQueryableModelOperator<T> where T : class
     {
+
         public Task<IQueryable<T>> Read(int pageSize = 10, int pageNumber = 1, int pageCount = 1);
 
         public Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1);
@@ -54,7 +88,6 @@ namespace TheHorselessNewspaper.HostingModel.Context
         public Task<T> DeleteByEntityId(Guid entityId, bool softDelete = true);
         public Task<T> DeleteByObjectId(string objectId, bool isSoftDelete = true);
         public Task<IEnumerable<T>> Delete(Expression<Func<T, bool>> query, bool softDelete = true, bool whatIf = true);
-
 
         Task ResetDb();
 

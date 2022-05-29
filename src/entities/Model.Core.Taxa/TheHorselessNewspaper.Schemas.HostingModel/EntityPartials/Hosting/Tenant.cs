@@ -89,6 +89,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
         public virtual ICollection<TenantInfo> TenantInfos { get; set; } = new HashSet<TenantInfo>();
         public DateTime? UpdatedAt { get; set; }
+        public string? DictionaryKey { get; set; }
     }
 
 
