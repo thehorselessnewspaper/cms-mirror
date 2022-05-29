@@ -362,6 +362,9 @@ namespace HorselessNewspaper.Client.Nuget
                 {
                     throw ex;
                 }
+
+                // here now that all the dependencies are downloaded
+                int i = 0;
             }
         }
 

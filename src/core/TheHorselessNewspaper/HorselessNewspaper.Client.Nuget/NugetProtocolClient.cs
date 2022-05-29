@@ -108,7 +108,7 @@ namespace HorselessNewspaper.Client.Nuget
             string packageId = nugetPackageId;
             NuGetVersion packageVersion = nugetVersion;
 
-            using FileStream packageStream = File.Open(folderPath, FileMode.OpenOrCreate);
+            using FileStream packageStream = File.Open(folderPath, FileMode.Create);
             await resource.CopyNupkgToStreamAsync(
                 packageId,
                 packageVersion,
@@ -125,6 +125,7 @@ namespace HorselessNewspaper.Client.Nuget
             logger.LogInformation($"Tags: {nuspecReader.GetTags()}");
             logger.LogInformation($"Description: {nuspecReader.GetDescription()}");
 
+            var packageFileLength = packageStream.Length;
             return await Task.FromResult<NuGetVersion>(nugetVersion);
         }
 
@@ -142,7 +143,7 @@ namespace HorselessNewspaper.Client.Nuget
             string packageId = nugetPackageId;
             NuGetVersion packageVersion = nugetVersion;
 
-            using FileStream packageStream = File.Open(folderPath + packageId + ".nupkg", FileMode.OpenOrCreate);
+            using FileStream packageStream = File.Open(folderPath + packageId + ".nupkg", FileMode.Create);
             await resource.CopyNupkgToStreamAsync(
                 packageId,
                 packageVersion,

@@ -11,6 +11,7 @@ using NuGet.Versioning;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using LoggerNS = NuGet.Common;
@@ -22,6 +23,7 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
         private const string NewtonsoftJsonPackageId = "NewtonSoft.Json";
         private const string NugetOrgEndpoint = "https://api.nuget.org/v3/index.json";
         private const string HorselessNugetPackageId = "HorselessNewspaper.RazorClassLibrary.CMS.Default";
+        private const string HorselessPublicNugetsEndpoint = "https://pkgs.dev.azure.com/electricrucible/155346c4-4c3d-4269-a624-e98408645b68/_packaging/public-artifacts/nuget/v3/index.json";
         private ILogger<NugetLoader> nugetLogger;
         private ILogger<SmokeTest> testLogger;
         private ILogger<HorselessNewspaper.Client.Nuget.NugetProtocolClient> nugetProtocolClientLogger;
@@ -55,8 +57,15 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
                 .Build();
 
 
-            var testPackage = NewtonsoftJsonPackageId;
-            var endpoint = new Uri(NugetOrgEndpoint);
+            var testPackage = HorselessNugetPackageId; // NewtonsoftJsonPackageId;
+            var packageCacheLocation = Path.Combine("c:\\tmp\\", testPackage);
+
+            var endpoint = new Uri(HorselessPublicNugetsEndpoint);
+            var endpointName = "Horseless Public Nugets";
+
+            var nugetEndpointUri = new Uri(NugetOrgEndpoint);
+            var nugetEndpointName = "Nuget.org";
+
 
             var a = services.GetServices(typeof(LoggerNS.ILogger));
             Assert.IsTrue(a != null, "service registration issue");
@@ -78,24 +87,38 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
 
             // get dependencies
 
-            PackageSource packageSource = new PackageSource(endpoint.AbsoluteUri, "Nuget.Org", true);
-            var packageSources = new List<PackageSource>() { packageSource };
+            PackageSource packageSource = new PackageSource(endpoint.AbsoluteUri, endpointName, true);
+            var packageSources = new List<PackageSource>() { 
+                new PackageSource(nugetEndpointUri.AbsoluteUri, nugetEndpointName),
+                packageSource
+            };
 
             var extensionConfiguration = new ExtensionConfiguration() { Package = testPackage, Version = versions.Last().Version.ToString(), PreRelease = false };
             var extensionConfigurations = new List<IExtensionConfiguration>() { extensionConfiguration };
 
-            TargetedFramework parseFolder = new TargetedFramework(TargetedFramework.NETCoreApp31);
-            var packageCacheLocationr = configuration.GetSection("PackageCacheLocation").Value;
+            List<TargetedFramework> targetedFrameworks = new List<TargetedFramework>()
+            {                
+                new TargetedFramework(TargetedFramework.NET60),
+                new TargetedFramework(TargetedFramework.NET50),
+                new TargetedFramework(TargetedFramework.NETCoreApp31)
+            };
 
-            try
+            Exception ex = null;
+            foreach(var targetedFramework in targetedFrameworks)
             {
-                await client.LoadExtensions(packageSources, extensionConfigurations.AsEnumerable<IExtensionConfiguration>(), parseFolder, packageCacheLocationr);
-            }
-            catch (Exception e)
-            {
-                int i = 0;
+                try
+                {
+                    await client.LoadExtensions(packageSources, extensionConfigurations.AsEnumerable<IExtensionConfiguration>(), targetedFramework, packageCacheLocation);
+                }
+                catch (Exception e)
+                {
+                    ex = e;
+                }
             }
 
+            Assert.Null(ex, "exception thrown while loading public nuget and dependencies");
+
+ 
             Assert.Pass();
         }
 
@@ -251,11 +274,11 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
                 .Build();
 
 
-            var testPackage = "NewtonSoft.Json";
-            var endpoint = new Uri("https://api.nuget.org/v3/index.json");
+            var testPackage = HorselessNugetPackageId; // "NewtonSoft.Json";
+            var packageLocation = Path.Combine("c:\\tmp","testpackage.dll"); // configuration.GetSection("PackageCacheLocation").Value;
+            var endpoint = new Uri(HorselessPublicNugetsEndpoint); // new Uri("https://api.nuget.org/v3/index.json");
             var Password = configuration.GetSection("Password").Value;
             var UserName = configuration.GetSection("UserName").Value;
-            var packageLocation = configuration.GetSection("PackageCacheLocation").Value;
 
             INugetProtocol client = services.GetService<INugetProtocol>(); // new HorselessNewspaper.Client.Nuget.NugetProtocolClient(logger);
             var versions = await client.ListPackageVersions(endpoint, testPackage);
@@ -267,8 +290,9 @@ namespace HorselessNewspaper.SmokeTests.NugetProtocolClient
                 Console.WriteLine($"Found version {version}");
             }
 
-            var savedVersion = await client.PersistNugetTolocalFilesystem(endpoint, testPackage, versions.LastOrDefault<NuGetVersion>(),
-                    packageLocation);
+
+            //var savedVersion = await client.PersistNugetTolocalFilesystem(endpoint, testPackage, versions.LastOrDefault<NuGetVersion>(),
+            //        packageLocation);
 
             Assert.Pass();
         }
