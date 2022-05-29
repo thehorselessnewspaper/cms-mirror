@@ -30,8 +30,10 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query
         /// <param name="pageCount"></param>
         /// <returns></returns>
         public Task<IQueryable<U>> ReadFilterByMetaData<U>(Expression<Func<U, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1) where U : class, IContentRowLevelSecured, IQueryableMetaDataModelEntity;
-        Task<T> DeleteByObjectId(string entityId, bool isSoftDelete = true);
+
         Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1);
+ 
+    
     }
 
 

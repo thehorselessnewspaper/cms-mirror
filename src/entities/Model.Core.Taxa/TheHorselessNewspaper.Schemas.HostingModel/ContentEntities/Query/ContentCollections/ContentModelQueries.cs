@@ -531,7 +531,6 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             try
             {
                 var dbSet = ((DbContext)_context).Set<U>().Where(query)
-                                        // .Where(u => u.HasJsonMetaDataProperty("somekey", "somepropertyName").Result)
                                         .OrderBy(o => o.CreatedAt)
                                         .Skip((pageNumber - 1) * pageSize)
                                         .Take(pageSize * pageCount);
