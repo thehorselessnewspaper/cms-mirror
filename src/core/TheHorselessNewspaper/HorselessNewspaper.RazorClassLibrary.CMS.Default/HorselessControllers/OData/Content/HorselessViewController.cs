@@ -1,6 +1,6 @@
 ﻿using Finbuckle.MultiTenant;
 using HorselessNewspaper.Web.Core.Authorization.Model;
-using HorselessNewspaper.Web.Core.Interfaces.Controller;
+using HorselessNewspaper.Web.Core.Services.Query.Controller;
 using HorselessNewspaper.Web.Core.Services.Query.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;

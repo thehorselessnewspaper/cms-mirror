@@ -7,7 +7,7 @@ using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
-namespace HorselessNewspaper.Web.Core.Interfaces.Controller
+namespace HorselessNewspaper.Web.Core.Services.Query.Controller
 {
     /// <summary>
     /// specify an ODATA controller friendly query interface

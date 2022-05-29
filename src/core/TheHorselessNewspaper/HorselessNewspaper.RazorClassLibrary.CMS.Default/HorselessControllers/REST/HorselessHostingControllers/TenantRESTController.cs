@@ -1,12 +1,13 @@
 ﻿using Finbuckle.MultiTenant;
 using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.Util;
-using HorselessNewspaper.Web.Core.Interfaces.Controller;
-using HorselessNewspaper.Web.Core.Interfaces.Hosting;
+using HorselessNewspaper.Web.Core.Services.Query.Controller.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+using HorselessNewspaper.Web.Core.Services.Query.Controller;
+
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.HorselessHostingControllers
 {
     [ApiController]

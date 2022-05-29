@@ -10,7 +10,7 @@ using Finbuckle.MultiTenant;
 using Microsoft.AspNetCore.Mvc;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HorselessNewspaper.Web.Core.Services.Query.Entities;
-using HorselessNewspaper.Web.Core.Interfaces.Controller;
+using HorselessNewspaper.Web.Core.Services.Query.Controller;
 using Microsoft.AspNetCore.OData.Routing;
 using Microsoft.AspNetCore.OData.Formatter;
 using Microsoft.AspNetCore.Http;

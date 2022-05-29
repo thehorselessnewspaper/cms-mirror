@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HorselessNewspaper.Web.Core.Services.Query.Entities;
-using HorselessNewspaper.Web.Core.Interfaces.Controller;
+using HorselessNewspaper.Web.Core.Services.Query.Controller;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using Microsoft.AspNetCore.OData.Routing;
 using Microsoft.AspNetCore.OData.Formatter;
