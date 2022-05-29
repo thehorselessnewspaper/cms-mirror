@@ -1,5 +1,5 @@
 ﻿using Finbuckle.MultiTenant;
-using HorselessNewspaper.Web.Core.Interfaces.Content;
+using HorselessNewspaper.Web.Core.Services.Query.Entities;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
 using Microsoft.AspNetCore.OData.Routing;
 using Microsoft.AspNetCore.Mvc;

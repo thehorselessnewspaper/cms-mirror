@@ -1,4 +1,4 @@
-﻿using HorselessNewspaper.Web.Core.Interfaces.Content;
+﻿using HorselessNewspaper.Web.Core.Services.Query.Entities;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;

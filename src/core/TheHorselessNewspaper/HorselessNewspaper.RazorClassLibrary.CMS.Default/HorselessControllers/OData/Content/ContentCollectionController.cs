@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using HorselessNewspaper.Web.Core.Interfaces.Content;
+using HorselessNewspaper.Web.Core.Services.Query.Entities;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using Microsoft.AspNetCore.OData.Routing;

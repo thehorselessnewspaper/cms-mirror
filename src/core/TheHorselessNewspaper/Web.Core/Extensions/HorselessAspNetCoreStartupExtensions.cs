@@ -30,6 +30,7 @@ using Microsoft.Extensions.Primitives;
 using Microsoft.FeatureManagement;
 using System.Text.Json.Serialization;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using HorselessNewspaper.Web.Core.Services.Query.Entities;
 using TheHorselessNewspaper.HostingModel.Entities.Query;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;

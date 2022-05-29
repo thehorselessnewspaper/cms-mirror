@@ -1,5 +1,5 @@
 ﻿using HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Model;
-using HorselessNewspaper.Web.Core.Interfaces.Content;
+using HorselessNewspaper.Web.Core.Services.Query.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;

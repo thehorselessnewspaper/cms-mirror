@@ -1,7 +1,7 @@
 ﻿using Finbuckle.MultiTenant;
 using HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings;
 using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.Util;
-using HorselessNewspaper.Web.Core.Interfaces.Content;
+using HorselessNewspaper.Web.Core.Services.Query.Entities;
 using HorselessNewspaper.Web.Core.Interfaces.Controller;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
