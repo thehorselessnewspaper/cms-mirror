@@ -137,6 +137,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
                             {
                                 // handle the case of a view that must
                                 // be added to the database
+                                
                                 var newView = new HorselessView()
                                 {
                                     Id = Guid.NewGuid(),
