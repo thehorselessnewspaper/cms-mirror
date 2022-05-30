@@ -53,31 +53,39 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
         public async Task<ActionResult<IEnumerable<ContentModel.Tenant>>> Get()
         {
-            var isFailedAuthorization = false;
-
-            var potentialResult = await _contentCollectionService.Query();
-            if (potentialResult != null)
+            try
             {
-                var items = potentialResult.ToList();
-                foreach(var item in items)
+
+                var isFailedAuthorization = false;
+
+                var potentialResult = await _contentCollectionService.Query();
+                if (potentialResult != null)
                 {
-                    var authorizeResult = await this.authorizationService
-                                            .AuthorizeAsync(User, item, AccessControlledOperations.Read);
-                   if(!authorizeResult.Succeeded)
+                    var items = potentialResult.ToList();
+                    foreach (var item in items)
                     {
-                        isFailedAuthorization = true;
-                    }    
+                        var authorizeResult = await this.authorizationService
+                                                .AuthorizeAsync(User, item, AccessControlledOperations.Read);
+                        if (!authorizeResult.Succeeded)
+                        {
+                            isFailedAuthorization = true;
+                        }
+                    }
                 }
-            }
 
-            if(isFailedAuthorization)
+                if (isFailedAuthorization)
+                {
+                    return Unauthorized();
+                }
+
+                var result = await _contentCollectionService.Query();
+
+                return Ok(result);
+            }
+            catch (Exception e)
             {
-                return Unauthorized();
+                return BadRequest();
             }
-
-            var result = await _contentCollectionService.Query();
-
-            return Ok(result);
         }
 
 
