@@ -1,15 +1,11 @@
-﻿using Finbuckle.MultiTenant;
-using HorselessNewspaper.Web.Core.Authorization.Model;
-using HorselessNewspaper.Web.Core.Services.Query.Controller;
-using HorselessNewspaper.Web.Core.Services.Query.Entities;
+﻿using HorselessNewspaper.Web.Core.Authorization.Model;
+using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
-using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {

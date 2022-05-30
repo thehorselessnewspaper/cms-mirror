@@ -11,9 +11,9 @@ namespace TheHorselessNewspaper.HostingModel.Context
     /// <summary>
     /// bulk registration of repository like services
     /// </summary>
-    internal static class ModelOperatorExtensions
+    public static class ModelOperatorExtensions
     {
-        internal static void RegisterHostingModelOperator(IServiceCollection services)
+        public static void RegisterHostingModelOperator(IServiceCollection services)
         {
             services.AddTransient<IQueryableHostingModelOperator<hostingModel.KeyCloakConfiguration>, HostingModelQueries<hostingModel.KeyCloakConfiguration>>();
             services.AddTransient<IQueryableHostingModelOperator<hostingModel.AccessControlEntry>, HostingModelQueries<hostingModel.AccessControlEntry>>();
@@ -24,7 +24,7 @@ namespace TheHorselessNewspaper.HostingModel.Context
             services.AddTransient<IQueryableHostingModelOperator<hostingModel.WebAPITenantInfo>, HostingModelQueries<hostingModel.WebAPITenantInfo>>();
         }
 
-        internal static void RegisterContentModelOperators(IServiceCollection services)
+        public static void RegisterContentModelOperators(IServiceCollection services)
         {
             // add services friendly for odata for each 
             // odata exposed entity
@@ -49,7 +49,6 @@ namespace TheHorselessNewspaper.HostingModel.Context
             services.AddTransient<IQueryableContentModelOperator<ContentModel.Taxon>, ContentModelQueries<ContentModel.Taxon>>();
             services.AddTransient<IQueryableContentModelOperator<ContentModel.Taxonomy>, ContentModelQueries<ContentModel.Taxonomy>>();
             services.AddTransient<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModelQueries<ContentModel.Tenant>>();
-            services.AddTransient<IQueryableContentModelOperator<ContentModel.HorselessView>, ContentModelQueries<ContentModel.HorselessView>>();
-        }
+              }
     }
 }
