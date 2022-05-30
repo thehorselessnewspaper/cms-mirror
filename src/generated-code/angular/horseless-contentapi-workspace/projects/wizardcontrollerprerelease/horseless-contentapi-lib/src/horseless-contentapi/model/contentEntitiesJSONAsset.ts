@@ -11,6 +11,7 @@
  */
 import { ContentEntitiesAccessControlEntry } from './contentEntitiesAccessControlEntry';
 import { ContentEntitiesHorselessContent } from './contentEntitiesHorselessContent';
+import { NodesJsonNode } from './nodesJsonNode';
 import { ContentEntitiesPrincipal } from './contentEntitiesPrincipal';
 
 
@@ -27,5 +28,7 @@ export interface ContentEntitiesJSONAsset {
     Owners?: Array<ContentEntitiesPrincipal> | null;
     Timestamp?: string | null;
     UpdatedAt?: string | null;
+    DictionaryKey?: string | null;
+    readonly JsonObject?: { [key: string]: NodesJsonNode; } | null;
 }
 

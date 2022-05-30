@@ -10,10 +10,14 @@
  * Do not edit the class manually.
  */
 import { ContentEntitiesPrincipalClaimContainer } from './contentEntitiesPrincipalClaimContainer';
+import { ContentEntitiesAccessControlEntry } from './contentEntitiesAccessControlEntry';
+import { ContentEntitiesPrincipal } from './contentEntitiesPrincipal';
 
 
 export interface ContentEntitiesPrincipalClaim { 
     Id?: string;
+    AccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
+    Owners?: Array<ContentEntitiesPrincipal> | null;
     ClaimType?: string | null;
     ClaimValue?: string | null;
     ClaimValueType?: string | null;

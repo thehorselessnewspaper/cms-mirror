@@ -39,5 +39,6 @@ export interface ContentEntitiesPrincipal {
     Timestamp?: string | null;
     PrincipalClaimContainer?: ContentEntitiesPrincipalClaimContainer;
     UpdatedAt?: string | null;
+    DictionaryKey?: string | null;
 }
 

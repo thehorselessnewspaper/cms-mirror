@@ -33,5 +33,6 @@ export interface ContentEntitiesHorselessView {
     Name?: string | null;
     PhysicalPath?: string | null;
     ViewContent?: string | null;
+    DictionaryKey?: string | null;
 }
 

@@ -20,6 +20,7 @@ export interface HostingEntitiesKeyCloakConfiguration {
     IsSoftDeleted?: boolean | null;
     Timestamp?: string | null;
     UpdatedAt?: string | null;
+    DictionaryKey?: string | null;
     Id?: string;
     DisplayName?: string | null;
     Authority?: string | null;
