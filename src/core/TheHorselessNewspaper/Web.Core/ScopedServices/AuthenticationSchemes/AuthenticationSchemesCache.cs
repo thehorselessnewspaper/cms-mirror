@@ -1,15 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using HorselessNewspaper.Core.Interfaces.Security.Cache;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 namespace HorselessNewspaper.Web.Core.ScopedServices.AuthenticationSchemes
 {
-
-
-    public interface IAuthenticationSchemesCache
-    {
-        Task<AuthenticationScheme[]> GetExternalProvidersAsync();
-    }
-
     public class AuthenticationSchemesCache : IAuthenticationSchemesCache
     {
         private readonly HttpContext? context;

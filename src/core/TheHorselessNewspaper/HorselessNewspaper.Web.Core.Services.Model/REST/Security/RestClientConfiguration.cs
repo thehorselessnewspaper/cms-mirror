@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HorselessNewspaper.Web.Core.Model.Security
+namespace HorselessNewspaper.Web.Core.Services.Model.REST.Security
 {
     /// <summary>
     /// DTO that supplies
@@ -12,9 +12,9 @@ namespace HorselessNewspaper.Web.Core.Model.Security
     /// configuration for
     /// rest clients
     /// </summary>
-    public class ObvsoleteRestClientConfiguration
+    public class RestClientConfiguration
     {
-        public Boolean IsClaimsIdentity { get; set; } = false;
+        public bool IsClaimsIdentity { get; set; } = false;
         public string AccessToken { get; set; } = string.Empty;
 
         public string ODataEndpoint { get; set; } = string.Empty;

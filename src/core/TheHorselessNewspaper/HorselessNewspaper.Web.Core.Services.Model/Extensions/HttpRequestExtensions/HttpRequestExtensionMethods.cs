@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HorselessNewspaper.Web.Core.Extensions.HttpRequestExtensions
+namespace HorselessNewspaper.Web.Core.Services.Model.Extensions.HttpRequestExtensions
 {
     /// <summary>
     /// useful httprequest extension methods

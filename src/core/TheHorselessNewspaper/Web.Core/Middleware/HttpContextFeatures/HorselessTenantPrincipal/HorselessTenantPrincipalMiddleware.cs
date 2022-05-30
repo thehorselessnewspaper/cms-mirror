@@ -11,7 +11,8 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using Microsoft.Extensions.DependencyInjection;
 using HorselessNewspaper.Web.Core.UnitOfWork.ContentModelTasks.PrincipalTasks;
 using Microsoft.Extensions.Logging;
-using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
+using HorselessNewspaper.Core.Interfaces.Security.Resolver;
+
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTenantPrincipal

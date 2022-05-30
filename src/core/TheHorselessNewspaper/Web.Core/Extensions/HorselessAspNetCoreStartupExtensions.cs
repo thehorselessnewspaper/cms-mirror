@@ -7,7 +7,6 @@ using HorselessNewspaper.Web.Core.Middleware;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter.Strategy;
 using HorselessNewspaper.Web.Core.ScopedServices.AuthenticationSchemes;
-using HorselessNewspaper.Web.Core.ScopedServices.Contexts;
 using HorselessNewspaper.Web.Core.ScopedServices.RestClients;
 using HorselessNewspaper.Web.Core.ScopedServices.RestClients.Also;
 using HorselessNewspaper.Web.Core.ScopedServices.RoutingStrategy;
@@ -36,6 +35,11 @@ using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntiti
 using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using HorselessNewspaper.Web.Core.Services.Query.Controller.Hosting;
 using TheHorselessNewspaper.HostingModel.ODATA;
+using HorselessNewspaper.Web.Core.Services.Model.Extensions.Hosting;
+using Microsoft.AspNetCore.Authorization;
+using HorselessNewspaper.Web.Core.Services.Query.Authorization.Handler;
+using HorselessNewspaper.Web.Core.Services.Query.Authorization.Contexts;
+using HorselessNewspaper.Core.Interfaces.Security.Cache;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -51,6 +55,9 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
             serviceBuilder.Services.AddSingleton<IConfiguration>(configuration);
             serviceBuilder.Services.AddFeatureManagement();
+
+            // as per https://docs.microsoft.com/en-us/aspnet/core/security/authorization/resourcebased?view=aspnetcore-6.0
+            serviceBuilder.Services.AddTransient<IAuthorizationHandler, RLSAuthorizationHandler>();
 
             var automapperConfig = new MapperConfiguration(mc =>
             {

@@ -16,7 +16,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\HorselessNewspaper.Core.Interfaces\HorselessNewspaper.Core.Interfaces.csproj" />
-		<ProjectReference Include="..\Web.Core\HorselessNewspaper.Web.Core.csproj" />
+		<ProjectReference Include="..\HorselessNewspaper.Web.Core.Services.Model\HorselessNewspaper.Web.Core.Services.Model.csproj" />
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 
@@ -25,8 +25,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.5" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.5" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220529.8" />
 	</ItemGroup>
 
 </Project>

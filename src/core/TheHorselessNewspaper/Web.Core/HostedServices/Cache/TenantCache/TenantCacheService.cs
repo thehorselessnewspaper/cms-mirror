@@ -29,6 +29,7 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+using HorselessNewspaper.Core.Interfaces.Security.Resolver;
 
 namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 {

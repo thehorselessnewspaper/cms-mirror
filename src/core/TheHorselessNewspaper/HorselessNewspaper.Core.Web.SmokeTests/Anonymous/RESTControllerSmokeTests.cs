@@ -17,7 +17,8 @@ using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using HorselessNewspaper.Web.Core.Model.Security;
-using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
+using HorselessNewspaper.Core.Interfaces.Security.Resolver;
+using HorselessNewspaper.Web.Core.Services.Model.REST.Security;
 
 namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 {

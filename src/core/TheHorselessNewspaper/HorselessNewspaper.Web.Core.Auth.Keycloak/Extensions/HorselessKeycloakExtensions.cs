@@ -1,9 +1,8 @@
-﻿using HorselessNewspaper.Web.Core.Auth.Keycloak.Claims;
+﻿using HorselessNewspaper.Core.Interfaces.Security.Resolver;
+using HorselessNewspaper.Web.Core.Auth.Keycloak.Claims;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalResolver;
-using HorselessNewspaper.Web.Core.Authorization.Handler;
-using HorselessNewspaper.Web.Core.Extensions;
-using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
+using HorselessNewspaper.Web.Core.Services.Model.Extensions.Hosting;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -11,7 +10,6 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Security.Claims;
@@ -211,8 +209,8 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
             //.AddOpenId(keyCloakOptions);
 
 
-            // as per https://docs.microsoft.com/en-us/aspnet/core/security/authorization/resourcebased?view=aspnetcore-6.0
-            serviceBuilder.Services.AddTransient<IAuthorizationHandler, RLSAuthorizationHandler>();
+            //// as per https://docs.microsoft.com/en-us/aspnet/core/security/authorization/resourcebased?view=aspnetcore-6.0
+            //serviceBuilder.Services.AddTransient<IAuthorizationHandler, RLSAuthorizationHandler>();
 
             serviceBuilder.Services.AddSingleton<IClaimsTransformation, HorselessKeycloakClaimsTransformer>();
 

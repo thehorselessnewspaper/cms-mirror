@@ -7,37 +7,36 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.Extensions.Logging;
-using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
 using Microsoft.AspNetCore.Http;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
-using HorselessNewspaper.Web.Core.Extensions.ClaimExtensions;
 using HorselessNewspaper.Web.Core.Authorization.Model;
+using HorselessNewspaper.Web.Core.Services.Model.Extensions.Claim;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.Context;
 
-namespace HorselessNewspaper.Web.Core.Authorization.Handler
+namespace HorselessNewspaper.Web.Core.Services.Query.Authorization.Handler
 {
     /// <summary>
     /// row levle secured authorization handler
     /// as per https://docs.microsoft.com/en-us/aspnet/core/security/authorization/resourcebased?view=aspnetcore-6.0
     /// </summary>
-    public class RLSAuthorizationHandlerObsolete : AuthorizationHandler<OperationAuthorizationRequirement, IContentRowLevelSecured>
+    public class RLSAuthorizationHandler : AuthorizationHandler<OperationAuthorizationRequirement, IContentRowLevelSecured>
     {
-        ILogger<RLSAuthorizationHandlerObsolete> _logger;
+        ILogger<RLSAuthorizationHandler> _logger;
         IHttpContextAccessor _httpcontextAccessor;
         IQueryableContentModelOperator<Tenant> _tenantOperator;
 
-        public RLSAuthorizationHandlerObsolete(ILogger<RLSAuthorizationHandlerObsolete> log, IHttpContextAccessor httpcontextAccessor, IQueryableContentModelOperator<Tenant> tenantOperator)
+        public RLSAuthorizationHandler(ILogger<RLSAuthorizationHandler> log, IHttpContextAccessor httpcontextAccessor, IQueryableContentModelOperator<Tenant> tenantOperator)
         {
             _logger = log;
-            this._httpcontextAccessor = httpcontextAccessor;
-            this._tenantOperator = tenantOperator;
+            _httpcontextAccessor = httpcontextAccessor;
+            _tenantOperator = tenantOperator;
         }
 
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, OperationAuthorizationRequirement requirement, IContentRowLevelSecured resource)
         {
- 
+
             // resolve the tenant
             try
             {
@@ -47,28 +46,28 @@ namespace HorselessNewspaper.Web.Core.Authorization.Handler
                     var upn = _httpcontextAccessor.HttpContext.Features.Get<Principal>().UPN;
                     var resourceName = resource.GetType().Name;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
-                    this._logger.LogWarning($"{this.GetType().FullName} failed probe for user UPN");
+                    _logger.LogWarning($"{GetType().FullName} failed probe for user UPN");
                 }
 
-                _logger.LogTrace($"{this.GetType().Name} is confirming tenant context resolver operational");
+                _logger.LogTrace($"{GetType().Name} is confirming tenant context resolver operational");
 
-                var currentPrincipal = this._httpcontextAccessor.HttpContext.Features.Get<Principal>();
-                var currentTenant = this._httpcontextAccessor.HttpContext.Features.Get<Tenant>();
+                var currentPrincipal = _httpcontextAccessor.HttpContext.Features.Get<Principal>();
+                var currentTenant = _httpcontextAccessor.HttpContext.Features.Get<Tenant>();
                 var isFunctionalTenantResolution = currentPrincipal == null ? false : true;
                 if (isFunctionalTenantResolution)
                 {
                     try
                     {
-                        var tenantQuery = await this._tenantOperator.Read(w => w.Id == currentTenant.Id, new List<string>()
+                        var tenantQuery = await _tenantOperator.Read(w => w.Id == currentTenant.Id, new List<string>()
                         { nameof(Tenant.AccessControlEntries)});
                         var tenantAccessControlEntries = tenantQuery.SelectMany(s => s.AccessControlEntries).ToList();
 
-                        _logger.LogTrace($"{this.GetType().Name} has confirmed tenant context resolver operational for tenant resolution");
+                        _logger.LogTrace($"{GetType().Name} has confirmed tenant context resolver operational for tenant resolution");
 
                         var principal = currentPrincipal;
-                        _logger.LogInformation($"{this.GetType().Name} is evaluating upn={principal.UPN}");
+                        _logger.LogInformation($"{GetType().Name} is evaluating upn={principal.UPN}");
 
                         foreach (var ace in principal.AccessControlEntries.Where(w => w.PermissionType == ACEPermissionType.PERMIT && w.Permission == ACEPermission.CREATE))
                         {
@@ -77,7 +76,7 @@ namespace HorselessNewspaper.Web.Core.Authorization.Handler
                         }
 
                         // todo - make this heuristic more robust 
-                        if(!this._httpcontextAccessor.HttpContext.HasDevopsAdminClaims() && requirement == AccessControlledOperations.Execute)
+                        if (!_httpcontextAccessor.HttpContext.HasDevopsAdminClaims() && requirement == AccessControlledOperations.Execute)
                         {
                             context.Fail();
                             return;
@@ -85,16 +84,16 @@ namespace HorselessNewspaper.Web.Core.Authorization.Handler
 
                         context.Succeed(requirement);
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         _logger.LogError($"auth handler failed to resolve current principal {e.Message}");
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _logger.LogError($"exception authorizing user {e.Message}");
-                context.Fail(new AuthorizationFailureReason(this, $"auth failed due to {e.Message}") );
+                context.Fail(new AuthorizationFailureReason(this, $"auth failed due to {e.Message}"));
                 return;
             }
 

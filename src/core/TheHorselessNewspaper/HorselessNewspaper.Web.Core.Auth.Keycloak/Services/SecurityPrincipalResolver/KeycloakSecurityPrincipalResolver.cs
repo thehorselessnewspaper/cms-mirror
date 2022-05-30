@@ -1,25 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using HorselessNewspaper.Web.Core.Extensions.ClaimExtensions;
-using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
-using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
+﻿using HorselessNewspaper.Core.Interfaces.Model.HttpContextFeatureModels;
+using HorselessNewspaper.Core.Interfaces.Security.Resolver;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
+using HorselessNewspaper.Web.Core.Services.Model.Extensions.Claim;
+using HorselessNewspaper.Web.Core.Services.Model.Extensions.HttpRequestExtensions;
+using HorselessNewspaper.Web.Core.Services.Model.HttpContextFeatures;
+using HorselessNewspaper.Web.Core.Services.Model.REST.Security;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using System.Text.Json;
-using HorselessNewspaper.Web.Core.Model.Security;
-using Finbuckle.MultiTenant;
-using TheHorselessNewspaper.HostingModel.MultiTenant;
-using HorselessNewspaper.Core.Interfaces.Model.HttpContextFeatureModels;
-using HorselessNewspaper.Web.Core.Model.HttpContextFeatures;
-using HorselessNewspaper.Web.Core.Extensions.HttpRequestExtensions;
 using System.Collections.Concurrent;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
-
+using System.Text;
+using System.Text.Json;
+using TheHorselessNewspaper.HostingModel.MultiTenant;
+using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalResolver
 {
     /// <summary>

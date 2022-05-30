@@ -1,6 +1,6 @@
 ﻿using Finbuckle.MultiTenant;
 using HorselessNewspaper.RazorClassLibrary.CMS.Default.Models;
-using HorselessNewspaper.Web.Core.Model.Security;
+using HorselessNewspaper.Web.Core.Services.Model.REST.Security;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

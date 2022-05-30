@@ -8,7 +8,7 @@ using HorselessNewspaper.Core.Interfaces.Model.HttpContextFeatureModels;
 
 namespace HorselessNewspaper.Web.Core.Interfaces.Security.Resolver
 {
-    public interface ISecurityPrincipalResolver
+    public interface ISecurityPrincipalResolverObsolete
     {
         Task<Tenant> EnsureTenant();
         Task<string> GetClientCredentialsGrantToken();

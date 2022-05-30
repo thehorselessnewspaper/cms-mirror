@@ -1,21 +1,11 @@
-﻿using HorselessNewspaper.Core.Interfaces.Query;
-using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
-using Finbuckle;
-using Finbuckle.MultiTenant;
+﻿using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
+using HorselessNewspaper.Web.Core.Services.Query.Authorization.Contexts;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.OAuth;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using NuGet.ContentModel;
-using System.Linq.Expressions;
-using System.Security.Claims;
-using System.Web;
-using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using HorselessNewspaper.Web.Core.ScopedServices.Contexts;
 using Microsoft.Extensions.Logging;
+using System.Web;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
 {

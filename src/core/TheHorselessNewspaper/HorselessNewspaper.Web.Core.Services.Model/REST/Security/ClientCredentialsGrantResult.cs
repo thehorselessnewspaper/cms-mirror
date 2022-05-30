@@ -5,11 +5,11 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace HorselessNewspaper.Web.Core.Model.Security
+namespace HorselessNewspaper.Web.Core.Services.Model.REST.Security
 {
-    public class ObsoleteClientCredentialsGrantResult
+    public class ClientCredentialsGrantResult
     {
-        public ObsoleteClientCredentialsGrantResult() { }
+        public ClientCredentialsGrantResult() { }
 
         [JsonPropertyName("access_token")]
         public string AccessToken { get; set; }

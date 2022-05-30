@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HorselessNewspaper.Web.Core.Extensions
+namespace HorselessNewspaper.Web.Core.Services.Model.Extensions.Hosting
 {
     public class HorselessServiceBuilder
     {
