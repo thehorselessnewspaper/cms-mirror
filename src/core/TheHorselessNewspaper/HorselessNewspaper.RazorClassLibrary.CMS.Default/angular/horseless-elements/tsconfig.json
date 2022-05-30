@@ -30,7 +30,7 @@
     ]
   },
   "include": ["./src/app/**/*.ts"],
-  "exclude": [ "/**/node_modules" ],
+  "exclude": [ "**/node_modules/**/*","**/dist/**/*" ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
