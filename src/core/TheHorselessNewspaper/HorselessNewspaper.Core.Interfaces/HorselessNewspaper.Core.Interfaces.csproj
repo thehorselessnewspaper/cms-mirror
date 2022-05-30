@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<PackageId>HorselessNewspaper.Core.Interfaces</PackageId>
 		<Version>0.0.1</Version>
-		<PackageVersion>1.0.0</PackageVersion>
+		<PackageVersion>0.0.1</PackageVersion>
 		<PackageId>HorselessNewspaper.Core.Interfaces</PackageId>
 		<Authors>sechele@ataxlab.com</Authors>
 		<Company>ataxlab</Company>
@@ -31,7 +31,7 @@
 	<ItemGroup>
 		<PackageReference Include="NuGet.Protocol" Version="6.2.0" />
 		<PackageReference Include="System.Linq.Expressions" Version="4.3.0" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220529.8" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220530.4" />
 	</ItemGroup>
 
 </Project>

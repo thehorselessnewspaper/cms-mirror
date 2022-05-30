@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 		<RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
-		<Version>1.0.0</Version>
+		<Version>0.0.1</Version>
 		<PackageId>HorselessNewspaper.Web.Core</PackageId>
 		<Authors>sechele@ataxlab.com</Authors>
 		<Company>ataxlab</Company>
@@ -40,7 +40,7 @@
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="NuGet.Protocol" Version="6.2.0" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220529.8" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220530.4" />
 	</ItemGroup>
 
 	<ItemGroup>
