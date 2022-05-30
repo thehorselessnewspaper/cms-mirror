@@ -36,6 +36,8 @@ COPY ["HorselessNewspaper.Web.Core.Extensions.MSSQLServer/HorselessNewspaper.Web
 COPY ["HorselessNewspaper.Web.Core.Extensions.MySQL/HorselessNewspaper.Web.Core.Extensions.MySQL.csproj", "HorselessNewspaper.Web.Core.Extensions.MySQL/"]
 COPY ["HorselessNewspaper.Web.Core.Services.Query/HorselessNewspaper.Web.Core.Services.Query.csproj", "HorselessNewspaper.Web.Core.Services.Query/"]
 
+COPY ["HorselessNewspaper.Web.Core.Services.Model/HorselessNewspaper.Web.Core.Services.Model.csproj", "HorselessNewspaper.Web.Core.Services.Model/"]
+
 RUN dotnet restore "TheHorselessCore.sln"
 RUN dotnet restore "HorselessNewspaper.Core.Web.Prototype/HorselessNewspaper.Core.Web.Prototype.csproj"
 COPY . .

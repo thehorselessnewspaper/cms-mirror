@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Finbuckle.MultiTenant;
 using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
 using NuGet.Common;
+using HorselessNewspaper.Core.Interfaces.Security.Resolver;
 
 namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 {
