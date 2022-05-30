@@ -9,7 +9,7 @@ using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
-namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
+namespace TheHorselessNewspaper.HostingModel.Context.MSSQL
 {
     internal partial class MSSQLHostingContext : THLNPHostingContext, IHostingModelContext
     {
@@ -35,13 +35,13 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
         public TenantMismatchMode TenantMismatchMode { get; set; }
         public TenantNotSetMode TenantNotSetMode { get; set; }
- 
+
         public async Task<ITenantInfo> ResolveTenant()
         {
 
-            if (this.TenantInfo == null)
+            if (TenantInfo == null)
             {
-                this.logger.LogTrace($"{this.GetType().Name} is handling a null tenant context");
+                logger.LogTrace($"{GetType().Name} is handling a null tenant context");
                 var tenant = new HorselessTenantInfo();
                 // here TTenatInfo is the type of your custom tenant info object
                 var resolver = serviceProvider.GetRequiredService<ITenantResolver<HorselessTenantInfo>>();
@@ -56,58 +56,58 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
                         var identifier = await s.GetIdentifierAsync("randomtextstrategymatcher");
                         if (identifier != null)
                         {
-                            logger.LogTrace($"{this.GetType().Name} resolved a tenant with the multitenant strategy");
+                            logger.LogTrace($"{GetType().Name} resolved a tenant with the multitenant strategy");
 
                             var allResult = await resolver.Stores.First().GetAllAsync();
                             var filtered = allResult.Where(w => w.Identifier.Equals(identifier)).First();
                             logger.LogTrace("resolved tenant");
-                            this.TenantInfo = filtered as ITenantInfo;
-                            return this.TenantInfo;
+                            TenantInfo = filtered as ITenantInfo;
+                            return TenantInfo;
                         }
                         else
                         {
-                            throw new Exception($"{this.GetType().Name} unable to resolve tenant;");
+                            throw new Exception($"{GetType().Name} unable to resolve tenant;");
                         }
                     }
                     catch (Exception e)
                     {
-                        logger.LogTrace($"{this.GetType().Name} problem resolving tenant {e.Message}");
+                        logger.LogTrace($"{GetType().Name} problem resolving tenant {e.Message}");
                     }
                 }
             }
             else
             {
-                this.logger.LogTrace($"{this.GetType().Name} is handling a previously initialized tenant context");
-                return this.TenantInfo;
+                logger.LogTrace($"{GetType().Name} is handling a previously initialized tenant context");
+                return TenantInfo;
             }
 
             /// TODO make sure this is always valid
-            return this.TenantInfo;
+            return TenantInfo;
         }
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
-            this.TenantMismatchMode = TenantMismatchMode.Overwrite;
-            this.TenantNotSetMode = TenantNotSetMode.Overwrite;
+            TenantMismatchMode = TenantMismatchMode.Overwrite;
+            TenantNotSetMode = TenantNotSetMode.Overwrite;
             this.EnforceMultiTenant();
             return base.SaveChanges(acceptAllChangesOnSuccess);
         }
 
         public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
-            await this.ResolveTenant();
-            this.TenantMismatchMode = TenantMismatchMode.Overwrite;
-            this.TenantNotSetMode = TenantNotSetMode.Overwrite;
+            await ResolveTenant();
+            TenantMismatchMode = TenantMismatchMode.Overwrite;
+            TenantNotSetMode = TenantNotSetMode.Overwrite;
             this.EnforceMultiTenant();
             return await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
         #endregion
 
-        public MSSQLHostingContext(DbContextOptions<MSSQLHostingContext> options, ILogger<MSSqlContentContext> logger, IServiceProvider serviceProvider, IConfiguration config, Finbuckle.MultiTenant.ITenantInfo tenant) : base(options, tenant)
+        public MSSQLHostingContext(DbContextOptions<MSSQLHostingContext> options, ILogger<MSSqlContentContext> logger, IServiceProvider serviceProvider, IConfiguration config, ITenantInfo tenant) : base(options, tenant)
         {
-            this.TenantInfo = tenant;
-            this._configuration = config;
-            this.SqlDialect = DatabaseServerFamily.IsSQLServer;
+            TenantInfo = tenant;
+            _configuration = config;
+            SqlDialect = DatabaseServerFamily.IsSQLServer;
             this.logger = logger;
             this.serviceProvider = serviceProvider;
 

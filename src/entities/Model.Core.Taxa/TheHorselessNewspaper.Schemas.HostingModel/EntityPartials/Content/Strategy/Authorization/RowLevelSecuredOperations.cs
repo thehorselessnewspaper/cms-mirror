@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
-namespace TheHorselessNewspaper.Schemas.HostingModel.EntityPartials.Content.Strategy.Authorization
+namespace TheHorselessNewspaper.HostingModel.EntityPartials.Content.Strategy.Authorization
 {
     /// <summary>
     /// support asp.net core resource based authorization 

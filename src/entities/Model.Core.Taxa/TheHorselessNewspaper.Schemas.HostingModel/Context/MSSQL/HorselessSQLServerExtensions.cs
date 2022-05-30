@@ -12,7 +12,7 @@ using TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollection
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.Context;
 
-namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
+namespace TheHorselessNewspaper.HostingModel.Context.MSSQL
 {
     /// <summary>
     /// consumers of the dbcontext added here are expected to be marked public
@@ -40,10 +40,10 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
                 builder.UseSqlServer(connectionString, options =>
                 {
                     options.EnableRetryOnFailure();
-                   
+
                 });
 
-                services.AddSingleton<DbContextOptions<MSSqlContentContext>>(builder.Options);
+                services.AddSingleton(builder.Options);
 
                 // add dbcontext for dependency injectoin
                 services.AddScoped<IContentModelContext, MSSqlContentContext>();
@@ -51,11 +51,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
                 // register repository-like services that depend on dbcontext
                 ModelOperatorExtensions.RegisterContentModelOperators(services);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 int i = 0;
             }
-              
+
             return services;
 
         }
@@ -80,7 +80,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
                 options.EnableRetryOnFailure();
 
             });
-            services.AddSingleton<DbContextOptions<MSSQLHostingContext>>(builder.Options);
+            services.AddSingleton(builder.Options);
 
             // add dbcontext for dependency injectoin
             services.AddScoped<IHostingModelContext, MSSQLHostingContext>();

@@ -1,4 +1,4 @@
-﻿namespace TheHorselessNewspaper.Schemas.HostingModel.DTO
+﻿namespace TheHorselessNewspaper.HostingModel.DTO
 {
     [Obsolete]
     public partial class RoutingDiscriminatorDTO

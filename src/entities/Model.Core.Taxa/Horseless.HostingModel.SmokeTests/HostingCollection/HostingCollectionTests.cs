@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.Context;
-using TheHorselessNewspaper.HostingModel.Entities.Query;
+using TheHorselessNewspaper.HostingModel.HostingEntities.Query;
 using TheHorselessNewspaper.HostingModel.HostingEntities.Query.Extensions;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace Horseless.HostingModel.SmokeTests.HostingCollection

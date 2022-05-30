@@ -2,7 +2,7 @@
 using Microsoft.OData.ModelBuilder;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
-namespace TheHorselessNewspaper.Schemas.HostingModel.ODATA
+namespace TheHorselessNewspaper.HostingModel.ODATA
 {
     public class HorselessOdataModel
     {
@@ -10,7 +10,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.ODATA
         private Type[] GetTypesInNamespace(System.Reflection.Assembly assembly, string nameSpace)
         {
             return assembly.GetTypes()
-                .Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal))
+                .Where(t => string.Equals(t.Namespace, nameSpace, StringComparison.Ordinal))
                 .ToArray();
         }
 

@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.Context;
 using Finbuckle.MultiTenant;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;

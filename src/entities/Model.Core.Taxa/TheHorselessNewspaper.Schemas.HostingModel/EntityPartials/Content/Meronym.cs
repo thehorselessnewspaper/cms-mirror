@@ -1,7 +1,6 @@
 ﻿using Finbuckle.MultiTenant;
 using System.ComponentModel.DataAnnotations;
 using TheHorselessNewspaper.HostingModel.Context;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {

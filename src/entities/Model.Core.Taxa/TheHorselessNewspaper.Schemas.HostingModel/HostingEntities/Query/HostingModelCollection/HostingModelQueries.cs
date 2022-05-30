@@ -6,10 +6,9 @@ using System.Linq.Expressions;
 using System.Reflection;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.HostingEntities.Query.Extensions;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
-namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollection
+namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelCollection
 {
     internal class HostingModelQueries<T> : IQueryableHostingModelOperator<T> where T : class, IHostingRowLevelSecured
     {
@@ -20,8 +19,8 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 
         public HostingModelQueries(IHostingModelContext ctx, ILogger<HostingModelQueries<T>> logger)
         {
-            this._context = ctx;
-            this._logger = logger;
+            _context = ctx;
+            _logger = logger;
 
             try
             {
@@ -44,7 +43,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError($"content collections reset exception: {ex.Message}");                    
+                    _logger.LogError($"content collections reset exception: {ex.Message}");
                 }
 
                 var tryResetAgain = await ((DbContext)_context).Database.EnsureCreatedAsync();
@@ -60,7 +59,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 
         public async Task<T> Create(T entity)
         {
-            var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
+            var resolvedTenant = await _context.ResolveTenant();
 
             _logger.LogDebug($"handling Create request");
             var dbSet = ((DbContext)_context).Set<T>();
@@ -68,7 +67,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
             var addResult = await dbSet.AddAsync(entity);
             var saveResult = await ((DbContext)_context).SaveChangesAsync();
 
-            return await Task.FromResult<T>(entity);
+            return await Task.FromResult(entity);
         }
 
         public async Task<IEnumerable<T>> Create(IEnumerable<T> entities)
@@ -88,40 +87,40 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
         {
             T? entity;
 
-            var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
+            var resolvedTenant = await _context.ResolveTenant();
 
             _logger.LogDebug($"handling Delete request");
             var dbSet = ((DbContext)_context).Set<T>();
-            entity = await dbSet.Where(w => w.Id == entityId).FirstOrDefaultAsync<T>();
+            entity = await dbSet.Where(w => w.Id == entityId).FirstOrDefaultAsync();
             var removeState = dbSet.Remove(entity);
             var updateResult = await ((DbContext)_context).SaveChangesAsync();
 
-            return await Task.FromResult<T>(entity);
+            return await Task.FromResult(entity);
         }
 
-        public async Task<T> DeleteByObjectId(string objectId, bool isSoftDelete = true )
+        public async Task<T> DeleteByObjectId(string objectId, bool isSoftDelete = true)
         {
             T? entity;
 
-            var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
+            var resolvedTenant = await _context.ResolveTenant();
 
             _logger.LogDebug($"handling Delete request");
             var dbSet = ((DbContext)_context).Set<T>();
-            entity = await dbSet.Where(w => w.ObjectId == objectId).FirstOrDefaultAsync<T>();
+            entity = await dbSet.Where(w => w.ObjectId == objectId).FirstOrDefaultAsync();
             var removeState = dbSet.Remove(entity);
             var updateResult = await ((DbContext)_context).SaveChangesAsync();
 
-            return await Task.FromResult<T>(entity);
+            return await Task.FromResult(entity);
         }
 
         public async Task<IEnumerable<T>> Delete(Expression<Func<T, bool>> query, bool softDelete = true, bool whatIf = true)
         {
             var ret = new List<T>();
-            var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
+            var resolvedTenant = await _context.ResolveTenant();
 
             if (whatIf == true)
             {
-                return await this.Read(query);
+                return await Read(query);
             }
             else if (softDelete == true)
             {
@@ -163,19 +162,19 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 
         public async Task<IQueryable<T>> Read(int pageSize = 10, int pageNumber = 1, int pageCount = 1)
         {
-            var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
+            var resolvedTenant = await _context.ResolveTenant();
 
             try
             {
                 _logger.LogDebug($"handling get request");
                 var dbSet = ((DbContext)_context).Set<T>();
 
-                return await Task.FromResult<IQueryable<T>>(dbSet
+                return await Task.FromResult(dbSet
                                         .OrderBy(o => o.CreatedAt)
-                                        .Skip((pageNumber - 1 ) * pageSize)
-                                        .Take(pageSize * pageCount).AsQueryable<T>());
+                                        .Skip((pageNumber - 1) * pageSize)
+                                        .Take(pageSize * pageCount).AsQueryable());
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _logger.LogError($"exception executing read {e.Message}");
                 throw new Exception($"exception executing read {e.Message}", e);
@@ -190,7 +189,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
         /// <returns></returns>
         public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1)
         {
-            var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
+            var resolvedTenant = await _context.ResolveTenant();
 
             try
             {
@@ -198,7 +197,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
                 var dbSet = ((DbContext)_context).Set<T>().Where(query)
                                         .OrderBy(o => o.CreatedAt)
                                         .Skip((pageNumber - 1) * pageSize)
-                                        .Take(pageSize * pageCount); 
+                                        .Take(pageSize * pageCount);
 
                 if (includeClauses != null)
                 {
@@ -208,7 +207,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
                     }
                 }
 
-                return await Task.FromResult<IQueryable<T>>(dbSet.AsQueryable<T>());
+                return await Task.FromResult(dbSet.AsQueryable());
             }
             catch (Exception e)
             {
@@ -220,7 +219,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
         public async Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null,
                                                             int pageSize = 10, int pageNumber = 1, int pageCount = 1)
         {
-            var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
+            var resolvedTenant = await _context.ResolveTenant();
 
             try
             {
@@ -254,7 +253,7 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public async Task<T> Update(T entity, List<String> targetProperties = null)
+        public async Task<T> Update(T entity, List<string> targetProperties = null)
         {
             try
             {
@@ -312,19 +311,19 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 
             }
 
-            return await Task.FromResult<T>(entity);
+            return await Task.FromResult(entity);
         }
 
-        public async Task<IEnumerable<T>> Update(IEnumerable<T> entities, List<String> targetProperties = null)
+        public async Task<IEnumerable<T>> Update(IEnumerable<T> entities, List<string> targetProperties = null)
         {
             var ret = new List<T>();
 
             _logger.LogDebug($"handling Update request");
-            var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
+            var resolvedTenant = await _context.ResolveTenant();
 
             foreach (var entity in entities)
             {
-                var updateResult = await this.Update(entity, targetProperties);
+                var updateResult = await Update(entity, targetProperties);
                 ret.Add(updateResult);
             }
 
@@ -338,19 +337,19 @@ namespace TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollecti
 
         public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class
         {
-            var resolvedTenant = await ((IHostingModelContext)_context).ResolveTenant();
+            var resolvedTenant = await _context.ResolveTenant();
 
             try
             {
                 var hasEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
-                T trackedEntity = default(T);
+                T trackedEntity = default;
 
                 if (hasEntity != null)
                 {
                     trackedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).Include(propertyName).First();
                     foreach (var item in relatedEntities)
                     {
-                        ((DbContext)_context).Entry<U>(item);
+                        ((DbContext)_context).Entry(item);
 
                         ((ICollection<U>)trackedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(trackedEntity)).Add(item);
                     }

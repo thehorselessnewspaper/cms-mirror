@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollections;
-using TheHorselessNewspaper.HostingModel.Entities.Query;
-using TheHorselessNewspaper.HostingModel.Entities.Query.HostingModelCollection;
+using TheHorselessNewspaper.HostingModel.HostingEntities.Query;
+using TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelCollection;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using hostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 

@@ -1,4 +1,4 @@
-﻿namespace TheHorselessNewspaper.Schemas.HostingModel.DTO
+﻿namespace TheHorselessNewspaper.HostingModel.DTO
 {
     public partial class NugetPackageDTO
     {

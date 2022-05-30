@@ -1,18 +1,16 @@
-using Finbuckle.MultiTenant;
 using HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
 using HorselessNewspaper.Web.Core.Extensions;
 using HorselessNewspaper.Web.Core.Extensions.Hosting;
+using HorselessNewspaper.Web.Core.Filters.ActionFilters.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.AspNetCore.OData;
 using Microsoft.AspNetCore.OData.Formatter;
 using Microsoft.Extensions.FileProviders;
-using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
-using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
+using Microsoft.Net.Http.Headers;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
-using Microsoft.Net.Http.Headers;
-using HorselessNewspaper.Web.Core.Filters.ActionFilters.Infrastructure;
+using TheHorselessNewspaper.HostingModel.Context.MSSQL;
 
 var builder = WebApplication.CreateBuilder(args);
 

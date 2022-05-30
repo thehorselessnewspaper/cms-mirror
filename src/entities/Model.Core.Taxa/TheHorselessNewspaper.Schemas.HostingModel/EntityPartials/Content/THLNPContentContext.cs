@@ -10,7 +10,6 @@ using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.Context.Extensions;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities

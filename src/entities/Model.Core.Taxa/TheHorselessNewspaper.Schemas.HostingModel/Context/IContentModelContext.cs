@@ -1,10 +1,9 @@
 ﻿using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
-namespace TheHorselessNewspaper.Schemas.HostingModel.Context
+namespace TheHorselessNewspaper.HostingModel.Context
 {
     /// <summary>
     /// support Implementation specific context
@@ -12,7 +11,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context
     /// as per 
     ///     - https://www.finbuckle.com/MultiTenant/Docs/v6.5.1/EFCore#adding-multitenant-functionality-to-an-existing-dbcontext
     /// </summary>
-    internal partial interface IContentModelContext : IMultiTenantDbContext 
+    internal partial interface IContentModelContext : IMultiTenantDbContext
     {
         // db provider discriminator
         internal DatabaseServerFamily SqlDialect { get; set; }

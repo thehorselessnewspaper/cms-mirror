@@ -5,9 +5,8 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.Context;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
-namespace TheHorselessNewspaper.HostingModel.Entities.Query
+namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query
 {
     public interface IQueryableHostingModelOperator<T> : IQueryableModelOperator<T> where T : class, IHostingRowLevelSecured
     {
