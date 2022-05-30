@@ -28,5 +28,8 @@ namespace HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings
         public const string API_HORSELESSCONTENTMODEL_NAVIGATIONMENUITEM = "api/HorselessContentModel/NavigationMenuItem";
         public const string API_HORSELESSCONTENTMODEL_NAVIGATIONMENU = "api/HorselessContentModelModel/NavigationMenu";
         public const string API_HORSELESSCONTENTMODEL_TENANT = "api/HorselessContentModel/Tenant";
+
+
+        public const string API_HORSELESSCONTENTMODEL_FILESYSTEMASSETINGRESS = "api/HorselessContentModel/FilesystemAssetIngress";
     }
 }

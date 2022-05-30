@@ -1959,6 +1959,28 @@
         }
       }
     },
+    "/{__tenant__}/api/HorselessContentModel/FilesystemAssetIngress": {
+      "post": {
+        "tags": [
+          "FilesystemAssetIngress"
+        ],
+        "parameters": [
+          {
+            "name": "__tenant__",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/{__tenant__}/api/HorselessContentModel/FilesystemAsset/Create": {
       "post": {
         "tags": [
