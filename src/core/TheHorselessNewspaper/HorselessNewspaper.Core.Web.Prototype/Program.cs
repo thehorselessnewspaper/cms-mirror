@@ -1,23 +1,15 @@
 using HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers;
+using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
 using HorselessNewspaper.Web.Core.Extensions;
 using HorselessNewspaper.Web.Core.Extensions.Hosting;
-using HorselessNewspaper.Web.Core.Filters.ActionFilters.Infrastructure;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.AspNetCore.OData;
-using Microsoft.AspNetCore.OData.Formatter;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.Net.Http.Headers;
-using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
-using Microsoft.AspNetCore.OData.Routing.Conventions;
-using Microsoft.AspNetCore.HttpOverrides;
-using System.Text.Json.Serialization;
-using Finbuckle.MultiTenant;
-using TheHorselessNewspaper.HostingModel.MultiTenant;
-using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST;
-using Microsoft.AspNetCore;
 using TheHorselessNewspaper.HostingModel.Context.MSSQL;
+using TheHorselessNewspaper.HostingModel.ODATA;
 
 var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(builder =>

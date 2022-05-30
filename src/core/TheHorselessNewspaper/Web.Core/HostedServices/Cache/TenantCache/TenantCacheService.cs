@@ -146,9 +146,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     // var tenantInfo = scope.ServiceProvider.GetRequiredService<HorselessTenantInfo>();
                     _logger.LogInformation("getting db query");
                     _logger.LogInformation("ensuring content db");
-                    await contentModelOperator.EnsureDbExists();
-                    var probeQuery = await contentModelOperator.Read(r => r.DisplayName.Equals("EnsureQueryWorks"));
-                    var probeResult = probeQuery.FirstOrDefault();
+                    await contentModelOperator.EnsureDbExists();                    
 
                     // should fail by here if the db schema is different
                     _logger.LogInformation("content db ensured");

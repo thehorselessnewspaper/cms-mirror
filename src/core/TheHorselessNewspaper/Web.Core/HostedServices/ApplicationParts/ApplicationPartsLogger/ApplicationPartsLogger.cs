@@ -112,7 +112,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
 
                 var viewsFeature = new ViewsFeature();
                 _partManager.PopulateFeature(viewsFeature);
- 
+
                 // update database
                 using (var scope = this._services.CreateScope())
                 {
@@ -123,45 +123,59 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
 
                     foreach (var view in viewsFeature.ViewDescriptors)
                     {
-                        var query = await viewOperator.Query(r => r.PhysicalPath.Equals(view.RelativePath));
-                        var queryResult = query.ToList();
-                        var isPreviouslyRegistered = queryResult.Any();
-
-                        if (!isPreviouslyRegistered)
+                        try
                         {
-                            // handle the case of a view that must
-                            // be added to the database
-                            var newView = new HorselessView()
-                            {
-                                Id = Guid.NewGuid(),
-                                ObjectId = Guid.NewGuid().ToString(),
-                                Name = view.GetType().Name,
-                                DisplayName = view.GetType().FullName,
-                                CreatedAt = DateTime.UtcNow,
-                                PhysicalPath = view.RelativePath,
-                                IsActive = true,
-                                Exists = true,
-                                IsDirectory = false,
-                                Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
-                            };
+                            var query = await viewOperator
+                                .Query(r => r.PhysicalPath.Equals(view.Item.Identifier)
+                            && r.DisplayName.Equals(view.Type.FullName)
+                            && r.Name.Equals(view.Type.Name));
 
-                            try
+                            var queryResult = query.ToList();
+                            var isPreviouslyRegistered = queryResult.Any();
+
+                            if (!isPreviouslyRegistered)
                             {
-                                // insert this view
-                                var insertResult = await viewOperator.Create(newView);
-                                this._logger.LogTrace($"{this.GetType().Name} is registering a new view named {newView.Name}");
+                                // handle the case of a view that must
+                                // be added to the database
+                                var newView = new HorselessView()
+                                {
+                                    Id = Guid.NewGuid(),
+                                    ObjectId = Guid.NewGuid().ToString(),
+                                    Name = view.Type.Name,
+                                    DisplayName = view.Type.FullName,
+                                    CreatedAt = DateTime.UtcNow,
+                                    PhysicalPath = view.Item.Identifier,
+                                    IsActive = true,
+                                    Exists = true,
+                                    IsDirectory = false,
+                                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
+                                };
+
+                                try
+                                {
+                                    // insert this view
+                                    var insertResult = await viewOperator.Create(newView);
+                                    this._logger.LogTrace($"{this.GetType().Name} is registering a new view named {newView.Name}");
+                                }
+                                catch (Exception e)
+                                {
+                                    // permit continue on exception 
+                                    // prbably want to emit a failed event here
+                                    this._logger.LogError($"problem registering view {e.Message}");
+                                }
                             }
-                            catch(Exception e)
-                            {
-                                // permit continue on exception 
-                                // prbably want to emit a failed event here
-                                this._logger.LogError($"problem registering view {e.Message}");
-                            }
+                        }
+                        catch (Exception e)
+                        {
+                            // permit the loop to continue on exception
+                            this._logger.LogError($"{this.GetType().FullName} had a problem updating presetation layer views in the database. exception was {e.Message}");
                         }
                     }
 
                 }
 
+                // reset the timer
+                _timer.Change(GetTimespanForSeconds(TimerDelayInSeconds), GetTimespanForSeconds(TimerDelayInSeconds));
 
             }
             catch (Exception e)
