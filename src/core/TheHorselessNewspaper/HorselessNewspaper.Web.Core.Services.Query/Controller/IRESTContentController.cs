@@ -3,9 +3,11 @@ using HorselessNewspaper.Web.Core.Services.Query.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
+using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
+
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using TheHorselessNewspaper.HostingModel.Context;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 
 namespace HorselessNewspaper.Web.Core.Services.Query.Controller
 {

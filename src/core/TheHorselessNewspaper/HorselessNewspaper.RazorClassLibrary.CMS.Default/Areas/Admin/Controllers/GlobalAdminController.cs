@@ -1,11 +1,13 @@
-﻿using HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Model;
+﻿
+using HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Model;
+using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using HorselessNewspaper.Web.Core.Services.Query.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
-using TheHorselessNewspaper.HostingModel.Entities.Query;
+using TheHorselessNewspaper.HostingModel.HostingEntities.Query;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controllers

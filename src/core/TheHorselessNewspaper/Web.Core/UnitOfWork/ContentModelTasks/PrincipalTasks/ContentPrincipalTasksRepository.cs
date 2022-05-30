@@ -5,10 +5,12 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HorselessNewspaper.Web.Core.Extensions.ClaimExtensions;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+
 namespace HorselessNewspaper.Web.Core.UnitOfWork.ContentModelTasks.PrincipalTasks
 {
     internal class ContentPrincipalTasksRepository : IContentPrincipalTasksRepository

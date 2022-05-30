@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.Context;
-using TheHorselessNewspaper.HostingModel.Entities.Query;
+
 using TheHorselessNewspaper.HostingModel.HostingEntities.Query.Extensions;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace HorselessNewspaper.SmokeTests.Repository

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 

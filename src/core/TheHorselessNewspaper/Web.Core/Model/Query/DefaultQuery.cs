@@ -17,6 +17,7 @@ namespace HorselessNewspaper.Web.Core.Model.Query
     /// </summary>
     /// <typeparam name="TCollection"></typeparam>
     /// <typeparam name="TData"></typeparam>
+    [Obsolete]
     public class DefaultQuery<TData> : IHorselessQuery<TData>
          where TData : new()
     {

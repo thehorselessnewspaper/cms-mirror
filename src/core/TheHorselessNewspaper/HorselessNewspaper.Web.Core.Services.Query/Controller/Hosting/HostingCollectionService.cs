@@ -1,6 +1,4 @@
 ﻿using Finbuckle.MultiTenant;
-using HorselessNewspaper.Web.Core.Interfaces.Hosting;
-using HorselessNewspaper.Web.Core.Model.Query.ContentCollection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,12 +7,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using TheHorselessNewspaper.HostingModel.Context;
-using TheHorselessNewspaper.HostingModel.Entities.Query;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
+using TheHorselessNewspaper.HostingModel.HostingEntities.Query;
 
-namespace HorselessNewspaper.Web.Core.Model.Query.HostingCollection
+namespace HorselessNewspaper.Web.Core.Services.Query.Controller.Hosting
 {
     /// <summary>
     /// generic interface for querying hosting model dbcontext

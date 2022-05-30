@@ -3,12 +3,9 @@ using HorselessNewspaper.Web.Core.Automapper;
 using HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.ApplicationPartsLogger;
 using HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
-using HorselessNewspaper.Web.Core.Interfaces.Hosting;
 using HorselessNewspaper.Web.Core.Middleware;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter.Strategy;
-using HorselessNewspaper.Web.Core.Model.Query.ContentCollection;
-using HorselessNewspaper.Web.Core.Model.Query.HostingCollection;
 using HorselessNewspaper.Web.Core.ScopedServices.AuthenticationSchemes;
 using HorselessNewspaper.Web.Core.ScopedServices.Contexts;
 using HorselessNewspaper.Web.Core.ScopedServices.RestClients;
@@ -29,14 +26,16 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 using Microsoft.FeatureManagement;
 using System.Text.Json.Serialization;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using HorselessNewspaper.Web.Core.Services.Query.Entities;
-using TheHorselessNewspaper.HostingModel.Entities.Query;
+
 using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
 using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
+using HorselessNewspaper.Web.Core.Services.Query.Controller.Hosting;
+using TheHorselessNewspaper.HostingModel.ODATA;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -293,7 +292,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
          HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Principal>, HostingEntities.Principal>>();
 
             serviceBuilder.Services.AddTransient<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessControlEntry>, HostingEntities.AccessControlEntry>,
-HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessControlEntry>, HostingEntities.AccessControlEntry>>();
+                HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessControlEntry>, HostingEntities.AccessControlEntry>>();
 
             serviceBuilder.Services.AddTransient<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.TenantInfo>, HostingEntities.TenantInfo>,
                      HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.TenantInfo>, HostingEntities.TenantInfo>>();
@@ -332,7 +331,7 @@ HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessCo
             // validate that this needs to be a singleton
             // as it's gating every request
             serviceBuilder.Services.AddScoped<HorselessRouteTransformer>();
-            
+
             // obsolete
             // serviceBuilder.Services.AddScoped<HorselessTenantSetupMiddleware>();
 

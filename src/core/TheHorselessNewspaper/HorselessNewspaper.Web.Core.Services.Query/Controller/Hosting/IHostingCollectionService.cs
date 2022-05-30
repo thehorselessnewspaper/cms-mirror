@@ -5,10 +5,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using TheHorselessNewspaper.HostingModel.Context;
-using TheHorselessNewspaper.HostingModel.Entities.Query;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
+using TheHorselessNewspaper.HostingModel.HostingEntities.Query;
 
 namespace HorselessNewspaper.Web.Core.Services.Query.Controller.Hosting
 {

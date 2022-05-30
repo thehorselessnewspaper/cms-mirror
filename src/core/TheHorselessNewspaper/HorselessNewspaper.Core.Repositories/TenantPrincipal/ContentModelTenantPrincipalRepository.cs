@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
-using TheHorselessNewspaper.HostingModel.Entities.Query;
+
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using System.Security.Claims;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using TheHorselessNewspaper.HostingModel.HostingEntities.Query;
 
 namespace HorselessNewspaper.Core.Repositories.TenantPrincipal
 {

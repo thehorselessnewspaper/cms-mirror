@@ -10,8 +10,6 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Net.Http.Headers;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
-using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
-using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
 using Microsoft.AspNetCore.OData.Routing.Conventions;
 using Microsoft.AspNetCore.HttpOverrides;
 using System.Text.Json.Serialization;
@@ -19,6 +17,7 @@ using Finbuckle.MultiTenant;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
 using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST;
 using Microsoft.AspNetCore;
+using TheHorselessNewspaper.HostingModel.Context.MSSQL;
 
 var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(builder =>

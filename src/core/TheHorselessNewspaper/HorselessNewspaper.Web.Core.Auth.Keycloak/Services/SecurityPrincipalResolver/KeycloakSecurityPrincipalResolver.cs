@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HorselessNewspaper.Web.Core.Extensions.ClaimExtensions;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
 using Microsoft.Extensions.Logging;
@@ -18,6 +18,7 @@ using HorselessNewspaper.Core.Interfaces.Model.HttpContextFeatureModels;
 using HorselessNewspaper.Web.Core.Model.HttpContextFeatures;
 using HorselessNewspaper.Web.Core.Extensions.HttpRequestExtensions;
 using System.Collections.Concurrent;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 
 namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalResolver
 {

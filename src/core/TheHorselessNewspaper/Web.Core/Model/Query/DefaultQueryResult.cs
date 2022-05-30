@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace HorselessNewspaper.Web.Core.Model.Query
 {
+    [Obsolete]
+
     public class DefaultQueryResult<TPayload> : IHorselessQueryResult<TPayload> where TPayload : new()
     {
         public string ETag { get; set; }

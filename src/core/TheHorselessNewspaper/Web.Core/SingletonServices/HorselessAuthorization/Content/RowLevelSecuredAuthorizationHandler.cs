@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
+
 
 namespace HorselessNewspaper.Web.Core.SingletonServices.HorselessAuthorization.Content
 {

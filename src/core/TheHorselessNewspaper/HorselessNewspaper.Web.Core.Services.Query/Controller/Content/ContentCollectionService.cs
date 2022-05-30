@@ -1,15 +1,11 @@
 ﻿using Finbuckle.MultiTenant;
-using HorselessNewspaper.Web.Core.Services.Query.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
-using TheHorselessNewspaper.HostingModel.Context;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
-using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using Microsoft.Extensions.Logging;
 using System.Linq.Expressions;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using TheHorselessNewspaper.HostingModel.Context;
 
-namespace HorselessNewspaper.Web.Core.Model.Query.ContentCollection
+namespace HorselessNewspaper.Web.Core.Services.Query.Controller.Content
 {
     /// <summary>
     /// suitable for injection into controllers
@@ -17,7 +13,7 @@ namespace HorselessNewspaper.Web.Core.Model.Query.ContentCollection
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="Entity"></typeparam>
     public class ContentCollectionService<T, Entity> : IContentCollectionService<T, Entity>
-        where T : class, IQueryableContentModelOperator<Entity>, IQueryableModelOperator<Entity>
+        where T : class , IQueryableContentModelOperator<Entity>, IQueryableModelOperator<Entity>
         where Entity : class, IContentRowLevelSecured
     {
         private IQueryableContentModelOperator<Entity> _contentModelService;
@@ -114,5 +110,13 @@ namespace HorselessNewspaper.Web.Core.Model.Query.ContentCollection
 
             return result;
         }
+
+        public async Task<IQueryable<U>> ReadFilterByMetaData<U>(Expression<Func<U, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1) where U : class, IContentRowLevelSecured, IQueryableMetaDataModelEntity
+        {
+            var result = await _contentModelService.ReadFilterByMetaData(query, includeClauses, pageSize, pageNumber, pageCount);
+
+            return result;
+        }
+
     }
 }

@@ -12,8 +12,8 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using Xunit;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
-using TheHorselessNewspaper.HostingModel.Entities.Query;
+using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
+
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using HorselessNewspaper.Web.Core.Model.Security;

@@ -3,7 +3,7 @@ using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST
 using HorselessNewspaper.Web.Core.Services.Query.Controller.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TheHorselessNewspaper.HostingModel.Entities.Query;
+
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using HorselessNewspaper.Web.Core.Services.Query.Controller;

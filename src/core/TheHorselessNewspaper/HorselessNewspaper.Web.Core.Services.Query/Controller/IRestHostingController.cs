@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.Context;
-using TheHorselessNewspaper.HostingModel.Entities.Query;
+
 using HorselessNewspaper.Web.Core.Services.Query.Controller.Hosting;
 
 namespace HorselessNewspaper.Web.Core.Services.Query.Controller

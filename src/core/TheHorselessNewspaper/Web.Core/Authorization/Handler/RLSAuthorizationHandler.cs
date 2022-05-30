@@ -5,14 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
+
 using Microsoft.Extensions.Logging;
 using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
 using Microsoft.AspNetCore.Http;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using HorselessNewspaper.Web.Core.Extensions.ClaimExtensions;
 using HorselessNewspaper.Web.Core.Authorization.Model;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using TheHorselessNewspaper.HostingModel.Context;
 
 namespace HorselessNewspaper.Web.Core.Authorization.Handler
 {

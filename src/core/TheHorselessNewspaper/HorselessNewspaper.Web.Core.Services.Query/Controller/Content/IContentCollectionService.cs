@@ -6,11 +6,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using TheHorselessNewspaper.HostingModel.Context;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 
-namespace HorselessNewspaper.Web.Core.Services.Query.Entities
+namespace HorselessNewspaper.Web.Core.Services.Query.Controller.Content
 {
     /// <summary>
     /// web wrapper for entity framework query services
@@ -28,6 +28,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.Entities
         Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class;
         public Task<IQueryable<Entity>> Query(int pageSize = 10, int pageNumber = 1, int pageCount = 1);
         Task<IQueryable<Entity>> Query(Expression<Func<Entity, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1);
+        Task<IQueryable<U>> ReadFilterByMetaData<U>(Expression<Func<U, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1) where U : class, IContentRowLevelSecured, IQueryableMetaDataModelEntity;
         public Task<Entity> Update([FromBody] Entity contentCollection, List<string> targetProperties = null);
     }
 }

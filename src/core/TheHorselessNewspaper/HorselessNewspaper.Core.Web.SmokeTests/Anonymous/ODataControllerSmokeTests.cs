@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using Xunit;
 using TheHorselessNewspaper.HostingModel.DTO;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using Microsoft.Extensions.DependencyInjection;
 using Finbuckle.MultiTenant;
 using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
