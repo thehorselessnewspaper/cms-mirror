@@ -412,7 +412,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
                         .Expand()
                         .Filter()
                         .OrderBy()
-                        .SetMaxTop(100)
+                        .SetMaxTop(1000)
                         .Count();
 
                         options.TimeZone = TimeZoneInfo.Utc;
@@ -432,7 +432,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
                         .Expand()
                         .Filter()
                         .OrderBy()
-                        .SetMaxTop(100)
+                        .SetMaxTop(1000)
                         .Count();
 
                         options.TimeZone = TimeZoneInfo.Utc;

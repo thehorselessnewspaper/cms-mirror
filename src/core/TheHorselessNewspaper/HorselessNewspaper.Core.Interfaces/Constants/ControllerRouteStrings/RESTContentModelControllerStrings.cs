@@ -17,7 +17,12 @@ namespace HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings
         public const string API_HORSELESSCONTENTMODEL_HOLONYM = "api/HorselessContentModel/Holonym";
         public const string API_HORSELESSCONTENTMODEL_HorselessContent = "api/HorselessContentModel/HorselessContent";
         public const string API_HORSELESSCONTENTMODEL_HORSELESSSESSION = "api/HorselessContentModel/HorselessSession";
+        public const string API_HORSELESSCONTENTMODEL_HORSELESSVIEW = "api/HorselessContentModel/HorselessView";
+        public const string API_HORSELESSCONTENTMODEL_PUBLICATION = "api/HorselessContentModel/Publication";
+        public const string API_HORSELESSCONTENTMODEL_NUGEPACKAGE = "api/HorselessContentModel/NugetPackage";
         public const string API_HORSELESSCONTENTMODEL_JSONASSET = "api/HorselessContentModel/JSONAsset";
+        public const string API_HORSELESSCONTENTMODEL_Principal = "api/HorselessContentModel/Principal";
+        public const string API_HORSELESSCONTENTMODEL_AccessControlEntry = "api/HorselessContentModel/AccessControlEntry";
         public const string API_HORSELESSCONTENTMODEL_MERONYM = "api/HorselessContentModel/Meronym";
         public const string API_HORSELESSCONTENTMODEL_MIMETYPE = "api/HorselessContentModel/MIMEType";
         public const string API_HORSELESSCONTENTMODEL_NAVIGATIONMENUITEM = "api/HorselessContentModel/NavigationMenuItem";
