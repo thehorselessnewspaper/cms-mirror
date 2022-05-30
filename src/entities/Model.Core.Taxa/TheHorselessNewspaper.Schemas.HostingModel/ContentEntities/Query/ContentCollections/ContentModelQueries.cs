@@ -10,7 +10,6 @@ using System.Reflection;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query.Extensions;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollections
 {

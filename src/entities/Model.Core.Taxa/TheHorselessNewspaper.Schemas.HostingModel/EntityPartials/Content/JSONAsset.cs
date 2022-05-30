@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using TheHorselessNewspaper.HostingModel.Context;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {

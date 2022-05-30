@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.Context;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {

@@ -2,11 +2,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TheHorselessNewspaper.HostingModel.Context;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    
+
     [MultiTenant]
     public partial class HorselessContent : IContentRowLevelSecured
     {

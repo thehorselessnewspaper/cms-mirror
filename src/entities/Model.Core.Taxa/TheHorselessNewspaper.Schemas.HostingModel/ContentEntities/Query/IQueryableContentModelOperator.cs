@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.Context;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
 
 namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query
 {

@@ -1,6 +1,6 @@
-﻿namespace TheHorselessNewspaper.Schemas.HostingModel.DTO
+﻿namespace TheHorselessNewspaper.HostingModel.DTO
 {
-    public class KeyCloakConfigurationDTO 
+    public class KeyCloakConfigurationDTO
     {
         public KeyCloakConfigurationDTO()
         {

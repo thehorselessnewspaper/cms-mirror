@@ -1,6 +1,6 @@
 ﻿using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
-namespace TheHorselessNewspaper.Schemas.HostingModel.DTO
+namespace TheHorselessNewspaper.HostingModel.DTO
 {
     public class FilesystemAssetLocationDTO
     {

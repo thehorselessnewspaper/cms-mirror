@@ -4,12 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 
-namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
+namespace TheHorselessNewspaper.HostingModel.Context.MSSQL
 {
     /// <summary>
     /// support polymorphic database interaction
@@ -25,13 +24,13 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         private IServiceProvider serviceProvider;
         private ILogger<MSSqlContentContext> logger;
         public DbSet<TenantIdentifierStrategyContainer> TenantIdentifierStrategyContainers { get; set; }
-        public MSSqlContentContext(DbContextOptions<MSSqlContentContext> options, ILogger<MSSqlContentContext> logger,  IServiceProvider serviceProvider, Finbuckle.MultiTenant.ITenantInfo tenant, IConfiguration config) : base(options)
+        public MSSqlContentContext(DbContextOptions<MSSqlContentContext> options, ILogger<MSSqlContentContext> logger, IServiceProvider serviceProvider, ITenantInfo tenant, IConfiguration config) : base(options)
         {
-            this.TenantInfo = tenant;
-            this._configuration = config;
+            TenantInfo = tenant;
+            _configuration = config;
             this.serviceProvider = serviceProvider;
             this.logger = logger;
-            this.SqlDialect = DatabaseServerFamily.IsSQLServer;
+            SqlDialect = DatabaseServerFamily.IsSQLServer;
 
         }
 
@@ -49,9 +48,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
         public async Task<ITenantInfo> ResolveTenant()
         {
 
-            if (this.TenantInfo == null)
+            if (TenantInfo == null)
             {
-                this.logger.LogWarning($"{this.GetType().Name} is handling a null tenant context");
+                logger.LogWarning($"{GetType().Name} is handling a null tenant context");
 
                 var tenant = new HorselessTenantInfo();
                 // here TTenatInfo is the type of your custom tenant info object
@@ -67,13 +66,13 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
                         var identifier = await s.GetIdentifierAsync("randomtextstrategymatcher");
                         if (identifier != null)
                         {
-                            logger.LogInformation($"{this.GetType().Name} resolved a tenant with the multitenant strategy");
+                            logger.LogInformation($"{GetType().Name} resolved a tenant with the multitenant strategy");
 
                             var allResult = await resolver.Stores.First().GetAllAsync();
                             var filtered = allResult.Where(w => w.Identifier.Equals(identifier)).First();
                             logger.LogInformation("resolved tenant");
-                            this.TenantInfo = filtered as ITenantInfo;
-                            return this.TenantInfo;
+                            TenantInfo = filtered as ITenantInfo;
+                            return TenantInfo;
                         }
                         else
                         {
@@ -88,29 +87,29 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
             }
             else
             {
-                this.logger.LogTrace($"{this.GetType().Name} is handling a previously initialized tenant context");
+                logger.LogTrace($"{GetType().Name} is handling a previously initialized tenant context");
             }
 
-            return this.TenantInfo;
+            return TenantInfo;
 
         }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
-  
-            this.TenantMismatchMode = TenantMismatchMode.Overwrite;
-            this.TenantNotSetMode = TenantNotSetMode.Overwrite;
+
+            TenantMismatchMode = TenantMismatchMode.Overwrite;
+            TenantNotSetMode = TenantNotSetMode.Overwrite;
             this.EnforceMultiTenant();
             return base.SaveChanges(acceptAllChangesOnSuccess);
         }
 
         public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
 
-            await this.ResolveTenant();
-            this.TenantMismatchMode = TenantMismatchMode.Overwrite;
-            this.TenantNotSetMode = TenantNotSetMode.Overwrite;
+            await ResolveTenant();
+            TenantMismatchMode = TenantMismatchMode.Overwrite;
+            TenantNotSetMode = TenantNotSetMode.Overwrite;
             this.EnforceMultiTenant();
             return await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
@@ -141,7 +140,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+
         }
     }
 

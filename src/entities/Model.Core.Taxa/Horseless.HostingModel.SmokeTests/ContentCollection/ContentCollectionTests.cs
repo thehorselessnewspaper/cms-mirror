@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 // using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using TheHorselessNewspaper.Schemas.HostingModel.Context;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query.Extensions;
+using TheHorselessNewspaper.HostingModel.Context;
 // using TheHorselessNewspaper.HostingModel.Entities.Query;
 
 namespace Horseless.HostingModel.SmokeTests.ContentCollection

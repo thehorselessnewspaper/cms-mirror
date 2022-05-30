@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
-using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
 
 namespace TheHorselessNewspaper.HostingModel.Context.Design
 {

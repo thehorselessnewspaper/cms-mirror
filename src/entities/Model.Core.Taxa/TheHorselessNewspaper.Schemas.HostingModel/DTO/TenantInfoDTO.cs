@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TheHorselessNewspaper.Schemas.HostingModel.DTO
+namespace TheHorselessNewspaper.HostingModel.DTO
 {
     public partial class TenantInfoDTO
     {
