@@ -11939,6 +11939,10 @@
               "$ref": "#/components/schemas/ContentEntitiesPublication"
             },
             "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -12055,6 +12059,10 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -12124,6 +12132,10 @@
           "UpdatedAt": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -12197,6 +12209,10 @@
           "UpdatedAt": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -12292,6 +12308,10 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -12370,6 +12390,10 @@
           "UpdatedAt": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -12460,6 +12484,10 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -12526,6 +12554,18 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "JsonObject": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/NodesJsonNode"
+            },
+            "nullable": true,
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -12587,6 +12627,10 @@
           "UpdatedAt": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -12653,6 +12697,10 @@
           "UpdatedAt": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -12752,6 +12800,10 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -12849,6 +12901,10 @@
           "UpdatedAt": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -12972,6 +13028,10 @@
           "UpdatedAt": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -13162,6 +13222,10 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -13249,6 +13313,10 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -13321,6 +13389,10 @@
           "UpdatedAt": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -13400,6 +13472,18 @@
           "UpdatedAt": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "MetaData": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesJSONAsset"
+            },
+            "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -13557,6 +13641,10 @@
             "format": "date-time",
             "nullable": true
           },
+          "DictionaryKey": {
+            "type": "string",
+            "nullable": true
+          },
           "Id": {
             "type": "string",
             "format": "uuid"
@@ -13651,6 +13739,10 @@
             "format": "date-time",
             "nullable": true
           },
+          "DictionaryKey": {
+            "type": "string",
+            "nullable": true
+          },
           "Id": {
             "type": "string",
             "format": "uuid"
@@ -13718,6 +13810,10 @@
           "UpdatedAt": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
             "nullable": true
           },
           "Id": {
@@ -13830,6 +13926,10 @@
           "UpdatedAt": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
             "nullable": true
           },
           "Id": {
@@ -13991,6 +14091,10 @@
             "format": "date-time",
             "nullable": true
           },
+          "DictionaryKey": {
+            "type": "string",
+            "nullable": true
+          },
           "Id": {
             "type": "string",
             "format": "uuid"
@@ -14070,6 +14174,10 @@
           "UpdatedAt": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
             "nullable": true
           },
           "Id": {
@@ -14168,6 +14276,30 @@
           }
         },
         "additionalProperties": { }
+      },
+      "NodesJsonNode": {
+        "type": "object",
+        "properties": {
+          "Options": {
+            "$ref": "#/components/schemas/NodesJsonNodeOptions"
+          },
+          "Parent": {
+            "$ref": "#/components/schemas/NodesJsonNode"
+          },
+          "Root": {
+            "$ref": "#/components/schemas/NodesJsonNode"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NodesJsonNodeOptions": {
+        "type": "object",
+        "properties": {
+          "PropertyNameCaseInsensitive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
       },
       "SecurityRestClientConfiguration": {
         "type": "object",
