@@ -9,8 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { ContentEntitiesAccessControlEntry } from './contentEntitiesAccessControlEntry';
 import { ContentEntitiesContentCollection } from './contentEntitiesContentCollection';
 import { ContentEntitiesTaxon } from './contentEntitiesTaxon';
+import { ContentEntitiesPrincipal } from './contentEntitiesPrincipal';
 
 
 export interface ContentEntitiesTaxonomy { 
@@ -23,5 +25,10 @@ export interface ContentEntitiesTaxonomy {
     JsonSchema?: string | null;
     ContentCollections?: Array<ContentEntitiesContentCollection> | null;
     Taxons?: Array<ContentEntitiesTaxon> | null;
+    AccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
+    Owners?: Array<ContentEntitiesPrincipal> | null;
+    Timestamp?: string | null;
+    UpdatedAt?: string | null;
+    DictionaryKey?: string | null;
 }
 

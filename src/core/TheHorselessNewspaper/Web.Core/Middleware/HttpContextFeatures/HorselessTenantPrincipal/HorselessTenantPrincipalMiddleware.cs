@@ -61,20 +61,27 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
                     if (isFunctionalTenantResolver)
                     {
                         var ensuredTenant = await securityPrincipalResolver.EnsureTenant();
-                        _logger.LogInformation($"tenant ensured");
-                        context.Features.Set<Tenant>((ensuredTenant));
-                        _logger.LogInformation($"httpcontext tenant feature initialized");
-                        hasEnsuredTenant = true;
+                        if (ensuredTenant != null)
+                        {
+                            _logger.LogInformation($"tenant ensured");
+                            context.Features.Set<Tenant>((ensuredTenant));
+                            _logger.LogInformation($"httpcontext tenant feature initialized");
+                            hasEnsuredTenant = true;
+                        }
                     }
                     else
                     {
                         _logger.LogWarning("tenant resolver not ready");
-                        var ensuredTenant = await securityPrincipalResolver.EnsureTenant();
-                        _logger.LogInformation($"tenant ensured for tenant identifier {ensuredTenant.TenantIdentifier}");
 
-                        // try to initialize the feature again
-                        context.Features.Set<Tenant>((ensuredTenant));
-                        _logger.LogInformation($"httpcontext tenant feature initialized");
+                        var ensuredTenant = await securityPrincipalResolver.EnsureTenant();
+                        if (ensuredTenant != null)
+                        {
+                            _logger.LogInformation($"tenant ensured for tenant identifier {ensuredTenant.TenantIdentifier}");
+
+                            // try to initialize the feature again
+                            context.Features.Set<Tenant>((ensuredTenant));
+                            _logger.LogInformation($"httpcontext tenant feature initialized");
+                        }
                     }
                 }
                 catch (Exception e)
@@ -91,10 +98,12 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
                     {
                         _logger.LogInformation("preparing HttpRequest.Feature.Principal");
                         var currentPrincipal = await securityPrincipalResolver.GetCurrentPrincipal();
-
-                        context.Features.Set<Principal>((currentPrincipal));
-                        _logger.LogInformation($"principal feature set for UPN: {currentPrincipal.UPN}");
-                        hasEnsuredPrincipal = true;
+                        if (currentPrincipal != null)
+                        {
+                            context.Features.Set<Principal>((currentPrincipal));
+                            _logger.LogInformation($"principal feature set for UPN: {currentPrincipal.UPN}");
+                            hasEnsuredPrincipal = true;
+                        }
                     }
                     else
                     {
@@ -137,8 +146,14 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
                 _logger.LogError($"problem initializing horseless tenant principal {e.Message}");
             }
 
-            await _next(context);
-
+            try
+            {
+                await _next(context);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"{this.GetType().FullName} middleware pipeline exception: {e.Message}");
+            }
         }
     }
 

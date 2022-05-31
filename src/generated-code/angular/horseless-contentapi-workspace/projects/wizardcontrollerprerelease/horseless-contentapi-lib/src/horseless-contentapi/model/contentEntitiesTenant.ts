@@ -13,6 +13,7 @@ import { ContentEntitiesAccessControlEntry } from './contentEntitiesAccessContro
 import { ContentEntitiesContentCollection } from './contentEntitiesContentCollection';
 import { ContentEntitiesTenantIdentifierStrategy } from './contentEntitiesTenantIdentifierStrategy';
 import { ContentEntitiesPrincipal } from './contentEntitiesPrincipal';
+import { ContentEntitiesJSONAsset } from './contentEntitiesJSONAsset';
 
 
 export interface ContentEntitiesTenant { 
@@ -31,5 +32,7 @@ export interface ContentEntitiesTenant {
     TenantIdentifier?: string | null;
     Timestamp?: string | null;
     UpdatedAt?: string | null;
+    MetaData?: Set<ContentEntitiesJSONAsset> | null;
+    DictionaryKey?: string | null;
 }
 

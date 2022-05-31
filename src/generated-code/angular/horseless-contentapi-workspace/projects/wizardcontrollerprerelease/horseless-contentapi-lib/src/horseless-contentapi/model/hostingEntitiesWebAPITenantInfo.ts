@@ -19,6 +19,7 @@ export interface HostingEntitiesWebAPITenantInfo {
     Owners?: Array<HostingEntitiesPrincipal> | null;
     Timestamp?: string | null;
     UpdatedAt?: string | null;
+    DictionaryKey?: string | null;
     Id?: string;
     DisplayName?: string | null;
     ObjectId?: string | null;

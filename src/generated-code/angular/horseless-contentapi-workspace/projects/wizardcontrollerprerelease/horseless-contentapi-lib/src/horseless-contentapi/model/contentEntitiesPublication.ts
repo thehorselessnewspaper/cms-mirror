@@ -26,11 +26,12 @@ export interface ContentEntitiesPublication {
     PublishedURL?: string | null;
     PreviewURL?: string | null;
     ContentCollections?: Array<ContentEntitiesContentCollection> | null;
+    PublicationChildrens?: Array<ContentEntitiesPublication> | null;
     PublicationParents?: Array<ContentEntitiesPublication> | null;
-    PublicationsChildren?: Array<ContentEntitiesPublication> | null;
     AccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
     Owners?: Array<ContentEntitiesPrincipal> | null;
     Timestamp?: string | null;
     UpdatedAt?: string | null;
+    DictionaryKey?: string | null;
 }
 

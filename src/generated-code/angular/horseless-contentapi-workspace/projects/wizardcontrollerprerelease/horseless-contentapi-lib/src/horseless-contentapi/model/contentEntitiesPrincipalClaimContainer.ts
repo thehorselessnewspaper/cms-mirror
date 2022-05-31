@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { ContentEntitiesAccessControlEntry } from './contentEntitiesAccessControlEntry';
 import { ContentEntitiesPrincipalClaim } from './contentEntitiesPrincipalClaim';
 import { ContentEntitiesPrincipal } from './contentEntitiesPrincipal';
 
@@ -20,5 +21,7 @@ export interface ContentEntitiesPrincipalClaimContainer {
     PrincipalClaim?: Array<ContentEntitiesPrincipalClaim> | null;
     PrincipalId?: string | null;
     Principal?: ContentEntitiesPrincipal;
+    AccessControlEntries?: Array<ContentEntitiesAccessControlEntry> | null;
+    Owners?: Array<ContentEntitiesPrincipal> | null;
 }
 

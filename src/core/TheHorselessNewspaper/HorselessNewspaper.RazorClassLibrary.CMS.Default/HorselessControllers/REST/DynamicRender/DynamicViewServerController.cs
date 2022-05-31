@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.AssetUploadControllers.ActionFilters;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.DynamicRender
 {
@@ -21,8 +22,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
     /// page composition via rest retrieval of views
     /// </summary>
 
-    [Route("/")]
+    [Route("{__tenant__}/api/[controller]")]
     [ApiExplorerSettings(IgnoreApi = false)]
+    [GenerateAntiforgeryTokenCookie]
     public class DynamicViewServerController : Controller
     {
         private IContentCollectionService<IQueryableContentModelOperator<HorselessView>, HorselessView> _horselessViewOperator { get; set; }
@@ -70,11 +72,31 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [HttpGet("GetDynamicView", Name = "Presentation[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(PartialViewResult))]
         [Produces("text/html")]
-        public IActionResult GetDynamicView([FromHeader] string viewName, [FromHeader] Guid? parentContentCollectionObjectId)
+        public async Task<PartialViewResult> GetDynamicView([FromHeader] string viewPhysicalPath, [FromHeader] Guid? parentContentCollectionObjectId)
         {
-            return View(viewName);
+            PartialViewResult result = new PartialViewResult();
+
+            try
+            {
+                // try to find the view in the database
+                var query = await _horselessViewOperator.Query(v => v.PhysicalPath.Contains(viewPhysicalPath));
+                var queryResult = query.ToList();
+
+                var hasView = query.Any();
+                if (hasView)
+                {
+                    result = PartialView(queryResult.First().PhysicalPath, queryResult.First());
+                }
+
+            }
+            catch (Exception e)
+            {
+                this._logger.LogError($"{this.GetType().FullName} had problems serving requested partial view: {e.Message}");
+            }
+
+            return result;
         }
     }
 }

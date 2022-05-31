@@ -23,6 +23,7 @@ export interface HostingEntitiesTenantInfo {
     ParentTenantId?: string | null;
     ParentTenant?: HostingEntitiesTenant;
     UpdatedAt?: string | null;
+    DictionaryKey?: string | null;
     Id?: string;
     DisplayName?: string | null;
     ObjectId?: string | null;

@@ -11,8 +11,12 @@
  */
 import { ContentEntitiesACEPermissionScope } from './contentEntitiesACEPermissionScope';
 import { ContentEntitiesACEPermissionType } from './contentEntitiesACEPermissionType';
+import { ContentEntitiesHorselessView } from './contentEntitiesHorselessView';
+import { ContentEntitiesContentCollection } from './contentEntitiesContentCollection';
 import { ContentEntitiesHorselessSession } from './contentEntitiesHorselessSession';
 import { ContentEntitiesACEPermission } from './contentEntitiesACEPermission';
+import { ContentEntitiesHorselessContent } from './contentEntitiesHorselessContent';
+import { ContentEntitiesPublication } from './contentEntitiesPublication';
 import { ContentEntitiesPrincipal } from './contentEntitiesPrincipal';
 import { ContentEntitiesTenant } from './contentEntitiesTenant';
 
@@ -35,5 +39,10 @@ export interface ContentEntitiesAccessControlEntry {
     PermissionType?: ContentEntitiesACEPermissionType;
     Timestamp?: string | null;
     UpdatedAt?: string | null;
+    ManagedContentCollections?: Array<ContentEntitiesContentCollection> | null;
+    ManagedHorselessContents?: Array<ContentEntitiesHorselessContent> | null;
+    ManagedHorselessViews?: Array<ContentEntitiesHorselessView> | null;
+    ManagedPublications?: Array<ContentEntitiesPublication> | null;
+    DictionaryKey?: string | null;
 }
 

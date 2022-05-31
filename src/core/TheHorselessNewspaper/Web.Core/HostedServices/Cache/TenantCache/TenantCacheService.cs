@@ -121,8 +121,6 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             try
             {
                 _logger.LogInformation("tenant cache service is running");
-                await EnsurePhysicalDatabases();
-                //_logger.LogInformation("databases ensured.");
             }
             catch (Exception e)
             {
@@ -146,17 +144,17 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     // var tenantInfo = scope.ServiceProvider.GetRequiredService<HorselessTenantInfo>();
                     _logger.LogInformation("getting db query");
                     _logger.LogInformation("ensuring content db");
-                    await contentModelOperator.EnsureDbExists();
+                    // await contentModelOperator.EnsureDbExists();
 
                     var probeQuery =  await contentModelOperator.ReadAsEnumerable(r => r.ObjectId != null && r.ObjectId.Equals("EnsureQueryWorks"));
-                    var probeResult = probeQuery.Any();
+                    var probeResult = probeQuery?.ToList<ContentModel.Tenant>();
 
 
                     var hostingModelOperator = GetQueryForHostingEntity<HostingModel.Tenant>(scope);
-                    await hostingModelOperator.EnsureDbExists();
+                    // await hostingModelOperator.EnsureDbExists();
 
                     var hostingProbeQuery = await hostingModelOperator.ReadAsEnumerable(r => r.ObjectId != null && r.ObjectId.Equals("EnsureQueryWorks"));
-                    var hostingProbeResult = hostingProbeQuery.Any();
+                    var hostingProbeResult = hostingProbeQuery?.ToList<HostingModel.Tenant>();
 
                     // should fail by here if the db schema is different
                     _logger.LogInformation("content db ensured");
@@ -184,8 +182,12 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 {
                     await hostingModelOperator.EnsureDbExists();
 
-                    var probeQuery = await hostingModelOperator.Read(r => r.DisplayName.Equals("probetext"));
-                    var probeQueryResult = probeQuery.First();
+                    var probeQuery = await hostingModelOperator.ReadAsEnumerable(r => r.DisplayName.Equals("probetext"));
+                    if (probeQuery != null)
+                    {
+                        // todo implement a more robust probe
+                        var probeQueryResult = probeQuery.ToList();
+                    }
                 }
                 catch (Exception e)
                 {

@@ -33,5 +33,6 @@ export interface ContentEntitiesNavigationMenu {
     Owners?: Array<ContentEntitiesPrincipal> | null;
     Timestamp?: string | null;
     UpdatedAt?: string | null;
+    DictionaryKey?: string | null;
 }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.OData.Edm;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
@@ -6,6 +7,11 @@ namespace TheHorselessNewspaper.HostingModel.ODATA
 {
     public class HorselessOdataModel
     {
+        public HorselessOdataModel() { }
+        public HorselessOdataModel(ILogger<HorselessOdataModel> logger)
+        {
+
+        }
 
         private Type[] GetTypesInNamespace(System.Reflection.Assembly assembly, string nameSpace)
         {
@@ -35,7 +41,6 @@ namespace TheHorselessNewspaper.HostingModel.ODATA
                 EntityTypeConfiguration entityType = builder.AddEntityType(item);
                 entityType.HasKey(item.GetProperty("Id"));
                 builder.AddEntitySet(item.Name, entityType);
-
             }
 
             builder.ContainerName = "ContentEntities";
