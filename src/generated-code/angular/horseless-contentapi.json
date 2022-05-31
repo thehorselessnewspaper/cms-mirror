@@ -1923,7 +1923,7 @@
         }
       }
     },
-    "/GetDynamicView": {
+    "/{__tenant__}/api/DynamicViewServer/GetDynamicView": {
       "get": {
         "tags": [
           "DynamicViewServer"
@@ -1944,6 +1944,14 @@
               "type": "string",
               "format": "uuid"
             }
+          },
+          {
+            "name": "__tenant__",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -1954,7 +1962,14 @@
             "description": "Not Found"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "$ref": "#/components/schemas/MvcPartialViewResult"
+                }
+              }
+            }
           }
         }
       }
@@ -18702,6 +18717,42 @@
         },
         "additionalProperties": false
       },
+      "MvcPartialViewResult": {
+        "type": "object",
+        "properties": {
+          "StatusCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ViewName": {
+            "type": "string",
+            "nullable": true
+          },
+          "Model": {
+            "nullable": true,
+            "readOnly": true
+          },
+          "ViewData": {
+            "type": "object",
+            "additionalProperties": { },
+            "nullable": true
+          },
+          "TempData": {
+            "type": "object",
+            "additionalProperties": { },
+            "nullable": true
+          },
+          "ViewEngine": {
+            "$ref": "#/components/schemas/ViewEnginesIViewEngine"
+          },
+          "ContentType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "MvcProblemDetails": {
         "type": "object",
         "properties": {
@@ -18776,6 +18827,10 @@
             "nullable": true
           }
         },
+        "additionalProperties": false
+      },
+      "ViewEnginesIViewEngine": {
+        "type": "object",
         "additionalProperties": false
       }
     }

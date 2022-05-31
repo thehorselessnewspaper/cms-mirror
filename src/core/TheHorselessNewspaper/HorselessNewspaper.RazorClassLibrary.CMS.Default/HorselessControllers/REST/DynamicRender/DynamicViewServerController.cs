@@ -21,7 +21,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
     /// page composition via rest retrieval of views
     /// </summary>
 
-    [Route("{__tenant__}/api/[controller]/[action]")]
+    [Route("{__tenant__}/api/[controller]")]
     [ApiExplorerSettings(IgnoreApi = false)]
     public class DynamicViewServerController : Controller
     {
@@ -70,9 +70,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [HttpGet("GetDynamicView", Name = "Presentation[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(ActionResult<PartialViewResult>))]
+        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(PartialViewResult))]
         [Produces("text/html")]
-        public async Task<ActionResult<PartialViewResult>> GetDynamicView([FromHeader] string viewName, [FromHeader] Guid? parentContentCollectionObjectId)
+        public async Task<PartialViewResult> GetDynamicView([FromHeader] string viewName, [FromHeader] Guid? parentContentCollectionObjectId)
         {
             PartialViewResult result = new PartialViewResult();
 
@@ -85,7 +85,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
                 var hasView = query.Any();
                 if (hasView)
                 {
-                    result = PartialView(viewName, queryResult.First());
+                    result = PartialView(queryResult.First().PhysicalPath, queryResult.First());
                 }
 
             }

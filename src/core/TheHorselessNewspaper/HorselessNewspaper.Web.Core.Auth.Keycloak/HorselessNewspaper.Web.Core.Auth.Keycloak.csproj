@@ -28,7 +28,7 @@
 		<PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.5" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.5" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220530.10" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220530.12" />
 	</ItemGroup>
 
 </Project>

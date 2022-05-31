@@ -182,8 +182,12 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 {
                     await hostingModelOperator.EnsureDbExists();
 
-                    var probeQuery = await hostingModelOperator.Read(r => r.DisplayName.Equals("probetext"));
-                    var probeQueryResult = probeQuery.First();
+                    var probeQuery = await hostingModelOperator.ReadAsEnumerable(r => r.DisplayName.Equals("probetext"));
+                    if (probeQuery != null)
+                    {
+                        // todo implement a more robust probe
+                        var probeQueryResult = probeQuery.ToList();
+                    }
                 }
                 catch (Exception e)
                 {

@@ -146,8 +146,14 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
                 _logger.LogError($"problem initializing horseless tenant principal {e.Message}");
             }
 
-            await _next(context);
-
+            try
+            {
+                await _next(context);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"{this.GetType().FullName} middleware pipeline exception: {e.Message}");
+            }
         }
     }
 

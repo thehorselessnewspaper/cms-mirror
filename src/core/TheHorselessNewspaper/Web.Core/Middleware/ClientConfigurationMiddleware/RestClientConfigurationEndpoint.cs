@@ -93,8 +93,14 @@ namespace HorselessNewspaper.Web.Core.Middleware.ClientConfigurationMiddleware
             }
             else
             {
-
-                await _next(context);
+                try
+                {
+                    await _next(context);
+                }
+                catch(Exception e)
+                {
+                    _logger.LogError($"{this.GetType().FullName} middleware pipeline exception: {e.Message}");
+                }
             }
         }
 
