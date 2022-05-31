@@ -72,7 +72,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Core.Wor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Web.Core.Startup", "HorselessNewspaper.Web.Core.Startup\HorselessNewspaper.Web.Core.Startup.csproj", "{FA16FB00-EDB9-4BB0-A37F-B8EEB93D919B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorselessNewspaper.Web.Core.Services.Model", "HorselessNewspaper.Web.Core.Services.Model\HorselessNewspaper.Web.Core.Services.Model.csproj", "{C095E4DA-7D3F-474B-B8AD-E691EE383E74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Web.Core.Services.Model", "HorselessNewspaper.Web.Core.Services.Model\HorselessNewspaper.Web.Core.Services.Model.csproj", "{C095E4DA-7D3F-474B-B8AD-E691EE383E74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

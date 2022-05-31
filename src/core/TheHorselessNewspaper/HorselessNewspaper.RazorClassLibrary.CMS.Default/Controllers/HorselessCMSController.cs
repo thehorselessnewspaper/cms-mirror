@@ -96,7 +96,14 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
             try
             {
                 logger.LogInformation($"handling signin request return url = {returnUrl}, provider {provider}");
-                var challengeResult = Challenge(new AuthenticationProperties { RedirectUri = returnUrl }, provider);
+                var uriBuilder = new UriBuilder(returnUrl)
+                {
+                    Scheme = Uri.UriSchemeHttps
+                };
+                HttpContext.Request.IsHttps = true;
+
+                var proxyNormalizedReturnUrl = uriBuilder.Uri.ToString();
+                var challengeResult = Challenge(new AuthenticationProperties { RedirectUri = proxyNormalizedReturnUrl }, provider);
   
                 return challengeResult;
             }
