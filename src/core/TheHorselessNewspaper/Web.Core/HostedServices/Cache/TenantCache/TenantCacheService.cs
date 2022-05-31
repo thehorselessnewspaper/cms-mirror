@@ -148,14 +148,14 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     _logger.LogInformation("ensuring content db");
                     await contentModelOperator.EnsureDbExists();
 
-                    var probeQuery =  await contentModelOperator.Read(r => r.ObjectId != null && r.ObjectId.Equals("EnsureQueryWorks"));
+                    var probeQuery =  await contentModelOperator.ReadAsEnumerable(r => r.ObjectId != null && r.ObjectId.Equals("EnsureQueryWorks"));
                     var probeResult = probeQuery.Any();
 
 
                     var hostingModelOperator = GetQueryForHostingEntity<HostingModel.Tenant>(scope);
                     await hostingModelOperator.EnsureDbExists();
 
-                    var hostingProbeQuery = await hostingModelOperator.Read(r => r.ObjectId != null && r.ObjectId.Equals("EnsureQueryWorks"));
+                    var hostingProbeQuery = await hostingModelOperator.ReadAsEnumerable(r => r.ObjectId != null && r.ObjectId.Equals("EnsureQueryWorks"));
                     var hostingProbeResult = hostingProbeQuery.Any();
 
                     // should fail by here if the db schema is different
