@@ -2,10 +2,16 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <AzureFunctionsVersion>v4</AzureFunctionsVersion>
+    <UserSecretsId>9c05563e-7af3-46e2-9f30-0f9c4feb67ca</UserSecretsId>
+    <DockerFastModeProjectMountDirectory>/home/site/wwwroot</DockerFastModeProjectMountDirectory>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.OpenApi" Version="1.3.0" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.RabbitMQ" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
@@ -15,5 +21,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ingress\nuget\" />
   </ItemGroup>
 </Project>

@@ -36,7 +36,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             _fileSizeLimit = config.GetValue<long>("FileSizeLimit");
 
             // To save physical files to a path provided by configuration:
-            _targetFilePath = config.GetValue<string>("StoredFilesPath");
+            _targetFilePath = config.GetValue<string>("tenant-filesystem");
 
             // To save physical files to the temporary files folder, use:
             //_targetFilePath = Path.GetTempPath();

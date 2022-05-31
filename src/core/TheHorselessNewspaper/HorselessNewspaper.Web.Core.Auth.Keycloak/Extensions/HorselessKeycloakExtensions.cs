@@ -82,6 +82,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
 
                 o.Events = new Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents()
                 {
+                    
                     OnAuthenticationFailed = ctxt =>
                     {
                         var error = ctxt.Response.StatusCode;

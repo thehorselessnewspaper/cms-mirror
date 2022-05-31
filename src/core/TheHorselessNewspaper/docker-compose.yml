@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  horselessnewspaper.core.workflow.azurefunctions:
+    image: ${DOCKER_REGISTRY-}horselessnewspapercoreworkflowazurefunctions
+    build:
+      context: .
+      dockerfile: HorselessNewspaper.Core.Workflow.AzureFunctions/Dockerfile
