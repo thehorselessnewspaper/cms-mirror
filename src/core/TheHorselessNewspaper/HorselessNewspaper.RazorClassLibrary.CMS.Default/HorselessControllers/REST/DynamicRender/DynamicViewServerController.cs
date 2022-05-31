@@ -74,14 +74,14 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(PartialViewResult))]
         [Produces("text/html")]
-        public async Task<PartialViewResult> GetDynamicView([FromHeader] string viewName, [FromHeader] Guid? parentContentCollectionObjectId)
+        public async Task<PartialViewResult> GetDynamicView([FromHeader] string viewPhysicalPath, [FromHeader] Guid? parentContentCollectionObjectId)
         {
             PartialViewResult result = new PartialViewResult();
 
             try
             {
                 // try to find the view in the database
-                var query = await _horselessViewOperator.Query(v => v.PhysicalPath.Contains(viewName));
+                var query = await _horselessViewOperator.Query(v => v.PhysicalPath.Contains(viewPhysicalPath));
                 var queryResult = query.ToList();
 
                 var hasView = query.Any();
