@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.AssetUploadControllers.ActionFilters;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.DynamicRender
 {
@@ -23,6 +24,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
     [Route("{__tenant__}/api/[controller]")]
     [ApiExplorerSettings(IgnoreApi = false)]
+    [GenerateAntiforgeryTokenCookie]
     public class DynamicViewServerController : Controller
     {
         private IContentCollectionService<IQueryableContentModelOperator<HorselessView>, HorselessView> _horselessViewOperator { get; set; }
