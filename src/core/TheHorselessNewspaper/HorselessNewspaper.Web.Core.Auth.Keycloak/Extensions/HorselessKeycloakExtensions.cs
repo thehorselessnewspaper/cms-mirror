@@ -146,8 +146,6 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 {
                     OnRedirectToIdentityProvider = async ctx =>
                     {
-                        await Task.Yield();
-
                         // fix oidc redirect to http when running behind ingress controller and listening on http only
                         // as per https://github.com/AzureAD/microsoft-identity-web/issues/115
                         var redirectUri = new UriBuilder(ctx.ProtocolMessage.RedirectUri)
@@ -155,6 +153,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                             Scheme = Uri.UriSchemeHttps
                         };
                         ctx.ProtocolMessage.RedirectUri = redirectUri.ToString();
+                        await Task.Yield();
+                        ctx.ProtocolMessage.RedirectUri = redirectUri.ToString();
+
                     },
                     OnRemoteFailure = async ctx =>
                     {
