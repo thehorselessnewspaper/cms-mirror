@@ -7,10 +7,10 @@ namespace TheHorselessNewspaper.HostingModel.ODATA
 {
     public class HorselessOdataModel
     {
-        ILogger<HorselessOdataModel> _logger;
+        public HorselessOdataModel() { }
         public HorselessOdataModel(ILogger<HorselessOdataModel> logger)
         {
-            this._logger = logger;
+
         }
 
         private Type[] GetTypesInNamespace(System.Reflection.Assembly assembly, string nameSpace)
@@ -41,7 +41,6 @@ namespace TheHorselessNewspaper.HostingModel.ODATA
                 EntityTypeConfiguration entityType = builder.AddEntityType(item);
                 entityType.HasKey(item.GetProperty("Id"));
                 builder.AddEntitySet(item.Name, entityType);
-                this._logger.LogInformation($"registered OData Entity {item.FullName}");
             }
 
             builder.ContainerName = "ContentEntities";
@@ -64,7 +63,6 @@ namespace TheHorselessNewspaper.HostingModel.ODATA
                 EntityTypeConfiguration entityType = builder.AddEntityType(item);
                 entityType.HasKey(item.GetProperty("Id"));
                 builder.AddEntitySet(item.Name, entityType);
-                this._logger.LogInformation($"registered OData Entity {item.FullName}");
             }
 
             builder.ContainerName = "HostingEntities";

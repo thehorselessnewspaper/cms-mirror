@@ -21,7 +21,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
     /// page composition via rest retrieval of views
     /// </summary>
 
-    [Route("/")]
+    [Route("{__tenant__}/api/[controller]/[action]")]
     [ApiExplorerSettings(IgnoreApi = false)]
     public class DynamicViewServerController : Controller
     {
@@ -70,11 +70,31 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [HttpGet("GetDynamicView", Name = "Presentation[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(ActionResult<PartialViewResult>))]
         [Produces("text/html")]
-        public IActionResult GetDynamicView([FromHeader] string viewName, [FromHeader] Guid? parentContentCollectionObjectId)
+        public async Task<ActionResult<PartialViewResult>> GetDynamicView([FromHeader] string viewName, [FromHeader] Guid? parentContentCollectionObjectId)
         {
-            return View(viewName);
+            PartialViewResult result = new PartialViewResult();
+
+            try
+            {
+                // try to find the view in the database
+                var query = await _horselessViewOperator.Query(v => v.PhysicalPath.Contains(viewName));
+                var queryResult = query.ToList();
+
+                var hasView = query.Any();
+                if (hasView)
+                {
+                    result = PartialView(viewName, queryResult.First());
+                }
+
+            }
+            catch (Exception e)
+            {
+                this._logger.LogError($"{this.GetType().FullName} had problems serving requested partial view: {e.Message}");
+            }
+
+            return result;
         }
     }
 }
