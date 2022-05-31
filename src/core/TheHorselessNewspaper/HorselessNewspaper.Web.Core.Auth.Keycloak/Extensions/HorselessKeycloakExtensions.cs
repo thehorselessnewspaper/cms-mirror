@@ -166,26 +166,41 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
 
                         await Task.Yield();
                     },
-                    OnMessageReceived = async ctxt =>
+                    OnMessageReceived = async ctx =>
                     {
-                        // Invoked when a protocol message is first received.
+                        // fix oidc redirect to http when running behind ingress controller and listening on http only
+                        // as per https://github.com/AzureAD/microsoft-identity-web/issues/115
+                        var redirectUri = new UriBuilder(ctx.ProtocolMessage.RedirectUri)
+                        {
+                            Scheme = Uri.UriSchemeHttps
+                        };
+                        ctx.ProtocolMessage.RedirectUri = redirectUri.ToString();
                         await Task.Yield();
+                        ctx.ProtocolMessage.RedirectUri = redirectUri.ToString();
 
                     },
-                    OnTicketReceived = async ctxt =>
+                    OnTicketReceived = async ctx =>
                     {
                         // Invoked after the remote ticket has been received.
                         // Can be used to modify the Principal before it is passed to the Cookie scheme for sign-in.
                         // This example removes all 'groups' claims from the Principal (assuming the AAD app has been configured
                         // with "groupMembershipClaims": "SecurityGroup"). Group memberships can be checked here and turned into
                         // roles, to be persisted in the cookie.
-                        if (ctxt.Principal.Identity is ClaimsIdentity identity)
+                        if (ctx.Principal.Identity is ClaimsIdentity identity)
                         {
-                            var groupClaims = ctxt.Principal.FindAll(x => x.Type == "roles")
+                            var groupClaims = ctx.Principal.FindAll(x => x.Type == "roles")
                                 .ToList();
                             // .ForEach(identity.RemoveClaim);
                         }
+                        // fix oidc redirect to http when running behind ingress controller and listening on http only
+                        // as per https://github.com/AzureAD/microsoft-identity-web/issues/115
+                        var redirectUri = new UriBuilder(ctx.ReturnUri)
+                        {
+                            Scheme = Uri.UriSchemeHttps
+                        };
+                        ctx.ReturnUri = redirectUri.ToString();
                         await Task.Yield();
+                        ctx.ReturnUri = redirectUri.ToString();
                     }
                 };
             })
