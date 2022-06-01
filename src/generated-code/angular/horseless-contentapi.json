@@ -1931,7 +1931,7 @@
         "operationId": "PresentationDynamicViewServer_GetDynamicView",
         "parameters": [
           {
-            "name": "viewName",
+            "name": "viewPhysicalPath",
             "in": "header",
             "schema": {
               "type": "string"

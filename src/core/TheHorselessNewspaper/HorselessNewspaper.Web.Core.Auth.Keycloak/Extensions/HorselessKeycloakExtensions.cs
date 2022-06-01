@@ -82,7 +82,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
 
                 o.Events = new Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents()
                 {
-                    
+
                     OnAuthenticationFailed = ctxt =>
                     {
                         var error = ctxt.Response.StatusCode;
@@ -146,14 +146,15 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 {
                     OnRedirectToIdentityProvider = async ctx =>
                     {
+
+
+                        await Task.Yield();
                         // fix oidc redirect to http when running behind ingress controller and listening on http only
                         // as per https://github.com/AzureAD/microsoft-identity-web/issues/115
                         var redirectUri = new UriBuilder(ctx.ProtocolMessage.RedirectUri)
                         {
                             Scheme = Uri.UriSchemeHttps
                         };
-                        ctx.ProtocolMessage.RedirectUri = redirectUri.ToString();
-                        await Task.Yield();
                         ctx.ProtocolMessage.RedirectUri = redirectUri.ToString();
 
                     },
@@ -168,15 +169,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                     },
                     OnMessageReceived = async ctx =>
                     {
-                        // fix oidc redirect to http when running behind ingress controller and listening on http only
-                        // as per https://github.com/AzureAD/microsoft-identity-web/issues/115
-                        var redirectUri = new UriBuilder(ctx.ProtocolMessage.RedirectUri)
-                        {
-                            Scheme = Uri.UriSchemeHttps
-                        };
-                        ctx.ProtocolMessage.RedirectUri = redirectUri.ToString();
+
                         await Task.Yield();
-                        ctx.ProtocolMessage.RedirectUri = redirectUri.ToString();
+
 
                     },
                     OnTicketReceived = async ctx =>
@@ -192,6 +187,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                                 .ToList();
                             // .ForEach(identity.RemoveClaim);
                         }
+
                         // fix oidc redirect to http when running behind ingress controller and listening on http only
                         // as per https://github.com/AzureAD/microsoft-identity-web/issues/115
                         var redirectUri = new UriBuilder(ctx.ReturnUri)
@@ -200,13 +196,13 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                         };
                         ctx.ReturnUri = redirectUri.ToString();
                         await Task.Yield();
-                        ctx.ReturnUri = redirectUri.ToString();
+
                     }
                 };
             })
             .AddCookie(opts =>
                 {
-                    
+
                     // TODO examine this cookie magic string naming business
                     // cookie.Cookie.Name = "keycloak.cookie";
                     opts.Cookie.MaxAge = TimeSpan.FromMinutes(60);
