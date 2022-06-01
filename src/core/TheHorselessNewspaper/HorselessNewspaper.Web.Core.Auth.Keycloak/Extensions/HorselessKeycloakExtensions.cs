@@ -12,8 +12,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Security.Claims;
+using System.Text.Encodings.Web;
 using System.Text.Json;
+
 
 namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
 {
@@ -144,6 +147,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
 
                 opts.Events = new OpenIdConnectEvents
                 {
+
                     OnRedirectToIdentityProvider = async ctx =>
                     {
 
@@ -151,6 +155,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                         await Task.Yield();
                         // fix oidc redirect to http when running behind ingress controller and listening on http only
                         // as per https://github.com/AzureAD/microsoft-identity-web/issues/115
+
                         var redirectUri = new UriBuilder(ctx.ProtocolMessage.RedirectUri)
                         {
                             Scheme = Uri.UriSchemeHttps
@@ -170,8 +175,33 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                     OnMessageReceived = async ctx =>
                     {
 
+                        if (ctx.ProtocolMessage.RedirectUri != null &&
+                        ctx.Request.Path != null & ctx.Request.Path.ToString().Contains("/signin-oidc"))
+                        {
+                            // fix oidc redirect to http when running behind ingress controller and listening on http only
+                            // as per https://github.com/AzureAD/microsoft-identity-web/issues/115
+
+                            var redirectUri = new UriBuilder(ctx.ProtocolMessage.RedirectUri)
+                            {
+                                Scheme = Uri.UriSchemeHttps
+                            };
+                            ctx.ProtocolMessage.RedirectUri = redirectUri.ToString();
+                        }
+
                         await Task.Yield();
 
+                        if (ctx.ProtocolMessage.RedirectUri != null &&
+                        ctx.Request.Path != null & ctx.Request.Path.ToString().Contains("/signin-oidc"))
+                        {
+                            // fix oidc redirect to http when running behind ingress controller and listening on http only
+                            // as per https://github.com/AzureAD/microsoft-identity-web/issues/115
+
+                            var redirectUri = new UriBuilder(ctx.ProtocolMessage.RedirectUri)
+                            {
+                                Scheme = Uri.UriSchemeHttps
+                            };
+                            ctx.ProtocolMessage.RedirectUri = redirectUri.ToString();
+                        }
 
                     },
                     OnTicketReceived = async ctx =>
