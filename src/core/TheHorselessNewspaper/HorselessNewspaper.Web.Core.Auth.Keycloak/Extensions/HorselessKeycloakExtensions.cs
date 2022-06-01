@@ -50,7 +50,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 
             })
 
@@ -133,9 +133,12 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 opts.SaveTokens = true;
                 opts.Scope.Add("openid email profile roles web-origins");
                 opts.NonceCookie.SameSite = SameSiteMode.None;
+
+                opts.NonceCookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                 opts.UseTokenLifetime = true;
                 opts.CorrelationCookie.SameSite = SameSiteMode.None;
-
+                opts.CorrelationCookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                // TODO revisit this tweak
                 // tweak the population of user.claims collection
                 // as per https://leastprivilege.com/2017/11/15/missing-claims-in-the-asp-net-core-2-openid-connect-handler/
                 opts.ClaimActions.Remove("aud");
@@ -236,7 +239,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                     // TODO examine this cookie magic string naming business
                     // cookie.Cookie.Name = "keycloak.cookie";
                     opts.Cookie.MaxAge = TimeSpan.FromMinutes(60);
-                    opts.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                    opts.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                     opts.Cookie.SameSite = SameSiteMode.None;
                     opts.Cookie.IsEssential = true;
                     opts.SlidingExpiration = true;
