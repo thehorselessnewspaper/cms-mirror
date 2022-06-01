@@ -136,11 +136,11 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 opts.SaveTokens = true;
                 opts.Scope.Add("openid email profile roles web-origins");
                 opts.NonceCookie.SameSite = SameSiteMode.None;
-
-                opts.NonceCookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                opts.NonceCookie.SecurePolicy = CookieSecurePolicy.Always;
+                
                 opts.UseTokenLifetime = true;
                 opts.CorrelationCookie.SameSite = SameSiteMode.None;
-                opts.CorrelationCookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                opts.CorrelationCookie.SecurePolicy = CookieSecurePolicy.Always;
                 // TODO revisit this tweak
                 // tweak the population of user.claims collection
                 // as per https://leastprivilege.com/2017/11/15/missing-claims-in-the-asp-net-core-2-openid-connect-handler/
@@ -164,16 +164,17 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                         // fix oidc redirect to http when running behind ingress controller and listening on http only
                         // as per https://github.com/AzureAD/microsoft-identity-web/issues/115
 
-                        var redirectUri = new UriBuilder(ctx.ProtocolMessage.RedirectUri)
-                        {
-                            Scheme = Uri.UriSchemeHttps
-                        };
+                        //var redirectUri = new UriBuilder(ctx.ProtocolMessage.RedirectUri)
+                        //{
+                        //    Scheme = Uri.UriSchemeHttps
+                        //};
 
-                        redirectUri = new UriBuilder(ctx.ProtocolMessage.RedirectUri)
-                        {
-                            Scheme = Uri.UriSchemeHttps
-                        };
-                        ctx.ProtocolMessage.RedirectUri = redirectUri.ToString();
+                        //redirectUri = new UriBuilder(ctx.ProtocolMessage.RedirectUri)
+                        //{
+                        //    Scheme = Uri.UriSchemeHttps
+                        //};
+                        
+                        // ctx.ProtocolMessage.RedirectUri = redirectUri.ToString();
 
                     },
                     OnRemoteFailure = async ctx =>
@@ -221,7 +222,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                     opts.Cookie.MaxAge = TimeSpan.FromMinutes(60);
                     opts.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                     opts.Cookie.SameSite = SameSiteMode.Strict;
-
+                    
                     opts.SlidingExpiration = true;
                 });
 
