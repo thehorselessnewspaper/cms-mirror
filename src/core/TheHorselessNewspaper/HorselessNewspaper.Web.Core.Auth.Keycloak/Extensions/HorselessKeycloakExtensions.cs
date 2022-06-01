@@ -178,18 +178,18 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                     OnMessageReceived = async ctx =>
                     {
 
-                        if (ctx.ProtocolMessage.RedirectUri != null &&
-                        ctx.Request.Path != null & ctx.Request.Path.ToString().Contains("/signin-oidc"))
-                        {
-                            // fix oidc redirect to http when running behind ingress controller and listening on http only
-                            // as per https://github.com/AzureAD/microsoft-identity-web/issues/115
+                        //if (ctx.ProtocolMessage.RedirectUri != null &&
+                        //ctx.Request.Path != null & ctx.Request.Path.ToString().Contains("/signin-oidc"))
+                        //{
+                        //    // fix oidc redirect to http when running behind ingress controller and listening on http only
+                        //    // as per https://github.com/AzureAD/microsoft-identity-web/issues/115
 
-                            var redirectUri = new UriBuilder(ctx.ProtocolMessage.RedirectUri)
-                            {
-                                Scheme = Uri.UriSchemeHttps
-                            };
-                            ctx.ProtocolMessage.RedirectUri = redirectUri.ToString();
-                        }
+                        //    var redirectUri = new UriBuilder(ctx.ProtocolMessage.RedirectUri)
+                        //    {
+                        //        Scheme = Uri.UriSchemeHttps
+                        //    };
+                        //    ctx.ProtocolMessage.RedirectUri = redirectUri.ToString();
+                        //}
 
                         await Task.Yield();
 
@@ -223,11 +223,11 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
 
                         // fix oidc redirect to http when running behind ingress controller and listening on http only
                         // as per https://github.com/AzureAD/microsoft-identity-web/issues/115
-                        var redirectUri = new UriBuilder(ctx.ReturnUri)
-                        {
-                            Scheme = Uri.UriSchemeHttps
-                        };
-                        ctx.ReturnUri = redirectUri.ToString();
+                        //var redirectUri = new UriBuilder(ctx.ReturnUri)
+                        //{
+                        //    Scheme = Uri.UriSchemeHttps
+                        //};
+                        //ctx.ReturnUri = redirectUri.ToString();
                         await Task.Yield();
 
                     }
