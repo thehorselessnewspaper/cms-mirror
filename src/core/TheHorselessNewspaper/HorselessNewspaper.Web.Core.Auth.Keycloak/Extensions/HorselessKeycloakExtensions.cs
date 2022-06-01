@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
@@ -32,6 +33,8 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
             Action<HorselessServiceBuilder> options = null, ServiceLifetime scope = ServiceLifetime.Scoped)
         {
             IConfiguration configuration = builder.Configuration;
+
+
             var serviceBuilder = new HorselessServiceBuilder(configuration, services);
             #region surface the keycloak logout url configuration 
 
@@ -154,12 +157,19 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                     OnRedirectToIdentityProvider = async ctx =>
                     {
 
+ 
+
 
                         await Task.Yield();
                         // fix oidc redirect to http when running behind ingress controller and listening on http only
                         // as per https://github.com/AzureAD/microsoft-identity-web/issues/115
 
                         var redirectUri = new UriBuilder(ctx.ProtocolMessage.RedirectUri)
+                        {
+                            Scheme = Uri.UriSchemeHttps
+                        };
+
+                        redirectUri = new UriBuilder(ctx.ProtocolMessage.RedirectUri)
                         {
                             Scheme = Uri.UriSchemeHttps
                         };
@@ -178,33 +188,10 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                     OnMessageReceived = async ctx =>
                     {
 
-                        //if (ctx.ProtocolMessage.RedirectUri != null &&
-                        //ctx.Request.Path != null & ctx.Request.Path.ToString().Contains("/signin-oidc"))
-                        //{
-                        //    // fix oidc redirect to http when running behind ingress controller and listening on http only
-                        //    // as per https://github.com/AzureAD/microsoft-identity-web/issues/115
-
-                        //    var redirectUri = new UriBuilder(ctx.ProtocolMessage.RedirectUri)
-                        //    {
-                        //        Scheme = Uri.UriSchemeHttps
-                        //    };
-                        //    ctx.ProtocolMessage.RedirectUri = redirectUri.ToString();
-                        //}
+  
 
                         await Task.Yield();
 
-                        if (ctx.ProtocolMessage.RedirectUri != null &&
-                        ctx.Request.Path != null & ctx.Request.Path.ToString().Contains("/signin-oidc"))
-                        {
-                            // fix oidc redirect to http when running behind ingress controller and listening on http only
-                            // as per https://github.com/AzureAD/microsoft-identity-web/issues/115
-
-                            var redirectUri = new UriBuilder(ctx.ProtocolMessage.RedirectUri)
-                            {
-                                Scheme = Uri.UriSchemeHttps
-                            };
-                            ctx.ProtocolMessage.RedirectUri = redirectUri.ToString();
-                        }
 
                     },
                     OnTicketReceived = async ctx =>
@@ -221,13 +208,6 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                             // .ForEach(identity.RemoveClaim);
                         }
 
-                        // fix oidc redirect to http when running behind ingress controller and listening on http only
-                        // as per https://github.com/AzureAD/microsoft-identity-web/issues/115
-                        //var redirectUri = new UriBuilder(ctx.ReturnUri)
-                        //{
-                        //    Scheme = Uri.UriSchemeHttps
-                        //};
-                        //ctx.ReturnUri = redirectUri.ToString();
                         await Task.Yield();
 
                     }
@@ -240,8 +220,8 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                     // cookie.Cookie.Name = "keycloak.cookie";
                     opts.Cookie.MaxAge = TimeSpan.FromMinutes(60);
                     opts.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-                    opts.Cookie.SameSite = SameSiteMode.None;
-                    opts.Cookie.IsEssential = true;
+                    opts.Cookie.SameSite = SameSiteMode.Strict;
+
                     opts.SlidingExpiration = true;
                 });
 
