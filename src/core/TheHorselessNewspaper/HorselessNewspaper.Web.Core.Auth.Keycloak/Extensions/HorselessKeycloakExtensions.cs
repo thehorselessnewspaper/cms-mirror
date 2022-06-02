@@ -53,7 +53,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+
 
             })
 
@@ -135,12 +135,15 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 opts.GetClaimsFromUserInfoEndpoint = true;
                 opts.SaveTokens = true;
                 opts.Scope.Add("openid email profile roles web-origins");
-                opts.NonceCookie.SameSite = SameSiteMode.None;
-                opts.NonceCookie.SecurePolicy = CookieSecurePolicy.Always;
+
+                //opts.NonceCookie.SameSite = SameSiteMode.None;
+                //opts.NonceCookie.SecurePolicy = CookieSecurePolicy.Always;
                 
                 opts.UseTokenLifetime = true;
-                opts.CorrelationCookie.SameSite = SameSiteMode.None;
-                opts.CorrelationCookie.SecurePolicy = CookieSecurePolicy.Always;
+                
+                //opts.CorrelationCookie.SameSite = SameSiteMode.None;
+                //opts.CorrelationCookie.SecurePolicy = CookieSecurePolicy.Always;
+                
                 // TODO revisit this tweak
                 // tweak the population of user.claims collection
                 // as per https://leastprivilege.com/2017/11/15/missing-claims-in-the-asp-net-core-2-openid-connect-handler/
