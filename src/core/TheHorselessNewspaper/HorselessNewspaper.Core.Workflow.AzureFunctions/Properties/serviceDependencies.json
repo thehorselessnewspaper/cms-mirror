@@ -12,7 +12,7 @@
     },
     "rabbitmq1": {
       "type": "rabbitmq",
-      "connectionId": "horseless-nuget-ingress",
+      "connectionId": "horselessnugetingress,
       "dynamicId": null
     }
   }

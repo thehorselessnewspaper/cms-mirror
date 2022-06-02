@@ -13,7 +13,7 @@
       "containerName": "rabbitmq",
       "containerImage": "rabbitmq:3-management-alpine",
       "type": "rabbitmq.container",
-      "connectionId": "horseless-nuget-ingress",
+      "connectionId": "localrabbit",
       "dynamicId": null
     }
   }

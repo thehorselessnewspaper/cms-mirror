@@ -8,7 +8,7 @@ namespace HorselessNewspaper.Core.Workflow.AzureFunctions
     public class CommandDispatcher
     {
         [FunctionName("CommandDispatcher")]
-        public void Run([RabbitMQTrigger("CommandChannel",  ConnectionStringSetting = "horseless-nuget-ingress" )]string signal, ILogger log)
+        public void Run([RabbitMQTrigger("CommandChannel",  ConnectionStringSetting = "localrabbit")]string signal, ILogger log)
         {
             log.LogInformation($"C# Queue trigger function processed: {signal}");
         }
