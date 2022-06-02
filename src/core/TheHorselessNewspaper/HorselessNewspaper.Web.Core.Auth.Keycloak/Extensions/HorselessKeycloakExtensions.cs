@@ -136,13 +136,13 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 opts.SaveTokens = true;
                 opts.Scope.Add("openid email profile roles web-origins");
 
-                //opts.NonceCookie.SameSite = SameSiteMode.None;
-                //opts.NonceCookie.SecurePolicy = CookieSecurePolicy.Always;
+                opts.NonceCookie.SameSite = SameSiteMode.Lax;
+                opts.NonceCookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                 
                 opts.UseTokenLifetime = true;
                 
-                //opts.CorrelationCookie.SameSite = SameSiteMode.None;
-                //opts.CorrelationCookie.SecurePolicy = CookieSecurePolicy.Always;
+                opts.CorrelationCookie.SameSite = SameSiteMode.Lax;
+                opts.CorrelationCookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                 
                 // TODO revisit this tweak
                 // tweak the population of user.claims collection
@@ -224,7 +224,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                     // cookie.Cookie.Name = "keycloak.cookie";
                     opts.Cookie.MaxAge = TimeSpan.FromMinutes(60);
                     opts.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-                    opts.Cookie.SameSite = SameSiteMode.Strict;
+                    opts.Cookie.SameSite = SameSiteMode.Lax;
                     
                     opts.SlidingExpiration = true;
                 });
