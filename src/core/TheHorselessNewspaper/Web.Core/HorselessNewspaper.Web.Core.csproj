@@ -34,12 +34,12 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 		<PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="2.5.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="NSwag.ApiDescription.Client" Version="13.16.0">
+		<PackageReference Include="NSwag.ApiDescription.Client" Version="13.16.1">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="NuGet.Protocol" Version="6.2.0" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220530.14" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220602.2" />
 	</ItemGroup>
 
 	<ItemGroup>

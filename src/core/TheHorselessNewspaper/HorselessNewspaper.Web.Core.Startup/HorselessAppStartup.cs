@@ -18,6 +18,11 @@ using TheHorselessNewspaper.HostingModel.Context.MSSQL;
 
 namespace HorselessNewspaper.Web.Core.Startup
 {
+    public delegate void ConfigureSharedContentDb(IServiceCollection services);
+
+    public delegate void ConfigureSharedHostingDb(IServiceCollection services);
+
+    public delegate void ConfigureRazorPages(IServiceCollection services);
     /// <summary>
     /// support extensible startup 
     /// that encapsulates what's required
@@ -28,6 +33,11 @@ namespace HorselessNewspaper.Web.Core.Startup
     /// </summary>
     public class HorselessAppStartup : AbstractAppStartup
     {
+        public ConfigureSharedHostingDb OnConfigureSharedHostingDb;
+        public ConfigureSharedContentDb OnConfigureSharedContentDb;
+
+        public ConfigureRazorPages OnAddRazorPages;
+
         IWebHostEnvironment Environment;
         public HorselessAppStartup(IConfiguration configuration, IWebHostEnvironment env) : base(configuration)
         {
@@ -120,9 +130,15 @@ namespace HorselessNewspaper.Web.Core.Startup
                     });
             });
 
-
-            services.AddRazorPages();
-            // .AddRazorRuntimeCompilation();
+            if (OnAddRazorPages != null)
+            {
+                OnAddRazorPages(services);
+            }
+            else
+            {
+                services.AddRazorPages();
+                // .AddRazorRuntimeCompilation();
+            }
 
             services.AddControllersWithViews(options =>
             {
@@ -200,15 +216,33 @@ namespace HorselessNewspaper.Web.Core.Startup
                 //options.FileProviders.Add(new PhysicalFileProvider(contentRootPath));
             });
 
-            // globally enables mssql server
-            services.UseHorselessContentModelMSSqlServer(Configuration, Configuration.GetConnectionString("ContentModelConnection"));
-            services.UseHorselessHostingModelMSSqlServer(Configuration, Configuration.GetConnectionString("HostingModelConnection"));
+            if (OnConfigureSharedContentDb != null)
+            {
+                OnConfigureSharedContentDb(services);
+            }
+            else
+            {
+                // globally enables mssql server
+                services.UseHorselessContentModelMSSqlServer(Configuration, Configuration.GetConnectionString("ContentModelConnection"));
+            }
 
+            if (OnConfigureSharedHostingDb != null)
+            {
+                OnConfigureSharedHostingDb(services);
+            }
+            else
+            {
+                services.UseHorselessHostingModelMSSqlServer(Configuration, Configuration.GetConnectionString("HostingModelConnection"));
+            }
 
 
             // as per https://docs.microsoft.com/en-us/shows/on-net/adding-a-little-swagger-to-odata
             // as per https://github.com/OData/WebApi/issues/2024
 
+            // **** warning ****
+            // this is a mission critical service
+            // without which login is impaired by
+            // loss of cookies on post /signin-oidc
             services.AddStackExchangeRedisCache(o =>
             {
                 o.Configuration = Configuration.GetConnectionString("RedisSessionCache");

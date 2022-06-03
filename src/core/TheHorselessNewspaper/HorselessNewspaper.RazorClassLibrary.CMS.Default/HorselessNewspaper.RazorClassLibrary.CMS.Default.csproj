@@ -67,7 +67,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.5" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220530.14" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220602.2" />
 	</ItemGroup>
 
 	<ItemGroup>

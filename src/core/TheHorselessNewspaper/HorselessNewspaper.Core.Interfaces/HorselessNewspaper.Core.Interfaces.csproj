@@ -28,7 +28,7 @@
 	<ItemGroup>
 		<PackageReference Include="NuGet.Protocol" Version="6.2.0" />
 		<PackageReference Include="System.Linq.Expressions" Version="4.3.0" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220530.14" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220602.2" />
 	</ItemGroup>
 
 </Project>

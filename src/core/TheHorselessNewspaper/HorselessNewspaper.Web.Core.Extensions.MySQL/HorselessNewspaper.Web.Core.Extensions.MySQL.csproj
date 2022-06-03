@@ -11,8 +11,8 @@
 	</PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.1" />
-    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220530.14" />
-    <PackageReference Include="TheHorselessNewspaper.HostingModel.SmokeTests" Version="0.3.20220530.14" />
+    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220602.2" />
+    <PackageReference Include="TheHorselessNewspaper.HostingModel.SmokeTests" Version="0.3.20220602.2" />
   </ItemGroup>
 
 	<PropertyGroup>
