@@ -115,18 +115,20 @@ namespace HorselessNewspaper.Web.Core.Startup
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
+                options.MinimumSameSitePolicy = SameSiteMode.Strict;
+                options.Secure = CookieSecurePolicy.SameAsRequest;
                 // Handling SameSite cookie according to https://docs.microsoft.com/en-us/aspnet/core/security/samesite?view=aspnetcore-3.1
                 // options.HandleSameSiteCookieCompatibility();
             });
             services.AddCors(options =>
             {
-
                 options.AddDefaultPolicy(
                     builder =>
                     {
-            // TODO put something rational and devops engineer production environment configurable here
-                        builder.AllowAnyOrigin();
+                        builder.WithOrigins("https://awsdev.ataxlab.com")
+                        .AllowCredentials();
+
+
                     });
             });
 

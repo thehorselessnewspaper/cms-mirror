@@ -100,7 +100,7 @@ services:
     image: redis:7-alpine
     ports:
       - "6379"  
-    command: redis-server --save 20 1 --loglevel warning --requirepass Pa55w0rd
+    command: redis-server --save 20 1 --loglevel debug --requirepass Pa55w0rd
     volumes: 
       - critical-redis-cache:/data
       
@@ -118,6 +118,7 @@ services:
 
   horselessnewspaper.local:
     image: "horselessnewspaper.local"
+    hostname: blackintosh.foray.ataxlab.com
     ports:
       - 5000:5000
     dns:
