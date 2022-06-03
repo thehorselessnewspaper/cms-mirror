@@ -3,7 +3,9 @@ using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
 using HorselessNewspaper.Web.Core.Extensions;
 using HorselessNewspaper.Web.Core.Extensions.Hosting;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -23,6 +25,14 @@ namespace HorselessNewspaper.Web.Core.Startup
     public delegate void ConfigureSharedHostingDb(IServiceCollection services);
 
     public delegate void ConfigureRazorPages(IServiceCollection services);
+
+    public delegate void ConfigureAuthenticationCookie(CookieAuthenticationOptions opts);
+    public delegate void ConfigureCookiePolicy(CookiePolicyOptions opts);
+
+
+    public delegate void ConfigureSession(SessionOptions opts);
+
+    public delegate void ConfigureCors(CorsOptions opts);
     /// <summary>
     /// support extensible startup 
     /// that encapsulates what's required
@@ -38,6 +48,13 @@ namespace HorselessNewspaper.Web.Core.Startup
 
         public ConfigureRazorPages OnAddRazorPages;
 
+        public ConfigureAuthenticationCookie OnAddAuthenticationCookie;
+
+        public ConfigureSession OnConfigureSession;
+
+        public ConfigureCors OnConfigureCors;
+
+        public ConfigureCookiePolicy OnConfigureDefaultCookiePolicy;
         IWebHostEnvironment Environment;
         public HorselessAppStartup(IConfiguration configuration, IWebHostEnvironment env) : base(configuration)
         {
@@ -57,7 +74,7 @@ namespace HorselessNewspaper.Web.Core.Startup
             if (app.Environment.IsDevelopment())
             {
                 // as per https://edi.wang/post/2020/4/29/my-aspnet-core-route-debugger-middleware
-                app.UseRouteDebugger();
+                // app.UseRouteDebugger();
 
             }
 
@@ -113,23 +130,41 @@ namespace HorselessNewspaper.Web.Core.Startup
 
             services.Configure<CookiePolicyOptions>(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.Strict;
-                options.Secure = CookieSecurePolicy.SameAsRequest;
-                // Handling SameSite cookie according to https://docs.microsoft.com/en-us/aspnet/core/security/samesite?view=aspnetcore-3.1
-                // options.HandleSameSiteCookieCompatibility();
+
+                if (OnConfigureDefaultCookiePolicy != null)
+                {
+                    OnConfigureDefaultCookiePolicy(options);
+                }
+                else
+                {
+                    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                    options.CheckConsentNeeded = context => true;
+                    options.MinimumSameSitePolicy = SameSiteMode.Lax;
+
+                    options.Secure = CookieSecurePolicy.None;
+                    // Handling SameSite cookie according to https://docs.microsoft.com/en-us/aspnet/core/security/samesite?view=aspnetcore-3.1
+                    // options.HandleSameSiteCookieCompatibility();
+                }
             });
             services.AddCors(options =>
             {
-                options.AddDefaultPolicy(
-                    builder =>
-                    {
-                        builder.WithOrigins("https://awsdev.ataxlab.com")
-                        .AllowCredentials();
+                if (OnConfigureCors != null)
+                {
+                    OnConfigureCors(options);
+                }
+                else
+                {
+                    options.AddDefaultPolicy(
+                        builder =>
+                        {
+                            builder
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowAnyOrigin();
 
 
-                    });
+                        });
+                }
             });
 
             if (OnAddRazorPages != null)
@@ -252,8 +287,15 @@ namespace HorselessNewspaper.Web.Core.Startup
 
             services.AddSession(options =>
             {
-                options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None;
-                options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                if (OnConfigureSession != null)
+                {
+                    OnConfigureSession(options);
+                }
+                else
+                {
+                    options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Lax;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                }
             });
 
         }
