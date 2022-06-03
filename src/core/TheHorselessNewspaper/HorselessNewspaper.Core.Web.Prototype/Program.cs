@@ -23,6 +23,14 @@ using var loggerFactory = LoggerFactory.Create(builder =>
 
 ILogger logger = loggerFactory.CreateLogger<Program>();
 
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+    options.CheckConsentNeeded = context => true;
+    options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
+    // Handling SameSite cookie according to https://docs.microsoft.com/en-us/aspnet/core/security/samesite?view=aspnetcore-3.1
+    // options.HandleSameSiteCookieCompatibility();
+});
 builder.Services.AddCors(options =>
 {
 
@@ -30,7 +38,7 @@ builder.Services.AddCors(options =>
         builder =>
         {
             // TODO put something rational and devops engineer production environment configurable here
-            builder.WithOrigins("https://localhost").AllowAnyOrigin();
+            builder.AllowAnyOrigin();
         });
 });
 
@@ -41,8 +49,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews(options =>
 {
     // options.Filters.Add<InstallRequiredActionFilter>(int.MinValue);
-}); 
-// .AddRazorRuntimeCompilation();
+}).AddRazorRuntimeCompilation();
 
 builder.Services.AddODataQueryFilter();
 
@@ -55,64 +62,6 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
         ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
 
 });
-
-
-// enables odata entities
-//var model = new HorselessOdataModel();
-//var edmContent = await model.GetContentEDMModel();
-//var edmHosting = await model.GetHostingEDMModel();
-
-// spa concerns 
-// as per https://www.teamscs.com/2021/05/creating-a-vue-js-net-core-web-app/
-//builder.Services.AddSpaStaticFiles(options =>
-//{
-//    options.RootPath = "horseless-vues/dist";
-//});
-
-// odata concerns
-
-
-//builder.Services.AddControllers()
-//    // json cycle handler as per https://gavilan.blog/2021/05/19/fixing-the-error-a-possible-object-cycle-was-detected-in-different-versions-of-asp-net-core/
-//    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve)
-//    .AddOData(options =>
-//    {
-//        /// TODO - surface these as configurable parameters 
-//        options
-//        .Select()
-//        .Expand()
-//        .Filter()
-//        .OrderBy()
-//        .SetMaxTop(100)
-//        .Count();
-
-//        options.TimeZone = TimeZoneInfo.Utc;
-//        // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
-
-//        /// todo make this an environment configurable item
-//        options.AddRouteComponents("{__tenant__}/HorselessContent", edmContent);
-
-
-
-//    })
-//    .AddOData(options =>
-//    {
-//        /// TODO - surface these as configurable parameters 
-//        options
-//        .Select()
-//        .Expand()
-//        .Filter()
-//        .OrderBy()
-//        .SetMaxTop(100)
-//        .Count();
-
-//        options.TimeZone = TimeZoneInfo.Utc;
-//        // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
-
-//        /// todo make this an environment configurable item
-//        options.AddRouteComponents("HorselessHosting", edmHosting);
-//    });
-
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
@@ -140,14 +89,9 @@ builder.Services.AddSwaggerGen(options =>
     options.DocumentFilter<SwaggerODataControllerDocumentFilter>();
 });
 
-//// this hardcodes a static reference to the default horseless razor class library
-//// i am sorry - the hoped for benefit is that this will always have a default implementation
-//// .AddApplicationPart(typeof(HorselessCMSController).Assembly);
-
-
 
 // as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/docs/keycloak.md
-builder.Services.AddHorselessKeycloakAuth(builder, keycloakOpts =>
+builder.Services.AddHorselessKeycloakAuth(builder.Configuration, keycloakOpts =>
 {
 
 });
@@ -186,46 +130,15 @@ builder.Services.UseHorselessHostingModelMSSqlServer(builder.Configuration, buil
 
 // as per https://docs.microsoft.com/en-us/shows/on-net/adding-a-little-swagger-to-odata
 // as per https://github.com/OData/WebApi/issues/2024
-//builder.Services.AddMvcCore(options =>
-//{
-//    options.RespectBrowserAcceptHeader = true;
-//    IEnumerable<ODataOutputFormatter> outputFormatters =
-//    options.OutputFormatters.OfType<ODataOutputFormatter>()
-//        .Where(foramtter => foramtter.SupportedMediaTypes.Count == 0);
 
-//    IEnumerable<ODataInputFormatter> inputFormatters =
-//        options.InputFormatters.OfType<ODataInputFormatter>()
-//            .Where(formatter => formatter.SupportedMediaTypes.Count == 0);
+builder.Services.AddStackExchangeRedisCache(o =>
+{
+    o.Configuration = builder.Configuration.GetConnectionString("RedisSessionCache");
+});
 
-//    foreach (var outputFormatter in outputFormatters)
-//    {
-//        outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/odata"));
-//        outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
-
-//    }
-
-//    foreach (var inputFormatter in inputFormatters)
-//    {
-//        inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/odata"));
-//        inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
-
-//    }
-
-//});
-//    .AddRazorRuntimeCompilation(
-//                opt =>
-//                {
-//// This would be useful but it's READ-ONLY
-//// opt.AdditionalReferencePaths = Path.Combine(WebRoot,"bin");
-
-//                    opt.FileProviders.Add(new PhysicalFileProvider(builder.Environment.WebRootPath));
-//                });
-
-
-builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict;
+    options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None;
     options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
 });
 

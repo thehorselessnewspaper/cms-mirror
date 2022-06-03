@@ -17,12 +17,7 @@
     // in case of adverse reverse proxy
     // http scheme forwarding conditions
     var currentUrl = Context.Request.GetDisplayUrl();
-    var redirectUri = new UriBuilder(currentUrl)
-                {
-                    Scheme = Uri.UriSchemeHttps
-                    @*,
-                    Port = Context.Connection.LocalPort*@
-                };
+
 
     <div>
 
@@ -35,7 +30,7 @@
             {
                 <form action="/signin" method="post">
                     <input type="hidden" name="provider" value="@scheme.Name" />
-                    <input type="hidden" name="returnUrl" value="@redirectUri.ToString()" />
+                    <input type="hidden" name="returnUrl" value="@currentUrl.ToString()" />
 
                     <button class="btn btn-success m-1" type="submit">Connect using @scheme.DisplayName</button>
                 </form>

@@ -14,6 +14,8 @@ volumes:
       driver: local
   critical-rabbitmq-volume:
       driver: local
+  critical-redis-cache:
+    driver: local
   horseless-webapp-https:
       driver: local
 
@@ -31,8 +33,6 @@ services:
         POSTGRES_PASSWORD: password
     ports:
       - "5435:5432"
-    networks:
-      - horselesswan
   keycloak.local:
       image: quay.io/keycloak/keycloak-x:latest  
       hostname: keycloak.local
@@ -81,13 +81,11 @@ services:
         - 8443:8443
       depends_on:
         - keycloakpostgres
-      networks:
-        - horselesswan
+
 
   critical-rabbitmq:
     hostname: "critical-rabbitmq"
     image: rabbitmq:3-management
-    container_name: critical-rabbitmq
     ports:
       - "4369:4369"
       - "5671:5671"
@@ -97,39 +95,46 @@ services:
       - "15672:15672"
     volumes:
       - critical-rabbitmq-volume:/var/lib/rabbitmq
-  
+ 
+  critical-redis:
+    image: redis:7-alpine
+    ports:
+      - "6379"  
+    command: redis-server --save 20 1 --loglevel warning --requirepass Pa55w0rd
+    volumes: 
+      - critical-redis-cache:/data
+      
   content-db:
     image: "mcr.microsoft.com/mssql/server:2019-latest"
-    hostname: contentdb.local
     volumes:
         - prototype-content-db:/var/opt/mssql
     environment:
         SA_PASSWORD: "Pa55w0rd"
         ACCEPT_EULA: "Y"
+    ports:
+        - 1433:1433
     depends_on:
         - keycloak.local
-    networks:
-        - horselesswan
 
   horselessnewspaper.local:
     image: "horselessnewspaper.local"
-    hostname: horselessnewspaper.local
     ports:
-      - 6000:6000
-      - 6001:6001
-    networks:
-        - horselesswan
+      - 5000:5000
     dns:
       - ${LocalDNS1}
       - 8.8.8.8
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:6001;http://+:6000
+      - ASPNETCORE_URLS_NOT=https://+:6001;http://+:6000
+      - ASPNETCORE_URLS=http://+:5000
       - Kestrel__Certificates__Default__Path=/https/servercert.pfx
       - Kestrel__Certificates__Default__Password=pa55word  
       - TenantFilesystemPath=assetroot
-      - ConnectionStrings__HostingModelConnection=Data Source=contentdb.local;Database=THLNP_Hosting;Integrated Security=false;User ID=sa;Password=Pa55w0rd;
-      - ConnectionStrings__ContentModelConnection=Data Source=contentdb.local;Database=THLNP_Content;Integrated Security=false;User ID=sa;Password=Pa55w0rd;
+      - ConnectionStrings__HostingModelConnection=Data Source=content-db;Database=THLNP_Hosting;Integrated Security=false;User ID=sa;Password=Pa55w0rd;
+      - ConnectionStrings__ContentModelConnection=Data Source=content-db;Database=THLNP_Content;Integrated Security=false;User ID=sa;Password=Pa55w0rd;
+      - ConnectionStrings__RedisSessionCache=critical-redis:6379,password=Pa55w0rd
+      - ConnectionStrings__CriticalRabbitMQ=Data Source=critical-rabbitmq
+
       - Keycloak__SignoutRedirectUrl=${KeycloakSignoutRedirectUrl}
       - Keycloak__Realm=${KeycloakRealm}
       - Keycloak__PostLogoutRedirectUri=${KeycloakPostLogoutRedirectUri}
@@ -144,6 +149,7 @@ services:
       - FeatureManagement__ContentEditorUI=false
       - RestApiBaseUrl=${RestApiBaseUrl}  
       - OdataApiBaseUrl=${OdataApiBaseUrl}
+
     volumes:
       - ./https/:/https
     depends_on:
@@ -152,7 +158,5 @@ services:
       context: ../
       dockerfile: HorselessNewspaper.Core.Web.Prototype/Dockerfile
 
-networks: 
-    horselesswan: 
-        name: horselesswan 
+
     

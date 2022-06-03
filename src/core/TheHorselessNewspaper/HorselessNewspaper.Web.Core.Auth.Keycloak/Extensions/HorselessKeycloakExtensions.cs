@@ -29,12 +29,10 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
     {
 
 
-        public static IServiceCollection AddHorselessKeycloakAuth(this IServiceCollection services, WebApplicationBuilder builder, Action<OpenIdConnectOptions> keyCloakOptions,
+        public static IServiceCollection AddHorselessKeycloakAuth(this IServiceCollection services, IConfiguration configuration, Action<OpenIdConnectOptions> keyCloakOptions,
             Action<HorselessServiceBuilder> options = null, ServiceLifetime scope = ServiceLifetime.Scoped)
         {
-            IConfiguration configuration = builder.Configuration;
-
-
+ 
             var serviceBuilder = new HorselessServiceBuilder(configuration, services);
             #region surface the keycloak logout url configuration 
 
@@ -126,22 +124,22 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 opts.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 //opts.SignedOutCallbackPath = "/";
                 //opts.SignedOutRedirectUri = builder.Configuration[KeycloakAuthOptions.SignoutRedirectUrlConfigKey];
-                opts.Authority = builder.Configuration[KeycloakAuthOptions.RealmConfigKey];
+                opts.Authority = configuration[KeycloakAuthOptions.RealmConfigKey];
                 opts.RequireHttpsMetadata = true;
-                opts.ClientId = builder.Configuration[KeycloakAuthOptions.ClientIdConfigKey];
-                opts.ClientSecret = builder.Configuration[KeycloakAuthOptions.ClientSecretConfigKey];
-                opts.MetadataAddress = builder.Configuration[KeycloakAuthOptions.MetaDataConfigKey];
+                opts.ClientId = configuration[KeycloakAuthOptions.ClientIdConfigKey];
+                opts.ClientSecret = configuration[KeycloakAuthOptions.ClientSecretConfigKey];
+                opts.MetadataAddress = configuration[KeycloakAuthOptions.MetaDataConfigKey];
                 opts.ResponseType = "code id_token";
                 opts.GetClaimsFromUserInfoEndpoint = true;
                 opts.SaveTokens = true;
                 opts.Scope.Add("openid email profile roles web-origins");
 
-                opts.NonceCookie.SameSite = SameSiteMode.Lax;
+                opts.NonceCookie.SameSite = SameSiteMode.None;
                 opts.NonceCookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                 
                 opts.UseTokenLifetime = true;
                 
-                opts.CorrelationCookie.SameSite = SameSiteMode.Lax;
+                opts.CorrelationCookie.SameSite = SameSiteMode.None;
                 opts.CorrelationCookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                 
                 // TODO revisit this tweak
@@ -224,7 +222,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                     // cookie.Cookie.Name = "keycloak.cookie";
                     opts.Cookie.MaxAge = TimeSpan.FromMinutes(60);
                     opts.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-                    opts.Cookie.SameSite = SameSiteMode.Lax;
+                    opts.Cookie.SameSite = SameSiteMode.None;
                     
                     opts.SlidingExpiration = true;
                 });

@@ -1,28 +1,20 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers;
+﻿using HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers;
+using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
 using HorselessNewspaper.Web.Core.Extensions;
 using HorselessNewspaper.Web.Core.Extensions.Hosting;
-using HorselessNewspaper.Web.Core.Filters.ActionFilters.Infrastructure;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.AspNetCore.OData;
-using Microsoft.AspNetCore.OData.Formatter;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.Net.Http.Headers;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using Microsoft.Extensions.Hosting;
 using System.Reflection;
-using TheHorselessNewspaper.Schemas.HostingModel.Context.MSSQL;
-using TheHorselessNewspaper.Schemas.HostingModel.ODATA;
-using Microsoft.AspNetCore.OData.Routing.Conventions;
-using Microsoft.AspNetCore.HttpOverrides;
-using System.Text.Json.Serialization;
-using Finbuckle.MultiTenant;
-using TheHorselessNewspaper.HostingModel.MultiTenant;
-using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Http;
+using TheHorselessNewspaper.HostingModel.Context.MSSQL;
 
 namespace HorselessNewspaper.Web.Core.Startup
 {
@@ -36,19 +28,87 @@ namespace HorselessNewspaper.Web.Core.Startup
     /// </summary>
     public class HorselessAppStartup : AbstractAppStartup
     {
-        public HorselessAppStartup(IConfigurationRoot configuration) : base(configuration)
+        IWebHostEnvironment Environment;
+        public HorselessAppStartup(IConfiguration configuration, IWebHostEnvironment env) : base(configuration)
         {
-
+            this.Environment = env;
         }
 
-        public override void Configure(IApplicationBuilder app)
+        public override void Configure(WebApplication app, IWebHostEnvironment env)
         {
-            throw new NotImplementedException();
+
+            /// <summary>
+            /// as per https://www.thecodebuzz.com/failed-to-determine-the-https-port-for-the-redirect/
+            /// </summary>
+            app.UseForwardedHeaders();
+
+            // Configure the HTTP request pipeline.
+
+            if (app.Environment.IsDevelopment())
+            {
+                // as per https://edi.wang/post/2020/4/29/my-aspnet-core-route-debugger-middleware
+                app.UseRouteDebugger();
+
+            }
+
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                // app.UseHsts();
+            }
+
+            app.UseStatusCodePages();
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
+            // no enforcement of https in dev
+            // since https won't exist on containers in kubernetes
+            // without great antipattern effort
+            // app.UseHttpsRedirection();
+
+
+            /// <summary>
+            /// enables multitenancy and other cms patterns
+            /// with attention to order of registration
+            /// as per 
+            ///     - https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-6.0#middleware-order
+            ///     - https://www.finbuckle.com/MultiTenant/Docs/v6.6.0/ConfigurationAndUsage
+            /// except for
+            ///     builder.UseAuthentication() situated prior to builder.UseRouting()
+            ///     due to need for ClaimsPrincipal during routing middleware logic
+            ///     builder.UseAuthentication();     
+            ///     builder.UseRouting();
+            ///     builder.UseCors();
+            ///     builder.UseMultiTenant();
+            ///     builder.UseAuthorization();
+            /// </summary>
+            app.UseHorselessNewspaper(app, app.Environment, app.Configuration, options =>
+            {
+
+
+            });
+
+            app.MapRazorPages();
+            //app.MapControllerRoute(
+            //    name: "default",
+            //    pattern: "{controller=Home}/{action=Index}/{id?}");
+
         }
 
         public override void ConfigureServices(IServiceCollection services)
         {
 
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
+                // Handling SameSite cookie according to https://docs.microsoft.com/en-us/aspnet/core/security/samesite?view=aspnetcore-3.1
+                // options.HandleSameSiteCookieCompatibility();
+            });
             services.AddCors(options =>
             {
 
@@ -56,7 +116,7 @@ namespace HorselessNewspaper.Web.Core.Startup
                     builder =>
                     {
             // TODO put something rational and devops engineer production environment configurable here
-                        builder.WithOrigins("https://localhost").AllowAnyOrigin();
+                        builder.AllowAnyOrigin();
                     });
             });
 
@@ -67,12 +127,9 @@ namespace HorselessNewspaper.Web.Core.Startup
             services.AddControllersWithViews(options =>
             {
                 // options.Filters.Add<InstallRequiredActionFilter>(int.MinValue);
-            });
-            // .AddRazorRuntimeCompilation();
+            }).AddRazorRuntimeCompilation();
 
             services.AddODataQueryFilter();
-
-
 
             /// <summary>
             /// as per https://www.thecodebuzz.com/failed-to-determine-the-https-port-for-the-redirect/
@@ -81,6 +138,7 @@ namespace HorselessNewspaper.Web.Core.Startup
             {
                 options.ForwardedHeaders =
                     ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+
             });
 
             services.AddHttpContextAccessor();
@@ -96,7 +154,12 @@ namespace HorselessNewspaper.Web.Core.Startup
                     var container = frag[frag.Length - 2];
                     return container + t.Name;
                 });
- 
+                //options.CustomOperationIds(apiDesc =>
+                //{
+                //    // produce this template export interface ContentEntitiesAccessControlEntry 
+                //    return apiDesc.TryGetMethodInfo(out MethodInfo methodInfo) ? methodInfo.DeclaringType.Name + methodInfo.Name : null;
+
+                //});
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Horseless Content API", Version = "v1" });
 
                 // eliminate odata metadata controller from swagger doc
@@ -106,55 +169,55 @@ namespace HorselessNewspaper.Web.Core.Startup
 
 
             // as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/docs/keycloak.md
-            services.AddHorselessKeycloakAuth(builder, keycloakOpts =>
+            services.AddHorselessKeycloakAuth(Configuration, keycloakOpts =>
             {
 
             });
 
-            services.AddHorselessNewspaper(this.Configuration, builder.Environment);
+            services.AddHorselessNewspaper(Configuration, Environment);
 
-            
+            services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
+            {
+                options.FileProviders.Add(
+                        new EmbeddedFileProvider(typeof(HorselessCMSController).Assembly));
+
+                options.FileProviders.Add(new EmbeddedFileProvider(
+                    typeof(HorselessCMSController).GetTypeInfo().Assembly,
+                    "HorselessNewspaper.RazorClassLibrary.CMS.Default"
+                ));
+
+                var contentRootPath = Path.GetFullPath(
+                Path.Combine(Environment.ContentRootPath, ".", ""));
+
+                var librarypath = Path.GetFullPath(
+                   Path.Combine(contentRootPath, "..", "HorselessNewspaper.RazorClassLibrary.CMS.Default"));
+                options.FileProviders.Add(new PhysicalFileProvider(contentRootPath));
+
+                options.FileProviders.Add(new PhysicalFileProvider(Environment.ContentRootPath));
+
+
+
+                //options.FileProviders.Add(new PhysicalFileProvider(contentRootPath));
+            });
 
             // globally enables mssql server
-            services.UseHorselessContentModelMSSqlServer(this.Configuration, this.Configuration.GetConnectionString("ContentModelConnection"));
-            services.UseHorselessHostingModelMSSqlServer(this.Configuration, this.Configuration.GetConnectionString("HostingModelConnection"));
+            services.UseHorselessContentModelMSSqlServer(Configuration, Configuration.GetConnectionString("ContentModelConnection"));
+            services.UseHorselessHostingModelMSSqlServer(Configuration, Configuration.GetConnectionString("HostingModelConnection"));
+
 
 
             // as per https://docs.microsoft.com/en-us/shows/on-net/adding-a-little-swagger-to-odata
             // as per https://github.com/OData/WebApi/issues/2024
-            services.AddMvc(options =>
+
+            services.AddStackExchangeRedisCache(o =>
             {
-                options.RespectBrowserAcceptHeader = true;
-                IEnumerable<ODataOutputFormatter> outputFormatters =
-                options.OutputFormatters.OfType<ODataOutputFormatter>()
-                    .Where(foramtter => foramtter.SupportedMediaTypes.Count == 0);
-
-                IEnumerable<ODataInputFormatter> inputFormatters =
-                    options.InputFormatters.OfType<ODataInputFormatter>()
-                        .Where(formatter => formatter.SupportedMediaTypes.Count == 0);
-
-                foreach (var outputFormatter in outputFormatters)
-                {
-                    outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/odata"));
-                    outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
-
-                }
-
-                foreach (var inputFormatter in inputFormatters)
-                {
-                    inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/odata"));
-                    inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
-
-                }
-
+                o.Configuration = Configuration.GetConnectionString("RedisSessionCache");
             });
 
-            services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
                 options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None;
-                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-                options.Cookie.IsEssential = true;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
             });
 
         }

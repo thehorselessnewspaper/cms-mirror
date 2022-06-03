@@ -5,7 +5,7 @@ using Microsoft.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
-
+using Microsoft.AspNetCore.Hosting;
 
 namespace HorselessNewspaper.Web.Core.Startup
 {
@@ -20,14 +20,14 @@ namespace HorselessNewspaper.Web.Core.Startup
     public abstract class AbstractAppStartup : IHorselessAppStartup
     {
         #region required by the asp.net core framework
-        public AbstractAppStartup(IConfigurationRoot configuration)
+        public AbstractAppStartup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public virtual IConfigurationRoot Configuration { get; }
+        public virtual IConfiguration Configuration { get; }
         public abstract void ConfigureServices(IServiceCollection services);
-        public abstract void Configure(IApplicationBuilder app);
+        public abstract void Configure(WebApplication app, IWebHostEnvironment env);
 
         #endregion required by the asp.net core framework
     }

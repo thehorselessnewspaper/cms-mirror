@@ -10,7 +10,7 @@ using Microsoft.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
-
+using Microsoft.AspNetCore.Hosting;
 
 namespace HorselessNewspaper.Web.Core.Startup
 {
@@ -24,9 +24,9 @@ namespace HorselessNewspaper.Web.Core.Startup
         /// as per 
         /// https://www.infoworld.com/article/3646098/demystifying-the-program-and-startup-classes-in-aspnet-core.html
         /// </summary>
-        IConfigurationRoot Configuration { get; }
+        IConfiguration Configuration { get; }
 
-        void Configure(IApplicationBuilder app);
+        void Configure(WebApplication app, IWebHostEnvironment env);
         void ConfigureServices(IServiceCollection services);
     }
 }
