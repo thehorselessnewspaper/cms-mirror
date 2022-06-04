@@ -3,6 +3,7 @@ using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
 using HorselessNewspaper.Web.Core.Extensions;
 using HorselessNewspaper.Web.Core.Extensions.Hosting;
+using HorselessNewspaper.Web.Core.Startup.Delegates;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
@@ -24,26 +25,20 @@ using TheHorselessNewspaper.HostingModel.Context.MSSQL;
 
 namespace HorselessNewspaper.Web.Core.Startup
 {
-    public delegate void ConfigureSharedContentDb(IServiceCollection services);
 
-    public delegate void ConfigureSharedHostingDb(IServiceCollection services);
-
-    public delegate void ConfigureRazorPages(IServiceCollection services);
-
-    public delegate void ConfigureAuthenticationCookie(CookieAuthenticationOptions opts);
-    public delegate void ConfigureCookiePolicy(CookiePolicyOptions opts);
-
-    public delegate void ConfigureHttpLogging(HttpLoggingOptions opts);
-
-    public delegate void ConfigureSession(SessionOptions opts);
-
-    public delegate void ConfigureCors(CorsOptions opts);
-
-    public delegate void ConfigureEndpointRouteBuilder(IEndpointRouteBuilder options);
     /// <summary>
     /// support extensible startup 
-    /// that encapsulates what's required
-    /// to boot the cms
+    /// that 
+    /// 
+    /// implements an opinionated startup.cs
+    /// 
+    /// encapsulates what's required
+    /// to boot the cms in the tested order
+    /// of registration of middleware and services
+    /// 
+    /// permits application developers to 
+    /// fully participate in the startup.cs workflow
+    /// without rewriting one if they don't want to
     /// 
     /// as per 
     /// https://www.infoworld.com/article/3646098/demystifying-the-program-and-startup-classes-in-aspnet-core.html
@@ -123,7 +118,7 @@ namespace HorselessNewspaper.Web.Core.Startup
             /// </summary>
             app.UseHorselessNewspaper(app, app.Environment, app.Configuration, options =>
             {
-
+                
 
             });
 
