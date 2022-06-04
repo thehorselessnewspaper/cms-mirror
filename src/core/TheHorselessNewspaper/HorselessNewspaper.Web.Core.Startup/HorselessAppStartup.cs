@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.AspNetCore.OData;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,6 +38,8 @@ namespace HorselessNewspaper.Web.Core.Startup
     public delegate void ConfigureSession(SessionOptions opts);
 
     public delegate void ConfigureCors(CorsOptions opts);
+
+    public delegate void ConfigureEndpointRouteBuilder(IEndpointRouteBuilder options);
     /// <summary>
     /// support extensible startup 
     /// that encapsulates what's required
