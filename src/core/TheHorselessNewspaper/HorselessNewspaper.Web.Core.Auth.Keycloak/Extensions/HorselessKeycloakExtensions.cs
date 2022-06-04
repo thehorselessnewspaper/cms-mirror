@@ -137,12 +137,12 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 opts.Scope.Add("openid email profile roles web-origins");
                 
 
-                opts.NonceCookie.SameSite = SameSiteMode.None;
+                opts.NonceCookie.SameSite = SameSiteMode.Lax;
                 opts.NonceCookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
 
                 opts.UseTokenLifetime = true;
 
-                opts.CorrelationCookie.SameSite = SameSiteMode.None;
+                opts.CorrelationCookie.SameSite = SameSiteMode.Lax;
                 opts.CorrelationCookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
 
                 // TODO revisit this tweak
@@ -212,7 +212,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                     // cookie.Cookie.Name = "keycloak.cookie";
                     opts.Cookie.MaxAge = TimeSpan.FromMinutes(60);
                     opts.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-                    opts.Cookie.SameSite = SameSiteMode.None;
+                    opts.Cookie.SameSite = SameSiteMode.Lax;
                     
                     opts.SlidingExpiration = true;
                 });

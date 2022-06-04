@@ -151,7 +151,8 @@ namespace HorselessNewspaper.Web.Core.Startup
             {
                 services.AddHttpLogging(logging =>
                 {
-                    logging.LoggingFields = HttpLoggingFields.All;
+                    
+                    logging.LoggingFields = HttpLoggingFields.RequestHeaders | HttpLoggingFields.ResponseHeaders;
                     logging.RequestBodyLogLimit = 4096;
                     logging.ResponseBodyLogLimit = 4096;
 
@@ -191,7 +192,7 @@ namespace HorselessNewspaper.Web.Core.Startup
                             builder
                             .AllowAnyHeader()
                             .AllowAnyMethod()
-                            .AllowAnyOrigin();
+                            .AllowCredentials();
 
 
                         });
@@ -324,9 +325,8 @@ namespace HorselessNewspaper.Web.Core.Startup
                 }
                 else
                 {
-                    options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None;
+                    options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Lax;
                     options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-                    options.Cookie.Domain = "ataxlab.com";
                 }
             });
 
