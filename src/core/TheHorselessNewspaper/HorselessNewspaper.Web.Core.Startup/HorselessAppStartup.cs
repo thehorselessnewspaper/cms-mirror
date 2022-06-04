@@ -3,7 +3,7 @@ using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
 using HorselessNewspaper.Web.Core.Extensions;
 using HorselessNewspaper.Web.Core.Extensions.Hosting;
-using HorselessNewspaper.Web.Core.Startup.Delegates;
+using HorselessNewspaper.Web.Core.Services.Model.Delegates;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;

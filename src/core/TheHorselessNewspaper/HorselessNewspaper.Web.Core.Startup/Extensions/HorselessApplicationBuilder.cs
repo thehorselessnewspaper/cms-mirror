@@ -1,5 +1,5 @@
-﻿using HorselessNewspaper.Web.Core.Startup;
-using HorselessNewspaper.Web.Core.Startup.Delegates;
+﻿using HorselessNewspaper.Web.Core.Services.Model.Delegates;
+using HorselessNewspaper.Web.Core.Startup;
 using Microsoft.AspNetCore.Builder;
 using System;
 using System.Collections.Generic;

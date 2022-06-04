@@ -17,6 +17,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.Extensions.Hosting
 
         public readonly IConfiguration Configuration;
 
+
         /// <summary>
         /// Gets/sets if runtime compilation should be enabled.
         /// </summary>

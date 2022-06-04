@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HorselessNewspaper.Web.Core.Startup.Delegates
+namespace HorselessNewspaper.Web.Core.Services.Model.Delegates
 {
     public delegate void ConfigureSharedContentDb(IServiceCollection services);
 
@@ -28,7 +29,9 @@ namespace HorselessNewspaper.Web.Core.Startup.Delegates
     public delegate void ConfigureCors(CorsOptions opts);
 
     public delegate void ConfigureEndpointRouteBuilder(IEndpointRouteBuilder options);
-    
+
+    public delegate void ConfigureCookie(CookieBuilder cookieBuilder);
+
     /// <summary>
     /// this class is merely travelling with the delegates
     /// examine removal
