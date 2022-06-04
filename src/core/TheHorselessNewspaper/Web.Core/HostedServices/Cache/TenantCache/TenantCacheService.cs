@@ -46,7 +46,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
     /// maintain a cache of tenants 
     /// and their web api endpoints
     /// </summary>
-    internal class TenantCacheService : ITenantCacheService, IHostedService, IDisposable
+    public class TenantCacheService : ITenantCacheService, IHostedService, IDisposable
     {
         // as per https://stackoverflow.com/questions/63468682/how-to-stop-a-timer-created-in-a-net-core-controller
         private static readonly object _timerLock = new object();

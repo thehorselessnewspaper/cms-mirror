@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HorselessNewspaper.Web.Core.UnitOfWork
 {
-    internal class UnitOfWorkResult<T> : IUnitOfWorkResult<T>
+    public class UnitOfWorkResult<T> : IUnitOfWorkResult<T>
     {
         public UnitOfWorkResult()
         {
@@ -18,7 +18,7 @@ namespace HorselessNewspaper.Web.Core.UnitOfWork
         public DateTime UTCTimestamp { get; set; }
     }
 
-    internal interface IUnitOfWorkResult<T>
+    public interface IUnitOfWorkResult<T>
     {
         T Payload { get; set; }
         bool OperationSuccessful { get; set; }

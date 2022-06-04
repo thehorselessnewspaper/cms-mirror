@@ -26,7 +26,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
     /// as per https://andrewlock.net/when-asp-net-core-cant-find-your-controller-debugging-application-parts/
     /// as per https://docs.microsoft.com/en-us/aspnet/core/mvc/advanced/app-parts?view=aspnetcore-6.0
     /// </summary>
-    internal class ApplicationPartsLogger : IHostedService, IDisposable
+    public class ApplicationPartsLogger : IHostedService, IDisposable
     {
         private readonly ILogger<ApplicationPartsLogger> _logger;
         private readonly ApplicationPartManager _partManager;

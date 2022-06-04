@@ -5,15 +5,17 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
+using HorselessNewspaper.Web.Core.Services.Model.Extensions.Claim;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using HorselessNewspaper.Web.Core.Extensions.ClaimExtensions;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 
 namespace HorselessNewspaper.Web.Core.UnitOfWork.ContentModelTasks.PrincipalTasks
 {
-    internal class ContentPrincipalTasksRepository : IContentPrincipalTasksRepository
+    /// <summary>
+    /// todo - revisit making this an internal class
+    /// </summary>
+    public class ContentPrincipalTasksRepository : IContentPrincipalTasksRepository
     {
         private ILogger<ContentPrincipalTasksRepository> logger;
 

@@ -40,16 +40,17 @@ using Microsoft.AspNetCore.Authorization;
 using HorselessNewspaper.Web.Core.Services.Query.Authorization.Handler;
 using HorselessNewspaper.Web.Core.Services.Query.Authorization.Contexts;
 using HorselessNewspaper.Core.Interfaces.Security.Cache;
+using TheHorselessNewspaper.HostingModel.HostingEntities.Query;
+using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
     /// <summary>
     /// support headless cms asp.net core startup semantics
     /// </summary>
-    [Obsolete]
-    public static class ObsoleteHorselessAspNetCoreStartupExtensions
+    public static class HorselessAspNetCoreStartupExtensions
     {
-        public static IServiceCollection ObsoleteAddHorselessNewspaper(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment,
+        public static IServiceCollection AddHorselessNewspaper(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment,
         Action<HorselessServiceBuilder> options = null, ServiceLifetime scope = ServiceLifetime.Scoped)
         {
             var serviceBuilder = new HorselessServiceBuilder(configuration, services);
@@ -310,8 +311,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
             #endregion
 
             #region repositories
-
-            //serviceBuilder.Services.AddScoped<IContentPrincipalTasksRepository, ContentPrincipalTasksRepository>();
+            serviceBuilder.Services.AddScoped<IContentPrincipalTasksRepository, ContentPrincipalTasksRepository>();
 
             #endregion repositories
 
