@@ -324,8 +324,9 @@ namespace HorselessNewspaper.Web.Core.Startup
                 }
                 else
                 {
-                    options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Lax;
+                    options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None;
                     options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                    options.Cookie.Domain = "ataxlab.com";
                 }
             });
 
