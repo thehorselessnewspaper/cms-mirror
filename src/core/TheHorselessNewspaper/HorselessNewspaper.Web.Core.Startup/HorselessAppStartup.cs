@@ -60,6 +60,12 @@ namespace HorselessNewspaper.Web.Core.Startup
 
         public ConfigureHttpLogging OnConfigureHttpLogging;
 
+        public ConfigureCookie OnConfigureNonceCookie;
+
+        public ConfigureCookie OnConfigureSessionCookie;
+
+        public ConfigureCookie OnConfigureCorrelationCookie;
+
         IWebHostEnvironment Environment;
         public HorselessAppStartup(IConfiguration configuration, IWebHostEnvironment env) : base(configuration)
         {
@@ -249,7 +255,7 @@ namespace HorselessNewspaper.Web.Core.Startup
             // as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/docs/keycloak.md
             services.AddHorselessKeycloakAuth(Configuration, keycloakOpts =>
             {
-
+               
             });
 
             services.AddHorselessNewspaper(Configuration, Environment);
