@@ -80,6 +80,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
             // as per https://docs.microsoft.com/en-us/aspnet/core/fundamentals/static-files?view=aspnetcore-6.0
             builder.UseStaticFiles();
 
+            builder.UseHttpLogging();
             builder.UseRouting();
             builder.UseCors();
             builder.UseMultiTenant();

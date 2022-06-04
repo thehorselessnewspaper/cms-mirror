@@ -8,13 +8,16 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.AspNetCore.OData;
+using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using System.Reflection;
 using TheHorselessNewspaper.HostingModel.Context.MSSQL;
 
@@ -29,6 +32,7 @@ namespace HorselessNewspaper.Web.Core.Startup
     public delegate void ConfigureAuthenticationCookie(CookieAuthenticationOptions opts);
     public delegate void ConfigureCookiePolicy(CookiePolicyOptions opts);
 
+    public delegate void ConfigureHttpLogging(HttpLoggingOptions opts);
 
     public delegate void ConfigureSession(SessionOptions opts);
 
@@ -55,6 +59,9 @@ namespace HorselessNewspaper.Web.Core.Startup
         public ConfigureCors OnConfigureCors;
 
         public ConfigureCookiePolicy OnConfigureDefaultCookiePolicy;
+
+        public ConfigureHttpLogging OnConfigureHttpLogging;
+
         IWebHostEnvironment Environment;
         public HorselessAppStartup(IConfiguration configuration, IWebHostEnvironment env) : base(configuration)
         {
@@ -126,6 +133,26 @@ namespace HorselessNewspaper.Web.Core.Startup
 
         public override void ConfigureServices(IServiceCollection services)
         {
+
+            if (OnConfigureHttpLogging != null)
+            {
+                services.AddHttpLogging(logging =>
+                {
+                    OnConfigureHttpLogging(logging);
+
+                });
+
+            }
+            else
+            {
+                services.AddHttpLogging(logging =>
+                {
+                    logging.LoggingFields = HttpLoggingFields.All;
+                    logging.RequestBodyLogLimit = 4096;
+                    logging.ResponseBodyLogLimit = 4096;
+
+                });
+            }
 
 
             services.Configure<CookiePolicyOptions>(options =>
