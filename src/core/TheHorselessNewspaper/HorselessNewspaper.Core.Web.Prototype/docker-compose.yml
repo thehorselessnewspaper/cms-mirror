@@ -116,6 +116,8 @@ services:
     depends_on:
         - keycloak.local
 
+ 
+
   horselessnewspaper.local:
     image: "horselessnewspaper.local"
     hostname: blackintosh.foray.ataxlab.com

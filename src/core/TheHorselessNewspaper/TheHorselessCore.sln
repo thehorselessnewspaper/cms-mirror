@@ -74,6 +74,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Web.Core
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Web.Core.Services.Model", "HorselessNewspaper.Web.Core.Services.Model\HorselessNewspaper.Web.Core.Services.Model.csproj", "{C095E4DA-7D3F-474B-B8AD-E691EE383E74}"
 EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "horselessnewspaper.DependencyValidation", "horselessnewspaper.DependencyValidation\horselessnewspaper.DependencyValidation.modelproj", "{515A2AC6-B66F-46ED-B35C-1BFBEC977D19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -148,6 +150,10 @@ Global
 		{C095E4DA-7D3F-474B-B8AD-E691EE383E74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C095E4DA-7D3F-474B-B8AD-E691EE383E74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C095E4DA-7D3F-474B-B8AD-E691EE383E74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{515A2AC6-B66F-46ED-B35C-1BFBEC977D19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{515A2AC6-B66F-46ED-B35C-1BFBEC977D19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{515A2AC6-B66F-46ED-B35C-1BFBEC977D19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{515A2AC6-B66F-46ED-B35C-1BFBEC977D19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

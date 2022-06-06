@@ -1,11 +1,19 @@
 {
-    "version": "2.0",
-    "logging": {
-        "applicationInsights": {
-            "samplingSettings": {
-                "isEnabled": true,
-                "excludedTypes": "Request"
-            }
-        }
+  "version": "2.0",
+  "extensions": {
+    "rabbitMQ": {
+      "prefetchCount": 100,
+      "queueName": "CommandChannel",
+      "connectionString": "amqp://guest:guest@awsdev.ataxlab.com:5672",
+      "port": 10
     }
+  },
+  "logging": {
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "excludedTypes": "Request"
+      }
+    }
+  }
 }

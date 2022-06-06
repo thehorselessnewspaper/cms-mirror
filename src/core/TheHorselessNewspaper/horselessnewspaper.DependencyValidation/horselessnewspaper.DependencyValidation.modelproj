@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{515a2ac6-b66f-46ed-b35c-1bfbec977d19}</ProjectGuid>
+    <ArchitectureToolsVersion>2.0.0.0</ArchitectureToolsVersion>
+    <Name>horselessnewspaper.DependencyValidation</Name>
+    <RootNamespace>horselessnewspaper.DependencyValidation</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Validate Include="DependencyValidation1.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="DependencyValidation1.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>DependencyValidation1.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="DependencyValidation1.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>DependencyValidation1.layerdiagram</DependentUpon>
+    </Validate>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HorselessNewspaper.Client.Nuget\HorselessNewspaper.Client.Nuget.csproj">
+      <Name>HorselessNewspaper.Client.Nuget</Name>
+      <Project>{5c766fc8-35d8-4f76-b544-b5f9b911797d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\HorselessNewspaper.Core.Interfaces\HorselessNewspaper.Core.Interfaces.csproj">
+      <Name>HorselessNewspaper.Core.Interfaces</Name>
+      <Project>{a3c89049-17dd-4568-8ebb-fbbf17df7819}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\HorselessNewspaper.Core.Repositories\HorselessNewspaper.Core.Repositories.csproj">
+      <Name>HorselessNewspaper.Core.Repositories</Name>
+      <Project>{bb3f1432-bd07-4b1c-996f-2a8740ce1dac}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\HorselessNewspaper.Core.Web.Prototype\HorselessNewspaper.Core.Web.Prototype.csproj">
+      <Name>HorselessNewspaper.Core.Web.Prototype</Name>
+      <Project>{e16e3ad0-784f-44d5-8ae5-c8e86547faf6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\HorselessNewspaper.Core.Workflow.AzureFunctions\HorselessNewspaper.Core.Workflow.AzureFunctions.csproj">
+      <Name>HorselessNewspaper.Core.Workflow.AzureFunctions</Name>
+      <Project>{52cbe59d-1580-4d3c-a66d-5515551198a0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\HorselessNewspaper.RazorClassLibrary.CMS.Default\HorselessNewspaper.RazorClassLibrary.CMS.Default.csproj">
+      <Name>HorselessNewspaper.RazorClassLibrary.CMS.Default</Name>
+      <Project>{56bde1b4-838e-491e-a9c0-9648fb3cf788}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\HorselessNewspaper.RazorClassLibrary.Keycloak.Default\HorselessNewspaper.RazorClassLibrary.Keycloak.Default.csproj">
+      <Name>HorselessNewspaper.RazorClassLibrary.Keycloak.Default</Name>
+      <Project>{fc6bb660-0bd4-4a02-ab79-b8a6c1fbbc1b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\HorselessNewspaper.Web.Core.Auth.Keycloak\HorselessNewspaper.Web.Core.Auth.Keycloak.csproj">
+      <Name>HorselessNewspaper.Web.Core.Auth.Keycloak</Name>
+      <Project>{e26646d7-38e1-4f56-9eec-039205e1ce3f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\HorselessNewspaper.Web.Core.Extensions.MSSQLServer\HorselessNewspaper.Web.Core.Extensions.MSSQLServer.csproj">
+      <Name>HorselessNewspaper.Web.Core.Extensions.MSSQLServer</Name>
+      <Project>{68c78ffb-7ba0-463b-a9c3-fd8e069054f4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\HorselessNewspaper.Web.Core.Extensions.MySQL\HorselessNewspaper.Web.Core.Extensions.MySQL.csproj">
+      <Name>HorselessNewspaper.Web.Core.Extensions.MySQL</Name>
+      <Project>{fec81f63-4e51-4d9c-ab51-8781557f725f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\HorselessNewspaper.Web.Core.Services.Model\HorselessNewspaper.Web.Core.Services.Model.csproj">
+      <Name>HorselessNewspaper.Web.Core.Services.Model</Name>
+      <Project>{c095e4da-7d3f-474b-b8ad-e691ee383e74}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\HorselessNewspaper.Web.Core.Services.Query\HorselessNewspaper.Web.Core.Services.Query.csproj">
+      <Name>HorselessNewspaper.Web.Core.Services.Query</Name>
+      <Project>{63e6f9db-f681-431b-b5f8-0ebc9c3c1c8b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\HorselessNewspaper.Web.Core.Startup\HorselessNewspaper.Web.Core.Startup.csproj">
+      <Name>HorselessNewspaper.Web.Core.Startup</Name>
+      <Project>{fa16fb00-edb9-4bb0-a37f-b8eeb93d919b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\HorselessNewspaper.Web.TagHelpers\HorselessNewspaper.Web.TagHelpers.csproj">
+      <Name>HorselessNewspaper.Web.TagHelpers</Name>
+      <Project>{7b1b7fb3-5a13-46c1-9d89-3f93cbc3ae42}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Web.Core\HorselessNewspaper.Web.Core.csproj">
+      <Name>HorselessNewspaper.Web.Core</Name>
+      <Project>{6bca4cb6-5574-40a7-a196-7cb6b9ccd539}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="TheHorselessNewspaper.HostingModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <Name>TheHorselessNewspaper.HostingModel</Name>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
+</Project>

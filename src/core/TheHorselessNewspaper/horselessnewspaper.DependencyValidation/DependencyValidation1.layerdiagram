@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="5e85d255-78fb-406a-bec3-4ebaaa99aca4" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="0cf5f77d-3043-4942-be78-8433e558bd4f" name="HorselessNewspaper.Web.Core.Startup.dll">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="48ae57b1-8ab5-4df0-8702-f4f1ca0b18e7" direction="Forward">
+          <layerMoniker Id="e7d3d950-5f71-48ce-b5fc-d72b29e4a704" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="a2cf313d-27c2-4a6c-8c4e-dfc7b3c2d9b2" direction="Forward">
+          <layerMoniker Id="4af66873-c955-414e-93c2-a779da63c9aa" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="37ddc15f-0f4b-4495-add7-2322e1b3d1dc" name="HorselessNewspaper.Web.Core.Startup.dll">
+          <ArtifactNode Label="HorselessNewspaper.Web.Core.Startup.dll" Category="CodeSchema_Assembly" Id="(Assembly=../HorselessNewspaper.Web.Core.Startup/bin/Debug/net6.0/HorselessNewspaper.Web.Core.Startup.dll)" />
+          <ExpandedNode Id="(Assembly=HorselessNewspaper.Web.Core.Startup)" Label="HorselessNewspaper.Web.Core.Startup.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="e7d3d950-5f71-48ce-b5fc-d72b29e4a704" name="HorselessNewspaper.Web.Core.dll">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="e1e5272d-e5e0-45b7-a22c-52ba11e33dfc" direction="Forward">
+          <layerMoniker Id="8f265681-d08c-4a1c-9a01-c8b96de90eef" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="8787e9f3-334c-4cfc-b0f2-6daa1d887a1d" name="HorselessNewspaper.Web.Core.dll">
+          <ArtifactNode Label="HorselessNewspaper.Web.Core.dll" Category="CodeSchema_Assembly" Id="(Assembly=../Web.Core/bin/Debug/net6.0/HorselessNewspaper.Web.Core.dll)" />
+          <ExpandedNode Id="(Assembly=HorselessNewspaper.Web.Core)" Label="HorselessNewspaper.Web.Core.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="8f265681-d08c-4a1c-9a01-c8b96de90eef" name="HorselessNewspaper.RazorClassLibrary.CMS.Default.dll">
+      <references>
+        <reference Id="e248d04c-fd62-462f-b081-9b1ac03ba95b" name="HorselessNewspaper.RazorClassLibrary.CMS.Default.dll">
+          <ArtifactNode Label="HorselessNewspaper.RazorClassLibrary.CMS.Default.dll" Category="CodeSchema_Assembly" Id="(Assembly=../HorselessNewspaper.RazorClassLibrary.CMS.Default/bin/Debug/net6.0/HorselessNewspaper.RazorClassLibrary.CMS.Default.dll)" />
+          <ExpandedNode Id="(Assembly=HorselessNewspaper.RazorClassLibrary.CMS.Default)" Label="HorselessNewspaper.RazorClassLibrary.CMS.Default.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="4af66873-c955-414e-93c2-a779da63c9aa" name="HorselessNewspaper.Web.Core.Auth.Keycloak.dll">
+      <references>
+        <reference Id="8afa7474-c983-427c-a4d0-f6282afe18d5" name="HorselessNewspaper.Web.Core.Auth.Keycloak.dll">
+          <ArtifactNode Label="HorselessNewspaper.Web.Core.Auth.Keycloak.dll" Category="CodeSchema_Assembly" Id="(Assembly=../HorselessNewspaper.Web.Core.Auth.Keycloak/bin/Debug/net6.0/HorselessNewspaper.Web.Core.Auth.Keycloak.dll)" />
+          <ExpandedNode Id="(Assembly=HorselessNewspaper.Web.Core.Auth.Keycloak)" Label="HorselessNewspaper.Web.Core.Auth.Keycloak.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="1f6c545a-cab4-4551-899a-fbb078a214b8" name="TheHorselessNewspaper.HostingModel.dll">
+      <references>
+        <reference Id="af9be291-8adf-41dd-9e33-99e1507e0d2b" name="TheHorselessNewspaper.HostingModel.dll">
+          <ArtifactNode Label="TheHorselessNewspaper.HostingModel.dll" Category="CodeSchema_Assembly" Id="(Assembly=file:///C:/Users/velve/.nuget/packages/thehorselessnewspaper.hostingmodel/0.3.20220603.1/lib/net6.0/TheHorselessNewspaper.HostingModel.dll)" />
+          <ExpandedNode Id="(Assembly=TheHorselessNewspaper.HostingModel)" Label="TheHorselessNewspaper.HostingModel.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="bb95aa69-db72-40d6-94b5-2072172a797f" name="HorselessNewspaper.Web.Core.Services.Model.dll">
+      <references>
+        <reference Id="0371ea49-9c9b-4a1f-9068-eb3e05201f70" name="HorselessNewspaper.Web.Core.Services.Model.dll">
+          <ArtifactNode Label="HorselessNewspaper.Web.Core.Services.Model.dll" Category="CodeSchema_Assembly" Id="(Assembly=../HorselessNewspaper.Web.Core.Services.Model/bin/Debug/net6.0/HorselessNewspaper.Web.Core.Services.Model.dll)" />
+          <ExpandedNode Id="(Assembly=HorselessNewspaper.Web.Core.Services.Model)" Label="HorselessNewspaper.Web.Core.Services.Model.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="78866ee7-0621-47f2-8034-f4180ca8c514" name="HorselessNewspaper.Web.Core.Services.Query.dll">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="a80dcba7-c197-4883-8b2e-a181905cb351" direction="Forward">
+          <layerMoniker Id="bb95aa69-db72-40d6-94b5-2072172a797f" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="fa3b597a-1d01-4f6a-8150-493fd09b8e2b" direction="Forward">
+          <layerMoniker Id="6634e4d4-cf6d-4a71-a245-27315fa8084b" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="2fdae185-ec24-411f-bdfd-622b18fdfa76" name="HorselessNewspaper.Web.Core.Services.Query.dll">
+          <ArtifactNode Label="HorselessNewspaper.Web.Core.Services.Query.dll" Category="CodeSchema_Assembly" Id="(Assembly=../HorselessNewspaper.Web.Core.Services.Query/bin/Debug/net6.0/HorselessNewspaper.Web.Core.Services.Query.dll)" />
+          <ExpandedNode Id="(Assembly=HorselessNewspaper.Web.Core.Services.Query)" Label="HorselessNewspaper.Web.Core.Services.Query.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="6634e4d4-cf6d-4a71-a245-27315fa8084b" name="HorselessNewspaper.Core.Interfaces.dll1">
+      <references>
+        <reference Id="9b4e6a14-9e1e-45df-b614-666469cfdb50" name="HorselessNewspaper.Core.Interfaces.dll">
+          <ArtifactNode Label="HorselessNewspaper.Core.Interfaces.dll" Category="CodeSchema_Assembly" Id="(Assembly=../HorselessNewspaper.Core.Interfaces/bin/Debug/net6.0/HorselessNewspaper.Core.Interfaces.dll)" />
+          <ExpandedNode Id="(Assembly=HorselessNewspaper.Core.Interfaces)" Label="HorselessNewspaper.Core.Interfaces.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>
