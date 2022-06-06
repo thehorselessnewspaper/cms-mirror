@@ -56,11 +56,11 @@
 		<Folder Include="Model\Query\HostingCollection\" />
 		<Folder Include="SingletonServices\Cache\Tenant\Mock\" />
 		<Folder Include="swagger\" />
-		<Folder Include="UnitOfWork\HostingModel\" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\HorselessNewspaper.Core.Interfaces\HorselessNewspaper.Core.Interfaces.csproj" />
+	  <ProjectReference Include="..\HorselessNewspaper.Core.Repositories\HorselessNewspaper.Core.Repositories.csproj" />
 	  <ProjectReference Include="..\HorselessNewspaper.Web.Core.Services.Query\HorselessNewspaper.Web.Core.Services.Query.csproj" />
 	</ItemGroup>
 

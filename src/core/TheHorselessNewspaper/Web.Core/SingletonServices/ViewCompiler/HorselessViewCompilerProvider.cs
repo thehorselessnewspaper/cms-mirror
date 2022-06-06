@@ -10,11 +10,13 @@ using System.Threading.Tasks;
 namespace HorselessNewspaper.Web.Core.SingletonServices.ViewCompiler
 {
     /// <summary>
+    /// todo - revisit making this an internal class
     /// support dynamic view loading and unloading
     /// wholly based on
     ///  HorselessViewCompiler
     /// </summary>
-    internal class HorselessViewCompilerProvider : IViewCompilerProvider
+    
+    public class HorselessViewCompilerProvider : IViewCompilerProvider
     { 
         public HorselessViewCompilerProvider(ApplicationPartManager applicationPartManager, ILoggerFactory loggerFactory)
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HorselessNewspaper.Web.Core.Services.Model.Delegates;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,6 +17,10 @@ namespace HorselessNewspaper.Web.Core.Services.Model.Extensions.Hosting
         public readonly IServiceCollection Services;
 
         public readonly IConfiguration Configuration;
+
+
+
+        public static ICollection<string> OpenIdConnectScopes { get; set; } = new HashSet<string>();
 
         /// <summary>
         /// Gets/sets if runtime compilation should be enabled.

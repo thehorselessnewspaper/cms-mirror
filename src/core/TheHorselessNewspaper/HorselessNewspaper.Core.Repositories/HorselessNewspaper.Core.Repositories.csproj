@@ -22,6 +22,11 @@
 
 	<ItemGroup>
 		<Folder Include="Query\" />
+		<Folder Include="UnitOfWork\HostingModel\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\HorselessNewspaper.Web.Core.Services.Model\HorselessNewspaper.Web.Core.Services.Model.csproj" />
 	</ItemGroup>
 
 </Project>

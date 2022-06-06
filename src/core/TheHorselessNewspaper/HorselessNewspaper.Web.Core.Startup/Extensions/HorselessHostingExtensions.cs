@@ -15,8 +15,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
     /// <summary>
     /// asp.net core extensibility hook to enable cms functionality
     /// </summary>
-    [Obsolete]
-    public static class ObsoleteHorselessHostingExtensions
+    public static class HorselessHostingExtensions
     {
         /// <summary>
         /// suggestion is to apply extension method parameter constraints
@@ -31,11 +30,11 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
         /// <param name="builder"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        [Obsolete]
-        public static IApplicationBuilder ObsoleteUseHorselessNewspaper(this IApplicationBuilder builder, WebApplication app, IWebHostEnvironment env, IConfiguration configuration,
-            Action<ObsoleteHorselessApplicationBuilder> options)
+
+        public static IApplicationBuilder UseHorselessNewspaper(this IApplicationBuilder builder, WebApplication app, IWebHostEnvironment env, IConfiguration configuration,
+            Action<HorselessApplicationBuilder> options)
         {
-            var applicationBuilder = new ObsoleteHorselessApplicationBuilder(app, builder);
+            var applicationBuilder = new HorselessApplicationBuilder(app, builder);
 
             // as per https://stackoverflow.com/questions/40908568/assembly-loading-in-net-core
             // todo - come up with a central way of storing configuration string keys
@@ -46,9 +45,9 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
                 var directoryInfo = new DirectoryInfo(env.WebRootPath);
                 if (directoryInfo != null 
                     && directoryInfo.Exists 
-                    && configuration[ObsoleteHorselessApplicationBuilder.TenantFilesystemPathConfigurationKey] != null)
+                    && configuration[HorselessApplicationBuilder.TenantFilesystemPathConfigurationKey] != null)
                 {
-                    string path2 = configuration[ObsoleteHorselessApplicationBuilder.TenantFilesystemPathConfigurationKey];
+                    string path2 = configuration[HorselessApplicationBuilder.TenantFilesystemPathConfigurationKey];
                     string fullName = directoryInfo.Parent.FullName;
                     var pluginPath = Path.Combine(fullName, path2);
 

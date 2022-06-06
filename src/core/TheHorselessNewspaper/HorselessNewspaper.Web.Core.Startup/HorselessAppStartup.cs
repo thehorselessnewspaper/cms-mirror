@@ -3,40 +3,42 @@ using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions;
 using HorselessNewspaper.Web.Core.Extensions;
 using HorselessNewspaper.Web.Core.Extensions.Hosting;
+using HorselessNewspaper.Web.Core.Services.Model.Delegates;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.AspNetCore.OData;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using System.Reflection;
 using TheHorselessNewspaper.HostingModel.Context.MSSQL;
 
 namespace HorselessNewspaper.Web.Core.Startup
 {
-    public delegate void ConfigureSharedContentDb(IServiceCollection services);
 
-    public delegate void ConfigureSharedHostingDb(IServiceCollection services);
-
-    public delegate void ConfigureRazorPages(IServiceCollection services);
-
-    public delegate void ConfigureAuthenticationCookie(CookieAuthenticationOptions opts);
-    public delegate void ConfigureCookiePolicy(CookiePolicyOptions opts);
-
-
-    public delegate void ConfigureSession(SessionOptions opts);
-
-    public delegate void ConfigureCors(CorsOptions opts);
     /// <summary>
     /// support extensible startup 
-    /// that encapsulates what's required
-    /// to boot the cms
+    /// that 
+    /// 
+    /// implements an opinionated startup.cs
+    /// 
+    /// encapsulates what's required
+    /// to boot the cms in the tested order
+    /// of registration of middleware and services
+    /// 
+    /// permits application developers to 
+    /// fully participate in the startup.cs workflow
+    /// without rewriting one if they don't want to
     /// 
     /// as per 
     /// https://www.infoworld.com/article/3646098/demystifying-the-program-and-startup-classes-in-aspnet-core.html
@@ -55,6 +57,15 @@ namespace HorselessNewspaper.Web.Core.Startup
         public ConfigureCors OnConfigureCors;
 
         public ConfigureCookiePolicy OnConfigureDefaultCookiePolicy;
+
+        public ConfigureHttpLogging OnConfigureHttpLogging;
+
+        public ConfigureCookie OnConfigureNonceCookie;
+
+        public ConfigureCookie OnConfigureSessionCookie;
+
+        public ConfigureCookie OnConfigureCorrelationCookie;
+
         IWebHostEnvironment Environment;
         public HorselessAppStartup(IConfiguration configuration, IWebHostEnvironment env) : base(configuration)
         {
@@ -113,7 +124,7 @@ namespace HorselessNewspaper.Web.Core.Startup
             /// </summary>
             app.UseHorselessNewspaper(app, app.Environment, app.Configuration, options =>
             {
-
+                
 
             });
 
@@ -126,6 +137,27 @@ namespace HorselessNewspaper.Web.Core.Startup
 
         public override void ConfigureServices(IServiceCollection services)
         {
+
+            if (OnConfigureHttpLogging != null)
+            {
+                services.AddHttpLogging(logging =>
+                {
+                    OnConfigureHttpLogging(logging);
+
+                });
+
+            }
+            else
+            {
+                services.AddHttpLogging(logging =>
+                {
+                    
+                    logging.LoggingFields = HttpLoggingFields.RequestHeaders | HttpLoggingFields.ResponseHeaders;
+                    logging.RequestBodyLogLimit = 4096;
+                    logging.ResponseBodyLogLimit = 4096;
+
+                });
+            }
 
 
             services.Configure<CookiePolicyOptions>(options =>
@@ -160,7 +192,7 @@ namespace HorselessNewspaper.Web.Core.Startup
                             builder
                             .AllowAnyHeader()
                             .AllowAnyMethod()
-                            .AllowAnyOrigin();
+                            .AllowCredentials();
 
 
                         });
@@ -224,7 +256,7 @@ namespace HorselessNewspaper.Web.Core.Startup
             // as per https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/dev/docs/keycloak.md
             services.AddHorselessKeycloakAuth(Configuration, keycloakOpts =>
             {
-
+               
             });
 
             services.AddHorselessNewspaper(Configuration, Environment);

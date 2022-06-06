@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using HorselessNewspaper.Web.Core.Services.Model.Delegates;
+using HorselessNewspaper.Web.Core.Startup;
+using Microsoft.AspNetCore.Builder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +9,17 @@ using System.Threading.Tasks;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
-    [Obsolete]
-    public class ObsoleteHorselessApplicationBuilder
+    public class HorselessApplicationBuilder
     {
         public readonly IApplicationBuilder Builder;
         public readonly WebApplication app;
+        public ConfigureEndpointRouteBuilder OnBeforeConfigureEndpoints;
+        public ConfigureEndpointRouteBuilder OnAfterConfigureEndpoints;
+        public ConfigureEndpointRouteBuilder OnConfigureEndpoints;
+
         // ouch mnagic string for retrieving configuration
         public static string TenantFilesystemPathConfigurationKey = "TenantFilesystemPath";
-        public ObsoleteHorselessApplicationBuilder(WebApplication app, IApplicationBuilder builder)
+        public HorselessApplicationBuilder(WebApplication app, IApplicationBuilder builder)
         {
             Builder = builder;
             this.app = app;

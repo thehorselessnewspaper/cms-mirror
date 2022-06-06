@@ -132,7 +132,10 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Extensions
                 opts.ResponseType = "code id_token";
                 opts.GetClaimsFromUserInfoEndpoint = true;
                 opts.SaveTokens = true;
+
+ 
                 opts.Scope.Add("openid email profile roles web-origins");
+                
 
                 opts.NonceCookie.SameSite = SameSiteMode.Lax;
                 opts.NonceCookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
