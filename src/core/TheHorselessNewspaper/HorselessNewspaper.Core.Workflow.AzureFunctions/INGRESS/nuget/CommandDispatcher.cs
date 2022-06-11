@@ -10,7 +10,7 @@ namespace HorselessNewspaper.Core.Workflow.AzureFunctions
     public class CommandDispatcher
     {
         [FunctionName("CommandDispatcher")]
-        public void Run([RabbitMQTrigger("CommandChannel", ConnectionStringSetting = "%localrabbit%")] BasicDeliverEventArgs arg, ILogger log)
+        public void Run([RabbitMQTrigger("CommandChannel", ConnectionStringSetting = "localrabbit")] BasicDeliverEventArgs arg, ILogger log)
         {
             log.LogInformation($"C# Queue trigger function processed message from exchange: {arg.Exchange}");
 

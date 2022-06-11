@@ -1,13 +1,7 @@
 {
-  "version": "2.0",
-  "extensions": {
-    "rabbitMQ": {
-      "prefetchCount": 100,
-      "queueName": "CommandChannel",
-      "port": 10
-    }
-  },
+    "version": "2.0",
   "logging": {
+    "HorselessNewspaper.Core.Workflow.AzureFunctions": "Information",
     "applicationInsights": {
       "samplingSettings": {
         "isEnabled": true,
