@@ -35,6 +35,7 @@ using TheHorselessNewspaper.HostingModel.ODATA;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
+using HorselessNewspaper.Client.RabbitMQ.Extensions;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -148,7 +149,8 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
             );
 
-
+            // register rabitmq client
+            services.AddHorselessRabbitMQClient();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
