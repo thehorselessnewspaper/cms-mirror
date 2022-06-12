@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
+using HorselessNewspaper.Web.Core.Services.Query.Extensions;
+
 [assembly: FunctionsStartup(typeof(HorselessNewspaper.Core.Workflow.AzureFunctions.Tenant.Onboarding.Startup))]
 namespace HorselessNewspaper.Core.Workflow.AzureFunctions.Tenant.Onboarding
 {
@@ -11,6 +13,10 @@ namespace HorselessNewspaper.Core.Workflow.AzureFunctions.Tenant.Onboarding
         public override void Configure(IFunctionsHostBuilder builder)
         {
             builder.Services.AddHttpClient();
+
+            /// add the horseless query surface 
+            builder.Services.AddHorselessQueryOperators();
+
         }
 
         public override void ConfigureAppConfiguration(IFunctionsConfigurationBuilder builder)

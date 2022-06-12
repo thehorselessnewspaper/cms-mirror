@@ -1,18 +1,23 @@
 ﻿using AutoMapper;
+using HorselessNewspaper.Core.Interfaces.Security.Cache;
 using HorselessNewspaper.Web.Core.Automapper;
 using HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.ApplicationPartsLogger;
 using HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
-using HorselessNewspaper.Web.Core.Middleware;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter.Strategy;
 using HorselessNewspaper.Web.Core.ScopedServices.AuthenticationSchemes;
 using HorselessNewspaper.Web.Core.ScopedServices.RestClients;
 using HorselessNewspaper.Web.Core.ScopedServices.RestClients.Also;
 using HorselessNewspaper.Web.Core.ScopedServices.RoutingStrategy;
+using HorselessNewspaper.Web.Core.Services.Model.Extensions.Hosting;
+using HorselessNewspaper.Web.Core.Services.Query.Authorization.Contexts;
+using HorselessNewspaper.Web.Core.Services.Query.Authorization.Handler;
+using HorselessNewspaper.Web.Core.Services.Query.Extensions;
 using HorselessNewspaper.Web.Core.SingletonServices.Cache.Tenant;
 using HorselessNewspaper.Web.Core.SingletonServices.ViewCompiler;
 using HorselessNewspaper.Web.Core.UnitOfWork.ContentModelTasks.PrincipalTasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -25,23 +30,11 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 using Microsoft.FeatureManagement;
 using System.Text.Json.Serialization;
-using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
-using HorselessNewspaper.Web.Core.Services.Query.Entities;
-
 using TheHorselessNewspaper.HostingModel.MultiTenant;
+using TheHorselessNewspaper.HostingModel.ODATA;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
-using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
-using HorselessNewspaper.Web.Core.Services.Query.Controller.Hosting;
-using TheHorselessNewspaper.HostingModel.ODATA;
-using HorselessNewspaper.Web.Core.Services.Model.Extensions.Hosting;
-using Microsoft.AspNetCore.Authorization;
-using HorselessNewspaper.Web.Core.Services.Query.Authorization.Handler;
-using HorselessNewspaper.Web.Core.Services.Query.Authorization.Contexts;
-using HorselessNewspaper.Core.Interfaces.Security.Cache;
-using TheHorselessNewspaper.HostingModel.HostingEntities.Query;
-using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -243,70 +236,73 @@ namespace HorselessNewspaper.Web.Core.Extensions
             /**
              * for injection into controllers
              **/
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.ContentCollection>, ContentEntities.ContentCollection>,
-                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.ContentCollection>, ContentEntities.ContentCollection>>();
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Tenant>, ContentEntities.Tenant>,
-                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Tenant>, ContentEntities.Tenant>>();
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.FilesystemAsset>, ContentEntities.FilesystemAsset>,
-                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.FilesystemAsset>, ContentEntities.FilesystemAsset>>();
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Holonym>, ContentEntities.Holonym>,
-                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Holonym>, ContentEntities.Holonym>>();
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessContent>, ContentEntities.HorselessContent>,
-                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessContent>, ContentEntities.HorselessContent>>();
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessSession>, ContentEntities.HorselessSession>,
-                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessSession>, ContentEntities.HorselessSession>>();
 
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.JSONAsset>, ContentEntities.JSONAsset>,
-                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.JSONAsset>, ContentEntities.JSONAsset>>();
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Meronym>, ContentEntities.Meronym>,
-                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Meronym>, ContentEntities.Meronym>>();
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.MIMEType>, ContentEntities.MIMEType>,
-                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.MIMEType>, ContentEntities.MIMEType>>();
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.MIMEType>, ContentEntities.MIMEType>,
-                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.MIMEType>, ContentEntities.MIMEType>>();
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.NavigationMenuItem>, ContentEntities.NavigationMenuItem>,
-                 ContentCollectionService<IQueryableContentModelOperator<ContentEntities.NavigationMenuItem>, ContentEntities.NavigationMenuItem>>();
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.NavigationMenu>, ContentEntities.NavigationMenu>,
-                 ContentCollectionService<IQueryableContentModelOperator<ContentEntities.NavigationMenu>, ContentEntities.NavigationMenu>>();
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Principal>, ContentEntities.Principal>,
-                 ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Principal>, ContentEntities.Principal>>();
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.AccessControlEntry>, ContentEntities.AccessControlEntry>,
-                       ContentCollectionService<IQueryableContentModelOperator<ContentEntities.AccessControlEntry>, ContentEntities.AccessControlEntry>>();
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessView>, ContentEntities.HorselessView>,
-                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessView>, ContentEntities.HorselessView>>();
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Publication>, ContentEntities.Publication>,
-                ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Publication>, ContentEntities.Publication>>();
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.NugetPackage>, ContentEntities.NugetPackage>,
-                   ContentCollectionService<IQueryableContentModelOperator<ContentEntities.NugetPackage>, ContentEntities.NugetPackage>>();
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Taxon>, ContentEntities.Taxon>,
-                            ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Taxon>, ContentEntities.Taxon>>();
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Taxonomy>, ContentEntities.Taxonomy>,
-                             ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Taxonomy>, ContentEntities.Taxonomy>>();
-            serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Placeholder>, ContentEntities.Placeholder>,
-                            ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Placeholder>, ContentEntities.Placeholder>>();
+            services.AddHorselessQueryOperators();
 
-            #endregion
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.ContentCollection>, ContentEntities.ContentCollection>,
+         //       ContentCollectionService<IQueryableContentModelOperator<ContentEntities.ContentCollection>, ContentEntities.ContentCollection>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Tenant>, ContentEntities.Tenant>,
+         //       ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Tenant>, ContentEntities.Tenant>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.FilesystemAsset>, ContentEntities.FilesystemAsset>,
+         //       ContentCollectionService<IQueryableContentModelOperator<ContentEntities.FilesystemAsset>, ContentEntities.FilesystemAsset>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Holonym>, ContentEntities.Holonym>,
+         //       ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Holonym>, ContentEntities.Holonym>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessContent>, ContentEntities.HorselessContent>,
+         //       ContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessContent>, ContentEntities.HorselessContent>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessSession>, ContentEntities.HorselessSession>,
+         //       ContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessSession>, ContentEntities.HorselessSession>>();
 
-            #region hosting collection query services
-            /**
-             * for injection into controllers
-             **/
-            serviceBuilder.Services.AddTransient<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.NugetPackage>, HostingEntities.NugetPackage>,
-                      HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.NugetPackage>, HostingEntities.NugetPackage>>();
-            serviceBuilder.Services.AddTransient<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.KeyCloakConfiguration>, HostingEntities.KeyCloakConfiguration>,
-                     HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.KeyCloakConfiguration>, HostingEntities.KeyCloakConfiguration>>();
-            serviceBuilder.Services.AddTransient<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Tenant>, HostingEntities.Tenant>,
-                    HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Tenant>, HostingEntities.Tenant>>();
-            serviceBuilder.Services.AddTransient<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Principal>, HostingEntities.Principal>,
-         HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Principal>, HostingEntities.Principal>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.JSONAsset>, ContentEntities.JSONAsset>,
+         //       ContentCollectionService<IQueryableContentModelOperator<ContentEntities.JSONAsset>, ContentEntities.JSONAsset>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Meronym>, ContentEntities.Meronym>,
+         //       ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Meronym>, ContentEntities.Meronym>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.MIMEType>, ContentEntities.MIMEType>,
+         //       ContentCollectionService<IQueryableContentModelOperator<ContentEntities.MIMEType>, ContentEntities.MIMEType>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.MIMEType>, ContentEntities.MIMEType>,
+         //       ContentCollectionService<IQueryableContentModelOperator<ContentEntities.MIMEType>, ContentEntities.MIMEType>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.NavigationMenuItem>, ContentEntities.NavigationMenuItem>,
+         //        ContentCollectionService<IQueryableContentModelOperator<ContentEntities.NavigationMenuItem>, ContentEntities.NavigationMenuItem>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.NavigationMenu>, ContentEntities.NavigationMenu>,
+         //        ContentCollectionService<IQueryableContentModelOperator<ContentEntities.NavigationMenu>, ContentEntities.NavigationMenu>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Principal>, ContentEntities.Principal>,
+         //        ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Principal>, ContentEntities.Principal>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.AccessControlEntry>, ContentEntities.AccessControlEntry>,
+         //              ContentCollectionService<IQueryableContentModelOperator<ContentEntities.AccessControlEntry>, ContentEntities.AccessControlEntry>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessView>, ContentEntities.HorselessView>,
+         //       ContentCollectionService<IQueryableContentModelOperator<ContentEntities.HorselessView>, ContentEntities.HorselessView>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Publication>, ContentEntities.Publication>,
+         //       ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Publication>, ContentEntities.Publication>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.NugetPackage>, ContentEntities.NugetPackage>,
+         //          ContentCollectionService<IQueryableContentModelOperator<ContentEntities.NugetPackage>, ContentEntities.NugetPackage>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Taxon>, ContentEntities.Taxon>,
+         //                   ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Taxon>, ContentEntities.Taxon>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Taxonomy>, ContentEntities.Taxonomy>,
+         //                    ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Taxonomy>, ContentEntities.Taxonomy>>();
+         //   serviceBuilder.Services.AddTransient<IContentCollectionService<IQueryableContentModelOperator<ContentEntities.Placeholder>, ContentEntities.Placeholder>,
+         //                   ContentCollectionService<IQueryableContentModelOperator<ContentEntities.Placeholder>, ContentEntities.Placeholder>>();
 
-            serviceBuilder.Services.AddTransient<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessControlEntry>, HostingEntities.AccessControlEntry>,
-                HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessControlEntry>, HostingEntities.AccessControlEntry>>();
+         //   #endregion
 
-            serviceBuilder.Services.AddTransient<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.TenantInfo>, HostingEntities.TenantInfo>,
-                     HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.TenantInfo>, HostingEntities.TenantInfo>>();
-            serviceBuilder.Services.AddTransient<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.WebAPITenantInfo>, HostingEntities.WebAPITenantInfo>,
-                   HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.WebAPITenantInfo>, HostingEntities.WebAPITenantInfo>>();
+         //   #region hosting collection query services
+         //   /**
+         //    * for injection into controllers
+         //    **/
+         //   serviceBuilder.Services.AddTransient<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.NugetPackage>, HostingEntities.NugetPackage>,
+         //             HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.NugetPackage>, HostingEntities.NugetPackage>>();
+         //   serviceBuilder.Services.AddTransient<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.KeyCloakConfiguration>, HostingEntities.KeyCloakConfiguration>,
+         //            HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.KeyCloakConfiguration>, HostingEntities.KeyCloakConfiguration>>();
+         //   serviceBuilder.Services.AddTransient<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Tenant>, HostingEntities.Tenant>,
+         //           HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Tenant>, HostingEntities.Tenant>>();
+         //   serviceBuilder.Services.AddTransient<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Principal>, HostingEntities.Principal>,
+         //HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.Principal>, HostingEntities.Principal>>();
+
+         //   serviceBuilder.Services.AddTransient<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessControlEntry>, HostingEntities.AccessControlEntry>,
+         //       HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.AccessControlEntry>, HostingEntities.AccessControlEntry>>();
+
+         //   serviceBuilder.Services.AddTransient<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.TenantInfo>, HostingEntities.TenantInfo>,
+         //            HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.TenantInfo>, HostingEntities.TenantInfo>>();
+         //   serviceBuilder.Services.AddTransient<IHostingCollectionService<IQueryableHostingModelOperator<HostingEntities.WebAPITenantInfo>, HostingEntities.WebAPITenantInfo>,
+         //          HostingCollectionService<IQueryableHostingModelOperator<HostingEntities.WebAPITenantInfo>, HostingEntities.WebAPITenantInfo>>();
 
             #endregion
 
