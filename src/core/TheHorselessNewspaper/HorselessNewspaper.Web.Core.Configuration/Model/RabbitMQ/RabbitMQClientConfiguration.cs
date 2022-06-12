@@ -16,7 +16,7 @@ namespace HorselessNewspaper.Web.Core.Configuration.Model.RabbitMQ
 
         public string Password { get; set; } = String.Empty;
 
-        public int Port { get; set; }; 
+        public int Port { get; set; }
 
     }
 }

@@ -11,7 +11,16 @@ using System.Text;
 
 namespace HorselessNewspaper.Client.RabbitMQ
 {
-    public class HorselessRabbitMQClient : IHorselessQueueClient
+    /// <summary>
+    /// support multiple registered implementations
+    /// even if each is a singleton
+    /// </summary>
+    public interface IHorselessRabbitMQClient : IHorselessQueueClient
+    {
+        public bool IsInitializeComplete { get; set; }
+    }
+
+    public class HorselessRabbitMQClient : IHorselessRabbitMQClient
     {
         private IModel _channel;
         ILogger<HorselessRabbitMQClient> _logger;
@@ -44,6 +53,8 @@ namespace HorselessNewspaper.Client.RabbitMQ
                 logger.LogError($"{this.GetType().FullName} threw an exception on initialization {e.Message}");
             }
         }
+
+        public bool IsInitializeComplete { get; set; }
 
         public async Task<IQueueClientPushResult> PushMessage<TPayload>(IQueueClientMessage<TPayload> message)
         {

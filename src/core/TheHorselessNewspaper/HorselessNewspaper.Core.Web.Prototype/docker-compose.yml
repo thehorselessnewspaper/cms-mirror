@@ -152,6 +152,12 @@ services:
       - FeatureManagement__ContentEditorUI=false
       - RestApiBaseUrl=${RestApiBaseUrl}  
       - OdataApiBaseUrl=${OdataApiBaseUrl}
+      - CriticalRabbitMQHostName=${CriticalRabbitMQHostName}
+      - CriticalRabbitMQUserName=${CriticalRabbitMQUserName}
+      - CriticalRabbitMQPassword=${CriticalRabbitMQPassword}
+      - CriticalRabbitMQPort=${CriticalRabbitMQPort}
+      - CriticalRabbitMQExchange=${CriticalRabbitMQExchange}
+      - CriticalRabbitMQVirtualHost=${CriticalRabbitMQVirtualHost}
 
     volumes:
       - ./https/:/https
