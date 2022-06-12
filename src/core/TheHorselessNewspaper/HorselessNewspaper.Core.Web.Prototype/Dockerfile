@@ -38,6 +38,10 @@ COPY ["HorselessNewspaper.Web.Core.Services.Query/HorselessNewspaper.Web.Core.Se
 
 COPY ["HorselessNewspaper.Web.Core.Services.Model/HorselessNewspaper.Web.Core.Services.Model.csproj", "HorselessNewspaper.Web.Core.Services.Model/"]
 
+COPY ["HorselessNewspaper.Client.RabbitMQ/HorselessNewspaper.Client.RabbitMQ.csproj", "HorselessNewspaper.Client.RabbitMQ/"]
+
+COPY ["HorselessNewspaper.Web.Core.Configuration/HorselessNewspaper.Web.Core.Configuration.csproj", "HorselessNewspaper.Web.Core.Configuration/"]
+
 RUN dotnet restore "TheHorselessCore.sln"
 RUN dotnet restore "HorselessNewspaper.Core.Web.Prototype/HorselessNewspaper.Core.Web.Prototype.csproj"
 COPY . .
