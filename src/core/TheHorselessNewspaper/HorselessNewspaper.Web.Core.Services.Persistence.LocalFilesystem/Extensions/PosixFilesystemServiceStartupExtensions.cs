@@ -11,7 +11,7 @@ namespace HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem.Exten
     {
         public static IServiceCollection AddPosixFilesystemService(this IServiceCollection services)
         {
-            services.AddTransient<IPosixFilesystemService, HorselessPosixFilesystemService>();
+            services.AddTransient<IPosixFilesystemService, HorselessPosixTenantFilesystemService>();
             return services;
         }
     }

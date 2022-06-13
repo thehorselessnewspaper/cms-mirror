@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.FileProviders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,9 @@ namespace HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem
 {
     public interface IPosixFilesystemService
     {
+        Task<IDirectoryContents> GetDirectoryContents(string subpath);
+        Task<IFileInfo> GetFileInfo(string subpath);
         Task<bool> Mount(string path);
+        Task<bool> Persist(string path, ICollection<IFormFile> files);
     }
 }
