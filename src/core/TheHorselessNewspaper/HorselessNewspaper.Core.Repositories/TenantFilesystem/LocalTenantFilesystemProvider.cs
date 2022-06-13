@@ -32,7 +32,7 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
     /// 
     /// as per https://docs.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-6.0
     /// </summary>
-    public class LocalTenantFilesystemProvider : IFormFilePersistenceProvider
+    public class LocalTenantFilesystemProvider : IHorselessFilePersistenceProvider
     {
 
         private PhysicalFileProvider _filesystemProvider;

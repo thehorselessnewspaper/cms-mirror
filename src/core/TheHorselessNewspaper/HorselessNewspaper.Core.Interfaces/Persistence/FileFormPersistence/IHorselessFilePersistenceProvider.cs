@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HorselessNewspaper.Core.Interfaces.Persistence.FileFormPersistence
 {
-    public interface IFormFilePersistenceProvider : IHorselessPersistenceProvider, IFileProvider
+    public interface IHorselessFilePersistenceProvider : IHorselessPersistenceProvider, IFileProvider
     {
         public Task<bool> Persist(string path, ICollection<IFormFile> files);
 

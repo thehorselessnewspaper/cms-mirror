@@ -1,4 +1,5 @@
 ﻿using HorselessNewspaper.Core.Repositories.TenantFilesystem;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,12 @@ namespace HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem
     /// and operations specific to tenant filesystem
     /// uploads and enumeratin
     /// </summary>
-    public class PosixFilesystemService
+    public class HorselessPosixFilesystemService : IPosixFilesystemService
     {
         LocalTenantFilesystemProvider _provider;
-        ILogger<PosixFilesystemService> _logger;
+        ILogger<HorselessPosixFilesystemService> _logger;
 
-        public PosixFilesystemService(LocalTenantFilesystemProvider provider, ILogger<PosixFilesystemService> logger)
+        public HorselessPosixFilesystemService(LocalTenantFilesystemProvider provider, ILogger<HorselessPosixFilesystemService> logger)
         {
             this._provider = provider;
             this._logger = logger;
@@ -31,6 +32,11 @@ namespace HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem
             var mountResult = await _provider.Mount(path);
 
             return false;
+        }
+
+        public IDirectoryContents GetDirectoryContents(string subpath)
+        {
+            return _provider.GetDirectoryContents(subpath);
         }
 
     }

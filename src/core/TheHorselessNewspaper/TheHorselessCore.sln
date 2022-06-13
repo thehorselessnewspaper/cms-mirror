@@ -68,6 +68,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Core.Web.SmokeTests", "HorselessNewspaper.Core.Web.SmokeTests\HorselessNewspaper.Core.Web.SmokeTests.csproj", "{7B863379-D900-4F65-BC63-84317E404D0D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Web.Core.Startup", "HorselessNewspaper.Web.Core.Startup\HorselessNewspaper.Web.Core.Startup.csproj", "{FA16FB00-EDB9-4BB0-A37F-B8EEB93D919B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BB3F1432-BD07-4B1C-996F-2A8740CE1DAC} = {BB3F1432-BD07-4B1C-996F-2A8740CE1DAC}
+		{A3C89049-17DD-4568-8EBB-FBBF17DF7819} = {A3C89049-17DD-4568-8EBB-FBBF17DF7819}
+		{C095E4DA-7D3F-474B-B8AD-E691EE383E74} = {C095E4DA-7D3F-474B-B8AD-E691EE383E74}
+		{72E8B5FD-4A07-493A-8C1F-98F0A78E2DC4} = {72E8B5FD-4A07-493A-8C1F-98F0A78E2DC4}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorselessNewspaper.Web.Core.Services.Model", "HorselessNewspaper.Web.Core.Services.Model\HorselessNewspaper.Web.Core.Services.Model.csproj", "{C095E4DA-7D3F-474B-B8AD-E691EE383E74}"
 EndProject
@@ -78,6 +84,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorselessNewspaper.Web.Core.Configuration", "HorselessNewspaper.Web.Core.Configuration\HorselessNewspaper.Web.Core.Configuration.csproj", "{72E8B5FD-4A07-493A-8C1F-98F0A78E2DC4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem", "HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem\HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem.csproj", "{33FC7807-30C9-4513-BE0F-358B22E89462}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A3C89049-17DD-4568-8EBB-FBBF17DF7819} = {A3C89049-17DD-4568-8EBB-FBBF17DF7819}
+		{C095E4DA-7D3F-474B-B8AD-E691EE383E74} = {C095E4DA-7D3F-474B-B8AD-E691EE383E74}
+		{63E6F9DB-F681-431B-B5F8-0EBC9C3C1C8B} = {63E6F9DB-F681-431B-B5F8-0EBC9C3C1C8B}
+		{72E8B5FD-4A07-493A-8C1F-98F0A78E2DC4} = {72E8B5FD-4A07-493A-8C1F-98F0A78E2DC4}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

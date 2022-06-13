@@ -20,6 +20,7 @@
     <ProjectReference Include="..\HorselessNewspaper.RazorClassLibrary.CMS.Default\HorselessNewspaper.RazorClassLibrary.CMS.Default.csproj" />
     <ProjectReference Include="..\HorselessNewspaper.RazorClassLibrary.Keycloak.Default\HorselessNewspaper.RazorClassLibrary.Keycloak.Default.csproj" />
     <ProjectReference Include="..\HorselessNewspaper.Web.Core.Auth.Keycloak\HorselessNewspaper.Web.Core.Auth.Keycloak.csproj" />
+    <ProjectReference Include="..\HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem\HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem.csproj" />
     <ProjectReference Include="..\Web.Core\HorselessNewspaper.Web.Core.csproj" />
   </ItemGroup>
 
