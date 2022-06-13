@@ -87,7 +87,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
             });
 
 
-            serviceBuilder.Services.AddHorselessPosixTenantFilesystem();
+            serviceBuilder.Services.AddPosixFilesystemRepository();
             serviceBuilder.Services.AddPosixFilesystemService();
 
             serviceBuilder.Services.AddTransient<IHorselessRestApiClient, HorselessRestApiClient>(

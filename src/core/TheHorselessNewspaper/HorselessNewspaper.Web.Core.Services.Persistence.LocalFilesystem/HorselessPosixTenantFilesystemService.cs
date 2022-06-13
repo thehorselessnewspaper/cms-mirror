@@ -17,10 +17,10 @@ namespace HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem
     /// </summary>
     public class HorselessPosixTenantFilesystemService : IPosixFilesystemService
     {
-        LocalTenantFilesystemRepository _provider;
+        ITenantFilesystemRepository _provider;
         ILogger<HorselessPosixTenantFilesystemService> _logger;
 
-        public HorselessPosixTenantFilesystemService(LocalTenantFilesystemRepository provider, ILogger<HorselessPosixTenantFilesystemService> logger)
+        public HorselessPosixTenantFilesystemService(ITenantFilesystemRepository provider, ILogger<HorselessPosixTenantFilesystemService> logger)
         {
             this._provider = provider;
             this._logger = logger;
