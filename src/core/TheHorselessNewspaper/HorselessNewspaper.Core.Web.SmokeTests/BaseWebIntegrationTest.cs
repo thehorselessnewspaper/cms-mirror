@@ -24,7 +24,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests
 
         public void Dispose()
         {
-
+            client.Dispose();
         }
 
         public BaseWebIntegrationTest()

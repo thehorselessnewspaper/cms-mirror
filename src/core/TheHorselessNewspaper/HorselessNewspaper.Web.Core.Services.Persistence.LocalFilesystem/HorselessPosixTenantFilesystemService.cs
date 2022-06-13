@@ -29,10 +29,10 @@ namespace HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem
         public async Task<MountLocalTenantFilesystemResult> Mount(bool createIfNotExist = false, params string[] pathSegments)
         {
             MountLocalTenantFilesystemResult ret = new MountLocalTenantFilesystemResult();
-            var path = await _provider.GetOSNormalizedPath(pathSegments);
+
 
             var mountResult = await _provider.Mount(createIfNotExist, pathSegments);
-
+            ret = mountResult;
             return ret;
         }
 

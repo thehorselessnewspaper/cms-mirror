@@ -27,15 +27,18 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Filesystem
                 ITenantInfo tenant = scope.ServiceProvider.GetRequiredService<ITenantInfo>();
                 IPosixFilesystemService fileSystemService = scope.ServiceProvider.GetRequiredService<IPosixFilesystemService>();
 
-                // mount should fail on uninitialized filesystem
+                // mount will fail on uninitialized filesystem config path
                 // due to invalid path
                 var mountResult = await fileSystemService.Mount(createIfNotExists: false, "");
                 Assert.NotNull(mountResult);
-                Assert.False(mountResult.IsMountSuccess);
+                Assert.True(mountResult.IsMountSuccess);
 
                 // create a folder
-                var validMountResult = await fileSystemService.Mount(createIfNotExists: false, "tenants");
+                var validMountResult = await fileSystemService.Mount(createIfNotExists: true, "images", "tenants");
 
+                Assert.NotNull(validMountResult);
+                Assert.True(validMountResult.IsMountSuccess);
+                Assert.True(validMountResult.CreatedDirectory.Exists);
                 var getContentsResult = await fileSystemService.GetDirectoryContents(".");
                 Assert.NotNull(getContentsResult);
             }
