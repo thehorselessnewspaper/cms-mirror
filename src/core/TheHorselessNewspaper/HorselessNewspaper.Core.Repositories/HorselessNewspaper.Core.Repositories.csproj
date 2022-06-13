@@ -26,6 +26,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\HorselessNewspaper.Web.Core.Configuration\HorselessNewspaper.Web.Core.Configuration.csproj" />
 	  <ProjectReference Include="..\HorselessNewspaper.Web.Core.Services.Model\HorselessNewspaper.Web.Core.Services.Model.csproj" />
 	</ItemGroup>
 
