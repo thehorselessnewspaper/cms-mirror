@@ -16,6 +16,8 @@ namespace HorselessNewspaper.Core.Interfaces.Persistence.FileFormPersistence
         IDirectoryContents GetDirectoryContents(string subpath);
         IFileInfo GetFileInfo(string subpath);
         public Task<bool> Persist(string path, ICollection<IFormFile> files);
+        public Task<string> Persist(string path, string fileName, byte[] data, bool isShouldOverwrite);
+
 
     }
 }

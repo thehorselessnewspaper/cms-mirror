@@ -15,5 +15,6 @@ namespace HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem
         Task<IFileInfo> GetFileInfo(string subpath);
         Task<MountLocalTenantFilesystemResult> Mount(bool createIfNotExists = false, params string[] pathSegments);
         Task<bool> Persist(string path, ICollection<IFormFile> files);
+        Task<string> Persist(string path, string fileName, byte[] data, bool isShouldOverwrite);
     }
 }

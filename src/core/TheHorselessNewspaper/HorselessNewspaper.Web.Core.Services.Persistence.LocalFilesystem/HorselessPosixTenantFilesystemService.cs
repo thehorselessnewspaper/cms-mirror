@@ -58,5 +58,10 @@ namespace HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem
 
             return ret;
         }
+
+        public async Task<string> Persist(string path, string fileName, byte[] data, bool isShouldOverwrite)
+        {
+            return await _provider.Persist(path, fileName, data, isShouldOverwrite);
+        }
     }
 }

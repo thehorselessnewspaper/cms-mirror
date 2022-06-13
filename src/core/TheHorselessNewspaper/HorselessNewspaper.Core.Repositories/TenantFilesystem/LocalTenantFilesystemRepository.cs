@@ -227,6 +227,13 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
             return ret;
         }
 
+        public async Task<string> Persist(string path, string fileName, byte[] data, bool isShouldOverwrite)
+        {
+            var ret = fileName;
+
+            return ret;
+        }
+
         /// <summary>
         /// construct a full os normalized path string
         /// accounting for the chroot path
