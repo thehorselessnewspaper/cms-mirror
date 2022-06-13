@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HorselessNewspaper.Web.Core.Services.Model\HorselessNewspaper.Web.Core.Services.Model.csproj" />
+    <ProjectReference Include="..\HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem\HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem.csproj" />
   </ItemGroup>
 
 

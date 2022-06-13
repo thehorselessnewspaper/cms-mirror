@@ -1,5 +1,4 @@
 ﻿using HorselessNewspaper.Core.Interfaces.Persistence;
-using HorselessNewspaper.Core.Interfaces.Persistence.FileFormPersistence;
 using HorselessNewspaper.Web.Core.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -14,10 +13,6 @@ using System.Threading.Tasks;
 
 namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
 {
-    public interface ILocalTenantFilesystemPersistenceProvider
-    {
-
-    }
 
     public class MountLocalTenantFilesystemResult
     {
@@ -32,17 +27,19 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
     /// 
     /// as per https://docs.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-6.0
     /// </summary>
-    public class LocalTenantFilesystemProvider : IHorselessFilePersistenceProvider
+    public class LocalTenantFilesystemRepository : ITenantFilesystemRepository
     {
 
         private PhysicalFileProvider _filesystemProvider;
-        private ILogger<LocalTenantFilesystemProvider> _logger;
+        private ILogger<LocalTenantFilesystemRepository> _logger;
 
-        public string TenantFilesystemRoot = string.Empty;
+        public string TenantFilesystemRoot { get; set; } = string.Empty;
 
         public bool IsInitializedFilesystemRoot { get; set; } = false;
+        public string ProviderName { get; set; }
+        public string ProviderDisplayName { get; set; }
 
-        public LocalTenantFilesystemProvider(ILogger<LocalTenantFilesystemProvider> logger, IConfiguration configuration)
+        public LocalTenantFilesystemRepository(ILogger<LocalTenantFilesystemRepository> logger, IConfiguration configuration)
         {
             _logger = logger;
             try

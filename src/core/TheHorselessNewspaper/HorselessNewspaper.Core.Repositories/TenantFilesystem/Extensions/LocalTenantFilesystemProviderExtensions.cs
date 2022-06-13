@@ -17,7 +17,7 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem.Extensions
         /// <returns></returns>
         public static IServiceCollection AddHorselessPosixTenantFilesystem(this IServiceCollection services)
         {
-            services.AddTransient<IHorselessFilePersistenceProvider, LocalTenantFilesystemProvider>();
+            services.AddTransient<ITenantFilesystemRepository, LocalTenantFilesystemRepository>();
 
             return services;
         }

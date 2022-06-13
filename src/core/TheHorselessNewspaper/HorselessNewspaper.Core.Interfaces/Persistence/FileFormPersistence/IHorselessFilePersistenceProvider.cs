@@ -10,6 +10,11 @@ namespace HorselessNewspaper.Core.Interfaces.Persistence.FileFormPersistence
 {
     public interface IHorselessFilePersistenceProvider : IHorselessPersistenceProvider, IFileProvider
     {
+        string TenantFilesystemRoot { get; set; }
+        bool IsInitializedFilesystemRoot { get; set; }
+
+        IDirectoryContents GetDirectoryContents(string subpath);
+        IFileInfo GetFileInfo(string subpath);
         public Task<bool> Persist(string path, ICollection<IFormFile> files);
 
     }

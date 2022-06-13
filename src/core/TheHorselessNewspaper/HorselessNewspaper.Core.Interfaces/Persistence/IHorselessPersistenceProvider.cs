@@ -8,6 +8,7 @@ namespace HorselessNewspaper.Core.Interfaces.Persistence
 {
     public interface IHorselessPersistenceProvider
     {
-        // public Task<TResult> InitializeProvider<TResult>();
+        public string ProviderName { get; set; }
+        public string ProviderDisplayName { get; set; }
     }
 }
