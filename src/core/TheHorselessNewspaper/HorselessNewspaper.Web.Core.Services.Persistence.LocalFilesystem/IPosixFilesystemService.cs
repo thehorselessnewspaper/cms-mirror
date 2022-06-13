@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using HorselessNewspaper.Core.Repositories.TenantFilesystem;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem
     {
         Task<IDirectoryContents> GetDirectoryContents(string subpath);
         Task<IFileInfo> GetFileInfo(string subpath);
-        Task<bool> Mount(string path);
+        Task<MountLocalTenantFilesystemResult> Mount(bool createIfNotExists = false, params string[] pathSegments);
         Task<bool> Persist(string path, ICollection<IFormFile> files);
     }
 }

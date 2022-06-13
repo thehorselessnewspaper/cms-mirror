@@ -6,5 +6,8 @@
     public static class HorselessConfigurationConstants
     {
         public const string TenantFilesystemRoot = "TenantFilesystemPath";
+        public const string RestApiBaseUrl = "RestApiBaseUrl";
+
+        public const string OdataApiBaseUrl = "OdataApiBaseUrl";
     }
 }

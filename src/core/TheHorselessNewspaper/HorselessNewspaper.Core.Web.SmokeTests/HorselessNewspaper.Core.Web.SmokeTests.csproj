@@ -34,6 +34,7 @@
 
   <ItemGroup>
     <Folder Include="EntityTests\" />
+    <Folder Include="assetroot\" />
   </ItemGroup>
 
 </Project>

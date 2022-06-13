@@ -16,8 +16,10 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
 
     public class MountLocalTenantFilesystemResult
     {
-        public bool IsInitialized { get; set; }
+        public bool IsMountSuccess { get; set; }
         public string FullPath { get; set; }
+
+        public DirectoryInfo CreatedDirectory { get; set; }
     }
 
     /// <summary>
@@ -45,9 +47,15 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
             try
             {
 
-                TenantFilesystemRoot = configuration[HorselessConfigurationConstants.TenantFilesystemRoot];
+                var configPath = configuration[HorselessConfigurationConstants.TenantFilesystemRoot];
+                string sanitizedPath = SanitizeConfigRoot(configPath);
+
+                TenantFilesystemRoot = sanitizedPath;
 
                 IsInitializedFilesystemRoot = true;
+
+                this.ProviderDisplayName = "POSIX Filsystem";
+                this.ProviderName = this.GetType().FullName;
             }
             catch (Exception e)
             {
@@ -56,28 +64,111 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
             }
         }
 
-        /// <summary>
-        /// returns initialization result
-        /// </summary>
-        /// <returns></returns>
-        public async Task<MountLocalTenantFilesystemResult> Mount(string path) 
+        public string SanitizeConfigRoot(string configPath)
         {
-            var ret = new MountLocalTenantFilesystemResult();
-            if (IsInitializedFilesystemRoot)
+            var ret = String.Empty;
+            
+            if(configPath.StartsWith(Path.DirectorySeparatorChar))
             {
-                var fullPath = Path.Combine(this.TenantFilesystemRoot, path);
-                ret.FullPath = fullPath;
-
-                _filesystemProvider = new PhysicalFileProvider(fullPath);
-
-                ret.IsInitialized = true;
+                ret = configPath;
             }
             else
             {
-                ret.IsInitialized = false;
+                ret = Path.DirectorySeparatorChar + configPath;
+            }
+
+            return ret;
+        }
+
+
+        /// <summary>
+        /// non-destructive directory create 
+        /// fills sparse filesystem trees 
+        /// as per https://docs.microsoft.com/en-us/dotnet/api/system.io.directory.createdirectory?view=net-6.0
+        /// </summary>
+        /// <param name="subPath"></param>
+        /// <returns></returns>
+        public async Task<DirectoryInfo> CreateDirectoryIfNotExists(string subPath)
+        {
+            DirectoryInfo ret = new DirectoryInfo("");
+
+            var chrootPath = this.GetChrootedPath(subPath);
+            ret = Directory.CreateDirectory(chrootPath);
+
+
+            return await Task.FromResult<DirectoryInfo>(ret);
+        }
+
+        private string GetChrootedPath(string subPath)
+        {
+            return Path.Join(this.TenantFilesystemRoot, subPath);
+        }
+
+        /// <summary>
+        /// mount a path
+        /// path is appended to root path 
+        /// configured in environment and used by this repository
+        /// 
+        /// implements create if not exists semantics
+        /// </summary>
+        /// <returns></returns>
+        public async Task<MountLocalTenantFilesystemResult> Mount( bool createPathIfNotExists = false, params string[] pathSegments) 
+        {
+            var ret = new MountLocalTenantFilesystemResult();
+            var subPath = await GetOSNormalizedPath(pathSegments);
+
+            if (IsInitializedFilesystemRoot)
+            {
+                if(createPathIfNotExists)
+                {
+                    var dirExists = await this.DirectoryExists(subPath);
+                    if(!dirExists)
+                    {
+                        _logger.LogTrace($"{this.GetType().FullName} creating sub path {subPath}");
+                        var createResult = Directory.CreateDirectory(subPath);
+
+                        ret.CreatedDirectory = createResult;
+                       
+
+                    }
+                }
+
+                try
+                {
+                    var fullPath = Path.Combine(this.TenantFilesystemRoot, subPath);
+                    ret.FullPath = fullPath;
+
+                    _filesystemProvider = new PhysicalFileProvider(fullPath);
+
+                    ret.IsMountSuccess = true;
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError($"problem mounting posix filesystem {e.Message}");
+                    ret.IsMountSuccess = false;
+                    return ret;
+                }
+            }
+            else
+            {
+                ret.IsMountSuccess = false;
             }
 
             return await Task.FromResult<MountLocalTenantFilesystemResult>(ret);
+        }
+
+        public async Task<bool> DirectoryExists(string subPath)
+        {
+            var ret = false;
+
+            var fullPath = Path.Join(this.TenantFilesystemRoot, subPath);
+
+            _logger.LogTrace($"{this.GetType().FullName} testing directory path {fullPath}");
+            ret = Directory.Exists(fullPath);
+
+            _logger.LogTrace($"{this.GetType().FullName} tested directory path {fullPath}: {ret}");
+
+            return await Task.FromResult<bool>(ret);
         }
 
         public IDirectoryContents GetDirectoryContents(string subpath)
@@ -134,6 +225,27 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
             }
 
             return ret;
+        }
+
+        /// <summary>
+        /// construct a full os normalized path string
+        /// accounting for the chroot path
+        /// </summary>
+        /// <param name="pathSegments"></param>
+        /// <returns></returns>
+        public async Task<string> GetOSNormalizedPath(params string[] pathSegments)
+        {
+            var ret = string.Empty;
+
+
+            List<string> parameters = new List<string>();
+            parameters.Add(this.TenantFilesystemRoot);
+            parameters.AddRange(pathSegments.ToList());
+            var paramArray = parameters.ToArray();
+
+            ret = Path.Join(paramArray);
+
+            return await Task.FromResult<string>(ret);
         }
     }
 }
