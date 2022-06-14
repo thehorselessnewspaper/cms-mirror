@@ -90,5 +90,15 @@ namespace HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem
         {
             return await _provider.RenderFilesystemTree(filesystemTree);
         }
+
+        public async Task<bool> DirectoryExists(params string[] pathSegments)
+        {
+            return await _provider.DirectoryExists(pathSegments);
+        }
+
+        public async Task<IEnumerable<IFileInfo>> FindFiles(Predicate<IFileInfo> fileMatcherPredicate, bool recursive = false, params string[] pathSegments)
+        {
+            return await _provider.FindFiles(fileMatcherPredicate, recursive, pathSegments);
+        }
     }
 }

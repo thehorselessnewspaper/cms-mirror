@@ -21,5 +21,6 @@ namespace HorselessNewspaper.Core.Interfaces.Persistence.FileFormPersistence
 
         public Task<byte[]> LoadAsByteArray(params string[] pathSegments);
         public Task<string> LoadAsString(params string[] pathSegments);
+        public Task<IEnumerable<IFileInfo>> FindFiles(Predicate<IFileInfo> fileMatcherPredicate, bool recursive = false, params string[] pathSegments);
     }
 }

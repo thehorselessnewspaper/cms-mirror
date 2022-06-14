@@ -16,7 +16,53 @@ using HorselessNewspaper.Core.Interfaces.Knuth.TreeNodes;
 
 namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
 {
+    /// <summary>
+    /// as per https://stackoverflow.com/questions/51520261/net-core-ifileprovider-getdirectorycontents-recursive-not-working
+    /// </summary>
+    public static class FileProviderExtensions
+    {
+        /// <summary>
+        /// Searches for files matching some <paramref name="match"/>, and invokes <paramref name="process"/> on them.
+        /// </summary>
+        /// <param name="provider">File provider</param>
+        /// <param name="directory">parent directory for the search, a relative path, leading slashes are ignored,
+        /// use "" or "/" for starting at the root of <paramref name="provider"/></param>
+        /// <param name="match">the match predicate, if this returns true the file is passed to <paramref name="process"/></param>
+        /// <param name="process">this action is invoked on <paramref name="match"/>ing files </param>
+        /// <param name="recursive">if true directories a</param>
+        /// <returns>the number of files <paramref name="match"/>ed and <paramref name="process"/>ed</returns>
+        public static int FindFiles(this IFileProvider provider, string directory, Predicate<IFileInfo> match, Action<IFileInfo> process, bool recursive = false)
+        {
+            var dirsToSearch = new Stack<string>();
+            dirsToSearch.Push(directory);
+            var count = 0;
+            while (dirsToSearch.Count > 0)
+            {
+                var dir = dirsToSearch.Pop();
+                foreach (var file in provider.GetDirectoryContents(dir))
+                {
+                    if (file.IsDirectory)
+                    {
+                        if (!recursive)
+                            continue;
 
+                        var relPath = Path.Join(dir, file.Name);
+                        dirsToSearch.Push(relPath);
+                    }
+                    else
+                    {
+                        if (!match(file))
+                            continue;
+
+                        process(file);
+                        count++;
+                    }
+                }
+            }
+
+            return count;
+        }
+    }
     public class MountLocalTenantFilesystemResult
     {
         public bool IsMountSuccess { get; set; }
@@ -96,10 +142,10 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
         /// <returns></returns>
         public async Task<DirectoryInfo> CreateDirectoryIfNotExists(params string[] pathSegments)
         {
-            DirectoryInfo ret = new DirectoryInfo("");
+
 
             var chrootPath = await GetOSNormalizedPath(pathSegments);
-            ret = Directory.CreateDirectory(chrootPath);
+            var ret = Directory.CreateDirectory(chrootPath);
 
 
             return await Task.FromResult<DirectoryInfo>(ret);
@@ -174,6 +220,28 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
             return await Task.FromResult<bool>(ret);
         }
 
+        /// <summary>
+        /// as per
+        /// https://stackoverflow.com/questions/51520261/net-core-ifileprovider-getdirectorycontents-recursive-not-working
+        /// </summary>
+        /// <param name="fileMatcherPredicate"></param>
+        /// <param name="recursive"></param>
+        /// <param name="pathSegments"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<IFileInfo>> FindFiles(Predicate<IFileInfo> fileMatcherPredicate, bool recursive = false, params string[] pathSegments)
+        {
+            var ret = new List<IFileInfo>();
+            var path = await GetOSNormalizedPath(pathSegments);
+
+            _filesystemProvider.FindFiles(
+                directory: path,
+                match:  fileMatcherPredicate,
+                process: ret.Add,
+                recursive: recursive
+                );
+            return ret;
+        }
+
         public async Task<IDirectoryContents> GetDirectoryContents(params string[] pathSegments)
         {
             IDirectoryContents ret;
@@ -189,10 +257,11 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
         {
             IFileInfo ret;
 
-            var fullPath = await GetOSNormalizedPath(pathSegments);
-            var fileNameAndPath = await GetOSNormalizedPath(fileName);
-
-;            ret = _filesystemProvider.GetFileInfo(fileNameAndPath);
+            var mountResult = await Mount(false, pathSegments);
+        
+            var fullPath = await GetOSNormalizedPath(fileName);
+            
+            ret = _filesystemProvider.GetFileInfo(fileName);
 
             return ret;
         }
@@ -249,8 +318,7 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
 
             if (data != null && data.Length > 0)
             {
-                var path = await GetOSNormalizedPath(pathSegments);
-                var fullPath = Path.Join(path, fileName);
+                var fullPath = await GetOSNormalizedPath(fileName, pathSegments);
                 var targetExists = File.Exists(fullPath);
 
                 if (isShouldOverwrite || !targetExists)
@@ -272,8 +340,7 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
 
             if (data != null && data.Length > 0)
             {
-                var path = await GetOSNormalizedPath(pathSegments);
-                var fullPath = Path.Join(path, fileName);
+                var fullPath = await GetOSNormalizedPath(fileName, pathSegments);
                 var targetExists = File.Exists(fullPath);
 
                 if (isShouldOverwrite || !targetExists)
@@ -304,6 +371,22 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
             List<string> parameters = new List<string>();
             parameters.Add(this.TenantFilesystemRoot);
             parameters.AddRange(pathSegments.ToList());
+            var paramArray = parameters.ToArray();
+
+            ret = Path.Join(paramArray);
+
+            return await Task.FromResult<string>(ret);
+        }
+
+        public async Task<string> GetOSNormalizedPath(string fileName, params string[] pathSegments)
+        {
+            var ret = string.Empty;
+
+
+            List<string> parameters = new List<string>();
+            parameters.Add(this.TenantFilesystemRoot);
+            parameters.AddRange(pathSegments.ToList());
+            parameters.Add(fileName);
             var paramArray = parameters.ToArray();
 
             ret = Path.Join(paramArray);

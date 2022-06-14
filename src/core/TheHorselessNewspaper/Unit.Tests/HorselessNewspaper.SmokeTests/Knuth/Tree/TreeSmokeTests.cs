@@ -9,6 +9,9 @@ using HorselessNewspaper.Web.Core.Services.Model.Extensions.TreeQueryExtensions.
 
 namespace HorselessNewspaper.SmokeTests.Knuth.Tree
 {
+    /// <summary>
+    /// exercises tree collections
+    /// </summary>
     public class TreeSmokeTests
     {
 
