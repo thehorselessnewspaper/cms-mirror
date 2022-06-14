@@ -11,10 +11,14 @@ namespace HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem
 {
     public interface IPosixFilesystemService
     {
-        Task<IDirectoryContents> GetDirectoryContents(string subpath);
-        Task<IFileInfo> GetFileInfo(string subpath);
+        Task<IDirectoryContents> GetDirectoryContents(params string[] pathSegments);
+        Task<IFileInfo> GetFileInfo(string fileName, params string[] pathSegments);
         Task<MountLocalTenantFilesystemResult> Mount(bool createIfNotExists = false, params string[] pathSegments);
-        Task<bool> Persist(string path, ICollection<IFormFile> files);
-        Task<string> Persist(string path, string fileName, byte[] data, bool isShouldOverwrite);
+        public Task<bool> Persist(ICollection<IFormFile> files, bool isShouldOverwrite = false, params string[] pathSegments);
+        public Task<string> Persist(string fileName, byte[] data, bool isShouldOverwrite = false, params string[] pathSegments);
+        public Task<string> Persist(string fileName, string data, bool isShouldOverwrite = false, params string[] pathSegments);
+
+        public Task<byte[]> LoadAsByteArray(string fileName, params string[] pathSegments);
+        public Task<string> LoadAsString(string fileName, params string[] pathSegments);
     }
 }

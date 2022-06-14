@@ -6,6 +6,8 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 using System;
+using System.IO;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,7 +66,7 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
             }
         }
 
-        public string SanitizeConfigRoot(string configPath)
+        private string SanitizeConfigRoot(string configPath)
         {
             var ret = String.Empty;
             
@@ -79,7 +81,10 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
 
             return ret;
         }
-
+        private string GetChrootedPath(string subPath)
+        {
+            return Path.Join(this.TenantFilesystemRoot, subPath);
+        }
 
         /// <summary>
         /// non-destructive directory create 
@@ -88,21 +93,18 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
         /// </summary>
         /// <param name="subPath"></param>
         /// <returns></returns>
-        public async Task<DirectoryInfo> CreateDirectoryIfNotExists(string subPath)
+        public async Task<DirectoryInfo> CreateDirectoryIfNotExists(params string[] pathSegments)
         {
             DirectoryInfo ret = new DirectoryInfo("");
 
-            var chrootPath = this.GetChrootedPath(subPath);
+            var chrootPath = await GetOSNormalizedPath(pathSegments);
             ret = Directory.CreateDirectory(chrootPath);
 
 
             return await Task.FromResult<DirectoryInfo>(ret);
         }
 
-        private string GetChrootedPath(string subPath)
-        {
-            return Path.Join(this.TenantFilesystemRoot, subPath);
-        }
+
 
         /// <summary>
         /// mount a path
@@ -157,11 +159,11 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
             return await Task.FromResult<MountLocalTenantFilesystemResult>(ret);
         }
 
-        public async Task<bool> DirectoryExists(string subPath)
+        public async Task<bool> DirectoryExists(params string[] pathSegments)
         {
             var ret = false;
 
-            var fullPath = Path.Join(this.TenantFilesystemRoot, subPath);
+            var fullPath = await GetOSNormalizedPath(pathSegments); 
 
             _logger.LogTrace($"{this.GetType().FullName} testing directory path {fullPath}");
             ret = Directory.Exists(fullPath);
@@ -171,20 +173,25 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
             return await Task.FromResult<bool>(ret);
         }
 
-        public IDirectoryContents GetDirectoryContents(string subpath)
+        public async Task<IDirectoryContents> GetDirectoryContents(params string[] pathSegments)
         {
             IDirectoryContents ret;
 
-            ret = _filesystemProvider.GetDirectoryContents(subpath);
+            var subPath = await GetOSNormalizedPath(pathSegments);
+
+            ret = _filesystemProvider.GetDirectoryContents(subPath);
 
             return ret;
         }
 
-        public IFileInfo GetFileInfo(string subpath)
+        public async Task<IFileInfo> GetFileInfo(string fileName, params string[] pathSegments)
         {
             IFileInfo ret;
 
-            ret = _filesystemProvider.GetFileInfo(subpath);
+            var fullPath = await GetOSNormalizedPath(pathSegments);
+            var fileNameAndPath = await GetOSNormalizedPath(fileName);
+
+;            ret = _filesystemProvider.GetFileInfo(fileNameAndPath);
 
             return ret;
         }
@@ -206,16 +213,16 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
         /// <param name="path"></param>
         /// <param name="files"></param>
         /// <returns></returns>
-        public async Task<bool> Persist(string path, ICollection<IFormFile> files)
+        public async Task<bool> Persist(ICollection<IFormFile> files, bool isShouldOverwrite = false, params string[] pathSegments)
         {
             bool ret = false;
-            var fullPath = Path.Combine(this.TenantFilesystemRoot, path);
+            var fullPath = await GetOSNormalizedPath(pathSegments); // Path.Combine(this.TenantFilesystemRoot, path);
 
             foreach (var formFile in files)
             {
                 if (formFile.Length > 0)
                 {
-                    var filePath = Path.Combine(fullPath, Path.GetRandomFileName());
+                    var filePath = Path.Join(fullPath, Path.GetRandomFileName());
 
                     using (var stream = System.IO.File.Create(filePath))
                     {
@@ -227,9 +234,57 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
             return ret;
         }
 
-        public async Task<string> Persist(string path, string fileName, byte[] data, bool isShouldOverwrite)
+        /// <summary>
+        /// as per https://docs.microsoft.com/en-us/dotnet/api/system.io.file.create?view=net-6.0
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="data"></param>
+        /// <param name="isShouldOverwrite"></param>
+        /// <param name="pathSegments"></param>
+        /// <returns></returns>
+        public async Task<string> Persist(string fileName, byte[] data, bool isShouldOverwrite = false, params string[] pathSegments)
         {
             var ret = fileName;
+
+            if (data != null && data.Length > 0)
+            {
+                var path = await GetOSNormalizedPath(pathSegments);
+                var fullPath = Path.Join(path, fileName);
+                var targetExists = File.Exists(fullPath);
+
+                if (isShouldOverwrite || !targetExists)
+                {
+                    using (FileStream fs = File.Create(fullPath))
+                    {
+                        fs.Write(data, 0, data.Length);
+                    }
+                }
+            }
+
+
+            return ret;
+        }
+
+        public async Task<string> Persist(string fileName, string data, bool isShouldOverwrite = false, params string[] pathSegments)
+        {
+            var ret = fileName;
+
+            if (data != null && data.Length > 0)
+            {
+                var path = await GetOSNormalizedPath(pathSegments);
+                var fullPath = Path.Join(path, fileName);
+                var targetExists = File.Exists(fullPath);
+
+                if (isShouldOverwrite || !targetExists)
+                {    
+                    using (StreamWriter outputFile = new StreamWriter(fullPath))
+                    {
+                        await outputFile.WriteAsync(data);
+                    }
+                }
+
+            }
+
 
             return ret;
         }
@@ -254,5 +309,37 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
 
             return await Task.FromResult<string>(ret);
         }
+
+        /// <summary>
+        /// requires a filename as the terminus of the path
+        /// </summary>
+        /// <param name="pathSegments"></param>
+        /// <returns></returns>
+        public async Task<byte[]> LoadAsByteArray(params string[] pathSegments)
+        {
+            byte[] ret = new byte[1];
+
+            var fullPath = await GetOSNormalizedPath(pathSegments);
+            ret = await File.ReadAllBytesAsync(fullPath);
+
+            return await Task.FromResult<byte[]> (ret);
+        }
+
+        /// <summary>
+        /// requires a filename as the terminus of the path
+        /// </summary>
+        /// <param name="pathSegments"></param>
+        /// <returns></returns>
+        public async Task<string> LoadAsString(params string[] pathSegments)
+        {
+            string ret = string.Empty;
+
+            var fullPath = await GetOSNormalizedPath(pathSegments);
+            ret = await File.ReadAllTextAsync(fullPath);
+
+            return await Task.FromResult<string>(ret);
+        }
+
+ 
     }
 }

@@ -36,32 +36,47 @@ namespace HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem
             return ret;
         }
 
-        public Task<IDirectoryContents> GetDirectoryContents(string subpath)
+        public async Task<IDirectoryContents> GetDirectoryContents(params string[] pathSegments)
         {
-            return Task.FromResult<IDirectoryContents>( _provider.GetDirectoryContents(subpath));
+            return await _provider.GetDirectoryContents(pathSegments);
         }
 
-        public Task<IFileInfo> GetFileInfo(string subpath)
+        public async Task<IFileInfo> GetFileInfo(string fileName, params string[] pathSegments)
         {
             IFileInfo ret;
 
-            ret = _provider.GetFileInfo(subpath);
-
-            return Task.FromResult<IFileInfo>(ret);
-        }
-
-        public async Task<bool> Persist(string path, ICollection<IFormFile> files)
-        {
-            bool ret = false;
-
-            ret = await _provider.Persist(path, files);
+            ret = await _provider.GetFileInfo(fileName, pathSegments);
 
             return ret;
         }
 
-        public async Task<string> Persist(string path, string fileName, byte[] data, bool isShouldOverwrite)
+        public async Task<bool> Persist(ICollection<IFormFile> files, bool isShouldOverwrite = false, params string[] pathSegments)
         {
-            return await _provider.Persist(path, fileName, data, isShouldOverwrite);
+            bool ret = false;
+
+            ret = await _provider.Persist(files, isShouldOverwrite, pathSegments);
+
+            return ret;
+        }
+
+        public async Task<string> Persist(string fileName, string data, bool isShouldOverwrite = false, params string[] pathSegments)
+        {
+            return await _provider.Persist(fileName, data, isShouldOverwrite, pathSegments);
+        }
+
+        public async Task<string> Persist(string fileName, byte[] data, bool isShouldOverwrite = false, params string[] pathSegments)
+        {
+            return await _provider.Persist(fileName, data, isShouldOverwrite, pathSegments);
+        }
+
+        public async Task<byte[]> LoadAsByteArray(string fileName, params string[] pathSegments)
+        {
+            return await _provider.LoadAsByteArray( pathSegments);
+        }
+
+        public async Task<string> LoadAsString(string fileName, params string[] pathSegments)
+        {
+            return await _provider.LoadAsString(pathSegments);
         }
     }
 }

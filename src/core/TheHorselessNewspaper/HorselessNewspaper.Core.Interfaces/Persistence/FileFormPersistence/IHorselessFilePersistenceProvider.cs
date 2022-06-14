@@ -8,16 +8,18 @@ using System.Threading.Tasks;
 
 namespace HorselessNewspaper.Core.Interfaces.Persistence.FileFormPersistence
 {
-    public interface IHorselessFilePersistenceProvider : IHorselessPersistenceProvider, IFileProvider
+    public interface IHorselessFilePersistenceProvider : IHorselessPersistenceProvider // , IFileProvider
     {
         string TenantFilesystemRoot { get; set; }
         bool IsInitializedFilesystemRoot { get; set; }
 
-        IDirectoryContents GetDirectoryContents(string subpath);
-        IFileInfo GetFileInfo(string subpath);
-        public Task<bool> Persist(string path, ICollection<IFormFile> files);
-        public Task<string> Persist(string path, string fileName, byte[] data, bool isShouldOverwrite);
+        Task<IDirectoryContents> GetDirectoryContents(params string[] pathSegments);
+        Task<IFileInfo> GetFileInfo(string fileName, params string[] pathSegments);
+        public Task<bool> Persist(ICollection<IFormFile> files, bool isShouldOverwrite = false, params string[] pathSegments);
+        public Task<string> Persist(string fileName, byte[] data, bool isShouldOverwrite=false, params string[] pathSegments);
+        public Task<string> Persist(string fileName, string data, bool isShouldOverwrite = false, params string[] pathSegments);
 
-
+        public Task<byte[]> LoadAsByteArray(params string[] pathSegments);
+        public Task<string> LoadAsString(params string[] pathSegments);
     }
 }
