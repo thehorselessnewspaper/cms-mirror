@@ -6,12 +6,16 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 using HorselessNewspaper.Core.Repositories.TenantFilesystem;
+using Microsoft.Extensions.FileProviders;
 
 namespace HorselessNewspaper.Core.Web.SmokeTests.Filesystem
 {
     [Collection("FilesystemProviderCollection")]
     public class FilesystemProviderSmokeTests :  IClassFixture<BaseWebIntegrationTest>
     {
+        private const string testFileName = "testjson.json";
+        string testJson = @"{""property"": ""value""}";
+
         BaseWebIntegrationTest _baseTest;
         public WebApplicationFactory<Program> application = null;
         List<IEnumerable<IHorselessTreeNode<string>>> testFilesystem = new List<IEnumerable<IHorselessTreeNode<string>>>();
@@ -135,24 +139,34 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Filesystem
 
 
                 mountResult = await fileSystemService.Mount(createIfNotExists: false, "images");
-                string testJson = @"{""property"": ""value""}";
 
-                var persistResult = await fileSystemService.Persist("testjson.json", testJson, true, "images", "tenants");
+                // validate the ability to save json strings
+
+
+                var persistResult = await fileSystemService.Persist(testFileName, testJson, true, "images", "tenants");
                 Assert.NotNull(persistResult);
 
-                var fileInfo = await fileSystemService.GetFileInfo("testjson.json", "images", "tenants");
+                // validate the ability to locate a fileinfo directly
+                var fileInfo = await fileSystemService.GetFileInfo(testFileName, "images", "tenants");
                 Assert.True(fileInfo.Exists);
 
+                // validate the ability to enumerate folder contents
                 var dirContents = await fileSystemService.GetDirectoryContents("images", "tenants");
+                Assert.NotNull(dirContents);
+                Assert.True(dirContents.Exists);
 
-                var newMountResult = await fileSystemService.Mount(createIfNotExists: false, "images");
-
-                var loadResult = await fileSystemService.LoadAsString("testjson.json", "tenants");
+                // validate the ability to load a saved string
+                var loadResult = await fileSystemService.LoadAsString(testFileName, "images", "tenants");
                 Assert.NotNull(loadResult);
-
+                Assert.True(loadResult.Equals(testJson));
 
                 var contentsResult = await fileSystemService.FindFiles(f => f.Name.Contains("json"), true, "images");
                 Assert.NotNull(contentsResult);
+                List<IFileInfo> resultList = new List<IFileInfo>(contentsResult);
+                Assert.True(resultList.Count == 1);
+                var payload = resultList.Find(f => f.Exists);
+                Assert.True(payload != null);
+                Assert.True(payload.Name.Equals(testFileName));
             }
         }
     }

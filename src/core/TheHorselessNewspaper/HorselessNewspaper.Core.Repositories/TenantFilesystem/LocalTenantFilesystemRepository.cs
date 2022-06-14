@@ -83,6 +83,7 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
 
         private PhysicalFileProvider _filesystemProvider;
         private ILogger<LocalTenantFilesystemRepository> _logger;
+        IConfiguration Configuration;
 
         public string TenantFilesystemRoot { get; set; } = string.Empty;
 
@@ -95,9 +96,8 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
             _logger = logger;
             try
             {
-
-                var configPath = configuration[HorselessConfigurationConstants.TenantFilesystemRoot];
-                string sanitizedPath = SanitizeConfigRoot(configPath);
+                Configuration = configuration;
+                string sanitizedPath = GetConfiguredFilesystemRootPath();
 
                 TenantFilesystemRoot = sanitizedPath;
 
@@ -111,6 +111,13 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
                 IsInitializedFilesystemRoot = false;
                 _logger.LogError($"{this.GetType().FullName} could not retrieve the tenant filesystem root path");
             }
+        }
+
+        public string GetConfiguredFilesystemRootPath()
+        {
+            var configPath = Configuration[HorselessConfigurationConstants.TenantFilesystemRoot];
+            string sanitizedPath = SanitizeConfigRoot(configPath);
+            return sanitizedPath;
         }
 
         private string SanitizeConfigRoot(string configPath)
@@ -233,8 +240,11 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
             var ret = new List<IFileInfo>();
             var path = await GetOSNormalizedPath(pathSegments);
 
-            _filesystemProvider.FindFiles(
-                directory: path,
+            var subPath = await GetOSNormalizedPath(string.Empty);
+            PhysicalFileProvider provider = new PhysicalFileProvider(subPath);
+
+            provider.FindFiles(
+                directory: string.Empty,
                 match:  fileMatcherPredicate,
                 process: ret.Add,
                 recursive: recursive
@@ -245,10 +255,10 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
         public async Task<IDirectoryContents> GetDirectoryContents(params string[] pathSegments)
         {
             IDirectoryContents ret;
-
             var subPath = await GetOSNormalizedPath(pathSegments);
+            PhysicalFileProvider provider = new PhysicalFileProvider(subPath);
 
-            ret = _filesystemProvider.GetDirectoryContents(subPath);
+            ret = provider.GetDirectoryContents(String.Empty);
 
             return ret;
         }
@@ -399,7 +409,7 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
         /// </summary>
         /// <param name="pathSegments"></param>
         /// <returns></returns>
-        public async Task<byte[]> LoadAsByteArray(params string[] pathSegments)
+        public async Task<byte[]> LoadAsByteArray(string fileName, params string[] pathSegments)
         {
             byte[] ret = new byte[1];
 
@@ -414,11 +424,11 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
         /// </summary>
         /// <param name="pathSegments"></param>
         /// <returns></returns>
-        public async Task<string> LoadAsString(params string[] pathSegments)
+        public async Task<string> LoadAsString(string fileName, params string[] pathSegments)
         {
             string ret = string.Empty;
 
-            var fullPath = await GetOSNormalizedPath(pathSegments);
+            var fullPath = await GetOSNormalizedPath(fileName, pathSegments);
             ret = await File.ReadAllTextAsync(fullPath);
 
             return await Task.FromResult<string>(ret);

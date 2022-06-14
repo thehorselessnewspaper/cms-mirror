@@ -72,12 +72,12 @@ namespace HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem
 
         public async Task<byte[]> LoadAsByteArray(string fileName, params string[] pathSegments)
         {
-            return await _provider.LoadAsByteArray( pathSegments);
+            return await _provider.LoadAsByteArray(fileName, pathSegments);
         }
 
         public async Task<string> LoadAsString(string fileName, params string[] pathSegments)
         {
-            return await _provider.LoadAsString(pathSegments);
+            return await _provider.LoadAsString(fileName, pathSegments);
         }
 
 
