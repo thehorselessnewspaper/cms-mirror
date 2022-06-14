@@ -1,4 +1,5 @@
-﻿using HorselessNewspaper.Core.Interfaces.Persistence.FileFormPersistence;
+﻿using HorselessNewspaper.Core.Interfaces.Knuth.TreeNodes;
+using HorselessNewspaper.Core.Interfaces.Persistence.FileFormPersistence;
 
 namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
 {
@@ -8,5 +9,6 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
         Task<bool> DirectoryExists(params string[] pathSegments);
 
         Task<string> GetOSNormalizedPath(params string[] pathSegments);
+        Task<bool> RenderFilesystemTree(IEnumerable<IHorselessTreeNode<string>> filesystemTree);
     }
 }

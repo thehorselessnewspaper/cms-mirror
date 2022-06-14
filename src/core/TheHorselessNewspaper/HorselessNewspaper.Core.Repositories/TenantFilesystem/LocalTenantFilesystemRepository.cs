@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HorselessNewspaper.Core.Interfaces.Knuth.TreeNodes;
 
 namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
 {
@@ -340,6 +341,44 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
             return await Task.FromResult<string>(ret);
         }
 
- 
+        /// <summary>
+        /// expects a list of parent nodes
+        /// meant to be attached to the 
+        /// chroot parent node maintained by 
+        /// this repository
+        /// </summary>
+        /// <param name="filesystemTree"></param>
+        /// <returns></returns>
+        public async Task<bool> RenderFilesystemTree(IEnumerable<IHorselessTreeNode<string>> filesystemTree)
+        {
+            var ret = true;
+            foreach(var node in filesystemTree)
+            {
+                try
+                {
+                    // compute lineage
+                    node.Render();
+
+                    // compute paths
+                    var paths = node.ComputePaths(node, n => n.Children);
+                    foreach (var subPath in paths)
+                    {
+                        var mountList = subPath.Select(s => s.Payload).ToArray();
+                        var newFolder = await this.CreateDirectoryIfNotExists( mountList);
+                        _logger.LogInformation($"{this.GetType().FullName} has created a new folder {newFolder.FullName}");
+                    }
+                }
+                catch (Exception e)
+                {
+                    // fail silent
+                    _logger.LogError($"{this.GetType().FullName} threw an exception materializing filesystem tree: {e.Message}");
+                    ret = false;
+                }
+            }
+
+            return ret;
+
+        }
+
     }
 }

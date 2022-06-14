@@ -1,4 +1,5 @@
-﻿using HorselessNewspaper.Core.Repositories.TenantFilesystem;
+﻿using HorselessNewspaper.Core.Interfaces.Knuth.TreeNodes;
+using HorselessNewspaper.Core.Repositories.TenantFilesystem;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
 using System;
@@ -20,5 +21,6 @@ namespace HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem
 
         public Task<byte[]> LoadAsByteArray(string fileName, params string[] pathSegments);
         public Task<string> LoadAsString(string fileName, params string[] pathSegments);
+        Task<bool> RenderFilesystemTree(IEnumerable<IHorselessTreeNode<string>> filesystemTree);
     }
 }

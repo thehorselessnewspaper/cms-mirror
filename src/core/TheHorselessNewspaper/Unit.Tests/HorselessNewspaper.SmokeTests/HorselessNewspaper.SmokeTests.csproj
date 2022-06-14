@@ -10,6 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
@@ -28,10 +34,6 @@
     <ProjectReference Include="..\..\HorselessNewspaper.Client.Nuget\HorselessNewspaper.Client.Nuget.csproj" />
     <ProjectReference Include="..\..\HorselessNewspaper.Core.Repositories\HorselessNewspaper.Core.Repositories.csproj" />
     <ProjectReference Include="..\..\Web.Core\HorselessNewspaper.Web.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="NewFolder\" />
   </ItemGroup>
 
 </Project>
