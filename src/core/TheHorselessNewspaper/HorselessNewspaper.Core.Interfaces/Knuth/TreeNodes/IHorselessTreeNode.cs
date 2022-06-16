@@ -29,6 +29,40 @@ namespace HorselessNewspaper.Core.Interfaces.Knuth.TreeNodes
 
     public interface IHorselessTreeNode<TPayload> : IHorselessTreeNode<TPayload, IHorselessTreeNode<TPayload>>
     {
+        public new TPayload Payload { get; set; }
+    }
+
+    public interface IHorselessRelationalTreeNode<TPayload, TChildren, TPrimaryRelation, TSecondaryRelation> : IHorselessTreeNode<TPayload, TChildren>
+    {
+        public new TPayload Payload { get; set; }
+
+        public TPrimaryRelation PrimaryRelation { get; set; }
+
+        public TSecondaryRelation SecondaryRelation { get; set; }
+    }
+
+    public interface IHorselessBaseRelationalTreeNode<TPayload, TPrimaryRelation, TSecondaryRelation>
+        : IHorselessRelationalTreeNode<TPayload, 
+            IHorselessBaseRelationalTreeNode<TPayload, TPrimaryRelation, TSecondaryRelation>, TPrimaryRelation, TSecondaryRelation>
+    {
+        public new TPayload Payload { get; set; }
+
+        public new TPrimaryRelation PrimaryRelation { get; set; }
+
+        public new TSecondaryRelation SecondaryRelation { get; set; }
+    }
+
+    /// <summary>
+    /// support a tree node that has related tree nodes 
+    /// for what it's worth this provides a 3 axis tree node 
+    /// </summary>
+    /// <typeparam name="TPayload"></typeparam>
+    public interface IHorselessRelationalTreeNode<TPayload, TPrimaryRelation, TSecondaryRelation> 
+                             :  IHorselessRelationalTreeNode<TPayload,
+                                IHorselessRelationalTreeNode<TPayload, TPrimaryRelation, TSecondaryRelation>,
+                                TPrimaryRelation,
+                                TSecondaryRelation>
+    {
 
     }
 
@@ -43,6 +77,7 @@ namespace HorselessNewspaper.Core.Interfaces.Knuth.TreeNodes
 
         public new TPayload Payload { get; set; }
     }
+
 
 
     public enum HorselessFilesystemNodeIdentifier
