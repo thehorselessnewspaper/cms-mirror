@@ -1,9 +1,4 @@
 ﻿using HorselessNewspaper.Core.Interfaces.Knuth.TreeNodes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HorselessNewspaper.Core.Interfaces.Model.Knuth.TreeNodes
 {
@@ -44,7 +39,13 @@ namespace HorselessNewspaper.Core.Interfaces.Model.Knuth.TreeNodes
     public abstract class AbstractHorselessFilesystmTreeNodeBase<TPayload> : AbstractHorselessTreeNodeBase<TPayload, IHorselessFilesystemTreeNode<TPayload>>, IHorselessFilesystemTreeNode<TPayload>
     
     {
-        public HorselessFilesystemNodeIdentifier WellKnownNode { get; set; }
+ 
+        public AbstractHorselessFilesystmTreeNodeBase(TPayload payload) : base(payload)
+        {
+
+        }
+
+        public virtual HorselessFilesystemNodeIdentifier WellKnownNode { get; set; }
     }
 
     /// <summary>
@@ -53,17 +54,17 @@ namespace HorselessNewspaper.Core.Interfaces.Model.Knuth.TreeNodes
     /// <typeparam name="TPayload"></typeparam>
     public class HorselessFilesystemTreeNode<TPayload> : AbstractHorselessFilesystmTreeNodeBase<TPayload>
     {
-        public override List<IHorselessFilesystemTreeNode<TPayload>> Children { get; set; }
-        public override TPayload Payload { get; set; }
-        public override IHorselessFilesystemTreeNode<TPayload>? Parent { get; set; }
-        public HorselessFilesystemNodeIdentifier WellKnownNode { get; set; }
-
-        public HorselessFilesystemTreeNode() { }
-
-        public HorselessFilesystemTreeNode(TPayload payload)
+        public HorselessFilesystemTreeNode(TPayload payload) : base(payload)
         {
             Payload = payload;
         }
+
+        public override List<IHorselessFilesystemTreeNode<TPayload>> Children { get; set; } = new List<IHorselessFilesystemTreeNode<TPayload>>();
+        public override TPayload Payload { get; set; }
+        public override IHorselessFilesystemTreeNode<TPayload>? Parent { get; set; }
+        public override HorselessFilesystemNodeIdentifier WellKnownNode { get; set; }
+
+
 
         public override IEnumerable<IHorselessFilesystemTreeNode<TPayload>> Subtree
         {

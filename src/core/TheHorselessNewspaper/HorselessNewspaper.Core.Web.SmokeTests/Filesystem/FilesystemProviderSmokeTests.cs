@@ -236,10 +236,10 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Filesystem
                 Assert.NotNull(loadResult);
                 Assert.True(loadResult.Equals(testJson));
 
-                var contentsResult = await fileSystemService.FindFiles(f => f.Name.Contains("json"), true, "images");
+                var contentsResult = await fileSystemService.FindFiles(f => f.Name.Equals(testFileName), true, "images", "tenans");
                 Assert.NotNull(contentsResult);
                 List<IFileInfo> resultList = new List<IFileInfo>(contentsResult);
-                Assert.True(resultList.Count == 1);
+                Assert.True(resultList.Count > 0);
                 var payload = resultList.Find(f => f.Exists);
                 Assert.True(payload != null);
                 Assert.True(payload.Name.Equals(testFileName));

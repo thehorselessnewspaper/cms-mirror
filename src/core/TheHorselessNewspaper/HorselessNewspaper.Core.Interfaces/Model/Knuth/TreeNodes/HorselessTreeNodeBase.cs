@@ -135,7 +135,13 @@ namespace HorselessNewspaper.Core.Interfaces.Knuth.TreeNodes
         where TChildren : IHorselessTreeNode<TPayload, TChildren>
     {
 
-        public abstract List<TChildren> Children { get; set; }
+
+        public AbstractHorselessTreeNodeBase(TPayload Payload)
+        {
+            Payload = Payload;
+        }
+
+        virtual public List<TChildren> Children { get; set; } = new List<TChildren>();
 
         public abstract TPayload Payload { get; set; }
         public abstract TChildren? Parent { get; set; }
