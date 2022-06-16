@@ -11,6 +11,8 @@ using HorselessNewspaper.Core.Interfaces.Model.Knuth.TreeNodes;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Linq;
+using System;
 
 namespace HorselessNewspaper.Core.Web.SmokeTests.Filesystem
 {
@@ -290,6 +292,43 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Filesystem
                 var loadResult = await fileSystemService.LoadAsString("treenodefilesystem.json", "images", "tenants");
 
                 Assert.True(loadResult == jsonString);
+
+                var aggregatePaths = new  List < IEnumerable<IHorselessFilesystemTreeNode<string>>>();
+                
+                foreach (IEnumerable<IHorselessFilesystemTreeNode<string>> nodes in treeNodeFilesystem)
+                {
+                    foreach (var node in nodes)
+                    {
+                        // compute lineage
+                        node.Render();
+
+                        // compute paths
+                        var paths = node.ComputePaths(node, n => n.Children);
+                        aggregatePaths.AddRange(paths);
+                    }
+                }
+
+                var differentOptions = new JsonSerializerOptions
+                {
+                    IgnoreReadOnlyProperties = true,
+                    WriteIndented = true,
+                    Converters ={
+                        new JsonStringEnumConverter()
+                    }
+
+                };
+
+                // serialize the paths
+                // with serialization cycle detection disabled
+                var pathsMs = new MemoryStream();
+                JsonSerializer.Serialize<List<IEnumerable<IHorselessFilesystemTreeNode<string>>>>(pathsMs, aggregatePaths, differentOptions);
+                pathsMs.Position = 0;
+
+                StreamReader pathsSr = new StreamReader(pathsMs);
+                string pathsJsonString = pathsSr.ReadToEnd();
+
+                var pathPersistResult = await fileSystemService.Persist("treenodefilesystem.json", pathsJsonString, true, "images", "tenants");
+                Assert.True(aggregatePaths != null);
             }
         }
     }

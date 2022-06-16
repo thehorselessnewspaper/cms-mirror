@@ -40,6 +40,8 @@ namespace HorselessNewspaper.Core.Interfaces.Knuth.TreeNodes
     public interface IHorselessFilesystemTreeNode<TPayload> : IHorselessTreeNode<TPayload, IHorselessFilesystemTreeNode<TPayload>>
     {
         public HorselessFilesystemNodeIdentifier WellKnownNode { get; set; }
+
+        public new TPayload Payload { get; set; }
     }
 
 

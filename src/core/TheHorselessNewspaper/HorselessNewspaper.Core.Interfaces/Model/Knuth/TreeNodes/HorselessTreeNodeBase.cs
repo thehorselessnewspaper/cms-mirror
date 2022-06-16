@@ -20,9 +20,9 @@ namespace HorselessNewspaper.Core.Interfaces.Knuth.TreeNodes
             Payload = payload;
         }
 
-        public List<HorselessTreeNode<TPayload>> Children { get; set; }
+        public List<HorselessTreeNode<TPayload>> Children { get; set; } = new List<HorselessTreeNode<TPayload>>();
 
-        public TPayload Payload { get; set; }
+        public TPayload Payload { get; set; } 
         public HorselessTreeNode<TPayload> Parent { get; set; }
 
         [JsonIgnore]
