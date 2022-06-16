@@ -7,39 +7,52 @@ using System.Threading.Tasks;
 using Xunit;
 using HorselessNewspaper.Core.Repositories.TenantFilesystem;
 using Microsoft.Extensions.FileProviders;
+using HorselessNewspaper.Core.Interfaces.Model.Knuth.TreeNodes;
+using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace HorselessNewspaper.Core.Web.SmokeTests.Filesystem
 {
     [Collection("FilesystemProviderCollection")]
-    public class FilesystemProviderSmokeTests :  IClassFixture<BaseWebIntegrationTest>
+    public class FilesystemProviderSmokeTests : IClassFixture<BaseWebIntegrationTest>
     {
         private const string testFileName = "testjson.json";
         string testJson = @"{""property"": ""value""}";
 
         BaseWebIntegrationTest _baseTest;
         public WebApplicationFactory<Program> application = null;
-        List<IEnumerable<IHorselessTreeNode<string>>> testFilesystem = new List<IEnumerable<IHorselessTreeNode<string>>>();
+        List<IEnumerable<HorselessTreeNode<string>>> testFilesystem = new List<IEnumerable<HorselessTreeNode<string>>>();
 
-         public FilesystemProviderSmokeTests(BaseWebIntegrationTest baseTest)
+        // the fact is this list is populated with a descendant of IHorselessTreeNode<T>
+
+        List<IEnumerable<HorselessFilesystemTreeNode<string>>> treeNodeFilesystem = new List<IEnumerable<HorselessFilesystemTreeNode<string>>>();
+
+        public FilesystemProviderSmokeTests(BaseWebIntegrationTest baseTest)
         {
             _baseTest = baseTest;
             application = _baseTest.application;
 
+            #region of polymorphic magical reality
             // prepare a tenant filesystem tree
-            IHorselessTreeNode<string> testNode = new HorselessTreeNode<string>("assetroot");
-            IEnumerable<IHorselessTreeNode<string>> testChildren = new List<IHorselessTreeNode<string>>()
+            var testNode = new HorselessTreeNode<string>("assetroot");
+            // prepare a tenant filesystem tree that inherits from HorselessTreeNode
+            var testTreeNode = new HorselessFilesystemTreeNode<string>("assetroot");
+
+            // prepare child nodes
+            IEnumerable<HorselessTreeNode<string>> testChildren = new List<HorselessTreeNode<string>>()
             {
                         new HorselessTreeNode<string>("images")
                         {
-                            Children = new List<IHorselessTreeNode<string>>
+                            Children = new List<HorselessTreeNode<string>>
                             {
                                 new HorselessTreeNode<string>("tenants")
                                 {
-                                    Children = new List<IHorselessTreeNode<string>>
+                                    Children = new List<HorselessTreeNode<string>>
                                     {
                                         new HorselessTreeNode<string>("default")
                                         {
-                                            Children = new List<IHorselessTreeNode<string>>
+                                            Children = new List<HorselessTreeNode<string>>
                                             {
                                                 new HorselessTreeNode<string>("users")
                                             }
@@ -51,15 +64,15 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Filesystem
 
                         new HorselessTreeNode<string>("nugets")
                         {
-                            Children = new List<IHorselessTreeNode<string>>
+                            Children = new List<HorselessTreeNode<string>>
                             {
                                 new HorselessTreeNode<string>("tenants")
                                 {
-                                    Children = new List<IHorselessTreeNode<string>>
+                                    Children = new List<HorselessTreeNode<string>>
                                     {
                                         new HorselessTreeNode<string>("default")
                                         {
-                                            Children = new List<IHorselessTreeNode<string>>
+                                            Children = new List<HorselessTreeNode<string>>
                                             {
                                                 new HorselessTreeNode<string>("users")
                                             }
@@ -69,8 +82,71 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Filesystem
                             }
                         }
             };
-            testFilesystem.Add(testChildren);
+            // prepare derived child nodes
+            IEnumerable<HorselessFilesystemTreeNode<string>> testTreeNodeChildren = new List<HorselessFilesystemTreeNode<string>>()
+            {
+                        new HorselessFilesystemTreeNode<string>("tenants")
+                        {
+                            WellKnownNode = HorselessFilesystemNodeIdentifier.TenantsRoot,
+                            Children = new List<IHorselessFilesystemTreeNode<string>>
+                            {
+                                new HorselessFilesystemTreeNode<string>("default")
+                                {
+                                    WellKnownNode = HorselessFilesystemNodeIdentifier.DefaultTenantRoot,
+                                    Children = new List<IHorselessFilesystemTreeNode<string>>
+                                    {
+                                        new HorselessFilesystemTreeNode<string>("media")
+                                        {
+                                            WellKnownNode = HorselessFilesystemNodeIdentifier.DefaultTenantMediaRoot,
+                                            Children = new List<IHorselessFilesystemTreeNode<string>>
+                                            {
+                                                new HorselessFilesystemTreeNode<string>("images"){WellKnownNode = HorselessFilesystemNodeIdentifier.DefaultTenantAudioRoot},
+                                                new HorselessFilesystemTreeNode<string>("video"){WellKnownNode = HorselessFilesystemNodeIdentifier.DefaultTenantVideoRoot},
+                                                new HorselessFilesystemTreeNode<string>("audio"){WellKnownNode = HorselessFilesystemNodeIdentifier.DefaultTenantAudioRoot},
+                                                new HorselessFilesystemTreeNode<string>("blobs"){WellKnownNode = HorselessFilesystemNodeIdentifier.DefaultTenantBlobRoot},
+                                                new HorselessFilesystemTreeNode<string>("nugets"){WellKnownNode = HorselessFilesystemNodeIdentifier.DefaultTenantNugetRoot}
+                                            },
 
+                                        },
+                                        new HorselessFilesystemTreeNode<string>("users")
+                                        {
+                                            WellKnownNode = HorselessFilesystemNodeIdentifier.DefaultTenantUsersRoot,
+                                            Children = new List<IHorselessFilesystemTreeNode<string>>()
+                                            {
+                                               new HorselessFilesystemTreeNode<string>("anonymous")
+                                                {
+                                                    WellKnownNode = HorselessFilesystemNodeIdentifier.DefaultTenantAnonymousUser,
+                                                    Children = new List<IHorselessFilesystemTreeNode<string>>
+                                                    {
+                                                        new HorselessFilesystemTreeNode<string>("media")
+                                                        {
+                                                            WellKnownNode = HorselessFilesystemNodeIdentifier.MediaUsersRoot,
+                                                            Children = new List<IHorselessFilesystemTreeNode<string>>
+                                                            {
+                                                                new HorselessFilesystemTreeNode<string>("images"){WellKnownNode = HorselessFilesystemNodeIdentifier.ImagesUsersRoot},
+                                                                new HorselessFilesystemTreeNode<string>("video"){WellKnownNode = HorselessFilesystemNodeIdentifier.VideoUsersRoot},
+                                                                new HorselessFilesystemTreeNode<string>("audio"){WellKnownNode = HorselessFilesystemNodeIdentifier.AudioUsersRoot},
+                                                                new HorselessFilesystemTreeNode<string>("blobs"){WellKnownNode = HorselessFilesystemNodeIdentifier.BlobUsersRoot},
+                                                                new HorselessFilesystemTreeNode<string>("nugets"){WellKnownNode = HorselessFilesystemNodeIdentifier.NugetUsersRoot}
+                                                            }
+
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+            };
+
+            // attach children to a tree an a derived type tree
+            testFilesystem.Add(testChildren);
+            treeNodeFilesystem.Add(testTreeNodeChildren);
+
+            #endregion of polymorphic magical reality
         }
 
         /// <summary>
@@ -79,7 +155,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Filesystem
         /// </summary>
         /// <returns></returns>
         [Fact]
-        
+
         public async Task CanEnumerateAssetRoot()
         {
             using (var scope = application.Services.CreateScope())
@@ -115,7 +191,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Filesystem
                 // mount will fail on uninitialized filesystem config path
                 // due to invalid path
 
-                foreach(var subTree in this.testFilesystem)
+                foreach (var subTree in this.testFilesystem)
                 {
                     var createResult = await fileSystemService.RenderFilesystemTree(subTree);
                     Assert.NotNull(createResult);
@@ -167,6 +243,53 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Filesystem
                 var payload = resultList.Find(f => f.Exists);
                 Assert.True(payload != null);
                 Assert.True(payload.Name.Equals(testFileName));
+            }
+        }
+
+        [Fact]
+        public async Task CanMaterializeJsonFilemTreeModel()
+        {
+            using (var scope = application.Services.CreateScope())
+            {
+                ITenantInfo tenant = scope.ServiceProvider.GetRequiredService<ITenantInfo>();
+                IPosixFilesystemService fileSystemService = scope.ServiceProvider.GetRequiredService<IPosixFilesystemService>();
+
+                // render the test filesystem
+                foreach (var subTree in this.treeNodeFilesystem)
+                {
+                    var createResult = await fileSystemService.RenderFilesystemTree(subTree);
+                    Assert.NotNull(createResult);
+                }
+
+                var options = new JsonSerializerOptions
+                {
+                    IgnoreReadOnlyProperties = true,
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    WriteIndented = true,
+                    Converters ={
+                        new JsonStringEnumConverter()
+                    }
+
+                };
+
+
+                var resultList = new List<IEnumerable<HorselessFilesystemTreeNode<string>>>(treeNodeFilesystem);
+                var ms = new MemoryStream();
+                JsonSerializer.Serialize<List<IEnumerable<HorselessFilesystemTreeNode<string>>>>(ms, treeNodeFilesystem, options);
+                ms.Position = 0;
+
+                StreamReader sr = new StreamReader(ms);
+                string jsonString = sr.ReadToEnd();
+
+                var mountResult = await fileSystemService.Mount(createIfNotExists: false, "images");
+
+                // validate the ability to save json strings
+
+
+                var persistResult = await fileSystemService.Persist("treenodefilesystem.json", jsonString, true, "images", "tenants");
+                var loadResult = await fileSystemService.LoadAsString("treenodefilesystem.json", "images", "tenants");
+
+                Assert.True(loadResult == jsonString);
             }
         }
     }

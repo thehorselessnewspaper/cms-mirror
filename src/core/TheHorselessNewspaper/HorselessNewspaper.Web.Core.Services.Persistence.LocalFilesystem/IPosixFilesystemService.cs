@@ -1,4 +1,5 @@
 ﻿using HorselessNewspaper.Core.Interfaces.Knuth.TreeNodes;
+using HorselessNewspaper.Core.Interfaces.Model.Knuth.TreeNodes;
 using HorselessNewspaper.Core.Repositories.TenantFilesystem;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
@@ -26,7 +27,8 @@ namespace HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem
 
         public Task<byte[]> LoadAsByteArray(string fileName, params string[] pathSegments);
         public Task<string> LoadAsString(string fileName, params string[] pathSegments);
-        public Task<bool> RenderFilesystemTree(IEnumerable<IHorselessTreeNode<string>> filesystemTree);
+        public Task<bool> RenderFilesystemTree(IEnumerable<HorselessTreeNode<string>> filesystemTree);
+        public Task<bool> RenderFilesystemTree(IEnumerable<HorselessFilesystemTreeNode<string>> filesystemTree);
         public Task<IEnumerable<IFileInfo>> FindFiles(Predicate<IFileInfo> fileMatcherPredicate, bool recursive = false, params string[] pathSegments);
     }
 }

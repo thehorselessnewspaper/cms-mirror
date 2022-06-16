@@ -16,20 +16,20 @@ namespace HorselessNewspaper.SmokeTests.Knuth.Tree
     {
 
         // prepare a tenant filesystem tree
-        IHorselessTreeNode<string> testNode = new HorselessTreeNode<string>("assetroot");
-        IEnumerable<IHorselessTreeNode<string>> testChildren = new List<IHorselessTreeNode<string>>()
+        HorselessTreeNode<string> testNode = new HorselessTreeNode<string>("assetroot");
+        List<HorselessTreeNode<string>> testChildren = new List<HorselessTreeNode<string>>()
             {
                         new HorselessTreeNode<string>("images")
                         {
-                            Children = new List<IHorselessTreeNode<string>>
+                            Children = new List<HorselessTreeNode<string>>
                             {
                                 new HorselessTreeNode<string>("tenants")
                                 {
-                                    Children = new List<IHorselessTreeNode<string>>
+                                    Children = new List<HorselessTreeNode<string>>
                                     {
                                         new HorselessTreeNode<string>("default")
                                         {
-                                            Children = new List<IHorselessTreeNode<string>>
+                                            Children = new List<HorselessTreeNode<string>>
                                             {
                                                 new HorselessTreeNode<string>("users")
                                             }
@@ -41,15 +41,15 @@ namespace HorselessNewspaper.SmokeTests.Knuth.Tree
 
                         new HorselessTreeNode<string>("nugets")
                         {
-                            Children = new List<IHorselessTreeNode<string>>
+                            Children = new List<HorselessTreeNode<string>>
                             {
                                 new HorselessTreeNode<string>("tenants")
                                 {
-                                    Children = new List<IHorselessTreeNode<string>>
+                                    Children = new List<HorselessTreeNode<string>>
                                     {
                                         new HorselessTreeNode<string>("default")
                                         {
-                                            Children = new List<IHorselessTreeNode<string>>
+                                            Children = new List<HorselessTreeNode<string>>
                                             {
                                                 new HorselessTreeNode<string>("users")
                                             }

@@ -13,6 +13,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HorselessNewspaper.Core.Interfaces.Knuth.TreeNodes;
+using NuGet.Common;
+using HorselessNewspaper.Core.Interfaces.Model.Knuth.TreeNodes;
 
 namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
 {
@@ -123,8 +125,8 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
         private string SanitizeConfigRoot(string configPath)
         {
             var ret = String.Empty;
-            
-            if(configPath.StartsWith(Path.DirectorySeparatorChar))
+
+            if (configPath.StartsWith(Path.DirectorySeparatorChar))
             {
                 ret = configPath;
             }
@@ -168,23 +170,23 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
         /// implements create if not exists semantics
         /// </summary>
         /// <returns></returns>
-        public async Task<MountLocalTenantFilesystemResult> Mount( bool createPathIfNotExists = false, params string[] pathSegments) 
+        public async Task<MountLocalTenantFilesystemResult> Mount(bool createPathIfNotExists = false, params string[] pathSegments)
         {
             var ret = new MountLocalTenantFilesystemResult();
             var subPath = await GetOSNormalizedPath(pathSegments);
 
             if (IsInitializedFilesystemRoot)
             {
-                if(createPathIfNotExists)
+                if (createPathIfNotExists)
                 {
                     var dirExists = await this.DirectoryExists(subPath);
-                    if(!dirExists)
+                    if (!dirExists)
                     {
                         _logger.LogTrace($"{this.GetType().FullName} creating sub path {subPath}");
                         var createResult = Directory.CreateDirectory(subPath);
 
                         ret.CreatedDirectory = createResult;
-                       
+
 
                     }
                 }
@@ -217,7 +219,7 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
         {
             var ret = false;
 
-            var fullPath = await GetOSNormalizedPath(pathSegments); 
+            var fullPath = await GetOSNormalizedPath(pathSegments);
 
             _logger.LogTrace($"{this.GetType().FullName} testing directory path {fullPath}");
             ret = Directory.Exists(fullPath);
@@ -245,7 +247,7 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
 
             provider.FindFiles(
                 directory: string.Empty,
-                match:  fileMatcherPredicate,
+                match: fileMatcherPredicate,
                 process: ret.Add,
                 recursive: recursive
                 );
@@ -268,15 +270,15 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
             IFileInfo ret;
 
             var mountResult = await Mount(false, pathSegments);
-        
+
             var fullPath = await GetOSNormalizedPath(fileName);
-            
+
             ret = _filesystemProvider.GetFileInfo(fileName);
 
             return ret;
         }
 
-     
+
         public IChangeToken Watch(string filter)
         {
             IChangeToken ret;
@@ -354,7 +356,7 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
                 var targetExists = File.Exists(fullPath);
 
                 if (isShouldOverwrite || !targetExists)
-                {    
+                {
                     using (StreamWriter outputFile = new StreamWriter(fullPath))
                     {
                         await outputFile.WriteAsync(data);
@@ -416,7 +418,7 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
             var fullPath = await GetOSNormalizedPath(pathSegments);
             ret = await File.ReadAllBytesAsync(fullPath);
 
-            return await Task.FromResult<byte[]> (ret);
+            return await Task.FromResult<byte[]>(ret);
         }
 
         /// <summary>
@@ -442,10 +444,10 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
         /// </summary>
         /// <param name="filesystemTree"></param>
         /// <returns></returns>
-        public async Task<bool> RenderFilesystemTree(IEnumerable<IHorselessTreeNode<string>> filesystemTree)
+        public async Task<bool> RenderFilesystemTree(IEnumerable<HorselessTreeNode<string>> filesystemTree)
         {
             var ret = true;
-            foreach(var node in filesystemTree)
+            foreach (var node in filesystemTree)
             {
                 try
                 {
@@ -457,7 +459,7 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
                     foreach (var subPath in paths)
                     {
                         var mountList = subPath.Select(s => s.Payload).ToArray();
-                        var newFolder = await this.CreateDirectoryIfNotExists( mountList);
+                        var newFolder = await this.CreateDirectoryIfNotExists(mountList);
                         _logger.LogInformation($"{this.GetType().FullName} has created a new folder {newFolder.FullName}");
                     }
                 }
@@ -473,5 +475,37 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
 
         }
 
+        public async Task<bool> RenderFilesystemTree(IEnumerable<HorselessFilesystemTreeNode<string>> filesystemTree)
+        {
+            var ret = true;
+            foreach (IHorselessFilesystemTreeNode<string> node in filesystemTree)
+            {
+                try
+                {
+                    // compute lineage
+                    node.Render();
+
+                    // compute paths
+                    var paths = node.ComputePaths(node, n => n.Children);
+                    foreach (var subPath in paths)
+                    {
+                        var mountList = subPath.Select(s => s.Payload).ToArray();
+                        var newFolder = await this.CreateDirectoryIfNotExists(mountList);
+                        _logger.LogInformation($"{this.GetType().FullName} has created a new folder {newFolder.FullName}");
+                    }
+                }
+                catch (Exception e)
+                {
+                    // fail silent
+                    _logger.LogError($"{this.GetType().FullName} threw an exception materializing filesystem tree: {e.Message}");
+                    ret = false;
+                }
+            }
+
+            return ret;
+
+        }
     }
+
+
 }

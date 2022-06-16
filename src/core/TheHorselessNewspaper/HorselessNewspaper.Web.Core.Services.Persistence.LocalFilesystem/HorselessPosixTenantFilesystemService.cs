@@ -1,4 +1,5 @@
 ﻿using HorselessNewspaper.Core.Interfaces.Knuth.TreeNodes;
+using HorselessNewspaper.Core.Interfaces.Model.Knuth.TreeNodes;
 using HorselessNewspaper.Core.Repositories.TenantFilesystem;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
@@ -86,7 +87,12 @@ namespace HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem
         /// </summary>
         /// <param name="filesystemTree"></param>
         /// <returns></returns>
-        public async Task<bool> RenderFilesystemTree(IEnumerable<IHorselessTreeNode<string>> filesystemTree)
+        public async Task<bool> RenderFilesystemTree(IEnumerable<HorselessTreeNode<string>> filesystemTree)
+        {
+            return await _provider.RenderFilesystemTree(filesystemTree);
+        }
+
+        public async Task<bool> RenderFilesystemTree(IEnumerable<HorselessFilesystemTreeNode<string>> filesystemTree)
         {
             return await _provider.RenderFilesystemTree(filesystemTree);
         }
