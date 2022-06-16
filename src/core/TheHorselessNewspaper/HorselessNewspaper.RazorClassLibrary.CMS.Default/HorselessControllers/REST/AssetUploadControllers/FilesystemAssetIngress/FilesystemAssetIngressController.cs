@@ -1,6 +1,7 @@
 ﻿using HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings;
 using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.AssetUploadControllers.ActionFilters;
 using HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.REST.AssetUploadControllers.FilesystemAssetIngress.Utilities;
+using HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
@@ -28,13 +29,16 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         // Get the default form options so that we can use them to set the default 
         // limits for request body data.
         private static readonly FormOptions _defaultFormOptions = new FormOptions();
+        public IPosixFilesystemService _tenantFilesystemService;
 
-        public FilesystemAssetIngressController(ILogger<FilesystemAssetIngressController> logger,
+        public FilesystemAssetIngressController(
+            IPosixFilesystemService tenantFilesystemService,
+            ILogger<FilesystemAssetIngressController> logger,
             IConfiguration config)
-{
+        {
             _logger = logger;
             _fileSizeLimit = config.GetValue<long>("FileSizeLimit");
-
+            _tenantFilesystemService = tenantFilesystemService;
             // To save physical files to a path provided by configuration:
             _targetFilePath = config.GetValue<string>("tenant-filesystem");
 
