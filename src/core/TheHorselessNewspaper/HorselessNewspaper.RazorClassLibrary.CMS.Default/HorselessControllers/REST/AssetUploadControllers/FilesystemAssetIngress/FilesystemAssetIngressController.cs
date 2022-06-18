@@ -22,9 +22,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
     public class FilesystemAssetIngressController : Controller
     {
         //private readonly AppDbContext _context;
-        private readonly long _fileSizeLimit;
+        private readonly long _fileSizeLimit = 1000000000;
         private readonly ILogger<FilesystemAssetIngressController> _logger;
-        private readonly string[] _permittedExtensions = { ".txt" };
+        private readonly string[] _permittedExtensions = { ".txt", ".xls", ".jpg", ".png", ".pdf",  ".json", ".xml" };
         private readonly string _targetFilePath;
         // Get the default form options so that we can use them to set the default 
         // limits for request body data.
@@ -37,7 +37,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             IConfiguration config)
         {
             _logger = logger;
-            _fileSizeLimit = config.GetValue<long>("FileSizeLimit");
+            // _fileSizeLimit = config.GetValue<long>("FileSizeLimit");
             _tenantFilesystemService = tenantFilesystemService;
             // To save physical files to a path provided by configuration:
             _targetFilePath = config.GetValue<string>("tenant-filesystem");
@@ -46,11 +46,14 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             //_targetFilePath = Path.GetTempPath();
         }
 
-        [HttpPost]
+        [Consumes("multipart/form-data")]
+        [HttpPost("UploadPhysical", Name = "ContentEntities[controller]_[action]")]
         [DisableFormValueModelBinding]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UploadPhysical()
         {
+
+
             if (!MultipartRequestHelper.IsMultipartContentType(Request.ContentType))
             {
                 ModelState.AddModelError("File",
@@ -113,17 +116,20 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
                             return BadRequest(ModelState);
                         }
 
-                        using (var targetStream = System.IO.File.Create(
-                            Path.Combine(_targetFilePath, trustedFileNameForFileStorage)))
-                        {
-                            await targetStream.WriteAsync(streamedFileContent);
+                        var insertResult = await _tenantFilesystemService.Persist(trustedFileNameForFileStorage, streamedFileContent, false, "tenants", "default", "media","images");
+                        _logger.LogTrace($"{this.GetType().FullName} has saved uploaded file {trustedFileNameForDisplay}");
 
-                            _logger.LogInformation(
-                                "Uploaded file '{TrustedFileNameForDisplay}' saved to " +
-                                "'{TargetFilePath}' as {TrustedFileNameForFileStorage}",
-                                trustedFileNameForDisplay, _targetFilePath,
-                                trustedFileNameForFileStorage);
-                        }
+                        //using (var targetStream = System.IO.File.Create(
+                        //    Path.Combine(_targetFilePath, trustedFileNameForFileStorage)))
+                        //{
+                        //    await targetStream.WriteAsync(streamedFileContent);
+
+                        //    _logger.LogInformation(
+                        //        "Uploaded file '{TrustedFileNameForDisplay}' saved to " +
+                        //        "'{TargetFilePath}' as {TrustedFileNameForFileStorage}",
+                        //        trustedFileNameForDisplay, _targetFilePath,
+                        //        trustedFileNameForFileStorage);
+                        //}
                     }
                 }
 
