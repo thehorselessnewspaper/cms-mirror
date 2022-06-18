@@ -65,62 +65,53 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
-    AuthModule.forRoot({
-      config: {
-        authority:
-          'https://awsdev.ataxlab.com:8443/realms/horseless-infrastructure',
-        redirectUrl: window.location.origin + '/tenants',
-        postLogoutRedirectUri: window.location.origin + '/index',
-        clientId: 'horseless-prototype-public',
-        scope: 'openid profile email offline_access',
-        responseType: 'code',
-        silentRenew: true,
-        useRefreshToken: true,
-        logLevel: LogLevel.Debug,
-      },
-    }),
-    ToolbarModule,
-    ButtonModule,
-    MatExpansionModule,
-    MatToolbarModule,
-    HttpClientModule,
-    TenantEditorModule,
-    TenantChooserModule,
-    HorselessClientAuthModule,
-    HorselessApiModule.forRoot(apiConfigFactory),
-    BrowserModule,
-    BrowserAnimationsModule,
-    AuthConfigModule,
-    NgbModule,
-    RouterModule.forRoot(routes),
-  ],
-  exports: [],
-  providers: [
-    OidcSecurityService,
-    { provide: BASE_PATH, useValue: environment.API_BASE_PATH },
-    {
-      provide: HorselessConfiguration,
-      useFactory: (authService: OidcSecurityService) =>
-        new HorselessConfiguration({
-          basePath: environment.API_BASE_PATH,
-          credentials: {
-            Bearer: authService.getAccessToken.bind(authService).toString(),
-          },
+    declarations: [AppComponent],
+    imports: [
+        AuthModule.forRoot({
+            config: {
+                authority: 'https://awsdev.ataxlab.com:8443/realms/horseless-infrastructure',
+                redirectUrl: window.location.origin + '/tenants',
+                postLogoutRedirectUri: window.location.origin + '/index',
+                clientId: 'horseless-prototype-public',
+                scope: 'openid profile email offline_access',
+                responseType: 'code',
+                silentRenew: true,
+                useRefreshToken: true,
+                logLevel: LogLevel.Debug,
+            },
         }),
-      deps: [OidcSecurityService],
-      multi: false,
-    },
-  ],
-  bootstrap: [],
-  entryComponents: [
-    TenantChooserComponent,
-    TenantEditorComponent,
-    LoginComponent,
-    LandingPageComponent,
-    AppComponent
-  ],
+        ToolbarModule,
+        ButtonModule,
+        MatExpansionModule,
+        MatToolbarModule,
+        HttpClientModule,
+        TenantEditorModule,
+        TenantChooserModule,
+        HorselessClientAuthModule,
+        HorselessApiModule.forRoot(apiConfigFactory),
+        BrowserModule,
+        BrowserAnimationsModule,
+        AuthConfigModule,
+        NgbModule,
+        RouterModule.forRoot(routes),
+    ],
+    exports: [],
+    providers: [
+        OidcSecurityService,
+        { provide: BASE_PATH, useValue: environment.API_BASE_PATH },
+        {
+            provide: HorselessConfiguration,
+            useFactory: (authService: OidcSecurityService) => new HorselessConfiguration({
+                basePath: environment.API_BASE_PATH,
+                credentials: {
+                    Bearer: authService.getAccessToken.bind(authService).toString(),
+                },
+            }),
+            deps: [OidcSecurityService],
+            multi: false,
+        },
+    ],
+    bootstrap: []
 })
 
 /*
