@@ -61,7 +61,16 @@
 
 	<ItemGroup>
 		<Content Remove="angular\" />
+		<Content Remove="wwwroot\js\bespoke.js" />
 
+	</ItemGroup>
+
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="wwwroot\js\bespoke.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="wwwroot\js\bespoke.js" />
 	</ItemGroup>
 
 	<ItemGroup>

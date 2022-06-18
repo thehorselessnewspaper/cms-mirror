@@ -1974,11 +1974,12 @@
         }
       }
     },
-    "/{__tenant__}/api/HorselessContentModel/FilesystemAssetIngress": {
+    "/{__tenant__}/api/HorselessContentModel/FilesystemAssetIngress/UploadPhysical": {
       "post": {
         "tags": [
           "FilesystemAssetIngress"
         ],
+        "operationId": "ContentEntitiesFilesystemAssetIngress_UploadPhysical",
         "parameters": [
           {
             "name": "__tenant__",

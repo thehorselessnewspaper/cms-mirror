@@ -29,8 +29,8 @@
     "typescript/**/*"
   ],
   "exclude": [
-    "/**/node_modules",
-    "/**/*.spec.ts",
+    "**/node_modules",
+    "**/*.spec.ts",
     "wwwroot/js/typescript"
   ]
 }
