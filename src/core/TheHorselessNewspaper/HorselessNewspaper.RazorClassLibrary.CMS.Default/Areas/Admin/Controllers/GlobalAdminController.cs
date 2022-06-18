@@ -1,5 +1,6 @@
 ﻿
 using HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Model;
+using HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem;
 using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using HorselessNewspaper.Web.Core.Services.Query.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -20,11 +21,13 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
         IContentCollectionService<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModel.Tenant> _tenantCollectionService;
         IQueryableHostingModelOperator<HostingModel.Tenant> _hostModelOperator;
         private IConfiguration _configuration;
+        IPosixFilesystemService _posixFilesystemService;
         IQueryableContentModelOperator<ContentModel.Tenant> _modelOperator;
         public GlobalAdminController(ILogger<GlobalAdminController> logger,
             IContentCollectionService<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModel.Tenant> tenantCollectionService,
             IQueryableContentModelOperator<ContentModel.Tenant> modelOperator,
             IQueryableHostingModelOperator<HostingModel.Tenant> hostModelOperator,
+            IPosixFilesystemService posixFilesystemService,
             IConfiguration configuration)
         {
             this._logger = logger;
@@ -32,6 +35,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
             this._modelOperator = modelOperator;
             this._hostModelOperator = hostModelOperator;
             this._configuration = configuration;
+            this._posixFilesystemService = posixFilesystemService;
         }
 
         public IActionResult Dashboard()
@@ -61,9 +65,14 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                 {
                     try
                     {
-                        if (model.IsMustResetDatabase)
+                        if (model.IsMustResetDatabase == true)
                         {
                             await this._modelOperator.ResetDb();
+                        }
+                        else if(model.IsMustResetFilesystem == true)
+                        {
+                            var filesystemResetResult = this._posixFilesystemService.RenderFilesystemTree();
+                            _logger.LogTrace($"{this.GetType().FullName} has reset the tenant filesystem {filesystemResetResult}");
                         }
                     }
                     catch (Exception ex)
@@ -71,17 +80,6 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                         _logger.LogError($"problem resetting database {ex.Message}");
                     }
 
-                    try
-                    {
-                        if (model.IsMustResetDatabase)
-                        {
-                            await this._hostModelOperator.ResetDb();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.LogError($"problem resetting database {ex.Message}");
-                    }
                 }
 
             }
@@ -91,6 +89,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
             }
 
             model.IsMustResetDatabase = false;
+            model.IsMustResetFilesystem = false;
             return RedirectToAction(nameof(ResetDatabase));
         }
 

@@ -106,5 +106,89 @@ namespace HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem
         {
             return await _provider.FindFiles(fileMatcherPredicate, recursive, pathSegments);
         }
+
+        /// <summary>
+        /// render the default tenant filesystem
+        /// </summary>
+        /// <returns></returns>
+  
+        public async Task<bool> RenderFilesystemTree()
+        {
+
+            bool ret  = true;
+            List<IEnumerable<HorselessFilesystemTreeNode<string>>> treeNodeFilesystem = new List<IEnumerable<HorselessFilesystemTreeNode<string>>>();
+            // prepare derived child nodes
+            IEnumerable<HorselessFilesystemTreeNode<string>> defaultTreenodeChildren = new List<HorselessFilesystemTreeNode<string>>()
+            {
+                        new HorselessFilesystemTreeNode<string>("tenants")
+                        {
+                            WellKnownNode = HorselessFilesystemNodeIdentifier.TenantsRoot,
+                            Children = new List<IHorselessFilesystemTreeNode<string>>
+                            {
+                                new HorselessFilesystemTreeNode<string>("default")
+                                {
+                                    WellKnownNode = HorselessFilesystemNodeIdentifier.DefaultTenantRoot,
+                                    Children = new List<IHorselessFilesystemTreeNode<string>>
+                                    {
+                                        new HorselessFilesystemTreeNode<string>("media")
+                                        {
+                                            WellKnownNode = HorselessFilesystemNodeIdentifier.DefaultTenantMediaRoot,
+                                            Children = new List<IHorselessFilesystemTreeNode<string>>
+                                            {
+                                                new HorselessFilesystemTreeNode<string>("images"){WellKnownNode = HorselessFilesystemNodeIdentifier.DefaultTenantAudioRoot},
+                                                new HorselessFilesystemTreeNode<string>("video"){WellKnownNode = HorselessFilesystemNodeIdentifier.DefaultTenantVideoRoot},
+                                                new HorselessFilesystemTreeNode<string>("audio"){WellKnownNode = HorselessFilesystemNodeIdentifier.DefaultTenantAudioRoot},
+                                                new HorselessFilesystemTreeNode<string>("blobs"){WellKnownNode = HorselessFilesystemNodeIdentifier.DefaultTenantBlobRoot},
+                                                new HorselessFilesystemTreeNode<string>("nugets"){WellKnownNode = HorselessFilesystemNodeIdentifier.DefaultTenantNugetRoot}
+                                            },
+
+                                        },
+                                        new HorselessFilesystemTreeNode<string>("users")
+                                        {
+                                            WellKnownNode = HorselessFilesystemNodeIdentifier.DefaultTenantUsersRoot,
+                                            Children = new List<IHorselessFilesystemTreeNode<string>>()
+                                            {
+                                               new HorselessFilesystemTreeNode<string>("anonymous")
+                                                {
+                                                    WellKnownNode = HorselessFilesystemNodeIdentifier.DefaultTenantAnonymousUser,
+                                                    Children = new List<IHorselessFilesystemTreeNode<string>>
+                                                    {
+                                                        new HorselessFilesystemTreeNode<string>("media")
+                                                        {
+                                                            WellKnownNode = HorselessFilesystemNodeIdentifier.MediaUsersRoot,
+                                                            Children = new List<IHorselessFilesystemTreeNode<string>>
+                                                            {
+                                                                new HorselessFilesystemTreeNode<string>("images"){WellKnownNode = HorselessFilesystemNodeIdentifier.ImagesUsersRoot},
+                                                                new HorselessFilesystemTreeNode<string>("video"){WellKnownNode = HorselessFilesystemNodeIdentifier.VideoUsersRoot},
+                                                                new HorselessFilesystemTreeNode<string>("audio"){WellKnownNode = HorselessFilesystemNodeIdentifier.AudioUsersRoot},
+                                                                new HorselessFilesystemTreeNode<string>("blobs"){WellKnownNode = HorselessFilesystemNodeIdentifier.BlobUsersRoot},
+                                                                new HorselessFilesystemTreeNode<string>("nugets"){WellKnownNode = HorselessFilesystemNodeIdentifier.NugetUsersRoot}
+                                                            }
+
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+            };
+
+            treeNodeFilesystem.Add(defaultTreenodeChildren);
+            foreach(var subtree in treeNodeFilesystem)
+            {
+                var insertResult = await this.RenderFilesystemTree(subtree);
+                if(insertResult == false)
+                {
+                    ret = false;
+                };
+            }
+
+
+            return ret;
+        }
     }
 }

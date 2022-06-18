@@ -477,8 +477,32 @@ namespace HorselessNewspaper.Core.Repositories.TenantFilesystem
 
         public async Task<bool> RenderFilesystemTree(IEnumerable<HorselessFilesystemTreeNode<string>> filesystemTree)
         {
+            IEnumerable<IHorselessFilesystemTreeNode<string>> iFilesystemTree = filesystemTree;
             var ret = true;
-  
+            foreach (var node in iFilesystemTree)
+            {
+                try
+                {
+                    // compute lineage
+                    node.Render();
+
+                    // compute paths
+                    var paths = node.ComputePaths(node, n => n.Children);
+                    foreach (var subPath in paths)
+                    {
+                        var mountList = subPath.Select(s => s.Payload).ToArray();
+                        var newFolder = await this.CreateDirectoryIfNotExists(mountList);
+                        _logger.LogInformation($"{this.GetType().FullName} has created a new folder {newFolder.FullName}");
+                    }
+                }
+                catch (Exception e)
+                {
+                    // fail silent
+                    _logger.LogError($"{this.GetType().FullName} threw an exception materializing filesystem tree: {e.Message}");
+                    ret = false;
+                }
+            }
+
             return ret;
 
         }
