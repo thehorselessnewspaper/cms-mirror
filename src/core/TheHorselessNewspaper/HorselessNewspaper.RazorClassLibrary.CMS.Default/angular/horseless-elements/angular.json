@@ -160,6 +160,7 @@
       }
     }
   },
+  "defaultProject": "horseless-elements",
   "cli": {
     "analytics": false
   }
