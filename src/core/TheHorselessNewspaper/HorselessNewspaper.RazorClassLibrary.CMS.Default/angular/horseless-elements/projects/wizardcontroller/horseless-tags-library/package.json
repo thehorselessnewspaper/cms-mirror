@@ -5,6 +5,9 @@
     "@angular/common": "^13.1.0",
     "@angular/core": "^13.1.0",
     "@wizardcontrollerprerelease/horseless-contentapi-lib": "^x.x.x",
+    "primeflex": "^3.2.0",
+    "primeicons": "^5.0.0",
+    "primeng": "^13.4.1",
     "rxjs": "^7.5.5"
   },
   "devDependencies": {
