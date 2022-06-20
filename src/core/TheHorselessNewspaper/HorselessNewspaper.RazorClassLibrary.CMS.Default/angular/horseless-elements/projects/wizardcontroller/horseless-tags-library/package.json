@@ -7,17 +7,23 @@
     "styles.css"
   ],
   "peerDependencies": {
-    "@angular/common": "^13.1.0",
-    "@angular/core": "^13.1.0",
+    "@angular/common": "^x.x.x",
+    "@angular/core": "^x.x.x",
     "@wizardcontrollerprerelease/horseless-contentapi-lib": "^x.x.x",
-    "primeflex": "^3.2.0",
-    "primeicons": "^5.0.0",
-    "primeng": "^13.4.1",
-    "rxjs": "^7.5.5"
+    "primeflex": "^x.x.x",
+    "primeicons": "^x.x.x",
+    "primeng": "^x.x.x",
+    "rxjs": "^x.x.x"
   },
   "devDependencies": {
-    "@angular/cli": "^14.0.2",
+    "@angular/cli": "^x.x.x",
+    "@angular/common": "^x.x.x",
+    "@angular/core": "^x.x.x",
     "@wizardcontrollerprerelease/horseless-contentapi-lib": "^x.x.x",
+    "primeflex": "^x.x.x",
+    "primeicons": "^x.x.x",
+    "primeng": "^x.x.x",
+    "rxjs": "^x.x.x",
     "tslib": "^2.3.1"
   }
 }
