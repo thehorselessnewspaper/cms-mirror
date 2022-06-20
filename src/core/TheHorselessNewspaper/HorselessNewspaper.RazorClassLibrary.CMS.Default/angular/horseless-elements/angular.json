@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects/wizardcontroller/horseless-tags-library/src",
+  "newProjectRoot": "projects",
   "projects": {
     "horseless-elements": {
       "projectType": "application",
@@ -155,6 +155,288 @@
               "projects/wizardcontroller/horseless-tags-library/**/*.ts",
               "projects/wizardcontroller/horseless-tags-library/**/*.html"
             ]
+          }
+        }
+      }
+    },
+    "@horselessnewspaper/devopsAdmin": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/horselessnewspaper/devops-admin",
+      "sourceRoot": "projects/horselessnewspaper/devops-admin/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/horselessnewspaper/devops-admin",
+            "index": "projects/horselessnewspaper/devops-admin/src/index.html",
+            "main": "projects/horselessnewspaper/devops-admin/src/main.ts",
+            "polyfills": "projects/horselessnewspaper/devops-admin/src/polyfills.ts",
+            "tsConfig": "projects/horselessnewspaper/devops-admin/tsconfig.app.json",
+            "assets": [
+              "projects/horselessnewspaper/devops-admin/src/favicon.ico",
+              "projects/horselessnewspaper/devops-admin/src/assets"
+            ],
+            "styles": [
+              "projects/horselessnewspaper/devops-admin/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/horselessnewspaper/devops-admin/src/environments/environment.ts",
+                  "with": "projects/horselessnewspaper/devops-admin/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "@horselessnewspaper/devopsAdmin:build:production"
+            },
+            "development": {
+              "browserTarget": "@horselessnewspaper/devopsAdmin:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "@horselessnewspaper/devopsAdmin:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/horselessnewspaper/devops-admin/src/test.ts",
+            "polyfills": "projects/horselessnewspaper/devops-admin/src/polyfills.ts",
+            "tsConfig": "projects/horselessnewspaper/devops-admin/tsconfig.spec.json",
+            "karmaConfig": "projects/horselessnewspaper/devops-admin/karma.conf.js",
+            "assets": [
+              "projects/horselessnewspaper/devops-admin/src/favicon.ico",
+              "projects/horselessnewspaper/devops-admin/src/assets"
+            ],
+            "styles": [
+              "projects/horselessnewspaper/devops-admin/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "@horselessnewspaper/contentAdmin": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/horselessnewspaper/content-admin",
+      "sourceRoot": "projects/horselessnewspaper/content-admin/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/horselessnewspaper/content-admin",
+            "index": "projects/horselessnewspaper/content-admin/src/index.html",
+            "main": "projects/horselessnewspaper/content-admin/src/main.ts",
+            "polyfills": "projects/horselessnewspaper/content-admin/src/polyfills.ts",
+            "tsConfig": "projects/horselessnewspaper/content-admin/tsconfig.app.json",
+            "assets": [
+              "projects/horselessnewspaper/content-admin/src/favicon.ico",
+              "projects/horselessnewspaper/content-admin/src/assets"
+            ],
+            "styles": [
+              "projects/horselessnewspaper/content-admin/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/horselessnewspaper/content-admin/src/environments/environment.ts",
+                  "with": "projects/horselessnewspaper/content-admin/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "@horselessnewspaper/contentAdmin:build:production"
+            },
+            "development": {
+              "browserTarget": "@horselessnewspaper/contentAdmin:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "@horselessnewspaper/contentAdmin:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/horselessnewspaper/content-admin/src/test.ts",
+            "polyfills": "projects/horselessnewspaper/content-admin/src/polyfills.ts",
+            "tsConfig": "projects/horselessnewspaper/content-admin/tsconfig.spec.json",
+            "karmaConfig": "projects/horselessnewspaper/content-admin/karma.conf.js",
+            "assets": [
+              "projects/horselessnewspaper/content-admin/src/favicon.ico",
+              "projects/horselessnewspaper/content-admin/src/assets"
+            ],
+            "styles": [
+              "projects/horselessnewspaper/content-admin/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "@horselessnewspaper/contentEditor": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/horselessnewspaper/content-editor",
+      "sourceRoot": "projects/horselessnewspaper/content-editor/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/horselessnewspaper/content-editor",
+            "index": "projects/horselessnewspaper/content-editor/src/index.html",
+            "main": "projects/horselessnewspaper/content-editor/src/main.ts",
+            "polyfills": "projects/horselessnewspaper/content-editor/src/polyfills.ts",
+            "tsConfig": "projects/horselessnewspaper/content-editor/tsconfig.app.json",
+            "assets": [
+              "projects/horselessnewspaper/content-editor/src/favicon.ico",
+              "projects/horselessnewspaper/content-editor/src/assets"
+            ],
+            "styles": [
+              "projects/horselessnewspaper/content-editor/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/horselessnewspaper/content-editor/src/environments/environment.ts",
+                  "with": "projects/horselessnewspaper/content-editor/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "@horselessnewspaper/contentEditor:build:production"
+            },
+            "development": {
+              "browserTarget": "@horselessnewspaper/contentEditor:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "@horselessnewspaper/contentEditor:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/horselessnewspaper/content-editor/src/test.ts",
+            "polyfills": "projects/horselessnewspaper/content-editor/src/polyfills.ts",
+            "tsConfig": "projects/horselessnewspaper/content-editor/tsconfig.spec.json",
+            "karmaConfig": "projects/horselessnewspaper/content-editor/karma.conf.js",
+            "assets": [
+              "projects/horselessnewspaper/content-editor/src/favicon.ico",
+              "projects/horselessnewspaper/content-editor/src/assets"
+            ],
+            "styles": [
+              "projects/horselessnewspaper/content-editor/src/styles.css"
+            ],
+            "scripts": []
           }
         }
       }
