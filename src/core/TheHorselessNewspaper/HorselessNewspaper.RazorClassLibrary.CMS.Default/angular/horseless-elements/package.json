@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --output-hashing=none",
+    "build:elements": "ng build --project horseless-elements --output-hashing none && npm run pack:elements && cp projects/wizardcontroller/horseless-tags-library/package.json dist/horseless-elements && cp dist/horseless-elements/elements.json ../../wwwroot/js/horseless-elements && cp dist/horseless-elements/styles.css ../../wwwroot/js/horseless-elements",
+    "pack:elements": "cat ./dist/horseless-elements/{runtime,polyfills,main}-es5.js > dist/horseless-elements/elements.js && ls -lah dist/horseless-elements/elements.js",
     "watch": "ng build --watch --output-hashing=none",
     "refreshVSToken": "vsts-npm-auth -config .npmrc",
     "test": "ng test",
