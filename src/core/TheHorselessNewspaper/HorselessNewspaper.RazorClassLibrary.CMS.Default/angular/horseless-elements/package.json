@@ -4,6 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "build:contentadmin": "ng build --project @horselessnewspaper/contentAdmin --output-hashing=none",
+    "build:contenteditor": "ng build --project @horselessnewspaper/contentEditor --output-hashing=none",
+    "build:devopsadmin": "ng build --project @horselessnewspaper/devopsAdmin --output-hashing=none",
     "build": "ng build --output-hashing=none",
     "build:elements": "./build-elements.ps1",
     "watch": "ng build --watch --output-hashing=none",
