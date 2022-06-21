@@ -95,10 +95,10 @@ export class TenantChooserComponent implements OnInit {
     )
     .subscribe();
 
-    /*
+    
     this.oidcService
       .checkAuth(window.location.href)
       .subscribe((x) => (this.isAuthenticated = x.isAuthenticated));
-      */
+      
   }
 }

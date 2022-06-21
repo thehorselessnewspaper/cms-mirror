@@ -5,10 +5,10 @@ import { AuthModule } from 'angular-auth-oidc-client';
 @NgModule({
     imports: [AuthModule.forRoot({
         config: {
-              authority: 'https://awsdev.ataxlab.com:8443/realms/horseless-infrastructure',
+              authority: 'https://awsk8sidp.ataxlab.com/auth/realms/horseless-infrastructure',
               redirectUrl: window.location.origin,
               postLogoutRedirectUri: window.location.origin,
-              clientId: 'horseless-prototype-public',
+              clientId: 'horseless-web',
               scope: 'openid profile email offline_access',
               responseType: 'code',
               silentRenew: true,

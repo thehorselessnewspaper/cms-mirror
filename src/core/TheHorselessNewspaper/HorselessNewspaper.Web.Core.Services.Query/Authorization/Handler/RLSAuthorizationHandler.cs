@@ -43,8 +43,18 @@ namespace HorselessNewspaper.Web.Core.Services.Query.Authorization.Handler
                 try
                 {
                     // evaluate access control list against principal \
-                    var upn = _httpcontextAccessor.HttpContext.Features.Get<Principal>().UPN;
-                    var resourceName = resource.GetType().Name;
+                    var principal = _httpcontextAccessor.HttpContext.Features.Get<Principal>();
+                    if(principal == null)
+                    {
+                        _logger.LogCritical($"{this.GetType().FullName} Principal Feature is unavailable");
+                    }
+                    else
+                    {
+                        var upn = principal.UPN;
+                        var resourceName = resource.GetType().Name;
+
+                    }
+ 
                 }
                 catch (Exception e)
                 {

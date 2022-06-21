@@ -49,6 +49,8 @@ namespace HorselessNewspaper.Web.Core.Extensions
     [Obsolete]
     public static class ObsoleteHorselessAspNetCoreStartupExtensions
     {
+        private const string DefaultIdentifier = "lache";
+
         public static IServiceCollection ObsoleteAddHorselessNewspaper(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment,
         Action<HorselessServiceBuilder> options = null, ServiceLifetime scope = ServiceLifetime.Scoped)
         {
@@ -168,7 +170,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
                         {
                             ConnectionString = configuration.GetConnectionString("ContentModelConnection"),
                             Id = Guid.Parse("6da806b8-f7ab-4e3a-8833-7e834a40e9d0"),
-                            Identifier = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
+                            Identifier = DefaultIdentifier, // = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
                             Name = "the Management",
                             ObjectId = "236324b8-278e-4372-9d06-13c40aabd8b2",
                             CreatedAt = DateTime.UtcNow,
@@ -187,7 +189,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
                     var httpContext = context as HttpContext;
                     if (httpContext == null)
                     {
-                        return "6da806b8-f7ab-4e3a-8833-7e834a40e9d0";
+                        return DefaultIdentifier; // "6da806b8-f7ab-4e3a-8833-7e834a40e9d0";
                     }
                     else
                     {
@@ -199,42 +201,11 @@ namespace HorselessNewspaper.Web.Core.Extensions
                         }
                         else
                         {
-                            return "6da806b8-f7ab-4e3a-8833-7e834a40e9d0";
+                            return DefaultIdentifier; // return "6da806b8-f7ab-4e3a-8833-7e834a40e9d0";
                         }
                     }
                 })
-                .WithStaticStrategy("6da806b8-f7ab-4e3a-8833-7e834a40e9d0");
-            //.WithDelegateStrategy(async context =>
-            //{
-            //    var httpContext = context as HttpContext;
-            //    if (httpContext == null)
-            //    {
-            //        return "6da806b8-f7ab-4e3a-8833-7e834a40e9d0";
-            //    }
-            //    else
-            //    {
-            //        httpContext.Request.Query.TryGetValue("tenant", out StringValues tenantIdParam);
-            //        return tenantIdParam.ToString();
-            //    }
-            //});
-
-
-            //.WithDelegateStrategy(async context =>
-            //{
-            //    var httpContext = context as HttpContext;
-            //    if(httpContext == null)
-            //    {
-            //        return "phantom";
-            //    }
-            //    else
-            //    {
-            //        httpContext.Request.Query.TryGetValue("tenant", out StringValues tenantIdParam);
-            //        return tenantIdParam.ToString();
-            //    }
-            //});
-
-
-
+                .WithStaticStrategy(DefaultIdentifier);
 
             #endregion multitenancy as per https://www.finbuckle.com/MultiTenant/
 

@@ -41,7 +41,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
     }
 
 
-    [Route("/")]
+    // [Route("/")]
+    [Route("/{__tenant__?}")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class HorselessCMSController : Controller
     {
