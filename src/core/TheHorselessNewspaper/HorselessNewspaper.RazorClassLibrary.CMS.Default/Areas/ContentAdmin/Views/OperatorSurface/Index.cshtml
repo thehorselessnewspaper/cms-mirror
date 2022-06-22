@@ -1,13 +1,59 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using HorselessNewspaper.Web.Core.Authorization.Model
+@using Microsoft.Extensions.Configuration
+@using HorselessNewspaper.Web.Core.Services.Model.Extensions.Claim
+@using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
+
+@inject Finbuckle.MultiTenant.ITenantInfo CurrentTenant;
+@inject IServiceProvider serviceProvider;
+@inject IConfiguration configuration;
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        @* // todo - this must become HttpContext.CanShowAdminSidebar *@
+        @{
+            var currentTenant = this.Context.Features.Get<Tenant>();
+            var isAuthorizedForAdminSidebarButton = await AuthorizationService.AuthorizeAsync(User, currentTenant, AccessControlledOperations.Execute);
+            var isAuthorizedResult = isAuthorizedForAdminSidebarButton.Succeeded;
+        }
+        @if (isAuthorizedForAdminSidebarButton.Succeeded)
+        {
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Admin Sidebar</span>
+            </button>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-align-justify"></i>
+            </button>
+        }
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Page</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Page</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Page</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Page</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <div>
     <span>Content Administrator Operator </span>
     <horseless-content-admin></horseless-content-admin>
 </div>
 
 @section Scripts {
+
+    <script src="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/horselessnewspaper/contentAdmin/runtime.js" type="module"></script>
+    <script src="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/horselessnewspaper/contentAdmin/polyfills.js" type="module"></script>
+    <script src="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/horselessnewspaper/contentAdmin/main.js" type="module"></script>
 
 }
