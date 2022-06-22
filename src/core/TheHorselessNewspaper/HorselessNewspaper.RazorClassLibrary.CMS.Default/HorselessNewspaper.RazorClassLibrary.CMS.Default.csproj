@@ -52,7 +52,6 @@
 		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
 	</PropertyGroup>
 	<ItemGroup>
-		<Folder Include="Areas\ContentAdmin\Views\Shared\" />
 		<Folder Include="Areas\HorselessContent\Controllers\REST\" />
 		<Folder Include="Areas\HorselessContent\Views\" />
 		<Folder Include="Areas\SiteAdmin\Views\Shared\" />
@@ -60,6 +59,7 @@
 		<Folder Include="typescript\Tenant\" />
 		<Folder Include="typescript\TenantSetup\" />
 		<Folder Include="wwwroot\js\horseless-elements\" />
+		<Folder Include="wwwroot\js\horselessnewspaper\" />
 	</ItemGroup>
 
 	<ItemGroup>

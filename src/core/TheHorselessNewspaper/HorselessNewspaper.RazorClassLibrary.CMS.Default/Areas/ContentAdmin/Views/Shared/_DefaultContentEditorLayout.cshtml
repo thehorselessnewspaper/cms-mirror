@@ -1,0 +1,152 @@
+﻿@using Microsoft.Extensions.Configuration
+@using HorselessNewspaper.Web.Core.Services.Model.Extensions.Claim
+
+@inject Finbuckle.MultiTenant.ITenantInfo CurrentTenant;
+@inject IServiceProvider serviceProvider;
+@inject IConfiguration configuration;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="/">
+    <title>@ViewData["Title"] - content administration</title>
+
+    <!-- as per https://bootstrapious.com/p/bootstrap-sidebar -->
+    <!-- Bootstrap CSS CDN -->
+    @*    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    *@
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- as per ng add ngbootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism.css" />
+
+    <script src="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/sidebar/bootstrap-navbar.js"></script>
+
+    <!-- <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @*    <link rel="stylesheet" href="https://unpkg.com/grapesjs/dist/css/grapes.min.css">*@
+    <link rel="stylesheet" href="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/css/sidebar/bootstrap-sidebar.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/horselessnewspaper/contentAdmin/styles.css">
+    @*    <link rel="stylesheet" href="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/css/grapejs-editor.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/css/grapesjs-preset-webpage.min.css" asp-append-version="true" />
+    *@
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+</head>
+<body class="d-flex flex-column h-100 mat-typography" style=" padding-top: 12px; ">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light mb-3 fixed-top bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Horseless Newpaper: @this.Layout</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="TenantOwner" asp-action="Register">New Tenant</a>
+                        </li>
+
+                    </ul>
+                    @{
+                        @* // support our default signin keycloak *@
+                        @* // expect to find _SignIn.cshtml in the associated *@
+                        @* // canonical keycloak horseless razorclass library *@
+
+                        @* // as per https://docs.microsoft.com/en-us/aspnet/core/mvc/views/partial?view=aspnetcore-6.0 *@
+                        await Html.RenderPartialAsync("_Login");
+                    }
+                </div>
+
+            </div>
+        </nav>
+    </header>
+    <div style="margin-top: 70px;" class="container-fluid wrapper flex-shrink-0">
+
+        @* // todo - this must become HttpContext.CanShowAdminSidebar *@
+        @if (Context.HasDevopsAdminClaims(new List<string>() { "admin" }))
+        {
+            @*            @if ((await AuthorizationService.AuthorizeAsync(User, "PolicyName")).Succeeded)
+        {
+        <p>This paragraph is displayed because you fulfilled PolicyName.</p>
+        }*@
+            await Html.RenderPartialAsync("_DevopsSidebar");
+        }
+        else if (await Context.IsTenantOwner(CurrentTenant, configuration, serviceProvider))
+        {
+            await Html.RenderPartialAsync("_TenantAdminSidebar");
+        }
+
+        <div style="margin-top: 70px;" id="content">
+            <main role="main">
+
+
+                @RenderBody()
+
+            </main>
+
+        </div>
+
+    </div>
+
+    <footer class="footer mt-auto py-3 bg-light text-muted">
+        <div class="container">
+            &copy; 2021 - tenant name: @CurrentTenant.Name - tenant identifier: @CurrentTenant.Identifier <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    @*    <script src="~/lib/jquery/dist/jquery.min.js"></script>*@
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+
+    @*
+    <script src="~/js/site.js" asp-append-version="true"></script>*@
+
+    <!-- as per view-source:https://bootstrapious.com/tutorial/sidebar/index.html-->
+    <!-- Popper.JS -->
+    @*    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    *@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script src="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/horselessnewspaper/contentAdmin/runtime.js" type="module"></script>
+    <script src="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/horselessnewspaper/contentAdmin/polyfills.js" type="module"></script>
+    <script src="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/horselessnewspaper/contentAdmin/main.js" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/grapesjs/0.12.17/grapes.min.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/grapesjs@0.17.29/dist/grapes.min.js"></script>
+    <script src="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/grapesjs-preset-webpage.min.js"></script>
+    <script src="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/grapejs-editor.js"></script>
+    <script src="~/_content/HorselessNewspaper.RazorClassLibrary.CMS.Default/js/bespoke.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- as per https://bootstrapious.com/tutorial/sidebar/index.html -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -169,7 +169,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/horselessnewspaper/devops-admin",
+            "outputPath": "../../wwwroot/js/horselessnewspaper/devopsAdmin",
             "index": "projects/horselessnewspaper/devops-admin/src/index.html",
             "main": "projects/horselessnewspaper/devops-admin/src/main.ts",
             "polyfills": "projects/horselessnewspaper/devops-admin/src/polyfills.ts",
@@ -263,7 +263,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/horselessnewspaper/content-admin",
+            "outputPath": "../../wwwroot/js/horselessnewspaper/contentAdmin",
             "index": "projects/horselessnewspaper/content-admin/src/index.html",
             "main": "projects/horselessnewspaper/content-admin/src/main.ts",
             "polyfills": "projects/horselessnewspaper/content-admin/src/polyfills.ts",
@@ -357,7 +357,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/horselessnewspaper/content-editor",
+            "outputPath": "../../wwwroot/js/horselessnewspaper/contentEditor",
             "index": "projects/horselessnewspaper/content-editor/src/index.html",
             "main": "projects/horselessnewspaper/content-editor/src/main.ts",
             "polyfills": "projects/horselessnewspaper/content-editor/src/polyfills.ts",
