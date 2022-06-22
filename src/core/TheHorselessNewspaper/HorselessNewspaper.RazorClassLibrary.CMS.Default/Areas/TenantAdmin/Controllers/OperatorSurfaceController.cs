@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,9 @@ using TheHorselessNewspaper.HostingModel.MultiTenant;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.TenantAdmin.Controllers
 {
-    public class OperatorSurfaceController
+    [Authorize]
+    [Area("TenantAdmin")]
+    public class OperatorSurfaceController : Controller
     {
         private readonly HorselessTenantInfo? CurrentTenant;
 

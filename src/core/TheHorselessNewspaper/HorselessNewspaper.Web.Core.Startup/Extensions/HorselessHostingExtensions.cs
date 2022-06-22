@@ -109,6 +109,22 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
                     areaName: "Installer",
                     pattern: "Installer/{controller=TenantSetup}/{action=Index}/{id?}");
 
+                options.MapAreaControllerRoute(
+                    name: "SiteAdmin",
+                    areaName: "SiteAdmin",
+                    pattern: "{__tenant__}/{area:exists}/{controller=OperatorSurface}/{action=Index}");
+
+                options.MapAreaControllerRoute(
+                    name: "TenantAdmin",
+                    areaName: "TenantAdmin",
+                    pattern: "{__tenant__}/{area:exists}/{controller=OperatorSurface}/{action=Index}");
+
+                options.MapAreaControllerRoute(
+                    name: "ContentAdmin",
+                    areaName: "ContentAdmin",
+                    pattern: "{__tenant__}/{area:exists}/{controller=OperatorSurface}/{action=Index}");
+
+
                 options.MapControllerRoute(
                 name: "Authentication",
                 pattern: "{area:exists}/{controller=KeycloakController}/{action=Signin}/{id?}");
