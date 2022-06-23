@@ -20,6 +20,7 @@ import { RouterModule } from '@angular/router';
   providers: [],
   bootstrap: []
 })
+
 export class AppModule  implements DoBootstrap {
   constructor(private injector: Injector){
 
@@ -28,7 +29,7 @@ export class AppModule  implements DoBootstrap {
   ngDoBootstrap(app: ApplicationRef) {
     // Convert `PopupComponent` to a custom element.
     const operatorSurfaceElement = createCustomElement(OperatorSurfaceComponent, {
-      injector: this.injector,
+      injector: this.injector
     });
     // Register the custom element with the browser.
     customElements.define('horseless-content-admin', operatorSurfaceElement);
