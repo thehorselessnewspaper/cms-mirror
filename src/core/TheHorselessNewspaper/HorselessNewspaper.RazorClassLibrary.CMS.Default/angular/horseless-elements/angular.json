@@ -451,7 +451,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "../../wwwroot/js/horselessnewspaper/tenant-admin",
+            "outputPath": "../../wwwroot/js/horselessnewspaper/tenantAdmin",
             "index": "projects/horselessnewspaper/tenant-admin/src/index.html",
             "main": "projects/horselessnewspaper/tenant-admin/src/main.ts",
             "polyfills": "projects/horselessnewspaper/tenant-admin/src/polyfills.ts",
