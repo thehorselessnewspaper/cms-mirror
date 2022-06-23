@@ -40,9 +40,9 @@
 	
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.6" />
 		<PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.10" />
-		<PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.2.0">
+		<PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.2.1">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -75,9 +75,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.6" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220603.1" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220623.1" />
 	</ItemGroup>
 
 	<ItemGroup>
