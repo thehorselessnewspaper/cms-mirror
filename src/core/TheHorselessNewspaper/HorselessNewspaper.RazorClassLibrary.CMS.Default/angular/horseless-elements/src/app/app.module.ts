@@ -49,6 +49,8 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { PrimeIcons } from 'primeng/api';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ODataModule } from 'angular-odata';
+// import {HorselessContentModule} from '@horselessnewspaper/horseless-content-odataapi/index';
 
 export function apiConfigFactory(): HorselessConfiguration {
   const params: HorselessConfigurationParameters = {
@@ -93,7 +95,8 @@ const routes: Routes = [
     BrowserAnimationsModule,
     AuthConfigModule,
     NgbModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    // ODataModule.forRoot(HorselessContentModule)
   ],
   exports: [],
   providers: [
