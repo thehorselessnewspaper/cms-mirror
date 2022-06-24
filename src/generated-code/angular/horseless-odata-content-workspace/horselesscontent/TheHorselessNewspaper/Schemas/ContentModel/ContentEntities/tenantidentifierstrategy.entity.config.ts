@@ -13,13 +13,13 @@ export const TenantIdentifierStrategyEntityConfig = {
   keys: [{name: 'Id'}],
   fields: {
     Id: {type: 'Edm.Guid', nullable: false},
-    TenantId: {type: 'Edm.Guid'},
     DisplayName: {type: 'Edm.String', nullable: false},
     ObjectId: {type: 'Edm.String', nullable: false},
     IsSoftDeleted: {type: 'Edm.Boolean'},
     CreatedAt: {type: 'Edm.DateTimeOffset'},
-    Tenant: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant', navigation: true, referentials: [{property: 'TenantId', referencedProperty: 'Id'}]},
-    TenantIdentifierStrategyContainers: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.TenantIdentifierStrategyContainer', collection: true, navigation: true}
+    Timestamp: {type: 'Edm.Binary', nullable: false},
+    TargetTenant: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant', navigation: true},
+    StrategyContainers: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.TenantIdentifierStrategyContainer', collection: true, navigation: true}
   }
 } as StructuredTypeConfig<TenantIdentifierStrategy>;
 //#endregion

@@ -19,8 +19,10 @@ export interface Meronym {
   JsonValue?: string;
   JsonSchema?: string;
   Timestamp: ArrayBuffer;
+  UpdatedAt?: Date;
+  DictionaryKey?: string;
   Holonyms?: Holonym[];
-  AccessControlList?: AccessControlEntry[];
+  AccessControlEntries?: AccessControlEntry[];
   Owners?: Principal[];
   //#endregion
 }

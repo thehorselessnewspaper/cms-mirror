@@ -18,7 +18,9 @@ export interface Placeholder {
   IsPublished?: boolean;
   Description?: string;
   Timestamp: ArrayBuffer;
-  AccessControlList?: AccessControlEntry[];
+  UpdatedAt?: Date;
+  DictionaryKey?: string;
+  AccessControlEntries?: AccessControlEntry[];
   Owners?: Principal[];
   //#endregion
 }

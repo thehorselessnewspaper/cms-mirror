@@ -20,8 +20,12 @@ export interface HorselessSession {
   Aud?: string;
   Sub?: string;
   IsAnonymous?: boolean;
+  HorselessSessionPrincipalId?: string;
   Timestamp: ArrayBuffer;
-  AccessControlList?: AccessControlEntry[];
+  UpdatedAt?: Date;
+  DictionaryKey?: string;
+  HorselessSessionPrincipal?: Principal;
+  AccessControlEntries?: AccessControlEntry[];
   Owners?: Principal[];
   //#endregion
 }

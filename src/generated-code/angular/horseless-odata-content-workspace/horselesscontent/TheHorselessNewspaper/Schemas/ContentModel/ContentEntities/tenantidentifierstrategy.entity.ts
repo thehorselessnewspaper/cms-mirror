@@ -11,12 +11,12 @@ import { TenantIdentifierStrategyContainer } from './tenantidentifierstrategycon
 export interface TenantIdentifierStrategy {
   //#region ODataApiGen Properties
   Id: string;
-  TenantId?: string;
   DisplayName: string;
   ObjectId: string;
   IsSoftDeleted?: boolean;
   CreatedAt?: Date;
-  Tenant?: Tenant;
-  TenantIdentifierStrategyContainers?: TenantIdentifierStrategyContainer[];
+  Timestamp: ArrayBuffer;
+  TargetTenant?: Tenant;
+  StrategyContainers?: TenantIdentifierStrategyContainer[];
   //#endregion
 }

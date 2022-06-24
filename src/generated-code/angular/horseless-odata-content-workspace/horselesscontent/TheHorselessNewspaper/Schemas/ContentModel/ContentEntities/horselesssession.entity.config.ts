@@ -22,8 +22,12 @@ export const HorselessSessionEntityConfig = {
     Aud: {type: 'Edm.String'},
     Sub: {type: 'Edm.String'},
     IsAnonymous: {type: 'Edm.Boolean'},
+    HorselessSessionPrincipalId: {type: 'Edm.Guid'},
     Timestamp: {type: 'Edm.Binary', nullable: false},
-    AccessControlList: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry', collection: true, navigation: true},
+    UpdatedAt: {type: 'Edm.DateTimeOffset'},
+    DictionaryKey: {type: 'Edm.String'},
+    HorselessSessionPrincipal: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal', navigation: true, referentials: [{property: 'HorselessSessionPrincipalId', referencedProperty: 'Id'}]},
+    AccessControlEntries: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry', collection: true, navigation: true},
     Owners: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal', collection: true, navigation: true}
   }
 } as StructuredTypeConfig<HorselessSession>;

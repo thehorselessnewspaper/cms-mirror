@@ -24,10 +24,12 @@ export const NavigationMenuItemEntityConfig = {
     MenuItemDescription: {type: 'Edm.String'},
     MenuItemAltText: {type: 'Edm.String'},
     Timestamp: {type: 'Edm.Binary', nullable: false},
+    UpdatedAt: {type: 'Edm.DateTimeOffset'},
+    DictionaryKey: {type: 'Edm.String'},
     ChildNavigationItems: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem', collection: true, navigation: true},
     ParentNavigationItems: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenuItem', collection: true, navigation: true},
     ParentNavigationMenus: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.NavigationMenu', collection: true, navigation: true},
-    AccessControlList: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry', collection: true, navigation: true},
+    AccessControlEntries: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry', collection: true, navigation: true},
     Owners: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal', collection: true, navigation: true}
   }
 } as StructuredTypeConfig<NavigationMenuItem>;

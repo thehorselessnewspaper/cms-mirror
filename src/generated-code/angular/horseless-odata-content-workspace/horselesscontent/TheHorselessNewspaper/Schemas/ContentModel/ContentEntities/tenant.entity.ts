@@ -6,6 +6,7 @@ import {
 //#region ODataApiGen Imports
 import { AccessControlEntry } from './accesscontrolentry.entity';
 import { ContentCollection } from './contentcollection.entity';
+import { JSONAsset } from './jsonasset.entity';
 import { Principal } from './principal.entity';
 import { TenantIdentifierStrategy } from './tenantidentifierstrategy.entity';
 //#endregion
@@ -18,11 +19,16 @@ export interface Tenant {
   IsSoftDeleted?: boolean;
   CreatedAt?: Date;
   IsPublished: boolean;
+  BaseUrl?: string;
+  TenantIdentifier?: string;
   Timestamp: ArrayBuffer;
+  UpdatedAt?: Date;
+  DictionaryKey?: string;
+  AccessControlEntries?: AccessControlEntry[];
+  Accounts?: Principal[];
   ContentCollections?: ContentCollection[];
-  TenantIdentifierStrategy?: TenantIdentifierStrategy;
-  AccessControlList?: AccessControlEntry[];
   Owners?: Principal[];
-  Principals?: Principal[];
+  TenantIdentifierStrategy?: TenantIdentifierStrategy;
+  MetaData?: JSONAsset[];
   //#endregion
 }

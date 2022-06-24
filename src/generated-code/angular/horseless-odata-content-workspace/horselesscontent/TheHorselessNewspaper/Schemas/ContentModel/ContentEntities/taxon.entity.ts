@@ -20,11 +20,13 @@ export interface Taxon {
   JsonValue?: string;
   JsonSchema?: string;
   Timestamp: ArrayBuffer;
+  UpdatedAt?: Date;
+  DictionaryKey?: string;
   AntecedentTaxons?: Taxon[];
   DerivativeTaxons?: Taxon[];
   Holonyms?: Holonym[];
   Taxonomies?: Taxonomy[];
-  AccessControlList?: AccessControlEntry[];
+  AccessControlEntries?: AccessControlEntry[];
   Owners?: Principal[];
   //#endregion
 }

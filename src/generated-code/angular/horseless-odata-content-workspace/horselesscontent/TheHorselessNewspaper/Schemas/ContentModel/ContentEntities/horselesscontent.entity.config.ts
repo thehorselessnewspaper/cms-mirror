@@ -24,11 +24,13 @@ export const HorselessContentEntityConfig = {
     PublishedURL: {type: 'Edm.String'},
     PreviewURL: {type: 'Edm.String'},
     Timestamp: {type: 'Edm.Binary', nullable: false},
+    UpdatedAt: {type: 'Edm.DateTimeOffset'},
+    DictionaryKey: {type: 'Edm.String'},
     FilesystemAsset: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.FilesystemAsset', navigation: true, referentials: [{property: 'FilesystemAssetId', referencedProperty: 'Id'}]},
     JSONAsset: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset', navigation: true, referentials: [{property: 'JSONAssetId', referencedProperty: 'Id'}]},
     MIMEType: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.MIMEType', navigation: true, referentials: [{property: 'MIMETypeId', referencedProperty: 'Id'}]},
     ContentCollections: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection', collection: true, navigation: true},
-    AccessControlList: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry', collection: true, navigation: true},
+    AccessControlEntries: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry', collection: true, navigation: true},
     Owners: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal', collection: true, navigation: true}
   }
 } as StructuredTypeConfig<HorselessContent>;

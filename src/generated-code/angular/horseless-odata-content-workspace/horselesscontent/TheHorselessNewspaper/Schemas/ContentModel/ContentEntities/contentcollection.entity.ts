@@ -6,6 +6,7 @@ import {
 //#region ODataApiGen Imports
 import { AccessControlEntry } from './accesscontrolentry.entity';
 import { HorselessContent } from './horselesscontent.entity';
+import { HorselessView } from './horselessview.entity';
 import { Principal } from './principal.entity';
 import { Publication } from './publication.entity';
 import { Taxonomy } from './taxonomy.entity';
@@ -24,13 +25,16 @@ export interface ContentCollection {
   PublishedURL?: string;
   PreviewURL?: string;
   Timestamp: ArrayBuffer;
+  UpdatedAt?: Date;
+  DictionaryKey?: string;
   ChildContentCollections?: ContentCollection[];
+  HorselessViews?: HorselessView[];
   MimeContents?: HorselessContent[];
   ParentContentCollections?: ContentCollection[];
   Publications?: Publication[];
   Taxonomies?: Taxonomy[];
   Tenants?: Tenant[];
-  AccessControlList?: AccessControlEntry[];
+  AccessControlEntries?: AccessControlEntry[];
   Owners?: Principal[];
   //#endregion
 }

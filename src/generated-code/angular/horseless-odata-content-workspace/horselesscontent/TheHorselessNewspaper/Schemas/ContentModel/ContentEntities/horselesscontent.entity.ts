@@ -26,11 +26,13 @@ export interface HorselessContent {
   PublishedURL?: string;
   PreviewURL?: string;
   Timestamp: ArrayBuffer;
+  UpdatedAt?: Date;
+  DictionaryKey?: string;
   FilesystemAsset?: FilesystemAsset;
   JSONAsset?: JSONAsset;
   MIMEType?: MIMEType;
   ContentCollections?: ContentCollection[];
-  AccessControlList?: AccessControlEntry[];
+  AccessControlEntries?: AccessControlEntry[];
   Owners?: Principal[];
   //#endregion
 }

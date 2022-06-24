@@ -20,9 +20,11 @@ export interface Holonym {
   JsonValue?: string;
   JsonSchema?: string;
   Timestamp: ArrayBuffer;
+  UpdatedAt?: Date;
+  DictionaryKey?: string;
   Meronyms?: Meronym[];
   Taxons?: Taxon[];
-  AccessControlList?: AccessControlEntry[];
+  AccessControlEntries?: AccessControlEntry[];
   Owners?: Principal[];
   //#endregion
 }

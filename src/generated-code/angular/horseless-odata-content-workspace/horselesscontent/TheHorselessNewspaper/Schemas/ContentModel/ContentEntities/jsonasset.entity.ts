@@ -19,8 +19,10 @@ export interface JSONAsset {
   JsonValue?: string;
   JsonSchema?: string;
   Timestamp: ArrayBuffer;
+  UpdatedAt?: Date;
+  DictionaryKey?: string;
   HorselessContents?: HorselessContent[];
-  AccessControlList?: AccessControlEntry[];
+  AccessControlEntries?: AccessControlEntry[];
   Owners?: Principal[];
   //#endregion
 }

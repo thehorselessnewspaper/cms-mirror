@@ -22,10 +22,12 @@ export interface Publication {
   PublishedURL?: string;
   PreviewURL?: string;
   Timestamp: ArrayBuffer;
+  UpdatedAt?: Date;
+  DictionaryKey?: string;
   ContentCollections?: ContentCollection[];
+  PublicationChildrens?: Publication[];
   PublicationParents?: Publication[];
-  PublicationsChildren?: Publication[];
-  AccessControlList?: AccessControlEntry[];
+  AccessControlEntries?: AccessControlEntry[];
   Owners?: Principal[];
   //#endregion
 }

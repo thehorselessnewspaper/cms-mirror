@@ -20,9 +20,22 @@ export const PrincipalEntityConfig = {
     Iss: {type: 'Edm.String'},
     Aud: {type: 'Edm.String'},
     Sub: {type: 'Edm.String'},
+    IsAnonymous: {type: 'Edm.Boolean', nullable: false},
+    UPN: {type: 'Edm.String', nullable: false},
+    Email: {type: 'Edm.String', nullable: false},
+    PreferredUserName: {type: 'Edm.String', nullable: false},
     Timestamp: {type: 'Edm.Binary', nullable: false},
-    AccessControlList: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry', collection: true, navigation: true},
-    Owners: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal', collection: true, navigation: true}
+    UpdatedAt: {type: 'Edm.DateTimeOffset'},
+    DictionaryKey: {type: 'Edm.String'},
+    HorselessSessions: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession', collection: true, navigation: true},
+    AccessControlEntries: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry', collection: true, navigation: true},
+    OwnedAccessControlEntries: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry', collection: true, navigation: true},
+    OwnedHorselessSessions: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.HorselessSession', collection: true, navigation: true},
+    OwnedPrincipals: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal', collection: true, navigation: true},
+    OwnedTenants: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant', collection: true, navigation: true},
+    Owners: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal', collection: true, navigation: true},
+    TenantAccounts: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant', collection: true, navigation: true},
+    PrincipalClaimContainer: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.PrincipalClaimContainer', navigation: true}
   }
 } as StructuredTypeConfig<Principal>;
 //#endregion

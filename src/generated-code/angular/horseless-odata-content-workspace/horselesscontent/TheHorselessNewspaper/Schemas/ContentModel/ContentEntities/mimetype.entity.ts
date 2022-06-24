@@ -18,8 +18,10 @@ export interface MIMEType {
   CreatedAt?: Date;
   MIMETypeName?: string;
   Timestamp: ArrayBuffer;
+  UpdatedAt?: Date;
+  DictionaryKey?: string;
   HorselessContents?: HorselessContent[];
-  AccessControlList?: AccessControlEntry[];
+  AccessControlEntries?: AccessControlEntry[];
   Owners?: Principal[];
   //#endregion
 }

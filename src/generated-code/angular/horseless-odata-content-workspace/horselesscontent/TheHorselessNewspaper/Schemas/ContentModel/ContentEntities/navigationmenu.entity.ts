@@ -23,10 +23,12 @@ export interface NavigationMenu {
   MenuDescription?: string;
   MenuAltText?: string;
   Timestamp: ArrayBuffer;
+  UpdatedAt?: Date;
+  DictionaryKey?: string;
   ChildNavigationMenuItems?: NavigationMenuItem[];
   Children?: NavigationMenu[];
   Parents?: NavigationMenu[];
-  AccessControlList?: AccessControlEntry[];
+  AccessControlEntries?: AccessControlEntry[];
   Owners?: Principal[];
   //#endregion
 }

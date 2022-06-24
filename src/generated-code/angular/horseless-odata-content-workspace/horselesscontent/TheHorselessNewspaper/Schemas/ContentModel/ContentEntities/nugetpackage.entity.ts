@@ -23,7 +23,9 @@ export interface NugetPackage {
   PackageAuthor?: string;
   PackageSource?: string;
   Timestamp: ArrayBuffer;
-  AccessControlList?: AccessControlEntry[];
+  UpdatedAt?: Date;
+  DictionaryKey?: string;
+  AccessControlEntries?: AccessControlEntry[];
   Owners?: Principal[];
   //#endregion
 }

@@ -1,6 +1,7 @@
 ﻿using Finbuckle.MultiTenant;
 using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
 using HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTenantPrincipal;
+using HorselessNewspaper.Web.Core.Model.Query;
 using HorselessNewspaper.Web.Core.Model.Security;
 using HorselessNewspaper.Web.Core.Services.Model.REST.Security;
 using Microsoft.AspNetCore.Authentication;

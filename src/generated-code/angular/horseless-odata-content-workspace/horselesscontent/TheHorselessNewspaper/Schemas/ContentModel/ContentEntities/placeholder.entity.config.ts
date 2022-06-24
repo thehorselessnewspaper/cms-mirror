@@ -20,7 +20,9 @@ export const PlaceholderEntityConfig = {
     IsPublished: {type: 'Edm.Boolean'},
     Description: {type: 'Edm.String'},
     Timestamp: {type: 'Edm.Binary', nullable: false},
-    AccessControlList: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry', collection: true, navigation: true},
+    UpdatedAt: {type: 'Edm.DateTimeOffset'},
+    DictionaryKey: {type: 'Edm.String'},
+    AccessControlEntries: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry', collection: true, navigation: true},
     Owners: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal', collection: true, navigation: true}
   }
 } as StructuredTypeConfig<Placeholder>;

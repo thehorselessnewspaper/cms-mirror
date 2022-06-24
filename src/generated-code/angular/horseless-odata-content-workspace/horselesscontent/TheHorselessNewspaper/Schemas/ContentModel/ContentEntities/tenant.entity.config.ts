@@ -18,12 +18,17 @@ export const TenantEntityConfig = {
     IsSoftDeleted: {type: 'Edm.Boolean'},
     CreatedAt: {type: 'Edm.DateTimeOffset'},
     IsPublished: {type: 'Edm.Boolean', nullable: false},
+    BaseUrl: {type: 'Edm.String'},
+    TenantIdentifier: {type: 'Edm.String'},
     Timestamp: {type: 'Edm.Binary', nullable: false},
+    UpdatedAt: {type: 'Edm.DateTimeOffset'},
+    DictionaryKey: {type: 'Edm.String'},
+    AccessControlEntries: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry', collection: true, navigation: true},
+    Accounts: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal', collection: true, navigation: true},
     ContentCollections: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.ContentCollection', collection: true, navigation: true},
-    TenantIdentifierStrategy: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.TenantIdentifierStrategy', navigation: true},
-    AccessControlList: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.AccessControlEntry', collection: true, navigation: true},
     Owners: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal', collection: true, navigation: true},
-    Principals: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Principal', collection: true, navigation: true}
+    TenantIdentifierStrategy: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.TenantIdentifierStrategy', navigation: true},
+    MetaData: {type: 'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.JSONAsset', collection: true, navigation: true}
   }
 } as StructuredTypeConfig<Tenant>;
 //#endregion
