@@ -6,11 +6,13 @@
     "elements.js",
     "styles.css"
   ],
+
   "peerDependencies": {
     "@angular/common": "^x.x.x",
     "@angular/core": "^x.x.x",
     "@wizardcontrollerprerelease/horseless-contentapi-lib": "^x.x.x",
-    "@horselessnewspaper/odataapi": "^x.x.x",
+    "@horselessnewspaper/horseless-hosting-odataapi": "^x.x.x",
+    "@horselessnewspaper/horseless-content-odataapi": "^x.x.x",
     "angular-odata":"^x.x.x",
     "primeflex": "^x.x.x",
     "primeicons": "^x.x.x",
@@ -22,7 +24,8 @@
     "@angular/common": "^x.x.x",
     "@angular/core": "^x.x.x",
     "@wizardcontrollerprerelease/horseless-contentapi-lib": "^x.x.x",
-    "@horselessnewspaper/odataapi": "^x.x.x",
+    "@horselessnewspaper/horseless-hosting-odataapi": "^x.x.x",
+    "@horselessnewspaper/horseless-content-odataapi": "^x.x.x",
     "angular-odata":"^x.x.x",
     "primeflex": "^x.x.x",
     "primeicons": "^x.x.x",

@@ -13,8 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { Injector } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
-import { TenantEditorComponent,  TenantChooserComponent } from '@wizardcontroller/horseless-tags-library';
-import { TenantEditorModule} from '@wizardcontroller/horseless-tags-library';
+import { TenantEditorComponent, TenantChooserComponent } from '@wizardcontroller/horseless-tags-library';
+import { TenantEditorModule } from '@wizardcontroller/horseless-tags-library';
 import { TenantChooserModule } from '@wizardcontroller/horseless-tags-library'
 
 import { HorselessTagsLibraryModule } from '@wizardcontroller/horseless-tags-library';
@@ -65,53 +65,53 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [AppComponent],
-    imports: [
-        AuthModule.forRoot({
-            config: {
-                authority: 'https://awsk8sidp.ataxlab.com/auth/realms/horseless-infrastructure',
-                redirectUrl: window.location.origin + '/tenants',
-                postLogoutRedirectUri: window.location.origin + '/index',
-                clientId: 'horseless-web',
-                scope: 'openid profile email offline_access',
-                responseType: 'code',
-                silentRenew: true,
-                useRefreshToken: true,
-                logLevel: LogLevel.Debug,
-            },
-        }),
-        ToolbarModule,
-        ButtonModule,
-        MatExpansionModule,
-        MatToolbarModule,
-        HttpClientModule,
-        TenantEditorModule,
-        TenantChooserModule,
-        HorselessClientAuthModule,
-        HorselessApiModule.forRoot(apiConfigFactory),
-        BrowserModule,
-        BrowserAnimationsModule,
-        AuthConfigModule,
-        NgbModule,
-        RouterModule.forRoot(routes),
-    ],
-    exports: [],
-    providers: [
-        OidcSecurityService,
-        { provide: BASE_PATH, useValue: environment.API_BASE_PATH },
-        {
-            provide: HorselessConfiguration,
-            useFactory: (authService: OidcSecurityService) => new HorselessConfiguration({
-                basePath: environment.API_BASE_PATH,
-                credentials: {
-                    Bearer: authService.getAccessToken.bind(authService).toString(),
-                },
-            }),
-            deps: [OidcSecurityService],
-            multi: false,
+  declarations: [AppComponent],
+  imports: [
+    AuthModule.forRoot({
+      config: {
+        authority: 'https://awsk8sidp.ataxlab.com/auth/realms/horseless-infrastructure',
+        redirectUrl: window.location.origin + '/tenants',
+        postLogoutRedirectUri: window.location.origin + '/index',
+        clientId: 'horseless-web',
+        scope: 'openid profile email offline_access',
+        responseType: 'code',
+        silentRenew: true,
+        useRefreshToken: true,
+        logLevel: LogLevel.Debug,
+      },
+    }),
+    ToolbarModule,
+    ButtonModule,
+    MatExpansionModule,
+    MatToolbarModule,
+    HttpClientModule,
+    TenantEditorModule,
+    TenantChooserModule,
+    HorselessClientAuthModule,
+    HorselessApiModule.forRoot(apiConfigFactory),
+    BrowserModule,
+    BrowserAnimationsModule,
+    AuthConfigModule,
+    NgbModule,
+    RouterModule.forRoot(routes)
+  ],
+  exports: [],
+  providers: [
+    OidcSecurityService,
+    { provide: BASE_PATH, useValue: environment.API_BASE_PATH },
+    {
+      provide: HorselessConfiguration,
+      useFactory: (authService: OidcSecurityService) => new HorselessConfiguration({
+        basePath: environment.API_BASE_PATH,
+        credentials: {
+          Bearer: authService.getAccessToken.bind(authService).toString(),
         },
-    ],
-    bootstrap: []
+      }),
+      deps: [OidcSecurityService],
+      multi: false,
+    },
+  ],
+  bootstrap: []
 })
 
 /*
@@ -149,12 +149,12 @@ export class AppModule {
     // Register the custom element with the browser.
     customElements.define('horseless-tenant-editor', tenantEditorComponent);
 
-        // Convert `PopupComponent` to a custom element.
-        const appComponent = createCustomElement(AppComponent, {
-          injector: this.injector,
-        });
-        // Register the custom element with the browser.
-        customElements.define('horseless-harness', appComponent);
+    // Convert `PopupComponent` to a custom element.
+    const appComponent = createCustomElement(AppComponent, {
+      injector: this.injector,
+    });
+    // Register the custom element with the browser.
+    customElements.define('horseless-harness', appComponent);
 
     // app.bootstrap(AppComponent);
   }
