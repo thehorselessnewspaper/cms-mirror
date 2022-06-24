@@ -1,15 +1,30 @@
 
 <div *ngIf="isAuthenticated; else unauthorized">
 
-  <p-dataView>
+  <p-dataView [paginator]="true" [rows]="hostingEntitiesPageSize"
+              layout="list" 
+              [value]="hostingModelTenants">
 
+    <ng-template pTemplate="header">
+      <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+    </ng-template>
+
+    <ng-template let-tenant pTemplate="listItem">
+      <div>
+        {{tenant.DisplayName}}
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+      <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+    </ng-template>
   </p-dataView>
 
-<mat-selection-list #selectionList>
-  <mat-list-option *ngFor="let tenant of hostingModelTenants">
-    {{tenant.DisplayName}}
-  </mat-list-option>
-</mat-selection-list>
+  <!--<mat-selection-list #selectionList>
+    <mat-list-option *ngFor="let tenant of hostingModelTenants">
+      {{tenant.DisplayName}}
+    </mat-list-option>
+  </mat-selection-list>-->
 
 </div>
 <ng-template #unauthorized>

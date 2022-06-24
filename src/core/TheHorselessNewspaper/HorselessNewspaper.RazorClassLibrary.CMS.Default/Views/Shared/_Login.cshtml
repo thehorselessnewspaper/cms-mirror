@@ -1,7 +1,7 @@
 ﻿@using HorselessNewspaper.Core.Interfaces.Security.Cache
 @using Microsoft.AspNetCore.Authentication
 @using Microsoft.Extensions.Configuration
-@using Microsoft.AspNetCore.Http.Extensions; 
+@using Microsoft.AspNetCore.Http.Extensions;
 @inject IAuthenticationSchemesCache authenticationSchemes;
 @inject IConfiguration configuration;
 
@@ -13,18 +13,19 @@
 }
 @if (registeredSchemes != null && (User.Claims == null || User.Claims.Count() == 0))
 {
-    // enforce https redirect 
+    // enforce https redirect
     // in case of adverse reverse proxy
     // http scheme forwarding conditions
     var currentUrl = Context.Request.GetDisplayUrl();
 
 
     <div>
-
-        <p class="lead text-right">available authorities</p>
-        <small>Auth Authority:</small>
-        <br/>
-        <small> @authority</small>
+        <div style="display: none;" hidden>
+            <p class="lead text-right">available authorities</p>
+            <small>Auth Authority:</small>
+            <br />
+            <small> @authority</small>
+        </div>
         <div>
             @foreach (var scheme in registeredSchemes.OrderBy(p => p.DisplayName))
             {

@@ -22,20 +22,24 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class TenantChooserComponent implements OnInit {
   clientConfiguration$!: Observable<SecurityRestClientConfiguration>;
-
+  currentTenantIdentifier: string = '';
   tenants!: ContentEntitiesTenant[];
   hostingModelTenants!: HostingEntitiesTenant[];
 
   isAuthenticated: boolean = false;
 
-  pageSize: number | undefined = 10;
-  pageCount: number | undefined = 2;
-  pageNumber: number | undefined = 1;
-  defaultTenant: string = 'phantom';
+  hostingEntitiesPageSize: number = 10;
+  hostingEntitiesPageCount: number = 2;
+  hostingEntitiesPageNumber: number = 1;
+
+  contentEntitiesPageSize: number = 10;
+  contentEntitiesPageCount: number = 2;
+  contentEntitiesPageNumber: number = 1;
+
+  defaultTenant: string = 'lache';
 
   private tenantService: TenantRESTService;
   private oidcService: OidcSecurityService;
-
 
   constructor(
     private router: Router,
@@ -49,56 +53,148 @@ export class TenantChooserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     let applicationJson = new HttpHeaders();
-    applicationJson.append("Accept", "application/json");
+    applicationJson.append('Accept', 'application/json');
 
     console.log('tenant chooser component is pulling configuration');
 
     this.clientConfigService.pullClientConfiguration();
 
-    this.clientConfigService.clientConfiguration$
-    .pipe(
-      take(1),
-      tap(t => {
-        console.log(`tenant chooser component has new client configuration `, t);
-      }),
-      map(m => {
-        console.log("setting tenant rest base path to %s", m.RESTEndpoint);
-        this.tenantService.configuration.basePath = m.RESTEndpoint as string | undefined;
+    this.pullHostingEntitiesTenants();
 
-
-        console.log("authenticated state transition with token %s", m.AccessToken);
-        this.isAuthenticated = true;
-
-        this.tenantService.hostingEntitiesTenantRESTGetByPageNumber(10, 1, 1, "body", true,
-        {
-          httpHeaderAccept : "application/json"
-        })
-        .pipe(
-          map(actionResult  =>{
-            // the rest api actually returns
-            // asp.net core ActionResult<T>
-            let realResult = actionResult as any;
-            return realResult.Value;
-
-          }),
-          map(t =>{
-            if (t != undefined) console.log("tenant service has returned %s results");
-            this.hostingModelTenants = t;
-          }
-         )
-        )
-        .subscribe();
-
-      })
-    )
-    .subscribe();
-
-    
     this.oidcService
       .checkAuth(window.location.href)
       .subscribe((x) => (this.isAuthenticated = x.isAuthenticated));
-      
   }
+
+  pullContentEntitiesTenants() {
+    this.clientConfigService.clientConfiguration$
+      .pipe(
+        take(1),
+        tap((t) => {
+          console.log(
+            `tenant chooser component has new client configuration `,
+            t
+          );
+        }),
+        map((m) => {
+          console.log('setting tenant rest base path to %s', m.RESTEndpoint);
+          this.tenantService.configuration.basePath = m.RESTEndpoint as
+            | string
+            | undefined;
+          this.currentTenantIdentifier = m.TenantIdentifier as string;
+
+          console.log(
+            'authenticated state transition with token %s',
+            m.AccessToken
+          );
+          this.isAuthenticated = true;
+
+          this.tenantService
+            .hostingEntitiesTenantRESTGetByPageNumber(
+              this.hostingEntitiesPageSize,
+              this.hostingEntitiesPageNumber,
+              this.hostingEntitiesPageCount,
+              'body',
+              true,
+              {
+                httpHeaderAccept: 'application/json',
+              }
+            )
+            .pipe(
+              map((actionResult) => {
+                // the rest api actually returns
+                // asp.net core ActionResult<T>
+                let realResult = actionResult as any;
+                return realResult.Value;
+              }),
+              map((t) => {
+                if (t != undefined)
+                  console.log('tenant service has returned %s results');
+                this.hostingModelTenants = t;
+              })
+            )
+            .subscribe();
+
+          if (this.currentTenantIdentifier.length == 0) {
+            this.currentTenantIdentifier = this.defaultTenant;
+          }
+
+          this.tenantService
+            .contentEntitiesTenantRESTGetByPageNumber(
+              this.currentTenantIdentifier,
+              this.contentEntitiesPageSize,
+              this.contentEntitiesPageNumber,
+              this.contentEntitiesPageCount,
+              'body',
+              true,
+              {
+                httpHeaderAccept: 'application/json',
+              }
+            )
+            .pipe()
+            .subscribe();
+        })
+      )
+      .subscribe();
+  }
+
+  pullHostingEntitiesTenants() {
+    this.clientConfigService.clientConfiguration$
+      .pipe(
+        take(1),
+        tap((t) => {
+          console.log(
+            `tenant chooser component has new client configuration `,
+            t
+          );
+        }),
+        map((m) => {
+          console.log('setting tenant rest base path to %s', m.RESTEndpoint);
+          this.tenantService.configuration.basePath = m.RESTEndpoint as
+            | string
+            | undefined;
+          this.currentTenantIdentifier = m.TenantIdentifier as string;
+
+          console.log(
+            'authenticated state transition with token %s',
+            m.AccessToken
+          );
+          this.isAuthenticated = true;
+
+          this.tenantService
+            .hostingEntitiesTenantRESTGetByPageNumber(
+              this.hostingEntitiesPageSize,
+              this.hostingEntitiesPageNumber,
+              this.hostingEntitiesPageCount,
+              'body',
+              true,
+              {
+                httpHeaderAccept: 'application/json',
+              }
+            )
+            .pipe(
+              map((actionResult) => {
+                // the rest api actually returns
+                // asp.net core ActionResult<T>
+                let realResult = actionResult as any;
+                return realResult.Value;
+              }),
+              map((t) => {
+                if (t != undefined)
+                  console.log('tenant service has returned %s results');
+                this.hostingModelTenants = t;
+              })
+            )
+            .subscribe();
+
+          if (this.currentTenantIdentifier.length == 0) {
+            this.currentTenantIdentifier = this.defaultTenant;
+          }
+        })
+      )
+      .subscribe();
+  }
+
+
 }

@@ -17,7 +17,9 @@
   },
   "private": true,
   "peerDependencies": {
-    "rxjs": "~7.5.4"
+    "rxjs": "~7.5.4",
+    "@wizardcontroller/horseless-tags-library": "~x.x.x",
+    "@wizardcontrollerprerelease/horseless-contentapi-lib": "^x.x.x"
   },
   "dependencies": {
     "@angular/animations": "^14.0.2",
