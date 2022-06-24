@@ -33,6 +33,68 @@
           }
         }
       }
+    },
+    "@horselessnewspaper/horseless-content-odataapi": {
+      "projectType": "library",
+      "root": "projects/horselessnewspaper/horseless-content-odataapi",
+      "sourceRoot": "projects/horselessnewspaper/horseless-content-odataapi/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/horselessnewspaper/horseless-content-odataapi/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/horselessnewspaper/horseless-content-odataapi/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/horselessnewspaper/horseless-content-odataapi/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/horselessnewspaper/horseless-content-odataapi/src/test.ts",
+            "tsConfig": "projects/horselessnewspaper/horseless-content-odataapi/tsconfig.spec.json",
+            "karmaConfig": "projects/horselessnewspaper/horseless-content-odataapi/karma.conf.js"
+          }
+        }
+      }
+    },
+    "@horselessnewspaper/horseless-hosting-odataapi": {
+      "projectType": "library",
+      "root": "projects/horselessnewspaper/horseless-hosting-odataapi",
+      "sourceRoot": "projects/horselessnewspaper/horseless-hosting-odataapi/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/horselessnewspaper/horseless-hosting-odataapi/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/horselessnewspaper/horseless-hosting-odataapi/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/horselessnewspaper/horseless-hosting-odataapi/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/horselessnewspaper/horseless-hosting-odataapi/src/test.ts",
+            "tsConfig": "projects/horselessnewspaper/horseless-hosting-odataapi/tsconfig.spec.json",
+            "karmaConfig": "projects/horselessnewspaper/horseless-hosting-odataapi/karma.conf.js"
+          }
+        }
+      }
     }
   }
 }
