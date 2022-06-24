@@ -5,4 +5,4 @@
 export * from './lib/horseless-hosting-odataapi.service';
 export * from './lib/horseless-hosting-odataapi.component';
 export * from './lib/horseless-hosting-odataapi.module';
-export * from './lib/horselesshosting/index'
+
