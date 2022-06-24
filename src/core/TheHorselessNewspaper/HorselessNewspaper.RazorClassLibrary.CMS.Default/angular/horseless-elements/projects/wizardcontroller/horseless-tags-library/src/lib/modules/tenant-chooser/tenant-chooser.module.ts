@@ -10,14 +10,17 @@ import { ConfigurationEndpointService } from '../../services/configuration-endpo
 import { AuthStateService } from 'angular-auth-oidc-client/lib/auth-state/auth-state.service';
 import { HttpHeaders } from '@angular/common/http';
 import {DataViewModule} from 'primeng/dataview';
-@NgModule({
+import { ODataModule } from 'angular-odata';
+
+ @NgModule({
   declarations: [TenantChooserComponent],
   imports: [
     CommonModule,
     MatListModule,
     MatSliderModule,
     DataViewModule,
-    HorselessApiModule
+    HorselessApiModule,
+    ODataModule.forRoot()
   ],
   providers: [TenantChooserService,
   {

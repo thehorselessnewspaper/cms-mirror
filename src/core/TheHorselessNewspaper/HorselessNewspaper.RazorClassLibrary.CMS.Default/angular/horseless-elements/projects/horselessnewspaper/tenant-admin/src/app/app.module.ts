@@ -22,6 +22,7 @@ import {
   MatExpansionPanel,
 } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ODataModule } from 'angular-odata';
 
 export function apiConfigFactory(): HorselessConfiguration {
   const params: HorselessConfigurationParameters = {
@@ -49,7 +50,8 @@ export function apiConfigFactory(): HorselessConfiguration {
     HorselessApiModule.forRoot(apiConfigFactory),
     OperatorSurfaceModule,
     TenantChooserModule,
-    TenantEditorModule
+    TenantEditorModule,
+    ODataModule.forRoot()
   ],
   providers: [],
   bootstrap: []

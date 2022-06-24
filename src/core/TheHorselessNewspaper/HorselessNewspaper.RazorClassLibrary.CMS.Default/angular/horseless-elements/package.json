@@ -17,9 +17,9 @@
   },
   "private": true,
   "peerDependencies": {
-    "rxjs": "~7.5.4",
     "@wizardcontroller/horseless-tags-library": "~x.x.x",
-    "@wizardcontrollerprerelease/horseless-contentapi-lib": "^x.x.x"
+    "@wizardcontrollerprerelease/horseless-contentapi-lib": "^x.x.x",
+    "rxjs": "~7.5.4"
   },
   "dependencies": {
     "@angular/animations": "^14.0.2",
@@ -31,6 +31,8 @@
     "@angular/platform-browser": "^14.0.2",
     "@angular/platform-browser-dynamic": "^14.0.2",
     "@angular/router": "^14.0.2",
+    "@horselessnewspaper/odataapi": "^0.0.1",
+    "angular-odata": "^0.101.0",
     "ngx-auto-unsubscribe": "^3.0.1",
     "primeflex": "^x.x.x",
     "primeicons": "^x.x.x",
