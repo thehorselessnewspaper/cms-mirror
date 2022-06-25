@@ -2,17 +2,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "paths": {
-      "@horselessnewspaper/horseless-content-odataapi": [
-        "dist/horselessnewspaper/horseless-content-odataapi"
-      ],
-      "@horselessnewspaper/horseless-hosting-odataapi": [
-        "dist/horselessnewspaper/horseless-hosting-odataapi"
-      ],
-      "@horselessnewspaper/odataapi": [
-        "dist/horselessnewspaper/odataapi"
-      ]
-    },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
