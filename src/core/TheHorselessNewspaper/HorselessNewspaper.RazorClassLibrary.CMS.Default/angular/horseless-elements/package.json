@@ -18,9 +18,6 @@
   "private": true,
   "peerDependencies": {
     "@wizardcontroller/horseless-tags-library": "~x.x.x",
-    "@wizardcontrollerprerelease/horseless-contentapi-lib": "~x.x.x",
-    "@horselessnewspaper/horseless-content-odataapi": "~x.x.x",
-    "@horselessnewspaper/horseless-hosting-odataapi": "~x.x.x",
     "rxjs": "~7.5.4"
   },
   "dependencies": {

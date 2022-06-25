@@ -50,7 +50,7 @@ import { ButtonModule } from 'primeng/button';
 import { PrimeIcons } from 'primeng/api';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ODataModule } from 'angular-odata';
-// import {HorselessContentModule} from '@horselessnewspaper/horseless-content-odataapi/index';
+// import {HorselessContentModule} from '@horselessnewspaper/horseless-content-odataapi';
 
 export function apiConfigFactory(): HorselessConfiguration {
   const params: HorselessConfigurationParameters = {
