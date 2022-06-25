@@ -11,7 +11,7 @@ import { AuthStateService } from 'angular-auth-oidc-client/lib/auth-state/auth-s
 import { HttpHeaders } from '@angular/common/http';
 import {DataViewModule} from 'primeng/dataview';
 import { ODataModule } from 'angular-odata';
-// import {HorselessContentConfiguration} from '@horselessnewspaper/horseless-content-odataapi';
+// import {HorselessContentConfiguration} from '@horselessnewspaper/horseless-content-odataapi/lib';
  @NgModule({
   declarations: [TenantChooserComponent],
   imports: [
