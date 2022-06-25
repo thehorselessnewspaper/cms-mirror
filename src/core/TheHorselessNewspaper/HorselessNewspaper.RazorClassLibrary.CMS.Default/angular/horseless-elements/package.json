@@ -18,7 +18,7 @@
   "private": true,
   "peerDependencies": {
     "@wizardcontroller/horseless-tags-library": "~x.x.x",
-    "@wizardcontrollerprerelease/horseless-contentapi-lib": "^x.x.x",
+    "@wizardcontrollerprerelease/horseless-contentapi-lib": "~x.x.x",
     "rxjs": "~7.5.4"
   },
   "dependencies": {
@@ -37,6 +37,8 @@
     "primeicons": "^x.x.x",
     "primeng": "^x.x.x",
     "tslib": "^2.4.0",
+    "@horselessnewspaper/horseless-content-odataapi": "~0.0.1",
+    "@horselessnewspaper/horseless-hosting-odataapi": "~0.0.1",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -49,8 +51,8 @@
     "@angular/compiler-cli": "^14.0.2",
     "@angular/core": "^14.0.2",
     "@angular/material": "^14.0.2",
-    "@horselessnewspaper/horseless-content-odataapi": "^0.0.1",
-    "@horselessnewspaper/horseless-hosting-odataapi": "^0.0.1",
+    "@horselessnewspaper/horseless-content-odataapi": "~0.0.1",
+    "@horselessnewspaper/horseless-hosting-odataapi": "~0.0.1",
     "@ng-bootstrap/ng-bootstrap": "^12.1.2",
     "@popperjs/core": "^2.11.5",
     "@types/eslint": "^8.4.1",
@@ -60,7 +62,7 @@
     "@typescript-eslint/eslint-plugin": "^5.23.0",
     "@typescript-eslint/parser": "^5.23.0",
     "@wizardcontroller/horseless-tags-library": "~x.x.x",
-    "@wizardcontrollerprerelease/horseless-contentapi-lib": "^x.x.x",
+    "@wizardcontrollerprerelease/horseless-contentapi-lib": "~x.x.x",
     "angular-auth-oidc-client": "14.0.2",
     "eslint": "^8.2.0",
     "jasmine-core": "^4.1.1",
