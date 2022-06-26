@@ -2,10 +2,32 @@
   "name": "@wizardcontrollerprerelease/horseless-contentapi-lib",
   "version": "0.0.56",
   "peerDependencies": {
-    "@angular/common": "^13.2.0",
-    "@angular/core": "^13.2.0"
+    "@angular/animations": "~x.x.x",
+    "@angular/common": "~x.x.x",
+    "@angular/compiler": "~x.x.x",
+    "@angular/core": "~x.x.x",
+    "@angular/forms": "~x.x.x",
+    "@angular/platform-browser": "~x.x.x",
+    "@angular/platform-browser-dynamic": "~x.x.x",
+    "@angular/router": "~x.x.x",
+    "rxjs": "~x.x.x"
   },
   "dependencies": {
     "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~x.x.x",
+    "@angular/cli": "~x.x.x",
+    "@angular/compiler-cli": "~x.x.x",
+    "@types/jasmine": "~x.x.x",
+    "@types/node": "~x.x.x",
+    "jasmine-core": "~x.x.x",
+    "karma": "~x.x.x",
+    "karma-chrome-launcher": "~x.x.x",
+    "karma-coverage": "~x.x.x",
+    "karma-jasmine": "~x.x.x",
+    "karma-jasmine-html-reporter": "~x.x.x",
+    "ng-packagr": "~x.x.x",
+    "typescript": "~4.7.4"
   }
 }
