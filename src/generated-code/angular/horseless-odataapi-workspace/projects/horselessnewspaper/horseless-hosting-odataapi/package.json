@@ -1,6 +1,6 @@
 {
   "name": "@horselessnewspaper/horseless-hosting-odataapi",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "peerDependencies": {
     "@angular/common": "^14.0.0",
     "angular-odata": "^x.x.x",
