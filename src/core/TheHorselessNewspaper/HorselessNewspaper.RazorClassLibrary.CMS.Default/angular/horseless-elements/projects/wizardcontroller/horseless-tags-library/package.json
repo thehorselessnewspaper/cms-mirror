@@ -16,6 +16,11 @@
     "primeflex": "^x.x.x",
     "primeicons": "^x.x.x",
     "primeng": "^x.x.x",
+    "angular-auth-oidc-client": "14.0.2",
+    "ngx-auto-unsubscribe": "^3.0.1",
+    "@angular/router": "^14.0.2",
+    "@angular/forms": "^14.0.2",
+    "@angular/platform-browser": "^14.0.2",
     "rxjs": "^x.x.x"
   },
   "devDependencies": {
