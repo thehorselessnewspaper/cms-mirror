@@ -2,9 +2,20 @@
   "name": "@horselessnewspaper/horseless-hosting-odataapi",
   "version": "0.0.29",
   "peerDependencies": {
+    "@angular-devkit/build-angular": "~x.x.x",
+    "@angular/cli": "~x.x.x",
+    "@angular/compiler-cli": "~x.x.x",
+    "@types/jasmine": "~x.x.x",
     "@angular/common": "~x.x.x",
     "angular-odata": "~x.x.x",
-    "@angular/core": "~x.x.x"
+    "@angular/core": "~x.x.x",
+    "karma": "~x.x.x",
+    "karma-chrome-launcher": "~x.x.x",
+    "karma-coverage": "~x.x.x",
+    "karma-jasmine": "~x.x.x",
+    "karma-jasmine-html-reporter": "~x.x.x",
+    "ng-packagr": "~x.x.x",
+    "rxjs": "~x.x.x",
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~x.x.x",
