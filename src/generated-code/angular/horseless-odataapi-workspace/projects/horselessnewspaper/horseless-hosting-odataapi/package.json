@@ -2,9 +2,14 @@
   "name": "@horselessnewspaper/horseless-hosting-odataapi",
   "version": "0.0.29",
   "peerDependencies": {
-    "@angular/common": "^14.0.0",
-    "angular-odata": "^x.x.x",
-    "@angular/core": "^14.0.0"
+    "@angular/common": "~x.x.x",
+    "angular-odata": "~x.x.x",
+    "@angular/core": "~x.x.x"
+  },
+  "devDependencies": {
+    "@angular/common": "~x.x.x",
+    "angular-odata": "~x.x.x",
+    "@angular/core": "~x.x.x"
   },
   "dependencies": {
     "tslib": "^2.3.0"
