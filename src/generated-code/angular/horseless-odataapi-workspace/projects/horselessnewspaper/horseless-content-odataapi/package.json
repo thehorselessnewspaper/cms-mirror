@@ -4,7 +4,6 @@
   "dependencies": {
     "@angular-devkit/build-angular": "~x.x.x",
     "@angular/cli": "~x.x.x",
-    "@angular/compiler-cli": "~x.x.x",
     "@types/jasmine": "~x.x.x",
     "@angular/common": "~x.x.x",
     "angular-odata": "~x.x.x",
@@ -21,7 +20,6 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "~x.x.x",
     "@angular/cli": "~x.x.x",
-    "@angular/compiler-cli": "~x.x.x",
     "@types/jasmine": "~x.x.x",
     "@angular/common": "~x.x.x",
     "angular-odata": "~x.x.x",
