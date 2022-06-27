@@ -57,5 +57,5 @@
     "ng-packagr": "~x.x.x",
     "rxjs": "~x.x.x",
     "typescript": "~x.x.x"
-  },
+  }
 }
