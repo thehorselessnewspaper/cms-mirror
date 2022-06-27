@@ -34,6 +34,19 @@
     "karma-jasmine": "~x.x.x",
     "karma-jasmine-html-reporter": "~x.x.x",
     "ng-packagr": "~x.x.x",
+    "angular-odata": "~x.x.x",
     "typescript": "~x.x.x"
+  },
+  "peerDependencies": {
+    "angular-odata": "~x.x.x",
+    "@angular/animations": "~x.x.x",
+    "@angular/common": "~x.x.x",
+    "@angular/compiler": "~x.x.x",
+    "@angular/core": "~x.x.x",
+    "@angular/forms": "~x.x.x",
+    "@angular/platform-browser": "~x.x.x",
+    "@angular/platform-browser-dynamic": "~x.x.x",
+    "@angular/router": "~x.x.x",
+    "rxjs": "~x.x.x"
   }
 }
