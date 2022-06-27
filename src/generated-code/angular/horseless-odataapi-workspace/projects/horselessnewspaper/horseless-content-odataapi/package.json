@@ -1,7 +1,7 @@
 {
   "name": "@horselessnewspaper/horseless-content-odataapi",
   "version": "0.0.29",
-  "peerDependencies": {
+  "dependencies": {
     "@angular-devkit/build-angular": "~x.x.x",
     "@angular/cli": "~x.x.x",
     "@angular/compiler-cli": "~x.x.x",
@@ -15,7 +15,8 @@
     "karma-jasmine": "~x.x.x",
     "karma-jasmine-html-reporter": "~x.x.x",
     "ng-packagr": "~x.x.x",
-    "rxjs": "~x.x.x"
+    "rxjs": "~x.x.x",
+    "tslib": "~x.x.x"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~x.x.x",
@@ -33,8 +34,5 @@
     "ng-packagr": "~x.x.x",
     "rxjs": "~x.x.x",
     "typescript": "~x.x.x"
-  },
-  "dependencies": {
-    "tslib": "~x.x.x"
   }
 }
