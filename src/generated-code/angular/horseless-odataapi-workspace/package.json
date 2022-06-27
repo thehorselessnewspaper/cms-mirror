@@ -9,7 +9,7 @@
     "test": "ng test"
   },
   "private": true,
-  "devDependencies": {
+  "Dependencies": {
     "@angular-devkit/build-angular": "^14.0.3",
     "@angular/cli": "~x.x.x",
     "@angular/compiler-cli": "~x.x.x",
