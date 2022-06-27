@@ -15,7 +15,7 @@
     "karma-jasmine": "~x.x.x",
     "karma-jasmine-html-reporter": "~x.x.x",
     "ng-packagr": "~x.x.x",
-    "rxjs": "~x.x.x",
+    "rxjs": "~x.x.x"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~x.x.x",
