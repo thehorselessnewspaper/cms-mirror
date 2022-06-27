@@ -6,6 +6,11 @@
     "angular-odata": "^x.x.x",
     "@angular/core": "~x.x.x"
   },
+  "devDependencies": {
+    "@angular/common": "~x.x.x",
+    "angular-odata": "~x.x.x",
+    "@angular/core": "~x.x.x"
+  },
   "dependencies": {
     "tslib": "^2.3.0"
   }
