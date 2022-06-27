@@ -10,7 +10,7 @@
   },
   "private": true,
   "Dependencies": {
-    "@angular-devkit/build-angular": "^14.0.3",
+    "@angular-devkit/build-angular": "~x.x.x",
     "@angular/cli": "~x.x.x",
     "@angular/compiler-cli": "~x.x.x",
     "@types/jasmine": "~x.x.x",
@@ -26,15 +26,19 @@
     "typescript": "~x.x.x"
   },
   "peerDependencies": {
-    "@angular/animations": "~x.x.x",
-    "@angular/common": "~x.x.x",
-    "@angular/compiler": "~x.x.x",
-    "@angular/core": "~x.x.x",
-    "@angular/forms": "~x.x.x",
-    "@angular/platform-browser": "~x.x.x",
-    "@angular/platform-browser-dynamic": "~x.x.x",
-    "@angular/router": "~x.x.x",
-    "angular-odata": "~x.x.x",
-    "rxjs": "~x.x.x"
+    "@angular-devkit/build-angular": "~x.x.x",
+    "@angular/cli": "~x.x.x",
+    "@angular/compiler-cli": "~x.x.x",
+    "@types/jasmine": "~x.x.x",
+    "angular-odata": "^0.101.0",
+    "jasmine-core": "~x.x.x",
+    "karma": "~x.x.x",
+    "karma-chrome-launcher": "~x.x.x",
+    "karma-coverage": "~x.x.x",
+    "karma-jasmine": "~x.x.x",
+    "karma-jasmine-html-reporter": "~x.x.x",
+    "ng-packagr": "~x.x.x",
+    "rxjs": "~x.x.x",
+    "typescript": "~x.x.x"
   }
 }
