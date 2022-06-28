@@ -1,13 +1,12 @@
 {
-  "name": "horseless-contentapi-workspace",
-  "version": "0.0.30",
+  "name": "horseless-odata-workspace",
+  "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "refreshVSToken": "vsts-npm-auth -config .npmrc"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
