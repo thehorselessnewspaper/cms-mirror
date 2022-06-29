@@ -30,7 +30,7 @@
     "@angular/platform-browser": "^14.0.2",
     "@angular/platform-browser-dynamic": "^14.0.2",
     "@angular/router": "^14.0.2",
-    "angular-odata": "^0.101.0",
+    "@vigouredelaruse/angular-odata": "^0.101.0",
     "ngx-auto-unsubscribe": "^3.0.1",
     "primeflex": "^x.x.x",
     "primeicons": "^x.x.x",
