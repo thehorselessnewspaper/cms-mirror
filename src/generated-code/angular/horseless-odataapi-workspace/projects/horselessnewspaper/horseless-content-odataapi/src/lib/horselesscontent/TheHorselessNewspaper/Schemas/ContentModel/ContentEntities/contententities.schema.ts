@@ -1,7 +1,7 @@
 ﻿//#region ODataApiGen ODataImports
 import {
   SchemaConfig
-} from 'angular-odata';//#endregion
+} from '@vigouredelaruse/angular-odata';//#endregion
 
 //#region ODataApiGen Imports
 import { TenantIdentifierStrategyNameConfig } from './tenantidentifierstrategyname.enum.config';

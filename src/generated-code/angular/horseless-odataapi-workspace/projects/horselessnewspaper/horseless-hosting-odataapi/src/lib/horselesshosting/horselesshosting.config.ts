@@ -2,7 +2,7 @@
 import {
   ApiConfig,
   EDM_PARSERS
-} from 'angular-odata';//#endregion
+} from '@vigouredelaruse/angular-odata';//#endregion
 
 //#region ODataApiGen Imports
 import { HostingEntitiesSchema } from './TheHorselessNewspaper/Schemas/HostingModel/HostingEntities/hostingentities.schema';

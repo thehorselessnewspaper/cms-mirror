@@ -1,7 +1,7 @@
 ﻿//#region ODataApiGen ODataImports
 import {
   EntitySetConfig
-} from 'angular-odata';//#endregion
+} from '@vigouredelaruse/angular-odata';//#endregion
 
 //#region ODataApiGen Imports
 import { TaxonomyService } from './taxonomy.service';
