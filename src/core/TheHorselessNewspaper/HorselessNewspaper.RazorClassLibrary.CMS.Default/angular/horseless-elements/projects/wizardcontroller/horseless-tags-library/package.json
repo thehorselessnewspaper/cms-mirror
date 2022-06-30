@@ -15,13 +15,13 @@
     "primeflex": ">=3.0.0",
     "primeicons": ">=4.0.0",
     "primeng": ">= 13.0.0",
-    "angular-auth-oidc-client": "~x.x.x",
-    "ngx-auto-unsubscribe": "~x.x.x",
+    "angular-auth-oidc-client": ">=14.0.0",
+    "ngx-auto-unsubscribe": ">=3.0.0",
     "@angular/router": ">=13.0.0",
     "@angular/material": ">=12.0.0",
     "@angular/forms": ">=13.0.0",
     "@angular/platform-browser": ">=12.0.0",
-    "rxjs": "~x.x.x"
+    "rxjs": ">=7.5.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": ">=13.1.3",
