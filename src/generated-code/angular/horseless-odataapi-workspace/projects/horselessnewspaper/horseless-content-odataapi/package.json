@@ -1,20 +1,21 @@
 {
   "name": "@horselessnewspaper/horseless-content-odataapi",
   "version": "0.0.30",
-  "dependencies": {
-
-    "@angular/animations": "~14.0.3",
-    "@angular/common": "~14.0.3",
-    "@angular/compiler": "~14.0.3",
-    "@angular/core": "^14.0.3",
-    "@angular/forms": "~14.0.3",
-    "@angular/platform-browser": "~14.0.3",
-    "@angular/platform-browser-dynamic": "~14.0.3",
-    "@angular/router": "~14.0.3",
-    "rxjs": "~7.5.0",
-    "tslib": "~2.3.0",
-    "zone.js": "~0.11.4",
-    "@vigouredelaruse/angular-odata": "~0.101.4"
+  "peerDependencies": {
+    "@angular-devkit/build-angular": "~x.x.x",
+    "@angular/cli": "~x.x.x",
+    "@types/jasmine": "~x.x.x",
+    "@angular/common": "~x.x.x",
+    "@vigouredelaruse/angular-odata": ">=0.101.4",
+    "@angular/core": "~x.x.x",
+    "karma": "~x.x.x",
+    "karma-chrome-launcher": "~x.x.x",
+    "karma-coverage": "~x.x.x",
+    "karma-jasmine": "~x.x.x",
+    "karma-jasmine-html-reporter": "~x.x.x",
+    "ng-packagr": "~x.x.x",
+    "rxjs": "~x.x.x",
+    "tslib": "~x.x.x"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.0.3",

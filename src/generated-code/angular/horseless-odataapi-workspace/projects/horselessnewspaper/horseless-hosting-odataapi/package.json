@@ -1,12 +1,12 @@
 {
   "name": "@horselessnewspaper/horseless-hosting-odataapi",
   "version": "0.0.30",
-  "dependencies": {
+  "peerDependencies": {
     "@angular-devkit/build-angular": "~x.x.x",
     "@angular/cli": "~x.x.x",
     "@types/jasmine": "~x.x.x",
     "@angular/common": "~x.x.x",
-    "@vigouredelaruse/angular-odata": "~0.101.4",
+    "@vigouredelaruse/angular-odata": ">=0.101.4",
     "@angular/core": "~x.x.x",
     "karma": "~x.x.x",
     "karma-chrome-launcher": "~x.x.x",

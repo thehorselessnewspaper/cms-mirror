@@ -1,7 +1,7 @@
-﻿//#region ODataApiGen ODataImports
+//#region ODataApiGen ODataImports
 import {
   StructuredTypeConfig
-} from 'angular-odata';//#endregion
+} from '@vigouredelaruse/angular-odata';//#endregion
 
 //#region ODataApiGen Imports
 import { HorselessContent } from './horselesscontent.entity';
