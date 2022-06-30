@@ -1,6 +1,6 @@
 {
   "name": "@wizardcontrollerprerelease/horseless-contentapi-lib",
-  "version": "0.1.38",
+  "version": "0.1.39",
   "peerDependencies": {
     "@angular/animations": "~x.x.x",
     "@angular/common": "~x.x.x",
