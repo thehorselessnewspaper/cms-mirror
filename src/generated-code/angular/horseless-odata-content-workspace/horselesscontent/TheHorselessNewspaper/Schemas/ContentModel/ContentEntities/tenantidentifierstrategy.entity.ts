@@ -1,7 +1,7 @@
 ﻿//#region ODataApiGen ODataImports
 import {
   Duration
-} from 'angular-odata';//#endregion
+} from '@vigouredelaruse/angular-odata';//#endregion
 
 //#region ODataApiGen Imports
 import { Tenant } from './tenant.entity';

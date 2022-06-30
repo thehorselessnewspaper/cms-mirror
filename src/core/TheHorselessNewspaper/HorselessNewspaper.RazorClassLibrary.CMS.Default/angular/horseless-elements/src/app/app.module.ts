@@ -49,7 +49,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { PrimeIcons } from 'primeng/api';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ODataModule } from 'angular-odata';
+import { ODataModule } from '@vigouredelaruse/angular-odata';
 // import {HorselessContentModule} from '@horselessnewspaper/horseless-content-odataapi';
 
 export function apiConfigFactory(): HorselessConfiguration {

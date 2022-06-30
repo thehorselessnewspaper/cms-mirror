@@ -22,7 +22,7 @@ import {
   MatExpansionPanel,
 } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ODataModule } from 'angular-odata';
+import { ODataModule } from '@vigouredelaruse/angular-odata';
 
 export function apiConfigFactory(): HorselessConfiguration {
   const params: HorselessConfigurationParameters = {

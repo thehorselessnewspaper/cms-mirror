@@ -21,7 +21,7 @@ import {
   ODataQueryArgumentsOptions,
   ODataFunctionOptions,
   ODataActionOptions
-} from 'angular-odata';//#endregion
+} from '@vigouredelaruse/angular-odata';//#endregion
 
 //#region ODataApiGen Imports
 import { AccessControlEntry } from './accesscontrolentry.entity';

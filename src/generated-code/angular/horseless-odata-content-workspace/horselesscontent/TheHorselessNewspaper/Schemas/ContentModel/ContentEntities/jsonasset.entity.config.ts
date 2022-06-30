@@ -1,7 +1,7 @@
 ﻿//#region ODataApiGen ODataImports
 import {
   StructuredTypeConfig
-} from 'angular-odata';//#endregion
+} from '@vigouredelaruse/angular-odata';//#endregion
 
 //#region ODataApiGen Imports
 import { JSONAsset } from './jsonasset.entity';

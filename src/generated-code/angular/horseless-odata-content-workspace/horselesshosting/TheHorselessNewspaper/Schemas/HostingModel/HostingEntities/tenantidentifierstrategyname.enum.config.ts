@@ -1,7 +1,7 @@
 ﻿//#region ODataApiGen ODataImports
 import {
   EnumTypeConfig
-} from 'angular-odata';//#endregion
+} from '@vigouredelaruse/angular-odata';//#endregion
 
 //#region ODataApiGen Imports
 import { TenantIdentifierStrategyName } from './tenantidentifierstrategyname.enum';
