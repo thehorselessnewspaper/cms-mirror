@@ -9,12 +9,14 @@ import {
   TenantInfoRESTService,
   TenantRESTService,
 } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
-import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { OidcSecurityService, AuthenticatedResult } from 'angular-auth-oidc-client';
 import { ConfigurationEndpointService } from '../../services/configuration-endpoint.service';
 import { Router, NavigationStart } from '@angular/router';
 import { map, Observable, take, tap } from 'rxjs';
 import { TenantChooserService } from './services/TenantChooser.service';
 import { HttpHeaders } from '@angular/common/http';
+import { ODataClient, ODataServiceFactory } from "@vigouredelaruse/angular-odata";
+
 @Component({
   selector: 'lib-tenant-chooser',
   templateUrl: './tenant-chooser.component.html',
@@ -24,6 +26,8 @@ export class TenantChooserComponent implements OnInit {
   clientConfiguration$!: Observable<SecurityRestClientConfiguration>;
   currentTenantIdentifier: string = '';
   tenants!: ContentEntitiesTenant[];
+  tenantsCount!: number;
+
   hostingModelTenants!: HostingEntitiesTenant[];
 
   isAuthenticated: boolean = false;
@@ -46,7 +50,8 @@ export class TenantChooserComponent implements OnInit {
     tenantSvc: TenantRESTService,
     oidcAuthSvc: OidcSecurityService,
     private tenantChooserService: TenantChooserService,
-    private clientConfigService: ConfigurationEndpointService
+    private clientConfigService: ConfigurationEndpointService,
+    private factory: ODataServiceFactory
   ) {
     this.tenantService = tenantSvc;
     this.oidcService = oidcAuthSvc;
@@ -67,17 +72,31 @@ export class TenantChooserComponent implements OnInit {
       .subscribe((x) => (this.isAuthenticated = x.isAuthenticated));
   }
 
+  pullContentEntitiesTenantsCount(){
+
+    let contentTenantsSvc = this.factory.entitySet<HostingEntitiesTenant>("Tenants","TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant");
+    let tenantEntities = contentTenantsSvc.entities();
+    tenantEntities.fetch({ withCount: true})
+    .subscribe(
+      ({ entities, annots}) => {
+        console.log("got odata response");
+        this.tenantsCount = annots.count as number;
+      }
+    );
+
+  }
+
   pullContentEntitiesTenants() {
     this.clientConfigService.clientConfiguration$
       .pipe(
         take(1),
-        tap((t) => {
+        tap((t: SecurityRestClientConfiguration) => {
           console.log(
             `tenant chooser component has new client configuration `,
             t
           );
         }),
-        map((m) => {
+        map((m: SecurityRestClientConfiguration) => {
           console.log('setting tenant rest base path to %s', m.RESTEndpoint);
           this.tenantService.configuration.basePath = m.RESTEndpoint as
             | string
@@ -112,6 +131,9 @@ export class TenantChooserComponent implements OnInit {
                 if (t != undefined)
                   console.log('tenant service has returned %s results');
                 this.hostingModelTenants = t;
+
+                console.log("getting count");
+                this.pullContentEntitiesTenantsCount();
               })
             )
             .subscribe();
@@ -149,7 +171,7 @@ export class TenantChooserComponent implements OnInit {
             t
           );
         }),
-        map((m) => {
+        map((m : SecurityRestClientConfiguration) => {
           console.log('setting tenant rest base path to %s', m.RESTEndpoint);
           this.tenantService.configuration.basePath = m.RESTEndpoint as
             | string
