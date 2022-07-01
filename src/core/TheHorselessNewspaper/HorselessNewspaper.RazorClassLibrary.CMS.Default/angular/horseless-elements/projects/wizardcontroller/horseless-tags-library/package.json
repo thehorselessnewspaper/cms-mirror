@@ -1,6 +1,6 @@
 {
   "name": "@wizardcontroller/horseless-tags-library",
-  "version": "0.0.93",
+  "version": "0.0.94",
   "files": [
     "elements.js",
     "styles.css"
