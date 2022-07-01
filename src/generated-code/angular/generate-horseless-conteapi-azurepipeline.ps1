@@ -23,13 +23,14 @@ npx @openapitools/openapi-generator-cli generate `
 
 $npmrc = "horseless-contentapi-workspace/.npmrc"
 
-git config --global user.email "$ENV:Build_QuedBy@wizardcontroller.com"
+git config --global user.email "$ENV:Build_QueuedBy@wizardcontroller.com"
 git config --global user.name "$ENV:Build_QueuedBy"
 git checkout  $ENV:Build_SourceBranchName
 git commit -m "ci/cd build -> $ENV:Build_QueuedBy comitted npm version bump branch $ENV:Build_SourceBranchName" -a
 Write-Host "ci/cd build -> $ENV:Build_QueuedBy comitted npm version bump branch $ENV:Build_SourceBranchName"
 pushd $theLibraryBuildPath
   npm version patch -m "Upgrade to %s for reasons"
+  npm update
   ng build $theLibrary 
 popd
 
