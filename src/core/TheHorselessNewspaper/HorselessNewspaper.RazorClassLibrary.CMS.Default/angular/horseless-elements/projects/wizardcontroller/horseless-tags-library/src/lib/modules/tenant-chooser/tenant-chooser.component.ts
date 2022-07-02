@@ -74,152 +74,16 @@ export class TenantChooserComponent implements OnInit {
 
     this.clientConfigService.pullClientConfiguration();
 
-    this.pullHostingEntitiesTenants();
-
     this.oidcService
       .checkAuth(window.location.href)
       .subscribe((x) => (this.isAuthenticated = x.isAuthenticated));
 
-      this.hostingModelTenant$ = this.tenantChooserService.hostingEntitiesTenantsSubject
-      .pipe()
-      .subscribe(entities => this.hostingModelTenants = entities);
+      this.tenantChooserService.pullContentEntitiesTenantsByOffset(0, this.hostingEntitiesPageSize);
 
       this.hostingTenants$ = this.tenantChooserService.hostingEntitiesTenantsSubject.asObservable();
 
   }
 
-
-  pullContentEntitiesTenants() {
-    this.clientConfigService.clientConfiguration$
-      .pipe(
-        take(1),
-        tap((t: SecurityRestClientConfiguration) => {
-          console.log(
-            `tenant chooser component has new client configuration `,
-            t
-          );
-        }),
-        map((m: SecurityRestClientConfiguration) => {
-          console.log('setting tenant rest base path to %s', m.RESTEndpoint);
-          this.tenantService.configuration.basePath = m.RESTEndpoint as
-            | string
-            | undefined;
-          this.currentTenantIdentifier = m.TenantIdentifier as string;
-
-          console.log(
-            'authenticated state transition with token %s',
-            m.AccessToken
-          );
-          this.isAuthenticated = true;
-
-          this.tenantService
-            .hostingEntitiesTenantRESTGetByPageNumber(
-              this.hostingEntitiesPageSize,
-              this.hostingEntitiesPageNumber,
-              this.hostingEntitiesPageCount,
-              'body',
-              true,
-              {
-                httpHeaderAccept: 'application/json',
-              }
-            )
-            .pipe(
-              map((actionResult) => {
-                // the rest api actually returns
-                // asp.net core ActionResult<T>
-                let realResult = actionResult as any;
-                return realResult.Value;
-              }),
-              map((t) => {
-                if (t != undefined)
-                  console.log('tenant service has returned %s results');
-                this.hostingModelTenants = t;
-
-                console.log("getting count");
-                this.tenantChooserService.pullHostingEntitiesTenantsCount();
-              })
-            )
-            .subscribe();
-
-          if (this.currentTenantIdentifier.length == 0) {
-            this.currentTenantIdentifier = this.defaultTenant;
-          }
-
-          this.tenantService
-            .contentEntitiesTenantRESTGetByPageNumber(
-              this.currentTenantIdentifier,
-              this.contentEntitiesPageSize,
-              this.contentEntitiesPageNumber,
-              this.contentEntitiesPageCount,
-              'body',
-              true,
-              {
-                httpHeaderAccept: 'application/json',
-              }
-            )
-            .pipe()
-            .subscribe();
-        })
-      )
-      .subscribe();
-  }
-
-  pullHostingEntitiesTenants() {
-    this.clientConfigService.clientConfiguration$
-      .pipe(
-        take(1),
-        tap((t) => {
-          console.log(
-            `tenant chooser component has new client configuration `,
-            t
-          );
-        }),
-        map((m : SecurityRestClientConfiguration) => {
-          console.log('setting tenant rest base path to %s', m.RESTEndpoint);
-          this.tenantService.configuration.basePath = m.RESTEndpoint as
-            | string
-            | undefined;
-          this.currentTenantIdentifier = m.TenantIdentifier as string;
-
-          console.log(
-            'authenticated state transition with token %s',
-            m.AccessToken
-          );
-          this.isAuthenticated = true;
-
-          this.tenantService
-            .hostingEntitiesTenantRESTGetByPageNumber(
-              this.hostingEntitiesPageSize,
-              this.hostingEntitiesPageNumber,
-              this.hostingEntitiesPageCount,
-              'body',
-              true,
-              {
-                httpHeaderAccept: 'application/json',
-              }
-            )
-            .pipe(
-              map((actionResult) => {
-                // the rest api actually returns
-                // asp.net core ActionResult<T>
-                let realResult = actionResult as any;
-                return realResult.Value;
-              }),
-              map((t) => {
-                if (t != undefined)
-                  console.log('tenant service has returned %s results');
-                this.hostingModelTenants = t;
-              })
-            )
-            .subscribe();
-
-          if (this.currentTenantIdentifier.length == 0) {
-            this.currentTenantIdentifier = this.defaultTenant;
-          }
-        })
-      )
-      .subscribe();
-  }
 
   pullHostingEntitiesTenantsByOffset(event : IPagedOffset) {
     //event.first = First row offset
