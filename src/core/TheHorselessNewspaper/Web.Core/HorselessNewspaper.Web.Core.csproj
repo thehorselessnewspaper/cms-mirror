@@ -49,6 +49,7 @@
 
 	<ItemGroup>
 		<Folder Include="BackgroundServices\" />
+		<Folder Include="Extensions\Hosting\" />
 		<Folder Include="HostedServices\RazorClassLibrary\" />
 		<Folder Include="Interfaces\Content\" />
 		<Folder Include="Interfaces\Controller\Hosting\" />

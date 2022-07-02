@@ -102,7 +102,7 @@ export class TenantChooserService {
     this.contentEntitiesTenantsSubject.next(ret);
   }
 
-  pullContentEntitiesTenantsCount(offset: number, rowCount: number): void {
+  pullContentEntitiesTenantsCount(): void {
     let ret: ContentEntitiesTenant[] = new Array<ContentEntitiesTenant>();
 
     //init service
@@ -116,7 +116,7 @@ export class TenantChooserService {
 
   }
 
-  pullHostingEntitiesTenantsCount(offset: number, rowCount: number): void {
+  pullHostingEntitiesTenantsCount(): void {
     let ret: HostingEntitiesTenant[] = new Array<HostingEntitiesTenant>();
 
     //init service

@@ -3,8 +3,8 @@
 
   <p-dataView [paginator]="true" [rows]="hostingEntitiesPageSize"
               layout="list"
-              [lazy]="true" (onLazyLoad)="pullHostingEntitiesTenantsByOffset($event)" [totalRecords]="totalRecords"
-              [value]="tenantChooserService.hostingEntitiesTenantsCount">
+              [lazy]="false" (onLazyLoad)="pullHostingEntitiesTenantsByOffset($event)" [totalRecords]="tenantChooserService.hostingEntitiesTenantsCount"
+              [value]="hostingModelTenants">
 
     <ng-template pTemplate="header">
       <p-dataViewLayoutOptions></p-dataViewLayoutOptions>

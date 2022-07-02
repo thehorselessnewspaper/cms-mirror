@@ -383,8 +383,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         // evaluate wether final tenant deployment
                         // workflow step completed
 
-                        var mirrorTenantExists = contentModelTenants.Where(r => r.Id == publishedTenant.Id).Any();
-                        var mirrorTenantHasOwners = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.Owners.Count() > 0).Any();
+                        var mirrorTenantExists = contentModelTenants.Where(r => r.TenantIdentifier == publishedTenant.TenantIdentifier).Any();
+                        // var mirrorTenantHasOwners = contentModelTenants.Where(r => r.TenantIdentifier == publishedTenant.TenantIdentifier && r.Owners.Count() > 0).Any();
                         var mirrorTenantHasAccessControlEntries = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.AccessControlEntries.Count() > 0).Any();
 
                         var isTenantDeploymentWorkflowComplete = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.IsPublished == true).Any();
@@ -400,7 +400,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                 await DeployPublishedTenant(publishedTenant);
                             }
                         }
-                        else if (mirrorTenantExists && mirrorTenantHasOwners && mirrorTenantHasAccessControlEntries && isTenantDeploymentWorkflowComplete == false)
+                        else if (mirrorTenantExists && mirrorTenantHasAccessControlEntries && isTenantDeploymentWorkflowComplete == false)
                         {
                             try
                             {

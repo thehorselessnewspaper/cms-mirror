@@ -69,6 +69,13 @@ MIT
 @angular/router
 MIT
 
+@horselessnewspaper/horseless-content-odataapi
+
+@horselessnewspaper/horseless-hosting-odataapi
+
+@vigouredelaruse/angular-odata
+MIT
+
 @wizardcontroller/horseless-tags-library
 
 @wizardcontrollerprerelease/horseless-contentapi-lib

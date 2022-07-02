@@ -12,6 +12,7 @@ import { HttpHeaders } from '@angular/common/http';
 import {DataViewModule} from 'primeng/dataview';
 import { ODataModule } from '@vigouredelaruse/angular-odata';
 import {HorselessContentModule, HorselessContentConfig} from '@horselessnewspaper/horseless-content-odataapi';
+import { HorselessHostingConfig, HorselessHostingModule } from '@horselessnewspaper/horseless-hosting-odataapi';
 
  @NgModule({
   declarations: [TenantChooserComponent],
@@ -22,7 +23,8 @@ import {HorselessContentModule, HorselessContentConfig} from '@horselessnewspape
     DataViewModule,
     HorselessApiModule,
     HorselessContentModule,
-    ODataModule.forRoot(HorselessContentConfig)
+    HorselessHostingModule,
+    ODataModule.forRoot(HorselessContentConfig,HorselessHostingConfig)
   ],
   providers: [TenantChooserService,
   {

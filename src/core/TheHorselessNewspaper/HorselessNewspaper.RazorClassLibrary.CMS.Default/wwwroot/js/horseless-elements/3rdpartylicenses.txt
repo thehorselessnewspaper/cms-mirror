@@ -71,6 +71,8 @@ MIT
 
 @horselessnewspaper/horseless-content-odataapi
 
+@horselessnewspaper/horseless-hosting-odataapi
+
 @ng-bootstrap/ng-bootstrap
 MIT
 The MIT License (MIT)
