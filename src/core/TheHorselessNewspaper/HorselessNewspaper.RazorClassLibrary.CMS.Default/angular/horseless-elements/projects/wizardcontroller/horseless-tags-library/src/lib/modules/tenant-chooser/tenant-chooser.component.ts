@@ -16,6 +16,7 @@ import { map, Observable, take, tap } from 'rxjs';
 import { TenantChooserService } from './services/TenantChooser.service';
 import { HttpHeaders } from '@angular/common/http';
 import { ODataClient, ODataServiceFactory } from "@vigouredelaruse/angular-odata";
+import { IPagedOffset } from './services/IPagedOffset';
 
 @Component({
   selector: 'lib-tenant-chooser',
@@ -218,5 +219,18 @@ export class TenantChooserComponent implements OnInit {
       .subscribe();
   }
 
+  pullHostingEntitiesTenantsByOffset(event : IPagedOffset) {
+    //event.first = First row offset
+    //event.rows = Number of rows per page
+    this.tenantChooserService.pullHostingEntitiesTenantsByOffset(event.first, event.rows);
+
+  }
+
+  pullContentEntitiesTenantsByOffset(event : IPagedOffset) {
+    //event.first = First row offset
+    //event.rows = Number of rows per page
+    this.tenantChooserService.pullContentEntitiesTenantsByOffset(event.first, event.rows);
+
+  }
 
 }

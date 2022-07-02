@@ -47,7 +47,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
     public static class HorselessAspNetCoreStartupExtensions
     {
         private const string defaultTenantIdentifier = "lache";
-
+        private const string DefaultIdentifier = "lache";
         public static IServiceCollection AddHorselessNewspaper(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment,
         Action<HorselessServiceBuilder> options = null, ServiceLifetime scope = ServiceLifetime.Scoped)
         {
@@ -167,19 +167,30 @@ namespace HorselessNewspaper.Web.Core.Extensions
                 .WithInMemoryStore(options =>
                 {
                     options.Tenants.Add(
-                        new HorselessTenantInfo(
-                        new HostingEntities.TenantInfo()
+                        new HorselessTenantInfo()
                         {
-                            ConnectionString = configuration.GetConnectionString("ContentModelConnection"),
-                            Id = Guid.Parse("6da806b8-f7ab-4e3a-8833-7e834a40e9d0"),
-                            Identifier = defaultTenantIdentifier,// "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
-                            Name = "the Management",
-                            ObjectId = "236324b8-278e-4372-9d06-13c40aabd8b2",
-                            CreatedAt = DateTime.UtcNow,
-                            DisplayName = "the management tenant"
-                        }
-                        )
-                    );
+                            Payload = new HostingEntities.TenantInfo()
+                            {
+                                ConnectionString = configuration.GetConnectionString("ContentModelConnection"),
+                                Id = Guid.Parse("6da806b8-f7ab-4e3a-8833-7e834a40e9d0"),
+                                Identifier = DefaultIdentifier, // = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
+                                Name = "the Management",
+                                ObjectId = "236324b8-278e-4372-9d06-13c40aabd8b2",
+                                CreatedAt = DateTime.UtcNow,
+                                DisplayName = "the management tenant",
+                                ParentTenant = new HostingEntities.Tenant()
+                                {
+                                    Id = Guid.NewGuid(),
+                                    DisplayName = "the management",
+                                    IsPublished = true,
+                                    IsSoftDeleted = false,
+                                    ObjectId = Guid.NewGuid().ToString(),
+                                    TenantIdentifier = DefaultIdentifier,
+                                    TenantIdentifierStrategy = new HostingEntities.TenantIdentifierStrategy()
+
+                                }
+                            }
+                        });
                 })
                 .WithRouteStrategy()
                 //.WithDelegateStrategy(async context =>

@@ -2,8 +2,9 @@
 <div *ngIf="isAuthenticated; else unauthorized">
 
   <p-dataView [paginator]="true" [rows]="hostingEntitiesPageSize"
-              layout="list" 
-              [value]="hostingModelTenants">
+              layout="list"
+              [lazy]="true" (onLazyLoad)="pullHostingEntitiesTenantsByOffset($event)" [totalRecords]="totalRecords"
+              [value]="tenantChooserService.hostingEntitiesTenantsCount">
 
     <ng-template pTemplate="header">
       <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
