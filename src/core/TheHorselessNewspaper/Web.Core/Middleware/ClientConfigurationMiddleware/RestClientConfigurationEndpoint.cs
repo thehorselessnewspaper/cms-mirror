@@ -82,6 +82,10 @@ namespace HorselessNewspaper.Web.Core.Middleware.ClientConfigurationMiddleware
 
                     restClientConfiguration.IsClaimsIdentity = context.User.Identities.Where(w => w.IsAuthenticated).Any();
                     restClientConfiguration.TenantIdentifier = tenant.Identifier;
+
+                    restClientConfiguration.RESTEndpoint = restClientConfiguration.RESTEndpoint + $"/{tenant.Identifier}";
+                    restClientConfiguration.ODataEndpoint = restClientConfiguration.ODataEndpoint;
+
                     var jsonResult = JsonConvert.SerializeObject(restClientConfiguration);
                     await context.Response.WriteAsync(jsonResult);
                 }

@@ -42,7 +42,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
 
 
     // [Route("/")]
-    [Route("/{__tenant__?}")]
+    [Route("/{__tenant__}")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class HorselessCMSController : Controller
     {
@@ -145,7 +145,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Controllers
             return View();
         }
 
-        [HttpPost("Signout")]
+        [HttpPost("~/Signout")]
         public async Task<IActionResult> SignOutCurrentUser()
         {
             // similar to https://docs.identityserver.io/en/release/quickstarts/3_interactive_login.html

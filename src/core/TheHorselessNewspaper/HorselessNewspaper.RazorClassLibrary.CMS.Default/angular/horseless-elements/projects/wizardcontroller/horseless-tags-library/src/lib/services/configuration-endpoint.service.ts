@@ -6,6 +6,7 @@ import { AutoUnsubscribe } from "ngx-auto-unsubscribe";
 import { SecurityRestClientConfiguration } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 import {
   catchError,
+  EMPTY,
   map,
   Observable,
   ReplaySubject,
@@ -21,13 +22,13 @@ import { IClaimsIdentityAuthService as IClaimsIdentiyAuthService } from './IClai
   providedIn: 'any',
 })
 export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
-  public clientConfiguration: Observable<SecurityRestClientConfiguration> =
-    new Observable<SecurityRestClientConfiguration>();
 
   clientConfiguration$: ReplaySubject<SecurityRestClientConfiguration> =
     new ReplaySubject<SecurityRestClientConfiguration>(1);
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+    this.probeClientConfiguration();
+  }
 
   /**
    * supporting getting claims identity
@@ -50,36 +51,6 @@ export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
     return ret;
   }
 
-  /**
-   * call the client configuration endpoint
-   * and set the result to the the observable
-   */
-  public pullClientConfiguration() {
-    let url = window.location.href;
-    let headers = new HttpHeaders();
-    // command channel message to the client configuration endpoint middleware
-    headers = headers.set('RestClientConfigurationEndpoint', 'get');
-
-    console.log(`getting client configuration for ${url}`);
-
-    this.httpClient
-      .post<SecurityRestClientConfiguration>(url, '', {
-        headers: headers,
-      })
-      .pipe(
-        take(1),
-        tap((t) => {
-          console.log('configuration endpoint service has new data %s', t);
-        })
-      )
-      .subscribe((requestResult) => {
-        console.log(
-          'configuration endpoint service has new route data for tenant=%s',
-          requestResult.TenantIdentifier
-        );
-        this.clientConfiguration$.next(requestResult);
-      });
-  }
 
   /**
    * calls the horseless site loaded in the browser
@@ -95,9 +66,20 @@ export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
     headers = headers.set('RestClientConfigurationEndpoint', 'get');
 
     console.log(`getting client configuration for ${url}`);
-    return this.httpClient.post<SecurityRestClientConfiguration>(url, '', {
+    this.httpClient.post<SecurityRestClientConfiguration>(url, '', {
       headers: headers,
-    });
+    })
+      .pipe(
+        map(clientConfig => {
+          console.log(`handling client configuration result for ${url}`)
+          this.clientConfiguration$.next(clientConfig);
+        }),
+        catchError(err => {
+          console.log(`handling error {err}`);
+          return EMPTY;
+        })
+      )
+      .subscribe();
   }
 
   private handleError(error: HttpErrorResponse) {

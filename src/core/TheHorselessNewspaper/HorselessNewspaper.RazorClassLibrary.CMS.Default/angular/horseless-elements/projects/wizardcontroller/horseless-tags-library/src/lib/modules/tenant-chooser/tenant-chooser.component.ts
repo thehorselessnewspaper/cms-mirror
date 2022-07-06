@@ -9,14 +9,21 @@ import {
   TenantInfoRESTService,
   TenantRESTService,
 } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
-import { OidcSecurityService, AuthenticatedResult } from 'angular-auth-oidc-client';
+import {
+  OidcSecurityService,
+  AuthenticatedResult,
+} from 'angular-auth-oidc-client';
 import { ConfigurationEndpointService } from '../../services/configuration-endpoint.service';
 import { Router, NavigationStart } from '@angular/router';
-import { map, Observable, take, tap, pipe, Subscription } from 'rxjs';
+import { map, Observable, take, tap, pipe, Subscription, BehaviorSubject } from 'rxjs';
 import { TenantChooserService } from './services/TenantChooser.service';
 import { HttpHeaders } from '@angular/common/http';
-import { ODataClient, ODataServiceFactory } from "@vigouredelaruse/angular-odata";
+import {
+  ODataClient,
+  ODataServiceFactory,
+} from '@vigouredelaruse/angular-odata';
 import { IPagedOffset } from './services/IPagedOffset';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
 @Component({
   selector: 'lib-tenant-chooser',
@@ -24,17 +31,15 @@ import { IPagedOffset } from './services/IPagedOffset';
   styleUrls: ['./tenant-chooser.component.css'],
 })
 
+@AutoUnsubscribe()
 export class TenantChooserComponent implements OnInit {
   clientConfiguration$!: Observable<SecurityRestClientConfiguration>;
-
 
   currentTenantIdentifier: string = '';
   tenants!: ContentEntitiesTenant[];
   tenantsCount!: number;
 
-  hostingModelTenants!: HostingEntitiesTenant[];
-
-  isAuthenticated: boolean = false;
+  isAuthenticated$ =  new BehaviorSubject<Boolean>(false);
 
   hostingEntitiesPageSize: number = 10;
   hostingEntitiesPageCount: number = 2;
@@ -50,9 +55,8 @@ export class TenantChooserComponent implements OnInit {
   private oidcService: OidcSecurityService;
   public tenantChooserService!: TenantChooserService;
 
-  hostingTenants$! : Observable<HostingEntitiesTenant[]>;
-
-  hostingModelTenant$! : Subscription;
+  public hostingModelTenant$! : Observable<HostingEntitiesTenant[] | null>
+  public contentModelTenant$! : Observable<ContentEntitiesTenant[] | null>
 
   constructor(
     private router: Router,
@@ -64,6 +68,14 @@ export class TenantChooserComponent implements OnInit {
     this.tenantService = tenantSvc;
     this.oidcService = oidcAuthSvc;
     this.tenantChooserService = tenantChooserSvc;
+
+    this.hostingModelTenant$
+    = this.tenantChooserService.hostingEntitiesTenantsSubject as Observable<HostingEntitiesTenant[] | null>;
+
+    this.contentModelTenant$
+    = this.tenantChooserService.contentEntitiesTenantsSubject as Observable<ContentEntitiesTenant[] | null>;
+
+
   }
 
   ngOnInit(): void {
@@ -72,32 +84,66 @@ export class TenantChooserComponent implements OnInit {
 
     console.log('tenant chooser component is pulling configuration');
 
-    this.clientConfigService.pullClientConfiguration();
 
-    this.oidcService
-      .checkAuth(window.location.href)
-      .subscribe((x) => (this.isAuthenticated = x.isAuthenticated));
+    try {
 
-      this.tenantChooserService.pullContentEntitiesTenantsByOffset(0, this.hostingEntitiesPageSize);
+      this.tenantChooserService.restClientConfiguration$
+          .pipe(
+            map(clientConfiguration => {
+              console.log("theant chooser component is handling client configuration result");
+              if (clientConfiguration.AccessToken != null) {
+                this.isAuthenticated$.next(true);
+              }
+            })
+          )
+          .subscribe();
 
-      this.hostingTenants$ = this.tenantChooserService.hostingEntitiesTenantsSubject.asObservable();
+    } catch (error) {
+      console.log('exception pulling client configiuration');
+    }
+
+    // this.oidcService
+    //  .checkAuth(window.location.href)
+    //  .subscribe((x) => (this.isAuthenticated = x.isAuthenticated));
+    // prime the async pump
+
+    this.tenantChooserService.pullContentEntitiesTenantsByOffset(0, this.contentEntitiesPageSize);
+    this.tenantChooserService.pullHostingEntitiesTenantsByOffset(0, this.hostingEntitiesPageSize );
+
+
 
   }
 
-
-  pullHostingEntitiesTenantsByOffset(event : IPagedOffset) {
+  pullHostingEntitiesTenantsByOffset(event: IPagedOffset) {
     //event.first = First row offset
     //event.rows = Number of rows per page
-    console.log("pullHostingEntitiesTenantsByOffset starting");
-    this.tenantChooserService.pullHostingEntitiesTenantsByOffset(event.first, event.rows);
-    console.log("pullHostingEntitiesTenantsByOffset complete");
+    console.log('pullHostingEntitiesTenantsByOffset starting');
+    this.tenantChooserService.pullHostingEntitiesTenantsByOffset(
+      event.first,
+      event.rows
+    );
+    console.log('pullHostingEntitiesTenantsByOffset complete');
   }
 
-  pullContentEntitiesTenantsByOffset(event : IPagedOffset) {
+  pullContentEntitiesTenantsByOffset(event: IPagedOffset) {
     //event.first = First row offset
     //event.rows = Number of rows per page
-    this.tenantChooserService.pullContentEntitiesTenantsByOffset(event.first, event.rows);
-
+    this.tenantChooserService.pullContentEntitiesTenantsByOffset(
+      event.first,
+      event.rows
+    );
   }
 
+  ngOnDestroy() {
+    // We'll throw an error if it doesn't
+  }
 }
+
+function AutoDestroy() {
+  throw new Error('Function not implemented.');
+}
+
+function ngOnDestroy() {
+  throw new Error('Function not implemented.');
+}
+

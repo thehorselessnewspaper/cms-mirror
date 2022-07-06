@@ -51,6 +51,12 @@ import { PrimeIcons } from 'primeng/api';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ODataModule } from '@vigouredelaruse/angular-odata';
 // import {HorselessContentModule} from '@horselessnewspaper/horseless-content-odataapi';
+import {
+  ClientConfigurationService,
+  ContentEntitiesTenant,
+  HostingEntitiesTenant,
+  SecurityRestClientConfiguration,
+} from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 
 export function apiConfigFactory(): HorselessConfiguration {
   const params: HorselessConfigurationParameters = {
@@ -112,7 +118,7 @@ const routes: Routes = [
       }),
       deps: [OidcSecurityService],
       multi: false,
-    },
+    }
   ],
   bootstrap: []
 })

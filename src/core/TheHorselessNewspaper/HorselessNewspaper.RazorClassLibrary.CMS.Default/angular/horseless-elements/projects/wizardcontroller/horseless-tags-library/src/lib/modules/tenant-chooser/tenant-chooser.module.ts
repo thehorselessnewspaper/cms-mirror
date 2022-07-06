@@ -14,11 +14,14 @@ import { ODataModule } from '@vigouredelaruse/angular-odata';
 import {HorselessContentModule, HorselessContentConfig} from '@horselessnewspaper/horseless-content-odataapi';
 import { HorselessHostingConfig, HorselessHostingModule } from '@horselessnewspaper/horseless-hosting-odataapi';
 
+import { TabViewModule } from 'primeng/tabview';
+
  @NgModule({
   declarations: [TenantChooserComponent],
   imports: [
     CommonModule,
     MatListModule,
+    TabViewModule,
     MatSliderModule,
     DataViewModule,
     HorselessApiModule,
