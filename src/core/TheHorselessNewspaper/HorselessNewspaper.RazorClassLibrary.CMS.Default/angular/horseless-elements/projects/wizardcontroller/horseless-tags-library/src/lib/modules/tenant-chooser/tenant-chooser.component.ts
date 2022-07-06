@@ -15,7 +15,7 @@ import {
 } from 'angular-auth-oidc-client';
 import { ConfigurationEndpointService } from '../../services/configuration-endpoint.service';
 import { Router, NavigationStart } from '@angular/router';
-import { map, Observable, take, tap, pipe, Subscription, BehaviorSubject } from 'rxjs';
+import { map, Observable, take, tap, pipe, Subscription, BehaviorSubject, catchError, EMPTY } from 'rxjs';
 import { TenantChooserService } from './services/TenantChooser.service';
 import { HttpHeaders } from '@angular/common/http';
 import {
@@ -24,7 +24,6 @@ import {
 } from '@vigouredelaruse/angular-odata';
 import { IPagedOffset } from './services/IPagedOffset';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
-
 @Component({
   selector: 'lib-tenant-chooser',
   templateUrl: './tenant-chooser.component.html',
@@ -69,6 +68,11 @@ export class TenantChooserComponent implements OnInit {
     this.oidcService = oidcAuthSvc;
     this.tenantChooserService = tenantChooserSvc;
 
+  }
+
+  ngOnInit(): void {
+
+
     this.hostingModelTenant$
     = this.tenantChooserService.hostingEntitiesTenantsSubject as Observable<HostingEntitiesTenant[] | null>;
 
@@ -76,9 +80,6 @@ export class TenantChooserComponent implements OnInit {
     = this.tenantChooserService.contentEntitiesTenantsSubject as Observable<ContentEntitiesTenant[] | null>;
 
 
-  }
-
-  ngOnInit(): void {
     let applicationJson = new HttpHeaders();
     applicationJson.append('Accept', 'application/json');
 
@@ -94,9 +95,15 @@ export class TenantChooserComponent implements OnInit {
               if (clientConfiguration.AccessToken != null) {
                 this.isAuthenticated$.next(true);
               }
+            }),
+            catchError(err => {
+              console.log(`TenantChooserComponent tenantChooserService.restClientConfiguration$ handling error ${err}`);
+              return EMPTY;
             })
           )
-          .subscribe();
+          .subscribe(piped => {
+            console.log(`tenantChooserService.restClientConfiguration$  pipe subscriber executing`);
+          });
 
     } catch (error) {
       console.log('exception pulling client configiuration');

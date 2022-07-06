@@ -9,7 +9,7 @@ import {
   TenantRESTService,
 } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
-import { BehaviorSubject, map, Observable, ReplaySubject, take, tap } from 'rxjs';
+import { BehaviorSubject, catchError, EMPTY, map, Observable, ReplaySubject, take, tap } from 'rxjs';
 import { ConfigurationEndpointService } from '../../../services/configuration-endpoint.service';
 
 
@@ -72,7 +72,7 @@ export class TenantChooserService {
 
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${clientConfig.AccessToken}`,
-          'Accept': 'application/json'
+          'Accept': 'application/json;odata.metadata=full'
         })
 
         console.log(
@@ -92,21 +92,29 @@ export class TenantChooserService {
 
         tenantEntities
           .fetch({ headers: headers })
-          .subscribe(({ entities, annots}) => {
-            console.log(
-              'pullHostingEntitiesTenantsByOffset got odata response'
-            );
-
-            this.hostingEntitiesTenantsSubject.next(entities);
-            this.contentEntitiesTenantsCount = annots.count as number;
+          .pipe(
+            map((odataResponse) =>{
+              console.log(`pullHostingEntitiesTenantsByOffset is emitting entities`);
+              this.hostingEntitiesTenantsSubject.next(odataResponse.entities);
+              this.contentEntitiesTenantsCount = odataResponse.annots.count as number;
+            }),
+            catchError(err => {
+              console.log(`pullHostingEntitiesTenantsByOffset handling error ${err}`);
+              return EMPTY;
+            })
+          )
+          .subscribe(piped => {
+            console.log(`tenantEntities.fetch  pipe subscriber executing`);
           });
-
-        console.log(
-          `pullHostingEntitiesTenantsByOffset is emitting latest data`
-        );
+      }),
+      catchError(err => {
+        console.log(`pullHostingEntitiesTenantsByOffset handling error ${err}`);
+        return EMPTY;
       })
     )
-    .subscribe();
+      .subscribe(piped => {
+        console.log(`restClientConfiguration$ pipe subscriber executed`)
+      });
 
 
   }
@@ -140,7 +148,7 @@ export class TenantChooserService {
 
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${clientConfig.AccessToken}`,
-          'Accept':'application/json;odata=none'
+          'Accept': 'application/json;odata.metadata=full'
         })
 
         // build query
@@ -155,16 +163,25 @@ export class TenantChooserService {
         tenantEntities
           .fetch({ headers: headers })
           .pipe(
-            map( ({entities, annots}) => {
-              this.contentEntitiesTenantsSubject.next(entities);
-              this.contentEntitiesTenantsCount = annots.count as number;
+            map((oDataResponse) => {
+              console.log(`pullContentEntitiesTenantsByOffset is emitting entities`);
+              this.contentEntitiesTenantsSubject.next(oDataResponse.entities);
+              this.contentEntitiesTenantsCount = oDataResponse.annots.count as number;
+            }),
+            catchError(err => {
+              console.log(`pullContentEntitiesTenantsByOffset handling error ${err}`);
+              return EMPTY;
             })
           )
-          .subscribe()
+          .subscribe(piped => {
+            console.log(`tenantEntities.fetch subscriber is executing`);
+          })
 
       })
     )
-    .subscribe();
+      .subscribe(piped => {
+        console.log(`this.restClientConfiguration$.pipe subscriber is emitting entities`);
+      });
   }
 
   pullContentEntitiesTenantsCount(): void {
@@ -186,7 +203,7 @@ export class TenantChooserService {
 
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${clientConfig.AccessToken}`,
-          'Accept': 'application/json;odata=none'
+          'Accept': 'application/json;odata.metadata=full'
         })
 
         console.log(
@@ -194,10 +211,20 @@ export class TenantChooserService {
         );
         let tenantEntities = contentTenantsSvc.entities();
 
-        let contentEntitiesTenantsCount = tenantEntities.count().fetch({headers: headers});
+        tenantEntities.count().fetch({ headers: headers })
+          .pipe(
+            map(odataResponse => {
+              this.contentEntitiesTenantsCount = odataResponse;
+            })
+        )
+          .subscribe(piped => {
+            console.log(`tenantEntities.count().fetch subscriber executing`);
+          });
       })
     )
-    .subscribe();
+      .subscribe(piped => {
+        console.log(`this.restClientConfiguration$.pipe subscriber executing`);
+      });
   }
 
   pullHostingEntitiesTenantsCount(): void {
@@ -224,7 +251,7 @@ export class TenantChooserService {
 
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${clientConfig.AccessToken}`,
-          'Accept': 'application/json;odata=none'
+          'Accept': 'application/json;odata.metadata=full'
         })
 
         console.log(
@@ -232,10 +259,19 @@ export class TenantChooserService {
         );
         let tenantEntities = contentTenantsSvc.entities();
 
-        let hostingEntitiesTenantsCount = tenantEntities.count().fetch({headers: headers});
+        tenantEntities.count().fetch({ headers: headers })
+          .pipe(
+            map(oDataResponse => {
+              this.hostingEntitiesTenantsCount = oDataResponse;
+            })
+        ).subscribe(piped => {
+          console.log(`tenantEntities.count().fetch subscriber executing`);
+        });
       })
     )
-    .subscribe();
+      .subscribe(piped => {
+        console.log(`this.restClientConfiguration$.pipe subscriber executing`);
+      });
   }
 
   ngOnDestroy() {

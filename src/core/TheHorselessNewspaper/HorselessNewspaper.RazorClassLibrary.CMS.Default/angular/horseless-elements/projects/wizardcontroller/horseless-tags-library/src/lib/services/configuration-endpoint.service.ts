@@ -41,7 +41,6 @@ export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
     console.log("getAccessToken is running");
 
     this.clientConfiguration$.pipe(
-      take(1),
       map(config => config.AccessToken),
       tap(token => {
         ret = token as string;
@@ -65,21 +64,23 @@ export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
     // command channel message to the client configuration endpoint middleware
     headers = headers.set('RestClientConfigurationEndpoint', 'get');
 
-    console.log(`getting client configuration for ${url}`);
+    console.log(`probeClientConfiguration getting client configuration for ${url}`);
     this.httpClient.post<SecurityRestClientConfiguration>(url, '', {
       headers: headers,
     })
       .pipe(
         map(clientConfig => {
-          console.log(`handling client configuration result for ${url}`)
+          console.log(`probeClientConfiguration handling client configuration result for ${url}`)
           this.clientConfiguration$.next(clientConfig);
         }),
         catchError(err => {
-          console.log(`handling error {err}`);
+          console.log(`probeClientConfiguration handling error ${err}`);
           return EMPTY;
         })
       )
-      .subscribe();
+      .subscribe(piped => {
+        console.log(`probeClientConfiguration pipe subscriber got client configuration for ${url}`);
+      });
   }
 
   private handleError(error: HttpErrorResponse) {

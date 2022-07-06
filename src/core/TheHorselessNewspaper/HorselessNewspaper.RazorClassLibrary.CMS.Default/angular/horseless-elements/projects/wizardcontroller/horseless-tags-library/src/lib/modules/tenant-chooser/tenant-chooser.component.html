@@ -2,7 +2,7 @@
 <div *ngIf="isAuthenticated$ | async; else unauthorized">
 
   <p-tabView>
-    <p-tabPanel title="Hosting">
+    <p-tabPanel  title="Hosting">
       <div>hosting entities</div>
       <ng-template *ngif="hostingModelTenant$ | async as tenants; else noHostingTenants">
         <p-dataView [paginator]="true" [rows]="hostingEntitiesPageSize"
