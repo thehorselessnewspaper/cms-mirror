@@ -292,7 +292,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     var tenants = await GetCurrentContentModelTenants();
                     foreach (var contentModelTenant in tenants)
                     {
-                        if (!this.CurrentContentModelTenants.Where(w => w.Id.Equals(contentModelTenant.Id)).Any())
+                        if (!this.CurrentContentModelTenants.Where(w => w.TenantIdentifier.Equals(contentModelTenant.TenantIdentifier)).Any())
                         {
                             // here because we need to cache this tenant in the singleton
                             _logger.LogWarning($"{this.GetType().FullName} has cached a content model tenant locally");
@@ -385,9 +385,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                         var mirrorTenantExists = contentModelTenants.Where(r => r.TenantIdentifier == publishedTenant.TenantIdentifier).Any();
                         // var mirrorTenantHasOwners = contentModelTenants.Where(r => r.TenantIdentifier == publishedTenant.TenantIdentifier && r.Owners.Count() > 0).Any();
-                        var mirrorTenantHasAccessControlEntries = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.AccessControlEntries.Count() > 0).Any();
+                        var mirrorTenantHasAccessControlEntries = contentModelTenants.Where(r => r.TenantIdentifier == publishedTenant.TenantIdentifier && r.AccessControlEntries.Count() > 0).Any();
 
-                        var isTenantDeploymentWorkflowComplete = contentModelTenants.Where(r => r.Id == publishedTenant.Id && r.IsPublished == true).Any();
+                        var isTenantDeploymentWorkflowComplete = contentModelTenants.Where(r => r.TenantIdentifier == publishedTenant.TenantIdentifier && r.IsPublished == true).Any();
 
                         if (mirrorTenantExists == false)
                         {
@@ -406,7 +406,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             {
 
                                 // detect final step, setting the tenant to published in the content model database
-                                var mirrorTenant = contentModelTenants.Where(r => r.Id == publishedTenant.Id).FirstOrDefault();
+                                var mirrorTenant = contentModelTenants.Where(r => r.TenantIdentifier == publishedTenant.TenantIdentifier).FirstOrDefault();
                                 mirrorTenant.IsPublished = true; // set the workflow complete flag
                                 var options = new JsonSerializerOptions
                                 {
@@ -528,7 +528,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 _logger.LogInformation($"loaded tenant cache service");
 
                 var currentTenants = await GetCurrentContentModelTenants();
-                var liveTenant = currentTenants.Where(w => w.Id.Equals(publishedTenant.Id)).FirstOrDefault();
+                var liveTenant = currentTenants.Where(w => w.TenantIdentifier.Equals(publishedTenant.TenantIdentifier)).FirstOrDefault();
                 await tenantCache.Set(publishedTenant.Id, liveTenant);
             }
             catch (Exception e)
@@ -1094,7 +1094,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 List<HostingModel.Tenant> hostingModelTenants = await GetCurrentHostingModelTenants();
                 foreach (var hostModelTenant in hostingModelTenants)
                 {
-                    if (!this.CurrentHostingModelTenants.Where(w => w.Id.Equals(hostModelTenant.Id)).Any())
+                    if (!this.CurrentHostingModelTenants.Where(w => w.TenantIdentifier.Equals(hostModelTenant.TenantIdentifier)).Any())
                     {
                         // here because we need to cache this tenant in the singleton
                         this.CurrentHostingModelTenants.Add(hostModelTenant);

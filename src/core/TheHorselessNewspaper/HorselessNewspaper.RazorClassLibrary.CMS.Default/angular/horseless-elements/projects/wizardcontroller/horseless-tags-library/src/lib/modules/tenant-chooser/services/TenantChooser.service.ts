@@ -72,7 +72,7 @@ export class TenantChooserService {
 
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${clientConfig.AccessToken}`,
-          'Accept': 'application/json;odata.metadata=full'
+          'Accept': 'odata.metadata=full'
         })
 
         console.log(
@@ -90,8 +90,8 @@ export class TenantChooserService {
 
         console.log(`pullHostingEntitiesTenantsByOffset fetching`);
 
-        tenantEntities
-          .fetch({ headers: headers })
+        return tenantEntities
+          .fetch({ withCount: true, headers: headers })
           .pipe(
             map((odataResponse) =>{
               console.log(`pullHostingEntitiesTenantsByOffset is emitting entities`);
@@ -102,10 +102,8 @@ export class TenantChooserService {
               console.log(`pullHostingEntitiesTenantsByOffset handling error ${err}`);
               return EMPTY;
             })
-          )
-          .subscribe(piped => {
-            console.log(`tenantEntities.fetch  pipe subscriber executing`);
-          });
+          );
+
       }),
       catchError(err => {
         console.log(`pullHostingEntitiesTenantsByOffset handling error ${err}`);
@@ -148,7 +146,7 @@ export class TenantChooserService {
 
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${clientConfig.AccessToken}`,
-          'Accept': 'application/json;odata.metadata=full'
+          'Accept': 'odata.metadata=full'
         })
 
         // build query
@@ -160,8 +158,8 @@ export class TenantChooserService {
 
         console.log(`pullContentEntitiesTenantsByOffset is fetching`);
 
-        tenantEntities
-          .fetch({ headers: headers })
+        return tenantEntities
+          .fetch({ withCount: true, headers: headers })
           .pipe(
             map((oDataResponse) => {
               console.log(`pullContentEntitiesTenantsByOffset is emitting entities`);
@@ -172,10 +170,7 @@ export class TenantChooserService {
               console.log(`pullContentEntitiesTenantsByOffset handling error ${err}`);
               return EMPTY;
             })
-          )
-          .subscribe(piped => {
-            console.log(`tenantEntities.fetch subscriber is executing`);
-          })
+          );
 
       })
     )
@@ -203,7 +198,7 @@ export class TenantChooserService {
 
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${clientConfig.AccessToken}`,
-          'Accept': 'application/json;odata.metadata=full'
+          'Accept': 'odata.metadata=full'
         })
 
         console.log(
@@ -211,7 +206,7 @@ export class TenantChooserService {
         );
         let tenantEntities = contentTenantsSvc.entities();
 
-        tenantEntities.count().fetch({ headers: headers })
+        tenantEntities.count().fetch({  headers: headers })
           .pipe(
             map(odataResponse => {
               this.contentEntitiesTenantsCount = odataResponse;
@@ -251,7 +246,7 @@ export class TenantChooserService {
 
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${clientConfig.AccessToken}`,
-          'Accept': 'application/json;odata.metadata=full'
+          'Accept': 'odata.metadata=full'
         })
 
         console.log(
