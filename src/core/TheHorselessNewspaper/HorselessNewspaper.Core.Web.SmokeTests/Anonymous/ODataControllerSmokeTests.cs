@@ -15,6 +15,8 @@ using Finbuckle.MultiTenant;
 using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
 using NuGet.Common;
 using HorselessNewspaper.Core.Interfaces.Security.Resolver;
+using HorselessNewspaper.Web.Core.Model.Query;
+using Microsoft.Net.Http.Headers;
 
 namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 {
@@ -104,8 +106,10 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 {
                     var principalResolver = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
                     client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", await principalResolver.GetClientCredentialsGrantToken());
-                    // client.DefaultRequestHeaders.Add("Accept", "application/json;odata.metadata=none");
-                    response = await client.GetAsync("phantom/ODataContent/Tenant?$top=10&");
+                    
+                    client.DefaultRequestHeaders.Add(ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, "lache");
+                    client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json;odata.metadata=none");
+                    response = await client.GetAsync("ODataContent/Tenant?$top=10&");
                     Assert.NotNull(response);
 
                     response.EnsureSuccessStatusCode(); // Status Code 200-299
@@ -129,9 +133,9 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
             try
             {
 
-                var contentCollection = JsonConvert.DeserializeObject<List<ContentEntities.Tenant>>(responseContent);
-                Assert.NotNull(contentCollection);
-                Assert.True(contentCollection.Count > 0);
+                var contentCollection = JsonConvert.DeserializeObject<ODataResponse<List<ContentEntities.Tenant>>>(responseContent);
+                Assert.True(contentCollection != null && contentCollection.Value != null);
+                Assert.True(contentCollection.Value.Count > 0);
             }
             catch (Exception e)
             {

@@ -9,7 +9,7 @@ import {
   TenantRESTService,
 } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
-import { BehaviorSubject, catchError, EMPTY, map, Observable, ReplaySubject, take, tap } from 'rxjs';
+import { BehaviorSubject, catchError, EMPTY, map, Observable, ReplaySubject, take, tap, concatMap } from 'rxjs';
 import { ConfigurationEndpointService } from '../../../services/configuration-endpoint.service';
 
 
@@ -20,10 +20,10 @@ import { ConfigurationEndpointService } from '../../../services/configuration-en
 export class TenantChooserService {
   clientConfigService!: ConfigurationEndpointService;
 
-  hostingEntitiesTenantsSubject!: ReplaySubject<HostingEntitiesTenant[] | null>;
+  hostingEntitiesTenantsSubject!: BehaviorSubject<HostingEntitiesTenant[] | null>;
   hostingEntitiesTenantsCount!: number;
 
-  contentEntitiesTenantsSubject!: ReplaySubject<ContentEntitiesTenant[] | null> ;
+  contentEntitiesTenantsSubject!: BehaviorSubject<ContentEntitiesTenant[] | null> ;
   contentEntitiesTenantsCount!: number;
 
   restClientConfiguration$!: ReplaySubject<SecurityRestClientConfiguration>;
@@ -38,9 +38,9 @@ export class TenantChooserService {
     this.restClientConfiguration$ =
       this.clientConfigService.clientConfiguration$;
 
-      this.hostingEntitiesTenantsSubject = new ReplaySubject<HostingEntitiesTenant[] | null>(1);
+      this.hostingEntitiesTenantsSubject = new BehaviorSubject<HostingEntitiesTenant[] | null>(null);
 
-      this.contentEntitiesTenantsSubject = new ReplaySubject<ContentEntitiesTenant[] | null>(1);
+      this.contentEntitiesTenantsSubject = new BehaviorSubject<ContentEntitiesTenant[] | null>(null);
   }
 
   pullHostingEntitiesTenantsByOffset(offset: number, rowCount: number): void {
@@ -68,7 +68,7 @@ export class TenantChooserService {
 
         return clientConfig;
       }),
-      map(clientConfig => {
+      concatMap(clientConfig => {
 
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${clientConfig.AccessToken}`,
@@ -93,10 +93,11 @@ export class TenantChooserService {
         return tenantEntities
           .fetch({ withCount: true, headers: headers })
           .pipe(
-            map((odataResponse) =>{
+            map((entities, annots) =>{
+
               console.log(`pullHostingEntitiesTenantsByOffset is emitting entities`);
-              this.hostingEntitiesTenantsSubject.next(odataResponse.entities);
-              this.contentEntitiesTenantsCount = odataResponse.annots.count as number;
+              this.hostingEntitiesTenantsSubject.next(entities.entities);
+              this.contentEntitiesTenantsCount = entities.annots.count as number;
             }),
             catchError(err => {
               console.log(`pullHostingEntitiesTenantsByOffset handling error ${err}`);
@@ -141,7 +142,7 @@ export class TenantChooserService {
         return clientConfig;
 
       }),
-      map((clientConfig) =>{
+      concatMap((clientConfig) =>{
 
 
         const headers = new HttpHeaders({
@@ -161,10 +162,10 @@ export class TenantChooserService {
         return tenantEntities
           .fetch({ withCount: true, headers: headers })
           .pipe(
-            map((oDataResponse) => {
+            map((entities, annots) => {
               console.log(`pullContentEntitiesTenantsByOffset is emitting entities`);
-              this.contentEntitiesTenantsSubject.next(oDataResponse.entities);
-              this.contentEntitiesTenantsCount = oDataResponse.annots.count as number;
+              this.contentEntitiesTenantsSubject.next(entities.entities);
+              this.contentEntitiesTenantsCount = entities.annots.count as number;
             }),
             catchError(err => {
               console.log(`pullContentEntitiesTenantsByOffset handling error ${err}`);

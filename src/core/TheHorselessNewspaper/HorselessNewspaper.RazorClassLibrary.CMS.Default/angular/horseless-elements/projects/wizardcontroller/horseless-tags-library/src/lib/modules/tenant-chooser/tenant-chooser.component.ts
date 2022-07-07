@@ -68,16 +68,16 @@ export class TenantChooserComponent implements OnInit {
     this.oidcService = oidcAuthSvc;
     this.tenantChooserService = tenantChooserSvc;
 
-  }
-
-  ngOnInit(): void {
-
 
     this.hostingModelTenant$
     = this.tenantChooserService.hostingEntitiesTenantsSubject as Observable<HostingEntitiesTenant[] | null>;
 
     this.contentModelTenant$
     = this.tenantChooserService.contentEntitiesTenantsSubject as Observable<ContentEntitiesTenant[] | null>;
+
+  }
+
+  ngOnInit(): void {
 
 
     let applicationJson = new HttpHeaders();
@@ -114,9 +114,20 @@ export class TenantChooserComponent implements OnInit {
     //  .subscribe((x) => (this.isAuthenticated = x.isAuthenticated));
     // prime the async pump
 
+    try{
     this.tenantChooserService.pullContentEntitiesTenantsByOffset(0, this.contentEntitiesPageSize);
-    this.tenantChooserService.pullHostingEntitiesTenantsByOffset(0, this.hostingEntitiesPageSize );
+    }
+    catch(exception){
+      console.log(`tenantchoosercomponent threw exception ${exception}`)
+    }
 
+
+    try{
+    this.tenantChooserService.pullHostingEntitiesTenantsByOffset(0, this.hostingEntitiesPageSize );
+    }
+    catch(exception){
+      console.log(`tenantchoosercomponent threw exception ${exception}`)
+    }
 
 
   }
@@ -129,16 +140,20 @@ export class TenantChooserComponent implements OnInit {
       event.first,
       event.rows
     );
-    console.log('pullHostingEntitiesTenantsByOffset complete');
+    console.log(`pullHostingEntitiesTenantsByOffset finished event.first ${event.first}, event.rows ${event.rows}`);
   }
 
   pullContentEntitiesTenantsByOffset(event: IPagedOffset) {
     //event.first = First row offset
     //event.rows = Number of rows per page
+
+    console.log('pullContentEntitiesTenantsByOffset starting');
     this.tenantChooserService.pullContentEntitiesTenantsByOffset(
       event.first,
       event.rows
     );
+
+    console.log(`pullContentEntitiesTenantsByOffset finished event.first ${event.first}, event.rows ${event.rows}`);
   }
 
   ngOnDestroy() {

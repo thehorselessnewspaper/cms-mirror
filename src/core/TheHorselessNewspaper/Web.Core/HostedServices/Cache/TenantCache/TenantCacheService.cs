@@ -1203,7 +1203,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                     foreach (var cachedTenant in allCachedTenants)
                     {
-                        var odataContentModelTenantQuery = $"{baseUri}/{cachedTenant.Identifier}/{ODataControllerStrings.ODATA_CONTENTMODEL_TENANT}{expandClause}";
+                        var odataContentModelTenantQuery = $"{baseUri}/{ODataControllerStrings.ODATA_CONTENTMODEL_TENANT}{expandClause}";
 
                         var odataContentModelQueryMessage = new HttpRequestMessage(
                             HttpMethod.Get,
@@ -1212,7 +1212,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             Headers =
                             {
                                 { HeaderNames.Accept, "application/json;odata.metadata=none" },
-                                { HeaderNames.UserAgent, "HorselessNewspaper" }
+                                { HeaderNames.UserAgent, "HorselessNewspaper" },
+                                { ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, $"{cachedTenant.Identifier}" }
                             }
                         };
 

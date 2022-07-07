@@ -192,6 +192,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
                             }
                         });
                 })
+                .WithHeaderStrategy()
                 .WithRouteStrategy()
                 //.WithDelegateStrategy(async context =>
                 //{
@@ -315,13 +316,14 @@ namespace HorselessNewspaper.Web.Core.Extensions
             var model = new HorselessOdataModel();
             var edmContent = model.GetContentEDMModel();
             var edmHosting = model.GetHostingEDMModel();
+
             // handle cycles in json responses 
             // as per https://gavilan.blog/2021/05/19/fixing-the-error-a-possible-object-cycle-was-detected-in-different-versions-of-asp-net-core/
-            services.AddControllers(
+            services.AddControllersWithViews(
                     opts =>
                     {
                         // permit content negotiation
-                        opts.RespectBrowserAcceptHeader = true;
+                        opts.RespectBrowserAcceptHeader = true; opts.EnableEndpointRouting = true;
                     }
                 ).AddJsonOptions(x =>
                 {
@@ -347,27 +349,28 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
                         /// todo make this an environment configurable item
                         options.AddRouteComponents("ODataContent", edmContent);
-
-
-
-                    })
-                    .AddOData(options =>
-                    {
-                        /// TODO - surface these as configurable parameters 
-                        options
-                        .Select()
-                        .Expand()
-                        .Filter()
-                        .OrderBy()
-                        .SetMaxTop(1000)
-                        .Count();
-
-                        options.TimeZone = TimeZoneInfo.Utc;
-                        // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
-
-                        /// todo make this an environment configurable item
                         options.AddRouteComponents("ODataHosting", edmHosting);
+
+
                     });
+                    //// .AddOData(options =>
+                    //{
+                    //    /// TODO - surface these as configurable parameters 
+                    //    options
+                    //    .Select()
+                    //    .Expand()
+                    //    .Filter()
+                    //    .OrderBy()
+                    //    .SetMaxTop(1000)
+                    //    .Count();
+
+                    //    options.TimeZone = TimeZoneInfo.Utc;
+                    //    // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
+
+                    //    /// todo make this an environment configurable item
+                    //    options.AddRouteComponents("ODataHosting", edmHosting);
+                    //    // options.AddRouteComponents(edmContent);
+                    //});
 
             options?.Invoke(serviceBuilder);
 

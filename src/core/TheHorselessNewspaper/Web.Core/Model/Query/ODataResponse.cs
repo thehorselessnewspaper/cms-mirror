@@ -21,6 +21,6 @@ namespace HorselessNewspaper.Web.Core.Model.Query
         public ODataResponse() { }
 
         [JsonPropertyName("value")]
-        public List<T> Value { get; set; }
+        public T Value { get; set; }
     }
 }

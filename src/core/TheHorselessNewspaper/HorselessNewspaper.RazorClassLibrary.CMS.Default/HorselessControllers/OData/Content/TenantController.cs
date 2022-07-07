@@ -18,15 +18,15 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using HorselessNewspaper.Web.Core.Authorization.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    [Route("{__tenant__}/ODataContent/Tenant")]
+    // [Route("ODataContent/[controller]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-
     [ApiExplorerSettings(IgnoreApi = true)]
     public class TenantController :
-        ODataController, IContentQueryController<ContentModel.Tenant>
+        ODataController //, IContentQueryController<ContentModel.Tenant>
 
     {
         private readonly IContentCollectionService<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModel.Tenant> _contentCollectionService;
@@ -44,7 +44,6 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-
 
         // [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.Tenant>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
