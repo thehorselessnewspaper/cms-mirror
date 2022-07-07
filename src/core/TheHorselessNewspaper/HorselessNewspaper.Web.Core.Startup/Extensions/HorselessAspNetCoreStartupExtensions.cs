@@ -348,8 +348,9 @@ namespace HorselessNewspaper.Web.Core.Extensions
                         // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
 
                         /// todo make this an environment configurable item
-                        options.AddRouteComponents("ODataContent", edmContent);
                         options.AddRouteComponents("ODataHosting", edmHosting);
+                        options.AddRouteComponents("ODataContent", edmContent);
+
 
 
                     });

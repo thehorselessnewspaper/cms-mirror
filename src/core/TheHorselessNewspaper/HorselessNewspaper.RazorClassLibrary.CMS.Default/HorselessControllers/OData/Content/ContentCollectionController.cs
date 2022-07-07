@@ -13,15 +13,16 @@ using Microsoft.AspNetCore.OData;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
 
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("{__tenant__}/ODataContent/ContentCollection")]
+    // [Route("{__tenant__}/ODataContent/ContentCollection")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class ContentCollectionController :
-        ODataController, IContentQueryController<ContentModel.ContentCollection>
+        ODataController //, IContentQueryController<ContentModel.ContentCollection>
     {
         private IContentCollectionService<IQueryableContentModelOperator<ContentCollection>, ContentCollection> _contentCollectionService;
         private ITenantInfo _tenantInfo;
@@ -40,7 +41,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-        public async Task<ActionResult<IEnumerable<ContentModel.ContentCollection>>> Get()
+        public async Task<ActionResult<IEnumerable<ContentModel.ContentCollection>>> Get([FromRoute] ODataQueryOptions<IEnumerable<ContentModel.ContentCollection>> options)
         {
             var result = await _contentCollectionService.Query();
             

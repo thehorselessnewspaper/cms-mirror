@@ -19,10 +19,12 @@ using Microsoft.AspNetCore.Authorization.Infrastructure;
 using HorselessNewspaper.Web.Core.Authorization.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Routing.Attributes;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    // [Route("ODataContent/[controller]")]
+    // [ODataAttributeRouting]
+    // [Route("ODataContent/[controller]/[action]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class TenantController :
@@ -45,12 +47,16 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
 
-        // [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.Tenant>))]
+        [HttpGet()]
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.Tenant>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-        public async Task<ActionResult<IEnumerable<ContentModel.Tenant>>> Get()
+
+        public async Task<ActionResult<IEnumerable<ContentModel.Tenant>>> Get(ODataQueryOptions<ContentModel.Tenant> options)
+        // public async Task<ActionResult<IEnumerable<ContentModel.Tenant>>> Get()
         {
             try
             {

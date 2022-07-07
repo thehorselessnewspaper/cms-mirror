@@ -11,16 +11,17 @@ using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
 
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("{__tenant__}/ODataContent/FilesystemAsset")]
+    // [Route("{__tenant__}/ODataContent/FilesystemAsset")]
 
     [ApiExplorerSettings(IgnoreApi = true)]
     public class FilesystemAssetController :
-        ODataController, IContentQueryController<ContentModel.FilesystemAsset>
+        ODataController //, IContentQueryController<ContentModel.FilesystemAsset>
     {
         private IContentCollectionService<IQueryableContentModelOperator<FilesystemAsset>, FilesystemAsset> _contentCollectionService;
         private ITenantInfo _tenantInfo;
@@ -39,7 +40,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-        public async Task<ActionResult<IEnumerable<ContentModel.FilesystemAsset>>> Get()
+        public async Task<ActionResult<IEnumerable<ContentModel.FilesystemAsset>>> Get([FromRoute] ODataQueryOptions<IEnumerable<ContentModel.FilesystemAsset>> options)
         {
             var result = await _contentCollectionService.Query();
             return Ok(result);

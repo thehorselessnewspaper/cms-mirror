@@ -1145,7 +1145,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                     foreach (var t in hostingModelTenantQueryResult)
                     {
-                        _logger.LogTrace($"tenant {t.DisplayName} has {t.TenantInfos.Count()} tenantinfo records");
+                       if (t.TenantInfos != null) _logger.LogTrace($"tenant {t.DisplayName} has {t.TenantInfos.Count()} tenantinfo records");
                     }
 
                     return hostingModelTenants;
@@ -1226,8 +1226,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             return ret;
                         }
 
-                        var contentModelTenantList = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<ContentModel.Tenant>>(probeResponseContent); // JsonConvert.DeserializeObject<ODataResponse<ContentModel.Tenant>>(probeResponseContent);
-                        ret.AddRange(contentModelTenantList);
+                        var contentModelTenantList = System.Text.Json.JsonSerializer.Deserialize<ODataResponse<IEnumerable<ContentModel.Tenant>>>(probeResponseContent); // JsonConvert.DeserializeObject<ODataResponse<ContentModel.Tenant>>(probeResponseContent);
+                        ret.AddRange(contentModelTenantList.Value);
                         this._logger.LogTrace($"{this.GetType().FullName} has cmpleted retrieving content model tenants");
                     }
                 }
@@ -1266,6 +1266,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             return ret;
         }
 
+        [Obsolete]
         private async Task<List<HostingModel.TenantInfo>> GetCurrentContentModelTenantInfo()
         {
             using(var scope = this._services.CreateScope())

@@ -63,7 +63,7 @@ export class TenantChooserService {
             clientConfig
         );
 
-        let baseUrl = clientConfig.ODataEndpoint + `/${clientConfig.TenantIdentifier}` + "/ODataHosting/";
+        let baseUrl = clientConfig.ODataEndpoint + "/ODataHosting/";
         contentTenantsSvc.api.serviceRootUrl = baseUrl as string;
 
         return clientConfig;
@@ -72,7 +72,8 @@ export class TenantChooserService {
 
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${clientConfig.AccessToken}`,
-          'Accept': 'odata.metadata=full'
+          'Accept': 'odata.metadata=full',
+          '__tenant__' : clientConfig.TenantIdentifier as string
         })
 
         console.log(
@@ -132,7 +133,7 @@ export class TenantChooserService {
     this.restClientConfiguration$.pipe(
       map((clientConfig) => {
         console.log(`pullContentEntitiesTenantsByOffset has client config`);
-        let baseUrl = clientConfig.ODataEndpoint + `/${clientConfig.TenantIdentifier}` + "/ODataContent/";
+        let baseUrl = clientConfig.ODataEndpoint + "/ODataContent/";
         contentTenantsSvc.api.serviceRootUrl = baseUrl as string;
 
         console.log(
@@ -147,7 +148,8 @@ export class TenantChooserService {
 
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${clientConfig.AccessToken}`,
-          'Accept': 'odata.metadata=full'
+          'Accept': 'odata.metadata=full',
+          '__tenant__' : clientConfig.TenantIdentifier as string
         })
 
         // build query
@@ -194,12 +196,13 @@ export class TenantChooserService {
 
     this.restClientConfiguration$.pipe(
       map((clientConfig) => {
-        let baseUrl = clientConfig.ODataEndpoint + `/${clientConfig.TenantIdentifier}` + "/ODataContent/";
+        let baseUrl = clientConfig.ODataEndpoint + "/ODataContent/";
         contentTenantsSvc.api.serviceRootUrl = baseUrl as string;
 
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${clientConfig.AccessToken}`,
-          'Accept': 'odata.metadata=full'
+          'Accept': 'odata.metadata=full',
+          '__tenant__' : clientConfig.TenantIdentifier as string
         })
 
         console.log(
@@ -242,12 +245,13 @@ export class TenantChooserService {
             clientConfig
         );
 
-        let baseUrl = clientConfig.ODataEndpoint + `/${clientConfig.TenantIdentifier}` + "/ODataHosting/";
+        let baseUrl = clientConfig.ODataEndpoint +  "/ODataHosting/";
         contentTenantsSvc.api.serviceRootUrl = baseUrl as string;
 
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${clientConfig.AccessToken}`,
-          'Accept': 'odata.metadata=full'
+          'Accept': 'odata.metadata=full',
+          '__tenant__' : clientConfig.TenantIdentifier as string
         })
 
         console.log(

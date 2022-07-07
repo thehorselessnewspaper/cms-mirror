@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Hosting
 {
-    // [Route("ODataHosting/[controller]")]
+    // [ODataAttributeRouting]
+    [Route("ODataHosting")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class TenantController : ODataController
@@ -29,16 +30,20 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         /// </summary>
         /// <returns></returns>
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-        // [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<HostingModel.Tenant>))]
+        // [HttpGet("Tenant")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
 
-        public async Task<ActionResult<IEnumerable<HostingModel.Tenant>>> Get()
+        // public async Task<ActionResult<IQueryable<TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant>>> GetHostingTenants(ODataQueryOptions<IQueryable<TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant>> options)
+
+        public async Task<ActionResult<IQueryable<HostingModel.Tenant>>> Get(ODataQueryOptions<TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant> options)
 
         {
-            return  Ok(await _TenantSvc.Read());
+            var result = await _TenantSvc.Read();
+            return  Ok(result);
         }
 
 
