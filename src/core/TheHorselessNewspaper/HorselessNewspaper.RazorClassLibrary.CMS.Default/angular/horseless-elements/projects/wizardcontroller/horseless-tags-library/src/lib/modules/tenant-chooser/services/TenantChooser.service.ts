@@ -94,7 +94,7 @@ export class TenantChooserService {
         return tenantEntities
           .fetch({ withCount: true, headers: headers })
           .pipe(
-            map((entities, annots) =>{
+            map((entities) =>{
 
               console.log(`pullHostingEntitiesTenantsByOffset is emitting entities`);
               this.hostingEntitiesTenantsSubject.next(entities.entities);
@@ -164,7 +164,7 @@ export class TenantChooserService {
         return tenantEntities
           .fetch({ withCount: true, headers: headers })
           .pipe(
-            map((entities, annots) => {
+            map((entities) => {
               console.log(`pullContentEntitiesTenantsByOffset is emitting entities`);
               this.contentEntitiesTenantsSubject.next(entities.entities);
               this.contentEntitiesTenantsCount = entities.annots.count as number;

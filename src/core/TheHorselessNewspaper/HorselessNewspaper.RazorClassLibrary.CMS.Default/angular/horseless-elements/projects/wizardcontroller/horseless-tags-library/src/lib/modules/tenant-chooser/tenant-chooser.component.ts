@@ -15,7 +15,7 @@ import {
 } from 'angular-auth-oidc-client';
 import { ConfigurationEndpointService } from '../../services/configuration-endpoint.service';
 import { Router, NavigationStart } from '@angular/router';
-import { map, Observable, take, tap, pipe, Subscription, BehaviorSubject, catchError, EMPTY } from 'rxjs';
+import { map, concatMap, Observable, take, tap, pipe, Subscription, BehaviorSubject, catchError, EMPTY } from 'rxjs';
 import { TenantChooserService } from './services/TenantChooser.service';
 import { HttpHeaders } from '@angular/common/http';
 import {
@@ -35,8 +35,12 @@ export class TenantChooserComponent implements OnInit {
   clientConfiguration$!: Observable<SecurityRestClientConfiguration>;
 
   currentTenantIdentifier: string = '';
-  tenants!: ContentEntitiesTenant[];
-  tenantsCount!: number;
+
+  contentTenants!: ContentEntitiesTenant[];
+  contentTenantsCount: number = 0;
+
+  hostingTenants!: HostingEntitiesTenant[];
+  hostingTenantsCount: number = 0;
 
   isAuthenticated$ =  new BehaviorSubject<Boolean>(false);
 
@@ -54,8 +58,9 @@ export class TenantChooserComponent implements OnInit {
   private oidcService: OidcSecurityService;
   public tenantChooserService!: TenantChooserService;
 
-  public hostingModelTenant$! : Observable<HostingEntitiesTenant[] | null>
-  public contentModelTenant$! : Observable<ContentEntitiesTenant[] | null>
+  public hostingModelTenant$! :  Observable<any>;
+  public contentModelTenant$! : Observable<any>;
+
 
   constructor(
     private router: Router,
@@ -69,11 +74,30 @@ export class TenantChooserComponent implements OnInit {
     this.tenantChooserService = tenantChooserSvc;
 
 
-    this.hostingModelTenant$
-    = this.tenantChooserService.hostingEntitiesTenantsSubject as Observable<HostingEntitiesTenant[] | null>;
+    this.hostingModelTenant$ = this.tenantChooserService.hostingEntitiesTenantsSubject
+    .pipe(
+      map( entities => {
+        console.log(`${entities?.length} entities retrieved`);
+        this.hostingTenants = entities as HostingEntitiesTenant[];
 
-    this.contentModelTenant$
-    = this.tenantChooserService.contentEntitiesTenantsSubject as Observable<ContentEntitiesTenant[] | null>;
+        if(this.hostingTenants != null)
+          this.hostingTenantsCount = this.hostingTenants.length;
+        return entities;
+      })
+    );
+
+
+    this.contentModelTenant$ = this.tenantChooserService.contentEntitiesTenantsSubject
+    .pipe(
+    map(entities => {
+    console.log(`${entities?.length} entities retrieved`);
+    this.contentTenants = entities as ContentEntitiesTenant[];
+
+    if(this.contentTenants != null)
+    this.contentTenantsCount = this.hostingTenants.length;
+    return entities;
+    })
+    );
 
   }
 

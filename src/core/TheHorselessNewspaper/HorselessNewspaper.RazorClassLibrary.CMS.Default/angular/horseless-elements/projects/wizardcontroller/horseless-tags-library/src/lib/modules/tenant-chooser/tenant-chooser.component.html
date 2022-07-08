@@ -1,80 +1,62 @@
-
 <div *ngIf="isAuthenticated$ | async; else unauthorized">
 
-  <p-tabView>
-    <p-tabPanel  title="Hosting">
-      <div>hosting entities</div>
-      <ng-template *ngif="hostingModelTenant$ | async as tenants; else noHostingTenants">
-        <p-dataView [paginator]="true" [rows]="hostingEntitiesPageSize"
-                    layout="list"
-                    [lazy]="true" (onLazyLoad)="pullHostingEntitiesTenantsByOffset($event)" [totalRecords]="tenantChooserService.hostingEntitiesTenantsCount"
-                    [value]="tenants">
+  <mat-tab-group>
+    <mat-tab label="Hosting">
+      <p-dataView
+        [paginator]="true"
+        [rows]="hostingEntitiesPageSize"
+        layout="list"
+        [lazy]="true"
+        (onLazyLoad)="pullHostingEntitiesTenantsByOffset($event)"
+        [totalRecords]="hostingTenantsCount"
+        [value]="hostingModelTenant$ | async"
+      >
+        <ng-template pTemplate="header">
+          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </ng-template>
 
-          <ng-template pTemplate="header">
-            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-          </ng-template>
+        <ng-template let-tenant pTemplate="listItem">
+          <div>
+            {{ tenant.DisplayName }}
+          </div>
+        </ng-template>
 
-          <ng-template let-tenant pTemplate="listItem">
-            <div>
-              {{tenant.DisplayName}}
-            </div>
-          </ng-template>
+        <ng-template pTemplate="footer">
+          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </ng-template>
+      </p-dataView>
+    </mat-tab>
 
-          <ng-template pTemplate="footer">
-            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-          </ng-template>
-        </p-dataView>
+    <mat-tab label="Content">
+      <p-dataView
+        [paginator]="true"
+        [rows]="contentEntitiesPageSize"
+        layout="list"
+        [lazy]="true"
+        (onLazyLoad)="pullContentEntitiesTenantsByOffset($event)"
+        [totalRecords]="contentTenantsCount"
+        [value]="contentModelTenant$ | async"
+      >
+        <ng-template pTemplate="header">
+          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </ng-template>
 
-      </ng-template>
+        <ng-template let-tenant pTemplate="listItem">
+          <div>
+            {{ tenant.DisplayName }}
+          </div>
+        </ng-template>
 
-      <ng-template #noHostingTenants>
-        <div>no hosting tenants</div>
-      </ng-template>
-    </p-tabPanel>
-
-    <p-tabPanel title="Content">
-      <div>content entities</div>
-      <ng-template *ngif="contentModelTenant$ | async as tenants; else noContentTenants">
-        <p-dataView [paginator]="true" [rows]="contentEntitiesPageSize"
-                    layout="list"
-                    [lazy]="true" (onLazyLoad)="pullContentEntitiesTenantsByOffset($event)" [totalRecords]="tenantChooserService.contentEntitiesTenantsCount"
-                    [value]="tenants">
-
-          <ng-template pTemplate="header">
-            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-          </ng-template>
-
-          <ng-template let-tenant pTemplate="listItem">
-            <div>
-              {{tenant.DisplayName}}
-            </div>
-          </ng-template>
-
-          <ng-template pTemplate="footer">
-            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-          </ng-template>
-        </p-dataView>
-
-      </ng-template>
-
-      <ng-template #noContentTenants>
-        <div>no content tenants</div>
-      </ng-template>
-    </p-tabPanel>
-  </p-tabView>
-
-
-
-  <!--<mat-selection-list #selectionList>
-    <mat-list-option *ngFor="let tenant of hostingModelTenants">
-      {{tenant.DisplayName}}
-    </mat-list-option>
-  </mat-selection-list>-->
-
+        <ng-template pTemplate="footer">
+          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </ng-template>
+      </p-dataView>
+    </mat-tab>
+  </mat-tab-group>
 </div>
+
 <ng-template #unauthorized>
   <div>
     <span>unauthorized</span>
   </div>
 </ng-template>
-

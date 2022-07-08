@@ -15,13 +15,14 @@ import {HorselessContentModule, HorselessContentConfig} from '@horselessnewspape
 import { HorselessHostingConfig, HorselessHostingModule } from '@horselessnewspaper/horseless-hosting-odataapi';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabViewModule } from 'primeng/tabview';
-
+import {MatTabsModule} from '@angular/material/tabs';
  @NgModule({
   declarations: [TenantChooserComponent],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
     MatListModule,
+    MatTabsModule,
     TabViewModule,
     MatSliderModule,
     DataViewModule,
