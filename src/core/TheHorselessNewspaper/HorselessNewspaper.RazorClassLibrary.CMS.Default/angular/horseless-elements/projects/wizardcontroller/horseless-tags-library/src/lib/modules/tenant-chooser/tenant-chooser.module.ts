@@ -16,11 +16,13 @@ import { HorselessHostingConfig, HorselessHostingModule } from '@horselessnewspa
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabViewModule } from 'primeng/tabview';
 import {MatTabsModule} from '@angular/material/tabs';
+import {BrowserModule} from '@angular/platform-browser';
 import {CardModule} from 'primeng/card';
  @NgModule({
   declarations: [TenantChooserComponent],
   imports: [
     CommonModule,
+    BrowserModule,
     BrowserAnimationsModule,
     MatListModule,
     MatTabsModule,

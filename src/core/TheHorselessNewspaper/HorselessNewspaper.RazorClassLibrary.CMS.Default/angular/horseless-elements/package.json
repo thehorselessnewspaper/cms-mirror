@@ -17,21 +17,17 @@
   },
   "private": true,
   "peerDependencies": {
-    "@horselessnewspaper/horseless-content-odataapi": ">=0.0.33",
-    "@horselessnewspaper/horseless-hosting-odataapi": ">=0.0.33",
-    "@vigouredelaruse/angular-odata": ">=0.101.20",
-    "ng-packagr": ">=14.0.0",
-    "rxjs": ">=7.5.4"
+
   },
   "dependencies": {
-    "@angular/animations": ">=14.0.2",
+    "@angular/animations": "^14.0.5",
     "@angular/cdk": ">=14.0.2",
     "@angular/common": ">=13.0.0",
     "@angular/compiler": ">=14.0.2",
     "@angular/core": ">=13.0.0",
     "@angular/elements": ">=14.0.2",
     "@angular/forms": ">=13.0.0",
-    "@angular/material": ">=12.0.0",
+    "@angular/material": ">=13.0.0",
     "@angular/platform-browser": ">=13.0.2",
     "@angular/platform-browser-dynamic": ">=13.0.2",
     "@angular/router": ">=13.0.0",
@@ -44,8 +40,7 @@
     "angular-auth-oidc-client": ">=14.0.0",
     "ngx-auto-unsubscribe": ">=3.0.1",
     "primeflex": ">=3.0.0",
-    "primeng": ">=11.0.0",
-    "primeicons": ">=4.0.0",
+    "primeicons": "^5.0.0",
     "rxjs": ">=7.5.4",
     "tslib": ">=2.4.0",
     "zone.js": "~0.11.4"

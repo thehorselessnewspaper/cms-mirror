@@ -1,7 +1,7 @@
 <div *ngIf="isAuthenticated$ | async; else unauthorized">
   <mat-tab-group>
     <mat-tab label="Hosting">
-      <p-dataView
+      <p-dataView #dv
         [paginator]="true"
         [rows]="hostingEntitiesPageSize"
         layout="list"
