@@ -35,11 +35,14 @@ import {
 } from '@vigouredelaruse/angular-odata';
 import { IPagedOffset } from './services/IPagedOffset';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+
 @Component({
   selector: 'lib-tenant-chooser',
   templateUrl: './tenant-chooser.component.html',
   styleUrls: ['./tenant-chooser.component.css'],
 })
+
+
 @AutoUnsubscribe()
 export class TenantChooserComponent implements OnInit {
   clientConfiguration$!: Observable<SecurityRestClientConfiguration>;
@@ -88,7 +91,7 @@ export class TenantChooserComponent implements OnInit {
           console.log(`${entities?.length} entities retrieved`);
           this.hostingTenants = entities as HostingEntitiesTenant[];
 
-          if (this.hostingTenants != null)
+          if (entities != null && entities != undefined)
             this.hostingTenantsCount = this.hostingTenants.length;
           return entities;
         })
@@ -100,7 +103,7 @@ export class TenantChooserComponent implements OnInit {
           console.log(`${entities?.length} entities retrieved`);
           this.contentTenants = entities as ContentEntitiesTenant[];
 
-          if (this.contentTenants != null)
+          if (this.contentTenants != null && this.contentTenants != undefined)
             this.contentTenantsCount = this.hostingTenants.length;
           return entities;
         })
@@ -122,6 +125,39 @@ export class TenantChooserComponent implements OnInit {
             );
             if (clientConfiguration.AccessToken != null) {
               this.isAuthenticated$.next(true);
+              return clientConfiguration;
+            }
+          }),
+          map((clientConfiguration) =>{
+            try {
+              this.tenantChooserService.pullContentEntitiesTenantsByOffset(
+                0,
+                this.contentEntitiesPageSize
+              );
+
+
+            } catch (exception) {
+              console.log(`tenantchoosercomponent threw exception ${exception}`);
+            }
+            return clientConfiguration;
+          }),
+          map((clientConfiguration) =>{
+            this.tenantChooserService.pullContentEntitiesTenantsCount();
+            return clientConfiguration;
+          }),
+          map((clientConfiguration) =>{
+            this.tenantChooserService.pullHostingEntitiesTenantsCount();
+            return clientConfiguration;
+          }),
+          map((clientConfiguration) =>{
+            try {
+              this.tenantChooserService.pullHostingEntitiesTenantsByOffset(
+                0,
+                this.hostingEntitiesPageSize
+              );
+
+            } catch (exception) {
+              console.log(`tenantchoosercomponent threw exception ${exception}`);
             }
           }),
           catchError((err) => {
@@ -145,25 +181,7 @@ export class TenantChooserComponent implements OnInit {
     //  .subscribe((x) => (this.isAuthenticated = x.isAuthenticated));
     // prime the async pump
 
-    try {
-      this.tenantChooserService.pullContentEntitiesTenantsByOffset(
-        0,
-        this.contentEntitiesPageSize
-      );
-      this.tenantChooserService.pullContentEntitiesTenantsCount();
-    } catch (exception) {
-      console.log(`tenantchoosercomponent threw exception ${exception}`);
-    }
 
-    try {
-      this.tenantChooserService.pullHostingEntitiesTenantsByOffset(
-        0,
-        this.hostingEntitiesPageSize
-      );
-      this.tenantChooserService.pullHostingEntitiesTenantsCount();
-    } catch (exception) {
-      console.log(`tenantchoosercomponent threw exception ${exception}`);
-    }
   }
 
   pullHostingEntitiesTenantsByOffset(event: IPagedOffset) {

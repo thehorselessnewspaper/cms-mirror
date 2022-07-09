@@ -16,18 +16,15 @@
     "lint": "ng lint"
   },
   "private": true,
-  "peerDependencies": {
-
-  },
   "dependencies": {
     "@angular/animations": "^14.0.5",
-    "@angular/cdk": ">=14.0.2",
+    "@angular/cdk": "^14.0.4",
     "@angular/common": ">=13.0.0",
     "@angular/compiler": ">=14.0.2",
     "@angular/core": ">=13.0.0",
     "@angular/elements": ">=14.0.2",
     "@angular/forms": ">=13.0.0",
-    "@angular/material": ">=13.0.0",
+    "@angular/material": "^14.0.4",
     "@angular/platform-browser": ">=13.0.2",
     "@angular/platform-browser-dynamic": ">=13.0.2",
     "@angular/router": ">=13.0.0",

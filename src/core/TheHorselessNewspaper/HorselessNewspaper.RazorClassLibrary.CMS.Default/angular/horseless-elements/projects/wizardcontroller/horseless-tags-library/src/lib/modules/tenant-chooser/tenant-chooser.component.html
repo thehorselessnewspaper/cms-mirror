@@ -1,7 +1,8 @@
 <div *ngIf="isAuthenticated$ | async; else unauthorized">
   <mat-tab-group>
     <mat-tab label="Hosting">
-      <p-dataView #dv
+      <p-dataView
+        #dv
         [paginator]="true"
         [rows]="hostingEntitiesPageSize"
         layout="list"
@@ -15,7 +16,7 @@
         </ng-template>
 
         <ng-template let-tenant pTemplate="listItem">
-          <div>
+          <div class="p-col-12">
             {{ tenant.DisplayName }}
           </div>
         </ng-template>
@@ -28,9 +29,11 @@
                   {{ tenant.tenantIdentifier }}
                 </div>
               </ng-template>
-              <div>
-                {{ tenant.DisplayName }}
-              </div>
+              <p-card>
+                <div class="p-col-12">
+                  {{ tenant.DisplayName }}
+                </div>
+              </p-card>
             </p-card>
           </div>
         </ng-template>
@@ -43,6 +46,7 @@
 
     <mat-tab label="Content">
       <p-dataView
+        #dv
         [paginator]="true"
         [rows]="contentEntitiesPageSize"
         layout="list"
@@ -56,7 +60,7 @@
         </ng-template>
 
         <ng-template let-tenant pTemplate="listItem">
-          <div>
+          <div class="p-col-12">
             {{ tenant.DisplayName }}
           </div>
         </ng-template>
@@ -69,7 +73,7 @@
                   {{ tenant.tenantIdentifier }}
                 </div>
               </ng-template>
-              <div>
+              <div class="p-col-12">
                 {{ tenant.DisplayName }}
               </div>
             </p-card>
