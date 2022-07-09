@@ -7,6 +7,8 @@
     <IsPackable>false</IsPackable>
 
     <UserSecretsId>56326183-441f-4934-af0a-a7fd609260ea</UserSecretsId>
+
+    <Configurations>Debug;Release;Swagger</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

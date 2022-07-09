@@ -7,6 +7,7 @@
     <Authors>nugetauthors@wizardcontroller.com</Authors>
     <Company>ataxlab</Company>
     <Description>extensions to enable mssql server</Description>
+    <Configurations>Debug;Release;Swagger</Configurations>
   </PropertyGroup>
 	<PropertyGroup>
 		<!-- Include symbol files (*.pdb) in the built .nupkg -->

@@ -7,6 +7,7 @@
 		<!-- support embedding dependencies for redistributable packages -->
 		<!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+		<Configurations>Debug;Release;Swagger</Configurations>
 	</PropertyGroup>
 	<!-- as per https://docs.microsoft.com/en-us/dotnet/core/compatibility/sdk/6.0/duplicate-files-in-output -->
 	<PropertyGroup>

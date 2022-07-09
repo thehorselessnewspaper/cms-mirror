@@ -16,6 +16,7 @@ import { HorselessHostingConfig, HorselessHostingModule } from '@horselessnewspa
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabViewModule } from 'primeng/tabview';
 import {MatTabsModule} from '@angular/material/tabs';
+import {CardModule} from 'primeng/card';
  @NgModule({
   declarations: [TenantChooserComponent],
   imports: [
@@ -29,6 +30,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     HorselessApiModule,
     HorselessContentModule,
     HorselessHostingModule,
+    CardModule,
     ODataModule.forRoot(HorselessContentConfig,HorselessHostingConfig)
   ],
   providers: [TenantChooserService,

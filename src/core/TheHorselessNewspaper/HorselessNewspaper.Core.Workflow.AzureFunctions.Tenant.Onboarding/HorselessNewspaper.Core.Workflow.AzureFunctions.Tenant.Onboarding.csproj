@@ -3,6 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <AzureFunctionsVersion>v4</AzureFunctionsVersion>
     <UserSecretsId>074525a9-d892-45d7-ac07-3ae68a1c89d4</UserSecretsId>
+    <Configurations>Debug;Release;Swagger</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AzureFunctions.Extensions.DependencyInjection" Version="1.1.3" />

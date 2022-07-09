@@ -195,7 +195,7 @@ export class TenantChooserService {
     );
 
     this.restClientConfiguration$.pipe(
-      map((clientConfig) => {
+      concatMap((clientConfig) => {
         let baseUrl = clientConfig.ODataEndpoint + "/ODataContent/";
         contentTenantsSvc.api.serviceRootUrl = baseUrl as string;
 
@@ -206,19 +206,17 @@ export class TenantChooserService {
         })
 
         console.log(
-          'odata service root url= ' + contentTenantsSvc.api.serviceRootUrl
+          'pullContentEntitiesTenantsCount odata service root url= ' + contentTenantsSvc.api.serviceRootUrl
         );
         let tenantEntities = contentTenantsSvc.entities();
 
-        tenantEntities.count().fetch({  headers: headers })
+        return tenantEntities.count().fetch({  headers: headers })
           .pipe(
             map(odataResponse => {
+              console.log("pullContentEntitiesTenantsCount has a count");
               this.contentEntitiesTenantsCount = odataResponse;
             })
-        )
-          .subscribe(piped => {
-            console.log(`tenantEntities.count().fetch subscriber executing`);
-          });
+        );
       })
     )
       .subscribe(piped => {
@@ -239,7 +237,7 @@ export class TenantChooserService {
     );
 
     this.restClientConfiguration$.pipe(
-      map((clientConfig) => {
+      concatMap((clientConfig) => {
         console.log(
           `pullHostingEntitiesTenantsCount finished getting client configuration with data ` +
             clientConfig
@@ -259,14 +257,11 @@ export class TenantChooserService {
         );
         let tenantEntities = contentTenantsSvc.entities();
 
-        tenantEntities.count().fetch({ headers: headers })
+        return tenantEntities.count().fetch({ headers: headers })
           .pipe(
             map(oDataResponse => {
               this.hostingEntitiesTenantsCount = oDataResponse;
-            })
-        ).subscribe(piped => {
-          console.log(`tenantEntities.count().fetch subscriber executing`);
-        });
+            }));
       })
     )
       .subscribe(piped => {

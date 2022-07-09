@@ -9,6 +9,7 @@
 		<Company>ataxlab</Company>
 		<Product>The Horseless Newspaper</Product>
 		<Description>core interfaces for the horseless newspaper</Description>
+		<Configurations>Debug;Release;Swagger</Configurations>
 		<!-- support embedding dependencies for redistributable packages -->
 		<!-- as per https://stackoverflow.com/questions/45464271/include-nuget-dependencies-in-my-build-output -->
 		<!--<CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>-->

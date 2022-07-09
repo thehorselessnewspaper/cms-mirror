@@ -1,5 +1,4 @@
 <div *ngIf="isAuthenticated$ | async; else unauthorized">
-
   <mat-tab-group>
     <mat-tab label="Hosting">
       <p-dataView
@@ -8,7 +7,7 @@
         layout="list"
         [lazy]="true"
         (onLazyLoad)="pullHostingEntitiesTenantsByOffset($event)"
-        [totalRecords]="hostingTenantsCount"
+        [totalRecords]="tenantChooserService.hostingEntitiesTenantsCount"
         [value]="hostingModelTenant$ | async"
       >
         <ng-template pTemplate="header">
@@ -18,6 +17,21 @@
         <ng-template let-tenant pTemplate="listItem">
           <div>
             {{ tenant.DisplayName }}
+          </div>
+        </ng-template>
+
+        <ng-template let-tenant pTemplate="gridItem">
+          <div>
+            <p-card>
+              <ng-template pTemplate="header">
+                <div>
+                  {{ tenant.tenantIdentifier }}
+                </div>
+              </ng-template>
+              <div>
+                {{ tenant.DisplayName }}
+              </div>
+            </p-card>
           </div>
         </ng-template>
 
@@ -34,7 +48,7 @@
         layout="list"
         [lazy]="true"
         (onLazyLoad)="pullContentEntitiesTenantsByOffset($event)"
-        [totalRecords]="contentTenantsCount"
+        [totalRecords]="tenantChooserService.contentEntitiesTenantsCount"
         [value]="contentModelTenant$ | async"
       >
         <ng-template pTemplate="header">
@@ -44,6 +58,21 @@
         <ng-template let-tenant pTemplate="listItem">
           <div>
             {{ tenant.DisplayName }}
+          </div>
+        </ng-template>
+
+        <ng-template let-tenant pTemplate="gridItem">
+          <div>
+            <p-card>
+              <ng-template pTemplate="header">
+                <div>
+                  {{ tenant.tenantIdentifier }}
+                </div>
+              </ng-template>
+              <div>
+                {{ tenant.DisplayName }}
+              </div>
+            </p-card>
           </div>
         </ng-template>
 
