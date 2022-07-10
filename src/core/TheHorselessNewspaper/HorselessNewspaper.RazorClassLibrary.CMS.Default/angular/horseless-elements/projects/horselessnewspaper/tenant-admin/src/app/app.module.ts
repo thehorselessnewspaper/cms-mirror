@@ -23,8 +23,8 @@ import {
 } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ApiConfig, ODataModule } from '@vigouredelaruse/angular-odata';
-import {HorselessContentModule, HorselessContentConfig} from '@horselessnewspaper/horseless-content-odataapi';
-import { HorselessHostingConfig, HorselessHostingModule } from '@horselessnewspaper/horseless-hosting-odataapi';
+import { HorselessContentConfig} from '@horselessnewspaper/horseless-content-odataapi';
+import { HorselessHostingConfig } from '@horselessnewspaper/horseless-hosting-odataapi';
 
 export function apiConfigFactory(): HorselessConfiguration {
   const params: HorselessConfigurationParameters = {

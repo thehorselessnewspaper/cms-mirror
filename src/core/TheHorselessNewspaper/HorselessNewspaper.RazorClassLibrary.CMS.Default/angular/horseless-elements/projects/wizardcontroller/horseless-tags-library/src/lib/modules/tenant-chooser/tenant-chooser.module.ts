@@ -11,8 +11,8 @@ import { AuthStateService } from 'angular-auth-oidc-client/lib/auth-state/auth-s
 import { HttpHeaders } from '@angular/common/http';
 import {DataViewModule} from 'primeng/dataview';
 import { ApiConfig, ODataModule } from '@vigouredelaruse/angular-odata';
-import {HorselessContentModule, HorselessContentConfig} from '@horselessnewspaper/horseless-content-odataapi';
-import { HorselessHostingConfig, HorselessHostingModule } from '@horselessnewspaper/horseless-hosting-odataapi';
+import {HorselessContentConfig} from '@horselessnewspaper/horseless-content-odataapi';
+import { HorselessHostingConfig } from '@horselessnewspaper/horseless-hosting-odataapi';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabViewModule } from 'primeng/tabview';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -34,8 +34,6 @@ import {PanelModule} from 'primeng/panel';
     MatSliderModule,
     DataViewModule,
     HorselessApiModule,
-    HorselessContentModule,
-    HorselessHostingModule,
     CardModule,
     ODataModule.forRoot(
       Object.assign(HorselessContentConfig, {

@@ -1,5 +1,5 @@
 <div class="container" *ngIf="isAuthenticated$ | async; else unauthorized">
-  <mat-tab-group>
+  <mat-tab-group dynamicHeight>
     <mat-tab label="Hosting">
       <p-dataView
         #dv
@@ -46,9 +46,9 @@
                 <tbody>
                     <tr *ngFor="let acl of tenant.AccessControlEntries">
                         <td>{{acl.DisplayName}}</td>
-                        <td>{{ acl.Scope.key }}</td>
-                        <td>{{ acl.Permission.key }}</td>
-                        <td>{{ acl.PermissionType.key }}</td>
+                        <td>{{ acl.Scope }}</td>
+                        <td>{{ acl.Permission }}</td>
+                        <td>{{ acl.PermissionType }}</td>
                         <td>{{ acl.IsActive }}</td>
                     </tr>
                 </tbody>
@@ -110,9 +110,9 @@
                 <tbody>
                     <tr *ngFor="let acl of tenant.AccessControlEntries">
                         <td>{{ acl.DisplayName}}</td>
-                        <td>{{ acl.Scope.key }}</td>
-                        <td>{{ acl.Permission.key }}</td>
-                        <td>{{ acl.PermissionType.key }}</td>
+                        <td>{{ acl.Scope }}</td>
+                        <td>{{ acl.Permission }}</td>
+                        <td>{{ acl.PermissionType }}</td>
                         <td>{{ acl.IsActive }}</td>
                     </tr>
                 </tbody>
