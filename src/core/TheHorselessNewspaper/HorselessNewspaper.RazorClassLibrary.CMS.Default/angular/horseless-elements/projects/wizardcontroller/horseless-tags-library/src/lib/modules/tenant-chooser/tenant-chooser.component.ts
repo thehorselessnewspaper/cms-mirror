@@ -35,7 +35,7 @@ import {
 } from '@vigouredelaruse/angular-odata';
 import { IPagedOffset } from '../../interfaces/IPagedOffset';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
-
+import { ContentAccessControlEntryEditorComponent } from '../../modules/accessControlEntry-editor/content/contentAccessControlEntry-editor/contentAccessControlEntry-editor.component'
 @Component({
   selector: 'lib-tenant-chooser',
   templateUrl: './tenant-chooser.component.html',

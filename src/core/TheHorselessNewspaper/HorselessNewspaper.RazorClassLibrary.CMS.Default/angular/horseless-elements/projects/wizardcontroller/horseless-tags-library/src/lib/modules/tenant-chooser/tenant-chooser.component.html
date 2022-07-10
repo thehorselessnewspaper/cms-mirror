@@ -34,25 +34,9 @@
                   {{ tenant.BaseUrl }}
                 </div>
               </div>
-              <table>
-                <thead>
-                    <th>Name</th>
-                    <th>Scope</th>
-                    <th>Permission</th>
-                    <th>PermissionType</th>
-                    <th>Scope</th>
-                    <th>Active</th>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let acl of tenant.AccessControlEntries">
-                        <td>{{acl.DisplayName}}</td>
-                        <td>{{ acl.Scope }}</td>
-                        <td>{{ acl.Permission }}</td>
-                        <td>{{ acl.PermissionType }}</td>
-                        <td>{{ acl.IsActive }}</td>
-                    </tr>
-                </tbody>
-            </table>
+              <div>access control list</div>
+              <lib-hostingAccessControlEntry-editor [accessControlEntries]="tenant.AccessControlEntries"></lib-hostingAccessControlEntry-editor>
+
           </p-card>
 
           </div>
@@ -98,25 +82,9 @@
                   {{ tenant.BaseUrl }}
                 </div>
               </div>
-              <table>
-                <thead>
-                    <th>Name</th>
-                    <th>Scope</th>
-                    <th>Permission</th>
-                    <th>PermissionType</th>
-                    <th>Scope</th>
-                    <th>Active</th>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let acl of tenant.AccessControlEntries">
-                        <td>{{ acl.DisplayName}}</td>
-                        <td>{{ acl.Scope }}</td>
-                        <td>{{ acl.Permission }}</td>
-                        <td>{{ acl.PermissionType }}</td>
-                        <td>{{ acl.IsActive }}</td>
-                    </tr>
-                </tbody>
-            </table>
+              <div>access control list</div>
+              <lib-contentAccessControlEntry-editor [accessControlEntries]="tenant.AccessControlEntries"></lib-contentAccessControlEntry-editor>
+
           </p-card>
 
           </div>

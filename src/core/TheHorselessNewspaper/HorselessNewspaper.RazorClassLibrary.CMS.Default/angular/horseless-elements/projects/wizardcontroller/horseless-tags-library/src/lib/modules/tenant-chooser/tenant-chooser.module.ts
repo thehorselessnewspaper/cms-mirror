@@ -20,6 +20,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {CardModule} from 'primeng/card';
 import {PanelModule} from 'primeng/panel';
+import { AccessControlEntryEditorModule } from '../accessControlEntry-editor/accessControlEntry-editor.module';
  @NgModule({
   declarations: [TenantChooserComponent],
   imports: [
@@ -35,6 +36,7 @@ import {PanelModule} from 'primeng/panel';
     DataViewModule,
     HorselessApiModule,
     CardModule,
+    AccessControlEntryEditorModule,
     ODataModule.forRoot(
       Object.assign(HorselessContentConfig, {
       options: {

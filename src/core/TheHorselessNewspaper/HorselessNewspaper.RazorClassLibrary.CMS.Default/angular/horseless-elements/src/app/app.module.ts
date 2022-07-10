@@ -13,7 +13,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { Injector } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
-import { TenantEditorComponent, TenantChooserComponent } from '@wizardcontroller/horseless-tags-library';
 import { TenantEditorModule } from '@wizardcontroller/horseless-tags-library';
 import { TenantChooserModule } from '@wizardcontroller/horseless-tags-library'
 
@@ -57,6 +56,8 @@ import {
   HostingEntitiesTenant,
   SecurityRestClientConfiguration,
 } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
+import { TenantChooserComponent } from 'projects/wizardcontroller/horseless-tags-library/src/lib/modules/tenant-chooser/tenant-chooser.component';
+import { TenantEditorComponent } from 'projects/wizardcontroller/horseless-tags-library/src/lib/modules/tenant-editor/tenant-editor.component';
 
 export function apiConfigFactory(): HorselessConfiguration {
   const params: HorselessConfigurationParameters = {

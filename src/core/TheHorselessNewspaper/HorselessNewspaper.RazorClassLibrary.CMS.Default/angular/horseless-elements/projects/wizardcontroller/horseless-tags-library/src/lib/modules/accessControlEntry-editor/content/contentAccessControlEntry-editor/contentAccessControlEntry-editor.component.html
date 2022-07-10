@@ -1,0 +1,21 @@
+
+
+<p-dataView #dv [value]="accessControlEntries"  [paginator]="true" [rows]="5" layout="list">
+  <ng-template pTemplate="header">
+    <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+  </ng-template>
+
+  <ng-template let-acl pTemplate="listItem">
+      <div class="p-col-12">
+        <div>{{acl.DisplayName}}</div>
+        <div>{{ acl.Scope }}</div>
+        <div>{{ acl.Permission }}</div>
+        <ng-template let-permissionType *ngIf="acl.PermissionType">
+          <div>{{ (ACEPermissionType[permissionType]) }}</div>
+        </ng-template>
+
+
+        <div>{{ acl.IsActive }}</div>
+      </div>
+  </ng-template>
+</p-dataView>
