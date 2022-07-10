@@ -33,7 +33,7 @@ import {
   ODataClient,
   ODataServiceFactory,
 } from '@vigouredelaruse/angular-odata';
-import { IPagedOffset } from './services/IPagedOffset';
+import { IPagedOffset } from '../../interfaces/IPagedOffset';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
 @Component({
@@ -41,7 +41,6 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
   templateUrl: './tenant-chooser.component.html',
   styleUrls: ['./tenant-chooser.component.css'],
 })
-
 
 @AutoUnsubscribe()
 export class TenantChooserComponent implements OnInit {
@@ -125,39 +124,41 @@ export class TenantChooserComponent implements OnInit {
             );
             if (clientConfiguration.AccessToken != null) {
               this.isAuthenticated$.next(true);
-              return clientConfiguration;
             }
+
+            return clientConfiguration;
           }),
-          map((clientConfiguration) =>{
+          map((clientConfiguration) => {
             try {
               this.tenantChooserService.pullContentEntitiesTenantsByOffset(
                 0,
                 this.contentEntitiesPageSize
               );
-
-
             } catch (exception) {
-              console.log(`tenantchoosercomponent threw exception ${exception}`);
+              console.log(
+                `tenantchoosercomponent threw exception ${exception}`
+              );
             }
             return clientConfiguration;
           }),
-          map((clientConfiguration) =>{
+          map((clientConfiguration) => {
             this.tenantChooserService.pullContentEntitiesTenantsCount();
             return clientConfiguration;
           }),
-          map((clientConfiguration) =>{
+          map((clientConfiguration) => {
             this.tenantChooserService.pullHostingEntitiesTenantsCount();
             return clientConfiguration;
           }),
-          map((clientConfiguration) =>{
+          map((clientConfiguration) => {
             try {
               this.tenantChooserService.pullHostingEntitiesTenantsByOffset(
                 0,
                 this.hostingEntitiesPageSize
               );
-
             } catch (exception) {
-              console.log(`tenantchoosercomponent threw exception ${exception}`);
+              console.log(
+                `tenantchoosercomponent threw exception ${exception}`
+              );
             }
           }),
           catchError((err) => {
@@ -180,8 +181,6 @@ export class TenantChooserComponent implements OnInit {
     //  .checkAuth(window.location.href)
     //  .subscribe((x) => (this.isAuthenticated = x.isAuthenticated));
     // prime the async pump
-
-
   }
 
   pullHostingEntitiesTenantsByOffset(event: IPagedOffset) {

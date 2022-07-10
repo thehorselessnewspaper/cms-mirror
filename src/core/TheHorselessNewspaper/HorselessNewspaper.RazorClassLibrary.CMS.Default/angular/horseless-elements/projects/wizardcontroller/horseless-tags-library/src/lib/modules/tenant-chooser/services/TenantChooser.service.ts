@@ -5,6 +5,10 @@ import {
   ClientConfigurationService,
   ContentEntitiesTenant,
   HostingEntitiesTenant,
+  ContentEntitiesAccessControlEntry,
+  ContentEntitiesACEPermission,
+  ContentEntitiesACEPermissionType,
+  ContentEntitiesACEPermissionScope,
   SecurityRestClientConfiguration,
   TenantRESTService,
 } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
@@ -85,6 +89,31 @@ export class TenantChooserService {
         // build query
         tenantEntities.query((q) => {
           q.orderBy((h) => h.e().ascending(h.s.CreatedAt));
+
+          q.expand({
+            AccessControlEntries : {
+              expand: {
+                AccessControlEntries: {
+                  select: ["AccessControlEntries"]
+                }
+              }
+            },
+            Owners : {
+              expand: {
+                Owners: {
+                  select: ["Owners"]
+                }
+              }
+            },
+            Accounts : {
+              expand: {
+                OwnedPrincipals: {
+                  select: ["OwnedPrincipals"]
+                }
+              }
+            }
+          });
+
           q.skip(offset);
           q.top(rowCount);
         });
@@ -155,6 +184,32 @@ export class TenantChooserService {
         // build query
         tenantEntities.query((q) => {
           q.orderBy((h) => h.e().ascending(h.s.CreatedAt));
+
+
+          q.expand({
+            AccessControlEntries : {
+              expand: {
+                AccessControlEntries: {
+                  select: ["AccessControlEntries"]
+                }
+              }
+            },
+            Owners : {
+              expand: {
+                Owners: {
+                  select: ["Owners"]
+                }
+              }
+            },
+            Accounts : {
+              expand: {
+                OwnedPrincipals: {
+                  select: ["OwnedPrincipals"]
+                }
+              }
+            }
+          });
+
           q.skip(offset);
           q.top(rowCount);
         });

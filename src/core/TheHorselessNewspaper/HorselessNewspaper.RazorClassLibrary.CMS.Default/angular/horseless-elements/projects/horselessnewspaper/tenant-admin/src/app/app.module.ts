@@ -22,7 +22,7 @@ import {
   MatExpansionPanel,
 } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ODataModule } from '@vigouredelaruse/angular-odata';
+import { ApiConfig, ODataModule } from '@vigouredelaruse/angular-odata';
 import {HorselessContentModule, HorselessContentConfig} from '@horselessnewspaper/horseless-content-odataapi';
 import { HorselessHostingConfig, HorselessHostingModule } from '@horselessnewspaper/horseless-hosting-odataapi';
 
@@ -53,7 +53,17 @@ export function apiConfigFactory(): HorselessConfiguration {
     OperatorSurfaceModule,
     TenantChooserModule,
     TenantEditorModule,
-    ODataModule.forRoot(HorselessContentConfig, HorselessHostingConfig)
+    ODataModule.forRoot(
+      Object.assign(HorselessContentConfig, {
+      options: {
+        stringAsEnum: true
+      }
+    } as ApiConfig),
+    Object.assign(HorselessHostingConfig, {
+      options: {
+        stringAsEnum: true
+      }
+    } as ApiConfig))
   ],
   providers: [],
   bootstrap: []

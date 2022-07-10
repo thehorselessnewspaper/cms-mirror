@@ -1,10 +1,10 @@
-<div *ngIf="isAuthenticated$ | async; else unauthorized">
+<div class="container" *ngIf="isAuthenticated$ | async; else unauthorized">
   <mat-tab-group>
     <mat-tab label="Hosting">
       <p-dataView
         #dv
         [paginator]="true"
-        [rows]="hostingEntitiesPageSize"
+        [rows]="5"
         layout="list"
         [lazy]="true"
         (onLazyLoad)="pullHostingEntitiesTenantsByOffset($event)"
@@ -16,25 +16,45 @@
         </ng-template>
 
         <ng-template let-tenant pTemplate="listItem">
-          <div class="p-col-12">
-            {{ tenant.DisplayName }}
-          </div>
+          {{ tenant.DisplayName }}
         </ng-template>
 
         <ng-template let-tenant pTemplate="gridItem">
-          <div>
+          <div class="container">
             <p-card>
-              <ng-template pTemplate="header">
+
+              <div class="row">
                 <div>
-                  {{ tenant.tenantIdentifier }}
-                </div>
-              </ng-template>
-              <p-card>
-                <div class="p-col-12">
                   {{ tenant.DisplayName }}
                 </div>
-              </p-card>
-            </p-card>
+                <div>
+                  {{ tenant.TenantIdentifier }}
+                </div>
+                <div>
+                  {{ tenant.BaseUrl }}
+                </div>
+              </div>
+              <table>
+                <thead>
+                    <th>Name</th>
+                    <th>Scope</th>
+                    <th>Permission</th>
+                    <th>PermissionType</th>
+                    <th>Scope</th>
+                    <th>Active</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let acl of tenant.AccessControlEntries">
+                        <td>{{acl.DisplayName}}</td>
+                        <td>{{ acl.Scope.key }}</td>
+                        <td>{{ acl.Permission.key }}</td>
+                        <td>{{ acl.PermissionType.key }}</td>
+                        <td>{{ acl.IsActive }}</td>
+                    </tr>
+                </tbody>
+            </table>
+          </p-card>
+
           </div>
         </ng-template>
 
@@ -48,7 +68,7 @@
       <p-dataView
         #dv
         [paginator]="true"
-        [rows]="contentEntitiesPageSize"
+        [rows]="5"
         layout="list"
         [lazy]="true"
         (onLazyLoad)="pullContentEntitiesTenantsByOffset($event)"
@@ -60,23 +80,45 @@
         </ng-template>
 
         <ng-template let-tenant pTemplate="listItem">
-          <div class="p-col-12">
-            {{ tenant.DisplayName }}
-          </div>
+          {{ tenant.DisplayName }}
         </ng-template>
 
         <ng-template let-tenant pTemplate="gridItem">
-          <div>
+          <div class="container">
             <p-card>
-              <ng-template pTemplate="header">
+
+              <div class="row">
                 <div>
-                  {{ tenant.tenantIdentifier }}
+                  {{ tenant.DisplayName }}
                 </div>
-              </ng-template>
-              <div class="p-col-12">
-                {{ tenant.DisplayName }}
+                <div>
+                  {{ tenant.TenantIdentifier }}
+                </div>
+                <div>
+                  {{ tenant.BaseUrl }}
+                </div>
               </div>
-            </p-card>
+              <table>
+                <thead>
+                    <th>Name</th>
+                    <th>Scope</th>
+                    <th>Permission</th>
+                    <th>PermissionType</th>
+                    <th>Scope</th>
+                    <th>Active</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let acl of tenant.AccessControlEntries">
+                        <td>{{ acl.DisplayName}}</td>
+                        <td>{{ acl.Scope.key }}</td>
+                        <td>{{ acl.Permission.key }}</td>
+                        <td>{{ acl.PermissionType.key }}</td>
+                        <td>{{ acl.IsActive }}</td>
+                    </tr>
+                </tbody>
+            </table>
+          </p-card>
+
           </div>
         </ng-template>
 

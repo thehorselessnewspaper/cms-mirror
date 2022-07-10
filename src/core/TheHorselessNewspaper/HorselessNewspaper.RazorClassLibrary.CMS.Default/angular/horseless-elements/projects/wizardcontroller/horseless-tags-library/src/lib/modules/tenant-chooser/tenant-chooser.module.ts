@@ -10,7 +10,7 @@ import { ConfigurationEndpointService } from '../../services/configuration-endpo
 import { AuthStateService } from 'angular-auth-oidc-client/lib/auth-state/auth-state.service';
 import { HttpHeaders } from '@angular/common/http';
 import {DataViewModule} from 'primeng/dataview';
-import { ODataModule } from '@vigouredelaruse/angular-odata';
+import { ApiConfig, ODataModule } from '@vigouredelaruse/angular-odata';
 import {HorselessContentModule, HorselessContentConfig} from '@horselessnewspaper/horseless-content-odataapi';
 import { HorselessHostingConfig, HorselessHostingModule } from '@horselessnewspaper/horseless-hosting-odataapi';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,11 +19,14 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {CardModule} from 'primeng/card';
+import {PanelModule} from 'primeng/panel';
  @NgModule({
   declarations: [TenantChooserComponent],
   imports: [
     CommonModule,
     BrowserModule,
+    FormsModule,
+    PanelModule,
     BrowserAnimationsModule,
     MatListModule,
     MatTabsModule,
@@ -34,15 +37,24 @@ import {CardModule} from 'primeng/card';
     HorselessContentModule,
     HorselessHostingModule,
     CardModule,
-    ODataModule.forRoot(HorselessContentConfig,HorselessHostingConfig)
+    ODataModule.forRoot(
+      Object.assign(HorselessContentConfig, {
+      options: {
+        stringAsEnum: true
+      }
+    } as ApiConfig),
+    Object.assign(HorselessHostingConfig, {
+      options: {
+        stringAsEnum: true
+      }
+    } as ApiConfig))
   ],
   providers: [TenantChooserService,
   {
     provide: HorselessConfiguration,
     useFactory: (authService: ConfigurationEndpointService) => new HorselessConfiguration(
        {
-
-         accessToken : authService.getAccessToken.bind(authService)
+        accessToken : authService.getAccessToken.bind(authService)
        }
       ),
       deps: [ConfigurationEndpointService],
