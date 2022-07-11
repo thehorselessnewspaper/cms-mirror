@@ -1,16 +1,29 @@
 
-<p-dataView #dv [value]="accessControlEntries"  [paginator]="true" [rows]="5" layout="grid">
-  <ng-template pTemplate="header">
-    <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-  </ng-template>
+<p-virtualScroller [value]="accessControlEntries" scrollHeight="150px" [itemSize]="40">
+  <ng-template pTemplate="item" let-acl>
+    <ng-template pTemplate="header">{{acl.DisplayName}}</ng-template>
+    <div class="container">
 
-  <ng-template let-acl pTemplate="gridItem">
-      <div class="p-col-3">
-        <div>{{acl.DisplayName}}</div>
-        <div>{{ acl.Scope }}</div>
-        <div>{{ acl.Permission | hostingEntitiesACEPermission }}</div>
-        <div>{{ acl.permissionType }}</div>
-        <div>{{ acl.IsActive }}</div>
+      <div>
+        <label>scope</label>
+        <div>{{ acl.Scope  | stringCoercion:ACEPermissionScope }}</div>
       </div>
+<div>
+  
+      <label>prmission</label>
+      <div>{{ acl.Permission | stringCoercion:ACEPermission}}</div>
+</div>
+
+<div>
+  <label>permission type</label>
+  <div>{{ acl.permissionType | stringCoercion:ACEPermissionType }}</div>
+</div>
+
+<div>
+  <label>is active</label>
+  <div>{{ acl.IsActive }}</div>
+</div>
+    </div>
   </ng-template>
-</p-dataView>
+</p-virtualScroller>
+

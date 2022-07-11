@@ -9,25 +9,26 @@ import { HostingAccessControlEntryEditorComponent } from './hosting/hostingAcces
 
 import { HostingEntitiesACEPermissionPipe } from './pipe/hostingEntitiesACEPermission.pipe';
 import  { ContentEntitiesACEPermissionPipe } from './pipe/contentEntitiesACEPermission.pipe';
-
+import {VirtualScrollerModule} from 'primeng/virtualscroller';
 import {InplaceModule} from 'primeng/inplace';
 import { MatSelectModule } from "@angular/material/select";
 import { FormsModule } from "@angular/forms";
-
+import { StringCoercionPipe } from './pipe/stringCoercion.pipe';
 @NgModule({
   imports: [
     CommonModule,
     BrowserAnimationsModule,
     DataViewModule,
-    MatSelectModule
+    MatSelectModule,
+    VirtualScrollerModule
   ],
   declarations: [
     ContentAccessControlEntryEditorComponent, HostingAccessControlEntryEditorComponent,
-    HostingEntitiesACEPermissionPipe, ContentEntitiesACEPermissionPipe
+    HostingEntitiesACEPermissionPipe, ContentEntitiesACEPermissionPipe, StringCoercionPipe
   ],
   exports: [
     ContentAccessControlEntryEditorComponent, HostingAccessControlEntryEditorComponent,
-    HostingEntitiesACEPermissionPipe, ContentEntitiesACEPermissionPipe
+    HostingEntitiesACEPermissionPipe, ContentEntitiesACEPermissionPipe, StringCoercionPipe
   ]
 })
 
