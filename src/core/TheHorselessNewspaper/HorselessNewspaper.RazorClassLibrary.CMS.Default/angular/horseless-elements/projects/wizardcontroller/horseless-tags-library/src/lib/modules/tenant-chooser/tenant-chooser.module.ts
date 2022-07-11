@@ -40,12 +40,12 @@ import { AccessControlEntryEditorModule } from '../accessControlEntry-editor/acc
     ODataModule.forRoot(
       Object.assign(HorselessContentConfig, {
       options: {
-        stringAsEnum: true
+        stringAsEnum: false
       }
     } as ApiConfig),
     Object.assign(HorselessHostingConfig, {
       options: {
-        stringAsEnum: true
+        stringAsEnum: false
       }
     } as ApiConfig))
   ],
