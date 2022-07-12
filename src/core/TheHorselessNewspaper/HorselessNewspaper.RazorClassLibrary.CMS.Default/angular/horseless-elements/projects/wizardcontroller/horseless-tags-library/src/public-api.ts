@@ -10,12 +10,11 @@ export * from './lib/horseless-tags-library.module';
 
 export * from './lib/modules/tenant-chooser/tenant-chooser.module';
 export * from './lib/modules/tenant-editor/tenant-editor.module';
-export * from './lib/modules/tenant-chooser/tenant-chooser.component';
-export * from './lib/modules/tenant-editor/tenant-editor.component';
+export * from './lib/modules/tenant-chooser/services/TenantChooser.service'
 
-// export { TenantChooserComponent } from './lib/modules/tenant-chooser/tenant-chooser.component';
-// export { TenantEditorComponent } from './lib/modules/tenant-editor/tenant-editor.component';
-export * from './lib/modules/tenant-editor/tenant-editor.module';
-export * from './lib/modules/tenant-chooser/tenant-chooser.module';
 
-// export { ConfigurationEndpointService } from './lib/services/configuration-endpoint.service'
+export * from './lib/modules/accessControlEntry-editor/accessControlEntry-editor.module';
+export * from './lib/modules/principal-editor/principal-editor.module'
+
+export * from './lib/modules/accessControlEntry-table/contentAccessControlEntry-table/contentAccessControlEntry-table.module';
+export * from './lib/modules/accessControlEntry-table/hostingAccessControlEntry-table/hostingAccessControlEntry-table.module';

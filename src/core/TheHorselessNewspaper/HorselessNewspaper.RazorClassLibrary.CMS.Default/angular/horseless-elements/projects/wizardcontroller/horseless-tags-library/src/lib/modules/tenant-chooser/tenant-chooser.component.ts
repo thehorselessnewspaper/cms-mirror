@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   ClientConfigurationService,
   ContentEntitiesTenant,
@@ -35,7 +35,10 @@ import {
 } from '@vigouredelaruse/angular-odata';
 import { IPagedOffset } from '../../interfaces/IPagedOffset';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
-
+import {MatAccordion} from '@angular/material/expansion';
+import { ContentAccessControlEntryEditorComponent } from '../../modules/accessControlEntry-editor/content/contentAccessControlEntry-editor/contentAccessControlEntry-editor.component'
+import {ContentAccessControlEntryTableComponent } from '../../modules/accessControlEntry-table/contentAccessControlEntry-table/contentAccessControlEntry-table.component';
+import { HostingAccessControlEntryTableComponent } from '../accessControlEntry-table/hostingAccessControlEntry-table/hostingAccessControlEntry-table.component';
 @Component({
   selector: 'lib-tenant-chooser',
   templateUrl: './tenant-chooser.component.html',
@@ -44,6 +47,9 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
 @AutoUnsubscribe()
 export class TenantChooserComponent implements OnInit {
+  @ViewChild(MatAccordion) accordion!: MatAccordion;
+  panelOpenState = false;
+  
   clientConfiguration$!: Observable<SecurityRestClientConfiguration>;
 
   currentTenantIdentifier: string = '';

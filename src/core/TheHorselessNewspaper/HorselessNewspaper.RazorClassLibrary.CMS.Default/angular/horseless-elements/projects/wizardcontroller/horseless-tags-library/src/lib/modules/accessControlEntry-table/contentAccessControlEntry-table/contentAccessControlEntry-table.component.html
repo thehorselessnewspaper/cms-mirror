@@ -1,0 +1,40 @@
+
+<mat-accordion class="headers-align" multi>
+  <mat-expansion-panel 
+  (opened)="panelOpenState = true"
+  (closed)="panelOpenState = false"
+>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        permissions
+      </mat-panel-title>
+      <mat-panel-description>
+        access control entry
+        <!-- <mat-icon>account_circle</mat-icon> -->
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p-table [value]="accessControlEntries" responsiveLayout="scroll" 
+    scrollHeight="200px" [scrollable]="true" [paginator]="true" [rows]="4" scrollHeight="flex"  
+    [(selection)]="selectedItem"
+    selectionMode="single"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>DisplayName</th>
+          <th>Scope</th>
+          <th>Permission</th>
+          <th>Permission Type</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-acl>
+        <tr [pSelectableRow]="acl">
+          <td>{{ acl.DisplayName }}</td>
+          <td>{{ acl.Scope | stringCoercion: ACEPermissionScope }}</td>
+          <td>{{ acl.Permission | stringCoercion : ACEPermission}}</td>
+          <td>{{ acl.PermissionType | stringCoercion : ACEPermissionType }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </mat-expansion-panel>
+
+</mat-accordion>

@@ -1,0 +1,29 @@
+<p-virtualScroller
+  [value]="accessControlEntries"
+  scrollHeight="150px"
+  [itemSize]="40"
+>
+  <ng-template pTemplate="item" let-acl>
+    <ng-template pTemplate="header">{{ acl.DisplayName }}</ng-template>
+    <div class="container">
+      <div>
+        <label>scope</label>
+        <div>{{ acl.Scope | stringCoercion: ACEPermissionScope }}</div>
+      </div>
+      <div>
+        <label>prmission</label>
+        <div>{{ acl.Permission | stringCoercion: ACEPermission }}</div>
+      </div>
+
+      <div>
+        <label>permission type</label>
+        <div>{{ acl.permissionType | stringCoercion: ACEPermissionType }}</div>
+      </div>
+
+      <div>
+        <label>is active</label>
+        <div>{{ acl.IsActive }}</div>
+      </div>
+    </div>
+  </ng-template>
+</p-virtualScroller>
