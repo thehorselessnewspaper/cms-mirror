@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {
   ContentEntitiesAccessControlEntry,
   ContentEntitiesACEPermission,
@@ -6,6 +6,7 @@ import {
   ContentEntitiesACEPermissionType,
 } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 import { StringCoercionPipe } from '../../../pipe/horseless-tags-pipes/stringCoercion.pipe';
+import { MatAccordion } from '@angular/material/expansion';
 @Component({
   selector: 'lib-contentAccessControlEntry-table',
   templateUrl: './contentAccessControlEntry-table.component.html',
@@ -14,7 +15,9 @@ import { StringCoercionPipe } from '../../../pipe/horseless-tags-pipes/stringCoe
 export class ContentAccessControlEntryTableComponent implements OnInit {
   @Input() accessControlEntries: ContentEntitiesAccessControlEntry[] =
     new Array<ContentEntitiesAccessControlEntry>();
+  @ViewChild(MatAccordion) accordion: MatAccordion | undefined;
   public selectedItem!: ContentEntitiesAccessControlEntry;
+  panelOpenState : boolean = false;
 
   public ACEPermissionType = ContentEntitiesACEPermissionType;
   public ACEPermission = ContentEntitiesACEPermission;

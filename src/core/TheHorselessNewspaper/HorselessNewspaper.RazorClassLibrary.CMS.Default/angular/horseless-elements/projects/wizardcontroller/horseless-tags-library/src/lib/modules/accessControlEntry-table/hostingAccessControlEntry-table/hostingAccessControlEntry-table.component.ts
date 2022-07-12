@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatAccordion } from '@angular/material/expansion';
 import {
   HostingEntitiesAccessControlEntry,
   HostingEntitiesACEPermission,
@@ -14,8 +15,10 @@ import { StringCoercionPipe } from '../../../pipe/horseless-tags-pipes/stringCoe
 export class HostingAccessControlEntryTableComponent implements OnInit {
   @Input() accessControlEntries: HostingEntitiesAccessControlEntry[] =
     new Array<HostingEntitiesAccessControlEntry>();
-
+  @ViewChild(MatAccordion) accordion!: MatAccordion;
   public selectedItem!: HostingEntitiesAccessControlEntry;
+  panelOpenState : boolean = false;
+
   public ACEPermissionType = HostingEntitiesACEPermission;
   public ACEPermission = HostingEntitiesACEPermission;
   public ACEPermissionScope = HostingEntitiesACEPermissionScope;

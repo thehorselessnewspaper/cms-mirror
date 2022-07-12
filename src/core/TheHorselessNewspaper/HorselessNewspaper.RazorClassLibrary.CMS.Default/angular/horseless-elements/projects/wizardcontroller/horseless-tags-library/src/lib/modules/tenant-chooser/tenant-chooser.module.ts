@@ -32,6 +32,7 @@ import { PanelModule } from 'primeng/panel';
 import { AccessControlEntryEditorModule } from '../accessControlEntry-editor/accessControlEntry-editor.module';
 import { HostingAccessControlEntryTableModule } from '../accessControlEntry-table/hostingAccessControlEntry-table/hostingAccessControlEntry-table.module';
 import { ContentAccessControlEntryTableModule } from '../accessControlEntry-table/contentAccessControlEntry-table/contentAccessControlEntry-table.module';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [TenantChooserComponent],
@@ -47,6 +48,7 @@ import { ContentAccessControlEntryTableModule } from '../accessControlEntry-tabl
     MatTabsModule,
     TabViewModule,
     MatExpansionModule,
+    MatIconModule,
     MatSliderModule,
     DataViewModule,
     HorselessApiModule,
