@@ -18,9 +18,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
         public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
 
-        public string ClaimType { get; set; } = String.Empty;
+        public string? ClaimType { get; set; } = String.Empty;
         public string ClaimValue { get; set; } = String.Empty;
-        public string ClaimValueType { get; set; } = String.Empty;
+        public string? ClaimValueType { get; set; } = String.Empty;
 
         public string ClaimIssuer { get; set; } = String.Empty;
 
@@ -54,6 +54,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     }
 
     [MultiTenant]
+    [Microsoft.EntityFrameworkCore.Index(nameof(PreferredUserName), IsUnique = true)]
     public partial class Principal : IQueryableModelEntity, IContentRowLevelSecured
     {
         public bool IsAnonymous { get; set; } = true;

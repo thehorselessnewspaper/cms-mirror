@@ -1,4 +1,5 @@
 ﻿using Finbuckle.MultiTenant;
+using Microsoft.AspNetCore.OData.Query;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -253,6 +254,23 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             }
 
             return await Task.FromResult<IQueryable<T>>(result);
+        }
+
+        public async Task<IQueryable<T>> Read(ODataQueryOptions<T> queryOptions)
+        {
+            try
+            {
+                var resolvedTenant = await _context.ResolveTenant();
+                var dbSet = ((DbContext)_context).Set<T>();
+                var queryResult = queryOptions.ApplyTo(dbSet) as IQueryable<T>;
+                return queryResult;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"exception executing read {e.Message}");
+                throw new Exception($"exception executing read {e.Message}", e);
+            }
+
         }
 
         public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize=10, int pageNumber=1, int pageCount=1)

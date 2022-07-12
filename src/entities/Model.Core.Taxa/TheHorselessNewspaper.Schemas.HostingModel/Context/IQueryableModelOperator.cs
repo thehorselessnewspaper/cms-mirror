@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.OData.Query;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -91,7 +92,7 @@ namespace TheHorselessNewspaper.HostingModel.Context
         Task ResetDb();
 
         Task EnsureDbExists();
-
+        Task<IQueryable<T>> Read(ODataQueryOptions<T> queryOptions);
     }
 
 

@@ -66,6 +66,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     /// watch for interactions with
     /// multitenant subsystem
     /// </summary>
+    [Microsoft.EntityFrameworkCore.Index(nameof(TenantIdentifier), IsUnique = true)]
     public partial class Tenant : IHostingRowLevelSecured
     {
         public bool IsPublished { get; set; }

@@ -13,7 +13,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
     }
 
-    // [Table("Principals")]
+    [Microsoft.EntityFrameworkCore.Index(nameof(PreferredUserName), IsUnique = true)]
     public partial class Principal : IQueryableModelEntity, IHostingRowLevelSecured
     {
         public string UPN { get; set; } = string.Empty;

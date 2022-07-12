@@ -18,6 +18,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     }
 
     [MultiTenant]
+
     public class TenantIdentifierStrategyContainer
     {
         [Key]
@@ -25,6 +26,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public TenantIdentifierStrategyName TenantIdentifierStrategyName { get; set; }
 
         public string DisplayName { get; set; } = string.Empty;
+
 
         public string ObjectId { get; set; }
         public bool? IsSoftDeleted { get; set; }
@@ -87,6 +89,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     /// or maybe not - we will se
     /// </summary>
     [MultiTenant]
+    [Microsoft.EntityFrameworkCore.Index(nameof(TenantIdentifier), IsUnique = true)]
     public partial class Tenant : IContentRowLevelSecured, IMetaDataModelEntity
     {
         public bool IsPublished { get; set; }

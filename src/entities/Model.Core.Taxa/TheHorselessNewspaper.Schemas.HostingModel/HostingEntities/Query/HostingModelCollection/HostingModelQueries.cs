@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.OData.Query;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
@@ -179,6 +180,28 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelC
                 _logger.LogError($"exception executing read {e.Message}");
                 throw new Exception($"exception executing read {e.Message}", e);
             }
+        }
+
+        /// <summary>
+        /// support odata query specification execution
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public async Task<IQueryable<T>> Read(ODataQueryOptions<T> queryOptions)
+        {
+            try
+            {
+                var resolvedTenant = await _context.ResolveTenant();
+                var dbSet = ((DbContext)_context).Set<T>();
+                var queryResult = queryOptions.ApplyTo(dbSet) as IQueryable<T>;
+                return queryResult;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"exception executing read {e.Message}");
+                throw new Exception($"exception executing read {e.Message}", e);
+            }
+
         }
 
         /// <summary>
