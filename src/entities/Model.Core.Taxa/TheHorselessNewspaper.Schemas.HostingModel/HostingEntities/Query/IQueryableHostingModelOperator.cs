@@ -13,6 +13,6 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query
     {
         public Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1);
 
-        public Task<IQueryable<T>> Read(ODataQueryOptions<T> queryOptions);
+        public Task<IQueryable<T>> Read<O>(O queryOptions) where O : ODataQueryOptions<T>;
     }
 }

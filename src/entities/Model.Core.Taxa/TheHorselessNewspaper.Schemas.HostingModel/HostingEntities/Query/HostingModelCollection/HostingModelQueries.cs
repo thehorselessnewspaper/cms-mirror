@@ -187,7 +187,7 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelC
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public async Task<IQueryable<T>> Read(ODataQueryOptions<T> queryOptions)
+        public async Task<IQueryable<T>> Read<O>(O queryOptions) where O : ODataQueryOptions<T>
         {
             try
             {
