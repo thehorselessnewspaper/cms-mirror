@@ -6,10 +6,10 @@ import { Injector } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { MatListModule } from '@angular/material/list';
 import { ConfigurationEndpointService } from './services/configuration-endpoint.service';
-import {ACEPermissionPipe} from './pipe/ACEPermission.pipe';
+
 @NgModule({
   declarations: [
-    HorselessTagsLibraryComponent, ACEPermissionPipe
+    HorselessTagsLibraryComponent
   ],
   imports: [
   ],
@@ -17,7 +17,7 @@ import {ACEPermissionPipe} from './pipe/ACEPermission.pipe';
     ConfigurationEndpointService
   ],
   exports: [
-    HorselessTagsLibraryComponent, ACEPermissionPipe
+    HorselessTagsLibraryComponent
   ]
 })
 

@@ -19,6 +19,8 @@ export class HostingAccessControlEntryEditorComponent
   @Input() accessControlEntries: HostingEntitiesAccessControlEntry[] =
     new Array<HostingEntitiesAccessControlEntry>();
 
+  public selectedItem! : HostingEntitiesAccessControlEntry;
+
   public ACEPermissionType = HostingEntitiesACEPermission;
   public ACEPermission = HostingEntitiesACEPermission;
   public ACEPermissionScope = HostingEntitiesACEPermissionScope;

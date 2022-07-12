@@ -1,99 +1,130 @@
 <div class="container" *ngIf="isAuthenticated$ | async; else unauthorized">
+  <!-- <div class="action-buttons">
+    <button mat-button (click)="accordion.openAll()">Expand All</button>
+    <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+  </div> -->
+
   <mat-tab-group dynamicHeight>
     <mat-tab label="Hosting">
-      <p-dataView
-        #dv
-        [paginator]="true"
-        [rows]="5"
-        layout="list"
-        [lazy]="true"
-        (onLazyLoad)="pullHostingEntitiesTenantsByOffset($event)"
-        [totalRecords]="tenantChooserService.hostingEntitiesTenantsCount"
-        [value]="hostingModelTenant$ | async"
-      >
-        <ng-template pTemplate="header">
-          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-        </ng-template>
+      <mat-accordion>
+        <mat-expansion-panel
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>hosting tenant admin </mat-panel-title>
+            <mat-panel-description>
+              tenant administration portal
+            </mat-panel-description>
+          </mat-expansion-panel-header>
 
-        <ng-template let-tenant pTemplate="listItem">
-          {{ tenant.DisplayName }}
-        </ng-template>
+          <p-dataView
+            #dv
+            [paginator]="true"
+            [rows]="5"
+            layout="grid"
+            [lazy]="true"
+            (onLazyLoad)="pullHostingEntitiesTenantsByOffset($event)"
+            [totalRecords]="tenantChooserService.hostingEntitiesTenantsCount"
+            [value]="hostingModelTenant$ | async"
+          >
+            <ng-template pTemplate="header">
+              <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </ng-template>
 
-        <ng-template let-tenant pTemplate="gridItem">
-          <div class="container">
-            <p-card>
+            <ng-template let-tenant pTemplate="listItem">
+              {{ tenant.DisplayName }}
+            </ng-template>
 
-              <div class="row">
-                <div class="col">
-                  {{ tenant.DisplayName }}
-                </div>
-                <div class="col">
-                  {{ tenant.TenantIdentifier }}
-                </div>
-                <div class="col">
-                  {{ tenant.BaseUrl }}
-                </div>
+            <ng-template let-tenant pTemplate="gridItem">
+              <div class="container">
+                <p-card>
+                  <div class="row">
+                    <div class="col">
+                      {{ tenant.DisplayName }}
+                    </div>
+                    <div class="col">
+                      {{ tenant.TenantIdentifier }}
+                    </div>
+                    <div class="col">
+                      {{ tenant.BaseUrl }}
+                    </div>
+                  </div>
+                  <div>access control list</div>
+                  <lib-hostingAccessControlEntry-table
+                    [accessControlEntries]="tenant.AccessControlEntries"
+                  ></lib-hostingAccessControlEntry-table>
+                </p-card>
               </div>
-              <div>access control list</div>
-              <lib-hostingAccessControlEntry-editor [accessControlEntries]="tenant.AccessControlEntries"></lib-hostingAccessControlEntry-editor>
+            </ng-template>
 
-          </p-card>
-
-          </div>
-        </ng-template>
-
-        <ng-template pTemplate="footer">
-          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-        </ng-template>
-      </p-dataView>
+            <ng-template pTemplate="footer">
+              <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </ng-template>
+          </p-dataView>
+        </mat-expansion-panel>
+      </mat-accordion>
     </mat-tab>
 
     <mat-tab label="Content">
-      <p-dataView
-        #dv
-        [paginator]="true"
-        [rows]="5"
-        layout="list"
-        [lazy]="true"
-        (onLazyLoad)="pullContentEntitiesTenantsByOffset($event)"
-        [totalRecords]="tenantChooserService.contentEntitiesTenantsCount"
-        [value]="contentModelTenant$ | async"
-      >
-        <ng-template pTemplate="header">
-          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-        </ng-template>
+      <mat-accordion>
+        <mat-expansion-panel
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title> content tenant admin </mat-panel-title>
+            <mat-panel-description>
+              tenant administration portal
+            </mat-panel-description>
+          </mat-expansion-panel-header>
 
-        <ng-template let-tenant pTemplate="listItem">
-          {{ tenant.DisplayName }}
-        </ng-template>
+          <p-dataView
+            #dv
+            [paginator]="true"
+            [rows]="5"
+            layout="grid"
+            [lazy]="true"
+            (onLazyLoad)="pullContentEntitiesTenantsByOffset($event)"
+            [totalRecords]="tenantChooserService.contentEntitiesTenantsCount"
+            [value]="contentModelTenant$ | async"
+          >
+            <ng-template pTemplate="header">
+              <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </ng-template>
 
-        <ng-template let-tenant pTemplate="gridItem">
-          <div class="container">
-            <p-card>
+            <ng-template let-tenant pTemplate="listItem">
+              {{ tenant.DisplayName }}
+            </ng-template>
 
-              <div class="row">
-                <div>
-                  {{ tenant.DisplayName }}
-                </div>
-                <div>
-                  {{ tenant.TenantIdentifier }}
-                </div>
-                <div>
-                  {{ tenant.BaseUrl }}
-                </div>
+            <ng-template let-tenant pTemplate="gridItem">
+              <div class="container">
+                <p-card>
+                  <div class="row">
+                    <div>
+                      {{ tenant.DisplayName }}
+                    </div>
+                    <div>
+                      {{ tenant.TenantIdentifier }}
+                    </div>
+                    <div>
+                      {{ tenant.BaseUrl }}
+                    </div>
+                  </div>
+                  <div>access control list</div>
+                  <lib-contentAccessControlEntry-table
+                    [accessControlEntries]="tenant.AccessControlEntries"
+                  ></lib-contentAccessControlEntry-table>
+                </p-card>
               </div>
-              <div>access control list</div>
-              <lib-contentAccessControlEntry-editor [accessControlEntries]="tenant.AccessControlEntries"></lib-contentAccessControlEntry-editor>
+            </ng-template>
 
-          </p-card>
-
-          </div>
-        </ng-template>
-
-        <ng-template pTemplate="footer">
-          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-        </ng-template>
-      </p-dataView>
+            <ng-template pTemplate="footer">
+              <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </ng-template>
+          </p-dataView>
+        </mat-expansion-panel>
+      </mat-accordion>
     </mat-tab>
   </mat-tab-group>
 </div>
