@@ -406,13 +406,13 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelC
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public async Task<IQueryable<T>> Read<O, T>(O queryOptions) where O : ODataQueryOptions<T> where T : class, IHostingRowLevelSecured
+        public async Task<IQueryable<X>> Read<O, X>(O queryOptions) where O : ODataQueryOptions<X> where X : class, IHostingRowLevelSecured
         {
             try
             {
                 var resolvedTenant = await _context.ResolveTenant();
-                var dbSet = ((DbContext)_context).Set<T>();
-                var queryResult = queryOptions.ApplyTo(dbSet) as IQueryable<T>;
+                var dbSet = ((DbContext)_context).Set<X>();
+                var queryResult = queryOptions.ApplyTo(dbSet) as IQueryable<X>;
                 return queryResult;
             }
             catch (Exception e)

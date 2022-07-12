@@ -256,13 +256,13 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             return await Task.FromResult<IQueryable<T>>(result);
         }
 
-        public async Task<IQueryable<T>> Read<O>(O queryOptions) where O : ODataQueryOptions<T>
+        public async Task<IQueryable<X>> Read<O, X>(O queryOptions) where O : ODataQueryOptions<X> where X : class, IContentRowLevelSecured
         {
             try
             {
                 var resolvedTenant = await _context.ResolveTenant();
-                var dbSet = ((DbContext)_context).Set<T>();
-                var queryResult = queryOptions.ApplyTo(dbSet) as IQueryable<T>;
+                var dbSet = ((DbContext)_context).Set<X>();
+                var queryResult = queryOptions.ApplyTo(dbSet) as IQueryable<X>;
                 return queryResult;
             }
             catch (Exception e)
