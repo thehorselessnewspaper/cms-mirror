@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Attributes;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 
@@ -30,10 +31,10 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
 
-        public async Task<ActionResult<IQueryable<HostingModel.Principal>>> Get()
-
-        {
-            return Ok(await _principalSvc.Read());
+        public async Task<ActionResult<IQueryable<HostingModel.Principal>>> Get(ODataQueryOptions<HostingModel.Principal> options)
+{
+            var result = await _principalSvc.Read<ODataQueryOptions<HostingModel.Principal>, HostingModel.Principal>(options);
+            return Ok(result);
         }
 
     }

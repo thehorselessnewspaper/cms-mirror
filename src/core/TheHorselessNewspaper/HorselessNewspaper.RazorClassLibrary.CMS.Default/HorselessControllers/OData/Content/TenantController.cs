@@ -63,7 +63,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
                 var isFailedAuthorization = false;
 
-                var potentialResult = await _contentCollectionService.Query();
+                var potentialResult = await _contentCollectionService.Query(options);
                 if (potentialResult != null)
                 {
                     var items = potentialResult.ToList();

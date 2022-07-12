@@ -42,7 +42,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         public async Task<ActionResult<IQueryable<HostingModel.Tenant>>> Get(ODataQueryOptions<TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant> options)
 
         {
-            var result = await _TenantSvc.Read();
+            var result = await _TenantSvc.Read<ODataQueryOptions<HostingModel.Tenant>, HostingModel.Tenant>  (options);
             return  Ok(result);
         }
 

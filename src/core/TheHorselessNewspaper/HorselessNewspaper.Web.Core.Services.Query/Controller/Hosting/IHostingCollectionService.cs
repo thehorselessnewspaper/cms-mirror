@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.HostingEntities.Query;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace HorselessNewspaper.Web.Core.Services.Query.Controller.Hosting
 {
@@ -28,5 +29,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.Controller.Hosting
         public Task<IQueryable<Entity>> Query(int pageSize = 10, int pageNumber = 1, int pageCount = 1);
         Task<IQueryable<Entity>> Query(Expression<Func<Entity, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1);
         public Task<Entity> Update([FromBody] Entity contentCollection, List<string> targetProperties = null);
+        public Task<IQueryable<Entity>> Read(ODataQueryOptions<Entity> queryOptions);
+
     }
 }

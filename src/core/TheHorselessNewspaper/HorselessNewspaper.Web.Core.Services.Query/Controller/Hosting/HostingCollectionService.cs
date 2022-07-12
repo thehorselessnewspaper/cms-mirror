@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.HostingEntities.Query;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace HorselessNewspaper.Web.Core.Services.Query.Controller.Hosting
 {
@@ -118,6 +119,12 @@ namespace HorselessNewspaper.Web.Core.Services.Query.Controller.Hosting
             return result;
         }
 
+        public async Task<IQueryable<Entity>> Read(ODataQueryOptions<Entity> queryOptions)
+        {
+            var result = await _hostingModelService.Read< ODataQueryOptions<Entity>, Entity>(queryOptions);
+
+            return result;
+        }
     }
 
 }

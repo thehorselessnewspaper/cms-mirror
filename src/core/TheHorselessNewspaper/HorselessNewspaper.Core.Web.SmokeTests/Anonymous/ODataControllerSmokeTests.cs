@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using Xunit;
 using TheHorselessNewspaper.HostingModel.DTO;
 using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
@@ -47,6 +48,101 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 response.Content.Headers.ContentType.ToString());
         }
 
+        [Fact]
+        public async Task CanQueryHostingTenants()
+        {
+            HttpResponseMessage response = null;
+            Exception ex = null;
+            string responseContent = String.Empty;
+
+            // arrange
+            // insert a content collection
+
+            try
+            {
+                using (var scope = application.Services.CreateScope())
+                {
+                    ITenantInfo tenant = scope.ServiceProvider.GetRequiredService<ITenantInfo>();
+                    Assert.NotNull(tenant);
+
+                    var insertQueryOperator = _baseTest.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<HostingEntities.Tenant>>(scope);
+                    var insertResult = await insertQueryOperator.Create(
+                        new HostingEntities.Tenant()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = "Test Content Collection",
+                            IsPublished = true,
+                            TenantIdentifier = Guid.NewGuid().ToString(),
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString(),
+                            TenantIdentifierStrategy = new HostingEntities.TenantIdentifierStrategy()
+                            {
+                                Id = Guid.NewGuid(),
+                                CreatedAt = DateTime.UtcNow,
+                                DisplayName = "Test Content Collection",
+                                IsSoftDeleted = false,
+                                ObjectId = Guid.NewGuid().ToString()
+                            }
+                        }
+                        );
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                ex = e;
+            }
+
+            Assert.Null(ex);
+
+            try
+            {
+                using (var scope = application.Services.CreateScope())
+                {
+                    var principalResolver = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", await principalResolver.GetClientCredentialsGrantToken());
+
+                    client.DefaultRequestHeaders.Add(ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, "lache");
+                    client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json;odata.metadata=none");
+                    response = await client.GetAsync("ODataHosting/Tenant?$top=10&");
+                    Assert.NotNull(response);
+
+                    response.EnsureSuccessStatusCode(); // Status Code 200-299
+                                                        //Assert.Equal(oDataResponseHeader,
+                                                        //    response.Content.Headers.ContentType.ToString());
+
+                    responseContent = await response.Content.ReadAsStringAsync();
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                ex = e;
+            }
+
+            Assert.Null(ex);
+
+
+            Assert.NotNull(responseContent);
+            try
+            {
+
+                var contentCollection = JsonConvert.DeserializeObject<ODataResponse<List<HostingEntities.Tenant>>>(responseContent);
+                Assert.True(contentCollection != null && contentCollection.Value != null);
+                Assert.True(contentCollection.Value.Count > 0);
+            }
+            catch (Exception e)
+            {
+
+                ex = e;
+            }
+
+            Assert.Null(ex);
+        }
+
         /// <summary>
         /// caveat - this test doesn't check for 
         /// tenant scoping
@@ -77,6 +173,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                             CreatedAt = DateTime.UtcNow,
                             DisplayName = "Test Content Collection",
                             IsPublished = true,
+                            TenantIdentifier = Guid.NewGuid().ToString(),
                             IsSoftDeleted = false,
                             ObjectId = Guid.NewGuid().ToString(),
                             TenantIdentifierStrategy = new ContentEntities.TenantIdentifierStrategy()
