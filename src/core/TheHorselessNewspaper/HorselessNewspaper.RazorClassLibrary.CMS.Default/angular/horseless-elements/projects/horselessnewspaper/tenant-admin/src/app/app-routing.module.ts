@@ -5,11 +5,11 @@ import { OperatorSurfaceComponent } from './operatorSurface/operatorSurface.comp
 import { PrincipalChooserComponent } from './../../../../wizardcontroller/horseless-tags-library/src/lib/modules/principal-chooser/principal-chooser.component';
 import { ContentCollectionChooserComponent } from './../../../../wizardcontroller/horseless-tags-library/src/lib/modules/contentCollection-chooser/contentCollection-chooser.component';
 import { NugetChooserComponent } from './../../../../wizardcontroller/horseless-tags-library/src/lib/modules/nuget-chooser/nuget-chooser.component';
-
+import {TenantChooserComponent } from '../../../../wizardcontroller/horseless-tags-library/src/lib/modules/tenant-chooser/tenant-chooser.component';
 const routes: Routes = [
   {
     path: 'tenants',
-    component: OperatorSurfaceComponent
+    component: TenantChooserComponent
   },
   {
     path: 'principals',

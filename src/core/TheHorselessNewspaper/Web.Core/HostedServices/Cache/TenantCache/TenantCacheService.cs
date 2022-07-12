@@ -1092,12 +1092,16 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             using (var scope = this._services.CreateScope())
             {
                 List<HostingModel.Tenant> hostingModelTenants = await GetCurrentHostingModelTenants();
-                foreach (var hostModelTenant in hostingModelTenants)
+                foreach (var hostModelTenant in hostingModelTenants
+                    .Where(t => t.TenantIdentifier != null))
                 {
                     if (!this.CurrentHostingModelTenants.Where(w => w.TenantIdentifier.Equals(hostModelTenant.TenantIdentifier)).Any())
                     {
                         // here because we need to cache this tenant in the singleton
-                        this.CurrentHostingModelTenants.Add(hostModelTenant);
+                        if(hostModelTenant.TenantIdentifier != null)
+                        {
+                            this.CurrentHostingModelTenants.Add(hostModelTenant);
+                        }
                     }
                 }
 
@@ -1137,7 +1141,11 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                     // collect the hosting model tenants
                     var hostingModelTenantQuery = this.GetQueryForHostingEntity<HostingModel.Tenant>(scope);
-                    var hostingModelTenantQueryResult = await hostingModelTenantQuery.ReadAsEnumerable(w => w.IsSoftDeleted == false, new List<string>() { nameof(HostingModel.Tenant.TenantInfos), nameof(HostingModel.Tenant.Owners) });
+                    var hostingModelTenantQueryResult = 
+                        await hostingModelTenantQuery.ReadAsEnumerable(w => w.IsSoftDeleted == false
+                                        && w.TenantIdentifier != null,
+                                        new List<string>() 
+                                        { nameof(HostingModel.Tenant.TenantInfos), nameof(HostingModel.Tenant.Owners) });
                     var hostingModelTenants = hostingModelTenantQueryResult == null ? new List<HostingModel.Tenant>() : hostingModelTenantQueryResult.ToList();
 
                     _logger.LogTrace($"read {hostingModelTenantQueryResult.Where(w => w.IsPublished == true).ToList().Count()} published hosting model tenant records");
