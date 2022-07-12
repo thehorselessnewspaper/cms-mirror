@@ -182,27 +182,6 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelC
             }
         }
 
-        /// <summary>
-        /// support odata query specification execution
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
-        public async Task<IQueryable<T>> Read(ODataQueryOptions<T> queryOptions)
-        {
-            try
-            {
-                var resolvedTenant = await _context.ResolveTenant();
-                var dbSet = ((DbContext)_context).Set<T>();
-                var queryResult = queryOptions.ApplyTo(dbSet) as IQueryable<T>;
-                return queryResult;
-            }
-            catch (Exception e)
-            {
-                _logger.LogError($"exception executing read {e.Message}");
-                throw new Exception($"exception executing read {e.Message}", e);
-            }
-
-        }
 
         /// <summary>
         /// 
@@ -418,6 +397,28 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelC
             catch (Exception ex)
             {
                 _logger.LogDebug($"content collections reset exception: {ex.Message}");
+            }
+        }
+
+
+        /// <summary>
+        /// support odata query specification execution
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public async Task<IQueryable<T>> Read<O>(O queryOptions) where O : ODataQueryOptions<T>
+        {
+            try
+            {
+                var resolvedTenant = await _context.ResolveTenant();
+                var dbSet = ((DbContext)_context).Set<T>();
+                var queryResult = queryOptions.ApplyTo(dbSet) as IQueryable<T>;
+                return queryResult;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"exception executing read {e.Message}");
+                throw new Exception($"exception executing read {e.Message}", e);
             }
         }
     }
