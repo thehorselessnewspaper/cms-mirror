@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.OData.Query;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -10,6 +11,8 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query
 {
     public interface IQueryableHostingModelOperator<T> : IQueryableModelOperator<T> where T : class, IHostingRowLevelSecured
     {
-        Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1);
+        public Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1);
+
+        public Task<IQueryable<T>> Read(ODataQueryOptions<T> queryOptions);
     }
 }

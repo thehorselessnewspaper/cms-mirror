@@ -119,8 +119,10 @@ namespace HorselessNewspaper.Web.Core.Services.Query.Controller.Content
             return result;
         }
 
-        public Task<IQueryable<Entity>> Query(ODataQueryOptions<T> query)
+        public async Task<IQueryable<Entity>> Query(ODataQueryOptions<T> query)
         {
+            // var result = await _contentModelService.Read(query);
+            // return result;
             throw new NotImplementedException();
         }
     }

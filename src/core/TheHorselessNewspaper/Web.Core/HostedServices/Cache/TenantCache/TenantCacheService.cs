@@ -292,7 +292,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     var tenants = await GetCurrentContentModelTenants();
                     foreach (var contentModelTenant in tenants)
                     {
-                        if (!this.CurrentContentModelTenants.Where(w => w.TenantIdentifier.Equals(contentModelTenant.TenantIdentifier)).Any())
+                        if (!this.CurrentContentModelTenants.Where(w => w.TenantIdentifier != null && w.TenantIdentifier.Equals(contentModelTenant.TenantIdentifier)).Any())
                         {
                             // here because we need to cache this tenant in the singleton
                             _logger.LogWarning($"{this.GetType().FullName} has cached a content model tenant locally");
@@ -383,11 +383,12 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         // evaluate wether final tenant deployment
                         // workflow step completed
 
-                        var mirrorTenantExists = contentModelTenants.Where(r => r.TenantIdentifier == publishedTenant.TenantIdentifier).Any();
+                        var mirrorTenantExists = contentModelTenants.Where(r => r.TenantIdentifier != null && 
+                                                                            r.TenantIdentifier == publishedTenant.TenantIdentifier).Any();
                         // var mirrorTenantHasOwners = contentModelTenants.Where(r => r.TenantIdentifier == publishedTenant.TenantIdentifier && r.Owners.Count() > 0).Any();
-                        var mirrorTenantHasAccessControlEntries = contentModelTenants.Where(r => r.TenantIdentifier == publishedTenant.TenantIdentifier && r.AccessControlEntries.Count() > 0).Any();
+                        var mirrorTenantHasAccessControlEntries = contentModelTenants.Where(r => r.TenantIdentifier != null && r.TenantIdentifier == publishedTenant.TenantIdentifier && r.AccessControlEntries.Count() > 0).Any();
 
-                        var isTenantDeploymentWorkflowComplete = contentModelTenants.Where(r => r.TenantIdentifier == publishedTenant.TenantIdentifier && r.IsPublished == true).Any();
+                        var isTenantDeploymentWorkflowComplete = contentModelTenants.Where(r => r.TenantIdentifier != null && r.TenantIdentifier == publishedTenant.TenantIdentifier && r.IsPublished == true).Any();
 
                         if (mirrorTenantExists == false)
                         {
@@ -528,7 +529,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 _logger.LogInformation($"loaded tenant cache service");
 
                 var currentTenants = await GetCurrentContentModelTenants();
-                var liveTenant = currentTenants.Where(w => w.TenantIdentifier.Equals(publishedTenant.TenantIdentifier)).FirstOrDefault();
+                var liveTenant = currentTenants.Where(w => w.TenantIdentifier != null  
+                                                                        && publishedTenant.TenantIdentifier != null &&
+                                                                        w.TenantIdentifier.Equals(publishedTenant.TenantIdentifier)).FirstOrDefault();
                 await tenantCache.Set(publishedTenant.Id, liveTenant);
             }
             catch (Exception e)
@@ -767,18 +770,29 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 _logger.LogTrace($"ensuring content model tenant post approvat database state for tenant={originEntity.TenantIdentifier}");
                 try
                 {
+                    // ensure tenantidentifier
 
                     IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
                     var httpClient = clientFactory.CreateClient();
 
                     string identifier = originEntity.TenantIdentifier;
+                    mergeEntity.TenantIdentifier = identifier;
+
                     var baseUri = originEntity.BaseUrl.ToString();
                     baseUri = baseUri.TrimEnd('/');
 
 
                     if (await IsMustCreateContentModelTenant(originEntity))
                     {
-                        await EnsureContentModelTenantCreated(mergeEntity, identifier, baseUri);
+                        try
+                        {
+                            await EnsureContentModelTenantCreated(mergeEntity, identifier, baseUri);
+                        }
+                        catch(Exception ex)
+                        {
+                            _logger.LogError($"problem ensuring content model tenant db updates {ex.Message}");
+                            throw new Exception($"problem ensuring content model tenant db updates {ex.Message}", ex);
+                        }
                     }
                     else if (await IsMustApplyAccessControlEntries(originEntity))
                     {
@@ -871,6 +885,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 var httpClient = clientFactory.CreateClient();
                 try
                 {
+                    // ensure populated tenantidentifier
+                    mergeEntity.TenantIdentifier = identifier;
                     var route = $"{baseUri}/{identifier}/api/HorselessContentModel/Tenant/Create";
                     var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
                     {

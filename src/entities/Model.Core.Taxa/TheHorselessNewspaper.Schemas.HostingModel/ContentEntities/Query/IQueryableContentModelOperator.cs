@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.OData.Query;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -30,9 +31,9 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query
         /// <returns></returns>
         public Task<IQueryable<U>> ReadFilterByMetaData<U>(Expression<Func<U, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1) where U : class, IContentRowLevelSecured, IQueryableMetaDataModelEntity;
 
-        Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1);
- 
-    
+        public Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1);
+        public Task<IQueryable<T>> Read(ODataQueryOptions<T> queryOptions);
+
     }
 
 
