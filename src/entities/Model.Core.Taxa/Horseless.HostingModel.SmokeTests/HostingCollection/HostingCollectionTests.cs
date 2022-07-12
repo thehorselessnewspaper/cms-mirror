@@ -163,6 +163,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                     new Principal()
                     {
                         Id= newPrincipalGuid,
+                PreferredUserName = "User" + Guid.NewGuid().ToString(),
                         ObjectId = Guid.NewGuid().ToString(),
                         DisplayName = "principal@tenant.com",
                         CreatedAt = DateTime.UtcNow,
@@ -176,6 +177,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                     new Principal()
                     {
                         Id= Guid.NewGuid(),
+                PreferredUserName = "User" + Guid.NewGuid().ToString(),
                         ObjectId = Guid.NewGuid().ToString(),
                         DisplayName = "principal@tenant.com",
                         CreatedAt = DateTime.UtcNow,

@@ -162,8 +162,9 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 CreatedAt = tenant.CreatedAt,
                 DisplayName = tenant.DisplayName,
                 ObjectId = Guid.NewGuid().ToString(),
-                Timestamp = tenant.Timestamp
-            });
+                Timestamp = tenant.Timestamp,
+                PreferredUserName = "User" + Guid.NewGuid().ToString()
+            }); ;
 
             // create a different principal
             var relatedPrincipal = new Principal()
@@ -172,7 +173,8 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 CreatedAt = tenant.CreatedAt,
                 DisplayName = tenant.DisplayName,
                 ObjectId = Guid.NewGuid().ToString(),
-                Timestamp = tenant.Timestamp
+                Timestamp = tenant.Timestamp,
+                PreferredUserName = "User" + Guid.NewGuid().ToString()
             };
 
             var principalQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Principal>>();
@@ -255,6 +257,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 DisplayName = tenant.DisplayName,
                 ObjectId = Guid.NewGuid().ToString(),
                 Timestamp = tenant.Timestamp,
+                PreferredUserName = "User" + Guid.NewGuid().ToString(),
                 HorselessSessions = new List<HorselessSession>()
                 {
                     new HorselessSession()
@@ -305,6 +308,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 DisplayName = tenant.DisplayName,
                 ObjectId = Guid.NewGuid().ToString(),
                 Timestamp = tenant.Timestamp,
+                PreferredUserName = "User" + Guid.NewGuid().ToString(),
                 HorselessSessions = new List<HorselessSession>()
                 {
                     new HorselessSession()
