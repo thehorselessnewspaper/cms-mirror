@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
@@ -45,9 +46,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.HorselessContent>))]
-        public async Task<ActionResult<IEnumerable<ContentModel.HorselessContent>>> Get()
+        public async Task<ActionResult<IEnumerable<ContentModel.HorselessContent>>> Get(ODataQueryOptions<ContentModel.HorselessContent> options)
         {
-            var result = await _contentCollectionService.Query();
+            var result = await _contentCollectionService.Query(options);
             return Ok(result);
         }
     }

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
@@ -37,9 +38,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
 
-        public async Task<ActionResult<IEnumerable<ContentModel.JSONAsset>>> Get()
+        public async Task<ActionResult<IEnumerable<ContentModel.JSONAsset>>> Get(ODataQueryOptions<ContentModel.JSONAsset> options)
         {
-            var result = await _contentCollectionService.Query();
+            var result = await _contentCollectionService.Query(options);
             return Ok(result);
         }
 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
@@ -38,11 +39,11 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-        public async Task<ActionResult<IEnumerable<ContentModel.HorselessView>>> Get()
+        public async Task<ActionResult<IEnumerable<ContentModel.HorselessView>>> Get(ODataQueryOptions<ContentModel.HorselessView> options)
         {
             var isFailedAuthorization = false;
 
-            var potentialResult = await _horselessViewService.Query();
+            var potentialResult = await _horselessViewService.Query(options);
             if (potentialResult != null)
             {
                 var items = potentialResult.ToList();
