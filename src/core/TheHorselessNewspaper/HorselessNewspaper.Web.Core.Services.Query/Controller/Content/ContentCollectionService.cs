@@ -1,5 +1,6 @@
 ﻿using Finbuckle.MultiTenant;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using Microsoft.Extensions.Logging;
 using System.Linq.Expressions;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query;
@@ -118,5 +119,9 @@ namespace HorselessNewspaper.Web.Core.Services.Query.Controller.Content
             return result;
         }
 
+        public Task<IQueryable<Entity>> Query(ODataQueryOptions<T> query)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
