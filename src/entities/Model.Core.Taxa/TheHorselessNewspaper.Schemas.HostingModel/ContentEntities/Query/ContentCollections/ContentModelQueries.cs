@@ -256,7 +256,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             return await Task.FromResult<IQueryable<T>>(result);
         }
 
-        public async Task<IQueryable<T>> Read(ODataQueryOptions<T> queryOptions)
+        public async Task<IQueryable<T>> Read<O>(O queryOptions) where O : ODataQueryOptions<T>
         {
             try
             {
