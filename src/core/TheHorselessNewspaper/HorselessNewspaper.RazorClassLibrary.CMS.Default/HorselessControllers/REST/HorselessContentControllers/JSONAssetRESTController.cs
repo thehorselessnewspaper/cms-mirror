@@ -50,7 +50,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
         }
 
-        [HttpGet("GetByObjectId", Name = "ContentEntities[controller]_[action]")]
+        [HttpGet("GetByObjectId/{objectId}", Name = "ContentEntities[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(JSONAsset))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<JSONAsset>> GetByObjectId([FromRoute] string objectId)

@@ -49,7 +49,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             }
         }
 
-        [HttpGet("GetByObjectId", Name = "ContentEntities[controller]_[action]")]
+        [HttpGet("GetByObjectId/{objectId}", Name = "ContentEntities[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NavigationMenu))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<NavigationMenu>> GetByObjectId([FromRoute] string objectId)

@@ -55,7 +55,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet("GetByObjectId", Name = "ContentEntities[controller]_[action]")]
+        [HttpGet("GetByObjectId/{objectId}", Name = "ContentEntities[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ContentCollection))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<HorselessSession>> GetByObjectId([FromRoute] string objectId)
