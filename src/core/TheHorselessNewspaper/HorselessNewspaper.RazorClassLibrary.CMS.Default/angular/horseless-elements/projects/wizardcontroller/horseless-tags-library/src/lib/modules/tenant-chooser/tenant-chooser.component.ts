@@ -35,9 +35,9 @@ import {
 } from '@vigouredelaruse/angular-odata';
 import { IPagedOffset } from '../../interfaces/IPagedOffset';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
-import {MatAccordion} from '@angular/material/expansion';
-import { ContentAccessControlEntryEditorComponent } from '../../modules/accessControlEntry-editor/content/contentAccessControlEntry-editor/contentAccessControlEntry-editor.component'
-import {ContentAccessControlEntryTableComponent } from '../../modules/accessControlEntry-table/contentAccessControlEntry-table/contentAccessControlEntry-table.component';
+import { MatAccordion } from '@angular/material/expansion';
+import { ContentAccessControlEntryEditorComponent } from '../../modules/accessControlEntry-editor/content/contentAccessControlEntry-editor/contentAccessControlEntry-editor.component';
+import { ContentAccessControlEntryTableComponent } from '../../modules/accessControlEntry-table/contentAccessControlEntry-table/contentAccessControlEntry-table.component';
 import { HostingAccessControlEntryTableComponent } from '../accessControlEntry-table/hostingAccessControlEntry-table/hostingAccessControlEntry-table.component';
 import { ContentPrincipalTableComponent } from '../../modules/principal-table/content/contentPrincipal-table/contentPrincipal-table.component';
 @Component({
@@ -45,7 +45,6 @@ import { ContentPrincipalTableComponent } from '../../modules/principal-table/co
   templateUrl: './tenant-chooser.component.html',
   styleUrls: ['./tenant-chooser.component.css'],
 })
-
 @AutoUnsubscribe()
 export class TenantChooserComponent implements OnInit {
   @ViewChild(MatAccordion) accordion!: MatAccordion;
@@ -95,10 +94,16 @@ export class TenantChooserComponent implements OnInit {
       this.tenantChooserService.hostingEntitiesTenantsSubject.pipe(
         map((entities) => {
           console.log(`${entities?.length} entities retrieved`);
-          this.hostingTenants = entities as HostingEntitiesTenant[];
 
-          if (entities != null && entities != undefined)
+          if (
+            entities != null &&
+            entities != undefined &&
+            entities.entries != null &&
+            entities.entries != undefined
+          ) {
+            this.hostingTenants = entities as HostingEntitiesTenant[];
             this.hostingTenantsCount = this.hostingTenants.length;
+          }
           return entities;
         })
       );
@@ -106,11 +111,12 @@ export class TenantChooserComponent implements OnInit {
     this.contentModelTenant$ =
       this.tenantChooserService.contentEntitiesTenantsSubject.pipe(
         map((entities) => {
-          console.log(`${entities?.length} entities retrieved`);
-          this.contentTenants = entities as ContentEntitiesTenant[];
+          if (this.contentTenants != null && this.contentTenants != undefined) {
+            console.log(`${entities?.length} entities retrieved`);
+            this.contentTenants = entities as ContentEntitiesTenant[];
 
-          if (this.contentTenants != null && this.contentTenants != undefined)
             this.contentTenantsCount = this.hostingTenants.length;
+          }
           return entities;
         })
       );
@@ -126,11 +132,14 @@ export class TenantChooserComponent implements OnInit {
       this.tenantChooserService.restClientConfiguration$
         .pipe(
           map((clientConfiguration) => {
-            console.log(
-              'theant chooser component is handling client configuration result'
-            );
-            if (clientConfiguration.AccessToken != null &&
-              clientConfiguration.AccessToken != undefined) {
+
+            if (
+              clientConfiguration.AccessToken != null &&
+              clientConfiguration.AccessToken != undefined
+            ) {
+              console.log(
+                'theant chooser component is handling client configuration result'
+              );
               this.isAuthenticated$.next(true);
             }
 

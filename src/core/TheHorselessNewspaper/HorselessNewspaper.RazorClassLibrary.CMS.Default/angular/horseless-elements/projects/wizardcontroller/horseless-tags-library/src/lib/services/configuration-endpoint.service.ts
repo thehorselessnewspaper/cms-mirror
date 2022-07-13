@@ -24,8 +24,10 @@ import { IClaimsIdentityAuthService as IClaimsIdentiyAuthService } from './IClai
 })
 export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
 
+  public accessToken : string = '';
+
   clientConfiguration$: BehaviorSubject<SecurityRestClientConfiguration> =
-    new BehaviorSubject<SecurityRestClientConfiguration>(1);
+    new BehaviorSubject<SecurityRestClientConfiguration>({});
 
   constructor(private httpClient: HttpClient) {
     this.probeClientConfiguration();
@@ -37,18 +39,7 @@ export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
    * auth to the browser cookies
    */
   getAccessToken(): string {
-    let ret = "";
-
-    console.log("getAccessToken is running");
-
-    this.clientConfiguration$.pipe(
-      map(config => config.AccessToken),
-      tap(token => {
-        ret = token as string;
-      })
-      ).subscribe();
-
-    return ret;
+    return this.accessToken;
   }
 
 
@@ -73,6 +64,8 @@ export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
         map(clientConfig => {
           console.log(`probeClientConfiguration handling client configuration result for ${url}`)
           this.clientConfiguration$.next(clientConfig);
+          this.accessToken = clientConfig.AccessToken as string;
+
         }),
         catchError(err => {
           console.log(`probeClientConfiguration handling error ${err}`);

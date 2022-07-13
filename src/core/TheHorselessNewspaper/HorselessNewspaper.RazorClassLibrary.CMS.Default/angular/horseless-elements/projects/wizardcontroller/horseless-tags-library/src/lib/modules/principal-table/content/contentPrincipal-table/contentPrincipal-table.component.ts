@@ -17,7 +17,7 @@ export class ContentPrincipalTableComponent implements OnInit {
   public selectedItem!: ContentEntitiesPrincipal;
   panelOpenState : boolean = false;
 
-  constructor(private principalService: PrincipalQueryService) {
+  constructor(principalService: PrincipalQueryService) {
 
   }
 

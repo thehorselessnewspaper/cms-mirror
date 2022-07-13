@@ -30,7 +30,7 @@ export class TenantChooserService {
   contentEntitiesTenantsSubject!: BehaviorSubject<ContentEntitiesTenant[] | null> ;
   contentEntitiesTenantsCount!: number;
 
-  restClientConfiguration$!: ReplaySubject<SecurityRestClientConfiguration>;
+  restClientConfiguration$!: BehaviorSubject<SecurityRestClientConfiguration>;
 
   constructor(
     clientConfigSvc: ConfigurationEndpointService,
@@ -132,18 +132,18 @@ export class TenantChooserService {
                   this.hostingEntitiesTenantsSubject.next(entities.entities);
                   // this.contentEntitiesTenantsCount = entities.annots.count as number;
                 }
-
+                return entities;
             }),
             catchError(err => {
               console.log(`pullHostingEntitiesTenantsByOffset handling error ${err}`);
-              return EMPTY;
+              return new Array<HostingEntitiesTenant>();
             })
           );
 
       }),
       catchError(err => {
         console.log(`pullHostingEntitiesTenantsByOffset handling error ${err}`);
-        return EMPTY;
+        return new Array<HostingEntitiesTenant>();
       })
     )
       .subscribe(piped => {
@@ -235,7 +235,7 @@ export class TenantChooserService {
             }),
             catchError(err => {
               console.log(`pullContentEntitiesTenantsByOffset handling error ${err}`);
-              return EMPTY;
+              return new Array<ContentEntitiesTenant>();
             })
           );
 
@@ -279,6 +279,7 @@ export class TenantChooserService {
             map(odataResponse => {
               console.log("pullContentEntitiesTenantsCount has a count");
               this.contentEntitiesTenantsCount = odataResponse;
+              return odataResponse;
             })
         );
       })

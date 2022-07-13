@@ -30,22 +30,21 @@ import { ConfigurationEndpointService } from '../../../../../services/configurat
 })
 export class PrincipalQueryService {
   clientConfigService!: ConfigurationEndpointService;
-  restClientConfiguration$!: ReplaySubject<SecurityRestClientConfiguration>;
+  restClientConfiguration$!: BehaviorSubject<SecurityRestClientConfiguration>;
   contentEntitiesPrincipal$!: BehaviorSubject<ContentEntitiesTenant[] | null>;
 
   constructor(
-    clientConfigSvc: ConfigurationEndpointService,
+    clientConfigService: ConfigurationEndpointService,
     factory: ODataServiceFactory,
     tenantService: TenantRESTService
   ) {
     console.log('PrincipalQueryService starting');
-    this.clientConfigService = clientConfigSvc;
+
     this.restClientConfiguration$ =
       this.clientConfigService.clientConfiguration$;
 
-      this.contentEntitiesPrincipal$ = new BehaviorSubject<ContentEntitiesTenant[] | null>(new Array<ContentEntitiesTenant>());
-
+    this.contentEntitiesPrincipal$ = new BehaviorSubject<
+      ContentEntitiesTenant[] | null
+    >(new Array<ContentEntitiesTenant>());
   }
-
-
 }
