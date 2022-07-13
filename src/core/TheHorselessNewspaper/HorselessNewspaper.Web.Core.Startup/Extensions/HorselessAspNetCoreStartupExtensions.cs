@@ -8,7 +8,6 @@ using HorselessNewspaper.Web.Core.Middleware.HorselessRouter;
 using HorselessNewspaper.Web.Core.Middleware.HorselessRouter.Strategy;
 using HorselessNewspaper.Web.Core.ScopedServices.AuthenticationSchemes;
 using HorselessNewspaper.Web.Core.ScopedServices.RestClients;
-using HorselessNewspaper.Web.Core.ScopedServices.RestClients.Also;
 using HorselessNewspaper.Web.Core.ScopedServices.RoutingStrategy;
 using HorselessNewspaper.Web.Core.Services.Model.Extensions.Hosting;
 using HorselessNewspaper.Web.Core.Services.Query.Authorization.Contexts;
@@ -102,15 +101,6 @@ namespace HorselessNewspaper.Web.Core.Extensions
                     );
                 });
 
-            serviceBuilder.Services.AddTransient<IHorselessRestApiClientAlso, HorselessRestApiClientAlso>(
-
-                s =>
-                {
-                    var baseUrl = configuration["RestApiBaseUrl"];
-                    return new HorselessRestApiClientAlso(
-                        baseUrl: baseUrl, s.GetRequiredService<HttpClient>()
-                    );
-                });
 
             // as per https://docs.microsoft.com/en-us/archive/msdn-magazine/2016/september/asp-net-core-feature-slices-for-asp-net-core-mvc
             // as per https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/areas?view=aspnetcore-6.0

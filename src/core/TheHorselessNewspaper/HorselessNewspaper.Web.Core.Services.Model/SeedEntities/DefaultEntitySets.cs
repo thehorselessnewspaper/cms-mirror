@@ -63,6 +63,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                     ObjectId = Guid.NewGuid().ToString(),
                     AllowAnonymousRead = true,
                     DisplayName = "Default Horseless Blog",
+                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
                     HorselessViews = new List<contentmodel.HorselessView>()
                     {
                         new contentmodel.HorselessView()
@@ -72,7 +73,10 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                             IsActive = true,
                             IsSoftDeleted = false,
                             ObjectId = Guid.NewGuid().ToString(),
-                            Name = "ViewTemplate.cshtml"
+                            Name = "ViewTemplate.cshtml",   
+                            PhysicalPath = "ViewTemplate.cshtml",
+                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
+
 
                         }
                     },

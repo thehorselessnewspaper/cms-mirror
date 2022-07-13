@@ -5,7 +5,6 @@ using HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
 using HorselessNewspaper.Web.Core.Model.Query;
 using HorselessNewspaper.Web.Core.ScopedServices.RestClients;
-using RestClientAlso = HorselessNewspaper.Web.Core.ScopedServices.RestClients.Also;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
@@ -369,7 +368,6 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 // the migrated entity should == original entity
                 // where == is based on uniquely constrained columns
                 var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRestApiClient>();
-                var restClientAlso = scope.ServiceProvider.GetRequiredService<RestClientAlso.IHorselessRestApiClientAlso>();
 
                 var iAutoMapper = scope.ServiceProvider.GetRequiredService<IMapper>();
                 var defaultTenantQuery = await inMemoryStores.GetAllAsync();
@@ -1161,7 +1159,6 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                 try
                 {
-                    var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRestApiClient>();
 
 
                     // collect the hosting model tenants
