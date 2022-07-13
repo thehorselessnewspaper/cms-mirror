@@ -1,0 +1,23 @@
+<mat-accordion class="headers-align" multi
+(opened)="panelOpenState = true"
+(closed)="panelOpenState = false"
+>
+<mat-expansion-panel-header>
+  <mat-panel-title>
+    permissions
+  </mat-panel-title>
+  <mat-panel-description>
+    access control entry
+    <!-- <mat-icon>account_circle</mat-icon> -->
+  </mat-panel-description>
+</mat-expansion-panel-header>
+
+<p-table [value]="principals"
+responsiveLayout="scroll"
+scrollHeight="200px" [scrollable]="true" [paginator]="true" [rows]="4" scrollHeight="flex"
+[(selection)]="selectedItem"
+selectionMode="single"
+>
+
+</p-table>
+</mat-accordion>

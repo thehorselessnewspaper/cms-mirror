@@ -9,10 +9,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Client\NewFolder\**" />
+    <Content Remove="Client\NewFolder\**" />
+    <EmbeddedResource Remove="Client\NewFolder\**" />
+    <None Remove="Client\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220712.14" />
   </ItemGroup>
 

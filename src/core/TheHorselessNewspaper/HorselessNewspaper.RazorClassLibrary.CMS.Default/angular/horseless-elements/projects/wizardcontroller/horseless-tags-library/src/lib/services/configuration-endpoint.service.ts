@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { AutoUnsubscribe } from "ngx-auto-unsubscribe";
 import { SecurityRestClientConfiguration } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 import {
+  BehaviorSubject,
   catchError,
   EMPTY,
   map,
@@ -23,8 +24,8 @@ import { IClaimsIdentityAuthService as IClaimsIdentiyAuthService } from './IClai
 })
 export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
 
-  clientConfiguration$: ReplaySubject<SecurityRestClientConfiguration> =
-    new ReplaySubject<SecurityRestClientConfiguration>(1);
+  clientConfiguration$: BehaviorSubject<SecurityRestClientConfiguration> =
+    new BehaviorSubject<SecurityRestClientConfiguration>(1);
 
   constructor(private httpClient: HttpClient) {
     this.probeClientConfiguration();

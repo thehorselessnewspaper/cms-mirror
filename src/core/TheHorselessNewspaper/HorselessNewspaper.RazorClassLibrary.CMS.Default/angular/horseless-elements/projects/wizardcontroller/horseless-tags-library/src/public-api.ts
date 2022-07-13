@@ -18,3 +18,5 @@ export * from './lib/modules/principal-editor/principal-editor.module'
 
 export * from './lib/modules/accessControlEntry-table/contentAccessControlEntry-table/contentAccessControlEntry-table.module';
 export * from './lib/modules/accessControlEntry-table/hostingAccessControlEntry-table/hostingAccessControlEntry-table.module';
+export * from './lib/modules/principal-table/content/contentPrincipal-table/contentPrincipal-table.module';
+export * from './lib/modules/principal-table/hosting/hostingPrincipal-table/hostingPrincipal-table.module';

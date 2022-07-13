@@ -50,10 +50,16 @@
                       {{ tenant.BaseUrl }}
                     </div>
                   </div>
+                  <br/>
                   <div>access control list</div>
                   <lib-hostingAccessControlEntry-table
                     [accessControlEntries]="tenant.AccessControlEntries"
                   ></lib-hostingAccessControlEntry-table>
+                  <br/>
+                  <div>principals</div>
+                  <lib-contentPrincipal-table [principals]="tenant.Owners">
+
+                  </lib-contentPrincipal-table>
                 </p-card>
               </div>
             </ng-template>
@@ -111,10 +117,16 @@
                       {{ tenant.BaseUrl }}
                     </div>
                   </div>
+                  <br/>
                   <div>access control list</div>
                   <lib-contentAccessControlEntry-table
                     [accessControlEntries]="tenant.AccessControlEntries"
                   ></lib-contentAccessControlEntry-table>
+                  <br/>
+                  <div>principals</div>
+                  <lib-contentPrincipal-table [principals]="tenant.Owners">
+
+                  </lib-contentPrincipal-table>
                 </p-card>
               </div>
             </ng-template>

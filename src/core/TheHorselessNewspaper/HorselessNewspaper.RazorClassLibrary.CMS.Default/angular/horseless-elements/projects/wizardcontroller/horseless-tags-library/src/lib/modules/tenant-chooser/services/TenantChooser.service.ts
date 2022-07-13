@@ -42,9 +42,9 @@ export class TenantChooserService {
     this.restClientConfiguration$ =
       this.clientConfigService.clientConfiguration$;
 
-      this.hostingEntitiesTenantsSubject = new BehaviorSubject<HostingEntitiesTenant[] | null>(null);
+      this.hostingEntitiesTenantsSubject = new BehaviorSubject<HostingEntitiesTenant[] | null>(new Array<HostingEntitiesTenant>());
 
-      this.contentEntitiesTenantsSubject = new BehaviorSubject<ContentEntitiesTenant[] | null>(null);
+      this.contentEntitiesTenantsSubject = new BehaviorSubject<ContentEntitiesTenant[] | null>(new Array<ContentEntitiesTenant>());
   }
 
   pullHostingEntitiesTenantsByOffset(offset: number, rowCount: number): void {
@@ -130,7 +130,7 @@ export class TenantChooserService {
                 entities.entities != null && entities.entities != undefined)
                 {
                   this.hostingEntitiesTenantsSubject.next(entities.entities);
-                  this.contentEntitiesTenantsCount = entities.annots.count as number;
+                  // this.contentEntitiesTenantsCount = entities.annots.count as number;
                 }
 
             }),
@@ -230,7 +230,7 @@ export class TenantChooserService {
                   && entities.entities != null && entities.entities != undefined)
                   {
                     this.contentEntitiesTenantsSubject.next(entities.entities);
-                    this.contentEntitiesTenantsCount = entities.annots.count as number;
+                    // this.contentEntitiesTenantsCount = entities.annots.count as number;
                   }
             }),
             catchError(err => {

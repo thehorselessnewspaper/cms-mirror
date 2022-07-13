@@ -37,6 +37,7 @@ using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntiti
 using HorselessNewspaper.Client.RabbitMQ.Extensions;
 using HorselessNewspaper.Core.Repositories.TenantFilesystem.Extensions;
 using HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem.Extensions;
+using HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPI;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {
@@ -101,6 +102,16 @@ namespace HorselessNewspaper.Web.Core.Extensions
                     );
                 });
 
+
+            serviceBuilder.Services.AddTransient<IHorselessRESTAPIClient, HorselessRESTAPIClient>(
+
+                s =>
+                {
+                    var baseUrl = configuration["RestApiBaseUrl"];
+                    return new HorselessRESTAPIClient(
+                        baseUrl: baseUrl, s.GetRequiredService<HttpClient>()
+                    );
+                });
 
             // as per https://docs.microsoft.com/en-us/archive/msdn-magazine/2016/september/asp-net-core-feature-slices-for-asp-net-core-mvc
             // as per https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/areas?view=aspnetcore-6.0

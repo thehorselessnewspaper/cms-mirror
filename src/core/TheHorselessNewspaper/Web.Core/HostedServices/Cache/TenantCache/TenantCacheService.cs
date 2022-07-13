@@ -4,7 +4,7 @@ using Finbuckle.MultiTenant.Stores;
 using HorselessNewspaper.Core.Interfaces.Constants.ControllerRouteStrings;
 using HorselessNewspaper.Web.Core.Interfaces.Cache;
 using HorselessNewspaper.Web.Core.Model.Query;
-using HorselessNewspaper.Web.Core.ScopedServices.RestClients;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
@@ -30,6 +30,7 @@ using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using HorselessNewspaper.Core.Interfaces.Security.Resolver;
 using HorselessNewspaper.Web.Core.Services.Model.SeedEntities;
+using HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPI;
 
 namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 {
@@ -135,7 +136,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         {
             using (var scope = _services.CreateScope())
             {
-
+  
                 var contentModelOperator = GetQueryForContentEntity<ContentModel.Tenant>(scope);
                 try
                 {
@@ -144,7 +145,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     // var tenantInfo = scope.ServiceProvider.GetRequiredService<HorselessTenantInfo>();
                     _logger.LogInformation("getting db query");
                     _logger.LogInformation("ensuring content db");
-                    // await contentModelOperator.EnsureDbExists();
+
 
                     var probeQuery = await contentModelOperator.ReadAsEnumerable(r => r.ObjectId != null && r.ObjectId.Equals("EnsureQueryWorks"));
                     var probeResult = probeQuery?.ToList<ContentModel.Tenant>();
@@ -268,9 +269,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     // var autoMapper = scope.ServiceProvider.GetRequiredService<IMapper>();
                     string configuredRestBaseUrl = GetRestBaseUrl();
 
-                    var apiClient = innerScope.ServiceProvider.GetRequiredService<IHorselessRestApiClient>();
+                    var apiClient = innerScope.ServiceProvider.GetRequiredService<IHorselessRESTAPIClient>();
 
-                    apiClient.BaseUrl = configuredRestBaseUrl;
+                    // apiClient.base = configuredRestBaseUrl;
 
                     // apiClient.
                 }
@@ -367,7 +368,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 // to the content model db
                 // the migrated entity should == original entity
                 // where == is based on uniquely constrained columns
-                var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRestApiClient>();
+                var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRESTAPIClient>();
 
                 var iAutoMapper = scope.ServiceProvider.GetRequiredService<IMapper>();
                 var defaultTenantQuery = await inMemoryStores.GetAllAsync();
@@ -1217,6 +1218,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                 using (var innerScope = this._services.CreateScope())
                 {
+
                     IHttpClientFactory clientFactory = innerScope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
                     var httpClient = clientFactory.CreateClient();
 

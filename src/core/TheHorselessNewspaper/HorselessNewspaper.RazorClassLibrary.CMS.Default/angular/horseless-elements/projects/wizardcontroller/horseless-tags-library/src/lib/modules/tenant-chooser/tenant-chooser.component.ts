@@ -39,6 +39,7 @@ import {MatAccordion} from '@angular/material/expansion';
 import { ContentAccessControlEntryEditorComponent } from '../../modules/accessControlEntry-editor/content/contentAccessControlEntry-editor/contentAccessControlEntry-editor.component'
 import {ContentAccessControlEntryTableComponent } from '../../modules/accessControlEntry-table/contentAccessControlEntry-table/contentAccessControlEntry-table.component';
 import { HostingAccessControlEntryTableComponent } from '../accessControlEntry-table/hostingAccessControlEntry-table/hostingAccessControlEntry-table.component';
+import { ContentPrincipalTableComponent } from '../../modules/principal-table/content/contentPrincipal-table/contentPrincipal-table.component';
 @Component({
   selector: 'lib-tenant-chooser',
   templateUrl: './tenant-chooser.component.html',
@@ -49,7 +50,7 @@ import { HostingAccessControlEntryTableComponent } from '../accessControlEntry-t
 export class TenantChooserComponent implements OnInit {
   @ViewChild(MatAccordion) accordion!: MatAccordion;
   panelOpenState = false;
-  
+
   clientConfiguration$!: Observable<SecurityRestClientConfiguration>;
 
   currentTenantIdentifier: string = '';

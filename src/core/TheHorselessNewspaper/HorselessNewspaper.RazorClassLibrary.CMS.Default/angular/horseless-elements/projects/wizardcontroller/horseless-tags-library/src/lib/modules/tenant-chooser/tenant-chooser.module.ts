@@ -32,6 +32,7 @@ import { PanelModule } from 'primeng/panel';
 import { AccessControlEntryEditorModule } from '../accessControlEntry-editor/accessControlEntry-editor.module';
 import { HostingAccessControlEntryTableModule } from '../accessControlEntry-table/hostingAccessControlEntry-table/hostingAccessControlEntry-table.module';
 import { ContentAccessControlEntryTableModule } from '../accessControlEntry-table/contentAccessControlEntry-table/contentAccessControlEntry-table.module';
+import { ContentPrincipalTableModule } from '../principal-table/content/contentPrincipal-table/contentPrincipal-table.module';
 import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
@@ -56,6 +57,7 @@ import { MatIconModule } from '@angular/material/icon';
     HostingAccessControlEntryTableModule,
     ContentAccessControlEntryTableModule,
     AccessControlEntryEditorModule,
+    ContentPrincipalTableModule,
     ODataModule.forRoot(
       Object.assign(HorselessContentConfig, {
         options: {
