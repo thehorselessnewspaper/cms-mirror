@@ -566,10 +566,10 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 var mergeEntity = new TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant()
                 {
                     Id = originEntity.Id,
-                    IsPublished = false,
-                    CreatedAt = originEntity.CreatedAt,
+                    IsPublished = true,
+                    CreatedAt = DateTime.UtcNow,
                     DisplayName = originEntity.DisplayName,
-                    IsSoftDeleted = originEntity.IsSoftDeleted,
+                    IsSoftDeleted = false,
                     ObjectId = originEntity.ObjectId,
                     Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
                     TenantIdentifier = originEntity.TenantIdentifier,
