@@ -20,7 +20,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
     /// </summary>
     public static class DefaultEntitySets
     {
-        public static IEnumerable<contentmodel.ContentCollection> GetDefaultContentCollections()
+        public static ICollection<contentmodel.ContentCollection> GetDefaultContentCollections()
         {
             List<contentmodel.Taxonomy> taxonomies = new List<contentmodel.Taxonomy>()
                     {
