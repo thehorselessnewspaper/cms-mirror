@@ -128,7 +128,8 @@ export class TenantChooserComponent implements OnInit {
             console.log(
               'theant chooser component is handling client configuration result'
             );
-            if (clientConfiguration.AccessToken != null) {
+            if (clientConfiguration.AccessToken != null &&
+              clientConfiguration.AccessToken != undefined) {
               this.isAuthenticated$.next(true);
             }
 

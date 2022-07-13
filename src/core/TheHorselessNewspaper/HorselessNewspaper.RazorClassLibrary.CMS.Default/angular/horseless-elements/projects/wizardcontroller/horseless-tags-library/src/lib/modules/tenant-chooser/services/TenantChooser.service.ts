@@ -126,8 +126,13 @@ export class TenantChooserService {
             map((entities) =>{
 
               console.log(`pullHostingEntitiesTenantsByOffset is emitting entities`);
-              this.hostingEntitiesTenantsSubject.next(entities.entities);
-              this.contentEntitiesTenantsCount = entities.annots.count as number;
+              if(entities != null && entities != undefined &&
+                entities.entities != null && entities.entities != undefined)
+                {
+                  this.hostingEntitiesTenantsSubject.next(entities.entities);
+                  this.contentEntitiesTenantsCount = entities.annots.count as number;
+                }
+
             }),
             catchError(err => {
               console.log(`pullHostingEntitiesTenantsByOffset handling error ${err}`);
@@ -221,8 +226,12 @@ export class TenantChooserService {
           .pipe(
             map((entities) => {
               console.log(`pullContentEntitiesTenantsByOffset is emitting entities`);
-              this.contentEntitiesTenantsSubject.next(entities.entities);
-              this.contentEntitiesTenantsCount = entities.annots.count as number;
+                if(entities != null && entities != undefined
+                  && entities.entities != null && entities.entities != undefined)
+                  {
+                    this.contentEntitiesTenantsSubject.next(entities.entities);
+                    this.contentEntitiesTenantsCount = entities.annots.count as number;
+                  }
             }),
             catchError(err => {
               console.log(`pullContentEntitiesTenantsByOffset handling error ${err}`);

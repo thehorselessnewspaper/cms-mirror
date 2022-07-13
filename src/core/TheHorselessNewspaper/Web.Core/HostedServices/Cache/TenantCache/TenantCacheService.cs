@@ -1242,7 +1242,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         {
                             Headers =
                             {
-                                { HeaderNames.Accept, "application/json;odata.metadata=none" },
+                                { HeaderNames.Accept, "application/json;odata.metadata=full" },
                                 { HeaderNames.UserAgent, "HorselessNewspaper" },
                                 { ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, $"{cachedTenant.Identifier}" }
                             }

@@ -48,10 +48,10 @@ namespace HorselessNewspaper.Core.Web.SmokeTests
                         // ConnectionString = configuration.GetConnectionString("ContentModelConnection"),
                         Id = Guid.Parse("6da806b8-f7ab-4e3a-8833-7e834a40e9d0"),
                         Identifier = "6da806b8-f7ab-4e3a-8833-7e834a40e9d0",
-                        Name = "the Management",
+                        Name = "test entity - the Management",
                         ObjectId = "236324b8-278e-4372-9d06-13c40aabd8b2",
                         CreatedAt = DateTime.UtcNow,
-                        DisplayName = "the management tenant"
+                        DisplayName = "the management test tenant"
                     }
                     );
                 });
