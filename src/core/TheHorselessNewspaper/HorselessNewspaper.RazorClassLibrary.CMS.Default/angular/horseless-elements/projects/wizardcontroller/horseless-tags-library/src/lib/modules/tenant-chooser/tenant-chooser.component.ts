@@ -93,7 +93,7 @@ export class TenantChooserComponent implements OnInit {
     this.hostingModelTenant$ =
       this.tenantChooserService.hostingEntitiesTenantsSubject.pipe(
         map((entities) => {
-          console.log(`${entities?.length} entities retrieved`);
+
 
           if (
             entities != null &&
@@ -101,6 +101,7 @@ export class TenantChooserComponent implements OnInit {
             entities.entries != null &&
             entities.entries != undefined
           ) {
+            console.log(`${entities?.length} entities retrieved`);
             this.hostingTenants = entities as HostingEntitiesTenant[];
             this.hostingTenantsCount = this.hostingTenants.length;
           }
@@ -111,7 +112,7 @@ export class TenantChooserComponent implements OnInit {
     this.contentModelTenant$ =
       this.tenantChooserService.contentEntitiesTenantsSubject.pipe(
         map((entities) => {
-          if (this.contentTenants != null && this.contentTenants != undefined) {
+          if (entities != null && entities != undefined) {
             console.log(`${entities?.length} entities retrieved`);
             this.contentTenants = entities as ContentEntitiesTenant[];
 

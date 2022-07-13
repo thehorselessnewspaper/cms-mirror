@@ -56,11 +56,11 @@ namespace HorselessNewspaper.Web.Core.Services.Query.Controller.Content
 
                 if (queryResult == null)
                 {
-                    throw new Exception("not found");
+                    throw new Http404Exception("not found");
                 }
                 else if (queryResult.First() == null)
                 {
-                    throw new Exception("not found");
+                    throw new Http404Exception("not found");
                 }
                 else
                 {
@@ -69,7 +69,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.Controller.Content
             }
             catch (Exception ex)
             {
-                throw new Exception("not found", ex);
+                throw new Http404Exception("not found", ex);
             }
 
             return result;

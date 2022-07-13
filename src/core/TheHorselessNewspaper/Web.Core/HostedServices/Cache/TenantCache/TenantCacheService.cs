@@ -166,12 +166,12 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 catch (Exception e)
                 {
                     _logger.LogError($"auto healing problem initializing databases {e.Message}");
-                    var hostingModelOperator = GetQueryForHostingEntity<HostingModel.Tenant>(scope);
+                    // var hostingModelOperator = GetQueryForHostingEntity<HostingModel.Tenant>(scope);
 
                     // self healing databae feature
                     // TODO - enable this some safe way
-                    await contentModelOperator.ResetDb();
-                    await hostingModelOperator.ResetDb();
+                    // await contentModelOperator.ResetDb();
+                    // await hostingModelOperator.ResetDb();
                 }
             }
 
@@ -1008,6 +1008,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 try
                 {
                     IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
+                    var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRESTAPIClient>();
+
+                    var result = await restClient.ApiHorselessContentModelTenantGetByObjectIdAsync(originEntity.ObjectId, originEntity.TenantIdentifier);
                     var httpClient = clientFactory.CreateClient();
 
                     string identifier = originEntity.TenantIdentifier;
@@ -1022,7 +1025,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     {
                         Headers =
                             {
-                                { HeaderNames.Accept, "text/html" },
+                                { HeaderNames.Accept, "application/json" },
                                 { HeaderNames.UserAgent, "HorselessNewspaper" }
                             }
                     };

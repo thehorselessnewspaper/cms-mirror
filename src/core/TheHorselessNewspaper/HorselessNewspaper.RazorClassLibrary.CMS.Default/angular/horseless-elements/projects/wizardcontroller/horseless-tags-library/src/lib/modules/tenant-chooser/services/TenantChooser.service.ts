@@ -13,7 +13,7 @@ import {
   TenantRESTService,
 } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
-import { BehaviorSubject, catchError, EMPTY, map, Observable, ReplaySubject, take, tap, concatMap } from 'rxjs';
+import { BehaviorSubject, skip, catchError, EMPTY, map, Observable, ReplaySubject, take, tap, concatMap } from 'rxjs';
 import { ConfigurationEndpointService } from '../../../services/configuration-endpoint.service';
 
 
@@ -61,6 +61,7 @@ export class TenantChooserService {
     );
 
     this.restClientConfiguration$.pipe(
+      skip(1),
       map((clientConfig) => {
         console.log(
           `pullHostingEntitiesTenantsByOffset finished getting client configuration: data was ` +
@@ -130,9 +131,9 @@ export class TenantChooserService {
                 entities.entities != null && entities.entities != undefined)
                 {
                   this.hostingEntitiesTenantsSubject.next(entities.entities);
-                  // this.contentEntitiesTenantsCount = entities.annots.count as number;
+                  this.contentEntitiesTenantsCount = entities.annots.count as number;
                 }
-                return entities;
+                // return entities;
             }),
             catchError(err => {
               console.log(`pullHostingEntitiesTenantsByOffset handling error ${err}`);
@@ -165,6 +166,7 @@ export class TenantChooserService {
     let tenantEntities = contentTenantsSvc.entities();
 
     this.restClientConfiguration$.pipe(
+      skip(1),
       map((clientConfig) => {
         console.log(`pullContentEntitiesTenantsByOffset has client config`);
         let baseUrl = clientConfig.ODataEndpoint + "/ODataContent/";
@@ -230,7 +232,7 @@ export class TenantChooserService {
                   && entities.entities != null && entities.entities != undefined)
                   {
                     this.contentEntitiesTenantsSubject.next(entities.entities);
-                    // this.contentEntitiesTenantsCount = entities.annots.count as number;
+                    this.contentEntitiesTenantsCount = entities.annots.count as number;
                   }
             }),
             catchError(err => {
@@ -259,6 +261,7 @@ export class TenantChooserService {
     );
 
     this.restClientConfiguration$.pipe(
+      skip(1),
       concatMap((clientConfig) => {
         let baseUrl = clientConfig.ODataEndpoint + "/ODataContent/";
         contentTenantsSvc.api.serviceRootUrl = baseUrl as string;
@@ -302,6 +305,7 @@ export class TenantChooserService {
     );
 
     this.restClientConfiguration$.pipe(
+      skip(1),
       concatMap((clientConfig) => {
         console.log(
           `pullHostingEntitiesTenantsCount finished getting client configuration with data ` +

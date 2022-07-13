@@ -20,6 +20,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 using TheHorselessNewspaper.HostingModel.Context.MSSQL;
 
@@ -239,12 +240,14 @@ namespace HorselessNewspaper.Web.Core.Startup
                     var container = frag[frag.Length - 2];
                     return container + t.Name;
                 });
-                //options.CustomOperationIds(apiDesc =>
-                //{
-                //    // produce this template export interface ContentEntitiesAccessControlEntry 
-                //    return apiDesc.TryGetMethodInfo(out MethodInfo methodInfo) ? methodInfo.DeclaringType.Name + methodInfo.Name : null;
 
-                //});
+                options.CustomOperationIds(apiDesc =>
+                {
+                    // produce this template export interface ContentEntitiesAccessControlEntry 
+                    return apiDesc.TryGetMethodInfo(out MethodInfo methodInfo) ? methodInfo.DeclaringType.Name + methodInfo.Name : null;
+
+                });
+
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Horseless Content API", Version = "v1" });
 
                 // eliminate odata metadata controller from swagger doc

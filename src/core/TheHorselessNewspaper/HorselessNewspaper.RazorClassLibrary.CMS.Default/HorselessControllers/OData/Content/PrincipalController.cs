@@ -35,8 +35,12 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         public async Task<ActionResult<IEnumerable<ContentModel.Principal>>> Get(ODataQueryOptions<ContentModel.Principal> options)
         {
             var result = await principalCollectionService.Query(options);
+            if (result != null)
+            {
+                return Ok(result);
+            }
 
-            return Ok(result);
+            return new List<ContentModel.Principal>();
         }
 
     }

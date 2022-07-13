@@ -51,7 +51,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
 
 
-        [HttpGet("GetByObjectId", Name = "ContentEntities[controller]_[action]")]
+        [HttpGet("GetByObjectId/{objectId}", Name = "ContentEntities[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Tenant))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Tenant>> GetByObjectId([FromRoute] string objectId)
@@ -79,10 +79,15 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
                     result = Ok(testFind);
                 }
             }
-            catch (Exception ex)
+            catch (Http404Exception ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound();
             }
+            catch(Exception ex)
+            {
+                return NotFound();
+            }
+
 
             return Ok(result);
         }

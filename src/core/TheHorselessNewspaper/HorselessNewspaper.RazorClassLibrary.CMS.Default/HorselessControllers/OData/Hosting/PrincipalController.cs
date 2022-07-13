@@ -34,7 +34,15 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         public async Task<ActionResult<IQueryable<HostingModel.Principal>>> Get(ODataQueryOptions<HostingModel.Principal> options)
 {
             var result = await _principalSvc.Read<ODataQueryOptions<HostingModel.Principal>, HostingModel.Principal>(options);
-            return Ok(result);
+            if(result == null)
+            {
+
+                return Ok(result);
+            }
+            else
+            {
+                return Ok(new List<HostingModel.Principal>());
+            }
         }
 
     }

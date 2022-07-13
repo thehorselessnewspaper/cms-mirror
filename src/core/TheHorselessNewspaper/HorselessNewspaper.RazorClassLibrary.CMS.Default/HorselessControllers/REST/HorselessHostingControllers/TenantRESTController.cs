@@ -50,7 +50,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [HttpGet("HostingEntitiesTenantGetByObjectId", Name = "HostingEntities[controller]_[action]")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HostingModel.Tenant))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<HostingModel.Tenant>> GetByObjectId([FromRoute] string objectId)
+        public async Task<ActionResult<HostingModel.Tenant>> GetByObjectId(string objectId)
         {
             IActionResult result;
             if (!ModelState.IsValid)

@@ -49,13 +49,13 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
         [HttpGet()]
 
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.Tenant>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<ContentModel.Tenant>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
 
-        public async Task<ActionResult<IEnumerable<ContentModel.Tenant>>> Get(ODataQueryOptions<ContentModel.Tenant> options)
+        public async Task<ActionResult<IQueryable<ContentModel.Tenant>>> Get(ODataQueryOptions<ContentModel.Tenant> options)
         // public async Task<ActionResult<IEnumerable<ContentModel.Tenant>>> Get()
         {
             try
@@ -77,15 +77,18 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
                         }
                     }
                 }
+                else
+                {
+                    return Ok(new List<ContentModel.Tenant>());
+                }
 
                 if (isFailedAuthorization)
                 {
                     return Unauthorized();
                 }
 
-                var result = await _contentCollectionService.Query();
 
-                return Ok(result);
+                return Ok(potentialResult);
             }
             catch (Exception e)
             {
