@@ -23,8 +23,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [InverseProperty(nameof(ContentCollection.ChildContentCollections))]
         public virtual ICollection<ContentCollection>? ParentContentCollections { get; set; } = new HashSet<ContentCollection>();
 
-
-        [ForeignKey("Id")]
         [InverseProperty(nameof(ContentCollection.ParentContentCollections))]
         public virtual ICollection<ContentCollection>? ChildContentCollections { get; set; } = new HashSet<ContentCollection>();
 

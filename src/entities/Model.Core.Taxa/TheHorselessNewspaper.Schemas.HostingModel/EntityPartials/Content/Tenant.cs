@@ -65,9 +65,12 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
-        [ForeignKey("TargetTenantId")]
-        [InverseProperty(nameof(Tenant.TenantIdentifierStrategy))]
-        public Tenant? TargetTenant { get; set; }
+
+
+        public Guid? Tenant_Id { get; set; }
+
+        // [InverseProperty(nameof(ContentEntities.Tenant.TenantIdentifierStrategy))]
+        public Tenant Tenant { get; set; }
 
         [InverseProperty(nameof(TenantIdentifierStrategyContainer.Strategy))]
         public ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();
@@ -99,7 +102,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         /// </summary>
         public string? BaseUrl { get; set; }
 
-        public virtual TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; } = new TenantIdentifierStrategy();
+        public Guid TenantIdentifierStrategyId { get; set; }
+
+        // [InverseProperty(nameof(ContentEntities.TenantIdentifierStrategy.Tenant))]
+
+        public TenantIdentifierStrategy TenantIdentifierStrategy { get; set; }
 
         /// <summary>
         /// prospectively override other tenant identifier definitions
@@ -114,15 +121,13 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public HashSet<JSONAsset> MetaData { get; set; } = new HashSet<JSONAsset>();
         public string? DictionaryKey { get; set; }
 
-        [ForeignKey("OwnersId")]
         [InverseProperty(nameof(Principal.OwnedTenants))]
         public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
 
-        [ForeignKey("AccountsId")]
         [InverseProperty(nameof(Principal.ManagedTenants))]
         public ICollection<Principal> Accounts { get; set; } = new HashSet<Principal>();
 
-        [ForeignKey("AccessControlEntriesId")]
+
         [InverseProperty(nameof(AccessControlEntry.ManagedTenants))]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
     }

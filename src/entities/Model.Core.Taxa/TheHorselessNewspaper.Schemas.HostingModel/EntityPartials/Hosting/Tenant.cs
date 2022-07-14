@@ -52,11 +52,10 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
 
-        public Guid? TargetTenantId { get; set; }
+        public Guid? Tenant_Id { get; set; }
 
-        [ForeignKey(nameof(TenantIdentifierStrategy.TargetTenantId))]
-        [InverseProperty(nameof(Tenant.TenantIdentifierStrategy))]
-        public Tenant? TargetTenant { get; set; }
+        // [InverseProperty(nameof(HostingEntities.Tenant.TenantIdentifierStrategy))]
+        public Tenant Tenant { get; set; }
 
         [InverseProperty(nameof(TenantIdentifierStrategyContainer.Strategy))]
         public virtual ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();
@@ -81,7 +80,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         /// </summary>
         public string? TenantIdentifier { get; set; }
 
-        [InverseProperty(nameof(TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantIdentifierStrategy.TargetTenant))]
+        public Guid? TenantIdentifierStrategyId { get; set; }
+
+        // [InverseProperty(nameof(HostingEntities.TenantIdentifierStrategy.Tenant))]
         public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; }
 
 
@@ -92,15 +93,14 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 
-        [ForeignKey("AccessControlEntriesId")]
         [InverseProperty(nameof(AccessControlEntry.ManagedTenants))]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
-        [ForeignKey("OwnersId")]
+
         [InverseProperty(nameof(Principal.OwnedTenants))]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
-        [ForeignKey("AccountsId")]
+
         [InverseProperty(nameof(Principal.TenantAccounts))]
         public ICollection<Principal> Accounts { get; set; } = new HashSet<Principal>();
     }

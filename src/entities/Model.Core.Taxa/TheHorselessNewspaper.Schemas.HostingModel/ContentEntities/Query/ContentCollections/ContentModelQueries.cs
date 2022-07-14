@@ -40,7 +40,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             {
                 string message = $"problem initializing ContentModelQueries {e.Message}";
                 _logger.LogError(message);
-                throw new Exception(message, e);
+                // throw new Exception(message, e);
             }
         }
 

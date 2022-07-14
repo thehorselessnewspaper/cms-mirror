@@ -43,13 +43,13 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public ICollection<PrincipalClaim> PrincipalClaim { get; set; } = new HashSet<PrincipalClaim>();
 
-        [ForeignKey("PrincipalId")]
+        // [ForeignKey("PrincipalId")]
         public Guid? PrincipalId { get; set; }
         public Principal? Principal { get; set; }
 
-        [ForeignKey("AccessControlEntriesId")]
+
         public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
-        [ForeignKey("OwnersId")]
+
         public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
     }
 
@@ -76,11 +76,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [InverseProperty(nameof(AccessControlEntry.SubjectPrincipals))]
         public ICollection<AccessControlEntry>? ManagingAccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
-        [ForeignKey("ManagedTenantsId")]
+      
         [InverseProperty(nameof(Tenant.Accounts))]
         public ICollection<Tenant>? ManagedTenants { get; set; } = new HashSet<Tenant>();
 
-        [ForeignKey("OwnedTenantsId")]
         [InverseProperty(nameof(Tenant.Owners))]
         public ICollection<Tenant>? OwnedTenants { get; set; } = new HashSet<Tenant>();
 

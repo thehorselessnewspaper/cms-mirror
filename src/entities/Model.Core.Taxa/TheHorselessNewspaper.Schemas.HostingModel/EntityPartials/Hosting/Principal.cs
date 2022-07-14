@@ -8,10 +8,6 @@ using TheHorselessNewspaper.HostingModel.Context;
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
 
-    public partial class HorselessPrincipal
-    {
-
-    }
 
     [Microsoft.EntityFrameworkCore.Index(nameof(PreferredUserName), IsUnique = true)]
     public partial class Principal : IQueryableModelEntity, IHostingRowLevelSecured
@@ -27,11 +23,10 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 
-        [ForeignKey("OwnedTenantsId")]
+
         [InverseProperty(nameof(Tenant.Owners))]
         public ICollection<Tenant> OwnedTenants { get; set; } = new HashSet<Tenant>();
 
-        [ForeignKey("TenantAccountsId")]
         [InverseProperty(nameof(Tenant.Accounts))]
         public ICollection<Tenant> TenantAccounts { get; set; } = new HashSet<Tenant>();
 

@@ -53,7 +53,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public string? DictionaryKey { get; set; }
 
 
-        [ForeignKey("ManagedTenantsId")]
         [InverseProperty(nameof(AccessControlEntry.AccessControlEntries))]
         public ICollection<Tenant> ManagedTenants { get; set; } = new HashSet<Tenant>(); 
 
