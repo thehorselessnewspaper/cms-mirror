@@ -1,23 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
+﻿using HorselessNewspaper.Core.Interfaces.Security.Resolver;
+using HorselessNewspaper.Web.Core.Model.Query;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 using ContentEntities = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
-using Xunit;
-using TheHorselessNewspaper.HostingModel.DTO;
-using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
-using Microsoft.Extensions.DependencyInjection;
-using Finbuckle.MultiTenant;
-using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
-using NuGet.Common;
-using HorselessNewspaper.Core.Interfaces.Security.Resolver;
-using HorselessNewspaper.Web.Core.Model.Query;
-using Microsoft.Net.Http.Headers;
 
 namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 {
