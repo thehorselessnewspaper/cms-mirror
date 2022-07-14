@@ -410,9 +410,25 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelC
         {
             try
             {
+                // TODO
+                // this needs to be injectable
+                // and runtime reconfigurable
+                ODataQuerySettings settings = new ODataQuerySettings()
+                {
+                    EnableConstantParameterization = true,
+                    EnableCorrelatedSubqueryBuffering = true,
+                    EnsureStableOrdering = true,
+                    HandleNullPropagation = HandleNullPropagationOption.Default,
+                    HandleReferenceNavigationPropertyExpandFilter = true,
+                    PageSize = 1000,
+                    TimeZone = TimeZoneInfo.Utc
+                };
+
+                AllowedQueryOptions opts = AllowedQueryOptions.All;
+
                 var resolvedTenant = await _context.ResolveTenant();
                 var dbSet = ((DbContext)_context).Set<X>();
-                var queryResult = queryOptions.ApplyTo(dbSet) as IQueryable<X>;
+                var queryResult = queryOptions.ApplyTo(dbSet, settings, opts) as IQueryable<X>;
                 return queryResult;
             }
             catch (Exception e)
