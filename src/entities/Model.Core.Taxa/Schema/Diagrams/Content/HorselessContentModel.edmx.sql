@@ -2,11 +2,12 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/14/2022 10:10:52
+-- Date Created: 07/14/2022 10:35:33
 -- Generated from EDMX file: E:\src\horseless-core\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
+GO
 
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
@@ -54,12 +55,6 @@ IF OBJECT_ID(N'[dbo].[FK_NavigationMenuItemNavigationMenu_NavigationMenuItem]', 
 GO
 IF OBJECT_ID(N'[dbo].[FK_NavigationMenuItemNavigationMenu_NavigationMenu]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[NavigationMenuItemNavigationMenu] DROP CONSTRAINT [FK_NavigationMenuItemNavigationMenu_NavigationMenu];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ContentCollectionHierarchy_ContentCollection]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ContentCollectionHierarchy] DROP CONSTRAINT [FK_ContentCollectionHierarchy_ContentCollection];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ContentCollectionHierarchy_ChildContentCollections]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ContentCollectionHierarchy] DROP CONSTRAINT [FK_ContentCollectionHierarchy_ChildContentCollections];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PublicationHierarchy_Publication]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PublicationHierarchy] DROP CONSTRAINT [FK_PublicationHierarchy_Publication];
@@ -206,9 +201,6 @@ IF OBJECT_ID(N'[dbo].[NavigationMenuItemHierarchy]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[NavigationMenuItemNavigationMenu]', 'U') IS NOT NULL
     DROP TABLE [dbo].[NavigationMenuItemNavigationMenu];
-GO
-IF OBJECT_ID(N'[dbo].[ContentCollectionHierarchy]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ContentCollectionHierarchy];
 GO
 IF OBJECT_ID(N'[dbo].[PublicationHierarchy]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PublicationHierarchy];
@@ -534,13 +526,6 @@ CREATE TABLE [dbo].[NavigationMenuItemNavigationMenu] (
 );
 GO
 
--- Creating table 'ContentCollectionHierarchy'
-CREATE TABLE [dbo].[ContentCollectionHierarchy] (
-    [ChildContentCollections_Id] uniqueidentifier  NOT NULL,
-    [ParentContentCollections_Id] uniqueidentifier  NOT NULL
-);
-GO
-
 -- Creating table 'PublicationHierarchy'
 CREATE TABLE [dbo].[PublicationHierarchy] (
     [PublicationChildren_Id] uniqueidentifier  NOT NULL,
@@ -764,12 +749,6 @@ GO
 ALTER TABLE [dbo].[NavigationMenuItemNavigationMenu]
 ADD CONSTRAINT [PK_NavigationMenuItemNavigationMenu]
     PRIMARY KEY CLUSTERED ([ChildNavigationMenuItems_Id], [ParentNavigationMenus_Id] ASC);
-GO
-
--- Creating primary key on [ChildContentCollections_Id], [ParentContentCollections_Id] in table 'ContentCollectionHierarchy'
-ALTER TABLE [dbo].[ContentCollectionHierarchy]
-ADD CONSTRAINT [PK_ContentCollectionHierarchy]
-    PRIMARY KEY CLUSTERED ([ChildContentCollections_Id], [ParentContentCollections_Id] ASC);
 GO
 
 -- Creating primary key on [PublicationChildren_Id], [PublicationParents_Id] in table 'PublicationHierarchy'
@@ -1005,30 +984,6 @@ GO
 CREATE INDEX [IX_FK_NavigationMenuItemNavigationMenu_NavigationMenu]
 ON [dbo].[NavigationMenuItemNavigationMenu]
     ([ParentNavigationMenus_Id]);
-GO
-
--- Creating foreign key on [ChildContentCollections_Id] in table 'ContentCollectionHierarchy'
-ALTER TABLE [dbo].[ContentCollectionHierarchy]
-ADD CONSTRAINT [FK_ContentCollectionHierarchy_ContentCollection]
-    FOREIGN KEY ([ChildContentCollections_Id])
-    REFERENCES [dbo].[ContentCollections]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [ParentContentCollections_Id] in table 'ContentCollectionHierarchy'
-ALTER TABLE [dbo].[ContentCollectionHierarchy]
-ADD CONSTRAINT [FK_ContentCollectionHierarchy_ChildContentCollections]
-    FOREIGN KEY ([ParentContentCollections_Id])
-    REFERENCES [dbo].[ContentCollections]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ContentCollectionHierarchy_ChildContentCollections'
-CREATE INDEX [IX_FK_ContentCollectionHierarchy_ChildContentCollections]
-ON [dbo].[ContentCollectionHierarchy]
-    ([ParentContentCollections_Id]);
 GO
 
 -- Creating foreign key on [PublicationChildren_Id] in table 'PublicationHierarchy'

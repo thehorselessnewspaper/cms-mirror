@@ -30,7 +30,6 @@
         <AssociationConnector Association="HorselessContentModel.NavigationMenuHierarchy" />
         <AssociationConnector Association="HorselessContentModel.NavigationMenuItemHierarchy" />
         <AssociationConnector Association="HorselessContentModel.NavigationMenuItemNavigationMenu" />
-        <AssociationConnector Association="HorselessContentModel.ContentCollectionHierarchy" />
         <AssociationConnector Association="HorselessContentModel.PublicationHierarchy" />
         <AssociationConnector Association="HorselessContentModel.PublicationContentCollection" />
         <EntityTypeShape EntityType="HorselessContentModel.Taxonomy" Width="2.25" PointX="2.375" PointY="13.75" />

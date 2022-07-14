@@ -19,8 +19,6 @@ namespace Schema.Diagrams.Content
         {
             this.Tenants = new HashSet<Tenant>();
             this.MimeContents = new HashSet<HorselessContent>();
-            this.ParentContentCollections = new HashSet<ContentCollection>();
-            this.ChildContentCollections = new HashSet<ContentCollection>();
             this.Publications = new HashSet<Publication>();
             this.Taxonomies = new HashSet<Taxonomy>();
             this.HorselessViews = new HashSet<HorselessView>();
@@ -40,10 +38,6 @@ namespace Schema.Diagrams.Content
         public virtual ICollection<Tenant> Tenants { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HorselessContent> MimeContents { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ContentCollection> ParentContentCollections { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ContentCollection> ChildContentCollections { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Publication> Publications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
