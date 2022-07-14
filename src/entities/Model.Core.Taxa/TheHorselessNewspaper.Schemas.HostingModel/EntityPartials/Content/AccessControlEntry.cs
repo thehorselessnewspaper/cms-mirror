@@ -69,8 +69,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [InverseProperty(nameof(ContentCollection.AccessControlEntries))]
         public virtual ICollection<ContentCollection?>? ManagedContentCollections { get; set; } = new HashSet<ContentCollection?>();
 
-        //[InverseProperty(nameof(ContentCollection.AccessControlEntries))]
-        //public virtual ICollection<HorselessSession?>? ManagedHorselessSessions { get; set; } = new HashSet<HorselessSession?>();
 
         [InverseProperty(nameof(HorselessContent.AccessControlEntries))]
         public virtual ICollection<HorselessContent?>? ManagedHorselessContents { get; set; } = new HashSet<HorselessContent?>();
