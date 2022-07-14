@@ -70,7 +70,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public Guid? Tenant_Id { get; set; }
 
         // [InverseProperty(nameof(ContentEntities.Tenant.TenantIdentifierStrategy))]
-        public Tenant Tenant { get; set; }
+        public Tenant? Tenant { get; set; }
 
         [InverseProperty(nameof(TenantIdentifierStrategyContainer.Strategy))]
         public ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();
@@ -102,11 +102,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         /// </summary>
         public string? BaseUrl { get; set; }
 
-        public Guid TenantIdentifierStrategyId { get; set; }
+        public Guid? TenantIdentifierStrategyId { get; set; }
 
         // [InverseProperty(nameof(ContentEntities.TenantIdentifierStrategy.Tenant))]
 
-        public TenantIdentifierStrategy TenantIdentifierStrategy { get; set; }
+        public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; }
 
         /// <summary>
         /// prospectively override other tenant identifier definitions
