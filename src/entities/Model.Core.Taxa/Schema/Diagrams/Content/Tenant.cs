@@ -18,7 +18,6 @@ namespace Schema.Diagrams.Content
         public Tenant()
         {
             this.ContentCollections = new HashSet<ContentCollection>();
-            this.AccessControlEntries = new HashSet<AccessControlEntry>();
         }
     
         public System.Guid Id { get; set; }
@@ -29,7 +28,5 @@ namespace Schema.Diagrams.Content
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ContentCollection> ContentCollections { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
     }
 }

@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
+#nullable disable
+
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Configurations
 {
     public partial class PrincipalConfiguration : IEntityTypeConfiguration<Principal>

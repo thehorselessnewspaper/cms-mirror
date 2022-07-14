@@ -12,7 +12,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     {
         public Tenant()
         {
-            AccessControlEntries = new HashSet<AccessControlEntry>();
             ContentCollections = new HashSet<ContentCollection>();
         }
 
@@ -24,9 +23,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
 
-        [ForeignKey("SubjectTenants_Id")]
-        [InverseProperty("SubjectTenants")]
-        public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
         [ForeignKey("Tenants_Id")]
         [InverseProperty("Tenants")]
         public virtual ICollection<ContentCollection> ContentCollections { get; set; }

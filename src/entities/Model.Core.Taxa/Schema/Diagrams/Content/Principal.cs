@@ -18,7 +18,6 @@ namespace Schema.Diagrams.Content
         public Principal()
         {
             this.HorselessSessions = new HashSet<HorselessSession>();
-            this.OwnedHorselessSessions = new HashSet<HorselessSession>();
         }
     
         public System.Guid Id { get; set; }
@@ -32,7 +31,5 @@ namespace Schema.Diagrams.Content
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HorselessSession> HorselessSessions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HorselessSession> OwnedHorselessSessions { get; set; }
     }
 }
