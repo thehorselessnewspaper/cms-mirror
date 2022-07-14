@@ -24,5 +24,11 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             var tokenHeader = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", AuthorizationHeaderToken);
             request.Headers.Authorization = tokenHeader;
         }
+
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder)
+        {
+            var tokenHeader = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", AuthorizationHeaderToken);
+            request.Headers.Authorization = tokenHeader;
+        }
     }
 }
