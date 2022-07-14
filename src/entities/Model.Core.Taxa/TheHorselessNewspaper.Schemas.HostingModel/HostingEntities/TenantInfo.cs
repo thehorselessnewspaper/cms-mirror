@@ -28,9 +28,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public string ConnectionString { get; set; }
         public string TenantBaseUrl { get; set; }
 
-        [InverseProperty(nameof(KeyCloakConfiguration.TenantInfo))]
+        [InverseProperty("TenantInfo")]
         public virtual ICollection<KeyCloakConfiguration> KeyCloakConfigurations { get; set; }
-        [InverseProperty(nameof(WebAPITenantInfo.TenantInfo))]
+        [InverseProperty("TenantInfo")]
         public virtual ICollection<WebAPITenantInfo> WebAPITenantInfos { get; set; }
     }
 }

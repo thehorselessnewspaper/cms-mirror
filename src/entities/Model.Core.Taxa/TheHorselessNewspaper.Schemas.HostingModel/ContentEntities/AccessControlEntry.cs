@@ -12,11 +12,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     {
         public AccessControlEntry()
         {
-            AccessControlEntries = new HashSet<AccessControlEntry>();
-            Owners = new HashSet<Principal>();
-            SubjectAccessControlEntries = new HashSet<AccessControlEntry>();
             SubjectHorselessSessions = new HashSet<HorselessSession>();
-            SubjectPrincipals = new HashSet<Principal>();
             SubjectTenants = new HashSet<Tenant>();
         }
 
@@ -29,21 +25,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public DateTime? CreatedAt { get; set; }
         public bool? IsActive { get; set; }
 
-        [ForeignKey("SubjectAccessControlEntries_Id")]
-        [InverseProperty("SubjectAccessControlEntries")]
-        public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
-        [ForeignKey("OwnedAccessControlEntries_Id")]
-        [InverseProperty("OwnedAccessControlEntries")]
-        public virtual ICollection<Principal> Owners { get; set; }
-        [ForeignKey("AccessControlEntries_Id")]
-        [InverseProperty("AccessControlEntries")]
-        public virtual ICollection<AccessControlEntry> SubjectAccessControlEntries { get; set; }
         [ForeignKey("AccessControlEntries_Id")]
         [InverseProperty("AccessControlEntries")]
         public virtual ICollection<HorselessSession> SubjectHorselessSessions { get; set; }
-        [ForeignKey("AccessControlEntries_Id")]
-        [InverseProperty("AccessControlEntries")]
-        public virtual ICollection<Principal> SubjectPrincipals { get; set; }
         [ForeignKey("AccessControlEntries_Id")]
         [InverseProperty("AccessControlEntries")]
         public virtual ICollection<Tenant> SubjectTenants { get; set; }

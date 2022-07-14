@@ -53,17 +53,12 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public string? DictionaryKey { get; set; }
 
 
-        //[NotMapped]
-        //public ICollection<AccessControlEntry> AccessControlList { get; set; }
+        [NotMapped]
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; }
 
 
-        //[NotMapped]
-        //public ICollection<Principal> Owners { get; set; }
-
-
-        ////[ForeignKey("PrincipalId")]
-        ////[InverseProperty(nameof(Principal.AccessControlEntries))]
-        //public virtual ICollection<Principal> Principals { get; set; } = new HashSet<Principal>();
+        [NotMapped]
+        public ICollection<Principal> Owners { get; set; }
 
     }
 

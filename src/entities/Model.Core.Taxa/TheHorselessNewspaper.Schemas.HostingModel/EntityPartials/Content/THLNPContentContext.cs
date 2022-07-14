@@ -68,9 +68,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             builder.Entity<Tenant>()
                 .Navigation(n => n.TenantIdentifierStrategy).AutoInclude();
 
-            builder.Entity<Principal>().Navigation(n => n.AccessControlEntries).AutoInclude();
-
-            builder.Entity<Principal>().Navigation(n => n.HorselessSessions).AutoInclude();
 
         }
 

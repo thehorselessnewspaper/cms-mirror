@@ -72,5 +72,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public PrincipalClaimContainer? PrincipalClaimContainer { get; set; } = new PrincipalClaimContainer();
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
+
+        [NotMapped]
+        public ICollection<AccessControlEntry>? AccessControlEntries { get; set; }
+
+        [NotMapped]
+        public ICollection<Principal>? Owners { get; set; }
     }
 }

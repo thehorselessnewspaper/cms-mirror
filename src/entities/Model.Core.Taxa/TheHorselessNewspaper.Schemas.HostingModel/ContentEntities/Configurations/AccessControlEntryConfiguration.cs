@@ -16,51 +16,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Configurati
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
 
-            entity.HasMany(d => d.AccessControlEntries)
-                .WithMany(p => p.SubjectAccessControlEntries)
-                .UsingEntity<Dictionary<string, object>>(
-                    "AccessControlEntryHierarchy",
-                    l => l.HasOne<AccessControlEntry>().WithMany().HasForeignKey("AccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryHierarchy_SubjectAccessControlEntry"),
-                    r => r.HasOne<AccessControlEntry>().WithMany().HasForeignKey("SubjectAccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryHierarchy_AccessControlEntry"),
-                    j =>
-                    {
-                        j.HasKey("SubjectAccessControlEntries_Id", "AccessControlEntries_Id");
-
-                        j.ToTable("AccessControlEntryHierarchy");
-
-                        j.HasIndex(new[] { "AccessControlEntries_Id" }, "IX_FK_AccessControlEntryHierarchy_SubjectAccessControlEntry");
-                    });
-
-            entity.HasMany(d => d.Owners)
-                .WithMany(p => p.OwnedAccessControlEntries)
-                .UsingEntity<Dictionary<string, object>>(
-                    "AccessControlEntryOwner",
-                    l => l.HasOne<Principal>().WithMany().HasForeignKey("Owners_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryOwners_Owner"),
-                    r => r.HasOne<AccessControlEntry>().WithMany().HasForeignKey("OwnedAccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryOwners_AccessControlEntry"),
-                    j =>
-                    {
-                        j.HasKey("OwnedAccessControlEntries_Id", "Owners_Id");
-
-                        j.ToTable("AccessControlEntryOwners");
-
-                        j.HasIndex(new[] { "Owners_Id" }, "IX_FK_AccessControlEntryOwners_Owner");
-                    });
-
-            entity.HasMany(d => d.SubjectAccessControlEntries)
-                .WithMany(p => p.AccessControlEntries)
-                .UsingEntity<Dictionary<string, object>>(
-                    "AccessControlEntryHierarchy",
-                    l => l.HasOne<AccessControlEntry>().WithMany().HasForeignKey("SubjectAccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryHierarchy_AccessControlEntry"),
-                    r => r.HasOne<AccessControlEntry>().WithMany().HasForeignKey("AccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryHierarchy_SubjectAccessControlEntry"),
-                    j =>
-                    {
-                        j.HasKey("SubjectAccessControlEntries_Id", "AccessControlEntries_Id");
-
-                        j.ToTable("AccessControlEntryHierarchy");
-
-                        j.HasIndex(new[] { "AccessControlEntries_Id" }, "IX_FK_AccessControlEntryHierarchy_SubjectAccessControlEntry");
-                    });
-
             OnConfigurePartial(entity);
         }
 

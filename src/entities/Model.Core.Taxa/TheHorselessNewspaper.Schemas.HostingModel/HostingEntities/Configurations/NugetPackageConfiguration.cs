@@ -4,21 +4,19 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
-using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
-#nullable disable
-
-namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Configurations
+namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Configurations
 {
-    public partial class PrincipalConfiguration : IEntityTypeConfiguration<Principal>
+    public partial class NugetPackageConfiguration : IEntityTypeConfiguration<NugetPackage>
     {
-        public void Configure(EntityTypeBuilder<Principal> entity)
+        public void Configure(EntityTypeBuilder<NugetPackage> entity)
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
 
             OnConfigurePartial(entity);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<Principal> entity);
+        partial void OnConfigurePartial(EntityTypeBuilder<NugetPackage> entity);
     }
 }

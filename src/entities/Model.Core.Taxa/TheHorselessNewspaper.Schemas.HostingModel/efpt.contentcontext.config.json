@@ -18,14 +18,6 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[AccessControlEntryHierarchy]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[AccessControlEntryOwners]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[dbo].[ContentCollectionHierarchy]",
          "ObjectType": 0
       },
@@ -118,14 +110,6 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[PrincipalAccessControlEntry]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[PrincipalHierarchy]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[dbo].[Principals]",
          "ObjectType": 0
       },
@@ -185,7 +169,7 @@
    "UiHint": "WIPERS.THLNP_Content_Modelling",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
-   "UseDbContextSplitting": false,
+   "UseDbContextSplitting": true,
    "UseFluentApiOnly": false,
    "UseHandleBars": false,
    "UseHierarchyId": false,

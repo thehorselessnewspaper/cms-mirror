@@ -26,5 +26,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
+
+        [NotMapped]
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; }
+
+        [NotMapped]
+        public ICollection<Principal> Owners { get; set; }
     }
 }

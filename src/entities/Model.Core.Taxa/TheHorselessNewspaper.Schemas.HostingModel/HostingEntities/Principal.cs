@@ -12,11 +12,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     {
         public Principal()
         {
-            AccessControlEntries = new HashSet<AccessControlEntry>();
-            OwnedAccessControlEntries = new HashSet<AccessControlEntry>();
-            OwnedPrincipals = new HashSet<Principal>();
             OwnedTenants = new HashSet<Tenant>();
-            Owners = new HashSet<Principal>();
             TenantAccounts = new HashSet<Tenant>();
         }
 
@@ -31,23 +27,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public string Aud { get; set; }
         public string Sub { get; set; }
 
-        [ForeignKey("SubjectPrincipals_Id")]
-        [InverseProperty(nameof(AccessControlEntry.SubjectPrincipals))]
-        public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
         [ForeignKey("Owners_Id")]
-        [InverseProperty(nameof(AccessControlEntry.Owners))]
-        public virtual ICollection<AccessControlEntry> OwnedAccessControlEntries { get; set; }
-        [ForeignKey("Owners_Id")]
-        [InverseProperty(nameof(Principal.Owners))]
-        public virtual ICollection<Principal> OwnedPrincipals { get; set; }
-        [ForeignKey("Owners_Id")]
-        [InverseProperty(nameof(Tenant.Owners))]
+        [InverseProperty("Owners")]
         public virtual ICollection<Tenant> OwnedTenants { get; set; }
-        [ForeignKey("OwnedPrincipals_Id")]
-        [InverseProperty(nameof(Principal.OwnedPrincipals))]
-        public virtual ICollection<Principal> Owners { get; set; }
         [ForeignKey("Accounts_Id")]
-        [InverseProperty(nameof(Tenant.Accounts))]
+        [InverseProperty("Accounts")]
         public virtual ICollection<Tenant> TenantAccounts { get; set; }
     }
 }

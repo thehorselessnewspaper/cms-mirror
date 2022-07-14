@@ -18,14 +18,6 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[AccessControlEntryTenant]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[AccessControlledAccessControlEntry]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[dbo].[KeyCloakConfigurations]",
          "ObjectType": 0
       },
@@ -34,19 +26,15 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[PrincipalAccessControlEntry]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[PrincipalAccessControlEntry1]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[PrincipalPrincipal]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[dbo].[Principals]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TenantAccessControlEntry]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TenantAccount]",
          "ObjectType": 0
       },
       {
@@ -54,11 +42,7 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[TenantPrincipal]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[TenantPrincipal1]",
+         "Name": "[dbo].[TenantOwner]",
          "ObjectType": 0
       },
       {
@@ -73,7 +57,7 @@
    "UiHint": "WIPERS.THLNP_Hosting_Modelling",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
-   "UseDbContextSplitting": false,
+   "UseDbContextSplitting": true,
    "UseFluentApiOnly": false,
    "UseHandleBars": false,
    "UseHierarchyId": false,
