@@ -31,21 +31,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Configurati
                         j.HasIndex(new[] { "AccessControlEntries_Id" }, "IX_FK_TenantAccessControlEntries_AccessControlEntry");
                     });
 
-            entity.HasMany(d => d.Accounts)
-                .WithMany(p => p.TenantAccounts)
-                .UsingEntity<Dictionary<string, object>>(
-                    "TenantAccount",
-                    l => l.HasOne<Principal>().WithMany().HasForeignKey("Accounts_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TenantAccounts_Principal"),
-                    r => r.HasOne<Tenant>().WithMany().HasForeignKey("TenantAccounts_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TenantAccounts_Tenant"),
-                    j =>
-                    {
-                        j.HasKey("TenantAccounts_Id", "Accounts_Id");
-
-                        j.ToTable("TenantAccounts");
-
-                        j.HasIndex(new[] { "Accounts_Id" }, "IX_FK_TenantAccounts_Principal");
-                    });
-
             entity.HasMany(d => d.ContentCollections)
                 .WithMany(p => p.Tenants)
                 .UsingEntity<Dictionary<string, object>>(
@@ -59,21 +44,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Configurati
                         j.ToTable("TenantContentCollections");
 
                         j.HasIndex(new[] { "ContentCollections_Id" }, "IX_FK_TenantContentCollections_ContentCollection");
-                    });
-
-            entity.HasMany(d => d.Owners)
-                .WithMany(p => p.OwnedTenants)
-                .UsingEntity<Dictionary<string, object>>(
-                    "TenantOwner",
-                    l => l.HasOne<Principal>().WithMany().HasForeignKey("Owners_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TenantOwners_Principal"),
-                    r => r.HasOne<Tenant>().WithMany().HasForeignKey("OwnedTenants_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TenantOwners_Tenant"),
-                    j =>
-                    {
-                        j.HasKey("OwnedTenants_Id", "Owners_Id");
-
-                        j.ToTable("TenantOwners");
-
-                        j.HasIndex(new[] { "Owners_Id" }, "IX_FK_TenantOwners_Principal");
                     });
 
             OnConfigurePartial(entity);

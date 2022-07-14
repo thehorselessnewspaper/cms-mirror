@@ -13,9 +13,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public Tenant()
         {
             AccessControlEntries = new HashSet<AccessControlEntry>();
-            Accounts = new HashSet<Principal>();
             ContentCollections = new HashSet<ContentCollection>();
-            Owners = new HashSet<Principal>();
         }
 
         [Key]
@@ -29,14 +27,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [ForeignKey("SubjectTenants_Id")]
         [InverseProperty("SubjectTenants")]
         public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
-        [ForeignKey("TenantAccounts_Id")]
-        [InverseProperty("TenantAccounts")]
-        public virtual ICollection<Principal> Accounts { get; set; }
         [ForeignKey("Tenants_Id")]
         [InverseProperty("Tenants")]
         public virtual ICollection<ContentCollection> ContentCollections { get; set; }
-        [ForeignKey("OwnedTenants_Id")]
-        [InverseProperty("OwnedTenants")]
-        public virtual ICollection<Principal> Owners { get; set; }
     }
 }

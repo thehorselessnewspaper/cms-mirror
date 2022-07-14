@@ -14,8 +14,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         {
             HorselessSessions = new HashSet<HorselessSession>();
             OwnedHorselessSessions = new HashSet<HorselessSession>();
-            OwnedTenants = new HashSet<Tenant>();
-            TenantAccounts = new HashSet<Tenant>();
         }
 
         [Key]
@@ -35,11 +33,5 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [ForeignKey("Owners_Id")]
         [InverseProperty("Owners")]
         public virtual ICollection<HorselessSession> OwnedHorselessSessions { get; set; }
-        [ForeignKey("Owners_Id")]
-        [InverseProperty("Owners")]
-        public virtual ICollection<Tenant> OwnedTenants { get; set; }
-        [ForeignKey("Accounts_Id")]
-        [InverseProperty("Accounts")]
-        public virtual ICollection<Tenant> TenantAccounts { get; set; }
     }
 }

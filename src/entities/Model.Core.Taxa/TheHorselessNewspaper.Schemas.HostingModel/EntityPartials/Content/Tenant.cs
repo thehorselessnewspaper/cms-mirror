@@ -113,5 +113,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public DateTime? UpdatedAt { get; set; }
         public HashSet<JSONAsset> MetaData { get; set; } = new HashSet<JSONAsset>();
         public string? DictionaryKey { get; set; }
+        public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
+
+        public ICollection<Principal> Accounts { get; set; } = new HashSet<Principal>();
     }
 }

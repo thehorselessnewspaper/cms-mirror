@@ -10,6 +10,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     internal partial class THLNPContentContext : DbContext
     {
+        public THLNPContentContext()
+        {
+        }
+
         public THLNPContentContext(DbContextOptions<THLNPContentContext> options)
             : base(options)
         {
