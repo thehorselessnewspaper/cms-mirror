@@ -91,6 +91,15 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public virtual ICollection<TenantInfo> TenantInfos { get; set; } = new HashSet<TenantInfo>();
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
+
+        [InverseProperty(nameof(AccessControlEntry.ManagedTenants))]
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+
+        [InverseProperty(nameof(Principal.OwnedTenants))]
+        public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
+
+        [InverseProperty(nameof(Principal.TenantAccounts))]
+        public ICollection<Principal> Accounts { get; set; } = new HashSet<Principal>();
     }
 
 

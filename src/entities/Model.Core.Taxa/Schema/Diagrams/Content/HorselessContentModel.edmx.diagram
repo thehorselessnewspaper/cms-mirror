@@ -38,10 +38,7 @@
         <AssociationConnector Association="HorselessContentModel.TaxonHolonym" />
         <AssociationConnector Association="HorselessContentModel.HolonymMeronym" />
         <AssociationConnector Association="HorselessContentModel.ContentCollectionTaxonomies" />
-        <AssociationConnector Association="HorselessContentModel.TenantAccessControlEntries" />
         <AssociationConnector Association="HorselessContentModel.PrincipalHorselessSession" />
-        <AssociationConnector Association="HorselessContentModel.HorselessSessionAccessControlEntry" />
-        <AssociationConnector Association="HorselessContentModel.HorselessSessionPrincipal" />
         <EntityTypeShape EntityType="HorselessContentModel.HorselessView" Width="2.625" PointX="5.5" PointY="15" />
         <AssociationConnector Association="HorselessContentModel.HorselessViewContentCollection" />
       </Diagram>

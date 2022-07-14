@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.Collections.Generic;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Configurations;
-#nullable disable
+#nullable enable
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
@@ -19,13 +19,13 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         {
         }
 
-        public virtual DbSet<AccessControlEntry> AccessControlEntries { get; set; }
-        public virtual DbSet<KeyCloakConfiguration> KeyCloakConfigurations { get; set; }
-        public virtual DbSet<NugetPackage> NugetPackages { get; set; }
-        public virtual DbSet<Principal> Principals { get; set; }
-        public virtual DbSet<Tenant> Tenants { get; set; }
-        public virtual DbSet<TenantInfo> TenantInfos { get; set; }
-        public virtual DbSet<WebAPITenantInfo> WebAPITenantInfos { get; set; }
+        public virtual DbSet<AccessControlEntry> AccessControlEntries { get; set; } = null!;
+        public virtual DbSet<KeyCloakConfiguration> KeyCloakConfigurations { get; set; } = null!;
+        public virtual DbSet<NugetPackage> NugetPackages { get; set; } = null!;
+        public virtual DbSet<Principal> Principals { get; set; } = null!;
+        public virtual DbSet<Tenant> Tenants { get; set; } = null!;
+        public virtual DbSet<TenantInfo> TenantInfos { get; set; } = null!;
+        public virtual DbSet<WebAPITenantInfo> WebAPITenantInfos { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

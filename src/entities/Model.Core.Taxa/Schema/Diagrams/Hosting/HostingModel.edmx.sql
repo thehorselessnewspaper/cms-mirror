@@ -2,12 +2,11 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/14/2022 08:47:11
--- Generated from EDMX file: E:\src\horseless-core\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Hosting\HostingModel.edmx
+-- Date Created: 07/14/2022 12:23:31
+-- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Hosting\HostingModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
-GO
 
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
@@ -22,24 +21,6 @@ IF OBJECT_ID(N'[dbo].[FK_TenantInfoWebAPITenantInfo]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_TenantInfoKeyCloakConfiguration]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[KeyCloakConfigurations] DROP CONSTRAINT [FK_TenantInfoKeyCloakConfiguration];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryTenant_AccessControlEntry]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AccessControlEntryTenant] DROP CONSTRAINT [FK_AccessControlEntryTenant_AccessControlEntry];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryTenant_SubjectTenant]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AccessControlEntryTenant] DROP CONSTRAINT [FK_AccessControlEntryTenant_SubjectTenant];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TenantPrincipal_Tenant]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TenantPrincipal] DROP CONSTRAINT [FK_TenantPrincipal_Tenant];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TenantPrincipal_Principal]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TenantPrincipal] DROP CONSTRAINT [FK_TenantPrincipal_Principal];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TenantPrincipal1_Tenant]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TenantPrincipal1] DROP CONSTRAINT [FK_TenantPrincipal1_Tenant];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TenantPrincipal1_Principal]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TenantPrincipal1] DROP CONSTRAINT [FK_TenantPrincipal1_Principal];
 GO
 
 -- --------------------------------------------------
@@ -66,15 +47,6 @@ IF OBJECT_ID(N'[dbo].[Principals]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[AccessControlEntries]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AccessControlEntries];
-GO
-IF OBJECT_ID(N'[dbo].[AccessControlEntryTenant]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AccessControlEntryTenant];
-GO
-IF OBJECT_ID(N'[dbo].[TenantPrincipal]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TenantPrincipal];
-GO
-IF OBJECT_ID(N'[dbo].[TenantPrincipal1]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TenantPrincipal1];
 GO
 
 -- --------------------------------------------------
@@ -171,27 +143,6 @@ CREATE TABLE [dbo].[AccessControlEntries] (
 );
 GO
 
--- Creating table 'TenantAccessControlEntry'
-CREATE TABLE [dbo].[TenantAccessControlEntry] (
-    [AccessControlEntries_Id] uniqueidentifier  NOT NULL,
-    [SubjectTenants_Id] uniqueidentifier  NOT NULL
-);
-GO
-
--- Creating table 'TenantAccount'
-CREATE TABLE [dbo].[TenantAccount] (
-    [TenantAccounts_Id] uniqueidentifier  NOT NULL,
-    [Accounts_Id] uniqueidentifier  NOT NULL
-);
-GO
-
--- Creating table 'TenantOwner'
-CREATE TABLE [dbo].[TenantOwner] (
-    [OwnedTenants_Id] uniqueidentifier  NOT NULL,
-    [Owners_Id] uniqueidentifier  NOT NULL
-);
-GO
-
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -238,24 +189,6 @@ ADD CONSTRAINT [PK_AccessControlEntries]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [AccessControlEntries_Id], [SubjectTenants_Id] in table 'TenantAccessControlEntry'
-ALTER TABLE [dbo].[TenantAccessControlEntry]
-ADD CONSTRAINT [PK_TenantAccessControlEntry]
-    PRIMARY KEY CLUSTERED ([AccessControlEntries_Id], [SubjectTenants_Id] ASC);
-GO
-
--- Creating primary key on [TenantAccounts_Id], [Accounts_Id] in table 'TenantAccount'
-ALTER TABLE [dbo].[TenantAccount]
-ADD CONSTRAINT [PK_TenantAccount]
-    PRIMARY KEY CLUSTERED ([TenantAccounts_Id], [Accounts_Id] ASC);
-GO
-
--- Creating primary key on [OwnedTenants_Id], [Owners_Id] in table 'TenantOwner'
-ALTER TABLE [dbo].[TenantOwner]
-ADD CONSTRAINT [PK_TenantOwner]
-    PRIMARY KEY CLUSTERED ([OwnedTenants_Id], [Owners_Id] ASC);
-GO
-
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
@@ -288,78 +221,6 @@ GO
 CREATE INDEX [IX_FK_TenantInfoKeyCloakConfiguration]
 ON [dbo].[KeyCloakConfigurations]
     ([TenantInfoId]);
-GO
-
--- Creating foreign key on [AccessControlEntries_Id] in table 'TenantAccessControlEntry'
-ALTER TABLE [dbo].[TenantAccessControlEntry]
-ADD CONSTRAINT [FK_AccessControlEntryTenant_AccessControlEntry]
-    FOREIGN KEY ([AccessControlEntries_Id])
-    REFERENCES [dbo].[AccessControlEntries]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [SubjectTenants_Id] in table 'TenantAccessControlEntry'
-ALTER TABLE [dbo].[TenantAccessControlEntry]
-ADD CONSTRAINT [FK_AccessControlEntryTenant_SubjectTenant]
-    FOREIGN KEY ([SubjectTenants_Id])
-    REFERENCES [dbo].[Tenants]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_AccessControlEntryTenant_SubjectTenant'
-CREATE INDEX [IX_FK_AccessControlEntryTenant_SubjectTenant]
-ON [dbo].[TenantAccessControlEntry]
-    ([SubjectTenants_Id]);
-GO
-
--- Creating foreign key on [TenantAccounts_Id] in table 'TenantAccount'
-ALTER TABLE [dbo].[TenantAccount]
-ADD CONSTRAINT [FK_TenantPrincipal_Tenant]
-    FOREIGN KEY ([TenantAccounts_Id])
-    REFERENCES [dbo].[Tenants]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Accounts_Id] in table 'TenantAccount'
-ALTER TABLE [dbo].[TenantAccount]
-ADD CONSTRAINT [FK_TenantPrincipal_Principal]
-    FOREIGN KEY ([Accounts_Id])
-    REFERENCES [dbo].[Principals]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TenantPrincipal_Principal'
-CREATE INDEX [IX_FK_TenantPrincipal_Principal]
-ON [dbo].[TenantAccount]
-    ([Accounts_Id]);
-GO
-
--- Creating foreign key on [OwnedTenants_Id] in table 'TenantOwner'
-ALTER TABLE [dbo].[TenantOwner]
-ADD CONSTRAINT [FK_TenantPrincipal1_Tenant]
-    FOREIGN KEY ([OwnedTenants_Id])
-    REFERENCES [dbo].[Tenants]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Owners_Id] in table 'TenantOwner'
-ALTER TABLE [dbo].[TenantOwner]
-ADD CONSTRAINT [FK_TenantPrincipal1_Principal]
-    FOREIGN KEY ([Owners_Id])
-    REFERENCES [dbo].[Principals]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TenantPrincipal1_Principal'
-CREATE INDEX [IX_FK_TenantPrincipal1_Principal]
-ON [dbo].[TenantOwner]
-    ([Owners_Id]);
 GO
 
 -- --------------------------------------------------

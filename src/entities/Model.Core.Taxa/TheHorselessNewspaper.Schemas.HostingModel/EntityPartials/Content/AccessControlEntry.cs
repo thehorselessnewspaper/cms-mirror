@@ -78,6 +78,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         [InverseProperty(nameof(Publication.AccessControlEntries))]
         public virtual ICollection<Publication?>? ManagedPublications { get; set; } = new HashSet<Publication?>();
+
+        [InverseProperty(nameof(Tenant.AccessControlEntries))]
+        public virtual ICollection<Tenant?>? ManagedTenants { get; set; } = new HashSet<Tenant?>();
+
+
         public string? DictionaryKey { get; set; }
 
         /// <summary>

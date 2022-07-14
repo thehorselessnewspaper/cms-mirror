@@ -14,13 +14,6 @@ namespace Schema.Diagrams.Hosting
     
     public partial class Principal
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Principal()
-        {
-            this.TenantAccounts = new HashSet<Tenant>();
-            this.OwnedTenants = new HashSet<Tenant>();
-        }
-    
         public System.Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
@@ -29,10 +22,5 @@ namespace Schema.Diagrams.Hosting
         public string Iss { get; set; }
         public string Aud { get; set; }
         public string Sub { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tenant> TenantAccounts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tenant> OwnedTenants { get; set; }
     }
 }

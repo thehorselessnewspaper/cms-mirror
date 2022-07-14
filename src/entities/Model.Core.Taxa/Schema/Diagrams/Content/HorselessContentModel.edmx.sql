@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/14/2022 10:35:33
--- Generated from EDMX file: E:\src\horseless-core\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
+-- Date Created: 07/14/2022 12:25:38
+-- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -98,26 +98,8 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ContentCollectionTaxonomies_ContentCollection]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ContentCollectionTaxonomies] DROP CONSTRAINT [FK_ContentCollectionTaxonomies_ContentCollection];
 GO
-IF OBJECT_ID(N'[dbo].[FK_TenantAccessControlEntries_SubjectTenant]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TenantAccessControlEntries] DROP CONSTRAINT [FK_TenantAccessControlEntries_SubjectTenant];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TenantAccessControlEntries_AccessControlEntry]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TenantAccessControlEntries] DROP CONSTRAINT [FK_TenantAccessControlEntries_AccessControlEntry];
-GO
 IF OBJECT_ID(N'[dbo].[FK_PrincipalHorselessSession]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[HorselessSessions] DROP CONSTRAINT [FK_PrincipalHorselessSession];
-GO
-IF OBJECT_ID(N'[dbo].[FK_HorselessSessionAccessControlEntry_SubjectHorselessSession]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[HorselessSessionAccessControlEntry] DROP CONSTRAINT [FK_HorselessSessionAccessControlEntry_SubjectHorselessSession];
-GO
-IF OBJECT_ID(N'[dbo].[FK_HorselessSessionAccessControlEntry_AccessControlledHorselessSession]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[HorselessSessionAccessControlEntry] DROP CONSTRAINT [FK_HorselessSessionAccessControlEntry_AccessControlledHorselessSession];
-GO
-IF OBJECT_ID(N'[dbo].[FK_HorselessSessionPrincipal_HorselessSession]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[HorselessSessionPrincipal] DROP CONSTRAINT [FK_HorselessSessionPrincipal_HorselessSession];
-GO
-IF OBJECT_ID(N'[dbo].[FK_HorselessSessionPrincipal_Principal]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[HorselessSessionPrincipal] DROP CONSTRAINT [FK_HorselessSessionPrincipal_Principal];
 GO
 IF OBJECT_ID(N'[dbo].[FK_HorselessViewContentCollection_HorselessView]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[HorselessViewContentCollection] DROP CONSTRAINT [FK_HorselessViewContentCollection_HorselessView];
@@ -222,15 +204,6 @@ IF OBJECT_ID(N'[dbo].[HolonymMeronym]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[ContentCollectionTaxonomies]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ContentCollectionTaxonomies];
-GO
-IF OBJECT_ID(N'[dbo].[TenantAccessControlEntries]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TenantAccessControlEntries];
-GO
-IF OBJECT_ID(N'[dbo].[HorselessSessionAccessControlEntry]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[HorselessSessionAccessControlEntry];
-GO
-IF OBJECT_ID(N'[dbo].[HorselessSessionPrincipal]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[HorselessSessionPrincipal];
 GO
 IF OBJECT_ID(N'[dbo].[HorselessViewContentCollection]', 'U') IS NOT NULL
     DROP TABLE [dbo].[HorselessViewContentCollection];
@@ -575,27 +548,6 @@ CREATE TABLE [dbo].[ContentCollectionTaxonomies] (
 );
 GO
 
--- Creating table 'TenantAccessControlEntries'
-CREATE TABLE [dbo].[TenantAccessControlEntries] (
-    [SubjectTenants_Id] uniqueidentifier  NOT NULL,
-    [AccessControlEntries_Id] uniqueidentifier  NOT NULL
-);
-GO
-
--- Creating table 'HorselessSessionAccessControlEntry'
-CREATE TABLE [dbo].[HorselessSessionAccessControlEntry] (
-    [SubjectHorselessSessions_Id] uniqueidentifier  NOT NULL,
-    [AccessControlEntries_Id] uniqueidentifier  NOT NULL
-);
-GO
-
--- Creating table 'HorselessSessionPrincipal'
-CREATE TABLE [dbo].[HorselessSessionPrincipal] (
-    [OwnedHorselessSessions_Id] uniqueidentifier  NOT NULL,
-    [Owners_Id] uniqueidentifier  NOT NULL
-);
-GO
-
 -- Creating table 'HorselessViewContentCollection'
 CREATE TABLE [dbo].[HorselessViewContentCollection] (
     [HorselessViews_Id] uniqueidentifier  NOT NULL,
@@ -791,24 +743,6 @@ GO
 ALTER TABLE [dbo].[ContentCollectionTaxonomies]
 ADD CONSTRAINT [PK_ContentCollectionTaxonomies]
     PRIMARY KEY CLUSTERED ([Taxonomies_Id], [ContentCollections_Id] ASC);
-GO
-
--- Creating primary key on [SubjectTenants_Id], [AccessControlEntries_Id] in table 'TenantAccessControlEntries'
-ALTER TABLE [dbo].[TenantAccessControlEntries]
-ADD CONSTRAINT [PK_TenantAccessControlEntries]
-    PRIMARY KEY CLUSTERED ([SubjectTenants_Id], [AccessControlEntries_Id] ASC);
-GO
-
--- Creating primary key on [SubjectHorselessSessions_Id], [AccessControlEntries_Id] in table 'HorselessSessionAccessControlEntry'
-ALTER TABLE [dbo].[HorselessSessionAccessControlEntry]
-ADD CONSTRAINT [PK_HorselessSessionAccessControlEntry]
-    PRIMARY KEY CLUSTERED ([SubjectHorselessSessions_Id], [AccessControlEntries_Id] ASC);
-GO
-
--- Creating primary key on [OwnedHorselessSessions_Id], [Owners_Id] in table 'HorselessSessionPrincipal'
-ALTER TABLE [dbo].[HorselessSessionPrincipal]
-ADD CONSTRAINT [PK_HorselessSessionPrincipal]
-    PRIMARY KEY CLUSTERED ([OwnedHorselessSessions_Id], [Owners_Id] ASC);
 GO
 
 -- Creating primary key on [HorselessViews_Id], [ContentCollections_Id] in table 'HorselessViewContentCollection'
@@ -1154,30 +1088,6 @@ ON [dbo].[ContentCollectionTaxonomies]
     ([ContentCollections_Id]);
 GO
 
--- Creating foreign key on [SubjectTenants_Id] in table 'TenantAccessControlEntries'
-ALTER TABLE [dbo].[TenantAccessControlEntries]
-ADD CONSTRAINT [FK_TenantAccessControlEntries_SubjectTenant]
-    FOREIGN KEY ([SubjectTenants_Id])
-    REFERENCES [dbo].[Tenants]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [AccessControlEntries_Id] in table 'TenantAccessControlEntries'
-ALTER TABLE [dbo].[TenantAccessControlEntries]
-ADD CONSTRAINT [FK_TenantAccessControlEntries_AccessControlEntry]
-    FOREIGN KEY ([AccessControlEntries_Id])
-    REFERENCES [dbo].[AccessControlEntries]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TenantAccessControlEntries_AccessControlEntry'
-CREATE INDEX [IX_FK_TenantAccessControlEntries_AccessControlEntry]
-ON [dbo].[TenantAccessControlEntries]
-    ([AccessControlEntries_Id]);
-GO
-
 -- Creating foreign key on [HorselessSessionPrincipalId] in table 'HorselessSessions'
 ALTER TABLE [dbo].[HorselessSessions]
 ADD CONSTRAINT [FK_PrincipalHorselessSession]
@@ -1191,54 +1101,6 @@ GO
 CREATE INDEX [IX_FK_PrincipalHorselessSession]
 ON [dbo].[HorselessSessions]
     ([HorselessSessionPrincipalId]);
-GO
-
--- Creating foreign key on [SubjectHorselessSessions_Id] in table 'HorselessSessionAccessControlEntry'
-ALTER TABLE [dbo].[HorselessSessionAccessControlEntry]
-ADD CONSTRAINT [FK_HorselessSessionAccessControlEntry_SubjectHorselessSession]
-    FOREIGN KEY ([SubjectHorselessSessions_Id])
-    REFERENCES [dbo].[HorselessSessions]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [AccessControlEntries_Id] in table 'HorselessSessionAccessControlEntry'
-ALTER TABLE [dbo].[HorselessSessionAccessControlEntry]
-ADD CONSTRAINT [FK_HorselessSessionAccessControlEntry_AccessControlledHorselessSession]
-    FOREIGN KEY ([AccessControlEntries_Id])
-    REFERENCES [dbo].[AccessControlEntries]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_HorselessSessionAccessControlEntry_AccessControlledHorselessSession'
-CREATE INDEX [IX_FK_HorselessSessionAccessControlEntry_AccessControlledHorselessSession]
-ON [dbo].[HorselessSessionAccessControlEntry]
-    ([AccessControlEntries_Id]);
-GO
-
--- Creating foreign key on [OwnedHorselessSessions_Id] in table 'HorselessSessionPrincipal'
-ALTER TABLE [dbo].[HorselessSessionPrincipal]
-ADD CONSTRAINT [FK_HorselessSessionPrincipal_HorselessSession]
-    FOREIGN KEY ([OwnedHorselessSessions_Id])
-    REFERENCES [dbo].[HorselessSessions]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Owners_Id] in table 'HorselessSessionPrincipal'
-ALTER TABLE [dbo].[HorselessSessionPrincipal]
-ADD CONSTRAINT [FK_HorselessSessionPrincipal_Principal]
-    FOREIGN KEY ([Owners_Id])
-    REFERENCES [dbo].[Principals]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_HorselessSessionPrincipal_Principal'
-CREATE INDEX [IX_FK_HorselessSessionPrincipal_Principal]
-ON [dbo].[HorselessSessionPrincipal]
-    ([Owners_Id]);
 GO
 
 -- Creating foreign key on [HorselessViews_Id] in table 'HorselessViewContentCollection'

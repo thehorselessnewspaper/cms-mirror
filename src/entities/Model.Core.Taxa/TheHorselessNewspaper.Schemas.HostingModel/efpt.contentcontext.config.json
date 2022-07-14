@@ -46,14 +46,6 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[HorselessSessionAccessControlEntry]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[HorselessSessionPrincipal]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[dbo].[HorselessSessions]",
          "ObjectType": 0
       },
@@ -139,10 +131,6 @@
       },
       {
          "Name": "[dbo].[TaxonTaxonomy]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[TenantAccessControlEntries]",
          "ObjectType": 0
       },
       {

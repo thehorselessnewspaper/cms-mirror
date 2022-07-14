@@ -16,21 +16,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Configurati
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
 
-            entity.HasMany(d => d.AccessControlEntries)
-                .WithMany(p => p.SubjectTenants)
-                .UsingEntity<Dictionary<string, object>>(
-                    "TenantAccessControlEntry",
-                    l => l.HasOne<AccessControlEntry>().WithMany().HasForeignKey("AccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TenantAccessControlEntries_AccessControlEntry"),
-                    r => r.HasOne<Tenant>().WithMany().HasForeignKey("SubjectTenants_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TenantAccessControlEntries_SubjectTenant"),
-                    j =>
-                    {
-                        j.HasKey("SubjectTenants_Id", "AccessControlEntries_Id");
-
-                        j.ToTable("TenantAccessControlEntries");
-
-                        j.HasIndex(new[] { "AccessControlEntries_Id" }, "IX_FK_TenantAccessControlEntries_AccessControlEntry");
-                    });
-
             entity.HasMany(d => d.ContentCollections)
                 .WithMany(p => p.Tenants)
                 .UsingEntity<Dictionary<string, object>>(

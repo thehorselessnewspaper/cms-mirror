@@ -11,12 +11,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     [Index("HorselessSessionPrincipalId", Name = "IX_FK_PrincipalHorselessSession")]
     public partial class HorselessSession
     {
-        public HorselessSession()
-        {
-            AccessControlEntries = new HashSet<AccessControlEntry>();
-            Owners = new HashSet<Principal>();
-        }
-
         [Key]
         public Guid Id { get; set; }
         public string? DisplayName { get; set; }
@@ -34,12 +28,5 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [ForeignKey("HorselessSessionPrincipalId")]
         [InverseProperty("HorselessSessions")]
         public virtual Principal? HorselessSessionPrincipal { get; set; }
-
-        [ForeignKey("SubjectHorselessSessions_Id")]
-        [InverseProperty("SubjectHorselessSessions")]
-        public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
-        [ForeignKey("OwnedHorselessSessions_Id")]
-        [InverseProperty("OwnedHorselessSessions")]
-        public virtual ICollection<Principal> Owners { get; set; }
     }
 }

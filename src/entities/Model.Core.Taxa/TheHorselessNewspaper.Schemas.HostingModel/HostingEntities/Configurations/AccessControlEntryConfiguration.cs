@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
+#nullable disable
+
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Configurations
 {
     public partial class AccessControlEntryConfiguration : IEntityTypeConfiguration<AccessControlEntry>
@@ -13,21 +15,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Configurati
         public void Configure(EntityTypeBuilder<AccessControlEntry> entity)
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
-
-            entity.HasMany(d => d.SubjectTenants)
-                .WithMany(p => p.AccessControlEntries)
-                .UsingEntity<Dictionary<string, object>>(
-                    "TenantAccessControlEntry",
-                    l => l.HasOne<Tenant>().WithMany().HasForeignKey("SubjectTenants_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryTenant_SubjectTenant"),
-                    r => r.HasOne<AccessControlEntry>().WithMany().HasForeignKey("AccessControlEntries_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_AccessControlEntryTenant_AccessControlEntry"),
-                    j =>
-                    {
-                        j.HasKey("AccessControlEntries_Id", "SubjectTenants_Id");
-
-                        j.ToTable("TenantAccessControlEntry");
-
-                        j.HasIndex(new[] { "SubjectTenants_Id" }, "IX_FK_AccessControlEntryTenant_SubjectTenant");
-                    });
 
             OnConfigurePartial(entity);
         }

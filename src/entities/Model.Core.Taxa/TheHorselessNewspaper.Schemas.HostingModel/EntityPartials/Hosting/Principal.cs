@@ -27,8 +27,15 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 
+        [InverseProperty(nameof(Tenant.Owners))]
+        public ICollection<Tenant> OwnedTenants { get; set; } = new HashSet<Tenant>();
+
+        [InverseProperty(nameof(Tenant.Accounts))]
+        public ICollection<Tenant> TenantAccounts { get; set; } = new HashSet<Tenant>();
+
         [NotMapped]
-        public ICollection<AccessControlEntry> AccessControlEntries { get; set; }
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+
 
         [NotMapped]
         public ICollection<Principal> Owners { get; set; }
