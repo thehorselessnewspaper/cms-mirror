@@ -10,7 +10,7 @@
         "tags": [
           "AccessControlEntriesREST"
         ],
-        "operationId": "AccessControlEntriesRESTControllerCreate",
+        "operationId": "ContentEntitiesAccessControlEntriesREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -209,7 +209,7 @@
         "tags": [
           "AccessControlEntriesREST"
         ],
-        "operationId": "AccessControlEntriesRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesAccessControlEntriesREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -407,7 +407,7 @@
         "tags": [
           "AccessControlEntriesREST"
         ],
-        "operationId": "AccessControlEntriesRESTControllerUpdate",
+        "operationId": "ContentEntitiesAccessControlEntriesREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -614,7 +614,7 @@
         "tags": [
           "AccessControlEntriesREST"
         ],
-        "operationId": "AccessControlEntriesRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesAccessControlEntriesREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -879,7 +879,7 @@
         "tags": [
           "ClientConfiguration"
         ],
-        "operationId": "ClientConfigurationControllerGetClientConfiguration",
+        "operationId": "ClientConfigurationClientConfiguration_GetClientConfiguration",
         "responses": {
           "200": {
             "description": "Success",
@@ -1060,7 +1060,7 @@
         "tags": [
           "ContentCollectionREST"
         ],
-        "operationId": "ContentCollectionRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesContentCollectionREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -1258,7 +1258,7 @@
         "tags": [
           "ContentCollectionREST"
         ],
-        "operationId": "ContentCollectionRESTControllerCreate",
+        "operationId": "ContentEntitiesContentCollectionREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -1457,7 +1457,7 @@
         "tags": [
           "ContentCollectionREST"
         ],
-        "operationId": "ContentCollectionRESTControllerUpdate",
+        "operationId": "ContentEntitiesContentCollectionREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -1664,7 +1664,7 @@
         "tags": [
           "ContentCollectionREST"
         ],
-        "operationId": "ContentCollectionRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesContentCollectionREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -1929,7 +1929,7 @@
         "tags": [
           "DynamicViewServer"
         ],
-        "operationId": "DynamicViewServerControllerGetDynamicView",
+        "operationId": "PresentationDynamicViewServer_GetDynamicView",
         "parameters": [
           {
             "name": "viewPhysicalPath",
@@ -1980,7 +1980,7 @@
         "tags": [
           "FilesystemAssetIngress"
         ],
-        "operationId": "FilesystemAssetIngressControllerUploadPhysical",
+        "operationId": "ContentEntitiesFilesystemAssetIngress_UploadPhysical",
         "parameters": [
           {
             "name": "__tenant__",
@@ -2003,7 +2003,7 @@
         "tags": [
           "FilesystemAssetREST"
         ],
-        "operationId": "FilesystemAssetRESTControllerCreate",
+        "operationId": "ContentEntitiesFilesystemAssetREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -2202,7 +2202,7 @@
         "tags": [
           "FilesystemAssetREST"
         ],
-        "operationId": "FilesystemAssetRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesFilesystemAssetREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -2400,7 +2400,7 @@
         "tags": [
           "FilesystemAssetREST"
         ],
-        "operationId": "FilesystemAssetRESTControllerUpdate",
+        "operationId": "ContentEntitiesFilesystemAssetREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -2607,7 +2607,7 @@
         "tags": [
           "FilesystemAssetREST"
         ],
-        "operationId": "FilesystemAssetRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesFilesystemAssetREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -2872,7 +2872,7 @@
         "tags": [
           "HolonymREST"
         ],
-        "operationId": "HolonymRESTControllerCreate",
+        "operationId": "ContentEntitiesHolonymREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -3071,7 +3071,7 @@
         "tags": [
           "HolonymREST"
         ],
-        "operationId": "HolonymRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesHolonymREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -3269,7 +3269,7 @@
         "tags": [
           "HolonymREST"
         ],
-        "operationId": "HolonymRESTControllerUpdate",
+        "operationId": "ContentEntitiesHolonymREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -3476,7 +3476,7 @@
         "tags": [
           "HolonymREST"
         ],
-        "operationId": "HolonymRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesHolonymREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -3741,7 +3741,7 @@
         "tags": [
           "HorselessContentREST"
         ],
-        "operationId": "HorselessContentRESTControllerCreate",
+        "operationId": "ContentEntitiesHorselessContentREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -3940,7 +3940,7 @@
         "tags": [
           "HorselessContentREST"
         ],
-        "operationId": "HorselessContentRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesHorselessContentREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -4138,7 +4138,7 @@
         "tags": [
           "HorselessContentREST"
         ],
-        "operationId": "HorselessContentRESTControllerUpdate",
+        "operationId": "ContentEntitiesHorselessContentREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -4345,7 +4345,7 @@
         "tags": [
           "HorselessContentREST"
         ],
-        "operationId": "HorselessContentRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesHorselessContentREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -4610,7 +4610,7 @@
         "tags": [
           "HorselessSessionREST"
         ],
-        "operationId": "HorselessSessionRESTControllerCreate",
+        "operationId": "ContentEntitiesHorselessSessionREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -4809,7 +4809,7 @@
         "tags": [
           "HorselessSessionREST"
         ],
-        "operationId": "HorselessSessionRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesHorselessSessionREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -5007,7 +5007,7 @@
         "tags": [
           "HorselessSessionREST"
         ],
-        "operationId": "HorselessSessionRESTControllerUpdate",
+        "operationId": "ContentEntitiesHorselessSessionREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -5214,7 +5214,7 @@
         "tags": [
           "HorselessSessionREST"
         ],
-        "operationId": "HorselessSessionRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesHorselessSessionREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -5479,7 +5479,7 @@
         "tags": [
           "HorselessViewREST"
         ],
-        "operationId": "HorselessViewRESTControllerCreate",
+        "operationId": "ContentEntitiesHorselessViewREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -5678,7 +5678,7 @@
         "tags": [
           "HorselessViewREST"
         ],
-        "operationId": "HorselessViewRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesHorselessViewREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -5876,7 +5876,7 @@
         "tags": [
           "HorselessViewREST"
         ],
-        "operationId": "HorselessViewRESTControllerUpdate",
+        "operationId": "ContentEntitiesHorselessViewREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -6083,7 +6083,7 @@
         "tags": [
           "HorselessViewREST"
         ],
-        "operationId": "HorselessViewRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesHorselessViewREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -6348,7 +6348,7 @@
         "tags": [
           "JSONAssetREST"
         ],
-        "operationId": "JSONAssetRESTControllerCreate",
+        "operationId": "ContentEntitiesJSONAssetREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -6547,7 +6547,7 @@
         "tags": [
           "JSONAssetREST"
         ],
-        "operationId": "JSONAssetRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesJSONAssetREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -6745,7 +6745,7 @@
         "tags": [
           "JSONAssetREST"
         ],
-        "operationId": "JSONAssetRESTControllerUpdate",
+        "operationId": "ContentEntitiesJSONAssetREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -6952,7 +6952,7 @@
         "tags": [
           "JSONAssetREST"
         ],
-        "operationId": "JSONAssetRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesJSONAssetREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -7217,7 +7217,6 @@
         "tags": [
           "KeycloakAuthentication"
         ],
-        "operationId": "KeycloakAuthenticationControllerSignIn",
         "responses": {
           "200": {
             "description": "Success"
@@ -7228,7 +7227,6 @@
         "tags": [
           "KeycloakAuthentication"
         ],
-        "operationId": "KeycloakAuthenticationControllerSignIn",
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -7260,7 +7258,6 @@
         "tags": [
           "KeycloakAuthentication"
         ],
-        "operationId": "KeycloakAuthenticationControllerSignOutCurrentUser",
         "responses": {
           "200": {
             "description": "Success"
@@ -7273,7 +7270,7 @@
         "tags": [
           "MeronymREST"
         ],
-        "operationId": "MeronymRESTControllerCreate",
+        "operationId": "ContentEntitiesMeronymREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -7472,7 +7469,7 @@
         "tags": [
           "MeronymREST"
         ],
-        "operationId": "MeronymRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesMeronymREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -7670,7 +7667,7 @@
         "tags": [
           "MeronymREST"
         ],
-        "operationId": "MeronymRESTControllerUpdate",
+        "operationId": "ContentEntitiesMeronymREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -7877,7 +7874,7 @@
         "tags": [
           "MeronymREST"
         ],
-        "operationId": "MeronymRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesMeronymREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -8142,7 +8139,7 @@
         "tags": [
           "MimeTypeREST"
         ],
-        "operationId": "MimeTypeRESTControllerCreate",
+        "operationId": "ContentEntitiesMimeTypeREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -8341,7 +8338,7 @@
         "tags": [
           "MimeTypeREST"
         ],
-        "operationId": "MimeTypeRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesMimeTypeREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -8539,7 +8536,7 @@
         "tags": [
           "MimeTypeREST"
         ],
-        "operationId": "MimeTypeRESTControllerUpdate",
+        "operationId": "ContentEntitiesMimeTypeREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -8746,7 +8743,7 @@
         "tags": [
           "MimeTypeREST"
         ],
-        "operationId": "MimeTypeRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesMimeTypeREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -9011,7 +9008,7 @@
         "tags": [
           "NavigationMenuItemREST"
         ],
-        "operationId": "NavigationMenuItemRESTControllerCreate",
+        "operationId": "ContentEntitiesNavigationMenuItemREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -9210,7 +9207,7 @@
         "tags": [
           "NavigationMenuItemREST"
         ],
-        "operationId": "NavigationMenuItemRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesNavigationMenuItemREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -9408,7 +9405,7 @@
         "tags": [
           "NavigationMenuItemREST"
         ],
-        "operationId": "NavigationMenuItemRESTControllerUpdate",
+        "operationId": "ContentEntitiesNavigationMenuItemREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -9615,7 +9612,7 @@
         "tags": [
           "NavigationMenuItemREST"
         ],
-        "operationId": "NavigationMenuItemRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesNavigationMenuItemREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -9880,7 +9877,7 @@
         "tags": [
           "NavigationMenuREST"
         ],
-        "operationId": "NavigationMenuRESTControllerCreate",
+        "operationId": "ContentEntitiesNavigationMenuREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -10079,7 +10076,7 @@
         "tags": [
           "NavigationMenuREST"
         ],
-        "operationId": "NavigationMenuRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesNavigationMenuREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -10277,7 +10274,7 @@
         "tags": [
           "NavigationMenuREST"
         ],
-        "operationId": "NavigationMenuRESTControllerUpdate",
+        "operationId": "ContentEntitiesNavigationMenuREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -10484,7 +10481,7 @@
         "tags": [
           "NavigationMenuREST"
         ],
-        "operationId": "NavigationMenuRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesNavigationMenuREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -10749,7 +10746,7 @@
         "tags": [
           "NugetPackageREST"
         ],
-        "operationId": "NugetPackageRESTControllerCreate",
+        "operationId": "ContentEntitiesNugetPackageREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -10948,7 +10945,7 @@
         "tags": [
           "NugetPackageREST"
         ],
-        "operationId": "NugetPackageRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesNugetPackageREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -11146,7 +11143,7 @@
         "tags": [
           "NugetPackageREST"
         ],
-        "operationId": "NugetPackageRESTControllerUpdate",
+        "operationId": "ContentEntitiesNugetPackageREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -11353,7 +11350,7 @@
         "tags": [
           "NugetPackageREST"
         ],
-        "operationId": "NugetPackageRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesNugetPackageREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -11618,7 +11615,7 @@
         "tags": [
           "PrincipalREST"
         ],
-        "operationId": "PrincipalRESTControllerCreate",
+        "operationId": "ContentEntitiesPrincipalREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -11817,7 +11814,7 @@
         "tags": [
           "PrincipalREST"
         ],
-        "operationId": "PrincipalRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesPrincipalREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -12015,7 +12012,7 @@
         "tags": [
           "PrincipalREST"
         ],
-        "operationId": "PrincipalRESTControllerUpdate",
+        "operationId": "ContentEntitiesPrincipalREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -12222,7 +12219,7 @@
         "tags": [
           "PrincipalREST"
         ],
-        "operationId": "PrincipalRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesPrincipalREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -12487,7 +12484,7 @@
         "tags": [
           "PublicationREST"
         ],
-        "operationId": "PublicationRESTControllerCreate",
+        "operationId": "ContentEntitiesPublicationREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -12686,7 +12683,7 @@
         "tags": [
           "PublicationREST"
         ],
-        "operationId": "PublicationRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesPublicationREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -12884,7 +12881,7 @@
         "tags": [
           "PublicationREST"
         ],
-        "operationId": "PublicationRESTControllerUpdate",
+        "operationId": "ContentEntitiesPublicationREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -13091,7 +13088,7 @@
         "tags": [
           "PublicationREST"
         ],
-        "operationId": "PublicationRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesPublicationREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -13356,7 +13353,7 @@
         "tags": [
           "TenantInfoREST"
         ],
-        "operationId": "TenantInfoRESTControllerCreate",
+        "operationId": "HostingEntitiesTenantInfoREST_Create",
         "requestBody": {
           "content": {
             "application/json": {
@@ -13545,7 +13542,7 @@
         "tags": [
           "TenantInfoREST"
         ],
-        "operationId": "TenantInfoRESTControllerGetByObjectId",
+        "operationId": "HostingEntitiesTenantInfoREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -13735,7 +13732,7 @@
         "tags": [
           "TenantInfoREST"
         ],
-        "operationId": "TenantInfoRESTControllerUpdate",
+        "operationId": "HostingEntitiesTenantInfoREST_Update",
         "parameters": [
           {
             "name": "entityCollectionId",
@@ -13934,7 +13931,7 @@
         "tags": [
           "TenantInfoREST"
         ],
-        "operationId": "TenantInfoRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesTenantInfoREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -14191,7 +14188,6 @@
         "tags": [
           "TenantRegistration"
         ],
-        "operationId": "TenantRegistrationControllerApprove",
         "parameters": [
           {
             "name": "tenantId",
@@ -14212,7 +14208,6 @@
         "tags": [
           "TenantRegistration"
         ],
-        "operationId": "TenantRegistrationControllerApprove",
         "parameters": [
           {
             "name": "tenantId",
@@ -14259,7 +14254,7 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "TenantRESTControllerCreate",
+        "operationId": "HostingEntitiesTenantREST_Create",
         "requestBody": {
           "content": {
             "application/json": {
@@ -14448,7 +14443,7 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "TenantRESTControllerGetByObjectId",
+        "operationId": "HostingEntitiesTenantREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -14638,7 +14633,7 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "TenantRESTControllerUpdate",
+        "operationId": "HostingEntitiesTenantREST_Update",
         "parameters": [
           {
             "name": "entityCollectionId",
@@ -14837,7 +14832,7 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "TenantRESTControllerGetByPageNumber",
+        "operationId": "HostingEntitiesTenantREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -15094,7 +15089,6 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "TenantRESTControllerCreate",
         "parameters": [
           {
             "name": "__tenant__",
@@ -15293,7 +15287,7 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "TenantRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesTenantREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -15491,7 +15485,7 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "TenantRESTControllerUpdate",
+        "operationId": "ContentEntitiesTenantREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -15698,7 +15692,7 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "TenantRESTControllerUpdateProperties",
+        "operationId": "ContentEntitiesTenantREST_UpdateProperties",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -15915,7 +15909,7 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "TenantRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesTenantREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",

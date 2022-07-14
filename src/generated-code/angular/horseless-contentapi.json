@@ -204,7 +204,7 @@
         }
       }
     },
-    "/{__tenant__}/api/HorselessContentModel/AccessControlEntry/GetByObjectId": {
+    "/{__tenant__}/api/HorselessContentModel/AccessControlEntry/GetByObjectId/{objectId}": {
       "get": {
         "tags": [
           "AccessControlEntriesREST"
@@ -1055,7 +1055,7 @@
         "deprecated": true
       }
     },
-    "/{__tenant__}/api/HorselessContentModel/ContentCollection/GetByObjectId": {
+    "/{__tenant__}/api/HorselessContentModel/ContentCollection/GetByObjectId/{objectId}": {
       "get": {
         "tags": [
           "ContentCollectionREST"
@@ -1064,7 +1064,8 @@
         "parameters": [
           {
             "name": "objectId",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "string"
             }
@@ -2196,7 +2197,7 @@
         }
       }
     },
-    "/{__tenant__}/api/HorselessContentModel/FilesystemAsset/GetByObjectId": {
+    "/{__tenant__}/api/HorselessContentModel/FilesystemAsset/GetByObjectId/{objectId}": {
       "get": {
         "tags": [
           "FilesystemAssetREST"
@@ -3065,7 +3066,7 @@
         }
       }
     },
-    "/{__tenant__}/api/HorselessContentModel/Holonym/GetByObjectId": {
+    "/{__tenant__}/api/HorselessContentModel/Holonym/GetByObjectId/{objectId}": {
       "get": {
         "tags": [
           "HolonymREST"
@@ -3934,7 +3935,7 @@
         }
       }
     },
-    "/{__tenant__}/api/HorselessContentModel/HorselessContent/GetByObjectId": {
+    "/{__tenant__}/api/HorselessContentModel/HorselessContent/GetByObjectId/{objectId}": {
       "get": {
         "tags": [
           "HorselessContentREST"
@@ -4803,7 +4804,7 @@
         }
       }
     },
-    "/{__tenant__}/api/HorselessContentModel/HorselessSession/GetByObjectId": {
+    "/{__tenant__}/api/HorselessContentModel/HorselessSession/GetByObjectId/{objectId}": {
       "get": {
         "tags": [
           "HorselessSessionREST"
@@ -5672,7 +5673,7 @@
         }
       }
     },
-    "/{__tenant__}/api/HorselessContentModel/HorselessView/GetByObjectId": {
+    "/{__tenant__}/api/HorselessContentModel/HorselessView/GetByObjectId/{objectId}": {
       "get": {
         "tags": [
           "HorselessViewREST"
@@ -6541,7 +6542,7 @@
         }
       }
     },
-    "/{__tenant__}/api/HorselessContentModel/JSONAsset/GetByObjectId": {
+    "/{__tenant__}/api/HorselessContentModel/JSONAsset/GetByObjectId/{objectId}": {
       "get": {
         "tags": [
           "JSONAssetREST"
@@ -7463,7 +7464,7 @@
         }
       }
     },
-    "/{__tenant__}/api/HorselessContentModel/Meronym/GetByObjectId": {
+    "/{__tenant__}/api/HorselessContentModel/Meronym/GetByObjectId/{objectId}": {
       "get": {
         "tags": [
           "MeronymREST"
@@ -8332,7 +8333,7 @@
         }
       }
     },
-    "/{__tenant__}/api/HorselessContentModel/MIMEType/GetByObjectId": {
+    "/{__tenant__}/api/HorselessContentModel/MIMEType/GetByObjectId/{objectId}": {
       "get": {
         "tags": [
           "MimeTypeREST"
@@ -9201,7 +9202,7 @@
         }
       }
     },
-    "/{__tenant__}/api/HorselessContentModel/NavigationMenuItem/GetByObjectId": {
+    "/{__tenant__}/api/HorselessContentModel/NavigationMenuItem/GetByObjectId/{objectId}": {
       "get": {
         "tags": [
           "NavigationMenuItemREST"
@@ -10070,7 +10071,7 @@
         }
       }
     },
-    "/{__tenant__}/api/HorselessContentModelModel/NavigationMenu/GetByObjectId": {
+    "/{__tenant__}/api/HorselessContentModelModel/NavigationMenu/GetByObjectId/{objectId}": {
       "get": {
         "tags": [
           "NavigationMenuREST"
@@ -10939,7 +10940,7 @@
         }
       }
     },
-    "/{__tenant__}/api/HorselessContentModel/NugetPackage/GetByObjectId": {
+    "/{__tenant__}/api/HorselessContentModel/NugetPackage/GetByObjectId/{objectId}": {
       "get": {
         "tags": [
           "NugetPackageREST"
@@ -11808,7 +11809,7 @@
         }
       }
     },
-    "/{__tenant__}/api/HorselessContentModel/Principal/GetByObjectId": {
+    "/{__tenant__}/api/HorselessContentModel/Principal/GetByObjectId/{objectId}": {
       "get": {
         "tags": [
           "PrincipalREST"
@@ -12677,7 +12678,7 @@
         }
       }
     },
-    "/{__tenant__}/api/HorselessContentModel/Publication/GetByObjectId": {
+    "/{__tenant__}/api/HorselessContentModel/Publication/GetByObjectId/{objectId}": {
       "get": {
         "tags": [
           "PublicationREST"
@@ -13536,7 +13537,7 @@
         }
       }
     },
-    "/api/HorselessHostingModel/TenantInfo/HostingEntitiesTenantInfoGetByObjectId": {
+    "/api/HorselessHostingModel/TenantInfo/HostingEntitiesTenantInfoGetByObjectId/{objectId}": {
       "get": {
         "tags": [
           "TenantInfoREST"
@@ -14437,7 +14438,7 @@
         }
       }
     },
-    "/api/HorselessHostingModel/TenantREST/HostingEntitiesTenantGetByObjectId": {
+    "/api/HorselessHostingModel/TenantREST/HostingEntitiesTenantGetByObjectId/{objectId}": {
       "get": {
         "tags": [
           "TenantREST"
@@ -15281,7 +15282,7 @@
         }
       }
     },
-    "/{__tenant__}/api/HorselessContentModel/Tenant/GetByObjectId": {
+    "/{__tenant__}/api/HorselessContentModel/Tenant/GetByObjectId/{objectId}": {
       "get": {
         "tags": [
           "TenantREST"
