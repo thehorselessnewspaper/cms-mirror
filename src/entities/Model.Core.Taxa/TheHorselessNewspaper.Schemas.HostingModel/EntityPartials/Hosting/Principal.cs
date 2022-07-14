@@ -27,11 +27,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 
-        [ForeignKey("FK_OWNED_TENANTSId")]
+        [ForeignKey("OwnedTenantsId")]
         [InverseProperty(nameof(Tenant.Owners))]
         public ICollection<Tenant> OwnedTenants { get; set; } = new HashSet<Tenant>();
 
-        [ForeignKey("FK_TENANT_ACCOUNTSId")]
+        [ForeignKey("TenantAccountsId")]
         [InverseProperty(nameof(Tenant.Accounts))]
         public ICollection<Tenant> TenantAccounts { get; set; } = new HashSet<Tenant>();
 
