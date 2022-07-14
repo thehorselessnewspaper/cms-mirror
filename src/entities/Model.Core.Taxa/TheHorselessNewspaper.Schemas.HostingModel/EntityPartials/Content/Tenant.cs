@@ -122,7 +122,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [InverseProperty(nameof(Principal.ManagedTenants))]
         public ICollection<Principal> Accounts { get; set; } = new HashSet<Principal>();
 
-        [ForeignKey("Tenants_Id")]
+        [ForeignKey("AccessControlEntriesId")]
         [InverseProperty(nameof(AccessControlEntry.ManagedTenants))]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
     }

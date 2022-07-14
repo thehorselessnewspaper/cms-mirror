@@ -97,6 +97,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [NotMapped]
         public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
 
+        [ForeignKey("SubjectPrincipalsId")]
         [InverseProperty(nameof(Principal.ManagingAccessControlEntries))]
         public ICollection<Principal>? SubjectPrincipals { get; set; } = new HashSet<Principal>();
     }
