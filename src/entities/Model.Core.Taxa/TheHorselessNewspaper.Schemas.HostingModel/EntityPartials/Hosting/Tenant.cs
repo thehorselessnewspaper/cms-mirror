@@ -92,12 +92,15 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 
+        [ForeignKey("Tenants_ID")]
         [InverseProperty(nameof(AccessControlEntry.ManagedTenants))]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
+        [ForeignKey("Tenants_ID")]
         [InverseProperty(nameof(Principal.OwnedTenants))]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
+        [ForeignKey("Tenants_ID")]
         [InverseProperty(nameof(Principal.TenantAccounts))]
         public ICollection<Principal> Accounts { get; set; } = new HashSet<Principal>();
     }

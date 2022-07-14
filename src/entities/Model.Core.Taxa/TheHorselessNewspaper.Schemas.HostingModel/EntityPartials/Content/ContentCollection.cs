@@ -13,6 +13,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     [MultiTenant]
     public partial class ContentCollection : IContentRowLevelSecured
     {
+
+        [ForeignKey("AccessControlEntriesId")]
         [InverseProperty(nameof(AccessControlEntry.ManagedContentCollections))]
         public virtual ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
