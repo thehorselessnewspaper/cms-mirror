@@ -14,15 +14,17 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     public partial class ContentCollection : IContentRowLevelSecured
     {
 
-        [ForeignKey("AccessControlEntriesId")]
+
         [InverseProperty(nameof(AccessControlEntry.ManagedContentCollections))]
         public virtual ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
+
+        // [ForeignKey("ParentContentCollectionsId")]
         [InverseProperty(nameof(ContentCollection.ChildContentCollections))]
         public virtual ICollection<ContentCollection>? ParentContentCollections { get; set; } = new HashSet<ContentCollection>();
 
 
-        [ForeignKey("ChildContentCollectionsId")]
+        [ForeignKey("Id")]
         [InverseProperty(nameof(ContentCollection.ParentContentCollections))]
         public virtual ICollection<ContentCollection>? ChildContentCollections { get; set; } = new HashSet<ContentCollection>();
 
