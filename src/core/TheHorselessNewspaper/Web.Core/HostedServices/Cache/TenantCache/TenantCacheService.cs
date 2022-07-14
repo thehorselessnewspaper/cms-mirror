@@ -824,7 +824,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 {
                     IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
                     ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
+                    var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRESTAPIClient>();
                     var token = await tokenService.GetClientCredentialsGrantToken();
+                    restClient.AuthorizationHeaderToken = token;
 
                     var httpClient = clientFactory.CreateClient();
 
@@ -858,10 +860,12 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             }
                     };
 
-                    var updatedPostResponse = await httpClient.SendAsync(updateRequest);
+                    var content = GetJsonContent(createdTenant);
+                    ContentEntitiesTenant dtoTenant = ContentEntitiesTenant.FromJson(await content.ReadAsStringAsync());
+                    // var updatedPostResponse = await httpClient.SendAsync(updateRequest);
 
-
-                    string updatepostResponseJson = await updatedPostResponse.Content.ReadAsStringAsync();
+                    var updatedPostResponse = await restClient.ApiHorselessContentModelTenantUpdateAsync(createdTenant.Id.ToString(), identifier, dtoTenant);
+                    string updatepostResponseJson = updatedPostResponse.Result.ToJson(); // await updatedPostResponse.Content.ReadAsStringAsync();
                     var updatedTenant = JsonConvert.DeserializeObject<ContentModel.Tenant>(updatepostResponseJson);
                     _logger.LogTrace($"tenant deployment: access control entries applied for {updatedTenant.TenantIdentifier}");
                     ret = updatedTenant;
@@ -884,6 +888,10 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                 IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
                 var httpClient = clientFactory.CreateClient();
+                var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRESTAPIClient>();
+                ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
+                var token = await tokenService.GetClientCredentialsGrantToken();
+                restClient.AuthorizationHeaderToken = token;
                 try
                 {
                     // ensure populated tenantidentifier
@@ -899,10 +907,14 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                     }
                     };
 
-                    var postResponse = await httpClient.SendAsync(postRequest);
+                    // var postResponse = await httpClient.SendAsync(postRequest);
 
+                    var content = GetJsonContent(mergeEntity);
+                    ContentEntitiesTenant dtoTenant = ContentEntitiesTenant.FromJson(await content.ReadAsStringAsync());
 
-                    string postResponseJson = await postResponse.Content.ReadAsStringAsync();
+                    var postResponse = await restClient.ApiHorselessContentModelTenantCreateAsync(identifier, dtoTenant);
+
+                    string postResponseJson = postResponse.Result.ToJson();
                     var createdTenant = JsonConvert.DeserializeObject<ContentModel.Tenant>(postResponseJson); // doesn't work JsonSerializer.Deserialize<ContentModel.Tenant>(postResponseJson);
                     _logger.LogTrace($"content model tenant record created for {createdTenant.TenantIdentifier}");
                 }
@@ -1010,6 +1022,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
                     var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRESTAPIClient>();
                     var httpClient = clientFactory.CreateClient();
+                    ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
+                    var token = await tokenService.GetClientCredentialsGrantToken();
+                    restClient.AuthorizationHeaderToken = token;
 
                     string identifier = originEntity.TenantIdentifier;
                     var baseUri = originEntity.BaseUrl.ToString();
