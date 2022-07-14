@@ -17877,6 +17877,11 @@
             "type": "string",
             "nullable": true
           },
+          "TenantIdentifierStrategyId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "TenantIdentifierStrategy": {
             "$ref": "#/components/schemas/ContentEntitiesTenantIdentifierStrategy"
           },
@@ -17959,7 +17964,12 @@
             "format": "byte",
             "nullable": true
           },
-          "TargetTenant": {
+          "Tenant_Id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "Tenant": {
             "$ref": "#/components/schemas/ContentEntitiesTenant"
           },
           "StrategyContainers": {
@@ -18321,6 +18331,11 @@
             "type": "string",
             "nullable": true
           },
+          "TenantIdentifierStrategyId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "TenantIdentifierStrategy": {
             "$ref": "#/components/schemas/HostingEntitiesTenantIdentifierStrategy"
           },
@@ -18414,12 +18429,12 @@
             "format": "date-time",
             "nullable": true
           },
-          "TargetTenantId": {
+          "Tenant_Id": {
             "type": "string",
             "format": "uuid",
             "nullable": true
           },
-          "TargetTenant": {
+          "Tenant": {
             "$ref": "#/components/schemas/HostingEntitiesTenant"
           },
           "StrategyContainers": {
