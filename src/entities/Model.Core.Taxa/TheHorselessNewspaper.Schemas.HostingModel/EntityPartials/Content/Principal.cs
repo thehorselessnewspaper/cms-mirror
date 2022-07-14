@@ -74,9 +74,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string? DictionaryKey { get; set; }
 
         [NotMapped]
-        public ICollection<AccessControlEntry>? AccessControlEntries { get; set; }
+        public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
         [NotMapped]
-        public ICollection<Principal>? Owners { get; set; }
+        public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
     }
 }

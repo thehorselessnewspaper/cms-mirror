@@ -13,7 +13,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public Publication()
         {
             ContentCollections = new HashSet<ContentCollection>();
-            PublicationChildrens = new HashSet<Publication>();
+            PublicationChildren = new HashSet<Publication>();
             PublicationParents = new HashSet<Publication>();
         }
 
@@ -37,9 +37,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public virtual ICollection<ContentCollection> ContentCollections { get; set; }
         [ForeignKey("PublicationParents_Id")]
         [InverseProperty("PublicationParents")]
-        public virtual ICollection<Publication> PublicationChildrens { get; set; }
+        public virtual ICollection<Publication> PublicationChildren { get; set; }
         [ForeignKey("PublicationChildren_Id")]
-        [InverseProperty("PublicationChildrens")]
+        [InverseProperty("PublicationChildren")]
         public virtual ICollection<Publication> PublicationParents { get; set; }
     }
 }

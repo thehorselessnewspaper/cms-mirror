@@ -31,7 +31,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Configurati
                         j.HasIndex(new[] { "ContentCollections_Id" }, "IX_FK_PublicationContentCollection_ContentCollection");
                     });
 
-            entity.HasMany(d => d.PublicationChildrens)
+            entity.HasMany(d => d.PublicationChildren)
                 .WithMany(p => p.PublicationParents)
                 .UsingEntity<Dictionary<string, object>>(
                     "PublicationHierarchy",
@@ -47,7 +47,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Configurati
                     });
 
             entity.HasMany(d => d.PublicationParents)
-                .WithMany(p => p.PublicationChildrens)
+                .WithMany(p => p.PublicationChildren)
                 .UsingEntity<Dictionary<string, object>>(
                     "PublicationHierarchy",
                     l => l.HasOne<Publication>().WithMany().HasForeignKey("PublicationParents_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PublicationHierarchy_PublicationChildren"),
