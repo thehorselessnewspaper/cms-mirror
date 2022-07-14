@@ -30,7 +30,7 @@ using HorselessNewspaper.Web.Core.Interfaces.Security.Resolver;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using HorselessNewspaper.Core.Interfaces.Security.Resolver;
 using HorselessNewspaper.Web.Core.Services.Model.SeedEntities;
-using HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPI;
+using HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient;
 
 namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 {
@@ -1009,8 +1009,6 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 {
                     IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
                     var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRESTAPIClient>();
-
-                    var result = await restClient.ApiHorselessContentModelTenantGetByObjectIdAsync(originEntity.ObjectId, originEntity.TenantIdentifier);
                     var httpClient = clientFactory.CreateClient();
 
                     string identifier = originEntity.TenantIdentifier;
@@ -1031,9 +1029,11 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     };
 
 
-                    var tenantProbeResponse = await httpClient.SendAsync(tenantProbeRequestmessage);
-                    var probeResponseContent = await tenantProbeResponse.Content.ReadAsStringAsync();
-                    ret = probeResponseContent;
+                    var result = await restClient.ApiHorselessContentModelTenantGetByObjectIdAsync(originEntity.ObjectId, originEntity.TenantIdentifier);
+                    ret = result.Result.ToJson();
+//                    var tenantProbeResponse = await httpClient.SendAsync(tenantProbeRequestmessage);
+//                    var probeResponseContent = await tenantProbeResponse.Content.ReadAsStringAsync();
+//                    ret = probeResponseContent;
                 }
                 catch (Exception ex)
                 {

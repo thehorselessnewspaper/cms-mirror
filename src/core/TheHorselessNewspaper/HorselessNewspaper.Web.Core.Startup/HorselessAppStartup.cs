@@ -241,12 +241,13 @@ namespace HorselessNewspaper.Web.Core.Startup
                     return container + t.Name;
                 });
 
-                options.CustomOperationIds(apiDesc =>
-                {
-                    // produce this template export interface ContentEntitiesAccessControlEntry 
-                    return apiDesc.TryGetMethodInfo(out MethodInfo methodInfo) ? methodInfo.DeclaringType.Name + methodInfo.Name : null;
+                // annoyingly, this casues DUPLICATE function names in generated clients
+                //options.CustomOperationIds(apiDesc =>
+                //{
+                //    // produce this template export interface ContentEntitiesAccessControlEntry 
+                //    return apiDesc.TryGetMethodInfo(out MethodInfo methodInfo) ? methodInfo.DeclaringType.Name + methodInfo.Name : null;
 
-                });
+                //});
 
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Horseless Content API", Version = "v1" });
 

@@ -43,6 +43,7 @@
   <ItemGroup>
     <ProjectReference Include="..\HorselessNewspaper.Core.Interfaces\HorselessNewspaper.Core.Interfaces.csproj" />
     <ProjectReference Include="..\HorselessNewspaper.Core.Web.Prototype\HorselessNewspaper.Core.Web.Prototype.csproj" />
+    <ProjectReference Include="..\HorselessNewspaper.Web.Core.Services.Query\HorselessNewspaper.Web.Core.Services.Query.csproj" />
   </ItemGroup>
 
 </Project>

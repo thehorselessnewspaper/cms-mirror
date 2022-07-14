@@ -37,7 +37,7 @@ using HostingEntities = TheHorselessNewspaper.Schemas.HostingModel.HostingEntiti
 using HorselessNewspaper.Client.RabbitMQ.Extensions;
 using HorselessNewspaper.Core.Repositories.TenantFilesystem.Extensions;
 using HorselessNewspaper.Web.Core.Services.Persistence.LocalFilesystem.Extensions;
-using HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPI;
+using HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient;
 
 namespace HorselessNewspaper.Web.Core.Extensions
 {

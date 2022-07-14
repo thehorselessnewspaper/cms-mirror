@@ -55,6 +55,8 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
             string responseContent = String.Empty;
             var route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT + "/HostingEntitiesTenantCreate";
 
+            // use generated rest client
+            // var restClient = serviceProvider.GetRequiredService<IHorselessRESTAPIClient>();
             // post bad request to a valid route 
             // without sending client config endpoint
             // control channel commands
