@@ -17,11 +17,7 @@ namespace Schema.Diagrams.Hosting
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AccessControlEntry()
         {
-            this.SubjectPrincipals = new HashSet<Principal>();
-            this.Owners = new HashSet<Principal>();
             this.SubjectTenants = new HashSet<Tenant>();
-            this.AccessControlEntries = new HashSet<AccessControlEntry>();
-            this.SubjectAccessControlEntries = new HashSet<AccessControlEntry>();
         }
     
         public System.Guid Id { get; set; }
@@ -32,14 +28,6 @@ namespace Schema.Diagrams.Hosting
         public Nullable<bool> IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Principal> SubjectPrincipals { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Principal> Owners { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tenant> SubjectTenants { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccessControlEntry> SubjectAccessControlEntries { get; set; }
     }
 }

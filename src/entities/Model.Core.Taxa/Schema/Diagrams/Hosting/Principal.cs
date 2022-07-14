@@ -17,10 +17,6 @@ namespace Schema.Diagrams.Hosting
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Principal()
         {
-            this.OwnedPrincipals = new HashSet<Principal>();
-            this.Owners = new HashSet<Principal>();
-            this.AccessControlEntries = new HashSet<AccessControlEntry>();
-            this.OwnedAccessControlEntries = new HashSet<AccessControlEntry>();
             this.TenantAccounts = new HashSet<Tenant>();
             this.OwnedTenants = new HashSet<Tenant>();
         }
@@ -34,14 +30,6 @@ namespace Schema.Diagrams.Hosting
         public string Aud { get; set; }
         public string Sub { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Principal> OwnedPrincipals { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Principal> Owners { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccessControlEntry> OwnedAccessControlEntries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tenant> TenantAccounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

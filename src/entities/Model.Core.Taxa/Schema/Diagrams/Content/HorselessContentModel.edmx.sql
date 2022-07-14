@@ -2,10 +2,12 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/27/2022 19:10:20
--- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
+-- Date Created: 07/14/2022 08:52:12
+-- Generated from EDMX file: E:\src\horseless-core\the horseless newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
+SET QUOTED_IDENTIFIER OFF;
+GO
 
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
@@ -107,30 +109,6 @@ IF OBJECT_ID(N'[dbo].[FK_TenantOwners_Tenant]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_TenantOwners_Principal]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TenantOwners] DROP CONSTRAINT [FK_TenantOwners_Principal];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PrincipalAccessControlEntry_Principal]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PrincipalAccessControlEntry] DROP CONSTRAINT [FK_PrincipalAccessControlEntry_Principal];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PrincipalAccessControlEntry_AccessControlEntry]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PrincipalAccessControlEntry] DROP CONSTRAINT [FK_PrincipalAccessControlEntry_AccessControlEntry];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryHierarchy_AccessControlEntry]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AccessControlEntryHierarchy] DROP CONSTRAINT [FK_AccessControlEntryHierarchy_AccessControlEntry];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryHierarchy_SubjectAccessControlEntry]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AccessControlEntryHierarchy] DROP CONSTRAINT [FK_AccessControlEntryHierarchy_SubjectAccessControlEntry];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PrincipalHierarchy_Principal]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PrincipalHierarchy] DROP CONSTRAINT [FK_PrincipalHierarchy_Principal];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PrincipalHierarchy_Owned]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PrincipalHierarchy] DROP CONSTRAINT [FK_PrincipalHierarchy_Owned];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryOwners_AccessControlEntry]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AccessControlEntryOwners] DROP CONSTRAINT [FK_AccessControlEntryOwners_AccessControlEntry];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AccessControlEntryOwners_Owner]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AccessControlEntryOwners] DROP CONSTRAINT [FK_AccessControlEntryOwners_Owner];
 GO
 IF OBJECT_ID(N'[dbo].[FK_TenantAccounts_Tenant]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TenantAccounts] DROP CONSTRAINT [FK_TenantAccounts_Tenant];
@@ -268,18 +246,6 @@ IF OBJECT_ID(N'[dbo].[ContentCollectionTaxonomies]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[TenantOwners]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TenantOwners];
-GO
-IF OBJECT_ID(N'[dbo].[PrincipalAccessControlEntry]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PrincipalAccessControlEntry];
-GO
-IF OBJECT_ID(N'[dbo].[AccessControlEntryHierarchy]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AccessControlEntryHierarchy];
-GO
-IF OBJECT_ID(N'[dbo].[PrincipalHierarchy]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PrincipalHierarchy];
-GO
-IF OBJECT_ID(N'[dbo].[AccessControlEntryOwners]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AccessControlEntryOwners];
 GO
 IF OBJECT_ID(N'[dbo].[TenantAccounts]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TenantAccounts];
@@ -650,34 +616,6 @@ CREATE TABLE [dbo].[TenantOwners] (
 );
 GO
 
--- Creating table 'PrincipalAccessControlEntry'
-CREATE TABLE [dbo].[PrincipalAccessControlEntry] (
-    [SubjectPrincipals_Id] uniqueidentifier  NOT NULL,
-    [AccessControlEntries_Id] uniqueidentifier  NOT NULL
-);
-GO
-
--- Creating table 'AccessControlEntryHierarchy'
-CREATE TABLE [dbo].[AccessControlEntryHierarchy] (
-    [SubjectAccessControlEntries_Id] uniqueidentifier  NOT NULL,
-    [AccessControlEntries_Id] uniqueidentifier  NOT NULL
-);
-GO
-
--- Creating table 'PrincipalHierarchy'
-CREATE TABLE [dbo].[PrincipalHierarchy] (
-    [OwnedPrincipals_Id] uniqueidentifier  NOT NULL,
-    [Owners_Id] uniqueidentifier  NOT NULL
-);
-GO
-
--- Creating table 'AccessControlEntryOwners'
-CREATE TABLE [dbo].[AccessControlEntryOwners] (
-    [OwnedAccessControlEntries_Id] uniqueidentifier  NOT NULL,
-    [Owners_Id] uniqueidentifier  NOT NULL
-);
-GO
-
 -- Creating table 'TenantAccounts'
 CREATE TABLE [dbo].[TenantAccounts] (
     [TenantAccounts_Id] uniqueidentifier  NOT NULL,
@@ -913,30 +851,6 @@ GO
 ALTER TABLE [dbo].[TenantOwners]
 ADD CONSTRAINT [PK_TenantOwners]
     PRIMARY KEY CLUSTERED ([OwnedTenants_Id], [Owners_Id] ASC);
-GO
-
--- Creating primary key on [SubjectPrincipals_Id], [AccessControlEntries_Id] in table 'PrincipalAccessControlEntry'
-ALTER TABLE [dbo].[PrincipalAccessControlEntry]
-ADD CONSTRAINT [PK_PrincipalAccessControlEntry]
-    PRIMARY KEY CLUSTERED ([SubjectPrincipals_Id], [AccessControlEntries_Id] ASC);
-GO
-
--- Creating primary key on [SubjectAccessControlEntries_Id], [AccessControlEntries_Id] in table 'AccessControlEntryHierarchy'
-ALTER TABLE [dbo].[AccessControlEntryHierarchy]
-ADD CONSTRAINT [PK_AccessControlEntryHierarchy]
-    PRIMARY KEY CLUSTERED ([SubjectAccessControlEntries_Id], [AccessControlEntries_Id] ASC);
-GO
-
--- Creating primary key on [OwnedPrincipals_Id], [Owners_Id] in table 'PrincipalHierarchy'
-ALTER TABLE [dbo].[PrincipalHierarchy]
-ADD CONSTRAINT [PK_PrincipalHierarchy]
-    PRIMARY KEY CLUSTERED ([OwnedPrincipals_Id], [Owners_Id] ASC);
-GO
-
--- Creating primary key on [OwnedAccessControlEntries_Id], [Owners_Id] in table 'AccessControlEntryOwners'
-ALTER TABLE [dbo].[AccessControlEntryOwners]
-ADD CONSTRAINT [PK_AccessControlEntryOwners]
-    PRIMARY KEY CLUSTERED ([OwnedAccessControlEntries_Id], [Owners_Id] ASC);
 GO
 
 -- Creating primary key on [TenantAccounts_Id], [Accounts_Id] in table 'TenantAccounts'
@@ -1351,102 +1265,6 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_TenantOwners_Principal'
 CREATE INDEX [IX_FK_TenantOwners_Principal]
 ON [dbo].[TenantOwners]
-    ([Owners_Id]);
-GO
-
--- Creating foreign key on [SubjectPrincipals_Id] in table 'PrincipalAccessControlEntry'
-ALTER TABLE [dbo].[PrincipalAccessControlEntry]
-ADD CONSTRAINT [FK_PrincipalAccessControlEntry_Principal]
-    FOREIGN KEY ([SubjectPrincipals_Id])
-    REFERENCES [dbo].[Principals]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [AccessControlEntries_Id] in table 'PrincipalAccessControlEntry'
-ALTER TABLE [dbo].[PrincipalAccessControlEntry]
-ADD CONSTRAINT [FK_PrincipalAccessControlEntry_AccessControlEntry]
-    FOREIGN KEY ([AccessControlEntries_Id])
-    REFERENCES [dbo].[AccessControlEntries]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PrincipalAccessControlEntry_AccessControlEntry'
-CREATE INDEX [IX_FK_PrincipalAccessControlEntry_AccessControlEntry]
-ON [dbo].[PrincipalAccessControlEntry]
-    ([AccessControlEntries_Id]);
-GO
-
--- Creating foreign key on [SubjectAccessControlEntries_Id] in table 'AccessControlEntryHierarchy'
-ALTER TABLE [dbo].[AccessControlEntryHierarchy]
-ADD CONSTRAINT [FK_AccessControlEntryHierarchy_DependentAccessControlEntry]
-    FOREIGN KEY ([SubjectAccessControlEntries_Id])
-    REFERENCES [dbo].[AccessControlEntries]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [AccessControlEntries_Id] in table 'AccessControlEntryHierarchy'
-ALTER TABLE [dbo].[AccessControlEntryHierarchy]
-ADD CONSTRAINT [FK_AccessControlEntryHierarchy_SubjectAccessControlEntry]
-    FOREIGN KEY ([AccessControlEntries_Id])
-    REFERENCES [dbo].[AccessControlEntries]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_AccessControlEntryHierarchy_SubjectAccessControlEntry'
-CREATE INDEX [IX_FK_AccessControlEntryHierarchy_SubjectAccessControlEntry]
-ON [dbo].[AccessControlEntryHierarchy]
-    ([AccessControlEntries_Id]);
-GO
-
--- Creating foreign key on [OwnedPrincipals_Id] in table 'PrincipalHierarchy'
-ALTER TABLE [dbo].[PrincipalHierarchy]
-ADD CONSTRAINT [FK_PrincipalHierarchy_OwnerPrincipals]
-    FOREIGN KEY ([OwnedPrincipals_Id])
-    REFERENCES [dbo].[Principals]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Owners_Id] in table 'PrincipalHierarchy'
-ALTER TABLE [dbo].[PrincipalHierarchy]
-ADD CONSTRAINT [FK_PrincipalHierarchy_Owned]
-    FOREIGN KEY ([Owners_Id])
-    REFERENCES [dbo].[Principals]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PrincipalHierarchy_Owned'
-CREATE INDEX [IX_FK_PrincipalHierarchy_Owned]
-ON [dbo].[PrincipalHierarchy]
-    ([Owners_Id]);
-GO
-
--- Creating foreign key on [OwnedAccessControlEntries_Id] in table 'AccessControlEntryOwners'
-ALTER TABLE [dbo].[AccessControlEntryOwners]
-ADD CONSTRAINT [FK_AccessControlEntryOwners_AccessControlEntry]
-    FOREIGN KEY ([OwnedAccessControlEntries_Id])
-    REFERENCES [dbo].[AccessControlEntries]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Owners_Id] in table 'AccessControlEntryOwners'
-ALTER TABLE [dbo].[AccessControlEntryOwners]
-ADD CONSTRAINT [FK_AccessControlEntryOwners_Owner]
-    FOREIGN KEY ([Owners_Id])
-    REFERENCES [dbo].[Principals]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_AccessControlEntryOwners_Owner'
-CREATE INDEX [IX_FK_AccessControlEntryOwners_Owner]
-ON [dbo].[AccessControlEntryOwners]
     ([Owners_Id]);
 GO
 

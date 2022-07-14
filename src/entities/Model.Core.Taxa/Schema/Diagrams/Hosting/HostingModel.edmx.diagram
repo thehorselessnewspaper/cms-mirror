@@ -14,13 +14,9 @@
         <AssociationConnector Association="HostingModel.TenantInfoKeyCloakConfiguration" />
         <EntityTypeShape EntityType="HostingModel.Principal" Width="2.5" PointX="13.25" PointY="0.875" />
         <EntityTypeShape EntityType="HostingModel.AccessControlEntry" Width="4.125" PointX="11.5" PointY="5.375" />
-        <AssociationConnector Association="HostingModel.PrincipalPrincipal" />
-        <AssociationConnector Association="HostingModel.PrincipalAccessControlEntry" />
-        <AssociationConnector Association="HostingModel.PrincipalAccessControlEntry1" />
         <AssociationConnector Association="HostingModel.AccessControlEntryTenant" />
         <AssociationConnector Association="HostingModel.TenantPrincipal" />
         <AssociationConnector Association="HostingModel.TenantPrincipal1" />
-        <AssociationConnector Association="HostingModel.AccessControlledAccessControlEntry" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
