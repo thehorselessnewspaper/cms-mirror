@@ -73,9 +73,18 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 
+        [InverseProperty(nameof(AccessControlEntry.SubjectPrincipals))]
+        public ICollection<AccessControlEntry>? ManagingAccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+
+        /// <summary>
+        /// not mapped - model impedence mismatch due to implemented interface
+        /// </summary>
         [NotMapped]
         public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
+        /// <summary>
+        /// not mapped - model impedence mismatch due to implemented interface
+        /// </summary>
         [NotMapped]
         public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
     }

@@ -80,11 +80,20 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public virtual ICollection<Publication?>? ManagedPublications { get; set; } = new HashSet<Publication?>();
         public string? DictionaryKey { get; set; }
 
+        /// <summary>
+        /// not mapped - model impedence mismatch due to implemented interface
+        /// </summary>
         [NotMapped]
         public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
+        /// <summary>
+        /// not mapped - model impedence mismatch due to implemented interface
+        /// </summary>
         [NotMapped]
         public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
+
+        [InverseProperty(nameof(Principal.ManagingAccessControlEntries))]
+        public ICollection<Principal>? SubjectPrincipals { get; set; } = new HashSet<Principal>();
     }
 
 
