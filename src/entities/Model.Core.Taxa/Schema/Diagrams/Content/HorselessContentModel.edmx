@@ -38,8 +38,6 @@
     <EntitySet Name="TaxonHolonym" EntityType="HorselessContentModel.Store.TaxonHolonym" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="HolonymMeronym" EntityType="HorselessContentModel.Store.HolonymMeronym" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ContentCollectionTaxonomies" EntityType="HorselessContentModel.Store.ContentCollectionTaxonomies" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="TenantOwners" EntityType="HorselessContentModel.Store.TenantOwners" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="TenantAccounts" EntityType="HorselessContentModel.Store.TenantAccounts" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TenantAccessControlEntries" EntityType="HorselessContentModel.Store.TenantAccessControlEntries" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="HorselessSessionAccessControlEntry" EntityType="HorselessContentModel.Store.HorselessSessionAccessControlEntry" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="HorselessSessionPrincipal" EntityType="HorselessContentModel.Store.HorselessSessionPrincipal" store:Type="Tables" Schema="dbo" />
@@ -159,22 +157,6 @@
     <AssociationSet Name="FK_ContentCollectionTaxonomies_ContentCollection" Association="HorselessContentModel.Store.FK_ContentCollectionTaxonomies_ContentCollection">
       <End Role="ContentCollection" EntitySet="ContentCollections" />
       <End Role="ContentCollectionTaxonomies" EntitySet="ContentCollectionTaxonomies" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TenantOwners_Tenant" Association="HorselessContentModel.Store.FK_TenantOwners_Tenant">
-      <End Role="Tenant" EntitySet="Tenants" />
-      <End Role="TenantOwners" EntitySet="TenantOwners" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TenantOwners_Principal" Association="HorselessContentModel.Store.FK_TenantOwners_Principal">
-      <End Role="Principal" EntitySet="Principals" />
-      <End Role="TenantOwners" EntitySet="TenantOwners" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TenantAccounts_Tenant" Association="HorselessContentModel.Store.FK_TenantAccounts_Tenant">
-      <End Role="Tenant" EntitySet="Tenants" />
-      <End Role="TenantAccounts" EntitySet="TenantAccounts" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TenantAccounts_Principal" Association="HorselessContentModel.Store.FK_TenantAccounts_Principal">
-      <End Role="Principal" EntitySet="Principals" />
-      <End Role="TenantAccounts" EntitySet="TenantAccounts" />
     </AssociationSet>
     <AssociationSet Name="FK_TenantAccessControlEntries_SubjectTenant" Association="HorselessContentModel.Store.FK_TenantAccessControlEntries_SubjectTenant">
       <End Role="SubjectTenant" EntitySet="Tenants" />
@@ -568,22 +550,6 @@
     <Property Name="Taxonomies_Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ContentCollections_Id" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
-  <EntityType Name="TenantOwners">
-    <Key>
-      <PropertyRef Name="OwnedTenants_Id" />
-      <PropertyRef Name="Owners_Id" />
-    </Key>
-    <Property Name="OwnedTenants_Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Owners_Id" Type="uniqueidentifier" Nullable="false" />
-  </EntityType>
-  <EntityType Name="TenantAccounts">
-    <Key>
-      <PropertyRef Name="TenantAccounts_Id" />
-      <PropertyRef Name="Accounts_Id" />
-    </Key>
-    <Property Name="TenantAccounts_Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Accounts_Id" Type="uniqueidentifier" Nullable="false" />
-  </EntityType>
   <EntityType Name="TenantAccessControlEntries">
     <Key>
       <PropertyRef Name="SubjectTenants_Id" />
@@ -976,54 +942,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TenantOwners_Tenant">
-    <End Role="Tenant" Type="HorselessContentModel.Store.Tenants" Multiplicity="1" />
-    <End Role="TenantOwners" Type="HorselessContentModel.Store.TenantOwners" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tenant">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TenantOwners">
-        <PropertyRef Name="OwnedTenants_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TenantOwners_Principal">
-    <End Role="TenantOwners" Type="HorselessContentModel.Store.TenantOwners" Multiplicity="*" />
-    <End Role="Principal" Type="HorselessContentModel.Store.Principals" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Principal">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TenantOwners">
-        <PropertyRef Name="Owners_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TenantAccounts_Tenant">
-    <End Role="Tenant" Type="HorselessContentModel.Store.Tenants" Multiplicity="1" />
-    <End Role="TenantAccounts" Type="HorselessContentModel.Store.TenantAccounts" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tenant">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TenantAccounts">
-        <PropertyRef Name="TenantAccounts_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TenantAccounts_Principal">
-    <End Role="TenantAccounts" Type="HorselessContentModel.Store.TenantAccounts" Multiplicity="*" />
-    <End Role="Principal" Type="HorselessContentModel.Store.Principals" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Principal">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TenantAccounts">
-        <PropertyRef Name="Accounts_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_TenantAccessControlEntries_SubjectTenant">
     <End Role="SubjectTenant" Type="HorselessContentModel.Store.Tenants" Multiplicity="1" />
     <End Role="TenantAccessControlEntries" Type="HorselessContentModel.Store.TenantAccessControlEntries" Multiplicity="*" />
@@ -1207,14 +1125,6 @@
             <End Role="Taxonomy" EntitySet="Taxonomies" />
             <End Role="ContentCollection" EntitySet="ContentCollections" />
           </AssociationSet>
-          <AssociationSet Name="TenantOwners" Association="HorselessContentModel.TenantOwners">
-            <End Role="Tenant" EntitySet="Tenants" />
-            <End Role="Principal" EntitySet="Principals" />
-          </AssociationSet>
-          <AssociationSet Name="TenantAccounts" Association="HorselessContentModel.TenantAccounts">
-            <End Role="Tenant" EntitySet="Tenants" />
-            <End Role="Principal" EntitySet="Principals" />
-          </AssociationSet>
           <AssociationSet Name="TenantAccessControlEntries" Association="HorselessContentModel.TenantAccessControlEntries">
             <End Role="SubjectTenant" EntitySet="Tenants" />
             <End Role="AccessControlEntry" EntitySet="AccessControlEntries" />
@@ -1267,8 +1177,6 @@
           <Property Name="IsSoftDeleted" Type="Boolean" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="ContentCollections" Relationship="HorselessContentModel.TenantContentCollections" FromRole="Tenant" ToRole="ContentCollection" />
-          <NavigationProperty Name="Owners" Relationship="HorselessContentModel.TenantOwners" FromRole="Tenant" ToRole="Principal" />
-          <NavigationProperty Name="Accounts" Relationship="HorselessContentModel.TenantAccounts" FromRole="Tenant" ToRole="Principal" />
           <NavigationProperty Name="AccessControlEntries" Relationship="HorselessContentModel.TenantAccessControlEntries" FromRole="SubjectTenant" ToRole="AccessControlEntry" />
         </EntityType>
         <EntityType Name="MIMEType">
@@ -1460,8 +1368,6 @@
           <Property Name="Iss" Type="String" Nullable="true" />
           <Property Name="Aud" Type="String" Nullable="true" />
           <Property Name="Sub" Type="String" Nullable="true" />
-          <NavigationProperty Name="OwnedTenants" Relationship="HorselessContentModel.TenantOwners" FromRole="Principal" ToRole="Tenant" />
-          <NavigationProperty Name="TenantAccounts" Relationship="HorselessContentModel.TenantAccounts" FromRole="Principal" ToRole="Tenant" />
           <NavigationProperty Name="HorselessSessions" Relationship="HorselessContentModel.PrincipalHorselessSession" FromRole="Principal" ToRole="HorselessSession" />
           <NavigationProperty Name="OwnedHorselessSessions" Relationship="HorselessContentModel.HorselessSessionPrincipal" FromRole="Principal" ToRole="HorselessSession" />
         </EntityType>
@@ -1653,14 +1559,6 @@
           <Member Name="PERMIT" />
           <Member Name="DENY" />
         </EnumType>
-        <Association Name="TenantOwners">
-          <End Type="HorselessContentModel.Tenant" Role="Tenant" Multiplicity="*" />
-          <End Type="HorselessContentModel.Principal" Role="Principal" Multiplicity="*" />
-        </Association>
-        <Association Name="TenantAccounts">
-          <End Type="HorselessContentModel.Tenant" Role="Tenant" Multiplicity="*" />
-          <End Type="HorselessContentModel.Principal" Role="Principal" Multiplicity="*" />
-        </Association>
         <Association Name="TenantAccessControlEntries">
           <End Type="HorselessContentModel.Tenant" Role="SubjectTenant" Multiplicity="*" />
           <End Type="HorselessContentModel.AccessControlEntry" Role="AccessControlEntry" Multiplicity="*" />
@@ -2079,22 +1977,6 @@
       </EndProperty>
       <EndProperty Name="ContentCollection">
         <ScalarProperty Name="Id" ColumnName="ContentCollections_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="TenantOwners" TypeName="HorselessContentModel.TenantOwners" StoreEntitySet="TenantOwners">
-      <EndProperty Name="Tenant">
-        <ScalarProperty Name="Id" ColumnName="OwnedTenants_Id" />
-      </EndProperty>
-      <EndProperty Name="Principal">
-        <ScalarProperty Name="Id" ColumnName="Owners_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="TenantAccounts" TypeName="HorselessContentModel.TenantAccounts" StoreEntitySet="TenantAccounts">
-      <EndProperty Name="Tenant">
-        <ScalarProperty Name="Id" ColumnName="TenantAccounts_Id" />
-      </EndProperty>
-      <EndProperty Name="Principal">
-        <ScalarProperty Name="Id" ColumnName="Accounts_Id" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="TenantAccessControlEntries" TypeName="HorselessContentModel.TenantAccessControlEntries" StoreEntitySet="TenantAccessControlEntries">

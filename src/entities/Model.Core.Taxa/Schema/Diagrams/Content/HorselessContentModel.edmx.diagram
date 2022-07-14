@@ -39,8 +39,6 @@
         <AssociationConnector Association="HorselessContentModel.TaxonHolonym" />
         <AssociationConnector Association="HorselessContentModel.HolonymMeronym" />
         <AssociationConnector Association="HorselessContentModel.ContentCollectionTaxonomies" />
-        <AssociationConnector Association="HorselessContentModel.TenantOwners" />
-        <AssociationConnector Association="HorselessContentModel.TenantAccounts" />
         <AssociationConnector Association="HorselessContentModel.TenantAccessControlEntries" />
         <AssociationConnector Association="HorselessContentModel.PrincipalHorselessSession" />
         <AssociationConnector Association="HorselessContentModel.HorselessSessionAccessControlEntry" />

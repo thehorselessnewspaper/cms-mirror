@@ -17,8 +17,6 @@ namespace Schema.Diagrams.Content
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Principal()
         {
-            this.OwnedTenants = new HashSet<Tenant>();
-            this.TenantAccounts = new HashSet<Tenant>();
             this.HorselessSessions = new HashSet<HorselessSession>();
             this.OwnedHorselessSessions = new HashSet<HorselessSession>();
         }
@@ -32,10 +30,6 @@ namespace Schema.Diagrams.Content
         public string Aud { get; set; }
         public string Sub { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tenant> OwnedTenants { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tenant> TenantAccounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HorselessSession> HorselessSessions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
