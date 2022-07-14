@@ -220,7 +220,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.7" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220712.14" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220714.11" />
 	</ItemGroup>
 
 	<ItemGroup>
