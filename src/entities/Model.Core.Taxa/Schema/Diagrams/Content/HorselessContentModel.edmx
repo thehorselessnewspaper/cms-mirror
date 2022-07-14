@@ -30,7 +30,6 @@
     <EntitySet Name="NavigationMenuHierarchy" EntityType="HorselessContentModel.Store.NavigationMenuHierarchy" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NavigationMenuItemHierarchy" EntityType="HorselessContentModel.Store.NavigationMenuItemHierarchy" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NavigationMenuItemNavigationMenu" EntityType="HorselessContentModel.Store.NavigationMenuItemNavigationMenu" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ContentCollectionHierarchy" EntityType="HorselessContentModel.Store.ContentCollectionHierarchy" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PublicationHierarchy" EntityType="HorselessContentModel.Store.PublicationHierarchy" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PublicationContentCollection" EntityType="HorselessContentModel.Store.PublicationContentCollection" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TaxonTaxonomy" EntityType="HorselessContentModel.Store.TaxonTaxonomy" store:Type="Tables" Schema="dbo" />
@@ -93,14 +92,6 @@
     <AssociationSet Name="FK_NavigationMenuItemNavigationMenu_NavigationMenu" Association="HorselessContentModel.Store.FK_NavigationMenuItemNavigationMenu_NavigationMenu">
       <End Role="NavigationMenu" EntitySet="NavigationMenus" />
       <End Role="NavigationMenuItemNavigationMenu" EntitySet="NavigationMenuItemNavigationMenu" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ContentCollectionHierarchy_ContentCollection" Association="HorselessContentModel.Store.FK_ContentCollectionHierarchy_ContentCollection">
-      <End Role="ContentCollection" EntitySet="ContentCollections" />
-      <End Role="ContentCollectionHierarchy" EntitySet="ContentCollectionHierarchy" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ContentCollectionHierarchy_ChildContentCollections" Association="HorselessContentModel.Store.FK_ContentCollectionHierarchy_ChildContentCollections">
-      <End Role="ChildContentCollections" EntitySet="ContentCollections" />
-      <End Role="ContentCollectionHierarchy" EntitySet="ContentCollectionHierarchy" />
     </AssociationSet>
     <AssociationSet Name="FK_PublicationHierarchy_Publication" Association="HorselessContentModel.Store.FK_PublicationHierarchy_Publication">
       <End Role="Publication" EntitySet="Publications" />
@@ -486,14 +477,6 @@
     <Property Name="ChildNavigationMenuItems_Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ParentNavigationMenus_Id" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
-  <EntityType Name="ContentCollectionHierarchy">
-    <Key>
-      <PropertyRef Name="ChildContentCollections_Id" />
-      <PropertyRef Name="ParentContentCollections_Id" />
-    </Key>
-    <Property Name="ChildContentCollections_Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="ParentContentCollections_Id" Type="uniqueidentifier" Nullable="false" />
-  </EntityType>
   <EntityType Name="PublicationHierarchy">
     <Key>
       <PropertyRef Name="PublicationChildren_Id" />
@@ -747,30 +730,6 @@
       </Principal>
       <Dependent Role="NavigationMenuItemNavigationMenu">
         <PropertyRef Name="ParentNavigationMenus_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ContentCollectionHierarchy_ContentCollection">
-    <End Role="ContentCollection" Type="HorselessContentModel.Store.ContentCollections" Multiplicity="1" />
-    <End Role="ContentCollectionHierarchy" Type="HorselessContentModel.Store.ContentCollectionHierarchy" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ContentCollection">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ContentCollectionHierarchy">
-        <PropertyRef Name="ChildContentCollections_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ContentCollectionHierarchy_ChildContentCollections">
-    <End Role="ContentCollectionHierarchy" Type="HorselessContentModel.Store.ContentCollectionHierarchy" Multiplicity="*" />
-    <End Role="ChildContentCollections" Type="HorselessContentModel.Store.ContentCollections" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="ChildContentCollections">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ContentCollectionHierarchy">
-        <PropertyRef Name="ParentContentCollections_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1092,10 +1051,6 @@
             <End Role="NavigationMenuItem" EntitySet="NavigationMenuItems" />
             <End Role="NavigationMenu" EntitySet="NavigationMenus" />
           </AssociationSet>
-          <AssociationSet Name="ContentCollectionHierarchy" Association="HorselessContentModel.ContentCollectionHierarchy">
-            <End Role="ContentCollection" EntitySet="ContentCollections" />
-            <End Role="ChildContentCollections" EntitySet="ContentCollections" />
-          </AssociationSet>
           <AssociationSet Name="PublicationHierarchy" Association="HorselessContentModel.PublicationHierarchy">
             <End Role="Publication" EntitySet="Publications" />
             <End Role="PublicationChildren" EntitySet="Publications" />
@@ -1231,8 +1186,6 @@
           <NavigationProperty Name="MimeContents" Relationship="HorselessContentModel.ContentCollectionMimeContent" FromRole="ContentCollection" ToRole="MimeContent" />
           <Property Name="AllowAnonymousRead" Type="Boolean" Nullable="true" />
           <Property Name="IsPublished" Type="Boolean" Nullable="true" />
-          <NavigationProperty Name="ParentContentCollections" Relationship="HorselessContentModel.ContentCollectionHierarchy" FromRole="ContentCollection" ToRole="ChildContentCollections" />
-          <NavigationProperty Name="ChildContentCollections" Relationship="HorselessContentModel.ContentCollectionHierarchy" FromRole="ChildContentCollections" ToRole="ContentCollection" />
           <Property Name="PublishedURL" Type="String" Nullable="true" />
           <NavigationProperty Name="Publications" Relationship="HorselessContentModel.PublicationContentCollection" FromRole="ContentCollection" ToRole="Publication" />
           <Property Name="PreviewURL" Type="String" Nullable="true" />
@@ -1489,10 +1442,6 @@
         <Association Name="NavigationMenuItemNavigationMenu">
           <End Type="HorselessContentModel.NavigationMenuItem" Role="NavigationMenuItem" Multiplicity="*" />
           <End Type="HorselessContentModel.NavigationMenu" Role="NavigationMenu" Multiplicity="*" />
-        </Association>
-        <Association Name="ContentCollectionHierarchy">
-          <End Type="HorselessContentModel.ContentCollection" Role="ContentCollection" Multiplicity="*" />
-          <End Type="HorselessContentModel.ContentCollection" Role="ChildContentCollections" Multiplicity="*" />
         </Association>
         <Association Name="PublicationHierarchy">
           <End Type="HorselessContentModel.Publication" Role="Publication" Multiplicity="*" />
@@ -1913,14 +1862,6 @@
       </EndProperty>
       <EndProperty Name="NavigationMenu">
         <ScalarProperty Name="Id" ColumnName="ParentNavigationMenus_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="ContentCollectionHierarchy" TypeName="HorselessContentModel.ContentCollectionHierarchy" StoreEntitySet="ContentCollectionHierarchy">
-      <EndProperty Name="ContentCollection">
-        <ScalarProperty Name="Id" ColumnName="ChildContentCollections_Id" />
-      </EndProperty>
-      <EndProperty Name="ChildContentCollections">
-        <ScalarProperty Name="Id" ColumnName="ParentContentCollections_Id" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="PublicationHierarchy" TypeName="HorselessContentModel.PublicationHierarchy" StoreEntitySet="PublicationHierarchy">
