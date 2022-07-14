@@ -38,7 +38,7 @@ public partial class Program
                  .AllowAnyHeader()
                  .AllowAnyMethod()
                  .AllowCredentials()
-                 .WithOrigins("dairgpuk8s.ataxlab.com", "awsk8sidp.ataxlab.com", "localhost:6001", "localhost");
+                 .WithOrigins("dairgpuk8s.ataxlab.com", "awsk8sidp.ataxlab.com", "localhost:6001", "localhost:7122", "localhost");
 
         });
     }
