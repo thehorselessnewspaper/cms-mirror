@@ -18,10 +18,6 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[ContentCollectionHierarchy]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[dbo].[ContentCollectionMimeContent]",
          "ObjectType": 0
       },

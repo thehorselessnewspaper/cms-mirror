@@ -16,21 +16,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Configurati
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
 
-            entity.HasMany(d => d.ChildContentCollections)
-                .WithMany(p => p.ParentContentCollections)
-                .UsingEntity<Dictionary<string, object>>(
-                    "ContentCollectionHierarchy",
-                    l => l.HasOne<ContentCollection>().WithMany().HasForeignKey("ChildContentCollections_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_ContentCollectionHierarchy_ContentCollection"),
-                    r => r.HasOne<ContentCollection>().WithMany().HasForeignKey("ParentContentCollections_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_ContentCollectionHierarchy_ChildContentCollections"),
-                    j =>
-                    {
-                        j.HasKey("ChildContentCollections_Id", "ParentContentCollections_Id");
-
-                        j.ToTable("ContentCollectionHierarchy");
-
-                        j.HasIndex(new[] { "ParentContentCollections_Id" }, "IX_FK_ContentCollectionHierarchy_ChildContentCollections");
-                    });
-
             entity.HasMany(d => d.MimeContents)
                 .WithMany(p => p.ContentCollections)
                 .UsingEntity<Dictionary<string, object>>(
@@ -44,21 +29,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Configurati
                         j.ToTable("ContentCollectionMimeContent");
 
                         j.HasIndex(new[] { "MimeContents_Id" }, "IX_FK_ContentCollectionMimeContent_MimeContent");
-                    });
-
-            entity.HasMany(d => d.ParentContentCollections)
-                .WithMany(p => p.ChildContentCollections)
-                .UsingEntity<Dictionary<string, object>>(
-                    "ContentCollectionHierarchy",
-                    l => l.HasOne<ContentCollection>().WithMany().HasForeignKey("ParentContentCollections_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_ContentCollectionHierarchy_ChildContentCollections"),
-                    r => r.HasOne<ContentCollection>().WithMany().HasForeignKey("ChildContentCollections_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_ContentCollectionHierarchy_ContentCollection"),
-                    j =>
-                    {
-                        j.HasKey("ChildContentCollections_Id", "ParentContentCollections_Id");
-
-                        j.ToTable("ContentCollectionHierarchy");
-
-                        j.HasIndex(new[] { "ParentContentCollections_Id" }, "IX_FK_ContentCollectionHierarchy_ChildContentCollections");
                     });
 
             OnConfigurePartial(entity);
