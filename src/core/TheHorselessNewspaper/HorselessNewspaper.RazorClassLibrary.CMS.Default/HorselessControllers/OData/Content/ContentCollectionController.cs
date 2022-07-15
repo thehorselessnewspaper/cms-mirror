@@ -22,7 +22,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
     // [Route("{__tenant__}/ODataContent/ContentCollection")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class ContentCollectionController :
-        ODataController //, IContentQueryController<ContentModel.ContentCollection>
+        ODataController , IContentQueryController<ContentModel.ContentCollection>
     {
         private IContentCollectionService<IQueryableContentModelOperator<ContentCollection>, ContentCollection> _contentCollectionService;
         private ITenantInfo _tenantInfo;
@@ -41,13 +41,12 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-        public async Task<ActionResult<IEnumerable<ContentModel.ContentCollection>>> Get([FromRoute] ODataQueryOptions<IEnumerable<ContentModel.ContentCollection>> options)
+        public async Task<ActionResult<IQueryable<ContentModel.ContentCollection>>> Get(ODataQueryOptions<ContentCollection> options)
         {
-            var result = await _contentCollectionService.Query();
+            var result = await _contentCollectionService.Query(options);
             
             return Ok(result);
         }
-
 
     }
 }

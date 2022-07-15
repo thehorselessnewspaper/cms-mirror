@@ -391,9 +391,13 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                         // tolerate the default tenant exist only in content db
                         // mark the workflow as complete if the default tenant is published
-                        if (mirrorTenantExists == false && publishedTenant.TenantIdentifier == defaultTenant.Identifier)
+                        if (mirrorTenantExists == false && publishedTenant.TenantIdentifier == defaultTenant.Identifier && isTenantDeploymentWorkflowComplete == false)
                         {
-                            isTenantDeploymentWorkflowComplete = true;
+                            await DeployPublishedTenant(publishedTenant);
+                        }
+                        else if (mirrorTenantExists == true && publishedTenant.TenantIdentifier == defaultTenant.Identifier && isTenantDeploymentWorkflowComplete == true)
+                        {
+                            _logger.LogTrace("default tenant is live");
                         }
 
                         if (mirrorTenantExists == false && isTenantDeploymentWorkflowComplete == false 
