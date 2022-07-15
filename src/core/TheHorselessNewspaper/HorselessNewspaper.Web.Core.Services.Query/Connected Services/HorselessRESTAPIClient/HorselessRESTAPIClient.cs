@@ -481,7 +481,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesAccessControlEntry), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -654,7 +654,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesAccessControlEntry), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -995,7 +995,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesContentCollection), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -1083,7 +1083,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesContentCollection), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -1414,7 +1414,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesFilesystemAsset), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -1587,7 +1587,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesFilesystemAsset), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -1765,7 +1765,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesHolonym), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -1938,7 +1938,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesHolonym), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -2116,7 +2116,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesHorselessContent), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -2289,7 +2289,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesHorselessContent), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -2467,7 +2467,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesHorselessSession), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -2640,7 +2640,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesHorselessSession), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -2818,7 +2818,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesHorselessView), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -2991,7 +2991,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesHorselessView), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -3169,7 +3169,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesJSONAsset), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -3342,7 +3342,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesJSONAsset), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -3715,7 +3715,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesMeronym), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -3888,7 +3888,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesMeronym), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -4066,7 +4066,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesMIMEType), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -4239,7 +4239,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesMIMEType), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -4417,7 +4417,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesNavigationMenuItem), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -4590,7 +4590,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesNavigationMenuItem), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -4768,7 +4768,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesNavigationMenu), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -4941,7 +4941,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesNavigationMenu), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -5119,7 +5119,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesNugetPackage), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -5292,7 +5292,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesNugetPackage), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -5470,7 +5470,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesPrincipal), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -5643,7 +5643,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesPrincipal), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -5821,7 +5821,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesPublication), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -5994,7 +5994,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesPublication), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -6168,7 +6168,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(HostingEntitiesTenantInfo), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -6333,7 +6333,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(HostingEntitiesTenantInfo), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -6647,7 +6647,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(HostingEntitiesTenant), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -6812,7 +6812,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(HostingEntitiesTenant), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -6986,7 +6986,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesTenant), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -7159,7 +7159,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesTenant), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -7249,7 +7249,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                 {
                     if (updatedProperties != null)
                         request_.Headers.TryAddWithoutValidation("updatedProperties", updatedProperties);
-                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(System.Text.Json.JsonSerializer.Serialize(body, typeof(ContentEntitiesTenant), _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -7605,24 +7605,6 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("IsActive")]
         public bool? IsActive { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("SubjectAccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> SubjectAccessControlEntries { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("SubjectHorselessSessions")]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessSession> SubjectHorselessSessions { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("SubjectPrincipals")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> SubjectPrincipals { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("SubjectTenants")]
-        public System.Collections.Generic.ICollection<ContentEntitiesTenant> SubjectTenants { get; set; }
-    
         [System.Text.Json.Serialization.JsonPropertyName("Scope")]
         [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
         public ContentEntitiesACEPermissionScope? Scope { get; set; }
@@ -7653,8 +7635,20 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("ManagedPublications")]
         public System.Collections.Generic.ICollection<ContentEntitiesPublication> ManagedPublications { get; set; }
     
+        [System.Text.Json.Serialization.JsonPropertyName("ManagedTenants")]
+        public System.Collections.Generic.ICollection<ContentEntitiesTenant> ManagedTenants { get; set; }
+    
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("SubjectPrincipals")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> SubjectPrincipals { get; set; }
     
         public string ToJson()
         {
@@ -7700,17 +7694,11 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("PreviewURL")]
         public string PreviewURL { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("ChildContentCollections")]
-        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ChildContentCollections { get; set; }
-    
         [System.Text.Json.Serialization.JsonPropertyName("HorselessViews")]
         public System.Collections.Generic.ICollection<ContentEntitiesHorselessView> HorselessViews { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("MimeContents")]
         public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent> MimeContents { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("ParentContentCollections")]
-        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ParentContentCollections { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Publications")]
         public System.Collections.Generic.ICollection<ContentEntitiesPublication> Publications { get; set; }
@@ -7723,6 +7711,12 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
         public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("ParentContentCollections")]
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ParentContentCollections { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("ChildContentCollections")]
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ChildContentCollections { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
         public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
@@ -7984,12 +7978,6 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("HorselessSessionPrincipal")]
         public ContentEntitiesPrincipal HorselessSessionPrincipal { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
-    
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
         public byte[] Timestamp { get; set; }
     
@@ -7998,6 +7986,12 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         public string ToJson()
         {
@@ -8501,27 +8495,6 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("HorselessSessions")]
         public System.Collections.Generic.ICollection<ContentEntitiesHorselessSession> HorselessSessions { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("OwnedAccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> OwnedAccessControlEntries { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("OwnedHorselessSessions")]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessSession> OwnedHorselessSessions { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("OwnedPrincipals")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> OwnedPrincipals { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("OwnedTenants")]
-        public System.Collections.Generic.ICollection<ContentEntitiesTenant> OwnedTenants { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("TenantAccounts")]
-        public System.Collections.Generic.ICollection<ContentEntitiesTenant> TenantAccounts { get; set; }
-    
         [System.Text.Json.Serialization.JsonPropertyName("IsAnonymous")]
         public bool? IsAnonymous { get; set; }
     
@@ -8545,6 +8518,21 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("ManagingAccessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> ManagingAccessControlEntries { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("ManagedTenants")]
+        public System.Collections.Generic.ICollection<ContentEntitiesTenant> ManagedTenants { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("OwnedTenants")]
+        public System.Collections.Generic.ICollection<ContentEntitiesTenant> OwnedTenants { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         public string ToJson()
         {
@@ -8681,8 +8669,8 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("ContentCollections")]
         public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ContentCollections { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("PublicationChildrens")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPublication> PublicationChildrens { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("PublicationChildren")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPublication> PublicationChildren { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PublicationParents")]
         public System.Collections.Generic.ICollection<ContentEntitiesPublication> PublicationParents { get; set; }
@@ -8858,23 +8846,17 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
         public System.DateTime? CreatedAt { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("Accounts")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Accounts { get; set; }
-    
         [System.Text.Json.Serialization.JsonPropertyName("ContentCollections")]
         public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ContentCollections { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsPublished")]
         public bool? IsPublished { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("BaseUrl")]
         public string BaseUrl { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("TenantIdentifierStrategyId")]
+        public System.Guid? TenantIdentifierStrategyId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("TenantIdentifierStrategy")]
         public ContentEntitiesTenantIdentifierStrategy TenantIdentifierStrategy { get; set; }
@@ -8893,6 +8875,15 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Accounts")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Accounts { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         public string ToJson()
         {
@@ -8929,8 +8920,11 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
         public byte[] Timestamp { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("TargetTenant")]
-        public ContentEntitiesTenant TargetTenant { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("Tenant_Id")]
+        public System.Guid? Tenant_Id { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Tenant")]
+        public ContentEntitiesTenant Tenant { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("StrategyContainers")]
         public System.Collections.Generic.ICollection<ContentEntitiesTenantIdentifierStrategyContainer> StrategyContainers { get; set; }
@@ -9113,6 +9107,15 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
     
+        [System.Text.Json.Serialization.JsonPropertyName("ManagedTenants")]
+        public System.Collections.Generic.ICollection<HostingEntitiesTenant> ManagedTenants { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
+    
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
         public System.Guid? Id { get; set; }
     
@@ -9130,21 +9133,6 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     
         [System.Text.Json.Serialization.JsonPropertyName("IsActive")]
         public bool? IsActive { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("SubjectAccessControlEntries")]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> SubjectAccessControlEntries { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("SubjectPrincipals")]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> SubjectPrincipals { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("SubjectTenants")]
-        public System.Collections.Generic.ICollection<HostingEntitiesTenant> SubjectTenants { get; set; }
     
         public string ToJson()
         {
@@ -9246,6 +9234,18 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
     
+        [System.Text.Json.Serialization.JsonPropertyName("OwnedTenants")]
+        public System.Collections.Generic.ICollection<HostingEntitiesTenant> OwnedTenants { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("TenantAccounts")]
+        public System.Collections.Generic.ICollection<HostingEntitiesTenant> TenantAccounts { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
+    
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
         public System.Guid? Id { get; set; }
     
@@ -9269,24 +9269,6 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     
         [System.Text.Json.Serialization.JsonPropertyName("Sub")]
         public string Sub { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("OwnedAccessControlEntries")]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> OwnedAccessControlEntries { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("OwnedPrincipals")]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> OwnedPrincipals { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("OwnedTenants")]
-        public System.Collections.Generic.ICollection<HostingEntitiesTenant> OwnedTenants { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("TenantAccounts")]
-        public System.Collections.Generic.ICollection<HostingEntitiesTenant> TenantAccounts { get; set; }
     
         public string ToJson()
         {
@@ -9314,6 +9296,9 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("TenantIdentifier")]
         public string TenantIdentifier { get; set; }
     
+        [System.Text.Json.Serialization.JsonPropertyName("TenantIdentifierStrategyId")]
+        public System.Guid? TenantIdentifierStrategyId { get; set; }
+    
         [System.Text.Json.Serialization.JsonPropertyName("TenantIdentifierStrategy")]
         public HostingEntitiesTenantIdentifierStrategy TenantIdentifierStrategy { get; set; }
     
@@ -9329,6 +9314,15 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
     
+        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Accounts")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Accounts { get; set; }
+    
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
         public System.Guid? Id { get; set; }
     
@@ -9343,15 +9337,6 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
         public System.DateTime? CreatedAt { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("Accounts")]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Accounts { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
     
         public string ToJson()
         {
@@ -9385,11 +9370,11 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
         public System.DateTime? CreatedAt { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("TargetTenantId")]
-        public System.Guid? TargetTenantId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("Tenant_Id")]
+        public System.Guid? Tenant_Id { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("TargetTenant")]
-        public HostingEntitiesTenant TargetTenant { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("Tenant")]
+        public HostingEntitiesTenant Tenant { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("StrategyContainers")]
         public System.Collections.Generic.ICollection<HostingEntitiesTenantIdentifierStrategyContainer> StrategyContainers { get; set; }

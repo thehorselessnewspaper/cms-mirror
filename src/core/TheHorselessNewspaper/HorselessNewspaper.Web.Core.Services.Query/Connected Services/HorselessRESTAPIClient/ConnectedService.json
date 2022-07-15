@@ -42,7 +42,7 @@
       "ParameterDateFormat": "yyyy-MM-dd",
       "GenerateUpdateJsonSerializerSettingsMethod": true,
       "UseRequestAndResponseSerializationSettings": false,
-      "SerializeTypeInformation": false,
+      "SerializeTypeInformation": true,
       "QueryNullValue": "",
       "ClassName": "{controller}Client",
       "OperationGenerationMode": 5,
@@ -106,7 +106,7 @@
     "Variables": null,
     "Runtime": 0,
     "CopySpecification": false,
-    "OpenGeneratedFilesOnComplete": false,
+    "OpenGeneratedFilesOnComplete": true,
     "UseRelativePath": false,
     "ConvertFromOdata": false,
     "OpenApiConvertSettings": {

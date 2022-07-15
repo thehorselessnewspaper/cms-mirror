@@ -19,7 +19,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.Controller
     {
 
         [EnableQuery, HttpGet()]
-        Task<ActionResult<IEnumerable<Entity>>> Get(ODataQueryOptions<Entity> options);
+        public Task<ActionResult<IQueryable<Entity>>> Get(ODataQueryOptions<Entity> options);
 
     }
 

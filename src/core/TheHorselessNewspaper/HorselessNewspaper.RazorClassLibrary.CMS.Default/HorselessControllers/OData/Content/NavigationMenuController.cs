@@ -39,7 +39,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-        public async Task<ActionResult<IEnumerable<ContentModel.NavigationMenu>>> Get(ODataQueryOptions<ContentModel.NavigationMenu> options)
+        public async Task<ActionResult<IQueryable<ContentModel.NavigationMenu>>> Get(ODataQueryOptions<ContentModel.NavigationMenu> options)
         {
             var result = await _contentCollectionService.Query(options);
             return Ok(result);

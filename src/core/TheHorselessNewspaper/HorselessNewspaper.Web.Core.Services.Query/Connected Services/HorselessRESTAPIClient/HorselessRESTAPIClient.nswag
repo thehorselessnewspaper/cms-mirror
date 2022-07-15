@@ -38,7 +38,7 @@
       "parameterDateFormat": "yyyy-MM-dd",
       "generateUpdateJsonSerializerSettingsMethod": true,
       "useRequestAndResponseSerializationSettings": false,
-      "serializeTypeInformation": false,
+      "serializeTypeInformation": true,
       "queryNullValue": "",
       "className": "{controller}Client",
       "operationGenerationMode": "SingleClientFromPathSegments",
