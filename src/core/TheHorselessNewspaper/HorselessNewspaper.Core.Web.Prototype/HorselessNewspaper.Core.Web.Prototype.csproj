@@ -22,6 +22,11 @@
 		<Exec Command="dotnet tool run swagger tofile --output ..\..\..\generated-code\TheHorselessNewspaper.REST\swagger-spec.json .\bin\Debug\net6.0\HorselessNewspaper.Core.Web.Prototype.dll v1" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development"></Exec>
 	</Target>
 
+	<Target Condition=" '$(Configuration)'=='Swagger' " Name="SwaggerPostBuildTargetDitto" AfterTargets="Build">
+		<Exec Command="dotnet tool restore"></Exec>
+		<Exec Command="dotnet tool run swagger tofile --output ..\HorselessNewspaper.Web.Core.Services.Query\Client\REST\swagger.json .\bin\Debug\net6.0\HorselessNewspaper.Core.Web.Prototype.dll v1" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development"></Exec>
+	</Target>
+
 	<!-- as per https://docs.microsoft.com/en-us/dotnet/core/compatibility/sdk/6.0/duplicate-files-in-output -->
 	<PropertyGroup>
 		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
