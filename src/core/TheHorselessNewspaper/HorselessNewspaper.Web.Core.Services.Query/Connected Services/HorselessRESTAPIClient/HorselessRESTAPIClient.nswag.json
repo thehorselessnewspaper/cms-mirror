@@ -10,7 +10,7 @@
         "tags": [
           "AccessControlEntriesREST"
         ],
-        "operationId": "AccessControlEntriesRESTControllerCreate",
+        "operationId": "ContentEntitiesAccessControlEntriesREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -209,7 +209,7 @@
         "tags": [
           "AccessControlEntriesREST"
         ],
-        "operationId": "AccessControlEntriesRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesAccessControlEntriesREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -407,7 +407,7 @@
         "tags": [
           "AccessControlEntriesREST"
         ],
-        "operationId": "AccessControlEntriesRESTControllerUpdate",
+        "operationId": "ContentEntitiesAccessControlEntriesREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -614,7 +614,7 @@
         "tags": [
           "AccessControlEntriesREST"
         ],
-        "operationId": "AccessControlEntriesRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesAccessControlEntriesREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -879,7 +879,7 @@
         "tags": [
           "ClientConfiguration"
         ],
-        "operationId": "ClientConfigurationControllerGetClientConfiguration",
+        "operationId": "ClientConfigurationClientConfiguration_GetClientConfiguration",
         "responses": {
           "200": {
             "description": "Success",
@@ -1060,7 +1060,7 @@
         "tags": [
           "ContentCollectionREST"
         ],
-        "operationId": "ContentCollectionRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesContentCollectionREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -1258,7 +1258,7 @@
         "tags": [
           "ContentCollectionREST"
         ],
-        "operationId": "ContentCollectionRESTControllerCreate",
+        "operationId": "ContentEntitiesContentCollectionREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -1457,7 +1457,7 @@
         "tags": [
           "ContentCollectionREST"
         ],
-        "operationId": "ContentCollectionRESTControllerUpdate",
+        "operationId": "ContentEntitiesContentCollectionREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -1664,7 +1664,7 @@
         "tags": [
           "ContentCollectionREST"
         ],
-        "operationId": "ContentCollectionRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesContentCollectionREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -1929,7 +1929,7 @@
         "tags": [
           "DynamicViewServer"
         ],
-        "operationId": "DynamicViewServerControllerGetDynamicView",
+        "operationId": "PresentationDynamicViewServer_GetDynamicView",
         "parameters": [
           {
             "name": "viewPhysicalPath",
@@ -1980,7 +1980,7 @@
         "tags": [
           "FilesystemAssetIngress"
         ],
-        "operationId": "FilesystemAssetIngressControllerUploadPhysical",
+        "operationId": "ContentEntitiesFilesystemAssetIngress_UploadPhysical",
         "parameters": [
           {
             "name": "__tenant__",
@@ -2003,7 +2003,7 @@
         "tags": [
           "FilesystemAssetREST"
         ],
-        "operationId": "FilesystemAssetRESTControllerCreate",
+        "operationId": "ContentEntitiesFilesystemAssetREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -2202,7 +2202,7 @@
         "tags": [
           "FilesystemAssetREST"
         ],
-        "operationId": "FilesystemAssetRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesFilesystemAssetREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -2400,7 +2400,7 @@
         "tags": [
           "FilesystemAssetREST"
         ],
-        "operationId": "FilesystemAssetRESTControllerUpdate",
+        "operationId": "ContentEntitiesFilesystemAssetREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -2607,7 +2607,7 @@
         "tags": [
           "FilesystemAssetREST"
         ],
-        "operationId": "FilesystemAssetRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesFilesystemAssetREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -2872,7 +2872,7 @@
         "tags": [
           "HolonymREST"
         ],
-        "operationId": "HolonymRESTControllerCreate",
+        "operationId": "ContentEntitiesHolonymREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -3071,7 +3071,7 @@
         "tags": [
           "HolonymREST"
         ],
-        "operationId": "HolonymRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesHolonymREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -3269,7 +3269,7 @@
         "tags": [
           "HolonymREST"
         ],
-        "operationId": "HolonymRESTControllerUpdate",
+        "operationId": "ContentEntitiesHolonymREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -3476,7 +3476,7 @@
         "tags": [
           "HolonymREST"
         ],
-        "operationId": "HolonymRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesHolonymREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -3741,7 +3741,7 @@
         "tags": [
           "HorselessContentREST"
         ],
-        "operationId": "HorselessContentRESTControllerCreate",
+        "operationId": "ContentEntitiesHorselessContentREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -3940,7 +3940,7 @@
         "tags": [
           "HorselessContentREST"
         ],
-        "operationId": "HorselessContentRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesHorselessContentREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -4138,7 +4138,7 @@
         "tags": [
           "HorselessContentREST"
         ],
-        "operationId": "HorselessContentRESTControllerUpdate",
+        "operationId": "ContentEntitiesHorselessContentREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -4345,7 +4345,7 @@
         "tags": [
           "HorselessContentREST"
         ],
-        "operationId": "HorselessContentRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesHorselessContentREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -4610,7 +4610,7 @@
         "tags": [
           "HorselessSessionREST"
         ],
-        "operationId": "HorselessSessionRESTControllerCreate",
+        "operationId": "ContentEntitiesHorselessSessionREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -4809,7 +4809,7 @@
         "tags": [
           "HorselessSessionREST"
         ],
-        "operationId": "HorselessSessionRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesHorselessSessionREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -5007,7 +5007,7 @@
         "tags": [
           "HorselessSessionREST"
         ],
-        "operationId": "HorselessSessionRESTControllerUpdate",
+        "operationId": "ContentEntitiesHorselessSessionREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -5214,7 +5214,7 @@
         "tags": [
           "HorselessSessionREST"
         ],
-        "operationId": "HorselessSessionRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesHorselessSessionREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -5479,7 +5479,7 @@
         "tags": [
           "HorselessViewREST"
         ],
-        "operationId": "HorselessViewRESTControllerCreate",
+        "operationId": "ContentEntitiesHorselessViewREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -5678,7 +5678,7 @@
         "tags": [
           "HorselessViewREST"
         ],
-        "operationId": "HorselessViewRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesHorselessViewREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -5876,7 +5876,7 @@
         "tags": [
           "HorselessViewREST"
         ],
-        "operationId": "HorselessViewRESTControllerUpdate",
+        "operationId": "ContentEntitiesHorselessViewREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -6083,7 +6083,7 @@
         "tags": [
           "HorselessViewREST"
         ],
-        "operationId": "HorselessViewRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesHorselessViewREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -6348,7 +6348,7 @@
         "tags": [
           "JSONAssetREST"
         ],
-        "operationId": "JSONAssetRESTControllerCreate",
+        "operationId": "ContentEntitiesJSONAssetREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -6547,7 +6547,7 @@
         "tags": [
           "JSONAssetREST"
         ],
-        "operationId": "JSONAssetRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesJSONAssetREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -6745,7 +6745,7 @@
         "tags": [
           "JSONAssetREST"
         ],
-        "operationId": "JSONAssetRESTControllerUpdate",
+        "operationId": "ContentEntitiesJSONAssetREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -6952,7 +6952,7 @@
         "tags": [
           "JSONAssetREST"
         ],
-        "operationId": "JSONAssetRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesJSONAssetREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -7217,7 +7217,7 @@
         "tags": [
           "KeycloakAuthentication"
         ],
-        "operationId": "KeycloakAuthenticationControllerSignInGET",
+        "operationId": "SignInGET",
         "responses": {
           "200": {
             "description": "Success"
@@ -7228,7 +7228,7 @@
         "tags": [
           "KeycloakAuthentication"
         ],
-        "operationId": "KeycloakAuthenticationControllerSignInPOST",
+        "operationId": "SignInPOST",
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -7260,7 +7260,7 @@
         "tags": [
           "KeycloakAuthentication"
         ],
-        "operationId": "KeycloakAuthenticationControllerSignOutCurrentUser",
+        "operationId": "Signout",
         "responses": {
           "200": {
             "description": "Success"
@@ -7273,7 +7273,7 @@
         "tags": [
           "MeronymREST"
         ],
-        "operationId": "MeronymRESTControllerCreate",
+        "operationId": "ContentEntitiesMeronymREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -7472,7 +7472,7 @@
         "tags": [
           "MeronymREST"
         ],
-        "operationId": "MeronymRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesMeronymREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -7670,7 +7670,7 @@
         "tags": [
           "MeronymREST"
         ],
-        "operationId": "MeronymRESTControllerUpdate",
+        "operationId": "ContentEntitiesMeronymREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -7877,7 +7877,7 @@
         "tags": [
           "MeronymREST"
         ],
-        "operationId": "MeronymRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesMeronymREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -8142,7 +8142,7 @@
         "tags": [
           "MimeTypeREST"
         ],
-        "operationId": "MimeTypeRESTControllerCreate",
+        "operationId": "ContentEntitiesMimeTypeREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -8341,7 +8341,7 @@
         "tags": [
           "MimeTypeREST"
         ],
-        "operationId": "MimeTypeRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesMimeTypeREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -8539,7 +8539,7 @@
         "tags": [
           "MimeTypeREST"
         ],
-        "operationId": "MimeTypeRESTControllerUpdate",
+        "operationId": "ContentEntitiesMimeTypeREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -8746,7 +8746,7 @@
         "tags": [
           "MimeTypeREST"
         ],
-        "operationId": "MimeTypeRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesMimeTypeREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -9011,7 +9011,7 @@
         "tags": [
           "NavigationMenuItemREST"
         ],
-        "operationId": "NavigationMenuItemRESTControllerCreate",
+        "operationId": "ContentEntitiesNavigationMenuItemREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -9210,7 +9210,7 @@
         "tags": [
           "NavigationMenuItemREST"
         ],
-        "operationId": "NavigationMenuItemRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesNavigationMenuItemREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -9408,7 +9408,7 @@
         "tags": [
           "NavigationMenuItemREST"
         ],
-        "operationId": "NavigationMenuItemRESTControllerUpdate",
+        "operationId": "ContentEntitiesNavigationMenuItemREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -9615,7 +9615,7 @@
         "tags": [
           "NavigationMenuItemREST"
         ],
-        "operationId": "NavigationMenuItemRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesNavigationMenuItemREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -9880,7 +9880,7 @@
         "tags": [
           "NavigationMenuREST"
         ],
-        "operationId": "NavigationMenuRESTControllerCreate",
+        "operationId": "ContentEntitiesNavigationMenuREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -10079,7 +10079,7 @@
         "tags": [
           "NavigationMenuREST"
         ],
-        "operationId": "NavigationMenuRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesNavigationMenuREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -10277,7 +10277,7 @@
         "tags": [
           "NavigationMenuREST"
         ],
-        "operationId": "NavigationMenuRESTControllerUpdate",
+        "operationId": "ContentEntitiesNavigationMenuREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -10484,7 +10484,7 @@
         "tags": [
           "NavigationMenuREST"
         ],
-        "operationId": "NavigationMenuRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesNavigationMenuREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -10749,7 +10749,7 @@
         "tags": [
           "NugetPackageREST"
         ],
-        "operationId": "NugetPackageRESTControllerCreate",
+        "operationId": "ContentEntitiesNugetPackageREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -10948,7 +10948,7 @@
         "tags": [
           "NugetPackageREST"
         ],
-        "operationId": "NugetPackageRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesNugetPackageREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -11146,7 +11146,7 @@
         "tags": [
           "NugetPackageREST"
         ],
-        "operationId": "NugetPackageRESTControllerUpdate",
+        "operationId": "ContentEntitiesNugetPackageREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -11353,7 +11353,7 @@
         "tags": [
           "NugetPackageREST"
         ],
-        "operationId": "NugetPackageRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesNugetPackageREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -11618,7 +11618,7 @@
         "tags": [
           "PrincipalREST"
         ],
-        "operationId": "PrincipalRESTControllerCreate",
+        "operationId": "ContentEntitiesPrincipalREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -11817,7 +11817,7 @@
         "tags": [
           "PrincipalREST"
         ],
-        "operationId": "PrincipalRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesPrincipalREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -12015,7 +12015,7 @@
         "tags": [
           "PrincipalREST"
         ],
-        "operationId": "PrincipalRESTControllerUpdate",
+        "operationId": "ContentEntitiesPrincipalREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -12222,7 +12222,7 @@
         "tags": [
           "PrincipalREST"
         ],
-        "operationId": "PrincipalRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesPrincipalREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -12487,7 +12487,7 @@
         "tags": [
           "PublicationREST"
         ],
-        "operationId": "PublicationRESTControllerCreate",
+        "operationId": "ContentEntitiesPublicationREST_Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -12686,7 +12686,7 @@
         "tags": [
           "PublicationREST"
         ],
-        "operationId": "PublicationRESTControllerGetByObjectId",
+        "operationId": "ContentEntitiesPublicationREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -12884,7 +12884,7 @@
         "tags": [
           "PublicationREST"
         ],
-        "operationId": "PublicationRESTControllerUpdate",
+        "operationId": "ContentEntitiesPublicationREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -13091,7 +13091,7 @@
         "tags": [
           "PublicationREST"
         ],
-        "operationId": "PublicationRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesPublicationREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -13356,7 +13356,7 @@
         "tags": [
           "TenantInfoREST"
         ],
-        "operationId": "TenantInfoRESTControllerCreate",
+        "operationId": "HostingEntitiesTenantInfoREST_Create",
         "requestBody": {
           "content": {
             "application/json": {
@@ -13545,7 +13545,7 @@
         "tags": [
           "TenantInfoREST"
         ],
-        "operationId": "TenantInfoRESTControllerGetByObjectId",
+        "operationId": "HostingEntitiesTenantInfoREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -13735,7 +13735,7 @@
         "tags": [
           "TenantInfoREST"
         ],
-        "operationId": "TenantInfoRESTControllerUpdate",
+        "operationId": "HostingEntitiesTenantInfoREST_Update",
         "parameters": [
           {
             "name": "entityCollectionId",
@@ -13934,7 +13934,7 @@
         "tags": [
           "TenantInfoREST"
         ],
-        "operationId": "TenantInfoRESTControllerGetByPageNumber",
+        "operationId": "ContentEntitiesTenantInfoREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -14191,7 +14191,7 @@
         "tags": [
           "TenantRegistration"
         ],
-        "operationId": "TenantRegistrationControllerApproveGET",
+        "operationId": "ApproveGET",
         "parameters": [
           {
             "name": "tenantId",
@@ -14212,7 +14212,7 @@
         "tags": [
           "TenantRegistration"
         ],
-        "operationId": "TenantRegistrationControllerApprovePOST",
+        "operationId": "ApprovePOST",
         "parameters": [
           {
             "name": "tenantId",
@@ -14259,7 +14259,7 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "TenantRESTControllerCreate",
+        "operationId": "HostingEntitiesTenantREST_Create",
         "requestBody": {
           "content": {
             "application/json": {
@@ -14448,7 +14448,7 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "TenantRESTControllerGetByObjectId",
+        "operationId": "HostingEntitiesTenantREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -14638,7 +14638,7 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "TenantRESTControllerUpdate",
+        "operationId": "HostingEntitiesTenantREST_Update",
         "parameters": [
           {
             "name": "entityCollectionId",
@@ -14837,7 +14837,7 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "TenantRESTControllerGetByPageNumber",
+        "operationId": "HostingEntitiesTenantREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -15094,7 +15094,7 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "TenantRESTControllerCreate2",
+        "operationId": "Create",
         "parameters": [
           {
             "name": "__tenant__",
@@ -15293,7 +15293,7 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "TenantRESTControllerGetByObjectId2",
+        "operationId": "ContentEntitiesTenantREST_GetByObjectId",
         "parameters": [
           {
             "name": "objectId",
@@ -15491,7 +15491,7 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "TenantRESTControllerUpdate2",
+        "operationId": "ContentEntitiesTenantREST_Update",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -15698,7 +15698,7 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "TenantRESTControllerUpdateProperties",
+        "operationId": "ContentEntitiesTenantREST_UpdateProperties",
         "parameters": [
           {
             "name": "contentCollectionId",
@@ -15915,7 +15915,7 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "TenantRESTControllerGetByPageNumber2",
+        "operationId": "ContentEntitiesTenantREST_GetByPageNumber",
         "parameters": [
           {
             "name": "pageSize",
@@ -16242,48 +16242,6 @@
             "type": "boolean",
             "nullable": true
           },
-          "AccessControlEntries": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
-            }
-          },
-          "Owners": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
-            }
-          },
-          "SubjectAccessControlEntries": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
-            }
-          },
-          "SubjectHorselessSessions": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesHorselessSession"
-            }
-          },
-          "SubjectPrincipals": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
-            }
-          },
-          "SubjectTenants": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesTenant"
-            }
-          },
           "Scope": {
             "$ref": "#/components/schemas/ContentEntitiesACEPermissionScope"
           },
@@ -16331,9 +16289,37 @@
               "$ref": "#/components/schemas/ContentEntitiesPublication"
             }
           },
+          "ManagedTenants": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesTenant"
+            }
+          },
           "DictionaryKey": {
             "type": "string",
             "nullable": true
+          },
+          "AccessControlEntries": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
+            }
+          },
+          "Owners": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
+            }
+          },
+          "SubjectPrincipals": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
+            }
           }
         }
       },
@@ -16378,13 +16364,6 @@
             "type": "string",
             "nullable": true
           },
-          "ChildContentCollections": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
-            }
-          },
           "HorselessViews": {
             "type": "array",
             "nullable": true,
@@ -16397,13 +16376,6 @@
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-            }
-          },
-          "ParentContentCollections": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
             }
           },
           "Publications": {
@@ -16432,6 +16404,20 @@
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
+            }
+          },
+          "ParentContentCollections": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+            }
+          },
+          "ChildContentCollections": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
             }
           },
           "Owners": {
@@ -16759,20 +16745,6 @@
           "HorselessSessionPrincipal": {
             "$ref": "#/components/schemas/ContentEntitiesPrincipal"
           },
-          "AccessControlEntries": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
-            }
-          },
-          "Owners": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
-            }
-          },
           "Timestamp": {
             "type": "string",
             "format": "byte",
@@ -16786,6 +16758,20 @@
           "DictionaryKey": {
             "type": "string",
             "nullable": true
+          },
+          "AccessControlEntries": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
+            }
+          },
+          "Owners": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
+            }
           }
         }
       },
@@ -17429,55 +17415,6 @@
               "$ref": "#/components/schemas/ContentEntitiesHorselessSession"
             }
           },
-          "AccessControlEntries": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
-            }
-          },
-          "OwnedAccessControlEntries": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
-            }
-          },
-          "OwnedHorselessSessions": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesHorselessSession"
-            }
-          },
-          "OwnedPrincipals": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
-            }
-          },
-          "OwnedTenants": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesTenant"
-            }
-          },
-          "Owners": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
-            }
-          },
-          "TenantAccounts": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesTenant"
-            }
-          },
           "IsAnonymous": {
             "type": "boolean"
           },
@@ -17509,6 +17446,41 @@
           "DictionaryKey": {
             "type": "string",
             "nullable": true
+          },
+          "ManagingAccessControlEntries": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
+            }
+          },
+          "ManagedTenants": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesTenant"
+            }
+          },
+          "OwnedTenants": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesTenant"
+            }
+          },
+          "AccessControlEntries": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
+            }
+          },
+          "Owners": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
+            }
           }
         }
       },
@@ -17661,7 +17633,7 @@
               "$ref": "#/components/schemas/ContentEntitiesContentCollection"
             }
           },
-          "PublicationChildrens": {
+          "PublicationChildren": {
             "type": "array",
             "nullable": true,
             "items": {
@@ -17898,20 +17870,6 @@
             "format": "date-time",
             "nullable": true
           },
-          "AccessControlEntries": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
-            }
-          },
-          "Accounts": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
-            }
-          },
           "ContentCollections": {
             "type": "array",
             "nullable": true,
@@ -17919,18 +17877,16 @@
               "$ref": "#/components/schemas/ContentEntitiesContentCollection"
             }
           },
-          "Owners": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
-            }
-          },
           "IsPublished": {
             "type": "boolean"
           },
           "BaseUrl": {
             "type": "string",
+            "nullable": true
+          },
+          "TenantIdentifierStrategyId": {
+            "type": "string",
+            "format": "uuid",
             "nullable": true
           },
           "TenantIdentifierStrategy": {
@@ -17961,6 +17917,27 @@
           "DictionaryKey": {
             "type": "string",
             "nullable": true
+          },
+          "Owners": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
+            }
+          },
+          "Accounts": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
+            }
+          },
+          "AccessControlEntries": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
+            }
           }
         }
       },
@@ -17994,7 +17971,12 @@
             "format": "byte",
             "nullable": true
           },
-          "TargetTenant": {
+          "Tenant_Id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "Tenant": {
             "$ref": "#/components/schemas/ContentEntitiesTenant"
           },
           "StrategyContainers": {
@@ -18121,6 +18103,27 @@
             "type": "string",
             "nullable": true
           },
+          "ManagedTenants": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesTenant"
+            }
+          },
+          "AccessControlEntries": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
+            }
+          },
+          "Owners": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
+            }
+          },
           "Id": {
             "type": "string",
             "format": "uuid"
@@ -18145,41 +18148,6 @@
           "IsActive": {
             "type": "boolean",
             "nullable": true
-          },
-          "AccessControlEntries": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
-            }
-          },
-          "Owners": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
-            }
-          },
-          "SubjectAccessControlEntries": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
-            }
-          },
-          "SubjectPrincipals": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
-            }
-          },
-          "SubjectTenants": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesTenant"
-            }
           }
         }
       },
@@ -18292,6 +18260,34 @@
             "type": "string",
             "nullable": true
           },
+          "OwnedTenants": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesTenant"
+            }
+          },
+          "TenantAccounts": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesTenant"
+            }
+          },
+          "AccessControlEntries": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
+            }
+          },
+          "Owners": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
+            }
+          },
           "Id": {
             "type": "string",
             "format": "uuid"
@@ -18324,48 +18320,6 @@
           "Sub": {
             "type": "string",
             "nullable": true
-          },
-          "AccessControlEntries": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
-            }
-          },
-          "OwnedAccessControlEntries": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
-            }
-          },
-          "OwnedPrincipals": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
-            }
-          },
-          "OwnedTenants": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesTenant"
-            }
-          },
-          "Owners": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
-            }
-          },
-          "TenantAccounts": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesTenant"
-            }
           }
         }
       },
@@ -18382,6 +18336,11 @@
           },
           "TenantIdentifier": {
             "type": "string",
+            "nullable": true
+          },
+          "TenantIdentifierStrategyId": {
+            "type": "string",
+            "format": "uuid",
             "nullable": true
           },
           "TenantIdentifierStrategy": {
@@ -18408,6 +18367,27 @@
             "type": "string",
             "nullable": true
           },
+          "AccessControlEntries": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
+            }
+          },
+          "Owners": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
+            }
+          },
+          "Accounts": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
+            }
+          },
           "Id": {
             "type": "string",
             "format": "uuid"
@@ -18428,27 +18408,6 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
-          },
-          "AccessControlEntries": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
-            }
-          },
-          "Accounts": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
-            }
-          },
-          "Owners": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
-            }
           }
         }
       },
@@ -18477,12 +18436,12 @@
             "format": "date-time",
             "nullable": true
           },
-          "TargetTenantId": {
+          "Tenant_Id": {
             "type": "string",
             "format": "uuid",
             "nullable": true
           },
-          "TargetTenant": {
+          "Tenant": {
             "$ref": "#/components/schemas/HostingEntitiesTenant"
           },
           "StrategyContainers": {
@@ -18840,6 +18799,13 @@
       "ViewEnginesIViewEngine": {
         "type": "object",
         "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "Json Web Token"
       }
     }
   }
