@@ -389,7 +389,15 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                         var isTenantDeploymentWorkflowComplete = contentModelTenants.Where(r => r.TenantIdentifier != null && r.TenantIdentifier == publishedTenant.TenantIdentifier && r.IsPublished == true).Any();
 
-                        if (mirrorTenantExists == false)
+                        // tolerate the default tenant exist only in content db
+                        // mark the workflow as complete if the default tenant is published
+                        if (mirrorTenantExists == false && publishedTenant.TenantIdentifier == defaultTenant.Identifier)
+                        {
+                            isTenantDeploymentWorkflowComplete = true;
+                        }
+
+                        if (mirrorTenantExists == false && isTenantDeploymentWorkflowComplete == false 
+                            && publishedTenant.TenantIdentifier != defaultTenant.Identifier)
                         {
                             // validate the multitenant routing is working for this tenant
                             // database inserts specific to the tenant can only occur
@@ -816,7 +824,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         {
             using (var scope = this._services.CreateScope())
             {
-
+                var defaultTenantIdentifier = "lache";
                 ContentModel.Tenant ret;
 
                 try
@@ -863,7 +871,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     ContentEntitiesTenant dtoTenant = ContentEntitiesTenant.FromJson(await content.ReadAsStringAsync());
                     // var updatedPostResponse = await httpClient.SendAsync(updateRequest);
 
-                    var updatedPostResponse = await restClient.ApiHorselessContentModelTenantUpdateAsync(createdTenant.Id.ToString(), identifier, dtoTenant);
+                    var updatedPostResponse = await restClient.ApiHorselessContentModelTenantUpdateAsync(createdTenant.Id.ToString(), defaultTenantIdentifier, dtoTenant);
                     string updatepostResponseJson = updatedPostResponse.Result.ToJson(); // await updatedPostResponse.Content.ReadAsStringAsync();
                     var updatedTenant = JsonConvert.DeserializeObject<ContentModel.Tenant>(updatepostResponseJson);
                     _logger.LogTrace($"tenant deployment: access control entries applied for {updatedTenant.TenantIdentifier}");
@@ -894,8 +902,13 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 try
                 {
                     // ensure populated tenantidentifier
+
+                    // obviously todo - implement applicationwide mechanism for getting default tenant
+                    var defaultTenantIdentifier = "lache";
                     mergeEntity.TenantIdentifier = identifier;
-                    var route = $"{baseUri}/{identifier}/api/HorselessContentModel/Tenant/Create";
+
+                    // in our current info architecture, all tenants are created in the root tenant
+                    var route = $"{baseUri}/{defaultTenantIdentifier}/api/HorselessContentModel/Tenant/Create";
                     var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
                     {
                         Content = GetJsonContent(mergeEntity),
@@ -1028,12 +1041,12 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
                     var token = await tokenService.GetClientCredentialsGrantToken();
                     restClient.AuthorizationHeaderToken = token;
-
+                    var defaultTenantIdentifier = "lache";
                     string identifier = originEntity.TenantIdentifier;
                     var baseUri = originEntity.BaseUrl.ToString();
                     baseUri = baseUri.TrimEnd('/');
 
-                    var tenantProbeRoute = $"{baseUri}/{identifier}/{RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_TENANT}/GetByObjectId/{originEntity.ObjectId}";
+                    var tenantProbeRoute = $"{baseUri}/{defaultTenantIdentifier}/{RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_TENANT}/GetByObjectId/{originEntity.ObjectId}";
 
                     var tenantProbeRequestmessage = new HttpRequestMessage(
                         HttpMethod.Get,
@@ -1246,7 +1259,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                 using (var innerScope = this._services.CreateScope())
                 {
-
+                    var defaultTenantIdentifier = "lache";
                     IHttpClientFactory clientFactory = innerScope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
                     var httpClient = clientFactory.CreateClient();
 
@@ -1273,7 +1286,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             {
                                 { HeaderNames.Accept, "application/json;odata.metadata=full" },
                                 { HeaderNames.UserAgent, "HorselessNewspaper" },
-                                { ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, $"{cachedTenant.Identifier}" }
+                                { ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, $"{defaultTenantIdentifier}" }
                             }
                         };
 
