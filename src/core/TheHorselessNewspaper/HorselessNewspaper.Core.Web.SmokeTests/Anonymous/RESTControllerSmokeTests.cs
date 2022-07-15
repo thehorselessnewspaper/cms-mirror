@@ -253,6 +253,8 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 CreatedAt = DateTime.UtcNow,
                 DisplayName = "Test Tenant - Can Create Hosting Tenant",
                 IsSoftDeleted = false,
+                IsPublished = false,
+                DeploymentState = TenantDeploymentWorkflowState.PendingApproval,
                 ObjectId = Guid.NewGuid().ToString(),
                 Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
             };

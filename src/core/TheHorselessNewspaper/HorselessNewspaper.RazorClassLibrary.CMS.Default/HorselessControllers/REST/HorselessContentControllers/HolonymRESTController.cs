@@ -107,7 +107,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             try
             {
                 var updateResult = await _contentCollectionService.Update(contentCollection);
-                return Ok(updateResult);
+                return Accepted(updateResult);
             }
             catch (Exception ex)
             {

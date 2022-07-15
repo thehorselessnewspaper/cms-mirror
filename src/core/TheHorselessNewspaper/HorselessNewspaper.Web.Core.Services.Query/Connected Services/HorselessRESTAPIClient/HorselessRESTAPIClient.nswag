@@ -3,7 +3,7 @@
   "defaultVariables": null,
   "documentGenerator": {
     "fromDocument": {
-      "url": "E:\\src\\horseless-core\\the horseless newspaper\\src\\core\\TheHorselessNewspaper\\HorselessNewspaper.Web.Core.Services.Query\\Client\\REST\\swagger.json",
+      "url": "C:\\src\\the-horseless-newspaper\\src\\core\\TheHorselessNewspaper\\HorselessNewspaper.Web.Core.Services.Query\\Client\\REST\\swagger.json",
       "output": "HorselessRESTAPIClient.nswag.json",
       "newLineBehavior": "Auto"
     }
@@ -38,7 +38,7 @@
       "parameterDateFormat": "yyyy-MM-dd",
       "generateUpdateJsonSerializerSettingsMethod": true,
       "useRequestAndResponseSerializationSettings": false,
-      "serializeTypeInformation": true,
+      "serializeTypeInformation": false,
       "queryNullValue": "",
       "className": "{controller}Client",
       "operationGenerationMode": "SingleClientFromPathSegments",

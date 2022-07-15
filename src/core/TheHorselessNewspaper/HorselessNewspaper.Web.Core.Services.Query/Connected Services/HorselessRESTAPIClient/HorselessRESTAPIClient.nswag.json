@@ -17932,6 +17932,9 @@
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             }
           },
+          "DeploymentState": {
+            "$ref": "#/components/schemas/ContentEntitiesTenantDeploymentWorkflowState"
+          },
           "AccessControlEntries": {
             "type": "array",
             "nullable": true,
@@ -17940,6 +17943,18 @@
             }
           }
         }
+      },
+      "ContentEntitiesTenantDeploymentWorkflowState": {
+        "type": "string",
+        "enum": [
+          "PendingApproval",
+          "Approved",
+          "ExistsInContentDb",
+          "HasOwners",
+          "HasACL",
+          "HasContentCollection",
+          "DeploymentComplete"
+        ]
       },
       "ContentEntitiesTenantIdentifierStrategy": {
         "type": "object",
@@ -18388,6 +18403,9 @@
               "$ref": "#/components/schemas/HostingEntitiesPrincipal"
             }
           },
+          "DeploymentState": {
+            "$ref": "#/components/schemas/HostingEntitiesTenantDeploymentWorkflowState"
+          },
           "Id": {
             "type": "string",
             "format": "uuid"
@@ -18410,6 +18428,18 @@
             "nullable": true
           }
         }
+      },
+      "HostingEntitiesTenantDeploymentWorkflowState": {
+        "type": "string",
+        "enum": [
+          "PendingApproval",
+          "Approved",
+          "ExistsInContentDb",
+          "HasOwners",
+          "HasACL",
+          "HasContentCollection",
+          "DeploymentComplete"
+        ]
       },
       "HostingEntitiesTenantIdentifierStrategy": {
         "type": "object",

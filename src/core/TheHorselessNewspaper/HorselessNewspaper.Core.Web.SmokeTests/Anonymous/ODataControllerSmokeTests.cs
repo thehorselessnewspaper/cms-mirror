@@ -65,7 +65,8 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                             Id = Guid.NewGuid(),
                             CreatedAt = DateTime.UtcNow,
                             DisplayName = "Test Content Collection",
-                            IsPublished = true,
+                            IsPublished = false,
+                            DeploymentState = HostingEntities.TenantDeploymentWorkflowState.PendingApproval,
                             TenantIdentifier = Guid.NewGuid().ToString(),
                             IsSoftDeleted = false,
                             ObjectId = Guid.NewGuid().ToString(),
@@ -165,9 +166,10 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                             Id = Guid.NewGuid(),
                             CreatedAt = DateTime.UtcNow,
                             DisplayName = "Test Content Collection",
-                            IsPublished = true,
+                            IsPublished = false,
                             TenantIdentifier = Guid.NewGuid().ToString(),
                             IsSoftDeleted = false,
+                            DeploymentState = ContentEntities.TenantDeploymentWorkflowState.PendingApproval,
                             ObjectId = Guid.NewGuid().ToString(),
                             TenantIdentifierStrategy = new ContentEntities.TenantIdentifierStrategy()
                             {

@@ -100,7 +100,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
                 var updateResult = await EntityCollectionService.Update(entityCollection, updateablePropreties);
 
-                return Ok(updateResult);
+                return Accepted(updateResult);
             }
             catch (Exception ex)
             {

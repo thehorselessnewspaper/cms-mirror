@@ -103,7 +103,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
                 List<string> updateablePropreties = await EntityReflectionHelpers.GetUpdateableProperties(contentCollection);
 
                 var updateResult = await _contentCollectionService.Update(contentCollection, updateablePropreties);
-                return Ok(updateResult);
+                return Accepted(updateResult);
             }
             catch (Exception ex)
             {
