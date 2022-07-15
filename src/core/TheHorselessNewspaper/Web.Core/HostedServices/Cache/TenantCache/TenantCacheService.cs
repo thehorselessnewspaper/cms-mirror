@@ -452,7 +452,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             // tenant deployment approved. deploy tenant to content db
                             var deployedTenant = await DeployPublishedTenant(approvedTenant);
                             var tenantStateQuery = await hostingModelOperator.ReadAsEnumerable(w => w.TenantIdentifier == deployedTenant.TenantIdentifier);
-                            if(tenantStateQuery.Any())
+                            if (tenantStateQuery.Any())
                             {
                                 var tenantStateQueryResult = tenantStateQuery.First();
                                 currentDeploymentState = tenantStateQueryResult.DeploymentState;
@@ -463,7 +463,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         if (currentDeploymentState == TenantDeploymentWorkflowState.ExistsInContentDb)
                         {
                             var probeResult = await this.ProbeTenantRouting(approvedTenant);
-                            if(probeResult)
+                            if (probeResult)
                             {
                                 // post tenant specific entities to the new tenant
                             }
@@ -474,7 +474,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             try
                             {
                                 var mirrorTenantQuery = await contentModelOperator.ReadAsEnumerable(w => w.TenantIdentifier.Equals(approvedTenant.TenantIdentifier));
-                                if(mirrorTenantQuery.Any())
+                                if (mirrorTenantQuery.Any())
                                 {
                                     var mirrorTenant = mirrorTenantQuery.First();
 
@@ -619,7 +619,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
         private async Task<ContentModel.Tenant> DeployPublishedTenant(HostingModel.Tenant originEntity)
         {
-            
+
             using (var scope = this._services.CreateScope())
             {
                 _logger.LogTrace($"found new undeployed tenant {originEntity.DisplayName}");
@@ -777,6 +777,25 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     // var route = baseUri +  $"/{identifier}/" + RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_TENANT + $"/Create";
 
                     var createdTenant = await EnsureContentModelTenant(originEntity, mergeEntity);
+                    switch ((createdTenant.DeploymentState))
+                    {
+                        case ContentModel.TenantDeploymentWorkflowState.ExistsInContentDb:
+                            break;
+                        case ContentModel.TenantDeploymentWorkflowState.HasOwners:
+                            break;
+
+                        case ContentModel.TenantDeploymentWorkflowState.HasACL:
+                            break;
+
+                        case ContentModel.TenantDeploymentWorkflowState.HasContentCollection:
+                            break;
+
+                        case ContentModel.TenantDeploymentWorkflowState.DeploymentComplete:
+                            break;
+
+                        default:
+                            break;
+                    }
 
                     _logger.LogTrace($"inserted access control entries for new undeployed tenant {createdTenant.DisplayName}");
                     return createdTenant;
@@ -813,9 +832,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     var existsQuery = await contentModelOperator.ReadAsEnumerable(w => w.TenantIdentifier.Equals(mergeEntity.TenantIdentifier));
                     var exists = existsQuery.Any();
 
-                    var stateRecordedQuery = await hostingModelOperator.Read(w => w.DeploymentState == TenantDeploymentWorkflowState.ExistsInContentDb &&
-                                                                                        w.TenantIdentifier.Equals(mergeEntity.TenantIdentifier));
-                    var hasStateRecorded = stateRecordedQuery.Any();
+                    var stateRecordedQuery = await hostingModelOperator.Read(w => w.IsPublished == false && w.DeploymentState == TenantDeploymentWorkflowState.Approved
+                                                                && w.TenantIdentifier.Equals(mergeEntity.TenantIdentifier));
+                    var hasStateRecorded = stateRecordedQuery.Any(w => w.DeploymentState == TenantDeploymentWorkflowState.ExistsInContentDb);
 
                     if (!exists)
                     {
@@ -824,527 +843,518 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         ret = await contentModelOperator.Create(mergeEntity);
 
                     }
-                    
-                    if(!hasStateRecorded)
-                    {
-                        originEntity.DeploymentState = TenantDeploymentWorkflowState.ExistsInContentDb;
-                        // record state change in the hosting db
-                        var updatedHostingTenant = hostingModelOperator.Update(originEntity, new List<string>() { nameof(HostingModel.Tenant.DeploymentState) });
 
-                        ret = existsQuery.First();
-
-                    }
                     return ret;
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError($"problem ensuring content model tenant db updates {ex.Message}");
-                    throw new Exception($"problem ensuring content model tenant db updates {ex.Message}", ex);
-                }
-
             }
-        }
-
-        private async Task<ContentModel.Tenant> EnsureAccessControlEntriesApplied(string identifier, string baseUri, string createdTenantJson)
-        {
-            using (var scope = this._services.CreateScope())
+                catch (Exception ex)
             {
-                var defaultTenantIdentifier = "lache";
-                ContentModel.Tenant ret;
+                _logger.LogError($"problem ensuring content model tenant db updates {ex.Message}");
+                throw new Exception($"problem ensuring content model tenant db updates {ex.Message}", ex);
+            }
 
-                try
+        }
+    }
+
+    private async Task<ContentModel.Tenant> EnsureAccessControlEntriesApplied(string identifier, string baseUri, string createdTenantJson)
+    {
+        using (var scope = this._services.CreateScope())
+        {
+            var defaultTenantIdentifier = "lache";
+            ContentModel.Tenant ret;
+
+            try
+            {
+                IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
+                ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
+                var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRESTAPIClient>();
+                var token = await tokenService.GetClientCredentialsGrantToken();
+                restClient.AuthorizationHeaderToken = token;
+
+                var httpClient = clientFactory.CreateClient();
+
+                var createdTenant = JsonConvert.DeserializeObject<ContentModel.Tenant>(createdTenantJson);
+
+                createdTenant.IsPublished = true; //mark workflow complete
+                _logger.LogTrace($"will change state of tenant {createdTenant.IsPublished} to true");
+
+                var updatedRoute = $"{baseUri}/{identifier}/api/HorselessContentModel/Tenant/Update/{createdTenant.Id}";
+
+                // update the acess control entries
+                // populate the access control entries for the new tenant
+
+                foreach (var user in createdTenant.Owners)
                 {
-                    IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
-                    ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
-                    var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRESTAPIClient>();
-                    var token = await tokenService.GetClientCredentialsGrantToken();
-                    restClient.AuthorizationHeaderToken = token;
-
-                    var httpClient = clientFactory.CreateClient();
-
-                    var createdTenant = JsonConvert.DeserializeObject<ContentModel.Tenant>(createdTenantJson);
-
-                    createdTenant.IsPublished = true; //mark workflow complete
-                    _logger.LogTrace($"will change state of tenant {createdTenant.IsPublished} to true");
-
-                    var updatedRoute = $"{baseUri}/{identifier}/api/HorselessContentModel/Tenant/Update/{createdTenant.Id}";
-
-                    // update the acess control entries
-                    // populate the access control entries for the new tenant
-
-                    foreach (var user in createdTenant.Owners)
+                    foreach (var ace in createdTenant.AccessControlEntries)
                     {
-                        foreach (var ace in createdTenant.AccessControlEntries)
-                        {
-                            ace.SubjectPrincipals.Add(user);
-                        }
+                        ace.SubjectPrincipals.Add(user);
                     }
+                }
 
 
 
-                    var updateRequest = new HttpRequestMessage(HttpMethod.Post, updatedRoute)
-                    {
-                        Content = GetJsonContent(createdTenant),
-                        Headers =
+                var updateRequest = new HttpRequestMessage(HttpMethod.Post, updatedRoute)
+                {
+                    Content = GetJsonContent(createdTenant),
+                    Headers =
                             {
                                 { HeaderNames.Accept, "application/json" },
                                 { HeaderNames.UserAgent, "HorselessNewspaper" }
                             }
-                    };
+                };
 
-                    var content = GetJsonContent(createdTenant);
-                    ContentEntitiesTenant dtoTenant = ContentEntitiesTenant.FromJson(await content.ReadAsStringAsync());
-                    // var updatedPostResponse = await httpClient.SendAsync(updateRequest);
+                var content = GetJsonContent(createdTenant);
+                ContentEntitiesTenant dtoTenant = ContentEntitiesTenant.FromJson(await content.ReadAsStringAsync());
+                // var updatedPostResponse = await httpClient.SendAsync(updateRequest);
 
-                    var updatedPostResponse = await restClient.ApiHorselessContentModelTenantUpdateAsync(createdTenant.Id.ToString(), defaultTenantIdentifier, dtoTenant);
-                    string updatepostResponseJson = updatedPostResponse.Result.ToJson(); // await updatedPostResponse.Content.ReadAsStringAsync();
-                    var updatedTenant = JsonConvert.DeserializeObject<ContentModel.Tenant>(updatepostResponseJson);
-                    _logger.LogTrace($"tenant deployment: access control entries applied for {updatedTenant.TenantIdentifier}");
-                    ret = updatedTenant;
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError($"problem applying access control entries for tenantidentifier={identifier}: exception {ex.Message}");
-                    throw new Exception($"problem applying access control entries for tenantidentifier={identifier}: exception {ex.Message}", ex);
-                }
-
-                return ret;
-
+                var updatedPostResponse = await restClient.ApiHorselessContentModelTenantUpdateAsync(createdTenant.Id.ToString(), defaultTenantIdentifier, dtoTenant);
+                string updatepostResponseJson = updatedPostResponse.Result.ToJson(); // await updatedPostResponse.Content.ReadAsStringAsync();
+                var updatedTenant = JsonConvert.DeserializeObject<ContentModel.Tenant>(updatepostResponseJson);
+                _logger.LogTrace($"tenant deployment: access control entries applied for {updatedTenant.TenantIdentifier}");
+                ret = updatedTenant;
             }
-        }
-
-        private async Task EnsureContentModelTenantCreated(ContentModel.Tenant mergeEntity, string identifier, string baseUri)
-        {
-            using (var scope = this._services.CreateScope())
+            catch (Exception ex)
             {
+                _logger.LogError($"problem applying access control entries for tenantidentifier={identifier}: exception {ex.Message}");
+                throw new Exception($"problem applying access control entries for tenantidentifier={identifier}: exception {ex.Message}", ex);
+            }
 
-                IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
-                var httpClient = clientFactory.CreateClient();
-                var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRESTAPIClient>();
-                ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
-                var token = await tokenService.GetClientCredentialsGrantToken();
-                restClient.AuthorizationHeaderToken = token;
-                try
+            return ret;
+
+        }
+    }
+
+    private async Task EnsureContentModelTenantCreated(ContentModel.Tenant mergeEntity, string identifier, string baseUri)
+    {
+        using (var scope = this._services.CreateScope())
+        {
+
+            IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
+            var httpClient = clientFactory.CreateClient();
+            var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRESTAPIClient>();
+            ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
+            var token = await tokenService.GetClientCredentialsGrantToken();
+            restClient.AuthorizationHeaderToken = token;
+            try
+            {
+                // ensure populated tenantidentifier
+
+                // obviously todo - implement applicationwide mechanism for getting default tenant
+                var defaultTenantIdentifier = "lache";
+                mergeEntity.TenantIdentifier = identifier;
+
+                // in our current info architecture, all tenants are created in the root tenant
+                var route = $"{baseUri}/{defaultTenantIdentifier}/api/HorselessContentModel/Tenant/Create";
+                var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
                 {
-                    // ensure populated tenantidentifier
-
-                    // obviously todo - implement applicationwide mechanism for getting default tenant
-                    var defaultTenantIdentifier = "lache";
-                    mergeEntity.TenantIdentifier = identifier;
-
-                    // in our current info architecture, all tenants are created in the root tenant
-                    var route = $"{baseUri}/{defaultTenantIdentifier}/api/HorselessContentModel/Tenant/Create";
-                    var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
-                    {
-                        Content = GetJsonContent(mergeEntity),
-                        Headers =
+                    Content = GetJsonContent(mergeEntity),
+                    Headers =
                                     {
                                         { HeaderNames.Accept, "application/json" },
                                         { HeaderNames.UserAgent, "HorselessNewspaper" }
                                     }
-                    };
+                };
 
-                    var postResponse = await httpClient.SendAsync(postRequest);
+                var postResponse = await httpClient.SendAsync(postRequest);
 
-                    // var content = GetJsonContent(mergeEntity);
-                    // ContentEntitiesTenant dtoTenant = ContentEntitiesTenant.FromJson(await content.ReadAsStringAsync());
+                // var content = GetJsonContent(mergeEntity);
+                // ContentEntitiesTenant dtoTenant = ContentEntitiesTenant.FromJson(await content.ReadAsStringAsync());
 
-                    // var postResponse = await restClient.ApiHorselessContentModelTenantCreateAsync(identifier, dtoTenant);
+                // var postResponse = await restClient.ApiHorselessContentModelTenantCreateAsync(identifier, dtoTenant);
 
-                    string postResponseJson = await postResponse.Content.ReadAsStringAsync();
-                    var createdTenant = JsonConvert.DeserializeObject<ContentModel.Tenant>(postResponseJson); // doesn't work JsonSerializer.Deserialize<ContentModel.Tenant>(postResponseJson);
-                    _logger.LogTrace($"content model tenant record created for {createdTenant.TenantIdentifier}");
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError($"problem ensuring content model tenant created for tenantidentifier={identifier}: exception  {ex.Message}");
-                    throw;
-                }
-            }
-
-
-        }
-
-        private async Task<bool> IsMustApplyAccessControlEntries(HostingModel.Tenant originEntity)
-        {
-            var ret = true;
-
-            try
-            {
-                var queryResponse = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{originEntity.TenantIdentifier}'&$top=1&$expand=AccessControlEntries");
-
-                if (queryResponse != null && queryResponse.Count > 0)
-                {
-                    var createdTenant = queryResponse.First();
-                    foreach (var ace in createdTenant.AccessControlEntries)
-                    {
-                        if (ace.SubjectPrincipals.Count() > 0)
-                        {
-                            _logger.LogTrace($"content model tenant access control entries already exists for tenant identifier = {originEntity.TenantIdentifier}");
-
-                            ret = false;
-                            break;
-                        }
-                    }
-                }
-
-                //string probeResponseContent = await GetContentModelTenantJSONByObjectId(originEntity);
-                //var createdTenant = JsonConvert.DeserializeObject<ContentModel.Tenant>(probeResponseContent); // doesn't work JsonSerializer.Deserialize<ContentModel.Tenant>(postResponseJson);
-
-                //foreach (var ace in createdTenant.AccessControlEntries)
-                //{
-                //    if (ace.SubjectPrincipals.Count() > 0)
-                //    {
-                //        _logger.LogTrace($"content model tenant access control entries already exists for tenant identifier = {originEntity.TenantIdentifier}");
-
-                //        ret = false;
-                //        break;
-                //    }
-                //}
-
-
-
-                ret = false;
+                string postResponseJson = await postResponse.Content.ReadAsStringAsync();
+                var createdTenant = JsonConvert.DeserializeObject<ContentModel.Tenant>(postResponseJson); // doesn't work JsonSerializer.Deserialize<ContentModel.Tenant>(postResponseJson);
+                _logger.LogTrace($"content model tenant record created for {createdTenant.TenantIdentifier}");
             }
             catch (Exception ex)
             {
-                _logger.LogError($"problem validating tenant deployment {ex.Message}");
+                _logger.LogError($"problem ensuring content model tenant created for tenantidentifier={identifier}: exception  {ex.Message}");
+                throw;
+            }
+        }
+
+
+    }
+
+    private async Task<bool> IsMustApplyAccessControlEntries(HostingModel.Tenant originEntity)
+    {
+        var ret = true;
+
+        try
+        {
+            var queryResponse = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{originEntity.TenantIdentifier}'&$top=1&$expand=AccessControlEntries");
+
+            if (queryResponse != null && queryResponse.Count > 0)
+            {
+                var createdTenant = queryResponse.First();
+                foreach (var ace in createdTenant.AccessControlEntries)
+                {
+                    if (ace.SubjectPrincipals.Count() > 0)
+                    {
+                        _logger.LogTrace($"content model tenant access control entries already exists for tenant identifier = {originEntity.TenantIdentifier}");
+
+                        ret = false;
+                        break;
+                    }
+                }
+            }
+
+            //string probeResponseContent = await GetContentModelTenantJSONByObjectId(originEntity);
+            //var createdTenant = JsonConvert.DeserializeObject<ContentModel.Tenant>(probeResponseContent); // doesn't work JsonSerializer.Deserialize<ContentModel.Tenant>(postResponseJson);
+
+            //foreach (var ace in createdTenant.AccessControlEntries)
+            //{
+            //    if (ace.SubjectPrincipals.Count() > 0)
+            //    {
+            //        _logger.LogTrace($"content model tenant access control entries already exists for tenant identifier = {originEntity.TenantIdentifier}");
+
+            //        ret = false;
+            //        break;
+            //    }
+            //}
+
+
+
+            ret = false;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"problem validating tenant deployment {ex.Message}");
+            ret = true;
+        }
+
+        return ret;
+    }
+
+    private async Task<bool> IsMustCreateContentModelTenant(HostingModel.Tenant originEntity)
+    {
+        using (var scope = this._services.CreateScope())
+        {
+
+            var ret = false;
+
+
+            try
+            {
+                string probeResponseContent = await GetContentModelTenantJSONByObjectId(originEntity);
+                var createdTenant = JsonConvert.DeserializeObject<IEnumerable<ContentModel.Tenant>>(probeResponseContent); // doesn't work JsonSerializer.Deserialize<ContentModel.Tenant>(postResponseJson);
+                if (createdTenant != null)
+                {
+                    _logger.LogTrace($"content model tenant record already exists for tenant identifier = {originEntity.TenantIdentifier}");
+
+                    ret = false;
+                }
+                else
+                {
+                    _logger.LogTrace($"content model tenant record does not already exists for tenant identifier = {originEntity.TenantIdentifier}");
+                    ret = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning($"problem validating tenant deployment {ex.Message}");
                 ret = true;
             }
 
             return ret;
+
         }
+    }
 
-        private async Task<bool> IsMustCreateContentModelTenant(HostingModel.Tenant originEntity)
-        {
-            using (var scope = this._services.CreateScope())
-            {
+    private async Task<string> GetContentModelTenantJSONByObjectId(HostingModel.Tenant originEntity)
+    {
 
-                var ret = false;
-
-
-                try
-                {
-                    string probeResponseContent = await GetContentModelTenantJSONByObjectId(originEntity);
-                    var createdTenant = JsonConvert.DeserializeObject<IEnumerable<ContentModel.Tenant>>(probeResponseContent); // doesn't work JsonSerializer.Deserialize<ContentModel.Tenant>(postResponseJson);
-                    if (createdTenant != null)
-                    {
-                        _logger.LogTrace($"content model tenant record already exists for tenant identifier = {originEntity.TenantIdentifier}");
-
-                        ret = false;
-                    }
-                    else
-                    {
-                        _logger.LogTrace($"content model tenant record does not already exists for tenant identifier = {originEntity.TenantIdentifier}");
-                        ret = true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogWarning($"problem validating tenant deployment {ex.Message}");
-                    ret = true;
-                }
-
-                return ret;
-
-            }
-        }
-
-        private async Task<string> GetContentModelTenantJSONByObjectId(HostingModel.Tenant originEntity)
+        using (var scope = this._services.CreateScope())
         {
 
-            using (var scope = this._services.CreateScope())
+            var ret = string.Empty;
+
+            try
             {
+                IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
+                var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRESTAPIClient>();
+                var httpClient = clientFactory.CreateClient();
+                ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
+                var token = await tokenService.GetClientCredentialsGrantToken();
+                restClient.AuthorizationHeaderToken = token;
+                var defaultTenantIdentifier = "lache";
+                string identifier = originEntity.TenantIdentifier;
+                var baseUri = originEntity.BaseUrl.ToString();
+                baseUri = baseUri.TrimEnd('/');
 
-                var ret = string.Empty;
+                var tenantProbeRoute = $"{baseUri}/{defaultTenantIdentifier}/{RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_TENANT}/GetByObjectId/{originEntity.ObjectId}";
 
-                try
+                var tenantProbeRequestmessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    tenantProbeRoute)
                 {
-                    IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
-                    var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRESTAPIClient>();
-                    var httpClient = clientFactory.CreateClient();
-                    ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
-                    var token = await tokenService.GetClientCredentialsGrantToken();
-                    restClient.AuthorizationHeaderToken = token;
-                    var defaultTenantIdentifier = "lache";
-                    string identifier = originEntity.TenantIdentifier;
-                    var baseUri = originEntity.BaseUrl.ToString();
-                    baseUri = baseUri.TrimEnd('/');
-
-                    var tenantProbeRoute = $"{baseUri}/{defaultTenantIdentifier}/{RESTContentModelControllerStrings.API_HORSELESSCONTENTMODEL_TENANT}/GetByObjectId/{originEntity.ObjectId}";
-
-                    var tenantProbeRequestmessage = new HttpRequestMessage(
-                        HttpMethod.Get,
-                        tenantProbeRoute)
-                    {
-                        Headers =
+                    Headers =
                             {
                                 { HeaderNames.Accept, "application/json" },
                                 { HeaderNames.UserAgent, "HorselessNewspaper" }
                             }
-                    };
+                };
 
-                    // tolerate varying objectid,id for dynamically created entities
-                    var queryResult = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{identifier}'");
-                    if (queryResult != null && queryResult.Count > 0)
-                    {
-                        ret = JsonConvert.SerializeObject(queryResult);
-                        return ret;
-                    }
-
-                    //var result = await restClient.ApiHorselessContentModelTenantGetByObjectIdAsync(originEntity.ObjectId, originEntity.TenantIdentifier);
-                    //ret = result.Result.ToJson();
-                    //var tenantProbeResponse = await httpClient.SendAsync(tenantProbeRequestmessage);
-                    //var probeResponseContent = await tenantProbeResponse.Content.ReadAsStringAsync();
-                    //ret = probeResponseContent;
-                }
-                catch (Exception ex)
+                // tolerate varying objectid,id for dynamically created entities
+                var queryResult = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{identifier}'");
+                if (queryResult != null && queryResult.Count > 0)
                 {
-                    ret = string.Empty;
-                    _logger.LogWarning($"problem getting content model tenant by object id");
+                    ret = JsonConvert.SerializeObject(queryResult);
+                    return ret;
                 }
 
-
-                return ret;
-
+                //var result = await restClient.ApiHorselessContentModelTenantGetByObjectIdAsync(originEntity.ObjectId, originEntity.TenantIdentifier);
+                //ret = result.Result.ToJson();
+                //var tenantProbeResponse = await httpClient.SendAsync(tenantProbeRequestmessage);
+                //var probeResponseContent = await tenantProbeResponse.Content.ReadAsStringAsync();
+                //ret = probeResponseContent;
             }
-        }
-
-        private async Task<string> GetHostingModelTenantJSONByObjectId(HostingModel.Tenant originEntity)
-        {
-            using (var scope = this._services.CreateScope())
+            catch (Exception ex)
             {
+                ret = string.Empty;
+                _logger.LogWarning($"problem getting content model tenant by object id");
+            }
 
-                var ret = string.Empty;
 
-                try
+            return ret;
+
+        }
+    }
+
+    private async Task<string> GetHostingModelTenantJSONByObjectId(HostingModel.Tenant originEntity)
+    {
+        using (var scope = this._services.CreateScope())
+        {
+
+            var ret = string.Empty;
+
+            try
+            {
+                IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
+                var httpClient = clientFactory.CreateClient();
+
+                string identifier = originEntity.TenantIdentifier;
+                var baseUri = originEntity.BaseUrl.ToString();
+                baseUri = baseUri.TrimEnd('/');
+
+                var tenantProbeRoute = $"{baseUri}/{identifier}/{RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT}/HostingEntitiesGetByObjectId/{originEntity.ObjectId}";
+
+                var tenantProbeRequestmessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    tenantProbeRoute)
                 {
-                    IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
-                    var httpClient = clientFactory.CreateClient();
-
-                    string identifier = originEntity.TenantIdentifier;
-                    var baseUri = originEntity.BaseUrl.ToString();
-                    baseUri = baseUri.TrimEnd('/');
-
-                    var tenantProbeRoute = $"{baseUri}/{identifier}/{RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT}/HostingEntitiesGetByObjectId/{originEntity.ObjectId}";
-
-                    var tenantProbeRequestmessage = new HttpRequestMessage(
-                        HttpMethod.Get,
-                        tenantProbeRoute)
-                    {
-                        Headers =
+                    Headers =
                             {
                                 { HeaderNames.Accept, "text/html" },
                                 { HeaderNames.UserAgent, "HorselessNewspaper" }
                             }
-                    };
+                };
 
 
-                    var tenantProbeResponse = await httpClient.SendAsync(tenantProbeRequestmessage);
-                    var probeResponseContent = await tenantProbeResponse.Content.ReadAsStringAsync();
-                    ret = probeResponseContent;
-                }
-                catch (Exception ex)
-                {
-                    ret = string.Empty;
-                    _logger.LogWarning($"problem getting hosting model tenant by object id");
-                }
-
-                return ret;
-
+                var tenantProbeResponse = await httpClient.SendAsync(tenantProbeRequestmessage);
+                var probeResponseContent = await tenantProbeResponse.Content.ReadAsStringAsync();
+                ret = probeResponseContent;
             }
-        }
-
-        private IMultiTenantStore<HorselessTenantInfo>? GetInMemoryTenantStores()
-        {
-            using (var scope = this._services.CreateScope())
+            catch (Exception ex)
             {
-
-                // inject the finbuckle in-memory store
-                var stores = scope.ServiceProvider.GetRequiredService<IEnumerable<IMultiTenantStore<HorselessTenantInfo>>>().ToList();
-
-                var inMemoryStores = stores.Where(s => s.GetType() == typeof(InMemoryStore<HorselessTenantInfo>))
-                       .SingleOrDefault();
-                return inMemoryStores;
+                ret = string.Empty;
+                _logger.LogWarning($"problem getting hosting model tenant by object id");
             }
 
+            return ret;
+
         }
+    }
 
-        private async Task<IEnumerable<HostingModel.Tenant>> GetInprogressDeployments()
-        {
-            using (var scope = this._services.CreateScope())
-            {
-
-                try
-                {
-
-                    // collect the hosting model tenants
-                    var hostingModelTenantQuery = scope.ServiceProvider.GetRequiredService<IQueryableHostingModelOperator<HostingModel.Tenant>>();
-
-                    var hostingModelTenantQueryResult =
-                        await hostingModelTenantQuery.ReadAsEnumerable(w => w.IsSoftDeleted == false
-                                                                            && w.IsPublished == false
-                                                                            && w.DeploymentState != TenantDeploymentWorkflowState.DeploymentComplete
-                                                                            && w.TenantIdentifier != null,
-                                                                            new List<string>()
-                                                                            { nameof(HostingModel.Tenant.TenantInfos), nameof(HostingModel.Tenant.Owners) });
-
-                    var hostingModelTenants = hostingModelTenantQueryResult == null ? new List<HostingModel.Tenant>() : hostingModelTenantQueryResult.ToList();
-
-                    _logger.LogTrace($"read {hostingModelTenantQueryResult.Where(w => w.IsPublished == true).ToList().Count()} published hosting model tenant records");
-                    _logger.LogTrace($"read {hostingModelTenantQueryResult.Where(w => w.IsPublished == false).ToList().Count()} unpublished hosting model tenant records");
-
-
-                    // take amount * service execution frequency = deploymentRate
-                    return hostingModelTenants.Take(100).ToList();
-
-                }
-                catch (Exception e)
-                {
-                    this._logger.LogError($"{this.GetType().FullName} had problems getting hosting model tenants: exception {e.Message}");
-                    return new List<HostingModel.Tenant>();
-                }
-
-            }
-        }
-
-        private async Task UpdateMultiTenantInMemoryStore(IMultiTenantStore<HorselessTenantInfo>? inMemoryStores, HostingModel.Tenant originEntity)
-        {
-            using (var scope = this._services.CreateScope())
-            {
-
-                var hostingModelTenantInfoQuery = this.GetQueryForHostingEntity<HostingModel.TenantInfo>(scope);
-                var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.ReadAsEnumerable(w => w.ParentTenantId == originEntity.Id);
-
-                if (hostingModelTenantInfoQueryResult != null &&
-                    hostingModelTenantInfoQueryResult.Any())
-                {
-
-                    var hostingModelTenantInfo = hostingModelTenantInfoQueryResult.ToList().First();
-                    _logger.LogTrace($"found new undeployed tenantInfo {hostingModelTenantInfo.DisplayName}");
-                    // TODO 
-                    // handle multiplicity of TenantInfo per Tenant
-                    // enables tenants of tenants
-                    var inMemoryStoreEntity = new HorselessTenantInfo(hostingModelTenantInfo);
-                    var inMemoryStoreUpdated = await inMemoryStores.TryAddAsync(inMemoryStoreEntity);
-                    _logger.LogTrace($"in memory tenant store updated with tenant: {inMemoryStoreEntity.Payload.DisplayName}");
-
-                }
-
-            }
-        }
-
-
-        private async Task<List<ContentModel.Tenant>> GetCurrentContentModelTenants(string expandList = "")
+    private IMultiTenantStore<HorselessTenantInfo>? GetInMemoryTenantStores()
+    {
+        using (var scope = this._services.CreateScope())
         {
 
-            var ret = new List<ContentModel.Tenant>();
-            string token = string.Empty;
+            // inject the finbuckle in-memory store
+            var stores = scope.ServiceProvider.GetRequiredService<IEnumerable<IMultiTenantStore<HorselessTenantInfo>>>().ToList();
+
+            var inMemoryStores = stores.Where(s => s.GetType() == typeof(InMemoryStore<HorselessTenantInfo>))
+                   .SingleOrDefault();
+            return inMemoryStores;
+        }
+
+    }
+
+    private async Task<IEnumerable<HostingModel.Tenant>> GetInprogressDeployments()
+    {
+        using (var scope = this._services.CreateScope())
+        {
 
             try
             {
 
+                // collect the hosting model tenants
+                var hostingModelTenantQuery = scope.ServiceProvider.GetRequiredService<IQueryableHostingModelOperator<HostingModel.Tenant>>();
 
-                IEnumerable<HorselessTenantInfo> allCachedTenants = new List<HorselessTenantInfo>();
+                var hostingModelTenantQueryResult =
+                    await hostingModelTenantQuery.ReadAsEnumerable(w => w.IsSoftDeleted == false
+                                                                        && w.IsPublished == false
+                                                                        && w.DeploymentState != TenantDeploymentWorkflowState.DeploymentComplete
+                                                                        && w.TenantIdentifier != null,
+                                                                        new List<string>()
+                                                                        { nameof(HostingModel.Tenant.TenantInfos), nameof(HostingModel.Tenant.Owners) });
 
-                // get auth token
-                token = await GetAuthToken(token);
+                var hostingModelTenants = hostingModelTenantQueryResult == null ? new List<HostingModel.Tenant>() : hostingModelTenantQueryResult.ToList();
 
-                using (var innerScope = this._services.CreateScope())
+                _logger.LogTrace($"read {hostingModelTenantQueryResult.Where(w => w.IsPublished == true).ToList().Count()} published hosting model tenant records");
+                _logger.LogTrace($"read {hostingModelTenantQueryResult.Where(w => w.IsPublished == false).ToList().Count()} unpublished hosting model tenant records");
+
+
+                // take amount * service execution frequency = deploymentRate
+                return hostingModelTenants.Take(100).ToList();
+
+            }
+            catch (Exception e)
+            {
+                this._logger.LogError($"{this.GetType().FullName} had problems getting hosting model tenants: exception {e.Message}");
+                return new List<HostingModel.Tenant>();
+            }
+
+        }
+    }
+
+    private async Task UpdateMultiTenantInMemoryStore(IMultiTenantStore<HorselessTenantInfo>? inMemoryStores, HostingModel.Tenant originEntity)
+    {
+        using (var scope = this._services.CreateScope())
+        {
+
+            var hostingModelTenantInfoQuery = this.GetQueryForHostingEntity<HostingModel.TenantInfo>(scope);
+            var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.ReadAsEnumerable(w => w.ParentTenantId == originEntity.Id);
+
+            if (hostingModelTenantInfoQueryResult != null &&
+                hostingModelTenantInfoQueryResult.Any())
+            {
+
+                var hostingModelTenantInfo = hostingModelTenantInfoQueryResult.ToList().First();
+                _logger.LogTrace($"found new undeployed tenantInfo {hostingModelTenantInfo.DisplayName}");
+                // TODO 
+                // handle multiplicity of TenantInfo per Tenant
+                // enables tenants of tenants
+                var inMemoryStoreEntity = new HorselessTenantInfo(hostingModelTenantInfo);
+                var inMemoryStoreUpdated = await inMemoryStores.TryAddAsync(inMemoryStoreEntity);
+                _logger.LogTrace($"in memory tenant store updated with tenant: {inMemoryStoreEntity.Payload.DisplayName}");
+
+            }
+
+        }
+    }
+
+
+    private async Task<List<ContentModel.Tenant>> GetCurrentContentModelTenants(string expandList = "")
+    {
+
+        var ret = new List<ContentModel.Tenant>();
+        string token = string.Empty;
+
+        try
+        {
+
+
+            IEnumerable<HorselessTenantInfo> allCachedTenants = new List<HorselessTenantInfo>();
+
+            // get auth token
+            token = await GetAuthToken(token);
+
+            using (var innerScope = this._services.CreateScope())
+            {
+                var defaultTenantIdentifier = "lache";
+                IHttpClientFactory clientFactory = innerScope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
+                var httpClient = clientFactory.CreateClient();
+
+                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                var baseUri = this.GetOdataBaseUrl(innerScope);
+                baseUri = baseUri.TrimEnd('/');
+                var expandClause = @"";
+
+                if (expandList != "")
                 {
-                    var defaultTenantIdentifier = "lache";
-                    IHttpClientFactory clientFactory = innerScope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
-                    var httpClient = clientFactory.CreateClient();
+                    expandClause = expandClause + expandList;
+                }
 
-                    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                foreach (var cachedTenant in allCachedTenants)
+                {
+                    var odataContentModelTenantQuery = $"{baseUri}/{ODataControllerStrings.ODATA_CONTENTMODEL_TENANT}{expandClause}";
 
-                    var baseUri = this.GetOdataBaseUrl(innerScope);
-                    baseUri = baseUri.TrimEnd('/');
-                    var expandClause = @"";
-
-                    if (expandList != "")
+                    var odataContentModelQueryMessage = new HttpRequestMessage(
+                        HttpMethod.Get,
+                        odataContentModelTenantQuery)
                     {
-                        expandClause = expandClause + expandList;
-                    }
-
-                    foreach (var cachedTenant in allCachedTenants)
-                    {
-                        var odataContentModelTenantQuery = $"{baseUri}/{ODataControllerStrings.ODATA_CONTENTMODEL_TENANT}{expandClause}";
-
-                        var odataContentModelQueryMessage = new HttpRequestMessage(
-                            HttpMethod.Get,
-                            odataContentModelTenantQuery)
-                        {
-                            Headers =
+                        Headers =
                             {
                                 { HeaderNames.Accept, "application/json;odata.metadata=full" },
                                 { HeaderNames.UserAgent, "HorselessNewspaper" },
                                 { ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, $"{defaultTenantIdentifier}" }
                             }
-                        };
+                    };
 
-                        odataContentModelQueryMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                    odataContentModelQueryMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-                        var odataResponse = await httpClient.SendAsync(odataContentModelQueryMessage);
-                        var probeResponseContent = await odataResponse.Content.ReadAsStringAsync();
-                        if (probeResponseContent == null || probeResponseContent.Equals(string.Empty))
-                        {
-                            return ret;
-                        }
-
-                        var contentModelTenantList = System.Text.Json.JsonSerializer.Deserialize<ODataResponse<IEnumerable<ContentModel.Tenant>>>(probeResponseContent); // JsonConvert.DeserializeObject<ODataResponse<ContentModel.Tenant>>(probeResponseContent);
-                        ret.AddRange(contentModelTenantList.Value);
-                        this._logger.LogTrace($"{this.GetType().FullName} has cmpleted retrieving content model tenants");
+                    var odataResponse = await httpClient.SendAsync(odataContentModelQueryMessage);
+                    var probeResponseContent = await odataResponse.Content.ReadAsStringAsync();
+                    if (probeResponseContent == null || probeResponseContent.Equals(string.Empty))
+                    {
+                        return ret;
                     }
 
-
+                    var contentModelTenantList = System.Text.Json.JsonSerializer.Deserialize<ODataResponse<IEnumerable<ContentModel.Tenant>>>(probeResponseContent); // JsonConvert.DeserializeObject<ODataResponse<ContentModel.Tenant>>(probeResponseContent);
+                    ret.AddRange(contentModelTenantList.Value);
+                    this._logger.LogTrace($"{this.GetType().FullName} has cmpleted retrieving content model tenants");
                 }
+
+
             }
-            catch (Exception ex)
+        }
+        catch (Exception ex)
+        {
+            // ret = string.Empty;
+
+            if (ex.InnerException != null && (ex.InnerException.Message.Contains("operation") && ex.InnerException.Message.Contains("cancelled")))
             {
-                // ret = string.Empty;
-
-                if (ex.InnerException != null && (ex.InnerException.Message.Contains("operation") && ex.InnerException.Message.Contains("cancelled")))
-                {
-                    _logger.LogWarning($"operation cancelled exception {ex.Message}");
-                }
-                else
-                {
-                    _logger.LogError($"problem getting content model tenants: {ex.Message}");
-                }
+                _logger.LogWarning($"operation cancelled exception {ex.Message}");
             }
-
-            return ret;
-        }
-
-        private async Task<string> GetAuthToken(string token)
-        {
-            using (var scope = this._services.CreateScope())
+            else
             {
-
-                // var tenantStore = this.GetInMemoryTenantStores();
-                // var cachedTenants = await tenantStore.GetAllAsync();
-                ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
-
-                // allCachedTenants = cachedTenants.ToList();
-
-                token = await tokenService.GetClientCredentialsGrantToken();
-
+                _logger.LogError($"problem getting content model tenants: {ex.Message}");
             }
-
-            return token;
         }
 
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            _logger.LogInformation("Timed Hosted Service is stopping.");
-            _timer?.Change(Timeout.Infinite, 0);
-            return Task.CompletedTask;
-        }
-
-        public void Dispose()
-        {
-            _timer?.Dispose();
-        }
+        return ret;
     }
+
+    private async Task<string> GetAuthToken(string token)
+    {
+        using (var scope = this._services.CreateScope())
+        {
+
+            // var tenantStore = this.GetInMemoryTenantStores();
+            // var cachedTenants = await tenantStore.GetAllAsync();
+            ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
+
+            // allCachedTenants = cachedTenants.ToList();
+
+            token = await tokenService.GetClientCredentialsGrantToken();
+
+        }
+
+        return token;
+    }
+
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        _logger.LogInformation("Timed Hosted Service is stopping.");
+        _timer?.Change(Timeout.Infinite, 0);
+        return Task.CompletedTask;
+    }
+
+    public void Dispose()
+    {
+        _timer?.Dispose();
+    }
+}
 }

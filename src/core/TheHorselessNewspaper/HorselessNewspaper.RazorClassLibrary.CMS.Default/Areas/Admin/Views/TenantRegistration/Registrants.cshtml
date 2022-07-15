@@ -1,5 +1,4 @@
-﻿
-@using HorselessNewspaper.Web.Core.Services.Query.Controller.Hosting
+﻿@using HorselessNewspaper.Web.Core.Services.Query.Controller.Hosting
 @using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 @using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
@@ -42,7 +41,9 @@
                         <td>
                             @Html.DisplayFor(d => item.TenantInfos.FirstOrDefault().Identifier)
                         </td>
-
+                        <td>
+                            @Html.DisplayFor(d => item.DeploymentState)
+                        </td>
                     </tr>
                 }
             </table>
@@ -64,6 +65,9 @@
                             @Html.DisplayFor(d => item.TenantInfos.FirstOrDefault().Identifier)
                         </td>
                         <td>
+                            @Html.DisplayFor(d => item.DeploymentState)
+                        </td>
+                        <td>
                             <a asp-area="Admin" asp-controller="TenantRegistration" asp-action="Approve" asp-route-tenantId="@item.Id">Approve</a>
                         </td>
                     </tr>
@@ -73,7 +77,7 @@
 
         <hr />
         <div>
-            <span>Invalid Requests</span>
+            <span>Other Requests</span>
             <table>
                 @foreach (var item in invalidRequests)
                 {
@@ -85,7 +89,9 @@
                         <td>
                             @Html.DisplayFor(d => item.CreatedAt)
                         </td>
-
+                        <td>
+                            @Html.DisplayFor(d => item.DeploymentState)
+                        </td>
                         <td>
                             <a asp-area="Admin" asp-controller="TenantRegistration" asp-action="Delete" asp-route-id="@item.Id">Reject</a>
                         </td>

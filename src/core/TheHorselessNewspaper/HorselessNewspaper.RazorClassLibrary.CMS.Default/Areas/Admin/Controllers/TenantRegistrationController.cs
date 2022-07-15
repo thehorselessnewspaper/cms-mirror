@@ -46,7 +46,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
             var iss = User.Claims.FirstOrDefault().Issuer;
             var sub = User.Claims.FirstOrDefault().Subject.Name;
 
-            var hasUnpublishedTenantQuery = await hostingTenantsCollectionService.Query();
+            var hasUnpublishedTenantQuery = await hostingTenantsCollectionService.Query(w => w.DeploymentState == TenantDeploymentWorkflowState.PendingApproval);
             var hasWaitingRequest = hasUnpublishedTenantQuery
                 .Where(w => w.Owners.Where(o => o.Iss.Equals(iss) && o.Sub.Equals(sub)).Any()).Any();
 
@@ -107,7 +107,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
 
                 {
                     tenant.IsSoftDeleted = false;
-                    tenant.IsPublished = true;
+                    tenant.IsPublished = false;
+                    tenant.DeploymentState = TenantDeploymentWorkflowState.Approved;
                     // reject the application
                     var rejectResult = await hostingTenantsCollectionService.Update(tenant, new List<string>() { nameof(tenant.IsSoftDeleted), nameof(tenant.IsPublished) });
                     return RedirectToAction(nameof(Index));
@@ -190,6 +191,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                     Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
                     BaseUrl = baseUrl,
                     TenantIdentifier = model.tenantIdentifier,
+                    DeploymentState = TenantDeploymentWorkflowState.PendingApproval,
                     AccessControlEntries = new List<HostingModel.AccessControlEntry>()
                     {
                         new AccessControlEntry()
