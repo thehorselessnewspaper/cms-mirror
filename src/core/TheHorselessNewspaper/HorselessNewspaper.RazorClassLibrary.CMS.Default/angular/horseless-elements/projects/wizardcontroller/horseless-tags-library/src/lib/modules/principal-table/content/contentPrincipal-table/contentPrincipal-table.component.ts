@@ -16,9 +16,10 @@ export class ContentPrincipalTableComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion | undefined;
   public selectedItem!: ContentEntitiesPrincipal;
   panelOpenState : boolean = false;
+  principalService! : PrincipalQueryService;
 
   constructor(principalService: PrincipalQueryService) {
-
+    this.principalService = principalService;
   }
 
   ngOnInit() {

@@ -73,14 +73,30 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
                     {
                         _logger.LogWarning("tenant resolver not ready");
 
-                        var ensuredTenant = await securityPrincipalResolver.EnsureTenant();
-                        if (ensuredTenant != null)
+                        try
                         {
-                            _logger.LogInformation($"tenant ensured for tenant identifier {ensuredTenant.TenantIdentifier}");
+                            isFunctionalTenantResolver = await securityPrincipalResolver.EnsureCanResoleCurrentTenant();
+                            if (isFunctionalTenantResolver)
+                            {
+                                var ensuredTenant = await securityPrincipalResolver.EnsureTenant();
+                                if (ensuredTenant != null)
+                                {
+                                    _logger.LogInformation($"tenant ensured for tenant identifier {ensuredTenant.TenantIdentifier}");
 
-                            // try to initialize the feature again
-                            context.Features.Set<Tenant>((ensuredTenant));
-                            _logger.LogInformation($"httpcontext tenant feature initialized");
+                                    // try to initialize the feature again
+                                    context.Features.Set<Tenant>((ensuredTenant));
+                                    _logger.LogInformation($"httpcontext tenant feature initialized");
+                                }
+                            }
+                            else
+                            {
+                                _logger.LogError($"error!! nonfunctional tenant resolver");
+                            }
+                        }
+                        catch(Exception e)
+                        {
+                            // tolerate this exception
+                            _logger.LogWarning($"tolerating exception initializing tenant feature: {e.Message}");
                         }
                     }
                 }

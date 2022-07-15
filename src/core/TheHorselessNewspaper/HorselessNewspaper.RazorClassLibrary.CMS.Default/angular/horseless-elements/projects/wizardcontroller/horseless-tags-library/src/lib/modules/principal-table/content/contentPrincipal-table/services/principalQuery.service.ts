@@ -11,6 +11,7 @@ import {
   ContentEntitiesACEPermissionScope,
   SecurityRestClientConfiguration,
   TenantRESTService,
+  ContentEntitiesPrincipal,
 } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import {
@@ -31,7 +32,7 @@ import { ConfigurationEndpointService } from '../../../../../services/configurat
 export class PrincipalQueryService {
   clientConfigService!: ConfigurationEndpointService;
   restClientConfiguration$!: BehaviorSubject<SecurityRestClientConfiguration>;
-  contentEntitiesPrincipal$!: BehaviorSubject<ContentEntitiesTenant[] | null>;
+  contentEntitiesPrincipal$!: BehaviorSubject<ContentEntitiesPrincipal[] | null>;
 
   constructor(
     clientConfigService: ConfigurationEndpointService,
@@ -40,11 +41,13 @@ export class PrincipalQueryService {
   ) {
     console.log('PrincipalQueryService starting');
 
+    this.clientConfigService = clientConfigService;
+
     this.restClientConfiguration$ =
       this.clientConfigService.clientConfiguration$;
 
     this.contentEntitiesPrincipal$ = new BehaviorSubject<
-      ContentEntitiesTenant[] | null
-    >(new Array<ContentEntitiesTenant>());
+    ContentEntitiesPrincipal[] | null
+    >(new Array<ContentEntitiesPrincipal>());
   }
 }

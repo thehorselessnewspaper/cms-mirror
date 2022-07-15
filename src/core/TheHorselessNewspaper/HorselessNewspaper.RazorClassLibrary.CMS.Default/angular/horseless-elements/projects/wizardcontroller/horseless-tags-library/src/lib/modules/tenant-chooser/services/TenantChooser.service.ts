@@ -45,6 +45,9 @@ export class TenantChooserService {
       this.hostingEntitiesTenantsSubject = new BehaviorSubject<HostingEntitiesTenant[] | null>(new Array<HostingEntitiesTenant>());
 
       this.contentEntitiesTenantsSubject = new BehaviorSubject<ContentEntitiesTenant[] | null>(new Array<ContentEntitiesTenant>());
+
+
+    this.clientConfigService.probeClientConfiguration();
   }
 
   pullHostingEntitiesTenantsByOffset(offset: number, rowCount: number): void {
@@ -61,7 +64,7 @@ export class TenantChooserService {
     );
 
     this.restClientConfiguration$.pipe(
-      skip(1),
+      // skip(1),
       map((clientConfig) => {
         console.log(
           `pullHostingEntitiesTenantsByOffset finished getting client configuration: data was ` +
@@ -93,25 +96,25 @@ export class TenantChooserService {
 
           q.expand({
             AccessControlEntries : {
-              expand: {
-                AccessControlEntries: {
-                  select: ["AccessControlEntries"]
-                }
-              }
+              // expand: {
+              //   AccessControlEntries: {
+              //     select: ["AccessControlEntries"]
+              //   }
+              // }
             },
             Owners : {
-              expand: {
-                Owners: {
-                  select: ["Owners"]
-                }
-              }
+              // expand: {
+              //   Owners: {
+              //     select: ["Owners"]
+              //   }
+              // }
             },
             Accounts : {
-              expand: {
-                OwnedPrincipals: {
-                  select: ["OwnedPrincipals"]
-                }
-              }
+              // expand: {
+              //   OwnedPrincipals: {
+              //     select: ["OwnedPrincipals"]
+              //   }
+              // }
             }
           });
 
@@ -156,6 +159,7 @@ export class TenantChooserService {
 
   pullContentEntitiesTenantsByOffset(offset: number, rowCount: number): void {
 
+
     console.log(`pullContentEntitiesTenantsByOffset starting`);
     //init service
     let contentTenantsSvc = this.factory.entitySet<ContentEntitiesTenant>(
@@ -195,25 +199,25 @@ export class TenantChooserService {
 
           q.expand({
             AccessControlEntries : {
-              expand: {
-                AccessControlEntries: {
-                  select: ["AccessControlEntries"]
-                }
-              }
+              // expand: {
+              //   AccessControlEntries: {
+              //     select: ["AccessControlEntries"]
+              //   }
+              // }
             },
             Owners : {
-              expand: {
-                Owners: {
-                  select: ["Owners"]
-                }
-              }
+              // expand: {
+              //   Owners: {
+              //     select: ["Owners"]
+              //   }
+              // }
             },
             Accounts : {
-              expand: {
-                OwnedPrincipals: {
-                  select: ["OwnedPrincipals"]
-                }
-              }
+              // expand: {
+              //   OwnedPrincipals: {
+              //     select: ["OwnedPrincipals"]
+              //   }
+              // }
             }
           });
 

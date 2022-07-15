@@ -21,6 +21,7 @@ import {
   Observable,
   take,
   tap,
+  skip,
   pipe,
   Subscription,
   BehaviorSubject,
@@ -127,11 +128,31 @@ export class TenantChooserComponent implements OnInit {
     let applicationJson = new HttpHeaders();
     applicationJson.append('Accept', 'application/json');
 
-    console.log('tenant chooser component is pulling configuration');
+
+
+    // this.tenantChooserService.restClientConfiguration$
+    //     .pipe(
+    //         skip(1),
+    //         tap(t => {
+    //           console.log('tenant chooser component is pulling configuration and tenant counts');
+    //         }),
+    //         map((clientConfiguration) => {
+    //         this.tenantChooserService.pullContentEntitiesTenantsCount();
+    //         return clientConfiguration;
+    //       }),
+    //       map((clientConfiguration) => {
+    //         this.tenantChooserService.pullHostingEntitiesTenantsCount();
+    //         return clientConfiguration;
+    //       }),
+    //       tap(t => {
+    //         console.log('tenant chooser component has pulled configuration and tenant counts');
+    //       })
+    //     ).subscribe();
 
     try {
       this.tenantChooserService.restClientConfiguration$
         .pipe(
+          skip(1),
           map((clientConfiguration) => {
 
             if (
@@ -157,14 +178,6 @@ export class TenantChooserComponent implements OnInit {
                 `tenantchoosercomponent threw exception ${exception}`
               );
             }
-            return clientConfiguration;
-          }),
-          map((clientConfiguration) => {
-            this.tenantChooserService.pullContentEntitiesTenantsCount();
-            return clientConfiguration;
-          }),
-          map((clientConfiguration) => {
-            this.tenantChooserService.pullHostingEntitiesTenantsCount();
             return clientConfiguration;
           }),
           map((clientConfiguration) => {

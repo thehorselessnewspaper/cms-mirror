@@ -109,7 +109,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
         {
             try
             {
-                var tenantQuery = await _tenantOperator.ReadAsEnumerable(w =>
+                var tenantQuery = await _tenantOperator.Read(w =>
                 w.TenantIdentifier.Equals(_iTenantInfo.Identifier));
                 var tenantQueryResult = tenantQuery == null ? null : tenantQuery.ToList();
 
