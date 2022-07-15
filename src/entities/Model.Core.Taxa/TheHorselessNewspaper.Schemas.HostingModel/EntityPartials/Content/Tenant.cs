@@ -8,6 +8,18 @@ using TheHorselessNewspaper.HostingModel.Context;
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
+    public enum TenantDeploymentWorkflowState
+    {
+        PendingApproval,
+        Approved,
+        ExistsInContentDb,
+        HasOwners,
+        HasACL,
+        HasContentCollection,
+        DeploymentComplete
+    }
+
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum TenantIdentifierStrategyName
     {
         STATIC,
@@ -127,6 +139,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [InverseProperty(nameof(Principal.ManagedTenants))]
         public ICollection<Principal> Accounts { get; set; } = new HashSet<Principal>();
 
+        public TenantDeploymentWorkflowState DeploymentState { get; set; } = TenantDeploymentWorkflowState.PendingApproval;
 
         [InverseProperty(nameof(AccessControlEntry.ManagedTenants))]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();

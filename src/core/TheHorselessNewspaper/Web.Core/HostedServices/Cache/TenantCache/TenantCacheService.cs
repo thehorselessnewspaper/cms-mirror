@@ -400,7 +400,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             _logger.LogTrace("default tenant is live");
                         }
 
-                        if (mirrorTenantExists == false && isTenantDeploymentWorkflowComplete == false 
+                        if (mirrorTenantExists == false && isTenantDeploymentWorkflowComplete == false
                             && publishedTenant.TenantIdentifier != defaultTenant.Identifier)
                         {
                             // validate the multitenant routing is working for this tenant
@@ -1153,6 +1153,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         {
             using (var scope = this._services.CreateScope())
             {
+
                 List<HostingModel.Tenant> hostingModelTenants = await GetCurrentHostingModelTenants();
                 foreach (var hostModelTenant in hostingModelTenants
                     .Where(t => t.TenantIdentifier != null))
@@ -1206,6 +1207,15 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 try
                 {
 
+                    // include statically defined tenants from multenant store
+                    // supports multenant code path execution before db exists
+
+                    var stores = scope.ServiceProvider.GetRequiredService<IEnumerable<IMultiTenantStore<HorselessTenantInfo>>>().ToList();
+
+                    var inMemoryStores = stores.Where(s => s.GetType() == typeof(InMemoryStore<HorselessTenantInfo>))
+                           .SingleOrDefault();
+
+                    var staticMultitenantsTenants = await inMemoryStores.GetAllAsync();
 
                     // collect the hosting model tenants
                     var hostingModelTenantQuery = this.GetQueryForHostingEntity<HostingModel.Tenant>(scope);
@@ -1219,9 +1229,11 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     _logger.LogTrace($"read {hostingModelTenantQueryResult.Where(w => w.IsPublished == true).ToList().Count()} published hosting model tenant records");
                     _logger.LogTrace($"read {hostingModelTenantQueryResult.Where(w => w.IsPublished == false).ToList().Count()} unpublished hosting model tenant records");
 
-                    foreach (var t in hostingModelTenantQueryResult)
+                    foreach (var t in staticMultitenantsTenants.Select(s => s.Payload.ParentTenant))
                     {
-                        if (t.TenantInfos != null) _logger.LogTrace($"tenant {t.DisplayName} has {t.TenantInfos.Count()} tenantinfo records");
+                        _logger.LogTrace($"inserting static tenant with identifier {t.TenantIdentifier}");
+                        t.IsPublished = true;
+                        hostingModelTenants.Add(t);
                     }
 
                     return hostingModelTenants;
@@ -1248,18 +1260,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                 IEnumerable<HorselessTenantInfo> allCachedTenants = new List<HorselessTenantInfo>();
 
-                using (var scope = this._services.CreateScope())
-                {
-
-                    var tenantStore = this.GetInMemoryTenantStores();
-                    var cachedTenants = await tenantStore.GetAllAsync();
-                    ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
-
-                    allCachedTenants = cachedTenants.ToList();
-
-                    token = await tokenService.GetClientCredentialsGrantToken();
-
-                }
+                // get auth token
+                token = await GetAuthToken(token);
 
                 using (var innerScope = this._services.CreateScope())
                 {
@@ -1307,24 +1309,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         ret.AddRange(contentModelTenantList.Value);
                         this._logger.LogTrace($"{this.GetType().FullName} has cmpleted retrieving content model tenants");
                     }
+
+
                 }
-
-
-                //using (var localScope = _scopeFactory.CreateAsyncScope())
-                //{
-                //    // collect the hosting model tenants
-                //    var contentModelTenantQuery = this.GetQueryForContentEntity<ContentModel.Tenant>(localScope);
-                //    var contentModelTenantQueryResult = await contentModelTenantQuery.ReadAsEnumerable(w => w.IsPublished == true && w.IsSoftDeleted == false);
-                //    var results = contentModelTenantQueryResult.ToList<ContentModel.Tenant>();
-
-                //    var contentModelTenants = contentModelTenantQueryResult == null ? new List<ContentModel.Tenant>() : contentModelTenantQueryResult.ToList();
-
-                //    _logger.LogInformation($"read {contentModelTenants.Count()} published content model tenant records");
-
-                //    return contentModelTenants;
-                //}
-
-
             }
             catch (Exception ex)
             {
@@ -1343,35 +1330,22 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             return ret;
         }
 
-        [Obsolete]
-        private async Task<List<HostingModel.TenantInfo>> GetCurrentContentModelTenantInfo()
+        private async Task<string> GetAuthToken(string token)
         {
             using (var scope = this._services.CreateScope())
             {
 
-                try
-                {
-                    // collect the hosting model tenants
-                    var contentModelTenantQuery = this.GetQueryForHostingEntity<HostingModel.TenantInfo>(scope);
-                    var contentModelTenantQueryResult = await contentModelTenantQuery.ReadAsEnumerable(w => w.IsSoftDeleted == false);
-                    var contentModelTenants = contentModelTenantQueryResult == null ? new List<HostingModel.TenantInfo>() : contentModelTenantQueryResult.ToList();
+                // var tenantStore = this.GetInMemoryTenantStores();
+                // var cachedTenants = await tenantStore.GetAllAsync();
+                ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
 
-                    _logger.LogInformation($"read {contentModelTenants.Count()} content model tenantinfo records");
-                    foreach (var ti in contentModelTenants)
-                    {
-                        _logger.LogInformation($"tenantinfo display name : {ti.DisplayName}, tenant id {ti.ParentTenantId}");
-                    }
+                // allCachedTenants = cachedTenants.ToList();
 
-                    return contentModelTenants;
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError($"{this.GetType().FullName} had problems getting TenantInfo: exception was {e.Message}");
-                    return new List<HostingModel.TenantInfo>();
-                }
+                token = await tokenService.GetClientCredentialsGrantToken();
 
             }
 
+            return token;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
