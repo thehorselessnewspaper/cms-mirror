@@ -17,7 +17,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         DNS_FQDN
     }
 
-    [MultiTenant]
+    // [MultiTenant]
 
     public class TenantIdentifierStrategyContainer
     {
@@ -47,7 +47,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     /// modelled as a wrapper for a collection payload
     /// to avoid awkardness with mapping owned collections
     /// </summary>
-    [MultiTenant]
+    // [MultiTenant]
     public class TenantIdentifierStrategy
     {
 
@@ -91,7 +91,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     /// 
     /// or maybe not - we will se
     /// </summary>
-    [MultiTenant]
+    // [MultiTenant]
     [Microsoft.EntityFrameworkCore.Index(nameof(TenantIdentifier), IsUnique = true)]
     public partial class Tenant : IContentRowLevelSecured, IMetaDataModelEntity
     {
