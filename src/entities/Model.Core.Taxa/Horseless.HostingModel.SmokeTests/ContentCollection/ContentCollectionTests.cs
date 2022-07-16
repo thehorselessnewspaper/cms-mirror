@@ -174,7 +174,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 DisplayName = tenant.DisplayName,
                 ObjectId = Guid.NewGuid().ToString(),
                 Timestamp = tenant.Timestamp,
-                PreferredUserName = "User" + Guid.NewGuid().ToString()
+                PreferredUserName = "UserAlso" + Guid.NewGuid().ToString()
             };
 
             var principalQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Principal>>();

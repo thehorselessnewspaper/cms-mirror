@@ -496,7 +496,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                     var trackedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).Include(propertyName).First();
                     foreach (var item in relatedEntities)
                     {
-                        // ((DbContext)_context).Entry<U>(item);
+                        ((DbContext)_context).Entry<U>(item);
 
                         ((ICollection<U>)trackedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(trackedEntity)).Add(item);
                     }
