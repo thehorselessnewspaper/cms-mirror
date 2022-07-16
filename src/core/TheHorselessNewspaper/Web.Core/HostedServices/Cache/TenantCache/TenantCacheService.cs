@@ -633,7 +633,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         {
                             if (approvedTenant.IsPublished)
                             {
-                                return true;
+                                // nothing to do but report here
                             }
                             else
                             {
@@ -641,7 +641,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                 // tolerate this update failure 
                                 approvedTenant.IsPublished = true;
                                 var udateResult = hostingModelOperator.Update(approvedTenant, new List<string>() { nameof(HostingModel.Tenant.IsPublished) });
-                                return false;
+                                ret = false;
                             }
                         }
                         else
@@ -667,6 +667,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 ret = true;
 
             }
+
             return ret;
         }
 
