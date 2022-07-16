@@ -140,7 +140,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                 var tenantQuery = await _tenantOperator.ReadAsEnumerable(w =>
                         w.TenantIdentifier.Equals(_iTenantInfo.Identifier),
-                        new List<string>() { nameof(Tenant.AccessControlEntries), nameof(Tenant.Owners), nameof(Tenant.Accounts)});
+                        new List<string>() { nameof(Tenant.AccessControlEntries), nameof(Tenant.Owners), nameof(Tenant.Accounts) });
                 var tenantQueryResult = tenantQuery == null || tenantQuery.Count() == 0 ? null : tenantQuery.ToList();
 
                 if (tenantQueryResult != null && tenantQueryResult.Count() > 0 && this._iTenantInfo != null)
@@ -151,70 +151,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                 }
                 else if (tenantQueryResult == null && this._iTenantInfo != null)
                 {
-                    try
-                    {
-                        _logger.LogWarning($"current tenant does not exist in content db {this._iTenantInfo.Identifier}");
-                        // must create new tenant for this tenantidentifier
-                        // very likely a phantom tenant
-                        // expect post insertion administrative duties
-                        // to assign access control lists and owners
-                        Guid newId = Guid.NewGuid();
-                        var idIsGuid = Guid.TryParse(this._iTenantInfo.Id, out newId);
 
-                        if (idIsGuid)
-                        {
-                            tenant.Id = newId;
-                        }
+                    _logger.LogWarning($"current tenant does not exist in content db {this._iTenantInfo.Identifier}");
 
-                        else
-                        {
-                            tenant.Id = Guid.NewGuid();
-                        }
-
-                        HorselessTenantInfo tenantInfo = this._iTenantInfo as HorselessTenantInfo;
-                        tenant.Id = tenantInfo.Payload.Id;
-                        tenant.ObjectId = tenantInfo.Payload.ObjectId;
-                        tenant.DisplayName = this._iTenantInfo.Name;
-                        tenant.BaseUrl = tenantInfo.Payload.TenantBaseUrl;
-                        // tenant.Timestamp = tenantInfo.Payload.Timestamp;
-                        tenant.TenantIdentifier = tenantInfo.Payload.Identifier;
-                        tenant.IsPublished = false;
-                        tenant.TenantIdentifierStrategy = new TenantIdentifierStrategy()
-                        {
-                            Id = Guid.NewGuid(),
-                            ObjectId = Guid.NewGuid().ToString(),
-                            DisplayName = tenant.DisplayName,
-                            CreatedAt = DateTime.UtcNow,
-                            IsSoftDeleted = false,
-                            StrategyContainers = new List<TenantIdentifierStrategyContainer>()
-                        {
-                            new TenantIdentifierStrategyContainer()
-                            {
-                                Id = Guid.NewGuid(),
-                                ObjectId = Guid.NewGuid().ToString(),
-                                DisplayName = this._iTenantInfo.Name,
-                                CreatedAt = DateTime.UtcNow,
-                                IsSoftDeleted = false,
-                                TenantIdentifier = this._iTenantInfo.Identifier,
-                                TenantIdentifierStrategyName = new TenantIdentifierStrategyName()
-                                {
-
-                                }
-                            }
-                        }
-                        };
-
-                        var tenantInsertResult = await this._tenantOperator.Create(tenant);
-                        if (tenantInsertResult != null)
-                        {
-                            tenant = tenantInsertResult;
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogWarning($"problem ensuring tenant");
-                        throw;
-                    }
                 }
                 else
                 {
@@ -267,7 +206,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             .Where(w => w.UPN.Equals(user.Claims.Upn())).Any()).Any();
 
                         var principalQuery = await this._principalOperator.Read(r => r.IsAnonymous == false && r.UPN == user.Claims.Upn(),
-                            new List<string>() { nameof(Principal.AccessControlEntries)});
+                            new List<string>() { nameof(Principal.AccessControlEntries) });
                         var principalCollection = principalQuery.ToList();
                         var principalQueryResult = principalQuery == null || principalCollection.Count() == 0 ? null : principalQuery.ToList().First();
                         if (principalQueryResult != null)
@@ -509,17 +448,17 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
             var currentUpdateTime = httpContext.Session.GetString("UTC_UPDATED_TIME");
 
             HorselessSession cachedSession;
-            
+
             var hasCachedSession = LocallyCachedSessions.TryGetValue(httpContext.Session.Id, out cachedSession);
 
-            if(hasCachedSession)
+            if (hasCachedSession)
             {
                 _logger.LogWarning($"{this.GetType().FullName} has cached HorselessSession entity");
                 IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(sessionPrincipalId);
 
                 return ret;
             }
-            
+
             else if (hasInsertedSessionQuery != null && hasInsertedSessionQuery.Any() == true)
             {
                 IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(sessionPrincipalId);
@@ -528,7 +467,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
             }
 
-            else if (principalQuery != null && httpContext != null )
+            else if (principalQuery != null && httpContext != null)
             {
                 var principalQueryResult = principalQuery.First();
 
@@ -551,7 +490,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                 principalQueryResult.HorselessSessions.Add(newSession);
 
                 var insertResult = await this._horselessSessionOperator.Create(newSession);
-                if(insertResult != null)
+                if (insertResult != null)
                 {
                     // cache the inserted session to hedge against
                     // new requests using the resolver before dbcontext is flushed
@@ -588,7 +527,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                 HorselessSession cachedPayload = null;
                 var hasCachedPayload = LocallyCachedSessions.TryGetValue(httpContext.Session.Id, out cachedPayload);
-                if(hasCachedPayload)
+                if (hasCachedPayload)
                 {
                     _logger.LogWarning($"{this.GetType().FullName} has retrieved HorselessSession entity from local cache");
                     payload = cachedPayload;
@@ -613,7 +552,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                 return ret;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 this._logger.LogError($"{this.GetType().Name} problem initializing session feature {ex.Message}");
                 throw new Exception($"{this.GetType().Name} problem initializing session feature {ex.Message}", ex);

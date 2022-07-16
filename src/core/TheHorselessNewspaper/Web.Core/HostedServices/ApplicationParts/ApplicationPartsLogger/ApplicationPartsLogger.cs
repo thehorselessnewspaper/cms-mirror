@@ -119,52 +119,58 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
 
 
                     var viewOperator = scope.ServiceProvider
-                        .GetRequiredService<IContentCollectionService<IQueryableContentModelOperator<HorselessView>, HorselessView>>();
+                        .GetRequiredService<IQueryableContentModelOperator<HorselessView>>();
 
                     foreach (var view in viewsFeature.ViewDescriptors)
                     {
                         try
                         {
                             var query = await viewOperator
-                                .Query(r => r.PhysicalPath.Equals(view.Item.Identifier)
+                                .ReadAsEnumerable(r => r.PhysicalPath.Equals(view.Item.Identifier)
                             && r.DisplayName.Equals(view.Type.FullName)
                             && r.Name.Equals(view.Type.Name));
-
-                            var queryResult = query.ToList();
-                            var isPreviouslyRegistered = queryResult.Any();
-
-                            if (!isPreviouslyRegistered)
+                           
+                            if(query != null)
                             {
-                                // handle the case of a view that must
-                                // be added to the database
-                                
-                                var newView = new HorselessView()
-                                {
-                                    Id = Guid.NewGuid(),
-                                    ObjectId = Guid.NewGuid().ToString(),
-                                    Name = view.Type.Name,
-                                    DisplayName = view.Type.FullName,
-                                    CreatedAt = DateTime.UtcNow,
-                                    PhysicalPath = view.Item.Identifier,
-                                    IsActive = true,
-                                    Exists = true,
-                                    IsDirectory = false,
-                                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
-                                };
 
-                                try
+                                var queryResult = query.ToList();
+                                var isPreviouslyRegistered = queryResult.Any();
+
+                                if (!isPreviouslyRegistered)
                                 {
-                                    // insert this view
-                                    var insertResult = await viewOperator.Create(newView);
-                                    this._logger.LogTrace($"{this.GetType().Name} is registering a new view named {newView.Name}");
-                                }
-                                catch (Exception e)
-                                {
-                                    // permit continue on exception 
-                                    // prbably want to emit a failed event here
-                                    this._logger.LogError($"problem registering view {e.Message}");
+                                    // handle the case of a view that must
+                                    // be added to the database
+
+                                    var newView = new HorselessView()
+                                    {
+                                        Id = Guid.NewGuid(),
+                                        ObjectId = Guid.NewGuid().ToString(),
+                                        Name = view.Type.Name,
+                                        DisplayName = view.Type.FullName,
+                                        CreatedAt = DateTime.UtcNow,
+                                        PhysicalPath = view.Item.Identifier,
+                                        IsActive = true,
+                                        Exists = true,
+                                        IsDirectory = false,
+                                        IsSoftDeleted = false,
+                                        Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
+                                    };
+
+                                    try
+                                    {
+                                        // insert this view
+                                        var insertResult = await viewOperator.Create(newView);
+                                        this._logger.LogTrace($"{this.GetType().Name} is registering a new view named {newView.Name}");
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        // permit continue on exception 
+                                        // prbably want to emit a failed event here
+                                        this._logger.LogError($"problem registering view {e.Message}");
+                                    }
                                 }
                             }
+
                         }
                         catch (Exception e)
                         {

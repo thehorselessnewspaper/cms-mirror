@@ -43,8 +43,8 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
                 // harden against nulls during executions by
                 // dotnet tool run invocations 
                 var directoryInfo = new DirectoryInfo(env.WebRootPath);
-                if (directoryInfo != null 
-                    && directoryInfo.Exists 
+                if (directoryInfo != null
+                    && directoryInfo.Exists
                     && configuration[HorselessApplicationBuilder.TenantFilesystemPathConfigurationKey] != null)
                 {
                     string path2 = configuration[HorselessApplicationBuilder.TenantFilesystemPathConfigurationKey];
@@ -104,10 +104,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 
                 // options.MapDynamicControllerRoute<HorselessRouteTransformer>("{__tenant__}/{**slug}");
 
-                options.MapAreaControllerRoute(
-                    name: "Installer",
-                    areaName: "Installer",
-                    pattern: "Installer/{controller=TenantSetup}/{action=Index}/{id?}");
+
 
                 options.MapAreaControllerRoute(
                     name: "SiteAdmin",
@@ -126,17 +123,21 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 
 
                 options.MapControllerRoute(
-                name: "Authentication",
-                pattern: "{area:exists}/{controller=KeycloakController}/{action=Signin}/{id?}");
+                  name: "multitenantdefault",
+                  pattern: "{__tenant__}/{controller}/{action}");
+
+                options.MapControllerRoute(
+                   name: "Authentication",
+                   pattern: "{area:exists}/{controller=KeycloakController}/{action=Signin}/{id?}");
 
                 options.MapControllerRoute(
                   name: "default",
                   pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                options.MapControllerRoute(
-                  name: "multitenantdefault",
-                  pattern: "{__tenant__}/{controller}/{action}");
-
+                options.MapAreaControllerRoute(
+                    name: "Installer",
+                    areaName: "Installer",
+                    pattern: "Installer/{controller=TenantSetup}/{action=Index}/{id?}");
 
                 options.MapControllers();
 

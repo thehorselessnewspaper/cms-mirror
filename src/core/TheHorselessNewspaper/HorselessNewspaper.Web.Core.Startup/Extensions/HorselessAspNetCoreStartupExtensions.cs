@@ -193,12 +193,10 @@ namespace HorselessNewspaper.Web.Core.Extensions
                             }
                         });
                 })
+                                .WithRouteStrategy("__tenant__")
+                .WithBasePathStrategy(o => o.RebaseAspNetCorePathBase = true)
+
                 .WithHeaderStrategy()
-                .WithRouteStrategy()
-                //.WithDelegateStrategy(async context =>
-                //{
-                //    return await Task.FromResult<string>("6da806b8-f7ab-4e3a-8833-7e834a40e9d0");
-                //})
                 .WithDelegateStrategy(async context =>
                 {
                     var httpContext = context as HttpContext;
@@ -208,10 +206,11 @@ namespace HorselessNewspaper.Web.Core.Extensions
                     }
                     else
                     {
-                        httpContext.Request.Query.TryGetValue("tenant", out StringValues tenantIdParam);
-                        var tenantIdParm = tenantIdParam.ToString();
-                        if (tenantIdParm != String.Empty)
+                        var routeValue = httpContext.Request.RouteValues["__tenant__"] as string;
+
+                        if (routeValue != String.Empty && routeValue != null)
                         {
+                            var tenantIdParm = routeValue.ToString();
                             return tenantIdParm;
                         }
                         else
@@ -219,10 +218,8 @@ namespace HorselessNewspaper.Web.Core.Extensions
                             return defaultTenantIdentifier; // return "6da806b8-f7ab-4e3a-8833-7e834a40e9d0";
                         }
                     }
-                })
-                .WithStaticStrategy(defaultTenantIdentifier);
-//                .WithStaticStrategy("6da806b8-f7ab-4e3a-8833-7e834a40e9d0");
-
+                });
+                //.WithStaticStrategy(defaultTenantIdentifier);
 
 
 
@@ -234,7 +231,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
              **/
 
             services.AddHorselessQueryOperators();
-       
+
             #endregion
 
             #region repositories
@@ -355,24 +352,24 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
 
                     });
-                    //// .AddOData(options =>
-                    //{
-                    //    /// TODO - surface these as configurable parameters 
-                    //    options
-                    //    .Select()
-                    //    .Expand()
-                    //    .Filter()
-                    //    .OrderBy()
-                    //    .SetMaxTop(1000)
-                    //    .Count();
+            //// .AddOData(options =>
+            //{
+            //    /// TODO - surface these as configurable parameters 
+            //    options
+            //    .Select()
+            //    .Expand()
+            //    .Filter()
+            //    .OrderBy()
+            //    .SetMaxTop(1000)
+            //    .Count();
 
-                    //    options.TimeZone = TimeZoneInfo.Utc;
-                    //    // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
+            //    options.TimeZone = TimeZoneInfo.Utc;
+            //    // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
 
-                    //    /// todo make this an environment configurable item
-                    //    options.AddRouteComponents("ODataHosting", edmHosting);
-                    //    // options.AddRouteComponents(edmContent);
-                    //});
+            //    /// todo make this an environment configurable item
+            //    options.AddRouteComponents("ODataHosting", edmHosting);
+            //    // options.AddRouteComponents(edmContent);
+            //});
 
             options?.Invoke(serviceBuilder);
 
