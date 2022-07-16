@@ -17,7 +17,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("{__tenant__}/ODataContent/NavigationMenu")]
+    [Route("ODataContent")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class NavigationMenuController :
         ODataController, IContentQueryController<ContentModel.NavigationMenu>

@@ -10,16 +10,17 @@ using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Hosting
 {
     // [ODataAttributeRouting]
-    [Route("ODataHosting")]
+    [Route("{__tenant__}/ODataHosting")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class TenantController : ODataController
     {
         private readonly IQueryableHostingModelOperator<HostingModel.Tenant> _TenantSvc;
-
-        public TenantController(IQueryableHostingModelOperator<HostingModel.Tenant> TenantSvc)
+        ITenantInfo tenant;
+        public TenantController(IQueryableHostingModelOperator<HostingModel.Tenant> TenantSvc, ITenantInfo tenant)
         {
             this._TenantSvc = TenantSvc;
+            this.tenant = tenant;
         }
 
 
@@ -30,7 +31,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         /// </summary>
         /// <returns></returns>
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-        [HttpGet()]
+        [HttpGet("Tenant")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
@@ -51,7 +52,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
                 }
                 else
                 {
-                    return Ok(new List<HostingModel.Tenant>());
+                    return NotFound();
                 }
             }
             catch(Exception e)

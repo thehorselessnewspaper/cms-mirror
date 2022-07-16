@@ -31,12 +31,14 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
             IContentCollectionService<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModel.Tenant> tenantCollectionService,
             IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.Tenant>, HostingModel.Tenant> hostingTenantsCollectionService,
             IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.TenantInfo>, HostingModel.TenantInfo> tenantInfoService,
+                        IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.Principal>, HostingModel.Principal> principalService,
             ITenantInfo tenantInfo)
         {
             this.tenantCollectionService = tenantCollectionService;
             this.hostingTenantsCollectionService = hostingTenantsCollectionService;
             this.tenantInfoService = tenantInfoService;
             this.CurrentTenant = tenantInfo;
+            this.principalService = principalService;
             this.logger = logger;
         }
 
@@ -139,32 +141,41 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
         {
             try
             {
+                Principal newOwner = new Principal();
 
                 var scheme = HttpContext.Request.IsHttps ? "https://" : "http://";
                 var baseUrl = scheme + HttpContext.Request.Host;
                 baseUrl = baseUrl.TrimEnd('/');
 
-                var newOwner = new HostingModel.Principal()
+                var principalQuery = await this.principalService.Query(w => w.PreferredUserName.Equals(User.Claims.PreferredUsername()));
+                var principalQueryResult = principalQuery.ToList();
+                if (principalQueryResult.Any())
                 {
-                    Id = Guid.NewGuid(),
-                    CreatedAt = DateTime.UtcNow,
-                    DisplayName = model.displayName,
-                    IsSoftDeleted = false,
-                    ObjectId = Guid.NewGuid().ToString(),
-                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                    // aud is not a guarantee
-                    //                            Aud = User.Claims.Where(w => w.Type.Contains("aud")).FirstOrDefault().Value,
+                    newOwner = principalQueryResult.First();
+                }
+                else
+                {
+                    newOwner = new HostingModel.Principal()
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedAt = DateTime.UtcNow,
+                        DisplayName = model.displayName,
+                        IsSoftDeleted = false,
+                        ObjectId = Guid.NewGuid().ToString(),
+                        Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                        // aud is not a guarantee
+                        //                            Aud = User.Claims.Where(w => w.Type.Contains("aud")).FirstOrDefault().Value,
 
-                    // subject/issuer are technically a compound unique key
-                    Iss = User.Claims.Iss(),
-                    Sub = User.Claims.Sub(),
-                    UPN = User.Claims.Upn(),
-                    Email = User.Claims.Email(),
-                    Aud = User.Claims.Aud(),
-                    PreferredUserName = User.Claims.PreferredUsername()
+                        // subject/issuer are technically a compound unique key
+                        Iss = User.Claims.Iss(),
+                        Sub = User.Claims.Sub(),
+                        UPN = User.Claims.Upn(),
+                        Email = User.Claims.Email(),
+                        Aud = User.Claims.Aud(),
+                        PreferredUserName = User.Claims.PreferredUsername()
 
-                };
-
+                    };
+                }
 
                 var newTenantInfo = new HostingModel.TenantInfo()
                 {
@@ -270,11 +281,14 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                 };
 
                 newTenantInfo.ParentTenantId = newTenant.Id;
-                newTenant.Owners.Add(newOwner);
+
                 newTenant.TenantInfos.Add(newTenantInfo);
 
 
                 var insertedTenant = await this.hostingTenantsCollectionService.Create(newTenant);
+                insertedTenant.Owners.Add(newOwner);
+
+                var updateResult = await this.hostingTenantsCollectionService.Update(insertedTenant, new List<string>() { nameof(HostingModel.Tenant.Owners) });
 
                 return RedirectToAction(nameof(Index));
             }

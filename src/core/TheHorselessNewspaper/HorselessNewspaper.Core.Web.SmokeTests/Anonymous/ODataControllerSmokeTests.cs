@@ -18,6 +18,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
     public class ODataControllerSmokeTests : IClassFixture<BaseWebIntegrationTest>
     {
         private const string oDataResponseHeader = "application/json;odata.metadata=minimal;odata.streaming=true";
+        private const string defaulttenantidentifier = "lache";
         BaseWebIntegrationTest _baseTest;
         public WebApplicationFactory<Program> application = null;
         public HttpClient client = null;
@@ -98,9 +99,9 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     var principalResolver = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
                     client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", await principalResolver.GetClientCredentialsGrantToken());
 
-                    client.DefaultRequestHeaders.Add(ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, "lache");
-                    client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json;odata.metadata=full");
-                    response = await client.GetAsync("ODataHosting/Tenant?$top=10");
+                    client.DefaultRequestHeaders.Add(ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, defaulttenantidentifier);
+                    // client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
+                    response = await client.GetAsync("lache/ODataHosting/Tenant?$top=10");
                     Assert.NotNull(response);
 
                     response.EnsureSuccessStatusCode(); // Status Code 200-299
@@ -108,6 +109,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                                                         //    response.Content.Headers.ContentType.ToString());
 
                     responseContent = await response.Content.ReadAsStringAsync();
+                    var deserialized = JsonConvert.DeserializeObject<IEnumerable<HostingEntities.Tenant>>(responseContent);
                 }
 
 
@@ -199,7 +201,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     var principalResolver = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
                     client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", await principalResolver.GetClientCredentialsGrantToken());
                     
-                    client.DefaultRequestHeaders.Add(ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, "lache");
+                    client.DefaultRequestHeaders.Add(ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, defaulttenantidentifier);
                     client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json;odata.metadata=none");
                     response = await client.GetAsync("ODataContent/Tenant?$top=10&");
                     Assert.NotNull(response);

@@ -24,7 +24,7 @@ using Microsoft.AspNetCore.OData.Routing.Attributes;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
     // [ODataAttributeRouting]
-    [Route("ODataContent")]
+    [Route("{__tenant__}/ODataContent")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class TenantController :
@@ -47,9 +47,9 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
 
-        [HttpGet()]
+         [HttpGet("Tenant")]
 
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<ContentModel.Tenant>))]
+        // [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<ContentModel.Tenant>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]

@@ -16,7 +16,7 @@
 
 <span>approve tenant registration</span>
 <div>
-    <form asp-action="approve" asp-route-tenantId="@tenant.Id" method="post">
+    <form asp-area="Admin" asp-action="approve" asp-route-tenantId="@tenant.Id" method="post">
         <div class="form-group">
             <label for="displayName">Display Name</label>
 

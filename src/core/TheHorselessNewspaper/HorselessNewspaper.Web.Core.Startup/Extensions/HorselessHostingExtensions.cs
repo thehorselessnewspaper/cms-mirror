@@ -102,9 +102,6 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
             builder.UseEndpoints(options =>
             {
 
-                // options.MapDynamicControllerRoute<HorselessRouteTransformer>("{__tenant__}/{**slug}");
-
-
 
                 options.MapAreaControllerRoute(
                     name: "SiteAdmin",
@@ -121,37 +118,62 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
                     areaName: "ContentAdmin",
                     pattern: "{__tenant__}/{area:exists}/{controller=OperatorSurface}/{action=Index}");
 
+                options.MapAreaControllerRoute(
+                    name: "TenantOwner",
+                    areaName: "TenantOwner",
+                    pattern: "{__tenant__}/{area:exists}/{controller=Home}/{action=Index}");
+
+
+                options.MapAreaControllerRoute(
+                    name: "TenantOwner",
+                    areaName: "SiteOwner",
+                    pattern: "{__tenant__}/{area:exists}/{controller=Home}/{action=Index}");
+
+
+                options.MapAreaControllerRoute(
+                    name: "Admin",
+                    areaName: "Admin",
+                    pattern: "{__tenant__}/{area:exists}/{controller=TenantOwner}/{action=Index}");
+
+
+                //options.MapControllerRoute(
+                //   name: "Authentication",
+                //   pattern: "{area:exists}/{controller=KeycloakController}/{action=Signin}/{id?}");
+
 
                 options.MapControllerRoute(
-                  name: "multitenantdefault",
-                  pattern: "{__tenant__}/{controller}/{action}");
+                      name: "multitenantdefault",
+                      pattern: "{__tenant__}/{controller=Home}/{action=Index}");
 
                 options.MapControllerRoute(
-                   name: "Authentication",
-                   pattern: "{area:exists}/{controller=KeycloakController}/{action=Signin}/{id?}");
+                      name: "multitenantareadefault",
+                      pattern: "{__tenant__}/{area:exists}/{controller=Home}/{action=Index}");
+
 
                 options.MapControllerRoute(
                   name: "default",
                   pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                options.MapAreaControllerRoute(
-                    name: "Installer",
-                    areaName: "Installer",
-                    pattern: "Installer/{controller=TenantSetup}/{action=Index}/{id?}");
+                //options.MapAreaControllerRoute(
+                //    name: "Installer",
+                //    areaName: "Installer",
+                //    pattern: "Installer/{controller=TenantSetup}/{action=Index}/{id?}");
 
-                // options.MapControllers();
 
-                options.MapDynamicControllerRoute<HorselessRouteTransformer>("{__tenant__}/{area:exists}/{controller=Home}/{action=Index}");
+                //options.MapDynamicControllerRoute<HorselessRouteTransformer>("{__tenant__}/{area:exists}/{controller=Home}/{action=Index}");
 
-                options.MapDynamicControllerRoute<HorselessRouteTransformer>("{__tenant__}/{controller=Home}/{action=Index}");
+                //options.MapDynamicControllerRoute<HorselessRouteTransformer>("{__tenant__}/{controller=Home}/{action=Index}");
 
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("{__tenant__}/{**slug}");
+
 
                 //options.MapControllerRoute(
                 //name: "HorselessCMS",
                 //pattern: "{controller=HorselessCMS}/{action=ViewTemplate}/{id?}");
 
 
+
+                //options.MapControllers();
             });
 
             options?.Invoke(applicationBuilder);
