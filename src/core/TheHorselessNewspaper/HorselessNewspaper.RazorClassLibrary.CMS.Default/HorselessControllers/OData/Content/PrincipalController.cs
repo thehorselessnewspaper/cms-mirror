@@ -10,7 +10,7 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("{__tenant__}/ODataContent/Principal")]
+    [Route("ODataContent")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class PrincipalController :
         ODataController, IContentQueryController<ContentModel.Principal>

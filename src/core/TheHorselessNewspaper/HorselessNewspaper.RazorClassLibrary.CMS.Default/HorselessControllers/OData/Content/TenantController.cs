@@ -24,7 +24,7 @@ using Microsoft.AspNetCore.OData.Routing.Attributes;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
     // [ODataAttributeRouting]
-    // [Route("ODataContent/[controller]/[action]")]
+    [Route("ODataContent")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class TenantController :

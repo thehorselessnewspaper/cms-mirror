@@ -193,10 +193,10 @@ namespace HorselessNewspaper.Web.Core.Extensions
                             }
                         });
                 })
-                                .WithRouteStrategy("__tenant__")
-                .WithBasePathStrategy(o => o.RebaseAspNetCorePathBase = true)
 
+                .WithBasePathStrategy(o => o.RebaseAspNetCorePathBase = true)
                 .WithHeaderStrategy()
+                .WithRouteStrategy()
                 .WithDelegateStrategy(async context =>
                 {
                     var httpContext = context as HttpContext;
@@ -219,7 +219,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
                         }
                     }
                 });
-                //.WithStaticStrategy(defaultTenantIdentifier);
+            //.WithStaticStrategy(defaultTenantIdentifier);
 
 
 
@@ -317,7 +317,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
             // handle cycles in json responses 
             // as per https://gavilan.blog/2021/05/19/fixing-the-error-a-possible-object-cycle-was-detected-in-different-versions-of-asp-net-core/
-            services.AddControllersWithViews(
+            services.AddMvc(
                     opts =>
                     {
                         // permit content negotiation
@@ -346,13 +346,13 @@ namespace HorselessNewspaper.Web.Core.Extensions
                         // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
 
                         /// todo make this an environment configurable item
-                        options.AddRouteComponents("ODataHosting", edmHosting);
+                        // options.AddRouteComponents("ODataHosting", edmHosting);
                         options.AddRouteComponents("ODataContent", edmContent);
-
+                        options.AddRouteComponents("ODataHosting", edmHosting);
 
 
                     });
-            //// .AddOData(options =>
+            // .AddOData(options =>
             //{
             //    /// TODO - surface these as configurable parameters 
             //    options
@@ -370,6 +370,8 @@ namespace HorselessNewspaper.Web.Core.Extensions
             //    options.AddRouteComponents("ODataHosting", edmHosting);
             //    // options.AddRouteComponents(edmContent);
             //});
+
+            services.AddODataQueryFilter();
 
             options?.Invoke(serviceBuilder);
 

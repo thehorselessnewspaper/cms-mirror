@@ -139,7 +139,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
                     areaName: "Installer",
                     pattern: "Installer/{controller=TenantSetup}/{action=Index}/{id?}");
 
-                options.MapControllers();
+                // options.MapControllers();
 
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("{__tenant__}/{area:exists}/{controller=Home}/{action=Index}");
 

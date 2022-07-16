@@ -210,12 +210,12 @@ namespace HorselessNewspaper.Web.Core.Startup
                 // .AddRazorRuntimeCompilation();
             }
 
-            services.AddControllersWithViews(options =>
-            {
-                // options.Filters.Add<InstallRequiredActionFilter>(int.MinValue);
-            }).AddRazorRuntimeCompilation();
+            //services.AddMvc(options =>
+            //{
+            //    // options.Filters.Add<InstallRequiredActionFilter>(int.MinValue);
+            //}).AddRazorRuntimeCompilation();
 
-            services.AddODataQueryFilter();
+            //services.AddODataQueryFilter();
 
             /// <summary>
             /// as per https://www.thecodebuzz.com/failed-to-determine-the-https-port-for-the-redirect/

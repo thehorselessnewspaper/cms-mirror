@@ -99,8 +99,8 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", await principalResolver.GetClientCredentialsGrantToken());
 
                     client.DefaultRequestHeaders.Add(ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, "lache");
-                    client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json;odata.metadata=none");
-                    response = await client.GetAsync("ODataHosting/Tenant?$top=10&");
+                    client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json;odata.metadata=full");
+                    response = await client.GetAsync("ODataHosting/Tenant?$top=10");
                     Assert.NotNull(response);
 
                     response.EnsureSuccessStatusCode(); // Status Code 200-299

@@ -31,6 +31,7 @@ using HorselessNewspaper.Web.Core.Services.Model.SeedEntities;
 using HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient;
 using System.Net.Http.Json;
 using Newtonsoft.Json;
+using System;
 
 namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 {
@@ -265,24 +266,31 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     var staticTenants = await inMemoryStores.GetAllAsync();
                     foreach (var staticTenant in staticTenants)
                     {
-
+                        var hostingTenantQuery = await hostingModelOperator.ReadAsEnumerable(w => w.TenantIdentifier.Equals(staticTenant.Identifier));
                         var currentTenant = staticTenant.Payload.ParentTenant;
-
-                        // check if already in hosting db
-                        var existsQuery = await hostingModelOperator.Read(w => w.TenantIdentifier.Equals(currentTenant.TenantIdentifier));
-                        var existsQueryResult = existsQuery.Any();
-
-                        if (!existsQueryResult)
+                        if (currentTenant != null)
                         {
-                            _logger.LogTrace($"found static tenant not hydrated in hosting db: tenantIdentifier = {currentTenant.TenantIdentifier}");
-                            currentTenant.IsPublished = false;
-                            currentTenant.DeploymentState = TenantDeploymentWorkflowState.Approved;
-                            var createResult = await hostingModelOperator.Create(currentTenant);
-                            _logger.LogTrace($"hydrated static tenant not hydrated in hosting db: tenantIdentifier = {currentTenant.TenantIdentifier}");
+                            // check if already in hosting db
+                            var existsQuery = await hostingModelOperator.Read(w => w.TenantIdentifier.Equals(staticTenant.Identifier));
+                            var existsQueryResult = existsQuery.Any();
+
+                            if (!existsQueryResult)
+                            {
+                                _logger.LogTrace($"found static tenant not hydrated in hosting db: tenantIdentifier = {staticTenant.Identifier}");
+                                currentTenant.IsPublished = false;
+                                currentTenant.DeploymentState = TenantDeploymentWorkflowState.Approved;
+                                var createResult = await hostingModelOperator.Create(currentTenant);
+                                _logger.LogTrace($"hydrated static tenant not hydrated in hosting db: tenantIdentifier = {staticTenant.Identifier}");
+                            }
+                            else
+                            {
+                                _logger.LogTrace($"found static tenant already hydrated in hosting db: tenantIdentifier = {staticTenant.Identifier}");
+                            }
                         }
                         else
                         {
-                            _logger.LogTrace($"found static tenant already hydrated in hosting db: tenantIdentifier = {currentTenant.TenantIdentifier}");
+                            // todo here because static tenantinfo loses parenttenant link 
+                            // after hydration
                         }
                     }
 
@@ -411,11 +419,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
             await EnsureTenantEntityWorkflow(hostingModelTenants);
 
-            var currentContentModelTenants = await this.GetCurrentContentModelTenants("$top=200&$expand=Owners, AccessControlEntries");
-            foreach (var currentTenant in currentContentModelTenants)
-            {
-
-            }
+            await ValidateCaches();
 
         }
 
@@ -633,7 +637,10 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         {
                             if (approvedTenant.IsPublished)
                             {
-                                // nothing to do but report here
+                                _logger.LogTrace("tenant deployment workflow complete for current batch");
+
+
+   
                             }
                             else
                             {
@@ -647,13 +654,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         else
                         {
                             // await ValidateCaches(scope, inMemoryStores, contentModelTenants, approvedTenant);
-                            _logger.LogTrace("tenant deployment workflow complete for current batch");
+ 
+                            _logger.LogTrace("tenant cache updated");
                         }
-
-
-
-
-
 
                     }
                     catch (Exception ex)
@@ -725,35 +728,40 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
         }
 
-        private async Task ValidateCaches(IServiceScope scope, IMultiTenantStore<HorselessTenantInfo>? inMemoryStores, List<ContentModel.Tenant> contentModelTenants, HostingModel.Tenant publishedTenant)
+        private async Task ValidateCaches()
         {
 
-            try
+
+            var currentContentModelTenants = await this.GetCurrentContentModelTenants("$top=200&$expand=Owners, AccessControlEntries");
+
+            foreach (var publishedTenant in currentContentModelTenants)
             {
-                // here because we are updating the in memory tenant cache
-                _logger.LogTrace($"found existing deployed tenant {publishedTenant.DisplayName}");
+                try
+                {
+                    // here because we are updating the in memory tenant cache
+                    _logger.LogTrace($"found existing deployed tenant {publishedTenant.DisplayName}");
 
-                await UpdateMultiTenantInMemoryStore(inMemoryStores, publishedTenant);
+                    await UpdateMultiTenantInMemoryStore( publishedTenant);
 
 
-                // validate tenant cache updated
-                // get the tenant cache
-                var tenantCache = scope.ServiceProvider.GetRequiredService<IHorselessCacheProvider<Guid, ContentModel.Tenant>>();
-                _logger.LogInformation($"loaded tenant cache service");
+                    // validate tenant cache updated
+                    // get the tenant cache
+                    //var tenantCache = scope.ServiceProvider.GetRequiredService<IHorselessCacheProvider<Guid, ContentModel.Tenant>>();
+                    //_logger.LogInformation($"loaded tenant cache service");
 
-                var currentTenants = await GetCurrentContentModelTenants();
-                var liveTenant = currentTenants.Where(w => w.TenantIdentifier != null
-                                                                        && publishedTenant.TenantIdentifier != null &&
-                                                                        w.TenantIdentifier.Equals(publishedTenant.TenantIdentifier)).FirstOrDefault();
-                await tenantCache.Set(publishedTenant.Id, liveTenant);
+                    //var currentTenants = await GetCurrentContentModelTenants();
+                    //var liveTenant = currentTenants.Where(w => w.TenantIdentifier != null
+                    //                                                        && publishedTenant.TenantIdentifier != null &&
+                    //                                                        w.TenantIdentifier.Equals(publishedTenant.TenantIdentifier)).FirstOrDefault();
+                    //await tenantCache.Set(publishedTenant.Id, liveTenant);
+                }
+                catch (Exception e)
+                {
+
+                    _logger.LogError($"problem validating caches: {e.Message}");
+                    throw new Exception("problem validating caches", e);
+                }
             }
-            catch (Exception e)
-            {
-
-                _logger.LogError($"problem validating caches: {e.Message}");
-                throw new Exception("problem validating caches", e);
-            }
-
 
         }
 
@@ -1261,13 +1269,23 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             }
         }
 
-        private async Task UpdateMultiTenantInMemoryStore(IMultiTenantStore<HorselessTenantInfo>? inMemoryStores, HostingModel.Tenant originEntity)
+        private async Task UpdateMultiTenantInMemoryStore( ContentModel.Tenant originEntity)
         {
             using (var scope = this._services.CreateScope())
             {
+                var stores = scope.ServiceProvider.GetRequiredService<IEnumerable<IMultiTenantStore<HorselessTenantInfo>>>().ToList();
 
-                var hostingModelTenantInfoQuery = this.GetQueryForHostingEntity<HostingModel.TenantInfo>(scope);
-                var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.ReadAsEnumerable(w => w.ParentTenantId == originEntity.Id);
+                var inMemoryStores = stores.Where(s => s.GetType() == typeof(InMemoryStore<HorselessTenantInfo>))
+                       .SingleOrDefault();
+
+
+                var hostingModelTenantQuery = scope.ServiceProvider.GetRequiredService<IQueryableHostingModelOperator<HostingModel.Tenant>>();
+                var hostModelQueryResult = await hostingModelTenantQuery.ReadAsEnumerable(w => w.TenantIdentifier.Equals(originEntity.TenantIdentifier));
+
+                var hostingModelTenantInfoQuery = scope.ServiceProvider.GetRequiredService <IQueryableHostingModelOperator<HostingModel.TenantInfo>>();
+                var hostingModelTenantInfoQueryResult = await hostingModelTenantInfoQuery.ReadAsEnumerable(w => w.ParentTenant.TenantIdentifier == originEntity.TenantIdentifier);
+
+
 
                 if (hostingModelTenantInfoQueryResult != null &&
                     hostingModelTenantInfoQueryResult.Any())
@@ -1279,6 +1297,11 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     // handle multiplicity of TenantInfo per Tenant
                     // enables tenants of tenants
                     var inMemoryStoreEntity = new HorselessTenantInfo(hostingModelTenantInfo);
+                    if(hostModelQueryResult != null && hostModelQueryResult.Any())
+                    {
+                        inMemoryStoreEntity.Payload.ParentTenant = hostModelQueryResult.First();
+                    }
+
                     var inMemoryStoreUpdated = await inMemoryStores.TryAddAsync(inMemoryStoreEntity);
                     _logger.LogTrace($"in memory tenant store updated with tenant: {inMemoryStoreEntity.Payload.DisplayName}");
 
