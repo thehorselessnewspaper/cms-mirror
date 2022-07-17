@@ -336,25 +336,57 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelC
             return ret;
         }
 
-        public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class, IHostingRowLevelSecured
+        public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities, Expression<Func<T, bool>> parentItemFilter = null, Expression<Func<U, bool>> relatedItemFilter = null) where U : class, IHostingRowLevelSecured
         {
-            var resolvedTenant = await _context.ResolveTenant();
 
             try
             {
+                var resolvedTenant = await _context.ResolveTenant();
+
+                // will throw exception if not exists
                 var hasEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
                 T trackedEntity = default;
 
+
                 if (hasEntity != null)
                 {
-                    trackedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).Include(propertyName).First();
+                    if (parentItemFilter == null)
+                    {
+                        // apply a default filter, a poor choice 
+                        trackedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).Include(propertyName).First();
+                    }
+                    else
+                    {
+                        // apply the user supplied filter
+                        trackedEntity = ((DbContext)_context).Set<T>().Where(parentItemFilter).Include(propertyName).First();
+                    }
+
                     foreach (var item in relatedEntities)
                     {
 
-                        var relatedEntityExists = ((DbContext)_context).Set<U>().Where(w => w.Id.Equals(item.Id)).Any();
+                        var relatedEntityExists = false;
+
+                        if (relatedItemFilter == null)
+                        {
+                            relatedEntityExists = ((DbContext)_context).Set<U>().Where(w => w.Id.Equals(item.Id)).Any();
+                        }
+                        else
+                        {
+                            relatedEntityExists = ((DbContext)_context).Set<U>().Where(relatedItemFilter).Any();
+                        }
+
                         if (relatedEntityExists)
                         {
-                            var relatedEntity = ((DbContext)_context).Set<U>().Where(w => w.Id.Equals(item.Id)).First();
+                            U relatedEntity = default; // ((DbContext)_context).Set<U>().Where(w => w.Id.Equals(item.Id)).First();
+                            if (relatedItemFilter == null)
+                            {
+                                relatedEntity = ((DbContext)_context).Set<U>().Where(w => w.Id.Equals(item.Id)).First();
+                            }
+                            else
+                            {
+                                relatedEntity = ((DbContext)_context).Set<U>().Where(relatedItemFilter).First();
+                            }
+
                             ((ICollection<U>)trackedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(trackedEntity)).Add(relatedEntity);
 
                         }

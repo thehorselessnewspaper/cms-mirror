@@ -13,7 +13,7 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query
     {
         public Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1);
 
-        public Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class, IHostingRowLevelSecured;
+        public Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities, Expression<Func<T, bool>> parentItemFilter = null, Expression<Func<U, bool>> relatedItemFilter = null) where U : class, IHostingRowLevelSecured;
 
         public Task<IQueryable<X>> Read<O, X>(O queryOptions) where O : ODataQueryOptions<X> where X : class, IHostingRowLevelSecured; 
     }

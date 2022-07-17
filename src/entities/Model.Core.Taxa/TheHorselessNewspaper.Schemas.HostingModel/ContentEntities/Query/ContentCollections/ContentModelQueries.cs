@@ -473,30 +473,55 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             return ret;
         }
 
-        public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class, IContentRowLevelSecured
+        public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities, Expression<Func<T, bool>> parentItemFilter = null, Expression<Func<U, bool>> relatedItemFilter = null) where U : class, IContentRowLevelSecured
         {
-
-
 
             try
             {
 
                 var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
                 var hasEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).First();
-
-                // T trackedEntity = default(T);
+                T trackedEntity = default;
 
                 if (hasEntity != null)
                 {
+                    if (parentItemFilter == null)
+                    {
+                        // apply a default filter, a poor choice 
+                        trackedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).Include(propertyName).First();
+                    }
+                    else
+                    {
+                        // apply the user supplied filter
+                        trackedEntity = ((DbContext)_context).Set<T>().Where(parentItemFilter).Include(propertyName).First();
+                    }
 
-                    var trackedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).Include(propertyName).First();
                     foreach (var item in relatedEntities)
                     {
 
-                        var relatedEntityExists = ((DbContext)_context).Set<U>().Where(w => w.Id.Equals(item.Id)).Any();
+                        var relatedEntityExists = false;
+
+                        if (relatedItemFilter == null)
+                        {
+                            relatedEntityExists = ((DbContext)_context).Set<U>().Where(w => w.Id.Equals(item.Id)).Any();
+                        }
+                        else
+                        {
+                            relatedEntityExists = ((DbContext)_context).Set<U>().Where(relatedItemFilter).Any();
+                        }
+
                         if (relatedEntityExists)
                         {
-                            var relatedEntity = ((DbContext)_context).Set<U>().Where(w => w.Id.Equals(item.Id)).First();
+                            U relatedEntity = default; // ((DbContext)_context).Set<U>().Where(w => w.Id.Equals(item.Id)).First();
+                            if (relatedItemFilter == null)
+                            {
+                                relatedEntity = ((DbContext)_context).Set<U>().Where(w => w.Id.Equals(item.Id)).First();
+                            }
+                            else
+                            {
+                                relatedEntity = ((DbContext)_context).Set<U>().Where(relatedItemFilter).First();
+                            }
+
                             ((ICollection<U>)trackedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(trackedEntity)).Add(relatedEntity);
 
                         }
@@ -507,8 +532,8 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                         }
                     }
 
+
                     var saveResult = await ((DbContext)_context).SaveChangesAsync();
-                    _logger.LogInformation($"inserted related entity");
                 }
                 else
                 {
