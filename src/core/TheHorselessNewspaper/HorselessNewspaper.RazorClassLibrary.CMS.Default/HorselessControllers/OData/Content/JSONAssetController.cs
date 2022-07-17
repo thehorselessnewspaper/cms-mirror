@@ -15,7 +15,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("{__tenant__}/ODataContent/JSONAsset")]
+    [Route("ODataContent/JSONAsset")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class JSONAssetController :
         ODataController, IContentQueryController<ContentModel.JSONAsset>

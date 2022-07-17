@@ -195,9 +195,9 @@ namespace HorselessNewspaper.Web.Core.Extensions
                 })
                 .WithDistributedCacheStore()
 
-                // .WithBasePathStrategy(o => o.RebaseAspNetCorePathBase = true)
-                .WithHeaderStrategy("tenant")
-                 .WithRouteStrategy()
+                 // .WithBasePathStrategy(o => o.RebaseAspNetCorePathBase = true)
+                 .WithHeaderStrategy("__tenant__")
+                 .WithRouteStrategy("__tenant__")
                 .WithDelegateStrategy(async context =>
                 {
                     var httpContext = context as HttpContext;
@@ -351,8 +351,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
                         /// todo make this an environment configurable item
                         // options.AddRouteComponents("ODataHosting", edmHosting);
                         options.AddRouteComponents("{__tenant__}/ODataContent", edmContent);
-
-
+                
 
                     })
                      .AddOData(options =>
@@ -368,9 +367,10 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
                         options.TimeZone = TimeZoneInfo.Utc;
                         // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
+                        options.AddRouteComponents( "ODataHosting", edmHosting);
 
                         /// todo make this an environment configurable item
-                        options.AddRouteComponents("{__tenant__}/ODataHosting", edmHosting);
+                        // options.AddRouteComponents("ODataHosting", edmHosting);
                         // options.AddRouteComponents(edmContent);
                     });
 

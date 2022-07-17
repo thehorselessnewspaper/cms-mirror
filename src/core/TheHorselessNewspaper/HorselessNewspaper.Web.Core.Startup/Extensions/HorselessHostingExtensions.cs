@@ -102,6 +102,7 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
             builder.UseEndpoints(options =>
             {
 
+                options.MapControllers();
 
                 options.MapAreaControllerRoute(
                     name: "SiteAdmin",
@@ -149,6 +150,9 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
                       name: "multitenantareadefault",
                       pattern: "{__tenant__}/{area:exists}/{controller=Home}/{action=Index}");
 
+                options.MapControllerRoute(
+                  name: "areadefault",
+                  pattern: "{area:exists}/{controller=Home}/{action=Index}");
 
                 options.MapControllerRoute(
                   name: "default",
@@ -171,9 +175,6 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
                 //name: "HorselessCMS",
                 //pattern: "{controller=HorselessCMS}/{action=ViewTemplate}/{id?}");
 
-
-
-                //options.MapControllers();
             });
 
             options?.Invoke(applicationBuilder);

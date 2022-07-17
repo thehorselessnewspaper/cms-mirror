@@ -109,7 +109,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                                                         //    response.Content.Headers.ContentType.ToString());
 
                     responseContent = await response.Content.ReadAsStringAsync();
-                    var deserialized = JsonConvert.DeserializeObject<IEnumerable<HostingEntities.Tenant>>(responseContent);
+                    var deserialized = JsonConvert.DeserializeObject<ODataResponse<IEnumerable<HostingEntities.Tenant>>>(responseContent);
                 }
 
 

@@ -17,7 +17,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("{__tenant__}/ODataContent/Meronym")]
+    [Route("ODataContent/Meronym")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class MeronymController :
         ODataController, IContentQueryController<ContentModel.Meronym>
