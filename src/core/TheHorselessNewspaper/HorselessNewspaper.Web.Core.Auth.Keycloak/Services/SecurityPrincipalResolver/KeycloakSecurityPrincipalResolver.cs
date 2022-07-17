@@ -196,16 +196,23 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         principal.PreferredUserName = user.Claims.PreferredUsername();
 
                         var allTenants = await _tenantOperator
-                            .Read(w => w.IsSoftDeleted != true,
+                            .ReadAsEnumerable(w => w.IsSoftDeleted != true,
                                 new List<string> { nameof(Tenant.Accounts), nameof(Tenant.Owners), nameof(Tenant.AccessControlEntries) });
-                        var allTenantsList = allTenants.ToList();
+
+                        var allTenantsList = new List<Tenant>();
+
+                        if (allTenants != null)
+                        {
+                            allTenantsList.AddRange( allTenants.ToList());
+                        }
+     
                         var isAnOwner = allTenantsList.Where(w => w.Owners
                                                             .Where(w => w.UPN.Equals(user.Claims.Upn()))
                                                             .Any()).Any();
                         var isAnAccount = allTenantsList.Where(w => w.Accounts
                             .Where(w => w.UPN.Equals(user.Claims.Upn())).Any()).Any();
 
-                        var principalQuery = await this._principalOperator.Read(r => r.IsAnonymous == false && r.UPN == user.Claims.Upn(),
+                        var principalQuery = await this._principalOperator.ReadAsEnumerable(r => r.IsAnonymous == false && r.UPN == user.Claims.Upn(),
                             new List<string>() { nameof(Principal.AccessControlEntries) });
                         var principalCollection = principalQuery.ToList();
                         var principalQueryResult = principalQuery == null || principalCollection.Count() == 0 ? null : principalQuery.ToList().First();
@@ -311,7 +318,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         // resolve the tenant
                         var tenantQuery = await _tenantOperator.Read(w =>
                             w.TenantIdentifier.Equals(_iTenantInfo.Identifier), new List<string> { nameof(Tenant.Owners), nameof(Tenant.Accounts) });
-                        var tenantQueryResult = tenantQuery == null ? null : tenantQuery.ToList().FirstOrDefault();
+                        var tenantQueryResult = tenantQuery == null ? null : tenantQuery.ToList();
 
                         var allTenants = await _tenantOperator.Read(w => w.IsSoftDeleted != true, new List<string> { nameof(Tenant.Accounts), nameof(Tenant.Owners) });
 
@@ -335,14 +342,14 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         {
                             _logger.LogInformation("anonymous user is an owner in current tenant");
                         }
-                        else if (tenantQueryResult != null)
+                        else if (tenantQueryResult != null && tenantQueryResult.Any())
                         {
                             var httpCtx = _httpContextAccessor.HttpContext;
                             // tenant exists
 
                             // search for tne anononymous principal 
                             var principalQuery = await _principalOperator.ReadAsEnumerable(w =>
-                                        w.IsSoftDeleted == false, new List<string> { nameof(Tenant.Owners), nameof(Tenant.Accounts) });
+                                        w.IsSoftDeleted == false && w.IsAnonymous == true, new List<string> { nameof(Tenant.Owners), nameof(Tenant.Accounts) });
 
 
                             var principalQueryResult = principalQuery == null
@@ -388,8 +395,8 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                                 try
                                 {
-                                    var insertResult = await this._tenantOperator.InsertRelatedEntity<Principal>(tenantQueryResult.Id,
-                                        nameof(Tenant.Accounts), new List<Principal>() { newPrincipal });
+                                    var insertResult = await this._tenantOperator.InsertRelatedEntity<Principal>(tenantQueryResult.First().Id,
+                                        nameof(Tenant.Accounts), new List<Principal>() { newPrincipal }, w => w.TenantIdentifier.Equals(tenantQueryResult.First().TenantIdentifier), u => u.PreferredUserName.Equals(newPrincipal.PreferredUserName));
 
 
                                     var newAccountQuery = insertResult.Where(w => w.IsAnonymous = true);

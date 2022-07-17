@@ -80,33 +80,21 @@ namespace HorselessNewspaper.Web.Core.Middleware.HorselessRouter
 
             try
             {
-                if (IsActive)
+                var tenant = values["__tenant__"] as string;
+                if (IsActive && tenant != null && tenant != String.Empty)
                 {
-                    var cachedTenants = await this.multitenantStore.GetAllAsync();
-                    if (cachedTenants.Count() > 1)
-                    {
-                        int i = 0;
-                        var tenant = values["__tenant__"] as string;
-                        if (cachedTenants.Where(w => w.Identifier.ToLower().Equals(tenant.ToLower())).Any())
-                        {
-                            // here because this is a request for a published tenant
-                            return values;
-                        }
-                        else
-                        {
+                    // distributed cache retrieval
 
-                            // as per https://github.com/dotnet/AspNetCore.Docs/issues/12997
-                            // a per https://github.com/dotnet/AspNetCore.Docs/issues/12997
-                            return null;
-                        }
+                    var cachedTenants = await this.multitenantStore.TryGetAsync(tenant);
+                    if(cachedTenants != null)
+                    {
+                        return values;
+                    }
+                    else
+                    {
+                        return values;
                     }
 
-                    var ctx = _httpContextAccessor.HttpContext;
-                    // this really calls for some fancy rules engine eventually
-
-                    bool hasNoTenants = await GetTenantCount() == 0;
-                    bool isAdminPrincipal = ctx.HasDevopsAdminClaims(new List<string>() { "admin", "owner" });
-                    // values = HandleInitialTenantSetup(values, hasNoTenants, isAdminPrincipal);
                 }
             }
             catch (Exception e)
