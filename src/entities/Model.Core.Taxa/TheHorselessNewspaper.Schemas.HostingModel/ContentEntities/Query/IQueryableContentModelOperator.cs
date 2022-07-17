@@ -31,6 +31,8 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query
         /// <returns></returns>
         public Task<IQueryable<U>> ReadFilterByMetaData<U>(Expression<Func<U, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1) where U : class, IContentRowLevelSecured, IQueryableMetaDataModelEntity;
 
+        public Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class, IContentRowLevelSecured;
+
         public Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1);
         public Task<IQueryable<V>> Read<O, V>(O queryOptions) where O : ODataQueryOptions<V> where V : class, IContentRowLevelSecured;
     }

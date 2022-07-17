@@ -1,16 +1,12 @@
-﻿using Finbuckle.MultiTenant;
-using Microsoft.AspNetCore.OData.Query;
+﻿using Microsoft.AspNetCore.OData.Query;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
-using System.Collections;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using TheHorselessNewspaper.HostingModel.ContentEntities.Query.Extensions;
 using TheHorselessNewspaper.HostingModel.Context;
-using TheHorselessNewspaper.HostingModel.MultiTenant;
 
 namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollections
 {
@@ -275,7 +271,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                     TimeZone = TimeZoneInfo.Utc
                 };
 
-                AllowedQueryOptions opts = AllowedQueryOptions.All; 
+                AllowedQueryOptions opts = AllowedQueryOptions.All;
 
                 var resolvedTenant = await _context.ResolveTenant();
                 var dbSet = ((DbContext)_context).Set<X>();
@@ -290,7 +286,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         }
 
-        public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize=10, int pageNumber=1, int pageCount=1)
+        public async Task<IQueryable<T>> Read(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1)
         {
             IQueryable<T> result;
 
@@ -338,7 +334,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         public async Task<IEnumerable<T>> ReadAsEnumerable(Expression<Func<T, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1)
         {
             IEnumerable<T> result = new List<T>();
-   
+
             try
             {
                 var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
@@ -388,7 +384,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         /// <returns></returns>
         public async Task<T> Update(T entity, List<String> targetProperties = null)
         {
-  
+
 
             try
             {
@@ -477,7 +473,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             return ret;
         }
 
-        public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class
+        public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class, IContentRowLevelSecured
         {
 
 
@@ -496,12 +492,21 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                     var trackedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).Include(propertyName).First();
                     foreach (var item in relatedEntities)
                     {
-                        ((DbContext)_context).Entry<U>(item);
 
-                        ((ICollection<U>)trackedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(trackedEntity)).Add(item);
+                        var relatedEntityExists = ((DbContext)_context).Set<U>().Where(w => w.Id.Equals(item.Id)).Any();
+                        if (relatedEntityExists)
+                        {
+                            var relatedEntity = ((DbContext)_context).Set<U>().Where(w => w.Id.Equals(item.Id)).First();
+                            ((ICollection<U>)trackedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(trackedEntity)).Add(relatedEntity);
+
+                        }
+                        else
+                        {
+                            ((ICollection<U>)trackedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(trackedEntity)).Add(item);
+
+                        }
                     }
 
-                    // ((DbContext)_context).Update<T>(trackedEntity);
                     var saveResult = await ((DbContext)_context).SaveChangesAsync();
                     _logger.LogInformation($"inserted related entity");
                 }

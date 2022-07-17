@@ -7,7 +7,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.HostingEntities.Query.Extensions;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelCollection
 {
@@ -337,7 +336,7 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelC
             return ret;
         }
 
-        public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class
+        public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class, IHostingRowLevelSecured
         {
             var resolvedTenant = await _context.ResolveTenant();
 
@@ -351,10 +350,21 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelC
                     trackedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entityId)).Include(propertyName).First();
                     foreach (var item in relatedEntities)
                     {
-                        ((DbContext)_context).Entry(item);
 
-                        ((ICollection<U>)trackedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(trackedEntity)).Add(item);
+                        var relatedEntityExists = ((DbContext)_context).Set<U>().Where(w => w.Id.Equals(item.Id)).Any();
+                        if (relatedEntityExists)
+                        {
+                            var relatedEntity = ((DbContext)_context).Set<U>().Where(w => w.Id.Equals(item.Id)).First();
+                            ((ICollection<U>)trackedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(trackedEntity)).Add(relatedEntity);
+
+                        }
+                        else
+                        {
+                            ((ICollection<U>)trackedEntity.GetType().GetRuntimeProperty(propertyName).GetValue(trackedEntity)).Add(item);
+
+                        }
                     }
+
 
                     var saveResult = await ((DbContext)_context).SaveChangesAsync();
                 }
