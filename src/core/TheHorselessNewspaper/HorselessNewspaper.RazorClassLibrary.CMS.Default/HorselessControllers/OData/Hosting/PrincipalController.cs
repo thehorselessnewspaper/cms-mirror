@@ -11,7 +11,8 @@ using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Hosting
 {
-    [Route("ODataHosting/Principal")]
+
+    [Route("{__tenant__}/ODataHosting/Principal")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class PrincipalController : ODataController
@@ -24,7 +25,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-        [HttpGet()]
+        [HttpGet(Name = "HostingEntitiesPrincipal")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<HostingModel.Principal>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]

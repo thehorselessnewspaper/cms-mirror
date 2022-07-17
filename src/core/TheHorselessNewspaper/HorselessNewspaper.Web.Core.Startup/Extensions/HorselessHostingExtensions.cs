@@ -102,39 +102,37 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
             builder.UseEndpoints(options =>
             {
 
-                options.MapControllers();
-
                 options.MapAreaControllerRoute(
                     name: "SiteAdmin",
                     areaName: "SiteAdmin",
-                    pattern: "{__tenant__}/{area:exists}/{controller=OperatorSurface}/{action=Index}");
+                    pattern: "{__tenant__}/SiteAdmin/{controller=OperatorSurface}/{action=Index}");
 
                 options.MapAreaControllerRoute(
                     name: "TenantAdmin",
                     areaName: "TenantAdmin",
-                    pattern: "{__tenant__}/{area:exists}/{controller=OperatorSurface}/{action=Index}");
+                    pattern: "{__tenant__}/TenantAdmin/{controller=OperatorSurface}/{action=Index}");
 
                 options.MapAreaControllerRoute(
                     name: "ContentAdmin",
                     areaName: "ContentAdmin",
-                    pattern: "{__tenant__}/{area:exists}/{controller=OperatorSurface}/{action=Index}");
+                    pattern: "{__tenant__}/ContentAdmin/{controller=OperatorSurface}/{action=Index}");
 
                 options.MapAreaControllerRoute(
                     name: "TenantOwner",
                     areaName: "TenantOwner",
-                    pattern: "{__tenant__}/{area:exists}/{controller=Home}/{action=Index}");
+                    pattern: "{__tenant__}/TenantOwner/{controller=Home}/{action=Index}");
 
 
                 options.MapAreaControllerRoute(
-                    name: "TenantOwner",
+                    name: "SiteOwner",
                     areaName: "SiteOwner",
-                    pattern: "{__tenant__}/{area:exists}/{controller=Home}/{action=Index}");
+                    pattern: "{__tenant__}/SiteOwner/{controller=Home}/{action=Index}");
 
 
                 options.MapAreaControllerRoute(
                     name: "Admin",
                     areaName: "Admin",
-                    pattern: "{__tenant__}/{area:exists}/{controller=TenantOwner}/{action=Index}");
+                    pattern: "{__tenant__}/Admin/{controller=Home}/{action=Index}");
 
 
                 //options.MapControllerRoute(
@@ -170,6 +168,8 @@ namespace HorselessNewspaper.Web.Core.Extensions.Hosting
 
                 options.MapDynamicControllerRoute<HorselessRouteTransformer>("{__tenant__}/{**slug}");
 
+
+                options.MapControllers();
 
                 //options.MapControllerRoute(
                 //name: "HorselessCMS",

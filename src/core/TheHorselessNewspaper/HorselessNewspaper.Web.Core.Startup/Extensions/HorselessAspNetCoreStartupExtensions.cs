@@ -195,7 +195,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
                 })
                 .WithDistributedCacheStore()
 
-                 // .WithBasePathStrategy(o => o.RebaseAspNetCorePathBase = true)
+                 .WithBasePathStrategy(o => o.RebaseAspNetCorePathBase = false)
                  .WithHeaderStrategy("__tenant__")
                  .WithRouteStrategy("__tenant__")
                 .WithDelegateStrategy(async context =>
@@ -312,8 +312,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
             serviceBuilder.Services.AddHostedService<TenantCacheService>(provider => provider.GetService<TenantCacheService>());
             #endregion hosted services
 
-            services.AddODataQueryFilter();
-
+     
             var model = new HorselessOdataModel();
             var edmContent = model.GetContentEDMModel();
             var edmHosting = model.GetHostingEDMModel();
@@ -351,28 +350,30 @@ namespace HorselessNewspaper.Web.Core.Extensions
                         /// todo make this an environment configurable item
                         // options.AddRouteComponents("ODataHosting", edmHosting);
                         options.AddRouteComponents("{__tenant__}/ODataContent", edmContent);
-                
+                        options.AddRouteComponents("{__tenant__}/ODataHosting", edmHosting);
 
-                    })
-                     .AddOData(options =>
-                    {
-                        /// TODO - surface these as configurable parameters 
-                        options
-                        .Select()
-                        .Expand()
-                        .Filter()
-                        .OrderBy()
-                        .SetMaxTop(1000)
-                        .Count();
 
-                        options.TimeZone = TimeZoneInfo.Utc;
-                        // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
-                        options.AddRouteComponents( "ODataHosting", edmHosting);
-
-                        /// todo make this an environment configurable item
-                        // options.AddRouteComponents("ODataHosting", edmHosting);
-                        // options.AddRouteComponents(edmContent);
                     });
+            // .AddOData(options =>
+            //{
+            //    /// TODO - surface these as configurable parameters 
+            //    options
+            //    .Select()
+            //    .Expand()
+            //    .Filter()
+            //    .OrderBy()
+            //    .SetMaxTop(1000)
+            //    .Count();
+
+            //    options.TimeZone = TimeZoneInfo.Utc;
+            //    // options.Conventions.Remove(options.Conventions.First(convention => convention is MetadataRoutingConvention));
+            //    options.AddRouteComponents("{__tenant__}/ODataHosting", edmHosting);
+
+            //    /// todo make this an environment configurable item
+            //    // options.AddRouteComponents("ODataHosting", edmHosting);
+            //    // options.AddRouteComponents(edmContent);
+            //});
+            services.AddODataQueryFilter();
 
             options?.Invoke(serviceBuilder);
 
