@@ -112,9 +112,9 @@ namespace HorselessNewspaper.Web.Core.Services.Query.Controller.Hosting
             return result;
         }
 
-        public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities) where U : class
+        public async Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities, Expression<Func<Entity, bool>> parentItemFilter = null, Expression<Func<U, bool>> relatedItemFilter = null) where U : class, IHostingRowLevelSecured
         {
-            var result = await _hostingModelService.InsertRelatedEntity(entityId, propertyName, relatedEntities);
+            var result = await _hostingModelService.InsertRelatedEntity(entityId, propertyName, relatedEntities, parentItemFilter, relatedItemFilter);
 
             return result;
         }

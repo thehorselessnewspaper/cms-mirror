@@ -26,10 +26,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.2" />
+		<PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.7" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220716.3" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220717.2" />
 	</ItemGroup>
 
 </Project>
