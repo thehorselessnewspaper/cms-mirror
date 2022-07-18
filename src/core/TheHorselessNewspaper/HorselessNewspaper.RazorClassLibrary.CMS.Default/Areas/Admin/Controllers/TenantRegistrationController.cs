@@ -186,7 +186,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                     IsSoftDeleted = false,
                     ObjectId = Guid.NewGuid().ToString(),
                     Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                    Identifier = model.tenantIdentifier,
+                    Identifier = model.tenantIdentifier.ToLower(), // obviously todo sanitize this
                     Name = model.displayName,
                     TenantBaseUrl = baseUrl
                 };
@@ -201,7 +201,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                     ObjectId = Guid.NewGuid().ToString(),
                     Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
                     BaseUrl = baseUrl,
-                    TenantIdentifier = model.tenantIdentifier,
+                    TenantIdentifier = model.tenantIdentifier.ToLower(), // todo obviously sanitize this
                     DeploymentState = TenantDeploymentWorkflowState.PendingApproval,
                     AccessControlEntries = new List<HostingModel.AccessControlEntry>()
                     {

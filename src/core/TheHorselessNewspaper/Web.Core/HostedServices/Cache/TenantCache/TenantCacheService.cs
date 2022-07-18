@@ -816,7 +816,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     IsSoftDeleted = false,
                     ObjectId = originEntity.ObjectId,
                     Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                    TenantIdentifier = originEntity.TenantIdentifier,
+                    TenantIdentifier = originEntity.TenantIdentifier.ToLower(), // obviously sanitize this
                     BaseUrl = originEntity.BaseUrl.TrimEnd('/'),
                     Owners = new List<ContentModel.Principal>()
                 };
@@ -840,7 +840,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                 IsSoftDeleted = originEntity.IsSoftDeleted,
                                 ObjectId = Guid.NewGuid().ToString(),
                                 Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                                TenantIdentifier = originEntity.TenantIdentifier,
+                                TenantIdentifier = originEntity.TenantIdentifier.ToLower(), // obviously sanitize this,
                                 TenantIdentifierStrategyName = ContentModel.TenantIdentifierStrategyName.ASPNETCORE_ROUTE
                               }
                           }
