@@ -23,6 +23,6 @@ namespace HorselessNewspaper.Core.Interfaces.Security.Resolver
 
         public Task<bool> EnsureCanResoleCurrentTenant();
 
-        public Task<IHorselessHttpSessionFeature<HorselessSession>> GetCurrentSessionForPrincipal(Guid sessionPrincipalId);
+        public Task<IHorselessHttpSessionFeature<HorselessSession>> GetCurrentSessionForPrincipal(Principal targetPrincipal);
     }
 }

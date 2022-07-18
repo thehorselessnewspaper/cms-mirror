@@ -35,7 +35,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
         /// instead these should be dematerializd
         /// so the scopes that retrieved them can be disposed
         /// </summary>
-        private ConcurrentDictionary<string, HorselessSession> LocallyCachedSessions { get; set; } = new ConcurrentDictionary<string, HorselessSession>();
+        // private ConcurrentDictionary<string, HorselessSession> LocallyCachedSessions { get; set; } = new ConcurrentDictionary<string, HorselessSession>();
         IEnumerable<IMultiTenantStore<HorselessTenantInfo>> tenantStores;
         IHttpContextAccessor _httpContextAccessor;
         private IQueryableContentModelOperator<Tenant> _tenantOperator;
@@ -284,7 +284,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                         var principalQuery = await this._principalOperator.ReadAsEnumerable(r => r.IsAnonymous == false && r.UPN == user.Claims.Upn(),
                             new List<string>() { nameof(Principal.AccessControlEntries) });
-                        var principalCollection = principalQuery.ToList();
+
+                        var principalCollection = principalQuery != null && principalQuery.Any()  ? principalQuery.ToList() : new List<Principal>();
+
                         var principalQueryResult = principalQuery == null || principalCollection.Count() == 0 ? null : principalQuery.ToList().First();
                         if (principalQueryResult != null)
                         {
@@ -375,6 +377,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             {
                                 try
                                 {
+
                                     tenantQueryResult.Accounts.Add(principal);
                                     var principalInsertResult = await this._principalOperator.Create(principal);
 
@@ -531,13 +534,13 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
             return principal;
         }
 
-        public async Task<IHorselessHttpSessionFeature<HorselessSession>> GetCurrentSessionForPrincipal(Guid sessionPrincipalId)
+        public async Task<IHorselessHttpSessionFeature<HorselessSession>> GetCurrentSessionForPrincipal(ContentModel.Principal principal)
         {
 
 
             var httpContext = this._httpContextAccessor.HttpContext;
 
-            var principalQuery = await this._principalOperator.ReadAsEnumerable(w => w.Id == sessionPrincipalId);
+            var principalQuery = await this._principalOperator.ReadAsEnumerable(w => w.PreferredUserName.Equals(principal.PreferredUserName));
 
        
             var allSessionsQuery = await this._horselessSessionOperator.ReadAsEnumerable(w => w.IsSoftDeleted == false && w.SessionId == httpContext.Session.Id);
@@ -548,25 +551,26 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
             HorselessSession cachedSession;
 
-            var hasCachedSession = LocallyCachedSessions.TryGetValue(httpContext.Session.Id, out cachedSession);
+            var hasCachedSession = await this.redisDb.GetStringAsync($"{ typeof(HorselessSession).GetType().FullName}.{ httpContext.Session.Id.ToString()}");
 
-            if (hasCachedSession)
+            if (hasCachedSession != String.Empty && principalQuery != null && principalQuery.Any())
             {
+                var item = principalQuery.FirstOrDefault();
                 _logger.LogWarning($"{this.GetType().FullName} has cached HorselessSession entity");
-                IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(sessionPrincipalId);
+                IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(item);
 
                 return ret;
             }
 
-            else if (allSessionsQuery != null && allSessionsQuery.Any() == true)
+            else if (allSessionsQuery != null && allSessionsQuery.Any() == true && principalQuery.Any())
             {
-                IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(sessionPrincipalId);
+                IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(principalQuery.First());
 
                 return ret;
 
             }
 
-            else if (principalQuery != null && httpContext != null)
+            else if (principalQuery != null && httpContext != null && principalQuery.Any())
             {
                 var principalQueryResult = principalQuery.First();
 
@@ -583,7 +587,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                     SessionId = httpContext.Session.Id,
                     Sub = principalQueryResult.Sub,
                     UpdatedAt = DateTime.UtcNow,
-                    HorselessSessionPrincipalId = principalQueryResult.Id
+                    HorselessSessionPrincipalId = principalQueryResult.Id,
                 };
 
                 principalQueryResult.HorselessSessions.Add(newSession);
@@ -593,63 +597,70 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                 {
                     // cache the inserted session to hedge against
                     // new requests using the resolver before dbcontext is flushed
-                    LocallyCachedSessions.TryAdd(newSession.SessionId, newSession);
+                    await redisDb.SetStringAsync($"{typeof(HorselessSession).GetType().FullName}.{httpContext.Session.Id.ToString()}", JsonSerializer.Serialize(newSession));
                     _logger.LogWarning($"{this.GetType().FullName} has added a HorselessSession entity to local cache");
-                    IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(sessionPrincipalId);
+                    IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(principalQueryResult);
 
                     return ret;
                 }
                 else
                 {
-                    throw new Exception($"{this.GetType().Name} is unable to initialize the current session. failed to insert new session");
+                    _logger.LogWarning($"{this.GetType().Name} is unable to initialize the current session. failed to insert new session");
                 }
             }
             else
             {
-                throw new Exception($"{this.GetType().Name} is unable to initialize the current session");
+                _logger.LogWarning($"{this.GetType().Name} is unable to initialize the current session");
             }
 
+            throw new Exception("unable to initoialize session feature. principal queries nonfunctional");
         }
 
-        private async Task<IHorselessHttpSessionFeature<HorselessSession>> GetSessionFeature(Guid sessionPrincipalId)
+        private async Task<IHorselessHttpSessionFeature<HorselessSession>> GetSessionFeature(Principal currentPrincipal)
         {
             try
             {
                 var httpContext = this._httpContextAccessor.HttpContext;
 
-                var principalQuery = await this._principalOperator.ReadAsEnumerable(w => w.Id == sessionPrincipalId);
+                var principalQuery = await this._principalOperator.ReadAsEnumerable(w => w.PreferredUserName == currentPrincipal.PreferredUserName);
 
-                var hasInsertedSessionQuery = await this._horselessSessionOperator.ReadAsEnumerable(w => w.HorselessSessionPrincipalId.Equals(httpContext.Session.Id));
+                var hasInsertedSessionQuery = await this._horselessSessionOperator.ReadAsEnumerable(w => w.SessionId.Equals(httpContext.Session.Id));
 
-                // session already created for this principal scenario
-                var payload = hasInsertedSessionQuery.FirstOrDefault();
-
-                HorselessSession cachedPayload = null;
-                var hasCachedPayload = LocallyCachedSessions.TryGetValue(httpContext.Session.Id, out cachedPayload);
-                if (hasCachedPayload)
+                if(hasInsertedSessionQuery != null && hasInsertedSessionQuery.Any())
                 {
-                    _logger.LogWarning($"{this.GetType().FullName} has retrieved HorselessSession entity from local cache");
-                    payload = cachedPayload;
+                    // session already created for this principal scenario
+                    var payload = hasInsertedSessionQuery.First();
+
+
+                    var hasCachedPayload = await redisDb.GetStringAsync($"{typeof(HorselessSession).GetType().FullName}.{httpContext.Session.Id.ToString()}");
+                    if (hasCachedPayload != null && hasCachedPayload != String.Empty)
+                    {
+                        _logger.LogWarning($"{this.GetType().FullName} has retrieved HorselessSession entity from local cache");
+                        var deserialized = JsonSerializer.Deserialize<HorselessSession>(hasCachedPayload);
+                        payload = deserialized;
+                    }
+
+                    IHorselessHttpSessionFeature<HorselessSession> ret = new HorselessHttpSessionFeature();
+                    ret.FeaturePayload = payload;
+                    ret.HttpUrl = new Uri(httpContext.Request.GetFullHttpUrl());
+                    ret.HttpSessionId = httpContext.Session.Id;
+
+                    ret.SessionStartedAt = DateTime.UtcNow;
+                    ret.SessionLastUpdatedAt = DateTime.UtcNow;
+
+                    if (payload.IsAnonymous == true)
+                    {
+                        ret.IsAnonymous = true;
+                    }
+                    else
+                    {
+                        ret.IsAnonymous = false;
+                    }
+
+                    return ret;
                 }
 
-                IHorselessHttpSessionFeature<HorselessSession> ret = new HorselessHttpSessionFeature();
-                ret.FeaturePayload = payload;
-                ret.HttpUrl = new Uri(httpContext.Request.GetFullHttpUrl());
-                ret.HttpSessionId = httpContext.Session.Id;
-
-                ret.SessionStartedAt = DateTime.UtcNow;
-                ret.SessionLastUpdatedAt = DateTime.UtcNow;
-
-                if (payload.IsAnonymous == true)
-                {
-                    ret.IsAnonymous = true;
-                }
-                else
-                {
-                    ret.IsAnonymous = false;
-                }
-
-                return ret;
+                throw new Exception($"{this.GetType().Name} problem initializing session feature - principal and session not persisted");
             }
             catch (Exception ex)
             {

@@ -217,7 +217,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             {
                 await EnsurePhysicalDatabases();
 
-                var hasHydratedStaticallyDefinedTenants = await EnsureStaticTenantHydration();
+                var hasHydratedStaticallyDefinedTenants = await HydrateCaches();
                 if (hasHydratedStaticallyDefinedTenants)
                 {
                     // no need
@@ -248,7 +248,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         /// persist hardcoded tenants in hosting db
         /// </summary>
         /// <returns></returns>
-        public async Task<bool> EnsureStaticTenantHydration()
+        public async Task<bool> HydrateCaches()
         {
             var ret = false;
 
@@ -297,6 +297,20 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         }
                     }
 
+                    
+                    // hydrate inprogress deployments
+                    // todo ensure a paged iteration through all tenants 
+                    // within a bounded period
+                    // obviously hydration revisit time < cache expiration time
+                    var inproressQuery = await hostingModelOperator.ReadAsEnumerable(r => r.DeploymentState == TenantDeploymentWorkflowState.Approved || r.DeploymentState == TenantDeploymentWorkflowState.DeploymentComplete);
+                    if (inproressQuery != null && inproressQuery.Any())
+                    {
+                        foreach (var item in inproressQuery)
+                        {
+                            await this.EnsureCachedTenant(item);
+                        }
+                    }
+
                     //done hydrating statix tenants
                     ret = true;
                 }
@@ -338,6 +352,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                     cacheEntity.Id = currentTenant.Id.ToString();
                     cacheEntity.Name = currentTenant.DisplayName;
+                    cacheEntity.Payload.ObjectId = currentTenant.ObjectId;
+                    
                     cacheEntity.Identifier = currentTenant.TenantIdentifier;
                     cacheEntity.Payload.ParentTenant = currentTenant;
 
@@ -515,13 +531,13 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             // apply content owners
                             try
                             {
-                                var mirrorTenantQuery = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{approvedTenant.TenantIdentifier}'");
+                                var mirrorTenantQuery = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{approvedTenant.TenantIdentifier}'", approvedTenant.TenantIdentifier);
 
                                 // var mirrorTenantQuery = await contentModelOperator.ReadAsEnumerable(w => w.TenantIdentifier.Equals(approvedTenant.TenantIdentifier));
                                 if (mirrorTenantQuery.Any())
                                 {
                                     var mirrorTenant = mirrorTenantQuery.First();
-                                    var contentModelTenant = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{mirrorTenant.TenantIdentifier}'");
+                                    var contentModelTenant = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{mirrorTenant.TenantIdentifier}'", mirrorTenant.TenantIdentifier);
                                     if(contentModelTenant.Any() )
                                     {
                                         var currentTenant = contentModelTenant.First();
@@ -558,13 +574,13 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             // apply acl
                             try
                             {
-                                var mirrorTenantQuery = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{approvedTenant.TenantIdentifier}'");
+                                var mirrorTenantQuery = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{approvedTenant.TenantIdentifier}'", approvedTenant.TenantIdentifier);
 
                                 // var mirrorTenantQuery = await contentModelOperator.ReadAsEnumerable(w => w.TenantIdentifier.Equals(approvedTenant.TenantIdentifier));
                                 if (mirrorTenantQuery.Any())
                                 {
                                     var mirrorTenant = mirrorTenantQuery.First();
-                                    var contentModelTenant = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{mirrorTenant.TenantIdentifier}'");
+                                    var contentModelTenant = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{mirrorTenant.TenantIdentifier}'", mirrorTenant.TenantIdentifier);
                                     if (contentModelTenant.Any())
                                     {
                                         var currentTenant = contentModelTenant.First();
@@ -601,13 +617,13 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             // workflow complete
                             try
                             {
-                                var mirrorTenantQuery = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{approvedTenant.TenantIdentifier}'");
+                                var mirrorTenantQuery = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{approvedTenant.TenantIdentifier}'", approvedTenant.TenantIdentifier);
 
                                 // var mirrorTenantQuery = await contentModelOperator.ReadAsEnumerable(w => w.TenantIdentifier.Equals(approvedTenant.TenantIdentifier));
                                 if (mirrorTenantQuery.Any())
                                 {
                                     var mirrorTenant = mirrorTenantQuery.First();
-                                    var contentModelTenant = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{mirrorTenant.TenantIdentifier}'");
+                                    var contentModelTenant = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{mirrorTenant.TenantIdentifier}'", mirrorTenant.TenantIdentifier);
                                     if (contentModelTenant.Any())
                                     {
                                         var currentTenant = contentModelTenant.First();
@@ -1049,7 +1065,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
             try
             {
-                var queryResponse = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{originEntity.TenantIdentifier}'&$top=1&$expand=AccessControlEntries");
+                var queryResponse = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{originEntity.TenantIdentifier}'&$top=1&$expand=AccessControlEntries", originEntity.TenantIdentifier);
 
                 if (queryResponse != null && queryResponse.Count > 0)
                 {
@@ -1163,7 +1179,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     };
 
                     // tolerate varying objectid,id for dynamically created entities
-                    var queryResult = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{identifier}'");
+                    var queryResult = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{identifier}'", identifier);
                     if (queryResult != null && queryResult.Count > 0)
                     {
                         ret = JsonConvert.SerializeObject(queryResult);
@@ -1338,7 +1354,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             return ret;
         }
 
-        private async Task<List<ContentModel.Tenant>> GetCurrentContentModelTenants(string expandList = "", string tenantIdentifier = "")
+        private async Task<List<ContentModel.Tenant>> GetCurrentContentModelTenants(string expandList , string tenantIdentifier)
         {
 
             var ret = new List<ContentModel.Tenant>();
