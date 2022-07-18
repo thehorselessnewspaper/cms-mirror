@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using StackExchange.Redis;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -38,9 +39,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
         // private ConcurrentDictionary<string, HorselessSession> LocallyCachedSessions { get; set; } = new ConcurrentDictionary<string, HorselessSession>();
         IEnumerable<IMultiTenantStore<HorselessTenantInfo>> tenantStores;
         IHttpContextAccessor _httpContextAccessor;
-        private IQueryableContentModelOperator<Tenant> _tenantOperator;
-        private IQueryableContentModelOperator<Principal> _principalOperator;
-        private IQueryableContentModelOperator<HorselessSession> _horselessSessionOperator;
+        private IQueryableContentModelOperator<ContentModel.Tenant> _tenantOperator;
+        private IQueryableContentModelOperator<ContentModel.Principal> _principalOperator;
+        private IQueryableContentModelOperator<ContentModel.HorselessSession> _horselessSessionOperator;
         private IKeycloakAuthOptions _keycloakAuthOptions;
         private HttpClient _httpClient;
 
@@ -50,13 +51,24 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
         private ITenantInfo _iTenantInfo;
         IMapper mapper;
 
+        JsonSerializerOptions serializerOptions = new JsonSerializerOptions
+        {
+            IgnoreReadOnlyProperties = true,
+            ReferenceHandler = ReferenceHandler.Preserve,
+            WriteIndented = true,
+            Converters ={
+                        new JsonStringEnumConverter()
+                    }
+
+        };
+
         public KeycloakSecurityPrincipalResolver(
             IEnumerable<IMultiTenantStore<HorselessTenantInfo>> stores,
             IHttpContextAccessor httpContextAccessor,
             IKeycloakAuthOptions keycloakOptions,
-            IQueryableContentModelOperator<Tenant> tenantOperator,
-               IQueryableContentModelOperator<Principal> principalOperator,
-               IQueryableContentModelOperator<HorselessSession> horselessSessionOperator,
+            IQueryableContentModelOperator<ContentModel.Tenant> tenantOperator,
+               IQueryableContentModelOperator<ContentModel.Principal> principalOperator,
+               IQueryableContentModelOperator<ContentModel.HorselessSession> horselessSessionOperator,
                HttpClient httpClient,
                ILogger<KeycloakSecurityPrincipalResolver> logger,
                IDistributedCache redisDb,
@@ -188,7 +200,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public async Task<Tenant> EnsureTenant()
+        public async Task<ContentModel.Tenant> EnsureTenant()
         {
             var distributedCacheStore = tenantStores
                       .Where(s => s.GetType() == typeof(DistributedCacheStore<HorselessTenantInfo>))
@@ -210,19 +222,10 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
 
 
-        public async Task<Principal> GetCurrentPrincipal()
+        public async Task<ContentModel.Principal> GetCurrentPrincipal()
         {
-            var principal = new Principal();
-            var serializerOptions = new JsonSerializerOptions
-            {
-                IgnoreReadOnlyProperties = true,
-                ReferenceHandler = ReferenceHandler.Preserve,
-                WriteIndented = true,
-                Converters ={
-                        new JsonStringEnumConverter()
-                    }
+            var principal = new ContentModel.Principal();
 
-            };
 
             try
             {
@@ -234,7 +237,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                     var user = _httpContextAccessor.HttpContext.User;
                     var sessionId = _httpContextAccessor.HttpContext.Session.IsAvailable ? _httpContextAccessor.HttpContext.Session.Id : "";
 
-                    if (user.Claims.Count() > 0)
+                    if (user.Claims.Count() > 0 && _iTenantInfo != null)
                     {
                         _logger.LogInformation($"handling authenticated request for sessionId={sessionId}");
                         /// the authenticated scenario
@@ -249,7 +252,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             // try the cache
 
                             var redisQueryResult = await this.redisDb.GetStringAsync(principal.PreferredUserName);
-                            var cachedPrincipal = JsonSerializer.Deserialize<Principal>(redisQueryResult) as Principal;
+                            var cachedPrincipal = JsonSerializer.Deserialize<ContentModel.Principal>(redisQueryResult) as ContentModel.Principal;
                             if (cachedPrincipal != null
                                 && cachedPrincipal.PreferredUserName != null
                                 && cachedPrincipal.PreferredUserName.Equals(principal.PreferredUserName))
@@ -267,9 +270,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                         var allTenants = await _tenantOperator
                             .ReadAsEnumerable(w => w.IsSoftDeleted != true,
-                                new List<string> { nameof(Tenant.Accounts), nameof(Tenant.Owners), nameof(Tenant.AccessControlEntries) });
+                                new List<string> { nameof(ContentModel.Tenant.Accounts), nameof(ContentModel.Tenant.Owners), nameof(ContentModel.Tenant.AccessControlEntries) });
 
-                        var allTenantsList = new List<Tenant>();
+                        var allTenantsList = new List<ContentModel.Tenant>();
 
                         if (allTenants != null)
                         {
@@ -283,9 +286,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             .Where(w => w.UPN.Equals(user.Claims.Upn())).Any()).Any();
 
                         var principalQuery = await this._principalOperator.ReadAsEnumerable(r => r.IsAnonymous == false && r.UPN == user.Claims.Upn(),
-                            new List<string>() { nameof(Principal.AccessControlEntries) });
+                            new List<string>() { nameof(ContentModel.Principal.AccessControlEntries) });
 
-                        var principalCollection = principalQuery != null && principalQuery.Any()  ? principalQuery.ToList() : new List<Principal>();
+                        var principalCollection = principalQuery != null && principalQuery.Any() ? principalQuery.ToList() : new List<ContentModel.Principal>();
 
                         var principalQueryResult = principalQuery == null || principalCollection.Count() == 0 ? null : principalQuery.ToList().First();
                         if (principalQueryResult != null)
@@ -334,7 +337,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             principal.IsSoftDeleted = false;
                             principal.ObjectId = Guid.NewGuid().ToString();
 
-                            principal.PrincipalClaimContainer = new PrincipalClaimContainer()
+                            principal.PrincipalClaimContainer = new ContentModel.PrincipalClaimContainer()
                             {
                                 Id = Guid.NewGuid(),
                                 DisplayName = user.Claims.PreferredUsername()
@@ -344,7 +347,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             foreach (var claim in user.Claims)
                             {
                                 principal.PrincipalClaimContainer.PrincipalClaim.Add(
-                                    new PrincipalClaim()
+                                    new ContentModel.PrincipalClaim()
                                     {
                                         ClaimType = claim.Type,
                                         ClaimValue = claim.Value,
@@ -354,7 +357,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                     });
                             }
 
-                            principal.HorselessSessions.Add(new HorselessSession()
+                            principal.HorselessSessions.Add(new ContentModel.HorselessSession()
                             {
                                 Id = Guid.NewGuid(),
                                 DisplayName = user.Claims.PreferredUsername(),
@@ -377,14 +380,19 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             {
                                 try
                                 {
-
+                                    
                                     tenantQueryResult.Accounts.Add(principal);
-                                    var principalInsertResult = await this._principalOperator.Create(principal);
+                                    var principalInsertResult = await this._tenantOperator.InsertRelatedEntity<ContentModel.Principal>(
+                                        tenantQueryResult.Id, nameof(ContentModel.Tenant.Accounts), new List<ContentModel.Principal>() { principal},
+                                        w  => w.TenantIdentifier.ToLower().Equals(tenantQueryResult.TenantIdentifier.ToLower()),
+                                        u => u.PreferredUserName.Equals(principal.PreferredUserName)
+                                        );
+                                    // var principalInsertResult = await this._principalOperator.Create(principal);
 
 
-                                    if (principalInsertResult != null)
+                                    if (principalInsertResult != null && principalInsertResult.Any())
                                     {
-                                        return principalInsertResult;
+                                        return principalInsertResult.First();
                                     }
                                 }
                                 catch (Exception e)
@@ -399,49 +407,39 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             await this.redisDb.SetStringAsync(principal.PreferredUserName, principalJson);
                         }
                     }
-                    else if (user.Claims.Count() == 0)
+                    else if (user.Claims.Count() == 0 && _iTenantInfo != null)
                     {
                         // the anonymous scenario
                         _logger.LogInformation($"handling anonymous request");
-                        // resolve the tenant
-                        var tenantQuery = await _tenantOperator.ReadAsEnumerable(w =>
-                            w.TenantIdentifier.Equals(_iTenantInfo.Identifier), new List<string> { nameof(Tenant.Owners), nameof(Tenant.Accounts) });
-                        var tenantQueryResult = tenantQuery == null ? null : tenantQuery.ToList();
+                        var anonymousPrefferedUsername = "anonymous";
 
-                        var allTenants = await _tenantOperator.ReadAsEnumerable(w => w.IsSoftDeleted != true, new List<string> { nameof(Tenant.Accounts), nameof(Tenant.Owners) });
+                        var cachedAnonymousPrincipal = await redisDb.GetStringAsync(anonymousPrefferedUsername);
+                        if (cachedAnonymousPrincipal != null)
+                        {
 
-                        var allTenantsList = allTenants.ToList();
-                        var isAnOwner = allTenantsList.Where(w => w.Owners
-                                        .Where(w => w.IsAnonymous == true).Any()).Any();
-                        var isAnAccount = allTenantsList.Where(w => w.Accounts
-                            .Where(w => w.IsAnonymous = true).Any()).Any();
+                            var cachedPrincipal = JsonSerializer.Deserialize<ContentModel.Principal>(cachedAnonymousPrincipal);
+                            return cachedPrincipal;
+                        }
 
                         var anonymousPrincipalQuery = await _principalOperator.ReadAsEnumerable(r => r.IsAnonymous == true);
                         var anonymousPrincipalQueryResult = anonymousPrincipalQuery == null ? null : anonymousPrincipalQuery.ToList().FirstOrDefault();
-                        if (anonymousPrincipalQueryResult != null)
+                        if (anonymousPrincipalQueryResult != null && anonymousPrincipalQueryResult.IsAnonymous)
                         {
 
                             // cache the principal
-                            var principalJson = JsonSerializer.Serialize(anonymousPrincipalQueryResult);
-                            await this.redisDb.SetStringAsync(principal.PreferredUserName, principalJson);
+                            var principalJson = JsonSerializer.Serialize(anonymousPrincipalQueryResult, serializerOptions);
+                            await this.redisDb.SetStringAsync(anonymousPrincipalQueryResult.PreferredUserName, principalJson);
                             return anonymousPrincipalQueryResult;
                         }
-                        if (isAnAccount)
-                        {
-                            _logger.LogInformation("anonymous user is an account in current tenant");
-                        }
-                        else if (isAnOwner)
-                        {
-                            _logger.LogInformation("anonymous user is an owner in current tenant");
-                        }
-                        else if (tenantQueryResult != null && tenantQueryResult.Any())
+
+                        else
                         {
                             var httpCtx = _httpContextAccessor.HttpContext;
                             // tenant exists
 
                             // search for tne anononymous principal 
                             var principalQuery = await _principalOperator.ReadAsEnumerable(w =>
-                                        w.IsSoftDeleted == false && w.IsAnonymous == true, new List<string> { nameof(Tenant.Owners), nameof(Tenant.Accounts) });
+                                        w.IsSoftDeleted == false && w.IsAnonymous == true, new List<string> { nameof(ContentModel.Tenant.Owners), nameof(ContentModel.Tenant.Accounts) });
 
 
                             var principalQueryResult = principalQuery == null
@@ -453,14 +451,14 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             {
                                 _logger.LogInformation($"anonymous tenant principal exists");
                                 var principalJson = JsonSerializer.Serialize(principalQueryResult, serializerOptions);
-                                await this.redisDb.SetStringAsync(principal.PreferredUserName, principalJson);
+                                await this.redisDb.SetStringAsync(principalQueryResult.PreferredUserName, principalJson);
                                 return principalQueryResult;
                             }
                             else
                             {
                                 // insert an anonymous principal and session
                                 _logger.LogWarning($"anonymous tenant principal does not exist");
-                                var newPrincipal = new Principal()
+                                var newPrincipal = new ContentModel.Principal()
                                 {
                                     IsAnonymous = true,
                                     Id = Guid.NewGuid(),
@@ -471,9 +469,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                     UPN = "anonymous",
                                     // Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
                                     CreatedAt = DateTime.UtcNow,
-                                    HorselessSessions = new List<HorselessSession>()
+                                    HorselessSessions = new List<ContentModel.HorselessSession>()
                                        {
-                                           new HorselessSession()
+                                           new ContentModel.HorselessSession()
                                            {
                                                 IsAnonymous = true,
                                                 DisplayName = "Anonymous User",
@@ -489,17 +487,28 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                                 try
                                 {
-                                    var insertResult = await this._tenantOperator.InsertRelatedEntity<Principal>(tenantQueryResult.First().Id,
-                                        nameof(Tenant.Accounts), new List<Principal>() { newPrincipal }, w => w.TenantIdentifier.Equals(tenantQueryResult.First().TenantIdentifier), u => u.PreferredUserName.Equals(newPrincipal.PreferredUserName));
-
-
-                                    var newAccountQuery = insertResult.Where(w => w.IsAnonymous = true);
-                                    if (newAccountQuery != null)
+                                    var distributedCacheStore = tenantStores
+                                        .Where(s => s.GetType() == typeof(DistributedCacheStore<HorselessTenantInfo>))
+                                        .SingleOrDefault();
+                                    var tenant = await distributedCacheStore.TryGetByIdentifierAsync($"{_iTenantInfo.Identifier}");
+                                    if (tenant != null && tenant.Payload != null && tenant.Payload.ParentTenant != null)
                                     {
-                                        var principalJson = JsonSerializer.Serialize(newAccountQuery, serializerOptions);
-                                        await this.redisDb.SetStringAsync(principal.PreferredUserName, principalJson);
-                                        return newAccountQuery.FirstOrDefault();
+                                        var insertResult = await this._tenantOperator.InsertRelatedEntity<ContentModel.Principal>(tenant.Payload.ParentTenant.Id,
+                                                 nameof(ContentModel.Tenant.Accounts),
+                                                 new List<ContentModel.Principal>() { newPrincipal },
+                                                 w => w.TenantIdentifier.Equals(tenant.Identifier), u => u.PreferredUserName.Equals(newPrincipal.PreferredUserName));
+
+
+                                        var newAccountQuery = insertResult.Where(w => w.IsAnonymous == true);
+                                        if (newAccountQuery != null && newAccountQuery.Any())
+                                        {
+                                            var principalJson = JsonSerializer.Serialize(newAccountQuery.First(), serializerOptions);
+                                            await this.redisDb.SetStringAsync(newAccountQuery.First().PreferredUserName, principalJson);
+                                            return newAccountQuery.FirstOrDefault();
+                                        }
                                     }
+
+
                                 }
                                 catch (Exception e)
                                 {
@@ -534,89 +543,96 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
             return principal;
         }
 
-        public async Task<IHorselessHttpSessionFeature<HorselessSession>> GetCurrentSessionForPrincipal(ContentModel.Principal principal)
+        public async Task<IHorselessHttpSessionFeature<ContentModel.HorselessSession>> GetCurrentSessionForPrincipal(ContentModel.Principal principal)
         {
 
+            IHorselessHttpSessionFeature<ContentModel.HorselessSession> ret = await GetSessionFeature(principal);
+            return ret;
 
-            var httpContext = this._httpContextAccessor.HttpContext;
+            //var httpContext = this._httpContextAccessor.HttpContext;
 
-            var principalQuery = await this._principalOperator.ReadAsEnumerable(w => w.PreferredUserName.Equals(principal.PreferredUserName));
+            //var hasCachedSession = await this.redisDb.GetStringAsync(principal.PreferredUserName);
 
-       
-            var allSessionsQuery = await this._horselessSessionOperator.ReadAsEnumerable(w => w.IsSoftDeleted == false && w.SessionId == httpContext.Session.Id);
-            // var allSessions = allSessionsQuery.ToList();
-            var hasSesion = allSessionsQuery == null ? false : allSessionsQuery.Any();
+            //if (hasCachedSession != String.Empty)
+            //{
+            //    var cachedPrincipal = JsonSerializer.Deserialize<ContentModel.Principal>(hasCachedSession);
 
-            var currentUpdateTime = httpContext.Session.GetString("UTC_UPDATED_TIME");
 
-            HorselessSession cachedSession;
+            //    _logger.LogWarning($"{this.GetType().FullName} has cached HorselessSession entity");
+            //    IHorselessHttpSessionFeature<ContentModel.HorselessSession> ret = await GetSessionFeature(cachedPrincipal);
 
-            var hasCachedSession = await this.redisDb.GetStringAsync($"{ typeof(HorselessSession).GetType().FullName}.{ httpContext.Session.Id.ToString()}");
+            //    return ret;
+            //}
 
-            if (hasCachedSession != String.Empty && principalQuery != null && principalQuery.Any())
-            {
-                var item = principalQuery.FirstOrDefault();
-                _logger.LogWarning($"{this.GetType().FullName} has cached HorselessSession entity");
-                IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(item);
 
-                return ret;
-            }
+            //var principalQuery = await this._principalOperator.ReadAsEnumerable(w => w.PreferredUserName.Equals(principal.PreferredUserName));
 
-            else if (allSessionsQuery != null && allSessionsQuery.Any() == true && principalQuery.Any())
-            {
-                IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(principalQuery.First());
 
-                return ret;
+            //var allSessionsQuery = await this._horselessSessionOperator.ReadAsEnumerable(w => w.IsSoftDeleted == false && w.SessionId == httpContext.Session.Id);
+            //// var allSessions = allSessionsQuery.ToList();
+            //var hasSesion = allSessionsQuery == null ? false : allSessionsQuery.Any();
 
-            }
+            //var currentUpdateTime = httpContext.Session.GetString("UTC_UPDATED_TIME");
 
-            else if (principalQuery != null && httpContext != null && principalQuery.Any())
-            {
-                var principalQueryResult = principalQuery.First();
+            //ContentModel.HorselessSession cachedSession;
 
-                var newSession = new HorselessSession()
-                {
-                    Id = Guid.NewGuid(),
-                    DisplayName = principalQueryResult.DisplayName,
-                    IsAnonymous = principalQueryResult.IsAnonymous,
-                    Aud = principalQueryResult.Aud,
-                    CreatedAt = DateTime.UtcNow,
-                    Iss = principalQueryResult.Iss,
-                    IsSoftDeleted = false,
-                    ObjectId = Guid.NewGuid().ToString(),
-                    SessionId = httpContext.Session.Id,
-                    Sub = principalQueryResult.Sub,
-                    UpdatedAt = DateTime.UtcNow,
-                    HorselessSessionPrincipalId = principalQueryResult.Id,
-                };
 
-                principalQueryResult.HorselessSessions.Add(newSession);
+            //if (allSessionsQuery != null && allSessionsQuery.Any() == true && principalQuery.Any())
+            //{
+            //    IHorselessHttpSessionFeature<ContentModel.HorselessSession> ret = await GetSessionFeature(principalQuery.First());
 
-                var insertResult = await this._horselessSessionOperator.Create(newSession);
-                if (insertResult != null)
-                {
-                    // cache the inserted session to hedge against
-                    // new requests using the resolver before dbcontext is flushed
-                    await redisDb.SetStringAsync($"{typeof(HorselessSession).GetType().FullName}.{httpContext.Session.Id.ToString()}", JsonSerializer.Serialize(newSession));
-                    _logger.LogWarning($"{this.GetType().FullName} has added a HorselessSession entity to local cache");
-                    IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(principalQueryResult);
+            //    return ret;
 
-                    return ret;
-                }
-                else
-                {
-                    _logger.LogWarning($"{this.GetType().Name} is unable to initialize the current session. failed to insert new session");
-                }
-            }
-            else
-            {
-                _logger.LogWarning($"{this.GetType().Name} is unable to initialize the current session");
-            }
+            //}
 
-            throw new Exception("unable to initoialize session feature. principal queries nonfunctional");
+            //else if (principalQuery != null && httpContext != null && principalQuery.Any())
+            //{
+            //    var principalQueryResult = principalQuery.First();
+
+            //    var newSession = new ContentModel.HorselessSession()
+            //    {
+            //        Id = Guid.NewGuid(),
+            //        DisplayName = principalQueryResult.DisplayName,
+            //        IsAnonymous = principalQueryResult.IsAnonymous,
+            //        Aud = principalQueryResult.Aud,
+            //        CreatedAt = DateTime.UtcNow,
+            //        Iss = principalQueryResult.Iss,
+            //        IsSoftDeleted = false,
+            //        ObjectId = Guid.NewGuid().ToString(),
+            //        SessionId = httpContext.Session.Id,
+            //        Sub = principalQueryResult.Sub,
+            //        UpdatedAt = DateTime.UtcNow,
+            //        HorselessSessionPrincipalId = principalQueryResult.Id,
+            //    };
+
+            //    principalQueryResult.HorselessSessions.Add(newSession);
+
+            //    var insertResult = await this._horselessSessionOperator.Create(newSession);
+            //    if (insertResult != null)
+            //    {
+            //        // cache the inserted session to hedge against
+            //        // new requests using the resolver before dbcontext is flushed
+            //        var principalJson = JsonSerializer.Serialize(principalQueryResult);
+            //        await this.redisDb.SetStringAsync(principal.PreferredUserName, principalJson);
+            //        _logger.LogWarning($"{this.GetType().FullName} has added a HorselessSession entity to local cache");
+            //        IHorselessHttpSessionFeature<ContentModel.HorselessSession> ret = await GetSessionFeature(principalQueryResult);
+
+            //        return ret;
+            //    }
+            //    else
+            //    {
+            //        _logger.LogWarning($"{this.GetType().Name} is unable to initialize the current session. failed to insert new session");
+            //    }
+            //}
+            //else
+            //{
+            //    _logger.LogWarning($"{this.GetType().Name} is unable to initialize the current session");
+            //}
+
+            //throw new Exception("unable to initoialize session feature. principal queries nonfunctional");
         }
 
-        private async Task<IHorselessHttpSessionFeature<HorselessSession>> GetSessionFeature(Principal currentPrincipal)
+        private async Task<IHorselessHttpSessionFeature<ContentModel.HorselessSession>> GetSessionFeature(ContentModel.Principal currentPrincipal)
         {
             try
             {
@@ -626,21 +642,12 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                 var hasInsertedSessionQuery = await this._horselessSessionOperator.ReadAsEnumerable(w => w.SessionId.Equals(httpContext.Session.Id));
 
-                if(hasInsertedSessionQuery != null && hasInsertedSessionQuery.Any())
+                var cacheQuery = await this.redisDb.GetStringAsync($"{typeof(ContentModel.HorselessSession).FullName}.{httpContext.Session.Id}");
+                if (cacheQuery != null && cacheQuery != String.Empty)
                 {
-                    // session already created for this principal scenario
-                    var payload = hasInsertedSessionQuery.First();
-
-
-                    var hasCachedPayload = await redisDb.GetStringAsync($"{typeof(HorselessSession).GetType().FullName}.{httpContext.Session.Id.ToString()}");
-                    if (hasCachedPayload != null && hasCachedPayload != String.Empty)
-                    {
-                        _logger.LogWarning($"{this.GetType().FullName} has retrieved HorselessSession entity from local cache");
-                        var deserialized = JsonSerializer.Deserialize<HorselessSession>(hasCachedPayload);
-                        payload = deserialized;
-                    }
-
-                    IHorselessHttpSessionFeature<HorselessSession> ret = new HorselessHttpSessionFeature();
+                    // cached session 
+                    var payload = JsonSerializer.Deserialize<ContentModel.HorselessSession>(cacheQuery);
+                    IHorselessHttpSessionFeature<ContentModel.HorselessSession> ret = new HorselessHttpSessionFeature();
                     ret.FeaturePayload = payload;
                     ret.HttpUrl = new Uri(httpContext.Request.GetFullHttpUrl());
                     ret.HttpSessionId = httpContext.Session.Id;
@@ -657,6 +664,97 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         ret.IsAnonymous = false;
                     }
 
+                    return ret;
+                }
+
+                if (hasInsertedSessionQuery != null && hasInsertedSessionQuery.Any())
+                {
+                    // session already created for this principal scenario
+                    var payload = hasInsertedSessionQuery.First();
+
+                    var hasCachedPayload = await this.redisDb.GetStringAsync(currentPrincipal.PreferredUserName);
+
+                    // var hasCachedPayload = await redisDb.GetStringAsync($"{typeof(HorselessSession).GetType().FullName}.{httpContext.Session.Id.ToString()}");
+                    if (hasCachedPayload != null && hasCachedPayload != String.Empty)
+                    {
+                        _logger.LogWarning($"{this.GetType().FullName} has retrieved HorselessSession entity from local cache");
+                        var deserialized = JsonSerializer.Deserialize<ContentModel.HorselessSession>(hasCachedPayload);
+                        payload = deserialized;
+                    }
+
+                    IHorselessHttpSessionFeature<ContentModel.HorselessSession> ret = new HorselessHttpSessionFeature();
+                    ret.FeaturePayload = payload;
+                    ret.HttpUrl = new Uri(httpContext.Request.GetFullHttpUrl());
+                    ret.HttpSessionId = httpContext.Session.Id;
+
+                    ret.SessionStartedAt = DateTime.UtcNow;
+                    ret.SessionLastUpdatedAt = DateTime.UtcNow;
+
+                    if (payload.IsAnonymous == true)
+                    {
+                        ret.IsAnonymous = true;
+                    }
+                    else
+                    {
+                        ret.IsAnonymous = false;
+                    }
+
+
+                    var sessionJson = JsonSerializer.Serialize(payload, serializerOptions);
+                    await this.redisDb.SetStringAsync($"{typeof(ContentModel.HorselessSession).FullName}.{httpContext.Session.Id}", sessionJson);
+
+                    return ret;
+                }
+                else
+                {
+                    // create a new session
+                    var newSession = new ContentModel.HorselessSession()
+                    {
+                        Id = Guid.NewGuid(),
+                        DisplayName = currentPrincipal.DisplayName,
+                        IsAnonymous = currentPrincipal.IsAnonymous,
+                        Aud = currentPrincipal.Aud,
+                        CreatedAt = DateTime.UtcNow,
+                        Iss = currentPrincipal.Iss,
+                        IsSoftDeleted = false,
+                        ObjectId = Guid.NewGuid().ToString(),
+                        SessionId = httpContext.Session.Id,
+                        Sub = currentPrincipal.Sub,
+                        UpdatedAt = DateTime.UtcNow,
+                        HorselessSessionPrincipalId = currentPrincipal.Id
+                    };
+                    var relatedItems = new List<ContentModel.HorselessSession>() { newSession };
+                    // currentPrincipal.HorselessSessions.Add(newSession);
+
+                    var insertResult = 
+                        await this._principalOperator.
+                        InsertRelatedEntity<ContentModel.HorselessSession>(currentPrincipal.Id, propertyName: nameof(ContentModel.Principal.HorselessSessions), relatedEntities: relatedItems,
+                        parentItemFilter: w => w.PreferredUserName.Equals(currentPrincipal.PreferredUserName),
+                        relatedItemFilter: f => f.SessionId.Equals(httpContext.Session.Id));
+
+                    // var insertResult = await this._horselessSessionOperator.Create(newSession);
+
+                    IHorselessHttpSessionFeature<ContentModel.HorselessSession> ret = new HorselessHttpSessionFeature();
+                    ret.FeaturePayload = insertResult.First(); // todo this is overly optimistic
+                    ret.HttpUrl = new Uri(httpContext.Request.GetFullHttpUrl());
+                    ret.HttpSessionId = httpContext.Session.Id;
+
+                    ret.SessionStartedAt = DateTime.UtcNow;
+                    ret.SessionLastUpdatedAt = DateTime.UtcNow;
+
+                    if (currentPrincipal.IsAnonymous == true)
+                    {
+                        ret.IsAnonymous = true;
+                    }
+                    else
+                    {
+                        ret.IsAnonymous = false;
+                    }
+
+
+
+                    var sessionJson = JsonSerializer.Serialize(newSession, serializerOptions);
+                    await this.redisDb.SetStringAsync($"{typeof(ContentModel.HorselessSession).FullName}.{httpContext.Session.Id}", sessionJson);
                     return ret;
                 }
 

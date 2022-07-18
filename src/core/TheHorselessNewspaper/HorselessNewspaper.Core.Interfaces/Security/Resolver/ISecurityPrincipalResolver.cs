@@ -10,8 +10,8 @@ namespace HorselessNewspaper.Core.Interfaces.Security.Resolver
 {
     public interface ISecurityPrincipalResolver
     {
-        Task<Tenant> EnsureTenant();
-        Task<string> GetClientCredentialsGrantToken();
+        public Task<Tenant> EnsureTenant();
+        public Task<string> GetClientCredentialsGrantToken();
 
         /// <summary>
         /// get principal from current (Http) context

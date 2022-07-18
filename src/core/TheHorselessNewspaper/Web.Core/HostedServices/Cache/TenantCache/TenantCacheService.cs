@@ -297,7 +297,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         }
                     }
 
-                    
+
                     // hydrate inprogress deployments
                     // todo ensure a paged iteration through all tenants 
                     // within a bounded period
@@ -338,7 +338,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                        .SingleOrDefault();
 
                 var cachedTenantExists = await distributedCacheStore.TryGetByIdentifierAsync(currentTenant.TenantIdentifier);
-                HorselessTenantInfo cacheEntity = cachedTenantExists == null ?  new HorselessTenantInfo() : cachedTenantExists;
+                HorselessTenantInfo cacheEntity = cachedTenantExists == null ? new HorselessTenantInfo() : cachedTenantExists;
                 if (cachedTenantExists == null)
                 {
                     if (currentTenant.TenantInfos != null && currentTenant.TenantInfos.Any())
@@ -353,7 +353,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     cacheEntity.Id = currentTenant.Id.ToString();
                     cacheEntity.Name = currentTenant.DisplayName;
                     cacheEntity.Payload.ObjectId = currentTenant.ObjectId;
-                    
+
                     cacheEntity.Identifier = currentTenant.TenantIdentifier;
                     cacheEntity.Payload.ParentTenant = currentTenant;
 
@@ -466,7 +466,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         if (currentDeploymentState == ContentModel.TenantDeploymentWorkflowState.Approved)
                         {
                             var probeResult = await this.ProbeTenantRouting(approvedTenant);
-                            if(probeResult)
+                            if (probeResult)
                             {
                                 // tenant deployment approved. deploy tenant to content db
                                 approvedTenant.DeploymentState = TenantDeploymentWorkflowState.ExistsInContentDb;
@@ -509,7 +509,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                                         var mutateResult = await restClient.
                                                                                             ApiHorselessContentModelTenantUpdatePropertiesAsync(mutatingTenant.Id.ToString(),
-                                                                                            mutatingTenant.TenantIdentifier, new List<string> { nameof(ContentModel.Tenant.ContentCollections), nameof(ContentModel.Tenant.DeploymentState) }, wireTenant);
+                                                                                            mutatingTenant.TenantIdentifier, new List<string> { nameof(ContentModel.Tenant.ContentCollections), 
+                                                                                                nameof(ContentModel.Tenant.DeploymentState) }, wireTenant);
 
                                         var mutateResultJson = mutateResult.Result.ToJson();
                                         var deserialzedMutateResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(mutateResultJson);
@@ -538,7 +539,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                 {
                                     var mirrorTenant = mirrorTenantQuery.First();
                                     var contentModelTenant = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{mirrorTenant.TenantIdentifier}'", mirrorTenant.TenantIdentifier);
-                                    if(contentModelTenant.Any() )
+                                    if (contentModelTenant.Any())
                                     {
                                         var currentTenant = contentModelTenant.First();
 
@@ -568,7 +569,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                 _logger.LogError($"problem marking workflow complete {e.Message}");
                             }
                         }
-                        
+
                         if (currentDeploymentState == ContentModel.TenantDeploymentWorkflowState.HasOwners)
                         {
                             // apply acl
@@ -611,7 +612,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                 _logger.LogError($"problem marking workflow complete {e.Message}");
                             }
                         }
-                        
+
                         if (currentDeploymentState == ContentModel.TenantDeploymentWorkflowState.HasACL)
                         {
                             // workflow complete
@@ -633,17 +634,29 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                         {
                                             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                                         }));
-                                        var updatedProperties = new List<string>() {  nameof(ContentModel.Tenant.DeploymentState) };
+                                        var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.DeploymentState) };
 
-                                        var mutateResult = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier, updatedProperties, wireTenant);
+                                        var mutateResult = await restClient.
+                                            ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier, updatedProperties, wireTenant);
                                         var mutateResultJson = mutateResult.Result.ToJson();
                                         var deserialzedMutateResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(mutateResultJson);
 
                                         // mark the hosting model deployment state as published
                                         approvedTenant.IsPublished = true;
-                                        var udateResult = hostingModelOperator.Update(approvedTenant, new List<string>() { nameof(HostingModel.Tenant.IsPublished) });
+                                        var updateResult = await hostingModelOperator.Update(approvedTenant, new List<string>() { nameof(HostingModel.Tenant.IsPublished) });
 
-                                        currentDeploymentState = deserialzedMutateResult.DeploymentState;
+                                        switch (updateResult.DeploymentState)
+                                        {
+                                            case HostingModel.TenantDeploymentWorkflowState.DeploymentComplete:
+                                                {
+                                                    currentDeploymentState = ContentModel.TenantDeploymentWorkflowState.DeploymentComplete;
+                                                    break;
+                                                }
+                                            default:
+                                                {
+                                                    break;
+                                                }
+                                        }
                                     }
                                 }
                             }
@@ -652,7 +665,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                 _logger.LogError($"problem marking workflow complete {e.Message}");
                             }
                         }
-                         
+
                         if (currentDeploymentState == ContentModel.TenantDeploymentWorkflowState.DeploymentComplete)
                         {
                             if (approvedTenant.IsPublished)
@@ -660,21 +673,21 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                 _logger.LogTrace("tenant deployment workflow complete for current batch");
 
 
-   
+
                             }
                             else
                             {
                                 // unable to update hosting tenant for some reason in previous step
                                 // tolerate this update failure 
                                 approvedTenant.IsPublished = true;
-                                var udateResult = hostingModelOperator.Update(approvedTenant, new List<string>() { nameof(HostingModel.Tenant.IsPublished) });
-                                ret = false;
+                                var udateResult = await hostingModelOperator.Update(approvedTenant, new List<string>() { nameof(HostingModel.Tenant.IsPublished) });
+                                ret = true;
                             }
                         }
                         else
                         {
                             // await ValidateCaches(scope, inMemoryStores, contentModelTenants, approvedTenant);
- 
+
                             _logger.LogTrace("tenant cache updated");
                         }
 
@@ -761,7 +774,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
             var currentPublishedTenants = await this.GetCurrentHostingModelTenants("$filter=IsPublished eq true&$top=200&$expand=Owners, AccessControlEntries, TenantInfos");
 
-            if(inProgressDeployments == null && CurrentContentModelTenants != null)
+            if (inProgressDeployments == null && CurrentContentModelTenants != null)
             {
                 currentPublishedTenants.AddRange(inProgressDeployments);
             }
@@ -922,7 +935,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         // var mergeEntityJson = JsonConvert.SerializeObject(mergeEntity);
                         var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mergeEntity)); //mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mergeEntity); 
                         var createResult = await restClient.ApiHorselessContentModelTenantCreateAsync(mergeEntity.TenantIdentifier, wireTenant);
-                        var mapResult =  mapper.Map<ContentEntitiesTenant, ContentModel.Tenant>(createResult.Result);
+                        var mapResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(createResult.Result.ToJson());
                         return mapResult;
 
 
@@ -1204,7 +1217,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             }
         }
 
-    
+
         private IMultiTenantStore<HorselessTenantInfo>? GetInMemoryTenantStores()
         {
             using (var scope = this._services.CreateScope())
@@ -1227,7 +1240,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                 try
                 {
-                    var currentPublishedTenants = await this.GetCurrentHostingModelTenants("$filter=isPublished eq false&$top=200&$expand=Owners, AccessControlEntries, TenantInfos");
+                    var currentPublishedTenants = await this.GetCurrentHostingModelTenants("$top=200&$expand=Owners, AccessControlEntries, TenantInfos");
 
                     // collect the hosting model tenants
                     var hostingModelTenantQuery = scope.ServiceProvider.GetRequiredService<IQueryableHostingModelOperator<HostingModel.Tenant>>();
@@ -1247,13 +1260,14 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     //_logger.LogTrace($"read {hostingModelTenantQueryResult.Where(w => w.IsPublished == false).ToList().Count()} unpublished hosting model tenant records");
 
                     var filteredTenants = new List<HostingModel.Tenant>();
-                    if(currentPublishedTenants != null && currentPublishedTenants.Where(w => w.DeploymentState == TenantDeploymentWorkflowState.Approved).Any())
+                    if (currentPublishedTenants != null && currentPublishedTenants.Any())
                     {
                         filteredTenants.AddRange(
-                            currentPublishedTenants.Where(w => w.DeploymentState == TenantDeploymentWorkflowState.Approved).ToList()
+                            currentPublishedTenants.Where(w => w.DeploymentState == TenantDeploymentWorkflowState.Approved ||
+                                                        w.DeploymentState == TenantDeploymentWorkflowState.DeploymentComplete).ToList()
                             );
 
-                        foreach(var filteredTenant in filteredTenants)
+                        foreach (var filteredTenant in filteredTenants)
                         {
                             // tenant resolution is necessary for all these tenants
                             // via the tenant cache
@@ -1262,8 +1276,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     }
 
                     // take amount * service execution frequency = deploymentRate
-                    return filteredTenants.Take(100).ToList();
-
+                    // hosting model tenant IsPublished when contentmodel tenant deploymentstate is complete
+                    var filterlist = filteredTenants.Where(w => w.IsPublished == false).Take(100).ToList();
+                    return filterlist;
                 }
                 catch (Exception e)
                 {
@@ -1354,7 +1369,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             return ret;
         }
 
-        private async Task<List<ContentModel.Tenant>> GetCurrentContentModelTenants(string expandList , string tenantIdentifier)
+        private async Task<List<ContentModel.Tenant>> GetCurrentContentModelTenants(string expandList, string tenantIdentifier)
         {
 
             var ret = new List<ContentModel.Tenant>();
@@ -1371,7 +1386,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                 using (var innerScope = this._services.CreateScope())
                 {
-                    var defaultTenantIdentifier =  tenantIdentifier == "" ? "lache" : tenantIdentifier;
+                    var defaultTenantIdentifier = tenantIdentifier == "" ? "lache" : tenantIdentifier;
                     IHttpClientFactory clientFactory = innerScope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
                     var httpClient = clientFactory.CreateClient();
 
