@@ -84,7 +84,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         /// <summary>
         /// prospectively overrides all other tenant base url contexts
         /// </summary>
-        public string? BaseUrl { get; set; }
+        public string BaseUrl { get; set; } = String.Empty;
 
         /// <summary>
         /// prospectively override other tenant identifier definitions

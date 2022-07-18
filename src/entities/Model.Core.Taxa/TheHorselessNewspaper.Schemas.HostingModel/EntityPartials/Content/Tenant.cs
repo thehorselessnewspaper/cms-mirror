@@ -112,13 +112,13 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         /// <summary>
         /// prospectively overrides all other tenant base url contexts
         /// </summary>
-        public string? BaseUrl { get; set; }
+        public string BaseUrl { get; set; } = String.Empty;
 
         public Guid? TenantIdentifierStrategyId { get; set; }
 
         // [InverseProperty(nameof(ContentEntities.TenantIdentifierStrategy.Tenant))]
 
-        public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; } = new TenantIdentifierStrategy();
+        public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; } 
 
         /// <summary>
         /// prospectively override other tenant identifier definitions
