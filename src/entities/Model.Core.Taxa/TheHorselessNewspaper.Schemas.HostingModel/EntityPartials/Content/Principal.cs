@@ -54,7 +54,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     }
 
     [MultiTenant]
-    [Microsoft.EntityFrameworkCore.Index(nameof(PreferredUserName), IsUnique = true)]
+    [Microsoft.EntityFrameworkCore.Index(nameof(PreferredUserName), nameof(Id), nameof(ObjectId), IsUnique = true)]
     public partial class Principal : IQueryableModelEntity, IContentRowLevelSecured
     {
         public bool IsAnonymous { get; set; } = true;
