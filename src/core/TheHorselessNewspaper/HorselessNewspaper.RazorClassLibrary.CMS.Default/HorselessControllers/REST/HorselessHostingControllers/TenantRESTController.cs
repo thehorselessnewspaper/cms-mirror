@@ -39,7 +39,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             try
             {
                 var createResult = await EntityCollectionService.Create(entityCollectionId);
-                return Ok(createResult);
+                return Created(Request.Path, createResult);
             }
             catch (Exception ex)
             {

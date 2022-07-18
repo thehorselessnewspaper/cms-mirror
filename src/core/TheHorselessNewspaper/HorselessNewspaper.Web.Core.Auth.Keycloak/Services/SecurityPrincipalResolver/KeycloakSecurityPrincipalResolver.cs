@@ -1,4 +1,7 @@
-﻿using HorselessNewspaper.Core.Interfaces.Model.HttpContextFeatureModels;
+﻿using AutoMapper;
+using Finbuckle.MultiTenant;
+using Finbuckle.MultiTenant.Stores;
+using HorselessNewspaper.Core.Interfaces.Model.HttpContextFeatureModels;
 using HorselessNewspaper.Core.Interfaces.Security.Resolver;
 using HorselessNewspaper.Web.Core.Auth.Keycloak.Model;
 using HorselessNewspaper.Web.Core.Services.Model.Extensions.Claim;
@@ -6,12 +9,18 @@ using HorselessNewspaper.Web.Core.Services.Model.Extensions.HttpRequestExtension
 using HorselessNewspaper.Web.Core.Services.Model.HttpContextFeatures;
 using HorselessNewspaper.Web.Core.Services.Model.REST.Security;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
+using StackExchange.Redis;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using TheHorselessNewspaper.HostingModel.MultiTenant;
 using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalResolver
 {
     /// <summary>
@@ -27,17 +36,22 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
         /// so the scopes that retrieved them can be disposed
         /// </summary>
         private ConcurrentDictionary<string, HorselessSession> LocallyCachedSessions { get; set; } = new ConcurrentDictionary<string, HorselessSession>();
-
+        IEnumerable<IMultiTenantStore<HorselessTenantInfo>> tenantStores;
         IHttpContextAccessor _httpContextAccessor;
         private IQueryableContentModelOperator<Tenant> _tenantOperator;
         private IQueryableContentModelOperator<Principal> _principalOperator;
         private IQueryableContentModelOperator<HorselessSession> _horselessSessionOperator;
         private IKeycloakAuthOptions _keycloakAuthOptions;
         private HttpClient _httpClient;
+
+        IDistributedCache redisDb;
+
         ILogger<KeycloakSecurityPrincipalResolver> _logger;
         private ITenantInfo _iTenantInfo;
+        IMapper mapper;
 
         public KeycloakSecurityPrincipalResolver(
+            IEnumerable<IMultiTenantStore<HorselessTenantInfo>> stores,
             IHttpContextAccessor httpContextAccessor,
             IKeycloakAuthOptions keycloakOptions,
             IQueryableContentModelOperator<Tenant> tenantOperator,
@@ -45,8 +59,11 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                IQueryableContentModelOperator<HorselessSession> horselessSessionOperator,
                HttpClient httpClient,
                ILogger<KeycloakSecurityPrincipalResolver> logger,
+               IDistributedCache redisDb,
+               IMapper mapper,
                ITenantInfo tenantInfo)
         {
+            this.tenantStores = stores;
             this._httpContextAccessor = httpContextAccessor;
             this._tenantOperator = tenantOperator;
             this._principalOperator = principalOperator;
@@ -55,6 +72,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
             this._logger = logger;
             this._iTenantInfo = tenantInfo;
             this._horselessSessionOperator = horselessSessionOperator;
+            this.mapper = mapper;
+            this.redisDb = redisDb;
+
         }
 
         /// <summary>
@@ -104,26 +124,56 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
             return ret;
         }
 
-
+        /// <summary>
+        /// tenant resolution is functional
+        /// when the tenant can be retrieved from the cache
+        /// </summary>
+        /// <returns></returns>
         public async Task<bool> EnsureCanResoleCurrentTenant()
         {
             try
             {
-                var tenantQuery = await _tenantOperator.Read(w =>
-                w.TenantIdentifier.Equals(_iTenantInfo.Identifier));
-                var tenantQueryResult = tenantQuery == null ? null : tenantQuery.ToList();
+                var distributedCacheStore = tenantStores
+                                    .Where(s => s.GetType() == typeof(DistributedCacheStore<HorselessTenantInfo>))
+                                    .SingleOrDefault();
 
-                if (tenantQueryResult != null && tenantQueryResult.Count() > 0 && this._iTenantInfo != null)
+
+                if (_iTenantInfo == null || _iTenantInfo.Identifier == null)
                 {
-                    _logger.LogInformation($"current tenant {this._iTenantInfo.Identifier} exists in db");
-
-                    return true;
+                    _logger.LogError($"error error error - tenant resolutoin failed due to null injected ITenantInfo");
+                    return false;
                 }
                 else
                 {
-                    _logger.LogWarning("could not find a current tenant in tne db");
-                    return false;
+                    var tenant = await distributedCacheStore.TryGetByIdentifierAsync($"{_iTenantInfo.Identifier}");
+                    if (tenant != null && tenant.Identifier.Equals(_iTenantInfo.Identifier))
+                    {
+                        // resolved tenant from cache
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
+
+                //// didn't find tenant in cache, check db
+                //var tenantQuery = await _tenantOperator.Read(w =>
+                //w.TenantIdentifier.Equals(_iTenantInfo.Identifier));
+
+                //var tenantQueryResult = tenantQuery == null ? null : tenantQuery.ToList();
+
+                //if (tenantQueryResult != null && tenantQueryResult.Count() > 0 && this._iTenantInfo != null)
+                //{
+                //    _logger.LogInformation($"current tenant {this._iTenantInfo.Identifier} exists in db");
+
+                //    return true;
+                //}
+                //else
+                //{
+                //    _logger.LogWarning("could not find a current tenant in tne db");
+                //    return false;
+                //}
             }
             catch (Exception e)
             {
@@ -132,41 +182,28 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
             }
         }
 
+        /// <summary>
+        /// get the tenant from the cache
+        /// or return null
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public async Task<Tenant> EnsureTenant()
         {
-            try
+            var distributedCacheStore = tenantStores
+                      .Where(s => s.GetType() == typeof(DistributedCacheStore<HorselessTenantInfo>))
+                      .SingleOrDefault();
+            var tenant = await distributedCacheStore.TryGetByIdentifierAsync($"{_iTenantInfo.Identifier}");
+
+            if (tenant != null && tenant.Identifier.Equals(_iTenantInfo.Identifier))
             {
-                var tenant = new Tenant();
-
-                var tenantQuery = await _tenantOperator.ReadAsEnumerable(w =>
-                        w.TenantIdentifier.Equals(_iTenantInfo.Identifier),
-                        new List<string>() { nameof(Tenant.AccessControlEntries), nameof(Tenant.Owners), nameof(Tenant.Accounts) });
-                var tenantQueryResult = tenantQuery == null || tenantQuery.Count() == 0 ? null : tenantQuery.ToList();
-
-                if (tenantQueryResult != null && tenantQueryResult.Count() > 0 && this._iTenantInfo != null)
-                {
-                    _logger.LogInformation($"current tenant {this._iTenantInfo.Identifier} exists in db");
-
-                    return tenantQueryResult.First();
-                }
-                else if (tenantQueryResult == null && this._iTenantInfo != null)
-                {
-
-                    _logger.LogWarning($"current tenant does not exist in content db {this._iTenantInfo.Identifier}");
-
-                }
-                else
-                {
-                    throw new Exception($"{this.GetType().Name}cannot ensure tenant");
-                }
-
-                return tenant;
-
+                // resolved tenant from cache
+                var mappedTenant = mapper.Map<HostingModel.Tenant, ContentModel.Tenant>(tenant.Payload.ParentTenant);
+                return mappedTenant;
             }
-            catch (Exception e)
+            else
             {
-                _logger.LogError($"{this.GetType().Name} failed ensuring tenant");
-                throw new Exception($"failed ensuring tenant due to {e.Message}");
+                return null;
             }
 
         }
@@ -176,12 +213,24 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
         public async Task<Principal> GetCurrentPrincipal()
         {
             var principal = new Principal();
+            var serializerOptions = new JsonSerializerOptions
+            {
+                IgnoreReadOnlyProperties = true,
+                ReferenceHandler = ReferenceHandler.Preserve,
+                WriteIndented = true,
+                Converters ={
+                        new JsonStringEnumConverter()
+                    }
+
+            };
 
             try
             {
 
                 if (_httpContextAccessor.HttpContext != null)
                 {
+
+
                     var user = _httpContextAccessor.HttpContext.User;
                     var sessionId = _httpContextAccessor.HttpContext.Session.IsAvailable ? _httpContextAccessor.HttpContext.Session.Id : "";
 
@@ -195,6 +244,27 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         principal.Email = user.Claims.Email();
                         principal.PreferredUserName = user.Claims.PreferredUsername();
 
+                        try
+                        {
+                            // try the cache
+
+                            var redisQueryResult = await this.redisDb.GetStringAsync(principal.PreferredUserName);
+                            var cachedPrincipal = JsonSerializer.Deserialize<Principal>(redisQueryResult) as Principal;
+                            if (cachedPrincipal != null
+                                && cachedPrincipal.PreferredUserName != null
+                                && cachedPrincipal.PreferredUserName.Equals(principal.PreferredUserName))
+                            {
+                                _logger.LogTrace($"current principal is cached");
+                                return cachedPrincipal;
+                            }
+
+                        }
+                        catch (Exception e)
+                        {
+                            // tolerate this 
+                            _logger.LogError($"current principal is uncached");
+                        }
+
                         var allTenants = await _tenantOperator
                             .ReadAsEnumerable(w => w.IsSoftDeleted != true,
                                 new List<string> { nameof(Tenant.Accounts), nameof(Tenant.Owners), nameof(Tenant.AccessControlEntries) });
@@ -203,9 +273,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                         if (allTenants != null)
                         {
-                            allTenantsList.AddRange( allTenants.ToList());
+                            allTenantsList.AddRange(allTenants.ToList());
                         }
-     
+
                         var isAnOwner = allTenantsList.Where(w => w.Owners
                                                             .Where(w => w.UPN.Equals(user.Claims.Upn()))
                                                             .Any()).Any();
@@ -219,6 +289,11 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         if (principalQueryResult != null)
                         {
                             _logger.LogInformation($"found authenticated user in database with upn={user.Claims.Upn()}");
+
+                            // cache the principal
+                            var principalJson = JsonSerializer.Serialize(principalQueryResult, serializerOptions);
+                            await this.redisDb.SetStringAsync(principal.PreferredUserName, principalJson);
+
                             return principalQueryResult;
                         }
                         if (isAnAccount)
@@ -228,6 +303,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             var homeTenant = allTenantsList.Where(w => w.Accounts
                             .Where(w => w.UPN.Equals(user.Claims.Upn())).Any()).FirstOrDefault();
                             var resolvedPrincipal = homeTenant.Accounts.Where(w => w.UPN.Equals(user.Claims.Upn())).FirstOrDefault();
+
+                            var principalJson = JsonSerializer.Serialize(principalQueryResult, serializerOptions);
+                            await this.redisDb.SetStringAsync(principal.PreferredUserName, principalJson);
                             return resolvedPrincipal;
                         }
                         else if (isAnOwner)
@@ -237,6 +315,10 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             var homeTenant = allTenantsList.Where(w => w.Accounts
                             .Where(w => w.UPN.Equals(user.Claims.Upn())).Any()).FirstOrDefault();
                             var resolvedPrincipal = homeTenant.Owners.Where(w => w.UPN.Equals(user.Claims.Upn())).FirstOrDefault();
+
+
+                            var principalJson = JsonSerializer.Serialize(resolvedPrincipal, serializerOptions);
+                            await this.redisDb.SetStringAsync(principal.PreferredUserName, principalJson);
                             return resolvedPrincipal;
                         }
                         else
@@ -309,6 +391,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                             }
 
+                            // cache the principal
+                            var principalJson = JsonSerializer.Serialize(principal, serializerOptions);
+                            await this.redisDb.SetStringAsync(principal.PreferredUserName, principalJson);
                         }
                     }
                     else if (user.Claims.Count() == 0)
@@ -316,11 +401,11 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         // the anonymous scenario
                         _logger.LogInformation($"handling anonymous request");
                         // resolve the tenant
-                        var tenantQuery = await _tenantOperator.Read(w =>
+                        var tenantQuery = await _tenantOperator.ReadAsEnumerable(w =>
                             w.TenantIdentifier.Equals(_iTenantInfo.Identifier), new List<string> { nameof(Tenant.Owners), nameof(Tenant.Accounts) });
                         var tenantQueryResult = tenantQuery == null ? null : tenantQuery.ToList();
 
-                        var allTenants = await _tenantOperator.Read(w => w.IsSoftDeleted != true, new List<string> { nameof(Tenant.Accounts), nameof(Tenant.Owners) });
+                        var allTenants = await _tenantOperator.ReadAsEnumerable(w => w.IsSoftDeleted != true, new List<string> { nameof(Tenant.Accounts), nameof(Tenant.Owners) });
 
                         var allTenantsList = allTenants.ToList();
                         var isAnOwner = allTenantsList.Where(w => w.Owners
@@ -328,10 +413,14 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         var isAnAccount = allTenantsList.Where(w => w.Accounts
                             .Where(w => w.IsAnonymous = true).Any()).Any();
 
-                        var anonymousPrincipalQuery = await _principalOperator.Read(r => r.IsAnonymous == true);
+                        var anonymousPrincipalQuery = await _principalOperator.ReadAsEnumerable(r => r.IsAnonymous == true);
                         var anonymousPrincipalQueryResult = anonymousPrincipalQuery == null ? null : anonymousPrincipalQuery.ToList().FirstOrDefault();
                         if (anonymousPrincipalQueryResult != null)
                         {
+
+                            // cache the principal
+                            var principalJson = JsonSerializer.Serialize(anonymousPrincipalQueryResult);
+                            await this.redisDb.SetStringAsync(principal.PreferredUserName, principalJson);
                             return anonymousPrincipalQueryResult;
                         }
                         if (isAnAccount)
@@ -360,6 +449,8 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             if (principalQueryResult != null)
                             {
                                 _logger.LogInformation($"anonymous tenant principal exists");
+                                var principalJson = JsonSerializer.Serialize(principalQueryResult, serializerOptions);
+                                await this.redisDb.SetStringAsync(principal.PreferredUserName, principalJson);
                                 return principalQueryResult;
                             }
                             else
@@ -402,6 +493,8 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                     var newAccountQuery = insertResult.Where(w => w.IsAnonymous = true);
                                     if (newAccountQuery != null)
                                     {
+                                        var principalJson = JsonSerializer.Serialize(newAccountQuery, serializerOptions);
+                                        await this.redisDb.SetStringAsync(principal.PreferredUserName, principalJson);
                                         return newAccountQuery.FirstOrDefault();
                                     }
                                 }
@@ -444,13 +537,12 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
             var httpContext = this._httpContextAccessor.HttpContext;
 
-            var principalQuery = await this._principalOperator.Read(w => w.Id == sessionPrincipalId);
+            var principalQuery = await this._principalOperator.ReadAsEnumerable(w => w.Id == sessionPrincipalId);
 
-            var hasInsertedSessionQuery = await this._horselessSessionOperator.ReadAsEnumerable(w => w.HorselessSessionPrincipalId.Equals(httpContext.Session.Id));
-
-            var allSessionsQuery = await this._horselessSessionOperator.ReadAsEnumerable(w => w.IsSoftDeleted == false);
-            var allSessions = allSessionsQuery.ToList();
-            var hasSesion = allSessions.Where(w => w.SessionId == httpContext.Session.Id).Any();
+       
+            var allSessionsQuery = await this._horselessSessionOperator.ReadAsEnumerable(w => w.IsSoftDeleted == false && w.SessionId == httpContext.Session.Id);
+            // var allSessions = allSessionsQuery.ToList();
+            var hasSesion = allSessionsQuery == null ? false : allSessionsQuery.Any();
 
             var currentUpdateTime = httpContext.Session.GetString("UTC_UPDATED_TIME");
 
@@ -466,7 +558,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                 return ret;
             }
 
-            else if (hasInsertedSessionQuery != null && hasInsertedSessionQuery.Any() == true)
+            else if (allSessionsQuery != null && allSessionsQuery.Any() == true)
             {
                 IHorselessHttpSessionFeature<HorselessSession> ret = await GetSessionFeature(sessionPrincipalId);
 

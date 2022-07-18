@@ -1,13 +1,23 @@
 ﻿using AutoMapper;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
-using ApiModel = HorselessNewspaper.Web.Core.ScopedServices.RestClients;
+using ApiModel = HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient;
 namespace HorselessNewspaper.Web.Core.Automapper
 {
     public class AutoMapperProfile : Profile
     {
         public AutoMapperProfile()
         {
+            CreateMap<HostingModel.Tenant, ContentModel.Tenant>();
+            CreateMap<ContentModel.Tenant, HostingModel.Tenant>();
+
+            CreateMap<HostingModel.TenantIdentifierStrategy, ContentModel.TenantIdentifierStrategy>();
+            CreateMap<ContentModel.TenantIdentifierStrategy, HostingModel.TenantIdentifierStrategy>();
+
+            CreateMap<HostingModel.TenantIdentifierStrategyContainer, ContentModel.TenantIdentifierStrategyContainer>();
+            CreateMap<ContentModel.TenantIdentifierStrategyContainer, HostingModel.TenantIdentifierStrategyContainer>();
+
+
             CreateMap<HostingModel.Tenant, ApiModel.HostingEntitiesTenant>();
             CreateMap<ContentModel.Tenant, ApiModel.ContentEntitiesTenant>();
 

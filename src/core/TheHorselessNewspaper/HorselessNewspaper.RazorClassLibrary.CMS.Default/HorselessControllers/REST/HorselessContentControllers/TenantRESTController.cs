@@ -41,7 +41,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             try
             {
                 var createResult = await _contentCollectionService.Create(contentCollection);
-                return Ok(createResult);
+                return Created(Request.Path, createResult);
             }
             catch (Exception ex)
             {
