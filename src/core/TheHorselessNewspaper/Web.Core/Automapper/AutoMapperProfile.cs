@@ -44,6 +44,12 @@ namespace HorselessNewspaper.Web.Core.Automapper
             CreateMap<ContentModel.TenantIdentifierStrategy, ApiModel.ContentEntitiesTenantIdentifierStrategy>();
 
             // reverse map
+            CreateMap<ContentModel.ContentCollection, ApiModel.ContentEntitiesContentCollection>();
+            CreateMap<ApiModel.ContentEntitiesContentCollection, ContentModel.ContentCollection>();
+
+            CreateMap<ContentModel.HorselessView, ApiModel.ContentEntitiesHorselessView>();
+            CreateMap<ApiModel.ContentEntitiesHorselessView, ContentModel.HorselessView>();
+
             CreateMap<ApiModel.HostingEntitiesTenantIdentifierStrategy, HostingModel.TenantIdentifierStrategy>();
             CreateMap<ApiModel.ContentEntitiesTenantIdentifierStrategy, ContentModel.TenantIdentifierStrategy>();
         }

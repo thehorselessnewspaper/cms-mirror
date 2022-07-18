@@ -441,6 +441,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRESTAPIClient>();
                 var contentModelOperator = scope.ServiceProvider.GetRequiredService<IQueryableContentModelOperator<ContentModel.Tenant>>();
                 var hostingModelOperator = scope.ServiceProvider.GetRequiredService<IQueryableHostingModelOperator<HostingModel.Tenant>>();
+                var mapper = scope.ServiceProvider.GetRequiredService<IMapper>();
 
                 foreach (var approvedTenant in hostingModelTenants)
                 {
@@ -501,18 +502,29 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                     {
                                         var mutatingTenant = mutatingEntityQuery.First();
                                         mutatingTenant.DeploymentState = ContentModel.TenantDeploymentWorkflowState.HasContentCollection;
-                                        mutatingTenant.ContentCollections = DefaultEntitySets.GetDefaultContentCollections();
+                                        mutatingTenant.ContentCollections.Add(DefaultEntitySets.GetDefaultContentCollections().First());
                                         var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mutatingTenant, Formatting.None, new JsonSerializerSettings()
                                         {
                                             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                                         }));
 
-                                        var mutateResult = await restClient.
-                                                                                            ApiHorselessContentModelTenantUpdatePropertiesAsync(mutatingTenant.Id.ToString(),
-                                                                                            mutatingTenant.TenantIdentifier, new List<string> { nameof(ContentModel.Tenant.ContentCollections), 
-                                                                                                nameof(ContentModel.Tenant.DeploymentState) }, wireTenant);
+                                        var wireContentCollection = JsonConvert.SerializeObject(mutatingTenant.ContentCollections.First(), Formatting.None, new JsonSerializerSettings()
+                                        {
+                                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                                        });
 
-                                        var mutateResultJson = mutateResult.Result.ToJson();
+                                        // TODO add support for multiple default collections
+                                        // var wireContentCollection = mapper.Map<ContentModel.ContentCollection, ContentEntitiesContentCollection>(mutatingTenant.ContentCollections.First());
+                                        var mutateResult = await restClient.
+                                                                            ApiHorselessContentModelContentCollectionCreateAsync(mutatingTenant.TenantIdentifier.ToString(), 
+                                                                            ContentEntitiesContentCollection.FromJson(wireContentCollection));
+
+                                        wireTenant.ContentCollections.Clear();
+                                        var mutatedTenant = await restClient.
+                                                                                            ApiHorselessContentModelTenantUpdatePropertiesAsync(mutatingTenant.Id.ToString(),
+                                                                                            mutatingTenant.TenantIdentifier, new List<string> { nameof(ContentModel.Tenant.DeploymentState) }, wireTenant);
+
+                                        var mutateResultJson = mutatedTenant.Result.ToJson();
                                         var deserialzedMutateResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(mutateResultJson);
                                         currentDeploymentState = deserialzedMutateResult.DeploymentState;
                                     }

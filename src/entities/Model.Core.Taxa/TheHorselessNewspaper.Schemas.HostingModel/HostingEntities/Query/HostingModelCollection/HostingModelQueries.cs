@@ -26,7 +26,7 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelC
             {
                 var providerName = ((DbContext)ctx).Database.ProviderName;
                 var dbName = ((DbContext)ctx).Database.GetDbConnection().Database;
-                _logger.LogInformation($"hosting collections context using provider named {providerName} on dbcontext instance {((IContentModelContext)ctx).DbContextInstanceId.ToString()}");
+                _logger.LogTrace($"hosting collections context using provider named {providerName} on dbcontext instance {((IContentModelContext)ctx).DbContextInstanceId.ToString()}");
 
             }
             catch (Exception e) { }
@@ -294,9 +294,12 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelC
 
                     if (hasTargetedProperty)
                     {
+
                         var foundEntityValue = foundEntity.GetType().GetProperty(propertyName).GetValue(foundEntity);
                         var sourceProperty = entity.GetType().GetProperty(propertyName).GetValue(entity);
                         var target = foundEntity.GetType().GetProperty(propertyName);
+
+      
                         target.SetValue(foundEntity, foundEntityValue);
                         ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).First().IsModified = true; ;
                     }

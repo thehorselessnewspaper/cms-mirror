@@ -30,7 +30,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             try
             {
                 var providerName = ((DbContext)ctx).Database.ProviderName;
-                _logger.LogInformation($"content collections context using provider named {providerName} on dbcontext instance {((IContentModelContext)ctx).DbContextInstanceId.ToString()}");
+                _logger.LogTrace($"content collections context using provider named {providerName} on dbcontext instance {((IContentModelContext)ctx).DbContextInstanceId.ToString()}");
             }
             catch (Exception e)
             {
