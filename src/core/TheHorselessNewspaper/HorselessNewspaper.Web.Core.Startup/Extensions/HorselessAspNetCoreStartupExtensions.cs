@@ -193,7 +193,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
                             }
                         });
                 })
-                .WithDistributedCacheStore()
+                .WithDistributedCacheStore(TimeSpan.FromMinutes(5))
 
                  .WithBasePathStrategy(o => o.RebaseAspNetCorePathBase = false)
                  .WithHeaderStrategy("__tenant__")

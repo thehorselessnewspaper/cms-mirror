@@ -288,7 +288,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         var isAnAccount = allTenantsList.Where(w => w.Accounts
                             .Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername())).Any()).Any();
 
-                        var principalQuery = await this._principalOperator.ReadAsEnumerable(r => r.IsAnonymous == false 
+                        var principalQuery = await this._principalOperator.ReadAsEnumerable(r => r.IsAnonymous == false
                                     && r.PreferredUserName.Equals(user.Claims.PreferredUsername()),
                             new List<string>() { nameof(ContentModel.Principal.AccessControlEntries) });
 
@@ -385,16 +385,26 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                 try
                                 {
                                     var idempotency = await this._principalOperator.ReadAsEnumerable(w => w.PreferredUserName.Equals(principal.PreferredUserName));
-                                    if (idempotency == null || idempotency.Count() > 0)
+                                    if (idempotency == null || idempotency.Count() == 0)
                                     {
-                                        // must create principal
-                                        var createdPrincipalResult = await this._principalOperator.Create(principal);
 
                                         // tenantQueryResult.Accounts.Add(principal);
-                                        if(principalQuery != null && principalQuery.Any())
+                                        if (principalQuery != null && principalQuery.Any())
                                         {
                                             principal = principalQuery.First();
                                         }
+                                        else
+                                        {
+                                            // must create principal
+                                            var createdPrincipalResult = await this._principalOperator.Create(principal);
+
+                                            // tenantQueryResult.Accounts.Add(createdPrincipalResult);
+                                            principal = createdPrincipalResult;
+
+                                        }
+
+
+                                        // principal.ManagedTenants.Add(tenantQueryResult);
 
                                         var principalInsertResult = await this._tenantOperator.InsertRelatedEntity<ContentModel.Principal>(
                                             tenantQueryResult.Id, nameof(ContentModel.Tenant.Accounts), new List<ContentModel.Principal>() { principal },
@@ -409,9 +419,16 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                             return principalInsertResult.First();
                                         }
                                     }
-                                    else
+
+
+                                    if (idempotency.Count() == 1)
                                     {
+                                        principal = idempotency.First();
+
                                         // tenantQueryResult.Accounts.Add(principal);
+
+                                        // principal.ManagedTenants.Add(tenantQueryResult);
+
                                         var principalInsertResult = await this._tenantOperator.InsertRelatedEntity<ContentModel.Principal>(
                                             tenantQueryResult.Id, nameof(ContentModel.Tenant.Accounts), new List<ContentModel.Principal>() { principal },
                                             w => w.TenantIdentifier.ToLower().Equals(tenantQueryResult.TenantIdentifier.ToLower()),
@@ -442,29 +459,24 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         // the anonymous scenario
                         _logger.LogInformation($"handling anonymous request");
                         var anonymousPrefferedUsername = "anonymous";
-                       
+
+                        var anonymousPrincipalQuery = await _principalOperator.ReadAsEnumerable(r => r.IsAnonymous == true);
                         var cachedAnonymousPrincipal = await this.redisDb.GetStringAsync($"{_iTenantInfo.Identifier}.{anonymousPrefferedUsername}");
-                        if (cachedAnonymousPrincipal != null)
+                        if (anonymousPrincipalQuery != null && anonymousPrincipalQuery.Count() > 0 && cachedAnonymousPrincipal != null)
                         {
 
                             var cachedPrincipal = JsonSerializer.Deserialize<ContentModel.Principal>(cachedAnonymousPrincipal, serializerOptions);
-                            return cachedPrincipal;
+
+                            if (cachedPrincipal != null && cachedPrincipal.Id.Equals(anonymousPrincipalQuery.First().Id))
+                            {
+                                // the cached principal id is the same as the persisted item
+
+                                return cachedPrincipal;
+                            }
                         }
 
-                        var anonymousPrincipalQuery = await _principalOperator.ReadAsEnumerable(r => r.IsAnonymous == true);
-                        var anonymousPrincipalQueryResult = anonymousPrincipalQuery == null ? null : anonymousPrincipalQuery.ToList().FirstOrDefault();
-                        if (anonymousPrincipalQueryResult != null && anonymousPrincipalQueryResult.IsAnonymous)
-                        {
 
-                            // cache the principal
-                            var principalJson = JsonSerializer.Serialize(anonymousPrincipalQueryResult, serializerOptions);
-                            await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{anonymousPrefferedUsername}", principalJson);
-                            return anonymousPrincipalQueryResult;
-                        }
-
-                        else
-                        {
-                            var httpCtx = _httpContextAccessor.HttpContext;
+                         var httpCtx = _httpContextAccessor.HttpContext;
                             // tenant exists
 
                             // search for tne anononymous principal 
@@ -528,25 +540,45 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                         {
                                             newPrincipal = existingPrincipal.First();
                                         }
-
-                                        var insertResult = await this._tenantOperator.InsertRelatedEntity<ContentModel.Principal>(tenant.Payload.ParentTenant.Id,
-                                                 nameof(ContentModel.Tenant.Accounts),
-                                                 new List<ContentModel.Principal>() { newPrincipal },
-                                                 w => w.TenantIdentifier.Equals(tenant.Identifier), u => u.PreferredUserName.Equals(newPrincipal.PreferredUserName));
-
-
-                                        var newAccountQuery = insertResult.Where(w => w.IsAnonymous == true);
-                                        if (newAccountQuery != null && newAccountQuery.Any())
+                                        else
                                         {
-                                            var principalJson = JsonSerializer.Serialize(newAccountQuery.First(), serializerOptions);
-                                           
-   
-                                            await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{newAccountQuery.First().PreferredUserName}", principalJson);
-                                            return newAccountQuery.FirstOrDefault();
+                                            try
+                                            {
+                                                var createResult = await this._principalOperator.Create(newPrincipal);
+                                                newPrincipal = createResult;
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                _logger.LogError($"anonymous principal creation failure {ex.Message}");
+                                            }
+
+                                            var tenantQuery = await this._tenantOperator.ReadAsEnumerable(w => w.TenantIdentifier.ToLower().Equals(_iTenantInfo.Identifier.ToLower()));
+                                            if (tenantQuery != null && tenantQuery.Any())
+                                            {
+                                                var targetTenant = tenantQuery.First();
+                                                // targetTenant.Accounts.Add(newPrincipal);
+
+                                                var insertResult = await this._tenantOperator.InsertRelatedEntity<ContentModel.Principal>(targetTenant.Id,
+                                                nameof(ContentModel.Tenant.Accounts),
+                                                new List<ContentModel.Principal>() { newPrincipal },
+                                                w => w.TenantIdentifier.Equals(tenant.Identifier), u => u.PreferredUserName.Equals(newPrincipal.PreferredUserName));
+
+
+                                                var newAccountQuery = insertResult.Where(w => w.IsAnonymous == true);
+                                                if (newAccountQuery != null && newAccountQuery.Any())
+                                                {
+                                                    var principalJson = JsonSerializer.Serialize(newAccountQuery.First(), serializerOptions);
+
+
+                                                    await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{newAccountQuery.First().PreferredUserName}", principalJson);
+                                                    return newAccountQuery.FirstOrDefault();
+                                                }
+                                            }
+
+
                                         }
+
                                     }
-
-
                                 }
                                 catch (Exception e)
                                 {
@@ -556,7 +588,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                 _logger.LogWarning($"problem ensuring current principal");
                                 return null;
                             }
-                        }
+                        
 
                     }
                     else
@@ -676,7 +708,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
             {
                 var httpContext = this._httpContextAccessor.HttpContext;
 
-                var principalQuery = await this._principalOperator.ReadAsEnumerable(w => w.PreferredUserName == currentPrincipal.PreferredUserName);
+                var principalQuery = await this._principalOperator.ReadAsEnumerable(w => w.PreferredUserName.Equals(currentPrincipal.PreferredUserName));
 
                 var hasInsertedSessionQuery = await this._horselessSessionOperator.ReadAsEnumerable(w => w.SessionId.Equals(httpContext.Session.Id));
 
@@ -743,7 +775,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                     return ret;
                 }
-                else
+                else if (principalQuery != null && principalQuery.Any())
                 {
                     // create a new session
                     var newSession = new ContentModel.HorselessSession()
@@ -759,21 +791,21 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         SessionId = httpContext.Session.Id,
                         Sub = currentPrincipal.Sub,
                         UpdatedAt = DateTime.UtcNow,
-                        HorselessSessionPrincipalId = currentPrincipal.Id
+                        HorselessSessionPrincipalId = principalQuery.First().Id
                     };
                     var relatedItems = new List<ContentModel.HorselessSession>() { newSession };
-                    // currentPrincipal.HorselessSessions.Add(newSession);
+                    /// currentPrincipal.HorselessSessions.Add(newSession);
 
-                    var insertResult = 
-                        await this._principalOperator.
-                        InsertRelatedEntity<ContentModel.HorselessSession>(currentPrincipal.Id, propertyName: nameof(ContentModel.Principal.HorselessSessions), relatedEntities: relatedItems,
-                        parentItemFilter: w => w.PreferredUserName.Equals(currentPrincipal.PreferredUserName),
-                        relatedItemFilter: f => f.SessionId.Equals(httpContext.Session.Id));
+                    //var insertResult =
+                    //    await this._principalOperator.
+                    //    InsertRelatedEntity<ContentModel.HorselessSession>(currentPrincipal.Id, propertyName: nameof(ContentModel.Principal.HorselessSessions), relatedEntities: relatedItems,
+                    //    parentItemFilter: w => w.PreferredUserName.Equals(currentPrincipal.PreferredUserName),
+                    //    relatedItemFilter: f => f.SessionId.Equals(httpContext.Session.Id));
 
-                    // var insertResult = await this._horselessSessionOperator.Create(newSession);
+                    var insertResult = await this._horselessSessionOperator.Create(newSession);
 
                     IHorselessHttpSessionFeature<ContentModel.HorselessSession> ret = new HorselessHttpSessionFeature();
-                    ret.FeaturePayload = insertResult.First(); // todo this is overly optimistic
+                    ret.FeaturePayload = insertResult; // todo this is overly optimistic
                     ret.HttpUrl = new Uri(httpContext.Request.GetFullHttpUrl());
                     ret.HttpSessionId = httpContext.Session.Id;
 
