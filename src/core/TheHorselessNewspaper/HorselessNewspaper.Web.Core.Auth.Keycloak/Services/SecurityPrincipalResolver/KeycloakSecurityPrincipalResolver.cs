@@ -599,6 +599,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         _logger.LogWarning("unable to get current principal in current context ");
                     }
                 }
+ 
                 else
                 {
                     _logger.LogWarning("KycloakSecurityPrincipalResolver ran with null httpcontext");
@@ -610,7 +611,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                 this._logger.LogError($"problem resolving current principal{e.Message}");
             }
 
-            return principal;
+            throw new Exception("could not complee principal resolution workflow");
         }
 
         public async Task<IHorselessHttpSessionFeature<ContentModel.HorselessSession>> GetCurrentSessionForPrincipal(ContentModel.Principal principal)
@@ -619,87 +620,6 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
             IHorselessHttpSessionFeature<ContentModel.HorselessSession> ret = await GetSessionFeature(principal);
             return ret;
 
-            //var httpContext = this._httpContextAccessor.HttpContext;
-
-            //var hasCachedSession = await this.redisDb.GetStringAsync(principal.PreferredUserName);
-
-            //if (hasCachedSession != String.Empty)
-            //{
-            //    var cachedPrincipal = JsonSerializer.Deserialize<ContentModel.Principal>(hasCachedSession);
-
-
-            //    _logger.LogWarning($"{this.GetType().FullName} has cached HorselessSession entity");
-            //    IHorselessHttpSessionFeature<ContentModel.HorselessSession> ret = await GetSessionFeature(cachedPrincipal);
-
-            //    return ret;
-            //}
-
-
-            //var principalQuery = await this._principalOperator.ReadAsEnumerable(w => w.PreferredUserName.Equals(principal.PreferredUserName));
-
-
-            //var allSessionsQuery = await this._horselessSessionOperator.ReadAsEnumerable(w => w.IsSoftDeleted == false && w.SessionId == httpContext.Session.Id);
-            //// var allSessions = allSessionsQuery.ToList();
-            //var hasSesion = allSessionsQuery == null ? false : allSessionsQuery.Any();
-
-            //var currentUpdateTime = httpContext.Session.GetString("UTC_UPDATED_TIME");
-
-            //ContentModel.HorselessSession cachedSession;
-
-
-            //if (allSessionsQuery != null && allSessionsQuery.Any() == true && principalQuery.Any())
-            //{
-            //    IHorselessHttpSessionFeature<ContentModel.HorselessSession> ret = await GetSessionFeature(principalQuery.First());
-
-            //    return ret;
-
-            //}
-
-            //else if (principalQuery != null && httpContext != null && principalQuery.Any())
-            //{
-            //    var principalQueryResult = principalQuery.First();
-
-            //    var newSession = new ContentModel.HorselessSession()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        DisplayName = principalQueryResult.DisplayName,
-            //        IsAnonymous = principalQueryResult.IsAnonymous,
-            //        Aud = principalQueryResult.Aud,
-            //        CreatedAt = DateTime.UtcNow,
-            //        Iss = principalQueryResult.Iss,
-            //        IsSoftDeleted = false,
-            //        ObjectId = Guid.NewGuid().ToString(),
-            //        SessionId = httpContext.Session.Id,
-            //        Sub = principalQueryResult.Sub,
-            //        UpdatedAt = DateTime.UtcNow,
-            //        HorselessSessionPrincipalId = principalQueryResult.Id,
-            //    };
-
-            //    principalQueryResult.HorselessSessions.Add(newSession);
-
-            //    var insertResult = await this._horselessSessionOperator.Create(newSession);
-            //    if (insertResult != null)
-            //    {
-            //        // cache the inserted session to hedge against
-            //        // new requests using the resolver before dbcontext is flushed
-            //        var principalJson = JsonSerializer.Serialize(principalQueryResult);
-            //        await this.redisDb.SetStringAsync(principal.PreferredUserName, principalJson);
-            //        _logger.LogWarning($"{this.GetType().FullName} has added a HorselessSession entity to local cache");
-            //        IHorselessHttpSessionFeature<ContentModel.HorselessSession> ret = await GetSessionFeature(principalQueryResult);
-
-            //        return ret;
-            //    }
-            //    else
-            //    {
-            //        _logger.LogWarning($"{this.GetType().Name} is unable to initialize the current session. failed to insert new session");
-            //    }
-            //}
-            //else
-            //{
-            //    _logger.LogWarning($"{this.GetType().Name} is unable to initialize the current session");
-            //}
-
-            //throw new Exception("unable to initoialize session feature. principal queries nonfunctional");
         }
 
         private async Task<IHorselessHttpSessionFeature<ContentModel.HorselessSession>> GetSessionFeature(ContentModel.Principal currentPrincipal)
@@ -713,28 +633,34 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                 var hasInsertedSessionQuery = await this._horselessSessionOperator.ReadAsEnumerable(w => w.SessionId.Equals(httpContext.Session.Id));
 
                 var cacheQuery = await this.redisDb.GetStringAsync($"{_iTenantInfo.Identifier}.{typeof(ContentModel.HorselessSession).FullName}.{httpContext.Session.Id}");
-                if (cacheQuery != null && cacheQuery != String.Empty)
+                if (cacheQuery != null && cacheQuery != String.Empty && principalQuery.Any() && hasInsertedSessionQuery.Any())
                 {
                     // cached session 
                     var payload = JsonSerializer.Deserialize<ContentModel.HorselessSession>(cacheQuery, serializerOptions);
-                    IHorselessHttpSessionFeature<ContentModel.HorselessSession> ret = new HorselessHttpSessionFeature();
-                    ret.FeaturePayload = payload;
-                    ret.HttpUrl = new Uri(httpContext.Request.GetFullHttpUrl());
-                    ret.HttpSessionId = httpContext.Session.Id;
 
-                    ret.SessionStartedAt = DateTime.UtcNow;
-                    ret.SessionLastUpdatedAt = DateTime.UtcNow;
-
-                    if (payload.IsAnonymous == true)
+                    if(payload.Id.Equals(hasInsertedSessionQuery.First().Id))
                     {
-                        ret.IsAnonymous = true;
-                    }
-                    else
-                    {
-                        ret.IsAnonymous = false;
+                        // cached id == persisted id
+                        IHorselessHttpSessionFeature<ContentModel.HorselessSession> ret = new HorselessHttpSessionFeature();
+                        ret.FeaturePayload = payload;
+                        ret.HttpUrl = new Uri(httpContext.Request.GetFullHttpUrl());
+                        ret.HttpSessionId = httpContext.Session.Id;
+
+                        ret.SessionStartedAt = DateTime.UtcNow;
+                        ret.SessionLastUpdatedAt = DateTime.UtcNow;
+
+                        if (payload.IsAnonymous == true)
+                        {
+                            ret.IsAnonymous = true;
+                        }
+                        else
+                        {
+                            ret.IsAnonymous = false;
+                        }
+
+                        return ret;
                     }
 
-                    return ret;
                 }
 
                 if (hasInsertedSessionQuery != null && hasInsertedSessionQuery.Any())
@@ -775,7 +701,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                     return ret;
                 }
-                else if (principalQuery != null && principalQuery.Any())
+                
+                if (principalQuery != null && principalQuery.Any()
+                    && !principalQuery.First().HorselessSessions.Where(w  => w.SessionId.Equals(httpContext.Session.Id)).Any())
                 {
                     // create a new session
                     var newSession = new ContentModel.HorselessSession()
@@ -791,21 +719,17 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         SessionId = httpContext.Session.Id,
                         Sub = currentPrincipal.Sub,
                         UpdatedAt = DateTime.UtcNow,
-                        HorselessSessionPrincipalId = principalQuery.First().Id
+                        HorselessSessionPrincipal = principalQuery.First()
                     };
+
                     var relatedItems = new List<ContentModel.HorselessSession>() { newSession };
-                    /// currentPrincipal.HorselessSessions.Add(newSession);
+                    
+                    currentPrincipal.HorselessSessions.Add(newSession);
 
-                    //var insertResult =
-                    //    await this._principalOperator.
-                    //    InsertRelatedEntity<ContentModel.HorselessSession>(currentPrincipal.Id, propertyName: nameof(ContentModel.Principal.HorselessSessions), relatedEntities: relatedItems,
-                    //    parentItemFilter: w => w.PreferredUserName.Equals(currentPrincipal.PreferredUserName),
-                    //    relatedItemFilter: f => f.SessionId.Equals(httpContext.Session.Id));
-
-                    var insertResult = await this._horselessSessionOperator.Create(newSession);
+                    var insertResult = await this._principalOperator.Update(currentPrincipal, new List<string>() { nameof(ContentModel.Principal.HorselessSessions) });
 
                     IHorselessHttpSessionFeature<ContentModel.HorselessSession> ret = new HorselessHttpSessionFeature();
-                    ret.FeaturePayload = insertResult; // todo this is overly optimistic
+                    ret.FeaturePayload = newSession; // todo this is overly optimistic
                     ret.HttpUrl = new Uri(httpContext.Request.GetFullHttpUrl());
                     ret.HttpSessionId = httpContext.Session.Id;
 
