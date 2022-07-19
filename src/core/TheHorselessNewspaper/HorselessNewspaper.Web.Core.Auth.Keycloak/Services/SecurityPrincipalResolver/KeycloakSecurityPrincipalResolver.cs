@@ -689,15 +689,15 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                         ObjectId = Guid.NewGuid().ToString(),
                         SessionId = httpContext.Session.Id,
                         Sub = currentPrincipal.Sub,
-                        UpdatedAt = DateTime.UtcNow,
-                        HorselessSessionPrincipal = principalQuery.First()
+                        UpdatedAt = DateTime.UtcNow
                     };
 
                     var relatedItems = new List<ContentModel.HorselessSession>() { newSession };
 
-                    currentPrincipal.HorselessSessions.Add(newSession);
+                    // currentPrincipal.HorselessSessions.Add(newSession);
 
-                    var insertResult = await this._principalOperator.Update(currentPrincipal, new List<string>() { nameof(ContentModel.Principal.HorselessSessions) });
+                    var insertResult = await this._principalOperator.InsertRelatedEntity(currentPrincipal.Id,  nameof(ContentModel.Principal.HorselessSessions) ,
+                                       relatedItems);
 
                     IHorselessHttpSessionFeature<ContentModel.HorselessSession> ret = new HorselessHttpSessionFeature();
                     ret.FeaturePayload = newSession; // todo this is overly optimistic

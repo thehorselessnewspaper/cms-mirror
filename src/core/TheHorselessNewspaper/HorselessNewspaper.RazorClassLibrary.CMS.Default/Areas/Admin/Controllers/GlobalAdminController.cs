@@ -68,8 +68,10 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                         if (model.IsMustResetDatabase == true)
                         {
                             await this._modelOperator.ResetDb();
+                            await this._hostModelOperator.ResetDb();
                         }
-                        else if(model.IsMustResetFilesystem == true)
+                        
+                        if(model.IsMustResetFilesystem == true)
                         {
                             var filesystemResetResult = this._posixFilesystemService.RenderFilesystemTree();
                             _logger.LogTrace($"{this.GetType().FullName} has reset the tenant filesystem {filesystemResetResult}");
