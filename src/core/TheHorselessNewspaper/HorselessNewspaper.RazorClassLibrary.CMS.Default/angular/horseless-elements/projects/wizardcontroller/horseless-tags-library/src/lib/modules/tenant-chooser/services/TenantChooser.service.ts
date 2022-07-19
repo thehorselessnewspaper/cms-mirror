@@ -71,7 +71,7 @@ export class TenantChooserService {
             clientConfig
         );
 
-        let baseUrl = clientConfig.ODataEndpoint + "/ODataHosting/";
+        let baseUrl = clientConfig.ODataEndpoint + `/${clientConfig.TenantIdentifier}/ODataHosting/`;
         contentTenantsSvc.api.serviceRootUrl = baseUrl as string;
 
         return clientConfig;
@@ -136,7 +136,7 @@ export class TenantChooserService {
                   this.hostingEntitiesTenantsSubject.next(entities.entities);
                   this.contentEntitiesTenantsCount = entities.annots.count as number;
                 }
-                // return entities;
+                return entities;
             }),
             catchError(err => {
               console.log(`pullHostingEntitiesTenantsByOffset handling error ${err}`);
@@ -173,7 +173,7 @@ export class TenantChooserService {
       skip(1),
       map((clientConfig) => {
         console.log(`pullContentEntitiesTenantsByOffset has client config`);
-        let baseUrl = clientConfig.ODataEndpoint + "/ODataContent/";
+        let baseUrl = clientConfig.ODataEndpoint + `/${clientConfig.TenantIdentifier}/ODataContent/`;
         contentTenantsSvc.api.serviceRootUrl = baseUrl as string;
 
         console.log(
@@ -237,7 +237,9 @@ export class TenantChooserService {
                   {
                     this.contentEntitiesTenantsSubject.next(entities.entities);
                     this.contentEntitiesTenantsCount = entities.annots.count as number;
+
                   }
+                  return entities;
             }),
             catchError(err => {
               console.log(`pullContentEntitiesTenantsByOffset handling error ${err}`);
@@ -267,7 +269,7 @@ export class TenantChooserService {
     this.restClientConfiguration$.pipe(
       skip(1),
       concatMap((clientConfig) => {
-        let baseUrl = clientConfig.ODataEndpoint + "/ODataContent/";
+        let baseUrl = clientConfig.ODataEndpoint + `/${clientConfig.TenantIdentifier}/ODataContent/`;
         contentTenantsSvc.api.serviceRootUrl = baseUrl as string;
 
         const headers = new HttpHeaders({
@@ -281,7 +283,7 @@ export class TenantChooserService {
         );
         let tenantEntities = contentTenantsSvc.entities();
 
-        return tenantEntities.count().fetch({  headers: headers })
+        return tenantEntities.count().fetch({   headers: headers })
           .pipe(
             map(odataResponse => {
               console.log("pullContentEntitiesTenantsCount has a count");
@@ -316,7 +318,7 @@ export class TenantChooserService {
             clientConfig
         );
 
-        let baseUrl = clientConfig.ODataEndpoint +  "/ODataHosting/";
+        let baseUrl = clientConfig.ODataEndpoint +  `${clientConfig.TenantIdentifier}/ODataHosting/`;
         contentTenantsSvc.api.serviceRootUrl = baseUrl as string;
 
         const headers = new HttpHeaders({
@@ -334,6 +336,7 @@ export class TenantChooserService {
           .pipe(
             map(oDataResponse => {
               this.hostingEntitiesTenantsCount = oDataResponse;
+              return oDataResponse;
             }));
       })
     )

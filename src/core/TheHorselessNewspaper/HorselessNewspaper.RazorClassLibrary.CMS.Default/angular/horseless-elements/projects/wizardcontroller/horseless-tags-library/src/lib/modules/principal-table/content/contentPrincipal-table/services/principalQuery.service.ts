@@ -18,7 +18,7 @@ import {
   BehaviorSubject,
   catchError,
   EMPTY,
-  map,
+  map, switchMap,
   Observable,
   ReplaySubject,
   take,
@@ -31,7 +31,13 @@ import { ConfigurationEndpointService } from '../../../../../services/configurat
 })
 export class PrincipalQueryService {
   clientConfigService!: ConfigurationEndpointService;
-  restClientConfiguration$!: BehaviorSubject<SecurityRestClientConfiguration>;
+  restClientConfiguration$ =  this.clientConfigService.clientConfiguration$
+                              .pipe(
+                                map(configuration => {
+                                  return configuration;
+                                })
+                              )
+;
   contentEntitiesPrincipal$!: BehaviorSubject<ContentEntitiesPrincipal[] | null>;
 
   constructor(
@@ -42,9 +48,6 @@ export class PrincipalQueryService {
     console.log('PrincipalQueryService starting');
 
     this.clientConfigService = clientConfigService;
-
-    this.restClientConfiguration$ =
-      this.clientConfigService.clientConfiguration$;
 
     this.contentEntitiesPrincipal$ = new BehaviorSubject<
     ContentEntitiesPrincipal[] | null

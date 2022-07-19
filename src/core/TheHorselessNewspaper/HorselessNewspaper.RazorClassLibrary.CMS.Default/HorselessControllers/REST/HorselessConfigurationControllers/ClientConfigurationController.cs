@@ -52,7 +52,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             configuration.IsClaimsIdentity = this.User.Identities.Where(w => w.IsAuthenticated).Any();
             configuration.RESTEndpoint = _configuration["RestApiBaseUrl"];
             configuration.ODataEndpoint = _configuration["OdataApiBaseUrl"];
-
+            configuration.TenantIdentifier = this._tenant.Identifier;
             return await Task.FromResult<RestClientConfiguration>(configuration);
         }
 
