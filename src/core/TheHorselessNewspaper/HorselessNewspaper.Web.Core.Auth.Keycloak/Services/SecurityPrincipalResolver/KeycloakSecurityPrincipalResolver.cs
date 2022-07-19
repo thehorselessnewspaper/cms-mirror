@@ -264,15 +264,19 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                     _logger.LogError($"current principal is uncached");
                 }
 
-                var allTenants = await _tenantOperator
-                    .ReadAsEnumerable(w => w.IsSoftDeleted != true,
+                var tenantQuery = await _tenantOperator
+                    .ReadAsEnumerable(w => w.IsSoftDeleted != true && w.TenantIdentifier.Equals(_iTenantInfo.Identifier),
                         new List<string> { nameof(ContentModel.Tenant.Accounts), nameof(ContentModel.Tenant.Owners), nameof(ContentModel.Tenant.AccessControlEntries) });
 
                 var allTenantsList = new List<ContentModel.Tenant>();
 
-                if (allTenants != null)
+                if (tenantQuery != null && tenantQuery.Any())
                 {
-                    allTenantsList.AddRange(allTenants.ToList());
+                    allTenantsList.AddRange(tenantQuery.ToList());
+                }
+                else
+                {
+                    throw new Exception("unable to resolve principal. tenant is null");
                 }
 
                 var isAnOwner = allTenantsList.Where(w => w.Owners
@@ -288,21 +292,20 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                 var principalCollection = principalQuery != null && principalQuery.Any() ? principalQuery.ToList() : new List<ContentModel.Principal>();
 
                 var principalQueryResult = principalQuery == null || principalCollection.Count() == 0 ? null : principalQuery.ToList().First();
-           
-            
+
+
                 if (isAnAccount)
                 {
                     // the authenticated scenario has already recorded this principal
                     _logger.LogInformation($"found authenticated user in database with upn={user.Claims.Upn()}");
-                    var homeTenant = allTenantsList.Where(w => w.Accounts
-                    .Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername())).Any()).FirstOrDefault();
-                    var resolvedPrincipal = homeTenant.Accounts.Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername())).FirstOrDefault();
+                    var homeTenant = allTenantsList.First();
+                    var resolvedPrincipal = homeTenant.Accounts.Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername())).First();
 
                     var principalJson = JsonSerializer.Serialize(principalQueryResult, serializerOptions);
                     await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{principal.PreferredUserName}", principalJson);
                     return resolvedPrincipal;
                 }
-                
+
                 if (isAnOwner)
                 {
                     // the authenticated scenario has already recorded this principal
@@ -316,9 +319,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                     await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{principal.PreferredUserName}", principalJson);
                     return resolvedPrincipal;
                 }
-                
-                
-                else
+
+
+                if (!isAnAccount && !isAnOwner)
                 {
                     // the authenticated scenario must record this principal
                     _logger.LogWarning($"did not find authenticated user in database with upn={user.Claims.Upn()}");
@@ -364,55 +367,33 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                     }); ;
 
                     // resolve the tenant
-                    var tenantQuery = await _tenantOperator.ReadAsEnumerable(w =>
-                        w.TenantIdentifier.Equals(_iTenantInfo.Identifier), includeClauses: new List<string>() { nameof(ContentModel.Tenant.Accounts) });
                     var tenantQueryResult = tenantQuery == null || tenantQuery.Count() == 0 ? null : tenantQuery.ToList().First();
 
                     if (tenantQueryResult != null)
                     {
                         try
                         {
-                            var idempotency = await this._principalOperator.ReadAsEnumerable(w => w.PreferredUserName.Equals(principal.PreferredUserName), 
-                                includeClauses: new List<string>() { nameof(ContentModel.Principal.HorselessSessions)} );
+                            var idempotency = await this._principalOperator.ReadAsEnumerable(w => w.PreferredUserName.Equals(principal.PreferredUserName),
+                                includeClauses: new List<string>() { nameof(ContentModel.Principal.HorselessSessions) });
                             if (idempotency == null || idempotency.Count() == 0)
                             {
-                                if(tenantQueryResult.Accounts.Where(w => w.PreferredUserName.Equals(principal.PreferredUserName)).Any())
+
+
+                                // must create principal
+                                var createdPrincipalResult = await this._principalOperator.Create(principal);
+
+                                tenantQueryResult.Accounts.Add(createdPrincipalResult);
+
+                                var tenantUpdateResult = await this._tenantOperator.Update(tenantQueryResult, new List<string>() { nameof(ContentModel.Tenant.Accounts) });
+
+                                _logger.LogTrace("created principal, added account");
+
+                                if (createdPrincipalResult != null)
                                 {
-
-                                }
-                                else
-                                {
-                                    tenantQueryResult.Accounts.Add(principal);
-                                }
-
-                                if (principalQuery != null && principalQuery.Any())
-                                {
-                                    principal = principalQuery.First();
-                                }
-                                else
-                                {
-                                    // must create principal
-                                    var createdPrincipalResult = await this._principalOperator.Create(principal);
-
-                                    // tenantQueryResult.Accounts.Add(createdPrincipalResult);
-                                    principal = createdPrincipalResult;
-
-                                }
-
-
-                                // principal.ManagedTenants.Add(tenantQueryResult);
-
-                                var principalInsertResult = await this._tenantOperator.InsertRelatedEntity<ContentModel.Principal>(
-                                    tenantQueryResult.Id, nameof(ContentModel.Tenant.Accounts), new List<ContentModel.Principal>() { principal },
-                                    w => w.TenantIdentifier.ToLower().Equals(tenantQueryResult.TenantIdentifier.ToLower()),
-                                    u => u.PreferredUserName.Equals(principal.PreferredUserName)
-                                    );
-
-                                _logger.LogTrace("created principal");
-
-                                if (principalInsertResult != null && principalInsertResult.Any())
-                                {
-                                    return principalInsertResult.First();
+                                    // cache the principal
+                                    var principalJson = JsonSerializer.Serialize(createdPrincipalResult, serializerOptions);
+                                    await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{createdPrincipalResult.PreferredUserName}", principalJson);
+                                    return createdPrincipalResult;
                                 }
                             }
 
@@ -421,19 +402,17 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                             {
                                 principal = idempotency.First();
 
-                                // tenantQueryResult.Accounts.Add(principal);
+                                tenantQueryResult.Accounts.Add(principal);
 
-                                // principal.ManagedTenants.Add(tenantQueryResult);
+                                var updateResult = await this._tenantOperator.Update(tenantQueryResult, new List<string>() { nameof(ContentModel.Tenant.Accounts) });
 
-                                var principalInsertResult = await this._tenantOperator.InsertRelatedEntity<ContentModel.Principal>(
-                                    tenantQueryResult.Id, nameof(ContentModel.Tenant.Accounts), new List<ContentModel.Principal>() { principal },
-                                    w => w.TenantIdentifier.ToLower().Equals(tenantQueryResult.TenantIdentifier.ToLower()),
-                                    u => u.PreferredUserName.Equals(principal.PreferredUserName)
-                                    );
 
-                                if (principalInsertResult != null && principalInsertResult.Any())
+                                if (updateResult != null)
                                 {
-                                    return principalInsertResult.First();
+                                    // cache the principal
+                                    var principalJson = JsonSerializer.Serialize(principal, serializerOptions);
+                                    await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{principal.PreferredUserName}", principalJson);
+                                    return principal;
                                 }
                             }
 
@@ -445,21 +424,26 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                     }
 
-                    // cache the principal
-                    var principalJson = JsonSerializer.Serialize(principal, serializerOptions);
-                    await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{principal.PreferredUserName}", principalJson);
+
                 }
             }
-            
-            else if (user.Claims.Count() == 0 && _iTenantInfo != null)
+
+            if (user.Claims.Count() == 0 && _iTenantInfo != null)
             {
                 // the anonymous scenario
                 _logger.LogInformation($"handling anonymous request");
                 var anonymousPrefferedUsername = "anonymous";
+                var currentTenant = await this._tenantOperator.ReadAsEnumerable(w => w.TenantIdentifier.Equals(_iTenantInfo.Identifier));
+                var isAnOwner = currentTenant.Where(w => w.Owners
+                                    .Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername()))
+                                    .Any()).Any();
+                var isAnAccount = currentTenant.Where(w => w.Accounts
+                    .Where(w => w.PreferredUserName.Equals(anonymousPrefferedUsername)).Any()).Any();
 
                 var anonymousPrincipalQuery = await _principalOperator.ReadAsEnumerable(r => r.IsAnonymous == true);
+
                 var cachedAnonymousPrincipal = await this.redisDb.GetStringAsync($"{_iTenantInfo.Identifier}.{anonymousPrefferedUsername}");
-                if (anonymousPrincipalQuery != null && anonymousPrincipalQuery.Count() > 0 && cachedAnonymousPrincipal != null)
+                if (anonymousPrincipalQuery != null && anonymousPrincipalQuery.Count() > 0 && cachedAnonymousPrincipal != null && isAnAccount)
                 {
 
                     var cachedPrincipal = JsonSerializer.Deserialize<ContentModel.Principal>(cachedAnonymousPrincipal, serializerOptions);
@@ -486,14 +470,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                                     ? null :
                                                     principalQuery.ToList().First();
 
-                if (principalQueryResult != null)
-                {
-                    _logger.LogInformation($"anonymous tenant principal exists");
-                    var principalJson = JsonSerializer.Serialize(principalQueryResult, serializerOptions);
-                    await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{principal.PreferredUserName}", principalJson);
-                    return principalQueryResult;
-                }
-                else
+                if (!isAnAccount)
                 {
                     // insert an anonymous principal and session
                     _logger.LogWarning($"anonymous tenant principal does not exist");
@@ -548,31 +525,26 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                 {
                                     _logger.LogError($"anonymous principal creation failure {ex.Message}");
                                 }
+                            }
 
-                                var tenantQuery = await this._tenantOperator.ReadAsEnumerable(w => w.TenantIdentifier.ToLower().Equals(_iTenantInfo.Identifier.ToLower()));
-                                if (tenantQuery != null && tenantQuery.Any())
+
+
+                            var tenantQuery = await this._tenantOperator.ReadAsEnumerable(w => w.TenantIdentifier.ToLower().Equals(_iTenantInfo.Identifier.ToLower()));
+                            if (tenantQuery != null && tenantQuery.Any())
+                            {
+                                var targetTenant = tenantQuery.First();
+                                if (!targetTenant.Accounts.Where(w => w.PreferredUserName.Equals(newPrincipal.PreferredUserName)).Any())
                                 {
-                                    var targetTenant = tenantQuery.First();
-                                    // targetTenant.Accounts.Add(newPrincipal);
-
-                                    var insertResult = await this._tenantOperator.InsertRelatedEntity<ContentModel.Principal>(targetTenant.Id,
-                                    nameof(ContentModel.Tenant.Accounts),
-                                    new List<ContentModel.Principal>() { newPrincipal },
-                                    w => w.TenantIdentifier.Equals(tenant.Identifier), u => u.PreferredUserName.Equals(newPrincipal.PreferredUserName));
-
-
-                                    var newAccountQuery = insertResult.Where(w => w.IsAnonymous == true);
-                                    if (newAccountQuery != null && newAccountQuery.Any())
-                                    {
-                                        var principalJson = JsonSerializer.Serialize(newAccountQuery.First(), serializerOptions);
-
-
-                                        await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{newAccountQuery.First().PreferredUserName}", principalJson);
-                                        return newAccountQuery.FirstOrDefault();
-                                    }
+                
+                                    var insertResult = await this._tenantOperator.InsertRelatedEntity(targetTenant.Id, nameof(ContentModel.Tenant.Accounts ), 
+                                        new List<ContentModel.Principal>() { newPrincipal });
                                 }
 
+                                var principalJson = JsonSerializer.Serialize(newPrincipal, serializerOptions);
 
+
+                                await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{newPrincipal.PreferredUserName}", principalJson);
+                                return newPrincipal;
                             }
 
                         }
@@ -588,7 +560,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
 
             }
-            
+
             else
             {
                 // the catch all scenario

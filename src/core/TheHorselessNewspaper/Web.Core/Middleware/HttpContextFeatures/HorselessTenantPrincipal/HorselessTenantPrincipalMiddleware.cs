@@ -24,7 +24,7 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
     /// 
     /// probably want to register this early in the pipeline
     /// </summary>
-    public class HorselessTenantPrincipalMiddleware 
+    public class HorselessTenantPrincipalMiddleware
     {
 
         private readonly RequestDelegate _next;
@@ -36,7 +36,7 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
         /// </summary>
         /// <param name="next"></param>
         /// <param name="securityPrincipalResolver"></param>
-        public HorselessTenantPrincipalMiddleware(RequestDelegate next, ILogger<HorselessTenantPrincipalMiddleware> logger )
+        public HorselessTenantPrincipalMiddleware(RequestDelegate next, ILogger<HorselessTenantPrincipalMiddleware> logger)
         {
             _next = next;
             this._logger = logger;
@@ -93,7 +93,7 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
                                 _logger.LogError($"error!! nonfunctional tenant resolver");
                             }
                         }
-                        catch(Exception e)
+                        catch (Exception e)
                         {
                             // tolerate this exception
                             _logger.LogWarning($"tolerating exception initializing tenant feature: {e.Message}");
