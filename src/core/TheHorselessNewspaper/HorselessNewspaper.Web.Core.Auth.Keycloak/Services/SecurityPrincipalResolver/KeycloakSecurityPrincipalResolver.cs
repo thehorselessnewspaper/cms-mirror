@@ -227,291 +227,288 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
             var principal = new ContentModel.Principal();
 
 
-            try
+            var user = _httpContextAccessor.HttpContext.User;
+            var sessionId = _httpContextAccessor.HttpContext.Session.IsAvailable ? _httpContextAccessor.HttpContext.Session.Id : "";
+
+            if (user.Claims.Count() > 0 && _iTenantInfo != null)
             {
+                _logger.LogInformation($"handling authenticated request for sessionId={sessionId}");
+                /// the authenticated scenario
+                principal.Aud = user.Claims.Aud();
+                principal.UPN = user.Claims.Upn();
+                principal.Iss = user.Claims.Iss();
+                principal.Email = user.Claims.Email();
+                principal.PreferredUserName = user.Claims.PreferredUsername();
 
-                if (_httpContextAccessor.HttpContext != null)
+                try
                 {
+                    // try the cache
 
-
-                    var user = _httpContextAccessor.HttpContext.User;
-                    var sessionId = _httpContextAccessor.HttpContext.Session.IsAvailable ? _httpContextAccessor.HttpContext.Session.Id : "";
-
-                    if (user.Claims.Count() > 0 && _iTenantInfo != null)
+                    var redisQueryResult = await this.redisDb.GetStringAsync($"{_iTenantInfo.Identifier}.{principal.PreferredUserName}");
+                    if (redisQueryResult != null)
                     {
-                        _logger.LogInformation($"handling authenticated request for sessionId={sessionId}");
-                        /// the authenticated scenario
-                        principal.Aud = user.Claims.Aud();
-                        principal.UPN = user.Claims.Upn();
-                        principal.Iss = user.Claims.Iss();
-                        principal.Email = user.Claims.Email();
-                        principal.PreferredUserName = user.Claims.PreferredUsername();
+                        var cachedPrincipal = JsonSerializer.Deserialize<ContentModel.Principal>(redisQueryResult, serializerOptions) as ContentModel.Principal;
+                        if (cachedPrincipal != null
+                            && cachedPrincipal.PreferredUserName != null
+                            && cachedPrincipal.PreferredUserName.Equals(principal.PreferredUserName))
+                        {
+                            _logger.LogTrace($"current principal is cached");
+                            return cachedPrincipal;
+                        }
+                    }
 
+                }
+                catch (Exception e)
+                {
+                    // tolerate this 
+                    _logger.LogError($"current principal is uncached");
+                }
+
+                var allTenants = await _tenantOperator
+                    .ReadAsEnumerable(w => w.IsSoftDeleted != true,
+                        new List<string> { nameof(ContentModel.Tenant.Accounts), nameof(ContentModel.Tenant.Owners), nameof(ContentModel.Tenant.AccessControlEntries) });
+
+                var allTenantsList = new List<ContentModel.Tenant>();
+
+                if (allTenants != null)
+                {
+                    allTenantsList.AddRange(allTenants.ToList());
+                }
+
+                var isAnOwner = allTenantsList.Where(w => w.Owners
+                                                    .Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername()))
+                                                    .Any()).Any();
+                var isAnAccount = allTenantsList.Where(w => w.Accounts
+                    .Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername())).Any()).Any();
+
+                var principalQuery = await this._principalOperator.ReadAsEnumerable(r => r.IsAnonymous == false
+                            && r.PreferredUserName.Equals(user.Claims.PreferredUsername()),
+                    new List<string>() { nameof(ContentModel.Principal.AccessControlEntries) });
+
+                var principalCollection = principalQuery != null && principalQuery.Any() ? principalQuery.ToList() : new List<ContentModel.Principal>();
+
+                var principalQueryResult = principalQuery == null || principalCollection.Count() == 0 ? null : principalQuery.ToList().First();
+           
+            
+                if (isAnAccount)
+                {
+                    // the authenticated scenario has already recorded this principal
+                    _logger.LogInformation($"found authenticated user in database with upn={user.Claims.Upn()}");
+                    var homeTenant = allTenantsList.Where(w => w.Accounts
+                    .Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername())).Any()).FirstOrDefault();
+                    var resolvedPrincipal = homeTenant.Accounts.Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername())).FirstOrDefault();
+
+                    var principalJson = JsonSerializer.Serialize(principalQueryResult, serializerOptions);
+                    await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{principal.PreferredUserName}", principalJson);
+                    return resolvedPrincipal;
+                }
+                
+                if (isAnOwner)
+                {
+                    // the authenticated scenario has already recorded this principal
+                    _logger.LogInformation($"found authenticated user in database with upn={user.Claims.Upn()}");
+                    var homeTenant = allTenantsList.Where(w => w.Accounts
+                    .Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername())).Any()).FirstOrDefault();
+                    var resolvedPrincipal = homeTenant.Owners.Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername())).FirstOrDefault();
+
+
+                    var principalJson = JsonSerializer.Serialize(resolvedPrincipal, serializerOptions);
+                    await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{principal.PreferredUserName}", principalJson);
+                    return resolvedPrincipal;
+                }
+                
+                
+                else
+                {
+                    // the authenticated scenario must record this principal
+                    _logger.LogWarning($"did not find authenticated user in database with upn={user.Claims.Upn()}");
+                    principal.Id = Guid.NewGuid();
+                    principal.DisplayName = user.Claims.PreferredUsername();
+                    principal.CreatedAt = DateTime.UtcNow;
+                    principal.IsAnonymous = false;
+                    principal.IsSoftDeleted = false;
+                    principal.ObjectId = Guid.NewGuid().ToString();
+
+                    principal.PrincipalClaimContainer = new ContentModel.PrincipalClaimContainer()
+                    {
+                        Id = Guid.NewGuid(),
+                        DisplayName = user.Claims.PreferredUsername()
+
+                    };
+
+                    foreach (var claim in user.Claims)
+                    {
+                        principal.PrincipalClaimContainer.PrincipalClaim.Add(
+                            new ContentModel.PrincipalClaim()
+                            {
+                                ClaimType = claim.Type,
+                                ClaimValue = claim.Value,
+                                ClaimIssuer = claim.Issuer,
+                                Id = Guid.NewGuid(),
+                                ClaimValueType = claim.ValueType
+                            });
+                    }
+
+                    principal.HorselessSessions.Add(new ContentModel.HorselessSession()
+                    {
+                        Id = Guid.NewGuid(),
+                        DisplayName = user.Claims.PreferredUsername(),
+                        Aud = user.Claims.Aud(),
+                        CreatedAt = DateTime.UtcNow,
+                        IsAnonymous = false,
+                        Iss = user.Claims.Iss(),
+                        ObjectId = Guid.NewGuid().ToString(),
+                        SessionId = _httpContextAccessor.HttpContext.Session.Id,
+                        IsSoftDeleted = false
+                        // Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
+                    }); ;
+
+                    // resolve the tenant
+                    var tenantQuery = await _tenantOperator.ReadAsEnumerable(w =>
+                        w.TenantIdentifier.Equals(_iTenantInfo.Identifier), includeClauses: new List<string>() { nameof(ContentModel.Tenant.Accounts) });
+                    var tenantQueryResult = tenantQuery == null || tenantQuery.Count() == 0 ? null : tenantQuery.ToList().First();
+
+                    if (tenantQueryResult != null)
+                    {
                         try
                         {
-                            // try the cache
-
-                            var redisQueryResult = await this.redisDb.GetStringAsync($"{_iTenantInfo.Identifier}.{principal.PreferredUserName}");
-                            if (redisQueryResult != null)
+                            var idempotency = await this._principalOperator.ReadAsEnumerable(w => w.PreferredUserName.Equals(principal.PreferredUserName), 
+                                includeClauses: new List<string>() { nameof(ContentModel.Principal.HorselessSessions)} );
+                            if (idempotency == null || idempotency.Count() == 0)
                             {
-                                var cachedPrincipal = JsonSerializer.Deserialize<ContentModel.Principal>(redisQueryResult, serializerOptions) as ContentModel.Principal;
-                                if (cachedPrincipal != null
-                                    && cachedPrincipal.PreferredUserName != null
-                                    && cachedPrincipal.PreferredUserName.Equals(principal.PreferredUserName))
+                                if(tenantQueryResult.Accounts.Where(w => w.PreferredUserName.Equals(principal.PreferredUserName)).Any())
                                 {
-                                    _logger.LogTrace($"current principal is cached");
-                                    return cachedPrincipal;
+
+                                }
+                                else
+                                {
+                                    tenantQueryResult.Accounts.Add(principal);
+                                }
+
+                                if (principalQuery != null && principalQuery.Any())
+                                {
+                                    principal = principalQuery.First();
+                                }
+                                else
+                                {
+                                    // must create principal
+                                    var createdPrincipalResult = await this._principalOperator.Create(principal);
+
+                                    // tenantQueryResult.Accounts.Add(createdPrincipalResult);
+                                    principal = createdPrincipalResult;
+
+                                }
+
+
+                                // principal.ManagedTenants.Add(tenantQueryResult);
+
+                                var principalInsertResult = await this._tenantOperator.InsertRelatedEntity<ContentModel.Principal>(
+                                    tenantQueryResult.Id, nameof(ContentModel.Tenant.Accounts), new List<ContentModel.Principal>() { principal },
+                                    w => w.TenantIdentifier.ToLower().Equals(tenantQueryResult.TenantIdentifier.ToLower()),
+                                    u => u.PreferredUserName.Equals(principal.PreferredUserName)
+                                    );
+
+                                _logger.LogTrace("created principal");
+
+                                if (principalInsertResult != null && principalInsertResult.Any())
+                                {
+                                    return principalInsertResult.First();
+                                }
+                            }
+
+
+                            if (idempotency.Count() == 1)
+                            {
+                                principal = idempotency.First();
+
+                                // tenantQueryResult.Accounts.Add(principal);
+
+                                // principal.ManagedTenants.Add(tenantQueryResult);
+
+                                var principalInsertResult = await this._tenantOperator.InsertRelatedEntity<ContentModel.Principal>(
+                                    tenantQueryResult.Id, nameof(ContentModel.Tenant.Accounts), new List<ContentModel.Principal>() { principal },
+                                    w => w.TenantIdentifier.ToLower().Equals(tenantQueryResult.TenantIdentifier.ToLower()),
+                                    u => u.PreferredUserName.Equals(principal.PreferredUserName)
+                                    );
+
+                                if (principalInsertResult != null && principalInsertResult.Any())
+                                {
+                                    return principalInsertResult.First();
                                 }
                             }
 
                         }
                         catch (Exception e)
                         {
-                            // tolerate this 
-                            _logger.LogError($"current principal is uncached");
+                            _logger.LogError($"problem creating anonymous session: {e.Message}");
                         }
 
-                        var allTenants = await _tenantOperator
-                            .ReadAsEnumerable(w => w.IsSoftDeleted != true,
-                                new List<string> { nameof(ContentModel.Tenant.Accounts), nameof(ContentModel.Tenant.Owners), nameof(ContentModel.Tenant.AccessControlEntries) });
-
-                        var allTenantsList = new List<ContentModel.Tenant>();
-
-                        if (allTenants != null)
-                        {
-                            allTenantsList.AddRange(allTenants.ToList());
-                        }
-
-                        var isAnOwner = allTenantsList.Where(w => w.Owners
-                                                            .Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername()))
-                                                            .Any()).Any();
-                        var isAnAccount = allTenantsList.Where(w => w.Accounts
-                            .Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername())).Any()).Any();
-
-                        var principalQuery = await this._principalOperator.ReadAsEnumerable(r => r.IsAnonymous == false
-                                    && r.PreferredUserName.Equals(user.Claims.PreferredUsername()),
-                            new List<string>() { nameof(ContentModel.Principal.AccessControlEntries) });
-
-                        var principalCollection = principalQuery != null && principalQuery.Any() ? principalQuery.ToList() : new List<ContentModel.Principal>();
-
-                        var principalQueryResult = principalQuery == null || principalCollection.Count() == 0 ? null : principalQuery.ToList().First();
-                        if (principalQueryResult != null)
-                        {
-                            _logger.LogInformation($"found authenticated user in database with upn={user.Claims.Upn()}");
-
-                            // cache the principal
-                            var principalJson = JsonSerializer.Serialize(principalQueryResult, serializerOptions);
-                            await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{principal.PreferredUserName}", principalJson);
-
-                            return principalQueryResult;
-                        }
-                        if (isAnAccount)
-                        {
-                            // the authenticated scenario has already recorded this principal
-                            _logger.LogInformation($"found authenticated user in database with upn={user.Claims.Upn()}");
-                            var homeTenant = allTenantsList.Where(w => w.Accounts
-                            .Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername())).Any()).FirstOrDefault();
-                            var resolvedPrincipal = homeTenant.Accounts.Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername())).FirstOrDefault();
-
-                            var principalJson = JsonSerializer.Serialize(principalQueryResult, serializerOptions);
-                            await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{principal.PreferredUserName}", principalJson);
-                            return resolvedPrincipal;
-                        }
-                        else if (isAnOwner)
-                        {
-                            // the authenticated scenario has already recorded this principal
-                            _logger.LogInformation($"found authenticated user in database with upn={user.Claims.Upn()}");
-                            var homeTenant = allTenantsList.Where(w => w.Accounts
-                            .Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername())).Any()).FirstOrDefault();
-                            var resolvedPrincipal = homeTenant.Owners.Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername())).FirstOrDefault();
-
-
-                            var principalJson = JsonSerializer.Serialize(resolvedPrincipal, serializerOptions);
-                            await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{principal.PreferredUserName}", principalJson);
-                            return resolvedPrincipal;
-                        }
-                        else
-                        {
-                            // the authenticated scenario must record this principal
-                            _logger.LogWarning($"did not find authenticated user in database with upn={user.Claims.Upn()}");
-                            principal.Id = Guid.NewGuid();
-                            principal.DisplayName = user.Claims.PreferredUsername();
-                            principal.CreatedAt = DateTime.UtcNow;
-                            principal.IsAnonymous = false;
-                            principal.IsSoftDeleted = false;
-                            principal.ObjectId = Guid.NewGuid().ToString();
-
-                            principal.PrincipalClaimContainer = new ContentModel.PrincipalClaimContainer()
-                            {
-                                Id = Guid.NewGuid(),
-                                DisplayName = user.Claims.PreferredUsername()
-
-                            };
-
-                            foreach (var claim in user.Claims)
-                            {
-                                principal.PrincipalClaimContainer.PrincipalClaim.Add(
-                                    new ContentModel.PrincipalClaim()
-                                    {
-                                        ClaimType = claim.Type,
-                                        ClaimValue = claim.Value,
-                                        ClaimIssuer = claim.Issuer,
-                                        Id = Guid.NewGuid(),
-                                        ClaimValueType = claim.ValueType
-                                    });
-                            }
-
-                            principal.HorselessSessions.Add(new ContentModel.HorselessSession()
-                            {
-                                Id = Guid.NewGuid(),
-                                DisplayName = user.Claims.PreferredUsername(),
-                                Aud = user.Claims.Aud(),
-                                CreatedAt = DateTime.UtcNow,
-                                IsAnonymous = false,
-                                Iss = user.Claims.Iss(),
-                                ObjectId = Guid.NewGuid().ToString(),
-                                SessionId = _httpContextAccessor.HttpContext.Session.Id,
-                                IsSoftDeleted = false
-                                // Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
-                            }); ;
-
-                            // resolve the tenant
-                            var tenantQuery = await _tenantOperator.ReadAsEnumerable(w =>
-                                w.TenantIdentifier.Equals(_iTenantInfo.Identifier));
-                            var tenantQueryResult = tenantQuery == null ? null : tenantQuery.ToList().FirstOrDefault();
-
-                            if (tenantQueryResult != null)
-                            {
-                                try
-                                {
-                                    var idempotency = await this._principalOperator.ReadAsEnumerable(w => w.PreferredUserName.Equals(principal.PreferredUserName));
-                                    if (idempotency == null || idempotency.Count() == 0)
-                                    {
-
-                                        // tenantQueryResult.Accounts.Add(principal);
-                                        if (principalQuery != null && principalQuery.Any())
-                                        {
-                                            principal = principalQuery.First();
-                                        }
-                                        else
-                                        {
-                                            // must create principal
-                                            var createdPrincipalResult = await this._principalOperator.Create(principal);
-
-                                            // tenantQueryResult.Accounts.Add(createdPrincipalResult);
-                                            principal = createdPrincipalResult;
-
-                                        }
-
-
-                                        // principal.ManagedTenants.Add(tenantQueryResult);
-
-                                        var principalInsertResult = await this._tenantOperator.InsertRelatedEntity<ContentModel.Principal>(
-                                            tenantQueryResult.Id, nameof(ContentModel.Tenant.Accounts), new List<ContentModel.Principal>() { principal },
-                                            w => w.TenantIdentifier.ToLower().Equals(tenantQueryResult.TenantIdentifier.ToLower()),
-                                            u => u.PreferredUserName.Equals(principal.PreferredUserName)
-                                            );
-
-                                        _logger.LogTrace("created principal");
-
-                                        if (principalInsertResult != null && principalInsertResult.Any())
-                                        {
-                                            return principalInsertResult.First();
-                                        }
-                                    }
-
-
-                                    if (idempotency.Count() == 1)
-                                    {
-                                        principal = idempotency.First();
-
-                                        // tenantQueryResult.Accounts.Add(principal);
-
-                                        // principal.ManagedTenants.Add(tenantQueryResult);
-
-                                        var principalInsertResult = await this._tenantOperator.InsertRelatedEntity<ContentModel.Principal>(
-                                            tenantQueryResult.Id, nameof(ContentModel.Tenant.Accounts), new List<ContentModel.Principal>() { principal },
-                                            w => w.TenantIdentifier.ToLower().Equals(tenantQueryResult.TenantIdentifier.ToLower()),
-                                            u => u.PreferredUserName.Equals(principal.PreferredUserName)
-                                            );
-
-                                        if (principalInsertResult != null && principalInsertResult.Any())
-                                        {
-                                            return principalInsertResult.First();
-                                        }
-                                    }
-
-                                }
-                                catch (Exception e)
-                                {
-                                    _logger.LogError($"problem creating anonymous session: {e.Message}");
-                                }
-
-                            }
-
-                            // cache the principal
-                            var principalJson = JsonSerializer.Serialize(principal, serializerOptions);
-                            await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{principal.PreferredUserName}", principalJson);
-                        }
                     }
-                    else if (user.Claims.Count() == 0 && _iTenantInfo != null)
+
+                    // cache the principal
+                    var principalJson = JsonSerializer.Serialize(principal, serializerOptions);
+                    await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{principal.PreferredUserName}", principalJson);
+                }
+            }
+            
+            else if (user.Claims.Count() == 0 && _iTenantInfo != null)
+            {
+                // the anonymous scenario
+                _logger.LogInformation($"handling anonymous request");
+                var anonymousPrefferedUsername = "anonymous";
+
+                var anonymousPrincipalQuery = await _principalOperator.ReadAsEnumerable(r => r.IsAnonymous == true);
+                var cachedAnonymousPrincipal = await this.redisDb.GetStringAsync($"{_iTenantInfo.Identifier}.{anonymousPrefferedUsername}");
+                if (anonymousPrincipalQuery != null && anonymousPrincipalQuery.Count() > 0 && cachedAnonymousPrincipal != null)
+                {
+
+                    var cachedPrincipal = JsonSerializer.Deserialize<ContentModel.Principal>(cachedAnonymousPrincipal, serializerOptions);
+
+                    if (cachedPrincipal != null && cachedPrincipal.Id.Equals(anonymousPrincipalQuery.First().Id))
                     {
-                        // the anonymous scenario
-                        _logger.LogInformation($"handling anonymous request");
-                        var anonymousPrefferedUsername = "anonymous";
+                        // the cached principal id is the same as the persisted item
 
-                        var anonymousPrincipalQuery = await _principalOperator.ReadAsEnumerable(r => r.IsAnonymous == true);
-                        var cachedAnonymousPrincipal = await this.redisDb.GetStringAsync($"{_iTenantInfo.Identifier}.{anonymousPrefferedUsername}");
-                        if (anonymousPrincipalQuery != null && anonymousPrincipalQuery.Count() > 0 && cachedAnonymousPrincipal != null)
-                        {
-
-                            var cachedPrincipal = JsonSerializer.Deserialize<ContentModel.Principal>(cachedAnonymousPrincipal, serializerOptions);
-
-                            if (cachedPrincipal != null && cachedPrincipal.Id.Equals(anonymousPrincipalQuery.First().Id))
-                            {
-                                // the cached principal id is the same as the persisted item
-
-                                return cachedPrincipal;
-                            }
-                        }
+                        return cachedPrincipal;
+                    }
+                }
 
 
-                         var httpCtx = _httpContextAccessor.HttpContext;
-                            // tenant exists
+                var httpCtx = _httpContextAccessor.HttpContext;
+                // tenant exists
 
-                            // search for tne anononymous principal 
-                            var principalQuery = await _principalOperator.ReadAsEnumerable(w =>
-                                        w.IsSoftDeleted == false && w.IsAnonymous == true, new List<string> { nameof(ContentModel.Tenant.Owners), nameof(ContentModel.Tenant.Accounts) });
+                // search for tne anononymous principal 
+                var principalQuery = await _principalOperator.ReadAsEnumerable(w =>
+                            w.IsSoftDeleted == false && w.IsAnonymous == true, new List<string> { nameof(ContentModel.Tenant.Owners), nameof(ContentModel.Tenant.Accounts) });
 
 
-                            var principalQueryResult = principalQuery == null
-                                                                || principalQuery.Count() == 0
-                                                                ? null :
-                                                                principalQuery.ToList().First();
+                var principalQueryResult = principalQuery == null
+                                                    || principalQuery.Count() == 0
+                                                    ? null :
+                                                    principalQuery.ToList().First();
 
-                            if (principalQueryResult != null)
-                            {
-                                _logger.LogInformation($"anonymous tenant principal exists");
-                                var principalJson = JsonSerializer.Serialize(principalQueryResult, serializerOptions);
-                                await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{principal.PreferredUserName}", principalJson);
-                                return principalQueryResult;
-                            }
-                            else
-                            {
-                                // insert an anonymous principal and session
-                                _logger.LogWarning($"anonymous tenant principal does not exist");
-                                var newPrincipal = new ContentModel.Principal()
-                                {
-                                    IsAnonymous = true,
-                                    Id = Guid.NewGuid(),
-                                    ObjectId = _httpContextAccessor.HttpContext.Session.Id,
-                                    DisplayName = "Anonymous User",
-                                    IsSoftDeleted = false,
-                                    PreferredUserName = "anonymous",
-                                    UPN = "anonymous",
-                                    // Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                                    CreatedAt = DateTime.UtcNow,
-                                    HorselessSessions = new List<ContentModel.HorselessSession>()
+                if (principalQueryResult != null)
+                {
+                    _logger.LogInformation($"anonymous tenant principal exists");
+                    var principalJson = JsonSerializer.Serialize(principalQueryResult, serializerOptions);
+                    await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{principal.PreferredUserName}", principalJson);
+                    return principalQueryResult;
+                }
+                else
+                {
+                    // insert an anonymous principal and session
+                    _logger.LogWarning($"anonymous tenant principal does not exist");
+                    var newPrincipal = new ContentModel.Principal()
+                    {
+                        IsAnonymous = true,
+                        Id = Guid.NewGuid(),
+                        ObjectId = _httpContextAccessor.HttpContext.Session.Id,
+                        DisplayName = "Anonymous User",
+                        IsSoftDeleted = false,
+                        PreferredUserName = "anonymous",
+                        UPN = "anonymous",
+                        // Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                        CreatedAt = DateTime.UtcNow,
+                        HorselessSessions = new List<ContentModel.HorselessSession>()
                                        {
                                            new ContentModel.HorselessSession()
                                            {
@@ -525,90 +522,79 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                                 SessionId = httpCtx.Session.Id
                                            }
                                        }
-                                };
+                    };
 
+                    try
+                    {
+                        var distributedCacheStore = tenantStores
+                            .Where(s => s.GetType() == typeof(DistributedCacheStore<HorselessTenantInfo>))
+                            .SingleOrDefault();
+                        var tenant = await distributedCacheStore.TryGetByIdentifierAsync($"{_iTenantInfo.Identifier}");
+                        if (tenant != null && tenant.Payload != null && tenant.Payload.ParentTenant != null)
+                        {
+                            var existingPrincipal = await this._principalOperator.Read(r => r.PreferredUserName.Equals(newPrincipal.PreferredUserName));
+                            if (existingPrincipal != null && existingPrincipal.Any())
+                            {
+                                newPrincipal = existingPrincipal.First();
+                            }
+                            else
+                            {
                                 try
                                 {
-                                    var distributedCacheStore = tenantStores
-                                        .Where(s => s.GetType() == typeof(DistributedCacheStore<HorselessTenantInfo>))
-                                        .SingleOrDefault();
-                                    var tenant = await distributedCacheStore.TryGetByIdentifierAsync($"{_iTenantInfo.Identifier}");
-                                    if (tenant != null && tenant.Payload != null && tenant.Payload.ParentTenant != null)
+                                    var createResult = await this._principalOperator.Create(newPrincipal);
+                                    newPrincipal = createResult;
+                                }
+                                catch (Exception ex)
+                                {
+                                    _logger.LogError($"anonymous principal creation failure {ex.Message}");
+                                }
+
+                                var tenantQuery = await this._tenantOperator.ReadAsEnumerable(w => w.TenantIdentifier.ToLower().Equals(_iTenantInfo.Identifier.ToLower()));
+                                if (tenantQuery != null && tenantQuery.Any())
+                                {
+                                    var targetTenant = tenantQuery.First();
+                                    // targetTenant.Accounts.Add(newPrincipal);
+
+                                    var insertResult = await this._tenantOperator.InsertRelatedEntity<ContentModel.Principal>(targetTenant.Id,
+                                    nameof(ContentModel.Tenant.Accounts),
+                                    new List<ContentModel.Principal>() { newPrincipal },
+                                    w => w.TenantIdentifier.Equals(tenant.Identifier), u => u.PreferredUserName.Equals(newPrincipal.PreferredUserName));
+
+
+                                    var newAccountQuery = insertResult.Where(w => w.IsAnonymous == true);
+                                    if (newAccountQuery != null && newAccountQuery.Any())
                                     {
-                                        var existingPrincipal = await this._principalOperator.Read(r => r.PreferredUserName.Equals(newPrincipal.PreferredUserName));
-                                        if (existingPrincipal != null && existingPrincipal.Any())
-                                        {
-                                            newPrincipal = existingPrincipal.First();
-                                        }
-                                        else
-                                        {
-                                            try
-                                            {
-                                                var createResult = await this._principalOperator.Create(newPrincipal);
-                                                newPrincipal = createResult;
-                                            }
-                                            catch (Exception ex)
-                                            {
-                                                _logger.LogError($"anonymous principal creation failure {ex.Message}");
-                                            }
-
-                                            var tenantQuery = await this._tenantOperator.ReadAsEnumerable(w => w.TenantIdentifier.ToLower().Equals(_iTenantInfo.Identifier.ToLower()));
-                                            if (tenantQuery != null && tenantQuery.Any())
-                                            {
-                                                var targetTenant = tenantQuery.First();
-                                                // targetTenant.Accounts.Add(newPrincipal);
-
-                                                var insertResult = await this._tenantOperator.InsertRelatedEntity<ContentModel.Principal>(targetTenant.Id,
-                                                nameof(ContentModel.Tenant.Accounts),
-                                                new List<ContentModel.Principal>() { newPrincipal },
-                                                w => w.TenantIdentifier.Equals(tenant.Identifier), u => u.PreferredUserName.Equals(newPrincipal.PreferredUserName));
+                                        var principalJson = JsonSerializer.Serialize(newAccountQuery.First(), serializerOptions);
 
 
-                                                var newAccountQuery = insertResult.Where(w => w.IsAnonymous == true);
-                                                if (newAccountQuery != null && newAccountQuery.Any())
-                                                {
-                                                    var principalJson = JsonSerializer.Serialize(newAccountQuery.First(), serializerOptions);
-
-
-                                                    await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{newAccountQuery.First().PreferredUserName}", principalJson);
-                                                    return newAccountQuery.FirstOrDefault();
-                                                }
-                                            }
-
-
-                                        }
-
+                                        await this.redisDb.SetStringAsync($"{_iTenantInfo.Identifier}.{newAccountQuery.First().PreferredUserName}", principalJson);
+                                        return newAccountQuery.FirstOrDefault();
                                     }
                                 }
-                                catch (Exception e)
-                                {
-                                    _logger.LogError($"problem creating anonymous session: {e.Message}");
-                                }
 
-                                _logger.LogWarning($"problem ensuring current principal");
-                                return null;
+
                             }
-                        
 
+                        }
                     }
-                    else
+                    catch (Exception e)
                     {
-                        // the catch all scenario
-                        // probaby because the tenant resolution
-                        // subsystem is leaky
-                        _logger.LogWarning("unable to get current principal in current context ");
+                        _logger.LogError($"problem creating anonymous session: {e.Message}");
                     }
+
+                    _logger.LogWarning($"problem ensuring current principal");
+                    return null;
                 }
- 
-                else
-                {
-                    _logger.LogWarning("KycloakSecurityPrincipalResolver ran with null httpcontext");
-                }
+
+
             }
-            catch (Exception e)
+            
+            else
             {
-                // TODO create an error-state principal
-                this._logger.LogError($"problem resolving current principal{e.Message}");
+                // the catch all scenario
+                // probaby because the tenant resolution
+                // subsystem is leaky
+                _logger.LogWarning("unable to get current principal in current context ");
             }
 
             throw new Exception("could not complee principal resolution workflow");
@@ -638,7 +624,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                     // cached session 
                     var payload = JsonSerializer.Deserialize<ContentModel.HorselessSession>(cacheQuery, serializerOptions);
 
-                    if(payload.Id.Equals(hasInsertedSessionQuery.First().Id))
+                    if (payload.Id.Equals(hasInsertedSessionQuery.First().Id))
                     {
                         // cached id == persisted id
                         IHorselessHttpSessionFeature<ContentModel.HorselessSession> ret = new HorselessHttpSessionFeature();
@@ -701,9 +687,9 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                     return ret;
                 }
-                
+
                 if (principalQuery != null && principalQuery.Any()
-                    && !principalQuery.First().HorselessSessions.Where(w  => w.SessionId.Equals(httpContext.Session.Id)).Any())
+                    && !principalQuery.First().HorselessSessions.Where(w => w.SessionId.Equals(httpContext.Session.Id)).Any())
                 {
                     // create a new session
                     var newSession = new ContentModel.HorselessSession()
@@ -723,7 +709,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                     };
 
                     var relatedItems = new List<ContentModel.HorselessSession>() { newSession };
-                    
+
                     currentPrincipal.HorselessSessions.Add(newSession);
 
                     var insertResult = await this._principalOperator.Update(currentPrincipal, new List<string>() { nameof(ContentModel.Principal.HorselessSessions) });
