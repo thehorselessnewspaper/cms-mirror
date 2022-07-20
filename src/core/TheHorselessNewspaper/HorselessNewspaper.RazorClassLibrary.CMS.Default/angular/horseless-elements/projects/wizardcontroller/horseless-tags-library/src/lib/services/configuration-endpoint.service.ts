@@ -30,7 +30,7 @@ export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
     new BehaviorSubject<SecurityRestClientConfiguration>({});
 
   constructor(private httpClient: HttpClient) {
-    this.probeClientConfiguration();
+
   }
 
   /**
@@ -43,6 +43,7 @@ export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
   }
 
 
+
   /**
    * calls the horseless site loaded in the browser
    * and sends control channel commands to the
@@ -50,14 +51,14 @@ export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
    * then
    * @returns Observable<SecurityRestClientConfiguration>
    */
-  public probeClientConfiguration() {
+  public probeClientConfiguration() : Observable<any> {
     let url = window.location.href;
     let headers = new HttpHeaders();
     // command channel message to the client configuration endpoint middleware
     headers = headers.set('RestClientConfigurationEndpoint', 'get');
 
     console.log(`probeClientConfiguration getting client configuration for ${url}`);
-    this.httpClient.post<SecurityRestClientConfiguration>(url, '', {
+    return this.httpClient.post<SecurityRestClientConfiguration>(url, '', {
       headers: headers,
     })
       .pipe(
@@ -71,10 +72,10 @@ export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
           console.log(`probeClientConfiguration handling error ${err}`);
           return EMPTY;
         })
-      )
-      .subscribe(piped => {
-        console.log(`probeClientConfiguration pipe subscriber got client configuration for ${url}`);
-      });
+      );
+      // .subscribe(piped => {
+      //   console.log(`probeClientConfiguration pipe subscriber got client configuration for ${url}`);
+      // });
   }
 
   private handleError(error: HttpErrorResponse) {

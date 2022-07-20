@@ -13,7 +13,7 @@ import {
   TenantRESTService,
 } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
-import { BehaviorSubject, skip, catchError, EMPTY, map, Observable, ReplaySubject, take, tap, concatMap } from 'rxjs';
+import { BehaviorSubject, mergeMap, skip, catchError, EMPTY, map, Observable, ReplaySubject, take, tap, concatMap } from 'rxjs';
 import { ConfigurationEndpointService } from '../../../services/configuration-endpoint.service';
 
 
@@ -30,7 +30,7 @@ export class TenantChooserService {
   contentEntitiesTenantsSubject!: BehaviorSubject<ContentEntitiesTenant[] | null> ;
   contentEntitiesTenantsCount!: number;
 
-  restClientConfiguration$!: BehaviorSubject<SecurityRestClientConfiguration>;
+  restClientConfiguration$: BehaviorSubject<SecurityRestClientConfiguration> = new  BehaviorSubject<SecurityRestClientConfiguration>({});
 
   constructor(
     clientConfigSvc: ConfigurationEndpointService,
@@ -46,11 +46,9 @@ export class TenantChooserService {
 
       this.contentEntitiesTenantsSubject = new BehaviorSubject<ContentEntitiesTenant[] | null>(new Array<ContentEntitiesTenant>());
 
-
-    this.clientConfigService.probeClientConfiguration();
   }
 
-  pullHostingEntitiesTenantsByOffset(offset: number, rowCount: number): void {
+  pullHostingEntitiesTenantsByOffset (offset: number, rowCount: number): Observable<any> {
 
     console.log(`pullHostingEntitiesTenantsByOffset starting`);
     //init service
@@ -63,8 +61,8 @@ export class TenantChooserService {
       `pullHostingEntitiesTenantsByOffset is getting client configuration`
     );
 
-    this.restClientConfiguration$.pipe(
-      // skip(1),
+    return this.restClientConfiguration$.pipe(
+      skip(1),
       map((clientConfig) => {
         console.log(
           `pullHostingEntitiesTenantsByOffset finished getting client configuration: data was ` +
@@ -76,7 +74,7 @@ export class TenantChooserService {
 
         return clientConfig;
       }),
-      concatMap(clientConfig => {
+      map(clientConfig => {
 
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${clientConfig.AccessToken}`,
@@ -124,7 +122,7 @@ export class TenantChooserService {
 
         console.log(`pullHostingEntitiesTenantsByOffset fetching`);
 
-        return tenantEntities
+        tenantEntities
           .fetch({ withCount: true, headers: headers })
           .pipe(
             map((entities) =>{
@@ -136,28 +134,28 @@ export class TenantChooserService {
                   this.hostingEntitiesTenantsSubject.next(entities.entities);
                   this.contentEntitiesTenantsCount = entities.annots.count as number;
                 }
-                return entities;
+
             }),
             catchError(err => {
               console.log(`pullHostingEntitiesTenantsByOffset handling error ${err}`);
               return new Array<HostingEntitiesTenant>();
             })
-          );
+          ).subscribe();
 
       }),
       catchError(err => {
         console.log(`pullHostingEntitiesTenantsByOffset handling error ${err}`);
         return new Array<HostingEntitiesTenant>();
       })
-    )
-      .subscribe(piped => {
-        console.log(`restClientConfiguration$ pipe subscriber executed`)
-      });
+    );
+      // .subscribe(piped => {
+      //   console.log(`restClientConfiguration$ pipe subscriber executed`)
+      // });
 
 
   }
 
-  pullContentEntitiesTenantsByOffset(offset: number, rowCount: number): void {
+  pullContentEntitiesTenantsByOffset(offset: number, rowCount: number): Observable<any> {
 
 
     console.log(`pullContentEntitiesTenantsByOffset starting`);
@@ -169,7 +167,7 @@ export class TenantChooserService {
 
     let tenantEntities = contentTenantsSvc.entities();
 
-    this.restClientConfiguration$.pipe(
+    return this.restClientConfiguration$.pipe(
       skip(1),
       map((clientConfig) => {
         console.log(`pullContentEntitiesTenantsByOffset has client config`);
@@ -183,7 +181,7 @@ export class TenantChooserService {
         return clientConfig;
 
       }),
-      concatMap((clientConfig) =>{
+      map((clientConfig) =>{
 
 
         const headers = new HttpHeaders({
@@ -227,7 +225,7 @@ export class TenantChooserService {
 
         console.log(`pullContentEntitiesTenantsByOffset is fetching`);
 
-        return tenantEntities
+        tenantEntities
           .fetch({ withCount: true, headers: headers })
           .pipe(
             map((entities) => {
@@ -245,16 +243,16 @@ export class TenantChooserService {
               console.log(`pullContentEntitiesTenantsByOffset handling error ${err}`);
               return new Array<ContentEntitiesTenant>();
             })
-          );
+          ).subscribe();
 
       })
-    )
-      .subscribe(piped => {
-        console.log(`this.restClientConfiguration$.pipe subscriber is emitting entities`);
-      });
+    );
+      // .subscribe(piped => {
+      //   console.log(`this.restClientConfiguration$.pipe subscriber is emitting entities`);
+      // });
   }
 
-  pullContentEntitiesTenantsCount(): void {
+  pullContentEntitiesTenantsCount(): Observable<any> {
     let ret: ContentEntitiesTenant[] = new Array<ContentEntitiesTenant>();
     console.log(
       `pullContentEntitiesTenantsCount is getting client configuration`
@@ -266,11 +264,14 @@ export class TenantChooserService {
       'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant'
     );
 
-    this.restClientConfiguration$.pipe(
+    return  this.restClientConfiguration$.pipe(
       skip(1),
-      concatMap((clientConfig) => {
+      map((clientConfig) => {
         let baseUrl = clientConfig.ODataEndpoint + `/${clientConfig.TenantIdentifier}/ODataContent/`;
         contentTenantsSvc.api.serviceRootUrl = baseUrl as string;
+        return clientConfig;
+      }),
+      map(clientConfig =>{
 
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${clientConfig.AccessToken}`,
@@ -283,22 +284,20 @@ export class TenantChooserService {
         );
         let tenantEntities = contentTenantsSvc.entities();
 
-        return tenantEntities.count().fetch({   headers: headers })
+        tenantEntities.count().fetch({   headers: headers })
           .pipe(
             map(odataResponse => {
               console.log("pullContentEntitiesTenantsCount has a count");
               this.contentEntitiesTenantsCount = odataResponse;
               return odataResponse;
             })
-        );
+        ).subscribe();
       })
-    )
-      .subscribe(piped => {
-        console.log(`this.restClientConfiguration$.pipe subscriber executing`);
-      });
+    );
+
   }
 
-  pullHostingEntitiesTenantsCount(): void {
+  pullHostingEntitiesTenantsCount(): Observable<any> {
     let ret: HostingEntitiesTenant[] = new Array<HostingEntitiesTenant>();
     console.log(
       `pullHostingEntitiesTenantsCount is getting client configuration`
@@ -310,9 +309,9 @@ export class TenantChooserService {
       'TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant'
     );
 
-    this.restClientConfiguration$.pipe(
+    return this.restClientConfiguration$.pipe(
       skip(1),
-      concatMap((clientConfig) => {
+      map((clientConfig) => {
         console.log(
           `pullHostingEntitiesTenantsCount finished getting client configuration with data ` +
             clientConfig
@@ -320,6 +319,9 @@ export class TenantChooserService {
 
         let baseUrl = clientConfig.ODataEndpoint +  `${clientConfig.TenantIdentifier}/ODataHosting/`;
         contentTenantsSvc.api.serviceRootUrl = baseUrl as string;
+        return clientConfig;
+      }),
+      map(clientConfig => {
 
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${clientConfig.AccessToken}`,
@@ -332,17 +334,15 @@ export class TenantChooserService {
         );
         let tenantEntities = contentTenantsSvc.entities();
 
-        return tenantEntities.count().fetch({ headers: headers })
+        tenantEntities.count().fetch({ headers: headers })
           .pipe(
             map(oDataResponse => {
               this.hostingEntitiesTenantsCount = oDataResponse;
               return oDataResponse;
-            }));
+            })).subscribe();
       })
-    )
-      .subscribe(piped => {
-        console.log(`this.restClientConfiguration$.pipe subscriber executing`);
-      });
+    );
+
   }
 
   ngOnDestroy() {

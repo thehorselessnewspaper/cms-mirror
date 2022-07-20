@@ -49,7 +49,7 @@ import { ContentPrincipalTableComponent } from '../../modules/principal-table/co
 @AutoUnsubscribe()
 export class TenantChooserComponent implements OnInit {
   @ViewChild(MatAccordion) accordion!: MatAccordion;
-  panelOpenState = false;
+  panelOpenState = true;
 
   clientConfiguration$!: Observable<SecurityRestClientConfiguration>;
 
@@ -80,6 +80,10 @@ export class TenantChooserComponent implements OnInit {
   public hostingModelTenant$!: Observable<any>;
   public contentModelTenant$!: Observable<any>;
 
+  hostingEntities$!: Observable<any>;
+
+  contentEntities$! : Observable<any>;
+
   constructor(
     private router: Router,
     tenantSvc: TenantRESTService,
@@ -90,6 +94,8 @@ export class TenantChooserComponent implements OnInit {
     this.tenantService = tenantSvc;
     this.oidcService = oidcAuthSvc;
     this.tenantChooserService = tenantChooserSvc;
+
+    this.clientConfigService.probeClientConfiguration().subscribe();
 
     this.hostingModelTenant$ =
       this.tenantChooserService.hostingEntitiesTenantsSubject.pipe(
@@ -117,9 +123,23 @@ export class TenantChooserComponent implements OnInit {
             console.log(`${entities?.length} entities retrieved`);
             this.contentTenants = entities as ContentEntitiesTenant[];
 
-            this.contentTenantsCount = this.hostingTenants.length;
+            this.contentTenantsCount = this.contentTenants.length;
           }
           return entities;
+        })
+      );
+
+      this.contentEntities$ = this.contentModelTenant$.pipe(
+        // skip(1),
+        tap( entities => {
+          // return entities as any[] | null;
+        })
+      );
+
+      this.hostingEntities$  =  this.hostingModelTenant$.pipe(
+        // skip(1),
+        tap( entities  =>  {
+          // return entities as any[] | null ;
         })
       );
   }
@@ -129,25 +149,6 @@ export class TenantChooserComponent implements OnInit {
     applicationJson.append('Accept', 'application/json');
 
 
-
-    // this.tenantChooserService.restClientConfiguration$
-    //     .pipe(
-    //         skip(1),
-    //         tap(t => {
-    //           console.log('tenant chooser component is pulling configuration and tenant counts');
-    //         }),
-    //         map((clientConfiguration) => {
-    //         this.tenantChooserService.pullContentEntitiesTenantsCount();
-    //         return clientConfiguration;
-    //       }),
-    //       map((clientConfiguration) => {
-    //         this.tenantChooserService.pullHostingEntitiesTenantsCount();
-    //         return clientConfiguration;
-    //       }),
-    //       tap(t => {
-    //         console.log('tenant chooser component has pulled configuration and tenant counts');
-    //       })
-    //     ).subscribe();
 
     try {
       this.tenantChooserService.restClientConfiguration$
@@ -208,6 +209,9 @@ export class TenantChooserComponent implements OnInit {
       console.log('exception pulling client configiuration');
     }
 
+    this.tenantChooserService.pullContentEntitiesTenantsCount().subscribe();
+    this.tenantChooserService.pullHostingEntitiesTenantsCount().subscribe();
+
     // this.oidcService
     //  .checkAuth(window.location.href)
     //  .subscribe((x) => (this.isAuthenticated = x.isAuthenticated));
@@ -221,7 +225,8 @@ export class TenantChooserComponent implements OnInit {
     this.tenantChooserService.pullHostingEntitiesTenantsByOffset(
       event.first,
       event.rows
-    );
+    ).subscribe();
+
     console.log(
       `pullHostingEntitiesTenantsByOffset finished event.first ${event.first}, event.rows ${event.rows}`
     );
@@ -235,7 +240,7 @@ export class TenantChooserComponent implements OnInit {
     this.tenantChooserService.pullContentEntitiesTenantsByOffset(
       event.first,
       event.rows
-    );
+    ).subscribe();
 
     console.log(
       `pullContentEntitiesTenantsByOffset finished event.first ${event.first}, event.rows ${event.rows}`
