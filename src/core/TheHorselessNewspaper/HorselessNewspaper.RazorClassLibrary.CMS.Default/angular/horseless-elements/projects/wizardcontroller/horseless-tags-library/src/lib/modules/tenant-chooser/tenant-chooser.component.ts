@@ -95,10 +95,9 @@ export class TenantChooserComponent implements OnInit {
     this.oidcService = oidcAuthSvc;
     this.tenantChooserService = tenantChooserSvc;
 
-    this.clientConfigService.probeClientConfiguration().subscribe();
 
     this.hostingModelTenant$ =
-      this.tenantChooserService.hostingEntitiesTenantsSubject.pipe(
+    this.tenantChooserService.hostingEntitiesTenantsSubject.pipe(
         map((entities) => {
 
 
@@ -112,12 +111,12 @@ export class TenantChooserComponent implements OnInit {
             this.hostingTenants = entities as HostingEntitiesTenant[];
             this.hostingTenantsCount = this.hostingTenants.length;
           }
-          return entities;
+
         })
       );
 
     this.contentModelTenant$ =
-      this.tenantChooserService.contentEntitiesTenantsSubject.pipe(
+    this.tenantChooserService.contentEntitiesTenantsSubject.pipe(
         map((entities) => {
           if (entities != null && entities != undefined) {
             console.log(`${entities?.length} entities retrieved`);
@@ -125,92 +124,16 @@ export class TenantChooserComponent implements OnInit {
 
             this.contentTenantsCount = this.contentTenants.length;
           }
-          return entities;
+            // return entities;
         })
       );
 
-      this.contentEntities$ = this.contentModelTenant$.pipe(
-        // skip(1),
-        tap( entities => {
-          // return entities as any[] | null;
-        })
-      );
-
-      this.hostingEntities$  =  this.hostingModelTenant$.pipe(
-        // skip(1),
-        tap( entities  =>  {
-          // return entities as any[] | null ;
-        })
-      );
   }
 
   ngOnInit(): void {
     let applicationJson = new HttpHeaders();
     applicationJson.append('Accept', 'application/json');
 
-
-
-    try {
-      this.tenantChooserService.restClientConfiguration$
-        .pipe(
-          skip(1),
-          map((clientConfiguration) => {
-
-            if (
-              clientConfiguration.AccessToken != null &&
-              clientConfiguration.AccessToken != undefined
-            ) {
-              console.log(
-                'theant chooser component is handling client configuration result'
-              );
-              this.isAuthenticated$.next(true);
-            }
-
-            return clientConfiguration;
-          }),
-          map((clientConfiguration) => {
-            try {
-              this.tenantChooserService.pullContentEntitiesTenantsByOffset(
-                0,
-                this.contentEntitiesPageSize
-              );
-            } catch (exception) {
-              console.log(
-                `tenantchoosercomponent threw exception ${exception}`
-              );
-            }
-            return clientConfiguration;
-          }),
-          map((clientConfiguration) => {
-            try {
-              this.tenantChooserService.pullHostingEntitiesTenantsByOffset(
-                0,
-                this.hostingEntitiesPageSize
-              );
-            } catch (exception) {
-              console.log(
-                `tenantchoosercomponent threw exception ${exception}`
-              );
-            }
-          }),
-          catchError((err) => {
-            console.log(
-              `TenantChooserComponent tenantChooserService.restClientConfiguration$ handling error ${err}`
-            );
-            return EMPTY;
-          })
-        )
-        .subscribe((piped) => {
-          console.log(
-            `tenantChooserService.restClientConfiguration$  pipe subscriber executing`
-          );
-        });
-    } catch (error) {
-      console.log('exception pulling client configiuration');
-    }
-
-    this.tenantChooserService.pullContentEntitiesTenantsCount().subscribe();
-    this.tenantChooserService.pullHostingEntitiesTenantsCount().subscribe();
 
     // this.oidcService
     //  .checkAuth(window.location.href)
@@ -225,7 +148,7 @@ export class TenantChooserComponent implements OnInit {
     this.tenantChooserService.pullHostingEntitiesTenantsByOffset(
       event.first,
       event.rows
-    ).subscribe();
+    );
 
     console.log(
       `pullHostingEntitiesTenantsByOffset finished event.first ${event.first}, event.rows ${event.rows}`
@@ -240,7 +163,7 @@ export class TenantChooserComponent implements OnInit {
     this.tenantChooserService.pullContentEntitiesTenantsByOffset(
       event.first,
       event.rows
-    ).subscribe();
+    );
 
     console.log(
       `pullContentEntitiesTenantsByOffset finished event.first ${event.first}, event.rows ${event.rows}`

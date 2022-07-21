@@ -15,6 +15,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         ExistsInContentDb,
         HasOwners,
         HasACL,
+        HasTenantFilesystem,
         HasContentCollection,
         DeploymentComplete
     }
@@ -136,7 +137,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [InverseProperty(nameof(Principal.OwnedTenants))]
         public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
 
-        [InverseProperty(nameof(Principal.ManagedTenants))]
+        [InverseProperty(nameof(Principal.Accounts))]
         public ICollection<Principal> Accounts { get; set; } = new HashSet<Principal>();
 
         public TenantDeploymentWorkflowState DeploymentState { get; set; } = TenantDeploymentWorkflowState.PendingApproval;

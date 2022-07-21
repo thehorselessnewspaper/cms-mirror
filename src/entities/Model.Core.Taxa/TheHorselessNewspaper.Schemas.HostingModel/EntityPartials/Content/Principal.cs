@@ -78,7 +78,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
       
         [InverseProperty(nameof(Tenant.Accounts))]
-        public ICollection<Tenant>? ManagedTenants { get; set; } = new HashSet<Tenant>();
+        public ICollection<Tenant>? Accounts { get; set; } = new HashSet<Tenant>();
 
         [InverseProperty(nameof(Tenant.Owners))]
         public ICollection<Tenant>? OwnedTenants { get; set; } = new HashSet<Tenant>();

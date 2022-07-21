@@ -148,6 +148,23 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
                 .Navigation(n => n.TenantIdentifierStrategy).AutoInclude();
 
 
+            builder.Entity<ContentCollection>()
+                .Navigation(n => n.ChildContentCollections).AutoInclude();
+
+            builder.Entity<ContentCollection>()
+                .Navigation(n => n.HorselessViews).AutoInclude();
+
+            builder.Entity<ContentCollection>()
+                .Navigation(n => n.Owners).AutoInclude();
+
+            builder.Entity<Principal>()
+            .Navigation(n => n.HorselessSessions).AutoInclude();
+
+            builder.Entity<Principal>()
+                .Navigation(n => n.Accounts).AutoInclude();
+
+
+
         }
 
     }
