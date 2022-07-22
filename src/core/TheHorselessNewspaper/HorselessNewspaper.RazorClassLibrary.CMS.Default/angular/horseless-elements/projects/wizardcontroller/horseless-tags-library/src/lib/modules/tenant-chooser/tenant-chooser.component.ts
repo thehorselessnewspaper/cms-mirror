@@ -78,9 +78,6 @@ export class TenantChooserComponent implements OnInit {
   public hostingModelTenant$!: Observable<any>;
   public contentModelTenant$!: Observable<any>;
 
-  hostingEntities$!: Observable<any>;
-
-  contentEntities$! : Observable<any>;
 
   constructor(
     private router: Router,
@@ -132,7 +129,7 @@ export class TenantChooserComponent implements OnInit {
       );
 
     this.contentModelTenant$ =
-    this.tenantChooserService.contentEntitiesTenantsSubject.pipe(
+    this.tenantChooserService.contentEntitiesTenant$.pipe(
         map((entities) => {
           if (entities != null && entities != undefined) {
             console.log(`${entities?.length} entities retrieved`);
@@ -155,7 +152,7 @@ export class TenantChooserComponent implements OnInit {
     //event.first = First row offset
     //event.rows = Number of rows per page
     console.log('pullHostingEntitiesTenantsByOffset starting');
-    this.tenantChooserService.getContentEntitiesTenantsByOffset(
+    this.tenantChooserService.getHostingEntitiesTenantsByOffset(
       event.first,
       event.rows
     ).subscribe(

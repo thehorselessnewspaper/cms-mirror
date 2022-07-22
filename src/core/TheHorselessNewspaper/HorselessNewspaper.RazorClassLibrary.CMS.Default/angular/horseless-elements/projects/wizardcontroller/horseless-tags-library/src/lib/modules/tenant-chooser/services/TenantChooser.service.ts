@@ -27,7 +27,7 @@ export class TenantChooserService {
   hostingEntitiesTenant$: BehaviorSubject<HostingEntitiesTenant[] >  = new BehaviorSubject<HostingEntitiesTenant[]>(new Array<HostingEntitiesTenant>());
   hostingEntitiesTenantsCount!: number;
 
-  contentEntitiesTenantsSubject: BehaviorSubject<ContentEntitiesTenant[]> = new BehaviorSubject<ContentEntitiesTenant[] >(new Array<ContentEntitiesTenant>());
+  contentEntitiesTenant$: BehaviorSubject<ContentEntitiesTenant[]> = new BehaviorSubject<ContentEntitiesTenant[] >(new Array<ContentEntitiesTenant>());
   contentEntitiesTenantsCount!: number;
 
 
@@ -42,11 +42,10 @@ export class TenantChooserService {
   }
 
   getContentEntitiesTenantsByOffset(offset: number, rowCount: number):  Observable<ContentEntitiesTenant[] | null> {
-    console.log(`pullContentEntitiesTenantsByOffset starting`);
+    console.log(`getContentEntitiesTenantsByOffset starting`);
     return this.clientConfigService.currentConfiguration$.pipe(
-      skip(1),
       map(clientConfig => {
-        console.log(`pullContentEntitiesTenantsByOffset pipe map starting`);
+        console.log(`getContentEntitiesTenantsByOffset pipe map starting`);
         //init service
         let contentTenantsSvc = this.factory.entitySet<ContentEntitiesTenant>(
           'Tenant',
@@ -55,7 +54,7 @@ export class TenantChooserService {
 
         let tenantEntities = contentTenantsSvc.entities();
 
-        console.log(`pullContentEntitiesTenantsByOffset has client config`);
+        console.log(`getContentEntitiesTenantsByOffset has client config`);
         let baseUrl = clientConfig.ODataEndpoint + `/${clientConfig.TenantIdentifier}/ODataContent/`;
         contentTenantsSvc.api.serviceRootUrl = baseUrl as string;
 
@@ -102,39 +101,36 @@ export class TenantChooserService {
           q.top(rowCount);
         });
 
-        console.log(`pullContentEntitiesTenantsByOffset is fetching`);
+        console.log(`getContentEntitiesTenantsByOffset is fetching`);
 
         return tenantEntities
           .fetch({ withCount: true, headers: headers })
           .pipe(
             map((entities) => {
-              console.log(`pullContentEntitiesTenantsByOffset is emitting entities`);
-                if(entities != null && entities != undefined
-                  && entities.entities != null && entities.entities != undefined)
-                  {
-                    this.contentEntitiesTenantsSubject.next(entities.entities);
-                    this.contentEntitiesTenantsCount = entities.annots.count as number;
+              console.log(`getContentEntitiesTenantsByOffset is emitting entities`);
 
-                  }
                   return entities.entities;
-            })
+            }),
           );
       }),
-      withLatestFrom(switched =>{
-        return switched
+      switchMap(entities =>{
+        console.log("getContentEntitiesTenantsByOffset: tenant chooser switchmapped");
+        return entities
       }),
-      switchMap(switched => {
-        return switched;
+      map(entities => {
+        let emitted = entities as ContentEntitiesTenant[];
+        this.contentEntitiesTenant$.next(emitted);
+        this.contentEntitiesTenantsCount = emitted.length as number;
+        return entities;
       })
     );
   }
 
   getHostingEntitiesTenantsByOffset (offset: number, rowCount: number): Observable<HostingEntitiesTenant[] | null> {
-
+    console.log(`getHostingEntitiesTenantsByOffset starting`);
     return this.clientConfigService.currentConfiguration$.pipe(
-      skip(1),
       map(clientConfig =>{
-        console.log(`pullHostingEntitiesTenantsByOffset starting`);
+        console.log(`getHostingEntitiesTenantsByOffset pipe starting`);
         //init service
         let contentTenantsSvc = this.factory.entitySet<HostingEntitiesTenant>(
           'Tenant',
@@ -142,7 +138,7 @@ export class TenantChooserService {
         );
 
         console.log(
-          `pullHostingEntitiesTenantsByOffset is getting client configuration`
+          `getHostingEntitiesTenantsByOffset is setting base url`
         );
 
         let baseUrl = clientConfig.ODataEndpoint + `/${clientConfig.TenantIdentifier}/ODataHosting/`;
@@ -192,29 +188,26 @@ export class TenantChooserService {
           q.top(rowCount);
         });
 
-        console.log(`pullHostingEntitiesTenantsByOffset fetching`);
+        console.log(`getHostingEntitiesTenantsByOffset fetching`);
 
         return tenantEntities
         .fetch({ withCount: true, headers: headers })
         .pipe(
           map((entities) =>{
-
-            console.log(`pullHostingEntitiesTenantsByOffset is emitting entities`);
-            if(entities != null && entities != undefined &&
-              entities.entities != null && entities.entities != undefined)
-              {
-                this.hostingEntitiesTenant$.next(entities.entities);
-                this.contentEntitiesTenantsCount = entities.annots.count as number;
-              }
                return entities.entities;
           })
         );
       }),
-      withLatestFrom(switched =>{
-        return switched
+      switchMap(entities => {
+        console.log("getHostingEntitiesTenantsByOffset: tenant chooser switchmapped");
+
+        return entities;
       }),
-      switchMap(switched => {
-        return switched;
+      map(entities =>{
+        let emitted = entities as HostingEntitiesTenant[];
+        this.hostingEntitiesTenant$.next(emitted);
+        this.contentEntitiesTenantsCount = emitted.length as number;
+        return entities;
       })
     );
   }

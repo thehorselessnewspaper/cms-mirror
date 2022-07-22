@@ -22,7 +22,7 @@ import {
   Observable,
   ReplaySubject,
   take,
-  tap,
+  tap,skip,
   concatMap,
 } from 'rxjs';
 import { ConfigurationEndpointService } from '../../../../../services/configuration-endpoint.service';
@@ -31,13 +31,7 @@ import { ConfigurationEndpointService } from '../../../../../services/configurat
 })
 export class PrincipalQueryService {
   clientConfigService!: ConfigurationEndpointService;
-  restClientConfiguration$ =  this.clientConfigService.currentConfiguration$
-                              .pipe(
-                                map(configuration => {
-                                  return configuration;
-                                })
-                              )
-;
+
   contentEntitiesPrincipal$!: BehaviorSubject<ContentEntitiesPrincipal[] | null>;
 
   constructor(

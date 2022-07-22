@@ -23,9 +23,9 @@ export class ContentPrincipalTableComponent implements OnInit {
       new Array<ContentEntitiesPrincipal>()
     );
 
-  constructor(principalService : PrincipalQueryService) {
+  constructor() {
 
-    this.principalService = principalService;
+
   }
 
   ngOnInit(): void {

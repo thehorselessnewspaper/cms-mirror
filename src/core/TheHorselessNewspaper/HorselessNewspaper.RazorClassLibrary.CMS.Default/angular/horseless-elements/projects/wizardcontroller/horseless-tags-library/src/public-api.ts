@@ -26,3 +26,4 @@ export * from './lib/modules/principal-table/content/contentPrincipal-table/cont
 export * from './lib/modules/principal-table/content/contentPrincipal-table/contentPrincipal-table.component';
 export * from './lib/modules/principal-table/hosting/hostingPrincipal-table/hostingPrincipal-table.module';
 export * from './lib/modules/principal-table/hosting/hostingPrincipal-table/hostingPrincipal-table.component';
+export * from './lib/modules/principal-table/content/contentPrincipal-table/services/principalQuery.service';
