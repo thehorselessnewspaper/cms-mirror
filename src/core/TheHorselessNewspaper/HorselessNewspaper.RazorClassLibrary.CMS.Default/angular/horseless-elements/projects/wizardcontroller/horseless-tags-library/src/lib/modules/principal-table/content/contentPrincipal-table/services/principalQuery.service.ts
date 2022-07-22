@@ -46,5 +46,7 @@ export class PrincipalQueryService {
     this.contentEntitiesPrincipal$ = new BehaviorSubject<
     ContentEntitiesPrincipal[] | null
     >(new Array<ContentEntitiesPrincipal>());
+
+    console.log('PrincipalQueryService constructed');
   }
 }

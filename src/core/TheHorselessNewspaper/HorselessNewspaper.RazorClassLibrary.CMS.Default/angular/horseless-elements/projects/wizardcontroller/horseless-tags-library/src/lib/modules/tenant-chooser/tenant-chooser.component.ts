@@ -41,6 +41,8 @@ import { ContentAccessControlEntryEditorComponent } from '../../modules/accessCo
 import { ContentAccessControlEntryTableComponent } from '../../modules/accessControlEntry-table/contentAccessControlEntry-table/contentAccessControlEntry-table.component';
 import { HostingAccessControlEntryTableComponent } from '../accessControlEntry-table/hostingAccessControlEntry-table/hostingAccessControlEntry-table.component';
 import { ContentPrincipalTableComponent } from '../../modules/principal-table/content/contentPrincipal-table/contentPrincipal-table.component';
+import  { HostingPrincipalTableComponent } from '../../modules/principal-table/hosting/hostingPrincipal-table/hostingPrincipal-table.component';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 @Component({
   selector: 'lib-tenant-chooser',
   templateUrl: './tenant-chooser.component.html',
@@ -152,16 +154,12 @@ export class TenantChooserComponent implements OnInit {
     //event.first = First row offset
     //event.rows = Number of rows per page
     console.log('pullHostingEntitiesTenantsByOffset starting');
-    this.tenantChooserService.getHostingEntitiesTenantsByOffset(
+    this.tenantChooserService.pullHostingEntitiesTenantsByOffset(
       event.first,
       event.rows
-    ).subscribe(
-      data => {
-        console.log(
-          `pullHostingEntitiesTenantsByOffset finished event.first ${event.first}, event.rows ${event.rows}`
-        );
-      }
-    );
+    ).subscribe(data => {
+      console.log("pullHostingEntitiesTenantsByOffset subscriber executing");
+    });
 
 
   }
@@ -171,20 +169,35 @@ export class TenantChooserComponent implements OnInit {
     //event.rows = Number of rows per page
 
     console.log('pullContentEntitiesTenantsByOffset starting');
-    this.tenantChooserService.getContentEntitiesTenantsByOffset(
+    this.tenantChooserService.pullContentEntitiesTenantsByOffset(
       event.first,
       event.rows
     ).subscribe(data => {
-
-      console.log(
-        `pullContentEntitiesTenantsByOffset finished event.first ${event.first}, event.rows ${event.rows}`
-      );
+      console.log("pullContentEntitiesTenantsByOffset subscriber executing");
     });
 
   }
 
   ngOnDestroy() {
     // We'll throw an error if it doesn't
+  }
+
+  onSelectionChanged($event: MatTabChangeEvent) : void {
+    console.log("selection changed");
+    this.tenantChooserService.pullContentEntitiesTenantsByOffset(
+      0,
+      10
+    ).subscribe(data => {
+      console.log("spullContentEntitiesTenantsByOffset selection changed subscriber executing");
+    });
+
+    this.tenantChooserService.pullHostingEntitiesTenantsByOffset(
+      0,
+      10
+    ).subscribe(data => {
+      console.log("pullHostingEntitiesTenantsByOffset selection changed subscriber executing");
+    });
+
   }
 }
 

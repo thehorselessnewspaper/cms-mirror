@@ -319,6 +319,7 @@ namespace HorselessNewspaper.Web.Core.Startup
             services.AddStackExchangeRedisCache(o =>
             {
                 o.Configuration = Configuration.GetConnectionString("RedisSessionCache");
+               
             });
 
             services.AddSession(options =>

@@ -4,8 +4,8 @@
     <button mat-button (click)="accordion.closeAll()">Collapse All</button>
   </div> -->
 
-  <mat-tab-group dynamicHeight>
-    <mat-tab label="Hosting">
+  <mat-tab-group #tabGroup dynamicHeight (selectedTabChange)="onSelectionChanged($event)">
+    <mat-tab label="Hosting" >
       <mat-accordion>
         <mat-expansion-panel
           (opened)="panelOpenState = true"
@@ -61,8 +61,8 @@
 
                   <div *ngIf="tenant.Owners">
                     <div>owners</div>
-                    <lib-contentPrincipal-table [principals]="tenant.Owners">
-                    </lib-contentPrincipal-table>
+                    <lib-hostingPrincipal-table [principals]="tenant.Owners">
+                    </lib-hostingPrincipal-table>
                   </div>
                 </p-card>
               </div>
@@ -90,7 +90,7 @@
           </mat-expansion-panel-header>
 
           <p-dataView
-            #dv
+            #dvContent
             [paginator]="true"
             [rows]="5"
             layout="grid"

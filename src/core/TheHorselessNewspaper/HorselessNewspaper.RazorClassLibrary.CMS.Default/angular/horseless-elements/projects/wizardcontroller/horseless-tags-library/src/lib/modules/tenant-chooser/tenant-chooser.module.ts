@@ -12,6 +12,7 @@ import {
 } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 import { TenantChooserService } from './services/TenantChooser.service';
 import { ConfigurationEndpointService } from '../../services/configuration-endpoint.service';
+import { PrincipalQueryService } from '../principal-table/content/contentPrincipal-table/services/principalQuery.service';
 import { AuthStateService } from 'angular-auth-oidc-client/lib/auth-state/auth-state.service';
 import { HttpHeaders } from '@angular/common/http';
 import { DataViewModule } from 'primeng/dataview';
@@ -33,6 +34,7 @@ import { AccessControlEntryEditorModule } from '../accessControlEntry-editor/acc
 import { HostingAccessControlEntryTableModule } from '../accessControlEntry-table/hostingAccessControlEntry-table/hostingAccessControlEntry-table.module';
 import { ContentAccessControlEntryTableModule } from '../accessControlEntry-table/contentAccessControlEntry-table/contentAccessControlEntry-table.module';
 import { ContentPrincipalTableModule } from '../principal-table/content/contentPrincipal-table/contentPrincipal-table.module';
+import { HostingPrincipalTableModule } from '../principal-table/hosting/hostingPrincipal-table/hostingPrincipal-table.module';
 import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
@@ -57,6 +59,7 @@ import { MatIconModule } from '@angular/material/icon';
     HostingAccessControlEntryTableModule,
     ContentAccessControlEntryTableModule,
     AccessControlEntryEditorModule,
+    HostingPrincipalTableModule,
     ContentPrincipalTableModule,
     ODataModule.forRoot(
       Object.assign(HorselessContentConfig, {
@@ -72,7 +75,7 @@ import { MatIconModule } from '@angular/material/icon';
     ),
   ],
   providers: [
-    TenantChooserService,
+    TenantChooserService, PrincipalQueryService,
     {
       provide: HorselessConfiguration,
       useFactory: (authService: ConfigurationEndpointService) =>
@@ -83,6 +86,6 @@ import { MatIconModule } from '@angular/material/icon';
       multi: false,
     },
   ],
-  exports: [TenantChooserComponent],
+  exports: [TenantChooserComponent]
 })
 export class TenantChooserModule {}

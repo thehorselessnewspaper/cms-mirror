@@ -7,7 +7,8 @@ import {from, Observable, BehaviorSubject} from 'rxjs';
 @Component({
   selector: 'lib-contentPrincipal-table',
   templateUrl: './contentPrincipal-table.component.html',
-  styleUrls: ['./contentPrincipal-table.component.css']
+  styleUrls: ['./contentPrincipal-table.component.css'],
+  providers: [PrincipalQueryService]
 })
 
 export class ContentPrincipalTableComponent implements OnInit {
@@ -17,19 +18,17 @@ export class ContentPrincipalTableComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion | undefined;
   public selectedItem!: ContentEntitiesPrincipal;
   panelOpenState : boolean = false;
-  principalService! : PrincipalQueryService;
   principals$: BehaviorSubject<ContentEntitiesPrincipal[]> =
     new BehaviorSubject<ContentEntitiesPrincipal[]>(
       new Array<ContentEntitiesPrincipal>()
     );
 
-  constructor() {
-
-
+  constructor( principalService : PrincipalQueryService) {
+    console.log('ContentPrincipalTableComponent constructing');
   }
 
   ngOnInit(): void {
-    console.log(`ContentPrincipalTableComponent starting`);
+    console.log('ContentPrincipalTableComponent ngOnInit');
 
   }
 

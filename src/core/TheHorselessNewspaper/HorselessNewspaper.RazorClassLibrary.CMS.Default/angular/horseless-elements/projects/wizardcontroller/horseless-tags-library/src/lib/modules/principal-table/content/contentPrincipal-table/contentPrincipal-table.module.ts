@@ -9,8 +9,8 @@ import {MatIconModule} from '@angular/material/icon';
   imports: [
     CommonModule, MatIconModule, MatExpansionModule,  TableModule
   ],
-  providers: [PrincipalQueryService],
   declarations: [ContentPrincipalTableComponent],
-  exports: [ContentPrincipalTableComponent]
+  exports: [ContentPrincipalTableComponent],
+  providers: [PrincipalQueryService]
 })
 export class ContentPrincipalTableModule { }

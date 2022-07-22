@@ -21,7 +21,7 @@ import { IClaimsIdentityAuthService as IClaimsIdentiyAuthService } from './IClai
 
 @AutoUnsubscribe()
 @Injectable({
-  providedIn: 'any',
+  providedIn: 'root',
 })
 export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
 

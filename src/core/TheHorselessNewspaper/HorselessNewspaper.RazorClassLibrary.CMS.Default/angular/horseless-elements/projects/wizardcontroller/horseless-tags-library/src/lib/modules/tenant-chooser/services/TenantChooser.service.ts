@@ -37,13 +37,17 @@ export class TenantChooserService {
     private factory: ODataServiceFactory,
     private tenantService: TenantRESTService
   ) {
-    console.log("TenantChooserService starting");
+    console.log("TenantChooserService starting. probing client configuration");
     // this.clientConfigService = clientConfigSvc;
+    this.clientConfigService.probeClientConfiguration().subscribe(data => {
+      console.log("tenant chooser service constructor completed probing client configuration");
+    })
   }
 
-  getContentEntitiesTenantsByOffset(offset: number, rowCount: number):  Observable<ContentEntitiesTenant[] | null> {
+  private getContentEntitiesTenantsByOffset(offset: number, rowCount: number):  void {
     console.log(`getContentEntitiesTenantsByOffset starting`);
-    return this.clientConfigService.currentConfiguration$.pipe(
+    this.clientConfigService.currentConfiguration$.pipe(
+      skip(1),
       map(clientConfig => {
         console.log(`getContentEntitiesTenantsByOffset pipe map starting`);
         //init service
@@ -103,7 +107,7 @@ export class TenantChooserService {
 
         console.log(`getContentEntitiesTenantsByOffset is fetching`);
 
-        return tenantEntities
+      return tenantEntities
           .fetch({ withCount: true, headers: headers })
           .pipe(
             map((entities) => {
@@ -118,17 +122,27 @@ export class TenantChooserService {
         return entities
       }),
       map(entities => {
-        let emitted = entities as ContentEntitiesTenant[];
-        this.contentEntitiesTenant$.next(emitted);
-        this.contentEntitiesTenantsCount = emitted.length as number;
-        return entities;
+        if(entities != null && entities != undefined){
+          let emitted = entities as ContentEntitiesTenant[];
+          this.contentEntitiesTenant$.next(emitted);
+          this.contentEntitiesTenantsCount = emitted.length as number;
+          return entities;
+        }
+        else{
+          return new Array<ContentEntitiesTenant>()
+        }
+
+
       })
-    );
+    ).subscribe(data => {
+      console.log("getContentEntitiesTenantsByOffset: tenant chooser service pipe subscriber executing.")
+    });
   }
 
-  getHostingEntitiesTenantsByOffset (offset: number, rowCount: number): Observable<HostingEntitiesTenant[] | null> {
+  private getHostingEntitiesTenantsByOffset (offset: number, rowCount: number): void{
     console.log(`getHostingEntitiesTenantsByOffset starting`);
-    return this.clientConfigService.currentConfiguration$.pipe(
+    this.clientConfigService.currentConfiguration$.pipe(
+      skip(1),
       map(clientConfig =>{
         console.log(`getHostingEntitiesTenantsByOffset pipe starting`);
         //init service
@@ -204,14 +218,210 @@ export class TenantChooserService {
         return entities;
       }),
       map(entities =>{
-        let emitted = entities as HostingEntitiesTenant[];
-        this.hostingEntitiesTenant$.next(emitted);
-        this.contentEntitiesTenantsCount = emitted.length as number;
+        if(entities != null && entities != undefined)
+        {
+          let emitted = entities as HostingEntitiesTenant[];
+          this.hostingEntitiesTenant$.next(emitted);
+          this.contentEntitiesTenantsCount = emitted.length as number;
+        }
+        else{
+          return new Array<HostingEntitiesTenant>();
+        }
+
+        return entities;
+      })
+    ).subscribe(data => {
+      console.log("getHostingEntitiesTenantsByOffsetpipe subscriber executing")
+    });
+  }
+
+  pullHostingEntitiesTenantsByOffset (offset: number, rowCount: number): Observable<HostingEntitiesTenant[]>{
+    console.log(`getHostingEntitiesTenantsByOffset starting`);
+    return this.clientConfigService.currentConfiguration$.pipe(
+      skip(1),
+      map(clientConfig =>{
+        console.log(`getHostingEntitiesTenantsByOffset pipe starting`);
+        //init service
+        let contentTenantsSvc = this.factory.entitySet<HostingEntitiesTenant>(
+          'Tenant',
+          'TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Tenant'
+        );
+
+        console.log(
+          `getHostingEntitiesTenantsByOffset is setting base url`
+        );
+
+        let baseUrl = clientConfig.ODataEndpoint + `/${clientConfig.TenantIdentifier}/ODataHosting/`;
+        contentTenantsSvc.api.serviceRootUrl = baseUrl as string;
+
+        const headers = new HttpHeaders({
+          'Authorization': `Bearer ${clientConfig.AccessToken}`,
+          'Accept': 'odata.metadata=full',
+          '__tenant__' : clientConfig.TenantIdentifier as string
+        })
+
+        console.log(
+          'odata service root url= ' + contentTenantsSvc.api.serviceRootUrl
+        );
+
+        let tenantEntities = contentTenantsSvc.entities();
+
+        // build query
+        tenantEntities.query((q) => {
+          q.orderBy((h) => h.e().ascending(h.s.CreatedAt));
+
+          q.expand({
+            AccessControlEntries : {
+              // expand: {
+              //   AccessControlEntries: {
+              //     select: ["AccessControlEntries"]
+              //   }
+              // }
+            },
+            Owners : {
+              // expand: {
+              //   Owners: {
+              //     select: ["Owners"]
+              //   }
+              // }
+            },
+            Accounts : {
+              // expand: {
+              //   OwnedPrincipals: {
+              //     select: ["OwnedPrincipals"]
+              //   }
+              // }
+            }
+          });
+
+          q.skip(offset);
+          q.top(rowCount);
+        });
+
+        console.log(`getHostingEntitiesTenantsByOffset fetching`);
+
+        return tenantEntities
+        .fetch({ withCount: true, headers: headers })
+        .pipe(
+          map((entities) =>{
+               return entities.entities;
+          })
+        );
+      }),
+      switchMap(entities => {
+        console.log("getHostingEntitiesTenantsByOffset: tenant chooser switchmapped");
+
+        return entities;
+      }),
+      map(entities =>{
+        if(entities != null && entities != undefined)
+        {
+          let emitted = entities as HostingEntitiesTenant[];
+          this.hostingEntitiesTenant$.next(emitted);
+          this.contentEntitiesTenantsCount = emitted.length as number;
+        }
+        else{
+          return new Array<HostingEntitiesTenant>();
+        }
+
         return entities;
       })
     );
   }
 
+
+ pullContentEntitiesTenantsByOffset(offset: number, rowCount: number):  Observable<ContentEntitiesTenant[]> {
+    console.log(`getContentEntitiesTenantsByOffset starting`);
+    return this.clientConfigService.currentConfiguration$.pipe(
+      skip(1),
+      map(clientConfig => {
+        console.log(`getContentEntitiesTenantsByOffset pipe map starting`);
+        //init service
+        let contentTenantsSvc = this.factory.entitySet<ContentEntitiesTenant>(
+          'Tenant',
+          'TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant'
+        );
+
+        let tenantEntities = contentTenantsSvc.entities();
+
+        console.log(`getContentEntitiesTenantsByOffset has client config`);
+        let baseUrl = clientConfig.ODataEndpoint + `/${clientConfig.TenantIdentifier}/ODataContent/`;
+        contentTenantsSvc.api.serviceRootUrl = baseUrl as string;
+
+        console.log(
+          'odata service root url= ' + contentTenantsSvc.api.serviceRootUrl
+        );
+
+        const headers = new HttpHeaders({
+          'Authorization': `Bearer ${clientConfig.AccessToken}`,
+          'Accept': 'odata.metadata=full',
+          '__tenant__' : clientConfig.TenantIdentifier as string
+        })
+
+        // build query
+        tenantEntities.query((q) => {
+          q.orderBy((h) => h.e().ascending(h.s.CreatedAt));
+
+
+          q.expand({
+            AccessControlEntries : {
+              // expand: {
+              //   AccessControlEntries: {
+              //     select: ["AccessControlEntries"]
+              //   }
+              // }
+            },
+            Owners : {
+              // expand: {
+              //   Owners: {
+              //     select: ["Owners"]
+              //   }
+              // }
+            },
+            Accounts : {
+              // expand: {
+              //   OwnedPrincipals: {
+              //     select: ["OwnedPrincipals"]
+              //   }
+              // }
+            }
+          });
+
+          q.skip(offset);
+          q.top(rowCount);
+        });
+
+        console.log(`getContentEntitiesTenantsByOffset is fetching`);
+
+      return tenantEntities
+          .fetch({ withCount: true, headers: headers })
+          .pipe(
+            map((entities) => {
+              console.log(`getContentEntitiesTenantsByOffset is emitting entities`);
+
+                  return entities.entities;
+            }),
+          );
+      }),
+      switchMap(entities =>{
+        console.log("getContentEntitiesTenantsByOffset: tenant chooser switchmapped");
+        return entities
+      }),
+      map(entities => {
+        if(entities != null && entities != undefined){
+          let emitted = entities as ContentEntitiesTenant[];
+          this.contentEntitiesTenant$.next(emitted);
+          this.contentEntitiesTenantsCount = emitted.length as number;
+          return entities;
+        }
+        else{
+          return new Array<ContentEntitiesTenant>()
+        }
+
+
+      })
+    );
+  }
   ngOnDestroy() {
     // We'll throw an error if it doesn't
   }
