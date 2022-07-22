@@ -51,8 +51,6 @@ export class TenantChooserComponent implements OnInit {
   @ViewChild(MatAccordion) accordion!: MatAccordion;
   panelOpenState = true;
 
-  clientConfiguration$!: Observable<SecurityRestClientConfiguration>;
-
   currentTenantIdentifier: string = '';
 
   contentTenants!: ContentEntitiesTenant[];
@@ -91,16 +89,34 @@ export class TenantChooserComponent implements OnInit {
     tenantChooserSvc: TenantChooserService,
     private clientConfigService: ConfigurationEndpointService
   ) {
+
+    console.log("tehant chooser component constructing");
     this.tenantService = tenantSvc;
     this.oidcService = oidcAuthSvc;
     this.tenantChooserService = tenantChooserSvc;
 
 
+ console.log("tehant chooser component constructor complete");
+  }
+
+  ngOnInit(): void {
+    let applicationJson = new HttpHeaders();
+    applicationJson.append('Accept', 'application/json');
+    console.log("tenant chooser compoent is running ngOnInit and probing client configuraton");
+
+    console.log("tenant chooser compoent is done running ngOnInit and probing client configuraton");
+
+    this.clientConfigService.currentConfiguration$.pipe(
+      skip(1),
+      map(config => {
+        console.log("tenant chooser compoent is testing authenticated status");
+        this.isAuthenticated$.next(true);
+      })
+    ).subscribe();
+
     this.hostingModelTenant$ =
-    this.tenantChooserService.hostingEntitiesTenantsSubject.pipe(
+    this.tenantChooserService.hostingEntitiesTenant$.pipe(
         map((entities) => {
-
-
           if (
             entities != null &&
             entities != undefined &&
@@ -111,7 +127,7 @@ export class TenantChooserComponent implements OnInit {
             this.hostingTenants = entities as HostingEntitiesTenant[];
             this.hostingTenantsCount = this.hostingTenants.length;
           }
-
+          return entities;
         })
       );
 
@@ -124,15 +140,9 @@ export class TenantChooserComponent implements OnInit {
 
             this.contentTenantsCount = this.contentTenants.length;
           }
-            // return entities;
+            return entities;
         })
       );
-
-  }
-
-  ngOnInit(): void {
-    let applicationJson = new HttpHeaders();
-    applicationJson.append('Accept', 'application/json');
 
 
     // this.oidcService
@@ -145,14 +155,18 @@ export class TenantChooserComponent implements OnInit {
     //event.first = First row offset
     //event.rows = Number of rows per page
     console.log('pullHostingEntitiesTenantsByOffset starting');
-    this.tenantChooserService.pullHostingEntitiesTenantsByOffset(
+    this.tenantChooserService.getContentEntitiesTenantsByOffset(
       event.first,
       event.rows
+    ).subscribe(
+      data => {
+        console.log(
+          `pullHostingEntitiesTenantsByOffset finished event.first ${event.first}, event.rows ${event.rows}`
+        );
+      }
     );
 
-    console.log(
-      `pullHostingEntitiesTenantsByOffset finished event.first ${event.first}, event.rows ${event.rows}`
-    );
+
   }
 
   pullContentEntitiesTenantsByOffset(event: IPagedOffset) {
@@ -160,14 +174,16 @@ export class TenantChooserComponent implements OnInit {
     //event.rows = Number of rows per page
 
     console.log('pullContentEntitiesTenantsByOffset starting');
-    this.tenantChooserService.pullContentEntitiesTenantsByOffset(
+    this.tenantChooserService.getContentEntitiesTenantsByOffset(
       event.first,
       event.rows
-    );
+    ).subscribe(data => {
 
-    console.log(
-      `pullContentEntitiesTenantsByOffset finished event.first ${event.first}, event.rows ${event.rows}`
-    );
+      console.log(
+        `pullContentEntitiesTenantsByOffset finished event.first ${event.first}, event.rows ${event.rows}`
+      );
+    });
+
   }
 
   ngOnDestroy() {

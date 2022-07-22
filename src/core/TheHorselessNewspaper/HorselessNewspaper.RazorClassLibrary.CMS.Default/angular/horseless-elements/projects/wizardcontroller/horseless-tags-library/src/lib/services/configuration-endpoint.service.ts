@@ -7,6 +7,7 @@ import { SecurityRestClientConfiguration } from '@wizardcontrollerprerelease/hor
 import {
   BehaviorSubject,
   catchError,
+  concatMap,
   EMPTY,
   map,
   Observable,
@@ -26,10 +27,18 @@ export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
 
   public accessToken : string = '';
 
-  clientConfiguration$: BehaviorSubject<SecurityRestClientConfiguration> =
-    new BehaviorSubject<SecurityRestClientConfiguration>({});
+  private clientConfiguration$: BehaviorSubject<SecurityRestClientConfiguration>  =
+                                new BehaviorSubject<SecurityRestClientConfiguration>({})
+
+  currentConfiguration$ : Observable<SecurityRestClientConfiguration> = this.clientConfiguration$.asObservable();
 
   constructor(private httpClient: HttpClient) {
+console.log("configuration endpoint service starting");
+this.probeClientConfiguration().subscribe(clientConfig => {
+  console.log("client configuration probed");
+  this.clientConfiguration$.next(clientConfig);
+  this.accessToken = clientConfig.AccessToken as string;
+});
 
   }
 
@@ -51,7 +60,7 @@ export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
    * then
    * @returns Observable<SecurityRestClientConfiguration>
    */
-  public probeClientConfiguration() : Observable<any> {
+  public probeClientConfiguration() : Observable<SecurityRestClientConfiguration> {
     let url = window.location.href;
     let headers = new HttpHeaders();
     // command channel message to the client configuration endpoint middleware
@@ -66,16 +75,9 @@ export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
           console.log(`probeClientConfiguration handling client configuration result for ${url}`)
           this.clientConfiguration$.next(clientConfig);
           this.accessToken = clientConfig.AccessToken as string;
-
-        }),
-        catchError(err => {
-          console.log(`probeClientConfiguration handling error ${err}`);
-          return EMPTY;
+          return clientConfig;
         })
       );
-      // .subscribe(piped => {
-      //   console.log(`probeClientConfiguration pipe subscriber got client configuration for ${url}`);
-      // });
   }
 
   private handleError(error: HttpErrorResponse) {

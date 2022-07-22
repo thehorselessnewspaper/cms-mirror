@@ -31,7 +31,7 @@ import { ConfigurationEndpointService } from '../../../../../services/configurat
 })
 export class PrincipalQueryService {
   clientConfigService!: ConfigurationEndpointService;
-  restClientConfiguration$ =  this.clientConfigService.clientConfiguration$
+  restClientConfiguration$ =  this.clientConfigService.currentConfiguration$
                               .pipe(
                                 map(configuration => {
                                   return configuration;
