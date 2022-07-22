@@ -238,7 +238,6 @@ export class TenantChooserService {
   pullHostingEntitiesTenantsByOffset (offset: number, rowCount: number): Observable<HostingEntitiesTenant[]>{
     console.log(`getHostingEntitiesTenantsByOffset starting`);
     return this.clientConfigService.currentConfiguration$.pipe(
-      skip(1),
       map(clientConfig =>{
         console.log(`getHostingEntitiesTenantsByOffset pipe starting`);
         //init service
@@ -333,8 +332,7 @@ export class TenantChooserService {
  pullContentEntitiesTenantsByOffset(offset: number, rowCount: number):  Observable<ContentEntitiesTenant[]> {
     console.log(`getContentEntitiesTenantsByOffset starting`);
     return this.clientConfigService.currentConfiguration$.pipe(
-      skip(1),
-      map(clientConfig => {
+        map(clientConfig => {
         console.log(`getContentEntitiesTenantsByOffset pipe map starting`);
         //init service
         let contentTenantsSvc = this.factory.entitySet<ContentEntitiesTenant>(
