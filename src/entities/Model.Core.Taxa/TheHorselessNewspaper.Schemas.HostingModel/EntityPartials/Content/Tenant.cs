@@ -143,7 +143,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public TenantDeploymentWorkflowState DeploymentState { get; set; } = TenantDeploymentWorkflowState.PendingApproval;
 
         [InverseProperty(nameof(AccessControlEntry.ManagedTenants))]
-        public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+        public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
         [InverseProperty(nameof(ContentCollection.Tenants))]
         public ICollection<ContentCollection> ContentCollections { get; set; } = new HashSet<ContentCollection>();
