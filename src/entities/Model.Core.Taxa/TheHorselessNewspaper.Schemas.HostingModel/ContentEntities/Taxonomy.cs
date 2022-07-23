@@ -10,12 +10,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     public partial class Taxonomy
     {
-        public Taxonomy()
-        {
-            ContentCollections = new HashSet<ContentCollection>();
-            Taxons = new HashSet<Taxon>();
-        }
-
         [Key]
         public Guid Id { get; set; }
         public string? DisplayName { get; set; }
@@ -25,12 +19,5 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public DateTime? CreatedAt { get; set; }
         public string? JsonValue { get; set; }
         public string? JsonSchema { get; set; }
-
-        [ForeignKey("Taxonomies_Id")]
-        [InverseProperty("Taxonomies")]
-        public virtual ICollection<ContentCollection> ContentCollections { get; set; }
-        [ForeignKey("Taxonomies_Id")]
-        [InverseProperty("Taxonomies")]
-        public virtual ICollection<Taxon> Taxons { get; set; }
     }
 }

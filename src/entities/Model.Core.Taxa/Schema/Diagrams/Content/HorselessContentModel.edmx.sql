@@ -2,14 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/14/2022 12:25:38
+-- Date Created: 07/22/2022 22:12:26
 -- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Content\HorselessContentModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
 
-GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
 
@@ -17,18 +16,6 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_TenantContentCollections_Tenant]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TenantContentCollections] DROP CONSTRAINT [FK_TenantContentCollections_Tenant];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TenantContentCollections_ContentCollection]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TenantContentCollections] DROP CONSTRAINT [FK_TenantContentCollections_ContentCollection];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ContentCollectionMimeContent_ContentCollection]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ContentCollectionMimeContent] DROP CONSTRAINT [FK_ContentCollectionMimeContent_ContentCollection];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ContentCollectionMimeContent_MimeContent]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ContentCollectionMimeContent] DROP CONSTRAINT [FK_ContentCollectionMimeContent_MimeContent];
-GO
 IF OBJECT_ID(N'[dbo].[FK_FilesystemAssetMimeContent]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[HorselessContents] DROP CONSTRAINT [FK_FilesystemAssetMimeContent];
 GO
@@ -62,29 +49,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PublicationHierarchy_PublicationChildren]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PublicationHierarchy] DROP CONSTRAINT [FK_PublicationHierarchy_PublicationChildren];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PublicationContentCollection_Publication]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PublicationContentCollection] DROP CONSTRAINT [FK_PublicationContentCollection_Publication];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PublicationContentCollection_ContentCollection]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PublicationContentCollection] DROP CONSTRAINT [FK_PublicationContentCollection_ContentCollection];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TaxonTaxonomy_Taxon]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TaxonTaxonomy] DROP CONSTRAINT [FK_TaxonTaxonomy_Taxon];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TaxonTaxonomy_Taxonomy]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TaxonTaxonomy] DROP CONSTRAINT [FK_TaxonTaxonomy_Taxonomy];
-GO
 IF OBJECT_ID(N'[dbo].[FK_TaxonTaxon_Taxon]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TaxonHirearchy] DROP CONSTRAINT [FK_TaxonTaxon_Taxon];
 GO
 IF OBJECT_ID(N'[dbo].[FK_TaxonTaxon_Taxon1]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TaxonHirearchy] DROP CONSTRAINT [FK_TaxonTaxon_Taxon1];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TaxonHolonym_Taxon]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TaxonHolonym] DROP CONSTRAINT [FK_TaxonHolonym_Taxon];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TaxonHolonym_Holonym]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TaxonHolonym] DROP CONSTRAINT [FK_TaxonHolonym_Holonym];
 GO
 IF OBJECT_ID(N'[dbo].[FK_HolonymMeronym_Holonym]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[HolonymMeronym] DROP CONSTRAINT [FK_HolonymMeronym_Holonym];
@@ -92,20 +61,8 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_HolonymMeronym_Meronym]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[HolonymMeronym] DROP CONSTRAINT [FK_HolonymMeronym_Meronym];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ContentCollectionTaxonomies_Taxonomy]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ContentCollectionTaxonomies] DROP CONSTRAINT [FK_ContentCollectionTaxonomies_Taxonomy];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ContentCollectionTaxonomies_ContentCollection]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ContentCollectionTaxonomies] DROP CONSTRAINT [FK_ContentCollectionTaxonomies_ContentCollection];
-GO
 IF OBJECT_ID(N'[dbo].[FK_PrincipalHorselessSession]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[HorselessSessions] DROP CONSTRAINT [FK_PrincipalHorselessSession];
-GO
-IF OBJECT_ID(N'[dbo].[FK_HorselessViewContentCollection_HorselessView]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[HorselessViewContentCollection] DROP CONSTRAINT [FK_HorselessViewContentCollection_HorselessView];
-GO
-IF OBJECT_ID(N'[dbo].[FK_HorselessViewContentCollection_ContentCollection]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[HorselessViewContentCollection] DROP CONSTRAINT [FK_HorselessViewContentCollection_ContentCollection];
 GO
 
 -- --------------------------------------------------
@@ -169,12 +126,6 @@ GO
 IF OBJECT_ID(N'[dbo].[HorselessViews]', 'U') IS NOT NULL
     DROP TABLE [dbo].[HorselessViews];
 GO
-IF OBJECT_ID(N'[dbo].[TenantContentCollections]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TenantContentCollections];
-GO
-IF OBJECT_ID(N'[dbo].[ContentCollectionMimeContent]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ContentCollectionMimeContent];
-GO
 IF OBJECT_ID(N'[dbo].[NavigationMenuHierarchy]', 'U') IS NOT NULL
     DROP TABLE [dbo].[NavigationMenuHierarchy];
 GO
@@ -187,26 +138,11 @@ GO
 IF OBJECT_ID(N'[dbo].[PublicationHierarchy]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PublicationHierarchy];
 GO
-IF OBJECT_ID(N'[dbo].[PublicationContentCollection]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PublicationContentCollection];
-GO
-IF OBJECT_ID(N'[dbo].[TaxonTaxonomy]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TaxonTaxonomy];
-GO
 IF OBJECT_ID(N'[dbo].[TaxonHirearchy]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TaxonHirearchy];
 GO
-IF OBJECT_ID(N'[dbo].[TaxonHolonym]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TaxonHolonym];
-GO
 IF OBJECT_ID(N'[dbo].[HolonymMeronym]', 'U') IS NOT NULL
     DROP TABLE [dbo].[HolonymMeronym];
-GO
-IF OBJECT_ID(N'[dbo].[ContentCollectionTaxonomies]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ContentCollectionTaxonomies];
-GO
-IF OBJECT_ID(N'[dbo].[HorselessViewContentCollection]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[HorselessViewContentCollection];
 GO
 
 -- --------------------------------------------------
@@ -404,8 +340,7 @@ CREATE TABLE [dbo].[HorselessSessions] (
     [Iss] nvarchar(max)  NULL,
     [Aud] nvarchar(max)  NULL,
     [Sub] nvarchar(max)  NULL,
-    [IsAnonymous] bit  NULL,
-    [HorselessSessionPrincipalId] uniqueidentifier  NULL
+    [IsAnonymous] bit  NULL
 );
 GO
 
@@ -464,20 +399,6 @@ CREATE TABLE [dbo].[HorselessViews] (
 );
 GO
 
--- Creating table 'TenantContentCollections'
-CREATE TABLE [dbo].[TenantContentCollections] (
-    [Tenants_Id] uniqueidentifier  NOT NULL,
-    [ContentCollections_Id] uniqueidentifier  NOT NULL
-);
-GO
-
--- Creating table 'ContentCollectionMimeContent'
-CREATE TABLE [dbo].[ContentCollectionMimeContent] (
-    [ContentCollections_Id] uniqueidentifier  NOT NULL,
-    [MimeContents_Id] uniqueidentifier  NOT NULL
-);
-GO
-
 -- Creating table 'NavigationMenuHierarchy'
 CREATE TABLE [dbo].[NavigationMenuHierarchy] (
     [Children_Id] uniqueidentifier  NOT NULL,
@@ -506,20 +427,6 @@ CREATE TABLE [dbo].[PublicationHierarchy] (
 );
 GO
 
--- Creating table 'PublicationContentCollection'
-CREATE TABLE [dbo].[PublicationContentCollection] (
-    [Publications_Id] uniqueidentifier  NOT NULL,
-    [ContentCollections_Id] uniqueidentifier  NOT NULL
-);
-GO
-
--- Creating table 'TaxonTaxonomy'
-CREATE TABLE [dbo].[TaxonTaxonomy] (
-    [Taxons_Id] uniqueidentifier  NOT NULL,
-    [Taxonomies_Id] uniqueidentifier  NOT NULL
-);
-GO
-
 -- Creating table 'TaxonHirearchy'
 CREATE TABLE [dbo].[TaxonHirearchy] (
     [AntecedentTaxons_Id] uniqueidentifier  NOT NULL,
@@ -527,31 +434,10 @@ CREATE TABLE [dbo].[TaxonHirearchy] (
 );
 GO
 
--- Creating table 'TaxonHolonym'
-CREATE TABLE [dbo].[TaxonHolonym] (
-    [Taxons_Id] uniqueidentifier  NOT NULL,
-    [Holonyms_Id] uniqueidentifier  NOT NULL
-);
-GO
-
 -- Creating table 'HolonymMeronym'
 CREATE TABLE [dbo].[HolonymMeronym] (
     [Holonyms_Id] uniqueidentifier  NOT NULL,
     [Meronyms_Id] uniqueidentifier  NOT NULL
-);
-GO
-
--- Creating table 'ContentCollectionTaxonomies'
-CREATE TABLE [dbo].[ContentCollectionTaxonomies] (
-    [Taxonomies_Id] uniqueidentifier  NOT NULL,
-    [ContentCollections_Id] uniqueidentifier  NOT NULL
-);
-GO
-
--- Creating table 'HorselessViewContentCollection'
-CREATE TABLE [dbo].[HorselessViewContentCollection] (
-    [HorselessViews_Id] uniqueidentifier  NOT NULL,
-    [ContentCollections_Id] uniqueidentifier  NOT NULL
 );
 GO
 
@@ -673,18 +559,6 @@ ADD CONSTRAINT [PK_HorselessViews]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Tenants_Id], [ContentCollections_Id] in table 'TenantContentCollections'
-ALTER TABLE [dbo].[TenantContentCollections]
-ADD CONSTRAINT [PK_TenantContentCollections]
-    PRIMARY KEY CLUSTERED ([Tenants_Id], [ContentCollections_Id] ASC);
-GO
-
--- Creating primary key on [ContentCollections_Id], [MimeContents_Id] in table 'ContentCollectionMimeContent'
-ALTER TABLE [dbo].[ContentCollectionMimeContent]
-ADD CONSTRAINT [PK_ContentCollectionMimeContent]
-    PRIMARY KEY CLUSTERED ([ContentCollections_Id], [MimeContents_Id] ASC);
-GO
-
 -- Creating primary key on [Children_Id], [Parents_Id] in table 'NavigationMenuHierarchy'
 ALTER TABLE [dbo].[NavigationMenuHierarchy]
 ADD CONSTRAINT [PK_NavigationMenuHierarchy]
@@ -709,28 +583,10 @@ ADD CONSTRAINT [PK_PublicationHierarchy]
     PRIMARY KEY CLUSTERED ([PublicationChildren_Id], [PublicationParents_Id] ASC);
 GO
 
--- Creating primary key on [Publications_Id], [ContentCollections_Id] in table 'PublicationContentCollection'
-ALTER TABLE [dbo].[PublicationContentCollection]
-ADD CONSTRAINT [PK_PublicationContentCollection]
-    PRIMARY KEY CLUSTERED ([Publications_Id], [ContentCollections_Id] ASC);
-GO
-
--- Creating primary key on [Taxons_Id], [Taxonomies_Id] in table 'TaxonTaxonomy'
-ALTER TABLE [dbo].[TaxonTaxonomy]
-ADD CONSTRAINT [PK_TaxonTaxonomy]
-    PRIMARY KEY CLUSTERED ([Taxons_Id], [Taxonomies_Id] ASC);
-GO
-
 -- Creating primary key on [AntecedentTaxons_Id], [DerivativeTaxons_Id] in table 'TaxonHirearchy'
 ALTER TABLE [dbo].[TaxonHirearchy]
 ADD CONSTRAINT [PK_TaxonHirearchy]
     PRIMARY KEY CLUSTERED ([AntecedentTaxons_Id], [DerivativeTaxons_Id] ASC);
-GO
-
--- Creating primary key on [Taxons_Id], [Holonyms_Id] in table 'TaxonHolonym'
-ALTER TABLE [dbo].[TaxonHolonym]
-ADD CONSTRAINT [PK_TaxonHolonym]
-    PRIMARY KEY CLUSTERED ([Taxons_Id], [Holonyms_Id] ASC);
 GO
 
 -- Creating primary key on [Holonyms_Id], [Meronyms_Id] in table 'HolonymMeronym'
@@ -739,69 +595,9 @@ ADD CONSTRAINT [PK_HolonymMeronym]
     PRIMARY KEY CLUSTERED ([Holonyms_Id], [Meronyms_Id] ASC);
 GO
 
--- Creating primary key on [Taxonomies_Id], [ContentCollections_Id] in table 'ContentCollectionTaxonomies'
-ALTER TABLE [dbo].[ContentCollectionTaxonomies]
-ADD CONSTRAINT [PK_ContentCollectionTaxonomies]
-    PRIMARY KEY CLUSTERED ([Taxonomies_Id], [ContentCollections_Id] ASC);
-GO
-
--- Creating primary key on [HorselessViews_Id], [ContentCollections_Id] in table 'HorselessViewContentCollection'
-ALTER TABLE [dbo].[HorselessViewContentCollection]
-ADD CONSTRAINT [PK_HorselessViewContentCollection]
-    PRIMARY KEY CLUSTERED ([HorselessViews_Id], [ContentCollections_Id] ASC);
-GO
-
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
-
--- Creating foreign key on [Tenants_Id] in table 'TenantContentCollections'
-ALTER TABLE [dbo].[TenantContentCollections]
-ADD CONSTRAINT [FK_TenantContentCollections_Tenant]
-    FOREIGN KEY ([Tenants_Id])
-    REFERENCES [dbo].[Tenants]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [ContentCollections_Id] in table 'TenantContentCollections'
-ALTER TABLE [dbo].[TenantContentCollections]
-ADD CONSTRAINT [FK_TenantContentCollections_ContentCollection]
-    FOREIGN KEY ([ContentCollections_Id])
-    REFERENCES [dbo].[ContentCollections]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TenantContentCollections_ContentCollection'
-CREATE INDEX [IX_FK_TenantContentCollections_ContentCollection]
-ON [dbo].[TenantContentCollections]
-    ([ContentCollections_Id]);
-GO
-
--- Creating foreign key on [ContentCollections_Id] in table 'ContentCollectionMimeContent'
-ALTER TABLE [dbo].[ContentCollectionMimeContent]
-ADD CONSTRAINT [FK_ContentCollectionMimeContent_ContentCollection]
-    FOREIGN KEY ([ContentCollections_Id])
-    REFERENCES [dbo].[ContentCollections]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [MimeContents_Id] in table 'ContentCollectionMimeContent'
-ALTER TABLE [dbo].[ContentCollectionMimeContent]
-ADD CONSTRAINT [FK_ContentCollectionMimeContent_MimeContent]
-    FOREIGN KEY ([MimeContents_Id])
-    REFERENCES [dbo].[HorselessContents]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ContentCollectionMimeContent_MimeContent'
-CREATE INDEX [IX_FK_ContentCollectionMimeContent_MimeContent]
-ON [dbo].[ContentCollectionMimeContent]
-    ([MimeContents_Id]);
-GO
 
 -- Creating foreign key on [FilesystemAssetId] in table 'HorselessContents'
 ALTER TABLE [dbo].[HorselessContents]
@@ -944,54 +740,6 @@ ON [dbo].[PublicationHierarchy]
     ([PublicationParents_Id]);
 GO
 
--- Creating foreign key on [Publications_Id] in table 'PublicationContentCollection'
-ALTER TABLE [dbo].[PublicationContentCollection]
-ADD CONSTRAINT [FK_PublicationContentCollection_Publication]
-    FOREIGN KEY ([Publications_Id])
-    REFERENCES [dbo].[Publications]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [ContentCollections_Id] in table 'PublicationContentCollection'
-ALTER TABLE [dbo].[PublicationContentCollection]
-ADD CONSTRAINT [FK_PublicationContentCollection_ContentCollection]
-    FOREIGN KEY ([ContentCollections_Id])
-    REFERENCES [dbo].[ContentCollections]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PublicationContentCollection_ContentCollection'
-CREATE INDEX [IX_FK_PublicationContentCollection_ContentCollection]
-ON [dbo].[PublicationContentCollection]
-    ([ContentCollections_Id]);
-GO
-
--- Creating foreign key on [Taxons_Id] in table 'TaxonTaxonomy'
-ALTER TABLE [dbo].[TaxonTaxonomy]
-ADD CONSTRAINT [FK_TaxonTaxonomy_Taxon]
-    FOREIGN KEY ([Taxons_Id])
-    REFERENCES [dbo].[Taxons]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Taxonomies_Id] in table 'TaxonTaxonomy'
-ALTER TABLE [dbo].[TaxonTaxonomy]
-ADD CONSTRAINT [FK_TaxonTaxonomy_Taxonomy]
-    FOREIGN KEY ([Taxonomies_Id])
-    REFERENCES [dbo].[Taxonomies]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TaxonTaxonomy_Taxonomy'
-CREATE INDEX [IX_FK_TaxonTaxonomy_Taxonomy]
-ON [dbo].[TaxonTaxonomy]
-    ([Taxonomies_Id]);
-GO
-
 -- Creating foreign key on [AntecedentTaxons_Id] in table 'TaxonHirearchy'
 ALTER TABLE [dbo].[TaxonHirearchy]
 ADD CONSTRAINT [FK_TaxonTaxon_Taxon]
@@ -1016,30 +764,6 @@ ON [dbo].[TaxonHirearchy]
     ([DerivativeTaxons_Id]);
 GO
 
--- Creating foreign key on [Taxons_Id] in table 'TaxonHolonym'
-ALTER TABLE [dbo].[TaxonHolonym]
-ADD CONSTRAINT [FK_TaxonHolonym_Taxon]
-    FOREIGN KEY ([Taxons_Id])
-    REFERENCES [dbo].[Taxons]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Holonyms_Id] in table 'TaxonHolonym'
-ALTER TABLE [dbo].[TaxonHolonym]
-ADD CONSTRAINT [FK_TaxonHolonym_Holonym]
-    FOREIGN KEY ([Holonyms_Id])
-    REFERENCES [dbo].[Holonyms]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TaxonHolonym_Holonym'
-CREATE INDEX [IX_FK_TaxonHolonym_Holonym]
-ON [dbo].[TaxonHolonym]
-    ([Holonyms_Id]);
-GO
-
 -- Creating foreign key on [Holonyms_Id] in table 'HolonymMeronym'
 ALTER TABLE [dbo].[HolonymMeronym]
 ADD CONSTRAINT [FK_HolonymMeronym_Holonym]
@@ -1062,69 +786,6 @@ GO
 CREATE INDEX [IX_FK_HolonymMeronym_Meronym]
 ON [dbo].[HolonymMeronym]
     ([Meronyms_Id]);
-GO
-
--- Creating foreign key on [Taxonomies_Id] in table 'ContentCollectionTaxonomies'
-ALTER TABLE [dbo].[ContentCollectionTaxonomies]
-ADD CONSTRAINT [FK_ContentCollectionTaxonomies_Taxonomy]
-    FOREIGN KEY ([Taxonomies_Id])
-    REFERENCES [dbo].[Taxonomies]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [ContentCollections_Id] in table 'ContentCollectionTaxonomies'
-ALTER TABLE [dbo].[ContentCollectionTaxonomies]
-ADD CONSTRAINT [FK_ContentCollectionTaxonomies_ContentCollection]
-    FOREIGN KEY ([ContentCollections_Id])
-    REFERENCES [dbo].[ContentCollections]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ContentCollectionTaxonomies_ContentCollection'
-CREATE INDEX [IX_FK_ContentCollectionTaxonomies_ContentCollection]
-ON [dbo].[ContentCollectionTaxonomies]
-    ([ContentCollections_Id]);
-GO
-
--- Creating foreign key on [HorselessSessionPrincipalId] in table 'HorselessSessions'
-ALTER TABLE [dbo].[HorselessSessions]
-ADD CONSTRAINT [FK_PrincipalHorselessSession]
-    FOREIGN KEY ([HorselessSessionPrincipalId])
-    REFERENCES [dbo].[Principals]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PrincipalHorselessSession'
-CREATE INDEX [IX_FK_PrincipalHorselessSession]
-ON [dbo].[HorselessSessions]
-    ([HorselessSessionPrincipalId]);
-GO
-
--- Creating foreign key on [HorselessViews_Id] in table 'HorselessViewContentCollection'
-ALTER TABLE [dbo].[HorselessViewContentCollection]
-ADD CONSTRAINT [FK_HorselessViewContentCollection_HorselessView]
-    FOREIGN KEY ([HorselessViews_Id])
-    REFERENCES [dbo].[HorselessViews]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [ContentCollections_Id] in table 'HorselessViewContentCollection'
-ALTER TABLE [dbo].[HorselessViewContentCollection]
-ADD CONSTRAINT [FK_HorselessViewContentCollection_ContentCollection]
-    FOREIGN KEY ([ContentCollections_Id])
-    REFERENCES [dbo].[ContentCollections]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_HorselessViewContentCollection_ContentCollection'
-CREATE INDEX [IX_FK_HorselessViewContentCollection_ContentCollection]
-ON [dbo].[HorselessViewContentCollection]
-    ([ContentCollections_Id]);
 GO
 
 -- --------------------------------------------------

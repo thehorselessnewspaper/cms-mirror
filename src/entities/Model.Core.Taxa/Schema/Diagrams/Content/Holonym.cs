@@ -17,7 +17,6 @@ namespace Schema.Diagrams.Content
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Holonym()
         {
-            this.Taxons = new HashSet<Taxon>();
             this.Meronyms = new HashSet<Meronym>();
         }
     
@@ -29,8 +28,6 @@ namespace Schema.Diagrams.Content
         public string JsonValue { get; set; }
         public string JsonSchema { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Taxon> Taxons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Meronym> Meronyms { get; set; }
     }

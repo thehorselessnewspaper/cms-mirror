@@ -20,7 +20,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
 
         // [ForeignKey("ParentContentCollectionsId")]
-        [InverseProperty(nameof(ContentCollection.ChildContentCollections))]
+        // [InverseProperty(nameof(ContentCollection.ChildContentCollections))]
         public virtual ICollection<ContentCollection>? ParentContentCollections { get; set; } = new HashSet<ContentCollection>();
 
         [InverseProperty(nameof(ContentCollection.ParentContentCollections))]
@@ -33,5 +33,12 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public byte[] Timestamp {get; set;}  = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
+
+        [InverseProperty(nameof(HorselessView.ContentCollections))]
+        public virtual ICollection<HorselessView> HorselessViews { get; set; } = new HashSet<HorselessView>();
+
+        public virtual ICollection<Publication> Publications { get; set; } = new HashSet<Publication>();
+
+        public virtual ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
     }
 }

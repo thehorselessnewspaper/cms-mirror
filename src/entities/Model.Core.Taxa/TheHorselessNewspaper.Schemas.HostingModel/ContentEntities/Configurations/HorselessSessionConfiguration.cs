@@ -16,11 +16,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Configurati
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
 
-            entity.HasOne(d => d.HorselessSessionPrincipal)
-                .WithMany(p => p.HorselessSessions)
-                .HasForeignKey(d => d.HorselessSessionPrincipalId)
-                .HasConstraintName("FK_PrincipalHorselessSession");
-
             OnConfigurePartial(entity);
         }
 

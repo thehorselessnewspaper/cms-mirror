@@ -40,6 +40,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public byte[] ViewContent { get; set; } = new byte[0];
         public string? DictionaryKey { get; set; }
 
+        public ICollection<ContentCollection> ContentCollections { get; set; } = new HashSet<ContentCollection>();
+
+
+        public ICollection<Placeholder> Placeholders { get; set; } = new HashSet<Placeholder>();
+
         public Stream CreateReadStream()
         {
             return new MemoryStream(ViewContent);

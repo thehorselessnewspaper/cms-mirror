@@ -10,11 +10,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     public partial class HorselessView
     {
-        public HorselessView()
-        {
-            ContentCollections = new HashSet<ContentCollection>();
-        }
-
         [Key]
         public Guid Id { get; set; }
         public string? DisplayName { get; set; }
@@ -23,9 +18,5 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
         public bool? IsActive { get; set; }
-
-        [ForeignKey("HorselessViews_Id")]
-        [InverseProperty("HorselessViews")]
-        public virtual ICollection<ContentCollection> ContentCollections { get; set; }
     }
 }

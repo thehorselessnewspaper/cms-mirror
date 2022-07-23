@@ -14,15 +14,6 @@ namespace Schema.Diagrams.Content
     
     public partial class ContentCollection
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ContentCollection()
-        {
-            this.MimeContents = new HashSet<HorselessContent>();
-            this.Publications = new HashSet<Publication>();
-            this.Taxonomies = new HashSet<Taxonomy>();
-            this.HorselessViews = new HashSet<HorselessView>();
-        }
-    
         public System.Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
@@ -32,14 +23,5 @@ namespace Schema.Diagrams.Content
         public Nullable<bool> IsPublished { get; set; }
         public string PublishedURL { get; set; }
         public string PreviewURL { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HorselessContent> MimeContents { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Publication> Publications { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Taxonomy> Taxonomies { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HorselessView> HorselessViews { get; set; }
     }
 }

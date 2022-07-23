@@ -14,8 +14,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         {
             AntecedentTaxons = new HashSet<Taxon>();
             DerivativeTaxons = new HashSet<Taxon>();
-            Holonyms = new HashSet<Holonym>();
-            Taxonomies = new HashSet<Taxonomy>();
         }
 
         [Key]
@@ -34,11 +32,5 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [ForeignKey("AntecedentTaxons_Id")]
         [InverseProperty("AntecedentTaxons")]
         public virtual ICollection<Taxon> DerivativeTaxons { get; set; }
-        [ForeignKey("Taxons_Id")]
-        [InverseProperty("Taxons")]
-        public virtual ICollection<Holonym> Holonyms { get; set; }
-        [ForeignKey("Taxons_Id")]
-        [InverseProperty("Taxons")]
-        public virtual ICollection<Taxonomy> Taxonomies { get; set; }
     }
 }

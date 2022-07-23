@@ -10,11 +10,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     public partial class Principal
     {
-        public Principal()
-        {
-            HorselessSessions = new HashSet<HorselessSession>();
-        }
-
         [Key]
         public Guid Id { get; set; }
         public string? DisplayName { get; set; }
@@ -25,8 +20,5 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string? Iss { get; set; }
         public string? Aud { get; set; }
         public string? Sub { get; set; }
-
-        [InverseProperty("HorselessSessionPrincipal")]
-        public virtual ICollection<HorselessSession> HorselessSessions { get; set; }
     }
 }

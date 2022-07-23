@@ -15,5 +15,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
+
+        public Guid? HorselessViewId { get; set; }
+
+
+        public HorselessView? HorselessViews { get; set; }
     }
 }

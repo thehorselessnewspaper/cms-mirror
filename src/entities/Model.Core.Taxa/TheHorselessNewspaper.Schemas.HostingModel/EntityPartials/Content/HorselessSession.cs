@@ -1,5 +1,6 @@
 ﻿using Finbuckle.MultiTenant;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using TheHorselessNewspaper.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
@@ -15,5 +16,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public ICollection<AccessControlEntry>? AccessControlEntries { get; set; }
         public ICollection<Principal>? Owners { get; set; }
+
+        [InverseProperty(nameof(Principal.HorselessSessions))]
+        public ICollection<Principal>? HorselessSessionPrincipals { get; set; }
     }
 }

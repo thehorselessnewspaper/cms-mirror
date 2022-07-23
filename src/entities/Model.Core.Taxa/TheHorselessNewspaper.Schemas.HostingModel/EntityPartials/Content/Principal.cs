@@ -83,6 +83,13 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [InverseProperty(nameof(Tenant.Owners))]
         public ICollection<Tenant>? OwnedTenants { get; set; } = new HashSet<Tenant>();
 
+        [InverseProperty(nameof(HorselessSession.Owners))]
+        public ICollection<HorselessSession>? OwnedHorselessSessions { get; set; } = new HashSet<HorselessSession>();
+
+
+        [InverseProperty(nameof(HorselessSession.HorselessSessionPrincipals))]
+        public ICollection<HorselessSession>? HorselessSessions { get; set; } = new HashSet<HorselessSession>();
+
         /// <summary>
         /// not mapped - model impedence mismatch due to implemented interface
         /// </summary>

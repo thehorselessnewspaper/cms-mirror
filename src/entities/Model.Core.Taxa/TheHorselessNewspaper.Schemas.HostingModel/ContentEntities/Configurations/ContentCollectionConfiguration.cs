@@ -16,21 +16,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Configurati
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
 
-            entity.HasMany(d => d.MimeContents)
-                .WithMany(p => p.ContentCollections)
-                .UsingEntity<Dictionary<string, object>>(
-                    "ContentCollectionMimeContent",
-                    l => l.HasOne<HorselessContent>().WithMany().HasForeignKey("MimeContents_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_ContentCollectionMimeContent_MimeContent"),
-                    r => r.HasOne<ContentCollection>().WithMany().HasForeignKey("ContentCollections_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_ContentCollectionMimeContent_ContentCollection"),
-                    j =>
-                    {
-                        j.HasKey("ContentCollections_Id", "MimeContents_Id");
-
-                        j.ToTable("ContentCollectionMimeContent");
-
-                        j.HasIndex(new[] { "MimeContents_Id" }, "IX_FK_ContentCollectionMimeContent_MimeContent");
-                    });
-
             OnConfigurePartial(entity);
         }
 

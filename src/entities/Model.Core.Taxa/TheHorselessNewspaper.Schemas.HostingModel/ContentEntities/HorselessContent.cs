@@ -13,11 +13,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     [Index("MIMETypeId", Name = "IX_FK_MimeContentMIMEType")]
     public partial class HorselessContent
     {
-        public HorselessContent()
-        {
-            ContentCollections = new HashSet<ContentCollection>();
-        }
-
         [Key]
         public Guid Id { get; set; }
         public string? DisplayName { get; set; }
@@ -41,9 +36,5 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [ForeignKey("MIMETypeId")]
         [InverseProperty("HorselessContents")]
         public virtual MIMEType? MIMEType { get; set; }
-
-        [ForeignKey("MimeContents_Id")]
-        [InverseProperty("MimeContents")]
-        public virtual ICollection<ContentCollection> ContentCollections { get; set; }
     }
 }

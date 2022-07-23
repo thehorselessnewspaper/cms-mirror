@@ -46,36 +46,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Configurati
                         j.HasIndex(new[] { "DerivativeTaxons_Id" }, "IX_FK_TaxonTaxon_Taxon1");
                     });
 
-            entity.HasMany(d => d.Holonyms)
-                .WithMany(p => p.Taxons)
-                .UsingEntity<Dictionary<string, object>>(
-                    "TaxonHolonym",
-                    l => l.HasOne<Holonym>().WithMany().HasForeignKey("Holonyms_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TaxonHolonym_Holonym"),
-                    r => r.HasOne<Taxon>().WithMany().HasForeignKey("Taxons_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TaxonHolonym_Taxon"),
-                    j =>
-                    {
-                        j.HasKey("Taxons_Id", "Holonyms_Id");
-
-                        j.ToTable("TaxonHolonym");
-
-                        j.HasIndex(new[] { "Holonyms_Id" }, "IX_FK_TaxonHolonym_Holonym");
-                    });
-
-            entity.HasMany(d => d.Taxonomies)
-                .WithMany(p => p.Taxons)
-                .UsingEntity<Dictionary<string, object>>(
-                    "TaxonTaxonomy",
-                    l => l.HasOne<Taxonomy>().WithMany().HasForeignKey("Taxonomies_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TaxonTaxonomy_Taxonomy"),
-                    r => r.HasOne<Taxon>().WithMany().HasForeignKey("Taxons_Id").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_TaxonTaxonomy_Taxon"),
-                    j =>
-                    {
-                        j.HasKey("Taxons_Id", "Taxonomies_Id");
-
-                        j.ToTable("TaxonTaxonomy");
-
-                        j.HasIndex(new[] { "Taxonomies_Id" }, "IX_FK_TaxonTaxonomy_Taxonomy");
-                    });
-
             OnConfigurePartial(entity);
         }
 

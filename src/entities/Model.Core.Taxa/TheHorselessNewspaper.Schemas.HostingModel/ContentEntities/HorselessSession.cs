@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
-    [Index("HorselessSessionPrincipalId", Name = "IX_FK_PrincipalHorselessSession")]
     public partial class HorselessSession
     {
         [Key]
@@ -23,10 +22,5 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string? Aud { get; set; }
         public string? Sub { get; set; }
         public bool? IsAnonymous { get; set; }
-        public Guid? HorselessSessionPrincipalId { get; set; }
-
-        [ForeignKey("HorselessSessionPrincipalId")]
-        [InverseProperty("HorselessSessions")]
-        public virtual Principal? HorselessSessionPrincipal { get; set; }
     }
 }

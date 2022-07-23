@@ -13,7 +13,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public Holonym()
         {
             Meronyms = new HashSet<Meronym>();
-            Taxons = new HashSet<Taxon>();
         }
 
         [Key]
@@ -29,8 +28,5 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [ForeignKey("Holonyms_Id")]
         [InverseProperty("Holonyms")]
         public virtual ICollection<Meronym> Meronyms { get; set; }
-        [ForeignKey("Holonyms_Id")]
-        [InverseProperty("Holonyms")]
-        public virtual ICollection<Taxon> Taxons { get; set; }
     }
 }

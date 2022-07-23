@@ -10,15 +10,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 {
     public partial class ContentCollection
     {
-        public ContentCollection()
-        {
-            HorselessViews = new HashSet<HorselessView>();
-            MimeContents = new HashSet<HorselessContent>();
-            Publications = new HashSet<Publication>();
-            Taxonomies = new HashSet<Taxonomy>();
-            Tenants = new HashSet<Tenant>();
-        }
-
         [Key]
         public Guid Id { get; set; }
         public string? DisplayName { get; set; }
@@ -30,21 +21,5 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public bool? IsPublished { get; set; }
         public string? PublishedURL { get; set; }
         public string? PreviewURL { get; set; }
-
-        [ForeignKey("ContentCollections_Id")]
-        [InverseProperty("ContentCollections")]
-        public virtual ICollection<HorselessView> HorselessViews { get; set; }
-        [ForeignKey("ContentCollections_Id")]
-        [InverseProperty("ContentCollections")]
-        public virtual ICollection<HorselessContent> MimeContents { get; set; }
-        [ForeignKey("ContentCollections_Id")]
-        [InverseProperty("ContentCollections")]
-        public virtual ICollection<Publication> Publications { get; set; }
-        [ForeignKey("ContentCollections_Id")]
-        [InverseProperty("ContentCollections")]
-        public virtual ICollection<Taxonomy> Taxonomies { get; set; }
-        [ForeignKey("ContentCollections_Id")]
-        [InverseProperty("ContentCollections")]
-        public virtual ICollection<Tenant> Tenants { get; set; }
     }
 }

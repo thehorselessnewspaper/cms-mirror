@@ -19,7 +19,6 @@ namespace Schema.Diagrams.Content
         {
             this.PublicationParents = new HashSet<Publication>();
             this.PublicationChildren = new HashSet<Publication>();
-            this.ContentCollections = new HashSet<ContentCollection>();
         }
     
         public System.Guid Id { get; set; }
@@ -37,7 +36,5 @@ namespace Schema.Diagrams.Content
         public virtual ICollection<Publication> PublicationParents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Publication> PublicationChildren { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ContentCollection> ContentCollections { get; set; }
     }
 }
