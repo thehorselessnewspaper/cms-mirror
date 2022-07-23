@@ -16,15 +16,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="HorselessNewspaper.RazorClassLibrary.CMS.Default" Version="0.4.220723.7" />
-		<PackageReference Include="HorselessNewspaper.Web.Core" Version="0.4.220714.33" />
-		<PackageReference Include="HorselessNewspaper.Web.Core.Startup" Version="0.4.220714.33" />
+		<PackageReference Include="HorselessNewspaper.RazorClassLibrary.CMS.Default" Version="0.4.220723.8" />
+		<PackageReference Include="HorselessNewspaper.Web.Core" Version="0.4.220723.8" />
+		<PackageReference Include="HorselessNewspaper.Web.Core.Startup" Version="0.4.220723.8" />
 		<PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="6.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="6.0.7" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.7" />
 		<PackageReference Include="StackExchange.Redis" Version="2.6.48" />
 		<PackageReference Include="StackExchange.Redis.Extensions.AspNetCore" Version="8.0.5" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.2" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
 	</ItemGroup>
 
 	<ItemGroup>

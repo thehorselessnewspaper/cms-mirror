@@ -21,8 +21,8 @@
 		<PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.1.1" PrivateAssets="All" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.2" />
-		<PackageReference Include="Finbuckle.MultiTenant.EntityFrameworkCore" Version="6.7.2" />
+		<PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.3" />
+		<PackageReference Include="Finbuckle.MultiTenant.EntityFrameworkCore" Version="6.7.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.10" />
