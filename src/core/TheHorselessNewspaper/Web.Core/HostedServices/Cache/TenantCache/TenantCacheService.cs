@@ -519,7 +519,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                                                             ApiHorselessContentModelContentCollectionCreateAsync(mutatingTenant.TenantIdentifier.ToString(), 
                                                                             ContentEntitiesContentCollection.FromJson(wireContentCollection));
 
-                                        wireTenant.ContentCollections.Clear();
+                                        // wireTenant.ContentCollections.Clear();
                                         var mutatedTenant = await restClient.
                                                                                             ApiHorselessContentModelTenantUpdatePropertiesAsync(mutatingTenant.Id.ToString(),
                                                                                             mutatingTenant.TenantIdentifier, new List<string> { nameof(ContentModel.Tenant.DeploymentState) }, wireTenant);
