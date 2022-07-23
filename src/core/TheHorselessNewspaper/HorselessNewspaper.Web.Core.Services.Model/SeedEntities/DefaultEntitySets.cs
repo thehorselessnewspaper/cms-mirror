@@ -176,7 +176,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                     },
                     IsPublished = true,
                     Taxonomies = taxonomies,
-                    MimeContents = new List<ContentModel.HorselessContent>()
+                    HorselessContents = new List<ContentModel.HorselessContent>()
                     {
                         new ContentModel.HorselessContent()
                         {

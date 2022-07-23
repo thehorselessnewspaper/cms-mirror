@@ -17,7 +17,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public ICollection<AccessControlEntry>? AccessControlEntries { get; set; }
         public ICollection<Principal>? Owners { get; set; }
 
-        [InverseProperty(nameof(Principal.HorselessSessions))]
-        public ICollection<Principal>? HorselessSessionPrincipals { get; set; }
+        public Guid? HorselessSessionPrincipalId { get; set; }
+        public Principal? HorselessSessionPrincipal { get; set; }
     }
 }
