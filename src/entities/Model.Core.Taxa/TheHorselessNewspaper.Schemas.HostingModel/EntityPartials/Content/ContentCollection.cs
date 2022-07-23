@@ -40,5 +40,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public virtual ICollection<Publication> Publications { get; set; } = new HashSet<Publication>();
 
         public virtual ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
+
+        [InverseProperty(nameof(Taxonomy.ContentCollections))]
+        public ICollection<Taxonomy> Taxonomies { get; set; } = new HashSet<Taxonomy>();
+
+
+        public ICollection<HorselessContent> HorselessContents { get; set; } = new HashSet<HorselessContent>();
     }
 }

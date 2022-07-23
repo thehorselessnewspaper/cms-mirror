@@ -1,5 +1,6 @@
 ﻿using Finbuckle.MultiTenant;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using TheHorselessNewspaper.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
@@ -13,6 +14,12 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
+
+
+        public Guid? TaxonomyId { get; set; }
+        public Taxonomy? Taxonomy { get; set; }
+
+        public ICollection<Holonym> Holonyms { get; set; } = new HashSet<Holonym>();
     }
 
     [MultiTenant]
@@ -25,5 +32,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
+
+        public ICollection<Taxon> Taxons { get; set; } = new HashSet<Taxon>();
+
+        [InverseProperty(nameof(ContentCollection.Taxonomies))]
+        public ICollection<ContentCollection> ContentCollections { get; set; } = new HashSet<ContentCollection>();
     }
 }

@@ -13,7 +13,7 @@
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.7" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
-    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220721.2" />
+    <PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220723.1" />
   </ItemGroup>
 
   <ItemGroup>
