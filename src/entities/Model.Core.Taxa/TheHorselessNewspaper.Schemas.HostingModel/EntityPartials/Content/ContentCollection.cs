@@ -34,14 +34,14 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 
-        [InverseProperty(nameof(HorselessView.ContentCollections))]
+        // [InverseProperty(nameof(HorselessView.ContentCollections))]
         public virtual ICollection<HorselessView> HorselessViews { get; set; } = new HashSet<HorselessView>();
 
         public virtual ICollection<Publication> Publications { get; set; } = new HashSet<Publication>();
 
         public virtual ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
 
-        [InverseProperty(nameof(Taxonomy.ContentCollections))]
+        // [InverseProperty(nameof(Taxonomy.ContentCollections))]
         public ICollection<Taxonomy> Taxonomies { get; set; } = new HashSet<Taxonomy>();
 
 

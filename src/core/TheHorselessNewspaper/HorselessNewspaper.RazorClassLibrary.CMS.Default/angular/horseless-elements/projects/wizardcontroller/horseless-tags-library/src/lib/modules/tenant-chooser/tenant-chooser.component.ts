@@ -198,6 +198,10 @@ export class TenantChooserComponent implements OnInit {
       console.log("pullHostingEntitiesTenantsByOffset selection changed subscriber executing");
     });
 
+    console.log("onSelectionChanged is probing client configuration");
+    this.clientConfigService.getClientConfiguration();
+
+    console.log("onSelectionChanged is done probing client configuration and completing");
   }
 }
 

@@ -18,6 +18,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public ICollection<Principal>? Owners { get; set; }
 
         public Guid? HorselessSessionPrincipalId { get; set; }
+
+
         public Principal? HorselessSessionPrincipal { get; set; }
     }
 }

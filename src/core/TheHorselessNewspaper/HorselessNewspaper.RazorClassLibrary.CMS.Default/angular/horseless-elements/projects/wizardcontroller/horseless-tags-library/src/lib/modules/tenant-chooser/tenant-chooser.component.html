@@ -33,7 +33,9 @@
             </ng-template>
 
             <ng-template let-tenant pTemplate="listItem">
-              {{ tenant.DisplayName }}
+              <div class="row">
+                {{ tenant.DisplayName }}
+              </div>
             </ng-template>
 
             <ng-template let-tenant pTemplate="gridItem">
@@ -59,9 +61,9 @@
                   </div>
                   <br />
 
-                  <div *ngIf="tenant.Owners">
-                    <div>owners</div>
-                    <lib-hostingPrincipal-table [principals]="tenant.Owners">
+                  <div *ngIf="tenant.Accounts">
+                    <div>principals</div>
+                    <lib-hostingPrincipal-table [principals]="tenant.Accounts">
                     </lib-hostingPrincipal-table>
                   </div>
                 </p-card>
@@ -104,7 +106,9 @@
             </ng-template>
 
             <ng-template let-tenant pTemplate="listItem">
-              {{ tenant.DisplayName }}
+              <div class="row">
+                {{ tenant.DisplayName }}
+              </div>
             </ng-template>
 
             <ng-template let-tenant pTemplate="gridItem">
@@ -128,7 +132,7 @@
                   ></lib-contentAccessControlEntry-table>
                   <br />
                   <div>principals</div>
-                  <lib-contentPrincipal-table [principals]="tenant.Owners">
+                  <lib-contentPrincipal-table [principals]="tenant.Accounts">
                   </lib-contentPrincipal-table>
                 </p-card>
               </div>

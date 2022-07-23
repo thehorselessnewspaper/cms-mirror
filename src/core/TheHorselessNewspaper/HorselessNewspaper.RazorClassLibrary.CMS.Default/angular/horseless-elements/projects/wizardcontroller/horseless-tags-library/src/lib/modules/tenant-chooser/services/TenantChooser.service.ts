@@ -13,7 +13,7 @@ import {
   TenantRESTService,
 } from '@wizardcontrollerprerelease/horseless-contentapi-lib';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
-import { BehaviorSubject, mergeMap, switchMap, skip, catchError, EMPTY, map, Observable, ReplaySubject, take, tap, concatMap, withLatestFrom } from 'rxjs';
+import { BehaviorSubject, mergeMap, switchMap, skip, distinct, catchError, EMPTY, map, Observable, ReplaySubject, take, tap, concatMap, withLatestFrom } from 'rxjs';
 import { ConfigurationEndpointService } from '../../../services/configuration-endpoint.service';
 
 
@@ -39,9 +39,13 @@ export class TenantChooserService {
   ) {
     console.log("TenantChooserService starting. probing client configuration");
     // this.clientConfigService = clientConfigSvc;
-    this.clientConfigService.probeClientConfiguration().subscribe(data => {
-      console.log("tenant chooser service constructor completed probing client configuration");
-    })
+    // this.clientConfigService.probeClientConfiguration().subscribe(data => {
+    //   console.log("tenant chooser service constructor completed probing client configuration");
+    // });
+
+    this.clientConfigService.getClientConfiguration();
+
+    console.log("TenantChooserService finished probing client configuration");
   }
 
   private getContentEntitiesTenantsByOffset(offset: number, rowCount: number):  void {
@@ -238,7 +242,7 @@ export class TenantChooserService {
   pullHostingEntitiesTenantsByOffset (offset: number, rowCount: number): Observable<HostingEntitiesTenant[]>{
     console.log(`getHostingEntitiesTenantsByOffset starting`);
     return this.clientConfigService.currentConfiguration$.pipe(
-      withLatestFrom(clientConfig =>{
+      map(clientConfig =>{
         console.log(`getHostingEntitiesTenantsByOffset pipe starting`);
         //init service
         let contentTenantsSvc = this.factory.entitySet<HostingEntitiesTenant>(
@@ -332,7 +336,7 @@ export class TenantChooserService {
  pullContentEntitiesTenantsByOffset(offset: number, rowCount: number):  Observable<ContentEntitiesTenant[]> {
     console.log(`getContentEntitiesTenantsByOffset starting`);
     return this.clientConfigService.currentConfiguration$.pipe(
-        withLatestFrom(clientConfig => {
+        map(clientConfig => {
         console.log(`getContentEntitiesTenantsByOffset pipe map starting`);
         //init service
         let contentTenantsSvc = this.factory.entitySet<ContentEntitiesTenant>(

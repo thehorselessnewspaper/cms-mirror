@@ -286,7 +286,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
 
 
                 var insertedTenant = await this.hostingTenantsCollectionService.Create(newTenant);
-                // insertedTenant.Owners.Add(newOwner);
+                insertedTenant.Owners.Add(newOwner);
 
                 var updateResult = await this.hostingTenantsCollectionService
                                         .InsertRelatedEntity(insertedTenant.Id, nameof(HostingModel.Tenant.Owners), new List<HostingModel.Principal>() { newOwner },

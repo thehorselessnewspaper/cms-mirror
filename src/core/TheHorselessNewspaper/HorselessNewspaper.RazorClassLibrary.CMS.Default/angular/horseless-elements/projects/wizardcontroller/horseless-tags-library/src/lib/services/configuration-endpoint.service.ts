@@ -34,12 +34,15 @@ export class ConfigurationEndpointService implements IClaimsIdentiyAuthService {
 
   constructor(private httpClient: HttpClient) {
 console.log("configuration endpoint service starting");
-this.probeClientConfiguration().subscribe(clientConfig => {
-  console.log("client configuration probed");
-  this.clientConfiguration$.next(clientConfig);
-  this.accessToken = clientConfig.AccessToken as string;
-});
+// this.probeClientConfiguration().subscribe(clientConfig => {
+//   console.log("client configuration probed");
+//   this.clientConfiguration$.next(clientConfig);
+//   this.accessToken = clientConfig.AccessToken as string;
+// });
 
+    this.getClientConfiguration();
+
+    console.log("configuration endpoint service constructed");
   }
 
   /**
@@ -51,7 +54,27 @@ this.probeClientConfiguration().subscribe(clientConfig => {
     return this.accessToken;
   }
 
+  public getClientConfiguration() : void {
+    let url = window.location.href;
+    let headers = new HttpHeaders();
+    // command channel message to the client configuration endpoint middleware
+    headers = headers.set('RestClientConfigurationEndpoint', 'get');
 
+    console.log(`probeClientConfiguration getting client configuration for ${url}`);
+    this.httpClient.post<SecurityRestClientConfiguration>(url, '', {
+      headers: headers,
+    })
+      .pipe(
+        map(clientConfig => {
+          console.log(`probeClientConfiguration handling client configuration result for ${url}`)
+          this.clientConfiguration$.next(clientConfig);
+          this.accessToken = clientConfig.AccessToken as string;
+          return clientConfig;
+        })
+      ).subscribe(data => {
+        console.log("client configuration probe pipe subscriber executed");
+      });
+  }
 
   /**
    * calls the horseless site loaded in the browser
