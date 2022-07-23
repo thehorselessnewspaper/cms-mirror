@@ -153,13 +153,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
                 .Navigation(n => n.HorselessViews).AutoInclude();
 
 
-            builder.Entity<Principal>()
-            .Navigation(n => n.HorselessSessions).AutoInclude();
-
-
-
-
-
         }
 
     }

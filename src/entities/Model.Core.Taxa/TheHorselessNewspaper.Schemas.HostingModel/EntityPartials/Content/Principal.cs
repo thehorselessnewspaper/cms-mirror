@@ -86,6 +86,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [InverseProperty(nameof(HorselessSession.Owners))]
         public ICollection<HorselessSession>? OwnedHorselessSessions { get; set; } = new HashSet<HorselessSession>();
 
+        [InverseProperty(nameof(HorselessSession.HorselessSessionPrincipal))]
         public ICollection<HorselessSession>? HorselessSessions { get; set; } = new HashSet<HorselessSession>();
 
         /// <summary>
