@@ -16364,41 +16364,6 @@
             "type": "string",
             "nullable": true
           },
-          "HorselessViews": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesHorselessView"
-            }
-          },
-          "MimeContents": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-            }
-          },
-          "Publications": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesPublication"
-            }
-          },
-          "Taxonomies": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesTaxonomy"
-            }
-          },
-          "Tenants": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesTenant"
-            }
-          },
           "AccessControlEntries": {
             "type": "array",
             "nullable": true,
@@ -16440,6 +16405,41 @@
           "DictionaryKey": {
             "type": "string",
             "nullable": true
+          },
+          "HorselessViews": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesHorselessView"
+            }
+          },
+          "Publications": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPublication"
+            }
+          },
+          "Tenants": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesTenant"
+            }
+          },
+          "Taxonomies": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesTaxonomy"
+            }
+          },
+          "HorselessContents": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
+            }
           }
         }
       },
@@ -16557,13 +16557,6 @@
               "$ref": "#/components/schemas/ContentEntitiesMeronym"
             }
           },
-          "Taxons": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesTaxon"
-            }
-          },
           "AccessControlEntries": {
             "type": "array",
             "nullable": true,
@@ -16655,13 +16648,6 @@
           "MIMEType": {
             "$ref": "#/components/schemas/ContentEntitiesMIMEType"
           },
-          "ContentCollections": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
-            }
-          },
           "AccessControlEntries": {
             "type": "array",
             "nullable": true,
@@ -16689,8 +16675,20 @@
           "DictionaryKey": {
             "type": "string",
             "nullable": true
+          },
+          "HorselesContentType": {
+            "$ref": "#/components/schemas/ContentEntitiesHorselessContentType"
           }
         }
+      },
+      "ContentEntitiesHorselessContentType": {
+        "type": "integer",
+        "format": "int32",
+        "enum": [
+          0,
+          1,
+          2
+        ]
       },
       "ContentEntitiesHorselessSession": {
         "type": "object",
@@ -16737,14 +16735,6 @@
             "type": "boolean",
             "nullable": true
           },
-          "HorselessSessionPrincipalId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "HorselessSessionPrincipal": {
-            "$ref": "#/components/schemas/ContentEntitiesPrincipal"
-          },
           "Timestamp": {
             "type": "string",
             "format": "byte",
@@ -16772,6 +16762,14 @@
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             }
+          },
+          "HorselessSessionPrincipalId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "HorselessSessionPrincipal": {
+            "$ref": "#/components/schemas/ContentEntitiesPrincipal"
           }
         }
       },
@@ -16803,13 +16801,6 @@
           "IsActive": {
             "type": "boolean",
             "nullable": true
-          },
-          "ContentCollections": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
-            }
           },
           "AccessControlEntries": {
             "type": "array",
@@ -16865,6 +16856,20 @@
           "DictionaryKey": {
             "type": "string",
             "nullable": true
+          },
+          "ContentCollections": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+            }
+          },
+          "Placeholders": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPlaceholder"
+            }
           }
         }
       },
@@ -17371,6 +17376,77 @@
           }
         }
       },
+      "ContentEntitiesPlaceholder": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "DisplayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ObjectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "IsPublished": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          },
+          "Timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "AccessControlEntries": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
+            }
+          },
+          "Owners": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
+            }
+          },
+          "UpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "HorselessViewId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "HorselessViews": {
+            "$ref": "#/components/schemas/ContentEntitiesHorselessView"
+          }
+        }
+      },
       "ContentEntitiesPrincipal": {
         "type": "object",
         "additionalProperties": false,
@@ -17407,13 +17483,6 @@
           "Sub": {
             "type": "string",
             "nullable": true
-          },
-          "HorselessSessions": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesHorselessSession"
-            }
           },
           "IsAnonymous": {
             "type": "boolean"
@@ -17454,7 +17523,7 @@
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             }
           },
-          "ManagedTenants": {
+          "Accounts": {
             "type": "array",
             "nullable": true,
             "items": {
@@ -17466,6 +17535,20 @@
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesTenant"
+            }
+          },
+          "OwnedHorselessSessions": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesHorselessSession"
+            }
+          },
+          "HorselessSessions": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesHorselessSession"
             }
           },
           "AccessControlEntries": {
@@ -17626,13 +17709,6 @@
             "type": "string",
             "nullable": true
           },
-          "ContentCollections": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
-            }
-          },
           "PublicationChildren": {
             "type": "array",
             "nullable": true,
@@ -17674,6 +17750,13 @@
           "DictionaryKey": {
             "type": "string",
             "nullable": true
+          },
+          "ContentCollections": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+            }
           }
         }
       },
@@ -17724,20 +17807,6 @@
               "$ref": "#/components/schemas/ContentEntitiesTaxon"
             }
           },
-          "Holonyms": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesHolonym"
-            }
-          },
-          "Taxonomies": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesTaxonomy"
-            }
-          },
           "AccessControlEntries": {
             "type": "array",
             "nullable": true,
@@ -17765,6 +17834,21 @@
           "DictionaryKey": {
             "type": "string",
             "nullable": true
+          },
+          "TaxonomyId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "Taxonomy": {
+            "$ref": "#/components/schemas/ContentEntitiesTaxonomy"
+          },
+          "Holonyms": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesHolonym"
+            }
           }
         }
       },
@@ -17801,20 +17885,6 @@
             "type": "string",
             "nullable": true
           },
-          "ContentCollections": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
-            }
-          },
-          "Taxons": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesTaxon"
-            }
-          },
           "AccessControlEntries": {
             "type": "array",
             "nullable": true,
@@ -17842,6 +17912,20 @@
           "DictionaryKey": {
             "type": "string",
             "nullable": true
+          },
+          "Taxons": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesTaxon"
+            }
+          },
+          "ContentCollections": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+            }
           }
         }
       },
@@ -17869,13 +17953,6 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
-          },
-          "ContentCollections": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
-            }
           },
           "IsPublished": {
             "type": "boolean"
@@ -17941,6 +18018,13 @@
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             }
+          },
+          "ContentCollections": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+            }
           }
         }
       },
@@ -17952,6 +18036,7 @@
           "ExistsInContentDb",
           "HasOwners",
           "HasACL",
+          "HasTenantFilesystem",
           "HasContentCollection",
           "DeploymentComplete"
         ]

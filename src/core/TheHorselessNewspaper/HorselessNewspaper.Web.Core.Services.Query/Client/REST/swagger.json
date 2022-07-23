@@ -16357,41 +16357,6 @@
             "type": "string",
             "nullable": true
           },
-          "HorselessViews": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesHorselessView"
-            },
-            "nullable": true
-          },
-          "MimeContents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
-            },
-            "nullable": true
-          },
-          "Publications": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesPublication"
-            },
-            "nullable": true
-          },
-          "Taxonomies": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesTaxonomy"
-            },
-            "nullable": true
-          },
-          "Tenants": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesTenant"
-            },
-            "nullable": true
-          },
           "AccessControlEntries": {
             "type": "array",
             "items": {
@@ -16432,6 +16397,41 @@
           },
           "DictionaryKey": {
             "type": "string",
+            "nullable": true
+          },
+          "HorselessViews": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesHorselessView"
+            },
+            "nullable": true
+          },
+          "Publications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPublication"
+            },
+            "nullable": true
+          },
+          "Tenants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesTenant"
+            },
+            "nullable": true
+          },
+          "Taxonomies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesTaxonomy"
+            },
+            "nullable": true
+          },
+          "HorselessContents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
+            },
             "nullable": true
           }
         },
@@ -16550,13 +16550,6 @@
             },
             "nullable": true
           },
-          "Taxons": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesTaxon"
-            },
-            "nullable": true
-          },
           "AccessControlEntries": {
             "type": "array",
             "items": {
@@ -16648,13 +16641,6 @@
           "MIMEType": {
             "$ref": "#/components/schemas/ContentEntitiesMIMEType"
           },
-          "ContentCollections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
-            },
-            "nullable": true
-          },
           "AccessControlEntries": {
             "type": "array",
             "items": {
@@ -16682,9 +16668,21 @@
           "DictionaryKey": {
             "type": "string",
             "nullable": true
+          },
+          "HorselesContentType": {
+            "$ref": "#/components/schemas/ContentEntitiesHorselessContentType"
           }
         },
         "additionalProperties": false
+      },
+      "ContentEntitiesHorselessContentType": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "ContentEntitiesHorselessSession": {
         "type": "object",
@@ -16730,14 +16728,6 @@
             "type": "boolean",
             "nullable": true
           },
-          "HorselessSessionPrincipalId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "HorselessSessionPrincipal": {
-            "$ref": "#/components/schemas/ContentEntitiesPrincipal"
-          },
           "Timestamp": {
             "type": "string",
             "format": "byte",
@@ -16765,6 +16755,14 @@
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             },
             "nullable": true
+          },
+          "HorselessSessionPrincipalId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "HorselessSessionPrincipal": {
+            "$ref": "#/components/schemas/ContentEntitiesPrincipal"
           }
         },
         "additionalProperties": false
@@ -16795,13 +16793,6 @@
           },
           "IsActive": {
             "type": "boolean",
-            "nullable": true
-          },
-          "ContentCollections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
-            },
             "nullable": true
           },
           "AccessControlEntries": {
@@ -16857,6 +16848,20 @@
           },
           "DictionaryKey": {
             "type": "string",
+            "nullable": true
+          },
+          "ContentCollections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+            },
+            "nullable": true
+          },
+          "Placeholders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPlaceholder"
+            },
             "nullable": true
           }
         },
@@ -17365,6 +17370,77 @@
         },
         "additionalProperties": false
       },
+      "ContentEntitiesPlaceholder": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "DisplayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ObjectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "IsPublished": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          },
+          "Timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "AccessControlEntries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
+            },
+            "nullable": true
+          },
+          "Owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
+            },
+            "nullable": true
+          },
+          "UpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "HorselessViewId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "HorselessViews": {
+            "$ref": "#/components/schemas/ContentEntitiesHorselessView"
+          }
+        },
+        "additionalProperties": false
+      },
       "ContentEntitiesPrincipal": {
         "type": "object",
         "properties": {
@@ -17399,13 +17475,6 @@
           },
           "Sub": {
             "type": "string",
-            "nullable": true
-          },
-          "HorselessSessions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesHorselessSession"
-            },
             "nullable": true
           },
           "IsAnonymous": {
@@ -17447,7 +17516,7 @@
             },
             "nullable": true
           },
-          "ManagedTenants": {
+          "Accounts": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesTenant"
@@ -17458,6 +17527,20 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesTenant"
+            },
+            "nullable": true
+          },
+          "OwnedHorselessSessions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesHorselessSession"
+            },
+            "nullable": true
+          },
+          "HorselessSessions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesHorselessSession"
             },
             "nullable": true
           },
@@ -17619,13 +17702,6 @@
             "type": "string",
             "nullable": true
           },
-          "ContentCollections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
-            },
-            "nullable": true
-          },
           "PublicationChildren": {
             "type": "array",
             "items": {
@@ -17666,6 +17742,13 @@
           },
           "DictionaryKey": {
             "type": "string",
+            "nullable": true
+          },
+          "ContentCollections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+            },
             "nullable": true
           }
         },
@@ -17717,20 +17800,6 @@
             },
             "nullable": true
           },
-          "Holonyms": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesHolonym"
-            },
-            "nullable": true
-          },
-          "Taxonomies": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesTaxonomy"
-            },
-            "nullable": true
-          },
           "AccessControlEntries": {
             "type": "array",
             "items": {
@@ -17757,6 +17826,21 @@
           },
           "DictionaryKey": {
             "type": "string",
+            "nullable": true
+          },
+          "TaxonomyId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "Taxonomy": {
+            "$ref": "#/components/schemas/ContentEntitiesTaxonomy"
+          },
+          "Holonyms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesHolonym"
+            },
             "nullable": true
           }
         },
@@ -17794,20 +17878,6 @@
             "type": "string",
             "nullable": true
           },
-          "ContentCollections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
-            },
-            "nullable": true
-          },
-          "Taxons": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesTaxon"
-            },
-            "nullable": true
-          },
           "AccessControlEntries": {
             "type": "array",
             "items": {
@@ -17835,6 +17905,20 @@
           "DictionaryKey": {
             "type": "string",
             "nullable": true
+          },
+          "Taxons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesTaxon"
+            },
+            "nullable": true
+          },
+          "ContentCollections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -17861,13 +17945,6 @@
           "CreatedAt": {
             "type": "string",
             "format": "date-time",
-            "nullable": true
-          },
-          "ContentCollections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
-            },
             "nullable": true
           },
           "IsPublished": {
@@ -17934,6 +18011,13 @@
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             },
             "nullable": true
+          },
+          "ContentCollections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -17945,6 +18029,7 @@
           "ExistsInContentDb",
           "HasOwners",
           "HasACL",
+          "HasTenantFilesystem",
           "HasContentCollection",
           "DeploymentComplete"
         ],
