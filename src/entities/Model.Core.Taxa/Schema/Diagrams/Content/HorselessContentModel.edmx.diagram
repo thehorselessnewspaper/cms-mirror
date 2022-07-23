@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="HorselessContentModel.FilesystemAsset" Width="2.875" PointX="17.875" PointY="13.5" />
         <EntityTypeShape EntityType="HorselessContentModel.JSONAsset" Width="2.875" PointX="17.875" PointY="16.75" />
         <EntityTypeShape EntityType="HorselessContentModel.ContentCollection" Width="2.875" PointX="9.25" PointY="12.75" />
-        <AssociationConnector Association="HorselessContentModel.TenantContentCollections" />
         <AssociationConnector Association="HorselessContentModel.ContentCollectionMimeContent" />
         <AssociationConnector Association="HorselessContentModel.FilesystemAssetMimeContent" />
         <AssociationConnector Association="HorselessContentModel.MimeContentJSONAsset" />
@@ -38,7 +37,6 @@
         <AssociationConnector Association="HorselessContentModel.TaxonHolonym" />
         <AssociationConnector Association="HorselessContentModel.HolonymMeronym" />
         <AssociationConnector Association="HorselessContentModel.ContentCollectionTaxonomies" />
-        <AssociationConnector Association="HorselessContentModel.PrincipalHorselessSession" />
         <EntityTypeShape EntityType="HorselessContentModel.HorselessView" Width="2.625" PointX="5.5" PointY="15" />
         <AssociationConnector Association="HorselessContentModel.HorselessViewContentCollection" />
       </Diagram>

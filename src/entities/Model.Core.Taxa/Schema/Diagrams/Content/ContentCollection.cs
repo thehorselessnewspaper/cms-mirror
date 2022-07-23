@@ -17,7 +17,6 @@ namespace Schema.Diagrams.Content
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ContentCollection()
         {
-            this.Tenants = new HashSet<Tenant>();
             this.MimeContents = new HashSet<HorselessContent>();
             this.Publications = new HashSet<Publication>();
             this.Taxonomies = new HashSet<Taxonomy>();
@@ -34,8 +33,6 @@ namespace Schema.Diagrams.Content
         public string PublishedURL { get; set; }
         public string PreviewURL { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tenant> Tenants { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HorselessContent> MimeContents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

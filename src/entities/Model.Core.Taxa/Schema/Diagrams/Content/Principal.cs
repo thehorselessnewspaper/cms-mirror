@@ -14,12 +14,6 @@ namespace Schema.Diagrams.Content
     
     public partial class Principal
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Principal()
-        {
-            this.HorselessSessions = new HashSet<HorselessSession>();
-        }
-    
         public System.Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
@@ -28,8 +22,5 @@ namespace Schema.Diagrams.Content
         public string Iss { get; set; }
         public string Aud { get; set; }
         public string Sub { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HorselessSession> HorselessSessions { get; set; }
     }
 }
