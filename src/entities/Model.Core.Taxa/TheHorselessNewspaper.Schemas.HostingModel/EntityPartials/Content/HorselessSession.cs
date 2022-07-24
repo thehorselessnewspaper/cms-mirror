@@ -16,11 +16,13 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
 
         public ICollection<AccessControlEntry>? AccessControlEntries { get; set; }
-        public ICollection<Principal>? Owners { get; set; }
 
-        public Guid? HorselessSessionPrincipalId { get; set; }
+        [InverseProperty(nameof(Principal.OwnedHorselessSessions))]
+        public ICollection<Principal> Owners { get; set; }
 
+        public Guid? PrincipalId { get; set; }
 
-        public Principal? HorselessSessionPrincipal { get; set; }
+        // [InverseProperty(nameof(Principal.HorselessSessions))]
+        public Principal? Princiupal { get; set; }
     }
 }

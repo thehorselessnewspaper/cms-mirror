@@ -134,6 +134,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
 
         [ForeignKey("FK_JSONAssetMetaData")]
+
         public HashSet<JSONAsset> MetaData { get; set; } = new HashSet<JSONAsset>();
         public string? DictionaryKey { get; set; }
 

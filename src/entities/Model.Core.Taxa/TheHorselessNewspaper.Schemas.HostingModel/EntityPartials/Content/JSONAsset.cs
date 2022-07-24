@@ -11,7 +11,12 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     public partial class JSONAsset : IContentRowLevelSecured
     {
         public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+
         public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
+
+        [InverseProperty(nameof(Tenant.MetaData))]
+        public ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
+
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
         public DateTime? UpdatedAt { get; set; }
