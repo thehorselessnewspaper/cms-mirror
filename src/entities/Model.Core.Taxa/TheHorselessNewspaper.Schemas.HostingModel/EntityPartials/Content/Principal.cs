@@ -76,16 +76,19 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [InverseProperty(nameof(AccessControlEntry.SubjectPrincipals))]
         public ICollection<AccessControlEntry>? ManagingAccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
-      
+        [ForeignKey("TenantAccountsId")]
         [InverseProperty(nameof(Tenant.Accounts))]
         public ICollection<Tenant>? Accounts { get; set; } = new HashSet<Tenant>();
 
+        [ForeignKey("TenantOwnersId")]
         [InverseProperty(nameof(Tenant.Owners))]
         public ICollection<Tenant>? OwnedTenants { get; set; } = new HashSet<Tenant>();
 
+        [ForeignKey("HorselessSessionOwnersId")]
         [InverseProperty(nameof(HorselessSession.Owners))]
         public ICollection<HorselessSession>? OwnedHorselessSessions { get; set; } = new HashSet<HorselessSession>();
 
+        [ForeignKey("HorselessSessionPrincipalId")]
         [InverseProperty(nameof(HorselessSession.HorselessSessionPrincipal))]
         public ICollection<HorselessSession>? HorselessSessions { get; set; } = new HashSet<HorselessSession>();
 

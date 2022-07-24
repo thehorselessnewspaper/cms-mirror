@@ -131,20 +131,30 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
         public DateTime? UpdatedAt { get; set; }
+
+
+        [ForeignKey("JSONAssetMetaDataId")]
         public HashSet<JSONAsset> MetaData { get; set; } = new HashSet<JSONAsset>();
         public string? DictionaryKey { get; set; }
 
+
+
+        [ForeignKey("PrincipalOwnedTenantsId")]
         [InverseProperty(nameof(Principal.OwnedTenants))]
         public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
 
+
+        [ForeignKey("PrincipalAccountsId")]
         [InverseProperty(nameof(Principal.Accounts))]
         public ICollection<Principal> Accounts { get; set; } = new HashSet<Principal>();
 
         public TenantDeploymentWorkflowState DeploymentState { get; set; } = TenantDeploymentWorkflowState.PendingApproval;
 
+        [ForeignKey("AccessControlEntryManagedTenantsId")]
         [InverseProperty(nameof(AccessControlEntry.ManagedTenants))]
         public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
+        [ForeignKey("ContentCollectionTenantsId")]
         [InverseProperty(nameof(ContentCollection.Tenants))]
         public ICollection<ContentCollection> ContentCollections { get; set; } = new HashSet<ContentCollection>();
     }
