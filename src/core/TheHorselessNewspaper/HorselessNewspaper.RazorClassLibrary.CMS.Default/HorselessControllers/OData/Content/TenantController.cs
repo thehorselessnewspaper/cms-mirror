@@ -56,7 +56,6 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
 
         public async Task<ActionResult<IQueryable<ContentModel.Tenant>>> Get(ODataQueryOptions<ContentModel.Tenant> options)
-        // public async Task<ActionResult<IEnumerable<ContentModel.Tenant>>> Get()
         {
             try
             {

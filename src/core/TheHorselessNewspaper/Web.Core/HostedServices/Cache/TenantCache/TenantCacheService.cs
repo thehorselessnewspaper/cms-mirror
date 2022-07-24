@@ -505,12 +505,12 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                         mutatingTenant.ContentCollections.Add(DefaultEntitySets.GetDefaultContentCollections().First());
                                         var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mutatingTenant, Formatting.None, new JsonSerializerSettings()
                                         {
-                                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                                            ReferenceLoopHandling = ReferenceLoopHandling.Serialize
                                         }));
 
                                         var wireContentCollection = JsonConvert.SerializeObject(mutatingTenant.ContentCollections.First(), Formatting.None, new JsonSerializerSettings()
                                         {
-                                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                                            ReferenceLoopHandling = ReferenceLoopHandling.Serialize
                                         });
 
                                         // TODO add support for multiple default collections
@@ -565,7 +565,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                         mirrorTenant.DeploymentState = ContentModel.TenantDeploymentWorkflowState.HasOwners; // set the workflow complete flag
                                         var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mirrorTenant, Formatting.None, new JsonSerializerSettings()
                                         {
-                                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                                            ReferenceLoopHandling = ReferenceLoopHandling.Serialize
                                         }));
                                         var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.Owners), nameof(ContentModel.Tenant.DeploymentState) };
                                         var mutateResult = await restClient.ApiHorselessContentModelTenantUpdateAsync(wireTenant.Id.ToString(), wireTenant.TenantIdentifier, wireTenant);
@@ -609,7 +609,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                         mirrorTenant.DeploymentState = ContentModel.TenantDeploymentWorkflowState.HasACL; // set the workflow complete flag
                                         var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mirrorTenant, Formatting.None, new JsonSerializerSettings()
                                         {
-                                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                                            ReferenceLoopHandling = ReferenceLoopHandling.Serialize
                                         }));
                                         var updatedProperties = new List<string>() { nameof(ContentModel.AccessControlEntry), nameof(ContentModel.Tenant.DeploymentState) };
                                         var mutateResult = await restClient.ApiHorselessContentModelTenantUpdateAsync(wireTenant.Id.ToString(), wireTenant.TenantIdentifier, wireTenant);
@@ -645,7 +645,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                         mirrorTenant.DeploymentState = ContentModel.TenantDeploymentWorkflowState.DeploymentComplete; // set the workflow complete flag
                                         var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mirrorTenant, Formatting.None, new JsonSerializerSettings()
                                         {
-                                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                                            ReferenceLoopHandling = ReferenceLoopHandling.Serialize
                                         }));
                                         var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.DeploymentState) };
 

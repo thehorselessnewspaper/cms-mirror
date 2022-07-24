@@ -24,10 +24,10 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public string? DictionaryKey { get; set; }
 
 
-        //[InverseProperty(nameof(Tenant.Owners))]
+        [InverseProperty(nameof(Tenant.Owners))]
         public ICollection<Tenant> OwnedTenants { get; set; } = new HashSet<Tenant>();
 
-        //[InverseProperty(nameof(Tenant.Accounts))]
+        [InverseProperty(nameof(Tenant.Accounts))]
         public ICollection<Tenant> TenantAccounts { get; set; } = new HashSet<Tenant>();
 
         [NotMapped]
