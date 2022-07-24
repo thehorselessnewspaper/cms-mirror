@@ -66,23 +66,24 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
         public DateTime? UpdatedAt { get; set; }
 
+        [ForeignKey("FK_ContentCollectionAccessControlEntries")]
         [InverseProperty(nameof(ContentCollection.AccessControlEntries))]
         public virtual ICollection<ContentCollection?>? ManagedContentCollections { get; set; } = new HashSet<ContentCollection?>();
 
-        [ForeignKey("HorselessContentAccessControlEntriesId")]
+        [ForeignKey("FK_HorselessContentAccessControlEntries")]
         [InverseProperty(nameof(HorselessContent.AccessControlEntries))]
         public virtual ICollection<HorselessContent?>? ManagedHorselessContents { get; set; } = new HashSet<HorselessContent?>();
 
-        [ForeignKey("HorselessViewAccessControlEntriesId")]
+        [ForeignKey("FK_HorselessViewAccessControlEntries")]
         [InverseProperty(nameof(HorselessView.AccessControlEntries))]
         public virtual ICollection<HorselessView?>? ManagedHorselessViews { get; set; } = new HashSet<HorselessView?>();
 
-        [ForeignKey("PublicationAccessControlEntriesId")]
+        [ForeignKey("FK_PublicationAccessControlEntries")]
         [InverseProperty(nameof(Publication.AccessControlEntries))]
         public virtual ICollection<Publication?>? ManagedPublications { get; set; } = new HashSet<Publication?>();
 
 
-        [ForeignKey("TenantAccessControlEntriesId")]
+        [ForeignKey("FK_TenantAccessControlEntries")]
         [InverseProperty(nameof(Tenant.AccessControlEntries))]
         public virtual ICollection<Tenant?>? ManagedTenants { get; set; } = new HashSet<Tenant?>();
 
