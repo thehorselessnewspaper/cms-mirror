@@ -28,7 +28,7 @@
 	<ItemGroup>
 		<PackageReference Include="Finbuckle.MultiTenant" Version="6.7.3" />
 		<PackageReference Include="Finbuckle.MultiTenant.EntityFrameworkCore" Version="6.7.3" />
-		<PackageReference Include="HorselessNewspaper.Web.Core" Version="0.4.220723.10" />
+		<PackageReference Include="HorselessNewspaper.Web.Core" Version="0.4.220724.1" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
