@@ -22,7 +22,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [InverseProperty(nameof(AccessControlEntry.ManagedHorselessViews))]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
-        [InverseProperty(nameof(Principal.ManagedHorselessViews))]
+        [InverseProperty(nameof(Principal.HorselessViews))]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
         public DateTime? UpdatedAt { get; set; }
         public byte[] Timestamp { get; set; }

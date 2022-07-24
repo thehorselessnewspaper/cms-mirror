@@ -77,31 +77,31 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string? DictionaryKey { get; set; }
 
         // [ForeignKey("FK_AccessControlEntrySubjectPrincipals")]
-        //[InverseProperty(nameof(AccessControlEntry.SubjectPrincipals))]
+        [InverseProperty(nameof(AccessControlEntry.SubjectPrincipals))]
         public ICollection<AccessControlEntry> ManagingAccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
         // [ForeignKey("FK_TenantAccounts")]
-        //[InverseProperty(nameof(Tenant.Accounts))]
+        [InverseProperty(nameof(Tenant.Accounts))]
         public ICollection<Tenant> TenantAccounts { get; set; } = new HashSet<Tenant>();
 
         // [ForeignKey("FK_TenantOwners")]
-        //[InverseProperty(nameof(Tenant.Owners))]
+        [InverseProperty(nameof(Tenant.Owners))]
         public ICollection<Tenant> OwnedTenants { get; set; } = new HashSet<Tenant>();
 
 
-        // [InverseProperty(nameof(HorselessSession.Owners))]
+        [InverseProperty(nameof(HorselessSession.Owners))]
         public ICollection<HorselessSession> OwnedHorselessSessions { get; set; } = new HashSet<HorselessSession>();
 
 
 
-        // [InverseProperty(nameof(HorselessSession.Principal))]
+        [InverseProperty(nameof(HorselessSession.Principal))]
         public ICollection<HorselessSession> HorselessSessions { get; set; } = new HashSet<HorselessSession>();
 
-        // [InverseProperty(nameof(HorselessContent.Owners))]
+        [InverseProperty(nameof(HorselessContent.Owners))]
         public ICollection<HorselessContent> HorselessContents { get; set; } = new HashSet<HorselessContent>();
 
-        // [InverseProperty(nameof(HorselessContent.Owners))]
-        public ICollection<HorselessView> ManagedHorselessViews { get; set; } = new HashSet<HorselessView>();
+        [InverseProperty(nameof(HorselessContent.Owners))]
+        public ICollection<HorselessView> HorselessViews { get; set; } = new HashSet<HorselessView>();
 
         /// <summary>
         /// not mapped - model impedence mismatch due to implemented interface
