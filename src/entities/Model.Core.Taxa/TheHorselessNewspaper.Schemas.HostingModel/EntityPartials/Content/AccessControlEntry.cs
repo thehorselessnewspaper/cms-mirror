@@ -68,26 +68,26 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         // [ForeignKey("FK_ContentCollectionAccessControlEntries")]
         [InverseProperty(nameof(ContentCollection.AccessControlEntries))]
-        public virtual ICollection<ContentCollection?>? ContentCollections { get; set; } = new HashSet<ContentCollection?>();
+        public virtual ICollection<ContentCollection> ContentCollections { get; set; } = new HashSet<ContentCollection>();
 
         /// <summary>
         ///  [ForeignKey("FK_HorselessContentAccessControlEntries")]
         /// </summary>
         [InverseProperty(nameof(HorselessContent.AccessControlEntries))]
-        public virtual ICollection<HorselessContent?>? HorselessContents { get; set; } = new HashSet<HorselessContent?>();
+        public virtual ICollection<HorselessContent> HorselessContents { get; set; } = new HashSet<HorselessContent>();
 
-        //[ForeignKey("FK_HorselessViewAccessControlEntries")]
-        //[InverseProperty(nameof(HorselessView.AccessControlEntries))]
-        //public virtual ICollection<HorselessView?>? ManagedHorselessViews { get; set; } = new HashSet<HorselessView?>();
+        // [ForeignKey("FK_HorselessViewAccessControlEntries")]
+        [InverseProperty(nameof(HorselessView.AccessControlEntries))]
+        public virtual ICollection<HorselessView> ManagedHorselessViews { get; set; } = new HashSet<HorselessView>();
 
-        //[ForeignKey("FK_PublicationAccessControlEntries")]
-        //[InverseProperty(nameof(Publication.AccessControlEntries))]
-        //public virtual ICollection<Publication?>? ManagedPublications { get; set; } = new HashSet<Publication?>();
+        // [ForeignKey("FK_PublicationAccessControlEntries")]
+        [InverseProperty(nameof(Publication.AccessControlEntries))]
+        public virtual ICollection<Publication> ManagedPublications { get; set; } = new HashSet<Publication>();
 
 
         //[ForeignKey("FK_TenantAccessControlEntries")]
-        //[InverseProperty(nameof(Tenant.AccessControlEntries))]
-        //public virtual ICollection<Tenant?>? ManagedTenants { get; set; } = new HashSet<Tenant?>();
+        [InverseProperty(nameof(Tenant.AccessControlEntries))]
+        public virtual ICollection<Tenant> ManagedTenants { get; set; } = new HashSet<Tenant>();
 
 
         public string? DictionaryKey { get; set; }

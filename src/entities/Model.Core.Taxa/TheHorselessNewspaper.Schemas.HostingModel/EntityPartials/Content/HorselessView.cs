@@ -18,12 +18,12 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     [MultiTenant]
     public partial class HorselessView : IContentRowLevelSecured, IFileInfo
     {
-        [ForeignKey("FK_AccessControlEntryManagedHorselessViews")]
-        // [InverseProperty(nameof(AccessControlEntry.ManagedHorselessViews))]
-        public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+        // [ForeignKey("FK_AccessControlEntryManagedHorselessViews")]
+        [InverseProperty(nameof(AccessControlEntry.ManagedHorselessViews))]
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
-
-        public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
+        [InverseProperty(nameof(Principal.ManagedHorselessViews))]
+        public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
         public DateTime? UpdatedAt { get; set; }
         public byte[] Timestamp { get; set; }
 
