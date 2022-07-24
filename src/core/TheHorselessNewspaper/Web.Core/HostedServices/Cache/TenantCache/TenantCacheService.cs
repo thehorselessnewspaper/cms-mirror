@@ -568,8 +568,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                                         }));
                                         var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.Owners), nameof(ContentModel.Tenant.DeploymentState) };
+                                        var mutateResult = await restClient.ApiHorselessContentModelTenantUpdateAsync(wireTenant.Id.ToString(), wireTenant.TenantIdentifier, wireTenant);
 
-                                        var mutateResult = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier, updatedProperties, wireTenant);
+                                        // var mutateResult = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier, updatedProperties, wireTenant);
                                         var mutateResultJson = mutateResult.Result.ToJson();
                                         var deserialzedMutateResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(mutateResultJson);
                                         currentDeploymentState = deserialzedMutateResult.DeploymentState;
@@ -611,8 +612,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                                         }));
                                         var updatedProperties = new List<string>() { nameof(ContentModel.AccessControlEntry), nameof(ContentModel.Tenant.DeploymentState) };
-
-                                        var mutateResult = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier, updatedProperties, wireTenant);
+                                        var mutateResult = await restClient.ApiHorselessContentModelTenantUpdateAsync(wireTenant.Id.ToString(), wireTenant.TenantIdentifier, wireTenant);
+                                        // var mutateResult = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier, updatedProperties, wireTenant);
                                         var mutateResultJson = mutateResult.Result.ToJson();
                                         var deserialzedMutateResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(mutateResultJson);
                                         currentDeploymentState = deserialzedMutateResult.DeploymentState;
@@ -648,8 +649,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                         }));
                                         var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.DeploymentState) };
 
-                                        var mutateResult = await restClient.
-                                            ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier, updatedProperties, wireTenant);
+                                        var mutateResult = await restClient.ApiHorselessContentModelTenantUpdateAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier,wireTenant);
+
+                                        // var mutateResult = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier, updatedProperties, wireTenant);
                                         var mutateResultJson = mutateResult.Result.ToJson();
                                         var deserialzedMutateResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(mutateResultJson);
 

@@ -14,6 +14,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 
+
         public ICollection<AccessControlEntry>? AccessControlEntries { get; set; }
         public ICollection<Principal>? Owners { get; set; }
 
