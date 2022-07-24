@@ -23,7 +23,5 @@ namespace Schema.Diagrams.Hosting
         public string Iss { get; set; }
         public string Aud { get; set; }
         public Nullable<System.Guid> TenantInfoId { get; set; }
-    
-        public virtual TenantInfo TenantInfo { get; set; }
     }
 }

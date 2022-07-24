@@ -24,7 +24,5 @@ namespace Schema.Diagrams.Hosting
         public string ConnectionString { get; set; }
         public string WebAPIBaseUrl { get; set; }
         public Nullable<System.Guid> TenantInfoId { get; set; }
-    
-        public virtual TenantInfo TenantInfo { get; set; }
     }
 }

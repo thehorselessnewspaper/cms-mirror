@@ -13,14 +13,6 @@
     <EntitySet Name="WebAPITenantInfos" EntityType="HostingModel.Store.WebAPITenantInfos" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Principals" EntityType="HostingModel.Store.Principals" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AccessControlEntries" EntityType="HostingModel.Store.AccessControlEntries" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="TenantInfoWebAPITenantInfo" Association="HostingModel.Store.TenantInfoWebAPITenantInfo">
-      <End Role="TenantInfo" EntitySet="TenantInfos" />
-      <End Role="WebAPITenantInfo" EntitySet="WebAPITenantInfos" />
-    </AssociationSet>
-    <AssociationSet Name="TenantInfoKeyCloakConfiguration" Association="HostingModel.Store.TenantInfoKeyCloakConfiguration">
-      <End Role="TenantInfo" EntitySet="TenantInfos" />
-      <End Role="KeyCloakConfiguration" EntitySet="KeyCloakConfigurations" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Tenants">
     <Key>
@@ -112,30 +104,6 @@
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="IsActive" Type="bit" Nullable="true" />
   </EntityType>
-  <Association Name="TenantInfoWebAPITenantInfo">
-    <End Role="TenantInfo" Type="HostingModel.Store.TenantInfos" Multiplicity="0..1" />
-    <End Role="WebAPITenantInfo" Type="HostingModel.Store.WebAPITenantInfos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TenantInfo">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="WebAPITenantInfo">
-        <PropertyRef Name="TenantInfoId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="TenantInfoKeyCloakConfiguration">
-    <End Role="TenantInfo" Type="HostingModel.Store.TenantInfos" Multiplicity="0..1" />
-    <End Role="KeyCloakConfiguration" Type="HostingModel.Store.KeyCloakConfigurations" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TenantInfo">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="KeyCloakConfiguration">
-        <PropertyRef Name="TenantInfoId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -146,14 +114,6 @@
           <EntitySet Name="KeyCloakConfigurations" EntityType="HostingModel.KeyCloakConfiguration" />
           <EntitySet Name="TenantInfos" EntityType="HostingModel.TenantInfo" />
           <EntitySet Name="WebAPITenantInfos" EntityType="HostingModel.WebAPITenantInfo" />
-          <AssociationSet Name="TenantInfoWebAPITenantInfo" Association="HostingModel.TenantInfoWebAPITenantInfo">
-            <End Role="TenantInfo" EntitySet="TenantInfos" />
-            <End Role="WebAPITenantInfo" EntitySet="WebAPITenantInfos" />
-          </AssociationSet>
-          <AssociationSet Name="TenantInfoKeyCloakConfiguration" Association="HostingModel.TenantInfoKeyCloakConfiguration">
-            <End Role="TenantInfo" EntitySet="TenantInfos" />
-            <End Role="KeyCloakConfiguration" EntitySet="KeyCloakConfigurations" />
-          </AssociationSet>
           <EntitySet Name="Principals" EntityType="HostingModel.Principal" />
           <EntitySet Name="AccessControlEntries" EntityType="HostingModel.AccessControlEntry" />
         </EntityContainer>
@@ -195,7 +155,6 @@
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="Iss" Type="String" Nullable="true" />
           <Property Name="Aud" Type="String" Nullable="true" />
-          <NavigationProperty Name="TenantInfo" Relationship="HostingModel.TenantInfoKeyCloakConfiguration" FromRole="KeyCloakConfiguration" ToRole="TenantInfo" />
           <Property Name="TenantInfoId" Type="Guid" Nullable="true" />
         </EntityType>
         <EntityType Name="TenantInfo">
@@ -211,8 +170,6 @@
           <Property Name="Name" Type="String" Nullable="true" />
           <Property Name="ConnectionString" Type="String" Nullable="true" />
           <Property Name="TenantBaseUrl" Type="String" Nullable="true" />
-          <NavigationProperty Name="WebAPITenantInfos" Relationship="HostingModel.TenantInfoWebAPITenantInfo" FromRole="TenantInfo" ToRole="WebAPITenantInfo" />
-          <NavigationProperty Name="KeyCloakConfigurations" Relationship="HostingModel.TenantInfoKeyCloakConfiguration" FromRole="TenantInfo" ToRole="KeyCloakConfiguration" />
         </EntityType>
         <EntityType Name="WebAPITenantInfo">
           <Key>
@@ -227,33 +184,8 @@
           <Property Name="Name" Type="String" Nullable="true" />
           <Property Name="ConnectionString" Type="String" Nullable="true" />
           <Property Name="WebAPIBaseUrl" Type="String" Nullable="true" />
-          <NavigationProperty Name="TenantInfo" Relationship="HostingModel.TenantInfoWebAPITenantInfo" FromRole="WebAPITenantInfo" ToRole="TenantInfo" />
           <Property Name="TenantInfoId" Type="Guid" Nullable="true" />
         </EntityType>
-        <Association Name="TenantInfoWebAPITenantInfo">
-          <End Type="HostingModel.TenantInfo" Role="TenantInfo" Multiplicity="0..1" />
-          <End Type="HostingModel.WebAPITenantInfo" Role="WebAPITenantInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TenantInfo">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="WebAPITenantInfo">
-              <PropertyRef Name="TenantInfoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TenantInfoKeyCloakConfiguration">
-          <End Type="HostingModel.TenantInfo" Role="TenantInfo" Multiplicity="0..1" />
-          <End Type="HostingModel.KeyCloakConfiguration" Role="KeyCloakConfiguration" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TenantInfo">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="KeyCloakConfiguration">
-              <PropertyRef Name="TenantInfoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Principal">
           <Key>
             <PropertyRef Name="Id" />

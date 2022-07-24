@@ -2,12 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/14/2022 12:23:31
+-- Date Created: 07/24/2022 16:18:11
 -- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Hosting\HostingModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
-
+GO
+USE [THNLP_Hosting];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -192,36 +193,6 @@ GO
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
-
--- Creating foreign key on [TenantInfoId] in table 'WebAPITenantInfos'
-ALTER TABLE [dbo].[WebAPITenantInfos]
-ADD CONSTRAINT [FK_TenantInfoWebAPITenantInfo]
-    FOREIGN KEY ([TenantInfoId])
-    REFERENCES [dbo].[TenantInfos]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TenantInfoWebAPITenantInfo'
-CREATE INDEX [IX_FK_TenantInfoWebAPITenantInfo]
-ON [dbo].[WebAPITenantInfos]
-    ([TenantInfoId]);
-GO
-
--- Creating foreign key on [TenantInfoId] in table 'KeyCloakConfigurations'
-ALTER TABLE [dbo].[KeyCloakConfigurations]
-ADD CONSTRAINT [FK_TenantInfoKeyCloakConfiguration]
-    FOREIGN KEY ([TenantInfoId])
-    REFERENCES [dbo].[TenantInfos]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TenantInfoKeyCloakConfiguration'
-CREATE INDEX [IX_FK_TenantInfoKeyCloakConfiguration]
-ON [dbo].[KeyCloakConfigurations]
-    ([TenantInfoId]);
-GO
 
 -- --------------------------------------------------
 -- Script has ended

@@ -14,13 +14,6 @@ namespace Schema.Diagrams.Hosting
     
     public partial class TenantInfo
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TenantInfo()
-        {
-            this.WebAPITenantInfos = new HashSet<WebAPITenantInfo>();
-            this.KeyCloakConfigurations = new HashSet<KeyCloakConfiguration>();
-        }
-    
         public System.Guid Id { get; set; }
         public string DisplayName { get; set; }
         public string ObjectId { get; set; }
@@ -30,10 +23,5 @@ namespace Schema.Diagrams.Hosting
         public string Name { get; set; }
         public string ConnectionString { get; set; }
         public string TenantBaseUrl { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WebAPITenantInfo> WebAPITenantInfos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<KeyCloakConfiguration> KeyCloakConfigurations { get; set; }
     }
 }

@@ -47,7 +47,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public Guid? PrincipalId { get; set; }
 
 
-        [InverseProperty("PrincipalClaimContainer")]
+        [InverseProperty(nameof(ContentEntities.Principal.PrincipalClaimContainer))]
         public Principal? Principal { get; set; }
 
 
