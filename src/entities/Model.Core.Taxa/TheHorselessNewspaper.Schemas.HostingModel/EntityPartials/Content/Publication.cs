@@ -8,8 +8,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     [MultiTenant]
     public partial class Publication : IContentRowLevelSecured
     {
-
-        [InverseProperty(nameof(AccessControlEntry.ManagedPublications))]
+        [ForeignKey("FK_AccessControlEntryManagedPublications")]
+        // [InverseProperty(nameof(AccessControlEntry.ManagedPublications))]
         public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
         public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
         [Timestamp]

@@ -76,24 +76,29 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 
-        [ForeignKey("FK_AccessControlEntrySubjectPrincipals")]
+        // [ForeignKey("FK_AccessControlEntrySubjectPrincipals")]
         [InverseProperty(nameof(AccessControlEntry.SubjectPrincipals))]
         public ICollection<AccessControlEntry> ManagingAccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
-        [ForeignKey("FK_TenantAccounts")]
+        // [ForeignKey("FK_TenantAccounts")]
         [InverseProperty(nameof(Tenant.Accounts))]
-        public ICollection<Tenant> Accounts { get; set; } = new HashSet<Tenant>();
+        public ICollection<Tenant> TenantAccounts { get; set; } = new HashSet<Tenant>();
 
-        [ForeignKey("FK_TenantOwnersI")]
+        // [ForeignKey("FK_TenantOwners")]
         [InverseProperty(nameof(Tenant.Owners))]
         public ICollection<Tenant> OwnedTenants { get; set; } = new HashSet<Tenant>();
 
-        [ForeignKey("FK_HorselessSessionOwners")]
+
         [InverseProperty(nameof(HorselessSession.Owners))]
         public ICollection<HorselessSession> OwnedHorselessSessions { get; set; } = new HashSet<HorselessSession>();
 
-        [InverseProperty(nameof(HorselessSession.Princiupal))]
+
+
+        [InverseProperty(nameof(HorselessSession.Principal))]
         public ICollection<HorselessSession> HorselessSessions { get; set; } = new HashSet<HorselessSession>();
+
+        [InverseProperty(nameof(HorselessContent.Owners))]
+        public ICollection<HorselessContent> HorselessContents { get; set; } = new HashSet<HorselessContent>();
 
         /// <summary>
         /// not mapped - model impedence mismatch due to implemented interface

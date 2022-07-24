@@ -14,9 +14,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     public partial class ContentCollection : IContentRowLevelSecured
     {
 
-
-        [InverseProperty(nameof(AccessControlEntry.ManagedContentCollections))]
-        public virtual ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+        // [ForeignKey("FK_AccessControlEntryManagedContentCollections")]
+        // [InverseProperty(nameof(AccessControlEntry.ManagedContentCollections))]
+        public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
 
         // [ForeignKey("ParentContentCollectionsId")]
@@ -46,7 +46,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [InverseProperty(nameof(Taxonomy.ContentCollections))]
         public ICollection<Taxonomy> Taxonomies { get; set; } = new HashSet<Taxonomy>();
 
-
+        [InverseProperty(nameof(HorselessContent.ContentCollections))]
         public ICollection<HorselessContent> HorselessContents { get; set; } = new HashSet<HorselessContent>();
     }
 }

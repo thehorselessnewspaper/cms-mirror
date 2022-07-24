@@ -66,26 +66,28 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
         public DateTime? UpdatedAt { get; set; }
 
-        [ForeignKey("FK_ContentCollectionAccessControlEntries")]
+        // [ForeignKey("FK_ContentCollectionAccessControlEntries")]
         [InverseProperty(nameof(ContentCollection.AccessControlEntries))]
-        public virtual ICollection<ContentCollection?>? ManagedContentCollections { get; set; } = new HashSet<ContentCollection?>();
+        public virtual ICollection<ContentCollection?>? ContentCollections { get; set; } = new HashSet<ContentCollection?>();
 
-        [ForeignKey("FK_HorselessContentAccessControlEntries")]
+        /// <summary>
+        ///  [ForeignKey("FK_HorselessContentAccessControlEntries")]
+        /// </summary>
         [InverseProperty(nameof(HorselessContent.AccessControlEntries))]
-        public virtual ICollection<HorselessContent?>? ManagedHorselessContents { get; set; } = new HashSet<HorselessContent?>();
+        public virtual ICollection<HorselessContent?>? HorselessContents { get; set; } = new HashSet<HorselessContent?>();
 
-        [ForeignKey("FK_HorselessViewAccessControlEntries")]
-        [InverseProperty(nameof(HorselessView.AccessControlEntries))]
-        public virtual ICollection<HorselessView?>? ManagedHorselessViews { get; set; } = new HashSet<HorselessView?>();
+        //[ForeignKey("FK_HorselessViewAccessControlEntries")]
+        //[InverseProperty(nameof(HorselessView.AccessControlEntries))]
+        //public virtual ICollection<HorselessView?>? ManagedHorselessViews { get; set; } = new HashSet<HorselessView?>();
 
-        [ForeignKey("FK_PublicationAccessControlEntries")]
-        [InverseProperty(nameof(Publication.AccessControlEntries))]
-        public virtual ICollection<Publication?>? ManagedPublications { get; set; } = new HashSet<Publication?>();
+        //[ForeignKey("FK_PublicationAccessControlEntries")]
+        //[InverseProperty(nameof(Publication.AccessControlEntries))]
+        //public virtual ICollection<Publication?>? ManagedPublications { get; set; } = new HashSet<Publication?>();
 
 
-        [ForeignKey("FK_TenantAccessControlEntries")]
-        [InverseProperty(nameof(Tenant.AccessControlEntries))]
-        public virtual ICollection<Tenant?>? ManagedTenants { get; set; } = new HashSet<Tenant?>();
+        //[ForeignKey("FK_TenantAccessControlEntries")]
+        //[InverseProperty(nameof(Tenant.AccessControlEntries))]
+        //public virtual ICollection<Tenant?>? ManagedTenants { get; set; } = new HashSet<Tenant?>();
 
 
         public string? DictionaryKey { get; set; }
@@ -94,7 +96,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         /// not mapped - model impedence mismatch due to implemented interface
         /// </summary>
         [NotMapped]
-        public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
         /// <summary>
         /// not mapped - model impedence mismatch due to implemented interface

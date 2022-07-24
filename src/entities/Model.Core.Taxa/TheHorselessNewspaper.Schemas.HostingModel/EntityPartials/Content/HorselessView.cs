@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.FileProviders;
+﻿using Finbuckle.MultiTenant;
+using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,10 +15,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     /// support loading razor (and other) views from the database
     /// totally as per https://www.mikesdotnetting.com/article/301/loading-asp-net-core-mvc-views-from-a-database-or-other-location
     /// </summary>
+    [MultiTenant]
     public partial class HorselessView : IContentRowLevelSecured, IFileInfo
     {
-
-        [InverseProperty(nameof(AccessControlEntry.ManagedHorselessViews))]
+        [ForeignKey("FK_AccessControlEntryManagedHorselessViews")]
+        // [InverseProperty(nameof(AccessControlEntry.ManagedHorselessViews))]
         public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
 
