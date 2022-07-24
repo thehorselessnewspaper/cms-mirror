@@ -114,7 +114,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                     tenant.IsPublished = false;
                     tenant.DeploymentState = TenantDeploymentWorkflowState.Approved;
                     // approve the application
-                    var rejectResult = await this.hostingModelTenantOperator.Update(tenant, new List<string>() { nameof(tenant.IsSoftDeleted), nameof(tenant.IsPublished) });
+                    var rejectResult = await this.hostingModelTenantOperator.Update(tenant, new List<string>() { nameof(tenant.IsSoftDeleted), nameof(tenant.IsPublished), nameof(tenant.DeploymentState) });
                     return RedirectToAction(nameof(Index));
                 }
                 else

@@ -16,9 +16,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="HorselessNewspaper.RazorClassLibrary.CMS.Default" Version="0.4.220723.8" />
-		<PackageReference Include="HorselessNewspaper.Web.Core" Version="0.4.220723.8" />
-		<PackageReference Include="HorselessNewspaper.Web.Core.Startup" Version="0.4.220723.8" />
+		<PackageReference Include="HorselessNewspaper.RazorClassLibrary.CMS.Default" Version="0.4.220723.10" />
+		<PackageReference Include="HorselessNewspaper.Web.Core" Version="0.4.220723.10" />
+		<PackageReference Include="HorselessNewspaper.Web.Core.Startup" Version="0.4.220723.10" />
 		<PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="6.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="6.0.7" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.7" />
