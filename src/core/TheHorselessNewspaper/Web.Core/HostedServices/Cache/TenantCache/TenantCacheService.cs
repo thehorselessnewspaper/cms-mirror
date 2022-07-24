@@ -515,14 +515,14 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                                         // TODO add support for multiple default collections
                                         // var wireContentCollection = mapper.Map<ContentModel.ContentCollection, ContentEntitiesContentCollection>(mutatingTenant.ContentCollections.First());
-                                        var mutateResult = await restClient.
-                                                                            ApiHorselessContentModelContentCollectionCreateAsync(mutatingTenant.TenantIdentifier.ToString(), 
-                                                                            ContentEntitiesContentCollection.FromJson(wireContentCollection));
+                                        //var mutateResult = await restClient.
+                                        //                                    ApiHorselessContentModelContentCollectionCreateAsync(mutatingTenant.TenantIdentifier.ToString(), 
+                                        //                                    ContentEntitiesContentCollection.FromJson(wireContentCollection));
 
                                         // wireTenant.ContentCollections.Clear();
                                         var mutatedTenant = await restClient.
-                                                                                            ApiHorselessContentModelTenantUpdatePropertiesAsync(mutatingTenant.Id.ToString(),
-                                                                                            mutatingTenant.TenantIdentifier, new List<string> { nameof(ContentModel.Tenant.DeploymentState) }, wireTenant);
+                                                                                            ApiHorselessContentModelTenantUpdateAsync(mutatingTenant.Id.ToString(),
+                                                                                            mutatingTenant.TenantIdentifier,  wireTenant);
 
                                         var mutateResultJson = mutatedTenant.Result.ToJson();
                                         var deserialzedMutateResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(mutateResultJson);

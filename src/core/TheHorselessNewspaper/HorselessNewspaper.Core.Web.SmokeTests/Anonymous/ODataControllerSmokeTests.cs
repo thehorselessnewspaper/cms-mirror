@@ -173,6 +173,81 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                             IsSoftDeleted = false,
                             DeploymentState = ContentEntities.TenantDeploymentWorkflowState.PendingApproval,
                             ObjectId = Guid.NewGuid().ToString(),
+                            AccessControlEntries = new List<ContentEntities.AccessControlEntry>()
+                            {
+                                        new ContentEntities.AccessControlEntry()
+                                        {
+                                            Id = Guid.NewGuid(),
+                                            CreatedAt = DateTime.UtcNow,
+                                            DisplayName = "test tenant",
+                                            IsSoftDeleted = false,
+                                            ObjectId = Guid.NewGuid().ToString(),
+                                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                                            Permission = ContentEntities.ACEPermission.READ,
+                                            PermissionType = ContentEntities.ACEPermissionType.PERMIT,
+                                            Scope = ContentEntities.ACEPermissionScope.OWNER
+                                        },
+                                        new ContentEntities.AccessControlEntry()
+                                        {
+                                            Id = Guid.NewGuid(),
+                                            CreatedAt = DateTime.UtcNow,
+                                            DisplayName = "test tenant",
+                                            IsSoftDeleted = false,
+                                            ObjectId = Guid.NewGuid().ToString(),
+                                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                                            Permission = ContentEntities.ACEPermission.CREATE,
+                                            PermissionType = ContentEntities.ACEPermissionType.PERMIT,
+                                            Scope = ContentEntities.ACEPermissionScope.OWNER
+                                        },
+                                        new ContentEntities.AccessControlEntry()
+                                        {
+                                            Id = Guid.NewGuid(),
+                                            CreatedAt = DateTime.UtcNow,
+                                            DisplayName = "test tenant",
+                                            IsSoftDeleted = false,
+                                            ObjectId = Guid.NewGuid().ToString(),
+                                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                                            Permission = ContentEntities.ACEPermission.DELETE,
+                                            PermissionType = ContentEntities.ACEPermissionType.PERMIT,
+                                            Scope = ContentEntities.ACEPermissionScope.OWNER
+                                        },
+                                        new ContentEntities.AccessControlEntry()
+                                        {
+                                            Id = Guid.NewGuid(),
+                                            CreatedAt = DateTime.UtcNow,
+                                            DisplayName = "test tenant",
+                                            IsSoftDeleted = false,
+                                            ObjectId = Guid.NewGuid().ToString(),
+                                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                                            Permission = ContentEntities.ACEPermission.EXECUTE,
+                                            PermissionType = ContentEntities.ACEPermissionType.PERMIT,
+                                            Scope = ContentEntities.ACEPermissionScope.OWNER
+                                        },
+                                        new ContentEntities.AccessControlEntry()
+                                        {
+                                            Id = Guid.NewGuid(),
+                                            CreatedAt = DateTime.UtcNow,
+                                            DisplayName = "test tenant",
+                                            IsSoftDeleted = false,
+                                            ObjectId = Guid.NewGuid().ToString(),
+                                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                                            Permission = ContentEntities.ACEPermission.PUBLISH,
+                                            PermissionType = ContentEntities.ACEPermissionType.PERMIT,
+                                            Scope = ContentEntities.ACEPermissionScope.OWNER
+                                        },
+                                        new ContentEntities.AccessControlEntry()
+                                        {
+                                            Id = Guid.NewGuid(),
+                                            CreatedAt = DateTime.UtcNow,
+                                            DisplayName = "test tenant",
+                                            IsSoftDeleted = false,
+                                            ObjectId = Guid.NewGuid().ToString(),
+                                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                                            Permission = ContentEntities.ACEPermission.SEARCH,
+                                            PermissionType = ContentEntities.ACEPermissionType.PERMIT,
+                                            Scope = ContentEntities.ACEPermissionScope.OWNER
+                                        }
+                                    },
                             TenantIdentifierStrategy = new ContentEntities.TenantIdentifierStrategy()
                             {
                                 Id = Guid.NewGuid(),
@@ -200,7 +275,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 {
                     var principalResolver = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
                     client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", await principalResolver.GetClientCredentialsGrantToken());
-                    
+
                     client.DefaultRequestHeaders.Add(ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, defaulttenantidentifier);
                     client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json;odata.metadata=none");
                     response = await client.GetAsync("lache/ODataContent/Tenant?$top=10&");

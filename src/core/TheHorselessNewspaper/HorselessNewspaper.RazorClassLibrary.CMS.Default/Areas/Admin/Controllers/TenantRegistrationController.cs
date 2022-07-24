@@ -20,7 +20,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
         public IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.Tenant>, HostingModel.Tenant> hostingTenantsCollectionService { get; set; }
         public IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.TenantInfo>, HostingModel.TenantInfo> tenantInfoService { get; set; }
         public IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.Principal>, HostingModel.Principal> principalService { get; set; }
-
+        IQueryableHostingModelOperator<HostingModel.Tenant> hostingModelTenantOperator;
 
         public ITenantInfo CurrentTenant { get; set; }
 
@@ -30,6 +30,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
             ILogger<TenantRegistrationController> logger,
             IContentCollectionService<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModel.Tenant> tenantCollectionService,
             IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.Tenant>, HostingModel.Tenant> hostingTenantsCollectionService,
+            IQueryableHostingModelOperator<HostingModel.Tenant> hostingModelTenantOperator,
             IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.TenantInfo>, HostingModel.TenantInfo> tenantInfoService,
                         IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.Principal>, HostingModel.Principal> principalService,
             ITenantInfo tenantInfo)
@@ -39,6 +40,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
             this.tenantInfoService = tenantInfoService;
             this.CurrentTenant = tenantInfo;
             this.principalService = principalService;
+            this.hostingModelTenantOperator = hostingModelTenantOperator;
             this.logger = logger;
         }
 
@@ -111,8 +113,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                     tenant.IsSoftDeleted = false;
                     tenant.IsPublished = false;
                     tenant.DeploymentState = TenantDeploymentWorkflowState.Approved;
-                    // reject the application
-                    var rejectResult = await hostingTenantsCollectionService.Update(tenant, new List<string>() { nameof(tenant.IsSoftDeleted), nameof(tenant.IsPublished) });
+                    // approve the application
+                    var rejectResult = await this.hostingModelTenantOperator.Update(tenant, new List<string>() { nameof(tenant.IsSoftDeleted), nameof(tenant.IsPublished) });
                     return RedirectToAction(nameof(Index));
                 }
                 else
@@ -283,7 +285,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                 newTenantInfo.ParentTenantId = newTenant.Id;
 
                 newTenant.TenantInfos.Add(newTenantInfo);
-                // newTenant.Owners.Add(newOwner);
+                newTenant.Owners.Add(newOwner);
 
                 var insertedTenant = await this.hostingTenantsCollectionService.Create(newTenant);
 
@@ -291,7 +293,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
 
                 var updateResult = await this.hostingTenantsCollectionService
                                         .InsertRelatedEntity(insertedTenant.Id, nameof(HostingModel.Tenant.Owners), new List<HostingModel.Principal>() { newOwner },
-                                        w => w.Id.Equals(newTenant.Id), t => t.Id.Equals(newOwner.Id));
+                                        w => w.TenantIdentifier.Equals(newTenant.TenantIdentifier), t => t.PreferredUserName.Equals(newOwner.PreferredUserName));
 
                 return RedirectToAction(nameof(Index));
             }
