@@ -103,6 +103,22 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [InverseProperty(nameof(HorselessContent.Owners))]
         public ICollection<HorselessView> HorselessViews { get; set; } = new HashSet<HorselessView>();
 
+        [InverseProperty(nameof(ContentCollection.Owners))]
+        public ICollection<ContentCollection> ContentCollections { get; set; } = new HashSet<ContentCollection>();
+
+        [InverseProperty(nameof(FilesystemAsset.Owners))]
+        public ICollection<FilesystemAsset> FilesystemAssets { get; set; } = new HashSet<FilesystemAsset>();
+
+        [InverseProperty(nameof(Holonym.Owners))]
+        public ICollection<Holonym> Holonyms { get; set; } = new HashSet<Holonym>();
+
+        [InverseProperty(nameof(JSONAsset.Owners))]
+        public ICollection<JSONAsset> JSONAssets { get; set; } = new HashSet<JSONAsset>();
+
+
+        [InverseProperty(nameof(Placeholder.Owners))]
+        public ICollection<Placeholder> Placeholders { get; set; } = new HashSet<Placeholder>();
+
         /// <summary>
         /// not mapped - model impedence mismatch due to implemented interface
         /// </summary>

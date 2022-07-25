@@ -9,15 +9,16 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     public partial class Publication : IContentRowLevelSecured
     {
         // [ForeignKey("FK_AccessControlEntryManagedPublications")]
-        [InverseProperty(nameof(AccessControlEntry.ManagedPublications))]
+        // [InverseProperty(nameof(AccessControlEntry.ManagedPublications))]
         public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+
         public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 
-        [InverseProperty(nameof(ContentCollection.Publications))]
+        // [InverseProperty(nameof(ContentCollection.Publications))]
         public ICollection<ContentCollection> ContentCollections { get; set; } = new HashSet<ContentCollection>();
     }
 }
