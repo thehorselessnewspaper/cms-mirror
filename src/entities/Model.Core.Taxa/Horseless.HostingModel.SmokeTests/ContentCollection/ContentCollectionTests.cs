@@ -222,8 +222,58 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             // exact insert test, adjust value as necessary
             var expectedPrincipalCount = ((insertCount * 2) + 1); // insertLoopTotal + 1 prior
             Assert.IsTrue(principalCount == expectedPrincipalCount);
+
+            // test insert related via simple Update()
+            var insertedPrincipal = await this.UpdateRelatedOwner(tenant);
+
+            Assert.True(insertedPrincipal != null);
         }
 
+
+        private async Task<ContentModel.Principal> UpdateRelatedOwner(IContentRowLevelSecured tenant)
+        {
+
+            var tenantQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Tenant>>();
+
+
+            var relatedPrincipal = new Principal()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = tenant.CreatedAt,
+                DisplayName = tenant.DisplayName,
+                IsSoftDeleted = false,
+                ObjectId = Guid.NewGuid().ToString(),
+                Timestamp = tenant.Timestamp,
+                PreferredUserName = "User" + Guid.NewGuid().ToString(),
+                HorselessSessions = new List<HorselessSession>()
+                {
+                    new HorselessSession()
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedAt = tenant.CreatedAt,
+                        DisplayName = tenant.DisplayName,
+                        ObjectId = Guid.NewGuid().ToString()
+                    }
+                }
+            };
+
+            var castTenant = tenant as ContentModel.Tenant;
+
+            var currentTenantsOwnersCount = castTenant.Owners.Count();
+            castTenant.Owners.Add(relatedPrincipal);
+
+            var principalQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Principal>>();
+
+            // insert the related principal
+            var updateResult = await tenantQuery.Update(castTenant, new List<string>() { nameof(tenant.Owners) });
+
+            Assert.True(updateResult != null);
+            var updatedTenants = await tenantQuery.ReadAsEnumerable(w => w.DisplayName == tenant.DisplayName, new List<string>() { nameof(Tenant.Owners) });
+            var updaedTenantsOwnersCount = updatedTenants.First().Owners.Count();
+
+            Assert.True(updaedTenantsOwnersCount > currentTenantsOwnersCount);
+            return relatedPrincipal;
+        }
         private async Task InsertRelatedOwner(IContentRowLevelSecured tenant)
         {
 
@@ -275,7 +325,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             // insert the related principal
             var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(tenant.Id, nameof(tenant.Owners), new List<Principal>() { relatedPrincipal });
 
-
+          
         }
 
         private async Task InsertRelatedAccount(IContentRowLevelSecured tenant)

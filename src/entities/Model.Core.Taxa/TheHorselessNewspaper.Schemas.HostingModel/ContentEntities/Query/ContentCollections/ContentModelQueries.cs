@@ -412,33 +412,47 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 {
                     // as per https://www.learnentityframeworkcore.com/dbcontext/modifying-data
                     var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties);
-                    ((DbContext)_context).Attach(updatedEntity);
+                    var entityEntry = ((DbContext)_context).Update(updatedEntity);
+                    //((DbContext)_context).Attach(updatedEntity);
 
-                    foreach (var propertyName in targetProperties)
-                    {
-                        var hasTargetedMember = ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
-                        if (hasTargetedMember)
-                        {
-                            var hasTargetedCollection = ((DbContext)_context).Entry(updatedEntity).Collections.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
-                            var hasTargetedProperty = ((DbContext)_context).Entry(updatedEntity).Properties.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
+                    //foreach (var propertyName in targetProperties)
+                    //{
+                    //    var hasTargetedMember = ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
+                    //    if (hasTargetedMember)
+                    //    {
+                    //        var isCollection = ((DbContext)_context).Entry(updatedEntity).Collections.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
+                    //        var hasTargetedProperty = ((DbContext)_context).Entry(updatedEntity).Properties.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
 
-                            if (hasTargetedProperty)
-                            {
-                                var foundEntityValue = foundEntity.GetType().GetProperty(propertyName).GetValue(foundEntity);
-                                var sourceProperty = entity.GetType().GetProperty(propertyName).GetValue(entity);
-                                var target = foundEntity.GetType().GetProperty(propertyName);
-                                target.SetValue(foundEntity, foundEntityValue);
-                            }
+                    //        //if (isCollection)
+                    //        //{
+                    //        //    _logger.LogTrace("updating a collection");
 
-                             ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).First().IsModified = true; ;
-                        }
-                        else
-                        {
-                            // todo validate fail silent
-                        }
+                    //        //    // load the entity / join on related property
+                    //        //    var targetedCollection = ((DbContext)_context).Entry(updatedEntity).Collections.Where(w => w.Metadata.Name.Equals(propertyName));
+                    //        //    var trackedEntity = ((DbContext)_context).Set<T>().Where(w => w.Id.Equals(entity.Id)).Include(propertyName).First();
+                    //        //    int i = 0;
+                    //        //}
+                            
+                    //        if(hasTargetedProperty)
+                    //        {
+                    //            var foundEntityValue = foundEntity.GetType().GetProperty(propertyName).GetValue(foundEntity);
+                    //            var sourceProperty = entity.GetType().GetProperty(propertyName).GetValue(entity);
+                    //            var target = foundEntity.GetType().GetProperty(propertyName);
+                    //            target.SetValue(foundEntity, foundEntityValue);
+                    //            ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).First().IsModified = true; ;
 
-                    }
+                    //        }
+
+
+                    //    }
+                    //    else
+                    //    {
+                    //        // todo validate fail silent
+                    //    }
+
+                    //}
                     var updateResult = await ((DbContext)_context).SaveChangesAsync();
+                    _logger.LogTrace($"{this.GetType().Name} has completed update");
 
 
                 }
@@ -446,7 +460,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             catch (Exception ex)
             {
                 _logger.LogError($"problem updating entity {ex.Message}");
-                throw new Exception($"problem updating {ex.Message}", ex);
+                    throw new Exception($"problem updating {ex.Message}", ex);
             }
 
             return await Task.FromResult<T>(entity);
