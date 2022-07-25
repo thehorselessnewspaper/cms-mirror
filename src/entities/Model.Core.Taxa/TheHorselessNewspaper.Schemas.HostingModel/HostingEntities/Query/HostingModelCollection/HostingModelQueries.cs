@@ -285,37 +285,16 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelC
             {
                 // as per https://www.learnentityframeworkcore.com/dbcontext/modifying-data
                 var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties);
-                ((DbContext)_context).Attach(updatedEntity);
+                var entityEntry = ((DbContext)_context).Update(updatedEntity);
 
-                foreach (var propertyName in targetProperties)
-                {
-                    var hasTargetedMember = ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
-                    var hasTargetedProperty = ((DbContext)_context).Entry(updatedEntity).Properties.Where(w => w.Metadata.Name.Equals(propertyName)).Any();
-
-                    if (hasTargetedProperty)
-                    {
-
-                        var foundEntityValue = foundEntity.GetType().GetProperty(propertyName).GetValue(foundEntity);
-                        var sourceProperty = entity.GetType().GetProperty(propertyName).GetValue(entity);
-                        var target = foundEntity.GetType().GetProperty(propertyName);
-
-      
-                        target.SetValue(foundEntity, foundEntityValue);
-                        ((DbContext)_context).Entry(updatedEntity).Members.Where(w => w.Metadata.Name.Equals(propertyName)).First().IsModified = true; ;
-                    }
-                    else
-                    {
-                        // todo validate fail silent
-                    }
-
-                }
 
                 var updateResult = await ((DbContext)_context).SaveChangesAsync();
-
+            _logger.LogTrace($"{this.GetType().Name} has completed update");
 
             }
 
             return await Task.FromResult(entity);
+
         }
 
         public async Task<IEnumerable<T>> Update(IEnumerable<T> entities, List<string> targetProperties = null)
