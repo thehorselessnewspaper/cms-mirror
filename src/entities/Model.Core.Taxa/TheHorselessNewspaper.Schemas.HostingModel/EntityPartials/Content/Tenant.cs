@@ -141,7 +141,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
 
         // [ForeignKey("FK_PrincipalOwnedTenants")]
-        // [InverseProperty(nameof(Principal.OwnedTenants))]
+        [InverseProperty(nameof(Principal.OwnedTenants))]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
 
@@ -152,11 +152,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public TenantDeploymentWorkflowState DeploymentState { get; set; } = TenantDeploymentWorkflowState.PendingApproval;
 
         // [ForeignKey("FK_AccessControlEntryManagedTenants")]
-        // [InverseProperty(nameof(AccessControlEntry.ManagedTenants))]
+        [InverseProperty(nameof(AccessControlEntry.ManagedTenants))]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
         // [ForeignKey("FK_ContentCollectionTenants")]
-        // [InverseProperty(nameof(ContentCollection.Tenants))]
+        [InverseProperty(nameof(ContentCollection.Tenants))]
         public ICollection<ContentCollection> ContentCollections { get; set; } = new HashSet<ContentCollection>();
     }
 }
