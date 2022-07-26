@@ -82,6 +82,9 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
             try
             {
+                entity.CreatedAt = DateTime.UtcNow;
+                entity.UpdatedAt = DateTime.UtcNow;
+
                 var dbSet = ((DbContext)_context).Set<T>();
                 var addResult = await dbSet.AddAsync(entity);
 
@@ -103,7 +106,8 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
         public async Task<IEnumerable<T>> Create(IEnumerable<T> entities)
         {
-
+            entities.Select(c => { c.CreatedAt = DateTime.UtcNow; return c; });
+            entities.Select(c => { c.UpdatedAt = DateTime.UtcNow; return c; });
             var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
             try
             {

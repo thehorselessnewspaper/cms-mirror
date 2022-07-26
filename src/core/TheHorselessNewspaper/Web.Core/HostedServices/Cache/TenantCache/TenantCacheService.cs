@@ -256,8 +256,10 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
             {
                 try
                 {
+                    ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
 
-                    var hostingModelOperator = scope.ServiceProvider.GetRequiredService<IQueryableHostingModelOperator<HostingModel.Tenant>>();
+                    var hostingModelPrincipalOperator = scope.ServiceProvider.GetRequiredService<IQueryableHostingModelOperator<HostingModel.Principal>>();
+                    var hostingModelTenantOperator = scope.ServiceProvider.GetRequiredService<IQueryableHostingModelOperator<HostingModel.Tenant>>();
                     var stores = scope.ServiceProvider.GetRequiredService<IEnumerable<IMultiTenantStore<HorselessTenantInfo>>>().ToList();
 
                     var inMemoryStores = stores.Where(s => s.GetType() == typeof(InMemoryStore<HorselessTenantInfo>))
@@ -266,7 +268,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     var staticTenants = await inMemoryStores.GetAllAsync();
                     foreach (var staticTenant in staticTenants)
                     {
-                        var hostingTenantQuery = await hostingModelOperator.ReadAsEnumerable(w => w.TenantIdentifier.Equals(staticTenant.Identifier));
+                        var hostingTenantQuery = await hostingModelTenantOperator.ReadAsEnumerable(w => w.TenantIdentifier.Equals(staticTenant.Identifier));
                         var currentTenant = staticTenant.Payload.ParentTenant;
                         if (currentTenant != null)
                         {
@@ -274,15 +276,17 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
 
                             // check if already in hosting db
-                            var existsQuery = await hostingModelOperator.Read(w => w.TenantIdentifier.Equals(staticTenant.Identifier));
+                            var existsQuery = await hostingModelTenantOperator.Read(w => w.TenantIdentifier.Equals(staticTenant.Identifier));
+
                             var existsQueryResult = existsQuery.Any();
 
                             if (!existsQueryResult)
                             {
-                                _logger.LogTrace($"found static tenant not hydrated in hosting db: tenantIdentifier = {staticTenant.Identifier}");
+ 
+                               _logger.LogTrace($"found static tenant not hydrated in hosting db: tenantIdentifier = {staticTenant.Identifier}");
                                 currentTenant.IsPublished = false;
                                 currentTenant.DeploymentState = TenantDeploymentWorkflowState.Approved;
-                                var createResult = await hostingModelOperator.Create(currentTenant);
+                                var createResult = await hostingModelTenantOperator.Create(currentTenant);
                                 _logger.LogTrace($"hydrated static tenant not hydrated in hosting db: tenantIdentifier = {staticTenant.Identifier}");
                             }
                             else
@@ -302,7 +306,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     // todo ensure a paged iteration through all tenants 
                     // within a bounded period
                     // obviously hydration revisit time < cache expiration time
-                    var inproressQuery = await hostingModelOperator.ReadAsEnumerable(r => r.DeploymentState == TenantDeploymentWorkflowState.Approved || r.DeploymentState == TenantDeploymentWorkflowState.DeploymentComplete);
+                    var inproressQuery = await hostingModelTenantOperator.ReadAsEnumerable(r => r.DeploymentState == TenantDeploymentWorkflowState.Approved || r.DeploymentState == TenantDeploymentWorkflowState.DeploymentComplete);
                     if (inproressQuery != null && inproressQuery.Any())
                     {
                         foreach (var item in inproressQuery)
@@ -1033,58 +1037,6 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 return ret;
 
             }
-        }
-
-        private async Task EnsureContentModelTenantCreated(ContentModel.Tenant mergeEntity, string identifier, string baseUri)
-        {
-            using (var scope = this._services.CreateScope())
-            {
-
-                IHttpClientFactory clientFactory = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>();
-                var httpClient = clientFactory.CreateClient();
-                var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRESTAPIClient>();
-                ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
-                var token = await tokenService.GetClientCredentialsGrantToken();
-                restClient.AuthorizationHeaderToken = token;
-                try
-                {
-                    // ensure populated tenantidentifier
-
-                    // obviously todo - implement applicationwide mechanism for getting default tenant
-                    var defaultTenantIdentifier = "lache";
-                    mergeEntity.TenantIdentifier = identifier;
-
-                    // in our current info architecture, all tenants are created in the root tenant
-                    var route = $"{baseUri}/{defaultTenantIdentifier}/api/HorselessContentModel/Tenant/Create";
-                    var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
-                    {
-                        Content = GetJsonContent(mergeEntity),
-                        Headers =
-                                    {
-                                        { HeaderNames.Accept, "application/json" },
-                                        { HeaderNames.UserAgent, "HorselessNewspaper" }
-                                    }
-                    };
-
-                    var postResponse = await httpClient.SendAsync(postRequest);
-
-                    // var content = GetJsonContent(mergeEntity);
-                    // ContentEntitiesTenant dtoTenant = ContentEntitiesTenant.FromJson(await content.ReadAsStringAsync());
-
-                    // var postResponse = await restClient.ApiHorselessContentModelTenantCreateAsync(identifier, dtoTenant);
-
-                    string postResponseJson = await postResponse.Content.ReadAsStringAsync();
-                    var createdTenant = JsonConvert.DeserializeObject<ContentModel.Tenant>(postResponseJson); // doesn't work JsonSerializer.Deserialize<ContentModel.Tenant>(postResponseJson);
-                    _logger.LogTrace($"content model tenant record created for {createdTenant.TenantIdentifier}");
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError($"problem ensuring content model tenant created for tenantidentifier={identifier}: exception  {ex.Message}");
-                    throw;
-                }
-            }
-
-
         }
 
         private async Task<bool> IsMustApplyAccessControlEntries(HostingModel.Tenant originEntity)

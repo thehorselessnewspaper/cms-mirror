@@ -23,7 +23,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 
+        public Guid? OwnedTenantsId { get; set; }
 
+        [ForeignKey(nameof(HostingEntities.Principal.OwnedTenantsId))]
         [InverseProperty(nameof(Tenant.Owners))]
         public ICollection<Tenant> OwnedTenants { get; set; } = new HashSet<Tenant>();
 

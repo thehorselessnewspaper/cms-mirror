@@ -21,7 +21,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
         public IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.TenantInfo>, HostingModel.TenantInfo> tenantInfoService { get; set; }
         public IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.Principal>, HostingModel.Principal> principalService { get; set; }
         IQueryableHostingModelOperator<HostingModel.Tenant> hostingModelTenantOperator;
-
+        IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.AccessControlEntry>, HostingModel.AccessControlEntry> accessControlEntryService;
         public ITenantInfo CurrentTenant { get; set; }
 
         ILogger<TenantRegistrationController> logger;
@@ -29,6 +29,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
         public TenantRegistrationController(
             ILogger<TenantRegistrationController> logger,
             IContentCollectionService<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModel.Tenant> tenantCollectionService,
+            IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.AccessControlEntry>, HostingModel.AccessControlEntry> accessControlEntryService,
             IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.Tenant>, HostingModel.Tenant> hostingTenantsCollectionService,
             IQueryableHostingModelOperator<HostingModel.Tenant> hostingModelTenantOperator,
             IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.TenantInfo>, HostingModel.TenantInfo> tenantInfoService,
@@ -42,6 +43,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
             this.principalService = principalService;
             this.hostingModelTenantOperator = hostingModelTenantOperator;
             this.logger = logger;
+            this.accessControlEntryService = accessControlEntryService;
         }
 
         // GET: TenantRegistrationController
@@ -193,19 +195,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                     TenantBaseUrl = baseUrl
                 };
 
-                var newTenant = new HostingModel.Tenant()
-                {
-                    Id = Guid.NewGuid(),
-                    CreatedAt = DateTime.UtcNow,
-                    DisplayName = model.displayName,
-                    IsPublished = false,
-                    IsSoftDeleted = false,
-                    ObjectId = Guid.NewGuid().ToString(),
-                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                    BaseUrl = baseUrl,
-                    TenantIdentifier = model.tenantIdentifier.ToLower(), // todo obviously sanitize this
-                    DeploymentState = TenantDeploymentWorkflowState.PendingApproval,
-                    AccessControlEntries = new List<HostingModel.AccessControlEntry>()
+                var accessControlEntries = new HashSet<HostingModel.AccessControlEntry>()
                     {
                         new AccessControlEntry()
                         {
@@ -279,21 +269,39 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                             PermissionType = ACEPermissionType.PERMIT,
                             Scope = ACEPermissionScope.OWNER
                         }
-                    }
+                    };
+                var newTenant = new HostingModel.Tenant()
+                {
+                    Id = Guid.NewGuid(),
+                    CreatedAt = DateTime.UtcNow,
+                    DisplayName = model.displayName,
+                    IsPublished = false,
+                    IsSoftDeleted = false,
+                    ObjectId = Guid.NewGuid().ToString(),
+                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                    BaseUrl = baseUrl,
+                    TenantIdentifier = model.tenantIdentifier.ToLower(), // todo obviously sanitize this
+                    DeploymentState = TenantDeploymentWorkflowState.PendingApproval
                 };
 
                 newTenantInfo.ParentTenantId = newTenant.Id;
 
-                newTenant.TenantInfos.Add(newTenantInfo);
-                newTenant.Owners.Add(newOwner);
+                // newTenant.TenantInfos.Add(newTenantInfo);
+                // newTenant.Owners.Add(newOwner);
 
                 var insertedTenant = await this.hostingTenantsCollectionService.Create(newTenant);
 
-                // newOwner.OwnedTenants.Add(insertedTenant);
-
-                var updateResult = await this.hostingTenantsCollectionService
+                var newOwnerUpdateResult = await this.hostingTenantsCollectionService
                                         .InsertRelatedEntity(insertedTenant.Id, nameof(HostingModel.Tenant.Owners), new List<HostingModel.Principal>() { newOwner },
                                         w => w.TenantIdentifier.Equals(newTenant.TenantIdentifier), t => t.PreferredUserName.Equals(newOwner.PreferredUserName));
+
+                var newTenantInfoUpdateResult = await this.hostingTenantsCollectionService
+                                          .InsertRelatedEntity(insertedTenant.Id, nameof(HostingModel.Tenant.TenantInfos), new List<HostingModel.TenantInfo>() { newTenantInfo },
+                                          w => w.TenantIdentifier.Equals(newTenant.TenantIdentifier), t => t.ParentTenantId.Equals(newTenant.Id));
+
+                var neAccessControlEntriesUpdateResult = await this.hostingTenantsCollectionService
+                          .InsertRelatedEntity(insertedTenant.Id, nameof(HostingModel.Tenant.AccessControlEntries), accessControlEntries,
+                          w => w.TenantIdentifier.Equals(newTenant.TenantIdentifier));
 
                 return RedirectToAction(nameof(Index));
             }
