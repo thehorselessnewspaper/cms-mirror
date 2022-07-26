@@ -3,38 +3,33 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
-using Microsoft.AspNetCore.OData.Routing.Attributes;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
-
-using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
-
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Hosting
 {
-
-    [Route("ODataHosting/Principal")]
+    [Route("ODataHosting/AccessControlEntry")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiExplorerSettings(IgnoreApi = true)]
-    public class PrincipalController : ODataController
+    public class AccessControlEntryController : ODataController
     {
-        private IQueryableHostingModelOperator<Principal> _principalSvc;
+        private IQueryableHostingModelOperator<HostingModel.AccessControlEntry> _AccessControlEntrySvc;
 
-        public PrincipalController(IQueryableHostingModelOperator<HostingModel.Principal> principalSvc)
+        public AccessControlEntryController(IQueryableHostingModelOperator<HostingModel.AccessControlEntry> _AccessControlEntrySvc)
         {
-            this._principalSvc = principalSvc;
+            this._AccessControlEntrySvc = _AccessControlEntrySvc;
         }
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-        [HttpGet(Name = "HostingEntitiesPrincipal")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<HostingModel.Principal>))]
+        [HttpGet(Name = "HostingEntitiesAccessControlEntry")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<HostingModel.AccessControlEntry>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
 
-        public async Task<ActionResult<IQueryable<HostingModel.Principal>>> Get(ODataQueryOptions<HostingModel.Principal> options)
+        public async Task<ActionResult<IQueryable<HostingModel.AccessControlEntry>>> Get(ODataQueryOptions<HostingModel.AccessControlEntry> options)
         {
-            var result = await _principalSvc.Read<ODataQueryOptions<HostingModel.Principal>, HostingModel.Principal>(options);
+            var result = await _AccessControlEntrySvc.Read<ODataQueryOptions<HostingModel.AccessControlEntry>, HostingModel.AccessControlEntry>(options);
             if (result != null)
             {
 
@@ -42,9 +37,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
             }
             else
             {
-                return Ok(new List<HostingModel.Principal>());
+                return Ok(new List<HostingModel.AccessControlEntry>());
             }
         }
-
     }
 }

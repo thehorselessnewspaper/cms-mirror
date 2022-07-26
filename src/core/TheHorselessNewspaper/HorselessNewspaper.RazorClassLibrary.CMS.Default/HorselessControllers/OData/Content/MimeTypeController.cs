@@ -21,7 +21,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("{__tenant__}/ODataContentMIMEType")]
+    [Route("{__tenant__}/ODataContent/MIMEType")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class MimeTypeController :
         ODataController, IContentQueryController<ContentModel.MIMEType>

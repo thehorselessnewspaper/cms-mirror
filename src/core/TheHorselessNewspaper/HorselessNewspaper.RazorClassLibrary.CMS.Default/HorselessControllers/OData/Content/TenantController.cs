@@ -25,7 +25,7 @@ using System.Xml.Linq;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
     // [ODataAttributeRouting]
-    [Route("{__tenant__}/ODataContentTenant")]
+    [Route("{__tenant__}/ODataContent/Tenant")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class TenantController :
