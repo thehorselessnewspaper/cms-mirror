@@ -33,7 +33,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 DisplayName = "test update tenant",
                 ObjectId = Guid.NewGuid().ToString(),
                 Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                AccessControlEntries = new List<ContentModel.AccessControlEntry>()
+                AccessControlEntries = new HashSet<ContentModel.AccessControlEntry>()
                 {
                     new ContentModel.AccessControlEntry()
                     {
@@ -55,7 +55,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                     DisplayName = "test update tenant",
                     ObjectId = Guid.NewGuid().ToString(),
                     Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                    StrategyContainers = new List<TenantIdentifierStrategyContainer>()
+                    StrategyContainers = new HashSet<TenantIdentifierStrategyContainer>()
                     {
                         new TenantIdentifierStrategyContainer()
                         {
@@ -79,7 +79,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 DisplayName = tenant.DisplayName,
                 ObjectId = tenant.ObjectId,
                 Timestamp = tenant.Timestamp,
-                AccessControlEntries = new List<ContentModel.AccessControlEntry>()
+                AccessControlEntries = new HashSet<ContentModel.AccessControlEntry>()
                 {
                     new ContentModel.AccessControlEntry()
                     {
@@ -101,7 +101,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                     DisplayName = "test update tenant",
                     ObjectId = Guid.NewGuid().ToString(),
                     Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                    StrategyContainers = new List<TenantIdentifierStrategyContainer>()
+                    StrategyContainers = new HashSet<TenantIdentifierStrategyContainer>()
                     {
                         new TenantIdentifierStrategyContainer()
                         {
@@ -185,7 +185,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             // insert the cloned tenant into the database
             var tenantInsertResult = await tenantQuery.Create(modifiedTenant);
 
-            var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(modifiedTenant.Id, nameof(modifiedTenant.Owners), new List<Principal>() { relatedPrincipal });
+            var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(modifiedTenant.Id, nameof(modifiedTenant.Owners), new HashSet<Principal>() { relatedPrincipal });
 
 
             Assert.IsTrue(insertResult != null);
@@ -245,7 +245,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 ObjectId = Guid.NewGuid().ToString(),
                 Timestamp = tenant.Timestamp,
                 PreferredUserName = "User" + Guid.NewGuid().ToString(),
-                HorselessSessions = new List<HorselessSession>()
+                HorselessSessions = new HashSet<HorselessSession>()
                 {
                     new HorselessSession()
                     {
@@ -308,7 +308,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 ObjectId = Guid.NewGuid().ToString(),
                 Timestamp = tenant.Timestamp,
                 PreferredUserName = "User" + Guid.NewGuid().ToString(),
-                HorselessSessions = new List<HorselessSession>()
+                HorselessSessions = new HashSet<HorselessSession>()
                 {
                     new HorselessSession()
                     {
@@ -359,7 +359,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 ObjectId = Guid.NewGuid().ToString(),
                 Timestamp = tenant.Timestamp,
                 PreferredUserName = "User" + Guid.NewGuid().ToString(),
-                HorselessSessions = new List<HorselessSession>()
+                HorselessSessions = new HashSet<HorselessSession>()
                 {
                     new HorselessSession()
                     {

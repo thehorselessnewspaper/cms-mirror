@@ -23,9 +23,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
 
-        public Guid? PrincipalId { get; set; }
-
-        [ForeignKey(nameof(ContentEntities.Principal.Id))]
         [InverseProperty(nameof(ContentEntities.Principal.HorselessSessions))]
         public Principal? Principal { get; set; }
     }

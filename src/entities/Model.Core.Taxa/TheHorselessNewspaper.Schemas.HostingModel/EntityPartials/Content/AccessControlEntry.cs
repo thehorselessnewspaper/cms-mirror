@@ -67,29 +67,29 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public DateTime? UpdatedAt { get; set; }
 
         // [ForeignKey("FK_ContentCollectionAccessControlEntries")]
-        [InverseProperty(nameof(ContentCollection.AccessControlEntries))]
+        // [InverseProperty(nameof(ContentCollection.AccessControlEntries))]
         public virtual ICollection<ContentCollection> ContentCollections { get; set; } = new HashSet<ContentCollection>();
 
         /// <summary>
         ///  [ForeignKey("FK_HorselessContentAccessControlEntries")]
         /// </summary>
-        [InverseProperty(nameof(HorselessContent.AccessControlEntries))]
+        // [InverseProperty(nameof(HorselessContent.AccessControlEntries))]
         public virtual ICollection<HorselessContent> HorselessContents { get; set; } = new HashSet<HorselessContent>();
 
         // [ForeignKey("FK_HorselessViewAccessControlEntries")]
-        [InverseProperty(nameof(HorselessView.AccessControlEntries))]
+        // [InverseProperty(nameof(HorselessView.AccessControlEntries))]
         public virtual ICollection<HorselessView> HorselessViews { get; set; } = new HashSet<HorselessView>();
 
         // [ForeignKey("FK_PublicationAccessControlEntries")]
-        [InverseProperty(nameof(Publication.AccessControlEntries))]
+        // [InverseProperty(nameof(Publication.AccessControlEntries))]
         public virtual ICollection<Publication> Publications { get; set; } = new HashSet<Publication>();
 
 
         //[ForeignKey("FK_TenantAccessControlEntries")]
-        [InverseProperty(nameof(Tenant.AccessControlEntries))]
+        // [InverseProperty(nameof(Tenant.AccessControlEntries))]
         public virtual ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
 
-        [InverseProperty(nameof(Placeholder.AccessControlEntries))]
+        // [InverseProperty(nameof(Placeholder.AccessControlEntries))]
         public ICollection<Placeholder> Placeholders { get; set; } = new HashSet<Placeholder>();
 
 
@@ -108,7 +108,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
 
-        [InverseProperty(nameof(Principal.ManagingAccessControlEntries))]
+        // [InverseProperty(nameof(Principal.ManagingAccessControlEntries))]
         public ICollection<Principal> SubjectPrincipals { get; set; } = new HashSet<Principal>();
     }
 

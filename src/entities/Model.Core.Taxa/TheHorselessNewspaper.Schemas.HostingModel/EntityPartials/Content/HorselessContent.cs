@@ -17,10 +17,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     public partial class HorselessContent : IContentRowLevelSecured
     {
         // [ForeignKey("FK_AccessControlEntryManagedHorselessContents")]
-        [InverseProperty(nameof(AccessControlEntry.HorselessContents))]
+        // [InverseProperty(nameof(AccessControlEntry.HorselessContents))]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
-        [InverseProperty(nameof(Principal.HorselessContents))]
+        // [InverseProperty(nameof(Principal.HorselessContents))]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
         [InverseProperty(nameof(ContentCollection.HorselessContents))]

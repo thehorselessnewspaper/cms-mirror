@@ -78,46 +78,46 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string? DictionaryKey { get; set; }
 
         // [ForeignKey("FK_AccessControlEntrySubjectPrincipals")]
-        [InverseProperty(nameof(AccessControlEntry.SubjectPrincipals))]
+        // [InverseProperty(nameof(AccessControlEntry.SubjectPrincipals))]
         public ICollection<AccessControlEntry> ManagingAccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
         // [ForeignKey("FK_TenantAccounts")]
-        [InverseProperty(nameof(Tenant.Accounts))]
+        // [InverseProperty(nameof(Tenant.Accounts))]
         public ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
 
         // [ForeignKey("FK_TenantOwners")]
-        [InverseProperty(nameof(Tenant.Owners))]
+        // [InverseProperty(nameof(Tenant.Owners))]
         public ICollection<Tenant> OwnedTenants { get; set; } = new HashSet<Tenant>();
 
 
-        [InverseProperty(nameof(HorselessSession.Owners))]
+        // [InverseProperty(nameof(HorselessSession.Owners))]
         public ICollection<HorselessSession> OwnedHorselessSessions { get; set; } = new HashSet<HorselessSession>();
 
 
 
-        [InverseProperty(nameof(HorselessSession.Principal))]
+        // [InverseProperty(nameof(HorselessSession.Principal))]
         public ICollection<HorselessSession> HorselessSessions { get; set; } = new HashSet<HorselessSession>();
 
-        [InverseProperty(nameof(HorselessContent.Owners))]
+        // [InverseProperty(nameof(HorselessContent.Owners))]
         public ICollection<HorselessContent> HorselessContents { get; set; } = new HashSet<HorselessContent>();
 
-        [InverseProperty(nameof(HorselessContent.Owners))]
+        // [InverseProperty(nameof(HorselessContent.Owners))]
         public ICollection<HorselessView> HorselessViews { get; set; } = new HashSet<HorselessView>();
 
-        [InverseProperty(nameof(ContentCollection.Owners))]
+        //[InverseProperty(nameof(ContentCollection.Owners))]
         public ICollection<ContentCollection> ContentCollections { get; set; } = new HashSet<ContentCollection>();
 
-        [InverseProperty(nameof(FilesystemAsset.Owners))]
+        //[InverseProperty(nameof(FilesystemAsset.Owners))]
         public ICollection<FilesystemAsset> FilesystemAssets { get; set; } = new HashSet<FilesystemAsset>();
 
-        [InverseProperty(nameof(Holonym.Owners))]
+        //[InverseProperty(nameof(Holonym.Owners))]
         public ICollection<Holonym> Holonyms { get; set; } = new HashSet<Holonym>();
 
-        [InverseProperty(nameof(JSONAsset.Owners))]
+        //[InverseProperty(nameof(JSONAsset.Owners))]
         public ICollection<JSONAsset> JSONAssets { get; set; } = new HashSet<JSONAsset>();
 
 
-        [InverseProperty(nameof(Placeholder.Owners))]
+        //[InverseProperty(nameof(Placeholder.Owners))]
         public ICollection<Placeholder> Placeholders { get; set; } = new HashSet<Placeholder>();
 
         /// <summary>
