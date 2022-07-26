@@ -71,6 +71,81 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                             TenantIdentifier = Guid.NewGuid().ToString(),
                             IsSoftDeleted = false,
                             ObjectId = Guid.NewGuid().ToString(),
+                            AccessControlEntries = new HashSet<HostingEntities.AccessControlEntry>()
+                            {
+                                        new HostingEntities.AccessControlEntry()
+                                        {
+                                            Id = Guid.NewGuid(),
+                                            CreatedAt = DateTime.UtcNow,
+                                            DisplayName = "test tenant",
+                                            IsSoftDeleted = false,
+                                            ObjectId = Guid.NewGuid().ToString(),
+                                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                                            Permission = HostingEntities.ACEPermission.READ,
+                                            PermissionType = HostingEntities.ACEPermissionType.PERMIT,
+                                            Scope = HostingEntities.ACEPermissionScope.OWNER
+                                        },
+                                        new HostingEntities.AccessControlEntry()
+                                        {
+                                            Id = Guid.NewGuid(),
+                                            CreatedAt = DateTime.UtcNow,
+                                            DisplayName = "test tenant",
+                                            IsSoftDeleted = false,
+                                            ObjectId = Guid.NewGuid().ToString(),
+                                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                                            Permission = HostingEntities.ACEPermission.CREATE,
+                                            PermissionType = HostingEntities.ACEPermissionType.PERMIT,
+                                            Scope = HostingEntities.ACEPermissionScope.OWNER
+                                        },
+                                        new HostingEntities.AccessControlEntry()
+                                        {
+                                            Id = Guid.NewGuid(),
+                                            CreatedAt = DateTime.UtcNow,
+                                            DisplayName = "test tenant",
+                                            IsSoftDeleted = false,
+                                            ObjectId = Guid.NewGuid().ToString(),
+                                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                                            Permission = HostingEntities.ACEPermission.DELETE,
+                                            PermissionType = HostingEntities.ACEPermissionType.PERMIT,
+                                            Scope = HostingEntities.ACEPermissionScope.OWNER
+                                        },
+                                        new HostingEntities.AccessControlEntry()
+                                        {
+                                            Id = Guid.NewGuid(),
+                                            CreatedAt = DateTime.UtcNow,
+                                            DisplayName = "test tenant",
+                                            IsSoftDeleted = false,
+                                            ObjectId = Guid.NewGuid().ToString(),
+                                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                                            Permission = HostingEntities.ACEPermission.EXECUTE,
+                                            PermissionType = HostingEntities.ACEPermissionType.PERMIT,
+                                            Scope = HostingEntities.ACEPermissionScope.OWNER
+                                        },
+                                        new HostingEntities.AccessControlEntry()
+                                        {
+                                            Id = Guid.NewGuid(),
+                                            CreatedAt = DateTime.UtcNow,
+                                            DisplayName = "test tenant",
+                                            IsSoftDeleted = false,
+                                            ObjectId = Guid.NewGuid().ToString(),
+                                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                                            Permission = HostingEntities.ACEPermission.PUBLISH,
+                                            PermissionType = HostingEntities.ACEPermissionType.PERMIT,
+                                            Scope = HostingEntities.ACEPermissionScope.OWNER
+                                        },
+                                        new HostingEntities.AccessControlEntry()
+                                        {
+                                            Id = Guid.NewGuid(),
+                                            CreatedAt = DateTime.UtcNow,
+                                            DisplayName = "test tenant",
+                                            IsSoftDeleted = false,
+                                            ObjectId = Guid.NewGuid().ToString(),
+                                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                                            Permission = HostingEntities.ACEPermission.SEARCH,
+                                            PermissionType = HostingEntities.ACEPermissionType.PERMIT,
+                                            Scope = HostingEntities.ACEPermissionScope.OWNER
+                                        }
+                                    },
                             TenantIdentifierStrategy = new HostingEntities.TenantIdentifierStrategy()
                             {
                                 Id = Guid.NewGuid(),
@@ -101,7 +176,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     client.DefaultRequestHeaders.Add(ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, defaulttenantidentifier);
                     // client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
-                    response = await client.GetAsync("lache/ODataHosting/Tenant?$top=10");
+                    response = await client.GetAsync("lache/ODataHosting/Tenant?$expand=Owners,AccessControlEntries&$top=10");
                     Assert.NotNull(response);
 
                     response.EnsureSuccessStatusCode(); // Status Code 200-299
@@ -129,6 +204,11 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 var contentCollection = JsonConvert.DeserializeObject<ODataResponse<List<HostingEntities.Tenant>>>(responseContent);
                 Assert.True(contentCollection != null && contentCollection.Value != null);
                 Assert.True(contentCollection.Value.Count > 0);
+
+
+                int aclCount = 0;
+                contentCollection.Value.ForEach(f => { aclCount = aclCount + f.AccessControlEntries.Count; });
+                Assert.True(aclCount > 0);
             }
             catch (Exception e)
             {
@@ -277,8 +357,8 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", await principalResolver.GetClientCredentialsGrantToken());
 
                     client.DefaultRequestHeaders.Add(ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, defaulttenantidentifier);
-                    client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json;odata.metadata=none");
-                    response = await client.GetAsync("lache/ODataContent/Tenant?$top=10&");
+                    client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json;odata.metadata=full");
+                    response = await client.GetAsync("lache/ODataContent/Tenant?$expand=AccessControlEntries, ContentCollections&$top=10&");
                     Assert.NotNull(response);
 
                     response.EnsureSuccessStatusCode(); // Status Code 200-299
@@ -305,6 +385,10 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 var contentCollection = JsonConvert.DeserializeObject<ODataResponse<List<ContentEntities.Tenant>>>(responseContent);
                 Assert.True(contentCollection != null && contentCollection.Value != null);
                 Assert.True(contentCollection.Value.Count > 0);
+
+                int aclCount = 0;
+                contentCollection.Value.ForEach(f => { aclCount = aclCount + f.AccessControlEntries.Count; });
+                Assert.True(aclCount > 0);
             }
             catch (Exception e)
             {
