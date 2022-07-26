@@ -17,14 +17,14 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     public partial class HorselessContent : IContentRowLevelSecured
     {
         // [ForeignKey("FK_AccessControlEntryManagedHorselessContents")]
-        // [InverseProperty(nameof(AccessControlEntry.HorselessContents))]
-        public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+        [InverseProperty(nameof(AccessControlEntry.HorselessContents))]
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
-        // [InverseProperty(nameof(Principal.HorselessContents))]
-        public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
+        [InverseProperty(nameof(Principal.HorselessContents))]
+        public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
         [InverseProperty(nameof(ContentCollection.HorselessContents))]
-        public ICollection<ContentCollection>? ContentCollections { get; set; } = new HashSet<ContentCollection>();
+        public ICollection<ContentCollection> ContentCollections { get; set; } = new HashSet<ContentCollection>();
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
         public DateTime? UpdatedAt { get; set; }

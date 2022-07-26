@@ -15,7 +15,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     {
 
         // [ForeignKey("FK_AccessControlEntryManagedContentCollections")]
-        // [InverseProperty(nameof(AccessControlEntry.ManagedContentCollections))]
+        [InverseProperty(nameof(AccessControlEntry.ContentCollections))]
         public virtual ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
 
@@ -26,7 +26,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [InverseProperty(nameof(ContentCollection.ParentContentCollections))]
         public virtual ICollection<ContentCollection>? ChildContentCollections { get; set; } = new HashSet<ContentCollection>();
 
-
+        [InverseProperty(nameof(Principal.ContentCollections))]
         public virtual ICollection<Principal>? Owners { get; set; } =  new HashSet<Principal>();
 
         [Timestamp]

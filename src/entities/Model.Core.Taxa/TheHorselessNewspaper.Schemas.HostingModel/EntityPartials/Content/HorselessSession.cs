@@ -15,7 +15,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string? DictionaryKey { get; set; }
 
 
-        public ICollection<AccessControlEntry>? AccessControlEntries { get; set; }
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
 
         // [ForeignKey("FK_HorselessSessionOwners")]
@@ -25,7 +25,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public Guid? PrincipalId { get; set; }
 
-        // [ForeignKey("FK_HorselessSessionPrincipal")]
+        [ForeignKey(nameof(ContentEntities.Principal.Id))]
         [InverseProperty(nameof(ContentEntities.Principal.HorselessSessions))]
         public Principal? Principal { get; set; }
     }

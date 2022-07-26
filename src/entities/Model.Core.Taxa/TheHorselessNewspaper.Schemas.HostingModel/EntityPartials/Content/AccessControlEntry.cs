@@ -105,11 +105,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         /// not mapped - model impedence mismatch due to implemented interface
         /// </summary>
         [NotMapped]
-        public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
+        public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
 
         [InverseProperty(nameof(Principal.ManagingAccessControlEntries))]
-        public ICollection<Principal>? SubjectPrincipals { get; set; } = new HashSet<Principal>();
+        public ICollection<Principal> SubjectPrincipals { get; set; } = new HashSet<Principal>();
     }
 
 

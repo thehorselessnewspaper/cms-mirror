@@ -16261,39 +16261,46 @@
             "format": "date-time",
             "nullable": true
           },
-          "ManagedContentCollections": {
+          "ContentCollections": {
             "type": "array",
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesContentCollection"
             }
           },
-          "ManagedHorselessContents": {
+          "HorselessContents": {
             "type": "array",
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
             }
           },
-          "ManagedHorselessViews": {
+          "HorselessViews": {
             "type": "array",
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesHorselessView"
             }
           },
-          "ManagedPublications": {
+          "Publications": {
             "type": "array",
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPublication"
             }
           },
-          "ManagedTenants": {
+          "Tenants": {
             "type": "array",
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesTenant"
+            }
+          },
+          "Placeholders": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPlaceholder"
             }
           },
           "DictionaryKey": {
@@ -16662,6 +16669,13 @@
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             }
           },
+          "ContentCollections": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+            }
+          },
           "Timestamp": {
             "type": "string",
             "format": "byte",
@@ -16763,12 +16777,12 @@
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             }
           },
-          "HorselessSessionPrincipalId": {
+          "PrincipalId": {
             "type": "string",
             "format": "uuid",
             "nullable": true
           },
-          "HorselessSessionPrincipal": {
+          "Principal": {
             "$ref": "#/components/schemas/ContentEntitiesPrincipal"
           }
         }
@@ -16925,6 +16939,13 @@
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
+            }
+          },
+          "Tenants": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesTenant"
             }
           },
           "Timestamp": {
@@ -17523,7 +17544,7 @@
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             }
           },
-          "Accounts": {
+          "Tenants": {
             "type": "array",
             "nullable": true,
             "items": {
@@ -17549,6 +17570,55 @@
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesHorselessSession"
+            }
+          },
+          "HorselessContents": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
+            }
+          },
+          "HorselessViews": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesHorselessView"
+            }
+          },
+          "ContentCollections": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
+            }
+          },
+          "FilesystemAssets": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesFilesystemAsset"
+            }
+          },
+          "Holonyms": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesHolonym"
+            }
+          },
+          "JSONAssets": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesJSONAsset"
+            }
+          },
+          "Placeholders": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPlaceholder"
             }
           },
           "AccessControlEntries": {
@@ -18330,6 +18400,77 @@
           }
         }
       },
+      "HostingEntitiesNugetPackage": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "AccessControlEntries": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
+            }
+          },
+          "Owners": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
+            }
+          },
+          "IsSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "Timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "UpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "DictionaryKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "Id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "ObjectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "PackageName": {
+            "type": "string",
+            "nullable": true
+          },
+          "PackageId": {
+            "type": "string",
+            "nullable": true
+          },
+          "Publisher": {
+            "type": "string",
+            "nullable": true
+          },
+          "Version": {
+            "type": "string",
+            "nullable": true
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "DisplayName": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "HostingEntitiesPrincipal": {
         "type": "object",
         "additionalProperties": false,
@@ -18479,6 +18620,20 @@
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesPrincipal"
+            }
+          },
+          "KeyCloakConfigurations": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesKeyCloakConfiguration"
+            }
+          },
+          "NugetPackages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesNugetPackage"
             }
           },
           "Accounts": {
@@ -18914,13 +19069,6 @@
       "ViewEnginesIViewEngine": {
         "type": "object",
         "additionalProperties": false
-      }
-    },
-    "securitySchemes": {
-      "Bearer": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "Json Web Token"
       }
     }
   }

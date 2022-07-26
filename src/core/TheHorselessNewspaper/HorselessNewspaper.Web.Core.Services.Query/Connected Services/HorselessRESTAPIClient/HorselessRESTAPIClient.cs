@@ -18,6 +18,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.14.8.0 (NJsonSchema v10.5.2.0 (Newtonsoft.Json v13.0.1.0))")]
     public partial interface IHorselessRESTAPIClient
+
     {
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
@@ -7623,20 +7624,23 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
         public System.DateTime? UpdatedAt { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("ManagedContentCollections")]
-        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ManagedContentCollections { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("ContentCollections")]
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ContentCollections { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("ManagedHorselessContents")]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent> ManagedHorselessContents { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("HorselessContents")]
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent> HorselessContents { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("ManagedHorselessViews")]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessView> ManagedHorselessViews { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("HorselessViews")]
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessView> HorselessViews { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("ManagedPublications")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPublication> ManagedPublications { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("Publications")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPublication> Publications { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("ManagedTenants")]
-        public System.Collections.Generic.ICollection<ContentEntitiesTenant> ManagedTenants { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("Tenants")]
+        public System.Collections.Generic.ICollection<ContentEntitiesTenant> Tenants { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Placeholders")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPlaceholder> Placeholders { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -7910,6 +7914,9 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
         public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
+        [System.Text.Json.Serialization.JsonPropertyName("ContentCollections")]
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ContentCollections { get; set; }
+    
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
         public byte[] Timestamp { get; set; }
     
@@ -7995,11 +8002,11 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
         public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("HorselessSessionPrincipalId")]
-        public System.Guid? HorselessSessionPrincipalId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("PrincipalId")]
+        public System.Guid? PrincipalId { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("HorselessSessionPrincipal")]
-        public ContentEntitiesPrincipal HorselessSessionPrincipal { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("Principal")]
+        public ContentEntitiesPrincipal Principal { get; set; }
     
         public string ToJson()
         {
@@ -8124,6 +8131,9 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
         public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Tenants")]
+        public System.Collections.Generic.ICollection<ContentEntitiesTenant> Tenants { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
         public byte[] Timestamp { get; set; }
@@ -8589,8 +8599,8 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("ManagingAccessControlEntries")]
         public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> ManagingAccessControlEntries { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("Accounts")]
-        public System.Collections.Generic.ICollection<ContentEntitiesTenant> Accounts { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("Tenants")]
+        public System.Collections.Generic.ICollection<ContentEntitiesTenant> Tenants { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("OwnedTenants")]
         public System.Collections.Generic.ICollection<ContentEntitiesTenant> OwnedTenants { get; set; }
@@ -8600,6 +8610,27 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     
         [System.Text.Json.Serialization.JsonPropertyName("HorselessSessions")]
         public System.Collections.Generic.ICollection<ContentEntitiesHorselessSession> HorselessSessions { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("HorselessContents")]
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent> HorselessContents { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("HorselessViews")]
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessView> HorselessViews { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("ContentCollections")]
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ContentCollections { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("FilesystemAssets")]
+        public System.Collections.Generic.ICollection<ContentEntitiesFilesystemAsset> FilesystemAssets { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Holonyms")]
+        public System.Collections.Generic.ICollection<ContentEntitiesHolonym> Holonyms { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("JSONAssets")]
+        public System.Collections.Generic.ICollection<ContentEntitiesJSONAsset> JSONAssets { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Placeholders")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPlaceholder> Placeholders { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
         public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
@@ -9323,6 +9354,65 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.1.0)")]
+    public partial class HostingEntitiesNugetPackage 
+    {
+        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
+        public byte[] Timestamp { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
+        public System.DateTime? UpdatedAt { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
+        public string DictionaryKey { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Id")]
+        public System.Guid? Id { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
+        public string ObjectId { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("PackageName")]
+        public string PackageName { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("PackageId")]
+        public string PackageId { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Publisher")]
+        public string Publisher { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Version")]
+        public string Version { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
+        public System.DateTime? CreatedAt { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
+        public string DisplayName { get; set; }
+    
+        public string ToJson()
+        {
+            var options = new System.Text.Json.JsonSerializerOptions();
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
+        }
+    
+        public static HostingEntitiesNugetPackage FromJson(string data)
+        {
+            var options = new System.Text.Json.JsonSerializerOptions();
+            return System.Text.Json.JsonSerializer.Deserialize<HostingEntitiesNugetPackage>(data, options);
+        }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.1.0)")]
     public partial class HostingEntitiesPrincipal 
     {
         [System.Text.Json.Serialization.JsonPropertyName("UPN")]
@@ -9428,6 +9518,12 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
         public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("KeyCloakConfigurations")]
+        public System.Collections.Generic.ICollection<HostingEntitiesKeyCloakConfiguration> KeyCloakConfigurations { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("NugetPackages")]
+        public System.Collections.Generic.ICollection<HostingEntitiesNugetPackage> NugetPackages { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Accounts")]
         public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Accounts { get; set; }
