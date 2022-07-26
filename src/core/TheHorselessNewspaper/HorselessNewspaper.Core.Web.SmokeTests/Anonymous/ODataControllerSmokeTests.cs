@@ -173,7 +173,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                             IsSoftDeleted = false,
                             DeploymentState = ContentEntities.TenantDeploymentWorkflowState.PendingApproval,
                             ObjectId = Guid.NewGuid().ToString(),
-                            AccessControlEntries = new List<ContentEntities.AccessControlEntry>()
+                            AccessControlEntries = new HashSet<ContentEntities.AccessControlEntry>()
                             {
                                         new ContentEntities.AccessControlEntry()
                                         {
