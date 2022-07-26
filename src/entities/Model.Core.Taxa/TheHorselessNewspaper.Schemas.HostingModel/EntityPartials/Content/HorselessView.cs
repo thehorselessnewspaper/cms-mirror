@@ -19,7 +19,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     public partial class HorselessView : IContentRowLevelSecured, IFileInfo
     {
         // [ForeignKey("FK_AccessControlEntryManagedHorselessViews")]
-        [InverseProperty(nameof(AccessControlEntry.ManagedHorselessViews))]
+        [InverseProperty(nameof(AccessControlEntry.HorselessViews))]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
         [InverseProperty(nameof(Principal.HorselessViews))]
@@ -44,7 +44,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public ICollection<ContentCollection> ContentCollections { get; set; } = new HashSet<ContentCollection>();
 
-
+        [InverseProperty(nameof(Placeholder.HorselessViews))]
         public ICollection<Placeholder> Placeholders { get; set; } = new HashSet<Placeholder>();
 
         public Stream CreateReadStream()

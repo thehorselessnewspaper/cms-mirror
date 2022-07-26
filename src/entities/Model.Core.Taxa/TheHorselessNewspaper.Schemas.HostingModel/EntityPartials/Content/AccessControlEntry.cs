@@ -78,16 +78,19 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         // [ForeignKey("FK_HorselessViewAccessControlEntries")]
         [InverseProperty(nameof(HorselessView.AccessControlEntries))]
-        public virtual ICollection<HorselessView> ManagedHorselessViews { get; set; } = new HashSet<HorselessView>();
+        public virtual ICollection<HorselessView> HorselessViews { get; set; } = new HashSet<HorselessView>();
 
         // [ForeignKey("FK_PublicationAccessControlEntries")]
         [InverseProperty(nameof(Publication.AccessControlEntries))]
-        public virtual ICollection<Publication> ManagedPublications { get; set; } = new HashSet<Publication>();
+        public virtual ICollection<Publication> Publications { get; set; } = new HashSet<Publication>();
 
 
         //[ForeignKey("FK_TenantAccessControlEntries")]
         [InverseProperty(nameof(Tenant.AccessControlEntries))]
-        public virtual ICollection<Tenant> ManagedTenants { get; set; } = new HashSet<Tenant>();
+        public virtual ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
+
+        [InverseProperty(nameof(Placeholder.AccessControlEntries))]
+        public ICollection<Placeholder> Placeholders { get; set; } = new HashSet<Placeholder>();
 
 
         public string? DictionaryKey { get; set; }

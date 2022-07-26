@@ -82,7 +82,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         // [ForeignKey("FK_TenantAccounts")]
         [InverseProperty(nameof(Tenant.Accounts))]
-        public ICollection<Tenant> TenantAccounts { get; set; } = new HashSet<Tenant>();
+        public ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
 
         // [ForeignKey("FK_TenantOwners")]
         [InverseProperty(nameof(Tenant.Owners))]
