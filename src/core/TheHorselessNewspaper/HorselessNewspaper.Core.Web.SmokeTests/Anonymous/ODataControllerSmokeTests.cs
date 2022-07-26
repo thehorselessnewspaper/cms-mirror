@@ -208,10 +208,10 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                 int aclCount = 0;
                 contentCollection.Value.ForEach(f => { aclCount = aclCount + f.AccessControlEntries.Count; });
-                Assert.True(aclCount > 0);
+                Assert.True(aclCount > 0,);
             }
             catch (Exception e)
-            {
+            "{
 
                 ex = e;
             }
