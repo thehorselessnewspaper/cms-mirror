@@ -12,7 +12,7 @@ using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Hosting
 {
 
-    [Route("ODataHosting/Principal")]
+    [Route("{__tenant__}/ODataHosting/Principal")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class PrincipalController : ODataController
