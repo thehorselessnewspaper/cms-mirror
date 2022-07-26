@@ -17,7 +17,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("ODataContent/Holonym")]
+    [Route("{__tenant__}/ODataContentHolonym")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class HolonymController :
         ODataController, IContentQueryController<ContentModel.Holonym>

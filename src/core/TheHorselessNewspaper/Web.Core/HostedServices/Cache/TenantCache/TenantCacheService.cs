@@ -1291,7 +1291,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                     // take amount * service execution frequency = deploymentRate
                     // hosting model tenant IsPublished when contentmodel tenant deploymentstate is complete
-                    var filterlist = filteredTenants.Where(w => w.IsPublished == false).Take(100).ToList();
+                    var filterlist = filteredTenants.Take(100).ToList();
                     return filterlist;
                 }
                 catch (Exception e)

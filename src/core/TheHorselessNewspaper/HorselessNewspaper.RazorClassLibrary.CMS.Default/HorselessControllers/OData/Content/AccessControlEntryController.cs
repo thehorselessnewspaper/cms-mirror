@@ -19,7 +19,7 @@ using Microsoft.AspNetCore.Http;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("ODataContent/AccessControlEntry")]
+    [Route("{__tenant__}/ODataContentAccessControlEntry")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class AccessControlEntryController :
         ODataController, IContentQueryController<ContentModel.AccessControlEntry>

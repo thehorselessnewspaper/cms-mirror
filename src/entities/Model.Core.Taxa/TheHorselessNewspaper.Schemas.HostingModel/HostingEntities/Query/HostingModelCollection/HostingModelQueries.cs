@@ -256,16 +256,12 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelC
         /// <returns></returns>
         public async Task<T> Update(T entity, List<string> targetProperties = null)
         {
-            try
-            {
-                await EnsureDbExists();
-            }
-            catch (Exception e) { }
 
             _logger.LogDebug($"handling Update request");
 
             if (targetProperties == null)
             {
+                entity.UpdatedAt = DateTime.UtcNow;
                 // reject update attempts witout property lists
                 _logger.LogWarning($"update attempt without provided property list");
                 return await Task.FromException<T>(new Exception("update attempt without provided property list"));
@@ -284,9 +280,10 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelC
             else
             {
                 // as per https://www.learnentityframeworkcore.com/dbcontext/modifying-data
+                entity.UpdatedAt = DateTime.UtcNow;
                 var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties);
-                var entityEntry = ((DbContext)_context).Update(updatedEntity);
-
+                // var entityEntry = ((DbContext)_context).Update(updatedEntity);
+                var entityEntry = ((DbContext)_context).Attach(updatedEntity);
 
                 var updateResult = await ((DbContext)_context).SaveChangesAsync();
             _logger.LogTrace($"{this.GetType().Name} has completed update");

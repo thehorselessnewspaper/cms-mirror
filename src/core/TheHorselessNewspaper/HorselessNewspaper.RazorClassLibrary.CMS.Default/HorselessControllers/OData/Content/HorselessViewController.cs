@@ -10,7 +10,7 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    [Route("ODataContent/HorselessView")]
+    [Route("{__tenant__}/ODataContentHorselessView")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     [ApiExplorerSettings(IgnoreApi = true)]

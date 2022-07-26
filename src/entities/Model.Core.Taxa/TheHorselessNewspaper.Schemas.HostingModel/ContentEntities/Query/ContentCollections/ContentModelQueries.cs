@@ -388,6 +388,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
             try
             {
+                entity.UpdatedAt = DateTime.UtcNow;
                 var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
                 // _logger.LogInformation($"handling Update request for tenant context {_tenantInfo.Identifier}");
 
@@ -412,9 +413,8 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 {
                     // as per https://www.learnentityframeworkcore.com/dbcontext/modifying-data
                     var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties);
-                    var entityEntry = ((DbContext)_context).Update(updatedEntity);
-
-    
+                    // var entityEntry = ((DbContext)_context).Update(updatedEntity);
+                    var entityEntry = ((DbContext)_context).Attach(updatedEntity);
                     var updateResult = await ((DbContext)_context).SaveChangesAsync();
                     _logger.LogTrace($"{this.GetType().Name} has completed update");
 

@@ -43,10 +43,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public ICollection<PrincipalClaim> PrincipalClaim { get; set; } = new HashSet<PrincipalClaim>();
 
-        // [ForeignKey("PrincipalId")]
+
         public Guid? PrincipalId { get; set; }
 
-
+        [ForeignKey(nameof(PrincipalClaimContainer.PrincipalId))]
         [InverseProperty(nameof(ContentEntities.Principal.PrincipalClaimContainer))]
         public Principal? Principal { get; set; }
 

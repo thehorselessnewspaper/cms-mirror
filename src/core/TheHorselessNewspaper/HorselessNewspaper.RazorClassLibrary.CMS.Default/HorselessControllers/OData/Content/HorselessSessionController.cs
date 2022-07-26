@@ -18,7 +18,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("ODataContent/HorselessSession")]
+    [Route("{__tenant__}/ODataContentHorselessSession")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class HorselessSessionController :
         ODataController, IContentQueryController<ContentModel.HorselessSession>

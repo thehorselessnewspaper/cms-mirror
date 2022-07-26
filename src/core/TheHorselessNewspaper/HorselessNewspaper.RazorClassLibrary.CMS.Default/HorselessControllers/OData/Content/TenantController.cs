@@ -20,11 +20,12 @@ using HorselessNewspaper.Web.Core.Authorization.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Attributes;
+using System.Xml.Linq;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
     // [ODataAttributeRouting]
-    [Route("{__tenant__}/ODataContent/Tenant")]
+    [Route("{__tenant__}/ODataContentTenant")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class TenantController :

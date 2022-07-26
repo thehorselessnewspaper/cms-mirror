@@ -19,7 +19,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 {
 
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("{__tenant__}/ODataContent/ContentCollection")]
+    [Route("{__tenant__}/ODataContentContentCollection")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class ContentCollectionController :
         ODataController , IContentQueryController<ContentModel.ContentCollection>
