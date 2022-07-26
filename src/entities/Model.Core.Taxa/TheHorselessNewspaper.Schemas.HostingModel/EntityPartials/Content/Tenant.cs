@@ -133,14 +133,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public DateTime? UpdatedAt { get; set; }
 
 
-       //  [ForeignKey("FK_JSONAssetMetaData")]
 
         public HashSet<JSONAsset> MetaData { get; set; } = new HashSet<JSONAsset>();
         public string? DictionaryKey { get; set; }
 
 
-
-        // [ForeignKey("FK_PrincipalOwnedTenants")]
         [InverseProperty(nameof(Principal.OwnedTenants))]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
