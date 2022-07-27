@@ -89,7 +89,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
 
 
             var tenantQueryResult = await hostingTenantsCollectionService.Query(w => w.Id.ToString().Equals(tenantId),
-                new List<string>() { nameof(Tenant.Owners), nameof(Tenant.TenantInfos), nameof(Tenant.Principals) });
+                new List<string>() { nameof(Tenant.Owners), nameof(Tenant.TenantInfos), nameof(Tenant.Accounts) });
             var tenantResult = tenantQueryResult.ToList();
             Tenant currentTenant = tenantResult.First();
             var tenant = GetTenantRegistrationModel(currentTenant);

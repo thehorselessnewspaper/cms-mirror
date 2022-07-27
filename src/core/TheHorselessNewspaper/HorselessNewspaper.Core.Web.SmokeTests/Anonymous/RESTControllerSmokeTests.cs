@@ -155,7 +155,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     var route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT + "/HostingEntitiesTenantCreate";
                     //testHostingModelTenantInfo.TenantId = testHostingModelTenant.Id;
-                    testHostingModelTenant.Principals = new HashSet<Principal>()
+                    testHostingModelTenant.Accounts = new HashSet<Principal>()
                     {
                         new Principal()
                         {
@@ -195,7 +195,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     Assert.NotNull(postResponse);
 
                     var hostingTenantsReadResult = await theHostingOperator.ReadAsEnumerable(w => w.IsSoftDeleted != true && w.Id.Equals(testHostingModelTenant.Id),
-                        new List<string>() { nameof(HostingModel.Tenant.Owners), nameof(HostingModel.Tenant.Principals), nameof(HostingModel.Tenant.TenantInfos) },
+                        new List<string>() { nameof(HostingModel.Tenant.Owners), nameof(HostingModel.Tenant.Accounts), nameof(HostingModel.Tenant.TenantInfos) },
                         pageCount: 2, pageNumber: 1, pageSize: 5);
 
                     Assert.NotNull(hostingTenantsReadResult);

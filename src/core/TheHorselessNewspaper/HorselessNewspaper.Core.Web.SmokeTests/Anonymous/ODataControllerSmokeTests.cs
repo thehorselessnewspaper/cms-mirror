@@ -185,7 +185,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     client.DefaultRequestHeaders.Add(ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, defaulttenantidentifier);
                     // client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
-                    response = await client.GetAsync("lache/ODataHosting/Tenant?$expand=Owners, Principals,AccessControlEntries&$top=10");
+                    response = await client.GetAsync("lache/ODataHosting/Tenant?$expand=Owners, Accounts,AccessControlEntries&$top=10");
                     Assert.NotNull(response);
 
                     response.EnsureSuccessStatusCode(); // Status Code 200-299
