@@ -44,7 +44,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public ICollection<ContentCollection> ContentCollections { get; set; } = new HashSet<ContentCollection>();
 
-        [InverseProperty(nameof(Placeholder.HorselessViews))]
+        [InverseProperty(nameof(Placeholder.HorselessView))]
         public ICollection<Placeholder> Placeholders { get; set; } = new HashSet<Placeholder>();
 
         public Stream CreateReadStream()

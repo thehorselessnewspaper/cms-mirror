@@ -24,7 +24,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public Guid? HorselessViewId { get; set; }
 
-        [InverseProperty(nameof(HorselessView.Placeholders))]
-        public HorselessView? HorselessViews { get; set; }
+        // [InverseProperty(nameof(HorselessView.Placeholders))]
+        public HorselessView? HorselessView { get; set; }
     }
 }
