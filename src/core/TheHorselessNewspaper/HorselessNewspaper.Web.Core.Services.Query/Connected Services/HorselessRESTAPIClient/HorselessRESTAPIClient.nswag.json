@@ -16777,11 +16777,6 @@
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             }
           },
-          "PrincipalId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
           "Principal": {
             "$ref": "#/components/schemas/ContentEntitiesPrincipal"
           }
@@ -17523,6 +17518,11 @@
           "Timestamp": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          },
+          "PrincipalClaimContainerId": {
+            "type": "string",
+            "format": "uuid",
             "nullable": true
           },
           "PrincipalClaimContainer": {
@@ -18636,7 +18636,7 @@
               "$ref": "#/components/schemas/HostingEntitiesNugetPackage"
             }
           },
-          "Accounts": {
+          "Principals": {
             "type": "array",
             "nullable": true,
             "items": {

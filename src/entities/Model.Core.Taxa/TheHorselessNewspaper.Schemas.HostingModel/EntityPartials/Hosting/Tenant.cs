@@ -104,11 +104,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 
-        [InverseProperty(nameof(AccessControlEntry.ManagedTenants))]
+        [InverseProperty(nameof(AccessControlEntry.Tenants))]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
 
-        [InverseProperty(nameof(Principal.OwnedTenants))]
+        [InverseProperty(nameof(Principal.Tenants))]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
         public ICollection<KeyCloakConfiguration> KeyCloakConfigurations { get; set; } = new HashSet<KeyCloakConfiguration>();

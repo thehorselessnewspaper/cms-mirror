@@ -18,7 +18,6 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.14.8.0 (NJsonSchema v10.5.2.0 (Newtonsoft.Json v13.0.1.0))")]
     public partial interface IHorselessRESTAPIClient
-
     {
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
@@ -8002,9 +8001,6 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
         public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("PrincipalId")]
-        public System.Guid? PrincipalId { get; set; }
-    
         [System.Text.Json.Serialization.JsonPropertyName("Principal")]
         public ContentEntitiesPrincipal Principal { get; set; }
     
@@ -8586,6 +8582,9 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
         public byte[] Timestamp { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("PrincipalClaimContainerId")]
+        public System.Guid? PrincipalClaimContainerId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PrincipalClaimContainer")]
         public ContentEntitiesPrincipalClaimContainer PrincipalClaimContainer { get; set; }
@@ -9525,8 +9524,8 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("NugetPackages")]
         public System.Collections.Generic.ICollection<HostingEntitiesNugetPackage> NugetPackages { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("Accounts")]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Accounts { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("Principals")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Principals { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DeploymentState")]
         [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]

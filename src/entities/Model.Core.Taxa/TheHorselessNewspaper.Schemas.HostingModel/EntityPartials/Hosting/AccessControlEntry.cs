@@ -54,7 +54,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
 
         // [InverseProperty(nameof(AccessControlEntry.AccessControlEntries))]
-        public ICollection<Tenant> ManagedTenants { get; set; } = new HashSet<Tenant>(); 
+        public ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>(); 
 
         [NotMapped]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; }
