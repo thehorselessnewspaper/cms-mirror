@@ -185,7 +185,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     client.DefaultRequestHeaders.Add(ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, defaulttenantidentifier);
                     // client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
-                    response = await client.GetAsync("lache/ODataHosting/Tenant?$expand=Owners,AccessControlEntries&$top=10");
+                    response = await client.GetAsync("lache/ODataHosting/Tenant?$expand=Owners, Principals,AccessControlEntries&$top=10");
                     Assert.NotNull(response);
 
                     response.EnsureSuccessStatusCode(); // Status Code 200-299
@@ -250,6 +250,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     ITenantInfo tenant = scope.ServiceProvider.GetRequiredService<ITenantInfo>();
                     var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRESTAPIClient>();
                     Assert.NotNull(tenant);
+                    var principalOperator = _baseTest.GetIQueryableContentModelOperator<IQueryableContentModelOperator<ContentEntities.Principal>>(scope);
 
                     var insertQueryOperator = _baseTest.GetIQueryableContentModelOperator<IQueryableContentModelOperator<ContentEntities.Tenant>>(scope);
 
@@ -263,6 +264,48 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                         IsSoftDeleted = false,
                         DeploymentState = ContentEntities.TenantDeploymentWorkflowState.PendingApproval,
                         ObjectId = Guid.NewGuid().ToString()
+
+                    };
+
+                    var newOwner = new ContentEntities.Principal()
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedAt = DateTime.UtcNow,
+                        DisplayName = $"DisplayName{Guid.NewGuid().ToString()}",
+                        IsSoftDeleted = false,
+                        ObjectId = Guid.NewGuid().ToString(),
+                        Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                        // aud is not a guarantee
+                        //                            Aud = User.Claims.Where(w => w.Type.Contains("aud")).FirstOrDefault().Value,
+
+                        // subject/issuer are technically a compound unique key
+                        Iss = $"ISS{Guid.NewGuid().ToString()}",
+                        Sub = $"Sub{Guid.NewGuid().ToString()}",
+                        UPN = $"UPN{Guid.NewGuid().ToString()}",
+                        Email = $"Email{Guid.NewGuid().ToString()}",
+                        Aud = $"Aud{Guid.NewGuid().ToString()}",
+                        PreferredUserName = $"PreferredUserName{Guid.NewGuid().ToString()}"
+
+                    };
+
+                    var newAccount = new ContentEntities.Principal()
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedAt = DateTime.UtcNow,
+                        DisplayName = $"DisplayName{Guid.NewGuid().ToString()}",
+                        IsSoftDeleted = false,
+                        ObjectId = Guid.NewGuid().ToString(),
+                        Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                        // aud is not a guarantee
+                        //                            Aud = User.Claims.Where(w => w.Type.Contains("aud")).FirstOrDefault().Value,
+
+                        // subject/issuer are technically a compound unique key
+                        Iss = $"ISS{Guid.NewGuid().ToString()}",
+                        Sub = $"Sub{Guid.NewGuid().ToString()}",
+                        UPN = $"UPN{Guid.NewGuid().ToString()}",
+                        Email = $"Email{Guid.NewGuid().ToString()}",
+                        Aud = $"Aud{Guid.NewGuid().ToString()}",
+                        PreferredUserName = $"PreferredUserName{Guid.NewGuid().ToString()}"
 
                     };
 
@@ -362,7 +405,16 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     {
                         newTenant.AccessControlEntries.Add(acl);
                     }
+
+                    newTenant.Accounts.Add(newAccount);
+                    newTenant.Owners.Add(newOwner);
+
+                    //var principalInsertResult = await principalOperator.Create(newOwner);
+                    //var accountInsertResult = await principalOperator.Create(newAccount);
+
                     var insertResult = await insertQueryOperator.Create(newTenant);
+
+
                     Assert.True(insertResult != null);
                 }
 
@@ -384,7 +436,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     client.DefaultRequestHeaders.Add(ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, defaulttenantidentifier);
                     client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json;odata.metadata=full");
-                    response = await client.GetAsync("lache/ODataContent/Tenant?$expand=AccessControlEntries, ContentCollections&$top=10&");
+                    response = await client.GetAsync("lache/ODataContent/Tenant?$expand=Accounts, Owners, AccessControlEntries, ContentCollections&$top=10&");
                     Assert.NotNull(response);
 
                     response.EnsureSuccessStatusCode(); // Status Code 200-299
