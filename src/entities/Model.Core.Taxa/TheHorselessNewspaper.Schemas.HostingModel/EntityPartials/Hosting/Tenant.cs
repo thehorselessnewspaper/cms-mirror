@@ -64,7 +64,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
         public Guid? TenantId { get; set; }
 
-        [InverseProperty(nameof(HostingEntities.Tenant.TenantIdentifierStrategy))]
+        // [InverseProperty(nameof(HostingEntities.Tenant.TenantIdentifierStrategy))]
         public Tenant? Tenant { get; set; }
 
         [InverseProperty(nameof(TenantIdentifierStrategyContainer.Strategy))]
@@ -90,9 +90,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         /// </summary>
         public string? TenantIdentifier { get; set; }
 
-        public Guid? TenantIdentifierStrategyId { get; set; }
+        // public Guid? TenantIdentifierStrategyId { get; set; }
         
-        [InverseProperty(nameof(HostingEntities.TenantIdentifierStrategy.Tenant))]
+        // [InverseProperty(nameof(HostingEntities.TenantIdentifierStrategy.Tenant))]
         public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; }
 
 
