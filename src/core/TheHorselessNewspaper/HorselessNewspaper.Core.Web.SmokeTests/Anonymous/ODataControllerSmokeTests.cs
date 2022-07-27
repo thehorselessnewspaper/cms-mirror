@@ -156,11 +156,55 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                         StrategyContainers = new HashSet<HostingEntities.TenantIdentifierStrategyContainer>()
                     };
 
+
+                    var newOwner = new HostingEntities.Principal()
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedAt = DateTime.UtcNow,
+                        DisplayName = $"DisplayName{Guid.NewGuid().ToString()}",
+                        IsSoftDeleted = false,
+                        ObjectId = Guid.NewGuid().ToString(),
+                        Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                        // aud is not a guarantee
+                        //                            Aud = User.Claims.Where(w => w.Type.Contains("aud")).FirstOrDefault().Value,
+
+                        // subject/issuer are technically a compound unique key
+                        Iss = $"ISS{Guid.NewGuid().ToString()}",
+                        Sub = $"Sub{Guid.NewGuid().ToString()}",
+                        UPN = $"UPN{Guid.NewGuid().ToString()}",
+                        Email = $"Email{Guid.NewGuid().ToString()}",
+                        Aud = $"Aud{Guid.NewGuid().ToString()}",
+                        PreferredUserName = $"PreferredUserName{Guid.NewGuid().ToString()}"
+
+                    };
+
+                    var newAccount = new HostingEntities.Principal()
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedAt = DateTime.UtcNow,
+                        DisplayName = $"DisplayName{Guid.NewGuid().ToString()}",
+                        IsSoftDeleted = false,
+                        ObjectId = Guid.NewGuid().ToString(),
+                        Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                        // aud is not a guarantee
+                        //                            Aud = User.Claims.Where(w => w.Type.Contains("aud")).FirstOrDefault().Value,
+
+                        // subject/issuer are technically a compound unique key
+                        Iss = $"ISS{Guid.NewGuid().ToString()}",
+                        Sub = $"Sub{Guid.NewGuid().ToString()}",
+                        UPN = $"UPN{Guid.NewGuid().ToString()}",
+                        Email = $"Email{Guid.NewGuid().ToString()}",
+                        Aud = $"Aud{Guid.NewGuid().ToString()}",
+                        PreferredUserName = $"PreferredUserName{Guid.NewGuid().ToString()}"
+
+                    };
                     foreach (var acl in AccessControlEntries)
                     {
                         newTenant.AccessControlEntries.Add(acl);
                     }
 
+                    newTenant.Owners.Add(newOwner);
+                    newTenant.Accounts.Add(newAccount);
                     var insertQueryOperator = _baseTest.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<HostingEntities.Tenant>>(scope);
                     var insertResult = await insertQueryOperator.Create(
                       newTenant

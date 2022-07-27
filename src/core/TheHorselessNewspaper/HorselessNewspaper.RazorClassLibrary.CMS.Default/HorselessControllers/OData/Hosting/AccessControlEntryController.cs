@@ -27,7 +27,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
 
-        public async Task<ActionResult<IQueryable<HostingModel.AccessControlEntry>>> Get(ODataQueryOptions<HostingModel.AccessControlEntry> options)
+        public async Task<ActionResult<IQueryable<HostingModel.AccessControlEntry>>> GetHostingEntitiesAccessControlEntry(ODataQueryOptions<HostingModel.AccessControlEntry> options)
         {
             var result = await _AccessControlEntrySvc.Read<ODataQueryOptions<HostingModel.AccessControlEntry>, HostingModel.AccessControlEntry>(options);
             if (result != null)

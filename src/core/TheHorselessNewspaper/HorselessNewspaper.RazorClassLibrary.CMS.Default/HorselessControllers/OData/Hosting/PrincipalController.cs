@@ -32,7 +32,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
 
-        public async Task<ActionResult<IQueryable<HostingModel.Principal>>> Get(ODataQueryOptions<HostingModel.Principal> options)
+        public async Task<ActionResult<IQueryable<HostingModel.Principal>>> GetHostingPrincipal(ODataQueryOptions<HostingModel.Principal> options)
         {
             var result = await _principalSvc.Read<ODataQueryOptions<HostingModel.Principal>, HostingModel.Principal>(options);
             if (result != null)

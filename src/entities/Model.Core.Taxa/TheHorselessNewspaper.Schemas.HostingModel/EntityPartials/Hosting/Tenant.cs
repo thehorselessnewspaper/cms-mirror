@@ -108,7 +108,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
 
-        [InverseProperty(nameof(Principal.OwnedTenants))]
+        // [InverseProperty(nameof(Principal.OwnedTenants))]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
         public ICollection<KeyCloakConfiguration> KeyCloakConfigurations { get; set; } = new HashSet<KeyCloakConfiguration>();
