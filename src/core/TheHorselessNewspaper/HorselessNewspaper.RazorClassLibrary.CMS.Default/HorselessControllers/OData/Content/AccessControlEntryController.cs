@@ -35,7 +35,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-        [HttpGet]
+        [HttpGet(Name = "GetContentEntitiesAccessControlEntry")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ContentModel.AccessControlEntry>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]

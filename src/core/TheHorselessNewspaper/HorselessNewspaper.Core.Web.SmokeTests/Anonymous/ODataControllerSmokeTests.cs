@@ -1,5 +1,6 @@
 ﻿using HorselessNewspaper.Core.Interfaces.Security.Resolver;
 using HorselessNewspaper.Web.Core.Model.Query;
+using HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
@@ -247,6 +248,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 using (var scope = application.Services.CreateScope())
                 {
                     ITenantInfo tenant = scope.ServiceProvider.GetRequiredService<ITenantInfo>();
+                    var restClient = scope.ServiceProvider.GetRequiredService<IHorselessRESTAPIClient>();
                     Assert.NotNull(tenant);
 
                     var insertQueryOperator = _baseTest.GetIQueryableContentModelOperator<IQueryableContentModelOperator<ContentEntities.Tenant>>(scope);
@@ -349,12 +351,19 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                                             Scope = ContentEntities.ACEPermissionScope.OWNER
                                         }
                                     };
+                    //var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(newTenant, Formatting.None, new JsonSerializerSettings()
+                    //{
+                    //    ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+                    //}));
+
+                    //var insertResult = await restClient.ApiHorselessContentModelTenantCreateAsync(tenant.Identifier, wireTenant);
+
                     foreach (var acl in AccessControlEntries)
                     {
                         newTenant.AccessControlEntries.Add(acl);
                     }
-
                     var insertResult = await insertQueryOperator.Create(newTenant);
+                    Assert.True(insertResult != null);
                 }
 
             }

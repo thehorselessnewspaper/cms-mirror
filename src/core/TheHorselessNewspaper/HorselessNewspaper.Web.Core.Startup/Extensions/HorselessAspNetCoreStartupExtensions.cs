@@ -354,7 +354,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
 
                     });
-            // .AddOData(options =>
+            // .ddOData(options =>
             //{
             //    /// TODO - surface these as configurable parameters 
             //    options
