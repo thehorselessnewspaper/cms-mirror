@@ -58,20 +58,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 {
                     ITenantInfo tenant = scope.ServiceProvider.GetRequiredService<ITenantInfo>();
                     Assert.NotNull(tenant);
-
-                    var insertQueryOperator = _baseTest.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<HostingEntities.Tenant>>(scope);
-                    var insertResult = await insertQueryOperator.Create(
-                        new HostingEntities.Tenant()
-                        {
-                            Id = Guid.NewGuid(),
-                            CreatedAt = DateTime.UtcNow,
-                            DisplayName = "Test Content Collection",
-                            IsPublished = false,
-                            DeploymentState = HostingEntities.TenantDeploymentWorkflowState.PendingApproval,
-                            TenantIdentifier = Guid.NewGuid().ToString(),
-                            IsSoftDeleted = false,
-                            ObjectId = Guid.NewGuid().ToString(),
-                            AccessControlEntries = new HashSet<HostingEntities.AccessControlEntry>()
+                    var AccessControlEntries = new HashSet<HostingEntities.AccessControlEntry>()
                             {
                                         new HostingEntities.AccessControlEntry()
                                         {
@@ -145,16 +132,34 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                                             PermissionType = HostingEntities.ACEPermissionType.PERMIT,
                                             Scope = HostingEntities.ACEPermissionScope.OWNER
                                         }
-                                    },
-                            TenantIdentifierStrategy = new HostingEntities.TenantIdentifierStrategy()
-                            {
-                                Id = Guid.NewGuid(),
-                                CreatedAt = DateTime.UtcNow,
-                                DisplayName = "Test Content Collection",
-                                IsSoftDeleted = false,
-                                ObjectId = Guid.NewGuid().ToString()
-                            }
+                                    };
+                    var newTenant = new HostingEntities.Tenant()
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedAt = DateTime.UtcNow,
+                        DisplayName = "Test Content Collection",
+                        IsPublished = false,
+                        DeploymentState = HostingEntities.TenantDeploymentWorkflowState.PendingApproval,
+                        TenantIdentifier = Guid.NewGuid().ToString(),
+                        IsSoftDeleted = false,
+                        ObjectId = Guid.NewGuid().ToString(),
+                        TenantIdentifierStrategy = new HostingEntities.TenantIdentifierStrategy()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreatedAt = DateTime.UtcNow,
+                            DisplayName = "Test Content Collection",
+                            IsSoftDeleted = false,
+                            ObjectId = Guid.NewGuid().ToString()
                         }
+                    };
+                    foreach(var acl in AccessControlEntries)
+                    {
+                        newTenant.AccessControlEntries.Add(acl);
+                    }
+
+                    var insertQueryOperator = _baseTest.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<HostingEntities.Tenant>>(scope);
+                    var insertResult = await insertQueryOperator.Create(
+                      newTenant
                         );
                 }
 
