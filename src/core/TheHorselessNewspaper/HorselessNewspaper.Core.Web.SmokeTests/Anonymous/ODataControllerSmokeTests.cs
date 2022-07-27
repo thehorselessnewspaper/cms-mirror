@@ -57,6 +57,9 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
             {
                 using (var scope = application.Services.CreateScope())
                 {
+                    var princpalOperator = _baseTest.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<HostingEntities.Principal>>(scope);
+
+
                     ITenantInfo tenant = scope.ServiceProvider.GetRequiredService<ITenantInfo>();
                     Assert.NotNull(tenant);
                     var AccessControlEntries = new HashSet<HostingEntities.AccessControlEntry>()
@@ -203,9 +206,14 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                         newTenant.AccessControlEntries.Add(acl);
                     }
 
-                    newTenant.Owners.Add(newOwner);
-                    newTenant.Accounts.Add(newAccount);
+                    var ownerInsertResult = await princpalOperator.Create(newOwner);
+                    var accountInsertResult = await princpalOperator.Create(newAccount);
+
+                    newTenant.Owners.Add(ownerInsertResult);
+                    newTenant.Accounts.Add(accountInsertResult);
                     var insertQueryOperator = _baseTest.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<HostingEntities.Tenant>>(scope);
+                  
+                    
                     var insertResult = await insertQueryOperator.Create(
                       newTenant
                         );
