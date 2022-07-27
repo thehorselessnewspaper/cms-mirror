@@ -9,7 +9,7 @@ using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
-    [Route("ODataContent/Principal")]
+    [Route("{__tenant__}/ODataContent/Principal")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class PrincipalController :

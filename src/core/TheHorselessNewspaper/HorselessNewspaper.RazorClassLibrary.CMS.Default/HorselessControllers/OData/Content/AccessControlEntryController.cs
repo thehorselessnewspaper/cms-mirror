@@ -1,25 +1,17 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.OData.Routing.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Finbuckle.MultiTenant;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.OData.Routing.Controllers;
-using HorselessNewspaper.Web.Core.Services.Query.Controller.Content;
-using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
-using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
+using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
+using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("ODataContent/AccessControlEntry")]
+    [Route("{__tenant__}/ODataContent/AccessControlEntry")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class AccessControlEntryController :
         ODataController, IContentQueryController<ContentModel.AccessControlEntry>

@@ -25,11 +25,11 @@ using System.Xml.Linq;
 namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.OData.Content
 {
     // [ODataAttributeRouting]
-    [Route("ODataContent/Tenant")]
+    [Route("{__tenant__}/ODataContent/Tenant")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class TenantController :
-        ODataController , IContentQueryController<ContentModel.Tenant>
+        ODataController // , IContentQueryController<ContentModel.Tenant>
 
     {
         private readonly IContentCollectionService<IQueryableContentModelOperator<ContentModel.Tenant>, ContentModel.Tenant> _contentCollectionService;
@@ -56,7 +56,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
 
-        public async Task<ActionResult<IQueryable<ContentModel.Tenant>>> Get(ODataQueryOptions<ContentModel.Tenant> options)
+        public async Task<ActionResult<IQueryable<ContentModel.Tenant>>> Get(ODataQueryOptions<ContentModel.Tenant> options, CancellationToken token)
         {
             try
             {
