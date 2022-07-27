@@ -16770,11 +16770,6 @@
             },
             "nullable": true
           },
-          "PrincipalId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
           "Principal": {
             "$ref": "#/components/schemas/ContentEntitiesPrincipal"
           }
@@ -17516,6 +17511,11 @@
           "Timestamp": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          },
+          "PrincipalClaimContainerId": {
+            "type": "string",
+            "format": "uuid",
             "nullable": true
           },
           "PrincipalClaimContainer": {
@@ -18629,7 +18629,7 @@
             },
             "nullable": true
           },
-          "Accounts": {
+          "Principals": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesPrincipal"
