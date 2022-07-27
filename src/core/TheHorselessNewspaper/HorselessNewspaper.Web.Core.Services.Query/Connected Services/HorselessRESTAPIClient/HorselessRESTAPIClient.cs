@@ -9246,8 +9246,8 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("ManagedTenants")]
-        public System.Collections.Generic.ICollection<HostingEntitiesTenant> ManagedTenants { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("Tenants")]
+        public System.Collections.Generic.ICollection<HostingEntitiesTenant> Tenants { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
         public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
@@ -9432,8 +9432,8 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("OwnedTenants")]
-        public System.Collections.Generic.ICollection<HostingEntitiesTenant> OwnedTenants { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("Tenants")]
+        public System.Collections.Generic.ICollection<HostingEntitiesTenant> Tenants { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("TenantAccounts")]
         public System.Collections.Generic.ICollection<HostingEntitiesTenant> TenantAccounts { get; set; }
@@ -9493,9 +9493,6 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     
         [System.Text.Json.Serialization.JsonPropertyName("TenantIdentifier")]
         public string TenantIdentifier { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("TenantIdentifierStrategyId")]
-        public System.Guid? TenantIdentifierStrategyId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("TenantIdentifierStrategy")]
         public HostingEntitiesTenantIdentifierStrategy TenantIdentifierStrategy { get; set; }
@@ -9604,8 +9601,8 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
         public System.DateTime? CreatedAt { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("Tenant_Id")]
-        public System.Guid? Tenant_Id { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("TenantId")]
+        public System.Guid? TenantId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Tenant")]
         public HostingEntitiesTenant Tenant { get; set; }

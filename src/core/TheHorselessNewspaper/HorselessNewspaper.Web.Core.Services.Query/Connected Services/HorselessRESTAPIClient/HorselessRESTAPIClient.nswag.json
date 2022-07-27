@@ -18273,7 +18273,7 @@
             "type": "string",
             "nullable": true
           },
-          "ManagedTenants": {
+          "Tenants": {
             "type": "array",
             "nullable": true,
             "items": {
@@ -18501,7 +18501,7 @@
             "type": "string",
             "nullable": true
           },
-          "OwnedTenants": {
+          "Tenants": {
             "type": "array",
             "nullable": true,
             "items": {
@@ -18577,11 +18577,6 @@
           },
           "TenantIdentifier": {
             "type": "string",
-            "nullable": true
-          },
-          "TenantIdentifierStrategyId": {
-            "type": "string",
-            "format": "uuid",
             "nullable": true
           },
           "TenantIdentifierStrategy": {
@@ -18706,7 +18701,7 @@
             "format": "date-time",
             "nullable": true
           },
-          "Tenant_Id": {
+          "TenantId": {
             "type": "string",
             "format": "uuid",
             "nullable": true
