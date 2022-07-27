@@ -216,7 +216,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                 int aclCount = 0;
                 contentCollection.Value.ForEach(f => { aclCount = aclCount + f.AccessControlEntries.Count; });
-                Assert.True(aclCount > 0,"failed to retieve persisted acl");
+                Assert.True(aclCount > 0, "failed to retieve persisted acl");
             }
             catch (Exception e)
             {
@@ -250,18 +250,31 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     Assert.NotNull(tenant);
 
                     var insertQueryOperator = _baseTest.GetIQueryableContentModelOperator<IQueryableContentModelOperator<ContentEntities.Tenant>>(scope);
-                    var insertResult = await insertQueryOperator.Create(
-                        new ContentEntities.Tenant()
-                        {
-                            Id = Guid.NewGuid(),
-                            CreatedAt = DateTime.UtcNow,
-                            DisplayName = "Test Content Collection",
-                            IsPublished = false,
-                            TenantIdentifier = Guid.NewGuid().ToString(),
-                            IsSoftDeleted = false,
-                            DeploymentState = ContentEntities.TenantDeploymentWorkflowState.PendingApproval,
-                            ObjectId = Guid.NewGuid().ToString(),
-                            AccessControlEntries = new HashSet<ContentEntities.AccessControlEntry>()
+
+                    var newTenant = new ContentEntities.Tenant()
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedAt = DateTime.UtcNow,
+                        DisplayName = "Test Content Collection",
+                        IsPublished = false,
+                        TenantIdentifier = Guid.NewGuid().ToString(),
+                        IsSoftDeleted = false,
+                        DeploymentState = ContentEntities.TenantDeploymentWorkflowState.PendingApproval,
+                        ObjectId = Guid.NewGuid().ToString()
+
+                    };
+
+
+                    var TenantIdentifierStrategy = new ContentEntities.TenantIdentifierStrategy()
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedAt = DateTime.UtcNow,
+                        DisplayName = "Test Content Collection",
+                        IsSoftDeleted = false,
+                        ObjectId = Guid.NewGuid().ToString()
+                    };
+
+                    var AccessControlEntries = new HashSet<ContentEntities.AccessControlEntry>()
                             {
                                         new ContentEntities.AccessControlEntry()
                                         {
@@ -335,17 +348,13 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                                             PermissionType = ContentEntities.ACEPermissionType.PERMIT,
                                             Scope = ContentEntities.ACEPermissionScope.OWNER
                                         }
-                                    },
-                            TenantIdentifierStrategy = new ContentEntities.TenantIdentifierStrategy()
-                            {
-                                Id = Guid.NewGuid(),
-                                CreatedAt = DateTime.UtcNow,
-                                DisplayName = "Test Content Collection",
-                                IsSoftDeleted = false,
-                                ObjectId = Guid.NewGuid().ToString()
-                            }
-                        }
-                        );
+                                    };
+                    foreach (var acl in AccessControlEntries)
+                    {
+                        newTenant.AccessControlEntries.Add(acl);
+                    }
+
+                    var insertResult = await insertQueryOperator.Create(newTenant);
                 }
 
             }
