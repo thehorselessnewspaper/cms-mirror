@@ -40,7 +40,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
-        [ForeignKey(nameof(TenantIdentifierStrategyContainer.Strategy))]
         public Guid? StrategyId { get; set; }
 
         [InverseProperty(nameof(TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantIdentifierStrategy.StrategyContainers))]
@@ -63,9 +62,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
 
-        public Guid? Tenant_Id { get; set; }
+        public Guid? TenantId { get; set; }
 
-        // [InverseProperty(nameof(HostingEntities.Tenant.TenantIdentifierStrategy))]
+        [InverseProperty(nameof(HostingEntities.Tenant.TenantIdentifierStrategy))]
         public Tenant? Tenant { get; set; }
 
         [InverseProperty(nameof(TenantIdentifierStrategyContainer.Strategy))]
@@ -104,7 +103,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 
-        [InverseProperty(nameof(AccessControlEntry.Tenants))]
+        // [InverseProperty(nameof(AccessControlEntry.Tenants))]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
 

@@ -142,17 +142,20 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                         DeploymentState = HostingEntities.TenantDeploymentWorkflowState.PendingApproval,
                         TenantIdentifier = Guid.NewGuid().ToString(),
                         IsSoftDeleted = false,
-                        ObjectId = Guid.NewGuid().ToString(),
-                        TenantIdentifierStrategy = new HostingEntities.TenantIdentifierStrategy()
-                        {
-                            Id = Guid.NewGuid(),
-                            CreatedAt = DateTime.UtcNow,
-                            DisplayName = "Test Content Collection",
-                            IsSoftDeleted = false,
-                            ObjectId = Guid.NewGuid().ToString()
-                        }
+                        ObjectId = Guid.NewGuid().ToString()
+
                     };
-                    foreach(var acl in AccessControlEntries)
+                    var TenantIdentifierStrategy = new HostingEntities.TenantIdentifierStrategy()
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedAt = DateTime.UtcNow,
+                        DisplayName = "Test Content Collection",
+                        IsSoftDeleted = false,
+                        ObjectId = Guid.NewGuid().ToString(),
+                        StrategyContainers = new HashSet<HostingEntities.TenantIdentifierStrategyContainer>()
+                    };
+
+                    foreach (var acl in AccessControlEntries)
                     {
                         newTenant.AccessControlEntries.Add(acl);
                     }
