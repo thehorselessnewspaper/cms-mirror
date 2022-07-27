@@ -122,6 +122,30 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
         {
 
             Guid newPrincipalGuid = Guid.NewGuid();
+            var newPrincipa = new Principal()
+            {
+                Id = newPrincipalGuid,
+                PreferredUserName = "AccountUser" + Guid.NewGuid().ToString(),
+                ObjectId = Guid.NewGuid().ToString(),
+                DisplayName = "principal@tenant.com",
+                CreatedAt = DateTime.UtcNow,
+                Iss = "https://isuer.tenant.com",
+                Aud = "client-application",
+                Sub = "oauth-sub"
+            };
+            var newOwner = new Principal()
+            {
+                Id = Guid.NewGuid(),
+                PreferredUserName = "OwnerUser" + Guid.NewGuid().ToString(),
+                ObjectId = Guid.NewGuid().ToString(),
+                DisplayName = "principal@tenant.com",
+                CreatedAt = DateTime.UtcNow,
+                Iss = "https://isuer.tenant.com",
+                Aud = "client-application",
+                Sub = "oauth-sub"
+            };
+
+
             Guid newTenantId = Guid.NewGuid();
             var tenant = new Tenant()
             {
@@ -157,44 +181,34 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                             }
                         }
                     }
-                },
-                Accounts = new List<Principal>()
-                {
-                    new Principal()
-                    {
-                        Id= newPrincipalGuid,
-                PreferredUserName = "User" + Guid.NewGuid().ToString(),
-                        ObjectId = Guid.NewGuid().ToString(),
-                        DisplayName = "principal@tenant.com",
-                        CreatedAt = DateTime.UtcNow,
-                        Iss = "https://isuer.tenant.com",
-                        Aud = "client-application",
-                        Sub = "oauth-sub"
-                    }
-                },
-                Owners = new List<Principal>()
-            {
-                    new Principal()
-                    {
-                        Id= Guid.NewGuid(),
-                PreferredUserName = "User" + Guid.NewGuid().ToString(),
-                        ObjectId = Guid.NewGuid().ToString(),
-                        DisplayName = "principal@tenant.com",
-                        CreatedAt = DateTime.UtcNow,
-                        Iss = "https://isuer.tenant.com",
-                        Aud = "client-application",
-                        Sub = "oauth-sub"
-                    }
-            }
+                }
             };
 
             try
             {
-                var newTenant = await CreateHostingEntity<Tenant>(tenant);
+
 
                 // validate implicit insertion of new principal
                 var principalQuery = this.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<Principal>>();
-                IQueryable<Principal> newPrincipalReadResult = await principalQuery.Read(r => r.Id.Equals(newPrincipalGuid));
+                var tenantQuery = this.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<Tenant>>();
+
+
+                var insertPrincipalResult = await principalQuery.Create(newPrincipa);
+                var insertOwnerResult = await principalQuery.Create(newOwner);
+
+                Assert.NotNull(insertPrincipalResult);
+                Assert.NotNull(insertOwnerResult);
+
+
+                var newTenant = await CreateHostingEntity<Tenant>(tenant);
+                //newTenant.Owners.Add(insertOwnerResult);
+                //newTenant.Principals.Add(insertPrincipalResult);
+                //var updatedTenant = await tenantQuery.Update(newTenant, new List<string>() { nameof(Tenant.Owners), nameof(Tenant.Principals) });
+
+                var insertRelatedPrincipalResult = await tenantQuery.InsertRelatedEntity(newTenant.Id, nameof(Tenant.Principals), new List<Principal>() { insertPrincipalResult });
+                var insertRelatedOwnerResult = await tenantQuery.InsertRelatedEntity(newTenant.Id, nameof(Tenant.Owners), new List<Principal>() { insertOwnerResult });
+
+                IQueryable <Principal> newPrincipalReadResult = await principalQuery.Read(r => r.Id.Equals(newPrincipalGuid));
 
                 Assert.IsTrue(newPrincipalReadResult.Any());
 
@@ -245,12 +259,12 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
             try
             {
                 var readResult = await this.ReadHostingEntity<Tenant>(w => w.Id.Equals(tenant.Id),
-                    new List<string>() { nameof(Tenant.Accounts), nameof(Tenant.TenantInfos) });
+                    new List<string>() { nameof(Tenant.Principals), nameof(Tenant.TenantInfos) });
 
                 Assert.True(readResult != null);
 
                 var readEntity = readResult.First();
-                Assert.True(readEntity.Accounts.Count() > 0);
+                Assert.True(readEntity.Principals.Count() > 0);
                 Assert.True(readEntity.TenantInfos.Count() > 0);
             }
             catch (Exception e)
