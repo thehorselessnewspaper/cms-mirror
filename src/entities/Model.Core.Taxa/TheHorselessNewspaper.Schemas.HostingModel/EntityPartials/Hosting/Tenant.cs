@@ -117,7 +117,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [InverseProperty(nameof(Principal.OwnedTenants))]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
-        [InverseProperty(nameof(Principal.Tenants))]
+        // [InverseProperty(nameof(Principal.Tenants))]
         public ICollection<Principal> Accounts { get; set; } = new HashSet<Principal>();
 
         public TenantDeploymentWorkflowState DeploymentState { get; set; } = TenantDeploymentWorkflowState.PendingApproval;
