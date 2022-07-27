@@ -13,7 +13,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class PrincipalController :
-        ODataController, IContentQueryController<ContentModel.Principal>
+        ODataController // , IContentQueryController<ContentModel.Principal>
     {
         private IContentCollectionService<IQueryableContentModelOperator<ContentModel.Principal>, ContentModel.Principal> principalCollectionService;
         private ITenantInfo _tenantInfo;
@@ -32,7 +32,8 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-        public async Task<ActionResult<IQueryable<ContentModel.Principal>>> Get(ODataQueryOptions<ContentModel.Principal> options)
+        public async Task<ActionResult<IQueryable<ContentModel.Principal>>> GetContentEntitiesPrincipal
+            (ODataQueryOptions<ContentModel.Principal> options)
         {
             var result = await principalCollectionService.Query(options);
 

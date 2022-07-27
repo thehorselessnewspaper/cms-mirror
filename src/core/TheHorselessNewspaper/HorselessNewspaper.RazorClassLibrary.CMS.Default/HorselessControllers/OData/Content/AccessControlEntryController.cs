@@ -14,7 +14,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
     [Route("{__tenant__}/ODataContent/AccessControlEntry")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class AccessControlEntryController :
-        ODataController, IContentQueryController<ContentModel.AccessControlEntry>
+        ODataController // , IContentQueryController<ContentModel.AccessControlEntry>
     {
         private IContentCollectionService<IQueryableContentModelOperator<AccessControlEntry>, AccessControlEntry> _contentCollectionService;
         private ITenantInfo _tenantInfo;
@@ -33,7 +33,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-        public async Task<ActionResult<IQueryable<AccessControlEntry>>> Get(ODataQueryOptions<AccessControlEntry> options)
+        public async Task<ActionResult<IQueryable<AccessControlEntry>>> GetContentEntitiesAccessControlEntry(ODataQueryOptions<AccessControlEntry> options)
         {
             var result = await _contentCollectionService.Query(options);
 

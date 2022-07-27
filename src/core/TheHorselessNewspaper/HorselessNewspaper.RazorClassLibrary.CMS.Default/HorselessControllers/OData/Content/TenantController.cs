@@ -48,7 +48,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
 
-         [HttpGet()]
+         [HttpGet(Name = "GetContentEnttiesTenant")]
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<ContentModel.Tenant>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
@@ -56,7 +56,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
 
-        public async Task<ActionResult<IQueryable<ContentModel.Tenant>>> Get(ODataQueryOptions<ContentModel.Tenant> options, CancellationToken token)
+        public async Task<ActionResult<IQueryable<ContentModel.Tenant>>> GetContentEnttiesTenant(ODataQueryOptions<ContentModel.Tenant> options, CancellationToken token)
         {
             try
             {

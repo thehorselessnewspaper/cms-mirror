@@ -93,6 +93,7 @@
 	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\primeicons.woff" />
 	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\runtime.js" />
 	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\styles.css" />
+	  <None Remove="HorselessControllers\OData\Content\i4suv40g.4f1~" />
 	</ItemGroup>
 
 	<ItemGroup>

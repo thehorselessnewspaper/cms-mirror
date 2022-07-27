@@ -25,7 +25,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         }
 
         [Microsoft.AspNetCore.OData.Query.EnableQuery]
-        [HttpGet()]
+        [HttpGet(Name = "GetHostingPrincipal")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<HostingModel.Principal>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
