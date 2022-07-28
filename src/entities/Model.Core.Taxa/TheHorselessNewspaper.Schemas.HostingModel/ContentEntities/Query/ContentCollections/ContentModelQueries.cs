@@ -392,6 +392,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
             try
             {
+
                 entity.UpdatedAt = DateTime.UtcNow;
                 var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
                 // _logger.LogInformation($"handling Update request for tenant context {_tenantInfo.Identifier}");
@@ -429,7 +430,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
             catch (Exception ex)
             {
                 _logger.LogError($"problem updating entity {ex.Message}");
-                    throw new Exception($"problem updating {ex.Message}", ex);
+                throw new Exception($"problem updating {ex.Message}", ex);
             }
 
             return await Task.FromResult<T>(entity);
