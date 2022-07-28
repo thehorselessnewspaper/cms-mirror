@@ -50,7 +50,7 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.Extensions
 
                         }
 
-                        prop.SetValue(target, targetCollection, null);
+                        // prop.SetValue(target, targetCollection, null);
                         return target;
                     }
                     else
