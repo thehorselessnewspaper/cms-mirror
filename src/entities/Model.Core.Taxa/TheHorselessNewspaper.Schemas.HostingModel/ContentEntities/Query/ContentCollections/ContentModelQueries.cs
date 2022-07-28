@@ -428,7 +428,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                     // var entityEntry = ((DbContext)_context).Attach(updatedEntity);
 
                     // as per https://www.learnentityframeworkcore.com/dbcontext/modifying-data
-                    var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties);
+                    var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties, ((DbContext)_context));
                     var updateResult = await ((DbContext)_context).SaveChangesAsync();
                     _logger.LogTrace($"{this.GetType().Name} has completed update");
 
