@@ -66,7 +66,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                             {
                                         new HostingEntities.AccessControlEntry()
                                         {
-                                            Id = Guid.NewGuid(),
+                                            //Id = Guid.NewGuid(),
                                             CreatedAt = DateTime.UtcNow,
                                             DisplayName = "test tenant",
                                             IsSoftDeleted = false,
@@ -78,7 +78,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                                         },
                                         new HostingEntities.AccessControlEntry()
                                         {
-                                            Id = Guid.NewGuid(),
+                                            //Id = Guid.NewGuid(),
                                             CreatedAt = DateTime.UtcNow,
                                             DisplayName = "test tenant",
                                             IsSoftDeleted = false,
@@ -90,7 +90,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                                         },
                                         new HostingEntities.AccessControlEntry()
                                         {
-                                            Id = Guid.NewGuid(),
+                                            //Id = Guid.NewGuid(),
                                             CreatedAt = DateTime.UtcNow,
                                             DisplayName = "test tenant",
                                             IsSoftDeleted = false,
@@ -102,7 +102,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                                         },
                                         new HostingEntities.AccessControlEntry()
                                         {
-                                            Id = Guid.NewGuid(),
+                                            //Id = Guid.NewGuid(),
                                             CreatedAt = DateTime.UtcNow,
                                             DisplayName = "test tenant",
                                             IsSoftDeleted = false,
@@ -114,7 +114,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                                         },
                                         new HostingEntities.AccessControlEntry()
                                         {
-                                            Id = Guid.NewGuid(),
+                                            //Id = Guid.NewGuid(),
                                             CreatedAt = DateTime.UtcNow,
                                             DisplayName = "test tenant",
                                             IsSoftDeleted = false,
@@ -126,7 +126,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                                         },
                                         new HostingEntities.AccessControlEntry()
                                         {
-                                            Id = Guid.NewGuid(),
+                                            //Id = Guid.NewGuid(),
                                             CreatedAt = DateTime.UtcNow,
                                             DisplayName = "test tenant",
                                             IsSoftDeleted = false,
@@ -139,7 +139,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                                     };
                     var newTenant = new HostingEntities.Tenant()
                     {
-                        Id = Guid.NewGuid(),
+                        //Id = Guid.NewGuid(),
                         CreatedAt = DateTime.UtcNow,
                         DisplayName = "Test Content Collection",
                         IsPublished = false,
@@ -151,7 +151,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     };
                     var TenantIdentifierStrategy = new HostingEntities.TenantIdentifierStrategy()
                     {
-                        Id = Guid.NewGuid(),
+                        //Id = Guid.NewGuid(),
                         CreatedAt = DateTime.UtcNow,
                         DisplayName = "Test Content Collection",
                         IsSoftDeleted = false,
@@ -162,7 +162,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     var newOwner = new HostingEntities.Principal()
                     {
-                        Id = Guid.NewGuid(),
+                        //Id = Guid.NewGuid(),
                         CreatedAt = DateTime.UtcNow,
                         DisplayName = $"DisplayName{Guid.NewGuid().ToString()}",
                         IsSoftDeleted = false,
@@ -183,7 +183,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     var newAccount = new HostingEntities.Principal()
                     {
-                        Id = Guid.NewGuid(),
+                        //Id = Guid.NewGuid(),
                         CreatedAt = DateTime.UtcNow,
                         DisplayName = $"DisplayName{Guid.NewGuid().ToString()}",
                         IsSoftDeleted = false,

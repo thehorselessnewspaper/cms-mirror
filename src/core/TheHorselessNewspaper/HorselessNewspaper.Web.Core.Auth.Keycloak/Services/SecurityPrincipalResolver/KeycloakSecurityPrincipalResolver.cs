@@ -330,7 +330,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                 {
                     // the authenticated scenario must record this principal
                     _logger.LogWarning($"did not find authenticated user in database with upn={user.Claims.Upn()}");
-                    principal.Id = Guid.NewGuid();
+                    //principal.Id = Guid.NewGuid();
                     principal.DisplayName = user.Claims.PreferredUsername();
                     principal.CreatedAt = DateTime.UtcNow;
                     principal.IsAnonymous = false;
@@ -339,14 +339,14 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                     principal.PrincipalClaimContainer = new ContentModel.PrincipalClaimContainer()
                     {
-                        Id = Guid.NewGuid(),
+                        //Id = Guid.NewGuid(),
                         DisplayName = user.Claims.PreferredUsername()
 
                     };
 
                     foreach (var claim in user.Claims)
                     {
-                        principal.PrincipalClaimContainer.PrincipalClaim.Add(
+                        principal.PrincipalClaimContainer.PrincipalClaims.Add(
                             new ContentModel.PrincipalClaim()
                             {
                                 ClaimType = claim.Type,
@@ -359,7 +359,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
 
                     principal.HorselessSessions.Add(new ContentModel.HorselessSession()
                     {
-                        Id = Guid.NewGuid(),
+                        //Id = Guid.NewGuid(),
                         DisplayName = user.Claims.PreferredUsername(),
                         Aud = user.Claims.Aud(),
                         CreatedAt = DateTime.UtcNow,
@@ -390,7 +390,8 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                 // tenantQueryResult.Accounts.Add(createdPrincipalResult);
 
                                 var tenantUpdateResult = await this._tenantOperator.InsertRelatedEntity(tenantQueryResult.Id,
-                                     nameof(ContentModel.Tenant.Accounts), new List<ContentModel.Principal>() { createdPrincipalResult });
+                                     nameof(ContentModel.Tenant.Accounts), new List<ContentModel.Principal>() { createdPrincipalResult },
+                                     w => w.TenantIdentifier.Equals(tenantQueryResult.TenantIdentifier));
 
                                 _logger.LogTrace("created principal, added account");
 
@@ -413,7 +414,8 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                 {
                                     // tenantQueryResult.Accounts.Add(principal);
                                     var tenantUpdateResult = await this._tenantOperator.InsertRelatedEntity(tenantQueryResult.Id,
-                                    nameof(ContentModel.Tenant.Accounts), new List<ContentModel.Principal>() { principal });
+                                    nameof(ContentModel.Tenant.Accounts), new List<ContentModel.Principal>() { principal }, 
+                                    w => w.TenantIdentifier.Equals(tenantQueryResult.TenantIdentifier));
 
                                     if (tenantUpdateResult != null)
                                     {
