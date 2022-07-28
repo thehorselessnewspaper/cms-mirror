@@ -206,12 +206,12 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                         newTenant.AccessControlEntries.Add(acl);
                     }
 
-                    //newTenant.Owners.Add(newOwner);
-                    //newTenant.Accounts.Add(newAccount);
-                    var ownerInsertResult = await princpalOperator.Create(newOwner);
-                    var accountInsertResult = await princpalOperator.Create(newAccount);
-                    newTenant.Owners.Add(ownerInsertResult);
-                    newTenant.Accounts.Add(accountInsertResult);
+                    newTenant.Owners.Add(newOwner);
+                    newTenant.Accounts.Add(newAccount);
+                    //var ownerInsertResult = await princpalOperator.Create(newOwner);
+                    //var accountInsertResult = await princpalOperator.Create(newAccount);
+                    //newTenant.Owners.Add(ownerInsertResult);
+                    //newTenant.Accounts.Add(accountInsertResult);
                     var insertQueryOperator = _baseTest.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<HostingEntities.Tenant>>(scope);
                   
                     

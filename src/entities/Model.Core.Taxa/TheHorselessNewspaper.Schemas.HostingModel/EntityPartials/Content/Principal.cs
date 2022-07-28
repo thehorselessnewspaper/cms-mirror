@@ -71,7 +71,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
-        public Guid? PrincipalClaimContainerId { get; set; }
+        // public Guid? PrincipalClaimContainerId { get; set; }
         public PrincipalClaimContainer? PrincipalClaimContainer { get; set; } = new PrincipalClaimContainer();
 
         public DateTime? UpdatedAt { get; set; }
