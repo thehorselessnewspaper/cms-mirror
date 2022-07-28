@@ -114,7 +114,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public ICollection<NugetPackage> NugetPackages { get; set; } = new HashSet<NugetPackage>();
 
 
-        // [InverseProperty(nameof(Principal.OwnedTenants))]
+        [InverseProperty(nameof(Principal.OwnedTenants))]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
         [InverseProperty(nameof(Principal.Tenants))]

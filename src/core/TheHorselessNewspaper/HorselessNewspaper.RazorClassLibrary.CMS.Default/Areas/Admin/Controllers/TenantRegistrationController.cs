@@ -295,17 +295,17 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
 
                 var insertedTenant = await this.hostingTenantsCollectionService.Create(newTenant);
 
-                //var newOwnerUpdateResult = await this.hostingTenantsCollectionService
-                //                        .InsertRelatedEntity(insertedTenant.Id, nameof(HostingModel.Tenant.Owners), new List<HostingModel.Principal>() { newOwner },
-                //                        w => w.TenantIdentifier.Equals(newTenant.TenantIdentifier), t => t.PreferredUserName.Equals(newOwner.PreferredUserName));
+                var newOwnerUpdateResult = await this.hostingTenantsCollectionService
+                                        .InsertRelatedEntity(insertedTenant.Id, nameof(HostingModel.Tenant.Owners), new List<HostingModel.Principal>() { newOwner },
+                                        w => w.TenantIdentifier.Equals(newTenant.TenantIdentifier), t => t.PreferredUserName.Equals(newOwner.PreferredUserName));
 
                 //var newTenantInfoUpdateResult = await this.hostingTenantsCollectionService
                 //                          .InsertRelatedEntity(insertedTenant.Id, nameof(HostingModel.Tenant.TenantInfos), new List<HostingModel.TenantInfo>() { newTenantInfo },
                 //                          w => w.TenantIdentifier.Equals(newTenant.TenantIdentifier), t => t.ParentTenantId.Equals(newTenant.Id));
 
-                //var neAccessControlEntriesUpdateResult = await this.hostingTenantsCollectionService
-                //          .InsertRelatedEntity(insertedTenant.Id, nameof(HostingModel.Tenant.AccessControlEntries), accessControlEntries,
-                //          w => w.TenantIdentifier.Equals(newTenant.TenantIdentifier));
+                var neAccessControlEntriesUpdateResult = await this.hostingTenantsCollectionService
+                          .InsertRelatedEntity(insertedTenant.Id, nameof(HostingModel.Tenant.AccessControlEntries), accessControlEntries,
+                          w => w.TenantIdentifier.Equals(newTenant.TenantIdentifier));
 
                 return RedirectToAction(nameof(Index));
             }
