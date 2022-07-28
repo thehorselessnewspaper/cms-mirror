@@ -152,6 +152,15 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             builder.Entity<ContentCollection>()
                 .Navigation(n => n.HorselessViews).AutoInclude();
 
+            var entityTypes = builder.Model.GetEntityTypes();
+            foreach(var entity in entityTypes)
+            {
+                var idProp = entity.FindProperty("Id");
+                if(idProp != null)
+                {
+                    idProp.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnAdd;
+                }
+            }
 
         }
 

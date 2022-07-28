@@ -199,7 +199,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                     {
                         new AccessControlEntry()
                         {
-                            Id = Guid.NewGuid(),
+
                             CreatedAt = DateTime.UtcNow,
                             DisplayName = model.displayName,
                             IsSoftDeleted = false,
@@ -211,7 +211,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                         },
                         new AccessControlEntry()
                         {
-                            Id = Guid.NewGuid(),
+
                             CreatedAt = DateTime.UtcNow,
                             DisplayName = model.displayName,
                             IsSoftDeleted = false,
@@ -223,7 +223,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                         },
                         new AccessControlEntry()
                         {
-                            Id = Guid.NewGuid(),
+
                             CreatedAt = DateTime.UtcNow,
                             DisplayName = model.displayName,
                             IsSoftDeleted = false,
@@ -235,7 +235,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                         },
                         new AccessControlEntry()
                         {
-                            Id = Guid.NewGuid(),
+
                             CreatedAt = DateTime.UtcNow,
                             DisplayName = model.displayName,
                             IsSoftDeleted = false,
@@ -247,7 +247,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                         },
                         new AccessControlEntry()
                         {
-                            Id = Guid.NewGuid(),
+
                             CreatedAt = DateTime.UtcNow,
                             DisplayName = model.displayName,
                             IsSoftDeleted = false,
@@ -259,7 +259,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                         },
                         new AccessControlEntry()
                         {
-                            Id = Guid.NewGuid(),
+
                             CreatedAt = DateTime.UtcNow,
                             DisplayName = model.displayName,
                             IsSoftDeleted = false,
@@ -272,7 +272,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                     };
                 var newTenant = new HostingModel.Tenant()
                 {
-                    Id = Guid.NewGuid(),
+             
                     CreatedAt = DateTime.UtcNow,
                     DisplayName = model.displayName,
                     IsPublished = false,
@@ -284,28 +284,28 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                     DeploymentState = TenantDeploymentWorkflowState.PendingApproval
                 };
 
-                newTenantInfo.ParentTenantId = newTenant.Id;
+                // newTenantInfo.ParentTenantId = newTenant.Id;
 
                 // newTenant.TenantInfos.Add(newTenantInfo);
-                //newTenant.Owners.Add(newOwner);
-                //foreach(var acl in accessControlEntries)
-                //{
-                //    newTenant.AccessControlEntries.Add(acl);
-                //}
+                newTenant.Owners.Add(newOwner);
+                foreach (var acl in accessControlEntries)
+                {
+                    newTenant.AccessControlEntries.Add(acl);
+                }
 
                 var insertedTenant = await this.hostingTenantsCollectionService.Create(newTenant);
 
-                var newOwnerUpdateResult = await this.hostingTenantsCollectionService
-                                        .InsertRelatedEntity(insertedTenant.Id, nameof(HostingModel.Tenant.Owners), new List<HostingModel.Principal>() { newOwner },
-                                        w => w.TenantIdentifier.Equals(newTenant.TenantIdentifier), t => t.PreferredUserName.Equals(newOwner.PreferredUserName));
+                //var newOwnerUpdateResult = await this.hostingTenantsCollectionService
+                //                        .InsertRelatedEntity(insertedTenant.Id, nameof(HostingModel.Tenant.Owners), new List<HostingModel.Principal>() { newOwner },
+                //                        w => w.TenantIdentifier.Equals(newTenant.TenantIdentifier), t => t.PreferredUserName.Equals(newOwner.PreferredUserName));
 
                 //var newTenantInfoUpdateResult = await this.hostingTenantsCollectionService
                 //                          .InsertRelatedEntity(insertedTenant.Id, nameof(HostingModel.Tenant.TenantInfos), new List<HostingModel.TenantInfo>() { newTenantInfo },
                 //                          w => w.TenantIdentifier.Equals(newTenant.TenantIdentifier), t => t.ParentTenantId.Equals(newTenant.Id));
 
-                var neAccessControlEntriesUpdateResult = await this.hostingTenantsCollectionService
-                          .InsertRelatedEntity(insertedTenant.Id, nameof(HostingModel.Tenant.AccessControlEntries), accessControlEntries,
-                          w => w.TenantIdentifier.Equals(newTenant.TenantIdentifier));
+                //var neAccessControlEntriesUpdateResult = await this.hostingTenantsCollectionService
+                //          .InsertRelatedEntity(insertedTenant.Id, nameof(HostingModel.Tenant.AccessControlEntries), accessControlEntries,
+                //          w => w.TenantIdentifier.Equals(newTenant.TenantIdentifier));
 
                 return RedirectToAction(nameof(Index));
             }

@@ -79,7 +79,7 @@ namespace TheHorselessNewspaper.HostingModel.Context
         public Task<IEnumerable<T>> Create(IEnumerable<T> entity);
 
 
-        public Task<T> Update(T entity, List<String> targetProperties = null);
+        public Task<T> Update(T entity, List<String> targetProperties = null, Expression<Func<T, bool>> parentItemFilter = null);
 
         public Task<IEnumerable<T>> Update(IEnumerable<T> entities, List<String> targetProperties = null);
 

@@ -254,10 +254,16 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelC
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public async Task<T> Update(T entity, List<string> targetProperties = null)
+        public async Task<T> Update(T entity, List<string> targetProperties = null, Expression<Func<T, bool>> parentItemFilter = null)
         {
 
             _logger.LogDebug($"handling Update request");
+
+            if(parentItemFilter == null)
+            {
+                // apply a default poor choice filter
+                parentItemFilter = f => f.Id.Equals(entity.Id);
+            }
 
             if (targetProperties == null)
             {
@@ -270,7 +276,7 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelC
             var dbSet = ((DbContext)_context).Set<T>();
 
             // get the existing entity
-            var foundEntity = await dbSet.Where(w => w.Id == entity.Id).FirstAsync();
+            var foundEntity = await dbSet.Where(parentItemFilter).FirstAsync();
 
             if (foundEntity == null)
             {

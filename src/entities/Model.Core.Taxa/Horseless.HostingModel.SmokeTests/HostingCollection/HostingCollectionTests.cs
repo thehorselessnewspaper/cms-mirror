@@ -23,7 +23,22 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                 CreatedAt = DateTime.UtcNow,
                 DisplayName = "test update tenant",
                 ObjectId = Guid.NewGuid().ToString(),
-                Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
+                Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                AccessControlEntries = new HashSet<AccessControlEntry>()
+                {
+                    new AccessControlEntry()
+                    {
+                        //Id = Guid.NewGuid(),
+                        CreatedAt = DateTime.UtcNow,
+                        DisplayName = $"test created",
+                        IsSoftDeleted = false,
+                        ObjectId = Guid.NewGuid().ToString(),
+                        Scope = ACEPermissionScope.EVERYONE,
+                        Permission = ACEPermission.READ,
+                        PermissionType = ACEPermissionType.DENY
+
+                    }
+                },
             };
 
 
@@ -41,6 +56,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
 
             var unUpdatedtenant = await tenant.UpdateModifiedPropertiesAsync(modifiedTenant);
 
+            Assert.IsTrue(unUpdatedtenant.AccessControlEntries.Count > 0);
             // require a list of property names to update
             Assert.IsTrue(unUpdatedtenant.Id == initialGuid);
 
@@ -63,7 +79,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
             // add to a related property
             updatedtenant.Owners.Add(new Principal()
             {
-                Id = Guid.NewGuid(),
+                /* Id = Guid.NewGuid(),*/
                 CreatedAt = tenant.CreatedAt,
                 DisplayName = tenant.DisplayName,
                 ObjectId = Guid.NewGuid().ToString(),
@@ -72,7 +88,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
 
             var relatedPrincipal = new Principal()
             {
-                Id = Guid.NewGuid(),
+                //Id = Guid.NewGuid(),
                 CreatedAt = tenant.CreatedAt,
                 DisplayName = tenant.DisplayName,
                 ObjectId = Guid.NewGuid().ToString(),
@@ -88,7 +104,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
             var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(modifiedTenant.Id, nameof(modifiedTenant.Owners), new List<Principal>() { relatedPrincipal });
             Assert.IsTrue(insertResult != null);
 
-            var validatedInsertResult = await tenantQuery.Read(r => r.Id.Equals(tenant.Id), new List<string>()
+            var validatedInsertResult = await tenantQuery.Read(r => r.TenantIdentifier.Equals(((Tenant)tenant).TenantIdentifier), new List<string>()
             {
                 nameof(tenant.Owners), nameof(tenant.AccessControlEntries)
             });

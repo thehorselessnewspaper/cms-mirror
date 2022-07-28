@@ -31,7 +31,15 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
             // If necessary call the base class method.
             // Recommended to be called first.
             base.OnModelCreating(builder);
-
+            var entityTypes = builder.Model.GetEntityTypes();
+            foreach (var entity in entityTypes)
+            {
+                var idProp = entity.FindProperty("Id");
+                if (idProp != null)
+                {
+                    idProp.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnAdd;
+                }
+            }
         }
 
     }

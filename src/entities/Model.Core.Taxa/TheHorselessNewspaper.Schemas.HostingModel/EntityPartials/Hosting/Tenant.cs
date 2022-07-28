@@ -109,7 +109,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
         public ICollection<KeyCloakConfiguration> KeyCloakConfigurations { get; set; } = new HashSet<KeyCloakConfiguration>();
 
-        [InverseProperty(nameof(NugetPackage))]
+        [InverseProperty(nameof(NugetPackage.Tenants))]
         public ICollection<NugetPackage> NugetPackages { get; set; } = new HashSet<NugetPackage>();
 
 

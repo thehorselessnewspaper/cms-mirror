@@ -386,12 +386,20 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public async Task<T> Update(T entity, List<String> targetProperties = null)
+        public async Task<T> Update(T entity, List<String> targetProperties = null, Expression<Func<T, bool>> parentItemFilter = null)
         {
 
 
             try
             {
+
+
+                if (parentItemFilter == null)
+                {
+                    // apply a default poor choice filter
+                    parentItemFilter = f => f.Id.Equals(entity.Id);
+                }
+
 
                 entity.UpdatedAt = DateTime.UtcNow;
                 var resolvedTenant = await ((IContentModelContext)_context).ResolveTenant();
@@ -407,7 +415,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 var dbSet = ((DbContext)_context).Set<T>();
 
                 // get the existing entity
-                var foundEntity = await dbSet.Where(w => w.Id == entity.Id).FirstAsync();
+                var foundEntity = await dbSet.Where(parentItemFilter).FirstAsync();
 
                 if (foundEntity == null)
                 {

@@ -41,12 +41,12 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public string? DisplayName { get; set; }
 
-        public ICollection<PrincipalClaim> PrincipalClaim { get; set; } = new HashSet<PrincipalClaim>();
+        public ICollection<PrincipalClaim> PrincipalClaims { get; set; } = new HashSet<PrincipalClaim>();
 
 
         public Guid? PrincipalId { get; set; }
 
-        [ForeignKey(nameof(PrincipalClaimContainer.PrincipalId))]
+        //[ForeignKey(nameof(PrincipalClaimContainer.PrincipalId))]
         [InverseProperty(nameof(ContentEntities.Principal.PrincipalClaimContainer))]
         public Principal? Principal { get; set; }
 
@@ -72,7 +72,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
         // public Guid? PrincipalClaimContainerId { get; set; }
-        public PrincipalClaimContainer? PrincipalClaimContainer { get; set; } = new PrincipalClaimContainer();
+        public PrincipalClaimContainer? PrincipalClaimContainer { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }

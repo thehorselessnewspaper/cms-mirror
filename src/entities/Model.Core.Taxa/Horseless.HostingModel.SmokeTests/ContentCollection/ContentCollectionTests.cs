@@ -28,7 +28,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             // initialize a tenant
             IContentRowLevelSecured tenant = new Tenant()
             {
-                Id = initialGuid,
+                //Id = initialGuid,
                 CreatedAt = DateTime.UtcNow,
                 DisplayName = "test update tenant",
                 ObjectId = Guid.NewGuid().ToString(),
@@ -37,7 +37,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 {
                     new ContentModel.AccessControlEntry()
                     {
-                        Id = Guid.NewGuid(),
+                        //Id = Guid.NewGuid(),
                         CreatedAt = DateTime.UtcNow,
                         DisplayName = $"test created",
                         IsSoftDeleted = false,
@@ -50,7 +50,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 },
                 TenantIdentifierStrategy = new TenantIdentifierStrategy()
                 {
-                    Id = Guid.NewGuid(),
+                    //Id = Guid.NewGuid(),
                     CreatedAt = DateTime.UtcNow,
                     DisplayName = "test update tenant",
                     ObjectId = Guid.NewGuid().ToString(),
@@ -59,7 +59,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                     {
                         new TenantIdentifierStrategyContainer()
                         {
-                            Id = Guid.NewGuid(),
+                            //Id = Guid.NewGuid(),
                             CreatedAt = DateTime.UtcNow,
                             DisplayName = "test update tenant",
                             ObjectId = Guid.NewGuid().ToString(),
@@ -74,7 +74,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             // clone previous tenant
             var modifiedTenant = new Tenant()
             {
-                Id = initialGuid,
+                //Id = initialGuid,
                 CreatedAt = tenant.CreatedAt,
                 DisplayName = tenant.DisplayName,
                 ObjectId = tenant.ObjectId,
@@ -83,7 +83,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 {
                     new ContentModel.AccessControlEntry()
                     {
-                        Id = Guid.NewGuid(),
+                        //Id = Guid.NewGuid(),
                         CreatedAt = DateTime.UtcNow,
                         DisplayName = $"test created",
                         IsSoftDeleted = false,
@@ -96,7 +96,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 },
                 TenantIdentifierStrategy = new TenantIdentifierStrategy()
                 {
-                    Id = Guid.NewGuid(),
+                    //Id = Guid.NewGuid(),
                     CreatedAt = DateTime.UtcNow,
                     DisplayName = "test update tenant",
                     ObjectId = Guid.NewGuid().ToString(),
@@ -105,7 +105,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                     {
                         new TenantIdentifierStrategyContainer()
                         {
-                            Id = Guid.NewGuid(),
+                            //Id = Guid.NewGuid(),
                             CreatedAt = DateTime.UtcNow,
                             DisplayName = "test update tenants",
                             ObjectId = Guid.NewGuid().ToString(),
@@ -118,7 +118,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             };
 
             // give the clone a different id
-            modifiedTenant.Id = Guid.NewGuid();
+            // Id = Guid.NewGuid();
 
             // update the original tenant with the clone's properties
             Tenant unUpdatedtenant = (Tenant)await tenant.UpdateModifiedPropertiesAsync(modifiedTenant);
@@ -130,16 +130,16 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
 
             Assert.True(unUpdatedtenant.TenantIdentifierStrategy.StrategyContainers.Count == 1);
             // require a list of property names to update
-            Assert.IsTrue(unUpdatedtenant.Id == initialGuid);
+            Assert.IsTrue(unUpdatedtenant.Id == Guid.Empty);
 
             // change the id of the cloned tenant
             // and update the original tenant with 
             // the cloned tenant's properties
 
-            modifiedTenant.Id = Guid.NewGuid();
+            modifiedTenant.ObjectId = Guid.NewGuid().ToString();
             var updatedtenant = (Tenant)await tenant.UpdateModifiedPropertiesAsync(modifiedTenant, new List<string>
             {
-                nameof(modifiedTenant.Id)
+                nameof(modifiedTenant.ObjectId)
             });
 
             // validate only the id changed
@@ -147,7 +147,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
 
             Assert.IsTrue(updatedtenant.CreatedAt == tenant.CreatedAt);
             Assert.IsTrue(updatedtenant.DisplayName == tenant.DisplayName);
-            Assert.IsTrue(updatedtenant.ObjectId == tenant.ObjectId);
+            Assert.IsTrue(updatedtenant.ObjectId == modifiedTenant.ObjectId);
             Assert.IsTrue(updatedtenant.Timestamp == tenant.Timestamp);
             Assert.IsTrue(updatedtenant.TenantIdentifierStrategy != null);
 
@@ -158,7 +158,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             // add an owner to the tenant
             updatedtenant.Owners.Add(new Principal()
             {
-                Id = Guid.NewGuid(),
+                //Id = Guid.NewGuid(),
                 CreatedAt = tenant.CreatedAt,
                 DisplayName = tenant.DisplayName,
                 ObjectId = Guid.NewGuid().ToString(),
@@ -169,7 +169,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             // create a different principal
             var relatedPrincipal = new Principal()
             {
-                Id = Guid.NewGuid(),
+                //Id = Guid.NewGuid(),
                 CreatedAt = tenant.CreatedAt,
                 DisplayName = tenant.DisplayName,
                 ObjectId = Guid.NewGuid().ToString(),
@@ -185,7 +185,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             // insert the cloned tenant into the database
             var tenantInsertResult = await tenantQuery.Create(modifiedTenant);
 
-            var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(modifiedTenant.Id, nameof(modifiedTenant.Owners), new HashSet<Principal>() { relatedPrincipal });
+            var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(tenantInsertResult.Id, nameof(modifiedTenant.Owners), new HashSet<Principal>() { relatedPrincipal });
 
 
             Assert.IsTrue(insertResult != null);
@@ -200,7 +200,8 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 await InsertRelatedAccount(tenant);
             }
 
-            var validatedInsertResult = await tenantQuery.Read(r => r.Id.Equals(tenant.Id), new List<string>()
+            var validatedInsertResult = await tenantQuery.Read(r => r.TenantIdentifier.Equals(((Tenant)tenant).TenantIdentifier), 
+                new List<string>()
             {
                 nameof(Tenant.Owners), nameof(Tenant.Accounts), nameof(Tenant.AccessControlEntries)
             },
@@ -238,7 +239,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
 
             var relatedPrincipal = new Principal()
             {
-                Id = Guid.NewGuid(),
+                //Id = Guid.NewGuid(),
                 CreatedAt = tenant.CreatedAt,
                 DisplayName = tenant.DisplayName,
                 IsSoftDeleted = false,
@@ -249,7 +250,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 {
                     new HorselessSession()
                     {
-                        Id = Guid.NewGuid(),
+                        //Id = Guid.NewGuid(),
                         CreatedAt = tenant.CreatedAt,
                         DisplayName = tenant.DisplayName,
                         ObjectId = Guid.NewGuid().ToString()
@@ -265,7 +266,8 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             var principalQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Principal>>();
 
             // insert the related principal
-            var updateResult = await tenantQuery.Update(castTenant, new List<string>() { nameof(tenant.Owners) });
+            var updateResult = await tenantQuery.Update(castTenant, new List<string>() { nameof(tenant.Owners) },
+                w => w.TenantIdentifier.Equals(castTenant.TenantIdentifier));
 
             Assert.True(updateResult != null);
             var updatedTenants = await tenantQuery.ReadAsEnumerable(w => w.DisplayName == tenant.DisplayName, new List<string>() { nameof(Tenant.Owners) });
@@ -278,7 +280,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
         {
 
             var tenantQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Tenant>>();
-            var validatedInsertResult = await tenantQuery.Read(r => r.Id.Equals(tenant.Id), new List<string>()
+            var validatedInsertResult = await tenantQuery.Read(r => r.TenantIdentifier.Equals(((Tenant)tenant).TenantIdentifier), new List<string>()
             {
                 nameof(tenant.Owners), nameof(Tenant.AccessControlEntries)
             });
@@ -302,7 +304,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
 
             var relatedPrincipal = new Principal()
             {
-                Id = Guid.NewGuid(),
+                //Id = Guid.NewGuid(),
                 CreatedAt = tenant.CreatedAt,
                 DisplayName = tenant.DisplayName,
                 ObjectId = Guid.NewGuid().ToString(),
@@ -312,7 +314,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 {
                     new HorselessSession()
                     {
-                        Id = Guid.NewGuid(),
+                        //Id = Guid.NewGuid(),
                         CreatedAt = tenant.CreatedAt,
                         DisplayName = tenant.DisplayName,
                         ObjectId = Guid.NewGuid().ToString()
@@ -323,7 +325,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             var principalQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Principal>>();
 
             // insert the related principal
-            var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(tenant.Id, nameof(tenant.Owners), new List<Principal>() { relatedPrincipal });
+            var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(validatedInsertResult.First().Id, nameof(tenant.Owners), new List<Principal>() { relatedPrincipal });
 
           
         }
@@ -331,7 +333,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
         private async Task InsertRelatedAccount(IContentRowLevelSecured tenant)
         {
             var tenantQuery = this.GetIQueryableHostingModelOperator<IQueryableContentModelOperator<Tenant>>();
-            var validatedInsertResult = await tenantQuery.Read(r => r.Id.Equals(tenant.Id), new List<string>()
+            var validatedInsertResult = await tenantQuery.Read(r => r.TenantIdentifier.Equals(((Tenant)tenant).TenantIdentifier), new List<string>()
             {
                 nameof(Tenant.Owners), nameof(Tenant.Accounts), nameof(Tenant.AccessControlEntries)
             });
@@ -353,7 +355,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
 
             var relatedPrincipal = new Principal()
             {
-                Id = Guid.NewGuid(),
+                //Id = Guid.NewGuid(),
                 CreatedAt = tenant.CreatedAt,
                 DisplayName = tenant.DisplayName,
                 ObjectId = Guid.NewGuid().ToString(),
@@ -363,7 +365,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                 {
                     new HorselessSession()
                     {
-                        Id = Guid.NewGuid(),
+                        //Id = Guid.NewGuid(),
                         CreatedAt = tenant.CreatedAt,
                         DisplayName = tenant.DisplayName,
                         ObjectId = Guid.NewGuid().ToString()
@@ -372,7 +374,7 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             };
 
 
-            var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(tenant.Id, nameof(Tenant.Accounts), new List<Principal>() { relatedPrincipal });
+            var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(validatedInsertResult.First().Id, nameof(Tenant.Accounts), new List<Principal>() { relatedPrincipal });
 
 
         }
