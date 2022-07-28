@@ -206,8 +206,10 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                         newTenant.AccessControlEntries.Add(acl);
                     }
 
-                    var ownerInsertResult = await princpalOperator.Create(newOwner);
-                    var accountInsertResult = await princpalOperator.Create(newAccount);
+                    newTenant.Owners.Add(newOwner);
+                    newTenant.Accounts.Add(newAccount);
+                    //var ownerInsertResult = await princpalOperator.Create(newOwner);
+                    //var accountInsertResult = await princpalOperator.Create(newAccount);
 
                     var insertQueryOperator = _baseTest.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<HostingEntities.Tenant>>(scope);
                   
@@ -217,17 +219,18 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                         );
 
 
-                    insertResult.Owners.Add(ownerInsertResult);
-                    // insertResult.Accounts.Add(accountInsertResult);
+                    //insertResult.Owners.Add(ownerInsertResult);
+                    //insertResult.Accounts.Add(accountInsertResult);
 
-                    //var updateResult = await insertQueryOperator.Update(
-                    //                                  newTenant, new List<string>() { nameof(HostingEntities.Tenant.Owners),
-                    //                                  nameof(HostingEntities.Tenant.Accounts)}
+                    //var updateResult = await insertQueryOperator.InsertRelatedEntity<HostingEntities.Principal>(
+                    //                                  newTenant.Id,  nameof(HostingEntities.Tenant.Owners),
+                    //                                  new List<HostingEntities.Principal>() { newOwner }, w => w.TenantIdentifier.Equals(newTenant.TenantIdentifier),
+                    //                                  w => w.PreferredUserName.Equals(newOwner.PreferredUserName)
                     //                                    );
 
-                    //var updateResult = await insertQueryOperator.Update(
-                    //              newTenant, new List<string>() { nameof(HostingEntities.Tenant.Owners)}
-                    //                );
+                    ////var updateResult = await insertQueryOperator.Update(
+                    ////              newTenant, new List<string>() { nameof(HostingEntities.Tenant.Owners)}
+                    ////                );
 
                     //Assert.NotNull(updateResult);
                 }
@@ -281,7 +284,12 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
 
                 int aclCount = 0;
+                int ownerCount = 0;
+                int accountCount = 0;
+
                 contentCollection.Value.ForEach(f => { aclCount = aclCount + f.AccessControlEntries.Count; });
+                contentCollection.Value.ForEach(f => { ownerCount = ownerCount + f.Owners.Count; });
+                contentCollection.Value.ForEach(f => { accountCount = accountCount + f.Accounts.Count; });
                 Assert.True(aclCount > 0, "failed to retieve persisted acl");
             }
             catch (Exception e)

@@ -43,7 +43,6 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.Extensions
                         var castSource = sourceCollection as IEnumerable<IHostingRowLevelSecured>;
                         var castTarget = targetCollection as IEnumerable<IHostingRowLevelSecured>;
 
-                        ;
                         foreach (var item in castSource)
                         {
                             // targetList.Add(item);
