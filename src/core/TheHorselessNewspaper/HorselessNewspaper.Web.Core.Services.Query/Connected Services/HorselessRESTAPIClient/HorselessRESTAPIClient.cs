@@ -8524,8 +8524,8 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("HorselessViewId")]
         public System.Guid? HorselessViewId { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("HorselessViews")]
-        public ContentEntitiesHorselessView HorselessViews { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("HorselessView")]
+        public ContentEntitiesHorselessView HorselessView { get; set; }
     
         public string ToJson()
         {
@@ -8582,9 +8582,6 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
         public byte[] Timestamp { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("PrincipalClaimContainerId")]
-        public System.Guid? PrincipalClaimContainerId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PrincipalClaimContainer")]
         public ContentEntitiesPrincipalClaimContainer PrincipalClaimContainer { get; set; }
@@ -8707,8 +8704,8 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
         public string DisplayName { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("PrincipalClaim")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipalClaim> PrincipalClaim { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("PrincipalClaims")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipalClaim> PrincipalClaims { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PrincipalId")]
         public System.Guid? PrincipalId { get; set; }
@@ -9246,6 +9243,9 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
     
+        [System.Text.Json.Serialization.JsonPropertyName("NugetPackages")]
+        public System.Collections.Generic.ICollection<HostingEntitiesNugetPackage> NugetPackages { get; set; }
+    
         [System.Text.Json.Serialization.JsonPropertyName("Tenants")]
         public System.Collections.Generic.ICollection<HostingEntitiesTenant> Tenants { get; set; }
     
@@ -9373,6 +9373,9 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
     
+        [System.Text.Json.Serialization.JsonPropertyName("Tenants")]
+        public System.Collections.Generic.ICollection<HostingEntitiesTenant> Tenants { get; set; }
+    
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
         public System.Guid? Id { get; set; }
     
@@ -9432,11 +9435,14 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
     
+        [System.Text.Json.Serialization.JsonPropertyName("NugetPackages")]
+        public System.Collections.Generic.ICollection<HostingEntitiesNugetPackage> NugetPackages { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("OwnedTenants")]
+        public System.Collections.Generic.ICollection<HostingEntitiesTenant> OwnedTenants { get; set; }
+    
         [System.Text.Json.Serialization.JsonPropertyName("Tenants")]
         public System.Collections.Generic.ICollection<HostingEntitiesTenant> Tenants { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("TenantAccounts")]
-        public System.Collections.Generic.ICollection<HostingEntitiesTenant> TenantAccounts { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
         public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
@@ -9509,24 +9515,24 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
-    
         [System.Text.Json.Serialization.JsonPropertyName("KeyCloakConfigurations")]
         public System.Collections.Generic.ICollection<HostingEntitiesKeyCloakConfiguration> KeyCloakConfigurations { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("NugetPackages")]
         public System.Collections.Generic.ICollection<HostingEntitiesNugetPackage> NugetPackages { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("Principals")]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Principals { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("Accounts")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Accounts { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DeploymentState")]
         [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
         public HostingEntitiesTenantDeploymentWorkflowState? DeploymentState { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
         public System.Guid? Id { get; set; }

@@ -134,7 +134,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
 
 
+        [InverseProperty(nameof(JSONAsset.Tenants))]
         public HashSet<JSONAsset> MetaData { get; set; } = new HashSet<JSONAsset>();
+
         public string? DictionaryKey { get; set; }
 
 

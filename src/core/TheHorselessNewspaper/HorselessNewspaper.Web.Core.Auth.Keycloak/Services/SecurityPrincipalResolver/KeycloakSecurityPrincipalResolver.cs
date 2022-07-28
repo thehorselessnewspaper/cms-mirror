@@ -492,7 +492,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                     var newPrincipal = new ContentModel.Principal()
                     {
                         IsAnonymous = true,
-                        Id = Guid.NewGuid(),
+                        //Id = Guid.NewGuid(),
                         ObjectId = _httpContextAccessor.HttpContext.Session.Id,
                         DisplayName = "Anonymous User",
                         IsSoftDeleted = false,
@@ -507,7 +507,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                                                 IsAnonymous = true,
                                                 DisplayName = "Anonymous User",
                                                 IsSoftDeleted = false,
-                                                Id = Guid.NewGuid(),
+                                                //Id = Guid.NewGuid(),
                                                 // Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
                                                 ObjectId = Guid.NewGuid().ToString(),
                                                 CreatedAt = DateTime.UtcNow,
@@ -681,7 +681,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                     // create a new session
                     var newSession = new ContentModel.HorselessSession()
                     {
-                        Id = Guid.NewGuid(),
+                        //Id = Guid.NewGuid(),
                         DisplayName = currentPrincipal.DisplayName,
                         IsAnonymous = currentPrincipal.IsAnonymous,
                         Aud = currentPrincipal.Aud,

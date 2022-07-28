@@ -32,6 +32,6 @@ namespace HorselessNewspaper.Web.Core.Services.Query.Controller.Content
 
         Task<IQueryable<Entity>> Query(Expression<Func<Entity, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1);
         Task<IQueryable<U>> ReadFilterByMetaData<U>(Expression<Func<U, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1) where U : class, IContentRowLevelSecured, IQueryableMetaDataModelEntity;
-        public Task<Entity> Update([FromBody] Entity contentCollection, List<string> targetProperties = null);
+        public Task<Entity> Update([FromBody] Entity contentCollection, List<string> targetProperties = null, Expression<Func<Entity, bool>> parentItemFilter = null);
     }
 }

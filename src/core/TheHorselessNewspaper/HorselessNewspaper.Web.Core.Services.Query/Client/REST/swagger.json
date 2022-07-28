@@ -17451,7 +17451,7 @@
             "format": "uuid",
             "nullable": true
           },
-          "HorselessViews": {
+          "HorselessView": {
             "$ref": "#/components/schemas/ContentEntitiesHorselessView"
           }
         },
@@ -17511,11 +17511,6 @@
           "Timestamp": {
             "type": "string",
             "format": "byte",
-            "nullable": true
-          },
-          "PrincipalClaimContainerId": {
-            "type": "string",
-            "format": "uuid",
             "nullable": true
           },
           "PrincipalClaimContainer": {
@@ -17694,7 +17689,7 @@
             "type": "string",
             "nullable": true
           },
-          "PrincipalClaim": {
+          "PrincipalClaims": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipalClaim"
@@ -18266,6 +18261,13 @@
             "type": "string",
             "nullable": true
           },
+          "NugetPackages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesNugetPackage"
+            },
+            "nullable": true
+          },
           "Tenants": {
             "type": "array",
             "items": {
@@ -18429,6 +18431,13 @@
             "type": "string",
             "nullable": true
           },
+          "Tenants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesTenant"
+            },
+            "nullable": true
+          },
           "Id": {
             "type": "string",
             "format": "uuid"
@@ -18494,14 +18503,21 @@
             "type": "string",
             "nullable": true
           },
-          "Tenants": {
+          "NugetPackages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesNugetPackage"
+            },
+            "nullable": true
+          },
+          "OwnedTenants": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesTenant"
             },
             "nullable": true
           },
-          "TenantAccounts": {
+          "Tenants": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesTenant"
@@ -18596,20 +18612,6 @@
             "type": "string",
             "nullable": true
           },
-          "AccessControlEntries": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
-            },
-            "nullable": true
-          },
-          "Owners": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
-            },
-            "nullable": true
-          },
           "KeyCloakConfigurations": {
             "type": "array",
             "items": {
@@ -18624,7 +18626,7 @@
             },
             "nullable": true
           },
-          "Principals": {
+          "Accounts": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesPrincipal"
@@ -18633,6 +18635,20 @@
           },
           "DeploymentState": {
             "$ref": "#/components/schemas/HostingEntitiesTenantDeploymentWorkflowState"
+          },
+          "Owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
+            },
+            "nullable": true
+          },
+          "AccessControlEntries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
+            },
+            "nullable": true
           },
           "Id": {
             "type": "string",

@@ -289,7 +289,7 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelC
                 // var entityEntry = ((DbContext)_context).Attach(updatedEntity);
                 // as per https://www.learnentityframeworkcore.com/dbcontext/modifying-data
                 entity.UpdatedAt = DateTime.UtcNow;
-                var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties);
+                var updatedEntity = await foundEntity.UpdateModifiedPropertiesAsync(entity, targetProperties, ((DbContext)_context));
 
 
                 var updateResult = await ((DbContext)_context).SaveChangesAsync();

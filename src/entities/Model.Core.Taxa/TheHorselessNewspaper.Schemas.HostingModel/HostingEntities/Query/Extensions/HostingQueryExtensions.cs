@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,8 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.Extensions
         /// support dbset.Update property change detection
         /// </summary>
 
-        public async static Task<T> UpdateModifiedPropertiesAsync<T>(this T target, T source, List<String> targetProperties = null) where T : class, IHostingRowLevelSecured
+        public async static Task<T> UpdateModifiedPropertiesAsync<T>(this T target, T source, List<String> targetProperties = null,
+            DbContext dbContext = null) where T : class, IHostingRowLevelSecured
         {
             if (targetProperties != null && source != null)
             {
@@ -38,6 +40,7 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.Extensions
 
                     if (isCollection)
                     {
+
                         var sourceCollection = source.GetType().GetProperty(prop.Name).GetValue(source, null);
                         var targetCollection = source.GetType().GetProperty(prop.Name).GetValue(target, null);
                         var castSource = sourceCollection as IEnumerable<IHostingRowLevelSecured>;
@@ -46,6 +49,13 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.Extensions
                         foreach (var item in castSource)
                         {
                             // targetList.Add(item);
+                            if(dbContext != null)
+                            {
+                                // attach the related item
+                                var relatedSet = dbContext.Set<T>().Include(prop.GetType().Name);
+                                dbContext.Update(item);
+                            }
+
                             prop.PropertyType.GetMethod("Add").Invoke(targetCollection, new[] { item });
 
                         }

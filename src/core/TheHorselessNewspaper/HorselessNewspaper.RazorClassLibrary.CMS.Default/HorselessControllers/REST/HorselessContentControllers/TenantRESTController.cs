@@ -135,7 +135,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
                     updateablePropreties = new List<string>(updatedProperties);
                 }
 
-                var updateResult = await _contentCollectionService.Update(contentCollection, updateablePropreties);
+                var updateResult = await _contentCollectionService.Update(contentCollection, updateablePropreties, w => w.TenantIdentifier.Equals(contentCollection.TenantIdentifier));
                 return Accepted(updateResult);
             }
             catch (Exception ex)

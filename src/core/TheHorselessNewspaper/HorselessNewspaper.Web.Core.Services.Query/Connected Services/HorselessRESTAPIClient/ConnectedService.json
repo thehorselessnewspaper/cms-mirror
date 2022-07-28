@@ -106,7 +106,7 @@
     "Variables": null,
     "Runtime": 0,
     "CopySpecification": false,
-    "OpenGeneratedFilesOnComplete": false,
+    "OpenGeneratedFilesOnComplete": true,
     "UseRelativePath": false,
     "ConvertFromOdata": false,
     "OpenApiConvertSettings": {

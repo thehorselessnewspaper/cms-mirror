@@ -28,7 +28,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.Controller.Hosting
         Task<IEnumerable<U>> InsertRelatedEntity<U>(Guid entityId, string propertyName, IEnumerable<U> relatedEntities, Expression<Func<Entity, bool>> parentItemFilter = null, Expression<Func<U, bool>> relatedItemFilter = null) where U : class, IHostingRowLevelSecured;
         public Task<IQueryable<Entity>> Query(int pageSize = 10, int pageNumber = 1, int pageCount = 1);
         Task<IQueryable<Entity>> Query(Expression<Func<Entity, bool>> query, List<string> includeClauses = null, int pageSize = 10, int pageNumber = 1, int pageCount = 1);
-        public Task<Entity> Update([FromBody] Entity contentCollection, List<string> targetProperties = null);
+        public Task<Entity> Update([FromBody] Entity contentCollection, List<string> targetProperties = null, Expression<Func<Entity, bool>> parentItemFilter = null);
         public Task<IQueryable<Entity>> Read(ODataQueryOptions<Entity> queryOptions);
 
     }

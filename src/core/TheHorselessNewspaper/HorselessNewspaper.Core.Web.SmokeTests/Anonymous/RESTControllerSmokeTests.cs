@@ -159,7 +159,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     {
                         new Principal()
                         {
-                            Id= Guid.NewGuid(),
+                            //Id= Guid.NewGuid(),
                             ObjectId = Guid.NewGuid().ToString(),
                             DisplayName = "principal@tenant.com",
                             CreatedAt = DateTime.UtcNow,
@@ -171,7 +171,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     testHostingModelTenantInfo.WebAPITenantInfos.Add(new WebAPITenantInfo()
                     {
-                        Id = Guid.NewGuid(),
+                        //Id = Guid.NewGuid(),
                         CreatedAt = DateTime.UtcNow,
                         DisplayName = testHostingModelTenant.DisplayName,
                         ConnectionString = testHostingModelTenantInfo.ConnectionString,

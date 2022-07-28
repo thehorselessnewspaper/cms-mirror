@@ -27,7 +27,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                     {
                       new ContentModel.AccessControlEntry()
                         {
-                            Id = Guid.NewGuid(),
+                            //Id = Guid.NewGuid(),
                             CreatedAt = DateTime.UtcNow,
                             DisplayName = displayName,
                             IsSoftDeleted = false,
@@ -39,7 +39,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                         },
                         new ContentModel.AccessControlEntry()
                         {
-                            Id = Guid.NewGuid(),
+                            //Id = Guid.NewGuid(),
                             CreatedAt = DateTime.UtcNow,
                             DisplayName = displayName,
                             IsSoftDeleted = false,
@@ -51,7 +51,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                         },
                         new ContentModel.AccessControlEntry()
                         {
-                            Id = Guid.NewGuid(),
+                            //Id = Guid.NewGuid(),
                             CreatedAt = DateTime.UtcNow,
                             DisplayName = displayName,
                             IsSoftDeleted = false,
@@ -63,7 +63,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                         },
                         new ContentModel.AccessControlEntry()
                         {
-                            Id = Guid.NewGuid(),
+                            //Id = Guid.NewGuid(),
                             CreatedAt = DateTime.UtcNow,
                             DisplayName = displayName,
                             IsSoftDeleted = false,
@@ -75,7 +75,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                         },
                         new ContentModel.AccessControlEntry()
                         {
-                            Id = Guid.NewGuid(),
+                            //Id = Guid.NewGuid(),
                             CreatedAt = DateTime.UtcNow,
                             DisplayName =displayName,
                             IsSoftDeleted = false,
@@ -87,7 +87,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                         },
                         new ContentModel.AccessControlEntry()
                         {
-                            Id = Guid.NewGuid(),
+                            //Id = Guid.NewGuid(),
                             CreatedAt = DateTime.UtcNow,
                             DisplayName = displayName,
                             IsSoftDeleted = false,
@@ -99,7 +99,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                         },
                         new ContentModel.AccessControlEntry()
                         {
-                            Id = Guid.NewGuid(),
+                            //Id = Guid.NewGuid(),
                             CreatedAt = DateTime.UtcNow,
                             DisplayName = displayName,
                             IsSoftDeleted = false,
@@ -120,7 +120,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                     {
                         new ContentModel.Taxonomy()
                         {
-                            Id = Guid.NewGuid(),
+                            //Id = Guid.NewGuid(),
                             ObjectId = Guid.NewGuid().ToString(),
                             DisplayName = "Horseless Blog Tags",
                             IsSoftDeleted = false,
@@ -129,7 +129,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                             {
                                 new ContentModel.Taxon()
                                 {
-                                    Id = Guid.NewGuid(),
+                                    //Id = Guid.NewGuid(),
                                     ObjectId = Guid.NewGuid().ToString(),
                                     DisplayName = "Horseless Tag",
                                     DictionaryKey = "tag",
@@ -138,7 +138,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                                     {
                                         new ContentModel.Holonym()
                                         {
-                                            Id = Guid.NewGuid(),
+                                            //Id = Guid.NewGuid(),
                                             ObjectId = Guid.NewGuid().ToString(),
                                             DisplayName = "Short Description",
                                             IsSoftDeleted = false,
@@ -153,7 +153,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
             {
                 new ContentModel.ContentCollection()
                 {
-                    Id = Guid.NewGuid(),
+                    //Id = Guid.NewGuid(),
                     ObjectId = Guid.NewGuid().ToString(),
                     AllowAnonymousRead = true,
                     DisplayName = "Default Horseless Blog",
@@ -162,7 +162,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                     {
                         new ContentModel.HorselessView()
                         {
-                            Id = Guid.NewGuid(),
+                            //Id = Guid.NewGuid(),
                             DisplayName = "Default Horseless View",
                             IsActive = true,
                             IsSoftDeleted = false,
@@ -180,7 +180,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                     {
                         new ContentModel.HorselessContent()
                         {
-                            Id = Guid.NewGuid(),
+                            //Id = Guid.NewGuid(),
                             DisplayName = "Content Title",
                             IsSoftDeleted = false,
                             ObjectId = Guid.NewGuid().ToString(),
@@ -188,7 +188,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                             DictionaryKey = "title",
                             JSONAsset = new ContentModel.JSONAsset()
                             {
-                                Id = Guid.NewGuid(),
+                                //Id = Guid.NewGuid(),
                                 DisplayName = "Content Title",
                                 IsSoftDeleted = false,
                                 ObjectId = Guid.NewGuid().ToString(),
@@ -198,7 +198,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                         },
                         new ContentModel.HorselessContent()
                         {
-                            Id = Guid.NewGuid(),
+                            //Id = Guid.NewGuid(),
                             DisplayName = "Content Description",
                             IsSoftDeleted = false,
                             ObjectId = Guid.NewGuid().ToString(),
@@ -206,7 +206,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                             DictionaryKey = "description",
                             JSONAsset = new ContentModel.JSONAsset()
                             {
-                                Id = Guid.NewGuid(),
+                                //Id = Guid.NewGuid(),
                                 DisplayName = "Content Description",
                                 IsSoftDeleted = false,
                                 ObjectId = Guid.NewGuid().ToString(),
@@ -216,7 +216,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                         },
                         new ContentModel.HorselessContent()
                         {
-                            Id = Guid.NewGuid(),
+                            //Id = Guid.NewGuid(),
                             DisplayName = "Content Body",
                             IsSoftDeleted = false,
                             ObjectId = Guid.NewGuid().ToString(),
@@ -224,7 +224,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                             DictionaryKey = "body",
                             JSONAsset = new ContentModel.JSONAsset()
                             {
-                                Id = Guid.NewGuid(),
+                                //Id = Guid.NewGuid(),
                                 DisplayName = "Content Body",
                                 IsSoftDeleted = false,
                                 ObjectId = Guid.NewGuid().ToString(),
