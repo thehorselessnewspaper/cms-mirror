@@ -52,6 +52,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 
+        public ICollection<NugetPackage> NugetPackages { get; set; } = new HashSet<NugetPackage>();
 
         // [InverseProperty(nameof(Tenant.AccessControlEntries))]
         public ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();

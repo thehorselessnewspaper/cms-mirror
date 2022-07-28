@@ -3,18 +3,25 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using TheHorselessNewspaper.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
     public partial class NugetPackage : IHostingRowLevelSecured
     {
+        [InverseProperty(nameof(AccessControlEntry.NugetPackages))]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+
+        [InverseProperty(nameof(Principal.NugetPackages))]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
         public bool? IsSoftDeleted { get; set; }
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
+
+        [InverseProperty(nameof(Tenant.NugetPackages))]
+        ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
     }
 }
