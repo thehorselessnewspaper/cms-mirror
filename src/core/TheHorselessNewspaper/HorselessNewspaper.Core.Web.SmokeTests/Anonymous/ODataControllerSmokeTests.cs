@@ -206,11 +206,12 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                         newTenant.AccessControlEntries.Add(acl);
                     }
 
-                    newTenant.Owners.Add(newOwner);
-                    newTenant.Accounts.Add(newAccount);
-                    //var ownerInsertResult = await princpalOperator.Create(newOwner);
-                    //var accountInsertResult = await princpalOperator.Create(newAccount);
-
+                    //newTenant.Owners.Add(newOwner);
+                    //newTenant.Accounts.Add(newAccount);
+                    var ownerInsertResult = await princpalOperator.Create(newOwner);
+                    var accountInsertResult = await princpalOperator.Create(newAccount);
+                    newTenant.Owners.Add(ownerInsertResult);
+                    newTenant.Accounts.Add(accountInsertResult);
                     var insertQueryOperator = _baseTest.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<HostingEntities.Tenant>>(scope);
                   
                     
@@ -538,7 +539,12 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 Assert.True(contentCollection.Value.Count > 0);
 
                 int aclCount = 0;
+                int ownerCount = 0;
+                int accountCount = 0;
+
                 contentCollection.Value.ForEach(f => { aclCount = aclCount + f.AccessControlEntries.Count; });
+                contentCollection.Value.ForEach(f => { ownerCount = ownerCount + f.Owners.Count; });
+                contentCollection.Value.ForEach(f => { accountCount = accountCount + f.Accounts.Count; });
                 Assert.True(aclCount > 0);
             }
             catch (Exception e)

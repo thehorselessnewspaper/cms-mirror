@@ -104,7 +104,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public string? DictionaryKey { get; set; }
 
         
-        // [InverseProperty(nameof(AccessControlEntry.Tenants))]
+        [InverseProperty(nameof(AccessControlEntry.Tenants))]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
 
