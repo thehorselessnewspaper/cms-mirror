@@ -161,7 +161,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                 {
                     newOwner = new HostingModel.Principal()
                     {
-                        Id = Guid.NewGuid(),
+
                         CreatedAt = DateTime.UtcNow,
                         DisplayName = model.displayName,
                         IsSoftDeleted = false,
@@ -287,11 +287,11 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.Areas.Admin.Controlle
                 newTenantInfo.ParentTenantId = newTenant.Id;
 
                 // newTenant.TenantInfos.Add(newTenantInfo);
-                newTenant.Owners.Add(newOwner);
-                foreach(var acl in accessControlEntries)
-                {
-                    newTenant.AccessControlEntries.Add(acl);
-                }
+                //newTenant.Owners.Add(newOwner);
+                //foreach(var acl in accessControlEntries)
+                //{
+                //    newTenant.AccessControlEntries.Add(acl);
+                //}
 
                 var insertedTenant = await this.hostingTenantsCollectionService.Create(newTenant);
 

@@ -100,27 +100,29 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
         public virtual ICollection<TenantInfo> TenantInfos { get; set; } = new HashSet<TenantInfo>();
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
-
-        
-        [InverseProperty(nameof(AccessControlEntry.Tenants))]
-        public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
 
 
         public ICollection<KeyCloakConfiguration> KeyCloakConfigurations { get; set; } = new HashSet<KeyCloakConfiguration>();
 
+        [InverseProperty(nameof(NugetPackage))]
         public ICollection<NugetPackage> NugetPackages { get; set; } = new HashSet<NugetPackage>();
 
-
-        [InverseProperty(nameof(Principal.OwnedTenants))]
-        public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
         [InverseProperty(nameof(Principal.Tenants))]
         public ICollection<Principal> Accounts { get; set; } = new HashSet<Principal>();
 
         public TenantDeploymentWorkflowState DeploymentState { get; set; } = TenantDeploymentWorkflowState.PendingApproval;
+
+
+        public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
+
+
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
     }
 
 

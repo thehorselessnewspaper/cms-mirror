@@ -22,6 +22,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public string? DictionaryKey { get; set; }
 
         [InverseProperty(nameof(Tenant.NugetPackages))]
-        ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
+        public ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
     }
 }

@@ -20,6 +20,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
+
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 
@@ -28,7 +31,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [InverseProperty(nameof(Tenant.Owners))]
         public ICollection<Tenant> OwnedTenants { get; set; } = new HashSet<Tenant>();
 
-        // [InverseProperty(nameof(Tenant.Accounts))]
+        [InverseProperty(nameof(Tenant.Accounts))]
         public ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
 
         [NotMapped]
