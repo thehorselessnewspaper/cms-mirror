@@ -47,27 +47,6 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                         PermissionType = ContentModel.ACEPermissionType.DENY
 
                     }
-                },
-                TenantIdentifierStrategy = new TenantIdentifierStrategy()
-                {
-                    //Id = Guid.NewGuid(),
-                    CreatedAt = DateTime.UtcNow,
-                    DisplayName = "test update tenant",
-                    ObjectId = Guid.NewGuid().ToString(),
-                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                    StrategyContainers = new HashSet<TenantIdentifierStrategyContainer>()
-                    {
-                        new TenantIdentifierStrategyContainer()
-                        {
-                            //Id = Guid.NewGuid(),
-                            CreatedAt = DateTime.UtcNow,
-                            DisplayName = "test update tenant",
-                            ObjectId = Guid.NewGuid().ToString(),
-                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                            TenantIdentifier = "testUpdateTenant",
-                            TenantIdentifierStrategyName = TenantIdentifierStrategyName.ASPNETCORE_ROUTE
-                        }
-                    }
                 }
             };
 
@@ -93,27 +72,6 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
                         PermissionType = ContentModel.ACEPermissionType.DENY
 
                     }
-                },
-                TenantIdentifierStrategy = new TenantIdentifierStrategy()
-                {
-                    //Id = Guid.NewGuid(),
-                    CreatedAt = DateTime.UtcNow,
-                    DisplayName = "test update tenant",
-                    ObjectId = Guid.NewGuid().ToString(),
-                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                    StrategyContainers = new HashSet<TenantIdentifierStrategyContainer>()
-                    {
-                        new TenantIdentifierStrategyContainer()
-                        {
-                            //Id = Guid.NewGuid(),
-                            CreatedAt = DateTime.UtcNow,
-                            DisplayName = "test update tenants",
-                            ObjectId = Guid.NewGuid().ToString(),
-                            Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                            TenantIdentifier = "testUpdateTenant",
-                            TenantIdentifierStrategyName = TenantIdentifierStrategyName.ASPNETCORE_ROUTE
-                        }
-                    }
                 }
             };
 
@@ -124,11 +82,11 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             Tenant unUpdatedtenant = (Tenant)await tenant.UpdateModifiedPropertiesAsync(modifiedTenant);
 
             // validate the clone traversals lost no data
-            Assert.True(unUpdatedtenant.TenantIdentifierStrategy != null);
+ //            Assert.True(unUpdatedtenant.TenantIdentifierStrategy != null);
 
-            Assert.True(unUpdatedtenant.TenantIdentifierStrategy.StrategyContainers != null);
+ //            Assert.True(unUpdatedtenant.TenantIdentifierStrategy.StrategyContainers != null);
 
-            Assert.True(unUpdatedtenant.TenantIdentifierStrategy.StrategyContainers.Count == 1);
+ //           Assert.True(unUpdatedtenant.TenantIdentifierStrategy.StrategyContainers.Count == 1);
             // require a list of property names to update
             Assert.IsTrue(unUpdatedtenant.Id == Guid.Empty);
 
@@ -149,10 +107,10 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
             Assert.IsTrue(updatedtenant.DisplayName == tenant.DisplayName);
             Assert.IsTrue(updatedtenant.ObjectId == modifiedTenant.ObjectId);
             Assert.IsTrue(updatedtenant.Timestamp == tenant.Timestamp);
-            Assert.IsTrue(updatedtenant.TenantIdentifierStrategy != null);
+            //Assert.IsTrue(updatedtenant.TenantIdentifierStrategy != null);
 
-            Assert.IsTrue(updatedtenant.TenantIdentifierStrategy.StrategyContainers != null);
-            Assert.IsTrue(updatedtenant.TenantIdentifierStrategy.StrategyContainers.Count == 1);
+            //Assert.IsTrue(updatedtenant.TenantIdentifierStrategy.StrategyContainers != null);
+            //Assert.IsTrue(updatedtenant.TenantIdentifierStrategy.StrategyContainers.Count == 1);
 
             // add a related property
             // add an owner to the tenant
@@ -296,11 +254,11 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
 
             Assert.IsTrue(updatedRelatedEntitiesResult.Owners.Count > 0);
 
-            Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy != null);
+            //Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy != null);
 
-            Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy.StrategyContainers != null);
+            //Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy.StrategyContainers != null);
 
-            Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy.StrategyContainers.Count == 1);
+            //Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy.StrategyContainers.Count == 1);
 
             var relatedPrincipal = new Principal()
             {
@@ -347,11 +305,11 @@ namespace Horseless.HostingModel.SmokeTests.ContentCollection
 
             Assert.IsTrue(updatedRelatedEntitiesResult.Owners.Count > 0);
 
-            Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy != null);
+            //Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy != null);
 
-            Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy.StrategyContainers != null);
+            //Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy.StrategyContainers != null);
 
-            Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy.StrategyContainers.Count == 1);
+            //Assert.IsTrue(updatedRelatedEntitiesResult.TenantIdentifierStrategy.StrategyContainers.Count == 1);
 
             var relatedPrincipal = new Principal()
             {
