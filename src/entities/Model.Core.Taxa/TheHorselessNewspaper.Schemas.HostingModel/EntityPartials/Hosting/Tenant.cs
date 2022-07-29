@@ -118,7 +118,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
         public TenantDeploymentWorkflowState DeploymentState { get; set; } = TenantDeploymentWorkflowState.PendingApproval;
 
-        [InverseProperty(nameof(Principal.OwnedTenants))]
+  
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
         [InverseProperty(nameof(AccessControlEntry.Tenants))]

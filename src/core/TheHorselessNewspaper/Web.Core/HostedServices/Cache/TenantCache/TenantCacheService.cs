@@ -992,7 +992,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         mergeEntity.TenantIdentifierStrategy = mergeEntity.TenantIdentifierStrategy == null ? new ContentModel.TenantIdentifierStrategy() : mergeEntity.TenantIdentifierStrategy;
 
                         // var mergeEntityJson = JsonConvert.SerializeObject(mergeEntity);
-                        var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mergeEntity, settings)); //mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mergeEntity); 
+                        var wireTenant = mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mergeEntity); //  ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mergeEntity, settings)); //mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mergeEntity); 
                         var createResult = await restClient.ApiHorselessContentModelTenantCreateAsync(mergeEntity.TenantIdentifier, wireTenant);
 
                         var mapResult = mapper.Map<ContentEntitiesTenant, ContentModel.Tenant>(createResult.Result);

@@ -328,7 +328,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
                 )
                 .AddJsonOptions(x =>
                 {  
-                    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+                    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                     x.JsonSerializerOptions.MaxDepth = 1;
                     x.JsonSerializerOptions.PropertyNamingPolicy = null; // leave property names unchanged
                     x.JsonSerializerOptions.PropertyNameCaseInsensitive = true;

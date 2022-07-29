@@ -181,15 +181,23 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             foreach(var entity in entityTypes)
             {
                 var idProp = entity.FindProperty(nameof(IContentRowLevelSecured.Id));
-                var updatedProp = entity.FindProperty(nameof(IContentRowLevelSecured.UpdatedAt));
+
                 if (idProp != null)
                 {
                     idProp.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnAdd;
                 }
 
+            }
+
+            foreach (var entity in entityTypes)
+            {
+
+                var updatedProp = entity.FindProperty(nameof(IContentRowLevelSecured.UpdatedAt));
+
+
                 if (updatedProp != null)
                 {
-                    idProp.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnUpdate;
+                    updatedProp.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnUpdate;
                 }
             }
 

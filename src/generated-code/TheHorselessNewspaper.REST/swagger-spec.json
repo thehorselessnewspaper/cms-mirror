@@ -18510,20 +18510,6 @@
             },
             "nullable": true
           },
-          "OwnedTenants": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesTenant"
-            },
-            "nullable": true
-          },
-          "Tenants": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesTenant"
-            },
-            "nullable": true
-          },
           "AccessControlEntries": {
             "type": "array",
             "items": {

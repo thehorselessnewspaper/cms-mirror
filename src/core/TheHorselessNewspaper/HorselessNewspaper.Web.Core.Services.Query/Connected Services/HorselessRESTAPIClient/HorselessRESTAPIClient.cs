@@ -9438,12 +9438,6 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         [System.Text.Json.Serialization.JsonPropertyName("NugetPackages")]
         public System.Collections.Generic.ICollection<HostingEntitiesNugetPackage> NugetPackages { get; set; }
     
-        [System.Text.Json.Serialization.JsonPropertyName("OwnedTenants")]
-        public System.Collections.Generic.ICollection<HostingEntitiesTenant> OwnedTenants { get; set; }
-    
-        [System.Text.Json.Serialization.JsonPropertyName("Tenants")]
-        public System.Collections.Generic.ICollection<HostingEntitiesTenant> Tenants { get; set; }
-    
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
         public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     

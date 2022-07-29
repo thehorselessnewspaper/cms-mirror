@@ -18517,20 +18517,6 @@
               "$ref": "#/components/schemas/HostingEntitiesNugetPackage"
             }
           },
-          "OwnedTenants": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesTenant"
-            }
-          },
-          "Tenants": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesTenant"
-            }
-          },
           "AccessControlEntries": {
             "type": "array",
             "nullable": true,

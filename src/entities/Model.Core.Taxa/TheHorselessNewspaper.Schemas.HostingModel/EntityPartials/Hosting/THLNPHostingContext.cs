@@ -54,8 +54,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
             //    .Navigation(n => n.Tenants).AutoInclude();
 
 
-            //builder.Entity<Principal>()
-            //    .Navigation(n => n.OwnedTenants).AutoInclude();
 
             var entityTypes = builder.Model.GetEntityTypes();
             foreach (var entity in entityTypes)
@@ -69,7 +67,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
                 if (updatedProp != null)
                 {
-                    idProp.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnUpdate;
+                    updatedProp.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnUpdate;
                 }
             }
         }

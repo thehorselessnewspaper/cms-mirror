@@ -137,10 +137,11 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
         private async Task CrudHostingCollection()
         {
 
+            Guid newTenantId = Guid.NewGuid();
             Guid newPrincipalGuid = Guid.NewGuid();
             var newPrincipa = new Principal()
             {
-                Id = newPrincipalGuid,
+                //Id = newPrincipalGuid,
                 PreferredUserName = "AccountUser" + Guid.NewGuid().ToString(),
                 ObjectId = Guid.NewGuid().ToString(),
                 DisplayName = "principal@tenant.com",
@@ -151,7 +152,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
             };
             var newOwner = new Principal()
             {
-                Id = Guid.NewGuid(),
+                //Id = Guid.NewGuid(),
                 PreferredUserName = "OwnerUser" + Guid.NewGuid().ToString(),
                 ObjectId = Guid.NewGuid().ToString(),
                 DisplayName = "principal@tenant.com",
@@ -162,10 +163,9 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
             };
 
 
-            Guid newTenantId = Guid.NewGuid();
             var tenant = new Tenant()
             {
-                Id = newTenantId,
+                //Id = newTenantId,
                 DisplayName = "created crudhostingcollection() ",
                 ObjectId = Guid.NewGuid().ToString(),
                 CreatedAt = DateTime.UtcNow,
@@ -173,7 +173,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                 {
                     new TenantInfo()
                     {
-                        Id = Guid.NewGuid(),
+                        //Id = Guid.NewGuid(),
                         DisplayName = "finbuckle test tenant",
                         ParentTenantId = newTenantId,
                         ObjectId = Guid.NewGuid().ToString(),
@@ -186,7 +186,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                         {
                             new WebAPITenantInfo()
                             {
-                                Id = Guid.NewGuid(),
+                                //Id = Guid.NewGuid(),
                                 Name = "created crudhostingcollection() ",
                                 ObjectId = Guid.NewGuid().ToString(),
                                 IsSoftDeleted = false,
@@ -212,11 +212,14 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                 var insertPrincipalResult = await principalQuery.Create(newPrincipa);
                 var insertOwnerResult = await principalQuery.Create(newOwner);
 
+                
                 Assert.NotNull(insertPrincipalResult);
                 Assert.NotNull(insertOwnerResult);
 
+                newPrincipalGuid = insertPrincipalResult.Id;
 
                 var newTenant = await CreateHostingEntity<Tenant>(tenant);
+
                 //newTenant.Owners.Add(insertOwnerResult);
                 //newTenant.Principals.Add(insertPrincipalResult);
                 //var updatedTenant = await tenantQuery.Update(newTenant, new List<string>() { nameof(Tenant.Owners), nameof(Tenant.Principals) });
