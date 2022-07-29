@@ -203,21 +203,25 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     };
 
 
-                    //newTenant.Owners.Add(newOwner);
-                    //newTenant.Accounts.Add(newAccount);
-                    var ownerInsertResult = await princpalOperator.Create(newOwner);
-                    var accountInsertResult = await princpalOperator.Create(newAccount);
+                    newTenant.Owners.Add(newOwner);
+                    newTenant.Accounts.Add(newAccount);
+                    //var ownerInsertResult = await princpalOperator.Create(newOwner);
+                    //var accountInsertResult = await princpalOperator.Create(newAccount);
                     //newTenant.Owners.Add(ownerInsertResult);
                     //newTenant.Accounts.Add(accountInsertResult);
                     var insertQueryOperator = _baseTest.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<HostingEntities.Tenant>>(scope);
 
 
+                    foreach (var acl in AccessControlEntries)
+                    {
+                        newTenant.AccessControlEntries.Add(acl);
+                    }
                     var insertResult = await insertQueryOperator.Create(
                       newTenant
                         );
 
 
-                    insertResult.Owners.Add(ownerInsertResult);
+                    //insertResult.Owners.Add(ownerInsertResult);
 
 
                     //var updateResult = await insertQueryOperator.InsertRelatedEntity<HostingEntities.Principal>(
@@ -226,28 +230,28 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     //                                  w => w.PreferredUserName.Equals(newOwner.PreferredUserName)
                     //                                    );
 
-                    var updateOwnerResult = await insertQueryOperator.Update(
-                                  insertResult, new List<string>() { nameof(HostingEntities.Tenant.Owners) },
-                                  w => w.TenantIdentifier.Equals(insertResult.TenantIdentifier)
-                                    );
-                    insertResult.Accounts.Add(accountInsertResult);
+                    //var updateOwnerResult = await insertQueryOperator.Update(
+                    //              insertResult, new List<string>() { nameof(HostingEntities.Tenant.Owners) },
+                    //              w => w.TenantIdentifier.Equals(insertResult.TenantIdentifier)
+                    //                );
+                    //updateOwnerResult.Accounts.Add(accountInsertResult);
 
-                    var updateAccountResult = await insertQueryOperator.Update(
-                                  insertResult, new List<string>() { nameof(HostingEntities.Tenant.Accounts) },
-                                  w => w.TenantIdentifier.Equals(insertResult.TenantIdentifier)
-                                    );
+                    //var updateAccountResult = await insertQueryOperator.Update(
+                    //              updateOwnerResult, new List<string>() { nameof(HostingEntities.Tenant.Accounts) },
+                    //              w => w.TenantIdentifier.Equals(insertResult.TenantIdentifier)
+                    //                );
 
-                    foreach (var acl in AccessControlEntries)
-                    {
-                        newTenant.AccessControlEntries.Add(acl);
-                    }
+                    //foreach (var acl in AccessControlEntries)
+                    //{
+                    //    updateAccountResult.AccessControlEntries.Add(acl);
+                    //}
 
-                    var updateACLResult = await insertQueryOperator.Update(
-                          insertResult, new List<string>() { nameof(HostingEntities.Tenant.AccessControlEntries) },
-                          w => w.TenantIdentifier.Equals(insertResult.TenantIdentifier)
-                );
+                    //var updateACLResult = await insertQueryOperator.Update(
+                    //      updateAccountResult, new List<string>() { nameof(HostingEntities.Tenant.AccessControlEntries) },
+                    //    //      w => w.TenantIdentifier.Equals(insertResult.TenantIdentifier)
+                    //);
 
-                    Assert.NotNull(updateOwnerResult);
+                    //Assert.NotNull(updateACLResult);
                 }
 
             }

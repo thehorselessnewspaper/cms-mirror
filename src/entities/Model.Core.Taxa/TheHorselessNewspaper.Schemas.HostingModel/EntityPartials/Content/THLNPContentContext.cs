@@ -147,10 +147,35 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             builder.Entity<Tenant>()
                 .Navigation(n => n.TenantIdentifierStrategy).AutoInclude();
 
+            builder.Entity<Principal>()
+                .Navigation(n => n.Tenants).AutoInclude();
 
+
+            builder.Entity<Principal>()
+                .Navigation(n => n.OwnedTenants).AutoInclude();
+
+
+            builder.Entity<Principal>()
+                .Navigation(n => n.HorselessSessions).AutoInclude();
 
             builder.Entity<ContentCollection>()
                 .Navigation(n => n.HorselessViews).AutoInclude();
+
+
+            builder.Entity<ContentCollection>()
+                .Navigation(n => n.AccessControlEntries).AutoInclude();
+
+
+            builder.Entity<HorselessView>()
+                .Navigation(n => n.AccessControlEntries).AutoInclude();
+
+            builder.Entity<HorselessView>()
+                 .Navigation(n => n.ContentCollections).AutoInclude();
+
+
+            builder.Entity<HorselessView>()
+                 .Navigation(n => n.Placeholders).AutoInclude();
+
 
             var entityTypes = builder.Model.GetEntityTypes();
             foreach(var entity in entityTypes)

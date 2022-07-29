@@ -31,6 +31,31 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
             // If necessary call the base class method.
             // Recommended to be called first.
             base.OnModelCreating(builder);
+
+
+            builder.Entity<Tenant>()
+                .Navigation(n => n.Owners).AutoInclude();
+
+
+            builder.Entity<Tenant>()
+                .Navigation(n => n.Accounts).AutoInclude();
+            builder.Entity<Tenant>()
+                .Navigation(n => n.AccessControlEntries).AutoInclude();
+
+            builder.Entity<TenantIdentifierStrategy>()
+                .Navigation(n => n.StrategyContainers).AutoInclude();
+
+            builder.Entity<Tenant>()
+                .Navigation(n => n.TenantIdentifierStrategy).AutoInclude();
+
+
+            builder.Entity<Principal>()
+                .Navigation(n => n.Tenants).AutoInclude();
+
+
+            builder.Entity<Principal>()
+                .Navigation(n => n.OwnedTenants).AutoInclude();
+
             var entityTypes = builder.Model.GetEntityTypes();
             foreach (var entity in entityTypes)
             {
