@@ -11,6 +11,9 @@ namespace HorselessNewspaper.Web.Core.Automapper
             CreateMap<HostingModel.Tenant, ContentModel.Tenant>();
             CreateMap<ContentModel.Tenant, HostingModel.Tenant>();
 
+            CreateMap<HostingModel.Principal, ContentModel.Principal>();
+            CreateMap<ContentModel.Principal, HostingModel.Principal>();
+
             CreateMap<HostingModel.TenantIdentifierStrategy, ContentModel.TenantIdentifierStrategy>();
             CreateMap<ContentModel.TenantIdentifierStrategy, HostingModel.TenantIdentifierStrategy>();
 

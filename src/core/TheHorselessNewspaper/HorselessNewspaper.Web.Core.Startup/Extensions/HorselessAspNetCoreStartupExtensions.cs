@@ -326,7 +326,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
                         opts.RespectBrowserAcceptHeader = true; opts.EnableEndpointRouting = true;
                     }
                 ).AddJsonOptions(x =>
-                {
+                {  
                     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                     x.JsonSerializerOptions.PropertyNamingPolicy = null; // leave property names unchanged
                     x.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
