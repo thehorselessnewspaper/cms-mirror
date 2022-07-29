@@ -887,30 +887,30 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     Owners = new List<ContentModel.Principal>()
                 };
 
-                mergeEntity.TenantIdentifierStrategy = new ContentModel.TenantIdentifierStrategy()
-                {
-                    Id = Guid.NewGuid(),
-                    CreatedAt = DateTime.UtcNow,
-                    DisplayName = originEntity.DisplayName,
-                    IsSoftDeleted = originEntity.IsSoftDeleted,
-                    ObjectId = Guid.NewGuid().ToString(),
-                    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                //mergeEntity.TenantIdentifierStrategy = new ContentModel.TenantIdentifierStrategy()
+                //{
+                //    Id = Guid.NewGuid(),
+                //    CreatedAt = DateTime.UtcNow,
+                //    DisplayName = originEntity.DisplayName,
+                //    IsSoftDeleted = originEntity.IsSoftDeleted,
+                //    ObjectId = Guid.NewGuid().ToString(),
+                //    Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
 
-                    StrategyContainers = new List<ContentModel.TenantIdentifierStrategyContainer>()
-                          {
-                              new ContentModel.TenantIdentifierStrategyContainer()
-                              {
-                                Id = Guid.NewGuid(),
-                                CreatedAt = DateTime.UtcNow,
-                                DisplayName = originEntity.DisplayName,
-                                IsSoftDeleted = originEntity.IsSoftDeleted,
-                                ObjectId = Guid.NewGuid().ToString(),
-                                Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                                TenantIdentifier = originEntity.TenantIdentifier.ToLower(), // obviously sanitize this,
-                                TenantIdentifierStrategyName = ContentModel.TenantIdentifierStrategyName.ASPNETCORE_ROUTE
-                              }
-                          }
-                };
+                //    StrategyContainers = new List<ContentModel.TenantIdentifierStrategyContainer>()
+                //          {
+                //              new ContentModel.TenantIdentifierStrategyContainer()
+                //              {
+                //                Id = Guid.NewGuid(),
+                //                CreatedAt = DateTime.UtcNow,
+                //                DisplayName = originEntity.DisplayName,
+                //                IsSoftDeleted = originEntity.IsSoftDeleted,
+                //                ObjectId = Guid.NewGuid().ToString(),
+                //                Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
+                //                TenantIdentifier = originEntity.TenantIdentifier.ToLower(), // obviously sanitize this,
+                //                TenantIdentifierStrategyName = ContentModel.TenantIdentifierStrategyName.ASPNETCORE_ROUTE
+                //              }
+                //          }
+                //};
 
                 try
                 {
@@ -989,7 +989,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     {
                         // insert content model record
                         mergeEntity.DeploymentState = ContentModel.TenantDeploymentWorkflowState.ExistsInContentDb;
-                        mergeEntity.TenantIdentifierStrategy = mergeEntity.TenantIdentifierStrategy == null ? new ContentModel.TenantIdentifierStrategy() : mergeEntity.TenantIdentifierStrategy;
+                        // mergeEntity.TenantIdentifierStrategy = mergeEntity.TenantIdentifierStrategy == null ? new ContentModel.TenantIdentifierStrategy() : mergeEntity.TenantIdentifierStrategy;
 
                         // var mergeEntityJson = JsonConvert.SerializeObject(mergeEntity);
                         var wireTenant = mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mergeEntity); //  ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mergeEntity, settings)); //mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mergeEntity); 

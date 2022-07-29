@@ -80,7 +80,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
 
 
-        public Guid? TenantId { get; set; }
+        // public Guid? TenantId { get; set; }
 
         // [InverseProperty(nameof(ContentEntities.Tenant.TenantIdentifierStrategy))]
         // public Tenant? Tenant { get; set; } = new Tenant();

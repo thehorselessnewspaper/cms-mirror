@@ -62,7 +62,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
 
-        public Guid? TenantId { get; set; }
+        // public Guid? TenantId { get; set; }
 
         // [InverseProperty(nameof(HostingEntities.Tenant.TenantIdentifierStrategy))]
         // public Tenant? Tenant { get; set; }
@@ -90,7 +90,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         /// </summary>
         public string? TenantIdentifier { get; set; }
 
-        // public Guid? TenantIdentifierStrategyId { get; set; }
+        public Guid? TenantIdentifierStrategyId { get; set; }
         
         //[InverseProperty(nameof(HostingEntities.TenantIdentifierStrategy.Tenant))]
         public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; }
