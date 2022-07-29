@@ -40,7 +40,7 @@
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="NuGet.Protocol" Version="6.2.1" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220728.9" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220729.2" />
 	</ItemGroup>
 
 	<ItemGroup>

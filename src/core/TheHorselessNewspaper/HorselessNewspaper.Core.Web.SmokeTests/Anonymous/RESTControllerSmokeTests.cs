@@ -155,19 +155,16 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     var route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT + "/HostingEntitiesTenantCreate";
                     //testHostingModelTenantInfo.TenantId = testHostingModelTenant.Id;
-                    testHostingModelTenant.Accounts = new HashSet<Principal>()
+                    testHostingModelTenant.Accounts.Add(new Principal()
                     {
-                        new Principal()
-                        {
-                            //Id= Guid.NewGuid(),
-                            ObjectId = Guid.NewGuid().ToString(),
-                            DisplayName = "principal@tenant.com",
-                            CreatedAt = DateTime.UtcNow,
-                            Iss = "https://isuer.tenant.com",
-                            Aud = "client-application",
-                            Sub = "oauth-sub"
-                        }
-                    };
+                        //Id= Guid.NewGuid(),
+                        ObjectId = Guid.NewGuid().ToString(),
+                        DisplayName = "principal@tenant.com",
+                        CreatedAt = DateTime.UtcNow,
+                        Iss = "https://isuer.tenant.com",
+                        Aud = "client-application",
+                        Sub = "oauth-sub"
+                    });
 
                     testHostingModelTenantInfo.WebAPITenantInfos.Add(new WebAPITenantInfo()
                     {
@@ -184,9 +181,12 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     });
 
                     testHostingModelTenant.TenantInfos.Add(testHostingModelTenantInfo);
+
+                    var tenantJson = GetJsonContent(testHostingModelTenant);
+
                     var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
                     {
-                        Content = GetJsonContent(testHostingModelTenant)
+                        Content = tenantJson
                     };
 
                     // act
@@ -194,7 +194,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     Assert.NotNull(postResponse);
 
-                    var hostingTenantsReadResult = await theHostingOperator.ReadAsEnumerable(w => w.IsSoftDeleted != true && w.Id.Equals(testHostingModelTenant.Id),
+                    var hostingTenantsReadResult = await theHostingOperator.ReadAsEnumerable(w => w.IsSoftDeleted != true && w.TenantIdentifier.Equals(testHostingModelTenant.TenantIdentifier),
                         new List<string>() { nameof(HostingModel.Tenant.Owners), nameof(HostingModel.Tenant.Accounts), nameof(HostingModel.Tenant.TenantInfos) },
                         pageCount: 2, pageNumber: 1, pageSize: 5);
 
@@ -242,14 +242,18 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
         private JsonContent GetJsonContent<T>(T content)
         {
-            return JsonContent.Create(content);
+            return JsonContent.Create<T>(content, options: new System.Text.Json.JsonSerializerOptions()
+            {
+                MaxDepth = 1,
+                ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
+            });
         }
 
         private HostingModel.Tenant GetNewHostingModelTenant()
         {
             return new HostingModel.Tenant()
             {
-                Id = Guid.NewGuid(),
+                //Id = Guid.NewGuid(),
                 CreatedAt = DateTime.UtcNow,
                 DisplayName = "Test Tenant - Can Create Hosting Tenant",
                 IsSoftDeleted = false,
@@ -264,7 +268,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
         {
             return new HostingModel.TenantInfo()
             {
-                Id = Guid.NewGuid(),
+                //Id = Guid.NewGuid(),
                 CreatedAt = DateTime.UtcNow,
                 DisplayName = "Test Tenant - Can Create Hosting Tenant",
                 IsSoftDeleted = false,

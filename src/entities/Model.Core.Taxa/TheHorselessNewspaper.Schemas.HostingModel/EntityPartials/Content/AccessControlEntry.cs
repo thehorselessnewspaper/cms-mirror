@@ -99,12 +99,14 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         /// not mapped - model impedence mismatch due to implemented interface
         /// </summary>
         [NotMapped]
+        [JsonIgnore]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
         /// <summary>
         /// not mapped - model impedence mismatch due to implemented interface
         /// </summary>
         [NotMapped]
+        [JsonIgnore]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
 
