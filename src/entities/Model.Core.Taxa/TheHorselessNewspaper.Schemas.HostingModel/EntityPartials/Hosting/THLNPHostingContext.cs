@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheHorselessNewspaper.HostingModel.Context;
 using TheHorselessNewspaper.HostingModel.Context.Extensions;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
@@ -59,10 +60,16 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
             var entityTypes = builder.Model.GetEntityTypes();
             foreach (var entity in entityTypes)
             {
-                var idProp = entity.FindProperty("Id");
+                var idProp = entity.FindProperty(nameof(IHostingRowLevelSecured.Id));
+                var updatedProp = entity.FindProperty(nameof(IHostingRowLevelSecured.UpdatedAt));
                 if (idProp != null)
                 {
                     idProp.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnAdd;
+                }
+
+                if (updatedProp != null)
+                {
+                    idProp.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnUpdate;
                 }
             }
         }

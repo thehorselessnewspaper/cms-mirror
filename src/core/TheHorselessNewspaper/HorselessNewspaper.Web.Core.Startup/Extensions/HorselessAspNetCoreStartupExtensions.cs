@@ -325,9 +325,11 @@ namespace HorselessNewspaper.Web.Core.Extensions
                         // permit content negotiation
                         opts.RespectBrowserAcceptHeader = true; opts.EnableEndpointRouting = true;
                     }
-                ).AddJsonOptions(x =>
+                )
+                .AddJsonOptions(x =>
                 {  
-                    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+                    x.JsonSerializerOptions.MaxDepth = 1;
                     x.JsonSerializerOptions.PropertyNamingPolicy = null; // leave property names unchanged
                     x.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                     x.JsonSerializerOptions.ReadCommentHandling = System.Text.Json.JsonCommentHandling.Skip;

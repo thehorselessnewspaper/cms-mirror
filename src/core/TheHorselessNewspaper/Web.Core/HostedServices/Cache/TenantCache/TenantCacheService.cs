@@ -311,6 +311,11 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     {
                         foreach (var item in inproressQuery)
                         {
+                            // prevent json reference loops
+                            item.AccessControlEntries.Clear();
+                            item.Accounts.Clear();
+                            item.Owners.Clear();
+
                             await this.EnsureCachedTenant(item);
                         }
                     }
@@ -435,10 +440,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
         {
             var ret = false;
 
-            JsonSerializerSettings settings = new JsonSerializerSettings()
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            };
+
             using (var scope = this._services.CreateScope())
             {
 
@@ -512,16 +514,18 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                         var mutatingTenant = mutatingEntityQuery.First();
                                         mutatingTenant.DeploymentState = ContentModel.TenantDeploymentWorkflowState.HasContentCollection;
                                         mutatingTenant.ContentCollections.Add(DefaultEntitySets.GetDefaultContentCollections().First());
-                                        var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mutatingTenant, Formatting.None, new JsonSerializerSettings()
-                                        {
-                                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                                            
-                                        }));
 
-                                        var wireContentCollection = JsonConvert.SerializeObject(mutatingTenant.ContentCollections.First(), Formatting.None, new JsonSerializerSettings()
-                                        {
-                                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                                        });
+                                        var wireTenant = mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mutatingTenant);
+                                        //var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mutatingTenant, Formatting.None, new JsonSerializerSettings()
+                                        //{
+                                        //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                                            
+                                        //}));
+
+                                        //var wireContentCollection = JsonConvert.SerializeObject(mutatingTenant.ContentCollections.First(), Formatting.None, new JsonSerializerSettings()
+                                        //{
+                                        //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                                        //});
 
                                         // TODO add support for multiple default collections
                                         // var wireContentCollection = mapper.Map<ContentModel.ContentCollection, ContentEntitiesContentCollection>(mutatingTenant.ContentCollections.First());
@@ -534,9 +538,10 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                         var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.DeploymentState), nameof(ContentModel.Tenant.UpdatedAt), nameof(ContentModel.Tenant.ContentCollections) };
                                         var mutatedTenant = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mutatingTenant.Id.ToString(),
                                                                                             mutatingTenant.TenantIdentifier, updatedProperties, wireTenant);
+                                        var deserialzedMutateResult = mapper.Map<ContentEntitiesTenant, ContentModel.Tenant>(mutatedTenant.Result);
 
-                                        var mutateResultJson = mutatedTenant.Result.ToJson();
-                                        var deserialzedMutateResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(mutateResultJson, settings);
+                                        //var mutateResultJson = mutatedTenant.Result.ToJson();
+                                        //var deserialzedMutateResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(mutateResultJson, serializerSettings);
                                         currentDeploymentState = deserialzedMutateResult.DeploymentState;
                                     }
 
@@ -568,32 +573,34 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                                         foreach (var owner in currentTenant.Owners)
                                         {
-                                            var ownerJson = JsonConvert.SerializeObject(owner, new JsonSerializerSettings()
-                                            {
-                                                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                                            //var ownerJson = JsonConvert.SerializeObject(owner, new JsonSerializerSettings()
+                                            //{
+                                            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
 
-                                            });
-                                            var mirrorOwner = JsonConvert.DeserializeObject<ContentModel.Principal>(ownerJson, new JsonSerializerSettings()
-                                            {
-                                                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                                            //});
+                                            //var mirrorOwner = JsonConvert.DeserializeObject<ContentModel.Principal>(ownerJson, new JsonSerializerSettings()
+                                            //{
+                                            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
 
-                                            });
-                                            mirrorTenant.Owners.Add(mirrorOwner);
+                                            //});
+                                            mirrorTenant.Owners.Add(owner);
                                         }
 
                                         mirrorTenant.DeploymentState = ContentModel.TenantDeploymentWorkflowState.HasOwners; // set the workflow complete flag
-
-                                        var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mirrorTenant, Formatting.None, settings));
+                                        var wireTenant = mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mirrorTenant);
+                                        // var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mirrorTenant, Formatting.None, serializerSettings));
                                         var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.Owners), nameof(ContentModel.Tenant.DeploymentState) };
                                         // var mutateResult = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(wireTenant.Id.ToString(), wireTenant.TenantIdentifier, updatedProperties, wireTenant);
 
                                         var mutateResult = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier, updatedProperties, wireTenant);
-                                        var mutateResultJson = mutateResult.Result.ToJson();
-                                        var deserialzedMutateResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(mutateResultJson, new JsonSerializerSettings()
-                                        {
-                                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                                        //var mutateResultJson = mutateResult.Result.ToJson();
+                                        //var deserialzedMutateResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(mutateResultJson, new JsonSerializerSettings()
+                                        //{
+                                        //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
 
-                                        });
+                                        //});
+                                        var deserialzedMutateResult = mapper.Map<ContentEntitiesTenant, ContentModel.Tenant>(mutateResult.Result);
+
                                         currentDeploymentState = deserialzedMutateResult.DeploymentState;
                                     }
                                 }
@@ -622,22 +629,29 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                                         foreach (var owner in currentTenant.AccessControlEntries)
                                         {
-                                            var ownerJson = JsonConvert.SerializeObject(owner);
-                                            var mirrorAcl = JsonConvert.DeserializeObject<ContentModel.AccessControlEntry>(ownerJson, settings);
-                                            mirrorTenant.AccessControlEntries.Add(mirrorAcl);
+                                            //var ownerJson = JsonConvert.SerializeObject(owner);
+                                            //var mirrorAcl = JsonConvert.DeserializeObject<ContentModel.AccessControlEntry>(ownerJson, serializerSettings);
+                                            
+                                            mirrorTenant.AccessControlEntries.Add(owner);
                                         }
 
                                         mirrorTenant.DeploymentState = ContentModel.TenantDeploymentWorkflowState.HasACL; // set the workflow complete flag
-                                        var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mirrorTenant, Formatting.None, new JsonSerializerSettings()
-                                        {
-                                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                                        }));
+                                        //var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mirrorTenant, Formatting.None, new JsonSerializerSettings()
+                                        //{
+                                        //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                                        //}));
+
+                                        var wireTenant = mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mirrorTenant);
+
                                         var updatedProperties = new List<string>() { nameof(ContentModel.AccessControlEntry), nameof(ContentModel.Tenant.DeploymentState) };
                                         // var mutateResult = await restClient.ApiHorselessContentModelTenantUpdateAsync(wireTenant.Id.ToString(), wireTenant.TenantIdentifier, wireTenant);
                                         var mutateResult = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier, updatedProperties, wireTenant);
-                                        var mutateResultJson = mutateResult.Result.ToJson();
-                                        var deserialzedMutateResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(mutateResultJson, settings);
+                                        //var mutateResultJson = mutateResult.Result.ToJson();
+                                        //var deserialzedMutateResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(mutateResultJson, serializerSettings);
+                                        var deserialzedMutateResult = mapper.Map<ContentEntitiesTenant, ContentModel.Tenant>(mutateResult.Result);
+
                                         currentDeploymentState = deserialzedMutateResult.DeploymentState;
+
                                     }
                                 }
                             }
@@ -664,17 +678,21 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                         var currentTenant = contentModelTenant.First();
 
                                         mirrorTenant.DeploymentState = ContentModel.TenantDeploymentWorkflowState.DeploymentComplete; // set the workflow complete flag
-                                        var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mirrorTenant, Formatting.None, new JsonSerializerSettings()
-                                        {
-                                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                                        }));
+                                        //var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mirrorTenant, Formatting.None, new JsonSerializerSettings()
+                                        //{
+                                        //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                                        //}));
+
+                                        var wireTenant = mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mirrorTenant);
                                         var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.DeploymentState) };
 
                                         // var mutateResult = await restClient.ApiHorselessContentModelTenantUpdateAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier,wireTenant);
 
                                         var mutateResult = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier, updatedProperties, wireTenant);
-                                        var mutateResultJson = mutateResult.Result.ToJson();
-                                        var deserialzedMutateResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(mutateResultJson, settings);
+                                        //var mutateResultJson = mutateResult.Result.ToJson();
+                                        //var deserialzedMutateResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(mutateResultJson, serializerSettings);
+                                        var deserialzedMutateResult = mapper.Map<ContentEntitiesTenant, ContentModel.Tenant>(mutateResult.Result);
+
 
                                         // mark the hosting model deployment state as published
                                         approvedTenant.IsPublished = true;
@@ -976,7 +994,11 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         // var mergeEntityJson = JsonConvert.SerializeObject(mergeEntity);
                         var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mergeEntity, settings)); //mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mergeEntity); 
                         var createResult = await restClient.ApiHorselessContentModelTenantCreateAsync(mergeEntity.TenantIdentifier, wireTenant);
-                        var mapResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(createResult.Result.ToJson(), settings);
+
+                        var mapResult = mapper.Map<ContentEntitiesTenant, ContentModel.Tenant>(createResult.Result);
+
+
+                        //var mapResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(createResult.Result.ToJson(), settings);
                         return mapResult;
 
 
