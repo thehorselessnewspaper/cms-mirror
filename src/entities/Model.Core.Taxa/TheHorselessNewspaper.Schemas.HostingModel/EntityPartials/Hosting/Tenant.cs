@@ -65,7 +65,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public Guid? TenantId { get; set; }
 
         // [InverseProperty(nameof(HostingEntities.Tenant.TenantIdentifierStrategy))]
-        public Tenant? Tenant { get; set; }
+        // public Tenant? Tenant { get; set; }
 
         [InverseProperty(nameof(TenantIdentifierStrategyContainer.Strategy))]
         public virtual ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();
