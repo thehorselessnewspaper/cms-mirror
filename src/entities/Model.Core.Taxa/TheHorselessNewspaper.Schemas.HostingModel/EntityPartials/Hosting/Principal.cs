@@ -30,11 +30,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public ICollection<NugetPackage> NugetPackages { get; set; } = new HashSet<NugetPackage>();
 
         [JsonIgnore]
-        [InverseProperty(nameof(Tenant.Owners))]
+        // [InverseProperty(nameof(Tenant.Owners))]
         public ICollection<Tenant> OwnedTenants { get; set; } = new HashSet<Tenant>();
 
         [JsonIgnore]
-        [InverseProperty(nameof(Tenant.Accounts))]
+        // [InverseProperty(nameof(Tenant.Accounts))]
         public ICollection<Tenant> Tenants { get; set; } = new HashSet<Tenant>();
 
         [NotMapped]
