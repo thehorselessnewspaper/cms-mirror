@@ -49,12 +49,12 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
                 .Navigation(n => n.TenantIdentifierStrategy).AutoInclude();
 
 
-            builder.Entity<Principal>()
-                .Navigation(n => n.Tenants).AutoInclude();
+            //builder.Entity<Principal>()
+            //    .Navigation(n => n.Tenants).AutoInclude();
 
 
-            builder.Entity<Principal>()
-                .Navigation(n => n.OwnedTenants).AutoInclude();
+            //builder.Entity<Principal>()
+            //    .Navigation(n => n.OwnedTenants).AutoInclude();
 
             var entityTypes = builder.Model.GetEntityTypes();
             foreach (var entity in entityTypes)
