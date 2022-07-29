@@ -319,6 +319,9 @@ namespace HorselessNewspaper.Web.Core.Extensions
 
             // handle cycles in json responses 
             // as per https://gavilan.blog/2021/05/19/fixing-the-error-a-possible-object-cycle-was-detected-in-different-versions-of-asp-net-core/
+
+            services.AddControllers().AddJsonOptions(x =>
+                    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
             services.AddMvc(
                     opts =>
                     {

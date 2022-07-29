@@ -113,7 +113,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public ICollection<NugetPackage> NugetPackages { get; set; } = new HashSet<NugetPackage>();
 
 
-        [InverseProperty(nameof(Principal.Tenants))]
+        // [InverseProperty(nameof(Principal.Tenants))]
         public ICollection<Principal> Accounts { get; set; } = new HashSet<Principal>();
 
         public TenantDeploymentWorkflowState DeploymentState { get; set; } = TenantDeploymentWorkflowState.PendingApproval;

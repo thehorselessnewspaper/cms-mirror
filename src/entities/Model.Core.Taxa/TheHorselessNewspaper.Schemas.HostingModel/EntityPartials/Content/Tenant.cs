@@ -140,12 +140,12 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string? DictionaryKey { get; set; }
 
 
-        [InverseProperty(nameof(Principal.OwnedTenants))]
+        // [InverseProperty(nameof(Principal.OwnedTenants))]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
 
         // [ForeignKey("FK_PrincipalAccounts")]
-        [InverseProperty(nameof(Principal.Tenants))]
+        // [InverseProperty(nameof(Principal.Tenants))]
         public ICollection<Principal> Accounts { get; set; } = new HashSet<Principal>();
 
         public TenantDeploymentWorkflowState DeploymentState { get; set; } = TenantDeploymentWorkflowState.PendingApproval;
