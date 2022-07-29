@@ -143,7 +143,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.ApplicationParts.Applicatio
 
                                     var newView = new HorselessView()
                                     {
-                                        Id = Guid.NewGuid(),
+                                        //Id = Guid.NewGuid(),
                                         ObjectId = Guid.NewGuid().ToString(),
                                         Name = view.Type.Name,
                                         DisplayName = view.Type.FullName,
