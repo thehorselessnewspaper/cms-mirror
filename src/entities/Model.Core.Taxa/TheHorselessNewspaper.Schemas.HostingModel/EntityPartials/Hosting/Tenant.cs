@@ -31,12 +31,12 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         DNS_FQDN
     }
 
-    public class TenantIdentifierStrategyContainer
+    public partial class TenantIdentifierStrategyContainer : IHostingRowLevelSecured
     {
         public TenantIdentifierStrategyContainer() { }
 
         [Key]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
         public TenantIdentifierStrategyName TenantIdentifierStrategyName { get; set; }
 
         [Timestamp]
@@ -46,6 +46,15 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
         // [InverseProperty(nameof(TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantIdentifierStrategy.StrategyContainers))]
         public TenantIdentifierStrategy? Strategy { get; set; }
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+        public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
+        public string ObjectId { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public string DisplayName { get; set; }
+        public bool? IsSoftDeleted { get; set; }
+        public string DictionaryKey { get; set; }
+
     }
 
     /// <summary>
@@ -53,7 +62,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     /// modelled as a wrapper for a collection payload
     /// to avoid awkardness with mapping owned collections
     /// </summary>
-    public partial class TenantIdentifierStrategy
+    public partial class TenantIdentifierStrategy : IHostingRowLevelSecured
     {
         public TenantIdentifierStrategy() { }
 
@@ -72,7 +81,12 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         // public Tenant? Tenant { get; set; }
 
         // [InverseProperty(nameof(TenantIdentifierStrategyContainer.Strategy))]
-        public virtual ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();
+        public virtual ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new HashSet<TenantIdentifierStrategyContainer>();
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+        public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
+        public DateTime? UpdatedAt { get; set; }
+        public byte[] Timestamp { get; set; }
+        public string DictionaryKey { get; set; }
     }
 
     /// <summary>

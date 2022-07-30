@@ -32,12 +32,12 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
     [MultiTenant]
 
-    public class TenantIdentifierStrategyContainer
+    public partial class TenantIdentifierStrategyContainer : IContentRowLevelSecured
     {
         public TenantIdentifierStrategyContainer() { }
 
         [Key]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
         public TenantIdentifierStrategyName TenantIdentifierStrategyName { get; set; }
 
         public string DisplayName { get; set; } = string.Empty;
@@ -56,6 +56,13 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public Guid? StrategyId { get; set; }
 
         public TenantIdentifierStrategy? Strategy { get; set; }
+
+
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+        public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
+        public DateTime? UpdatedAt { get; set; }
+        public string? DictionaryKey { get; set; }
+
     }
 
 
@@ -65,7 +72,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     /// to avoid awkardness with mapping owned collections
     /// </summary>
     [MultiTenant]
-    public class TenantIdentifierStrategy
+    public partial class TenantIdentifierStrategy : IContentRowLevelSecured
     {
         public TenantIdentifierStrategy() { }
 
@@ -93,6 +100,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         // [InverseProperty(nameof(TenantIdentifierStrategyContainer.Strategy))]
         public ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; }
+        public ICollection<Principal> Owners { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public string? DictionaryKey { get; set; }
     }
 
     /// <summary>
