@@ -172,8 +172,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             builder.Entity<HorselessView>()
                 .Navigation(n => n.AccessControlEntries).AutoInclude();
 
-            builder.Entity<HorselessView>()
-                 .Navigation(n => n.ContentCollections).AutoInclude();
+            //builder.Entity<HorselessView>()
+            //     .Navigation(n => n.ContentCollections).AutoInclude();
 
 
             builder.Entity<HorselessView>()

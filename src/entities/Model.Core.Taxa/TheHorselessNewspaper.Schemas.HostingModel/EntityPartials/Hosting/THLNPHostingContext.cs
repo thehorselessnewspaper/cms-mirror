@@ -46,11 +46,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
             builder.Entity<Tenant>()
                 .Navigation(n => n.AccessControlEntries).AutoInclude();
 
-            builder.Entity<TenantIdentifierStrategy>()
-                .Navigation(n => n.StrategyContainers).AutoInclude();
+            //builder.Entity<TenantIdentifierStrategy>()
+            //    .Navigation(n => n.StrategyContainers).AutoInclude();
 
-            builder.Entity<Tenant>()
-                .Navigation(n => n.TenantIdentifierStrategy).AutoInclude();
+            //builder.Entity<Tenant>()
+            //    .Navigation(n => n.TenantIdentifierStrategy).AutoInclude();
 
 
             //builder.Entity<Principal>()

@@ -251,7 +251,6 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
         {
             return JsonContent.Create<T>(content, options: new System.Text.Json.JsonSerializerOptions()
             {
-                MaxDepth = 1,
                 ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
             });
         }

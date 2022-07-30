@@ -111,7 +111,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public Guid? TenantIdentifierStrategyId { get; set; }
         
         //[InverseProperty(nameof(HostingEntities.TenantIdentifierStrategy.Tenant))]
-        public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; }
+        // public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; }
 
 
         [Timestamp]

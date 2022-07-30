@@ -26,7 +26,7 @@ namespace HorselessNewspaper.RazorClassLibrary.CMS.Default.HorselessControllers.
         public IHostingCollectionService<IQueryableHostingModelOperator<HostingModel.Tenant>, HostingModel.Tenant> EntityCollectionService { get; set; }
         public ITenantInfo CurrentTenant { get; set; }
 
-        [HttpPost("HostingEntitiesTenantCreate", Name = "HostingEntities[controller]_[action]")]
+        [HttpPost("HostingEntitiesTenantCreate")]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(HostingModel.Tenant))]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(HostingModel.Tenant))]

@@ -7600,7 +7600,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsActive")]
         public bool? IsActive { get; set; }
@@ -7621,7 +7621,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ContentCollections")]
         public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ContentCollections { get; set; }
@@ -7677,7 +7677,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AllowAnonymousRead")]
         public bool? AllowAnonymousRead { get; set; }
@@ -7707,7 +7707,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -7757,7 +7757,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Filename")]
         public string Filename { get; set; }
@@ -7781,7 +7781,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -7816,7 +7816,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JsonValue")]
         public string JsonValue { get; set; }
@@ -7837,7 +7837,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -7872,7 +7872,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("FilesystemAssetId")]
         public System.Guid? FilesystemAssetId { get; set; }
@@ -7914,7 +7914,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -7963,7 +7963,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("SessionId")]
         public string SessionId { get; set; }
@@ -7984,7 +7984,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -8028,7 +8028,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsActive")]
         public bool? IsActive { get; set; }
@@ -8040,7 +8040,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
         public byte[] Timestamp { get; set; }
@@ -8052,7 +8052,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsDirectory { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("LastModified")]
-        public System.DateTime? LastModified { get; set; }
+        public System.DateTimeOffset? LastModified { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Length")]
         public long? Length { get; set; }
@@ -8105,7 +8105,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JsonValue")]
         public string JsonValue { get; set; }
@@ -8129,7 +8129,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -8167,7 +8167,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("MIMETypeName")]
         public string MIMETypeName { get; set; }
@@ -8185,7 +8185,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -8220,7 +8220,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JsonValue")]
         public string JsonValue { get; set; }
@@ -8241,7 +8241,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -8276,13 +8276,13 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PublishAt")]
-        public System.DateTime? PublishAt { get; set; }
+        public System.DateTimeOffset? PublishAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UnPublishAt")]
-        public System.DateTime? UnPublishAt { get; set; }
+        public System.DateTimeOffset? UnPublishAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsPublished")]
         public bool? IsPublished { get; set; }
@@ -8315,7 +8315,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -8350,13 +8350,13 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PublishAt")]
-        public System.DateTime? PublishAt { get; set; }
+        public System.DateTimeOffset? PublishAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UnPublishAt")]
-        public System.DateTime? UnPublishAt { get; set; }
+        public System.DateTimeOffset? UnPublishAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsPublished")]
         public bool? IsPublished { get; set; }
@@ -8389,7 +8389,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -8424,13 +8424,13 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PublishAt")]
-        public System.DateTime? PublishAt { get; set; }
+        public System.DateTimeOffset? PublishAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UnPublishAt")]
-        public System.DateTime? UnPublishAt { get; set; }
+        public System.DateTimeOffset? UnPublishAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsPublished")]
         public bool? IsPublished { get; set; }
@@ -8457,7 +8457,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -8492,7 +8492,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsPublished")]
         public bool? IsPublished { get; set; }
@@ -8510,7 +8510,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -8551,7 +8551,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Iss")]
         public string Iss { get; set; }
@@ -8581,7 +8581,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public ContentEntitiesPrincipalClaimContainer PrincipalClaimContainer { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -8731,13 +8731,13 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PublishAt")]
-        public System.DateTime? PublishAt { get; set; }
+        public System.DateTimeOffset? PublishAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UnPublishAt")]
-        public System.DateTime? UnPublishAt { get; set; }
+        public System.DateTimeOffset? UnPublishAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsPublished")]
         public bool? IsPublished { get; set; }
@@ -8764,7 +8764,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -8802,7 +8802,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JsonValue")]
         public string JsonValue { get; set; }
@@ -8826,7 +8826,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -8870,7 +8870,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JsonValue")]
         public string JsonValue { get; set; }
@@ -8888,7 +8888,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -8929,7 +8929,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsPublished")]
         public bool? IsPublished { get; set; }
@@ -8950,7 +8950,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("MetaData")]
         public System.Collections.Generic.ICollection<ContentEntitiesJSONAsset> MetaData { get; set; }
@@ -9033,7 +9033,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
         public byte[] Timestamp { get; set; }
@@ -9048,7 +9048,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -9087,7 +9087,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
         public byte[] Timestamp { get; set; }
@@ -9108,7 +9108,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -9241,7 +9241,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -9265,7 +9265,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsActive")]
         public bool? IsActive { get; set; }
@@ -9300,7 +9300,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -9321,7 +9321,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Iss")]
         public string Iss { get; set; }
@@ -9365,7 +9365,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -9392,7 +9392,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public string Version { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
         public string DisplayName { get; set; }
@@ -9427,7 +9427,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -9448,7 +9448,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Iss")]
         public string Iss { get; set; }
@@ -9498,7 +9498,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public System.Collections.Generic.ICollection<HostingEntitiesTenantInfo> TenantInfos { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -9535,7 +9535,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         public string ToJson()
         {
@@ -9593,7 +9593,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("StrategyContainers")]
         public System.Collections.Generic.ICollection<HostingEntitiesTenantIdentifierStrategyContainer> StrategyContainers { get; set; }
@@ -9605,7 +9605,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
         public byte[] Timestamp { get; set; }
@@ -9656,10 +9656,10 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
         public string DisplayName { get; set; }
@@ -9723,7 +9723,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public HostingEntitiesTenant ParentTenant { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -9741,7 +9741,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Identifier")]
         public string Identifier { get; set; }
@@ -9788,7 +9788,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTimeOffset? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
         public string DictionaryKey { get; set; }
@@ -9806,7 +9806,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTimeOffset? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Identifier")]
         public string Identifier { get; set; }

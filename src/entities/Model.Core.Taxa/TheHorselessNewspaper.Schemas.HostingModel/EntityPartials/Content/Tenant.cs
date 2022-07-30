@@ -136,7 +136,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         // [InverseProperty(nameof(ContentEntities.TenantIdentifierStrategy.Tenant))]
 
-        public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; } 
+        // public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; } 
 
         /// <summary>
         /// prospectively override other tenant identifier definitions
