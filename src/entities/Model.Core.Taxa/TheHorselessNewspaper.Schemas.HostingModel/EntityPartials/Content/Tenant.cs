@@ -34,6 +34,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
     public class TenantIdentifierStrategyContainer
     {
+        public TenantIdentifierStrategyContainer() { }
+
         [Key]
         public Guid? Id { get; set; }
         public TenantIdentifierStrategyName TenantIdentifierStrategyName { get; set; }
@@ -41,7 +43,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public string DisplayName { get; set; } = string.Empty;
 
 
-        public string ObjectId { get; set; }
+        public string ObjectId { get; set; } = String.Empty;
         public bool? IsSoftDeleted { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
@@ -65,6 +67,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     [MultiTenant]
     public class TenantIdentifierStrategy
     {
+        public TenantIdentifierStrategy() { }
 
         [Key]
         // [Column("TenantIdentifierStrategyId")]
@@ -72,7 +75,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public string DisplayName { get; set; } = string.Empty;
 
-        public string ObjectId { get; set; }
+        public string ObjectId { get; set; } = String.Empty;
+
         public bool? IsSoftDeleted { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }

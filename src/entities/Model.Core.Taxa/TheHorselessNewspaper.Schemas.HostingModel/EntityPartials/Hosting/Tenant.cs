@@ -33,6 +33,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
     public class TenantIdentifierStrategyContainer
     {
+        public TenantIdentifierStrategyContainer() { }
+
         [Key]
         public Guid? Id { get; set; }
         public TenantIdentifierStrategyName TenantIdentifierStrategyName { get; set; }
@@ -53,6 +55,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     /// </summary>
     public partial class TenantIdentifierStrategy
     {
+        public TenantIdentifierStrategy() { }
+
         [Key]
         public Guid Id { get; set; }
         public string DisplayName { get; set; } = string.Empty;
