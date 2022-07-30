@@ -186,13 +186,14 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     var tenantJson = GetJsonContent(testHostingModelTenant);
 
-                    //var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
-                    //{
-                    //    Content = tenantJson
-                    //};
+                    var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
+                    {
+                        Content = tenantJson
+                    };
 
+                    var postResponse = await client.SendAsync(postRequest);
                     // act
-                    var postResponse = await client.PostAsJsonAsync(route, tenantJson.Value.ToString()); // await client.SendAsync(postRequest);
+                    // var postResponse = await client.PostAsJsonAsync(route, tenantJson.Value.ToString()); // await client.SendAsync(postRequest);
 
                     Assert.NotNull(postResponse);
 

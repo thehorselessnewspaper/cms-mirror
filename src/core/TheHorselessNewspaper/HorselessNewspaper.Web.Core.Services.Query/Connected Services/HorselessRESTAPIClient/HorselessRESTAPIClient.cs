@@ -22,408 +22,408 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryCreateAsync(string __tenant__, ContentEntitiesAccessControlEntry body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryCreateAsync(string __tenant__, ContentEntitiesAccessControlEntry body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesAccessControlEntry body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesAccessControlEntry body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>>> ApiHorselessContentModelAccessControlEntryGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>>> ApiHorselessContentModelAccessControlEntryGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         [System.Obsolete]
-        System.Threading.Tasks.Task<HoselessResponse<SecurityRestClientConfiguration>> ApiClientConfigurationGetClientConfigurationAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<SecurityRestClientConfiguration>> ApiClientConfigurationGetClientConfigurationAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionCreateAsync(string __tenant__, ContentEntitiesContentCollection body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionCreateAsync(string __tenant__, ContentEntitiesContentCollection body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesContentCollection body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesContentCollection body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesContentCollection>>> ApiHorselessContentModelContentCollectionGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesContentCollection>>> ApiHorselessContentModelContentCollectionGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<MvcPartialViewResult>> ApiDynamicViewServerGetDynamicViewAsync(string __tenant__, string viewPhysicalPath = null, System.Guid? parentContentCollectionObjectId = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<MvcPartialViewResult>> ApiDynamicViewServerGetDynamicViewAsync(string __tenant__, string viewPhysicalPath = null, System.Guid? parentContentCollectionObjectId = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse> ApiHorselessContentModelFilesystemAssetIngressUploadPhysicalAsync(string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse> ApiHorselessContentModelFilesystemAssetIngressUploadPhysicalAsync(string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetCreateAsync(string __tenant__, ContentEntitiesFilesystemAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetCreateAsync(string __tenant__, ContentEntitiesFilesystemAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesFilesystemAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesFilesystemAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesFilesystemAsset>>> ApiHorselessContentModelFilesystemAssetGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesFilesystemAsset>>> ApiHorselessContentModelFilesystemAssetGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymCreateAsync(string __tenant__, ContentEntitiesHolonym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymCreateAsync(string __tenant__, ContentEntitiesHolonym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHolonym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHolonym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHolonym>>> ApiHorselessContentModelHolonymGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHolonym>>> ApiHorselessContentModelHolonymGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentCreateAsync(string __tenant__, ContentEntitiesHorselessContent body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentCreateAsync(string __tenant__, ContentEntitiesHorselessContent body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessContent body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessContent body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>>> ApiHorselessContentModelHorselessContentGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>>> ApiHorselessContentModelHorselessContentGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessSession>> ApiHorselessContentModelHorselessSessionCreateAsync(string __tenant__, ContentEntitiesHorselessSession body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessSession>> ApiHorselessContentModelHorselessSessionCreateAsync(string __tenant__, ContentEntitiesHorselessSession body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelHorselessSessionGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelHorselessSessionGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessSession>> ApiHorselessContentModelHorselessSessionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessSession body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessSession>> ApiHorselessContentModelHorselessSessionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessSession body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessSession>>> ApiHorselessContentModelHorselessSessionGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessSession>>> ApiHorselessContentModelHorselessSessionGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewCreateAsync(string __tenant__, ContentEntitiesHorselessView body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewCreateAsync(string __tenant__, ContentEntitiesHorselessView body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessView body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessView body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessView>>> ApiHorselessContentModelHorselessViewGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessView>>> ApiHorselessContentModelHorselessViewGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetCreateAsync(string __tenant__, ContentEntitiesJSONAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetCreateAsync(string __tenant__, ContentEntitiesJSONAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesJSONAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesJSONAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesJSONAsset>>> ApiHorselessContentModelJSONAssetGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesJSONAsset>>> ApiHorselessContentModelJSONAssetGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse> KeycloakSignInGetAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse> KeycloakSignInGetAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse> KeycloakSignInPostAsync(string provider = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse> KeycloakSignInPostAsync(string provider = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse> KeycloakSignoutAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse> KeycloakSignoutAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymCreateAsync(string __tenant__, ContentEntitiesMeronym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymCreateAsync(string __tenant__, ContentEntitiesMeronym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMeronym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMeronym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMeronym>>> ApiHorselessContentModelMeronymGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMeronym>>> ApiHorselessContentModelMeronymGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeCreateAsync(string __tenant__, ContentEntitiesMIMEType body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeCreateAsync(string __tenant__, ContentEntitiesMIMEType body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMIMEType body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMIMEType body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMIMEType>>> ApiHorselessContentModelMIMETypeGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMIMEType>>> ApiHorselessContentModelMIMETypeGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemCreateAsync(string __tenant__, ContentEntitiesNavigationMenuItem body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemCreateAsync(string __tenant__, ContentEntitiesNavigationMenuItem body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenuItem body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenuItem body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem>>> ApiHorselessContentModelNavigationMenuItemGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem>>> ApiHorselessContentModelNavigationMenuItemGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuCreateAsync(string __tenant__, ContentEntitiesNavigationMenu body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuCreateAsync(string __tenant__, ContentEntitiesNavigationMenu body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenu body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenu body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu>>> ApiHorselessContentModelModelNavigationMenuGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu>>> ApiHorselessContentModelModelNavigationMenuGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageCreateAsync(string __tenant__, ContentEntitiesNugetPackage body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageCreateAsync(string __tenant__, ContentEntitiesNugetPackage body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNugetPackage body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNugetPackage body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNugetPackage>>> ApiHorselessContentModelNugetPackageGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNugetPackage>>> ApiHorselessContentModelNugetPackageGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalCreateAsync(string __tenant__, ContentEntitiesPrincipal body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalCreateAsync(string __tenant__, ContentEntitiesPrincipal body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesPrincipal body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesPrincipal body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPrincipal>>> ApiHorselessContentModelPrincipalGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPrincipal>>> ApiHorselessContentModelPrincipalGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationCreateAsync(string __tenant__, ContentEntitiesPublication body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationCreateAsync(string __tenant__, ContentEntitiesPublication body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesPublication body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesPublication body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPublication>>> ApiHorselessContentModelPublicationGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPublication>>> ApiHorselessContentModelPublicationGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoCreateAsync(HostingEntitiesTenantInfo body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoCreateAsync(HostingEntitiesTenantInfo body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoUpdateAsync(string entityCollectionId, HostingEntitiesTenantInfo body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoUpdateAsync(string entityCollectionId, HostingEntitiesTenantInfo body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<MultiTenantTenantInfo>>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoGetByPageNumberAsync(int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<MultiTenantTenantInfo>>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoGetByPageNumberAsync(int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse> ApproveGetAsync(string tenantId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse> ApproveGetAsync(string tenantId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse> ApprovePostAsync(string tenantId, string displayName, string tenantIdentifier, System.Guid? id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse> ApprovePostAsync(string tenantId, string displayName, string tenantIdentifier, System.Guid? id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantCreateAsync(HostingEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantCreateAsync(HostingEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantUpdateAsync(string entityCollectionId, HostingEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantUpdateAsync(string entityCollectionId, HostingEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<HostingEntitiesTenant>>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantGetByPageNumberAsync(int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<HostingEntitiesTenant>>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantGetByPageNumberAsync(int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantCreateAsync(string __tenant__, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantCreateAsync(string __tenant__, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantUpdatePropertiesAsync(string contentCollectionId, string __tenant__, System.Collections.Generic.IEnumerable<string> updatedProperties = null, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantUpdatePropertiesAsync(string contentCollectionId, string __tenant__, System.Collections.Generic.IEnumerable<string> updatedProperties = null, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesTenant>>> ApiHorselessContentModelTenantGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesTenant>>> ApiHorselessContentModelTenantGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
     }
     
@@ -454,7 +454,8 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             set { _baseUrl = value; }
         }
     
-        protected System.Text.Json.JsonSerializerOptions JsonSerializerSettings { get { return _settings.Value; } }
+    
+        public System.Text.Json.JsonSerializerOptions JsonSerializerSettings { get { return _settings.Value; } }
     
         partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings);
     
@@ -465,7 +466,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryCreateAsync(string __tenant__, ContentEntitiesAccessControlEntry body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryCreateAsync(string __tenant__, ContentEntitiesAccessControlEntry body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -524,7 +525,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesAccessControlEntry>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesAccessControlEntry>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -549,7 +550,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -599,7 +600,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesAccessControlEntry>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesAccessControlEntry>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -634,7 +635,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesAccessControlEntry body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesAccessControlEntry body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -697,7 +698,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesAccessControlEntry>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesAccessControlEntry>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -722,7 +723,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>>> ApiHorselessContentModelAccessControlEntryGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>>> ApiHorselessContentModelAccessControlEntryGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -781,7 +782,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -817,7 +818,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         [System.Obsolete]
-        public async System.Threading.Tasks.Task<HoselessResponse<SecurityRestClientConfiguration>> ApiClientConfigurationGetClientConfigurationAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<SecurityRestClientConfiguration>> ApiClientConfigurationGetClientConfigurationAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/ClientConfiguration/GetClientConfiguration");
@@ -859,7 +860,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<SecurityRestClientConfiguration>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<SecurityRestClientConfiguration>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -894,7 +895,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -944,7 +945,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesContentCollection>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesContentCollection>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -979,7 +980,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionCreateAsync(string __tenant__, ContentEntitiesContentCollection body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionCreateAsync(string __tenant__, ContentEntitiesContentCollection body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -1038,7 +1039,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesContentCollection>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesContentCollection>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -1063,7 +1064,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesContentCollection body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesContentCollection body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -1126,7 +1127,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesContentCollection>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesContentCollection>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -1151,7 +1152,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesContentCollection>>> ApiHorselessContentModelContentCollectionGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesContentCollection>>> ApiHorselessContentModelContentCollectionGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -1210,7 +1211,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesContentCollection>>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesContentCollection>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -1245,7 +1246,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<MvcPartialViewResult>> ApiDynamicViewServerGetDynamicViewAsync(string __tenant__, string viewPhysicalPath = null, System.Guid? parentContentCollectionObjectId = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<MvcPartialViewResult>> ApiDynamicViewServerGetDynamicViewAsync(string __tenant__, string viewPhysicalPath = null, System.Guid? parentContentCollectionObjectId = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -1307,7 +1308,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<MvcPartialViewResult>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<MvcPartialViewResult>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -1332,7 +1333,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse> ApiHorselessContentModelFilesystemAssetIngressUploadPhysicalAsync(string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse> ApiHorselessContentModelFilesystemAssetIngressUploadPhysicalAsync(string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -1373,7 +1374,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return new HoselessResponse(status_, headers_);
+                            return new HorselessResponse(status_, headers_);
                         }
                         else
                         {
@@ -1398,7 +1399,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetCreateAsync(string __tenant__, ContentEntitiesFilesystemAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetCreateAsync(string __tenant__, ContentEntitiesFilesystemAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -1457,7 +1458,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesFilesystemAsset>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesFilesystemAsset>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -1482,7 +1483,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -1532,7 +1533,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesFilesystemAsset>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesFilesystemAsset>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -1567,7 +1568,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesFilesystemAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesFilesystemAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -1630,7 +1631,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesFilesystemAsset>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesFilesystemAsset>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -1655,7 +1656,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesFilesystemAsset>>> ApiHorselessContentModelFilesystemAssetGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesFilesystemAsset>>> ApiHorselessContentModelFilesystemAssetGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -1714,7 +1715,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesFilesystemAsset>>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesFilesystemAsset>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -1749,7 +1750,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymCreateAsync(string __tenant__, ContentEntitiesHolonym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymCreateAsync(string __tenant__, ContentEntitiesHolonym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -1808,7 +1809,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesHolonym>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesHolonym>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -1833,7 +1834,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -1883,7 +1884,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesHolonym>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesHolonym>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -1918,7 +1919,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHolonym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHolonym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -1981,7 +1982,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesHolonym>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesHolonym>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -2006,7 +2007,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHolonym>>> ApiHorselessContentModelHolonymGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHolonym>>> ApiHorselessContentModelHolonymGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -2065,7 +2066,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHolonym>>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHolonym>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -2100,7 +2101,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentCreateAsync(string __tenant__, ContentEntitiesHorselessContent body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentCreateAsync(string __tenant__, ContentEntitiesHorselessContent body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -2159,7 +2160,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesHorselessContent>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesHorselessContent>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -2184,7 +2185,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -2234,7 +2235,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesHorselessContent>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesHorselessContent>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -2269,7 +2270,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessContent body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessContent body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -2332,7 +2333,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesHorselessContent>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesHorselessContent>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -2357,7 +2358,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>>> ApiHorselessContentModelHorselessContentGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>>> ApiHorselessContentModelHorselessContentGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -2416,7 +2417,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -2451,7 +2452,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessSession>> ApiHorselessContentModelHorselessSessionCreateAsync(string __tenant__, ContentEntitiesHorselessSession body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessSession>> ApiHorselessContentModelHorselessSessionCreateAsync(string __tenant__, ContentEntitiesHorselessSession body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -2510,7 +2511,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesHorselessSession>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesHorselessSession>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -2535,7 +2536,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelHorselessSessionGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelHorselessSessionGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -2585,7 +2586,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesContentCollection>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesContentCollection>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -2620,7 +2621,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessSession>> ApiHorselessContentModelHorselessSessionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessSession body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessSession>> ApiHorselessContentModelHorselessSessionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessSession body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -2683,7 +2684,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesHorselessSession>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesHorselessSession>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -2708,7 +2709,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessSession>>> ApiHorselessContentModelHorselessSessionGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessSession>>> ApiHorselessContentModelHorselessSessionGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -2767,7 +2768,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessSession>>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessSession>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -2802,7 +2803,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewCreateAsync(string __tenant__, ContentEntitiesHorselessView body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewCreateAsync(string __tenant__, ContentEntitiesHorselessView body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -2861,7 +2862,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesHorselessView>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesHorselessView>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -2886,7 +2887,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -2936,7 +2937,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesHorselessView>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesHorselessView>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -2971,7 +2972,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessView body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessView body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -3034,7 +3035,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesHorselessView>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesHorselessView>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -3059,7 +3060,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessView>>> ApiHorselessContentModelHorselessViewGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessView>>> ApiHorselessContentModelHorselessViewGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -3118,7 +3119,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessView>>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessView>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -3153,7 +3154,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetCreateAsync(string __tenant__, ContentEntitiesJSONAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetCreateAsync(string __tenant__, ContentEntitiesJSONAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -3212,7 +3213,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesJSONAsset>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesJSONAsset>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -3237,7 +3238,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -3287,7 +3288,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesJSONAsset>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesJSONAsset>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -3322,7 +3323,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesJSONAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesJSONAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -3385,7 +3386,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesJSONAsset>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesJSONAsset>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -3410,7 +3411,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesJSONAsset>>> ApiHorselessContentModelJSONAssetGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesJSONAsset>>> ApiHorselessContentModelJSONAssetGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -3469,7 +3470,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesJSONAsset>>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesJSONAsset>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -3504,7 +3505,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse> KeycloakSignInGetAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse> KeycloakSignInGetAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Keycloak/SignIn");
@@ -3540,7 +3541,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return new HoselessResponse(status_, headers_);
+                            return new HorselessResponse(status_, headers_);
                         }
                         else
                         {
@@ -3565,7 +3566,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse> KeycloakSignInPostAsync(string provider = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse> KeycloakSignInPostAsync(string provider = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Keycloak/SignIn");
@@ -3612,7 +3613,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return new HoselessResponse(status_, headers_);
+                            return new HorselessResponse(status_, headers_);
                         }
                         else
                         {
@@ -3637,7 +3638,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse> KeycloakSignoutAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse> KeycloakSignoutAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Keycloak/Signout");
@@ -3674,7 +3675,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return new HoselessResponse(status_, headers_);
+                            return new HorselessResponse(status_, headers_);
                         }
                         else
                         {
@@ -3699,7 +3700,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymCreateAsync(string __tenant__, ContentEntitiesMeronym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymCreateAsync(string __tenant__, ContentEntitiesMeronym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -3758,7 +3759,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesMeronym>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesMeronym>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -3783,7 +3784,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -3833,7 +3834,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesMeronym>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesMeronym>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -3868,7 +3869,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMeronym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMeronym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -3931,7 +3932,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesMeronym>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesMeronym>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -3956,7 +3957,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMeronym>>> ApiHorselessContentModelMeronymGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMeronym>>> ApiHorselessContentModelMeronymGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -4015,7 +4016,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMeronym>>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMeronym>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -4050,7 +4051,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeCreateAsync(string __tenant__, ContentEntitiesMIMEType body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeCreateAsync(string __tenant__, ContentEntitiesMIMEType body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -4109,7 +4110,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesMIMEType>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesMIMEType>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -4134,7 +4135,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -4184,7 +4185,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesMIMEType>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesMIMEType>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -4219,7 +4220,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMIMEType body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMIMEType body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -4282,7 +4283,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesMIMEType>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesMIMEType>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -4307,7 +4308,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMIMEType>>> ApiHorselessContentModelMIMETypeGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMIMEType>>> ApiHorselessContentModelMIMETypeGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -4366,7 +4367,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMIMEType>>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMIMEType>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -4401,7 +4402,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemCreateAsync(string __tenant__, ContentEntitiesNavigationMenuItem body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemCreateAsync(string __tenant__, ContentEntitiesNavigationMenuItem body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -4460,7 +4461,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesNavigationMenuItem>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesNavigationMenuItem>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -4485,7 +4486,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -4535,7 +4536,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesNavigationMenuItem>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesNavigationMenuItem>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -4570,7 +4571,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenuItem body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenuItem body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -4633,7 +4634,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesNavigationMenuItem>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesNavigationMenuItem>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -4658,7 +4659,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem>>> ApiHorselessContentModelNavigationMenuItemGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem>>> ApiHorselessContentModelNavigationMenuItemGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -4717,7 +4718,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem>>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -4752,7 +4753,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuCreateAsync(string __tenant__, ContentEntitiesNavigationMenu body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuCreateAsync(string __tenant__, ContentEntitiesNavigationMenu body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -4811,7 +4812,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesNavigationMenu>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesNavigationMenu>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -4836,7 +4837,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -4886,7 +4887,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesNavigationMenu>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesNavigationMenu>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -4921,7 +4922,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenu body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenu body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -4984,7 +4985,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesNavigationMenu>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesNavigationMenu>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -5009,7 +5010,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu>>> ApiHorselessContentModelModelNavigationMenuGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu>>> ApiHorselessContentModelModelNavigationMenuGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -5068,7 +5069,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu>>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -5103,7 +5104,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageCreateAsync(string __tenant__, ContentEntitiesNugetPackage body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageCreateAsync(string __tenant__, ContentEntitiesNugetPackage body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -5162,7 +5163,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesNugetPackage>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesNugetPackage>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -5187,7 +5188,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -5237,7 +5238,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesNugetPackage>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesNugetPackage>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -5272,7 +5273,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNugetPackage body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNugetPackage body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -5335,7 +5336,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesNugetPackage>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesNugetPackage>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -5360,7 +5361,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNugetPackage>>> ApiHorselessContentModelNugetPackageGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNugetPackage>>> ApiHorselessContentModelNugetPackageGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -5419,7 +5420,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNugetPackage>>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNugetPackage>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -5454,7 +5455,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalCreateAsync(string __tenant__, ContentEntitiesPrincipal body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalCreateAsync(string __tenant__, ContentEntitiesPrincipal body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -5513,7 +5514,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesPrincipal>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesPrincipal>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -5538,7 +5539,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -5588,7 +5589,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesPrincipal>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesPrincipal>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -5623,7 +5624,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesPrincipal body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesPrincipal body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -5686,7 +5687,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesPrincipal>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesPrincipal>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -5711,7 +5712,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPrincipal>>> ApiHorselessContentModelPrincipalGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPrincipal>>> ApiHorselessContentModelPrincipalGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -5770,7 +5771,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPrincipal>>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPrincipal>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -5805,7 +5806,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationCreateAsync(string __tenant__, ContentEntitiesPublication body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationCreateAsync(string __tenant__, ContentEntitiesPublication body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -5864,7 +5865,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesPublication>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesPublication>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -5889,7 +5890,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -5939,7 +5940,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesPublication>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesPublication>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -5974,7 +5975,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesPublication body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesPublication body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -6037,7 +6038,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesPublication>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesPublication>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -6062,7 +6063,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPublication>>> ApiHorselessContentModelPublicationGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPublication>>> ApiHorselessContentModelPublicationGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -6121,7 +6122,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPublication>>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPublication>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -6156,7 +6157,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoCreateAsync(HostingEntitiesTenantInfo body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoCreateAsync(HostingEntitiesTenantInfo body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/HorselessHostingModel/TenantInfo/HostingEntitiesTenantInfoCreate");
@@ -6211,7 +6212,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<HostingEntitiesTenantInfo>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<HostingEntitiesTenantInfo>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -6236,7 +6237,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -6282,7 +6283,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<HostingEntitiesTenantInfo>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<HostingEntitiesTenantInfo>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -6317,7 +6318,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoUpdateAsync(string entityCollectionId, HostingEntitiesTenantInfo body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoUpdateAsync(string entityCollectionId, HostingEntitiesTenantInfo body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (entityCollectionId == null)
                 throw new System.ArgumentNullException("entityCollectionId");
@@ -6376,7 +6377,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<HostingEntitiesTenantInfo>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<HostingEntitiesTenantInfo>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -6401,7 +6402,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<MultiTenantTenantInfo>>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoGetByPageNumberAsync(int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<MultiTenantTenantInfo>>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoGetByPageNumberAsync(int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/HorselessHostingModel/TenantInfo/HostingEntitiesTenantInfoGetByPageNumber?");
@@ -6456,7 +6457,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<System.Collections.Generic.ICollection<MultiTenantTenantInfo>>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<System.Collections.Generic.ICollection<MultiTenantTenantInfo>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -6491,7 +6492,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse> ApproveGetAsync(string tenantId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse> ApproveGetAsync(string tenantId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -6531,7 +6532,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return new HoselessResponse(status_, headers_);
+                            return new HorselessResponse(status_, headers_);
                         }
                         else
                         {
@@ -6556,7 +6557,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse> ApprovePostAsync(string tenantId, string displayName, string tenantIdentifier, System.Guid? id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse> ApprovePostAsync(string tenantId, string displayName, string tenantIdentifier, System.Guid? id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -6610,7 +6611,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return new HoselessResponse(status_, headers_);
+                            return new HorselessResponse(status_, headers_);
                         }
                         else
                         {
@@ -6635,7 +6636,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantCreateAsync(HostingEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantCreateAsync(HostingEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/HorselessHostingModel/TenantREST/HostingEntitiesTenantCreate");
@@ -6690,7 +6691,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<HostingEntitiesTenant>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<HostingEntitiesTenant>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -6715,7 +6716,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -6761,7 +6762,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<HostingEntitiesTenant>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<HostingEntitiesTenant>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -6796,7 +6797,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantUpdateAsync(string entityCollectionId, HostingEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantUpdateAsync(string entityCollectionId, HostingEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (entityCollectionId == null)
                 throw new System.ArgumentNullException("entityCollectionId");
@@ -6855,7 +6856,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<HostingEntitiesTenant>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<HostingEntitiesTenant>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -6880,7 +6881,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<HostingEntitiesTenant>>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantGetByPageNumberAsync(int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<HostingEntitiesTenant>>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantGetByPageNumberAsync(int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/HorselessHostingModel/TenantREST/HostingEntitiesTenantGetByPageNumber?");
@@ -6935,7 +6936,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<System.Collections.Generic.ICollection<HostingEntitiesTenant>>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<System.Collections.Generic.ICollection<HostingEntitiesTenant>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -6970,7 +6971,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantCreateAsync(string __tenant__, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantCreateAsync(string __tenant__, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -7029,7 +7030,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesTenant>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesTenant>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -7054,7 +7055,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -7104,7 +7105,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesTenant>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesTenant>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -7139,7 +7140,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -7202,7 +7203,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesTenant>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesTenant>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -7227,7 +7228,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantUpdatePropertiesAsync(string contentCollectionId, string __tenant__, System.Collections.Generic.IEnumerable<string> updatedProperties = null, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantUpdatePropertiesAsync(string contentCollectionId, string __tenant__, System.Collections.Generic.IEnumerable<string> updatedProperties = null, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -7292,7 +7293,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<ContentEntitiesTenant>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<ContentEntitiesTenant>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -7317,7 +7318,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesTenant>>> ApiHorselessContentModelTenantGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesTenant>>> ApiHorselessContentModelTenantGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -7376,7 +7377,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesTenant>>(status_, headers_, objectResponse_.Object);
+                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesTenant>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -10043,13 +10044,13 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.14.8.0 (NJsonSchema v10.5.2.0 (Newtonsoft.Json v13.0.1.0))")]
-    public partial class HoselessResponse
+    public partial class HorselessResponse
     {
         public int StatusCode { get; private set; }
 
         public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> Headers { get; private set; }
 
-        public HoselessResponse(int statusCode, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers)
+        public HorselessResponse(int statusCode, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers)
         {
             StatusCode = statusCode;
             Headers = headers;
@@ -10057,11 +10058,11 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.14.8.0 (NJsonSchema v10.5.2.0 (Newtonsoft.Json v13.0.1.0))")]
-    public partial class HoselessResponse<TResult> : HoselessResponse
+    public partial class HorselessResponse<TResult> : HorselessResponse
     {
         public TResult Result { get; private set; }
 
-        public HoselessResponse(int statusCode, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, TResult result)
+        public HorselessResponse(int statusCode, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, TResult result)
             : base(statusCode, headers)
         {
             Result = result;

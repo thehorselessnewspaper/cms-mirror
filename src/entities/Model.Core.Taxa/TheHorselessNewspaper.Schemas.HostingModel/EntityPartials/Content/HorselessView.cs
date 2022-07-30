@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using TheHorselessNewspaper.HostingModel.Context;
 
@@ -33,7 +34,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public DateTimeOffset LastModified { get; set; }
 
-        public long Length { get; set; } = String.Empty;
+        public long Length { get; set; }
 
         public string Name { get; set; } = String.Empty;
 
@@ -47,8 +48,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [InverseProperty(nameof(Placeholder.HorselessView))]
         public ICollection<Placeholder> Placeholders { get; set; } = new HashSet<Placeholder>();
 
-        [JsonIgnore]
-        [NotMapped]
         public Stream CreateReadStream()
         {
             return new MemoryStream(ViewContent);
