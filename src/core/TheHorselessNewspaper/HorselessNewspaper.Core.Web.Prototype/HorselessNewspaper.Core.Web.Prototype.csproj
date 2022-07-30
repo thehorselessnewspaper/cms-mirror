@@ -12,10 +12,7 @@
 
 	<!-- support automated openpi spec rendering as per -->
 	<!-- https://tonylunt.medium.com/swashbuckle-cli-automating-asp-net-core-api-swagger-definitions-during-build-f3ee2b8e857a -->
-	<Target Condition=" '$(Configuration)'=='Swagger' " Name="SwaggerPostBuildTarget" AfterTargets="Build">
-		<Exec Command="dotnet tool restore"></Exec>
-		<Exec Command="dotnet tool run swagger tofile --output ..\..\..\generated-code\angular\horseless-contentapi.json .\bin\Debug\net6.0\HorselessNewspaper.Core.Web.Prototype.dll v1" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development"></Exec>
-	</Target>
+
 
 	<Target Condition=" '$(Configuration)'=='Swagger' " Name="SwaggerPostBuildTargetAlso" AfterTargets="Build">
 		<Exec Command="dotnet tool restore"></Exec>
@@ -27,6 +24,11 @@
 		<Exec Command="dotnet tool run swagger tofile --output ..\HorselessNewspaper.Web.Core.Services.Query\Client\REST\swagger.json .\bin\Debug\net6.0\HorselessNewspaper.Core.Web.Prototype.dll v1" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development"></Exec>
 	</Target>
 
+	<Target Condition=" '$(Configuration)'=='Swagger' " Name="SwaggerPostBuildTarget" AfterTargets="Build">
+		<Exec Command="dotnet tool restore"></Exec>
+		<Exec Command="dotnet tool run swagger tofile --output ..\..\..\generated-code\angular\horseless-contentapi.json .\bin\Debug\net6.0\HorselessNewspaper.Core.Web.Prototype.dll v1" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development"></Exec>
+	</Target>
+	
 	<!-- as per https://docs.microsoft.com/en-us/dotnet/core/compatibility/sdk/6.0/duplicate-files-in-output -->
 	<PropertyGroup>
 		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>

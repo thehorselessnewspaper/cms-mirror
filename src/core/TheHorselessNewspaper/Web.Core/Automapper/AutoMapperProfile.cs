@@ -18,16 +18,16 @@ namespace HorselessNewspaper.Web.Core.Automapper
             CreateMap<ContentModel.TenantIdentifierStrategy, HostingModel.TenantIdentifierStrategy>();
 
 
-            //CreateMap<HostingModel.TenantIdentifierStrategy, ApiModel.HostingEntitiesTenantIdentifierStrategy>();
-            //CreateMap<ContentModel.TenantIdentifierStrategy, ApiModel.ContentEntitiesTenantIdentifierStrategy>();
+            CreateMap<HostingModel.TenantIdentifierStrategy, ApiModel.HostingEntitiesTenantIdentifierStrategy>();
+            CreateMap<ContentModel.TenantIdentifierStrategy, ApiModel.ContentEntitiesTenantIdentifierStrategy>();
 
-            //CreateMap<ApiModel.HostingEntitiesTenantIdentifierStrategy, HostingModel.TenantIdentifierStrategy>();
-            //CreateMap<ApiModel.ContentEntitiesTenantIdentifierStrategy, ContentModel.TenantIdentifierStrategy>();
+            CreateMap<ApiModel.HostingEntitiesTenantIdentifierStrategy, HostingModel.TenantIdentifierStrategy>();
+            CreateMap<ApiModel.ContentEntitiesTenantIdentifierStrategy, ContentModel.TenantIdentifierStrategy>();
 
 
 
-            //CreateMap<ContentModel.TenantIdentifierStrategyContainer, ApiModel.ContentEntitiesTenantIdentifierStrategyContainer>();
-            //CreateMap<ApiModel.ContentEntitiesTenantIdentifierStrategyContainer, ContentModel.TenantIdentifierStrategyContainer>();
+            CreateMap<ContentModel.TenantIdentifierStrategyContainer, ApiModel.ContentEntitiesTenantIdentifierStrategyContainer>();
+            CreateMap<ApiModel.ContentEntitiesTenantIdentifierStrategyContainer, ContentModel.TenantIdentifierStrategyContainer>();
 
 
             CreateMap<HostingModel.TenantIdentifierStrategyContainer, ContentModel.TenantIdentifierStrategyContainer>();
@@ -42,6 +42,13 @@ namespace HorselessNewspaper.Web.Core.Automapper
 
             CreateMap<HostingModel.Principal, ApiModel.HostingEntitiesPrincipal>();
             CreateMap<ContentModel.Principal, ApiModel.ContentEntitiesPrincipal>();
+
+
+            CreateMap<ContentModel.HorselessSession, ApiModel.ContentEntitiesHorselessSession>();
+            CreateMap<ApiModel.ContentEntitiesHorselessSession, ContentModel.HorselessSession>();
+
+            CreateMap<ContentModel.FilesystemAsset, ApiModel.ContentEntitiesFilesystemAsset>();
+            CreateMap<ApiModel.ContentEntitiesFilesystemAsset, ContentModel.FilesystemAsset>();
 
             // reverse map
             CreateMap<ApiModel.HostingEntitiesPrincipal, HostingModel.Principal>();
@@ -61,8 +68,28 @@ namespace HorselessNewspaper.Web.Core.Automapper
             CreateMap<ContentModel.HorselessView, ApiModel.ContentEntitiesHorselessView>();
             CreateMap<ApiModel.ContentEntitiesHorselessView, ContentModel.HorselessView>();
 
+            CreateMap<ContentModel.Placeholder, ApiModel.ContentEntitiesPlaceholder>();
+            CreateMap<ApiModel.ContentEntitiesPlaceholder, ContentModel.Placeholder>();
+
+            CreateMap<ContentModel.Publication, ApiModel.ContentEntitiesPublication>();
+            CreateMap<ApiModel.ContentEntitiesPublication, ContentModel.Publication>();
+
+            CreateMap<ContentModel.Taxonomy, ApiModel.ContentEntitiesTaxonomy>();
+            CreateMap<ApiModel.ContentEntitiesTaxonomy, ContentModel.Taxonomy>();
 
 
+            CreateMap<ContentModel.JSONAsset, ApiModel.ContentEntitiesJSONAsset>();
+            CreateMap<ApiModel.ContentEntitiesJSONAsset, ContentModel.JSONAsset>();
+
+            CreateMap<ContentModel.Holonym, ApiModel.ContentEntitiesHolonym>();
+            CreateMap<ApiModel.ContentEntitiesHolonym, ContentModel.Holonym>();
+
+
+            CreateMap<ContentModel.Meronym, ApiModel.ContentEntitiesMeronym>();
+            CreateMap<ApiModel.ContentEntitiesMeronym, ContentModel.Meronym>();
+
+            CreateMap<ContentModel.HorselessContent, ApiModel.ContentEntitiesHorselessContent>();
+            CreateMap<ApiModel.ContentEntitiesHorselessContent, ContentModel.HorselessContent>();
         }
     }
 }

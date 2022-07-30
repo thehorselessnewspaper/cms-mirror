@@ -33,11 +33,11 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public DateTimeOffset LastModified { get; set; }
 
-        public long Length { get; set; }
+        public long Length { get; set; } = String.Empty;
 
-        public string Name { get; set; }
+        public string Name { get; set; } = String.Empty;
 
-        public string PhysicalPath { get; set; }
+        public string PhysicalPath { get; set; } = String.Empty;
 
         public byte[] ViewContent { get; set; } = new byte[0];
         public string? DictionaryKey { get; set; }
@@ -47,6 +47,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [InverseProperty(nameof(Placeholder.HorselessView))]
         public ICollection<Placeholder> Placeholders { get; set; } = new HashSet<Placeholder>();
 
+        [JsonIgnore]
+        [NotMapped]
         public Stream CreateReadStream()
         {
             return new MemoryStream(ViewContent);

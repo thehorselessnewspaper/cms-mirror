@@ -99,9 +99,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         // public Tenant? Tenant { get; set; } = new Tenant();
 
         // [InverseProperty(nameof(TenantIdentifierStrategyContainer.Strategy))]
-        public ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();
-        public ICollection<AccessControlEntry> AccessControlEntries { get; set; }
-        public ICollection<Principal> Owners { get; set; }
+        public ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new HashSet<TenantIdentifierStrategyContainer>();
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+        public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
     }

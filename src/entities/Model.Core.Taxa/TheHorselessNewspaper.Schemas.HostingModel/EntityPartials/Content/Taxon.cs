@@ -25,8 +25,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     [MultiTenant]
     public partial class Taxonomy : IContentRowLevelSecured
     {
-        public ICollection<AccessControlEntry>? AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
-        public ICollection<Principal>? Owners { get; set; } = new HashSet<Principal>();
+        public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+        public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);

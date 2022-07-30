@@ -4,8 +4,6 @@
 // </auto-generated>
 //----------------------
 
-#nullable enable
-
 #pragma warning disable 108 // Disable "CS0108 '{derivedDto}.ToJson()' hides inherited member '{dtoBase}.ToJson()'. Use the new keyword if hiding was intended."
 #pragma warning disable 114 // Disable "CS0114 '{derivedDto}.RaisePropertyChanged(String)' hides inherited member 'dtoBase.RaisePropertyChanged(String)'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword."
 #pragma warning disable 472 // Disable "CS0472 The result of the expression is always 'false' since a value of type 'Int32' is never equal to 'null' of type 'Int32?'
@@ -24,408 +22,408 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryCreateAsync(string __tenant__, ContentEntitiesAccessControlEntry? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryCreateAsync(string __tenant__, ContentEntitiesAccessControlEntry body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesAccessControlEntry? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesAccessControlEntry body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>>> ApiHorselessContentModelAccessControlEntryGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>>> ApiHorselessContentModelAccessControlEntryGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         [System.Obsolete]
-        System.Threading.Tasks.Task<HorselessResponse<SecurityRestClientConfiguration>> ApiClientConfigurationGetClientConfigurationAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<SecurityRestClientConfiguration>> ApiClientConfigurationGetClientConfigurationAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionCreateAsync(string __tenant__, ContentEntitiesContentCollection? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionCreateAsync(string __tenant__, ContentEntitiesContentCollection body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesContentCollection? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesContentCollection body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesContentCollection>>> ApiHorselessContentModelContentCollectionGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesContentCollection>>> ApiHorselessContentModelContentCollectionGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<MvcPartialViewResult>> ApiDynamicViewServerGetDynamicViewAsync(string __tenant__, string? viewPhysicalPath = null, System.Guid? parentContentCollectionObjectId = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<MvcPartialViewResult>> ApiDynamicViewServerGetDynamicViewAsync(string __tenant__, string viewPhysicalPath = null, System.Guid? parentContentCollectionObjectId = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse> ApiHorselessContentModelFilesystemAssetIngressUploadPhysicalAsync(string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse> ApiHorselessContentModelFilesystemAssetIngressUploadPhysicalAsync(string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetCreateAsync(string __tenant__, ContentEntitiesFilesystemAsset? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetCreateAsync(string __tenant__, ContentEntitiesFilesystemAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesFilesystemAsset? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesFilesystemAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesFilesystemAsset>>> ApiHorselessContentModelFilesystemAssetGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesFilesystemAsset>>> ApiHorselessContentModelFilesystemAssetGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymCreateAsync(string __tenant__, ContentEntitiesHolonym? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymCreateAsync(string __tenant__, ContentEntitiesHolonym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHolonym? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHolonym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHolonym>>> ApiHorselessContentModelHolonymGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHolonym>>> ApiHorselessContentModelHolonymGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentCreateAsync(string __tenant__, ContentEntitiesHorselessContent? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentCreateAsync(string __tenant__, ContentEntitiesHorselessContent body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessContent? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessContent body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>>> ApiHorselessContentModelHorselessContentGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>>> ApiHorselessContentModelHorselessContentGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessSession>> ApiHorselessContentModelHorselessSessionCreateAsync(string __tenant__, ContentEntitiesHorselessSession? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessSession>> ApiHorselessContentModelHorselessSessionCreateAsync(string __tenant__, ContentEntitiesHorselessSession body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelHorselessSessionGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelHorselessSessionGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessSession>> ApiHorselessContentModelHorselessSessionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessSession? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessSession>> ApiHorselessContentModelHorselessSessionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessSession body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessSession>>> ApiHorselessContentModelHorselessSessionGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessSession>>> ApiHorselessContentModelHorselessSessionGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewCreateAsync(string __tenant__, ContentEntitiesHorselessView? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewCreateAsync(string __tenant__, ContentEntitiesHorselessView body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessView? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessView body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessView>>> ApiHorselessContentModelHorselessViewGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessView>>> ApiHorselessContentModelHorselessViewGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetCreateAsync(string __tenant__, ContentEntitiesJSONAsset? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetCreateAsync(string __tenant__, ContentEntitiesJSONAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesJSONAsset? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesJSONAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesJSONAsset>>> ApiHorselessContentModelJSONAssetGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesJSONAsset>>> ApiHorselessContentModelJSONAssetGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse> KeycloakSignInGetAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse> KeycloakSignInGetAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse> KeycloakSignInPostAsync(string? provider = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse> KeycloakSignInPostAsync(string provider = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse> KeycloakSignoutAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse> KeycloakSignoutAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymCreateAsync(string __tenant__, ContentEntitiesMeronym? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymCreateAsync(string __tenant__, ContentEntitiesMeronym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMeronym? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMeronym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMeronym>>> ApiHorselessContentModelMeronymGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMeronym>>> ApiHorselessContentModelMeronymGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeCreateAsync(string __tenant__, ContentEntitiesMIMEType? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeCreateAsync(string __tenant__, ContentEntitiesMIMEType body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMIMEType? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMIMEType body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMIMEType>>> ApiHorselessContentModelMIMETypeGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMIMEType>>> ApiHorselessContentModelMIMETypeGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemCreateAsync(string __tenant__, ContentEntitiesNavigationMenuItem? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemCreateAsync(string __tenant__, ContentEntitiesNavigationMenuItem body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenuItem? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenuItem body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem>>> ApiHorselessContentModelNavigationMenuItemGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem>>> ApiHorselessContentModelNavigationMenuItemGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuCreateAsync(string __tenant__, ContentEntitiesNavigationMenu? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuCreateAsync(string __tenant__, ContentEntitiesNavigationMenu body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenu? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenu body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu>>> ApiHorselessContentModelModelNavigationMenuGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu>>> ApiHorselessContentModelModelNavigationMenuGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageCreateAsync(string __tenant__, ContentEntitiesNugetPackage? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageCreateAsync(string __tenant__, ContentEntitiesNugetPackage body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNugetPackage? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNugetPackage body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNugetPackage>>> ApiHorselessContentModelNugetPackageGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNugetPackage>>> ApiHorselessContentModelNugetPackageGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalCreateAsync(string __tenant__, ContentEntitiesPrincipal? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalCreateAsync(string __tenant__, ContentEntitiesPrincipal body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesPrincipal? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesPrincipal body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPrincipal>>> ApiHorselessContentModelPrincipalGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPrincipal>>> ApiHorselessContentModelPrincipalGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationCreateAsync(string __tenant__, ContentEntitiesPublication? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationCreateAsync(string __tenant__, ContentEntitiesPublication body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesPublication? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesPublication body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPublication>>> ApiHorselessContentModelPublicationGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPublication>>> ApiHorselessContentModelPublicationGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoCreateAsync(HostingEntitiesTenantInfo? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoCreateAsync(HostingEntitiesTenantInfo body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoUpdateAsync(string entityCollectionId, HostingEntitiesTenantInfo? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoUpdateAsync(string entityCollectionId, HostingEntitiesTenantInfo body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<MultiTenantTenantInfo>>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoGetByPageNumberAsync(int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<MultiTenantTenantInfo>>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoGetByPageNumberAsync(int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse> ApproveGetAsync(string tenantId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse> ApproveGetAsync(string tenantId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse> ApprovePostAsync(string tenantId, string displayName, string tenantIdentifier, System.Guid? id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse> ApprovePostAsync(string tenantId, string displayName, string tenantIdentifier, System.Guid? id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantCreateAsync(HostingEntitiesTenant? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantCreateAsync(HostingEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantUpdateAsync(string entityCollectionId, HostingEntitiesTenant? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantUpdateAsync(string entityCollectionId, HostingEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<HostingEntitiesTenant>>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantGetByPageNumberAsync(int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<HostingEntitiesTenant>>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantGetByPageNumberAsync(int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantCreateAsync(string __tenant__, ContentEntitiesTenant? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantCreateAsync(string __tenant__, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesTenant? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantUpdatePropertiesAsync(string contentCollectionId, string __tenant__, System.Collections.Generic.IEnumerable<string>? updatedProperties = null, ContentEntitiesTenant? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantUpdatePropertiesAsync(string contentCollectionId, string __tenant__, System.Collections.Generic.IEnumerable<string> updatedProperties = null, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesTenant>>> ApiHorselessContentModelTenantGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesTenant>>> ApiHorselessContentModelTenantGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
     }
     
@@ -456,8 +454,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             set { _baseUrl = value; }
         }
     
-    
-        public System.Text.Json.JsonSerializerOptions JsonSerializerSettings { get { return _settings.Value; } }
+        protected System.Text.Json.JsonSerializerOptions JsonSerializerSettings { get { return _settings.Value; } }
     
         partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings);
     
@@ -468,7 +465,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryCreateAsync(string __tenant__, ContentEntitiesAccessControlEntry? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryCreateAsync(string __tenant__, ContentEntitiesAccessControlEntry body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -527,7 +524,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesAccessControlEntry>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesAccessControlEntry>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -552,7 +549,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -602,7 +599,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesAccessControlEntry>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesAccessControlEntry>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -637,7 +634,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesAccessControlEntry? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesAccessControlEntry>> ApiHorselessContentModelAccessControlEntryUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesAccessControlEntry body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -700,7 +697,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesAccessControlEntry>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesAccessControlEntry>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -725,7 +722,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>>> ApiHorselessContentModelAccessControlEntryGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>>> ApiHorselessContentModelAccessControlEntryGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -784,7 +781,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -820,7 +817,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         [System.Obsolete]
-        public async System.Threading.Tasks.Task<HorselessResponse<SecurityRestClientConfiguration>> ApiClientConfigurationGetClientConfigurationAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<SecurityRestClientConfiguration>> ApiClientConfigurationGetClientConfigurationAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/ClientConfiguration/GetClientConfiguration");
@@ -862,7 +859,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<SecurityRestClientConfiguration>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<SecurityRestClientConfiguration>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -897,7 +894,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -947,7 +944,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesContentCollection>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesContentCollection>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -982,7 +979,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionCreateAsync(string __tenant__, ContentEntitiesContentCollection? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionCreateAsync(string __tenant__, ContentEntitiesContentCollection body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -1041,7 +1038,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesContentCollection>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesContentCollection>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -1066,7 +1063,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesContentCollection? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelContentCollectionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesContentCollection body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -1129,7 +1126,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesContentCollection>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesContentCollection>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -1154,7 +1151,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesContentCollection>>> ApiHorselessContentModelContentCollectionGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesContentCollection>>> ApiHorselessContentModelContentCollectionGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -1213,7 +1210,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesContentCollection>>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesContentCollection>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -1248,7 +1245,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<MvcPartialViewResult>> ApiDynamicViewServerGetDynamicViewAsync(string __tenant__, string? viewPhysicalPath = null, System.Guid? parentContentCollectionObjectId = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<MvcPartialViewResult>> ApiDynamicViewServerGetDynamicViewAsync(string __tenant__, string viewPhysicalPath = null, System.Guid? parentContentCollectionObjectId = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -1310,7 +1307,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<MvcPartialViewResult>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<MvcPartialViewResult>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -1335,7 +1332,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse> ApiHorselessContentModelFilesystemAssetIngressUploadPhysicalAsync(string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse> ApiHorselessContentModelFilesystemAssetIngressUploadPhysicalAsync(string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -1376,7 +1373,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return new HorselessResponse(status_, headers_);
+                            return new HoselessResponse(status_, headers_);
                         }
                         else
                         {
@@ -1401,7 +1398,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetCreateAsync(string __tenant__, ContentEntitiesFilesystemAsset? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetCreateAsync(string __tenant__, ContentEntitiesFilesystemAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -1460,7 +1457,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesFilesystemAsset>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesFilesystemAsset>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -1485,7 +1482,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -1535,7 +1532,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesFilesystemAsset>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesFilesystemAsset>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -1570,7 +1567,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesFilesystemAsset? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesFilesystemAsset>> ApiHorselessContentModelFilesystemAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesFilesystemAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -1633,7 +1630,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesFilesystemAsset>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesFilesystemAsset>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -1658,7 +1655,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesFilesystemAsset>>> ApiHorselessContentModelFilesystemAssetGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesFilesystemAsset>>> ApiHorselessContentModelFilesystemAssetGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -1717,7 +1714,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesFilesystemAsset>>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesFilesystemAsset>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -1752,7 +1749,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymCreateAsync(string __tenant__, ContentEntitiesHolonym? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymCreateAsync(string __tenant__, ContentEntitiesHolonym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -1811,7 +1808,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesHolonym>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesHolonym>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -1836,7 +1833,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -1886,7 +1883,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesHolonym>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesHolonym>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -1921,7 +1918,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHolonym? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHolonym>> ApiHorselessContentModelHolonymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHolonym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -1984,7 +1981,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesHolonym>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesHolonym>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -2009,7 +2006,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHolonym>>> ApiHorselessContentModelHolonymGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHolonym>>> ApiHorselessContentModelHolonymGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -2068,7 +2065,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHolonym>>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHolonym>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -2103,7 +2100,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentCreateAsync(string __tenant__, ContentEntitiesHorselessContent? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentCreateAsync(string __tenant__, ContentEntitiesHorselessContent body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -2162,7 +2159,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesHorselessContent>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesHorselessContent>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -2187,7 +2184,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -2237,7 +2234,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesHorselessContent>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesHorselessContent>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -2272,7 +2269,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessContent? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessContent>> ApiHorselessContentModelHorselessContentUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessContent body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -2335,7 +2332,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesHorselessContent>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesHorselessContent>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -2360,7 +2357,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>>> ApiHorselessContentModelHorselessContentGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>>> ApiHorselessContentModelHorselessContentGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -2419,7 +2416,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -2454,7 +2451,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessSession>> ApiHorselessContentModelHorselessSessionCreateAsync(string __tenant__, ContentEntitiesHorselessSession? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessSession>> ApiHorselessContentModelHorselessSessionCreateAsync(string __tenant__, ContentEntitiesHorselessSession body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -2513,7 +2510,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesHorselessSession>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesHorselessSession>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -2538,7 +2535,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelHorselessSessionGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesContentCollection>> ApiHorselessContentModelHorselessSessionGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -2588,7 +2585,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesContentCollection>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesContentCollection>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -2623,7 +2620,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessSession>> ApiHorselessContentModelHorselessSessionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessSession? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessSession>> ApiHorselessContentModelHorselessSessionUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessSession body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -2686,7 +2683,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesHorselessSession>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesHorselessSession>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -2711,7 +2708,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessSession>>> ApiHorselessContentModelHorselessSessionGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessSession>>> ApiHorselessContentModelHorselessSessionGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -2770,7 +2767,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessSession>>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessSession>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -2805,7 +2802,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewCreateAsync(string __tenant__, ContentEntitiesHorselessView? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewCreateAsync(string __tenant__, ContentEntitiesHorselessView body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -2864,7 +2861,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesHorselessView>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesHorselessView>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -2889,7 +2886,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -2939,7 +2936,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesHorselessView>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesHorselessView>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -2974,7 +2971,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessView? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesHorselessView>> ApiHorselessContentModelHorselessViewUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesHorselessView body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -3037,7 +3034,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesHorselessView>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesHorselessView>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -3062,7 +3059,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessView>>> ApiHorselessContentModelHorselessViewGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessView>>> ApiHorselessContentModelHorselessViewGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -3121,7 +3118,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessView>>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesHorselessView>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -3156,7 +3153,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetCreateAsync(string __tenant__, ContentEntitiesJSONAsset? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetCreateAsync(string __tenant__, ContentEntitiesJSONAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -3215,7 +3212,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesJSONAsset>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesJSONAsset>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -3240,7 +3237,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -3290,7 +3287,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesJSONAsset>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesJSONAsset>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -3325,7 +3322,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesJSONAsset? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesJSONAsset>> ApiHorselessContentModelJSONAssetUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesJSONAsset body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -3388,7 +3385,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesJSONAsset>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesJSONAsset>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -3413,7 +3410,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesJSONAsset>>> ApiHorselessContentModelJSONAssetGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesJSONAsset>>> ApiHorselessContentModelJSONAssetGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -3472,7 +3469,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesJSONAsset>>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesJSONAsset>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -3507,7 +3504,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse> KeycloakSignInGetAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse> KeycloakSignInGetAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Keycloak/SignIn");
@@ -3543,7 +3540,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return new HorselessResponse(status_, headers_);
+                            return new HoselessResponse(status_, headers_);
                         }
                         else
                         {
@@ -3568,7 +3565,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse> KeycloakSignInPostAsync(string? provider = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse> KeycloakSignInPostAsync(string provider = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Keycloak/SignIn");
@@ -3615,7 +3612,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return new HorselessResponse(status_, headers_);
+                            return new HoselessResponse(status_, headers_);
                         }
                         else
                         {
@@ -3640,7 +3637,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse> KeycloakSignoutAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse> KeycloakSignoutAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Keycloak/Signout");
@@ -3677,7 +3674,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return new HorselessResponse(status_, headers_);
+                            return new HoselessResponse(status_, headers_);
                         }
                         else
                         {
@@ -3702,7 +3699,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymCreateAsync(string __tenant__, ContentEntitiesMeronym? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymCreateAsync(string __tenant__, ContentEntitiesMeronym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -3761,7 +3758,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesMeronym>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesMeronym>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -3786,7 +3783,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -3836,7 +3833,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesMeronym>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesMeronym>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -3871,7 +3868,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMeronym? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMeronym>> ApiHorselessContentModelMeronymUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMeronym body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -3934,7 +3931,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesMeronym>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesMeronym>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -3959,7 +3956,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMeronym>>> ApiHorselessContentModelMeronymGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMeronym>>> ApiHorselessContentModelMeronymGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -4018,7 +4015,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMeronym>>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMeronym>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -4053,7 +4050,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeCreateAsync(string __tenant__, ContentEntitiesMIMEType? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeCreateAsync(string __tenant__, ContentEntitiesMIMEType body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -4112,7 +4109,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesMIMEType>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesMIMEType>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -4137,7 +4134,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -4187,7 +4184,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesMIMEType>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesMIMEType>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -4222,7 +4219,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMIMEType? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesMIMEType>> ApiHorselessContentModelMIMETypeUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesMIMEType body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -4285,7 +4282,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesMIMEType>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesMIMEType>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -4310,7 +4307,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMIMEType>>> ApiHorselessContentModelMIMETypeGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMIMEType>>> ApiHorselessContentModelMIMETypeGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -4369,7 +4366,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMIMEType>>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesMIMEType>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -4404,7 +4401,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemCreateAsync(string __tenant__, ContentEntitiesNavigationMenuItem? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemCreateAsync(string __tenant__, ContentEntitiesNavigationMenuItem body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -4463,7 +4460,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesNavigationMenuItem>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesNavigationMenuItem>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -4488,7 +4485,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -4538,7 +4535,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesNavigationMenuItem>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesNavigationMenuItem>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -4573,7 +4570,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenuItem? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenuItem>> ApiHorselessContentModelNavigationMenuItemUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenuItem body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -4636,7 +4633,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesNavigationMenuItem>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesNavigationMenuItem>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -4661,7 +4658,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem>>> ApiHorselessContentModelNavigationMenuItemGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem>>> ApiHorselessContentModelNavigationMenuItemGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -4720,7 +4717,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem>>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -4755,7 +4752,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuCreateAsync(string __tenant__, ContentEntitiesNavigationMenu? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuCreateAsync(string __tenant__, ContentEntitiesNavigationMenu body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -4814,7 +4811,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesNavigationMenu>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesNavigationMenu>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -4839,7 +4836,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -4889,7 +4886,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesNavigationMenu>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesNavigationMenu>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -4924,7 +4921,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenu? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNavigationMenu>> ApiHorselessContentModelModelNavigationMenuUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNavigationMenu body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -4987,7 +4984,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesNavigationMenu>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesNavigationMenu>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -5012,7 +5009,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu>>> ApiHorselessContentModelModelNavigationMenuGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu>>> ApiHorselessContentModelModelNavigationMenuGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -5071,7 +5068,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu>>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -5106,7 +5103,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageCreateAsync(string __tenant__, ContentEntitiesNugetPackage? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageCreateAsync(string __tenant__, ContentEntitiesNugetPackage body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -5165,7 +5162,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesNugetPackage>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesNugetPackage>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -5190,7 +5187,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -5240,7 +5237,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesNugetPackage>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesNugetPackage>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -5275,7 +5272,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNugetPackage? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesNugetPackage>> ApiHorselessContentModelNugetPackageUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesNugetPackage body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -5338,7 +5335,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesNugetPackage>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesNugetPackage>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -5363,7 +5360,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNugetPackage>>> ApiHorselessContentModelNugetPackageGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNugetPackage>>> ApiHorselessContentModelNugetPackageGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -5422,7 +5419,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNugetPackage>>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesNugetPackage>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -5457,7 +5454,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalCreateAsync(string __tenant__, ContentEntitiesPrincipal? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalCreateAsync(string __tenant__, ContentEntitiesPrincipal body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -5516,7 +5513,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesPrincipal>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesPrincipal>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -5541,7 +5538,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -5591,7 +5588,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesPrincipal>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesPrincipal>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -5626,7 +5623,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesPrincipal? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPrincipal>> ApiHorselessContentModelPrincipalUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesPrincipal body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -5689,7 +5686,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesPrincipal>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesPrincipal>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -5714,7 +5711,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPrincipal>>> ApiHorselessContentModelPrincipalGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPrincipal>>> ApiHorselessContentModelPrincipalGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -5773,7 +5770,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPrincipal>>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPrincipal>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -5808,7 +5805,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationCreateAsync(string __tenant__, ContentEntitiesPublication? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationCreateAsync(string __tenant__, ContentEntitiesPublication body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -5867,7 +5864,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesPublication>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesPublication>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -5892,7 +5889,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -5942,7 +5939,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesPublication>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesPublication>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -5977,7 +5974,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesPublication? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesPublication>> ApiHorselessContentModelPublicationUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesPublication body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -6040,7 +6037,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesPublication>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesPublication>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -6065,7 +6062,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPublication>>> ApiHorselessContentModelPublicationGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPublication>>> ApiHorselessContentModelPublicationGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -6124,7 +6121,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPublication>>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesPublication>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -6159,7 +6156,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoCreateAsync(HostingEntitiesTenantInfo? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoCreateAsync(HostingEntitiesTenantInfo body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/HorselessHostingModel/TenantInfo/HostingEntitiesTenantInfoCreate");
@@ -6214,7 +6211,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<HostingEntitiesTenantInfo>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<HostingEntitiesTenantInfo>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -6239,7 +6236,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -6285,7 +6282,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<HostingEntitiesTenantInfo>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<HostingEntitiesTenantInfo>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -6320,7 +6317,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoUpdateAsync(string entityCollectionId, HostingEntitiesTenantInfo? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenantInfo>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoUpdateAsync(string entityCollectionId, HostingEntitiesTenantInfo body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (entityCollectionId == null)
                 throw new System.ArgumentNullException("entityCollectionId");
@@ -6379,7 +6376,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<HostingEntitiesTenantInfo>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<HostingEntitiesTenantInfo>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -6404,7 +6401,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<MultiTenantTenantInfo>>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoGetByPageNumberAsync(int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<MultiTenantTenantInfo>>> ApiHorselessHostingModelTenantInfoHostingEntitiesTenantInfoGetByPageNumberAsync(int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/HorselessHostingModel/TenantInfo/HostingEntitiesTenantInfoGetByPageNumber?");
@@ -6459,7 +6456,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<System.Collections.Generic.ICollection<MultiTenantTenantInfo>>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<System.Collections.Generic.ICollection<MultiTenantTenantInfo>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -6494,7 +6491,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse> ApproveGetAsync(string tenantId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse> ApproveGetAsync(string tenantId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -6534,7 +6531,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return new HorselessResponse(status_, headers_);
+                            return new HoselessResponse(status_, headers_);
                         }
                         else
                         {
@@ -6559,7 +6556,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse> ApprovePostAsync(string tenantId, string displayName, string tenantIdentifier, System.Guid? id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse> ApprovePostAsync(string tenantId, string displayName, string tenantIdentifier, System.Guid? id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (tenantId == null)
                 throw new System.ArgumentNullException("tenantId");
@@ -6613,7 +6610,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return new HorselessResponse(status_, headers_);
+                            return new HoselessResponse(status_, headers_);
                         }
                         else
                         {
@@ -6638,7 +6635,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantCreateAsync(HostingEntitiesTenant? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantCreateAsync(HostingEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/HorselessHostingModel/TenantREST/HostingEntitiesTenantCreate");
@@ -6693,7 +6690,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<HostingEntitiesTenant>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<HostingEntitiesTenant>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -6718,7 +6715,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantGetByObjectIdAsync(string objectId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -6764,7 +6761,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<HostingEntitiesTenant>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<HostingEntitiesTenant>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -6799,7 +6796,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantUpdateAsync(string entityCollectionId, HostingEntitiesTenant? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<HostingEntitiesTenant>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantUpdateAsync(string entityCollectionId, HostingEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (entityCollectionId == null)
                 throw new System.ArgumentNullException("entityCollectionId");
@@ -6858,7 +6855,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<HostingEntitiesTenant>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<HostingEntitiesTenant>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -6883,7 +6880,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<HostingEntitiesTenant>>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantGetByPageNumberAsync(int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<HostingEntitiesTenant>>> ApiHorselessHostingModelTenantRESTHostingEntitiesTenantGetByPageNumberAsync(int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/HorselessHostingModel/TenantREST/HostingEntitiesTenantGetByPageNumber?");
@@ -6938,7 +6935,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<System.Collections.Generic.ICollection<HostingEntitiesTenant>>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<System.Collections.Generic.ICollection<HostingEntitiesTenant>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -6973,7 +6970,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantCreateAsync(string __tenant__, ContentEntitiesTenant? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantCreateAsync(string __tenant__, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -7032,7 +7029,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesTenant>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesTenant>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -7057,7 +7054,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantGetByObjectIdAsync(string objectId, string __tenant__, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (objectId == null)
                 throw new System.ArgumentNullException("objectId");
@@ -7107,7 +7104,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesTenant>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesTenant>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)
@@ -7142,7 +7139,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesTenant? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantUpdateAsync(string contentCollectionId, string __tenant__, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -7205,7 +7202,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesTenant>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesTenant>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -7230,7 +7227,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantUpdatePropertiesAsync(string contentCollectionId, string __tenant__, System.Collections.Generic.IEnumerable<string>? updatedProperties = null, ContentEntitiesTenant? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<ContentEntitiesTenant>> ApiHorselessContentModelTenantUpdatePropertiesAsync(string contentCollectionId, string __tenant__, System.Collections.Generic.IEnumerable<string> updatedProperties = null, ContentEntitiesTenant body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (contentCollectionId == null)
                 throw new System.ArgumentNullException("contentCollectionId");
@@ -7295,7 +7292,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<ContentEntitiesTenant>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<ContentEntitiesTenant>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
@@ -7320,7 +7317,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesTenant>>> ApiHorselessContentModelTenantGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesTenant>>> ApiHorselessContentModelTenantGetByPageNumberAsync(string __tenant__, int? pageSize = null, int? pageNumber = null, int? pageCount = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (__tenant__ == null)
                 throw new System.ArgumentNullException("__tenant__");
@@ -7379,7 +7376,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new HorselessResponse<System.Collections.Generic.ICollection<ContentEntitiesTenant>>(status_, headers_, objectResponse_.Object);
+                            return new HoselessResponse<System.Collections.Generic.ICollection<ContentEntitiesTenant>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 400)
@@ -7430,7 +7427,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
         {
             if (response == null || response.Content == null)
             {
-                return new ObjectResponseResult<T>(default(T)!, string.Empty);
+                return new ObjectResponseResult<T>(default(T), string.Empty);
             }
         
             if (ReadResponseAsString)
@@ -7439,7 +7436,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                 try
                 {
                     var typedBody = System.Text.Json.JsonSerializer.Deserialize<T>(responseText, JsonSerializerSettings);
-                    return new ObjectResponseResult<T>(typedBody!, responseText);
+                    return new ObjectResponseResult<T>(typedBody, responseText);
                 }
                 catch (System.Text.Json.JsonException exception)
                 {
@@ -7454,7 +7451,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
                     using (var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
                     {
                         var typedBody = await System.Text.Json.JsonSerializer.DeserializeAsync<T>(responseStream, JsonSerializerSettings, cancellationToken).ConfigureAwait(false);
-                        return new ObjectResponseResult<T>(typedBody!, string.Empty);
+                        return new ObjectResponseResult<T>(typedBody, string.Empty);
                     }
                 }
                 catch (System.Text.Json.JsonException exception)
@@ -7465,7 +7462,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
             }
         }
     
-        private string ConvertToString(object? value, System.Globalization.CultureInfo cultureInfo)
+        private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value == null)
             {
@@ -7590,64 +7587,64 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesAccessControlEntry 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsActive")]
-        public bool? IsActive { get; set; }= default!;
+        public bool? IsActive { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Scope")]
         [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
-        public ContentEntitiesACEPermissionScope Scope { get; set; }= default!;
+        public ContentEntitiesACEPermissionScope? Scope { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Permission")]
         [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
-        public ContentEntitiesACEPermission Permission { get; set; }= default!;
+        public ContentEntitiesACEPermission? Permission { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PermissionType")]
         [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
-        public ContentEntitiesACEPermissionType PermissionType { get; set; }= default!;
+        public ContentEntitiesACEPermissionType? PermissionType { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ContentCollections")]
-        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection>? ContentCollections { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ContentCollections { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("HorselessContents")]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>? HorselessContents { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent> HorselessContents { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("HorselessViews")]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessView>? HorselessViews { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessView> HorselessViews { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Publications")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPublication>? Publications { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPublication> Publications { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Tenants")]
-        public System.Collections.Generic.ICollection<ContentEntitiesTenant>? Tenants { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesTenant> Tenants { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Placeholders")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPlaceholder>? Placeholders { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPlaceholder> Placeholders { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("SubjectPrincipals")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? SubjectPrincipals { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> SubjectPrincipals { get; set; }
     
         public string ToJson()
         {
@@ -7667,67 +7664,67 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesContentCollection 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AllowAnonymousRead")]
-        public bool? AllowAnonymousRead { get; set; }= default!;
+        public bool? AllowAnonymousRead { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsPublished")]
-        public bool? IsPublished { get; set; }= default!;
+        public bool? IsPublished { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PublishedURL")]
-        public string? PublishedURL { get; set; }= default!;
+        public string PublishedURL { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PreviewURL")]
-        public string? PreviewURL { get; set; }= default!;
+        public string PreviewURL { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ParentContentCollections")]
-        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection>? ParentContentCollections { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ParentContentCollections { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ChildContentCollections")]
-        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection>? ChildContentCollections { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ChildContentCollections { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("HorselessViews")]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessView>? HorselessViews { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessView> HorselessViews { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Publications")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPublication>? Publications { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPublication> Publications { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Tenants")]
-        public System.Collections.Generic.ICollection<ContentEntitiesTenant>? Tenants { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesTenant> Tenants { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Taxonomies")]
-        public System.Collections.Generic.ICollection<ContentEntitiesTaxonomy>? Taxonomies { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesTaxonomy> Taxonomies { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("HorselessContents")]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>? HorselessContents { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent> HorselessContents { get; set; }
     
         public string ToJson()
         {
@@ -7747,46 +7744,46 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesFilesystemAsset 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Filename")]
-        public string? Filename { get; set; }= default!;
+        public string Filename { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PublishedURL")]
-        public string? PublishedURL { get; set; }= default!;
+        public string PublishedURL { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PreviewURL")]
-        public string? PreviewURL { get; set; }= default!;
+        public string PreviewURL { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("HorselessContents")]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>? HorselessContents { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent> HorselessContents { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         public string ToJson()
         {
@@ -7806,43 +7803,43 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesHolonym 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JsonValue")]
-        public string? JsonValue { get; set; }= default!;
+        public string JsonValue { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JsonSchema")]
-        public string? JsonSchema { get; set; }= default!;
+        public string JsonSchema { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Meronyms")]
-        public System.Collections.Generic.ICollection<ContentEntitiesMeronym>? Meronyms { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesMeronym> Meronyms { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         public string ToJson()
         {
@@ -7862,67 +7859,67 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesHorselessContent 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("FilesystemAssetId")]
-        public System.Guid? FilesystemAssetId { get; set; }= default!;
+        public System.Guid? FilesystemAssetId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JSONAssetId")]
-        public System.Guid? JSONAssetId { get; set; }= default!;
+        public System.Guid? JSONAssetId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("MIMETypeId")]
-        public System.Guid? MIMETypeId { get; set; }= default!;
+        public System.Guid? MIMETypeId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsPublished")]
-        public bool? IsPublished { get; set; }= default!;
+        public bool? IsPublished { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PublishedURL")]
-        public string? PublishedURL { get; set; }= default!;
+        public string PublishedURL { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PreviewURL")]
-        public string? PreviewURL { get; set; }= default!;
+        public string PreviewURL { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("FilesystemAsset")]
-        public ContentEntitiesFilesystemAsset FilesystemAsset { get; set; }= default!;
+        public ContentEntitiesFilesystemAsset FilesystemAsset { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JSONAsset")]
-        public ContentEntitiesJSONAsset JSONAsset { get; set; }= default!;
+        public ContentEntitiesJSONAsset JSONAsset { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("MIMEType")]
-        public ContentEntitiesMIMEType MIMEType { get; set; }= default!;
+        public ContentEntitiesMIMEType MIMEType { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ContentCollections")]
-        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection>? ContentCollections { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ContentCollections { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("HorselesContentType")]
-        public ContentEntitiesHorselessContentType HorselesContentType { get; set; }= default!;
+        public ContentEntitiesHorselessContentType? HorselesContentType { get; set; }
     
         public string ToJson()
         {
@@ -7953,52 +7950,52 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesHorselessSession 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("SessionId")]
-        public string? SessionId { get; set; }= default!;
+        public string SessionId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Iss")]
-        public string? Iss { get; set; }= default!;
+        public string Iss { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Aud")]
-        public string? Aud { get; set; }= default!;
+        public string Aud { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Sub")]
-        public string? Sub { get; set; }= default!;
+        public string Sub { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsAnonymous")]
-        public bool? IsAnonymous { get; set; }= default!;
+        public bool? IsAnonymous { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Principal")]
-        public ContentEntitiesPrincipal Principal { get; set; }= default!;
+        public ContentEntitiesPrincipal Principal { get; set; }
     
         public string ToJson()
         {
@@ -8018,64 +8015,64 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesHorselessView 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsActive")]
-        public bool? IsActive { get; set; }= default!;
+        public bool? IsActive { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Exists")]
-        public bool Exists { get; set; }= default!;
+        public bool? Exists { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsDirectory")]
-        public bool IsDirectory { get; set; }= default!;
+        public bool? IsDirectory { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("LastModified")]
-        public System.DateTime LastModified { get; set; }= default!;
+        public System.DateTime? LastModified { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Length")]
-        public long Length { get; set; }= default!;
+        public long? Length { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Name")]
-        public string? Name { get; set; }= default!;
+        public string Name { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PhysicalPath")]
-        public string? PhysicalPath { get; set; }= default!;
+        public string PhysicalPath { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ViewContent")]
-        public byte[]? ViewContent { get; set; }= default!;
+        public byte[] ViewContent { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ContentCollections")]
-        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection>? ContentCollections { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ContentCollections { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Placeholders")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPlaceholder>? Placeholders { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPlaceholder> Placeholders { get; set; }
     
         public string ToJson()
         {
@@ -8095,49 +8092,49 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesJSONAsset 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JsonValue")]
-        public string? JsonValue { get; set; }= default!;
+        public string JsonValue { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JsonSchema")]
-        public string? JsonSchema { get; set; }= default!;
+        public string JsonSchema { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("HorselessContents")]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>? HorselessContents { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent> HorselessContents { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Tenants")]
-        public System.Collections.Generic.ICollection<ContentEntitiesTenant>? Tenants { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesTenant> Tenants { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JsonObject")]
-        public System.Collections.Generic.IDictionary<string, NodesJsonNode>? JsonObject { get; set; }= default!;
+        public System.Collections.Generic.IDictionary<string, NodesJsonNode> JsonObject { get; set; }
     
         public string ToJson()
         {
@@ -8157,40 +8154,40 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesMIMEType 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("MIMETypeName")]
-        public string? MIMETypeName { get; set; }= default!;
+        public string MIMETypeName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("HorselessContents")]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>? HorselessContents { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent> HorselessContents { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         public string ToJson()
         {
@@ -8210,43 +8207,43 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesMeronym 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JsonValue")]
-        public string? JsonValue { get; set; }= default!;
+        public string JsonValue { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JsonSchema")]
-        public string? JsonSchema { get; set; }= default!;
+        public string JsonSchema { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Holonyms")]
-        public System.Collections.Generic.ICollection<ContentEntitiesHolonym>? Holonyms { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesHolonym> Holonyms { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         public string ToJson()
         {
@@ -8266,61 +8263,61 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesNavigationMenu 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PublishAt")]
-        public System.DateTime? PublishAt { get; set; }= default!;
+        public System.DateTime? PublishAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UnPublishAt")]
-        public System.DateTime? UnPublishAt { get; set; }= default!;
+        public System.DateTime? UnPublishAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsPublished")]
-        public bool? IsPublished { get; set; }= default!;
+        public bool? IsPublished { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("MenuLabel")]
-        public string? MenuLabel { get; set; }= default!;
+        public string MenuLabel { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("MenuDescription")]
-        public string? MenuDescription { get; set; }= default!;
+        public string MenuDescription { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("MenuAltText")]
-        public string? MenuAltText { get; set; }= default!;
+        public string MenuAltText { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ChildNavigationMenuItems")]
-        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem>? ChildNavigationMenuItems { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem> ChildNavigationMenuItems { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Children")]
-        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu>? Children { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu> Children { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Parents")]
-        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu>? Parents { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu> Parents { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         public string ToJson()
         {
@@ -8340,61 +8337,61 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesNavigationMenuItem 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PublishAt")]
-        public System.DateTime? PublishAt { get; set; }= default!;
+        public System.DateTime? PublishAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UnPublishAt")]
-        public System.DateTime? UnPublishAt { get; set; }= default!;
+        public System.DateTime? UnPublishAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsPublished")]
-        public bool? IsPublished { get; set; }= default!;
+        public bool? IsPublished { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("MenuItemLabel")]
-        public string? MenuItemLabel { get; set; }= default!;
+        public string MenuItemLabel { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("MenuItemDescription")]
-        public string? MenuItemDescription { get; set; }= default!;
+        public string MenuItemDescription { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("MenuItemAltText")]
-        public string? MenuItemAltText { get; set; }= default!;
+        public string MenuItemAltText { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ChildNavigationItems")]
-        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem>? ChildNavigationItems { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem> ChildNavigationItems { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ParentNavigationItems")]
-        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem>? ParentNavigationItems { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenuItem> ParentNavigationItems { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ParentNavigationMenus")]
-        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu>? ParentNavigationMenus { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesNavigationMenu> ParentNavigationMenus { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         public string ToJson()
         {
@@ -8414,55 +8411,55 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesNugetPackage 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PublishAt")]
-        public System.DateTime? PublishAt { get; set; }= default!;
+        public System.DateTime? PublishAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UnPublishAt")]
-        public System.DateTime? UnPublishAt { get; set; }= default!;
+        public System.DateTime? UnPublishAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsPublished")]
-        public bool? IsPublished { get; set; }= default!;
+        public bool? IsPublished { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PackageId")]
-        public string? PackageId { get; set; }= default!;
+        public string PackageId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PackageVersion")]
-        public string? PackageVersion { get; set; }= default!;
+        public string PackageVersion { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PackageAuthor")]
-        public string? PackageAuthor { get; set; }= default!;
+        public string PackageAuthor { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PackageSource")]
-        public string? PackageSource { get; set; }= default!;
+        public string PackageSource { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         public string ToJson()
         {
@@ -8482,46 +8479,46 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesPlaceholder 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsPublished")]
-        public bool? IsPublished { get; set; }= default!;
+        public bool? IsPublished { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Description")]
-        public string? Description { get; set; }= default!;
+        public string Description { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("HorselessViewId")]
-        public System.Guid? HorselessViewId { get; set; }= default!;
+        public System.Guid? HorselessViewId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("HorselessView")]
-        public ContentEntitiesHorselessView HorselessView { get; set; }= default!;
+        public ContentEntitiesHorselessView HorselessView { get; set; }
     
         public string ToJson()
         {
@@ -8541,82 +8538,82 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesPrincipal 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Iss")]
-        public string? Iss { get; set; }= default!;
+        public string Iss { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Aud")]
-        public string? Aud { get; set; }= default!;
+        public string Aud { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Sub")]
-        public string? Sub { get; set; }= default!;
+        public string Sub { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsAnonymous")]
-        public bool IsAnonymous { get; set; }= default!;
+        public bool? IsAnonymous { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UPN")]
-        public string? UPN { get; set; }= default!;
+        public string UPN { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Email")]
-        public string? Email { get; set; }= default!;
+        public string Email { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PreferredUserName")]
-        public string? PreferredUserName { get; set; }= default!;
+        public string PreferredUserName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PrincipalClaimContainer")]
-        public ContentEntitiesPrincipalClaimContainer PrincipalClaimContainer { get; set; }= default!;
+        public ContentEntitiesPrincipalClaimContainer PrincipalClaimContainer { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ManagingAccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? ManagingAccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> ManagingAccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("OwnedHorselessSessions")]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessSession>? OwnedHorselessSessions { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessSession> OwnedHorselessSessions { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("HorselessSessions")]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessSession>? HorselessSessions { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessSession> HorselessSessions { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("HorselessContents")]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent>? HorselessContents { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessContent> HorselessContents { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("HorselessViews")]
-        public System.Collections.Generic.ICollection<ContentEntitiesHorselessView>? HorselessViews { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesHorselessView> HorselessViews { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ContentCollections")]
-        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection>? ContentCollections { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ContentCollections { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("FilesystemAssets")]
-        public System.Collections.Generic.ICollection<ContentEntitiesFilesystemAsset>? FilesystemAssets { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesFilesystemAsset> FilesystemAssets { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Holonyms")]
-        public System.Collections.Generic.ICollection<ContentEntitiesHolonym>? Holonyms { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesHolonym> Holonyms { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JSONAssets")]
-        public System.Collections.Generic.ICollection<ContentEntitiesJSONAsset>? JSONAssets { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesJSONAsset> JSONAssets { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Placeholders")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPlaceholder>? Placeholders { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPlaceholder> Placeholders { get; set; }
     
         public string ToJson()
         {
@@ -8636,31 +8633,31 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesPrincipalClaim 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ClaimType")]
-        public string? ClaimType { get; set; }= default!;
+        public string ClaimType { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ClaimValue")]
-        public string? ClaimValue { get; set; }= default!;
+        public string ClaimValue { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ClaimValueType")]
-        public string? ClaimValueType { get; set; }= default!;
+        public string ClaimValueType { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ClaimIssuer")]
-        public string? ClaimIssuer { get; set; }= default!;
+        public string ClaimIssuer { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PrincipalClaimContainerId")]
-        public System.Guid? PrincipalClaimContainerId { get; set; }= default!;
+        public System.Guid? PrincipalClaimContainerId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PrincipalClaimContainer")]
-        public ContentEntitiesPrincipalClaimContainer PrincipalClaimContainer { get; set; }= default!;
+        public ContentEntitiesPrincipalClaimContainer PrincipalClaimContainer { get; set; }
     
         public string ToJson()
         {
@@ -8680,28 +8677,28 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesPrincipalClaimContainer 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PrincipalClaims")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipalClaim>? PrincipalClaims { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipalClaim> PrincipalClaims { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PrincipalId")]
-        public System.Guid? PrincipalId { get; set; }= default!;
+        public System.Guid? PrincipalId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Principal")]
-        public ContentEntitiesPrincipal Principal { get; set; }= default!;
+        public ContentEntitiesPrincipal Principal { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         public string ToJson()
         {
@@ -8721,58 +8718,58 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesPublication 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PublishAt")]
-        public System.DateTime? PublishAt { get; set; }= default!;
+        public System.DateTime? PublishAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UnPublishAt")]
-        public System.DateTime? UnPublishAt { get; set; }= default!;
+        public System.DateTime? UnPublishAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsPublished")]
-        public bool? IsPublished { get; set; }= default!;
+        public bool? IsPublished { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PublishedURL")]
-        public string? PublishedURL { get; set; }= default!;
+        public string PublishedURL { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PreviewURL")]
-        public string? PreviewURL { get; set; }= default!;
+        public string PreviewURL { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PublicationChildren")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPublication>? PublicationChildren { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPublication> PublicationChildren { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PublicationParents")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPublication>? PublicationParents { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPublication> PublicationParents { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ContentCollections")]
-        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection>? ContentCollections { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ContentCollections { get; set; }
     
         public string ToJson()
         {
@@ -8792,55 +8789,55 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesTaxon 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JsonValue")]
-        public string? JsonValue { get; set; }= default!;
+        public string JsonValue { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JsonSchema")]
-        public string? JsonSchema { get; set; }= default!;
+        public string JsonSchema { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AntecedentTaxons")]
-        public System.Collections.Generic.ICollection<ContentEntitiesTaxon>? AntecedentTaxons { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesTaxon> AntecedentTaxons { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DerivativeTaxons")]
-        public System.Collections.Generic.ICollection<ContentEntitiesTaxon>? DerivativeTaxons { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesTaxon> DerivativeTaxons { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("TaxonomyId")]
-        public System.Guid? TaxonomyId { get; set; }= default!;
+        public System.Guid? TaxonomyId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Taxonomy")]
-        public ContentEntitiesTaxonomy Taxonomy { get; set; }= default!;
+        public ContentEntitiesTaxonomy Taxonomy { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Holonyms")]
-        public System.Collections.Generic.ICollection<ContentEntitiesHolonym>? Holonyms { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesHolonym> Holonyms { get; set; }
     
         public string ToJson()
         {
@@ -8860,46 +8857,46 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesTaxonomy 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JsonValue")]
-        public string? JsonValue { get; set; }= default!;
+        public string JsonValue { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("JsonSchema")]
-        public string? JsonSchema { get; set; }= default!;
+        public string JsonSchema { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Taxons")]
-        public System.Collections.Generic.ICollection<ContentEntitiesTaxon>? Taxons { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesTaxon> Taxons { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ContentCollections")]
-        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection>? ContentCollections { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ContentCollections { get; set; }
     
         public string ToJson()
         {
@@ -8919,59 +8916,62 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class ContentEntitiesTenant 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsPublished")]
-        public bool IsPublished { get; set; }= default!;
+        public bool? IsPublished { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("BaseUrl")]
-        public string? BaseUrl { get; set; }= default!;
+        public string BaseUrl { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("TenantIdentifierStrategyId")]
-        public System.Guid? TenantIdentifierStrategyId { get; set; }= default!;
+        public System.Guid? TenantIdentifierStrategyId { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("TenantIdentifierStrategy")]
+        public ContentEntitiesTenantIdentifierStrategy TenantIdentifierStrategy { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("TenantIdentifier")]
-        public string? TenantIdentifier { get; set; }= default!;
+        public string TenantIdentifier { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("MetaData")]
-        public System.Collections.Generic.ICollection<ContentEntitiesJSONAsset>? MetaData { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesJSONAsset> MetaData { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Accounts")]
-        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal>? Accounts { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Accounts { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DeploymentState")]
         [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
-        public ContentEntitiesTenantDeploymentWorkflowState DeploymentState { get; set; }= default!;
+        public ContentEntitiesTenantDeploymentWorkflowState? DeploymentState { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ContentCollections")]
-        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection>? ContentCollections { get; set; }= default!;
+        public System.Collections.Generic.ICollection<ContentEntitiesContentCollection> ContentCollections { get; set; }
     
         public string ToJson()
         {
@@ -9013,6 +9013,136 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     
         [System.Runtime.Serialization.EnumMember(Value = @"DeploymentComplete")]
         DeploymentComplete = 7,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.1.0)")]
+    public partial class ContentEntitiesTenantIdentifierStrategy 
+    {
+        [System.Text.Json.Serialization.JsonPropertyName("Id")]
+        public System.Guid? Id { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
+        public string DisplayName { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
+        public string ObjectId { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
+        public System.DateTime? CreatedAt { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
+        public byte[] Timestamp { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("StrategyContainers")]
+        public System.Collections.Generic.ICollection<ContentEntitiesTenantIdentifierStrategyContainer> StrategyContainers { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
+        public System.DateTime? UpdatedAt { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
+        public string DictionaryKey { get; set; }
+    
+        public string ToJson()
+        {
+            var options = new System.Text.Json.JsonSerializerOptions();
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
+        }
+    
+        public static ContentEntitiesTenantIdentifierStrategy FromJson(string data)
+        {
+            var options = new System.Text.Json.JsonSerializerOptions();
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesTenantIdentifierStrategy>(data, options);
+        }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.1.0)")]
+    public partial class ContentEntitiesTenantIdentifierStrategyContainer 
+    {
+        [System.Text.Json.Serialization.JsonPropertyName("Id")]
+        public System.Guid? Id { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("TenantIdentifierStrategyName")]
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+        public ContentEntitiesTenantIdentifierStrategyName? TenantIdentifierStrategyName { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
+        public string DisplayName { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
+        public string ObjectId { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
+        public System.DateTime? CreatedAt { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
+        public byte[] Timestamp { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("TenantIdentifier")]
+        public string TenantIdentifier { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("StrategyId")]
+        public System.Guid? StrategyId { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Strategy")]
+        public ContentEntitiesTenantIdentifierStrategy Strategy { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
+        public System.Collections.Generic.ICollection<ContentEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
+        public System.Collections.Generic.ICollection<ContentEntitiesPrincipal> Owners { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
+        public System.DateTime? UpdatedAt { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
+        public string DictionaryKey { get; set; }
+    
+        public string ToJson()
+        {
+            var options = new System.Text.Json.JsonSerializerOptions();
+            return System.Text.Json.JsonSerializer.Serialize(this, options);
+        }
+    
+        public static ContentEntitiesTenantIdentifierStrategyContainer FromJson(string data)
+        {
+            var options = new System.Text.Json.JsonSerializerOptions();
+            return System.Text.Json.JsonSerializer.Deserialize<ContentEntitiesTenantIdentifierStrategyContainer>(data, options);
+        }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.1.0)")]
+    public enum ContentEntitiesTenantIdentifierStrategyName
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"STATIC")]
+        STATIC = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"BASE_PATH")]
+        BASE_PATH = 1,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"ASPNETCORE_ROUTE")]
+        ASPNETCORE_ROUTE = 2,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"DNS_HOSTNAME")]
+        DNS_HOSTNAME = 3,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"DNS_FQDN")]
+        DNS_FQDN = 4,
     
     }
     
@@ -9096,48 +9226,48 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     {
         [System.Text.Json.Serialization.JsonPropertyName("Scope")]
         [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
-        public HostingEntitiesACEPermissionScope Scope { get; set; }= default!;
+        public HostingEntitiesACEPermissionScope? Scope { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Permission")]
         [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
-        public HostingEntitiesACEPermission Permission { get; set; }= default!;
+        public HostingEntitiesACEPermission? Permission { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PermissionType")]
         [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
-        public HostingEntitiesACEPermissionType PermissionType { get; set; }= default!;
+        public HostingEntitiesACEPermissionType? PermissionType { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("NugetPackages")]
-        public System.Collections.Generic.ICollection<HostingEntitiesNugetPackage>? NugetPackages { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesNugetPackage> NugetPackages { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Tenants")]
-        public System.Collections.Generic.ICollection<HostingEntitiesTenant>? Tenants { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesTenant> Tenants { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsActive")]
-        public bool? IsActive { get; set; }= default!;
+        public bool? IsActive { get; set; }
     
         public string ToJson()
         {
@@ -9157,52 +9287,52 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class HostingEntitiesKeyCloakConfiguration 
     {
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Authority")]
-        public string? Authority { get; set; }= default!;
+        public string Authority { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Realm")]
-        public string? Realm { get; set; }= default!;
+        public string Realm { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Iss")]
-        public string? Iss { get; set; }= default!;
+        public string Iss { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Aud")]
-        public string? Aud { get; set; }= default!;
+        public string Aud { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("TenantInfoId")]
-        public System.Guid? TenantInfoId { get; set; }= default!;
+        public System.Guid? TenantInfoId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("TenantInfo")]
-        public HostingEntitiesTenantInfo TenantInfo { get; set; }= default!;
+        public HostingEntitiesTenantInfo TenantInfo { get; set; }
     
         public string ToJson()
         {
@@ -9222,49 +9352,49 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class HostingEntitiesNugetPackage 
     {
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Tenants")]
-        public System.Collections.Generic.ICollection<HostingEntitiesTenant>? Tenants { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesTenant> Tenants { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PackageName")]
-        public string? PackageName { get; set; }= default!;
+        public string PackageName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PackageId")]
-        public string? PackageId { get; set; }= default!;
+        public string PackageId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Publisher")]
-        public string? Publisher { get; set; }= default!;
+        public string Publisher { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Version")]
-        public string? Version { get; set; }= default!;
+        public string Version { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         public string ToJson()
         {
@@ -9284,49 +9414,49 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class HostingEntitiesPrincipal 
     {
         [System.Text.Json.Serialization.JsonPropertyName("UPN")]
-        public string? UPN { get; set; }= default!;
+        public string UPN { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Email")]
-        public string? Email { get; set; }= default!;
+        public string Email { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("PreferredUserName")]
-        public string? PreferredUserName { get; set; }= default!;
+        public string PreferredUserName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("NugetPackages")]
-        public System.Collections.Generic.ICollection<HostingEntitiesNugetPackage>? NugetPackages { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesNugetPackage> NugetPackages { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Iss")]
-        public string? Iss { get; set; }= default!;
+        public string Iss { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Aud")]
-        public string? Aud { get; set; }= default!;
+        public string Aud { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Sub")]
-        public string? Sub { get; set; }= default!;
+        public string Sub { get; set; }
     
         public string ToJson()
         {
@@ -9346,62 +9476,65 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class HostingEntitiesTenant 
     {
         [System.Text.Json.Serialization.JsonPropertyName("IsPublished")]
-        public bool IsPublished { get; set; }= default!;
+        public bool? IsPublished { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("BaseUrl")]
-        public string? BaseUrl { get; set; }= default!;
+        public string BaseUrl { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("TenantIdentifier")]
-        public string? TenantIdentifier { get; set; }= default!;
+        public string TenantIdentifier { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("TenantIdentifierStrategyId")]
+        public System.Guid? TenantIdentifierStrategyId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("TenantIdentifierStrategy")]
-        public HostingEntitiesTenantIdentifierStrategy TenantIdentifierStrategy { get; set; }= default!;
+        public HostingEntitiesTenantIdentifierStrategy TenantIdentifierStrategy { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("TenantInfos")]
-        public System.Collections.Generic.ICollection<HostingEntitiesTenantInfo>? TenantInfos { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesTenantInfo> TenantInfos { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("KeyCloakConfigurations")]
-        public System.Collections.Generic.ICollection<HostingEntitiesKeyCloakConfiguration>? KeyCloakConfigurations { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesKeyCloakConfiguration> KeyCloakConfigurations { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("NugetPackages")]
-        public System.Collections.Generic.ICollection<HostingEntitiesNugetPackage>? NugetPackages { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesNugetPackage> NugetPackages { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Accounts")]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal>? Accounts { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Accounts { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DeploymentState")]
         [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
-        public HostingEntitiesTenantDeploymentWorkflowState DeploymentState { get; set; }= default!;
+        public HostingEntitiesTenantDeploymentWorkflowState? DeploymentState { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         public string ToJson()
         {
@@ -9447,25 +9580,37 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class HostingEntitiesTenantIdentifierStrategy 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
-    
-        [System.Text.Json.Serialization.JsonPropertyName("TenantId")]
-        public System.Guid? TenantId { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("StrategyContainers")]
-        public System.Collections.Generic.ICollection<HostingEntitiesTenantIdentifierStrategyContainer>? StrategyContainers { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesTenantIdentifierStrategyContainer> StrategyContainers { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
+        public System.DateTime? UpdatedAt { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
+        public byte[] Timestamp { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
+        public string DictionaryKey { get; set; }
     
         public string ToJson()
         {
@@ -9485,20 +9630,44 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class HostingEntitiesTenantIdentifierStrategyContainer 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid? Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("TenantIdentifierStrategyName")]
         [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
-        public HostingEntitiesTenantIdentifierStrategyName TenantIdentifierStrategyName { get; set; }= default!;
+        public HostingEntitiesTenantIdentifierStrategyName? TenantIdentifierStrategyName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("StrategyId")]
-        public System.Guid? StrategyId { get; set; }= default!;
+        public System.Guid? StrategyId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Strategy")]
-        public HostingEntitiesTenantIdentifierStrategy Strategy { get; set; }= default!;
+        public HostingEntitiesTenantIdentifierStrategy Strategy { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("Owners")]
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
+        public string ObjectId { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
+        public System.DateTime? CreatedAt { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
+        public System.DateTime? UpdatedAt { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
+        public string DisplayName { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
+        public bool? IsSoftDeleted { get; set; }
+    
+        [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
+        public string DictionaryKey { get; set; }
     
         public string ToJson()
         {
@@ -9538,58 +9707,58 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class HostingEntitiesTenantInfo 
     {
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ParentTenantId")]
-        public System.Guid? ParentTenantId { get; set; }= default!;
+        public System.Guid? ParentTenantId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ParentTenant")]
-        public HostingEntitiesTenant ParentTenant { get; set; }= default!;
+        public HostingEntitiesTenant ParentTenant { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Identifier")]
-        public string? Identifier { get; set; }= default!;
+        public string Identifier { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Name")]
-        public string? Name { get; set; }= default!;
+        public string Name { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ConnectionString")]
-        public string? ConnectionString { get; set; }= default!;
+        public string ConnectionString { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("TenantBaseUrl")]
-        public string? TenantBaseUrl { get; set; }= default!;
+        public string TenantBaseUrl { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("KeyCloakConfigurations")]
-        public System.Collections.Generic.ICollection<HostingEntitiesKeyCloakConfiguration>? KeyCloakConfigurations { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesKeyCloakConfiguration> KeyCloakConfigurations { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("WebAPITenantInfos")]
-        public System.Collections.Generic.ICollection<HostingEntitiesWebAPITenantInfo>? WebAPITenantInfos { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesWebAPITenantInfo> WebAPITenantInfos { get; set; }
     
         public string ToJson()
         {
@@ -9609,52 +9778,52 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class HostingEntitiesWebAPITenantInfo 
     {
         [System.Text.Json.Serialization.JsonPropertyName("AccessControlEntries")]
-        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry>? AccessControlEntries { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesAccessControlEntry> AccessControlEntries { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Owners")]
-        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal>? Owners { get; set; }= default!;
+        public System.Collections.Generic.ICollection<HostingEntitiesPrincipal> Owners { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Timestamp")]
-        public byte[]? Timestamp { get; set; }= default!;
+        public byte[] Timestamp { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("UpdatedAt")]
-        public System.DateTime? UpdatedAt { get; set; }= default!;
+        public System.DateTime? UpdatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DictionaryKey")]
-        public string? DictionaryKey { get; set; }= default!;
+        public string DictionaryKey { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public System.Guid Id { get; set; }= default!;
+        public System.Guid? Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("DisplayName")]
-        public string? DisplayName { get; set; }= default!;
+        public string DisplayName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ObjectId")]
-        public string? ObjectId { get; set; }= default!;
+        public string ObjectId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("IsSoftDeleted")]
-        public bool? IsSoftDeleted { get; set; }= default!;
+        public bool? IsSoftDeleted { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("CreatedAt")]
-        public System.DateTime? CreatedAt { get; set; }= default!;
+        public System.DateTime? CreatedAt { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Identifier")]
-        public string? Identifier { get; set; }= default!;
+        public string Identifier { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Name")]
-        public string? Name { get; set; }= default!;
+        public string Name { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ConnectionString")]
-        public string? ConnectionString { get; set; }= default!;
+        public string ConnectionString { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("WebAPIBaseUrl")]
-        public string? WebAPIBaseUrl { get; set; }= default!;
+        public string WebAPIBaseUrl { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("TenantInfoId")]
-        public System.Guid? TenantInfoId { get; set; }= default!;
+        public System.Guid? TenantInfoId { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("TenantInfo")]
-        public HostingEntitiesTenantInfo TenantInfo { get; set; }= default!;
+        public HostingEntitiesTenantInfo TenantInfo { get; set; }
     
         public string ToJson()
         {
@@ -9674,16 +9843,16 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class MultiTenantTenantInfo 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public string? Id { get; set; }= default!;
+        public string Id { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Identifier")]
-        public string? Identifier { get; set; }= default!;
+        public string Identifier { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Name")]
-        public string? Name { get; set; }= default!;
+        public string Name { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ConnectionString")]
-        public string? ConnectionString { get; set; }= default!;
+        public string ConnectionString { get; set; }
     
         public string ToJson()
         {
@@ -9703,25 +9872,25 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class MvcPartialViewResult 
     {
         [System.Text.Json.Serialization.JsonPropertyName("StatusCode")]
-        public int? StatusCode { get; set; }= default!;
+        public int? StatusCode { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ViewName")]
-        public string? ViewName { get; set; }= default!;
+        public string ViewName { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Model")]
-        public object? Model { get; set; }= default!;
+        public object Model { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ViewData")]
-        public System.Collections.Generic.IDictionary<string, object>? ViewData { get; set; }= default!;
+        public System.Collections.Generic.IDictionary<string, object> ViewData { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("TempData")]
-        public System.Collections.Generic.IDictionary<string, object>? TempData { get; set; }= default!;
+        public System.Collections.Generic.IDictionary<string, object> TempData { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ViewEngine")]
-        public ViewEnginesIViewEngine ViewEngine { get; set; }= default!;
+        public ViewEnginesIViewEngine ViewEngine { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ContentType")]
-        public string? ContentType { get; set; }= default!;
+        public string ContentType { get; set; }
     
         public string ToJson()
         {
@@ -9741,19 +9910,19 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class MvcProblemDetails 
     {
         [System.Text.Json.Serialization.JsonPropertyName("type")]
-        public string? Type { get; set; }= default!;
+        public string Type { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("title")]
-        public string? Title { get; set; }= default!;
+        public string Title { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("status")]
-        public int? Status { get; set; }= default!;
+        public int? Status { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("detail")]
-        public string? Detail { get; set; }= default!;
+        public string Detail { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("instance")]
-        public string? Instance { get; set; }= default!;
+        public string Instance { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -9782,13 +9951,13 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class NodesJsonNode 
     {
         [System.Text.Json.Serialization.JsonPropertyName("Options")]
-        public NodesJsonNodeOptions Options { get; set; }= default!;
+        public NodesJsonNodeOptions Options { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Parent")]
-        public NodesJsonNode Parent { get; set; }= default!;
+        public NodesJsonNode Parent { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("Root")]
-        public NodesJsonNode Root { get; set; }= default!;
+        public NodesJsonNode Root { get; set; }
     
         public string ToJson()
         {
@@ -9808,7 +9977,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class NodesJsonNodeOptions 
     {
         [System.Text.Json.Serialization.JsonPropertyName("PropertyNameCaseInsensitive")]
-        public bool PropertyNameCaseInsensitive { get; set; }= default!;
+        public bool? PropertyNameCaseInsensitive { get; set; }
     
         public string ToJson()
         {
@@ -9828,19 +9997,19 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     public partial class SecurityRestClientConfiguration 
     {
         [System.Text.Json.Serialization.JsonPropertyName("IsClaimsIdentity")]
-        public bool IsClaimsIdentity { get; set; }= default!;
+        public bool? IsClaimsIdentity { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("AccessToken")]
-        public string? AccessToken { get; set; }= default!;
+        public string AccessToken { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("ODataEndpoint")]
-        public string? ODataEndpoint { get; set; }= default!;
+        public string ODataEndpoint { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("RESTEndpoint")]
-        public string? RESTEndpoint { get; set; }= default!;
+        public string RESTEndpoint { get; set; }
     
         [System.Text.Json.Serialization.JsonPropertyName("TenantIdentifier")]
-        public string? TenantIdentifier { get; set; }= default!;
+        public string TenantIdentifier { get; set; }
     
         public string ToJson()
         {
@@ -9874,13 +10043,13 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.14.8.0 (NJsonSchema v10.5.2.0 (Newtonsoft.Json v13.0.1.0))")]
-    public partial class HorselessResponse
+    public partial class HoselessResponse
     {
         public int StatusCode { get; private set; }
 
         public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> Headers { get; private set; }
 
-        public HorselessResponse(int statusCode, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers)
+        public HoselessResponse(int statusCode, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers)
         {
             StatusCode = statusCode;
             Headers = headers;
@@ -9888,11 +10057,11 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.14.8.0 (NJsonSchema v10.5.2.0 (Newtonsoft.Json v13.0.1.0))")]
-    public partial class HorselessResponse<TResult> : HorselessResponse
+    public partial class HoselessResponse<TResult> : HoselessResponse
     {
         public TResult Result { get; private set; }
 
-        public HorselessResponse(int statusCode, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, TResult result)
+        public HoselessResponse(int statusCode, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, TResult result)
             : base(statusCode, headers)
         {
             Result = result;
@@ -9904,11 +10073,11 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     {
         public int StatusCode { get; private set; }
 
-        public string? Response { get; private set; }
+        public string Response { get; private set; }
 
         public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> Headers { get; private set; }
 
-        public ApiException(string message, int statusCode, string? response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, System.Exception? innerException)
+        public ApiException(string message, int statusCode, string response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, System.Exception innerException)
             : base(message + "\n\nStatus: " + statusCode + "\nResponse: \n" + ((response == null) ? "(null)" : response.Substring(0, response.Length >= 512 ? 512 : response.Length)), innerException)
         {
             StatusCode = statusCode;
@@ -9927,7 +10096,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
     {
         public TResult Result { get; private set; }
 
-        public ApiException(string message, int statusCode, string? response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, TResult result, System.Exception? innerException)
+        public ApiException(string message, int statusCode, string response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, TResult result, System.Exception innerException)
             : base(message, statusCode, response, headers, innerException)
         {
             Result = result;
