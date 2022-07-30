@@ -51,6 +51,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public string TenantIdentifier { get; set; }
 
+        public Guid? StrategyId { get; set; }
+
         public TenantIdentifierStrategy? Strategy { get; set; }
     }
 
@@ -85,7 +87,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         // [InverseProperty(nameof(ContentEntities.Tenant.TenantIdentifierStrategy))]
         // public Tenant? Tenant { get; set; } = new Tenant();
 
-        [InverseProperty(nameof(TenantIdentifierStrategyContainer.Strategy))]
+        // [InverseProperty(nameof(TenantIdentifierStrategyContainer.Strategy))]
         public ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();
     }
 
@@ -119,7 +121,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         // [InverseProperty(nameof(ContentEntities.TenantIdentifierStrategy.Tenant))]
 
-        // public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; } 
+        public TenantIdentifierStrategy? TenantIdentifierStrategy { get; set; } 
 
         /// <summary>
         /// prospectively override other tenant identifier definitions
@@ -155,7 +157,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
         // [ForeignKey("FK_ContentCollectionTenants")]
-        [InverseProperty(nameof(ContentCollection.Tenants))]
+        // [InverseProperty(nameof(ContentCollection.Tenants))]
         public ICollection<ContentCollection> ContentCollections { get; set; } = new HashSet<ContentCollection>();
     }
 }

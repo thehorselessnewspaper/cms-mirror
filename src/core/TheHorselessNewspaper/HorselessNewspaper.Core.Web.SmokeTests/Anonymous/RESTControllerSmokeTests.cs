@@ -19,6 +19,7 @@ using System.Linq;
 using HorselessNewspaper.Web.Core.Model.Security;
 using HorselessNewspaper.Core.Interfaces.Security.Resolver;
 using HorselessNewspaper.Web.Core.Services.Model.REST.Security;
+using Microsoft.Extensions.Hosting;
 
 namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 {
@@ -155,7 +156,8 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     var route = RESTHostingModelControllerStrings.API_HORSELESSHOSTINGMODEL_TENANT + "/HostingEntitiesTenantCreate";
                     //testHostingModelTenantInfo.TenantId = testHostingModelTenant.Id;
-                    testHostingModelTenant.Accounts.Add(new Principal()
+                    // testHostingModelTenant.Accounts.Add();
+                    var testAccount = new Principal()
                     {
                         //Id= Guid.NewGuid(),
                         ObjectId = Guid.NewGuid().ToString(),
@@ -164,33 +166,33 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                         Iss = "https://isuer.tenant.com",
                         Aud = "client-application",
                         Sub = "oauth-sub"
-                    });
+                    };
 
-                    testHostingModelTenantInfo.WebAPITenantInfos.Add(new WebAPITenantInfo()
-                    {
-                        //Id = Guid.NewGuid(),
-                        CreatedAt = DateTime.UtcNow,
-                        DisplayName = testHostingModelTenant.DisplayName,
-                        ConnectionString = testHostingModelTenantInfo.ConnectionString,
-                        Identifier = testHostingModelTenantInfo.Identifier,
-                        Name = testHostingModelTenantInfo.Name,
-                        IsSoftDeleted = false,
-                        ObjectId = Guid.NewGuid().ToString(),
-                        //TenantInfoId = testHostingModelTenantInfo.Id,
-                        WebAPIBaseUrl = "/webapi/url"
-                    });
+                    //testHostingModelTenantInfo.WebAPITenantInfos.Add(new WebAPITenantInfo()
+                    //{
+                    //    //Id = Guid.NewGuid(),
+                    //    CreatedAt = DateTime.UtcNow,
+                    //    DisplayName = testHostingModelTenant.DisplayName,
+                    //    ConnectionString = testHostingModelTenantInfo.ConnectionString,
+                    //    Identifier = testHostingModelTenantInfo.Identifier,
+                    //    Name = testHostingModelTenantInfo.Name,
+                    //    IsSoftDeleted = false,
+                    //    ObjectId = Guid.NewGuid().ToString(),
+                    //    //TenantInfoId = testHostingModelTenantInfo.Id,
+                    //    WebAPIBaseUrl = "/webapi/url"
+                    //});
 
-                    testHostingModelTenant.TenantInfos.Add(testHostingModelTenantInfo);
+                    //testHostingModelTenant.TenantInfos.Add(testHostingModelTenantInfo);
 
                     var tenantJson = GetJsonContent(testHostingModelTenant);
 
-                    var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
-                    {
-                        Content = tenantJson
-                    };
+                    //var postRequest = new HttpRequestMessage(HttpMethod.Post, route)
+                    //{
+                    //    Content = tenantJson
+                    //};
 
                     // act
-                    var postResponse = await client.SendAsync(postRequest);
+                    var postResponse = await client.PostAsJsonAsync(route, tenantJson.Value.ToString()); // await client.SendAsync(postRequest);
 
                     Assert.NotNull(postResponse);
 
@@ -204,10 +206,14 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     var tenantCount = readResultAslist.Count();
                     Assert.True(tenantCount == 1);
 
-                    Assert.True(readResultAslist.First().Id == testHostingModelTenant.Id);
+                    Assert.True(readResultAslist.First().TenantIdentifier == testHostingModelTenant.TenantIdentifier);
 
                     var insertResult = readResultAslist.First();
                     Assert.True(insertResult.TenantInfos.Count > 0);
+
+
+                    // var relatedItemInsertResult = await theHostingOperator.InsertRelatedEntity(post)
+
                     // here because we can post a tenant to the hosting model tenant endpoint
                     // add a tenantinfo 
 
@@ -258,6 +264,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 DisplayName = "Test Tenant - Can Create Hosting Tenant",
                 IsSoftDeleted = false,
                 IsPublished = false,
+                TenantIdentifier = "TestTenantIdentifier",
                 DeploymentState = TenantDeploymentWorkflowState.PendingApproval,
                 ObjectId = Guid.NewGuid().ToString(),
                 Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)

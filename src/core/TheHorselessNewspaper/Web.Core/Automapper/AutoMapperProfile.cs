@@ -57,6 +57,8 @@ namespace HorselessNewspaper.Web.Core.Automapper
 
             CreateMap<ApiModel.HostingEntitiesTenantIdentifierStrategy, HostingModel.TenantIdentifierStrategy>();
             CreateMap<ApiModel.ContentEntitiesTenantIdentifierStrategy, ContentModel.TenantIdentifierStrategy>();
+
+
         }
     }
 }

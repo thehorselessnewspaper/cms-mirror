@@ -42,7 +42,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
         public Guid? StrategyId { get; set; }
 
-        [InverseProperty(nameof(TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantIdentifierStrategy.StrategyContainers))]
+        // [InverseProperty(nameof(TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.TenantIdentifierStrategy.StrategyContainers))]
         public TenantIdentifierStrategy? Strategy { get; set; }
     }
 
@@ -67,7 +67,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         // [InverseProperty(nameof(HostingEntities.Tenant.TenantIdentifierStrategy))]
         // public Tenant? Tenant { get; set; }
 
-        [InverseProperty(nameof(TenantIdentifierStrategyContainer.Strategy))]
+        // [InverseProperty(nameof(TenantIdentifierStrategyContainer.Strategy))]
         public virtual ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new List<TenantIdentifierStrategyContainer>();
     }
 
@@ -109,7 +109,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
         public ICollection<KeyCloakConfiguration> KeyCloakConfigurations { get; set; } = new HashSet<KeyCloakConfiguration>();
 
-        [InverseProperty(nameof(NugetPackage.Tenants))]
+        // [InverseProperty(nameof(NugetPackage.Tenants))]
         public ICollection<NugetPackage> NugetPackages { get; set; } = new HashSet<NugetPackage>();
 
 
