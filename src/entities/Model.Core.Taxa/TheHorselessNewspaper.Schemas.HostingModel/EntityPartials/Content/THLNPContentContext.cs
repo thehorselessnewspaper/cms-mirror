@@ -22,6 +22,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
     internal partial class THLNPContentContext : DbContext
     {
         public Guid ContextInstanceId { get; set; } = Guid.NewGuid();
+        public DbSet<TenantIdentifierStrategyContainer> TenantIdentifierStrategyContainers { get; set; }
+
+        public DbSet<TenantIdentifierStrategy> TenantIdentifierStrategies { get; set; }
 
         private ILogger<THLNPContentContext> _logger;
         protected THLNPContentContext(DbContextOptions options)

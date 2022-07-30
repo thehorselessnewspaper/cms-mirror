@@ -20,9 +20,6 @@ namespace TheHorselessNewspaper.HostingModel.Context.MSSQL
         private ILogger<MSSqlContentContext> logger;
         private IServiceProvider serviceProvider;
 
-        public DbSet<TenantIdentifierStrategy> TenantIdentifierStrategies { get; set; }
-
-        public DbSet<TenantIdentifierStrategyContainer> TenantIdentifierStrategyContainer { get; set; }
 
 
         #region finbuckle IMultiTenantDbContext concerns 

@@ -14,6 +14,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
     {
         public Guid ContextInstanceId { get; set; } = Guid.NewGuid();
 
+        public DbSet<TenantIdentifierStrategy> TenantIdentifierStrategies { get; set; }
+
+        public DbSet<TenantIdentifierStrategyContainer> TenantIdentifierStrategyContainer { get; set; }
         partial void OnModelCreatingPartial(ModelBuilder builder)
         {
 

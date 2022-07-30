@@ -18,19 +18,20 @@ namespace HorselessNewspaper.Web.Core.Automapper
             CreateMap<ContentModel.TenantIdentifierStrategy, HostingModel.TenantIdentifierStrategy>();
 
 
-            CreateMap<HostingModel.TenantIdentifierStrategy, ApiModel.HostingEntitiesTenantIdentifierStrategy>();
-            CreateMap<ContentModel.TenantIdentifierStrategy, ApiModel.ContentEntitiesTenantIdentifierStrategy>();
+            //CreateMap<HostingModel.TenantIdentifierStrategy, ApiModel.HostingEntitiesTenantIdentifierStrategy>();
+            //CreateMap<ContentModel.TenantIdentifierStrategy, ApiModel.ContentEntitiesTenantIdentifierStrategy>();
 
-            CreateMap<ApiModel.HostingEntitiesTenantIdentifierStrategy, HostingModel.TenantIdentifierStrategy>();
-            CreateMap<ApiModel.ContentEntitiesTenantIdentifierStrategy, ContentModel.TenantIdentifierStrategy>();
+            //CreateMap<ApiModel.HostingEntitiesTenantIdentifierStrategy, HostingModel.TenantIdentifierStrategy>();
+            //CreateMap<ApiModel.ContentEntitiesTenantIdentifierStrategy, ContentModel.TenantIdentifierStrategy>();
+
+
+
+            //CreateMap<ContentModel.TenantIdentifierStrategyContainer, ApiModel.ContentEntitiesTenantIdentifierStrategyContainer>();
+            //CreateMap<ApiModel.ContentEntitiesTenantIdentifierStrategyContainer, ContentModel.TenantIdentifierStrategyContainer>();
+
 
             CreateMap<HostingModel.TenantIdentifierStrategyContainer, ContentModel.TenantIdentifierStrategyContainer>();
             CreateMap<ContentModel.TenantIdentifierStrategyContainer, HostingModel.TenantIdentifierStrategyContainer>();
-
-
-            CreateMap<ContentModel.TenantIdentifierStrategyContainer, ApiModel.ContentEntitiesTenantIdentifierStrategyContainer>();
-            CreateMap<ApiModel.ContentEntitiesTenantIdentifierStrategyContainer, ContentModel.TenantIdentifierStrategyContainer>();
-
 
             CreateMap<HostingModel.Tenant, ApiModel.HostingEntitiesTenant>();
             CreateMap<ContentModel.Tenant, ApiModel.ContentEntitiesTenant>();

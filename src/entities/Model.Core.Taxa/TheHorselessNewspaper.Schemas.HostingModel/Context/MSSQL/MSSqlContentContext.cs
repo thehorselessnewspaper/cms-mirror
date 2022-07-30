@@ -19,11 +19,10 @@ namespace TheHorselessNewspaper.HostingModel.Context.MSSQL
         private readonly IConfiguration _configuration;
         public DatabaseServerFamily SqlDialect { get; set; }
 
-        public DbSet<TenantIdentifierStrategy> TenantIdentifierStrategies { get; set; }
         public Guid DbContextInstanceId { get; set; } = Guid.NewGuid();
         private IServiceProvider serviceProvider;
         private ILogger<MSSqlContentContext> logger;
-        public DbSet<TenantIdentifierStrategyContainer> TenantIdentifierStrategyContainers { get; set; }
+
         public MSSqlContentContext(DbContextOptions<MSSqlContentContext> options, ILogger<MSSqlContentContext> logger, IServiceProvider serviceProvider, ITenantInfo tenant, IConfiguration config) : base(options)
         {
             TenantInfo = tenant;
@@ -66,11 +65,11 @@ namespace TheHorselessNewspaper.HostingModel.Context.MSSQL
                         var identifier = await s.GetIdentifierAsync("randomtextstrategymatcher");
                         if (identifier != null)
                         {
-                            logger.LogInformation($"{GetType().Name} resolved a tenant with the multitenant strategy");
+                            logger.LogTrace($"{GetType().Name} resolved a tenant with the multitenant strategy");
 
                             var allResult = await resolver.Stores.First().GetAllAsync();
                             var filtered = allResult.Where(w => w.Identifier.Equals(identifier)).First();
-                            logger.LogInformation("resolved tenant");
+                            logger.LogTrace("resolved tenant");
                             TenantInfo = filtered as ITenantInfo;
                             return TenantInfo;
                         }

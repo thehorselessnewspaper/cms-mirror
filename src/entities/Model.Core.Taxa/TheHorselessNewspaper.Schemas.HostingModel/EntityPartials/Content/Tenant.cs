@@ -51,7 +51,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
-        public string TenantIdentifier { get; set; }
+        public string TenantIdentifier { get; set; } = string.Empty;
 
         public Guid? StrategyId { get; set; }
 
