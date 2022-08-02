@@ -27,6 +27,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 
+        [JsonIgnore]
         public ICollection<NugetPackage> NugetPackages { get; set; } = new HashSet<NugetPackage>();
 
         // [JsonIgnore]

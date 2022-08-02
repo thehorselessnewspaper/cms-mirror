@@ -117,7 +117,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
-        public virtual ICollection<TenantInfo> TenantInfos { get; set; } = new HashSet<TenantInfo>();
+        // public virtual ICollection<TenantInfo> TenantInfos { get; set; } = new HashSet<TenantInfo>();
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? UpdatedAt { get; set; }
@@ -125,7 +125,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
 
 
-        public ICollection<KeyCloakConfiguration> KeyCloakConfigurations { get; set; } = new HashSet<KeyCloakConfiguration>();
+        /// public ICollection<KeyCloakConfiguration> KeyCloakConfigurations { get; set; } = new HashSet<KeyCloakConfiguration>();
 
         // [InverseProperty(nameof(NugetPackage.Tenants))]
         public ICollection<NugetPackage> NugetPackages { get; set; } = new HashSet<NugetPackage>();
