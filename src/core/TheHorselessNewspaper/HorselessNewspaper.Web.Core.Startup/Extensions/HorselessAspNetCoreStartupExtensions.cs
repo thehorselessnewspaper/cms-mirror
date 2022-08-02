@@ -186,8 +186,7 @@ namespace HorselessNewspaper.Web.Core.Extensions
                                     IsPublished = true,
                                     IsSoftDeleted = false,
                                     ObjectId = Guid.NewGuid().ToString(),
-                                    TenantIdentifier = DefaultIdentifier,
-                                    TenantIdentifierStrategy = new HostingEntities.TenantIdentifierStrategy()
+                                    TenantIdentifier = DefaultIdentifier
 
                                 }
                             }
