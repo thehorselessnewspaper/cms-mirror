@@ -77,6 +77,8 @@ namespace HorselessNewspaper.Web.Core.Automapper
             CreateMap<ContentModel.Taxonomy, ApiModel.ContentEntitiesTaxonomy>();
             CreateMap<ApiModel.ContentEntitiesTaxonomy, ContentModel.Taxonomy>();
 
+            CreateMap<ContentModel.Taxon, ApiModel.ContentEntitiesTaxon>();
+            CreateMap<ApiModel.ContentEntitiesTaxon, ContentModel.Taxon>();
 
             CreateMap<ContentModel.JSONAsset, ApiModel.ContentEntitiesJSONAsset>();
             CreateMap<ApiModel.ContentEntitiesJSONAsset, ContentModel.JSONAsset>();
@@ -90,6 +92,9 @@ namespace HorselessNewspaper.Web.Core.Automapper
 
             CreateMap<ContentModel.HorselessContent, ApiModel.ContentEntitiesHorselessContent>();
             CreateMap<ApiModel.ContentEntitiesHorselessContent, ContentModel.HorselessContent>();
+
+            CreateMap<DateTime, DateTimeOffset>();
+            CreateMap<DateTimeOffset, DateTime>();
         }
     }
 }

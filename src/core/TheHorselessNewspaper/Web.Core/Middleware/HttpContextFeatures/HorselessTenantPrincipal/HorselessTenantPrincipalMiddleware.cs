@@ -103,7 +103,7 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
                 catch (Exception e)
                 {
                     _logger.LogWarning($"exception initializing tenant feature: {e.Message}");
-                    throw new Exception($"exception initializing tenant feature {e.Message}");
+                    // throw new Exception($"exception initializing tenant feature {e.Message}");
                 }
 
                 // ensure current principal
@@ -130,7 +130,7 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
                 catch (Exception e)
                 {
                     _logger.LogWarning($"exception initializing current principal feature: {e.Message}");
-                    throw new Exception($"exception initializing principal feature {e.Message}");
+                    // throw new Exception($"exception initializing principal feature {e.Message}");
                 }
 
                 // ensure principal session
@@ -154,7 +154,7 @@ namespace HorselessNewspaper.Web.Core.Middleware.HttpContextFeatures.HorselessTe
                 catch (Exception e)
                 {
                     _logger.LogWarning($"exception initializing current principal feature: {e.Message}");
-                    throw new Exception($"exception initializing principal feature {e.Message}");
+                    // throw new Exception($"exception initializing principal feature {e.Message}");
                 }
             }
             catch (Exception e)

@@ -1347,7 +1347,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     {
                         Headers =
                             {
-                                { HeaderNames.Accept, "application/json;odata.metadata=full" },
+                                { HeaderNames.Accept, "application/json;odata.metadata=minimal" },
                                 { HeaderNames.UserAgent, "HorselessNewspaper" },
                                 { ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, $"{defaultTenantIdentifier}" }
                             }
@@ -1426,7 +1426,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     {
                         Headers =
                             {
-                                { HeaderNames.Accept, "application/json;odata.metadata=full" },
+                                { HeaderNames.Accept, "application/json;odata.metadata=minimal" },
                                 { HeaderNames.UserAgent, "HorselessNewspaper" },
                                 { ODataControllerStrings.ODATA_TENANTIDENTIFIER_HEADER, $"{defaultTenantIdentifier}" }
                             }
