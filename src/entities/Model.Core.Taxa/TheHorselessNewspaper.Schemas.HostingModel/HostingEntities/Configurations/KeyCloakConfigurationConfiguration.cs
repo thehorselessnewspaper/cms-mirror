@@ -6,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
-#nullable disable
-
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Configurations
 {
     public partial class KeyCloakConfigurationConfiguration : IEntityTypeConfiguration<KeyCloakConfiguration>
@@ -15,11 +13,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Configurati
         public void Configure(EntityTypeBuilder<KeyCloakConfiguration> entity)
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
-
-            entity.HasOne(d => d.TenantInfo)
-                .WithMany(p => p.KeyCloakConfigurations)
-                .HasForeignKey(d => d.TenantInfoId)
-                .HasConstraintName("FK_TenantInfoKeyCloakConfiguration");
 
             OnConfigurePartial(entity);
         }

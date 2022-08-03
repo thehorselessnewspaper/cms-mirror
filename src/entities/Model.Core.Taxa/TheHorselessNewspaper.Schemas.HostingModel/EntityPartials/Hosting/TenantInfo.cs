@@ -19,6 +19,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
         public Guid? ParentTenantId { get; set; }
 
+        public virtual ICollection<WebAPITenantInfo> WebAPITenantInfos { get; set; } = new HashSet<WebAPITenantInfo>();
 
         public Tenant? ParentTenant { get; set; }
         public DateTime? UpdatedAt { get; set; }

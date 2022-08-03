@@ -6,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 
-#nullable disable
-
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Configurations
 {
     public partial class WebAPITenantInfoConfiguration : IEntityTypeConfiguration<WebAPITenantInfo>
@@ -15,11 +13,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities.Configurati
         public void Configure(EntityTypeBuilder<WebAPITenantInfo> entity)
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
-
-            entity.HasOne(d => d.TenantInfo)
-                .WithMany(p => p.WebAPITenantInfos)
-                .HasForeignKey(d => d.TenantInfoId)
-                .HasConstraintName("FK_TenantInfoWebAPITenantInfo");
 
             OnConfigurePartial(entity);
         }

@@ -45,7 +45,7 @@
    "UiHint": "WIPERS.THLNP_Hosting_Modelling",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
-   "UseDbContextSplitting": false,
+   "UseDbContextSplitting": true,
    "UseFluentApiOnly": false,
    "UseHandleBars": false,
    "UseHierarchyId": false,

@@ -182,7 +182,7 @@ namespace Horseless.HostingModel.SmokeTests.HostingCollection
                         Name = "finbuckle tenant name",
                         ConnectionString = "connectionstring",
                         TenantBaseUrl = "https://baseurl.com",
-                        WebAPITenantInfos = new List<WebAPITenantInfo>()
+                        WebAPITenantInfos = new HashSet<WebAPITenantInfo>()
                         {
                             new WebAPITenantInfo()
                             {
