@@ -350,7 +350,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     var newTenant = new ContentEntities.Tenant()
                     {
-                        Id = Guid.NewGuid(),
+                        //Id = Guid.NewGuid(),
                         CreatedAt = DateTime.UtcNow,
                         DisplayName = "Test Content Collection",
                         IsPublished = false,
@@ -560,6 +560,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 Assert.True(contentCollection != null && contentCollection.Value != null);
                 Assert.True(contentCollection.Value.Count > 0);
                 Assert.True(contentCollection.Value.First().ContentCollections != null);
+                var contentCollections = contentCollection.Value.First().ContentCollections;
                 Assert.True(contentCollection.Value.First().ContentCollections.Count > 0 );
                 int aclCount = 0;
                 int ownerCount = 0;
