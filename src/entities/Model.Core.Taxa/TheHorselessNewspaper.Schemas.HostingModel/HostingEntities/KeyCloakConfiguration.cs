@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
-    [Index("TenantInfoId", Name = "IX_FK_TenantInfoKeyCloakConfiguration")]
     public partial class KeyCloakConfiguration
     {
         [Key]
@@ -21,10 +20,5 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public DateTime? CreatedAt { get; set; }
         public string Iss { get; set; }
         public string Aud { get; set; }
-        public Guid? TenantInfoId { get; set; }
-
-        [ForeignKey("TenantInfoId")]
-        [InverseProperty("KeyCloakConfigurations")]
-        public virtual TenantInfo TenantInfo { get; set; }
     }
 }

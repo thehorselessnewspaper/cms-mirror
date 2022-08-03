@@ -22,6 +22,5 @@ namespace Schema.Diagrams.Hosting
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public string Iss { get; set; }
         public string Aud { get; set; }
-        public Nullable<System.Guid> TenantInfoId { get; set; }
     }
 }

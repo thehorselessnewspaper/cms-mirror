@@ -36,11 +36,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
             modelBuilder.Entity<KeyCloakConfiguration>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.HasOne(d => d.TenantInfo)
-                    .WithMany(p => p.KeyCloakConfigurations)
-                    .HasForeignKey(d => d.TenantInfoId)
-                    .HasConstraintName("FK_TenantInfoKeyCloakConfiguration");
             });
 
             modelBuilder.Entity<NugetPackage>(entity =>
@@ -66,11 +61,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
             modelBuilder.Entity<WebAPITenantInfo>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.HasOne(d => d.TenantInfo)
-                    .WithMany(p => p.WebAPITenantInfos)
-                    .HasForeignKey(d => d.TenantInfoId)
-                    .HasConstraintName("FK_TenantInfoWebAPITenantInfo");
             });
 
             OnModelCreatingPartial(modelBuilder);

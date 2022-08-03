@@ -10,12 +10,6 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
     public partial class TenantInfo
     {
-        public TenantInfo()
-        {
-            KeyCloakConfigurations = new HashSet<KeyCloakConfiguration>();
-            WebAPITenantInfos = new HashSet<WebAPITenantInfo>();
-        }
-
         [Key]
         public Guid Id { get; set; }
         public string DisplayName { get; set; }
@@ -27,10 +21,5 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public string Name { get; set; }
         public string ConnectionString { get; set; }
         public string TenantBaseUrl { get; set; }
-
-        [InverseProperty("TenantInfo")]
-        public virtual ICollection<KeyCloakConfiguration> KeyCloakConfigurations { get; set; }
-        [InverseProperty("TenantInfo")]
-        public virtual ICollection<WebAPITenantInfo> WebAPITenantInfos { get; set; }
     }
 }

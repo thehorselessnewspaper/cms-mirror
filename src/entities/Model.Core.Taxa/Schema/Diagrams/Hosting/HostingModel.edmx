@@ -49,7 +49,6 @@
     <Property Name="CreatedAt" Type="datetime" Nullable="true" />
     <Property Name="Iss" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Aud" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="TenantInfoId" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <EntityType Name="TenantInfos">
     <Key>
@@ -78,7 +77,6 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ConnectionString" Type="nvarchar(max)" Nullable="true" />
     <Property Name="WebAPIBaseUrl" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="TenantInfoId" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <EntityType Name="Principals">
     <Key>
@@ -155,7 +153,6 @@
           <Property Name="CreatedAt" Type="DateTime" Nullable="true" />
           <Property Name="Iss" Type="String" Nullable="true" />
           <Property Name="Aud" Type="String" Nullable="true" />
-          <Property Name="TenantInfoId" Type="Guid" Nullable="true" />
         </EntityType>
         <EntityType Name="TenantInfo">
           <Key>
@@ -184,7 +181,6 @@
           <Property Name="Name" Type="String" Nullable="true" />
           <Property Name="ConnectionString" Type="String" Nullable="true" />
           <Property Name="WebAPIBaseUrl" Type="String" Nullable="true" />
-          <Property Name="TenantInfoId" Type="Guid" Nullable="true" />
         </EntityType>
         <EntityType Name="Principal">
           <Key>
@@ -252,7 +248,6 @@
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="Iss" ColumnName="Iss" />
           <ScalarProperty Name="Aud" ColumnName="Aud" />
-          <ScalarProperty Name="TenantInfoId" ColumnName="TenantInfoId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -283,7 +278,6 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ConnectionString" ColumnName="ConnectionString" />
           <ScalarProperty Name="WebAPIBaseUrl" ColumnName="WebAPIBaseUrl" />
-          <ScalarProperty Name="TenantInfoId" ColumnName="TenantInfoId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

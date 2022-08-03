@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 {
-    [Index("TenantInfoId", Name = "IX_FK_TenantInfoWebAPITenantInfo")]
     public partial class WebAPITenantInfo
     {
         [Key]
@@ -22,10 +21,5 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public string Name { get; set; }
         public string ConnectionString { get; set; }
         public string WebAPIBaseUrl { get; set; }
-        public Guid? TenantInfoId { get; set; }
-
-        [ForeignKey("TenantInfoId")]
-        [InverseProperty("WebAPITenantInfos")]
-        public virtual TenantInfo TenantInfo { get; set; }
     }
 }

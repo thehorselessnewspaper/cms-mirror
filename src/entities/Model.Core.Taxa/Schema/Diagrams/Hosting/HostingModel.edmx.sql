@@ -2,13 +2,12 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/24/2022 16:18:11
+-- Date Created: 08/03/2022 13:08:05
 -- Generated from EDMX file: C:\src\the-horseless-newspaper\src\entities\Model.Core.Taxa\Schema\Diagrams\Hosting\HostingModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
-GO
-USE [THNLP_Hosting];
+;
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -17,12 +16,6 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_TenantInfoWebAPITenantInfo]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[WebAPITenantInfos] DROP CONSTRAINT [FK_TenantInfoWebAPITenantInfo];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TenantInfoKeyCloakConfiguration]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[KeyCloakConfigurations] DROP CONSTRAINT [FK_TenantInfoKeyCloakConfiguration];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -86,8 +79,7 @@ CREATE TABLE [dbo].[KeyCloakConfigurations] (
     [ObjectId] nvarchar(max)  NULL,
     [CreatedAt] datetime  NULL,
     [Iss] nvarchar(max)  NULL,
-    [Aud] nvarchar(max)  NULL,
-    [TenantInfoId] uniqueidentifier  NULL
+    [Aud] nvarchar(max)  NULL
 );
 GO
 
@@ -115,8 +107,7 @@ CREATE TABLE [dbo].[WebAPITenantInfos] (
     [Identifier] nvarchar(max)  NULL,
     [Name] nvarchar(max)  NULL,
     [ConnectionString] nvarchar(max)  NULL,
-    [WebAPIBaseUrl] nvarchar(max)  NULL,
-    [TenantInfoId] uniqueidentifier  NULL
+    [WebAPIBaseUrl] nvarchar(max)  NULL
 );
 GO
 
