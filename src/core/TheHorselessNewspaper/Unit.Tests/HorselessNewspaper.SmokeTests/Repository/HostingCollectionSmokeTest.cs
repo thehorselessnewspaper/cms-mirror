@@ -62,24 +62,28 @@ namespace HorselessNewspaper.SmokeTests.Repository
             Assert.IsTrue(updatedtenant.ObjectId == tenant.ObjectId);
             Assert.IsTrue(updatedtenant.Timestamp == tenant.Timestamp);
 
+            // arrange for entity framework graph creation semantics
+            modifiedTenant.Id = Guid.Empty;
 
             // add to a related property
-            updatedtenant.Owners.Add(new Principal()
+            modifiedTenant.Owners.Add(new Principal()
             {
-                Id = Guid.NewGuid(),
+                // Id = Guid.NewGuid(),
                 CreatedAt = tenant.CreatedAt,
                 DisplayName = tenant.DisplayName,
                 ObjectId = Guid.NewGuid().ToString(),
-                Timestamp = tenant.Timestamp
+                Timestamp = tenant.Timestamp,
+                PreferredUserName = "Owner" + Guid.NewGuid().ToString(),
             });
 
             var relatedPrincipal = new Principal()
             {
-                Id = Guid.NewGuid(),
+                // Id = Guid.NewGuid(),
                 CreatedAt = tenant.CreatedAt,
                 DisplayName = tenant.DisplayName,
                 ObjectId = Guid.NewGuid().ToString(),
-                Timestamp = tenant.Timestamp
+                Timestamp = tenant.Timestamp,
+                PreferredUserName = "Principal" + Guid.NewGuid().ToString(),
             };
 
             var principalQuery = this.GetIQueryableHostingModelOperator<IQueryableHostingModelOperator<Principal>>();
@@ -88,10 +92,10 @@ namespace HorselessNewspaper.SmokeTests.Repository
 
             var tenantInsertResult = await tenantQuery.Create(modifiedTenant);
 
-            var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(modifiedTenant.Id, nameof(modifiedTenant.Owners), new List<Principal>() { relatedPrincipal });
+            var insertResult = await tenantQuery.InsertRelatedEntity<Principal>(tenantInsertResult.Id, nameof(modifiedTenant.Owners), new List<Principal>() { relatedPrincipal });
             Assert.IsTrue(insertResult != null);
 
-            var validatedInsertResult = await tenantQuery.Read(r => r.Id.Equals(tenant.Id), new List<string>()
+            var validatedInsertResult = await tenantQuery.Read(r => r.TenantIdentifier.Equals(((Tenant)tenant).TenantIdentifier), new List<string>()
             {
                 nameof(tenant.Owners), nameof(tenant.AccessControlEntries)
             });

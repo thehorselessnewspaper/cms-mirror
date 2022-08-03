@@ -1,5 +1,6 @@
 ﻿using HorselessNewspaper.Core.Interfaces.Security.Resolver;
 using HorselessNewspaper.Web.Core.Model.Query;
+using HorselessNewspaper.Web.Core.Services.Model.SeedEntities;
 using HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,6 +8,7 @@ using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
@@ -359,6 +361,8 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     };
 
+                    newTenant.ContentCollections.Add(DefaultEntitySets.GetDefaultContentCollections().First());
+
                     var newOwner = new ContentEntities.Principal()
                     {
                         Id = Guid.NewGuid(),
@@ -555,7 +559,8 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 var contentCollection = JsonConvert.DeserializeObject<ODataResponse<List<ContentEntities.Tenant>>>(responseContent);
                 Assert.True(contentCollection != null && contentCollection.Value != null);
                 Assert.True(contentCollection.Value.Count > 0);
-
+                Assert.True(contentCollection.Value.First().ContentCollections != null);
+                Assert.True(contentCollection.Value.First().ContentCollections.Count > 0 );
                 int aclCount = 0;
                 int ownerCount = 0;
                 int accountCount = 0;

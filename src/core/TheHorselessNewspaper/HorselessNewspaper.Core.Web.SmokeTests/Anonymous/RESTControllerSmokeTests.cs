@@ -182,7 +182,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                     //    WebAPIBaseUrl = "/webapi/url"
                     //});
 
-                    //testHostingModelTenant.TenantInfos.Add(testHostingModelTenantInfo);
+                    testHostingModelTenant.TenantInfos.Add(testHostingModelTenantInfo);
 
                     var tenantJson = GetJsonContent(testHostingModelTenant);
 
