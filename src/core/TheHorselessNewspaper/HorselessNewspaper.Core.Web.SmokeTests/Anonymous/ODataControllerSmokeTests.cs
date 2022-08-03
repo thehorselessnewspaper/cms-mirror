@@ -361,7 +361,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     };
 
-                    newTenant.ContentCollections.Add(DefaultEntitySets.GetDefaultContentCollections().First());
+                    //newTenant.ContentCollections.Add(DefaultEntitySets.GetDefaultContentCollections().First());
 
                     var newOwner = new ContentEntities.Principal()
                     {
@@ -510,6 +510,10 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
 
                     var insertResult = await insertQueryOperator.Create(newTenant);
 
+                    var insertRelatedResult = await insertQueryOperator.InsertRelatedEntity(insertResult.Id, nameof(ContentEntities.Tenant.ContentCollections), new List<ContentEntities.ContentCollection>()
+                    {
+                        DefaultEntitySets.GetDefaultContentCollections().First()
+                    }, w => w.TenantIdentifier.Equals(newTenant.TenantIdentifier));
 
                     Assert.True(insertResult != null);
                 }

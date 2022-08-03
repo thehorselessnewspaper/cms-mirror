@@ -23,7 +23,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
 
         public static ICollection<ContentModel.AccessControlEntry> GetDefaultTenantACL(string displayName)
         {
-            var ret = new List<ContentModel.AccessControlEntry>()
+            var ret = new HashSet<ContentModel.AccessControlEntry>()
                     {
                       new ContentModel.AccessControlEntry()
                         {
@@ -116,7 +116,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
 
         public static ICollection<ContentModel.ContentCollection> GetDefaultContentCollections()
         {
-            List<ContentModel.Taxonomy> taxonomies = new List<ContentModel.Taxonomy>()
+            HashSet<ContentModel.Taxonomy> taxonomies = new HashSet<ContentModel.Taxonomy>()
                     {
                         new ContentModel.Taxonomy()
                         {
@@ -125,7 +125,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                             DisplayName = "Horseless Blog Tags",
                             IsSoftDeleted = false,
                             DictionaryKey = "tags",
-                            Taxons = new List<ContentModel.Taxon>()
+                            Taxons = new HashSet<ContentModel.Taxon>()
                             {
                                 new ContentModel.Taxon()
                                 {
@@ -134,7 +134,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                                     DisplayName = "Horseless Tag",
                                     DictionaryKey = "tag",
                                     IsSoftDeleted = false,
-                                    Holonyms = new List<ContentModel.Holonym>()
+                                    Holonyms = new HashSet<ContentModel.Holonym>()
                                     {
                                         new ContentModel.Holonym()
                                         {
@@ -149,7 +149,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                             }
                         }
                     };
-            var ret = new List<ContentModel.ContentCollection>()
+            var ret = new HashSet<ContentModel.ContentCollection>()
             {
                 new ContentModel.ContentCollection()
                 {
