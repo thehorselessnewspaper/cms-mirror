@@ -575,6 +575,7 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 contentCollection.Value.ForEach(f => { accountCount = accountCount + f.Accounts.Count; });
                 contentCollection.Value.ForEach(f => { contentCollectionsCount = contentCollectionsCount + f.ContentCollections.Count; });
                 Assert.True(aclCount > 0);
+                Assert.True(contentCollectionsCount > 0);
             }
             catch (Exception e)
             {
