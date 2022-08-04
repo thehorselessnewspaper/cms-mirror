@@ -159,7 +159,9 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                     AllowAnonymousRead = true,
                     DisplayName = "Default Horseless Blog",
                     Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                    IsPublished = true
+                    IsPublished = true,
+                    HorselessContents = GetDefaultHorselessContents(),
+                    HorselessViews = GetDefaultHorselessViews()
                 }
 
             };
@@ -167,9 +169,9 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
             return ret;
         }
 
-        private static List<HorselessView> GetDefaultHorselessViews()
+        private static HashSet<HorselessView> GetDefaultHorselessViews()
         {
-            return new List<ContentModel.HorselessView>()
+            return new HashSet<ContentModel.HorselessView>()
                     {
                         new ContentModel.HorselessView()
                         {
@@ -187,9 +189,9 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                     };
         }
 
-        private static List<HorselessContent> GetDefaultHorselessContents()
+        private static HashSet<HorselessContent> GetDefaultHorselessContents()
         {
-            return new List<ContentModel.HorselessContent>()
+            return new HashSet<ContentModel.HorselessContent>()
                     {
                         new ContentModel.HorselessContent()
                         {
