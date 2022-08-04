@@ -23,7 +23,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         // [InverseProperty(nameof(Principal.HorselessContents))]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
 
-        [InverseProperty(nameof(ContentCollection.HorselessContents))]
+        // [InverseProperty(nameof(ContentCollection.HorselessContents))]
         public ICollection<ContentCollection> ContentCollections { get; set; } = new HashSet<ContentCollection>();
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);

@@ -168,6 +168,21 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             builder.Entity<ContentCollection>()
                 .Navigation(n => n.AccessControlEntries).AutoInclude();
 
+            builder.Entity<ContentCollection>()
+                .Navigation(n => n.Owners).AutoInclude();
+
+            builder.Entity<ContentCollection>()
+                .Navigation(n => n.HorselessViews).AutoInclude();
+
+            builder.Entity<ContentCollection>()
+                .Navigation(n => n.Publications).AutoInclude();
+
+
+            builder.Entity<ContentCollection>()
+                .Navigation(n => n.HorselessContents).AutoInclude();
+
+            builder.Entity<ContentCollection>()
+                .Navigation(n => n.Taxonomies).AutoInclude();
 
             builder.Entity<HorselessView>()
                 .Navigation(n => n.AccessControlEntries).AutoInclude();

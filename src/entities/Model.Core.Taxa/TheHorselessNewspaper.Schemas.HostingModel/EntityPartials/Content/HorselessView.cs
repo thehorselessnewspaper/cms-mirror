@@ -43,6 +43,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public byte[] ViewContent { get; set; } = new byte[0];
         public string? DictionaryKey { get; set; }
 
+        [InverseProperty(nameof(ContentCollection.HorselessViews))]
         public ICollection<ContentCollection> ContentCollections { get; set; } = new HashSet<ContentCollection>();
 
         [InverseProperty(nameof(Placeholder.HorselessView))]
