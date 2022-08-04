@@ -151,7 +151,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
 
 
-        [InverseProperty(nameof(JSONAsset.Tenants))]
+        // [InverseProperty(nameof(JSONAsset.Tenants))]
         public HashSet<JSONAsset> MetaData { get; set; } = new HashSet<JSONAsset>();
 
         public string? DictionaryKey { get; set; }
@@ -172,7 +172,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
 
         // [ForeignKey("FK_ContentCollectionTenants")]
-        [InverseProperty(nameof(ContentCollection.Tenants))]
+        // [InverseProperty(nameof(ContentCollection.Tenants))]
         public ICollection<ContentCollection> ContentCollections { get; set; } = new HashSet<ContentCollection>();
     }
 }
