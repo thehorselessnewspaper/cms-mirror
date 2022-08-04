@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using ContentModel = TheHorselessNewspaper.Schemas.ContentModel.ContentEntities;
 using HostingModel = TheHorselessNewspaper.Schemas.HostingModel.HostingEntities;
 namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
@@ -149,7 +150,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                             }
                         }
                     };
-            var ret = new HashSet<ContentModel.ContentCollection>()
+            var ret = new HashSet<ContentCollection>()
             {
                 new ContentModel.ContentCollection()
                 {
@@ -158,7 +159,17 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                     AllowAnonymousRead = true,
                     DisplayName = "Default Horseless Blog",
                     Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
-                    HorselessViews = new List<ContentModel.HorselessView>()
+                    IsPublished = true
+                }
+
+            };
+
+            return ret;
+        }
+
+        private static List<HorselessView> GetDefaultHorselessViews()
+        {
+            return new List<ContentModel.HorselessView>()
                     {
                         new ContentModel.HorselessView()
                         {
@@ -167,16 +178,18 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                             IsActive = true,
                             IsSoftDeleted = false,
                             ObjectId = Guid.NewGuid().ToString(),
-                            Name = "ViewTemplate.cshtml",   
+                            Name = "ViewTemplate.cshtml",
                             PhysicalPath = "ViewTemplate.cshtml",
                             Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
 
 
                         }
-                    },
-                    IsPublished = true,
-                    Taxonomies = taxonomies,
-                    HorselessContents = new List<ContentModel.HorselessContent>()
+                    };
+        }
+
+        private static List<HorselessContent> GetDefaultHorselessContents()
+        {
+            return new List<ContentModel.HorselessContent>()
                     {
                         new ContentModel.HorselessContent()
                         {
@@ -194,7 +207,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                                 ObjectId = Guid.NewGuid().ToString(),
                                 DictionaryKey = "title"
                             }
-                              
+
                         },
                         new ContentModel.HorselessContent()
                         {
@@ -232,13 +245,7 @@ namespace HorselessNewspaper.Web.Core.Services.Model.SeedEntities
                             }
 
                         }
-                    }
-
-                }
-
-            };
-
-            return ret;
+                    };
         }
     }
 }

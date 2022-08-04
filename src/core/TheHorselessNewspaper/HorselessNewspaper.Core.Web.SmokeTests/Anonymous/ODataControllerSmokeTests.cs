@@ -564,15 +564,16 @@ namespace HorselessNewspaper.Core.Web.SmokeTests.Anonymous
                 Assert.True(contentCollection != null && contentCollection.Value != null);
                 Assert.True(contentCollection.Value.Count > 0);
                 Assert.True(contentCollection.Value.First().ContentCollections != null);
-                var contentCollections = contentCollection.Value.First().ContentCollections;
-                Assert.True(contentCollection.Value.First().ContentCollections.Count > 0 );
+
                 int aclCount = 0;
                 int ownerCount = 0;
                 int accountCount = 0;
+                int contentCollectionsCount = 0;
 
                 contentCollection.Value.ForEach(f => { aclCount = aclCount + f.AccessControlEntries.Count; });
                 contentCollection.Value.ForEach(f => { ownerCount = ownerCount + f.Owners.Count; });
                 contentCollection.Value.ForEach(f => { accountCount = accountCount + f.Accounts.Count; });
+                contentCollection.Value.ForEach(f => { contentCollectionsCount = contentCollectionsCount + f.ContentCollections.Count; });
                 Assert.True(aclCount > 0);
             }
             catch (Exception e)
