@@ -215,7 +215,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
                 if (updatedProp != null)
                 {
-                    updatedProp.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnUpdate;
+                    updatedProp.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnAddOrUpdate;
                 }
             }
 
