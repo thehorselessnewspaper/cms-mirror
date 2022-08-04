@@ -147,8 +147,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             builder.Entity<TenantIdentifierStrategy>()
                 .Navigation(n => n.StrategyContainers).AutoInclude();
 
-            //builder.Entity<Tenant>()
-            //    .Navigation(n => n.TenantIdentifierStrategy).AutoInclude();
+            builder.Entity<Tenant>()
+                .Navigation(n => n.ContentCollections).AutoInclude();
 
             //builder.Entity<Principal>()
             //    .Navigation(n => n.Tenants).AutoInclude();
