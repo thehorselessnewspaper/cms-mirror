@@ -1,6 +1,6 @@
 {
   "name": "horseless-contentapi-workspace",
-  "version": "0.0.32",
+  "version": "0.0.333",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
