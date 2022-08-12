@@ -26,9 +26,9 @@
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
 		<PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.7" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.8" />
 		<PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.10" />
-		<PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="6.0.7">
+		<PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="6.0.8">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -39,8 +39,8 @@
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="NuGet.Protocol" Version="6.2.1" />
-		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220803.11" />
+		<PackageReference Include="NuGet.Protocol" Version="6.3.0" />
+		<PackageReference Include="TheHorselessNewspaper.HostingModel" Version="0.3.20220812.3" />
 	</ItemGroup>
 
 	<ItemGroup>
