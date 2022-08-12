@@ -571,19 +571,21 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                     {
                                         var currentTenant = contentModelTenant.First();
 
-                                        foreach (var owner in currentTenant.Owners)
+                                        foreach (var owner in approvedTenant.Owners)
                                         {
-                                            //var ownerJson = JsonConvert.SerializeObject(owner, new JsonSerializerSettings()
-                                            //{
-                                            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                                            var ownerJson = JsonConvert.SerializeObject(owner, new JsonSerializerSettings()
+                                            {
+                                                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
 
-                                            //});
-                                            //var mirrorOwner = JsonConvert.DeserializeObject<ContentModel.Principal>(ownerJson, new JsonSerializerSettings()
-                                            //{
-                                            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                                            });
+                                            var mirrorOwner = JsonConvert.DeserializeObject<ContentModel.Principal>(ownerJson, new JsonSerializerSettings()
+                                            {
+                                                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
 
-                                            //});
-                                            mirrorTenant.Owners.Add(owner);
+                                            });
+
+                                            mirrorOwner.Id = Guid.Empty;
+                                            mirrorTenant.Owners.Add(mirrorOwner);
                                         }
 
                                         mirrorTenant.DeploymentState = ContentModel.TenantDeploymentWorkflowState.HasOwners; // set the workflow complete flag
@@ -627,12 +629,17 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                     {
                                         var currentTenant = contentModelTenant.First();
 
-                                        foreach (var owner in currentTenant.AccessControlEntries)
+                                        foreach (var owner in approvedTenant.AccessControlEntries)
                                         {
-                                            //var ownerJson = JsonConvert.SerializeObject(owner);
-                                            //var mirrorAcl = JsonConvert.DeserializeObject<ContentModel.AccessControlEntry>(ownerJson, serializerSettings);
-                                            
-                                            mirrorTenant.AccessControlEntries.Add(owner);
+                                            var ownerJson = JsonConvert.SerializeObject(owner);
+                                            var mirrorAcl = JsonConvert.DeserializeObject<ContentModel.AccessControlEntry>(ownerJson, new JsonSerializerSettings()
+                                            {
+                                                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+
+                                            });
+
+                                            mirrorAcl.Id = Guid.Empty;
+                                            mirrorTenant.AccessControlEntries.Add(mirrorAcl);
                                         }
 
                                         mirrorTenant.DeploymentState = ContentModel.TenantDeploymentWorkflowState.HasACL; // set the workflow complete flag
@@ -875,7 +882,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                 var mergeEntity = new TheHorselessNewspaper.Schemas.ContentModel.ContentEntities.Tenant()
                 {
-                    Id = originEntity.Id,
+                    // Id = originEntity.Id,
+                    Id = Guid.Empty,
                     IsPublished = true,
                     CreatedAt = DateTime.UtcNow,
                     DisplayName = originEntity.DisplayName,
