@@ -572,51 +572,56 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             // apply content owners
                             try
                             {
-                                var mirrorTenantQuery = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{approvedTenant.TenantIdentifier}'", approvedTenant.TenantIdentifier);
+                                var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.Owners), nameof(ContentModel.Tenant.DeploymentState), nameof(ContentModel.Tenant.UpdatedAt) };
 
+                                var mirrorTenantQuery = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{approvedTenant.TenantIdentifier}'&" +
+                                                   $"$expand=Owners", approvedTenant.TenantIdentifier);
                                 // var mirrorTenantQuery = await contentModelOperator.ReadAsEnumerable(w => w.TenantIdentifier.Equals(approvedTenant.TenantIdentifier));
                                 if (mirrorTenantQuery.Any())
                                 {
                                     var mirrorTenant = mirrorTenantQuery.First();
-                                    var contentModelTenant = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{mirrorTenant.TenantIdentifier}'", mirrorTenant.TenantIdentifier);
+                                    var contentModelTenant = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{approvedTenant.TenantIdentifier}'&" +
+                                                   $"$expand=Owners", approvedTenant.TenantIdentifier);
                                     if (contentModelTenant.Any())
                                     {
                                         var currentTenant = contentModelTenant.First();
-
-                                        foreach (var owner in approvedTenant.Owners)
+                                        if(approvedTenant.Owners.Any() && currentTenant.Owners.Any())
                                         {
-                                            //var ownerJson = JsonConvert.SerializeObject(owner, new JsonSerializerSettings()
-                                            //{
-                                            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-
-                                            //});
-                                            //var mirrorOwner = JsonConvert.DeserializeObject<ContentModel.Principal>(ownerJson, new JsonSerializerSettings()
-                                            //{
-                                            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-
-                                            //});
-
-                                            var mirrorOwner = mapper.Map<HostingModel.Principal, ContentModel.Principal>(owner);
-                                            mirrorOwner.Id = Guid.Empty;
-                                            mirrorOwner.CreatedAt = DateTime.UtcNow;
-                                            mirrorOwner.UpdatedAt = DateTime.UtcNow;
+                                            // the source has owners and the destination has owners
+                                            /// don't overwrite - todo control this behaviour with options
+                                            /// 
+                                            updatedProperties = new List<string>() { nameof(ContentModel.Tenant.DeploymentState), nameof(ContentModel.Tenant.UpdatedAt) };
                                             mirrorTenant.UpdatedAt = DateTime.UtcNow;
-                                            mirrorTenant.Owners.Add(mirrorOwner);
+                                            mirrorTenant.DeploymentState = ContentModel.TenantDeploymentWorkflowState.HasOwners; // set the workflow complete flag
+                                        }
+                                        else if (approvedTenant.Owners.Count() > 0 && currentTenant.Owners.Count() == 0)
+                                        {
+                                            // the source has owners and the destination has none
+                                            foreach (var owner in approvedTenant.Owners)
+                                            {
+
+                                                var mirrorOwner = mapper.Map<HostingModel.Principal, ContentModel.Principal>(owner);
+                                                mirrorOwner.Id = Guid.Empty;
+                                                mirrorOwner.CreatedAt = DateTime.UtcNow;
+                                                mirrorOwner.UpdatedAt = DateTime.UtcNow;
+                                                mirrorTenant.Owners.Add(mirrorOwner);
+                                            }
+
+                                            mirrorTenant.DeploymentState = ContentModel.TenantDeploymentWorkflowState.HasOwners; // set the workflow complete flag
+                                        }
+                                        else if(approvedTenant.Owners.Count() == 0)
+                                        {
+                                            // the source has no owners
+                                            updatedProperties = new List<string>() { nameof(ContentModel.Tenant.DeploymentState), nameof(ContentModel.Tenant.UpdatedAt) };
+                                            mirrorTenant.UpdatedAt = DateTime.UtcNow;
+                                            mirrorTenant.DeploymentState = ContentModel.TenantDeploymentWorkflowState.HasOwners; // set the workflow complete flag
+
                                         }
 
-                                        mirrorTenant.DeploymentState = ContentModel.TenantDeploymentWorkflowState.HasOwners; // set the workflow complete flag
                                         var wireTenant = mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mirrorTenant);
-                                        // var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mirrorTenant, Formatting.None, serializerSettings));
-                                        var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.Owners), nameof(ContentModel.Tenant.DeploymentState), nameof(ContentModel.Tenant.UpdatedAt) };
-                                        // var mutateResult = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(wireTenant.Id.ToString(), wireTenant.TenantIdentifier, updatedProperties, wireTenant);
 
                                         var mutateResult = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier, updatedProperties, wireTenant);
-                                        //var mutateResultJson = mutateResult.Result.ToJson();
-                                        //var deserialzedMutateResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(mutateResultJson, new JsonSerializerSettings()
-                                        //{
-                                        //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-
-                                        //});
+     
                                         var deserialzedMutateResult = mapper.Map<ContentEntitiesTenant, ContentModel.Tenant>(mutateResult.Result);
 
                                         currentDeploymentState = deserialzedMutateResult.DeploymentState;

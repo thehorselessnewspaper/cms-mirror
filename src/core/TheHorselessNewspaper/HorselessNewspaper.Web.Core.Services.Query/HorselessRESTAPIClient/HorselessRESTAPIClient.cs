@@ -33,7 +33,7 @@ namespace HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient
 
         partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings)
         {
-            settings.MaxDepth = 69;
+            settings.MaxDepth = 1024;
             settings.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
         }
     }
