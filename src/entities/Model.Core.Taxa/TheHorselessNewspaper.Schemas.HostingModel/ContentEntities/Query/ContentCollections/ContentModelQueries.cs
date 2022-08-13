@@ -432,6 +432,8 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                     var updateResult = await ((DbContext)_context).SaveChangesAsync();
                     _logger.LogTrace($"{this.GetType().Name} has completed update");
 
+                    var updatedResult = await dbSet.Where(parentItemFilter).FirstAsync();
+                    return updatedResult;
 
                 }
             }

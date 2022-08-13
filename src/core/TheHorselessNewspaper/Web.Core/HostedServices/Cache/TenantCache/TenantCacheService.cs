@@ -634,33 +634,42 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                             // apply acl
                             try
                             {
-                                var mirrorTenantQuery = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{approvedTenant.TenantIdentifier}'", approvedTenant.TenantIdentifier);
+                                var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.AccessControlEntries), nameof(ContentModel.Tenant.DeploymentState), nameof(ContentModel.Tenant.UpdatedAt) };
+
+                                var mirrorTenantQuery = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{approvedTenant.TenantIdentifier}'&" +
+                                        $"                                                                                  $expand=AccessControlEntries", approvedTenant.TenantIdentifier);
 
                                 // var mirrorTenantQuery = await contentModelOperator.ReadAsEnumerable(w => w.TenantIdentifier.Equals(approvedTenant.TenantIdentifier));
                                 if (mirrorTenantQuery.Any())
                                 {
                                     var mirrorTenant = mirrorTenantQuery.First();
-                                    var contentModelTenant = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{mirrorTenant.TenantIdentifier}'", mirrorTenant.TenantIdentifier);
+
+                                    var contentModelTenant = await this.GetCurrentContentModelTenants($"$filter=TenantIdentifier eq '{mirrorTenant.TenantIdentifier}'&" +
+                                        $"                                                                                  $expand=AccessControlEntries", mirrorTenant.TenantIdentifier);
                                     if (contentModelTenant.Any())
                                     {
                                         var currentTenant = contentModelTenant.First();
-
-                                        foreach (var acl in approvedTenant.AccessControlEntries)
+                                        if (currentTenant.AccessControlEntries.Any())
                                         {
-                                            //var ownerJson = JsonConvert.SerializeObject(owner);
-                                            //var mirrorAcl = JsonConvert.DeserializeObject<ContentModel.AccessControlEntry>(ownerJson, new JsonSerializerSettings()
-                                            //{
-                                            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-
-                                            //});
-
-                                            var mirrorAcl = mapper.Map<HostingModel.AccessControlEntry, ContentModel.AccessControlEntry>(acl);
-
-                                            mirrorAcl.Id = Guid.Empty;
-                                            mirrorAcl.CreatedAt = DateTime.UtcNow;
-                                            mirrorAcl.UpdatedAt = DateTime.UtcNow;
+                                            // do not overwrite - 
+                                            // todo - surface this behaviour in options
                                             mirrorTenant.UpdatedAt = DateTime.UtcNow;
-                                            mirrorTenant.AccessControlEntries.Add(mirrorAcl);
+                                            mirrorTenant.AccessControlEntries.Clear();
+                                            updatedProperties = new List<string>() { nameof(ContentModel.Tenant.DeploymentState), nameof(ContentModel.Tenant.UpdatedAt) };
+                                        }
+                                        else
+                                        {
+                                            foreach (var acl in approvedTenant.AccessControlEntries)
+                                            {
+
+                                                var mirrorAcl = mapper.Map<HostingModel.AccessControlEntry, ContentModel.AccessControlEntry>(acl);
+
+                                                mirrorAcl.Id = Guid.Empty;
+                                                mirrorAcl.CreatedAt = DateTime.UtcNow;
+                                                mirrorAcl.UpdatedAt = DateTime.UtcNow;
+                                                mirrorTenant.UpdatedAt = DateTime.UtcNow;
+                                                mirrorTenant.AccessControlEntries.Add(mirrorAcl);
+                                            }
                                         }
 
                                         mirrorTenant.DeploymentState = ContentModel.TenantDeploymentWorkflowState.HasACL; // set the workflow complete flag
@@ -671,8 +680,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                                         var wireTenant = mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mirrorTenant);
 
-                                        var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.AccessControlEntries), nameof(ContentModel.Tenant.DeploymentState), nameof(ContentModel.Tenant.UpdatedAt) };
-                                        // var mutateResult = await restClient.ApiHorselessContentModelTenantUpdateAsync(wireTenant.Id.ToString(), wireTenant.TenantIdentifier, wireTenant);
+                                         // var mutateResult = await restClient.ApiHorselessContentModelTenantUpdateAsync(wireTenant.Id.ToString(), wireTenant.TenantIdentifier, wireTenant);
                                         var mutateResult = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier, updatedProperties, wireTenant);
                                         //var mutateResultJson = mutateResult.Result.ToJson();
                                         //var deserialzedMutateResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(mutateResultJson, serializerSettings);
@@ -728,8 +736,9 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                         // mark the hosting model deployment state as published
                                         approvedTenant.IsPublished = true;
                                         approvedTenant.UpdatedAt = DateTime.UtcNow;
+                                        approvedTenant.DeploymentState = TenantDeploymentWorkflowState.DeploymentComplete;
 
-                                        var updateResult = await hostingModelOperator.Update(approvedTenant, new List<string>() { nameof(HostingModel.Tenant.IsPublished) });
+                                        var updateResult = await hostingModelOperator.Update(approvedTenant, new List<string>() { nameof(HostingModel.Tenant.IsPublished), nameof(HostingModel.Tenant.DeploymentState), nameof(HostingModel.Tenant.UpdatedAt) });
 
                                         switch (updateResult.DeploymentState)
                                         {
