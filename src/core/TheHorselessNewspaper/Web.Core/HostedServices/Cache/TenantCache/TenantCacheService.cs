@@ -272,6 +272,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                         var currentTenant = staticTenant.Payload.ParentTenant;
                         if (currentTenant != null)
                         {
+                            currentTenant.UpdatedAt = DateTime.UtcNow;
                             await EnsureCachedTenant(currentTenant);
 
 

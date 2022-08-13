@@ -75,6 +75,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         // public Guid? PrincipalClaimContainerId { get; set; }
         public PrincipalClaimContainer? PrincipalClaimContainer { get; set; }
 
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 

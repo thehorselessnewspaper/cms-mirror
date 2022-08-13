@@ -49,7 +49,13 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
         public string ObjectId { get; set; }
+
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? CreatedAt { get; set; }
+
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? UpdatedAt { get; set; }
         public string DisplayName { get; set; }
         public bool? IsSoftDeleted { get; set; }
@@ -84,6 +90,9 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public virtual ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new HashSet<TenantIdentifierStrategyContainer>();
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
+
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? UpdatedAt { get; set; }
         public byte[] Timestamp { get; set; }
         public string DictionaryKey { get; set; }

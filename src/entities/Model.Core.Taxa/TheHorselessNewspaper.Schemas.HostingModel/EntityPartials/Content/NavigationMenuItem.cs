@@ -1,5 +1,6 @@
 ﻿using Finbuckle.MultiTenant;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using TheHorselessNewspaper.HostingModel.Context;
 
 namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
@@ -12,6 +13,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
+
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
     }

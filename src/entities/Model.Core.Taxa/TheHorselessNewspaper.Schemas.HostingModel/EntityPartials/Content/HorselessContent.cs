@@ -27,6 +27,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public ICollection<ContentCollection> ContentCollections { get; set; } = new HashSet<ContentCollection>();
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
+
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 

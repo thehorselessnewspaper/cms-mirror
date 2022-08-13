@@ -60,6 +60,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
+
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 
@@ -102,6 +105,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
         public ICollection<TenantIdentifierStrategyContainer> StrategyContainers { get; set; } = new HashSet<TenantIdentifierStrategyContainer>();
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
     }
@@ -147,6 +152,8 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? UpdatedAt { get; set; }
 
 
@@ -167,9 +174,10 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         public TenantDeploymentWorkflowState DeploymentState { get; set; } = TenantDeploymentWorkflowState.PendingApproval;
 
-        // [ForeignKey("FK_AccessControlEntryManagedTenants")]
+
         [InverseProperty(nameof(AccessControlEntry.Tenants))]
         public ICollection<AccessControlEntry> AccessControlEntries { get; set; } = new HashSet<AccessControlEntry>();
+
 
         // [ForeignKey("FK_ContentCollectionTenants")]
         [InverseProperty(nameof(ContentCollection.Tenants))]

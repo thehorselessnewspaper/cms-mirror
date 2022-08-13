@@ -25,6 +25,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         [InverseProperty(nameof(Principal.HorselessViews))]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
+
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? UpdatedAt { get; set; }
         public byte[] Timestamp { get; set; }
 

@@ -61,18 +61,40 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
             var entityTypes = builder.Model.GetEntityTypes();
             foreach (var entity in entityTypes)
             {
-                var idProp = entity.FindProperty(nameof(IHostingRowLevelSecured.Id));
-                var updatedProp = entity.FindProperty(nameof(IHostingRowLevelSecured.UpdatedAt));
+                var idProp = entity.FindProperty("Id");
+
                 if (idProp != null)
                 {
                     idProp.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnAdd;
                 }
 
+            }
+
+            foreach (var entity in entityTypes)
+            {
+
+                var updatedProp = entity.FindProperty("UpdatedAt");
+
+
                 if (updatedProp != null)
                 {
-                    updatedProp.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnUpdate;
+                    updatedProp.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnAddOrUpdate;
                 }
             }
+            //foreach (var entity in entityTypes)
+            //{
+            //    var idProp = entity.FindProperty(nameof(IHostingRowLevelSecured.Id));
+            //    var updatedProp = entity.FindProperty(nameof(IHostingRowLevelSecured.UpdatedAt));
+            //    if (idProp != null)
+            //    {
+            //        idProp.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnAdd;
+            //    }
+
+            //    if (updatedProp != null)
+            //    {
+            //        updatedProp.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnUpdate;
+            //    }
+            //}
         }
 
     }

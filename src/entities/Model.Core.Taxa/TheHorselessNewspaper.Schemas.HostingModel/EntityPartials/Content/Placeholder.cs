@@ -19,6 +19,9 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
 
         [InverseProperty(nameof(Principal.Placeholders))]
         public ICollection<Principal> Owners { get; set; } = new HashSet<Principal>();
+
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 

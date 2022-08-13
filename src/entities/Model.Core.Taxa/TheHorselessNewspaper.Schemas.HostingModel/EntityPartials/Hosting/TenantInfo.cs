@@ -22,6 +22,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public virtual ICollection<WebAPITenantInfo> WebAPITenantInfos { get; set; } = new HashSet<WebAPITenantInfo>();
 
         public Tenant? ParentTenant { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
     }

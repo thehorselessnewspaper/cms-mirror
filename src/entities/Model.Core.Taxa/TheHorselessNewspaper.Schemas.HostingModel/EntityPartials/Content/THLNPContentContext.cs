@@ -113,7 +113,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             var entityTypes = builder.Model.GetEntityTypes();
             foreach(var entity in entityTypes)
             {
-                var idProp = entity.FindProperty(nameof(IContentRowLevelSecured.Id));
+                var idProp = entity.FindProperty("Id");
 
                 if (idProp != null)
                 {
@@ -125,7 +125,7 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             foreach (var entity in entityTypes)
             {
 
-                var updatedProp = entity.FindProperty(nameof(IContentRowLevelSecured.UpdatedAt));
+                var updatedProp = entity.FindProperty("UpdatedAt");
 
 
                 if (updatedProp != null)

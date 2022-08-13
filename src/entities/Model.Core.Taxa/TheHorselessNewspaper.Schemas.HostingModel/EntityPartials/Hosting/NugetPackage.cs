@@ -18,6 +18,8 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
         public bool? IsSoftDeleted { get; set; }
         [Timestamp]
         public byte[] Timestamp { get; set; } = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? UpdatedAt { get; set; }
         public string? DictionaryKey { get; set; }
 
