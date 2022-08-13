@@ -32,6 +32,7 @@ using HorselessNewspaper.Web.Core.Services.Query.HorselessRESTAPIClient;
 using System.Net.Http.Json;
 using Newtonsoft.Json;
 using System;
+using System.Linq;
 
 namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 {
@@ -257,7 +258,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                 try
                 {
                     ISecurityPrincipalResolver tokenService = scope.ServiceProvider.GetRequiredService<ISecurityPrincipalResolver>();
-
+                    var mapper = scope.ServiceProvider.GetRequiredService<IMapper>();
                     var hostingModelPrincipalOperator = scope.ServiceProvider.GetRequiredService<IQueryableHostingModelOperator<HostingModel.Principal>>();
                     var hostingModelTenantOperator = scope.ServiceProvider.GetRequiredService<IQueryableHostingModelOperator<HostingModel.Tenant>>();
                     var stores = scope.ServiceProvider.GetRequiredService<IEnumerable<IMultiTenantStore<HorselessTenantInfo>>>().ToList();
@@ -289,6 +290,14 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                 currentTenant.DeploymentState = TenantDeploymentWorkflowState.Approved;
                                 currentTenant.CreatedAt = DateTime.UtcNow;
                                 currentTenant.UpdatedAt = DateTime.UtcNow;
+
+                                var contentModelACL = DefaultEntitySets.GetDefaultTenantACL("Default");
+                                var hostingACL = mapper.Map<ICollection<ContentModel.AccessControlEntry>, ICollection<HostingModel.AccessControlEntry>>(contentModelACL);
+                                foreach(var acl in hostingACL)
+                                {
+                                    currentTenant.AccessControlEntries.Add(acl);
+                                }
+
                                 var createResult = await hostingModelTenantOperator.Create(currentTenant);
                                 _logger.LogTrace($"hydrated static tenant not hydrated in hosting db: tenantIdentifier = {staticTenant.Identifier}");
                             }
@@ -662,7 +671,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                                         var wireTenant = mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mirrorTenant);
 
-                                        var updatedProperties = new List<string>() { nameof(ContentModel.AccessControlEntry), nameof(ContentModel.Tenant.DeploymentState), nameof(ContentModel.Tenant.UpdatedAt) };
+                                        var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.AccessControlEntries), nameof(ContentModel.Tenant.DeploymentState), nameof(ContentModel.Tenant.UpdatedAt) };
                                         // var mutateResult = await restClient.ApiHorselessContentModelTenantUpdateAsync(wireTenant.Id.ToString(), wireTenant.TenantIdentifier, wireTenant);
                                         var mutateResult = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier, updatedProperties, wireTenant);
                                         //var mutateResultJson = mutateResult.Result.ToJson();
