@@ -18157,85 +18157,6 @@
         },
         "additionalProperties": false
       },
-      "HostingEntitiesKeyCloakConfiguration": {
-        "type": "object",
-        "properties": {
-          "AccessControlEntries": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
-            },
-            "nullable": true
-          },
-          "Owners": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
-            },
-            "nullable": true
-          },
-          "IsSoftDeleted": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "Timestamp": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          },
-          "UpdatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "DictionaryKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "Id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "DisplayName": {
-            "type": "string",
-            "nullable": true
-          },
-          "Authority": {
-            "type": "string",
-            "nullable": true
-          },
-          "Realm": {
-            "type": "string",
-            "nullable": true
-          },
-          "ObjectId": {
-            "type": "string",
-            "nullable": true
-          },
-          "CreatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "Iss": {
-            "type": "string",
-            "nullable": true
-          },
-          "Aud": {
-            "type": "string",
-            "nullable": true
-          },
-          "TenantInfoId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "TenantInfo": {
-            "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
-          }
-        },
-        "additionalProperties": false
-      },
       "HostingEntitiesNugetPackage": {
         "type": "object",
         "properties": {
@@ -18343,13 +18264,6 @@
             "type": "string",
             "nullable": true
           },
-          "NugetPackages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesNugetPackage"
-            },
-            "nullable": true
-          },
           "Id": {
             "type": "string",
             "format": "uuid"
@@ -18424,13 +18338,6 @@
           },
           "DictionaryKey": {
             "type": "string",
-            "nullable": true
-          },
-          "KeyCloakConfigurations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesKeyCloakConfiguration"
-            },
             "nullable": true
           },
           "NugetPackages": {
@@ -18527,6 +18434,13 @@
             "format": "uuid",
             "nullable": true
           },
+          "WebAPITenantInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesWebAPITenantInfo"
+            },
+            "nullable": true
+          },
           "ParentTenant": {
             "$ref": "#/components/schemas/HostingEntitiesTenant"
           },
@@ -18574,20 +18488,6 @@
           },
           "TenantBaseUrl": {
             "type": "string",
-            "nullable": true
-          },
-          "KeyCloakConfigurations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesKeyCloakConfiguration"
-            },
-            "nullable": true
-          },
-          "WebAPITenantInfos": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesWebAPITenantInfo"
-            },
             "nullable": true
           }
         },
@@ -18660,14 +18560,6 @@
           "WebAPIBaseUrl": {
             "type": "string",
             "nullable": true
-          },
-          "TenantInfoId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "TenantInfo": {
-            "$ref": "#/components/schemas/HostingEntitiesTenantInfo"
           }
         },
         "additionalProperties": false

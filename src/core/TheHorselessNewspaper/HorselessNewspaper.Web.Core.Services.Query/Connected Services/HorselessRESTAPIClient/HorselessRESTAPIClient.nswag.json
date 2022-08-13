@@ -14259,7 +14259,7 @@
         "tags": [
           "TenantREST"
         ],
-        "operationId": "HostingEntitiesTenantCreate",
+        "operationId": "HostingEntitiesTenantREST_Create",
         "requestBody": {
           "content": {
             "application/json": {
@@ -16261,51 +16261,58 @@
             "format": "date-time",
             "nullable": true
           },
-          "ContentCollections": {
+          "ManagedContentCollections": {
             "type": "array",
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesContentCollection"
             }
           },
-          "HorselessContents": {
+          "ManagedHorselessContents": {
             "type": "array",
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
             }
           },
-          "HorselessViews": {
+          "ManagedHorselessViews": {
             "type": "array",
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesHorselessView"
             }
           },
-          "Publications": {
+          "ManagedPublications": {
             "type": "array",
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPublication"
             }
           },
-          "Tenants": {
+          "ManagedTenants": {
             "type": "array",
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesTenant"
             }
           },
-          "Placeholders": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesPlaceholder"
-            }
-          },
           "DictionaryKey": {
             "type": "string",
             "nullable": true
+          },
+          "AccessControlEntries": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
+            }
+          },
+          "Owners": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
+            }
           },
           "SubjectPrincipals": {
             "type": "array",
@@ -16655,13 +16662,6 @@
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             }
           },
-          "ContentCollections": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
-            }
-          },
           "Timestamp": {
             "type": "string",
             "format": "byte",
@@ -16763,7 +16763,12 @@
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             }
           },
-          "Principal": {
+          "HorselessSessionPrincipalId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "HorselessSessionPrincipal": {
             "$ref": "#/components/schemas/ContentEntitiesPrincipal"
           }
         }
@@ -16920,13 +16925,6 @@
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/ContentEntitiesPrincipal"
-            }
-          },
-          "Tenants": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesTenant"
             }
           },
           "Timestamp": {
@@ -17444,7 +17442,7 @@
             "format": "uuid",
             "nullable": true
           },
-          "HorselessView": {
+          "HorselessViews": {
             "$ref": "#/components/schemas/ContentEntitiesHorselessView"
           }
         }
@@ -17525,6 +17523,20 @@
               "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             }
           },
+          "Accounts": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesTenant"
+            }
+          },
+          "OwnedTenants": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesTenant"
+            }
+          },
           "OwnedHorselessSessions": {
             "type": "array",
             "nullable": true,
@@ -17539,53 +17551,18 @@
               "$ref": "#/components/schemas/ContentEntitiesHorselessSession"
             }
           },
-          "HorselessContents": {
+          "AccessControlEntries": {
             "type": "array",
             "nullable": true,
             "items": {
-              "$ref": "#/components/schemas/ContentEntitiesHorselessContent"
+              "$ref": "#/components/schemas/ContentEntitiesAccessControlEntry"
             }
           },
-          "HorselessViews": {
+          "Owners": {
             "type": "array",
             "nullable": true,
             "items": {
-              "$ref": "#/components/schemas/ContentEntitiesHorselessView"
-            }
-          },
-          "ContentCollections": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesContentCollection"
-            }
-          },
-          "FilesystemAssets": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesFilesystemAsset"
-            }
-          },
-          "Holonyms": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesHolonym"
-            }
-          },
-          "JSONAssets": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesJSONAsset"
-            }
-          },
-          "Placeholders": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContentEntitiesPlaceholder"
+              "$ref": "#/components/schemas/ContentEntitiesPrincipal"
             }
           }
         }
@@ -17654,7 +17631,7 @@
             "type": "string",
             "nullable": true
           },
-          "PrincipalClaims": {
+          "PrincipalClaim": {
             "type": "array",
             "nullable": true,
             "items": {
@@ -17989,6 +17966,9 @@
             "format": "uuid",
             "nullable": true
           },
+          "TenantIdentifierStrategy": {
+            "$ref": "#/components/schemas/ContentEntitiesTenantIdentifierStrategy"
+          },
           "TenantIdentifier": {
             "type": "string",
             "nullable": true
@@ -18061,6 +18041,106 @@
           "DeploymentComplete"
         ]
       },
+      "ContentEntitiesTenantIdentifierStrategy": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "DisplayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ObjectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "Tenant_Id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "Tenant": {
+            "$ref": "#/components/schemas/ContentEntitiesTenant"
+          },
+          "StrategyContainers": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContentEntitiesTenantIdentifierStrategyContainer"
+            }
+          }
+        }
+      },
+      "ContentEntitiesTenantIdentifierStrategyContainer": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "TenantIdentifierStrategyName": {
+            "$ref": "#/components/schemas/ContentEntitiesTenantIdentifierStrategyName"
+          },
+          "DisplayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ObjectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "TenantIdentifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "Strategy": {
+            "$ref": "#/components/schemas/ContentEntitiesTenantIdentifierStrategy"
+          }
+        }
+      },
+      "ContentEntitiesTenantIdentifierStrategyName": {
+        "type": "string",
+        "enum": [
+          "STATIC",
+          "BASE_PATH",
+          "ASPNETCORE_ROUTE",
+          "DNS_HOSTNAME",
+          "DNS_FQDN"
+        ]
+      },
       "HostingEntitiesACEPermission": {
         "type": "string",
         "enum": [
@@ -18123,18 +18203,25 @@
             "type": "string",
             "nullable": true
           },
-          "NugetPackages": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesNugetPackage"
-            }
-          },
-          "Tenants": {
+          "ManagedTenants": {
             "type": "array",
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/HostingEntitiesTenant"
+            }
+          },
+          "AccessControlEntries": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
+            }
+          },
+          "Owners": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
             }
           },
           "Id": {
@@ -18243,84 +18330,6 @@
           }
         }
       },
-      "HostingEntitiesNugetPackage": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "AccessControlEntries": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
-            }
-          },
-          "Owners": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
-            }
-          },
-          "IsSoftDeleted": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "Timestamp": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          },
-          "UpdatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "DictionaryKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "Tenants": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesTenant"
-            }
-          },
-          "Id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "ObjectId": {
-            "type": "string",
-            "nullable": true
-          },
-          "PackageName": {
-            "type": "string",
-            "nullable": true
-          },
-          "PackageId": {
-            "type": "string",
-            "nullable": true
-          },
-          "Publisher": {
-            "type": "string",
-            "nullable": true
-          },
-          "Version": {
-            "type": "string",
-            "nullable": true
-          },
-          "CreatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "DisplayName": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
       "HostingEntitiesPrincipal": {
         "type": "object",
         "additionalProperties": false,
@@ -18351,11 +18360,32 @@
             "type": "string",
             "nullable": true
           },
-          "NugetPackages": {
+          "OwnedTenants": {
             "type": "array",
             "nullable": true,
             "items": {
-              "$ref": "#/components/schemas/HostingEntitiesNugetPackage"
+              "$ref": "#/components/schemas/HostingEntitiesTenant"
+            }
+          },
+          "TenantAccounts": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesTenant"
+            }
+          },
+          "AccessControlEntries": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
+            }
+          },
+          "Owners": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
             }
           },
           "Id": {
@@ -18413,6 +18443,9 @@
             "format": "uuid",
             "nullable": true
           },
+          "TenantIdentifierStrategy": {
+            "$ref": "#/components/schemas/HostingEntitiesTenantIdentifierStrategy"
+          },
           "Timestamp": {
             "type": "string",
             "format": "byte",
@@ -18434,18 +18467,18 @@
             "type": "string",
             "nullable": true
           },
-          "KeyCloakConfigurations": {
+          "AccessControlEntries": {
             "type": "array",
             "nullable": true,
             "items": {
-              "$ref": "#/components/schemas/HostingEntitiesKeyCloakConfiguration"
+              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
             }
           },
-          "NugetPackages": {
+          "Owners": {
             "type": "array",
             "nullable": true,
             "items": {
-              "$ref": "#/components/schemas/HostingEntitiesNugetPackage"
+              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
             }
           },
           "Accounts": {
@@ -18457,20 +18490,6 @@
           },
           "DeploymentState": {
             "$ref": "#/components/schemas/HostingEntitiesTenantDeploymentWorkflowState"
-          },
-          "Owners": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesPrincipal"
-            }
-          },
-          "AccessControlEntries": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/HostingEntitiesAccessControlEntry"
-            }
           },
           "Id": {
             "type": "string",
@@ -18505,6 +18524,85 @@
           "HasACL",
           "HasContentCollection",
           "DeploymentComplete"
+        ]
+      },
+      "HostingEntitiesTenantIdentifierStrategy": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "DisplayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ObjectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsSoftDeleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Tenant_Id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "Tenant": {
+            "$ref": "#/components/schemas/HostingEntitiesTenant"
+          },
+          "StrategyContainers": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HostingEntitiesTenantIdentifierStrategyContainer"
+            }
+          }
+        }
+      },
+      "HostingEntitiesTenantIdentifierStrategyContainer": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "TenantIdentifierStrategyName": {
+            "$ref": "#/components/schemas/HostingEntitiesTenantIdentifierStrategyName"
+          },
+          "Timestamp": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "StrategyId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "Strategy": {
+            "$ref": "#/components/schemas/HostingEntitiesTenantIdentifierStrategy"
+          }
+        }
+      },
+      "HostingEntitiesTenantIdentifierStrategyName": {
+        "type": "string",
+        "enum": [
+          "STATIC",
+          "BASE_PATH",
+          "ASPNETCORE_ROUTE",
+          "DNS_HOSTNAME",
+          "DNS_FQDN"
         ]
       },
       "HostingEntitiesTenantInfo": {
@@ -18816,6 +18914,13 @@
       "ViewEnginesIViewEngine": {
         "type": "object",
         "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "Json Web Token"
       }
     }
   }

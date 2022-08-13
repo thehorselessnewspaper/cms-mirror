@@ -57,6 +57,10 @@ namespace HorselessNewspaper.Web.Core.Automapper
             CreateMap<HostingModel.AccessControlEntry, ApiModel.HostingEntitiesAccessControlEntry>();
             CreateMap<ContentModel.AccessControlEntry, ApiModel.ContentEntitiesAccessControlEntry>();
 
+
+            CreateMap<HostingModel.AccessControlEntry, ContentModel.AccessControlEntry>();
+            CreateMap<ContentModel.AccessControlEntry, HostingModel.AccessControlEntry>();
+
             // reverse map
             CreateMap<ApiModel.HostingEntitiesAccessControlEntry, HostingModel.AccessControlEntry>();
             CreateMap<ApiModel.ContentEntitiesAccessControlEntry, ContentModel.AccessControlEntry>();

@@ -286,6 +286,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                _logger.LogTrace($"found static tenant not hydrated in hosting db: tenantIdentifier = {staticTenant.Identifier}");
                                 currentTenant.IsPublished = false;
                                 currentTenant.DeploymentState = TenantDeploymentWorkflowState.Approved;
+                                currentTenant.CreatedAt = DateTime.UtcNow;
+                                currentTenant.UpdatedAt = DateTime.UtcNow;
                                 var createResult = await hostingModelTenantOperator.Create(currentTenant);
                                 _logger.LogTrace($"hydrated static tenant not hydrated in hosting db: tenantIdentifier = {staticTenant.Identifier}");
                             }
@@ -514,7 +516,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                         var mutatingTenant = mutatingEntityQuery.First();
                                         mutatingTenant.DeploymentState = ContentModel.TenantDeploymentWorkflowState.HasContentCollection;
                                         mutatingTenant.ContentCollections.Add(DefaultEntitySets.GetDefaultContentCollections().First());
-
+                                        mutatingTenant.UpdatedAt = DateTime.UtcNow;
                                         var wireTenant = mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mutatingTenant);
                                         //var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mutatingTenant, Formatting.None, new JsonSerializerSettings()
                                         //{
@@ -573,25 +575,29 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                                         foreach (var owner in approvedTenant.Owners)
                                         {
-                                            var ownerJson = JsonConvert.SerializeObject(owner, new JsonSerializerSettings()
-                                            {
-                                                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                                            //var ownerJson = JsonConvert.SerializeObject(owner, new JsonSerializerSettings()
+                                            //{
+                                            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
 
-                                            });
-                                            var mirrorOwner = JsonConvert.DeserializeObject<ContentModel.Principal>(ownerJson, new JsonSerializerSettings()
-                                            {
-                                                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                                            //});
+                                            //var mirrorOwner = JsonConvert.DeserializeObject<ContentModel.Principal>(ownerJson, new JsonSerializerSettings()
+                                            //{
+                                            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
 
-                                            });
+                                            //});
 
+                                            var mirrorOwner = mapper.Map<HostingModel.Principal, ContentModel.Principal>(owner);
                                             mirrorOwner.Id = Guid.Empty;
+                                            mirrorOwner.CreatedAt = DateTime.UtcNow;
+                                            mirrorOwner.UpdatedAt = DateTime.UtcNow;
+                                            mirrorTenant.UpdatedAt = DateTime.UtcNow;
                                             mirrorTenant.Owners.Add(mirrorOwner);
                                         }
 
                                         mirrorTenant.DeploymentState = ContentModel.TenantDeploymentWorkflowState.HasOwners; // set the workflow complete flag
                                         var wireTenant = mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mirrorTenant);
                                         // var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mirrorTenant, Formatting.None, serializerSettings));
-                                        var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.Owners), nameof(ContentModel.Tenant.DeploymentState) };
+                                        var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.Owners), nameof(ContentModel.Tenant.DeploymentState), nameof(ContentModel.Tenant.UpdatedAt) };
                                         // var mutateResult = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(wireTenant.Id.ToString(), wireTenant.TenantIdentifier, updatedProperties, wireTenant);
 
                                         var mutateResult = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier, updatedProperties, wireTenant);
@@ -629,16 +635,21 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                     {
                                         var currentTenant = contentModelTenant.First();
 
-                                        foreach (var owner in approvedTenant.AccessControlEntries)
+                                        foreach (var acl in approvedTenant.AccessControlEntries)
                                         {
-                                            var ownerJson = JsonConvert.SerializeObject(owner);
-                                            var mirrorAcl = JsonConvert.DeserializeObject<ContentModel.AccessControlEntry>(ownerJson, new JsonSerializerSettings()
-                                            {
-                                                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                                            //var ownerJson = JsonConvert.SerializeObject(owner);
+                                            //var mirrorAcl = JsonConvert.DeserializeObject<ContentModel.AccessControlEntry>(ownerJson, new JsonSerializerSettings()
+                                            //{
+                                            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
 
-                                            });
+                                            //});
+
+                                            var mirrorAcl = mapper.Map<HostingModel.AccessControlEntry, ContentModel.AccessControlEntry>(acl);
 
                                             mirrorAcl.Id = Guid.Empty;
+                                            mirrorAcl.CreatedAt = DateTime.UtcNow;
+                                            mirrorAcl.UpdatedAt = DateTime.UtcNow;
+                                            mirrorTenant.UpdatedAt = DateTime.UtcNow;
                                             mirrorTenant.AccessControlEntries.Add(mirrorAcl);
                                         }
 
@@ -650,7 +661,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                                         var wireTenant = mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mirrorTenant);
 
-                                        var updatedProperties = new List<string>() { nameof(ContentModel.AccessControlEntry), nameof(ContentModel.Tenant.DeploymentState) };
+                                        var updatedProperties = new List<string>() { nameof(ContentModel.AccessControlEntry), nameof(ContentModel.Tenant.DeploymentState), nameof(ContentModel.Tenant.UpdatedAt) };
                                         // var mutateResult = await restClient.ApiHorselessContentModelTenantUpdateAsync(wireTenant.Id.ToString(), wireTenant.TenantIdentifier, wireTenant);
                                         var mutateResult = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier, updatedProperties, wireTenant);
                                         //var mutateResultJson = mutateResult.Result.ToJson();
@@ -691,7 +702,10 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                         //}));
 
                                         var wireTenant = mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mirrorTenant);
-                                        var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.DeploymentState) };
+                                        wireTenant.CreatedAt = DateTime.UtcNow;
+                                        wireTenant.UpdatedAt = DateTime.UtcNow;
+
+                                        var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.DeploymentState), nameof(ContentModel.Tenant.UpdatedAt) };
 
                                         // var mutateResult = await restClient.ApiHorselessContentModelTenantUpdateAsync(mirrorTenant.Id.ToString(), mirrorTenant.TenantIdentifier,wireTenant);
 
@@ -703,6 +717,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                                         // mark the hosting model deployment state as published
                                         approvedTenant.IsPublished = true;
+                                        approvedTenant.UpdatedAt = DateTime.UtcNow;
+
                                         var updateResult = await hostingModelOperator.Update(approvedTenant, new List<string>() { nameof(HostingModel.Tenant.IsPublished) });
 
                                         switch (updateResult.DeploymentState)
@@ -886,13 +902,14 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     Id = Guid.Empty,
                     IsPublished = true,
                     CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
                     DisplayName = originEntity.DisplayName,
                     IsSoftDeleted = false,
                     ObjectId = originEntity.ObjectId,
                     Timestamp = BitConverter.GetBytes(DateTime.UtcNow.Ticks),
                     TenantIdentifier = originEntity.TenantIdentifier.ToLower(), // obviously sanitize this
                     BaseUrl = originEntity.BaseUrl.TrimEnd('/'),
-                    Owners = new List<ContentModel.Principal>()
+                    Owners = new HashSet<ContentModel.Principal>()
                 };
 
                 //mergeEntity.TenantIdentifierStrategy = new ContentModel.TenantIdentifierStrategy()
@@ -997,6 +1014,8 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     {
                         // insert content model record
                         mergeEntity.DeploymentState = ContentModel.TenantDeploymentWorkflowState.ExistsInContentDb;
+                        mergeEntity.CreatedAt = DateTime.UtcNow;
+                        mergeEntity.UpdatedAt = DateTime.UtcNow;
                         // mergeEntity.TenantIdentifierStrategy = mergeEntity.TenantIdentifierStrategy == null ? new ContentModel.TenantIdentifierStrategy() : mergeEntity.TenantIdentifierStrategy;
 
                         // var mergeEntityJson = JsonConvert.SerializeObject(mergeEntity);
@@ -1043,6 +1062,7 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                     var createdTenant = JsonConvert.DeserializeObject<ContentModel.Tenant>(createdTenantJson);
 
                     createdTenant.IsPublished = true; //mark workflow complete
+                    createdTenant.UpdatedAt = DateTime.UtcNow;
                     _logger.LogTrace($"will change state of tenant {createdTenant.IsPublished} to true");
 
                     var updatedRoute = $"{baseUri}/{identifier}/api/HorselessContentModel/Tenant/Update/{createdTenant.Id}";
@@ -1052,8 +1072,13 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
 
                     foreach (var user in createdTenant.Owners)
                     {
+                        user.UpdatedAt = DateTime.UtcNow;
+                        user.CreatedAt = DateTime.UtcNow;
+
                         foreach (var ace in createdTenant.AccessControlEntries)
                         {
+                            ace.CreatedAt = DateTime.UtcNow;
+                            ace.UpdatedAt = DateTime.UtcNow;
                             ace.SubjectPrincipals.Add(user);
                         }
                     }

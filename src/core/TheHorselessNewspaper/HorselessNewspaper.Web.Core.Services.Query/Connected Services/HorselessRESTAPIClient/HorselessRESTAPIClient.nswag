@@ -3,7 +3,7 @@
   "defaultVariables": null,
   "documentGenerator": {
     "fromDocument": {
-      "url": "C:\\src\\the-horseless-newspaper\\src\\core\\TheHorselessNewspaper\\HorselessNewspaper.Web.Core.Services.Query\\Client\\REST\\swagger.json",
+      "url": "E:\\src\\horseless-core\\the horseless newspaper\\src\\core\\TheHorselessNewspaper\\HorselessNewspaper.Web.Core.Services.Query\\swagger.json",
       "output": "HorselessRESTAPIClient.nswag.json",
       "newLineBehavior": "Auto"
     }
@@ -61,7 +61,7 @@
       "jsonConverters": null,
       "anyType": "object",
       "dateTimeType": "System.DateTime",
-      "timeType": "System.TimeSpan",
+      "timeType": "System.DateTime",
       "timeSpanType": "System.TimeSpan",
       "arrayType": "System.Collections.Generic.ICollection",
       "arrayInstanceType": "System.Collections.ObjectModel.Collection",
@@ -85,7 +85,7 @@
       "inlineNamedAny": false,
       "generateDtoTypes": true,
       "generateOptionalPropertiesAsNullable": true,
-      "generateNullableReferenceTypes": false,
+      "generateNullableReferenceTypes": true,
       "templateDirectory": null,
       "typeNameGeneratorType": null,
       "propertyNameGeneratorType": null,
