@@ -1,5 +1,6 @@
 registry=https://registry.npmjs.org/
+always-auth=true
 @horselessnewspaper:registry=https://registry.npmjs.org/
 @wizardcontrollerprerelease:registry=https://registry.npmjs.org/
 @wizardcontroller:registry=https://registry.npmjs.org/
-always-auth=false
+@vigouredelaruse:registry=https://registry.npmjs.org/
