@@ -21,7 +21,7 @@ steps:
     displayName: 'set git safe'
     inputs:
       targetType: 'inline'
-      script: 'git config --global --add safe.directory $(Build.Repository.LocalPath)'  
+      script: 'git config --global --add safe.directory $(Build.SourcesDirectory)'  
 
   - checkout: self
 
