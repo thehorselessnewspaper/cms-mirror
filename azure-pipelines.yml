@@ -10,6 +10,8 @@ pool:
     name: Default
   
 steps:
+  - powershell: |
+      Write-Host $(Build.SourcesDirectory)
   
   - task: PowerShell@2
     displayName: 'start mssqllocaldb'
