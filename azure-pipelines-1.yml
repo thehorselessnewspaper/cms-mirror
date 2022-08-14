@@ -1,0 +1,45 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- mrgncy
+
+pool:
+  name: Default
+
+steps:
+
+- checkout: self
+
+- powershell: |
+   .
+   
+   Write-Host "starting sqllocaldb"
+   sqllocaldb start mssqllocaldb
+   Write-Host "started sqllocaldb"
+  displayName: 'PowerShell Script'
+
+- task: DotNetCoreCLI@2
+  displayName: Restore
+  inputs:
+    command: restore
+    projects: src/entities/Model.Core.Taxa/Model.Core.Taxa.sln
+    vstsFeed: '155346c4-4c3d-4269-a624-e98408645b68/37532069-a755-46e5-9614-9bd2c3da7795'
+
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    projects: Model.Core.Taxa/Model.Core.Taxa.sln
+    arguments: '--configuration $(BuildConfiguration)'
+    workingDirectory: src/entities
+
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: Horseless.HostingModel.SmokeTests.csproj
+    arguments: '--configuration $(BuildConfiguration)'
+    workingDirectory: src/entities/Model.Core.Taxa/Horseless.HostingModel.SmokeTests
+
