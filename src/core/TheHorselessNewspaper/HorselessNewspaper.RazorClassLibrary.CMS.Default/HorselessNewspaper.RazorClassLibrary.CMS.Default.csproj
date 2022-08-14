@@ -40,6 +40,13 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
+	  <Compile Remove="angular\**" />
+	  <Content Remove="angular\**" />
+	  <EmbeddedResource Remove="angular\**" />
+	  <None Remove="angular\**" />
+	</ItemGroup>
+	
+	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.8" />
 		<PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.10" />
@@ -67,151 +74,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\3rdpartylicenses.txt" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\color.png" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\favicon.ico" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\hue.png" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\index.html" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\main.js" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\polyfills.js" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\primeicons.eot" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\primeicons.svg" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\primeicons.ttf" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\primeicons.woff" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\runtime.js" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\styles.css" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\3rdpartylicenses.txt" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\color.png" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\favicon.ico" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\hue.png" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\index.html" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\main.js" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\polyfills.js" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\primeicons.eot" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\primeicons.svg" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\primeicons.ttf" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\primeicons.woff" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\runtime.js" />
-	  <None Remove="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\styles.css" />
 	  <None Remove="HorselessControllers\OData\Content\i4suv40g.4f1~" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <_ContentIncludedByDefault Remove="wwwroot\js\bespoke.js" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\3rdpartylicenses.txt">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\color.png">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\favicon.ico">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\hue.png">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\index.html">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\main.js">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\polyfills.js">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\primeicons.eot">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\primeicons.svg">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\primeicons.ttf">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\primeicons.woff">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\runtime.js">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\devops-admin\src\assets\horseless-elements\styles.css">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\color.png" />
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\favicon.ico" />
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\3rdpartylicenses.txt">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\color.png">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\favicon.ico">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\hue.png">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\index.html">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\main.js">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\polyfills.js">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\primeicons.eot">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\primeicons.svg">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\primeicons.ttf">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\primeicons.woff">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\runtime.js">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\horseless-elements\styles.css">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\hue.png" />
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\primeicons.eot" />
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\primeicons.svg" />
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\primeicons.ttf" />
-	  <Content Include="angular\horseless-elements\projects\horselessnewspaper\tenant-admin\src\assets\primeicons.woff" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -230,15 +97,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Update="angular\horseless-elements\package.json">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Content>
-	  <Content Update="angular\horseless-elements\tsconfig.json">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Content>
-	  <Content Update="angular\package.json">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Content>
 	  <Content Update="wwwroot\js\horselessnewspaper\tenantAdmin\assets\horseless-elements\color.png">
 	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
