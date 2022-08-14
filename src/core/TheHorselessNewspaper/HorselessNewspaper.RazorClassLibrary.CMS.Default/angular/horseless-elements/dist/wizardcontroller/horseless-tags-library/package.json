@@ -1,0 +1,33 @@
+{
+  "name": "@wizardcontroller/horseless-tags-library",
+  "version": "0.0.0-watch+1652569400551",
+  "peerDependencies": {
+    "@angular/common": "^13.1.0",
+    "@angular/core": "^13.1.0",
+    "@wizardcontrollerprerelease/horseless-contentapi-lib": "~x.x.x",
+    "rxjs": "^7.5.5"
+  },
+  "module": "fesm2015/wizardcontroller-horseless-tags-library.mjs",
+  "es2020": "fesm2020/wizardcontroller-horseless-tags-library.mjs",
+  "esm2020": "esm2020/wizardcontroller-horseless-tags-library.mjs",
+  "fesm2020": "fesm2020/wizardcontroller-horseless-tags-library.mjs",
+  "fesm2015": "fesm2015/wizardcontroller-horseless-tags-library.mjs",
+  "typings": "wizardcontroller-horseless-tags-library.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./wizardcontroller-horseless-tags-library.d.ts",
+      "esm2020": "./esm2020/wizardcontroller-horseless-tags-library.mjs",
+      "es2020": "./fesm2020/wizardcontroller-horseless-tags-library.mjs",
+      "es2015": "./fesm2015/wizardcontroller-horseless-tags-library.mjs",
+      "node": "./fesm2015/wizardcontroller-horseless-tags-library.mjs",
+      "default": "./fesm2020/wizardcontroller-horseless-tags-library.mjs"
+    }
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}

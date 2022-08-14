@@ -4,16 +4,43 @@
 # https://aka.ms/yaml
 
 trigger:
-- triage
-
-pool:
-  vmImage: ubuntu-latest
-
-steps:
-- task: swellaby.mirror-git-repository.mirror-git-repository-vsts-task.mirror-git-repository-vsts-task@1
-  displayName: 'Mirror Git Repository'
-  inputs:
-    sourceGitRepositoryUri: 'https://dev.azure.com/electricrucible/the%20horseless%20newspaper/_git/the%20horseless%20newspaper'
-    sourceVerifySSLCertificate: false
-    destinationGitRepositoryUri: 'https://github.com/thehorselessnewspaper/cms-mirror'
-    destinationGitRepositoryPersonalAccessToken: '$(destinationPat)'
+  - mrgncy
+  
+  pool:
+    name: Default
+  
+  steps:
+  
+  - checkout: self
+  
+  - powershell: |
+     .
+     
+     Write-Host "starting sqllocaldb"
+     sqllocaldb start mssqllocaldb
+     Write-Host "started sqllocaldb"
+    displayName: 'PowerShell Script'
+  
+  - task: DotNetCoreCLI@2
+    displayName: Restore
+    inputs:
+      command: restore
+      projects: src/entities/Model.Core.Taxa/Model.Core.Taxa.sln
+      vstsFeed: '155346c4-4c3d-4269-a624-e98408645b68/37532069-a755-46e5-9614-9bd2c3da7795'
+  
+  - task: DotNetCoreCLI@2
+    displayName: Build
+    inputs:
+      projects: Model.Core.Taxa/Model.Core.Taxa.sln
+      arguments: '--configuration $(BuildConfiguration)'
+      workingDirectory: src/entities
+  
+  - task: DotNetCoreCLI@2
+    displayName: Test
+    inputs:
+      command: test
+      projects: Horseless.HostingModel.SmokeTests.csproj
+      arguments: '--configuration $(BuildConfiguration)'
+      workingDirectory: src/entities/Model.Core.Taxa/Horseless.HostingModel.SmokeTests
+  
+  
