@@ -528,32 +528,14 @@ namespace HorselessNewspaper.Web.Core.HostedServices.Cache.TenantCache
                                         mutatingTenant.ContentCollections.Add(DefaultEntitySets.GetDefaultContentCollections().First());
                                         mutatingTenant.UpdatedAt = DateTime.UtcNow;
                                         var wireTenant = mapper.Map<ContentModel.Tenant, ContentEntitiesTenant>(mutatingTenant);
-                                        //var wireTenant = ContentEntitiesTenant.FromJson(JsonConvert.SerializeObject(mutatingTenant, Formatting.None, new JsonSerializerSettings()
-                                        //{
-                                        //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                                            
-                                        //}));
-
-                                        //var wireContentCollection = JsonConvert.SerializeObject(mutatingTenant.ContentCollections.First(), Formatting.None, new JsonSerializerSettings()
-                                        //{
-                                        //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                                        //});
-
-                                        // TODO add support for multiple default collections
-                                        // var wireContentCollection = mapper.Map<ContentModel.ContentCollection, ContentEntitiesContentCollection>(mutatingTenant.ContentCollections.First());
-                                        //var mutateResult = await restClient.
-                                        //                                    ApiHorselessContentModelContentCollectionCreateAsync(mutatingTenant.TenantIdentifier.ToString(), 
-                                        //                                    ContentEntitiesContentCollection.FromJson(wireContentCollection));
-
-                                        // wireTenant.ContentCollections.Clear();
+  
 
                                         var updatedProperties = new List<string>() { nameof(ContentModel.Tenant.DeploymentState), nameof(ContentModel.Tenant.UpdatedAt), nameof(ContentModel.Tenant.ContentCollections) };
                                         var mutatedTenant = await restClient.ApiHorselessContentModelTenantUpdatePropertiesAsync(mutatingTenant.Id.ToString(),
                                                                                             mutatingTenant.TenantIdentifier, updatedProperties, wireTenant);
                                         var deserialzedMutateResult = mapper.Map<ContentEntitiesTenant, ContentModel.Tenant>(mutatedTenant.Result);
 
-                                        //var mutateResultJson = mutatedTenant.Result.ToJson();
-                                        //var deserialzedMutateResult = JsonConvert.DeserializeObject<ContentModel.Tenant>(mutateResultJson, serializerSettings);
+
                                         currentDeploymentState = deserialzedMutateResult.DeploymentState;
                                     }
 
