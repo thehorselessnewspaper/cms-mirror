@@ -109,9 +109,14 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
             builder.Entity<HorselessView>()
                  .Navigation(n => n.Placeholders).AutoInclude();
 
+            // EnsureAutomaticPropertySetters(builder);
 
+        }
+
+        private static void EnsureAutomaticPropertySetters(ModelBuilder builder)
+        {
             var entityTypes = builder.Model.GetEntityTypes();
-            foreach(var entity in entityTypes)
+            foreach (var entity in entityTypes)
             {
                 var idProp = entity.FindProperty("Id");
 
@@ -133,8 +138,6 @@ namespace TheHorselessNewspaper.Schemas.ContentModel.ContentEntities
                     updatedProp.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnAddOrUpdate;
                 }
             }
-
         }
-
     }
 }

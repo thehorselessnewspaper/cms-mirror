@@ -58,6 +58,11 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
 
 
+            // EnsureAutomaticPropertySetters(builder);
+        }
+
+        private static void EnsureAutomaticPropertySetters(ModelBuilder builder)
+        {
             var entityTypes = builder.Model.GetEntityTypes();
             foreach (var entity in entityTypes)
             {
@@ -96,6 +101,5 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
             //    }
             //}
         }
-
     }
 }
