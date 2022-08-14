@@ -315,7 +315,7 @@ namespace HorselessNewspaper.Web.Core.Auth.Keycloak.Services.SecurityPrincipalRe
                 {
                     // the authenticated scenario has already recorded this principal
                     _logger.LogInformation($"found authenticated user in database with upn={user.Claims.Upn()}");
-                    var homeTenant = allTenantsList.Where(w => w.Accounts
+                    var homeTenant = allTenantsList.Where(w => w.Owners
                     .Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername())).Any()).FirstOrDefault();
                     var resolvedPrincipal = homeTenant.Owners.Where(w => w.PreferredUserName.Equals(user.Claims.PreferredUsername())).FirstOrDefault();
 
