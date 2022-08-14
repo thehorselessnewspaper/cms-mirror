@@ -21,7 +21,7 @@ steps:
     displayName: 'set git safe'
     inputs:
       targetType: 'inline'
-      script: 'git config --global --add safe.directory E:/agent/_work/'  
+      script: 'git config --global --add safe.directory $(Agent.BuildDirectory)'  
 
   - checkout: self
 
