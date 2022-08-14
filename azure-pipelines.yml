@@ -6,10 +6,10 @@
 trigger:
   - mrgncy
   
-  pool:
+pool:
     name: Default
   
-  steps:
+steps:
   
   - checkout: self
   
