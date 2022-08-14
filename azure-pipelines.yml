@@ -16,17 +16,15 @@ steps:
     inputs:
       targetType: 'inline'
       script: 'sqllocaldb start mssqllocaldb'  
-      
+
+  - task: PowerShell@2
+    displayName: 'set git safe'
+    inputs:
+      targetType: 'inline'
+      script: 'git config --global --add safe.directory E:/agent/_work/'  
+
   - checkout: self
-  
-  - powershell: |
-     .
-     
-     Write-Host "starting sqllocaldb"
-     sqllocaldb start mssqllocaldb
-     Write-Host "started sqllocaldb"
-    displayName: 'PowerShell Script'
-  
+
   - task: DotNetCoreCLI@2
     displayName: Restore
     inputs:
