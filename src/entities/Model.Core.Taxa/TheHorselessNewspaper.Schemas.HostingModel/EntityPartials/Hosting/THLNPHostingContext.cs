@@ -58,7 +58,7 @@ namespace TheHorselessNewspaper.Schemas.HostingModel.HostingEntities
 
 
 
-            // EnsureAutomaticPropertySetters(builder);
+            EnsureAutomaticPropertySetters(builder);
         }
 
         private static void EnsureAutomaticPropertySetters(ModelBuilder builder)

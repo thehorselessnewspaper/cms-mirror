@@ -61,13 +61,25 @@ namespace TheHorselessNewspaper.HostingModel.HostingEntities.Query.HostingModelC
         {
             var resolvedTenant = await _context.ResolveTenant();
 
-            _logger.LogDebug($"handling Create request");
-            var dbSet = ((DbContext)_context).Set<T>();
+            try
+            {
+                _logger.LogDebug($"handling Create request");
 
-            var addResult = await dbSet.AddAsync(entity);
-            var saveResult = await ((DbContext)_context).SaveChangesAsync();
+                var dbSet = ((DbContext)_context).Set<T>();
+                entity.CreatedAt = DateTime.UtcNow;
+                entity.UpdatedAt = DateTime.UtcNow;
 
-            return await Task.FromResult(entity);
+                var addResult = await dbSet.AddAsync(entity);
+                var saveResult = await ((DbContext)_context).SaveChangesAsync();
+
+                return await Task.FromResult(addResult.Entity);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"problem handling request {ex.Message}");
+
+                throw new Exception($"entity creation exception {ex.Message}", ex);
+            }
         }
 
         public async Task<IEnumerable<T>> Create(IEnumerable<T> entities)

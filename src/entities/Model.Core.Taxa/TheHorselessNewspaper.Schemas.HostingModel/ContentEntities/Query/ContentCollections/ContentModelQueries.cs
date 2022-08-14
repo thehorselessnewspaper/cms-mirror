@@ -90,9 +90,8 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
 
                 var saveResult = await ((DbContext)_context).SaveChangesAsync();
 
-                var savedQuery = await this.Read(w => w.Id == entity.Id);
-                var savedEntity = await savedQuery.FirstOrDefaultAsync();
-                return await Task.FromResult<T>(savedEntity);
+
+                return await Task.FromResult<T>(addResult.Entity);
             }
             catch (Exception ex)
             {
@@ -101,7 +100,7 @@ namespace TheHorselessNewspaper.HostingModel.ContentEntities.Query.ContentCollec
                 throw new Exception($"entity creation exception {ex.Message}", ex);
             }
 
-            return await Task.FromResult<T>(entity);
+            // return await Task.FromResult<T>(entity);
         }
 
         public async Task<IEnumerable<T>> Create(IEnumerable<T> entities)
