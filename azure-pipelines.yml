@@ -13,8 +13,9 @@ resources:
     ports:
       - 1433:1433
 
+
 trigger:
-  - mrgncy
+  - task-170-cms-placeholder
   
 pool:
     name: Azure Pipelines
