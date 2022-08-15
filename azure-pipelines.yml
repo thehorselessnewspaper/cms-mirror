@@ -11,7 +11,7 @@ resources:
       SA_PASSWORD: Password123!
       MSSQL_PID: Express
     ports:
-      - 1433
+      - 1433:1433
 
 trigger:
   - mrgncy
