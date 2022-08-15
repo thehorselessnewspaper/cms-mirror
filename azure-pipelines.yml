@@ -2,7 +2,14 @@
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
-
+resources:
+  containers:
+  - container: mssql
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    env:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: Password123
+      MSSQL_PID: Express
 trigger:
   - mrgncy
   
@@ -10,13 +17,8 @@ pool:
     name: Default
   
 steps:
-- container: mssql
-  image: mcr.microsoft.com/mssql/server:2022-latest
-  env:
-    ACCEPT_EULA: Y
-    SA_PASSWORD: Password123
-    MSSQL_PID: Express
 
+    
   - powershell: |
       Write-Host $(Build.SourcesDirectory)
   
