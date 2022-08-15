@@ -42,7 +42,7 @@ steps:
     displayName: Test
     inputs:
       command: test
-      projects: Horseless.HostingModel.SmokeTests.csproj
+      projects: src/entities/Model.Core.Taxa/Horseless.HostingModel.SmokeTests/Horseless.HostingModel.SmokeTests.csproj
       arguments: '--configuration $(BuildConfiguration)'
       workingDirectory: src/entities/Model.Core.Taxa/Horseless.HostingModel.SmokeTests
   
