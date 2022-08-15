@@ -28,13 +28,6 @@ steps:
 
   - checkout: self
 
-  - task: DotNetCoreCLI@2
-    displayName: Restore
-    inputs:
-      command: restore
-      projects: src/entities/Model.Core.Taxa/Model.Core.Taxa.sln
-      vstsFeed: '155346c4-4c3d-4269-a624-e98408645b68/37532069-a755-46e5-9614-9bd2c3da7795'
-   
   - task: MSBuild@1
     inputs:
       solution: 'Model.Core.Taxa/Model.Core.Taxa.sln'
