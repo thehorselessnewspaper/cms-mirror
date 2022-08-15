@@ -8,8 +8,11 @@ resources:
     image: mcr.microsoft.com/mssql/server:2022-latest
     env:
       ACCEPT_EULA: Y
-      SA_PASSWORD: Password123
+      SA_PASSWORD: Password123!
       MSSQL_PID: Express
+    ports:
+      - 1433
+
 trigger:
   - mrgncy
   
@@ -17,6 +20,10 @@ pool:
     name: Azure Pipelines
   
 steps:
+  - script: |    
+      sleep 60
+      sqlcmd -S "localhost,${AGENT_SERVICES_MSSQL_PORTS_1433}" -U SA -P Password123! -Q "SELECT * FROM INFORMATION_SCHEMA.TABLES
+
   - powershell: |
       Write-Host $(Build.SourcesDirectory)
 
