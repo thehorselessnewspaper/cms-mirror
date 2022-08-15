@@ -1,0 +1,68 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+resources:
+  containers:
+  - container: mssql
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    env:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: Password123!
+      MSSQL_PID: Express
+    ports:
+      - 1433:1433
+
+
+trigger:
+  - task-170-cms-placeholder
+  
+pool:
+    name: Azure Pipelines
+
+services:
+
+  mssql: mssql
+
+steps:
+  - script: |    
+      sleep 60
+      docker ps
+      sqlcmd -S "localhost" -U SA -P Password123! -Q "SELECT * FROM INFORMATION_SCHEMA.TABLES"
+
+  - powershell: |
+      Write-Host $(Build.SourcesDirectory)
+
+  - task: PowerShell@2
+    displayName: 'set git safe'
+    inputs:
+      targetType: 'inline'
+      script: 'git config --global --add safe.directory $(Build.SourcesDirectory)'  
+
+  - checkout: self
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'restore'
+      projects: 'src/entities/Model.Core.Taxa/Horseless.HostingModel.SmokeTests/Horseless.HostingModel.SmokeTests.csproj'
+      feedsToUse: 'select'
+      vstsFeed: '155346c4-4c3d-4269-a624-e98408645b68/37532069-a755-46e5-9614-9bd2c3da7795'
+  - task: MSBuild@1
+    inputs:
+      solution: 'Model.Core.Taxa/Model.Core.Taxa.sln'
+      msbuildArchitecture: 'x64'
+      configuration: '$(BuildConfiguration)'
+      clean: true
+      maximumCpuCount: true
+      restoreNugetPackages: true
+      logProjectEvents: true'
+        
+  - task: DotNetCoreCLI@2
+    displayName: Test
+    inputs:
+      command: test
+      testRunTitle: 'horseless schema tests'
+      projects: src/entities/Model.Core.Taxa/Horseless.HostingModel.SmokeTests/Horseless.HostingModel.SmokeTests.csproj
+      arguments: '--configuration $(BuildConfiguration)'
+      workingDirectory: src/entities/Model.Core.Taxa/Horseless.HostingModel.SmokeTests
+      publishTestResults: true
