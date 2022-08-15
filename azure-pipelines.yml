@@ -61,6 +61,8 @@ steps:
     displayName: Test
     inputs:
       command: test
+      testRunTitle: 'horseless schema tests'
       projects: src/entities/Model.Core.Taxa/Horseless.HostingModel.SmokeTests/Horseless.HostingModel.SmokeTests.csproj
       arguments: '--configuration $(BuildConfiguration)'
       workingDirectory: src/entities/Model.Core.Taxa/Horseless.HostingModel.SmokeTests
+      publishTestResults: true
