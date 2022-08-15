@@ -18,7 +18,11 @@ trigger:
   
 pool:
     name: Azure Pipelines
-  
+
+services:
+
+  mssql: mssql
+
 steps:
   - script: |    
       sleep 60
