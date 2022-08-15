@@ -34,14 +34,17 @@ steps:
       command: restore
       projects: src/entities/Model.Core.Taxa/Model.Core.Taxa.sln
       vstsFeed: '155346c4-4c3d-4269-a624-e98408645b68/37532069-a755-46e5-9614-9bd2c3da7795'
-  
-  - task: DotNetCoreCLI@2
-    displayName: Build
+   
+  - task: MSBuild@1
     inputs:
-      projects: Model.Core.Taxa/Model.Core.Taxa.sln
-      arguments: '--configuration $(BuildConfiguration)'
-      workingDirectory: src/entities
-  
+      solution: 'Model.Core.Taxa/Model.Core.Taxa.sln'
+      msbuildArchitecture: 'x64'
+      configuration: '$(BuildConfiguration)'
+      clean: true
+      maximumCpuCount: true
+      restoreNugetPackages: true
+      logProjectEvents: true'
+        
   - task: DotNetCoreCLI@2
     displayName: Test
     inputs:
