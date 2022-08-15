@@ -63,12 +63,3 @@ steps:
       projects: src/entities/Model.Core.Taxa/Horseless.HostingModel.SmokeTests/Horseless.HostingModel.SmokeTests.csproj
       arguments: '--configuration $(BuildConfiguration)'
       workingDirectory: src/entities/Model.Core.Taxa/Horseless.HostingModel.SmokeTests
-  
-  - task: VSTest@2
-    inputs:
-      testSelector: 'testAssemblies'
-      testAssemblyVer2: |
-        **\*test*.dll
-        !**\*TestAdapter.dll
-        !**\obj\**
-      searchFolder: '$(System.DefaultWorkingDirectory)'
