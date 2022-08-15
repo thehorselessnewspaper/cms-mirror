@@ -5,7 +5,7 @@
 resources:
   containers:
   - container: mssql
-    image: mcr.microsoft.com/mssql/server:2017-latest
+    image: mcr.microsoft.com/mssql/server:2022-latest
     env:
       ACCEPT_EULA: Y
       SA_PASSWORD: Password123
@@ -17,16 +17,8 @@ pool:
     name: Azure Pipelines
   
 steps:
-
-    
   - powershell: |
       Write-Host $(Build.SourcesDirectory)
-  
-  - task: PowerShell@2
-    displayName: 'start mssqllocaldb'
-    inputs:
-      targetType: 'inline'
-      script: 'sqllocaldb start mssqllocaldb'  
 
   - task: PowerShell@2
     displayName: 'set git safe'
