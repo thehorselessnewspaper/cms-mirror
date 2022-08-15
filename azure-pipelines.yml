@@ -22,7 +22,7 @@ pool:
 steps:
   - script: |    
       sleep 60
-      sqlcmd -S "localhost,${AGENT_SERVICES_MSSQL_PORTS_1433}" -U SA -P Password123! -Q "SELECT * FROM INFORMATION_SCHEMA.TABLES
+      sqlcmd -S "localhost,${AGENT_SERVICES_MSSQL_PORTS_1433}" -U SA -P Password123! -Q "SELECT * FROM INFORMATION_SCHEMA.TABLES"
 
   - powershell: |
       Write-Host $(Build.SourcesDirectory)
